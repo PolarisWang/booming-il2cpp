@@ -4,11 +4,5 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>ManagedBenchmarkHarness</AssemblyName>
-    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="ManagedBenchmarkHarness.cs" />
-    <Compile Include="BenchmarkManagedBody.cs" />
-  </ItemGroup>
 </Project>

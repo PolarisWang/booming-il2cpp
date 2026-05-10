@@ -7,6 +7,16 @@ target_link_libraries(
     PRIVATE
         chaos_interpreter)
 
+add_executable(chaos_interpreter_new_features_test
+    interpreter_new_features_test.cpp)
+
+target_compile_features(chaos_interpreter_new_features_test PRIVATE cxx_std_17)
+target_link_libraries(
+    chaos_interpreter_new_features_test
+    PRIVATE
+        chaos_interpreter
+        chaos_runtime_core)
+
 add_executable(chaos_interpreter_integration
     interpreter_integration.cpp)
 
@@ -15,7 +25,10 @@ target_link_libraries(
     chaos_interpreter_integration
     PRIVATE
         chaos_interpreter
-        chaos_bootstrap)
+        chaos_bootstrap
+        chaos_fmt
+        chaos_common
+        chaos_support)
 
 add_executable(chaos_interpreter_bridge_test
     interpreter_bridge_test.cpp)
@@ -26,3 +39,19 @@ target_link_libraries(
     PRIVATE
         chaos_interpreter
         chaos_bootstrap)
+
+add_executable(chaos_interpreter_entry_test
+    interpreter_entry_test.cpp)
+
+target_compile_features(chaos_interpreter_entry_test PRIVATE cxx_std_17)
+target_include_directories(chaos_interpreter_entry_test PRIVATE
+    ${CMAKE_SOURCE_DIR}/src/native/interpreter/generated)
+target_link_libraries(
+    chaos_interpreter_entry_test
+    PRIVATE
+        chaos_runtime_core
+        chaos_interpreter
+        chaos_bootstrap
+        chaos_fmt
+        chaos_common
+        chaos_support)

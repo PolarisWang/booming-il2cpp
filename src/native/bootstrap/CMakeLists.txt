@@ -17,6 +17,7 @@ target_include_directories(
         "${REPO_ROOT}/src/native/runtime-core"
         "${REPO_ROOT}/src/native/support"
         "${REPO_ROOT}/src/native/interpreter"
+        "${REPO_ROOT}/src/native/interpreter/generated"
         "${REPO_ROOT}/third_party/bdwgc/include")
 target_link_libraries(
     chaos_bootstrap

@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Linq\\grouping-lookup\\entrypoint\\build-output\\GroupingLookupNativeEntry.dll"
-    ],
-    "entry": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Run:System.Int32(System.Int32)"
-  }
-}

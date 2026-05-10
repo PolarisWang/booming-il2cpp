@@ -39,11 +39,26 @@ public sealed partial class LoaderStage
         var bodyBlock = peReader.GetMethodBody(methodDefinition.RelativeVirtualAddress);
         var ilReader = bodyBlock.GetILReader();
         var instructions = new List<ManagedInstructionModel>();
+        string? pendingConstrainedSubjectId = null;
 
         while (ilReader.RemainingBytes > 0)
         {
             var instructionOffset = ilReader.Offset;
             var opCode = ReadOpCode(ref ilReader);
+
+            // Detect constrained. prefix and resolve the type token for the
+            // subsequent callvirt/call/newobj instruction. Value types use
+            // constrained. to request direct dispatch to their own override
+            // instead of virtual dispatch through the base type's vtable.
+            if (opCode == ILOpCode.Constrained)
+            {
+                var token = ilReader.ReadInt32();
+                var handle = MetadataTokens.EntityHandle(token);
+                var typeIdentity = typeResolver.ResolveTypeIdentity(handle);
+                pendingConstrainedSubjectId = typeIdentity.SubjectId;
+                continue;
+            }
+
             var instruction = DecodeInstruction(
                 metadataReader,
                 typeResolver,
@@ -56,6 +71,14 @@ public sealed partial class LoaderStage
 
             if (instruction is not null)
             {
+                if (pendingConstrainedSubjectId is not null &&
+                    (string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal) ||
+                     string.Equals(instruction.Op, "call", StringComparison.Ordinal) ||
+                     string.Equals(instruction.Op, "newobj", StringComparison.Ordinal)))
+                {
+                    instruction = instruction with { ConstrainedTypeSubjectId = pendingConstrainedSubjectId };
+                }
+                pendingConstrainedSubjectId = null;
                 instructions.Add(instruction with { IlOffset = instructionOffset });
             }
         }

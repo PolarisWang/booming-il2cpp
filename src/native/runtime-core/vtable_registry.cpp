@@ -1,8 +1,10 @@
 #include "vtable_registry.h"
 #include "reflection_query_model.h"
 #include "runtime_core.h"
+#include "type_registry.h"
 
 #include <chaos/native_types.h>
+#include <chaos/type_info.h>
 
 #include <cstdlib>
 #include <cstring>
@@ -189,7 +191,7 @@ const void** BuildRuntimeVTable(CHAOS_IL2CPP_UINT64 type_stable_id,
 void* ResolveVirtualMethodPointer(
     CHAOS_IL2CPP_UINT32 instance_type_token,
     CHAOS_IL2CPP_UINT32 declared_method_token) {
-    if (instance_type_token == 0u || declared_method_token == 0u) {
+    if (instance_type_token == 0u) {
         return nullptr;
     }
 
@@ -197,22 +199,54 @@ void* ResolveVirtualMethodPointer(
     CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
 
     // Walk the inheritance chain starting from instance_type_token.
-    CHAOS_IL2CPP_UINT32 current_token = instance_type_token;
-    while (current_token != 0u) {
-        auto it = state.by_type_token.find(current_token);
-        if (it == state.by_type_token.end()) {
-            break;
-        }
+    // When declared_method_token is 0 (interface slot 0), skip this walk
+    // since no type has a slot with method_token == 0.
+    if (declared_method_token != 0u) {
+        CHAOS_IL2CPP_UINT32 current_token = instance_type_token;
+        while (current_token != 0u) {
+            auto it = state.by_type_token.find(current_token);
+            if (it == state.by_type_token.end()) {
+                break;
+            }
 
-        const TypeVTable* vtable = it->second;
-        for (CHAOS_IL2CPP_UINT32 i = 0u; i < vtable->slot_count; ++i) {
-            if (vtable->slots[i].method_token == declared_method_token) {
-                return vtable->slots[i].method_pointer;
+            const TypeVTable* vtable = it->second;
+            for (CHAOS_IL2CPP_UINT32 i = 0u; i < vtable->slot_count; ++i) {
+                if (vtable->slots[i].method_token == declared_method_token) {
+                    return vtable->slots[i].method_pointer;
+                }
+            }
+
+            // Move to base type
+            current_token = vtable->base_token;
+        }
+    }
+
+    // Base chain walk failed (or skipped) — try interface vtable map.
+    // The declared_method_token on interface dispatch is the slot index
+    // within the interface's method table. Walk interface entries to find
+    // the matching vtable offset.
+    {
+        auto it = state.by_type_token.find(instance_type_token);
+        if (it != state.by_type_token.end()) {
+            const TypeVTable* vtable = it->second;
+            if (vtable->iface_map != nullptr && vtable->iface_count > 0u &&
+                vtable->vtable_array != nullptr) {
+                const auto* iface_entries = static_cast<const ChaosIl2cpp::Common::InterfaceMapEntry*>(vtable->iface_map);
+                // When calling through an interface, declared_method_token is a small
+                // zero-based slot index within that interface's method table.
+                // Scan all interfaces to find one whose slots cover this index.
+                for (CHAOS_IL2CPP_UINT32 ifi = 0u; ifi < vtable->iface_count; ++ifi) {
+                    if (declared_method_token < iface_entries[ifi].method_count) {
+                        // Slot is within this interface's range
+                        CHAOS_IL2CPP_UINT32 vtable_slot =
+                            iface_entries[ifi].vtable_offset + declared_method_token;
+                        if (vtable_slot < vtable->vtable_length) {
+                            return const_cast<void*>(vtable->vtable_array[vtable_slot]);
+                        }
+                    }
+                }
             }
         }
-
-        // Move to base type
-        current_token = vtable->base_token;
     }
 
     return nullptr;

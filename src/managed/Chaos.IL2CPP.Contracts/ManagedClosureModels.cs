@@ -206,6 +206,14 @@ public sealed record ManagedInstructionModel
     public ManagedCallSiteSignature? CallSiteSignature { get; init; }
 
     public ManagedInstructionReference? Reference { get; init; }
+
+    /// <summary>
+    /// When non-null, this instruction is preceded by a <c>constrained.</c> IL prefix
+    /// that specifies the type on which the subsequent <c>callvirt</c> should be
+    /// resolved. For value types, the callvirt must be devirtualized to a direct call
+    /// to the value type's own override (if any).
+    /// </summary>
+    public string? ConstrainedTypeSubjectId { get; init; }
 }
 
 public sealed record ManagedInstructionReference

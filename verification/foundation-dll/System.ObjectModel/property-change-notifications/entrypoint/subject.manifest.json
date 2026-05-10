@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\property-change-notifications\\entrypoint\\build-output\\PropertyChangeNotificationsNativeEntry.dll"
-    ],
-    "entry": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)"
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\extensions-marshal\\entrypoint\\build-output\\ExtensionsMarshalNativeEntry.dll"
-    ],
-    "entry": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Run:System.Int32(System.Int32)"
-  }
-}

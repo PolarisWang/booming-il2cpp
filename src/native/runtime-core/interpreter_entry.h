@@ -8,13 +8,13 @@
 //
 // Flow:
 //   1. PatchMethod* is extracted from method_key
-//   2. IL→IR lowering happens lazily (on first call, cached thereafter)
+//   2. AotCoreIr JSON → IRMethod deserialization happens lazily (on first call, cached thereafter)
 //   3. Method signature is parsed to determine argument types
 //   4. Arguments are read from args_buf into InterpreterValue[]
 //   5. ExecutionFrame is built and InterpreterVM::Execute is called
 //   6. Return value is written to ret_buf
 //
-// Thread safety: the lazy IR lowering uses double-checked locking (DCLP)
+// Thread safety: the lazy IR deserialization uses double-checked locking (DCLP)
 // via a std::atomic flag on PatchMethod.  Subsequent calls are lock-free.
 
 #include <chaos/native_types.h>

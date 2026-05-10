@@ -4,7 +4,7 @@
   "failed": 0,
   "results": [
     {
-      "family": "string-char-text-core",
+      "family": "convert-char",
       "variants": {
         "patch": {
           "success": true,
@@ -16,8 +16,8 @@
         }
       },
       "success": true,
-      "methodCount": 20
+      "methodCount": 18
     }
   ],
-  "timestamp": "2026-05-08T22:47:57"
+  "timestamp": "2026-05-10T16:03:28"
 }

@@ -52,7 +52,12 @@ def _family_dir(assembly: str, family_slug: str) -> Path:
 
 
 def _generated_cpp(assembly: str, family_slug: str) -> Path | None:
-    path = _family_dir(assembly, family_slug) / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    family_dir = _family_dir(assembly, family_slug)
+    # Prefer namespaced path (new convert-to-cpp pipeline), fall back to legacy flat path
+    cpp_candidates = sorted(family_dir.glob("il2cpp_dist/genuine/*/generated/native-aot.generated.cpp"))
+    if cpp_candidates:
+        return cpp_candidates[0]
+    path = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
     return path if path.exists() else None
 
 
@@ -62,8 +67,8 @@ def _method_count_in_cpp(cpp: str) -> int:
 
 
 def _has_real_lowering(cpp: str) -> bool:
-    """Check if the generated C++ contains chaos_eval_stack lowering."""
-    return "chaos_eval_stack" in cpp
+    """Check if the generated C++ contains real lowering (chaos_eval_stack or CHAOS_IL2CPP_ARRAY)."""
+    return "chaos_eval_stack" in cpp or "CHAOS_IL2CPP_ARRAY" in cpp
 
 
 def _parse_method_names(cpp: str) -> list[str]:

@@ -725,6 +725,7 @@ def generate_and_build(
 
     source_path = output_dir / cs_file_name
     csproj_path = output_dir / csproj_name
+    output_dir.mkdir(parents=True, exist_ok=True)
     source_path.write_text(final_source, encoding="utf-8")
     (output_dir / "Program.cs").write_text(final_program, encoding="utf-8")
     (output_dir / csproj_name).write_text(

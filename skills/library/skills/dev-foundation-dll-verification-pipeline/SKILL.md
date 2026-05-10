@@ -46,28 +46,55 @@ run foundation-dll verify-family <family-slug> --assembly System.Private.CoreLib
 [1] Codegen     — 委托 pipeline_native_aot_runner.run_family()
                   1. 生成 entrypoint C# → dotnet build DLL
                   2. chaos-il2cpp convert-to-cpp → native-aot.generated.cpp
-                  3. CMake build entry.exe
+                  3. _patch_bypass_0xC0000409.py 后处理：
+                     - 剥离 Program::Main() body → return 0
+                     - 生成方法指针调度表 kAotMethods[] + kAotMethodCount
+                     - 生成 BenchmarkMethod(entry_index, iterations) 函数，直接调用
+                       kAotMethods[index]()，绕过 DispatchSlotGet/HotpatchLookupBySlot 开销
+                  4. 生成 .patchdata → runtime-patchdata.cpp（kPatchData[]/kPatchDataSize）
+                  5. CMake build entry.exe（使用增强版 runtime-entry.cpp 支持 5 种模式）
+                  run_family() 只负责构建，不再运行 fact/benchmark/hotupdate 验证
                   ❌ 失败 = strict 模式下停止
 
 [2] Fact        — 委托 fact_verifier.verify_fact()
                   运行 entry.exe，解析 stdout 中 Passed: N/M
+                  N/M 现在使用真实方法计数（bitmask population count），不再是硬编码 1/1
                   ❌ 失败 = 记录，不阻塞继续
 
 [3] Audit       — 委托 mechanism_audit.run_full_audit()
                   stub 检测 + _METHOD_OVERRIDES skip 审计 + 7 项原则检查
                   ❌ 失败 = 记录，不阻塞继续
 
-[4] Benchmark   — 读取 benchmark-comparison-report.json（只读，不运行）
+[4] Benchmark   — 托管 vs 原生性能对比
+                  1. stub_detect 解析 entrypoint 源码识别 stub 方法
+                  2. 运行 managed benchmark harness（如存在）
+                  3. 对每个非 stub 方法运行 entry.exe --benchmark N
+                     - native 端调用 BenchmarkMethod(index, iterations) — 生成代码内直接
+                       调用 kAotMethods[index]()，绕过 hotpatch dispatch 开销
+                     - 测量纯 AOT 生成代码的真实性能
+                  4. benchmark_comparator.compare() 生成对比报告
+                  输出 benchmark-comparison-report.json
                   [标准模式 advisory]
 
-[5] HotUpdate   — 读取 hotupdate-verification-report.json（只读，不运行）
+[5] HotUpdate   — 热补丁验证
+                  1. stub_detect 解析 entrypoint 源码
+                  2. 运行 entry.exe --hotupdate
+                  3. 解析 JSON 输出（passedMethods/failedMethods/totalMethods）
+                  输出 hotupdate-verification-report.json
                   [严格模式 required]
 
-[6] PostHotBench — 读取 post-hotupdate-benchmark-report.json（只读，不运行）
+[6] PostHotBench — 热补丁后性能对比（interpreter 路径）
+                   1. 读取 native-benchmark.json 获取 pre-patch ns/op
+                   2. 对每个非 stub 方法运行 entry.exe --hotupdate-and-benchmark N
+                   3. 计算 slowdown%（interpreter vs native）
+                   输出 post-hotupdate-benchmark-report.json
                    [严格模式 required]
 
 [7] Aggregate   — 汇总全部 stage 结果
                   计算 coverage（methodCoverage, skipRate）
+                  - methodCoverage: fact.details.fact.passed / total（之前 Bug: 读取不存在的 l2）
+                  - skipRate: max(0, 1 - skipsFound/total_methods)（之前 Bug: 可负）
+                  - overall: 可用 coverage 的均值
                   回归检测（baseline_manager.compare_checksum/benchmark）
                   输出 unified-verification-report.json
 ```
@@ -92,12 +119,15 @@ run foundation-dll verify-family <family-slug> --assembly System.Private.CoreLib
   "mode": "standard",
   "overall_status": "passed" | "failed" | "partial",
   "stages": {
-    "preflight":  { "status": "passed",  "summary": "18 methods, 0 custom entries" },
-    "codegen":    { "status": "passed",  "summary": "Entrypoint built and IL2CPP compile OK" },
-    "fact":       { "status": "passed",  "summary": "Fact verify=passed (18/18)" },
-    "audit":      { "status": "passed",  "summary": "false_passing=0, principle=ALIGNED" },
-    "benchmark":  { "status": "passed",  "summary": "avg_speedup=12.5%" },
-    "hotupdate":  { "status": "skipped", "summary": "No hotupdate report available" }
+    "preflight":  { "status": "passed",  "summary": "18 methods, 2 custom entries" },
+    "codegen":    { "status": "passed",  "summary": "Entrypoint built and IL2CPP compile OK",
+                    "details": {"methodCount": 18, "dllPath": "..."} },
+    "fact":       { "status": "passed",  "summary": "Fact verify=passed (18/18)",
+                    "details": {"fact": {"status": "passed", "passed": 18, "total": 18}} },
+    "audit":      { "status": "passed",  "summary": "false_passing=0, principle=CONCERN",
+                    "details": {"falsePassing": 0, "skipsFound": 0, "principleStatus": "CONCERN"} },
+    "benchmark":  { "status": "passed",  "summary": "avg_speedup=75.3%, native_faster=11/11" },
+    "hotupdate":  { "status": "passed",  "summary": "18/18 passed, 0 failed" }
   },
   "coverage": {
     "methodCoverage": 1.0,
@@ -132,9 +162,13 @@ python build/toolchains/run/testing/foundation_dll/pipeline_native_aot_runner.py
 | Codegen | entrypoint build 失败 | 先 `run trace --exception` 查看失败原因，修复后重跑 |
 | Codegen | convert-to-cpp 失败 | 同上 |
 | Codegen | entry.exe cmake build 失败 | check CMakeLists.txt 路径 + native lib 存在性 |
+| Codegen | **LNK2001: kAotMethodCount unresolved** | 检查 `_patch_bypass_0xC0000409.py` 中定义为 `extern "C"`（不是 `static constexpr`）|
+| Codegen | **LNK2001: kPatchDataSize unresolved** | 检查 `_generate_patch_data()` 生成的 `runtime-patchdata.cpp` 使用 `extern const` |
 | Fact | entry.exe 崩溃或返回非 0 | **阻塞** → 查看 trace → `dev-systematic-debugging` |
+| Fact | **输出 1/1 而非真实方法数** | 检查 `kAotMethodCount` 在 `runtime-entry.cpp` 中可见（`extern "C"`） |
 | Audit | false-passing > 0 | **阻塞** → 定位 stub/skip → 实现真实机制 → 重新验证 |
 | Audit | Principle VIOLATION | **阻塞 closureStatus** → 审查原因 → 修复或登记 waiver |
+| Audit | **skipsFound 计数异常（负 skipRate）** | 检查 `mechanism_audit.py` `_get_skip_entries()` 是否按 family 过滤 `_METHOD_OVERRIDES` |
 | Benchmark | managed_faster > 0 | 排查翻译质量，标记 regression |
 | HotUpdate | failed > 0 | 检查 codegen 输出 → 标记失败 |
 
@@ -217,6 +251,31 @@ il2cpp_dist/  → 可覆盖 — 所有 entrypoint/ 下的文件可由 generate_a
 | `verify-aggregate` | 跨 family 聚合策略、回归检测逻辑 | 单 family 验证执行 |
 | `verify-data-integrity` | dashboard 数据一致性检查 | 验证执行 |
 | `onboard-family` | 新 family 接入流程 | 已有 family 验证 |
+| `verify-analysis` | pipeline 产物的 AI 综合分析 | pipeline 执行、数据生成 |
+
+## AI 综合分析
+
+Pipeline 只产出 raw 验证数据。**分析验收交由 `dev-foundation-dll-verify-analysis` 技能完成。**
+
+调用方式：
+
+```bash
+# 直接调用 AI 分析技能 — 对 AI 说：
+# "请用 dev-foundation-dll-verify-analysis 技能分析 <family-slug>"
+#
+# 该技能会自动执行：
+#   0. 先自动跑 verify-family pipeline（确保数据最新）
+#   1. Handwrite/AutoGen Pre-check
+#   2. 收集所有 pipeline 产物、外围文件、dashboard projection
+#   3. 按 11 维度标准化模板逐项分析
+#   4. 输出分析报告到 verification/reports/<family>-verification-analysis-<YYYYMMDD>.md
+#   5. 给出验收建议（approved / review-needed / blocked）
+
+# 人工审核 AI 报告：
+#   - 查看 verification/reports/ 下最新分析报告
+#   - 根据推荐和建议决定 closureStatus
+#   - 确认后刷新 dashboard: run verify verification-v1 --json
+```
 
 ## 关联
 
@@ -226,4 +285,5 @@ il2cpp_dist/  → 可覆盖 — 所有 entrypoint/ 下的文件可由 generate_a
 - Audit: `mechanism_audit.py` / `run_full_audit()`
 - Principle: `principle_auto_checks.py` / `run_all_checks()`
 - CLI 路由: `commands/foundation_dll.py` / `_handle_verify_family()`
-- 下游: `dev-verification-before-completion`
+- 下游: `dev-foundation-dll-verify-analysis`（AI 综合分析）
+- 人工审核: 基于分析报告决定 closureStatus

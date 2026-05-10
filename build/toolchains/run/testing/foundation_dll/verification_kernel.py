@@ -95,12 +95,19 @@ def _extract_run_id(path: str) -> str:
 
 def build_native_proof_facts(projects: list[dict[str, Any]], *, family_id: str) -> list[VerificationFact]:
     facts: list[VerificationFact] = []
+    # Extract family slug from family_id (e.g., "family/System.Private.CoreLib/convert/char" → "convert-char")
+    parts = [part for part in family_id.split("/") if part]
+    family_slug = "-".join(parts[2:]) if len(parts) >= 4 else family_id.replace("/", "-")
     for project in projects:
         if _string(project.get("projectCode")) != "native-proof":
             continue
         for artifact in list(project.get("artifacts") or []):
             path = _string(artifact.get("path"))
             if not path:
+                continue
+            # Only include evidence matching this family's slug to prevent
+            # cross-family evidence pollution in per-family detail pages.
+            if family_slug not in path.replace("\\", "/"):
                 continue
             fact = VerificationFact(
                 factId=f"{family_id}::native-proof::{path.replace('\\', '/')}",
@@ -167,7 +174,7 @@ def evaluate_native_proof(
             }
         )
         coverage_payload = _coverage_json_for_artifact_path(repo_root, fact.artifactPath)
-        if coverage_payload is not None:
+        if coverage_payload is not None and coverage_payload.get("familyId") == family_id:
             coverage_by_run_id[run_key] = coverage_payload
 
     # ── Stub detection ────────────────────────────────────────────────
@@ -207,18 +214,22 @@ def evaluate_native_proof(
     if denominator > 0 and status not in {"pending", "blocked", "not-required", ""}:
         latest_run_id = max(coverage_by_run_id) if coverage_by_run_id else ""
         coverage_payload = coverage_by_run_id.get(latest_run_id)
-        if claim_payload.methodSubjectIds and coverage_payload is not None:
-            uncovered_ids = {str(item) for item in list(coverage_payload.get("uncoveredMethodSubjectIds") or [])}
-            # Add stub method subject IDs to the uncovered set
-            uncovered_ids |= stub_method_subject_ids
-            method_details = [
-                {
-                    "subjectId": subject_id,
-                    "covered": subject_id not in uncovered_ids,
-                }
-                for subject_id in claim_payload.methodSubjectIds
-            ]
-            numerator = sum(1 for subject_id in claim_payload.methodSubjectIds if subject_id not in uncovered_ids)
+        if coverage_payload is not None:
+            covered_ids = {str(item) for item in list(coverage_payload.get("coveredMethodSubjectIds") or [])}
+            uncovered_from_coverage = {str(item) for item in list(coverage_payload.get("uncoveredMethodSubjectIds") or [])}
+            # Derive methodSubjectIds from coverage JSON when claim doesn't provide them
+            all_coverage_ids = covered_ids | uncovered_from_coverage
+            effective_ids = claim_payload.methodSubjectIds or list(all_coverage_ids)
+            uncovered_ids = uncovered_from_coverage | stub_method_subject_ids
+            if effective_ids:
+                method_details = [
+                    {
+                        "subjectId": subject_id,
+                        "covered": subject_id not in uncovered_ids,
+                    }
+                    for subject_id in effective_ids
+                ]
+                numerator = sum(1 for subject_id in effective_ids if subject_id not in uncovered_ids)
         elif claim_payload.methodSubjectIds and status == "passed":
             # Gate says "passed" but no coverage evidence — don't fabricate coverage
             method_details = [

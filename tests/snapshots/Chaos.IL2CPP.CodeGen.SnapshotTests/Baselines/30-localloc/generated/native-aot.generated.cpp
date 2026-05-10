@@ -82,7 +82,7 @@ inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System
 inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Reflection_FieldInfo = { nullptr, nullptr, 0, 0, 0, 0 };
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_MethodInfo = { nullptr, nullptr, 10748947813473285525ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
 inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Reflection_MethodInfo = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_String = { nullptr, nullptr, 1782325859292956794ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 2 };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_String = { nullptr, nullptr, 1782325859292956794ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
 inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_String = { nullptr, nullptr, 0, 0, 0, 0 };
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
 // ── Virtual method table arrays ──
@@ -226,19 +226,19 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
 {
-	FatHeader header{};
+	ThinLockableHeader header{}
 	CHAOS_IL2CPP_INTPTR runtime_assembly_name_value = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName
 {
-	FatHeader header{};
+	ThinLockableHeader header{}
 	CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo
 {
-	FatHeader header{};
+	ThinLockableHeader header{}
 	CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
 	CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
@@ -249,7 +249,7 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo
 {
-	FatHeader header{};
+	ThinLockableHeader header{}
 	CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
 	CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
@@ -257,7 +257,7 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo
 {
-	FatHeader header{};
+	ThinLockableHeader header{}
 	CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
 	CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
@@ -268,7 +268,7 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo
 
 struct chaos_type_System_Private_CoreLib_System_String
 {
-	FatHeader header{};
+	ThinLockableHeader header{}
 	CHAOS_IL2CPP_INTPTR length = 0;
 	const char* utf8_data = nullptr;
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
@@ -914,6 +914,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LocalAllocHelper_RunAlloc(voi
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(100);

@@ -101,7 +101,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("    if ((chaos_left_string_value != static_cast<CHAOS_IL2CPP_INTPTR>(0) && chaos_left_utf8 == nullptr && chaos_left_length != 0) ||");
 			builder.AppendLine("        (chaos_right_string_value != static_cast<CHAOS_IL2CPP_INTPTR>(0) && chaos_right_utf8 == nullptr && chaos_right_length != 0))");
 			builder.AppendLine("    {");
-			builder.AppendLine("        CHAOS_IL2CPP_ABORT();");
+			builder.AppendLine("        CHAOS_IL2CPP_FAIL();");
 			builder.AppendLine("    }");
 			builder.AppendLine();
 			builder.AppendLine("    const auto chaos_combined_length = chaos_left_length + chaos_right_length;");
@@ -184,7 +184,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("{");
 			builder.AppendLine("    if (chaos_handler_ref == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 			builder.AppendLine("    {");
-			builder.AppendLine("        CHAOS_IL2CPP_ABORT();");
+			builder.AppendLine("        CHAOS_IL2CPP_FAIL();");
 			builder.AppendLine("    }");
 			builder.AppendLine();
 			builder.AppendLine("    if ((chaos_handler_ref & chaos_managed_pointer_local_slot_tag) != 0)");
@@ -1974,7 +1974,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("{");
 			builder.AppendLine("    if (chaos_exception_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 			builder.AppendLine("    {");
-			builder.AppendLine("        CHAOS_IL2CPP_ABORT();");
+			builder.AppendLine("        CHAOS_IL2CPP_FAIL();");
 			builder.AppendLine("    }");
 			builder.AppendLine();
 			builder.AppendLine("    for (auto& chaos_entry : chaos_exception_metadata_entries)");

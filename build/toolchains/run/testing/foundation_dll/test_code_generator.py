@@ -789,6 +789,8 @@ def _ref_return_expr(parsed: dict[str, Any]) -> str:
 def _cast_return_to_int(ret: str, call_expr: str) -> str:
     """Cast a method's return value to int for checksum return."""
     ret = ret.strip()
+    if ret == "System.Void" or not ret:
+        return call_expr
     if ret == "System.Int32":
         return call_expr
     if ret in ("System.Int64", "System.UInt64", "System.UInt32"):

@@ -34,6 +34,12 @@ struct TypeVTable {
     const VTableSlot* slots;          ///< Rich slot descriptors (method_token + pointer)
     const void** vtable_array;         ///< Flat function-pointer array (for direct dispatch)
     CHAOS_IL2CPP_UINT32 vtable_length; ///< Length of vtable_array
+    CHAOS_IL2CPP_UINT8  type_shape;   ///< 1=reference, 2=value, 3=interface (mirrors TypeInfoHot::type_shape)
+    uint8_t             _pad[3];      ///< Explicit padding to keep struct size aligned
+    /// Optional interface map: describes which interfaces this type implements
+    /// and where their methods live in the flat vtable_array.
+    const void* iface_map;            ///< Pointer to array of InterfaceMapEntry (optional)
+    CHAOS_IL2CPP_UINT32 iface_count;  ///< Number of entries in iface_map (0 = none)
 };
 
 // ── Registration ─────────────────────────────────────────────────────────
@@ -61,6 +67,7 @@ void RegisterVTableArray(CHAOS_IL2CPP_UINT64 stable_id,
 
 /// Resolve a virtual method pointer by walking the inheritance chain.
 /// Uses secondary token→stable_id index, then walks by base_stable_id.
+/// Also checks interface vtable map if base chain walk fails.
 void* ResolveVirtualMethodPointer(CHAOS_IL2CPP_UINT32 instance_type_token,
                                   CHAOS_IL2CPP_UINT32 declared_method_token);
 

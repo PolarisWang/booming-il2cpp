@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <vector>
 
+#include <chaos/type_info.h>
 #include "vtable_registry.h"
 
 namespace chaos::il2cpp::interpreter {
@@ -16,14 +17,6 @@ using ObjectStorage = InterpreterObject;
 /// Max argument count for stack-allocated call_args buffer in Call handler.
 /// The vast majority of managed methods have < 8 parameters.
 static constexpr CHAOS_IL2CPP_UINT32 kMaxCallArgs = 8u;
-
-struct ArrayStorage {
-    CHAOS_IL2CPP_VECTOR(InterpreterValue) elements = {};
-};
-
-struct BoxedValue {
-    InterpreterValue value = {};
-};
 
 CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
 
@@ -493,38 +486,70 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::Blt: {
-                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
-                if (left < right) {
-                    instruction_index = GetBranchTarget(method, instruction.branch_target);
-                    continue;
+                const InterpreterValue right_val = Pop(&frame->stack);
+                const InterpreterValue left_val = Pop(&frame->stack);
+                if (left_val.tag == ValueTag::Float32 || left_val.tag == ValueTag::Float64 ||
+                    right_val.tag == ValueTag::Float32 || right_val.tag == ValueTag::Float64) {
+                    if (ReadFloat64(left_val) < ReadFloat64(right_val)) {
+                        instruction_index = GetBranchTarget(method, instruction.branch_target);
+                        continue;
+                    }
+                } else {
+                    if (ReadInt32(left_val) < ReadInt32(right_val)) {
+                        instruction_index = GetBranchTarget(method, instruction.branch_target);
+                        continue;
+                    }
                 }
                 break;
             }
             case IROpCode::Bgt: {
-                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
-                if (left > right) {
-                    instruction_index = GetBranchTarget(method, instruction.branch_target);
-                    continue;
+                const InterpreterValue right_val = Pop(&frame->stack);
+                const InterpreterValue left_val = Pop(&frame->stack);
+                if (left_val.tag == ValueTag::Float32 || left_val.tag == ValueTag::Float64 ||
+                    right_val.tag == ValueTag::Float32 || right_val.tag == ValueTag::Float64) {
+                    if (ReadFloat64(left_val) > ReadFloat64(right_val)) {
+                        instruction_index = GetBranchTarget(method, instruction.branch_target);
+                        continue;
+                    }
+                } else {
+                    if (ReadInt32(left_val) > ReadInt32(right_val)) {
+                        instruction_index = GetBranchTarget(method, instruction.branch_target);
+                        continue;
+                    }
                 }
                 break;
             }
             case IROpCode::Ble: {
-                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
-                if (left <= right) {
-                    instruction_index = GetBranchTarget(method, instruction.branch_target);
-                    continue;
+                const InterpreterValue right_val = Pop(&frame->stack);
+                const InterpreterValue left_val = Pop(&frame->stack);
+                if (left_val.tag == ValueTag::Float32 || left_val.tag == ValueTag::Float64 ||
+                    right_val.tag == ValueTag::Float32 || right_val.tag == ValueTag::Float64) {
+                    if (ReadFloat64(left_val) <= ReadFloat64(right_val)) {
+                        instruction_index = GetBranchTarget(method, instruction.branch_target);
+                        continue;
+                    }
+                } else {
+                    if (ReadInt32(left_val) <= ReadInt32(right_val)) {
+                        instruction_index = GetBranchTarget(method, instruction.branch_target);
+                        continue;
+                    }
                 }
                 break;
             }
             case IROpCode::Bge: {
-                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
-                if (left >= right) {
-                    instruction_index = GetBranchTarget(method, instruction.branch_target);
-                    continue;
+                const InterpreterValue right_val = Pop(&frame->stack);
+                const InterpreterValue left_val = Pop(&frame->stack);
+                if (left_val.tag == ValueTag::Float32 || left_val.tag == ValueTag::Float64 ||
+                    right_val.tag == ValueTag::Float32 || right_val.tag == ValueTag::Float64) {
+                    if (ReadFloat64(left_val) >= ReadFloat64(right_val)) {
+                        instruction_index = GetBranchTarget(method, instruction.branch_target);
+                        continue;
+                    }
+                } else {
+                    if (ReadInt32(left_val) >= ReadInt32(right_val)) {
+                        instruction_index = GetBranchTarget(method, instruction.branch_target);
+                        continue;
+                    }
                 }
                 break;
             }
@@ -777,8 +802,32 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     }
                     current_token = vtable->base_token;
                 }
-                // Interface compatibility check: also scan implemented interfaces
-                // (Phase A+: add isinst/castclass interface check when iface_map is available)
+                // Interface compatibility check: scan implemented interfaces
+                if (!compatible) {
+                    const auto* target_vtable = chaos::il2cpp::vtable_registry::TryGetTypeVTable(target_type_token);
+                    if (target_vtable != nullptr && target_vtable->type_shape == ChaosIl2cpp::Common::chaos_type_shape_interface) {
+                        // Target is an interface — check if instance type implements it.
+                        // Walk instance type's interface map (through all ancestors).
+                        CHAOS_IL2CPP_UINT32 scan_token = obj_type_token;
+                        while (scan_token != 0u && !compatible) {
+                            const auto* scan_vtable = chaos::il2cpp::vtable_registry::TryGetTypeVTable(scan_token);
+                            if (scan_vtable == nullptr) break;
+                            if (scan_vtable->iface_map != nullptr && scan_vtable->iface_count > 0u) {
+                                const auto* iface_entries = static_cast<const ChaosIl2cpp::Common::InterfaceMapEntry*>(scan_vtable->iface_map);
+                                for (CHAOS_IL2CPP_UINT32 ifi = 0u; ifi < scan_vtable->iface_count; ++ifi) {
+                                    // Compare stable_id against target's stable_id.
+                                    const auto* target_vt2 = chaos::il2cpp::vtable_registry::TryGetTypeVTable(target_type_token);
+                                    if (target_vt2 != nullptr &&
+                                        iface_entries[ifi].iface_stable_id == target_vt2->stable_id) {
+                                        compatible = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            scan_token = scan_vtable->base_token;
+                        }
+                    }
+                }
                 if (compatible) {
                     frame->stack.push_back(cast_val);
                 } else if (instruction.op_code == IROpCode::IsInst) {
@@ -917,7 +966,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     const CHAOS_IL2CPP_UINT32 declared_method_token =
                         static_cast<CHAOS_IL2CPP_UINT32>(instruction.secondary_index);
 
-                    if (instance_type_token != 0u && declared_method_token != 0u) {
+                    if (instance_type_token != 0u) {
                         void* vtable_resolved = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
                             instance_type_token, declared_method_token);
                         if (vtable_resolved != nullptr) {
@@ -1248,13 +1297,26 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index) >= frame->arguments.size()) {
                     throw CHAOS_IL2CPP_OUT_OF_RANGE("argument");
                 }
-                // In our stack model, load argument value.
-                frame->stack.push_back(frame->arguments[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)]);
+                // Push ADDRESS of argument slot (managed pointer / by-ref lvalue).
+                // Dereferenced by LdObj/StObj.
+                {
+                    InterpreterValue mp;
+                    mp.tag = ValueTag::ManagedPtr;
+                    mp.obj = &frame->arguments[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)];
+                    frame->stack.push_back(mp);
+                }
                 break;
             }
             case IROpCode::LdLocA: {
                 EnsureLocal(&frame->locals, static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index));
-                frame->stack.push_back(frame->locals[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)]);
+                // Push ADDRESS of local slot (managed pointer / by-ref lvalue).
+                // Dereferenced by LdObj/StObj.
+                {
+                    InterpreterValue mp;
+                    mp.tag = ValueTag::ManagedPtr;
+                    mp.obj = &frame->locals[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)];
+                    frame->stack.push_back(mp);
+                }
                 break;
             }
             case IROpCode::LocAlloc: {
@@ -1421,38 +1483,49 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::LdObj: {
-                // Pop address, push value (similar to LdInd).
+                // Pop address, push value at address.
                 const InterpreterValue addr_val = Pop(&frame->stack);
-                frame->stack.push_back(InterpreterValue::from_i32(ReadInt32(addr_val)));
+                if (addr_val.tag == ValueTag::ManagedPtr && addr_val.obj != nullptr) {
+                    // Managed pointer (from LdArgA/LdLocA): dereference InterpreterValue.
+                    frame->stack.push_back(*static_cast<InterpreterValue*>(addr_val.obj));
+                } else {
+                    // Raw pointer fallback: read as int32.
+                    frame->stack.push_back(InterpreterValue::from_i32(ReadInt32(addr_val)));
+                }
                 break;
             }
             case IROpCode::StObj: {
                 // StObj: pop value then address; write value bytes to address.
                 const InterpreterValue stobj_val = Pop(&frame->stack);
                 const InterpreterValue stobj_addr = Pop(&frame->stack);
-                void* stobj_dst = (stobj_addr.tag == ValueTag::Struct || stobj_addr.tag == ValueTag::ObjectRef)
-                    ? stobj_addr.obj : nullptr;
-                if (stobj_dst != nullptr) {
-                    CHAOS_IL2CPP_SIZE stobj_write_size = sizeof(void*);
-                    const void* stobj_src = nullptr;
-                    CHAOS_IL2CPP_INT64 stobj_raw = 0;
-                    if (stobj_val.tag == ValueTag::Struct && stobj_val.obj != nullptr) {
-                        stobj_src = stobj_val.obj;
-                        stobj_write_size = stobj_val.struct_size;
-                    } else if (stobj_val.tag == ValueTag::Int32 || stobj_val.tag == ValueTag::Float32) {
-                        stobj_raw = stobj_val.i32;
-                        stobj_src = &stobj_raw;
-                        stobj_write_size = 4;
-                    } else if (stobj_val.tag == ValueTag::Int64 || stobj_val.tag == ValueTag::Float64) {
-                        stobj_raw = stobj_val.i64;
-                        stobj_src = &stobj_raw;
-                        stobj_write_size = 8;
-                    } else {
-                        stobj_raw = reinterpret_cast<CHAOS_IL2CPP_INT64>(stobj_val.obj);
-                        stobj_src = &stobj_raw;
-                        stobj_write_size = sizeof(void*);
+                // Managed pointer (from LdArgA/LdLocA): write through to InterpreterValue slot.
+                if (stobj_addr.tag == ValueTag::ManagedPtr && stobj_addr.obj != nullptr) {
+                    *static_cast<InterpreterValue*>(stobj_addr.obj) = stobj_val;
+                } else {
+                    void* stobj_dst = (stobj_addr.tag == ValueTag::Struct || stobj_addr.tag == ValueTag::ObjectRef)
+                        ? stobj_addr.obj : nullptr;
+                    if (stobj_dst != nullptr) {
+                        CHAOS_IL2CPP_SIZE stobj_write_size = sizeof(void*);
+                        const void* stobj_src = nullptr;
+                        CHAOS_IL2CPP_INT64 stobj_raw = 0;
+                        if (stobj_val.tag == ValueTag::Struct && stobj_val.obj != nullptr) {
+                            stobj_src = stobj_val.obj;
+                            stobj_write_size = stobj_val.struct_size;
+                        } else if (stobj_val.tag == ValueTag::Int32 || stobj_val.tag == ValueTag::Float32) {
+                            stobj_raw = stobj_val.i32;
+                            stobj_src = &stobj_raw;
+                            stobj_write_size = 4;
+                        } else if (stobj_val.tag == ValueTag::Int64 || stobj_val.tag == ValueTag::Float64) {
+                            stobj_raw = stobj_val.i64;
+                            stobj_src = &stobj_raw;
+                            stobj_write_size = 8;
+                        } else {
+                            stobj_raw = reinterpret_cast<CHAOS_IL2CPP_INT64>(stobj_val.obj);
+                            stobj_src = &stobj_raw;
+                            stobj_write_size = sizeof(void*);
+                        }
+                        std::memcpy(stobj_dst, stobj_src, stobj_write_size);
                     }
-                    std::memcpy(stobj_dst, stobj_src, stobj_write_size);
                 }
                 break;
             }

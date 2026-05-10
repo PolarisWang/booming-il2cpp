@@ -1515,7 +1515,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetTypes(CHAOS_IL2CPP_INTPTR assembly
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromAssemblyBool(
     CHAOS_IL2CPP_INTPTR assembly_handle,
     CHAOS_IL2CPP_INTPTR name_string_id,
-    CHAOS_IL2CPP_INT32 throw_on_error)
+    CHAOS_IL2CPP_INT32 throw_on_error) noexcept
 {
     auto* decoded = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly_handle));
     if (decoded == nullptr) return 0;

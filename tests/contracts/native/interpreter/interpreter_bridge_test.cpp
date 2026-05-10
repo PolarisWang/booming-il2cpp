@@ -2,7 +2,7 @@
 ///
 /// These tests exercise the RuntimeInstantiationBridgeV0::interpret_method_call
 /// entry point end-to-end, including:
-///   - IL lowering inside LowerMethodBody
+///   - AotCoreIr JSON deserialization inside LowerMethodBody
 ///   - V1 signature-aware argument marshalling
 ///   - Return value extraction via tag dispatch
 ///   - Exception propagation via ManagedExceptionCarrier
@@ -22,6 +22,7 @@
 #include <iostream>
 #include <cstring>
 #include <cstdint>
+#include <cstdarg>
 
 // ── Namespace aliases ───────────────────────────────────────────────────
 using chaos::il2cpp::runtime_core::EncodeReflectionQueryMethodHandle;
@@ -32,18 +33,38 @@ using chaos::il2cpp::runtime_instantiation::RuntimeInstantiatedMethod;
 using chaos::il2cpp::interpreter::InterpreterValue;
 using chaos::il2cpp::interpreter::ValueTag;
 
+// ── IROpCode numeric values for JSON construction ──────────────────────
+// These match the generated ir_opcodes.h enum values.
+constexpr int kOpLdcI4 = 0;
+constexpr int kOpLdArg = 6;
+constexpr int kOpAdd   = 25;
+constexpr int kOpThrow = 48;
+constexpr int kOpRet   = 53;
+
 // ════════════════════════════════════════════════════════════════════════════
 // Helpers
 // ════════════════════════════════════════════════════════════════════════════
 
-/// Build a tiny-header method body in a local buffer.
-/// Returns the total size (header + code).
-static uint8_t BuildTinyMethod(uint8_t* buf, const uint8_t* il_code,
-                                uint8_t code_size)
-{
-    buf[0] = static_cast<uint8_t>((code_size << 2) | 0x02u);
-    std::memcpy(buf + 1, il_code, code_size);
-    return static_cast<uint8_t>(1u + code_size);
+/// Build a tiny AotCoreIr JSON string for a simple method body.
+/// Returns the number of bytes written (including null terminator).
+/// \param buf        output buffer (must be at least 256 bytes)
+/// \param json       constructed JSON with a fixed set of opcodes and operands
+///
+/// JSON format expected by DeserializeAotCoreIrMethod:
+/// {
+///   "instructions": [
+///     {"opCode": N, "ilOffset": M, "operand": V},
+///     ...
+///   ],
+///   "exceptionRegions": []
+/// }
+static uint32_t BuildJsonMethod(char* buf, size_t buf_size, const char* json_fmt, ...) {
+    va_list args;
+    va_start(args, json_fmt);
+    int written = std::vsnprintf(buf, buf_size, json_fmt, args);
+    va_end(args);
+    if (written < 0 || static_cast<size_t>(written) >= buf_size) return 0;
+    return static_cast<uint32_t>(written) + 1;  // include null terminator
 }
 
 /// Encode a method descriptor pointer as a valid MethodInfoHandle.
@@ -101,13 +122,18 @@ int main()
 // Test: Basic method execution through InterpretMethodCall.
 //   Method body: ldc.i4.1 + ldc.i4.2 + add + ret → returns 3
 //   No parameter type info (V0 fallback).
-//   Exercises: lowering, execution, return value extraction.
+//   Exercises: deserialization, execution, return value extraction.
 static bool TestBridgeBasicAdd()
 {
-    // ── IL: ldc.i4.1 (0x15) + ldc.i4.2 (0x16) + add (0x58) + ret (0x2A) = 4 bytes ──
-    const uint8_t il_code[] = { 0x15, 0x16, 0x58, 0x2A };
-    uint8_t method_body[1 + sizeof(il_code)];
-    const uint8_t total_size = BuildTinyMethod(method_body, il_code, sizeof(il_code));
+    // ── AotCoreIr JSON: ldc.i4.1 + ldc.i4.2 + add + ret ──
+    char json_buf[256];
+    uint32_t json_len = BuildJsonMethod(json_buf, sizeof(json_buf),
+        R"({"instructions":[)"
+        R"({"opCode":%d,"ilOffset":0,"operand":1},)"
+        R"({"opCode":%d,"ilOffset":1,"operand":2},)"
+        R"({"opCode":%d,"ilOffset":2},)"
+        R"({"opCode":%d,"ilOffset":3}]})",
+        kOpLdcI4, kOpLdcI4, kOpAdd, kOpRet);
 
     // ── Method descriptor (no parameter type info) ──
     const char* subject = "test_BridgeBasicAdd";
@@ -122,8 +148,8 @@ static bool TestBridgeBasicAdd()
     // ── RuntimeInstantiatedMethod ──
     RuntimeInstantiatedMethod rt_method = {};
     rt_method.descriptor = desc;
-    rt_method.il_bytes = method_body;
-    rt_method.il_length = total_size;
+    rt_method.aot_core_ir_json = json_buf;
+    rt_method.aot_core_ir_json_length = json_len;
     rt_method.is_unloaded = false;
 
     const auto method_handle = EncodeMethod(&rt_method.descriptor);
@@ -155,10 +181,13 @@ static bool TestBridgeBasicAdd()
 //   Exercises: V1 marshalling path with explicit type info.
 static bool TestBridgeSignatureAwareArg()
 {
-    // ── IL: ldarg.0 (0x02) + ret (0x2A) = 2 bytes ──
-    const uint8_t il_code[] = { 0x02, 0x2A };
-    uint8_t method_body[1 + sizeof(il_code)];
-    const uint8_t total_size = BuildTinyMethod(method_body, il_code, sizeof(il_code));
+    // ── AotCoreIr JSON: ldarg.0 + ret ──
+    char json_buf[256];
+    uint32_t json_len = BuildJsonMethod(json_buf, sizeof(json_buf),
+        R"({"instructions":[)"
+        R"({"opCode":%d,"ilOffset":0,"operand":0},)"
+        R"({"opCode":%d,"ilOffset":1}]})",
+        kOpLdArg, kOpRet);
 
     // ── Parameter descriptor ──
     const char* param_type = "System.Int32";
@@ -181,8 +210,8 @@ static bool TestBridgeSignatureAwareArg()
     // ── RuntimeInstantiatedMethod ──
     RuntimeInstantiatedMethod rt_method = {};
     rt_method.descriptor = desc;
-    rt_method.il_bytes = method_body;
-    rt_method.il_length = total_size;
+    rt_method.aot_core_ir_json = json_buf;
+    rt_method.aot_core_ir_json_length = json_len;
     rt_method.is_unloaded = false;
 
     const auto method_handle = EncodeMethod(&rt_method.descriptor);
@@ -214,10 +243,14 @@ static bool TestBridgeSignatureAwareArg()
 //   We catch the C++ exception and verify it.
 static bool TestBridgeExceptionPropagation()
 {
-    // ── IL: ldc.i4 99 (0x1F, 99) + throw (0x7A) + ret (0x2A) = 4 bytes ──
-    const uint8_t il_code[] = { 0x1F, 99, 0x7A, 0x2A };
-    uint8_t method_body[1 + sizeof(il_code)];
-    const uint8_t total_size = BuildTinyMethod(method_body, il_code, sizeof(il_code));
+    // ── AotCoreIr JSON: ldc.i4.99 + throw + ret (unreachable) ──
+    char json_buf[256];
+    uint32_t json_len = BuildJsonMethod(json_buf, sizeof(json_buf),
+        R"({"instructions":[)"
+        R"({"opCode":%d,"ilOffset":0,"operand":99},)"
+        R"({"opCode":%d,"ilOffset":1},)"
+        R"({"opCode":%d,"ilOffset":2}]})",
+        kOpLdcI4, kOpThrow, kOpRet);
 
     // ── Method descriptor ──
     const char* subject = "test_BridgeExceptionPropagation";
@@ -232,8 +265,8 @@ static bool TestBridgeExceptionPropagation()
     // ── RuntimeInstantiatedMethod ──
     RuntimeInstantiatedMethod rt_method = {};
     rt_method.descriptor = desc;
-    rt_method.il_bytes = method_body;
-    rt_method.il_length = total_size;
+    rt_method.aot_core_ir_json = json_buf;
+    rt_method.aot_core_ir_json_length = json_len;
     rt_method.is_unloaded = false;
 
     const auto method_handle = EncodeMethod(&rt_method.descriptor);

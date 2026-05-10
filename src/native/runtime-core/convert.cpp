@@ -11,7 +11,7 @@
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_byte(CHAOS_IL2CPP_INTPTR value)
 {
     // Byte range 0-255 is always valid for char
-    return static_cast<CHAOS_IL2CPP_UINT16>(static_cast<uint8_t>(value & 0xFF));
+    return static_cast<CHAOS_IL2CPP_UINT16>(static_cast<CHAOS_IL2CPP_UINT8>(value & 0xFF));
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_char(CHAOS_IL2CPP_INTPTR value)

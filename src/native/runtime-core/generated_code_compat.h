@@ -74,7 +74,7 @@ inline const TypeInfoHot* chaos_object_get_type_info(const void* obj) noexcept {
 // ── Managed string type ──────────────────────────────────────────
 // Used by generated code for reinterpret_cast access to string length.
 struct chaos_managed_string {
-    FatHeader header{};
+    ThinLockableHeader header{};
     CHAOS_IL2CPP_INT32 length = 0;
     const char* utf8_data = nullptr;
     CHAOS_IL2CPP_UINT64 string_id = 0u;
@@ -101,6 +101,9 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetExceptionMessage(CHAOS_IL2CPP_INTPTR excep
 // ── Runtime stub declarations ───────────────────────────────────
 // Stub implementations in runtime_stubs.cpp. These are thin wrappers
 // called by generated extern "C" external-runtime-helper functions.
+//
+// NOTE: Functions already declared in reflection_api.h (included via
+// runtime_core.h) are NOT duplicated here to avoid redefinition errors.
 extern "C" {
 // Array
 void    ChaosArrayClear(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INT32 count) noexcept;
@@ -127,10 +130,38 @@ CHAOS_IL2CPP_INT32  ChaosExceptionGetHresult(CHAOS_IL2CPP_INTPTR exc) noexcept;
 // Object
 CHAOS_IL2CPP_INTPTR ChaosObjectEqualsStatic(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right) noexcept;
 void    ChaosObjectCtor(CHAOS_IL2CPP_INTPTR obj) noexcept;
-// GUID / Random
+// GUID / Random / HashCode
 CHAOS_IL2CPP_INTPTR ChaosGuidNewGuid(void) noexcept;
+CHAOS_IL2CPP_INT32  ChaosGuidGetHashCode(CHAOS_IL2CPP_INTPTR guid) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosGuidToString(CHAOS_IL2CPP_INTPTR guid) noexcept;
 void    ChaosRandomNextBytes(CHAOS_IL2CPP_INTPTR rng, CHAOS_IL2CPP_INTPTR buffer) noexcept;
 CHAOS_IL2CPP_INT64  ChaosRandomNextDouble(CHAOS_IL2CPP_INTPTR rng) noexcept;
+CHAOS_IL2CPP_INT32  ChaosRandomNext(CHAOS_IL2CPP_INTPTR rng) noexcept;
+CHAOS_IL2CPP_INT32  ChaosRandomNextMax(CHAOS_IL2CPP_INTPTR rng, CHAOS_IL2CPP_INT32 maxValue) noexcept;
+CHAOS_IL2CPP_INT32  ChaosHashCodeToHashCode(CHAOS_IL2CPP_INTPTR state) noexcept;
+CHAOS_IL2CPP_INT32  ChaosHashCodeCombine2(CHAOS_IL2CPP_INT32 hc1, CHAOS_IL2CPP_INT32 hc2) noexcept;
+void    ChaosHashCodeAdd(CHAOS_IL2CPP_INTPTR state, CHAOS_IL2CPP_INT32 value) noexcept;
+	// Convert / Parse / Format
+	CHAOS_IL2CPP_INT32  ChaosConvertToBoolean(CHAOS_IL2CPP_INTPTR value) noexcept;
+	CHAOS_IL2CPP_UINT8  ChaosConvertToByte(CHAOS_IL2CPP_INTPTR value) noexcept;
+	CHAOS_IL2CPP_INT16  ChaosConvertToInt16(CHAOS_IL2CPP_INTPTR value) noexcept;
+	CHAOS_IL2CPP_INT32  ChaosConvertToInt32(CHAOS_IL2CPP_INTPTR value) noexcept;
+	CHAOS_IL2CPP_INT64  ChaosConvertToInt64(CHAOS_IL2CPP_INTPTR value) noexcept;
+	CHAOS_IL2CPP_FLOAT32 ChaosConvertToSingle(CHAOS_IL2CPP_INTPTR value) noexcept;
+	CHAOS_IL2CPP_FLOAT64 ChaosConvertToDouble(CHAOS_IL2CPP_INTPTR value) noexcept;
+	CHAOS_IL2CPP_INTPTR ChaosConvertToDecimal(CHAOS_IL2CPP_INTPTR value) noexcept;
+	CHAOS_IL2CPP_INT32  ChaosConvertToInt32FromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept;
+	CHAOS_IL2CPP_INTPTR ChaosFormatInt32(CHAOS_IL2CPP_INT32 value) noexcept;
+	CHAOS_IL2CPP_INTPTR ChaosFormatDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept;
+	CHAOS_IL2CPP_INT32  ChaosParseInt32(CHAOS_IL2CPP_INTPTR value) noexcept;
+	CHAOS_IL2CPP_INT64  ChaosParseInt64(CHAOS_IL2CPP_INTPTR value) noexcept;
+	CHAOS_IL2CPP_FLOAT64 ChaosParseDouble(CHAOS_IL2CPP_INTPTR value) noexcept;
+	CHAOS_IL2CPP_INT32  ChaosDecimalToInt32(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+	CHAOS_IL2CPP_INTPTR ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+	CHAOS_IL2CPP_INTPTR ChaosDecimalSubtract(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+	CHAOS_IL2CPP_INTPTR ChaosDecimalMultiply(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+	CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+	CHAOS_IL2CPP_INTPTR ChaosDecimalFromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept;
 // Culture
 CHAOS_IL2CPP_INTPTR ChaosCultureGetCurrent(void) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosCultureGetInvariant(void) noexcept;
@@ -178,6 +209,31 @@ void    ChaosConsoleWriteLine(CHAOS_IL2CPP_INTPTR value) noexcept;
 // Delegate
 void    ChaosDelegateInitialize(CHAOS_IL2CPP_INTPTR delegate_obj, CHAOS_IL2CPP_INTPTR target, CHAOS_IL2CPP_INTPTR method_ptr) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosDelegateGetTarget(CHAOS_IL2CPP_INTPTR delegate_obj) noexcept;
+
+// ── Thread ─────────────────────────────────────────────────────
+CHAOS_IL2CPP_INTPTR chaos_thread_get_current(void) noexcept;
+// ── Volatile ──────────────────────────────────────────────────
+CHAOS_IL2CPP_INT32  ChaosVolatileRead(CHAOS_IL2CPP_INTPTR ptr) noexcept;
+
+// ══════════════════════════════════════════════════════════════
+// NOTE: Functions declared in reflection_api.h (included via
+// runtime_core.h) are NOT redeclared here. Only additional stubs
+// not present in reflection_api.h are declared below.
+// ══════════════════════════════════════════════════════════════
+
+// ── Pure stubs (only in runtime_stubs.cpp, NOT in reflection_api.h/cpp) ──
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsDefined(CHAOS_IL2CPP_INTPTR assembly, CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionHasDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetRawDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsVirtual(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseDefinition(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosFormattablestringFactoryCreate(CHAOS_IL2CPP_INTPTR format, CHAOS_IL2CPP_INTPTR args) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersEquals(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right) noexcept;
+CHAOS_IL2CPP_INT32  ChaosRuntimeHelpersGetHashCode(CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetObjectValue(CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimewrappedGetWrappedException(CHAOS_IL2CPP_INTPTR exc) noexcept;
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
 

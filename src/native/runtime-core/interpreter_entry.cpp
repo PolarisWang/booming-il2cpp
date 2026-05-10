@@ -5,9 +5,10 @@
 #include "token_resolver.h"
 #include "module_registry.h"
 #include "reflection_query_model.h"
+#include "fast_dispatch.h"
 #include "../bootstrap/bootstrap.h"
 
-#include <il_to_ir_lowerer.h>     // LowerILToIR, ParseMethodBodyHeader, ILTokenResolver
+#include <aot_core_ir_reader.h>   // DeserializeAotCoreIrMethod
 #include <interpreter_vm.h>       // ExecutionFrame, InterpreterVM, IRMethod, InterpreterValue
 
 #include <atomic>
@@ -87,145 +88,221 @@ void ArgBuffer::WritePtr(void* value) noexcept {
     offset_ += sizeof(void*);
 }
 
-// ── PatchTokenResolver ──────────────────────────────────────────────────
-// ILTokenResolver callback for patched methods.
-// Uses PatchMetadataCache from user_data to resolve metadata tokens locally.
-// Falls back through DefaultTokenResolver for tokens outside the patch scope.
+// ── Subject ID resolver callback for DeserializeAotCoreIr ────────────────
+// Maps subject IDs to call_target pointers using PatchMetadataCache + AOT reflection query.
+// This replaces the old PatchTokenResolver which resolved raw metadata tokens.
 
-static bool PatchTokenResolver(
-    CHAOS_IL2CPP_UINT32 token,
-    interpreter::IRInstruction& instruction,
-    void* user_data) noexcept {
+static void* ResolveSubjectId(
+    const char* subject_id,
+    void* user_data) noexcept
+{
+    if (subject_id == nullptr || user_data == nullptr) return nullptr;
 
-    if (user_data == nullptr) return false;
     auto* cache = static_cast<PatchMetadataCache*>(user_data);
+    const auto* bridge = cache->GetBridge();
+    ImageHandle aot_image = cache->GetAotImage();
 
-    uint8_t table = static_cast<uint8_t>(token >> 24);
-
-    switch (table) {
-    case 0x02: {  // TypeDef — type defined in patch assembly.
-        instruction.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(token);
-        return true;
-    }
-    case 0x06: {  // MethodDef — method defined in patch assembly.
-        instruction.call_target = nullptr;
-        instruction.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(token);
-        return true;
-    }
-    case 0x70: {  // UserString — ldstr token from patch #US heap.
-        const char* str = cache->GetUserString(token);
-        if (str != nullptr) {
-            instruction.string_operand = str;
-            return true;
-        }
-        return false;
-    }
-    case 0x0A: {  // MemberRef — cross-module method reference.
-        // Resolve MemberRef to a concrete MethodInfoHandle from the AOT image.
-        // MemberRef tokens (0x0A) cannot be resolved by DefaultTokenResolver
-        // because the AOT bridge's resolve_method_by_token only handles MethodDef
-        // tokens (0x06).  Instead, we extract the declaring type and method name
-        // from the patch data's MemberRef/TypeRef tables, then look up the method
-        // in the AOT image's reflection query descriptor tree.
-        if (instruction.op_code != interpreter::IROpCode::Call &&
-            instruction.op_code != interpreter::IROpCode::CallBridge) {
-            break;  // non-call MemberRefs fall through to DefaultTokenResolver
-        }
-
-        const auto* member_ref = cache->ResolveMemberRef(token);
-        if (member_ref == nullptr) break;
-
-        const char* method_name = cache->GetString(member_ref->name_offset);
-        if (method_name == nullptr || method_name[0] == '\0') break;
-
-        // Resolve declaring type name from parent token (TypeRef or TypeDef).
-        const uint8_t parent_table = static_cast<uint8_t>(
-            member_ref->parent_token >> 24);
-        const char* type_name = nullptr;
-        const char* ns       = "";
-
-        if (parent_table == 0x02) {
-            auto* td = cache->ResolveTypeDef(member_ref->parent_token);
-            if (td != nullptr) {
-                type_name = cache->GetString(td->type_name_offset);
-                ns        = cache->GetString(td->namespace_offset);
-            }
-        } else if (parent_table == 0x01) {
-            auto* tr = cache->ResolveTypeRef(member_ref->parent_token);
-            if (tr != nullptr) {
-                type_name = cache->GetString(tr->type_name_offset);
-                ns        = cache->GetString(tr->namespace_offset);
-            }
-        }
-        if (type_name == nullptr) break;
-
-        // Find the declaring type in the AOT image.
-        const auto* aot_image = TryDecodeReflectionQueryImageHandle(
-            cache->GetAotImage());
-        if (aot_image == nullptr) break;
-
-        const auto* decl_type = FindReflectionQueryTypeByName(
-            aot_image, ns, type_name);
-        if (decl_type == nullptr) break;
-
-        // Parse parameter count and instance flag from the MemberRef signature.
-        CHAOS_IL2CPP_INT32 param_count = -1;
-        bool is_instance = false;
-        if (member_ref->signature_offset != 0) {
-            const auto* sb = static_cast<const uint8_t*>(
-                cache->GetBlob(member_ref->signature_offset));
-            if (sb != nullptr && sb[0] >= 2) {
-                const uint8_t* sig = sb + 1;  // skip #Blob length byte
-                is_instance = (sig[0] & 0x20) == 0x20;
-                const uint8_t pc = sig[1];     // param count (compressed uint)
-                if (pc <= 0x7F) {
-                    param_count = static_cast<CHAOS_IL2CPP_INT32>(pc);
+    // Try to resolve through the AOT reflection query model.
+    // Subject IDs follow the format: "AssemblyName/Namespace.TypeName:MethodName"
+    // or just "SubjectId" for types.
+    if (bridge != nullptr && aot_image != 0) {
+        const auto* image = TryDecodeReflectionQueryImageHandle(aot_image);
+        if (image != nullptr) {
+            // Search types by subject_id.
+            for (CHAOS_IL2CPP_UINT32 ti = 0; ti < image->type_count; ++ti) {
+                const auto* type_desc = image->types[ti];
+                if (type_desc == nullptr) continue;
+                if (type_desc->subject_id_utf8 != nullptr &&
+                    std::strcmp(type_desc->subject_id_utf8, subject_id) == 0) {
+                    return reinterpret_cast<void*>(
+                        static_cast<CHAOS_IL2CPP_UINTPTR>(
+                            EncodeReflectionQueryTypeHandle(type_desc)));
+                }
+                // Search methods in this type.
+                if (type_desc->methods != nullptr) {
+                    for (CHAOS_IL2CPP_INT32 mi = 0; mi < type_desc->method_count; ++mi) {
+                        const auto* method_desc = &type_desc->methods[mi];
+                        if (method_desc->subject_id_utf8 != nullptr &&
+                            std::strcmp(method_desc->subject_id_utf8, subject_id) == 0) {
+                            return reinterpret_cast<void*>(
+                                static_cast<CHAOS_IL2CPP_UINTPTR>(
+                                    EncodeReflectionQueryMethodHandle(method_desc)));
+                        }
+                    }
                 }
             }
         }
-        if (param_count < 0) break;
-
-        const auto* method = FindReflectionQueryMethod(
-            decl_type, method_name, param_count);
-        if (method == nullptr) break;
-
-        instruction.call_target = reinterpret_cast<void*>(
-            static_cast<CHAOS_IL2CPP_UINTPTR>(
-                EncodeReflectionQueryMethodHandle(method)));
-        instruction.is_instance_call = is_instance;
-        instruction.arg_count = static_cast<CHAOS_IL2CPP_UINT32>(
-            param_count + (is_instance ? 1u : 0u));
-        return true;
-    }
-    default:
-        // All other token types (0x01 TypeRef, 0x0A MemberRef, 0x11
-        // StandaloneSig, etc.) fall through to DefaultTokenResolver
-        // for AOT-side resolution via CodegenBridgeV0.
-        break;
     }
 
-    // ── Fallback to DefaultTokenResolver ──
-    // Uses the AOT CodegenBridgeV0 + ImageHandle stored in PatchMetadataCache
-    // by InterpreterEntryDirect before IL→IR lowering. This enables resolution
-    // of string tokens (ldstr), cross-module method references (Convert.ToChar),
-    // and type references (System.String) that live in the AOT image rather than
-    // the patch data.
-    const auto* bridge = cache->GetBridge();
-    if (bridge == nullptr) return false;
-    const ImageHandle aot_image = cache->GetAotImage();
-    if (aot_image == 0) return false;
-
-    interpreter::TokenResolverContext fallback_ctx;
-    fallback_ctx.bridge       = bridge;
-    fallback_ctx.source_image = aot_image;
-    return interpreter::DefaultTokenResolver(token, instruction, &fallback_ctx);
+    return nullptr;
 }
 
-// ── PatchMethod lazy IR lowering ────────────────────────────────────────
+// ── ECMA element_type → ValueTag mapper ────────────────────────────────────
+// Maps a single ECMA element type byte from a method signature to an
+// interpreter::ValueTag. Returns ValueTag::ObjectRef for complex types
+// (Class, ValueType, SzArray) that need pointer-based access.
+static interpreter::ValueTag ElementTypeToValueTag(uint8_t elem_type) noexcept {
+    using interpreter::ValueTag;
+    switch (elem_type) {
+    case 0x02: // Boolean
+    case 0x03: // Char
+    case 0x04: // I1 (SByte)
+    case 0x05: // U1 (Byte)
+    case 0x06: // I2 (Int16)
+    case 0x07: // U2 (UInt16)
+    case 0x08: // I4 (Int32)
+    case 0x09: // U4 (UInt32)
+        return ValueTag::Int32;
+    case 0x0A: // I8 (Int64)
+    case 0x0B: // U8 (UInt64)
+    case 0x18: // I (IntPtr)
+    case 0x19: // U (UIntPtr)
+        return ValueTag::Int64;
+    case 0x0C: // R4 (Single)
+        return ValueTag::Float32;
+    case 0x0D: // R8 (Double)
+        return ValueTag::Float64;
+    default:
+        // 0x0E (String), 0x0F (Ptr), 0x10 (ByRef), 0x11 (ValueType),
+        // 0x12 (Class), 0x1C (Object), 0x1D (SzArray) → pointer-sized
+        return ValueTag::ObjectRef;
+    }
+}
 
-// Global mutex for double-checked locking of IR lowering.
-// Fine-grained: one lock for all methods (low contention since lowering
-// typically happens during initial patch activation, not concurrently).
+// ── Read one argument from ArgBuffer with correct type ──────────────────────
+// Reads from ArgBuffer using the type-appropriate read method and returns
+// an InterpreterValue with the correct tag (not ObjectRef for primitives).
+static interpreter::InterpreterValue ReadTypedArg(
+    ArgBuffer& reader, interpreter::ValueTag tag) noexcept {
+    switch (tag) {
+    case interpreter::ValueTag::Int32:
+        return interpreter::InterpreterValue::from_i32(reader.ReadI32());
+    case interpreter::ValueTag::Int64:
+        return interpreter::InterpreterValue::from_i64(reader.ReadI64());
+    case interpreter::ValueTag::Float32:
+        return interpreter::InterpreterValue::from_f32(reader.ReadF32());
+    case interpreter::ValueTag::Float64:
+        return interpreter::InterpreterValue::from_f64(reader.ReadF64());
+    default:
+        return interpreter::InterpreterValue::from_obj(reader.ReadPtr());
+    }
+}
+
+// ── Write a return value to ret_buf with type-aware write ──────────────────
+// Skips the tag switch when the return type is known.
+static void WriteTypedRet(void* ret_buf, const interpreter::ExecutionResult& result,
+                           interpreter::ValueTag ret_tag) noexcept {
+    if (ret_buf == nullptr || !result.has_return_value) return;
+    ArgBuffer ret_writer(ret_buf);
+    switch (ret_tag) {
+    case interpreter::ValueTag::Int32:
+        ret_writer.WriteI32(result.return_value.i32);
+        return;
+    case interpreter::ValueTag::Int64:
+        ret_writer.WriteI64(result.return_value.i64);
+        return;
+    case interpreter::ValueTag::Float32:
+        ret_writer.WriteF32(result.return_value.f32);
+        return;
+    case interpreter::ValueTag::Float64:
+        ret_writer.WriteF64(result.return_value.f64);
+        return;
+    default:
+        break; // fall through to tag-switch
+    }
+    // Fallback: use tag from the return value itself.
+    switch (result.return_value.tag) {
+    case interpreter::ValueTag::Int32:
+        ret_writer.WriteI32(result.return_value.i32); break;
+    case interpreter::ValueTag::Int64:
+        ret_writer.WriteI64(result.return_value.i64); break;
+    case interpreter::ValueTag::Float32:
+        ret_writer.WriteF32(result.return_value.f32); break;
+    case interpreter::ValueTag::Float64:
+        ret_writer.WriteF64(result.return_value.f64); break;
+    default:
+        ret_writer.WritePtr(result.return_value.obj); break;
+    }
+}
+
+// ── Parse and cache method signature ───────────────────────────────────────
+// Walks ECMA #Blob signature format, caches arg count, per-arg types,
+// and return type in PatchMethod. Sets cached_sig_valid = true on success.
+static void CacheSignature(PatchMethod* patch_method) noexcept {
+    if (patch_method == nullptr ||
+        patch_method->signature_blob == nullptr ||
+        patch_method->signature_len <= 1) {
+        return;
+    }
+
+    const uint8_t* sig = patch_method->signature_blob;
+    uint32_t sig_len = patch_method->signature_len;
+
+    // [blob_length] [calling_convention] [param_count] [ret_type] [param_types...]
+    const uint8_t* ptr = sig + 1; // skip blob length
+    uint32_t remaining = sig_len - 1;
+    if (remaining < 2) return;
+
+    uint8_t cc = ptr[0];
+    uint8_t count_byte = ptr[1];
+
+    uint32_t param_count = 0;
+    uint32_t consumed = 2;
+    if (count_byte <= 0x7F) {
+        param_count = count_byte;
+    } else if (count_byte <= 0xBF && remaining >= 3) {
+        param_count = static_cast<uint32_t>(((count_byte & 0x3F) << 8) | ptr[2]);
+        consumed = 3;
+    } else {
+        return; // 4-byte encoding, rare, skip
+    }
+
+    bool has_this = (cc & 0x20) == 0x20;
+    uint32_t total_arg_count = has_this ? param_count + 1 : param_count;
+
+    ptr += consumed;
+    remaining -= consumed;
+    if (remaining < 1) return;
+
+    // Parse return type.
+    patch_method->cached_ret_tag = static_cast<uint8_t>(
+        ElementTypeToValueTag(ptr[0]));
+    ptr += 1;
+    remaining -= 1;
+
+    // Parse parameter types.
+    // Only cache first 8 args (vast majority of methods).
+    uint32_t args_cached = (total_arg_count > 8) ? 8 : total_arg_count;
+    for (uint32_t i = 0; i < args_cached && remaining > 0; ++i) {
+        uint8_t elem = ptr[0];
+        auto tag = ElementTypeToValueTag(elem);
+        patch_method->cached_arg_types[i] = static_cast<uint8_t>(tag);
+
+        // Advance past this parameter type.
+        ptr += 1;
+        remaining -= 1;
+
+        // For complex types with trailing token bytes, skip past them.
+        if (elem == 0x11 || elem == 0x12) { // ValueType or Class
+            // Skip TypeDefOrRef coded index (compressed unsigned int).
+            if (remaining >= 1 && ptr[0] >= 0x80) {
+                if ((ptr[0] & 0xC0) == 0xC0 && remaining >= 4) {
+                    ptr += 4; remaining -= 4;
+                } else if (remaining >= 2) {
+                    ptr += 2; remaining -= 2;
+                }
+            }
+            // 1-byte tok: ptr already advanced by ptr+=1 above, any 0x7F or less is 1 byte
+        }
+    }
+
+    patch_method->cached_arg_count = total_arg_count;
+    patch_method->cached_sig_valid = true;
+}
+
+// ── PatchMethod lazy IR deserialization ─────────────────────────────────
+
+// Global mutex for double-checked locking of IR deserialization.
 static std::mutex g_lower_ir_mutex;
 
 void PatchMethodLowerIR(uintptr_t method_key) noexcept {
@@ -241,34 +318,55 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
 
     if (patch_method->cached_ir != nullptr) return;
 
-    // Parse method body header.
-    interpreter::MethodBodyHeader header;
-    if (!interpreter::ParseMethodBodyHeader(
-            patch_method->il_bytes,
-            patch_method->il_length,
-            header)) {
-        // Cannot parse header — create an empty IR with Ret.
+    // Deserialize AotCoreIr JSON → IRMethod.
+    const char* json = patch_method->aot_core_ir_json;
+    if (json == nullptr || json[0] == '\0') {
+        // No JSON — create an empty IR with Ret.
         auto* ir = new interpreter::IRMethod();
         ir->instructions.push_back({});
         patch_method->cached_ir = ir;
         return;
     }
 
-    auto* ir = new interpreter::IRMethod();
-
-    // Lower using the IL bytes (after the method body header).
-    // The code_start from the parsed header points to the first IL opcode.
-    *ir = interpreter::LowerILToIR(
-        header.code_start,
-        patch_method->il_length - static_cast<uint32_t>(
-            reinterpret_cast<const uint8_t*>(header.code_start) -
-            patch_method->il_bytes),
-        header.code_size,
-        header.max_stack,
-        PatchTokenResolver,
-        patch_method->metadata_cache);
+    size_t json_length = std::strlen(json);
+    auto* ir = new interpreter::IRMethod(
+        DeserializeAotCoreIrMethod(
+            json,
+            json_length,
+            ResolveSubjectId,
+            patch_method->metadata_cache));
 
     patch_method->cached_ir = ir;
+
+    // Pre-cache signature so the fast path can use it immediately.
+    if (!patch_method->cached_sig_valid) {
+        CacheSignature(patch_method);
+    }
+
+    // Pre-cache call-site metadata for every Call instruction.
+    // This eliminates TryDecodeReflectionQueryMethodHandle + ResolveParameterType
+    // + IsValueTypeByHandle + LayoutEngine at each call dispatch.
+    uint32_t instr_count = static_cast<uint32_t>(ir->instructions.size());
+    if (instr_count > 0) {
+        auto* call_cache = new runtime_instantiation::CachedCallInfo[instr_count];
+        for (uint32_t i = 0; i < instr_count; ++i) {
+            const auto& instr = ir->instructions[i];
+            if (instr.op_code == interpreter::IROpCode::Call ||
+                instr.op_code == interpreter::IROpCode::CallVirt ||
+                instr.op_code == interpreter::IROpCode::CallBridge ||
+                instr.op_code == interpreter::IROpCode::CallVirtConstrained) {
+                if (instr.call_target != nullptr) {
+                    call_cache[i] = runtime_instantiation::PrecacheCallTarget(
+                        instr.call_target);
+                } else {
+                    call_cache[i].ret_tag = 0xFF; // not cached
+                }
+            } else {
+                call_cache[i].ret_tag = 0xFF; // not a call
+            }
+        }
+        patch_method->call_cache = call_cache;
+    }
 }
 
 // ── InterpreterEntryDirect ──────────────────────────────────────────────
@@ -282,22 +380,20 @@ void InterpreterEntryDirect(
 
     auto* patch_method = reinterpret_cast<PatchMethod*>(method_key);
 
-    // Step 0: Set up AOT bridge for cross-module token resolution.
-    // The PatchMetadataCache needs access to the CodegenBridgeV0 + AOT
-    // ImageHandle so that PatchTokenResolver can fall back to
-    // DefaultTokenResolver for MemberRef, TypeRef, and LdStr tokens
-    // that reference types/methods/strings outside the patch data.
-    if (patch_method->metadata_cache != nullptr) {
+    // Step 0: Set up AOT bridge for cross-module subject ID resolution.
+    // This only runs once per PatchMetadataCache (all methods in a patch
+    // context share the same cache). After the first call, GetBridge()
+    // returns non-null and the entire block is skipped.
+    if (patch_method->metadata_cache != nullptr &&
+        patch_method->metadata_cache->GetBridge() == nullptr) {
         const auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
         const auto* bootstrap_state = chaos::il2cpp::bootstrap::PeekBootstrapState();
         ImageHandle image = 0;
         if (bootstrap_state != nullptr && bootstrap_state->aot_image_handle != 0) {
             image = bootstrap_state->aot_image_handle;
-        } else if (bridge != nullptr) {
-            // Fallback for standalone hotupdate test context where
-            // bootstrap_state->aot_image_handle is 0 (bootstrap not fully
-            // initialized). Scan registered modules for the first valid
-            // ImageHandle to enable DefaultTokenResolver fallback.
+        } else {
+            // In hotupdate test contexts the AOT image handle is obtained
+            // from the first registered module that has types loaded.
             for (uint32_t mid = 0; mid < kMaxModules; ++mid) {
                 const auto* module = LookupModule(mid);
                 if (module != nullptr && !module->tombstone &&
@@ -312,47 +408,192 @@ void InterpreterEntryDirect(
         }
     }
 
-    // Step 1: Lazy IL→IR lowering.
+    // Step 1: Lazy AotCoreIr JSON → IR deserialization.
     PatchMethodLowerIR(method_key);
 
     auto* ir = static_cast<interpreter::IRMethod*>(patch_method->cached_ir);
     if (ir == nullptr || ir->instructions.empty()) {
-        return;  // Lowering failed — nothing to execute.
+        return;  // Deserialization failed — nothing to execute.
     }
 
-    // Step 2: Parse method signature to determine argument count and types.
-    // The signature blob format (ECMA 335):
-    //   [0] = calling convention (0x00 for static, 0x20 for instance)
-    //   [1] = param count (compressed unsigned int)
-    //   [2..] = return type, then parameter types
-    //
-    // For now, use a simple approach: count args from the signature blob.
-    CHAOS_IL2CPP_UINT32 arg_count = 0;
-
-    if (patch_method->signature_blob != nullptr &&
-        patch_method->signature_len > 1) {
-        // Skip calling convention byte.
-        // Read compressed unsigned int for param count.
-        const uint8_t* sig = patch_method->signature_blob;
-        // Skip length prefix (first byte of blob).
-        // PatchMethod stores the raw blob starting with the length byte.
-        // The actual signature starts at offset 1.
-        if (patch_method->signature_blob[0] >= 2) {
-            const uint8_t* sig_data = patch_method->signature_blob + 1;
-            uint8_t cc = sig_data[0];  // calling convention
-            uint8_t count_byte = sig_data[1];
-
-            // Param count (compressed unsigned int, 1-4 bytes).
-            if (count_byte <= 0x7F) {
-                arg_count = count_byte;
-            } else if (count_byte <= 0xBF) {
-                arg_count = static_cast<CHAOS_IL2CPP_UINT32>(
-                    ((count_byte & 0x3F) << 8) | sig_data[2]);
+    // ── Step A: Trivial fast path ────────────────────────────────────────
+    // Detect simple patterns (LdArg+Ret, LdcI4+Ret, LdNull+Ret) and handle
+    // them inline without building ExecutionFrame or calling InterpreterVM.
+    // Also handles single-instruction Ret (empty IR fallback when AotCoreIr
+    // JSON is absent from patchdata).
+    if (ir->instructions.empty()) {
+        return;  // No instructions — nothing to execute.
+    }
+    const auto instr_count = ir->instructions.size();
+    if (instr_count == 1) {
+        // Single instruction: must be Ret (empty IR fallback, no AotCoreIr in patchdata).
+        return;
+    }
+    if (instr_count == 2 && ir->seh_clauses.empty()) {
+        const auto& op0 = ir->instructions[0];
+        const auto& op1 = ir->instructions[1];
+        if (op1.op_code == interpreter::IROpCode::Ret) {
+            // Cache signature on first call if not already done.
+            if (!patch_method->cached_sig_valid) {
+                CacheSignature(patch_method);
             }
 
-            // Instance methods have an implicit 'this' argument.
-            if ((cc & 0x20) == 0x20) {
-                arg_count += 1;  // include 'this'
+            if (op0.op_code == interpreter::IROpCode::LdArg) {
+                // Forward first argument to return buffer.
+                // Use type-aware forwarding when cached signature is available.
+                if (ret_buf != nullptr) {
+                    ArgBuffer args(args_buf);
+                    ArgBuffer ret(ret_buf);
+                    if (patch_method->cached_sig_valid) {
+                        auto ret_tag = static_cast<interpreter::ValueTag>(
+                            patch_method->cached_ret_tag);
+                        // For LdArg+Ret where arg 0 is the return source, read
+                        // from args with the return type's read method.
+                        switch (ret_tag) {
+                        case interpreter::ValueTag::Int32:
+                            ret.WriteI32(args.ReadI32()); return;
+                        case interpreter::ValueTag::Int64:
+                            ret.WriteI64(args.ReadI64()); return;
+                        case interpreter::ValueTag::Float32:
+                            ret.WriteF32(args.ReadF32()); return;
+                        case interpreter::ValueTag::Float64:
+                            ret.WriteF64(args.ReadF64()); return;
+                        default:
+                            ret.WritePtr(args.ReadPtr()); return;
+                        }
+                    }
+                    // Fallback: pointer forwarding.
+                    ret.WritePtr(args.ReadPtr());
+                }
+                return;
+            }
+            if (op0.op_code == interpreter::IROpCode::LdcI4) {
+                if (ret_buf != nullptr) {
+                    ArgBuffer ret(ret_buf);
+                    ret.WriteI32(op0.immediate_i4);
+                }
+                return;
+            }
+            if (op0.op_code == interpreter::IROpCode::LdNull) {
+                if (ret_buf != nullptr) {
+                    ArgBuffer ret(ret_buf);
+                    ret.WritePtr(nullptr);
+                }
+                return;
+            }
+        }
+    }
+
+    // ── Step B: FastExecute path (Layer 1+2) ─────────────────────────
+    // For methods WITHOUT SEH, use function-pointer dispatch + FastFrame.
+    if (ir->seh_clauses.empty() && instr_count > 2) {
+        if (!patch_method->cached_sig_valid) {
+            CacheSignature(patch_method);
+        }
+
+        FastFrame ff;
+        if (patch_method->cached_sig_valid) {
+            ff.arg_count = patch_method->cached_arg_count;
+        } else {
+            ff.arg_count = 0;
+            if (patch_method->signature_blob != nullptr &&
+                patch_method->signature_len > 1) {
+                const uint8_t* sig = patch_method->signature_blob;
+                const uint8_t* sig_data = sig + 1;
+                uint8_t count_byte = sig_data[1];
+                if (count_byte <= 0x7F) {
+                    ff.arg_count = count_byte;
+                } else if (count_byte <= 0xBF) {
+                    ff.arg_count = static_cast<uint32_t>(
+                        ((count_byte & 0x3F) << 8) | sig_data[2]);
+                }
+                if ((sig_data[0] & 0x20) == 0x20) {
+                    ff.arg_count += 1;
+                }
+            }
+        }
+        ff.args = args_buf;
+
+        // Set up dispatch callback for Call instructions inside FastExecute.
+        auto* runtime_state = GetCurrentRuntimeState();
+        auto* thread_state  = GetCurrentThreadState();
+        runtime_instantiation::InterpreterDispatchContext dispatch_ctx;
+        dispatch_ctx.runtime_state = runtime_state;
+        dispatch_ctx.thread_state  = thread_state;
+        ff.dispatch_fn = reinterpret_cast<void*>(
+            runtime_instantiation::InterpreterDispatch);
+        ff.dispatch_ctx = &dispatch_ctx;
+
+        // Wire call-site metadata cache — one CachedCallInfo per instruction.
+        ff.call_cache = patch_method->call_cache;
+        ff.call_count = static_cast<uint32_t>(ir->instructions.size());
+
+        bool ok = FastExecute(ff,
+                              ir->instructions.data(),
+                              static_cast<uint32_t>(ir->instructions.size()));
+        if (ok) {
+            if (ff.has_ret && ret_buf != nullptr) {
+                auto ret_tag = static_cast<interpreter::ValueTag>(ff.ret_tag);
+                ArgBuffer ret_writer(ret_buf);
+                switch (ret_tag) {
+                case interpreter::ValueTag::Int32:
+                    ret_writer.WriteI32(static_cast<int32_t>(ff.ret_val));
+                    return;
+                case interpreter::ValueTag::Int64:
+                    ret_writer.WriteI64(static_cast<int64_t>(ff.ret_val));
+                    return;
+                case interpreter::ValueTag::Float32: {
+                    float v;
+                    std::memcpy(&v, &ff.ret_val, sizeof(float));
+                    ret_writer.WriteF32(v);
+                    return;
+                }
+                case interpreter::ValueTag::Float64: {
+                    double v;
+                    std::memcpy(&v, &ff.ret_val, sizeof(double));
+                    ret_writer.WriteF64(v);
+                    return;
+                }
+                default:
+                    ret_writer.WritePtr(reinterpret_cast<void*>(ff.ret_val));
+                    return;
+                }
+            }
+            return;
+        }
+    }
+
+    // ── Step 2: Parse/cache method signature ─────────────────────────────
+    CHAOS_IL2CPP_UINT32 arg_count = 0;
+    bool type_aware_args = false;
+
+    if (!patch_method->cached_sig_valid) {
+        CacheSignature(patch_method);
+    }
+
+    if (patch_method->cached_sig_valid) {
+        arg_count = patch_method->cached_arg_count;
+        type_aware_args = true;
+    } else {
+        // Fallback: legacy signature parsing (arg_count only).
+        if (patch_method->signature_blob != nullptr &&
+            patch_method->signature_len > 1) {
+            const uint8_t* sig = patch_method->signature_blob;
+            if (patch_method->signature_blob[0] >= 2) {
+                const uint8_t* sig_data = patch_method->signature_blob + 1;
+                uint8_t cc = sig_data[0];
+                uint8_t count_byte = sig_data[1];
+
+                if (count_byte <= 0x7F) {
+                    arg_count = count_byte;
+                } else if (count_byte <= 0xBF) {
+                    arg_count = static_cast<CHAOS_IL2CPP_UINT32>(
+                        ((count_byte & 0x3F) << 8) | sig_data[2]);
+                }
+
+                if ((cc & 0x20) == 0x20) {
+                    arg_count += 1;
+                }
             }
         }
     }
@@ -360,30 +601,28 @@ void InterpreterEntryDirect(
     // Step 3: Build ExecutionFrame and populate arguments.
     interpreter::ExecutionFrame frame;
 
-    // Parse args from the args_buf.
     ArgBuffer arg_reader(args_buf);
     frame.arguments.reserve(arg_count);
 
-    for (CHAOS_IL2CPP_UINT32 i = 0; i < arg_count; ++i) {
-        // Default: treat as IntPtr/object reference (the most common case).
-        // Proper type-specific parsing requires full signature traversal.
-        // For now, read as pointer-sized value.
-        void* raw = arg_reader.ReadPtr();
-        frame.arguments.push_back(interpreter::InterpreterValue::from_obj(raw));
+    if (type_aware_args) {
+        // Type-aware push: use cached ValueTag per argument.
+        for (CHAOS_IL2CPP_UINT32 i = 0; i < arg_count; ++i) {
+            auto tag = (i < 8)
+                ? static_cast<interpreter::ValueTag>(patch_method->cached_arg_types[i])
+                : interpreter::ValueTag::ObjectRef;
+            frame.arguments.push_back(ReadTypedArg(arg_reader, tag));
+        }
+    } else {
+        // Legacy: all args as ObjectRef pointers.
+        for (CHAOS_IL2CPP_UINT32 i = 0; i < arg_count; ++i) {
+            void* raw = arg_reader.ReadPtr();
+            frame.arguments.push_back(interpreter::InterpreterValue::from_obj(raw));
+        }
     }
 
-    // Initialize locals to default values.
-    // (Correct count depends on the method body's local signature, which
-    // requires parsing the local_var_sig_tok from the method body header.
-    // For now, start with empty locals — InterpreterVM will expand as needed.)
     frame.locals.reserve(8);
 
-    // ── Set up dispatch callback for nested Call instructions ──
-    // When Execute encounters Call/CallVirt/CallBridge to cross-module
-    // methods (e.g. System.Convert.ToChar), the dispatch_fn routes them
-    // through MethodInvoke → AOT function or interpreter, instead of
-    // returning needs_external_dispatch. This is the same pattern used
-    // by InterpretMethodCall in runtime_instantiation.cpp.
+    // Set up dispatch callback for nested Call instructions.
     auto* runtime_state = GetCurrentRuntimeState();
     auto* thread_state  = GetCurrentThreadState();
     runtime_instantiation::InterpreterDispatchContext dispatch_ctx;
@@ -401,28 +640,10 @@ void InterpreterEntryDirect(
 
     // Step 5: Write return value to ret_buf.
     if (ret_buf != nullptr && result.has_return_value) {
-        ArgBuffer ret_writer(ret_buf);
-        switch (result.return_value.tag) {
-        case interpreter::ValueTag::Int32:
-            ret_writer.WriteI32(result.return_value.i32);
-            break;
-        case interpreter::ValueTag::Int64:
-            ret_writer.WriteI64(result.return_value.i64);
-            break;
-        case interpreter::ValueTag::Float32:
-            ret_writer.WriteF32(result.return_value.f32);
-            break;
-        case interpreter::ValueTag::Float64:
-            ret_writer.WriteF64(result.return_value.f64);
-            break;
-        case interpreter::ValueTag::ObjectRef:
-        case interpreter::ValueTag::Struct:
-        case interpreter::ValueTag::Null:
-            ret_writer.WritePtr(result.return_value.obj);
-            break;
-        default:
-            break;
-        }
+        auto ret_tag = (type_aware_args && patch_method->cached_sig_valid)
+            ? static_cast<interpreter::ValueTag>(patch_method->cached_ret_tag)
+            : interpreter::ValueTag::Void;
+        WriteTypedRet(ret_buf, result, ret_tag);
     }
 }
 

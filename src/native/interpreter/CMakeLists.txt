@@ -10,7 +10,8 @@ target_include_directories(
     PUBLIC
         "${REPO_ROOT}/contracts/native/v0"
         "${REPO_ROOT}/src/native/runtime-core"
-        "${CMAKE_CURRENT_LIST_DIR}")
+        "${CMAKE_CURRENT_LIST_DIR}"
+        "${CMAKE_CURRENT_LIST_DIR}/generated")
 target_link_libraries(
     chaos_interpreter
     PUBLIC

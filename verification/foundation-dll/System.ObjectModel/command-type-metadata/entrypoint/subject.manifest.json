@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\command-type-metadata\\entrypoint\\build-output\\CommandTypeMetadataNativeEntry.dll"
-    ],
-    "entry": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)"
-  }
-}

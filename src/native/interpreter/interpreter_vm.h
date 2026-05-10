@@ -4,115 +4,14 @@
 #include <chaos/native_types.h>
 #include <vector>
 
+#include <ir_opcodes.h>
+
 namespace chaos::il2cpp::interpreter {
 
-enum class IROpCode {
-    LdcI4 = 0,
-    LdcI8 = 1,
-    LdcR4 = 2,
-    LdcR8 = 3,
-    LdStr = 4,
-    LdNull = 5,
-    LdArg = 6,
-    LdLoc = 7,
-    StLoc = 8,
-    StArg = 9,
-    LdFld = 10,
-    StFld = 11,
-    LdSFld = 12,
-    StSFld = 13,
-    Call = 14,
-    CallVirt = 15,
-    CallBridge = 16,
-    Br = 17,
-    BrTrue = 18,
-    BrFalse = 19,
-    Beq = 20,
-    Blt = 21,
-    Bgt = 22,
-    Ble = 23,
-    Bge = 24,
-    Add = 25,
-    Sub = 26,
-    Mul = 27,
-    Div = 28,
-    Rem = 29,
-    Neg = 30,
-    Ceq = 31,
-    Clt = 32,
-    Cgt = 33,
-    NewObj = 34,
-    Box = 35,
-    Unbox = 36,
-    CastClass = 37,
-    IsInst = 38,
-    Conv_I4 = 39,
-    Conv_I8 = 40,
-    Conv_R4 = 41,
-    Conv_R8 = 42,
-    NewArr = 43,
-    LdElem = 44,
-    StElem = 45,
-    LdLen = 46,
-    Pop = 47,
-    Throw = 48,
-    Rethrow = 49,
-    Leave = 50,
-    EndFinally = 51,
-    EndFilter = 52,
-    Ret = 53,
-
-    // -- Opcode coverage expansion (Phase A) --
-    Dup = 54,
-    DivUn = 55,
-    RemUn = 56,
-    And = 57,
-    Or = 58,
-    Xor = 59,
-    Not = 60,
-    Shl = 61,
-    Shr = 62,
-    ShrUn = 63,
-    ConvRUn = 64,
-    ConvI = 65,     // native int
-    ConvU = 66,     // native unsigned
-    LdInd = 67,     // ldind.* -- type info via immediate_i4
-    StInd = 68,     // stind.* -- type info via immediate_i4
-    Switch = 69,
-    LdToken = 70,
-    InitObj = 71,
-    SizeOf = 72,
-    LdFtn = 73,
-    LdVirtFtn = 74,
-    LdArgA = 75,
-    LdLocA = 76,
-    LocAlloc = 77,
-
-    // -- Full coverage expansion (Phase A+) --
-    Break = 78,
-    BneUn = 79,
-    BgeUn = 80,
-    BgtUn = 81,
-    BleUn = 82,
-    BltUn = 83,
-    AddOvf = 84,
-    SubOvf = 85,
-    MulOvf = 86,
-    ConvOvfI = 87,
-    ConvOvfI4 = 88,
-    ConvOvfI8 = 89,
-    ConvOvfU = 90,
-    ConvOvfU4 = 91,
-    ConvOvfU8 = 92,
-    LdObj = 93,
-    StObj = 94,
-    LdElemA = 95,
-    Cpblk = 96,
-    InitBlk = 97,
-
-    // -- Constrained CallVirt --
-    CallVirtConstrained = 98,
-};
+// Use the generated IROpCode from ir_opcodes.h (auto-generated from schemas/ir_opcodes.yaml).
+// Verify at compile time that the generated enum is available.
+static_assert(static_cast<int>(IROpCode::LdcI4) == 0, "IROpCode::LdcI4 must be 0");
+static_assert(static_cast<int>(IROpCode::CallVirtConstrained) == 98, "IROpCode::CallVirtConstrained must be 98");
 
 enum class ValueTag : uint8_t {
     Void = 0,
@@ -123,6 +22,7 @@ enum class ValueTag : uint8_t {
     ObjectRef = 5,
     Null = 6,
     Struct = 7,   // Value type (struct) — data stored via heap pointer
+    ManagedPtr = 8, // Managed pointer (address of arg/local slot) — obj points to InterpreterValue
 };
 
 struct InterpreterValue {
@@ -253,6 +153,16 @@ struct ExecutionFrame {
 struct InterpreterObject {
     CHAOS_IL2CPP_VECTOR(InterpreterValue) fields = {};
     CHAOS_IL2CPP_UINT32 type_token = 0u;
+};
+
+// Lightweight array storage for NewArr / LdElem / StElem.
+struct ArrayStorage {
+    CHAOS_IL2CPP_VECTOR(InterpreterValue) elements = {};
+};
+
+// Boxed value type for Box/Unbox.
+struct BoxedValue {
+    InterpreterValue value = {};
 };
 
 struct ExecutionResult {

@@ -152,6 +152,16 @@ public sealed partial class NativeAotLoweringPlanner
 				case "conv.ovf.u8":
 				case "conv.ovf.i":
 				case "conv.ovf.u":
+				case "conv.ovf.i8.un":
+				case "conv.ovf.u8.un":
+				case "conv.ovf.i.un":
+				case "conv.ovf.u.un":
+				case "conv.ovf.i1.un":
+				case "conv.ovf.i2.un":
+				case "conv.ovf.i4.un":
+				case "conv.ovf.u1.un":
+				case "conv.ovf.u2.un":
+				case "conv.ovf.u4.un":
 					flag = true;
 					break;
 				default:
@@ -508,10 +518,10 @@ public sealed partial class NativeAotLoweringPlanner
 				HeaderKind hdrKind = GetHeaderKind(item);
 				byte flags = (byte)hdrKind; // PureType=0, ThinLockable=1, Fat=2
 				_vtableLengths.TryGetValue(item, out int vtLen);
-				// TypeInfoHot (32B)
-				handler.AppendLiteral("inline TypeInfoHot ");
-				handler.AppendFormatted(GetNativeTypeInfoSymbol(item));
-				handler.AppendLiteral(" = { ");
+				// TypeInfoV0 = Hot (32B) + Warm (32B), guaranteed contiguous
+				handler.AppendLiteral("inline TypeInfoV0 ");
+				handler.AppendFormatted(GetNativeTypeInfoV0Symbol(item));
+				handler.AppendLiteral(" = {{");
 				handler.AppendFormatted(parentExpr);
 				handler.AppendLiteral(", ");
 				string vtableArrayExpr = (vtLen > 0) ? GetNativeVTableSymbol(item) : "nullptr";
@@ -522,17 +532,11 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(vtLen.ToString());
 				handler.AppendLiteral("u, 32 /* warm_delta */, 1 /* reference */, ");
 				handler.AppendFormatted(flags.ToString());
-				handler.AppendLiteral(" };");
-				stringBuilder.AppendLine(ref handler);
-				// TypeInfoWarm (32B)
-				handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfoWarm ");
-				handler.AppendFormatted(GetNativeTypeInfoWarmSymbol(item));
-				handler.AppendLiteral(" = { ");
+				handler.AppendLiteral("}, {");
 				handler.AppendFormatted(ifaceMapExpr);
 				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);
-				handler.AppendLiteral(", 0, 0, 0 };");
+				handler.AppendLiteral(", 0, 0, 0 }};");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -552,16 +556,11 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfoHot ");
-				handler.AppendFormatted(GetNativeTypeInfoSymbol(item2));
-				handler.AppendLiteral(" = { nullptr, nullptr, ");
+				handler.AppendLiteral("inline TypeInfoV0 ");
+				handler.AppendFormatted(GetNativeTypeInfoV0Symbol(item2));
+				handler.AppendLiteral(" = {{nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", 0u, 32 /* warm_delta */, 3 /* interface */, 0 };");
-				stringBuilder.AppendLine(ref handler);
-				handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfoWarm ");
-				handler.AppendFormatted(GetNativeTypeInfoWarmSymbol(item2));
-				handler.AppendLiteral(" = { nullptr, nullptr, 0, 0, 0, 0 };");
+				handler.AppendLiteral(", 0u, 32 /* warm_delta */, 3 /* interface */, 0}, {nullptr, nullptr, 0, 0, 0, 0}};");
 				stringBuilder.AppendLine(ref handler);
 			}
 
@@ -573,16 +572,11 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfoHot ");
-				handler.AppendFormatted(GetNativeTypeInfoSymbol(item3));
-				handler.AppendLiteral(" = { nullptr, nullptr, ");
+				handler.AppendLiteral("inline TypeInfoV0 ");
+				handler.AppendFormatted(GetNativeTypeInfoV0Symbol(item3));
+				handler.AppendLiteral(" = {{nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", 0u, 32 /* warm_delta */, 2 /* value */, 0 };");
-				stringBuilder.AppendLine(ref handler);
-				handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfoWarm ");
-				handler.AppendFormatted(GetNativeTypeInfoWarmSymbol(item3));
-				handler.AppendLiteral(" = { nullptr, nullptr, 0, 0, 0, 0 };");
+				handler.AppendLiteral(", 0u, 32 /* warm_delta */, 2 /* value */, 0}, {nullptr, nullptr, 0, 0, 0, 0}};");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -639,20 +633,15 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfoHot ");
-				handler.AppendFormatted(GetNativeTypeInfoSymbol(item3));
-				handler.AppendLiteral(" = { nullptr, nullptr, ");
+				handler.AppendLiteral("inline TypeInfoV0 ");
+				handler.AppendFormatted(GetNativeTypeInfoV0Symbol(item3));
+				handler.AppendLiteral(" = {{nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", 0u, 32 /* warm_delta */, 2 /* value (boxed) */, 0 };");
-				stringBuilder.AppendLine(ref handler);
-				handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfoWarm ");
-				handler.AppendFormatted(GetNativeTypeInfoWarmSymbol(item3));
-				handler.AppendLiteral(" = { ");
+				handler.AppendLiteral(", 0u, 32 /* warm_delta */, 2 /* value (boxed) */, 0}, {");
 				handler.AppendFormatted(ifaceMapExpr);
 				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);
-				handler.AppendLiteral(", 0, 0, 0 };");
+				handler.AppendLiteral(", 0, 0, 0}};");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -679,7 +668,7 @@ public sealed partial class NativeAotLoweringPlanner
 			foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
 			{
 				if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
-				var entries = new string[vtLen];
+				var entries = new AotCoreIrMethodArtifact?[vtLen];
 				// Walk hierarchy to fill entries (most derived first)
 				string? current = typeId;
 				while (current != null && referenceTypeSubjectIds.Contains(current))
@@ -692,22 +681,23 @@ public sealed partial class NativeAotLoweringPlanner
 							var sig = GetMethodSignatureSuffix(method.SubjectId);
 							if (_vtableSlotMap.TryGetValue(sig, out int slot) && slot < vtLen && entries[slot] == null)
 							{
-								entries[slot] = TryGetInstantiationStubSymbol(method) ?? method.NativeSymbol;
+								entries[slot] = method;
 							}
 						}
 					}
 					referenceTypeBaseSubjectIds.TryGetValue(current, out string? nextCurrent);
 					current = nextCurrent;
 				}
-				// Emit extern declarations for methods referenced in vtable array
+				// Emit extern "C" declarations for methods referenced in vtable array
 				var externDeclared = new HashSet<string>(StringComparer.Ordinal);
 				foreach (var entry in entries)
 				{
-					if (entry is not null && externDeclared.Add(entry))
+					if (entry is null || !externDeclared.Add(entry.NativeSymbol)) continue;
+					builder.AppendLine(FormatMethodDeclaration(entry));
+					var stub = TryGetInstantiationStubSymbol(entry);
+					if (stub != null && externDeclared.Add(stub))
 					{
-						builder.Append("extern void ");
-						builder.Append(entry);
-						builder.AppendLine("();");
+						builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry)));
 					}
 				}
 				// Emit vtable array
@@ -723,7 +713,7 @@ public sealed partial class NativeAotLoweringPlanner
 					if (entry != null)
 					{
 						builder.Append("    reinterpret_cast<void*>(");
-						builder.Append(entry);
+						builder.Append(TryGetInstantiationStubSymbol(entry) ?? entry.NativeSymbol);
 						builder.AppendLine("),");
 					}
 					else
@@ -748,8 +738,8 @@ public sealed partial class NativeAotLoweringPlanner
 		// ── Virtual dispatch helper (replaces switch-based dispatch) ──
 		builder.AppendLine("inline void* chaos_vtable_resolve(const void** vtable, CHAOS_IL2CPP_UINT32 slot) noexcept");
 		builder.AppendLine("{");
-		builder.AppendLine("    if (vtable == nullptr) CHAOS_IL2CPP_ABORT();");
-		builder.AppendLine("    if (vtable[slot] == nullptr) CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine("    if (vtable == nullptr) CHAOS_IL2CPP_FAIL();");
+		builder.AppendLine("    if (vtable[slot] == nullptr) CHAOS_IL2CPP_FAIL();");
 		builder.AppendLine("    return const_cast<void*>(vtable[slot]);");
 		builder.AppendLine("}");
 		builder.AppendLine();
@@ -911,12 +901,18 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				builder.AppendLine("struct " + GetNativeTypeSymbol(typeSubjectId));
 				builder.AppendLine("{");
-				builder.AppendLine("    FatHeader header{};");
+				builder.AppendLine("    PureTypeHeader header{};");
 				builder.AppendLine("};");
 				builder.AppendLine();
 				continue;
 			}
-			if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string? value6) && !string.IsNullOrWhiteSpace(value6) && referenceTypeSubjectIds.Contains(value6))
+			// When a type inherits from a base AND needs its own vtable, skip C++
+			// inheritance to avoid header field shadowing: the derived class's
+			// FatHeader would shadow the base class's ThinLockableHeader at offset 0,
+			// but chaos_object_get_type_info() reads from offset 0, getting an
+			// uninitialized base header → segfault. Emit a standalone struct instead.
+			bool _skipInheritanceDueToVTable = _vtableLengths != null && _vtableLengths.TryGetValue(typeSubjectId, out int _baseVtLen) && _baseVtLen > 0;
+			if (!_skipInheritanceDueToVTable && referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string? value6) && !string.IsNullOrWhiteSpace(value6) && referenceTypeSubjectIds.Contains(value6))
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder stringBuilder13 = stringBuilder;
@@ -937,9 +933,22 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder14.AppendLine(ref handler);
 			}
 			builder.AppendLine("{");
-			if (!referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string? value7) || string.IsNullOrWhiteSpace(value7) || !referenceTypeSubjectIds.Contains(value7))
+			// Emit header always for types without base. For types WITH base but
+			// needing own vtable, force FatHeader so header.vtable = ... compiles.
+			bool _hasBase = referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string? value7) && !string.IsNullOrWhiteSpace(value7) && referenceTypeSubjectIds.Contains(value7);
+			bool _needsOwnVTable = _vtableLengths != null && _vtableLengths.TryGetValue(typeSubjectId, out int _vtLen) && _vtLen > 0;
+			if (!_hasBase || _needsOwnVTable)
 			{
-				builder.AppendLine("    FatHeader header{};");
+								// Use GetHeaderKind for correct header variant
+				HeaderKind hdrKind = _needsOwnVTable ? HeaderKind.Fat : GetHeaderKind(typeSubjectId);
+				string headerType = hdrKind switch
+				{
+				    HeaderKind.PureType => "PureTypeHeader",
+				    HeaderKind.ThinLockable => "ThinLockableHeader",
+				    _ => "FatHeader"
+				};
+				builder.AppendLine($"    {headerType} header{{}};");
+
 			}
 			List<string> list = fieldsByDeclaringType.TryGetValue(typeSubjectId, out var fields) ? fields : s_emptyFieldList;
 			if (num2)
@@ -1051,7 +1060,7 @@ public sealed partial class NativeAotLoweringPlanner
 			handler.AppendFormatted(GetNativeBoxTypeSymbol(item10));
 			stringBuilder18.AppendLine(ref handler);
 			builder.AppendLine("{");
-			builder.AppendLine("    FatHeader header{};");
+			builder.AppendLine("    PureTypeHeader header{};");
 			if (IsStructuredValueTypeSubjectId(item10))
 			{
 				stringBuilder = builder;

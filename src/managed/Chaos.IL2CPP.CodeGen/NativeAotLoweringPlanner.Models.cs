@@ -12,7 +12,8 @@ public sealed partial class NativeAotLoweringPlanner
         string? OpenDefinitionSubjectId = null,
         SharedGenericBodyId? SharedGenericBodyId = null,
         InstantiationStubId? InstantiationStubId = null,
-        RuntimeGenericContextArtifact? RuntimeGenericContext = null);
+        RuntimeGenericContextArtifact? RuntimeGenericContext = null,
+        string? InlineCppExpression = null);
 
     private sealed record ExternalRuntimeHelperDefinition(
         string SubjectId,

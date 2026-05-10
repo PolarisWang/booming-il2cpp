@@ -7,6 +7,8 @@ from typing import Any
 from test_code_generator import (
     _build_call_expr,
     _cast_return_to_int,
+    _has_unsafe_param,
+    _is_auto_callable,
     _parse_method_subject_id,
 )
 
@@ -490,17 +492,41 @@ def generate_benchmark_managed_bodies(
         "",
     ]
 
+    # Track which methods have real (non-empty) bodies
+    has_real_body: list[bool] = []
+
     for subject_id in method_subject_ids:
         parsed = _parse_method_subject_id(subject_id)
-        call_expr = _build_call_expr(parsed)
-        cast_expr = _cast_return_to_int(parsed["return_type"], call_expr)
         slot_name = _method_slot_name(subject_id)
+
+        is_callable = _is_auto_callable(parsed) and not _has_unsafe_param(parsed["param_types"])
+        has_real_body.append(is_callable)
+
         body_lines.append(f"        // {subject_id}")
         body_lines.append(f"        public static void {slot_name}()")
         body_lines.append("        {")
-        body_lines.append(f"            BenchmarkChecksum += {cast_expr};")
+        if is_callable:
+            call_expr = _build_call_expr(parsed)
+            ret = parsed["return_type"]
+            if ret == "System.Void" or not ret:
+                body_lines.append(f"            {call_expr};")
+            else:
+                cast_expr = _cast_return_to_int(ret, call_expr)
+                body_lines.append(f"            BenchmarkChecksum += {cast_expr};")
+        else:
+            body_lines.append("            // TODO: needs-manual — cannot auto-generate managed benchmark body")
         body_lines.append("        }")
         body_lines.append("")
+
+    # Emit hasRealBody array for comparison filtering
+    body_lines.append("        internal static readonly bool[] HasRealBody = new bool[]")
+    body_lines.append("        {")
+    for idx, real in enumerate(has_real_body):
+        comma = "," if idx < len(has_real_body) - 1 else ""
+        val = "true" if real else "false"
+        body_lines.append(f"            {val}{comma}")
+    body_lines.append("        };")
+    body_lines.append("")
 
     body_lines.append("    }")
     body_lines.append("}")
@@ -535,6 +561,13 @@ def generate_benchmark_managed_bodies(
     harness_lines.extend([
         "};",
         "",
+        "// JIT warmup pre-scan: call all methods once before measurement",
+        "// to avoid tiered JIT startup penalty on the first method.",
+        "for (int i = 0; i < methodSubjects.Length; i++)",
+        "{",
+        "    try { methodSubjects[i].Body(); } catch { }",
+        "}",
+        "",
         'Console.WriteLine("{");',
         'Console.WriteLine("  \\"schemaVersion\\": 1,");',
         f'Console.WriteLine("  \\"assemblyName\\": \\"{assembly_name}\\",");',
@@ -546,31 +579,43 @@ def generate_benchmark_managed_bodies(
         "for (int i = 0; i < methodSubjects.Length; i++)",
         "{",
         "    var (subjectId, body) = methodSubjects[i];",
+        "    bool hasRealBody = i < BenchmarkManagedBody.HasRealBody.Length && BenchmarkManagedBody.HasRealBody[i];",
+        "    string comma = (i < methodSubjects.Length - 1) ? \",\" : \"\";",
         "",
-        "    // Warmup",
+        "    // Warmup (catch exceptions — methods may throw at runtime)",
         "    for (int w = 0; w < kWarmupIterations; w++)",
         "    {",
-        "        body();",
+        "        try { body(); } catch { }",
         "    }",
         "",
-        "    // Measurement",
-        "    var sw = Stopwatch.StartNew();",
-        "    for (int m = 0; m < kMeasureIterations; m++)",
+        "    // Measurement (catch exceptions)",
+        "    double elapsedMs = 0;",
+        "    double opsPerSecond = 0;",
+        "    bool hasException = false;",
+        "    try",
         "    {",
-        "        body();",
+        "        var sw = Stopwatch.StartNew();",
+        "        for (int m = 0; m < kMeasureIterations; m++)",
+        "        {",
+        "            body();",
+        "        }",
+        "        sw.Stop();",
+        "        elapsedMs = sw.Elapsed.TotalMilliseconds;",
+        "        opsPerSecond = kMeasureIterations / (elapsedMs / 1000.0);",
         "    }",
-        "    sw.Stop();",
+        "    catch",
+        "    {",
+        "        hasException = true;",
+        "    }",
         "",
-        "    double elapsedMs = sw.Elapsed.TotalMilliseconds;",
-        "    double opsPerSecond = kMeasureIterations / (elapsedMs / 1000.0);",
-        "",
-        '    string comma = (i < methodSubjects.Length - 1) ? "," : "";',
         "    Console.WriteLine(\"    {\");",
         "    Console.WriteLine(\"      \\\"methodIndex\\\": \" + i + \",\");",
         '    Console.WriteLine("      \\\"methodSubjectId\\\": \\"" + subjectId.Replace("\\\\", "\\\\\\\\").Replace("\\"", "\\\\\\"") + "\\",");',
         '    Console.WriteLine("      \\\"elapsedMilliseconds\\\": " + elapsedMs.ToString("F6") + ",");',
         '    Console.WriteLine("      \\\"opsPerSecond\\\": " + opsPerSecond.ToString("F6") + ",");',
-        '    Console.WriteLine("      \\\"iterations\\\": " + kMeasureIterations);',
+        '    Console.WriteLine("      \\\"iterations\\\": " + kMeasureIterations + ",");',
+        '    Console.WriteLine("      \\\"isBodyReal\\\": " + (hasRealBody ? "true" : "false") + ",");',
+        '    Console.WriteLine("      \\\"isException\\\": " + (hasException ? "true" : "false"));',
         "    Console.WriteLine(\"    }\" + comma);",
         "}",
         "",

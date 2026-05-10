@@ -25,6 +25,7 @@
 #include "runtime_instantiation.h"
 #include "runtime_abi.h"
 #include "interpreter_entry.h"
+#include "string_table.h"
 
 // Object header layouts (mirrors runtime_core.cpp)
 struct StubArrayHeader {
@@ -283,6 +284,98 @@ CHAOS_IL2CPP_INT64 ChaosRandomNextDouble(CHAOS_IL2CPP_INTPTR rng) noexcept
     return result;
 }
 
+CHAOS_IL2CPP_INT32 ChaosRandomNext(CHAOS_IL2CPP_INTPTR rng) noexcept
+{
+    (void)rng;
+    return static_cast<CHAOS_IL2CPP_INT32>(stub_xorshift32());
+}
+
+CHAOS_IL2CPP_INT32 ChaosRandomNextMax(CHAOS_IL2CPP_INTPTR rng, CHAOS_IL2CPP_INT32 maxValue) noexcept
+{
+    (void)rng;
+    if (maxValue <= 0) return 0;
+    return static_cast<CHAOS_IL2CPP_INT32>(stub_xorshift32() % static_cast<uint32_t>(maxValue));
+}
+
+// ─── Guid helpers ──────────────────────────────────────────────
+
+CHAOS_IL2CPP_INT32 ChaosGuidGetHashCode(CHAOS_IL2CPP_INTPTR guid) noexcept
+{
+    if (guid == 0) return 0;
+    const auto* bytes = reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(guid);
+    uint32_t hash = 2166136261u;
+    for (int i = 0; i < 16; ++i) {
+        hash ^= static_cast<uint32_t>(bytes[i]);
+        hash *= 16777619u;
+    }
+    return static_cast<CHAOS_IL2CPP_INT32>(hash);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosGuidToString(CHAOS_IL2CPP_INTPTR guid) noexcept
+{
+    if (guid == 0) return 0;
+    const auto* bytes = reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(guid);
+    char buf[37];
+    std::snprintf(buf, sizeof(buf),
+        "%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x",
+        bytes[0], bytes[1], bytes[2], bytes[3],
+        bytes[4], bytes[5], bytes[6], bytes[7],
+        bytes[8], bytes[9], bytes[10], bytes[11],
+        bytes[12], bytes[13], bytes[14], bytes[15]);
+    auto str_id = chaos::il2cpp::string_table::Intern(buf, 36);
+    return chaos_make_string_id_value(str_id);
+}
+
+// ─── HashCode helpers ──────────────────────────────────────────
+
+static CHAOS_IL2CPP_UINT32 ChaosHashCodeRotateLeft32(CHAOS_IL2CPP_UINT32 value, int offset) noexcept {
+    return (value << offset) | (value >> (32 - offset));
+}
+
+static CHAOS_IL2CPP_UINT32 ChaosHashCodeMixFinal(CHAOS_IL2CPP_UINT32 hash) noexcept {
+    constexpr CHAOS_IL2CPP_UINT32 kPrime2 = 2246822519u;
+    constexpr CHAOS_IL2CPP_UINT32 kPrime3 = 3266489917u;
+    hash ^= hash >> 15;
+    hash *= kPrime2;
+    hash ^= hash >> 13;
+    hash *= kPrime3;
+    hash ^= hash >> 16;
+    return hash;
+}
+
+static CHAOS_IL2CPP_UINT32 ChaosHashCodeQueueRound(CHAOS_IL2CPP_UINT32 hash, CHAOS_IL2CPP_UINT32 queued_value) noexcept {
+    constexpr CHAOS_IL2CPP_UINT32 kPrime3 = 3266489917u;
+    constexpr CHAOS_IL2CPP_UINT32 kPrime4 = 668265263u;
+    return ChaosHashCodeRotateLeft32(hash + queued_value * kPrime3, 17) * kPrime4;
+}
+
+CHAOS_IL2CPP_INT32 ChaosHashCodeToHashCode(CHAOS_IL2CPP_INTPTR state) noexcept
+{
+    (void)state;
+    constexpr CHAOS_IL2CPP_UINT32 kPrime5 = 374761393u;
+    constexpr CHAOS_IL2CPP_UINT32 kSeed = 0u;
+    CHAOS_IL2CPP_UINT32 hash = kSeed + kPrime5;
+    hash += 0u;
+    return static_cast<CHAOS_IL2CPP_INT32>(ChaosHashCodeMixFinal(hash));
+}
+
+CHAOS_IL2CPP_INT32 ChaosHashCodeCombine2(CHAOS_IL2CPP_INT32 hc1, CHAOS_IL2CPP_INT32 hc2) noexcept
+{
+    constexpr CHAOS_IL2CPP_UINT32 kPrime5 = 374761393u;
+    constexpr CHAOS_IL2CPP_UINT32 kSeed = 0u;
+    CHAOS_IL2CPP_UINT32 hash = kSeed + kPrime5;
+    hash += 8u;
+    hash = ChaosHashCodeQueueRound(hash, static_cast<CHAOS_IL2CPP_UINT32>(hc1));
+    hash = ChaosHashCodeQueueRound(hash, static_cast<CHAOS_IL2CPP_UINT32>(hc2));
+    return static_cast<CHAOS_IL2CPP_INT32>(ChaosHashCodeMixFinal(hash));
+}
+
+void ChaosHashCodeAdd(CHAOS_IL2CPP_INTPTR state, CHAOS_IL2CPP_INT32 value) noexcept
+{
+    (void)state;
+    (void)value;
+}
+
 // ─── Culture helpers ──────────────────────────────────────────────
 // Stub: returns static non-null pointers to prevent NREs. Managed
 // CultureInfo/CompareInfo/DateTimeFormatInfo/NumberFormatInfo objects
@@ -450,6 +543,13 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseDefinition(CHAOS_IL2CPP_INTPTR member_
     return member_handle;
 }
 
+// ─── Thread helpers ──────────────────────────────────────────
+
+CHAOS_IL2CPP_INTPTR chaos_thread_get_current(void) noexcept
+{
+    return 0;
+}
+
 // ─── Runtime helpers ──────────────────────────────────────────────
 
 CHAOS_IL2CPP_INTPTR ChaosFormattablestringFactoryCreate(CHAOS_IL2CPP_INTPTR /*format*/, CHAOS_IL2CPP_INTPTR /*args*/) noexcept
@@ -524,10 +624,12 @@ extern "C" void (*g_chaos_register_hotpatch_modules)(void) = nullptr;
 // stub is sufficient for Fact Static checksum verification which never invokes
 // hot-patch dispatch.
 extern "C" void InterpreterEntryDirect(
-    uintptr_t /*method_key*/,
-    void*     /*args_buf*/,
-    void*     /*ret_buf*/) noexcept
+    uintptr_t method_key,
+    void*     args_buf,
+    void*     ret_buf) noexcept
 {
-    // Not reached during Fact Static checksum verification.
-    // Full implementation requires chaos_interpreter.lib.
+    // Delegate to the real implementation in interpreter_entry.cpp.
+    // The generated code references &InterpreterEntryDirect (extern "C" linkage),
+    // so the dispatch table entries would otherwise call the empty stub.
+    chaos::il2cpp::runtime_core::InterpreterEntryDirect(method_key, args_buf, ret_buf);
 }

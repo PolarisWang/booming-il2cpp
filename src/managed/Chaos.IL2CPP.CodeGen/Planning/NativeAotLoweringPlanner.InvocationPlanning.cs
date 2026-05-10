@@ -141,8 +141,21 @@ public sealed partial class NativeAotLoweringPlanner
         {
             foreach (var instruction in method.Instructions)
             {
-                if (string.IsNullOrEmpty(instruction.Callee) ||
-                    !TryCreateExternalRuntimeHelperDefinition(instruction.Callee, out var helperDefinition))
+                // Try Callee first (direct calls).
+                string? targetSubjectId = instruction.Callee;
+                if (string.IsNullOrEmpty(targetSubjectId))
+                {
+                    // For generic instantiation calls, Callee can be null but
+                    // TargetReference carries the SubjectId and InstantiationStubId.
+                    targetSubjectId = instruction.TargetReference?.SubjectId;
+                }
+
+                if (string.IsNullOrEmpty(targetSubjectId))
+                {
+                    continue;
+                }
+
+                if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDefinition))
                 {
                     continue;
                 }
@@ -603,7 +616,10 @@ public sealed partial class NativeAotLoweringPlanner
 
     private InvocationTarget ResolveDirectInvocationTarget(AotCoreIrInstructionArtifact instruction)
     {
-        if (TryResolveDirectInvocationTarget(instruction.Callee) is { } directInvocationTarget)
+        // Try Callee first, then TargetReference SubjectId for generic instantiation calls
+        // where Callee may be null but the closed-form SubjectId is in TargetReference.
+        string? calleeOrTarget = instruction.Callee ?? instruction.TargetReference?.SubjectId;
+        if (TryResolveDirectInvocationTarget(calleeOrTarget) is { } directInvocationTarget)
         {
             return directInvocationTarget;
         }
@@ -614,7 +630,16 @@ public sealed partial class NativeAotLoweringPlanner
         // (TargetSymbol, TargetParameterCount, TargetReturnType) if present,
         // otherwise derive a callable symbol from the callee SubjectId.
         string? symbol;
-        if (TryGetInstantiationStubSymbol(instruction.TargetReference?.InstantiationStubId) is { } stubSymbol)
+
+        // Priority: external runtime helper (via GenericShapeDescriptor/SimpleForward)
+        // before instantiation stub symbol, so that Nullable<T> etc. stub definitions
+        // resolve to chaos_external_runtime_* symbols rather than undefined chaos_stub_definition_*.
+        if (!string.IsNullOrEmpty(calleeOrTarget) &&
+            TryCreateExternalRuntimeHelperDefinition(calleeOrTarget, out _))
+        {
+            symbol = GetExternalRuntimeHelperSymbol(calleeOrTarget);
+        }
+        else if (TryGetInstantiationStubSymbol(instruction.TargetReference?.InstantiationStubId) is { } stubSymbol)
         {
             symbol = stubSymbol;
         }
@@ -624,8 +649,6 @@ public sealed partial class NativeAotLoweringPlanner
         }
         else if (!string.IsNullOrEmpty(instruction.Callee))
         {
-            // Generate a derived symbol from the callee SubjectId so the
-            // generated C++ references a runtime-provided implementation.
             symbol = GetExternalRuntimeHelperSymbol(instruction.Callee);
         }
         else
@@ -659,13 +682,35 @@ public sealed partial class NativeAotLoweringPlanner
             return null;
         }
 
-        if (TryCreateExternalRuntimeHelperDefinition(callee, out var externalRuntimeHelper))
+        // Priority 1: Inline shape — emit C++ expression directly at call site,
+        // before external runtime helper check, because inline expansion gives
+        // the best performance (no function call at all, matches JIT inlining).
+        if (_shapeRegistry.TryMatchInlineShape(callee, out var cppExpr))
+        {
+            // Resolve ABI: ToChar returns UInt16, takes one native-int arg.
+            // The caller will substitute {0} with the actual argument expression.
+            var returnAbi = new AotCoreIrAbiSlotArtifact
+            {
+                CarrierKindCode = AotCoreIrAbiCarrierKind.UInt16,
+                TypeShape = AotCoreIrTypeShapeKind.ValueType
+            };
+            var paramAbi = CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType);
+            return new InvocationTarget(
+                TargetSymbol: callee, // unused for inline, but required for struct identity
+                ParameterAbis: new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(paramAbi),
+                ReturnAbi: returnAbi,
+                RawArgumentIndices: new HashSet<int> { 0 },
+                InlineCppExpression: cppExpr);
+        }
+
+        // Priority 2: External runtime helper (GenericShapeDescriptor or SimpleForward)
+        if (TryCreateExternalRuntimeHelperDefinition(callee, out var helperDefinition))
         {
             return new InvocationTarget(
-                externalRuntimeHelper!.TargetSymbol,
-                externalRuntimeHelper.ParameterAbis,
-                externalRuntimeHelper.ReturnAbi,
-                externalRuntimeHelper.RawArgumentIndices);
+                helperDefinition!.TargetSymbol,
+                helperDefinition.ParameterAbis,
+                helperDefinition.ReturnAbi,
+                helperDefinition.RawArgumentIndices);
         }
 
         if (TryGetLowerableMethod(callee) is { } lowerableMethod)
