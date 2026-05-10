@@ -19,6 +19,7 @@
 #include <limits>
 #include <memory>
 #include <mutex>
+#include <new>
 #include <shared_mutex>
 #include <string>
 #include <string_view>
@@ -179,8 +180,56 @@
 #define CHAOS_IL2CPP_NOTROW                    std::nothrow
 
 // ── Memory allocation ──────────────────────────────────────
+//
+// == Three allocation domains ==
+//
+// GC domain   — managed objects/arrays/strings (GcAllocate placement-new)
+// Domain      — per-module metadata / runtime internals (IDomainHeap)
+// Raw         — temp buffers, vtable arrays, non-GC structures (malloc/free)
+//
+// == Critical constraints ==
+//
+// 1. NO global operator new/delete overrides — generated code is imported
+//    into game engine source code, global overrides would pollute the
+//    engine's allocation behavior.
+// 2. Codegen output MUST use CHAOS_IL2CPP_NEW_GC / CHAOS_IL2CPP_NEW_GC_ARRAY
+//    instead of raw "new T{}" / "new T[N]".
+// 3. No cross-domain free — each domain's memory must be released by its
+//    own deallocation mechanism.
+//
+// ========== GC domain — managed object allocation ==========
+// Placement-new onto GcAllocate-zeroed memory.
+// The GcAllocate helpers are defined in runtime_core.cpp.
+#define CHAOS_IL2CPP_NEW_GC(T, ...) \
+    ::new (chaos::il2cpp::runtime_core::GcAllocate(sizeof(T))) T{__VA_ARGS__}
+
+// GC non-scanned allocation (pointer-free data, e.g. string UTF-8 bytes)
+#define CHAOS_IL2CPP_NEW_GC_ATOMIC(T, ...) \
+    ::new (chaos::il2cpp::runtime_core::GcAllocateAtomic(sizeof(T))) T{__VA_ARGS__}
+
+// Zero-initialized POD array in GC heap (memory already zeroed by GC_MALLOC)
+#define CHAOS_IL2CPP_NEW_GC_ARRAY(T, count) \
+    static_cast<T*>(chaos::il2cpp::runtime_core::GcAllocate(sizeof(T) * (count)))
+
+// ========== Domain domain — per-module metadata ==========
+// Allocate through a specific domain's heap. Freed by heap->Destroy()
+// on module unload — no individual free needed.
+#define CHAOS_IL2CPP_DOMAIN_NEW(domain, T, ...) \
+    ::new ((domain)->heap->Allocate(sizeof(T))) T{__VA_ARGS__}
+
+// Allocate through the current TLS domain (or fall back to malloc).
+#define CHAOS_IL2CPP_DOMAIN_CURRENT_NEW(T, ...) \
+    ::new (::chaos::il2cpp::memory_domain::CurrentDomain() \
+        ? ::chaos::il2cpp::memory_domain::CurrentDomain()->heap->Allocate(sizeof(T)) \
+        : CHAOS_IL2CPP_MALLOC(sizeof(T))) T{__VA_ARGS__}
+
+// ========== Raw domain — temp / non-GC structures ==========
+// Existing macros — unchanged semantics, std::malloc/free/realloc.
 #define CHAOS_IL2CPP_NEW(T)          new T
 #define CHAOS_IL2CPP_NEW_ARRAY(T, N) new T[N]
+#define CHAOS_IL2CPP_MALLOC(s)     std::malloc(s)
+#define CHAOS_IL2CPP_FREE(p)       std::free(p)
+#define CHAOS_IL2CPP_REALLOC(p,s)  std::realloc(p, s)
 
 // ── Numeric limits ─────────────────────────────────────────
 #define CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(T) std::numeric_limits<T>::min()

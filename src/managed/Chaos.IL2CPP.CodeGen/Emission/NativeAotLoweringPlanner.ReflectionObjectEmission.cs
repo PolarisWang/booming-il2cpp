@@ -149,11 +149,9 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("    const auto chaos_id = chaos_extract_string_id(chaos_value);");
 			builder.AppendLine("    const auto chaos_view = chaos::il2cpp::string_table::Resolve(chaos_id);");
 			builder.AppendLine();
-			builder.Append("    auto* chaos_string = static_cast<");
+			builder.Append("    auto* chaos_string = CHAOS_IL2CPP_NEW_GC(");
 			builder.Append(GetNativeTypeSymbol("System.Private.CoreLib/System.String"));
-			builder.AppendLine("*>(chaos::il2cpp::runtime_core::GcAllocate(sizeof(");
-			builder.Append(GetNativeTypeSymbol("System.Private.CoreLib/System.String"));
-			builder.AppendLine(")));");
+			builder.AppendLine(", {});");
 			builder.Append("    chaos_string->header.type_info = &");
 			builder.Append(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.String"));
 			builder.AppendLine(";");
@@ -164,7 +162,7 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine(";");
 			}
 			builder.AppendLine("    chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_view.byte_count);");
-			builder.AppendLine("    auto* owned_utf8 = static_cast<char*>(chaos::il2cpp::runtime_core::GcAllocateAtomic(chaos_view.byte_count + 1));");
+			builder.AppendLine("    auto* owned_utf8 = CHAOS_IL2CPP_NEW_GC_ATOMIC(char, chaos_view.byte_count + 1);");
 			builder.AppendLine("    CHAOS_IL2CPP_MEMCPY(owned_utf8, chaos_view.utf8_data, chaos_view.byte_count);");
 			builder.AppendLine("    owned_utf8[chaos_view.byte_count] = '\\0';");
 			builder.AppendLine("    chaos_string->utf8_data = owned_utf8;");

@@ -47,3 +47,14 @@
 ## 技能系统
 
 技能通过 `.claude/skills/` 注册，支持 `/dev-<skill-name>` 或 Skill 工具调用。完整技能目录见 `skills/discovery/skill-index.md`（自动加载）。自进化系统详情见 `skills/` 目录。
+
+## 统一内存分配约束（强制）
+
+IL2CPP 生成 C++ 代码会被引入游戏引擎源码，因此分配行为必须遵循以下约束：
+
+1. **禁止全局 operator new/delete 重载** — 任何情况下不得添加全局 `operator new` / `operator delete` 重载。生成代码引入游戏引擎后，全局重载会污染引擎的分配行为。
+2. **codegen 输出必须使用 CHAOS_IL2CPP_ 宏** — codegen 生成 `new T{}` / `new T[N]` / `malloc` / `free` 都必须替换为 `CHAOS_IL2CPP_NEW_GC` / `CHAOS_IL2CPP_NEW_GC_ARRAY` / `CHAOS_IL2CPP_MALLOC` 等宏。
+3. **禁止跨域分配/free 不匹配** — GC 域内存必须通过 GC 回收，Domain 域通过 heap->Destroy() 批量释放，Raw 域通过 std::free 释放。不得混用。
+4. **新分配策略必须通过 GcAllocate/GcAllocateAtomic 内部切换** — A→B→C 三阶段（Bump Arena → TLS GC Cache → Precise Generational GC）对 codegen 完全透明，codegen 输出无需修改。
+
+详见 `wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/17-统一内存分配体系.md`。

@@ -4,6 +4,7 @@
 #include <chaos/log.h>
 
 #include "memory_domain.h"
+#include "gc_bump_cache.h"
 #include "reflection_query_model.h"
 #include "generic_context.h"
 #include "vtable_registry.h"
@@ -293,12 +294,17 @@ static void* AllocateBytesAtomic(CHAOS_IL2CPP_SIZE size) {
 
 }  // close anonymous — GcAllocate/GcAllocateAtomic need external linkage
 
+// Thread-local bump cache for GC allocations (Phase B: Size-class cache).
+// Collocated here so it lives in the same translation unit as
+// GcAllocate/GcAllocateAtomic.
+static thread_local chaos::il2cpp::runtime_core::GcBumpCache tls_gc_arena;
+
 void* GcAllocate(CHAOS_IL2CPP_SIZE size) {
-    return GC_MALLOC(size);
+    return tls_gc_arena.Allocate(size);
 }
 
 void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) {
-    return GC_MALLOC_ATOMIC(size);
+    return tls_gc_arena.AllocateAtomic(size);
 }
 
 // ======================================================================
