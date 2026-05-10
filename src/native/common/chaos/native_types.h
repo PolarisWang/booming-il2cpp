@@ -212,42 +212,71 @@
     static_cast<T*>(chaos::il2cpp::runtime_core::GcAllocate(sizeof(T) * (count)))
 
 // ========== Domain domain — per-module metadata ==========
-// Allocate through a specific domain's heap. Freed by heap->Destroy()
-// on module unload — no individual free needed.
-#define CHAOS_IL2CPP_DOMAIN_NEW(domain, T, ...) \
-    ::new ((domain)->heap->Allocate(sizeof(T))) T{__VA_ARGS__}
+// Allocate through the current TLS domain heap.  Each allocation is tagged
+// with the originating heap pointer so that Free() routes to the correct
+// heap without depending on thread-local domain state — cross-domain safe
+// for 200+ DLL hotupdate scenarios.
+// Overhead: one pointer (8 bytes) per allocation.
+//
+// Normal lifecycle: allocated once, never individually freed (heap->Destroy()
+// handles bulk release on module unload).  The tag only matters on error
+// paths where individual Free() is needed.
+//
+// Falls back to tagged std::malloc when no domain is active (AOT root).
 
-// Allocate through the current TLS domain (or fall back to malloc).
-#define CHAOS_IL2CPP_DOMAIN_CURRENT_NEW(T, ...) \
-    ::new (::chaos::il2cpp::memory_domain::CurrentDomain() \
-        ? ::chaos::il2cpp::memory_domain::CurrentDomain()->heap->Allocate(sizeof(T)) \
-        : CHAOS_IL2CPP_MALLOC(sizeof(T))) T{__VA_ARGS__}
+// Tagged allocation through current domain (default).  Returns pointer
+// to user data after the routing header.
+#define CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(size)                             \
+    ::chaos::il2cpp::memory_domain::DomainCurrentAllocateTagged(size)
+
+// Free a tagged allocation.  Reads the header to route to the originating
+// heap — safe from any thread, any domain context.
+#define CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(ptr)                                  \
+    ::chaos::il2cpp::memory_domain::DomainFreeTagged(const_cast<void*>(static_cast<const void*>(ptr)))
+
+// Reallocate through the current TLS domain heap.
+// NOTE: REALLOC does not preserve the tag.  Use only when allocation and
+// free happen within the same domain context.
+#define CHAOS_IL2CPP_DOMAIN_CURRENT_REALLOC(ptr, new_size)                       \
+    (::chaos::il2cpp::memory_domain::CurrentDomain()                              \
+         ? ::chaos::il2cpp::memory_domain::CurrentDomain()->heap->Reallocate(ptr, new_size) \
+         : CHAOS_IL2CPP_REALLOC(ptr, new_size))
+
+// String duplicate through current domain (uses tagged allocation internally).
+#define CHAOS_IL2CPP_DOMAIN_CURRENT_STRDUP(src)                                \
+    ::chaos::il2cpp::runtime_core::DomainStrDup(src)
+
+// Placement-new through current domain (uses ALLOCATE internally).
+#define CHAOS_IL2CPP_DOMAIN_CURRENT_NEW(T, ...)                                \
+    ::new (CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(T))) T{__VA_ARGS__}
 
 // ========== Raw domain — temp / non-GC structures ==========
 // Existing macros — unchanged semantics, std::malloc/free/realloc.
 #define CHAOS_IL2CPP_NEW(T)          new T
 #define CHAOS_IL2CPP_NEW_ARRAY(T, N) new T[N]
 #define CHAOS_IL2CPP_MALLOC(s)     std::malloc(s)
+#define CHAOS_IL2CPP_CALLOC(n,s)   std::calloc(n, s)
 #define CHAOS_IL2CPP_FREE(p)       std::free(p)
 #define CHAOS_IL2CPP_REALLOC(p,s)  std::realloc(p, s)
 
 // ── Numeric limits ─────────────────────────────────────────
-#define CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(T) std::numeric_limits<T>::min()
-#define CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(T) std::numeric_limits<T>::max()
-#define CHAOS_IL2CPP_NUMERIC_LIMITS_INFINITY(T) std::numeric_limits<T>::infinity()
-#define CHAOS_IL2CPP_NUMERIC_LIMITS_QUIET_NAN(T) std::numeric_limits<T>::quiet_NaN()
+// Parentheses around min/max prevent collision with Windows macros (NOMINMAX not guaranteed).
+#define CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(T) (std::numeric_limits<T>::min)()
+#define CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(T) (std::numeric_limits<T>::max)()
+#define CHAOS_IL2CPP_NUMERIC_LIMITS_INFINITY(T) (std::numeric_limits<T>::infinity)()
+#define CHAOS_IL2CPP_NUMERIC_LIMITS_QUIET_NAN(T) (std::numeric_limits<T>::quiet_NaN)()
 
 // ── Explicit *_[MIN|MAX] constants (for generated C++ overflow checks) ──
-#define CHAOS_IL2CPP_INT8_MAX     std::numeric_limits<CHAOS_IL2CPP_INT8>::max()
-#define CHAOS_IL2CPP_INT16_MAX    std::numeric_limits<CHAOS_IL2CPP_INT16>::max()
-#define CHAOS_IL2CPP_INT32_MAX    std::numeric_limits<CHAOS_IL2CPP_INT32>::max()
-#define CHAOS_IL2CPP_INT64_MAX    std::numeric_limits<CHAOS_IL2CPP_INT64>::max()
-#define CHAOS_IL2CPP_UINT8_MAX    std::numeric_limits<CHAOS_IL2CPP_UINT8>::max()
-#define CHAOS_IL2CPP_UINT16_MAX   std::numeric_limits<CHAOS_IL2CPP_UINT16>::max()
-#define CHAOS_IL2CPP_UINT32_MAX   std::numeric_limits<CHAOS_IL2CPP_UINT32>::max()
-#define CHAOS_IL2CPP_UINT64_MAX   std::numeric_limits<CHAOS_IL2CPP_UINT64>::max()
-#define CHAOS_IL2CPP_INTPTR_MAX   std::numeric_limits<CHAOS_IL2CPP_INTPTR>::max()
-#define CHAOS_IL2CPP_UINTPTR_MAX  std::numeric_limits<CHAOS_IL2CPP_UINTPTR>::max()
+#define CHAOS_IL2CPP_INT8_MAX     (std::numeric_limits<CHAOS_IL2CPP_INT8>::max)()
+#define CHAOS_IL2CPP_INT16_MAX    (std::numeric_limits<CHAOS_IL2CPP_INT16>::max)()
+#define CHAOS_IL2CPP_INT32_MAX    (std::numeric_limits<CHAOS_IL2CPP_INT32>::max)()
+#define CHAOS_IL2CPP_INT64_MAX    (std::numeric_limits<CHAOS_IL2CPP_INT64>::max)()
+#define CHAOS_IL2CPP_UINT8_MAX    (std::numeric_limits<CHAOS_IL2CPP_UINT8>::max)()
+#define CHAOS_IL2CPP_UINT16_MAX   (std::numeric_limits<CHAOS_IL2CPP_UINT16>::max)()
+#define CHAOS_IL2CPP_UINT32_MAX   (std::numeric_limits<CHAOS_IL2CPP_UINT32>::max)()
+#define CHAOS_IL2CPP_UINT64_MAX   (std::numeric_limits<CHAOS_IL2CPP_UINT64>::max)()
+#define CHAOS_IL2CPP_INTPTR_MAX   (std::numeric_limits<CHAOS_IL2CPP_INTPTR>::max)()
+#define CHAOS_IL2CPP_UINTPTR_MAX  (std::numeric_limits<CHAOS_IL2CPP_UINTPTR>::max)()
 
 // ── Indirect load/store templates ────────────────────────────
 #define CHAOS_IL2CPP_RAW_POINTER_TAG  CHAOS_IL2CPP_UINTPTR(1) << 63

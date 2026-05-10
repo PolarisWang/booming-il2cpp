@@ -16,6 +16,8 @@ using DomainId = CHAOS_IL2CPP_UINT32;
 
 constexpr DomainId kDomainIdInvalid = 0u;
 
+struct MemoryDomain;
+
 // -----------------------------------------------------------------------
 // IDomainHeap — pluggable heap strategy for each domain.
 //
@@ -30,6 +32,8 @@ public:
 
     /// Allocate @a size bytes through this heap.
     /// Returns nullptr on allocation failure.
+    /// If usage_limit is set on the owning domain and would be exceeded,
+    /// returns nullptr without allocating.
     virtual void* Allocate(CHAOS_IL2CPP_SIZE size) = 0;
 
     /// Reallocate a previously allocated block to @a new_size.
@@ -43,6 +47,44 @@ public:
     /// individual Free() for each allocation.  After this call the heap
     /// object is no longer usable and should be destroyed.
     virtual void Destroy() = 0;
+
+    /// Set the owning MemoryDomain (for usage tracking).
+    /// Called by RegisterMemoryDomain after heap construction.
+    void SetOwner(MemoryDomain* domain) { owner_ = domain; }
+
+    /// Get the owning MemoryDomain.
+    MemoryDomain* GetOwner() const { return owner_; }
+
+    /// Get the domain id of the owning MemoryDomain.
+    DomainId GetDomainId() const {
+        return owner_ ? owner_->domain_id : kDomainIdInvalid;
+    }
+
+protected:
+    MemoryDomain* owner_ = nullptr;
+
+    /// Track an allocation of @a size bytes.  Returns false if the
+    /// domain's usage_limit would be exceeded (caller should fail).
+    bool TrackAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
+        if (owner_ == nullptr) return true;
+        CHAOS_IL2CPP_INT64 new_usage = owner_->current_usage + static_cast<CHAOS_IL2CPP_INT64>(size);
+        if (owner_->usage_limit > 0 && new_usage > owner_->usage_limit) {
+            CHAOS_IL2CPP_LOG_WARN("MemoryDomain", "allocation of %llu bytes would exceed limit %lld",
+                                  (unsigned long long)size, (long long)owner_->usage_limit);
+            return false;
+        }
+        owner_->current_usage = new_usage;
+        if (new_usage > owner_->peak_usage) {
+            owner_->peak_usage = new_usage;
+        }
+        return true;
+    }
+
+    /// Track a free of @a size bytes.
+    void TrackFree(CHAOS_IL2CPP_SIZE size) noexcept {
+        if (owner_ == nullptr) return;
+        owner_->current_usage -= static_cast<CHAOS_IL2CPP_INT64>(size);
+    }
 };
 
 // -----------------------------------------------------------------------
@@ -69,7 +111,30 @@ struct MemoryDomain {
 };
 
 // -----------------------------------------------------------------------
-// Heap factory — users can override these to provide custom heap strategies.
+// Domain-tagged allocation — cross-domain safe free routing.
+//
+// Each domain allocation prepends an AllocationHeader containing the
+// originating heap pointer.  DOMAIN_CURRENT_FREE reads this header to
+// route the free() call to the correct heap — no dependency on thread-
+// local domain state, no hash lookup, no race condition.
+//
+// Layout:  [ IDomainHeap* | user data ... ]
+//            ^- header     ^- returned pointer
+// -----------------------------------------------------------------------
+
+/// Allocate @a size bytes through @a domain's heap and prepend a routing
+/// header.  Returns a pointer to the user data (header + sizeof(void*)).
+/// The caller must pair this with DomainFreeTagged().
+void* DomainAllocateTagged(MemoryDomain* domain, CHAOS_IL2CPP_SIZE size);
+
+/// Like DomainAllocateTagged but uses CurrentDomain() for the domain.
+/// Falls back to std::malloc tagged with nullptr when no domain is active.
+void* DomainCurrentAllocateTagged(CHAOS_IL2CPP_SIZE size);
+
+/// Free a pointer previously returned by DomainAllocateTagged() or
+/// DomainCurrentAllocateTagged().  Reads the header to route to the
+/// originating heap.  Safe to call even after the domain has been
+/// unloaded (no-ops when heap is gone).
 // -----------------------------------------------------------------------
 using HeapFactoryFn = IDomainHeap* (*)(const MemoryDomain* domain, void* user_data);
 using HeapFactoryUserData = void*;

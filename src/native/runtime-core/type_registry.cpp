@@ -9,6 +9,7 @@
 #include "runtime_vtable.h"
 #include "type_registry.h"
 #include "module_registry.h"
+#include "memory_domain.h"
 #include "reflection_query_model.h"
 
 #include <mutex>
@@ -74,8 +75,8 @@ TypeInfoHot* chaos_register_type(
     }
 
     // Allocate TypeInfoHot + TypeInfoWarm as a contiguous pair.
-    auto* hot = CHAOS_IL2CPP_NEW(TypeInfoHot);
-    auto* warm = CHAOS_IL2CPP_NEW(TypeInfoWarm);
+    auto* hot = CHAOS_IL2CPP_DOMAIN_CURRENT_NEW(TypeInfoHot);
+    auto* warm = CHAOS_IL2CPP_DOMAIN_CURRENT_NEW(TypeInfoWarm);
 
     hot->parent        = parent;
     hot->vtable_array  = nullptr;
@@ -151,7 +152,7 @@ bool ChaosTypeAddInterface(
 
     CHAOS_IL2CPP_UINT32 newCount = warm->runtime_iface_count + 1;
     auto* newMap = static_cast<InterfaceMapEntry*>(
-        CHAOS_IL2CPP_REALLOC(
+        CHAOS_IL2CPP_DOMAIN_CURRENT_REALLOC(
             const_cast<InterfaceMapEntry*>(warm->runtime_iface_map),
             newCount * sizeof(InterfaceMapEntry)));
 

@@ -121,6 +121,36 @@ CHAOS_IL2CPP_INT64  ChaosDatetimeGetUtcNow(void) noexcept;
 CHAOS_IL2CPP_INT32  ChaosDatetimeGetHashCode(CHAOS_IL2CPP_INTPTR datetime) noexcept;
 // Math
 CHAOS_IL2CPP_INT64  ChaosMathSqrt(CHAOS_IL2CPP_INT64 value) noexcept;
+CHAOS_IL2CPP_INT32  ChaosMathAbsInt32(CHAOS_IL2CPP_INT32 value) noexcept;
+CHAOS_IL2CPP_FLOAT64 ChaosMathAbsDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept;
+CHAOS_IL2CPP_FLOAT64 ChaosMathCeiling(CHAOS_IL2CPP_FLOAT64 value) noexcept;
+CHAOS_IL2CPP_FLOAT64 ChaosMathFloor(CHAOS_IL2CPP_FLOAT64 value) noexcept;
+CHAOS_IL2CPP_FLOAT64 ChaosMathRound(CHAOS_IL2CPP_FLOAT64 value) noexcept;
+CHAOS_IL2CPP_INT32  ChaosMathMaxInt32(CHAOS_IL2CPP_INT32 a, CHAOS_IL2CPP_INT32 b) noexcept;
+CHAOS_IL2CPP_FLOAT64 ChaosMathMaxDouble(CHAOS_IL2CPP_FLOAT64 a, CHAOS_IL2CPP_FLOAT64 b) noexcept;
+CHAOS_IL2CPP_INT32  ChaosMathMinInt32(CHAOS_IL2CPP_INT32 a, CHAOS_IL2CPP_INT32 b) noexcept;
+CHAOS_IL2CPP_FLOAT64 ChaosMathPow(CHAOS_IL2CPP_FLOAT64 x, CHAOS_IL2CPP_FLOAT64 y) noexcept;
+CHAOS_IL2CPP_FLOAT64 ChaosMathSin(CHAOS_IL2CPP_FLOAT64 x) noexcept;
+CHAOS_IL2CPP_FLOAT64 ChaosMathCos(CHAOS_IL2CPP_FLOAT64 x) noexcept;
+CHAOS_IL2CPP_INT64  ChaosMathBigMul(CHAOS_IL2CPP_INT32 a, CHAOS_IL2CPP_INT32 b) noexcept;
+// DateTime
+CHAOS_IL2CPP_INTPTR ChaosDateTimeToString(CHAOS_IL2CPP_INT64 dt) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosDateTimeToStringFormat(CHAOS_IL2CPP_INT64 dt, CHAOS_IL2CPP_INTPTR format) noexcept;
+CHAOS_IL2CPP_INT64  ChaosDateTimeAddDays(CHAOS_IL2CPP_INT64 dt, CHAOS_IL2CPP_FLOAT64 value) noexcept;
+CHAOS_IL2CPP_INT64  ChaosDateTimeAddHours(CHAOS_IL2CPP_INT64 dt, CHAOS_IL2CPP_FLOAT64 value) noexcept;
+CHAOS_IL2CPP_INT64  ChaosDateTimeAddMinutes(CHAOS_IL2CPP_INT64 dt, CHAOS_IL2CPP_FLOAT64 value) noexcept;
+CHAOS_IL2CPP_INT32  ChaosDateTimeCompare(CHAOS_IL2CPP_INT64 left, CHAOS_IL2CPP_INT64 right) noexcept;
+CHAOS_IL2CPP_INT32  ChaosDateTimeDaysInMonth(CHAOS_IL2CPP_INT32 year, CHAOS_IL2CPP_INT32 month) noexcept;
+// TimeSpan
+CHAOS_IL2CPP_INT64  ChaosTimeSpanFromDays(CHAOS_IL2CPP_FLOAT64 value) noexcept;
+CHAOS_IL2CPP_INT64  ChaosTimeSpanFromHours(CHAOS_IL2CPP_FLOAT64 value) noexcept;
+CHAOS_IL2CPP_INT64  ChaosTimeSpanFromMinutes(CHAOS_IL2CPP_FLOAT64 value) noexcept;
+CHAOS_IL2CPP_INT64  ChaosTimeSpanParse(CHAOS_IL2CPP_INTPTR value) noexcept;
+// DateTime/TimeSpan ctor stubs
+void    ChaosDateTimeCtor3(CHAOS_IL2CPP_INTPTR instance, CHAOS_IL2CPP_INT32 year, CHAOS_IL2CPP_INT32 month, CHAOS_IL2CPP_INT32 day) noexcept;
+void    ChaosDateTimeCtor6(CHAOS_IL2CPP_INTPTR instance, CHAOS_IL2CPP_INT32 year, CHAOS_IL2CPP_INT32 month, CHAOS_IL2CPP_INT32 day, CHAOS_IL2CPP_INT32 hour, CHAOS_IL2CPP_INT32 minute, CHAOS_IL2CPP_INT32 second) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosDateTimeParse(CHAOS_IL2CPP_INTPTR value) noexcept;
+void    ChaosTimeSpanCtor(CHAOS_IL2CPP_INTPTR instance, CHAOS_IL2CPP_INT32 hours, CHAOS_IL2CPP_INT32 minutes, CHAOS_IL2CPP_INT32 seconds) noexcept;
 // Threading
 void    ChaosInterlockedMemoryBarrier(void) noexcept;
 // Exception
@@ -132,6 +162,7 @@ CHAOS_IL2CPP_INTPTR ChaosObjectEqualsStatic(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2C
 void    ChaosObjectCtor(CHAOS_IL2CPP_INTPTR obj) noexcept;
 // GUID / Random / HashCode
 CHAOS_IL2CPP_INTPTR ChaosGuidNewGuid(void) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosGuidParse(CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INT32  ChaosGuidGetHashCode(CHAOS_IL2CPP_INTPTR guid) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosGuidToString(CHAOS_IL2CPP_INTPTR guid) noexcept;
 void    ChaosRandomNextBytes(CHAOS_IL2CPP_INTPTR rng, CHAOS_IL2CPP_INTPTR buffer) noexcept;

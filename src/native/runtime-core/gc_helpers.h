@@ -6,6 +6,9 @@
 
 namespace chaos::il2cpp::runtime_core {
 
+// Forward declaration — full definition in runtime_core.h.
+enum class RuntimeMode;
+
 /* GC allocation helpers for generated code. GcAllocate returns zeroed memory
    (scanned for pointers). GcAllocateAtomic returns zeroed memory that is NOT
    scanned for pointers — use for pointer-free data (e.g. string UTF-8 bytes). */
@@ -51,6 +54,11 @@ bool ArrayReverseReferenceRange(
 /// Mark the object as changed (for incremental GC write barrier).
 /// No-op when bdwgc is not compiled with MANUAL_VDB.
 void GcEndStubbornChange(const void* obj);
+
+/// String duplicate through the current TLS domain heap.
+/// Falls back to std::malloc when no domain is active.
+/// Returns nullptr on OOM or null input.
+char* DomainStrDup(const char* src);
 
 }  // namespace chaos::il2cpp::runtime_core
 

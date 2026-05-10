@@ -1,10 +1,10 @@
 #include "interpreter_vm.h"
 
-#include <cstdlib>
 #include <cstring>
 #include <stdexcept>
 #include <vector>
 
+#include <chaos/native_types.h>
 #include <chaos/type_info.h>
 #include "vtable_registry.h"
 
@@ -140,7 +140,7 @@ static int FindEnclosingCatch(const IRMethod& method, CHAOS_IL2CPP_SIZE idx) {
 
 void InterpreterValue::FreeStruct() {
     if (tag == ValueTag::Struct && obj != nullptr) {
-        std::free(obj);
+        CHAOS_IL2CPP_FREE(obj);
         obj = nullptr;
         struct_size = 0u;
     }
@@ -152,7 +152,7 @@ InterpreterValue::InterpreterValue(const InterpreterValue& other)
 {
     if (tag == ValueTag::Struct && other.obj != nullptr) {
         // Deep-copy struct data.
-        obj = std::malloc(struct_size);
+        obj = CHAOS_IL2CPP_MALLOC(struct_size);
         if (obj != nullptr) {
             std::memcpy(obj, other.obj, struct_size);
         } else {
@@ -179,7 +179,7 @@ InterpreterValue& InterpreterValue::operator=(const InterpreterValue& other) {
     struct_size = other.struct_size;
 
     if (tag == ValueTag::Struct && other.obj != nullptr) {
-        obj = std::malloc(struct_size);
+        obj = CHAOS_IL2CPP_MALLOC(struct_size);
         if (obj != nullptr) {
             std::memcpy(obj, other.obj, struct_size);
         } else {
@@ -239,7 +239,7 @@ InterpreterValue InterpreterValue::from_struct(const void* data, CHAOS_IL2CPP_UI
     result.tag = ValueTag::Struct;
     result.struct_size = size;
     if (data != nullptr && size > 0u) {
-        result.obj = std::malloc(size);
+        result.obj = CHAOS_IL2CPP_MALLOC(size);
         if (result.obj != nullptr) {
             std::memcpy(result.obj, data, size);
         } else {
@@ -265,7 +265,7 @@ ExecutionFrame::~ExecutionFrame() {
     for (auto& v : stack)     { v.FreeStruct(); }
     // Free localloc allocations.
     for (auto* block : localloc_blocks) {
-        std::free(block);
+        CHAOS_IL2CPP_FREE(block);
     }
 }
 
@@ -625,7 +625,9 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 }
                 break;
             case IROpCode::NewObj: {
-                auto* storage = new ObjectStorage();
+                auto* storage = static_cast<ObjectStorage*>(CHAOS_IL2CPP_MALLOC(sizeof(ObjectStorage)));
+                if (storage == nullptr) break;
+                ::new (storage) ObjectStorage();
                 storage->fields.resize(instruction.secondary_index == 0u ? 1u : instruction.secondary_index);
                 // Type token is set by the token resolver (or test) via immediate_i4.
                 storage->type_token = static_cast<CHAOS_IL2CPP_UINT32>(instruction.immediate_i4);
@@ -634,7 +636,9 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::NewArr: {
                 const CHAOS_IL2CPP_SIZE length = static_cast<CHAOS_IL2CPP_SIZE>(ReadInt32(Pop(&frame->stack)));
-                auto* storage = new ArrayStorage();
+                auto* storage = static_cast<ArrayStorage*>(CHAOS_IL2CPP_MALLOC(sizeof(ArrayStorage)));
+                if (storage == nullptr) break;
+                ::new (storage) ArrayStorage();
                 storage->elements.resize(length);
                 frame->stack.push_back(InterpreterValue::from_obj(storage));
                 break;
@@ -743,7 +747,9 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 (void)Pop(&frame->stack);
                 break;
             case IROpCode::Box: {
-                auto* boxed = new BoxedValue();
+                auto* boxed = static_cast<BoxedValue*>(CHAOS_IL2CPP_MALLOC(sizeof(BoxedValue)));
+                if (boxed == nullptr) break;
+                ::new (boxed) BoxedValue();
                 boxed->value = Pop(&frame->stack);
                 frame->stack.push_back(InterpreterValue::from_obj(boxed));
                 break;
@@ -847,7 +853,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     InterpreterValue local_buf[kMaxCallArgs];
                     auto* arg_buf = (arg_count <= kMaxCallArgs)
                         ? local_buf
-                        : static_cast<InterpreterValue*>(std::malloc(
+                        : static_cast<InterpreterValue*>(CHAOS_IL2CPP_MALLOC(
                             sizeof(InterpreterValue) * arg_count));
 
                     for (CHAOS_IL2CPP_SIZE ai = arg_count; ai > 0u; --ai) {
@@ -860,7 +866,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                         instruction.is_instance_call,
                         frame->dispatch_context);
 
-                    if (arg_count > kMaxCallArgs) std::free(arg_buf);
+                    if (arg_count > kMaxCallArgs) CHAOS_IL2CPP_FREE(arg_buf);
 
                     const DispatchAction da = handleDispatchResult(dret);
                     if (da == DispatchAction::Return) return result;
@@ -887,7 +893,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 InterpreterValue local_buf[kMaxCallArgs];
                 auto* cv_args = (cv_arg_count <= kMaxCallArgs)
                     ? local_buf
-                    : static_cast<InterpreterValue*>(std::malloc(
+                    : static_cast<InterpreterValue*>(CHAOS_IL2CPP_MALLOC(
                         sizeof(InterpreterValue) * cv_arg_count));
                 for (CHAOS_IL2CPP_SIZE ai = cv_arg_count; ai > 0u; --ai) {
                     cv_args[ai - 1u] = Pop(&frame->stack);
@@ -922,7 +928,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                         true, /* CallVirtConstrained is always instance */
                         frame->dispatch_context);
 
-                    if (cv_arg_count > kMaxCallArgs) std::free(cv_args);
+                    if (cv_arg_count > kMaxCallArgs) CHAOS_IL2CPP_FREE(cv_args);
 
                     const DispatchAction da_cv = handleDispatchResult(dret);
                     if (da_cv == DispatchAction::Return) return result;
@@ -936,7 +942,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 for (CHAOS_IL2CPP_SIZE ai = 0u; ai < cv_arg_count; ++ai) {
                     result.call_args[ai] = cv_args[ai];
                 }
-                if (cv_arg_count > kMaxCallArgs) std::free(cv_args);
+                if (cv_arg_count > kMaxCallArgs) CHAOS_IL2CPP_FREE(cv_args);
                 result.call_target = resolved_target;
                 result.needs_external_dispatch = true;
                 return result;
@@ -948,7 +954,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 InterpreterValue local_buf_v[kMaxCallArgs];
                 auto* cv_args_v = (arg_count_v <= kMaxCallArgs)
                     ? local_buf_v
-                    : static_cast<InterpreterValue*>(std::malloc(
+                    : static_cast<InterpreterValue*>(CHAOS_IL2CPP_MALLOC(
                         sizeof(InterpreterValue) * arg_count_v));
                 for (CHAOS_IL2CPP_SIZE ai = arg_count_v; ai > 0u; --ai) {
                     cv_args_v[ai - 1u] = Pop(&frame->stack);
@@ -982,7 +988,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                         true, /* CallVirt is always instance */
                         frame->dispatch_context);
 
-                    if (arg_count_v > kMaxCallArgs) std::free(cv_args_v);
+                    if (arg_count_v > kMaxCallArgs) CHAOS_IL2CPP_FREE(cv_args_v);
 
                     const DispatchAction da_v = handleDispatchResult(dret_v);
                     if (da_v == DispatchAction::Return) return result;
@@ -996,7 +1002,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 for (CHAOS_IL2CPP_SIZE ai = 0u; ai < arg_count_v; ++ai) {
                     result.call_args[ai] = cv_args_v[ai];
                 }
-                if (arg_count_v > kMaxCallArgs) std::free(cv_args_v);
+                if (arg_count_v > kMaxCallArgs) CHAOS_IL2CPP_FREE(cv_args_v);
                 result.call_target = resolved_target_v;
                 result.needs_external_dispatch = true;
                 return result;
@@ -1321,7 +1327,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::LocAlloc: {
                 const CHAOS_IL2CPP_SIZE size = static_cast<CHAOS_IL2CPP_SIZE>(ReadInt32(Pop(&frame->stack)));
-                void* buf = std::malloc(size > 0u ? size : 1u);
+                void* buf = CHAOS_IL2CPP_MALLOC(size > 0u ? size : 1u);
                 if (buf != nullptr) {
                     std::memset(buf, 0, size > 0u ? size : 1u);
                     // Register for automatic cleanup on frame exit.

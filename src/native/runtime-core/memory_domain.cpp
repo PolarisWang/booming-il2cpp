@@ -2,6 +2,7 @@
 #include "runtime_core.h"
 
 #include <chaos/trace.h>
+#include <chaos/log.h>
 
 #include <atomic>
 #include <cstdlib>
@@ -13,6 +14,7 @@
 #include <Windows.h>
 #else
 #include <cstdlib>
+#include <sys/mman.h>
 #endif
 
 namespace chaos::il2cpp::memory_domain {
@@ -34,15 +36,30 @@ public:
     ~SegregatedHeap() override { Destroy(); }
 
     void* Allocate(CHAOS_IL2CPP_SIZE size) override {
-        return heap_ != nullptr ? ::HeapAlloc(heap_, 0u, size) : nullptr;
+        if (heap_ == nullptr) return nullptr;
+        if (!TrackAlloc(size)) return nullptr;
+        return ::HeapAlloc(heap_, 0u, size);
     }
 
     void* Reallocate(void* ptr, CHAOS_IL2CPP_SIZE new_size) override {
-        return heap_ != nullptr ? ::HeapReAlloc(heap_, 0u, ptr, new_size) : nullptr;
+        if (heap_ == nullptr) return nullptr;
+        // Untrack old size first.
+        if (ptr != nullptr) {
+            CHAOS_IL2CPP_SIZE old_size = ::HeapSize(heap_, 0u, ptr);
+            if (old_size != static_cast<CHAOS_IL2CPP_SIZE>(-1)) {
+                TrackFree(old_size);
+            }
+        }
+        if (!TrackAlloc(new_size)) return nullptr;
+        return ::HeapReAlloc(heap_, 0u, ptr, new_size);
     }
 
     void Free(void* ptr) override {
         if (heap_ != nullptr && ptr != nullptr) {
+            CHAOS_IL2CPP_SIZE old_size = ::HeapSize(heap_, 0u, ptr);
+            if (old_size != static_cast<CHAOS_IL2CPP_SIZE>(-1)) {
+                TrackFree(old_size);
+            }
             ::HeapFree(heap_, 0u, ptr);
         }
     }
@@ -58,27 +75,173 @@ private:
     HANDLE heap_;
 };
 
-#else  // not _WIN32 — portable fallback
+#else  // not _WIN32 — region-based allocator
+
+/// Minimum region size for the mmap-based SegregatedHeap.
+/// 64 KB = typical large page on many systems, balances fragmentation vs waste.
+static constexpr CHAOS_IL2CPP_SIZE kMmapRegionSize = 64 * 1024;
 
 class SegregatedHeap final : public IDomainHeap {
 public:
+    SegregatedHeap() {
+        AllocateNewRegion();
+    }
+
+    ~SegregatedHeap() override { Destroy(); }
+
     void* Allocate(CHAOS_IL2CPP_SIZE size) override {
-        return CHAOS_IL2CPP_MALLOC(size);
+        size = AlignUp(size, sizeof(void*));
+        if (!TrackAlloc(size)) return nullptr;
+
+        std::lock_guard<std::mutex> lock(region_mutex_);
+
+        // Try current region first.
+        if (current_ != nullptr &&
+            (current_pos_ + size) <= current_end_) {
+            void* ptr = reinterpret_cast<void*>(current_pos_);
+            current_pos_ += size;
+            return ptr;
+        }
+
+        // Large allocation: get a dedicated mmap region just for this block.
+        if (size > kMmapRegionSize / 2) {
+            CHAOS_IL2CPP_SIZE alloc_size = AlignUp(size, kMmapRegionSize);
+            void* ptr = MmapAlloc(alloc_size);
+            if (ptr == nullptr) return nullptr;
+            regions_.push_back({ptr, alloc_size});
+            return ptr;
+        }
+
+        // Need a fresh region.
+        if (!AllocateNewRegion()) return nullptr;
+
+        // Retry with the new region.
+        void* ptr = reinterpret_cast<void*>(current_pos_);
+        current_pos_ += size;
+        return ptr;
     }
 
     void* Reallocate(void* ptr, CHAOS_IL2CPP_SIZE new_size) override {
-        return CHAOS_IL2CPP_REALLOC(ptr, new_size);
+        if (!TrackAlloc(new_size)) return nullptr;
+
+        std::lock_guard<std::mutex> lock(region_mutex_);
+
+        // If ptr is the last allocation in the current region, just extend.
+        if (ptr != nullptr && IsInCurrentRegion(ptr)) {
+            CHAOS_IL2CPP_SIZE needed = AlignUp(new_size, sizeof(void*));
+            if ((reinterpret_cast<char*>(ptr) + needed) <= current_end_) {
+                current_pos_ = reinterpret_cast<CHAOS_IL2CPP_SIZE>(ptr) + needed;
+                return ptr;
+            }
+        }
+
+        // Generic fallback: alloc + copy + free.
+        void* new_ptr = AllocateLocked(new_size);
+        if (new_ptr == nullptr || ptr == nullptr) return new_ptr;
+        std::memcpy(new_ptr, ptr, new_size);
+        // Bump allocator: no individual free needed.
+        return new_ptr;
     }
 
     void Free(void* ptr) override {
-        CHAOS_IL2CPP_FREE(ptr);
+        (void)ptr;
+        // Bump allocator: individual free is a no-op.
+        // All memory released in Destroy() via bulk munmap.
     }
 
     void Destroy() override {
-        // On platforms without heap handles we cannot do a bulk free,
-        // so Destroy is semantically a no-op here.  Users who need
-        // O(1) destroy should provide a custom heap factory that uses
-        // mmap region or jemalloc arena.
+        std::lock_guard<std::mutex> lock(region_mutex_);
+
+        CHAOS_IL2CPP_INT64 total = 0;
+        for (auto& r : regions_) {
+            if (r.ptr != nullptr) {
+                total += static_cast<CHAOS_IL2CPP_INT64>(r.size);
+                ::munmap(r.ptr, r.size);
+            }
+        }
+        // Subtract all tracked region sizes from usage (since we can't
+        // track individual bump-allocated blocks, use region total as
+        // a conservative estimate).
+        if (owner_ != nullptr) {
+            owner_->current_usage -= total;
+            if (owner_->current_usage < 0) owner_->current_usage = 0;
+        }
+        regions_.clear();
+        current_ = nullptr;
+        current_pos_ = 0;
+        current_end_ = 0;
+    }
+
+private:
+    struct Region {
+        void* ptr;
+        CHAOS_IL2CPP_SIZE size;
+    };
+
+    std::mutex            region_mutex_;   ///< Serializes region metadata and bump-pointer access.
+    std::vector<Region>   regions_;
+
+    void*  current_     = nullptr;
+    CHAOS_IL2CPP_SIZE current_pos_  = 0;
+    CHAOS_IL2CPP_SIZE current_end_  = 0;
+
+    static CHAOS_IL2CPP_SIZE AlignUp(CHAOS_IL2CPP_SIZE size, CHAOS_IL2CPP_SIZE align) {
+        return (size + align - 1) & ~(align - 1);
+    }
+
+    static void* MmapAlloc(CHAOS_IL2CPP_SIZE size) {
+        void* ptr = ::mmap(nullptr, size, PROT_READ | PROT_WRITE,
+                           MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+        return (ptr == MAP_FAILED) ? nullptr : ptr;
+    }
+
+    void SetupCurrent(void* region, CHAOS_IL2CPP_SIZE size) {
+        current_ = region;
+        current_pos_ = reinterpret_cast<CHAOS_IL2CPP_SIZE>(current_);
+        current_end_ = current_pos_ + size;
+    }
+
+    bool AllocateNewRegion() {
+        // Must be called with region_mutex_ held.
+        CHAOS_IL2CPP_SIZE size = kMmapRegionSize;
+        void* ptr = MmapAlloc(size);
+        if (ptr == nullptr) return false;
+        SetupCurrent(ptr, size);
+        regions_.push_back({ptr, size});
+        return true;
+    }
+
+    bool IsInCurrentRegion(const void* ptr) const {
+        // Must be called with region_mutex_ held.
+        if (current_ == nullptr) return false;
+        CHAOS_IL2CPP_SIZE p = reinterpret_cast<CHAOS_IL2CPP_SIZE>(ptr);
+        CHAOS_IL2CPP_SIZE start = reinterpret_cast<CHAOS_IL2CPP_SIZE>(current_);
+        return p >= start && p < current_end_;
+    }
+
+    /// Allocate under the assumption that region_mutex_ is already held.
+    void* AllocateLocked(CHAOS_IL2CPP_SIZE size) {
+        size = AlignUp(size, sizeof(void*));
+        // Try current region first.
+        if (current_ != nullptr &&
+            (current_pos_ + size) <= current_end_) {
+            void* ptr = reinterpret_cast<void*>(current_pos_);
+            current_pos_ += size;
+            return ptr;
+        }
+        // Large allocation.
+        if (size > kMmapRegionSize / 2) {
+            CHAOS_IL2CPP_SIZE alloc_size = AlignUp(size, kMmapRegionSize);
+            void* ptr = MmapAlloc(alloc_size);
+            if (ptr == nullptr) return nullptr;
+            regions_.push_back({ptr, alloc_size});
+            return ptr;
+        }
+        // Fresh region.
+        if (!AllocateNewRegion()) return nullptr;
+        void* ptr = reinterpret_cast<void*>(current_pos_);
+        current_pos_ += size;
+        return ptr;
     }
 };
 
@@ -108,6 +271,65 @@ thread_local struct DomainStack {
 IDomainHeap* DefaultHeapFactory(const MemoryDomain* /*domain*/, void* /*user_data*/) {
     return new SegregatedHeap();
 }
+
+// ======================================================================
+// Tagged allocation — cross-domain safe free routing
+//
+// Each allocation prepends an AllocationHeader containing the originating
+// IDomainHeap pointer.  DomainFreeTagged reads this header to route the
+// free() call to the correct heap — no dependency on thread-local domain
+// state, no hash lookup, no race condition.
+//
+// Layout:
+//   [ IDomainHeap* | user data ... ]
+//     ^- header     ^- returned pointer
+//
+// Overhead: 8 bytes (one pointer) per domain allocation.
+// ======================================================================
+
+namespace {
+
+struct AllocationHeader {
+    IDomainHeap* heap;
+};
+
+}  // namespace
+
+void* DomainAllocateTagged(MemoryDomain* domain, CHAOS_IL2CPP_SIZE size) {
+    const CHAOS_IL2CPP_SIZE total = size + sizeof(AllocationHeader);
+    void* raw;
+    if (domain != nullptr && domain->heap != nullptr) {
+        raw = domain->heap->Allocate(total);
+    } else {
+        raw = std::malloc(total);
+    }
+    if (raw == nullptr) return nullptr;
+
+    auto* hdr = static_cast<AllocationHeader*>(raw);
+    hdr->heap = (domain != nullptr && domain->heap != nullptr) ? domain->heap : nullptr;
+    return static_cast<void*>(hdr + 1);
+}
+
+void* DomainCurrentAllocateTagged(CHAOS_IL2CPP_SIZE size) {
+    return DomainAllocateTagged(CurrentDomain(), size);
+}
+
+void DomainFreeTagged(void* ptr) {
+    if (ptr == nullptr) return;
+    auto* hdr = static_cast<AllocationHeader*>(static_cast<void*>(ptr)) - 1;
+    IDomainHeap* heap = hdr->heap;
+    if (heap != nullptr) {
+        // Route to the originating heap.  For bump allocators this is a
+        // no-op; for Win32 HeapAlloc this calls HeapFree.
+        // The header pointer is what the heap originally gave us.
+        heap->Free(static_cast<void*>(hdr));
+    } else {
+        // Tagged as null-heap = raw malloc, use std::free directly.
+        std::free(static_cast<void*>(hdr));
+    }
+}
+
+MemoryDomain* CurrentDomain();
 
 }  // namespace
 
@@ -161,6 +383,7 @@ DomainId RegisterMemoryDomain(const DomainInit& init) {
             delete domain;
             return kDomainIdInvalid;
         }
+        domain->heap->SetOwner(domain);
 
         g_domains.push_back(domain);
     }
@@ -227,6 +450,8 @@ int PushDomain(MemoryDomain* domain) {
     auto& stack = g_tls_domain_stack;
     if (stack.top < 63) {
         stack.domains[++stack.top] = domain;
+    } else {
+        CHAOS_IL2CPP_LOG_ERROR("MemoryDomain", "PushDomain: thread-local stack overflow (max 64), domain push ignored");
     }
     return stack.top;
 }

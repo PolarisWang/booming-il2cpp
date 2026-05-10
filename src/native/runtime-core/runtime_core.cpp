@@ -307,6 +307,19 @@ void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) {
     return tls_gc_arena.AllocateAtomic(size);
 }
 
+char* DomainStrDup(const char* src) {
+    if (src == nullptr) return nullptr;
+    if (chaos::il2cpp::memory_domain::CurrentDomain() == nullptr) {
+        CHAOS_IL2CPP_LOG_TRACE("MemoryDomain", "DomainStrDup",
+            "CurrentDomain()=null, falling back to malloc for src=%p", (const void*)src);
+    }
+    CHAOS_IL2CPP_SIZE len = std::strlen(src);
+    auto* buf = static_cast<char*>(CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(len + 1));
+    if (buf == nullptr) return nullptr;
+    std::memcpy(buf, src, len + 1);
+    return buf;
+}
+
 // ======================================================================
 // Thread-local RuntimeState — must have EXTERNAL linkage (outside
 // anonymous namespace) so reflection_api.obj and codegen-generated

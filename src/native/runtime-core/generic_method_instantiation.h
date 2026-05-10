@@ -44,7 +44,7 @@ struct RuntimeInstantiatedMethod {
     CHAOS_IL2CPP_SIZE   aot_core_ir_json_length = 0u;
 
     /// IR method body cache.  Populated on first call to LowerMethodBody().
-    /// Heap-allocated interpreter::IRMethod; delete via ~IRMethod() + std::free.
+    /// Domain-allocated interpreter::IRMethod; freed by heap->Destroy() on module unload.
     chaos::il2cpp::interpreter::IRMethod* ir_method_body = nullptr;
 
     /// Process-wide codegen bridge for metadata token resolution.

@@ -1,5 +1,11 @@
 #include "patch_loader.h"
 
+#include "interpreter_entry.h"
+#include "module_registry.h"
+#include "reflection_query_model.h"
+
+#include "../bootstrap/bootstrap.h"
+
 #include <cstdio>
 #include <cstring>
 #include <fmt/format.h>
@@ -410,6 +416,58 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
     // Update method count to reflect only successfully patched methods.
     ctx->method_count = patched_count;
     HOTPATCH_DIAG("DIAG[APFM]: returning ctx method_count=%u\n", static_cast<unsigned>(ctx->method_count));
+
+    // ── Step: Pre-lower IR and populate inlining map ────────────────────
+    // This ensures that PatchMethodLowerIR + InlineLeafCallees can find
+    // callee IR via FindInliningTarget during deserialization.
+    if (patched_count > 0) {
+        // 1. Set up AOT bridge on the metadata cache.
+        //    The bridge must be available at patch-load time (runtime, not bootstrap).
+        if (cache->GetBridge() == nullptr) {
+            const auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
+            const auto* bootstrap_state = chaos::il2cpp::bootstrap::PeekBootstrapState();
+            ImageHandle image = 0;
+            if (bootstrap_state != nullptr && bootstrap_state->aot_image_handle != 0) {
+                image = bootstrap_state->aot_image_handle;
+            } else {
+                // Fallback: scan registered modules for a live image.
+                for (uint32_t mid = 0; mid < kMaxModules; ++mid) {
+                    const auto* mod = chaos::il2cpp::runtime_core::LookupModule(mid);
+                    if (mod != nullptr && !mod->tombstone &&
+                        mod->image != nullptr && mod->type_count > 0) {
+                        image = EncodeReflectionQueryImageHandle(mod->image);
+                        break;
+                    }
+                }
+            }
+            if (bridge != nullptr && image != 0) {
+                cache->SetAotBridge(bridge, image);
+            }
+        }
+
+        // 2. Pre-lower all methods' IR.
+        //    This populates cached_ir via DeserializeAotCoreIrMethod, which
+        //    internally calls PatchMethodLowerIR's lazy path.
+        for (uint32_t i = 0; i < patched_count; ++i) {
+            PatchMethodLowerIR(reinterpret_cast<uintptr_t>(&ctx->methods[i]));
+        }
+
+        // 3. Populate the inlining map.
+        //    Keyed by (module_id << 32 | token), pointing to the PatchMethod.
+        for (uint32_t i = 0; i < patched_count; ++i) {
+            auto& pm = ctx->methods[i];
+            if (pm.cached_ir != nullptr && pm.token != 0) {
+                cache->AddInliningTarget(pm.module_id, pm.token, &pm);
+            }
+        }
+
+        // 4. Reapply inlining to catch missed opportunities.
+        //    When a caller was pre-lowered before its callee, InlineLeafCallees
+        //    could not find the callee in the inlining map (it wasn't populated yet).
+        //    ReapplyInlining runs InlineLeafCallees again for every method now
+        //    that all methods are in the map.
+        ReapplyInlining(ctx->methods, patched_count);
+    }
 
     return ctx;
 }

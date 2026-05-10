@@ -25,7 +25,9 @@
 #include "runtime_instantiation.h"
 #include "runtime_abi.h"
 #include "interpreter_entry.h"
+#include "generated_code_compat.h"
 #include "string_table.h"
+#include "gc_helpers.h"  // GcAllocate
 
 // Object header layouts (mirrors runtime_core.cpp)
 struct StubArrayHeader {
@@ -164,6 +166,41 @@ CHAOS_IL2CPP_INT64 ChaosMathSqrt(CHAOS_IL2CPP_INT64 value) noexcept
     return result;
 }
 
+// ─── Math stubs (return 0 for methods not yet implemented) ───────
+CHAOS_IL2CPP_INT32 ChaosMathAbsInt32(CHAOS_IL2CPP_INT32 value) noexcept { (void)value; return 0; }
+CHAOS_IL2CPP_FLOAT64 ChaosMathAbsDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept { (void)value; return 0.0; }
+CHAOS_IL2CPP_FLOAT64 ChaosMathCeiling(CHAOS_IL2CPP_FLOAT64 value) noexcept { (void)value; return 0.0; }
+CHAOS_IL2CPP_FLOAT64 ChaosMathFloor(CHAOS_IL2CPP_FLOAT64 value) noexcept { (void)value; return 0.0; }
+CHAOS_IL2CPP_FLOAT64 ChaosMathRound(CHAOS_IL2CPP_FLOAT64 value) noexcept { (void)value; return 0.0; }
+CHAOS_IL2CPP_FLOAT64 ChaosMathRound2(CHAOS_IL2CPP_FLOAT64 value, CHAOS_IL2CPP_INT32 digits) noexcept { (void)value; (void)digits; return 0.0; }
+CHAOS_IL2CPP_INT32 ChaosMathMaxInt32(CHAOS_IL2CPP_INT32 a, CHAOS_IL2CPP_INT32 b) noexcept { (void)a; (void)b; return 0; }
+CHAOS_IL2CPP_FLOAT64 ChaosMathMaxDouble(CHAOS_IL2CPP_FLOAT64 a, CHAOS_IL2CPP_FLOAT64 b) noexcept { (void)a; (void)b; return 0.0; }
+CHAOS_IL2CPP_INT32 ChaosMathMinInt32(CHAOS_IL2CPP_INT32 a, CHAOS_IL2CPP_INT32 b) noexcept { (void)a; (void)b; return 0; }
+CHAOS_IL2CPP_FLOAT64 ChaosMathPow(CHAOS_IL2CPP_FLOAT64 x, CHAOS_IL2CPP_FLOAT64 y) noexcept { (void)x; (void)y; return 0.0; }
+CHAOS_IL2CPP_FLOAT64 ChaosMathSin(CHAOS_IL2CPP_FLOAT64 x) noexcept { (void)x; return 0.0; }
+CHAOS_IL2CPP_FLOAT64 ChaosMathCos(CHAOS_IL2CPP_FLOAT64 x) noexcept { (void)x; return 0.0; }
+CHAOS_IL2CPP_INT64 ChaosMathBigMul(CHAOS_IL2CPP_INT32 a, CHAOS_IL2CPP_INT32 b) noexcept { (void)a; (void)b; return 0; }
+
+// ─── DateTime stubs ─────────────────────────────────────────────
+CHAOS_IL2CPP_INTPTR ChaosDateTimeToString(CHAOS_IL2CPP_INT64 dt) noexcept { (void)dt; return 0; }
+CHAOS_IL2CPP_INTPTR ChaosDateTimeToStringFormat(CHAOS_IL2CPP_INT64 dt, CHAOS_IL2CPP_INTPTR format) noexcept { (void)dt; (void)format; return 0; }
+CHAOS_IL2CPP_INT64 ChaosDateTimeAddDays(CHAOS_IL2CPP_INT64 dt, CHAOS_IL2CPP_FLOAT64 value) noexcept { (void)dt; (void)value; return 0; }
+CHAOS_IL2CPP_INT64 ChaosDateTimeAddHours(CHAOS_IL2CPP_INT64 dt, CHAOS_IL2CPP_FLOAT64 value) noexcept { (void)dt; (void)value; return 0; }
+CHAOS_IL2CPP_INT64 ChaosDateTimeAddMinutes(CHAOS_IL2CPP_INT64 dt, CHAOS_IL2CPP_FLOAT64 value) noexcept { (void)dt; (void)value; return 0; }
+CHAOS_IL2CPP_INT32 ChaosDateTimeCompare(CHAOS_IL2CPP_INT64 left, CHAOS_IL2CPP_INT64 right) noexcept { (void)left; (void)right; return 0; }
+CHAOS_IL2CPP_INT32 ChaosDateTimeDaysInMonth(CHAOS_IL2CPP_INT32 year, CHAOS_IL2CPP_INT32 month) noexcept { (void)year; (void)month; return 0; }
+// ─── TimeSpan stubs ─────────────────────────────────────────────
+CHAOS_IL2CPP_INT64 ChaosTimeSpanFromDays(CHAOS_IL2CPP_FLOAT64 value) noexcept { (void)value; return 0; }
+CHAOS_IL2CPP_INT64 ChaosTimeSpanFromHours(CHAOS_IL2CPP_FLOAT64 value) noexcept { (void)value; return 0; }
+CHAOS_IL2CPP_INT64 ChaosTimeSpanFromMinutes(CHAOS_IL2CPP_FLOAT64 value) noexcept { (void)value; return 0; }
+CHAOS_IL2CPP_INT64 ChaosTimeSpanParse(CHAOS_IL2CPP_INTPTR value) noexcept { (void)value; return 0; }
+
+// ─── DateTime/TimeSpan ctor stubs ──────────────────────────────
+void ChaosDateTimeCtor3(CHAOS_IL2CPP_INTPTR instance, CHAOS_IL2CPP_INT32 year, CHAOS_IL2CPP_INT32 month, CHAOS_IL2CPP_INT32 day) noexcept { (void)instance; (void)year; (void)month; (void)day; }
+void ChaosDateTimeCtor6(CHAOS_IL2CPP_INTPTR instance, CHAOS_IL2CPP_INT32 year, CHAOS_IL2CPP_INT32 month, CHAOS_IL2CPP_INT32 day, CHAOS_IL2CPP_INT32 hour, CHAOS_IL2CPP_INT32 minute, CHAOS_IL2CPP_INT32 second) noexcept { (void)instance; (void)year; (void)month; (void)day; (void)hour; (void)minute; (void)second; }
+CHAOS_IL2CPP_INTPTR ChaosDateTimeParse(CHAOS_IL2CPP_INTPTR value) noexcept { (void)value; return 0; }
+void ChaosTimeSpanCtor(CHAOS_IL2CPP_INTPTR instance, CHAOS_IL2CPP_INT32 hours, CHAOS_IL2CPP_INT32 minutes, CHAOS_IL2CPP_INT32 seconds) noexcept { (void)instance; (void)hours; (void)minutes; (void)seconds; }
+
 // ─── Interlocked / threading ──────────────────────────────────────
 
 void ChaosInterlockedMemoryBarrier(void) noexcept
@@ -224,7 +261,7 @@ static uint32_t stub_xorshift32() noexcept {
 
 CHAOS_IL2CPP_INTPTR ChaosGuidNewGuid(void) noexcept
 {
-    auto* guid = static_cast<CHAOS_IL2CPP_UINT8*>(std::malloc(16));
+    auto* guid = static_cast<CHAOS_IL2CPP_UINT8*>(chaos::il2cpp::runtime_core::GcAllocateAtomic(16));
     if (guid == nullptr) return 0;
 
 #if defined(_WIN32)
@@ -299,16 +336,83 @@ CHAOS_IL2CPP_INT32 ChaosRandomNextMax(CHAOS_IL2CPP_INTPTR rng, CHAOS_IL2CPP_INT3
 
 // ─── Guid helpers ──────────────────────────────────────────────
 
+static CHAOS_IL2CPP_UINT8 HexNibble(char c) noexcept
+{
+    if (c >= '0' && c <= '9') return static_cast<CHAOS_IL2CPP_UINT8>(c - '0');
+    if (c >= 'a' && c <= 'f') return static_cast<CHAOS_IL2CPP_UINT8>(c - 'a' + 10);
+    if (c >= 'A' && c <= 'F') return static_cast<CHAOS_IL2CPP_UINT8>(c - 'A' + 10);
+    return 0xFF;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosGuidParse(CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    if (value == 0) return 0;
+
+    const char* data = nullptr;
+    CHAOS_IL2CPP_INT32 len = 0;
+
+    if (chaos_is_string_id(value))
+    {
+        auto view = chaos::il2cpp::string_table::Resolve(chaos_extract_string_id(value));
+        data = view.utf8_data;
+        len = static_cast<CHAOS_IL2CPP_INT32>(view.byte_count);
+    }
+    else
+    {
+        auto ms = reinterpret_cast<const CHAOS_IL2CPP_STRING_TYPE*>(
+            static_cast<CHAOS_IL2CPP_INTPTR>(value));
+        len = ms->length;
+        if (len > 0) data = ms->utf8_data;
+    }
+    if (data == nullptr || len < 36) return 0;
+    if (data[8] != '-' || data[13] != '-' || data[18] != '-' || data[23] != '-') return 0;
+
+    auto* guid = static_cast<CHAOS_IL2CPP_UINT8*>(chaos::il2cpp::runtime_core::GcAllocateAtomic(16));
+    if (guid == nullptr) return 0;
+
+    static constexpr int kPos[16] = {0,2,4,6, 9,11, 14,16, 19,21, 24,26,28,30,32,34};
+    for (int i = 0; i < 16; i++)
+    {
+        int p = kPos[i];
+        auto hi = HexNibble(data[p]);
+        auto lo = HexNibble(data[p + 1]);
+        if (hi == 0xFF || lo == 0xFF) { return 0; }
+        guid[i] = static_cast<CHAOS_IL2CPP_UINT8>((hi << 4) | lo);
+    }
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(guid);
+}
+
 CHAOS_IL2CPP_INT32 ChaosGuidGetHashCode(CHAOS_IL2CPP_INTPTR guid) noexcept
 {
     if (guid == 0) return 0;
     const auto* bytes = reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(guid);
-    uint32_t hash = 2166136261u;
-    for (int i = 0; i < 16; ++i) {
-        hash ^= static_cast<uint32_t>(bytes[i]);
-        hash *= 16777619u;
-    }
-    return static_cast<CHAOS_IL2CPP_INT32>(hash);
+
+    // Match .NET Guid.GetHashCode() exactly.
+    // Managed layout: _a (int32 LE, bytes 0-3), _b (int16 LE, bytes 4-5), _c (int16 LE, bytes 6-7),
+    // _d.._k (8 bytes, bytes 8-15).
+    auto read_i32_le = [](const CHAOS_IL2CPP_UINT8* b) noexcept -> int32_t {
+        return static_cast<int32_t>(b[0]) | (static_cast<int32_t>(b[1]) << 8)
+             | (static_cast<int32_t>(b[2]) << 16) | (static_cast<int32_t>(b[3]) << 24);
+    };
+    auto read_i16_le = [](const CHAOS_IL2CPP_UINT8* b) noexcept -> int16_t {
+        return static_cast<int16_t>(b[0]) | (static_cast<int16_t>(b[1]) << 8);
+    };
+
+    const int32_t _a = read_i32_le(bytes);
+    const int16_t _b = read_i16_le(bytes + 4);
+    const int16_t _c = read_i16_le(bytes + 6);
+
+    int32_t result = _a;
+    result ^= static_cast<int32_t>((static_cast<uint16_t>(_b) << 16) | static_cast<uint16_t>(_c));
+    result ^= static_cast<int32_t>((static_cast<uint32_t>(bytes[8]) << 24)
+                                  | (static_cast<uint32_t>(bytes[9]) << 16)
+                                  | (static_cast<uint32_t>(bytes[10]) << 8)
+                                  | bytes[11]);
+    result ^= static_cast<int32_t>((static_cast<uint32_t>(bytes[12]) << 24)
+                                  | (static_cast<uint32_t>(bytes[13]) << 16)
+                                  | (static_cast<uint32_t>(bytes[14]) << 8)
+                                  | bytes[15]);
+    return result;
 }
 
 CHAOS_IL2CPP_INTPTR ChaosGuidToString(CHAOS_IL2CPP_INTPTR guid) noexcept
@@ -468,9 +572,10 @@ CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR separator, CHAOS_IL2CP
     }
     if (count > 1) total += sep_len * (count - 1);
 
-    // Allocate result: header + data + NUL.
+    // Allocate result: header + data + NUL using GC_ATOMIC so managed
+    // string wrappers can hold it without explicit free.
     auto* result = static_cast<StubStringHeader*>(
-        std::malloc(sizeof(StubStringHeader) + total + 1));
+        chaos::il2cpp::runtime_core::GcAllocateAtomic(sizeof(StubStringHeader) + total + 1));
     if (result == nullptr) return 0;
     result->type = 0;
     result->byte_count = total;

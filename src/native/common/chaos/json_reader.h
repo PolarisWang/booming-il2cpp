@@ -19,6 +19,8 @@
 #include <cstring>
 #include <cerrno>
 
+#include <chaos/native_types.h>
+
 namespace chaos::il2cpp::json {
 
 // ── Result types ──────────────────────────────────────────────────────────
@@ -46,6 +48,10 @@ struct JsonValue {
     // Points into the source buffer: start of the array/object token.
     const char* data_start = nullptr;
     size_t      data_length = 0;
+
+    // True when string_value was heap-allocated (escape decoding).
+    // Caller must call JsonFreeString() to release.
+    bool        owns_string = false;
 
     // Convenience accessors
     bool IsNull()    const { return kind == JsonValueKind::Null; }
@@ -144,8 +150,8 @@ struct JsonParser {
         size_t str_len = len;
 
         if (has_escape) {
-            // Allocate and unescape.
-            auto* buf = static_cast<char*>(std::malloc(len + 1));
+            // Allocate and unescape.  Uses CHAOS_IL2CPP_MALLOC (raw domain).
+            auto* buf = static_cast<char*>(CHAOS_IL2CPP_MALLOC(len + 1));
             if (!buf) { result.error = "out of memory"; return result; }
             const char* src = start;
             char* dst = buf;
@@ -169,6 +175,7 @@ struct JsonParser {
             result.value.kind = JsonValueKind::String;
             result.value.string_value = buf;
             result.value.string_length = len;
+            result.value.owns_string = true;  // caller must free
         } else {
             result.value.kind = JsonValueKind::String;
             result.value.string_value = str_start;
@@ -406,14 +413,11 @@ struct JsonParser {
 };
 
 // ── Free allocated string data ────────────────────────────────────────────
-// Call this on a JsonValue tree if ParseString allocated unescaped copies.
-// Only frees strings that were heap-allocated (those with escapes).
+// Call this on a JsonValue to release any heap-allocated string data
+// that was allocated during escape-sequence decoding.
 inline void JsonFreeString(const JsonValue& val) {
-    if (val.kind == JsonValueKind::String && val.string_value != nullptr) {
-        // Check if it's a heap-allocated copy by seeing if it points into
-        // our buffer. We can't reliably detect this, so we provide this
-        // function for the caller to use when they know the string was
-        // heap-allocated.
+    if (val.kind == JsonValueKind::String && val.owns_string) {
+        CHAOS_IL2CPP_FREE(const_cast<char*>(val.string_value));
     }
 }
 

@@ -24,6 +24,9 @@
 
 namespace chaos::il2cpp::runtime_core {
 
+// Forward declarations
+struct PatchMethod;
+
 // ── ArgBuffer ───────────────────────────────────────────────────────────
 // Lightweight utility for packing/unpacking native ABI arguments.
 // Used by InterpreterEntryDirect to convert between the flat call buffer
@@ -77,6 +80,14 @@ void InterpreterEntryDirect(
 // Lower a PatchMethod's IL to IR if not already cached.
 // Uses double-checked locking for thread safety.
 void PatchMethodLowerIR(uintptr_t method_key) noexcept;
+
+// ── Reapply inlining after all methods in a patch context are pre-lowered ─
+// When ApplyPatchFromMemory pre-lowers all methods, callee IR may not be
+// available yet when a caller is lowered (depends on iteration order).
+// This function re-runs InlineLeafCallees on each lowered method so that
+// all missed inlining opportunities are captured.
+// Called from ApplyPatchFromMemory after the initial pre-lowering pass.
+void ReapplyInlining(PatchMethod* methods, uint32_t method_count) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

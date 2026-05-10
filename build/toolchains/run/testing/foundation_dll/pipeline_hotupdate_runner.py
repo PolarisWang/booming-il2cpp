@@ -73,16 +73,20 @@ FAMILIES = [
 ]
 
 
-def _run_emit_patch_data(dll_path: str, output_path: str) -> bool:
+def _run_emit_patch_data(dll_path: str, output_path: str, aot_core_ir_path: str | None = None) -> bool:
     """Run emit-patch-data to produce .patchdata from a patch DLL."""
+    cmd = [
+        "dotnet", "run", "--no-build",
+        "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
+        "--", "emit-patch-data",
+        dll_path,
+        output_path,
+    ]
+    if aot_core_ir_path:
+        cmd += ["--aot-core-ir", aot_core_ir_path]
+
     result = subprocess.run(
-        [
-            "dotnet", "run", "--no-build",
-            "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
-            "--", "emit-patch-data",
-            dll_path,
-            output_path,
-        ],
+        cmd,
         capture_output=True, text=True,
         timeout=120,
     )
@@ -326,14 +330,31 @@ def _run_variant_pipeline(
     result["entryPointSubjectId"] = build_result["entry_point_subject_id"]
 
     if variant == "patch":
-        # Patch variant: extract .patchdata from DLL using emit-patch-data.
-        # The .patchdata binary is consumed at runtime by PatchLoader for
-        # IL interpretation via InterpreterEntryDirect (Hotpatch dispatch).
+        # Patch variant: need to convert+trim first to produce aot-core-ir.json,
+        # then embed it into the patchdata so the runtime can deserialize IR for inlining.
+        print(f"    [patch] Converting patch entrypoint DLL...")
+        entrypoint_dir = _VERIFICATION / family_slug / "il2cpp_dist" / f"entrypoint-{variant}"
+        if not _run_convert(entrypoint_dir, build_result["dll_path"], build_result["entry_point_subject_id"]):
+            result["steps"]["convert"] = "FAILED"
+            result["error"] = "convert failed"
+            return result
+        result["steps"]["convert"] = "OK"
+
+        print(f"    [patch] Trimming IR to entry-only methods...")
+        if not _trim_ir(family_slug, variant):
+            result["steps"]["trim"] = "FAILED"
+            result["error"] = "trim failed"
+            return result
+        result["steps"]["trim"] = "OK"
+
+        # Now emit-patch-data with the trimmed aot-core-ir.json.
         print(f"    [patch] Extracting patch data via emit-patch-data...")
         patchdata_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "patchdata"
         patchdata_dir.mkdir(parents=True, exist_ok=True)
         patchdata_path = patchdata_dir / f"{family_slug}.patchdata"
-        if not _run_emit_patch_data(build_result["dll_path"], str(patchdata_path)):
+        ir_path = _VERIFICATION / family_slug / "il2cpp_dist" / f"entrypoint-{variant}" / "closure-sp" / "analysis" / "aot-core-ir.json"
+        ir_arg = str(ir_path) if ir_path.exists() else None
+        if not _run_emit_patch_data(build_result["dll_path"], str(patchdata_path), ir_arg):
             result["steps"]["emit_patch_data"] = "FAILED"
             result["error"] = "emit-patch-data failed"
             return result
