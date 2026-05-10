@@ -1,5 +1,8 @@
 #include "generic_method_instantiation.h"
 #include "aot_core_ir_reader.h"   // DeserializeAotCoreIrMethod
+#include "gc_helpers.h"           // DomainStrDup
+#include "memory_domain.h"        // CurrentDomain, CHAOS_IL2CPP_DOMAIN_CURRENT_*
+#include "runtime_core.h"         // RuntimeMode, RuntimeStatus for gc_helpers.h
 #include "runtime_instantiation.h" // AllocateRuntimeToken
 
 #include <chaos/native_types.h>
@@ -31,14 +34,14 @@ static const char* GetTypeDisplayName(TypeInfoHandle handle) {
     return "?";
 }
 
-/* ── Helper: copy a C string into a heap-allocated buffer. ── */
+/* ── Helper: copy a C string into a domain-allocated buffer. ── */
 
 static char* StrDup(const char* src) {
     if (src == nullptr) return nullptr;
     CHAOS_IL2CPP_SIZE len = std::strlen(src);
-    auto* buf = static_cast<char*>(std::malloc(len + 1));
+    auto* buf = static_cast<char*>(CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(len + 1));
     if (buf == nullptr) return nullptr;
-    std::memcpy(buf, src, len + 1);
+    CHAOS_IL2CPP_MEMCPY(buf, src, len + 1);
     return buf;
 }
 
@@ -69,10 +72,11 @@ RuntimeInstantiatedMethod* CreateClosedMethodDescriptor(
 
     // ── Allocate RuntimeInstantiatedMethod ──
     auto* rt_method = static_cast<RuntimeInstantiatedMethod*>(
-        std::calloc(1u, sizeof(RuntimeInstantiatedMethod)));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(RuntimeInstantiatedMethod)));
     if (rt_method == nullptr) {
         return nullptr;
     }
+    CHAOS_IL2CPP_MEMSET(rt_method, 0, sizeof(RuntimeInstantiatedMethod));
 
     // ── Build closed subject_id ──
     // Format: "OpenMethodSubjectId[arg1,arg2,...]"
@@ -87,9 +91,9 @@ RuntimeInstantiatedMethod* CreateClosedMethodDescriptor(
             subject_id += GetTypeDisplayName(type_args[i]);
         }
         subject_id += ']';
-        rt_method->descriptor.subject_id_utf8 = StrDup(subject_id.c_str());
+        rt_method->descriptor.subject_id_utf8 = CHAOS_IL2CPP_DOMAIN_CURRENT_STRDUP(subject_id.c_str());
         if (rt_method->descriptor.subject_id_utf8 == nullptr) {
-            std::free(rt_method);
+            CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(rt_method);
             return nullptr;
         }
     }
@@ -107,15 +111,15 @@ RuntimeInstantiatedMethod* CreateClosedMethodDescriptor(
 
     // ── Copy type_args ──
     auto* args_buf = static_cast<TypeInfoHandle*>(
-        std::malloc(sizeof(TypeInfoHandle) * arg_count));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(TypeInfoHandle) * arg_count));
     if (args_buf == nullptr) {
-        std::free(const_cast<char*>(rt_method->descriptor.subject_id_utf8));
-        std::free(const_cast<char*>(rt_method->descriptor.name_utf8));
-        std::free(const_cast<char*>(rt_method->descriptor.member_type_utf8));
-        std::free(rt_method);
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(const_cast<char*>(rt_method->descriptor.subject_id_utf8));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(const_cast<char*>(rt_method->descriptor.name_utf8));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(const_cast<char*>(rt_method->descriptor.member_type_utf8));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(rt_method);
         return nullptr;
     }
-    std::memcpy(args_buf, type_args, sizeof(TypeInfoHandle) * arg_count);
+    CHAOS_IL2CPP_MEMCPY(args_buf, type_args, sizeof(TypeInfoHandle) * arg_count);
     rt_method->type_args  = args_buf;
     rt_method->arg_count  = arg_count;
     rt_method->open_method_definition = open_method_definition;
@@ -159,7 +163,7 @@ bool LowerMethodBody(
 
     // Allocate heap-cached IRMethod via placement new
     // (IRMethod contains a std::vector and needs its constructor called).
-    void* mem = std::malloc(sizeof(interpreter::IRMethod));
+    void* mem = CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(interpreter::IRMethod));
     if (mem == nullptr) {
         return false;
     }

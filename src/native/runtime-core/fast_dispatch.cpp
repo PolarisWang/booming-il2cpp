@@ -95,6 +95,25 @@ static void Handle_LdNull(FastFrame& frame, const interpreter::IRInstruction&) n
 }
 
 static void Handle_LdArg(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+    // Inlined LdArg: secondary_index > 0 indicates the callee's arg count.
+    // The args are already on the FastFrame stack (pushed by the caller before the
+    // now-inlined Call instruction).  Read from stack[sp - callee_argc + operand_idx].
+    if (instr.secondary_index > 0) {
+        uint32_t callee_argc = static_cast<uint32_t>(instr.secondary_index);
+        uint32_t idx = static_cast<uint32_t>(instr.operand_index);
+        if (idx >= callee_argc || frame.sp < callee_argc) {
+            frame.threw_exception = true;
+            frame.pc = 9999;
+            return;
+        }
+        uint32_t stack_idx = frame.sp - callee_argc + idx;
+        frame.stack[frame.sp] = frame.stack[stack_idx];
+        frame.stack_tags[frame.sp] = frame.stack_tags[stack_idx];
+        ++frame.sp;
+        ++frame.pc;
+        return;
+    }
+
     if (instr.operand_index < 0 ||
         static_cast<uint32_t>(instr.operand_index) >= frame.arg_count) {
         frame.threw_exception = true;
@@ -456,8 +475,12 @@ static void Handle_Conv_R8(FastFrame& frame, const interpreter::IRInstruction&) 
 
 static void Handle_Box(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
-    // Box: wrap the top-of-stack value into a heap-allocated BoxedValue.
-    auto* boxed = new interpreter::InterpreterObject();
+    // Box: wrap the top-of-stack value into a heap-allocated InterpreterObject.
+    auto* boxed = static_cast<interpreter::InterpreterObject*>(
+        CHAOS_IL2CPP_MALLOC(sizeof(interpreter::InterpreterObject)));
+    if (boxed == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
+    ::new (boxed) interpreter::InterpreterObject();
+    frame.Track(boxed, frame.Dtor<interpreter::InterpreterObject>);
     boxed->fields.resize(1);
     boxed->fields[0] = frame.PopIV();
     frame.PushObj(boxed);
@@ -495,7 +518,11 @@ static void Handle_StSFld(FastFrame& frame, const interpreter::IRInstruction& in
 }
 
 static void Handle_NewObj(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
-    auto* storage = new interpreter::InterpreterObject();
+    auto* storage = static_cast<interpreter::InterpreterObject*>(
+        CHAOS_IL2CPP_MALLOC(sizeof(interpreter::InterpreterObject)));
+    if (storage == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
+    ::new (storage) interpreter::InterpreterObject();
+    frame.Track(storage, frame.Dtor<interpreter::InterpreterObject>);
     uint32_t field_count = static_cast<uint32_t>(
         instr.secondary_index == 0u ? 1u : instr.secondary_index);
     storage->fields.resize(field_count);
@@ -507,7 +534,11 @@ static void Handle_NewObj(FastFrame& frame, const interpreter::IRInstruction& in
 static void Handle_NewArr(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     uint32_t len = static_cast<uint32_t>(frame.stack[--frame.sp]);
-    auto* arr = new interpreter::ArrayStorage();
+    auto* arr = static_cast<interpreter::ArrayStorage*>(
+        CHAOS_IL2CPP_MALLOC(sizeof(interpreter::ArrayStorage)));
+    if (arr == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
+    ::new (arr) interpreter::ArrayStorage();
+    frame.Track(arr, frame.Dtor<interpreter::ArrayStorage>);
     arr->elements.resize(len);
     frame.PushObj(arr);
     ++frame.pc;
@@ -564,24 +595,57 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
     if (frame.sp < instr.arg_count) {
         frame.threw_exception = true; frame.pc = 9999; return;
     }
-    if (instr.call_target == nullptr) { ++frame.pc; return; }
+    if (instr.call_target == nullptr && instr.direct_fn == nullptr) { ++frame.pc; return; }
+
+    uint32_t ac = static_cast<uint32_t>(instr.arg_count);
+
+    // ── AotDirectDispatch fast path: call chaos_external_runtime_* directly ──
+    // When direct_fn is pre-resolved (during IR lowering via kAotDirectFnTable),
+    // we call the AOT function pointer directly, skipping ~2200ns method_invoke.
+    // The chaos_external_runtime_* functions accept CHAOS_IL2CPP_INTPTR args.
+    if (instr.direct_fn != nullptr) {
+        using DirectFn1 = CHAOS_IL2CPP_UINT16 (*)(CHAOS_IL2CPP_INTPTR);
+        using DirectFn2 = CHAOS_IL2CPP_UINT16 (*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR);
+
+        // Pop args in reverse order from FastFrame stack.
+        CHAOS_IL2CPP_INTPTR raw_args[2] = {0, 0};
+        for (uint32_t i = ac; i > 0; --i) {
+            --frame.sp;
+            if (i - 1 < 2) {
+                raw_args[i - 1] = static_cast<CHAOS_IL2CPP_INTPTR>(frame.stack[frame.sp]);
+            }
+        }
+
+        CHAOS_IL2CPP_UINT16 result;
+        if (ac <= 1) {
+            result = reinterpret_cast<DirectFn1>(instr.direct_fn)(raw_args[0]);
+        } else {
+            result = reinterpret_cast<DirectFn2>(instr.direct_fn)(raw_args[0], raw_args[1]);
+        }
+
+        // Push result as Int32 (UINT16 fits in Int32).
+        frame.stack[frame.sp] = static_cast<uint64_t>(result);
+        frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::Int32);
+        ++frame.sp;
+        ++frame.pc;
+        return;
+    }
+
     if (frame.dispatch_fn == nullptr) {
         frame.threw_exception = true; frame.pc = 9999; return;
     }
-
-    uint32_t ac = static_cast<uint32_t>(instr.arg_count);
 
     // Stack-allocated arrays for arg_count ≤ 8 (common case).
     // Avoids malloc/free overhead on every Call instruction.
     uint64_t raw_args_stack[8];
     uint8_t  raw_tags_stack[8];
     auto* raw_args = (ac <= 8) ? raw_args_stack
-        : static_cast<uint64_t*>(std::malloc(sizeof(uint64_t) * ac));
+        : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
     auto* raw_tags = (ac <= 8) ? raw_tags_stack
-        : static_cast<uint8_t*>(std::malloc(sizeof(uint8_t) * ac));
+        : static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
 
     if (raw_args == nullptr || raw_tags == nullptr) {
-        if (ac > 8) { std::free(raw_args); std::free(raw_tags); }
+        if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
         frame.threw_exception = true; frame.pc = 9999; return;
     }
 
@@ -608,7 +672,7 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
         frame.dispatch_ctx,
         cache_info);
 
-    if (ac > 8) { std::free(raw_args); std::free(raw_tags); }
+    if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
 
     // Handle dispatch result.
     if (dret.threw_exception) {
@@ -619,7 +683,15 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
     }
 
     if (dret.has_value) {
-        frame.stack[frame.sp] = dret.value;
+        if (dret.tag == static_cast<uint8_t>(interpreter::ValueTag::Struct) &&
+            dret.struct_data != nullptr) {
+            // Struct return: struct_data is raw-domain (std::malloc'd by interpreter dispatch).
+            // Push the pointer as the value; Track() frees it via CleanupTracked().
+            frame.stack[frame.sp] = reinterpret_cast<uint64_t>(dret.struct_data);
+            frame.Track(dret.struct_data, [](void* p) noexcept { std::free(p); });
+        } else {
+            frame.stack[frame.sp] = dret.value;
+        }
         frame.stack_tags[frame.sp] = dret.tag;
         ++frame.sp;
     }
@@ -777,17 +849,20 @@ bool FastExecute(FastFrame& frame,
 
         kHandlers[op_val](frame, instrs[frame.pc]);
 
-        // Check for fallback signal.
+        // Check for fallback signal — free tracked objects before returning.
         if (frame.threw_exception && frame.pc == 9999) {
+            frame.CleanupTracked();
             return false;
         }
 
         // Check for normal termination (Ret handler sets pc to sentinel).
         if (frame.pc == 0xFFffFFffu) {
+            frame.CleanupTracked();
             return true;
         }
     }
 
+    frame.CleanupTracked();
     return true;
 }
 

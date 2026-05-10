@@ -18,7 +18,7 @@ public sealed class PatchDataExtractor
     // Track string insertion order for correct offset computation.
     private readonly List<(string Key, uint Offset)> _insertOrder = new();
 
-    public void Extract(string dllPath, string outputPath, string? aotCoreIrPath = null)
+    public void Extract(string dllPath, string outputPath, string? aotCoreIrPath = null, string? genuineIrPath = null)
     {
         using var stream = File.OpenRead(dllPath);
         using var peReader = new PEReader(stream);
@@ -119,6 +119,11 @@ public sealed class PatchDataExtractor
         if (aotCoreIrPath != null && File.Exists(aotCoreIrPath))
         {
             (aotCoreIrSection, aotCoreIrCount) = BuildAotCoreIrSection(aotCoreIrPath, methodDefs, mr);
+        }
+        else if (genuineIrPath != null && File.Exists(genuineIrPath))
+        {
+            // Fallback: use the genuine aot-core-ir.json (all methods) when no trimmed one is available.
+            (aotCoreIrSection, aotCoreIrCount) = BuildAotCoreIrSection(genuineIrPath, methodDefs, mr);
         }
 
         // Build binary heaps

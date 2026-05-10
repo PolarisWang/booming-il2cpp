@@ -59,6 +59,35 @@ struct FastFrame {
 
     uint32_t    pc                    = 0;
 
+    // ── Tracked object cleanup for interpreter heap objects ──────────
+    // Fast dispatch heap-allocates InterpreterObject/ArrayStorage via
+    // CHAOS_IL2CPP_MALLOC+placement new.  We track pointers here so
+    // FastExecute / callers can free everything on normal/fallback exit,
+    // eliminating the R1 operator-new leak.
+    static constexpr uint32_t kMaxTracked = 8;
+    void*     tracked_objs[kMaxTracked]{};
+    void (*tracked_dtors[kMaxTracked])(void*){};
+    uint32_t  tracked_cnt            = 0;
+
+    template<typename T>
+    static void Dtor(void* p) noexcept { static_cast<T*>(p)->~T(); }
+
+    void Track(void* ptr, void (*dtor)(void*)) noexcept {
+        if (tracked_cnt < kMaxTracked) {
+            tracked_objs[tracked_cnt]   = ptr;
+            tracked_dtors[tracked_cnt]   = dtor;
+            ++tracked_cnt;
+        }
+    }
+
+    void CleanupTracked() noexcept {
+        for (uint32_t i = 0; i < tracked_cnt; ++i) {
+            tracked_dtors[i](tracked_objs[i]);
+            CHAOS_IL2CPP_FREE(tracked_objs[i]);
+        }
+        tracked_cnt = 0;
+    }
+
     // ── Push helpers ─────────────────────────────────────────────────
     void PushI32(int32_t v) noexcept {
         stack[sp] = static_cast<uint64_t>(v);

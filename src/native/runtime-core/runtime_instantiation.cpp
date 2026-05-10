@@ -70,9 +70,9 @@ static const char* GetTypeDisplayName(TypeInfoHandle handle) {
 static char* StrDup(const char* src) {
     if (src == nullptr) return nullptr;
     CHAOS_IL2CPP_SIZE len = std::strlen(src);
-    auto* buf = static_cast<char*>(std::malloc(len + 1));
+    auto* buf = static_cast<char*>(CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(len + 1));
     if (buf == nullptr) return nullptr;
-    std::memcpy(buf, src, len + 1);
+    CHAOS_IL2CPP_MEMCPY(buf, src, len + 1);
     return buf;
 }
 
@@ -255,7 +255,7 @@ TypeInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveOrInstantiateType(
     TypeInfoHandle closed_handle = EncodeReflectionQueryTypeHandle(
         &rt_type->descriptor);
     if (closed_handle == 0) {
-        std::free(rt_type);
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(rt_type);
         return 0;
     }
 
@@ -320,11 +320,11 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveOrInstantiateMethod(
     MethodInfoHandle closed_handle = chaos::il2cpp::runtime_core::EncodeReflectionQueryMethodHandle(
         &rt_method->descriptor);
     if (closed_handle == 0u) {
-        std::free(const_cast<char*>(rt_method->descriptor.subject_id_utf8));
-        std::free(const_cast<char*>(rt_method->descriptor.name_utf8));
-        std::free(const_cast<char*>(rt_method->descriptor.member_type_utf8));
-        std::free(rt_method->type_args);
-        std::free(rt_method);
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(const_cast<char*>(rt_method->descriptor.subject_id_utf8));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(const_cast<char*>(rt_method->descriptor.name_utf8));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(const_cast<char*>(rt_method->descriptor.member_type_utf8));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(rt_method->type_args);
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(rt_method);
         return 0u;
     }
 
@@ -353,15 +353,15 @@ void CHAOS_RUNTIME_ABI_CALL UnregisterModuleGenerics(
         for (CHAOS_IL2CPP_SIZE i = 0u; i < s_runtime_types.size(); ) {
             if (s_runtime_types[i].module_id == module_id) {
                 auto* rt = s_runtime_types[i].type;
-                std::free(const_cast<char*>(rt->descriptor.subject_id_utf8));
-                std::free(const_cast<char*>(rt->descriptor.definition_subject_id_utf8));
-                std::free(const_cast<char*>(rt->descriptor.namespace_name_utf8));
-                std::free(const_cast<char*>(rt->descriptor.name_utf8));
-                std::free(const_cast<char*>(rt->descriptor.display_name_utf8));
-                std::free(rt->type_args);
-                std::free(rt->field_offsets);
-                std::free(rt->resolved_field_types);
-                std::free(rt);
+                CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(const_cast<char*>(rt->descriptor.subject_id_utf8));
+                CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(const_cast<char*>(rt->descriptor.definition_subject_id_utf8));
+                CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(const_cast<char*>(rt->descriptor.namespace_name_utf8));
+                CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(const_cast<char*>(rt->descriptor.name_utf8));
+                CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(const_cast<char*>(rt->descriptor.display_name_utf8));
+                CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(rt->type_args);
+                CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(rt->field_offsets);
+                CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(rt->resolved_field_types);
+                CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(rt);
                 s_runtime_types.erase(s_runtime_types.begin() +
                     static_cast<CHAOS_IL2CPP_SIZE>(i));
             } else {
@@ -495,7 +495,7 @@ interpreter::DispatchResult InterpreterDispatch(
         runtime_core::TryDecodeReflectionQueryMethodHandle(method);
 
     // ── Prepare return value buffer ──
-    // Scalar returns use a stack uint64; struct returns allocate via LayoutEngine.
+    // Scalar returns use a stack uint64; struct returns allocate a temp buffer.
     CHAOS_IL2CPP_UINT64      ret_scalar = 0;
     void*                     ret_buf = &ret_scalar;
     CHAOS_IL2CPP_SIZE         ret_size = sizeof(ret_scalar);
@@ -618,14 +618,13 @@ interpreter::DispatchResult InterpreterDispatch(
 // Pre-compute call metadata so InterpreterDispatchRaw can skip all reflection
 // queries at runtime. Called during IR lowering (PatchMethodLowerIR).
 
-interpreter::CachedCallInfo PrecacheCallTarget(void* call_target) noexcept {
-    using interpreter::CachedCallInfo;
+CachedCallInfo PrecacheCallTarget(void* call_target) noexcept {
     using interpreter::ValueTag;
 
     CachedCallInfo info{};
     info.ret_tag = 0xFF;  // uninit sentinel
 
-    const auto* method = reinterpret_cast<MethodInfoHandle>(call_target);
+    const auto method = static_cast<MethodInfoHandle>(reinterpret_cast<uintptr_t>(call_target));
     if (method == 0u) return info;
 
     const auto* method_desc =
@@ -668,16 +667,15 @@ interpreter::CachedCallInfo PrecacheCallTarget(void* call_target) noexcept {
 //
 // Called by Handle_Call in fast_dispatch.cpp (Layer 4 optimization).
 
-interpreter::RawDispatchResult InterpreterDispatchRaw(
+RawDispatchResult InterpreterDispatchRaw(
     void*                               call_target,
     const uint64_t*                     raw_args,
     const uint8_t*                      arg_tags,
     CHAOS_IL2CPP_UINT32                arg_count,
     bool                                is_instance_call,
     void*                               dispatch_context,
-    const interpreter::CachedCallInfo*  cache_info)
+    const CachedCallInfo*  cache_info)
 {
-    using interpreter::RawDispatchResult;
     using interpreter::ValueTag;
 
     RawDispatchResult result = {};
@@ -785,13 +783,19 @@ interpreter::RawDispatchResult InterpreterDispatchRaw(
     uint64_t ret_scalar = 0;
     void*    ret_buf = &ret_scalar;
     size_t   ret_size = sizeof(ret_scalar);
-    CHAOS_IL2CPP_VECTOR(uint8_t) struct_ret_buf;
 
     if (is_struct_ret && struct_size > 0u) {
-        struct_ret_buf.resize(struct_size);
-        void* buf_ptr = struct_ret_buf.data();
-        ret_buf  = &buf_ptr;
-        ret_size = struct_size;
+        // Allocate destination buffer directly — eliminates double allocation
+        // (was: vector<uint8_t> + malloc + memcpy).  The caller takes ownership
+        // of result.struct_data, so this single alloc is both input and output.
+        result.struct_data = CHAOS_IL2CPP_MALLOC(struct_size);
+        if (result.struct_data != nullptr) {
+            void* buf_ptr = result.struct_data;
+            ret_buf = &buf_ptr;
+            ret_size = struct_size;
+        } else {
+            is_struct_ret = false;
+        }
     }
 
     // ── Call MethodInvoke ──
@@ -841,14 +845,9 @@ interpreter::RawDispatchResult InterpreterDispatchRaw(
                 break;
             }
             case ValueTag::Struct:
-                if (!struct_ret_buf.empty()) {
-                    void* data = std::malloc(struct_ret_buf.size());
-                    if (data != nullptr) {
-                        std::memcpy(data, struct_ret_buf.data(), struct_ret_buf.size());
-                        result.struct_data = data;
-                        result.struct_size = static_cast<uint32_t>(struct_ret_buf.size());
-                        result.tag = static_cast<uint8_t>(ValueTag::Struct);
-                    }
+                if (result.struct_data != nullptr) {
+                    result.struct_size = static_cast<uint32_t>(struct_size);
+                    result.tag = static_cast<uint8_t>(ValueTag::Struct);
                 }
                 break;
             default:
@@ -1159,9 +1158,9 @@ char* BuildClosedSubjectId(
     }
     result += ']';
 
-    auto* buf = static_cast<char*>(std::malloc(result.size() + 1));
+    auto* buf = static_cast<char*>(CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(result.size() + 1));
     if (buf == nullptr) return nullptr;
-    std::memcpy(buf, result.data(), result.size() + 1);
+    CHAOS_IL2CPP_MEMCPY(buf, result.data(), result.size() + 1);
     return buf;
 }
 
@@ -1182,15 +1181,16 @@ RuntimeInstantiatedType* BuildClosedDescriptor(
 
     // ── Allocate RuntimeInstantiatedType ──
     auto* rt_type = static_cast<RuntimeInstantiatedType*>(
-        std::calloc(1u, sizeof(RuntimeInstantiatedType)));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(RuntimeInstantiatedType)));
     if (rt_type == nullptr) {
         return 0;
     }
+    CHAOS_IL2CPP_MEMSET(rt_type, 0, sizeof(RuntimeInstantiatedType));
 
     // ── Build closed subject_id ──
     char* subject_id = BuildClosedSubjectId(open_desc, type_args, arg_count);
     if (subject_id == nullptr) {
-        std::free(rt_type);
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(rt_type);
         return 0;
     }
     rt_type->descriptor.subject_id_utf8 = subject_id;
@@ -1217,9 +1217,9 @@ RuntimeInstantiatedType* BuildClosedDescriptor(
             display += GetTypeDisplayName(type_args[i]);
         }
         display += ']';
-        auto* buf = static_cast<char*>(std::malloc(display.size() + 1));
+        auto* buf = static_cast<char*>(CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(display.size() + 1));
         if (buf) {
-            std::memcpy(buf, display.data(), display.size() + 1);
+            CHAOS_IL2CPP_MEMCPY(buf, display.data(), display.size() + 1);
             rt_type->descriptor.display_name_utf8 = buf;
         }
     }
@@ -1238,13 +1238,13 @@ RuntimeInstantiatedType* BuildClosedDescriptor(
 
     // ── Copy type_args ──
     auto* args_buf = static_cast<TypeInfoHandle*>(
-        std::malloc(sizeof(TypeInfoHandle) * arg_count));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(TypeInfoHandle) * arg_count));
     if (args_buf == nullptr) {
-        std::free(const_cast<char*>(rt_type->descriptor.subject_id_utf8));
-        std::free(rt_type);
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(const_cast<char*>(rt_type->descriptor.subject_id_utf8));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(rt_type);
         return 0;
     }
-    std::memcpy(args_buf, type_args, sizeof(TypeInfoHandle) * arg_count);
+    CHAOS_IL2CPP_MEMCPY(args_buf, type_args, sizeof(TypeInfoHandle) * arg_count);
     rt_type->type_args  = args_buf;
     rt_type->arg_count  = arg_count;
     rt_type->module_id  = 0u;  // AOT root by default
@@ -1294,7 +1294,7 @@ void ComputeValueTypeLayout(RuntimeInstantiatedType* rt_type) {
     if (layout->field_count > 0u && layout->fields != nullptr) {
         // ── Copy field offsets ──
         auto* offsets = static_cast<CHAOS_IL2CPP_UINT32*>(
-            std::malloc(sizeof(CHAOS_IL2CPP_UINT32) * layout->field_count));
+            CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(CHAOS_IL2CPP_UINT32) * layout->field_count));
         if (offsets != nullptr) {
             for (CHAOS_IL2CPP_UINT32 i = 0u; i < layout->field_count; ++i) {
                 offsets[i] = layout->fields[i].offset;
@@ -1304,7 +1304,7 @@ void ComputeValueTypeLayout(RuntimeInstantiatedType* rt_type) {
 
         // ── Copy resolved field types (optional cache) ──
         auto* resolved = static_cast<TypeInfoHandle*>(
-            std::malloc(sizeof(TypeInfoHandle) * layout->field_count));
+            CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(TypeInfoHandle) * layout->field_count));
         if (resolved != nullptr) {
             for (CHAOS_IL2CPP_UINT32 i = 0u; i < layout->field_count; ++i) {
                 resolved[i] = layout->fields[i].resolved_type;

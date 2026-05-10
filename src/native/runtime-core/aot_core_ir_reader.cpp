@@ -74,7 +74,9 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
     const char* json,
     size_t length,
     ResolveSubjectIdFn resolve_fn,
-    void* resolve_ctx)
+    void* resolve_ctx,
+    ResolveSubjectIdFn resolve_direct_fn,
+    void* direct_ctx)
 {
     interpreter::IRMethod result;
     if (json == nullptr || length == 0) {
@@ -288,6 +290,20 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                     auto param_count = json::JsonParser::FindKey(elem, "targetParameterCount");
                     if (param_count.kind == json::JsonValueKind::Int64) {
                         instr.arg_count = static_cast<CHAOS_IL2CPP_UINT32>(param_count.int64_value);
+                    }
+                }
+
+                // ── AotDirectDispatch: resolve direct_fn from subjectId ──
+                // When the resolve_direct_fn callback is provided, look up the
+                // call's subjectId in the kAotDirectFnTable to get the pre-resolved
+                // chaos_external_runtime_* function pointer.
+                if (instr.op_code == interpreter::IROpCode::Call &&
+                    resolve_direct_fn != nullptr && direct_ctx != nullptr)
+                {
+                    auto callee = json::JsonParser::FindKey(elem, "callee");
+                    const char* callee_str = JsonStringOr(callee);
+                    if (callee_str != nullptr) {
+                        instr.direct_fn = resolve_direct_fn(callee_str, direct_ctx);
                     }
                 }
             }

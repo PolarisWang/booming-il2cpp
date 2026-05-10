@@ -6,17 +6,17 @@
   "failed": 0,
   "results": [
     {
-      "family": "primitive-numeric-conversions",
+      "family": "convert-char",
       "steps": {
         "build_entrypoint": "OK",
         "convert_to_cpp": "OK",
         "build_entry_exe": "OK"
       },
       "success": true,
-      "methodCount": 15,
-      "entryPointSubjectId": "PrimitiveNumericConversionsNativeEntry/Program::Main:System.Int32()",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions\\il2cpp_dist\\entrypoint\\build-output\\PrimitiveNumericConversionsNativeEntry.dll"
+      "methodCount": 18,
+      "entryPointSubjectId": "ConvertCharNativeEntry/Program::Main:System.Int32()",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint\\build-output\\ConvertCharNativeEntry.dll"
     }
   ],
-  "timestamp": "2026-05-10T21:21:24"
+  "timestamp": "2026-05-11T01:27:39"
 }

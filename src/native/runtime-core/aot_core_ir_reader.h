@@ -27,6 +27,10 @@ using ResolveSubjectIdFn = void* (*)(const char* subject_id, void* user_data);
 // resolve_fn:  Callback to resolve subject IDs to call_target pointers
 //              (may be nullptr if no call_target resolution is needed)
 // resolve_ctx: User data passed through to resolve_fn
+// resolve_direct_fn: Optional callback to resolve subject IDs to AOT direct
+//              function pointers for AotDirectDispatch (skips method_invoke).
+//              Set to nullptr (default) if not needed.
+// direct_ctx: User data passed through to resolve_direct_fn
 //
 // Returns an IRMethod with heap-allocated instructions and SEH clauses.
 // The caller must free both instructions and seh_clauses vectors.
@@ -36,7 +40,9 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
     const char* json,
     size_t length,
     ResolveSubjectIdFn resolve_fn,
-    void* resolve_ctx);
+    void* resolve_ctx,
+    ResolveSubjectIdFn resolve_direct_fn = nullptr,
+    void* direct_ctx = nullptr);
 
 }  // namespace chaos::il2cpp::runtime_core
 

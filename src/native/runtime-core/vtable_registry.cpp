@@ -95,7 +95,7 @@ bool RegisterRuntimeVTable(
     }
 
     // Heap-allocate a TypeVTable that lives for the process lifetime.
-    auto* vtable = static_cast<TypeVTable*>(std::malloc(sizeof(TypeVTable)));
+    auto* vtable = static_cast<TypeVTable*>(CHAOS_IL2CPP_MALLOC(sizeof(TypeVTable)));
     if (vtable == nullptr) {
         return false;
     }
@@ -114,7 +114,7 @@ bool RegisterRuntimeVTable(
     CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
 
     if (state.by_type_token.count(type_token)) {
-        std::free(vtable);
+        CHAOS_IL2CPP_FREE(vtable);
         return true;  // idempotent
     }
 
@@ -179,10 +179,10 @@ const void** BuildRuntimeVTable(CHAOS_IL2CPP_UINT64 type_stable_id,
     CHAOS_IL2CPP_UINT32 length = (len_it != state.flat_lengths.end()) ? len_it->second : 0u;
     if (length == 0u) return nullptr;
 
-    auto* new_vtable = static_cast<const void**>(std::malloc(length * sizeof(void*)));
+    auto* new_vtable = static_cast<const void**>(CHAOS_IL2CPP_MALLOC(length * sizeof(void*)));
     if (new_vtable == nullptr) return nullptr;
 
-    std::memcpy(new_vtable, base_it->second, length * sizeof(void*));
+    CHAOS_IL2CPP_MEMCPY(new_vtable, base_it->second, length * sizeof(void*));
     state.flat_vtables[type_stable_id] = new_vtable;
     state.flat_lengths[type_stable_id] = length;
     return new_vtable;

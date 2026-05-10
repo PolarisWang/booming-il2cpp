@@ -2,8 +2,8 @@
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-10T20:31:37",
-  "duration_ms": 19309,
+  "timestamp": "2026-05-11T01:28:24",
+  "duration_ms": 18248,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -31,7 +31,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint\\build-output\\ConvertCharNativeEntry.dll"
       },
       "errors": [],
-      "duration_ms": 16262
+      "duration_ms": 15419
     },
     "fact": {
       "stage": "fact",
@@ -45,7 +45,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 190
+      "duration_ms": 35
     },
     "audit": {
       "stage": "audit",
@@ -59,21 +59,21 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 120
+      "duration_ms": 135
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "passed",
-      "summary": "avg_speedup=75.34%, native_faster=11/11, managed_faster=0/11",
+      "summary": "avg_speedup=73.84%, native_faster=11/11, managed_faster=0/11",
       "details": {
-        "averageSpeedupPercent": 75.34,
+        "averageSpeedupPercent": 73.84,
         "nativeFasterCount": 11,
         "managedFasterCount": 0,
         "matchedCount": 11,
         "totalMethods": 18
       },
       "errors": [],
-      "duration_ms": 1949
+      "duration_ms": 1880
     },
     "hotupdate": {
       "stage": "hotupdate",
@@ -87,20 +87,20 @@
         "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 22
+      "duration_ms": 19
     },
     "post_hotupdate_benchmark": {
       "stage": "post_hotupdate_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=143834.85% (1439.3x) over 11 methods (interpreter path — expected)",
+      "summary": "avg_slowdown=141712.37% (1418.1x) over 11 methods (interpreter path — expected)",
       "details": {
-        "averageSlowdownPercent": 143834.85,
-        "slowdownFactor": 1439.3485,
+        "averageSlowdownPercent": 141712.37,
+        "slowdownFactor": 1418.1236999999999,
         "threshold": 50.0,
         "nonStubMethods": 11
       },
       "errors": [],
-      "duration_ms": 760
+      "duration_ms": 755
     }
   },
   "coverage": {
