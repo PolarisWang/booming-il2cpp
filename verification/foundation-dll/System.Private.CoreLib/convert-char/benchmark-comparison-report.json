@@ -2,20 +2,31 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/convert/char",
+  "status": "build_failed",
+  "error": "Build failed:\nD:\\agent\\booming-il2cpp\\src\\native\\common\\chaos\\log.h(134): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.\nCompiling generated C++ (native-aot.generated.cpp)...\nnative-aot.generated.cpp\nD:\\agent\\booming-il2cpp\\src\\native\\common\\chaos/trace.h(45): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.\nD:\\agent\\booming-il2cpp\\src\\native\\common\\chaos/trace.h(53): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.\nD:\\agent\\booming-il2cpp\\src\\native\\common\\chaos\\log.h(134): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.\nD:\\agent\\booming-il2cpp\\src\\native\\runtime-core\\marshal_abi.h(128): warning C4200: nonstandard extension used: zero-sized array in struct/union\nD:\\agent\\booming-il2cpp\\src\\native\\runtime-core\\marshal_abi.h(128): note: This member will be ignored by a defaulted constructor or copy/move assignment operator\nLinking...\nLINK : fatal error LNK1181: cannot open input file 'D:\\agent\\booming-il2cpp\\build\\native\\src\\native\\interpreter\\Release\\chaos_interpreter.lib'",
   "summary": {
     "totalMethods": 18,
-    "matchedCount": 11,
+    "matchedCount": 0,
     "unmatchedCount": 0,
+<<<<<<< Updated upstream
     "invalidCount": 7,
     "jitElidedCount": 0,
     "nativeFasterCount": 11,
     "managedFasterCount": 0,
     "equalCount": 0,
     "averageSpeedupPercent": 73.84
+=======
+    "invalidCount": 18,
+    "nativeFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0
+>>>>>>> Stashed changes
   },
   "methodResults": [
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
+<<<<<<< Updated upstream
       "status": "invalid",
       "managedElapsedMs": 34.3823,
       "nativeElapsedMs": -1.0,
@@ -139,6 +150,77 @@
       "managedElapsedMs": 0.0442,
       "nativeElapsedMs": 0.016,
       "speedupPercent": 63.8
+=======
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
+      "status": "build_failed"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
+      "status": "build_failed"
+>>>>>>> Stashed changes
     }
   ]
 }

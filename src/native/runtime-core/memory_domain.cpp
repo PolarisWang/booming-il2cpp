@@ -287,13 +287,13 @@ IDomainHeap* DefaultHeapFactory(const MemoryDomain* /*domain*/, void* /*user_dat
 // Overhead: 8 bytes (one pointer) per domain allocation.
 // ======================================================================
 
-namespace {
+}  // namespace (anonymous)
+
+// ── Tagged allocation header ──────────────────────────────────────────
 
 struct AllocationHeader {
     IDomainHeap* heap;
 };
-
-}  // namespace
 
 void* DomainAllocateTagged(MemoryDomain* domain, CHAOS_IL2CPP_SIZE size) {
     const CHAOS_IL2CPP_SIZE total = size + sizeof(AllocationHeader);
@@ -328,10 +328,6 @@ void DomainFreeTagged(void* ptr) {
         std::free(static_cast<void*>(hdr));
     }
 }
-
-MemoryDomain* CurrentDomain();
-
-}  // namespace
 
 // ======================================================================
 // Heap factory accessors

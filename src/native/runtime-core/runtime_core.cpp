@@ -2417,9 +2417,7 @@ bool InteropKernel32FreeLibrary(CHAOS_IL2CPP_INTPTR handle) {
 // For CharSet.Unicode P/Invoke we must convert to/from UTF-16.
 // For CharSet.Ansi the string is already UTF-8 — just copy.
 
-static const char* stub_string_data(const void* str) noexcept {
-    return reinterpret_cast<const char*>(static_cast<const StringObjectHeader*>(str) + 1);
-}
+// stub_string_data is provided by runtime_stubs/stub_common.h (included via generated_code_compat.h).
 
 CHAOS_IL2CPP_INT32 MarshalStringToWide(void* managed_string, CHAOS_IL2CPP_UINT16* wide_buf, CHAOS_IL2CPP_INT32 buf_capacity) {
     if (managed_string == nullptr) return 0;

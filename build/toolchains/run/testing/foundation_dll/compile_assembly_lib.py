@@ -80,8 +80,12 @@ def compile_assembly_lib(assembly_name: str) -> bool:
             print(f"    {e}")
         return False
 
-    # Step 2: Compile runtime_stubs.cpp
-    print(f"  Compiling runtime_stubs.cpp...")
+    # Step 2: Compile runtime_stubs (file split into runtime_stubs/*.cpp; skip if old monolithic file gone)
+    runtime_stubs_path = _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_stubs.cpp"
+    if not runtime_stubs_path.exists():
+        print(f"  [SKIP] runtime_stubs.cpp not found (file split into runtime_stubs/) — symbols provided by chaos_runtime_core.lib")
+    else:
+        print(f"  Compiling runtime_stubs.cpp...")
     r = subprocess.run(
         f'{vcvars_prefix} cl {compile_flags} {inc_flags} {defines} -Fo"{obj2}" "{runtime_stubs}"',
         shell=True, capture_output=True, text=True, timeout=120,

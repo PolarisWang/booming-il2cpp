@@ -6,6 +6,14 @@ namespace ri = chaos::il2cpp::runtime_instantiation;
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <vector>
+
+// Global static field storage from the full InterpreterVM.
+// FastFrame reads/writes this directly so StSFld/LdSFld don't trigger fallback.
+namespace chaos::il2cpp::interpreter {
+struct InterpreterValue;
+extern CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
+}
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -501,20 +509,23 @@ static void Handle_Unbox(FastFrame& frame, const interpreter::IRInstruction&) no
 }
 
 static void Handle_LdSFld(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
-    // Read from global static fields via InterpreterVM's g_static_fields.
-    // We temporarily convert to InterpreterValue, read, then push onto FastFrame.
-    // TODO: direct static field access without InterpreterValue round-trip.
-    interpreter::ExecutionResult dummy;
-    (void)dummy;
-    // For now, fall back to InterpreterVM for LdSFld/StSFld.
-    frame.threw_exception = true; // signal: try fallback
-    frame.pc = 9999;
+    // Read from the global static field vector directly.
+    auto& sfields = interpreter::g_static_fields;
+    if (sfields.size() <= instr.field_offset) {
+        sfields.resize(instr.field_offset + 1u);
+    }
+    frame.PushIV(sfields[instr.field_offset]);
+    ++frame.pc;
 }
 
 static void Handle_StSFld(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
-    // Fallback for StSFld too.
-    frame.threw_exception = true;
-    frame.pc = 9999;
+    // Pop value and write to the global static field vector.
+    auto& sfields = interpreter::g_static_fields;
+    if (sfields.size() <= instr.field_offset) {
+        sfields.resize(instr.field_offset + 1u);
+    }
+    sfields[instr.field_offset] = frame.PopIV();
+    ++frame.pc;
 }
 
 static void Handle_NewObj(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
@@ -719,7 +730,12 @@ static void Handle_Unsupported(FastFrame& frame, const interpreter::IRInstructio
 
 // SEH opcodes
 static void Handle_Throw(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept { Handle_Unsupported(frame, instr); }
-static void Handle_Leave(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept { Handle_Unsupported(frame, instr); }
+static void Handle_Leave(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+    // Leave without SEH is just a branch — jump to the target.
+    // (SEH-containing methods are filtered out before FastExecute, so
+    //  we never see Leave-with-SEH here.)
+    frame.pc = static_cast<uint32_t>(instr.branch_target);
+}
 static void Handle_EndFinally(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept { Handle_Unsupported(frame, instr); }
 static void Handle_Rethrow(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept { Handle_Unsupported(frame, instr); }
 

@@ -2,25 +2,22 @@
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-11T01:28:24",
-  "duration_ms": 18248,
+  "timestamp": "2026-05-11T02:36:05",
+  "duration_ms": 17744,
   "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
       "status": "passed",
-      "summary": "18 methods, 2 custom entries",
+      "summary": "18 methods, 0 custom entries",
       "details": {
         "methodCount": 18,
-        "customMethodCount": 2,
+        "customMethodCount": 0,
         "hasCustomEntryFile": false,
-        "customMethods": [
-          "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
-          "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)"
-        ]
+        "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -31,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint\\build-output\\ConvertCharNativeEntry.dll"
       },
       "errors": [],
-      "duration_ms": 15419
+      "duration_ms": 16765
     },
     "fact": {
       "stage": "fact",
@@ -45,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 35
+      "duration_ms": 50
     },
     "audit": {
       "stage": "audit",
@@ -59,21 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 135
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "passed",
-      "summary": "avg_speedup=73.84%, native_faster=11/11, managed_faster=0/11",
-      "details": {
-        "averageSpeedupPercent": 73.84,
-        "nativeFasterCount": 11,
-        "managedFasterCount": 0,
-        "matchedCount": 11,
-        "totalMethods": 18
-      },
-      "errors": [],
-      "duration_ms": 1880
+      "duration_ms": 130
     },
     "hotupdate": {
       "stage": "hotupdate",
@@ -87,20 +70,20 @@
         "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 19
+      "duration_ms": 23
     },
     "post_hotupdate_benchmark": {
       "stage": "post_hotupdate_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=141712.37% (1418.1x) over 11 methods (interpreter path — expected)",
+      "summary": "avg_slowdown=145667.6% (1457.7x) over 11 methods (interpreter path — expected)",
       "details": {
-        "averageSlowdownPercent": 141712.37,
-        "slowdownFactor": 1418.1236999999999,
+        "averageSlowdownPercent": 145667.6,
+        "slowdownFactor": 1457.6760000000002,
         "threshold": 50.0,
         "nonStubMethods": 11
       },
       "errors": [],
-      "duration_ms": 755
+      "duration_ms": 773
     }
   },
   "coverage": {
