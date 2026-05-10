@@ -54,6 +54,7 @@ add_library(chaos_runtime_core STATIC
     interpreter_entry.cpp
     fast_dispatch.h
     fast_dispatch.cpp
+    gc_bump_cache.h
     native_library.h
     native_library.cpp
     exception_api.cpp

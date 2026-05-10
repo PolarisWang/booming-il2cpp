@@ -950,7 +950,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             builder.AppendLine($"        case {GetNativeTypeIdSymbol(delegateTypeSubjectId)}:");
             builder.AppendLine("        {");
-            builder.AppendLine($"            auto* chaos_delegate = new {GetNativeTypeSymbol(delegateTypeSubjectId)}{{}};");
+            builder.AppendLine($"            auto* chaos_delegate = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(delegateTypeSubjectId)}, {{}});");
             builder.AppendLine($"            chaos_delegate->header.type_info = &{GetNativeTypeInfoSymbol(delegateTypeSubjectId)};");
             if (_vtableTypes?.Contains(delegateTypeSubjectId) == true)
             {
@@ -983,7 +983,7 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine(
             "    const auto chaos_delegate_value = chaos_delegate_allocate_with_type_info(chaos_template_delegate->header.type_info);");
         builder.AppendLine("    auto* chaos_delegate = chaos_require_delegate(chaos_delegate_value);");
-        builder.AppendLine("    auto* chaos_invocation_list = new chaos_delegate_invocation_list(chaos_entries);");
+        builder.AppendLine("    auto* chaos_invocation_list = CHAOS_IL2CPP_NEW_GC(chaos_delegate_invocation_list, (chaos_entries));");
         builder.AppendLine("    chaos_delegate->chaos_delegate_target = static_cast<CHAOS_IL2CPP_INTPTR>(0);");
         builder.AppendLine("    chaos_delegate->chaos_delegate_method_ptr = static_cast<CHAOS_IL2CPP_INTPTR>(0);");
         builder.AppendLine(
