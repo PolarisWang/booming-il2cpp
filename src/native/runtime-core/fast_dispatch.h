@@ -77,6 +77,8 @@ struct FastFrame {
             tracked_objs[tracked_cnt]   = ptr;
             tracked_dtors[tracked_cnt]   = dtor;
             ++tracked_cnt;
+        } else {
+            CHAOS_IL2CPP_LOG_WARN_M("FastFrame", "Track overflow, ptr={0}", reinterpret_cast<const void*>(ptr));
         }
     }
 

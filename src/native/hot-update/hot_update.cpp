@@ -107,7 +107,8 @@ CHAOS_IL2CPP_STRING ExtractJsonString(const CHAOS_IL2CPP_STRING& source, const c
 }
 
 char* DuplicateCString(const CHAOS_IL2CPP_STRING& value) {
-    auto* buffer = new char[value.size() + 1u];
+    auto* buffer = static_cast<char*>(CHAOS_IL2CPP_MALLOC(value.size() + 1u));
+    if (buffer == nullptr) return nullptr;
     for (CHAOS_IL2CPP_SIZE index = 0; index < value.size(); index++) {
         buffer[index] = value[index];
     }

@@ -265,7 +265,7 @@ static PatchContext* CreatePatchContext(const PatchDataHeader* header, size_t to
     size_t cache_size = sizeof(PatchMetadataCache);
     size_t methods_size = sizeof(PatchMethod) * method_count;
 
-    auto* block = new uint8_t[ctx_size + cache_size + methods_size];
+    auto* block = static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(ctx_size + cache_size + methods_size));
     if (block == nullptr) return nullptr;
 
     auto* ctx = new (block) PatchContext();
@@ -306,8 +306,7 @@ static void DestroyPatchContext(PatchContext* ctx) {
     }
 
     // Free the block (all allocations are in one contiguous block).
-    auto* block = reinterpret_cast<uint8_t*>(ctx);
-    delete[] block;
+    CHAOS_IL2CPP_FREE(ctx);
 }
 
 // ── Public API ──────────────────────────────────────────────────────────
