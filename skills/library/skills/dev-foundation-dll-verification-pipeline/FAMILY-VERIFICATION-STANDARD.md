@@ -223,6 +223,66 @@ run verify verification-v1 --json
 
 > **注意**：dashboard 数据来源是 `unified-verification-report.json` + contract + case indexes。dashboard 的 `nativeProof` 字段需要 `native-reference.runtime-skeleton.coverage.json` 才有详情数据；纯 pipeline 跑完的 fact 18/18 会显示为 `0/18`（因为缺少 runtime-skeleton coverage evidence），但 `nativeCorrect` 状态会保持 `pending`（等待批量管线接入）。
 
+## Post-Pipeline AI Analysis
+
+Pipeline 只产出 raw 验证数据（unified report、benchmark 对比、审计报告等）。**分析验收交由 AI 完成**，使用 `dev-foundation-dll-verify-analysis` 技能。
+
+### 调用方式
+
+```bash
+# 直接对 AI 说：
+# "请用 dev-foundation-dll-verify-analysis 技能分析 <family-slug>"
+```
+
+该技能会自动：
+1. 重新执行 verify-family pipeline（确保数据最新）
+2. 执行 Handwrite/AutoGen Pre-check
+3. 读取全部 14 种产物（reports、logs、contract、dashboard projection 等）
+4. 按 11 维度标准化模板逐项分析
+5. 输出分析报告到 `verification/reports/<family>-verification-analysis-<YYYYMMDD>.md`
+6. 更新 `verification/reports/analysis-index.md`
+
+### 分析模板覆盖的维度
+
+| 维度 | 缩写 | 核心问题 |
+|------|------|---------|
+| A. Pipeline 数据正确性 | correctness | fact/benchmark/hotupdate/coverage 数据是否可信 |
+| B. 性能分析 | performance | native vs managed 速度对比、异常值、JIT 影响 |
+| C. 架构质量 | architecture | principle alignment、mechanism audit、lowering |
+| D. 热更新适配 | hotupdate | patch 完整性、interpreter 路径、dispatch |
+| E. 内存/体积 | footprint | entry.exe、生成 C++、IL2CPP 产物大小 |
+| F. 正确性 | correctness-depth | fact 失败根因、contract 一致性、custom entry |
+| G. 完整性（外围产物） | completeness | review/handwrite/managed-test/benchmark 是否存在 |
+| H. 效率 | efficiency | pipeline 耗时、瓶颈、稳定性 |
+| I. 维护性 | maintainability | handwrite 质量、contract 完整度、文档 |
+| J. Dashboard 输出验证 | dashboard | projection 一致性、详情页数据、证据链接 |
+| K. 综合评定 | verdict | 整体评分、风险、改进建议、验收建议 |
+
+### 验收建议规则
+
+| 条件 | 建议 |
+|------|------|
+| 所有维度得分 >= 4，且无 blocking 问题 | **approved** |
+| 有维度得分 < 4，但无结构性失败 | **review-needed** |
+| 存在结构性失败（fact rate < 0.9 / false_passing > 0 / contract 无效） | **blocked** |
+
+### AI 分析报告位置
+
+```
+verification/reports/
+├── <family>-verification-analysis-<YYYYMMDD>.md   # 完整分析报告
+└── analysis-index.md                               # 摘要索引（每次新增一行）
+```
+
+### 人工审核流程
+
+1. 读取 `verification/reports/` 下最新分析报告
+2. 核对关键数据是否与 pipeline 原始产物一致
+3. 根据推荐（approved/review-needed/blocked）决定 closureStatus
+4. 确认后刷新 dashboard：`run verify verification-v1 --json`
+
+> **注意**：AI 分析报告是辅助人工决策的参考，**不是自动门禁**。最终验收决定由人工做出。
+
 ## AI 验证 Dashboard 正确性
 
 每次 dashboard 刷新后，必须通过以下 checklist 验证输出正确性：

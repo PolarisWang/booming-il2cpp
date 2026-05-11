@@ -1,6 +1,6 @@
 # AI Code Review: convert-char
-## Type: codegen
-## Date: 2026-05-11T08:59:18.000000+00:00
+## Type: hotupdate
+## Date: 2026-05-11T08:49:33.000000+00:00
 ## Verdict: PASS
 
 ## Summary
@@ -10,10 +10,10 @@
 - C++ functions: 46
 
 ## Issues Found
-None — all checks passed.
+None — all hotupdate checks passed.
 
 ## Check Results
+- patch_correctness: PASS
 - signature_alignment: PASS
-- return_type_handling: PASS
-- null_handling: PASS
-- exception_handling: PASS
+- interrupt_ptr: PASS
+- dispatch_table: PASS
