@@ -95,13 +95,15 @@ build/*.sln
 build/cmake_install.cmake
 
 # CMake-generated sub-build directories under build/native-runtime/
+build/native-runtime/*.vcxproj
+build/native-runtime/*.vcxproj.filters
+build/native-runtime/*.sln
+build/native-runtime/cmake_install.cmake
 build/native-runtime/bdwgc_build/
 build/native-runtime/fmt_build/
 build/native-runtime/src/
 build/native-runtime/tests/
 build/native-runtime/verification/
-build/native-runtime/check_arch*.vcxproj
-build/native-runtime/check_arch*.vcxproj.filters
 
 # Build intermediate output directories
 build/managed-build/
