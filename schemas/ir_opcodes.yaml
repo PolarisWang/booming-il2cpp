@@ -1,0 +1,517 @@
+# IR OpCode Schema — Single source of truth for interpreter IR opcodes.
+# Generates both C# (InstructionOpCode) and C++ (IROpCode) enums.
+#
+# Each opcode has:
+#   name:     Canonical name (PascalCase)
+#   value:    Integer value (0-98, matches C++ IROpCode enum order)
+#   operands: Ordered list of IRInstruction fields this opcode uses
+#
+# Possible operand values:
+#   immediate_i4      - 32-bit integer immediate
+#   immediate_i8      - 64-bit integer immediate
+#   immediate_r8      - 64-bit float immediate
+#   string_operand    - String constant pointer (ldstr)
+#   branch_target     - Branch target instruction index
+#   call_target       - Method pointer for call instructions
+#   arg_count         - Number of arguments (call instructions)
+#   is_instance_call  - Instance call flag (call instructions)
+#   operand_index     - Argument/local/variable index
+#   field_offset      - Field offset for field access
+#   secondary_index   - Secondary index/switch target count
+#   switch_targets    - Switch target array pointer
+
+opcodes:
+  - name: LdcI4
+    value: 0
+    operands: [immediate_i4]
+    description: Push int32 constant onto evaluation stack
+
+  - name: LdcI8
+    value: 1
+    operands: [immediate_i8]
+    description: Push int64 constant onto evaluation stack
+
+  - name: LdcR4
+    value: 2
+    operands: [immediate_i4]
+    description: Push float32 constant onto evaluation stack
+
+  - name: LdcR8
+    value: 3
+    operands: [immediate_r8]
+    description: Push float64 constant onto evaluation stack
+
+  - name: LdStr
+    value: 4
+    operands: [string_operand]
+    description: Load string constant
+
+  - name: LdNull
+    value: 5
+    operands: []
+    description: Push null reference
+
+  - name: LdArg
+    value: 6
+    operands: [operand_index]
+    description: Load argument by index
+
+  - name: LdLoc
+    value: 7
+    operands: [operand_index]
+    description: Load local variable by index
+
+  - name: StLoc
+    value: 8
+    operands: [operand_index]
+    description: Store local variable by index
+
+  - name: StArg
+    value: 9
+    operands: [operand_index]
+    description: Store argument by index
+
+  - name: LdFld
+    value: 10
+    operands: [field_offset, immediate_i4]
+    description: Load instance field
+
+  - name: StFld
+    value: 11
+    operands: [field_offset, immediate_i4]
+    description: Store instance field
+
+  - name: LdSFld
+    value: 12
+    operands: [field_offset, immediate_i4, call_target]
+    description: Load static field
+
+  - name: StSFld
+    value: 13
+    operands: [field_offset, immediate_i4, call_target]
+    description: Store static field
+
+  - name: Call
+    value: 14
+    operands: [call_target, arg_count, is_instance_call]
+    description: Call a method
+
+  - name: CallVirt
+    value: 15
+    operands: [call_target, arg_count, is_instance_call]
+    description: Virtual call
+
+  - name: CallBridge
+    value: 16
+    operands: [call_target, arg_count, is_instance_call]
+    description: Bridge call (cross-module/interpreter)
+
+  - name: Br
+    value: 17
+    operands: [branch_target]
+    description: Unconditional branch
+
+  - name: BrTrue
+    value: 18
+    operands: [branch_target]
+    description: Branch if true (non-zero)
+
+  - name: BrFalse
+    value: 19
+    operands: [branch_target]
+    description: Branch if false (zero)
+
+  - name: Beq
+    value: 20
+    operands: [branch_target]
+    description: Branch if equal
+
+  - name: Blt
+    value: 21
+    operands: [branch_target]
+    description: Branch if less than
+
+  - name: Bgt
+    value: 22
+    operands: [branch_target]
+    description: Branch if greater than
+
+  - name: Ble
+    value: 23
+    operands: [branch_target]
+    description: Branch if less than or equal
+
+  - name: Bge
+    value: 24
+    operands: [branch_target]
+    description: Branch if greater than or equal
+
+  - name: Add
+    value: 25
+    operands: []
+    description: Add two values
+
+  - name: Sub
+    value: 26
+    operands: []
+    description: Subtract two values
+
+  - name: Mul
+    value: 27
+    operands: []
+    description: Multiply two values
+
+  - name: Div
+    value: 28
+    operands: []
+    description: Divide two values (signed)
+
+  - name: Rem
+    value: 29
+    operands: []
+    description: Remainder (signed)
+
+  - name: Neg
+    value: 30
+    operands: []
+    description: Negate value
+
+  - name: Ceq
+    value: 31
+    operands: []
+    description: Compare equal
+
+  - name: Clt
+    value: 32
+    operands: []
+    description: Compare less than (signed)
+
+  - name: Cgt
+    value: 33
+    operands: []
+    description: Compare greater than (signed)
+
+  - name: NewObj
+    value: 34
+    operands: [call_target, arg_count]
+    description: Create new object
+
+  - name: Box
+    value: 35
+    operands: [call_target]
+    description: Box a value type
+
+  - name: Unbox
+    value: 36
+    operands: [call_target]
+    description: Unbox to value type pointer
+
+  - name: CastClass
+    value: 37
+    operands: [call_target]
+    description: Cast to class (throws on failure)
+
+  - name: IsInst
+    value: 38
+    operands: [call_target]
+    description: Type check (returns null on failure)
+
+  - name: Conv_I4
+    value: 39
+    operands: []
+    description: Convert to int32
+
+  - name: Conv_I8
+    value: 40
+    operands: []
+    description: Convert to int64
+
+  - name: Conv_R4
+    value: 41
+    operands: []
+    description: Convert to float32
+
+  - name: Conv_R8
+    value: 42
+    operands: []
+    description: Convert to float64
+
+  - name: NewArr
+    value: 43
+    operands: [call_target]
+    description: Create new array
+
+  - name: LdElem
+    value: 44
+    operands: [immediate_i4]
+    description: Load array element
+
+  - name: StElem
+    value: 45
+    operands: [immediate_i4]
+    description: Store array element
+
+  - name: LdLen
+    value: 46
+    operands: []
+    description: Get array length
+
+  - name: Pop
+    value: 47
+    operands: []
+    description: Pop value from stack
+
+  - name: Throw
+    value: 48
+    operands: []
+    description: Throw exception
+
+  - name: Rethrow
+    value: 49
+    operands: []
+    description: Rethrow current exception
+
+  - name: Leave
+    value: 50
+    operands: [branch_target]
+    description: Leave try block
+
+  - name: EndFinally
+    value: 51
+    operands: []
+    description: End finally handler
+
+  - name: EndFilter
+    value: 52
+    operands: []
+    description: End filter handler
+
+  - name: Ret
+    value: 53
+    operands: []
+    description: Return from method
+
+  - name: Dup
+    value: 54
+    operands: []
+    description: Duplicate top of stack
+
+  - name: DivUn
+    value: 55
+    operands: []
+    description: Unsigned divide
+
+  - name: RemUn
+    value: 56
+    operands: []
+    description: Unsigned remainder
+
+  - name: And
+    value: 57
+    operands: []
+    description: Bitwise AND
+
+  - name: Or
+    value: 58
+    operands: []
+    description: Bitwise OR
+
+  - name: Xor
+    value: 59
+    operands: []
+    description: Bitwise XOR
+
+  - name: Not
+    value: 60
+    operands: []
+    description: Bitwise NOT
+
+  - name: Shl
+    value: 61
+    operands: []
+    description: Shift left
+
+  - name: Shr
+    value: 62
+    operands: []
+    description: Shift right (arithmetic)
+
+  - name: ShrUn
+    value: 63
+    operands: []
+    description: Shift right (logical)
+
+  - name: ConvRUn
+    value: 64
+    operands: []
+    description: Convert unsigned to float
+
+  - name: ConvI
+    value: 65
+    operands: []
+    description: Convert to native int
+
+  - name: ConvU
+    value: 66
+    operands: []
+    description: Convert to native unsigned
+
+  - name: LdInd
+    value: 67
+    operands: [immediate_i4]
+    description: Load indirect (type via immediate_i4)
+
+  - name: StInd
+    value: 68
+    operands: [immediate_i4]
+    description: Store indirect (type via immediate_i4)
+
+  - name: Switch
+    value: 69
+    operands: [switch_targets, secondary_index, branch_target]
+    description: Switch/jump table
+
+  - name: LdToken
+    value: 70
+    operands: [call_target, immediate_i4]
+    description: Load metadata token
+
+  - name: InitObj
+    value: 71
+    operands: [call_target]
+    description: Initialize object (zero-init value type)
+
+  - name: SizeOf
+    value: 72
+    operands: [immediate_i4]
+    description: Size of value type
+
+  - name: LdFtn
+    value: 73
+    operands: [call_target, immediate_i4]
+    description: Load function pointer
+
+  - name: LdVirtFtn
+    value: 74
+    operands: [call_target, immediate_i4]
+    description: Load virtual function pointer
+
+  - name: LdArgA
+    value: 75
+    operands: [operand_index]
+    description: Load argument address
+
+  - name: LdLocA
+    value: 76
+    operands: [operand_index]
+    description: Load local address
+
+  - name: LocAlloc
+    value: 77
+    operands: [immediate_i4]
+    description: Allocate on local heap
+
+  - name: Break
+    value: 78
+    operands: []
+    description: Breakpoint
+
+  - name: BneUn
+    value: 79
+    operands: [branch_target]
+    description: Branch if not equal (unsigned)
+
+  - name: BgeUn
+    value: 80
+    operands: [branch_target]
+    description: Branch if greater than or equal (unsigned)
+
+  - name: BgtUn
+    value: 81
+    operands: [branch_target]
+    description: Branch if greater than (unsigned)
+
+  - name: BleUn
+    value: 82
+    operands: [branch_target]
+    description: Branch if less than or equal (unsigned)
+
+  - name: BltUn
+    value: 83
+    operands: [branch_target]
+    description: Branch if less than (unsigned)
+
+  - name: AddOvf
+    value: 84
+    operands: []
+    description: Add with overflow check
+
+  - name: SubOvf
+    value: 85
+    operands: []
+    description: Subtract with overflow check
+
+  - name: MulOvf
+    value: 86
+    operands: []
+    description: Multiply with overflow check
+
+  - name: ConvOvfI
+    value: 87
+    operands: []
+    description: Overflow-checked convert to native int
+
+  - name: ConvOvfI4
+    value: 88
+    operands: []
+    description: Overflow-checked convert to int32
+
+  - name: ConvOvfI8
+    value: 89
+    operands: []
+    description: Overflow-checked convert to int64
+
+  - name: ConvOvfU
+    value: 90
+    operands: []
+    description: Overflow-checked convert to native unsigned
+
+  - name: ConvOvfU4
+    value: 91
+    operands: []
+    description: Overflow-checked convert to uint32
+
+  - name: ConvOvfU8
+    value: 92
+    operands: []
+    description: Overflow-checked convert to uint64
+
+  - name: LdObj
+    value: 93
+    operands: [immediate_i4]
+    description: Load value type from address
+
+  - name: StObj
+    value: 94
+    operands: [immediate_i4]
+    description: Store value type to address
+
+  - name: LdElemA
+    value: 95
+    operands: [immediate_i4]
+    description: Load array element address
+
+  - name: Cpblk
+    value: 96
+    operands: []
+    description: Copy memory block
+
+  - name: InitBlk
+    value: 97
+    operands: []
+    description: Initialize memory block
+
+  - name: CallVirtConstrained
+    value: 98
+    operands: [call_target, arg_count, is_instance_call]
+    description: Constrained virtual call

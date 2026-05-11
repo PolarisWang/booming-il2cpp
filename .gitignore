@@ -93,6 +93,51 @@ build/*.vcxproj
 build/*.vcxproj.filters
 build/*.sln
 build/cmake_install.cmake
+
+# CMake-generated sub-build directories under build/native-runtime/
+build/native-runtime/bdwgc_build/
+build/native-runtime/fmt_build/
+build/native-runtime/src/
+build/native-runtime/tests/
+build/native-runtime/verification/
+build/native-runtime/check_arch*.vcxproj
+build/native-runtime/check_arch*.vcxproj.filters
+
+# Build intermediate output directories
+build/managed-build/
+build/temp_output/
+
+# Stale verification directories
+verification-history/
+verification/foundation-dll/*/*/native_test/
+
+# Root-level debug scripts and logs (not part of the project)
+_check_*.cmd
+_check_*.py
+_pipeline_debug.log
+_reflection_full.log
+_run_*.cmd
+_run_*.py
+_single_*.cmd
+_stderr*.txt
+_stdout*.txt
+_test_*.py
+_test_*.cmd
+batch_results.json
+batch_run_log.txt
+obj_list.txt
+
+# Entrypoint debug scripts
+run_entry*.bat
+run_entry*.cmd
+run_entry*.ps1
+run_guid.bat
+run_pnc_fact.bat
+
+# Build debug scripts
+build/_*.bat
+build/toolchains/run/testing/foundation_dll/_*.bat
+build/toolchains/run/testing/foundation_dll/fact_l2_verifier.py
 build/bdwgc_build/
 build/fmt_build/
 build/src/

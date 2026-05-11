@@ -302,9 +302,11 @@ def _project_artifacts(
         # Primary artifacts must be under artifacts/. But coverage JSONs
         # produced by the batch pipeline live under verification/ — allow
         # those as evidence too since they are the native-proof gate's
-        # primary coverage source.
+        # primary coverage source. Also allow benchmark/hotupdate reports
+        # that are produced by the verify-family pipeline directly into
+        # verification/foundation-dll/<assembly>/<family>/.
         if not (normalized.startswith("artifacts/") or
-                (normalized.startswith("verification/foundation-dll/") and normalized.endswith(".coverage.json"))):
+                normalized.startswith("verification/foundation-dll/")):
             continue
         if any(keyword in normalized for keyword in keywords):
             matched_evidence.append(evidence_path)
@@ -614,6 +616,16 @@ def _build_projects(
         rel = cov_path.relative_to(repo_root).as_posix()
         if rel not in evidence_paths:
             evidence_paths.append(rel)
+
+    # Fallback: scan for benchmark-comparison-report.json and
+    # hotupdate-verification-report.json produced by the verify-family
+    # pipeline, so they appear as evidence in benchmark/hotupdate detail pages.
+    for report_name in ("benchmark-comparison-report.json", "hotupdate-verification-report.json", "post-hotupdate-benchmark-report.json"):
+        report_glob = repo_root / "verification" / "foundation-dll" / assembly_name / "*" / report_name
+        for report_path in repo_root.glob(str(report_glob.relative_to(repo_root))):
+            rel = report_path.relative_to(repo_root).as_posix()
+            if rel not in evidence_paths:
+                evidence_paths.append(rel)
 
     support_paths = _collect_support_refs(
         repo_root,
@@ -2936,7 +2948,7 @@ def _render_hotupdate_detail_page(family: dict[str, Any], *, assembly_name: str,
     hotpatch_total = int(hotupdate_proof.get("denominator") or 0)
     hotpatch_failed = hotpatch_total - hotpatch_passed
 
-    if schema_version >= 2 and hotpatch_method_results:
+    if schema_version >= 2:
         # Hotpatch detail rows
         detail_rows = ""
         for item in hotpatch_method_results:
@@ -2960,7 +2972,7 @@ def _render_hotupdate_detail_page(family: dict[str, Any], *, assembly_name: str,
                 f"</tr>"
             )
         if not detail_rows:
-            detail_rows = "<tr><td colspan=\"6\">No Hotpatch method results available</td></tr>"
+            detail_rows = "<tr><td colspan=\"6\">No Hotpatch method results available (entry.exe --hotupdate does not emit per-method d3 data)</td></tr>"
 
         table_title = "Hotpatch Patch分派验证"
         table_headers = "<th>Token</th><th>Status</th><th>Patched</th><th>返回值</th><th>Interpreter 分派</th><th>Revert</th>"
