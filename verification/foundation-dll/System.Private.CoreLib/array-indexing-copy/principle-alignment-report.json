@@ -1,0 +1,117 @@
+{
+  "family": "array-indexing-copy",
+  "assembly": "System.Private.CoreLib",
+  "generated_at": "2026-05-12T13:55:06.117419",
+  "checks": {
+    "p1_lowering": {
+      "check_id": "p1_lowering",
+      "principle": "P1",
+      "status": "ALIGNED",
+      "summary": "chaos_eval_stack present [OK]",
+      "details": [],
+      "evidence": {
+        "has_lowering": true,
+        "stub_count": 0,
+        "simple_forward_count": 0
+      }
+    },
+    "p1_no_redundant_branch": {
+      "check_id": "p1_no_redundant_branch",
+      "principle": "P1",
+      "status": "ALIGNED",
+      "summary": "No runtime dispatch branches in generated code",
+      "details": [],
+      "evidence": {
+        "checked_patterns": [
+          "if\\s*\\(\\s*family\\s*[=!]=",
+          "switch\\s*\\(\\s*methodIndex\\b",
+          "if\\s*\\(\\s*methodIndex\\b",
+          "CHAOS_FAMILY_SPECIFIC",
+          "if\\s*\\(\\s*__family\\b"
+        ]
+      }
+    },
+    "p1_no_unnecessary_indirection": {
+      "check_id": "p1_no_unnecessary_indirection",
+      "principle": "P1",
+      "status": "CONCERN",
+      "summary": "2 runtime_stub calls in generated code",
+      "details": [
+        {
+          "function": "ChaosArrayClear",
+          "call_count": 1
+        },
+        {
+          "function": "ChaosArrayGetLength",
+          "call_count": 1
+        }
+      ],
+      "evidence": {
+        "stub_call_count": 2
+      }
+    },
+    "p1_benchmark": {
+      "check_id": "p1_benchmark",
+      "principle": "P1",
+      "status": "ALIGNED",
+      "summary": "avg_speedup=0.0%",
+      "details": [],
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "managed_faster_count": 0,
+        "native_faster_count": 0
+      }
+    },
+    "p2_template_hygiene": {
+      "check_id": "p2_template_hygiene",
+      "principle": "P2",
+      "status": "ALIGNED",
+      "summary": "All Scriban templates clean — no semantic decision logic",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_no_bare_new": {
+      "check_id": "p2_no_bare_new",
+      "principle": "P2",
+      "status": "ALIGNED",
+      "summary": "All managed allocations use CHAOS_IL2CPP_NEW_GC or equivalent",
+      "details": [],
+      "evidence": {}
+    },
+    "p3_patch_entry": {
+      "check_id": "p3_patch_entry",
+      "principle": "P3",
+      "status": "ALIGNED",
+      "summary": "Dispatch table: 14 entries, all with interrupt_ptr [OK]",
+      "details": [],
+      "evidence": {
+        "table_size": 14,
+        "entries_with_interrupt_ptr": 14,
+        "has_hotpatch_module": true
+      }
+    },
+    "p3_patchdata": {
+      "check_id": "p3_patchdata",
+      "principle": "P3",
+      "status": "ALIGNED",
+      "summary": "1/1 valid .patchdata files",
+      "details": [],
+      "evidence": {
+        "patchdata_count": 1,
+        "valid_count": 1,
+        "stub_patchdata_count": 0,
+        "files": [
+          "System.Private.CoreLib\\array-indexing-copy\\il2cpp_dist\\patch\\patchdata\\array-indexing-copy.patchdata"
+        ]
+      }
+    }
+  },
+  "summary": {
+    "total": 8,
+    "aligned": 7,
+    "concern": 1,
+    "violation": 0,
+    "not_applicable": 0,
+    "overall": "CONCERN"
+  }
+}

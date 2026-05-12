@@ -26,10 +26,10 @@
     "required": true
   },
   "performanceObligation": {
-    "required": false
+    "required": true
   },
   "hotupdateFunctionalObligation": {
-    "required": false
+    "required": true
   },
   "hotupdatePerformanceObligation": {
     "required": false

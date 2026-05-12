@@ -15,22 +15,24 @@ extern "C" {
 void ChaosArrayClear(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INT32 count) noexcept
 {
     if (array == 0 || count <= 0) return;
-    auto* hdr = reinterpret_cast<StubArrayHeader*>(array);
+    auto* arr = get_managed_array_mut(array);
     if (index < 0 || count < 0) return;
     auto uindex = static_cast<CHAOS_IL2CPP_UINTPTR>(index);
     auto ucount = static_cast<CHAOS_IL2CPP_UINTPTR>(count);
-    if (uindex > hdr->length || ucount > (hdr->length - uindex)) return;
+    if (uindex > static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length) || ucount > (static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length) - uindex)) return;
+    if (arr->elements == nullptr) return;
 
-    auto* elements = reinterpret_cast<CHAOS_IL2CPP_UINT8*>(hdr + 1);
-    std::memset(elements + uindex * sizeof(void*), 0, ucount * sizeof(void*));
+    std::memset(
+        reinterpret_cast<CHAOS_IL2CPP_UINT8*>(arr->elements) + uindex * sizeof(void*),
+        0, ucount * sizeof(void*));
 }
 
 CHAOS_IL2CPP_INT32 ChaosArrayGetLength(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 dimension) noexcept
 {
     if (array == 0) return 0;
     (void)dimension;
-    auto* hdr = reinterpret_cast<const StubArrayHeader*>(array);
-    return static_cast<CHAOS_IL2CPP_INT32>(hdr->length);
+    const auto* arr = get_managed_array(array);
+    return static_cast<CHAOS_IL2CPP_INT32>(arr->length);
 }
 
 // ── Type marshalling helpers ──
@@ -70,8 +72,8 @@ CHAOS_IL2CPP_FLOAT64 ChaosLoadFloat64(CHAOS_IL2CPP_INTPTR value) noexcept
 CHAOS_IL2CPP_INT32 ChaosBufferByteLength(CHAOS_IL2CPP_INTPTR array) noexcept
 {
     if (array == 0) return 0;
-    auto* hdr = reinterpret_cast<const StubArrayHeader*>(array);
-    return static_cast<CHAOS_IL2CPP_INT32>(hdr->length);
+    const auto* arr = get_managed_array(array);
+    return static_cast<CHAOS_IL2CPP_INT32>(arr->length);
 }
 
 // ── Culture helpers (stub: return static non-null pointers) ──
@@ -115,6 +117,36 @@ CHAOS_IL2CPP_INTPTR ChaosCultureGetNumberFormat(CHAOS_IL2CPP_INTPTR /*culture*/)
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_stub_subsystem);
 }
 
+CHAOS_IL2CPP_INT32 ChaosCompareInfoCompare(CHAOS_IL2CPP_INTPTR /*compare_info*/, CHAOS_IL2CPP_INTPTR /*a*/, CHAOS_IL2CPP_INTPTR /*b*/) noexcept
+{
+    return 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosCompareInfoIndexOf(CHAOS_IL2CPP_INTPTR /*compare_info*/, CHAOS_IL2CPP_INTPTR /*source*/, CHAOS_IL2CPP_INTPTR /*value*/) noexcept
+{
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosCultureGetTextInfo(CHAOS_IL2CPP_INTPTR /*culture*/) noexcept
+{
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_stub_subsystem);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTextInfoToLower(CHAOS_IL2CPP_INTPTR /*text_info*/, CHAOS_IL2CPP_INT32 /*c*/) noexcept
+{
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTextInfoToUpper(CHAOS_IL2CPP_INTPTR /*text_info*/, CHAOS_IL2CPP_INT32 /*c*/) noexcept
+{
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTextInfoGetCultureName(CHAOS_IL2CPP_INTPTR /*text_info*/) noexcept
+{
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_stub_empty_string);
+}
+
 // ── GC stubs ──
 void ChaosGcCollect(CHAOS_IL2CPP_INT32 generation) noexcept
 {
@@ -137,6 +169,8 @@ CHAOS_IL2CPP_INTPTR ChaosEnvironmentGetStackTrace(void) noexcept
 {
     return 0;
 }
+
+CHAOS_IL2CPP_INTPTR ChaosConsoleGetError(void) noexcept { return 0; }
 
 void ChaosConsoleWriteLine(CHAOS_IL2CPP_INTPTR value) noexcept
 {

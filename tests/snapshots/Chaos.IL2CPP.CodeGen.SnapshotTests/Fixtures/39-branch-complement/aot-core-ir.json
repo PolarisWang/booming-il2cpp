@@ -45,6 +45,37 @@
         { "op": "ldc.i4", "operand": 1, "ilOffset": 15, "resultType": "System.Int32" },
         { "op": "ret", "ilOffset": 16 }
       ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.branch-unsigned-b-helper.run-branch-unsigned-b",
+      "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
+      "signature": "System.Int32 BranchUnsignedBHelper::RunBranchUnsignedB()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
+        "methodId": "snapshot-test-fixtures.branch-unsigned-b-helper.run-branch-unsigned-b",
+        "signature": "System.Int32 BranchUnsignedBHelper::RunBranchUnsignedB()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_BranchUnsignedBHelper_RunBranchUnsignedB",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 2, "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "ble.un", "operand": 5, "ilOffset": 2, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 3, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 4 },
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 5, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 6 }
+      ]
     }
   ]
 }

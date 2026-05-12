@@ -6,153 +6,117 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2214.2,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
-      "status": "passed",
-      "prePatchNsPerOp": 1.5,
-      "postPatchNsPerOp": 2258.7,
-      "slowdownPercent": 150480.0
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
-      "status": "passed",
-      "prePatchNsPerOp": 1.5,
-      "postPatchNsPerOp": 2476.3,
-      "slowdownPercent": 164986.67
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2168.5,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2177.0,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2339.8,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
-      "status": "passed",
-      "prePatchNsPerOp": 1.5,
-      "postPatchNsPerOp": 2147.5,
-      "slowdownPercent": 143066.67
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
-      "status": "passed",
-      "prePatchNsPerOp": 1.5,
-      "postPatchNsPerOp": 2234.2,
-      "slowdownPercent": 148846.67
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
-      "status": "passed",
-      "prePatchNsPerOp": 1.6,
-      "postPatchNsPerOp": 2305.2,
-      "slowdownPercent": 143975.0
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)",
-      "status": "passed",
-      "prePatchNsPerOp": 1.5,
-      "postPatchNsPerOp": 2214.7,
-      "slowdownPercent": 147546.67
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
-      "status": "passed",
-      "prePatchNsPerOp": 1.5,
-      "postPatchNsPerOp": 2122.7,
-      "slowdownPercent": 141413.33
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
-      "status": "passed",
-      "prePatchNsPerOp": 1.5,
-      "postPatchNsPerOp": 2179.6,
-      "slowdownPercent": 145206.67
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2139.8,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2468.5,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 14,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2362.3,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 15,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
-      "status": "passed",
-      "prePatchNsPerOp": 1.5,
-      "postPatchNsPerOp": 2146.5,
-      "slowdownPercent": 143000.0
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 16,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
-      "status": "passed",
-      "prePatchNsPerOp": 1.5,
-      "postPatchNsPerOp": 2144.8,
-      "slowdownPercent": 142886.67
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     },
     {
       "methodIndex": 17,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
-      "status": "passed",
-      "prePatchNsPerOp": 1.7,
-      "postPatchNsPerOp": 2227.6,
-      "slowdownPercent": 130935.29
+      "status": "failed",
+      "error": "INFO: Applied patches to 18 methods\n"
     }
   ],
   "summary": {
     "totalMethods": 18,
-    "nonStubMethods": 11,
-    "averageSlowdownPercent": 145667.6,
-    "slowdownFactor": 1457.6760000000002,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
     "slowdownThresholdX": 50.0
   }
 }

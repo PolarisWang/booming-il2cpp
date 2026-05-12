@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
-"""Stop hook: evaluates session quality and generates learning signals.
+"""Stop hook: evaluates session quality using telemetry data.
 
-Reads Claude Code session transcript, computes heuristic quality score,
-and writes signals to lifecycle/learning/signals/ when score >= threshold.
+Replaces the previous transcript-text-parsing approach which was broken
+because session JSON files only contain metadata, not conversation text.
+Now reads telemetry JSONL files to compute quality metrics:
+  - tool_success_rate from tool_outcomes.jsonl
+  - edit intensity from tool_outcomes (Edit/Write calls)
+  - completion signal from session_outcomes.jsonl
+  - recently used skills from usage.jsonl
 """
 
 from __future__ import annotations
 
 import json
-import re
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -28,90 +32,136 @@ def resolve_repo_root() -> Path | None:
         return None
 
 
-def find_transcript() -> str | None:
-    """Find the most recent Claude Code transcript."""
-    # Cross-platform: check common transcript directories
-    candidate_dirs = []
-    home = Path.home()
-
-    # Linux/macOS
-    candidate_dirs.append(home / ".claude" / "claude-code" / "transcripts")
-    # Windows
-    local_app_data = Path.home() / "AppData" / "Local"
-    candidate_dirs.append(local_app_data / "Claude" / "claude-code" / "transcripts")
-
-    for claude_dir in candidate_dirs:
-        if claude_dir.exists():
-            transcripts = sorted(claude_dir.glob("*.md"), key=lambda p: p.stat().st_mtime, reverse=True)
-            if transcripts:
-                return str(transcripts[0])
-
-    return None
+def load_jsonl(path: Path, max_records: int = 0) -> list[dict]:
+    if not path.exists() or path.stat().st_size == 0:
+        return []
+    records = []
+    try:
+        for line in path.read_text(encoding="utf-8").strip().splitlines():
+            if line.strip():
+                records.append(json.loads(line))
+                if max_records > 0 and len(records) >= max_records:
+                    break
+    except (json.JSONDecodeError, OSError):
+        return records
+    return records
 
 
-def estimate_quality(transcript_path: str) -> dict:
-    """Heuristic quality scoring of a session transcript."""
-    text = Path(transcript_path).read_text(encoding="utf-8", errors="replace")
+def estimate_quality_from_telemetry(repo_root: Path) -> dict:
+    """Compute quality score from telemetry data instead of session transcript."""
+    telemetry_dir = repo_root / "skills" / "lifecycle" / "telemetry"
+    usage_path = telemetry_dir / "usage.jsonl"
+    tool_path = telemetry_dir / "tool_outcomes.jsonl"
+    session_path = telemetry_dir / "session_outcomes.jsonl"
 
-    tool_call_count = len(re.findall(r"^- .+ \(", text))
-    skill_refs = len(re.findall(r"dev-[a-z-]+", text))
-    edit_count = len(re.findall(r"(?:Edit|Write)\s+`[^`]+`", text))
+    # Load recent records (last 500 to keep it fast)
+    tools = load_jsonl(tool_path, 500)
+    sessions = load_jsonl(session_path, 500)
+    usage = load_jsonl(usage_path, 500)
 
+    if not tools and not sessions and not usage:
+        return {"score": 0.0, "reason": "no telemetry data"}
+
+    # 1. tool_success_rate
+    total_tools = len(tools)
+    successful_tools = sum(1 for t in tools if t.get("success", True))
+    tool_success_rate = successful_tools / max(total_tools, 1)
+
+    # 2. edit intensity (Edit/Write calls as proxy for real work)
+    edit_tools = [t for t in tools if t.get("tool_name") in ("Edit", "Write")]
+    edit_count = len(edit_tools)
+    edit_ratio = edit_count / max(total_tools, 1)
+
+    # 3. completion signal from session records
+    completed_sessions = sum(1 for s in sessions if s.get("completed", False))
+    total_sessions = len(sessions)
+    completion_rate = completed_sessions / max(total_sessions, 1)
+
+    # 4. skill usage breadth
+    unique_skills = len(set(
+        u.get("skill_path", "") for u in usage if u.get("skill_path")
+    ))
+
+    # Compute composite quality score (0.0 ~ 1.0)
     score = 0.0
     details = []
 
-    if edit_count > 5:
-        score += 0.35
-        details.append(f"edits={edit_count}")
-    if skill_refs >= 2:
+    # Tool success (max 0.30)
+    if tool_success_rate >= 0.95:
         score += 0.30
-        details.append(f"skill_refs={skill_refs}")
-    if tool_call_count > 30:
-        score += 0.25
-        details.append(f"tool_calls={tool_call_count}")
-    elif tool_call_count > 10:
-        score += 0.10
-        details.append(f"tool_calls={tool_call_count}")
+        details.append(f"tool_ok={tool_success_rate:.2f}")
+    elif tool_success_rate >= 0.8:
+        score += 0.15
+        details.append(f"tool_ok={tool_success_rate:.2f}")
 
-    domain_hint = _detect_domain(text)
-    action_hint = _detect_action(text)
+    # Edit intensity (max 0.30)
+    if edit_ratio >= 0.15:
+        score += 0.30
+        details.append(f"edit_ratio={edit_ratio:.2f}")
+    elif edit_ratio >= 0.08:
+        score += 0.15
+        details.append(f"edit_ratio={edit_ratio:.2f}")
+
+    # Completion (max 0.25)
+    if completion_rate >= 0.8:
+        score += 0.25
+        details.append(f"complete={completion_rate:.2f}")
+    elif completion_rate >= 0.5:
+        score += 0.10
+        details.append(f"complete={completion_rate:.2f}")
+
+    # Skill breadth bonus (max 0.15)
+    if unique_skills >= 3:
+        score += 0.15
+        details.append(f"skills={unique_skills}")
+    elif unique_skills >= 2:
+        score += 0.08
+        details.append(f"skills={unique_skills}")
+
+    # Detect domain from skill paths
+    domain_hint = _detect_domain_from_skills(usage)
+    action_hint = _detect_action_from_telemetry(completion_rate, tool_success_rate, edit_count)
 
     return {
-        "score": round(score, 2),
-        "tool_call_count": tool_call_count,
-        "skill_refs": skill_refs,
+        "score": round(min(1.0, score), 2),
+        "tool_success_rate": round(tool_success_rate, 4),
         "edit_count": edit_count,
+        "completion_rate": round(completion_rate, 4),
+        "unique_skills": unique_skills,
         "domain_hint": domain_hint,
         "action_hint": action_hint,
-        "details": "; ".join(details),
+        "details": "; ".join(details) if details else "no significant signals",
     }
 
 
-def _detect_domain(text: str) -> str:
-    domain_keywords = {
-        "workflow": ["brainstorm", "roadmap", "writing-plans", "executing-plans", "TDD", "debug"],
-        "quality": ["code review", "verification", "trace", "completion"],
-        "testing": ["test governance", "foundation-dll", "test generation", "subject"],
-        "il2cpp": ["il2cpp", "translation", "emission", "planning", "opcode"],
-        "knowledge": ["wiki", "knowledge", "documentation"],
-        "skilling": ["skill", "SKILL.md", "manifest"],
+def _detect_domain_from_skills(usage: list[dict]) -> str:
+    """Detect domain from recently used skill paths."""
+    domain_skills = {
+        "workflow": ["dev-brainstorm", "dev-roadmap", "dev-writing-plans", "dev-executing-plans", "dev-dispatching"],
+        "quality": ["dev-verification", "dev-receiving-code-review", "dev-requesting-code-review", "dev-trace"],
+        "testing": ["dev-foundation-dll", "dev-test-driven-development", "dev-project-test-governance"],
+        "il2cpp": ["dev-architecture-first-development", "dev-using-booming"],
+        "knowledge": ["dev-project-wiki"],
+        "skilling": ["dev-skill-evolution", "dev-writing-skills"],
     }
-    text_lower = text.lower()
-    scores = {}
-    for domain, keywords in domain_keywords.items():
-        scores[domain] = sum(1 for kw in keywords if kw.lower() in text_lower)
-    if max(scores.values()) == 0:
-        return "engineering"
-    return max(scores, key=scores.get)
+    for u in reversed(usage):
+        path = u.get("skill_path", "")
+        for domain, skills in domain_skills.items():
+            if any(s in path for s in skills):
+                return domain
+    return "engineering"
 
 
-def _detect_action(text: str) -> str:
-    if re.search(r"(?:create|new|add).*(?:skill|SKILL\.md)", text, re.IGNORECASE):
-        return "new-skill"
-    if re.search(r"(?:update|modify|edit|improve).*(?:skill|SKILL\.md)", text, re.IGNORECASE):
-        return "refine"
-    if re.search(r"(?:bug|fix|error|fail|crash)", text, re.IGNORECASE):
+def _detect_action_from_telemetry(
+    completion_rate: float, tool_success_rate: float, edit_count: int
+) -> str:
+    """Detect action type from telemetry patterns."""
+    if completion_rate >= 0.8 and edit_count >= 5:
+        return "feature"
+    if completion_rate < 0.3 and tool_success_rate < 0.8:
         return "bugfix"
+    if edit_count >= 3:
+        return "refine"
     return "feature"
 
 
@@ -120,13 +170,9 @@ def main() -> int:
     if not repo_root:
         return 0
 
-    transcript = find_transcript()
-    if not transcript:
-        return 0
-
-    quality = estimate_quality(transcript)
-    if quality["score"] < 0.7:
-        return 0  # Not a high-quality enough session to record
+    quality = estimate_quality_from_telemetry(repo_root)
+    if quality["score"] < 0.5:
+        return 0  # Not a high-quality enough period to record
 
     signals_dir = repo_root / "skills" / "lifecycle" / "learning" / "signals"
     signals_dir.mkdir(parents=True, exist_ok=True)
@@ -137,14 +183,17 @@ def main() -> int:
         "domain_hint": quality["domain_hint"],
         "action_hint": quality["action_hint"],
         "metrics": {
-            "tool_calls": quality["tool_call_count"],
-            "skill_refs": quality["skill_refs"],
-            "edits": quality["edit_count"],
+            "tool_calls": 0,  # no longer track from transcript
+            "tool_success_rate": quality["tool_success_rate"],
+            "edit_count": quality["edit_count"],
+            "completion_rate": quality["completion_rate"],
+            "unique_skills": quality["unique_skills"],
         },
-        "transcript": transcript,
+        "details": quality["details"],
+        "source": "telemetry",
     }
 
-    month_file = signals_dir / f"{datetime.now().strftime('%Y-%m')}.jsonl"
+    month_file = signals_dir / f"{datetime.now(timezone.utc).strftime('%Y-%m')}.jsonl"
     with open(month_file, "a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 

@@ -15,3 +15,50 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimeTypeFromHandle(CHAOS_IL2CPP_INTPTR handle) noexc
 CHAOS_IL2CPP_INTPTR ChaosTypeGetTypeFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosTypeEquals(CHAOS_IL2CPP_INTPTR type_a, CHAOS_IL2CPP_INTPTR type_b) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosTypeGetTypeInfo(CHAOS_IL2CPP_INTPTR type) noexcept;
+
+// Type stub stubs (SimpleForward replacements for GenericShapeDescriptors)
+CHAOS_IL2CPP_INTPTR ChaosTypeGetFieldBindingFlags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INTPTR bindingFlags) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeGetEvent(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeGetProperty(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INT32 ChaosTypeGetIsByRef(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeMakeArrayType(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeMakeByRefType(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INT32 ChaosTypeGetIsPointer(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INT32 ChaosTypeGetIsNested(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INT32 ChaosTypeGetIsNestedPrivate(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INT32 ChaosTypeGetIsNestedPublic(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INT32 ChaosTypeGetIsNotPublic(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INT32 ChaosTypeGetIsPublic(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeGetUnderlyingSystemType(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeGetElementType(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeGetEvents(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeGetInterfaces(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeGetNestedTypes(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeMakePointerType(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeGetNestedType(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeGetMembers(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeGetProperties(CHAOS_IL2CPP_INTPTR type) noexcept;
+
+// Assembly stubs
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetExportedTypes(CHAOS_IL2CPP_INTPTR assembly) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetForwardedTypes(CHAOS_IL2CPP_INTPTR assembly) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetManifestResourceNames(CHAOS_IL2CPP_INTPTR assembly) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetModules(CHAOS_IL2CPP_INTPTR assembly) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetEntryPoint(CHAOS_IL2CPP_INTPTR assembly) noexcept;
+
+// ParameterInfo stubs
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetOptionalCustomModifiers(CHAOS_IL2CPP_INTPTR param) noexcept;
+
+// FieldInfo stubs
+CHAOS_IL2CPP_INT32 ChaosReflectionFieldGetIsInitOnly(CHAOS_IL2CPP_INTPTR field) noexcept;
+CHAOS_IL2CPP_INT64 ChaosReflectionFieldGetFieldHandle(CHAOS_IL2CPP_INTPTR field) noexcept;
+CHAOS_IL2CPP_INT32 ChaosReflectionFieldGetIsLiteral(CHAOS_IL2CPP_INTPTR field) noexcept;
+
+// PropertyInfo stubs
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetIndexParameters(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INT32 ChaosReflectionPropertyGetCanRead(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INT32 ChaosReflectionPropertyGetCanWrite(CHAOS_IL2CPP_INTPTR prop) noexcept;
+
+// AssemblyName stubs
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCultureInfo(CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetVersion(CHAOS_IL2CPP_INTPTR name) noexcept;

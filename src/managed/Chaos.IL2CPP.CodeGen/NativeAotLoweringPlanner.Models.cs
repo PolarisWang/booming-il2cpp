@@ -13,7 +13,8 @@ public sealed partial class NativeAotLoweringPlanner
         SharedGenericBodyId? SharedGenericBodyId = null,
         InstantiationStubId? InstantiationStubId = null,
         RuntimeGenericContextArtifact? RuntimeGenericContext = null,
-        string? InlineCppExpression = null);
+        string? InlineCppExpression = null,
+        int ExternalRuntimeTableIndex = -1);
 
     private sealed record ExternalRuntimeHelperDefinition(
         string SubjectId,
@@ -23,6 +24,10 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrAbiSlotArtifact ReturnAbi,
         IReadOnlySet<int> RawArgumentIndices,
         IReadOnlySet<string>? ReferencedStaticFieldSubjectIds = null);
+
+    private sealed record ExternalRuntimeDispatchEntry(
+        string SubjectId,
+        int Index);
 
     private sealed record EnumerableJoinSupportVariant(
         string EnumerableTypeSubjectId,

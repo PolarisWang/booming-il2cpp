@@ -8,9 +8,8 @@
 //   CHAOS_IL2CPP_LOG_TRACE_INIT();
 //   CHAOS_IL2CPP_LOG_TRACE_FLUSH("/tmp/trace.jsonl");
 //
-// In PROFILE/SHIP builds all macros expand to ((void)0) — zero runtime overhead.
-// Enable via CMake: target_compile_definitions(chaos_common PUBLIC CHAOS_TRACE_ENABLED)
-// (Automatically set for Debug builds in chaos_common/CMakeLists.txt)
+// In SHIP builds all macros expand to ((void)0) — zero runtime overhead.
+// Enabled automatically for CHECK and PROFILE builds via config.h.
 
 #include <cstdint>
 #include <cstdio>
@@ -118,7 +117,7 @@ inline const char* cached_iso8601() {
 // Public macros
 // ============================================================================
 
-#ifdef CHAOS_TRACE_ENABLED
+#ifdef CHAOS_IL2CPP_TRACE_ENABLED
 
 #define CHAOS_IL2CPP_LOG_TRACE(stage, op, fmt_str, ...) do {                       \
     const auto _ts_ = ChaosIl2cpp::Common::detail::cached_iso8601();              \
@@ -156,12 +155,12 @@ inline const char* cached_iso8601() {
     ChaosIl2cpp::Common::detail::g_trace_ring.flush(path);                     \
 } while (0)
 
-#else // !CHAOS_TRACE_ENABLED
+#else // !CHAOS_IL2CPP_TRACE_ENABLED
 
 #define CHAOS_IL2CPP_LOG_TRACE(stage, op, fmt, ...) ((void)0)
 #define CHAOS_IL2CPP_LOG_TRACE_INIT()                ((void)0)
 #define CHAOS_IL2CPP_LOG_TRACE_FLUSH(path)           ((void)0)
 
-#endif // CHAOS_TRACE_ENABLED
+#endif // CHAOS_IL2CPP_TRACE_ENABLED
 
 #endif // CHAOS_IL2CPP_COMMON_TRACE_H_

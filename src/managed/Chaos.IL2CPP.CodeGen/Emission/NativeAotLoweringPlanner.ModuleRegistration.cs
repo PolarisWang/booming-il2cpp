@@ -92,7 +92,15 @@ public sealed partial class NativeAotLoweringPlanner
         MetadataRegistrationArtifact metadataRegistration)
     {
         if (reachableMethods == null || reachableMethods.Count == 0)
-            return string.Empty;
+        {
+            // No methods — emit nullptr so the linker always resolves the symbol.
+            var emptySb = new StringBuilder(256);
+            emptySb.AppendLine("// ── Hotpatch dispatch table (empty — no reachable methods) ──");
+            emptySb.AppendLine("// No hotpatch data for this module");
+            emptySb.AppendLine("extern \"C\" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module");
+            emptySb.AppendLine("    = nullptr;");
+            return emptySb.ToString();
+        }
 
         var sb = new StringBuilder(4096);
         sb.AppendLine("// ── Hotpatch name index + dispatch table ────────────────────");
@@ -100,8 +108,8 @@ public sealed partial class NativeAotLoweringPlanner
         // Build token lookup from metadata registration.
         var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);
 
-        // Collect (type_name, method_name, token, native_symbol, param_count) tuples.
-        var entries = new List<(string TypeName, string MethodName, uint Token, string NativeSymbol, int ParamCount)>();
+        // Collect (type_name, type_namespace, method_name, token, native_symbol, param_count) tuples.
+        var entries = new List<(string TypeName, string TypeNamespace, string MethodName, uint Token, string NativeSymbol, int ParamCount)>();
         foreach (var method in reachableMethods)
         {
             string typeSubjectId;
@@ -115,21 +123,24 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             var typeName = GetTypeDisplayName(typeSubjectId);
+            var typeNamespace = GetTypeNamespace(typeSubjectId);
             var methodName = GetMethodName(method.SubjectId);
             uint token = tokenLookup.TryGetMethodToken(method.SubjectId);
             if (token == 0)
                 continue; // skip methods without metadata tokens
 
-            entries.Add((typeName, methodName, token, method.NativeSymbol, method.ParameterCount));
+            entries.Add((typeName, typeNamespace, methodName, token, method.NativeSymbol, method.ParameterCount));
         }
 
         if (entries.Count == 0)
             return string.Empty;
 
-        // Group by type name and sort type groups lexicographically.
+        // Group by (namespace, type_name) tuple and sort lexicographically.
+        // This mirrors the C++ CompareTypeName which compares namespace first, then type_name.
         var grouped = entries
-            .GroupBy(e => e.TypeName, StringComparer.Ordinal)
-            .OrderBy(g => g.Key, StringComparer.Ordinal)
+            .GroupBy(e => (e.TypeNamespace, e.TypeName))
+            .OrderBy(g => g.Key.TypeNamespace, StringComparer.Ordinal)
+            .ThenBy(g => g.Key.TypeName, StringComparer.Ordinal)
             .ToList();
 
         // ── Method entries (grouped by type, in type-sorted order) ──
@@ -150,13 +161,14 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine();
 
         // ── Type entries with first_method_index ──
-        sb.AppendLine("// Type name index entries");
+        sb.AppendLine("// Type name index entries (namespace, short_name)");
         sb.Append("static constexpr HotpatchTypeEntryV0 s_hotpatch_types[")
           .Append(grouped.Count).AppendLine("] = {");
         uint methodIndex = 0;
         foreach (var group in grouped)
         {
-            sb.Append("    { ").Append(ToCppStringLiteral(group.Key)).Append(", ")
+            sb.Append("    { ").Append(ToCppStringLiteral(group.Key.TypeName)).Append(", ")
+              .Append(ToCppStringLiteral(group.Key.TypeNamespace)).Append(", ")
               .Append(methodIndex).Append("u, ")
               .Append((ushort)group.Count()).Append("u },");
             sb.AppendLine();
@@ -213,14 +225,10 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("};");
         sb.AppendLine();
 
-        // ── Static initializer: register with runtime ──
-        sb.AppendLine("// Register hotpatch table with the runtime on load");
-        sb.AppendLine("static const CHAOS_IL2CPP_UINT32 s_hotpatch_registered = []()");
-        sb.AppendLine("{");
-        sb.AppendLine("    ::chaos::il2cpp::runtime_core::RegisterHotpatchModule(");
-        sb.AppendLine("        &s_hotpatch_module);");
-        sb.AppendLine("    return 1u;");
-        sb.AppendLine("}();");
+        // ── Expose module to BootstrapRuntime via extern "C" ──
+        sb.AppendLine("// Expose hotpatch module to BootstrapRuntime");
+        sb.AppendLine("extern \"C\" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module");
+        sb.AppendLine("    = &s_hotpatch_module;");
 
         // ── Reverse P/Invoke (UnmanagedCallersOnly) wrapper registration ──
         if (_reversePInvokeEntries.Count > 0)
@@ -481,8 +489,8 @@ public sealed partial class NativeAotLoweringPlanner
             uint tokenForSwitch = GetTypeTokenForSubjectId(attrSubjectId);
             sb.Append("        case 0x").Append(tokenForSwitch.ToString("X8")).AppendLine("u:");
             sb.AppendLine("        {");
-            sb.Append("            auto* attr = new ")
-                .Append(GetNativeTypeSymbol(attrSubjectId)).AppendLine("{};");
+            sb.Append("            auto* attr = CHAOS_IL2CPP_NEW_GC(")
+                .Append(GetNativeTypeSymbol(attrSubjectId)).AppendLine(");");
             sb.Append("            attr->header.type_info = &")
                 .Append(GetNativeTypeInfoSymbol(attrSubjectId)).AppendLine(";");
 
@@ -729,6 +737,94 @@ public sealed partial class NativeAotLoweringPlanner
             .Replace("\n", "\\n")
             .Replace("\r", "\\r")
             .Replace("\t", "\\t");
+    }
+
+    /// <summary>
+    /// Emit the external runtime dispatch table: a startup-time-resolved function
+    /// pointer table for cross-assembly calls that would otherwise fall through to
+    /// chaos_external_runtime_* stub generation.
+    ///
+    /// Generated C++ pattern:
+    /// <code>
+    /// extern "C" const char* kChaosExternalRuntimeSubjects[] = { "subj1", "subj2", ... };
+    /// extern "C" void* kChaosExternalRuntimeFnTable[2] = { nullptr, nullptr };
+    /// extern "C" int32_t kChaosExternalRuntimeCount = 2;
+    /// </code>
+    ///
+    /// For entries that have a corresponding chaos_external_runtime_* helper function
+    /// (shaped helpers defined in the same TU), the function pointer is pre-filled
+    /// at compile time.  Other entries remain nullptr and are resolved at startup
+    /// by ChaosResolveExternalRuntimeFnTable() via the HotpatchNameRegistry.
+    ///
+    /// The interpreter's ResolveDirectFn uses kChaosExternalRuntimeFnTable as a
+    /// third fallback (after AotDirectDispatch and HotpatchNameRegistry) so that
+    /// patched methods can call cross-assembly functions correctly.
+    /// </summary>
+    internal string BuildExternalRuntimeDispatchTable(
+        Dictionary<string, string>? helperSymbolBySubjectId = null)
+    {
+        if (_externalRuntimeSubjects.Count == 0)
+        {
+            // Always emit the count symbol so the runtime can safely reference it.
+            var emptySb = new StringBuilder(256);
+            emptySb.AppendLine("// ── External Runtime Dispatch Table (empty) ─────────────────");
+            emptySb.AppendLine("extern \"C\" const char* kChaosExternalRuntimeSubjects[1] = { nullptr };");
+            emptySb.AppendLine("extern \"C\" void* kChaosExternalRuntimeFnTable[1] = { nullptr };");
+            emptySb.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeCount = 0;");
+            return emptySb.ToString();
+        }
+
+        // Sort by subjectId for deterministic output
+        var sorted = _externalRuntimeSubjects
+            .OrderBy(kv => kv.Key, StringComparer.Ordinal)
+            .ToArray();
+
+        // Build a lookup: subjectId → chaos_external_runtime_* symbol (for shaped entries)
+        // If caller passed helperSymbolBySubjectId, use it directly; otherwise build from optional IReadOnlyList<>.
+
+        var sb = new StringBuilder(4096);
+        sb.AppendLine("// ── External Runtime Dispatch Table ──────────────────────────");
+        sb.AppendLine("// Startup-time-resolved function pointers for cross-assembly calls.");
+        sb.AppendLine();
+
+        // SubjectId strings (compiler can merge duplicates across TUs)
+        sb.Append("extern \"C\" const char* kChaosExternalRuntimeSubjects[")
+            .Append(sorted.Length).AppendLine("] =");
+        sb.AppendLine("{");
+        foreach (var kv in sorted)
+        {
+            sb.Append("    ").Append(ToCppStringLiteral(kv.Key)).AppendLine(",");
+        }
+        sb.AppendLine("};");
+        sb.AppendLine();
+
+        // Function pointer table — pre-filled for shaped entries, nullptr for others
+        sb.Append("extern \"C\" void* kChaosExternalRuntimeFnTable[")
+            .Append(sorted.Length).AppendLine("] =");
+        sb.AppendLine("{");
+        for (int i = 0; i < sorted.Length; i++)
+        {
+            string subjectId = sorted[i].Key;
+            if (helperSymbolBySubjectId.TryGetValue(subjectId, out var helperSymbol))
+            {
+                // Shaped entry: pre-fill with the chaos_external_runtime_* function pointer
+                sb.Append("    reinterpret_cast<void*>(&").Append(helperSymbol).AppendLine("),");
+            }
+            else
+            {
+                // Non-shaped entry: resolved at startup by ChaosResolveExternalRuntimeFnTable()
+                sb.AppendLine("    nullptr,");
+            }
+        }
+        sb.AppendLine("};");
+        sb.AppendLine();
+
+        // Count
+        sb.Append("extern \"C\" int32_t kChaosExternalRuntimeCount = ")
+            .Append(sorted.Length).AppendLine(";");
+        sb.AppendLine();
+
+        return sb.ToString();
     }
 
     private static uint ComputeAbiManifestChecksum(IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)

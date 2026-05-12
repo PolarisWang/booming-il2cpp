@@ -408,7 +408,15 @@ def _generate_patch_data(family_slug: str, *,
     patchdata_dir = family_dir / "il2cpp_dist" / "patch" / "patchdata"
     patchdata_dir.mkdir(parents=True, exist_ok=True)
     patchdata_path = patchdata_dir / f"{family_slug}.patchdata"
-    if not _run_emit_patch_data(build_result["dll_path"], str(patchdata_path)):
+
+    # Pass aot-core-ir.json so .patchdata contains pre-lowered IR for interpreter dispatch.
+    # Without this, GetAotCoreIr() returns NULL and FastExecute is never entered.
+    aot_core_ir_path = str(family_dir / "il2cpp_dist" / "genuine" / "aot-core-ir.json")
+    if not os.path.exists(aot_core_ir_path):
+        aot_core_ir_path = None
+
+    if not _run_emit_patch_data(build_result["dll_path"], str(patchdata_path),
+                                aot_core_ir_path=aot_core_ir_path):
         print(f"    [gen_patch] emit-patch-data failed")
         return _write_sentinel_patchdata(family_dir)
 
@@ -477,13 +485,36 @@ def _write_sentinel_patchdata(family_dir: Path) -> bool:
     return True
 
 
-def _build_entry_exe(family_slug: str, *, verification: Path | None = None) -> bool:
+def _inject_config_tier(cmakelists: Path, config_tier: str) -> None:
+    """Inject target_compile_definitions for config tier into CMakeLists.txt.
+
+    Ensures the entry EXE gets the correct CHAOS_IL2CPP_CONFIG_* define.
+    """
+    config_tier = config_tier.upper()
+    assert config_tier in ("CHECK", "PROFILE", "SHIP"), f"Invalid config tier: {config_tier}"
+    marker = "# chaos-il2cpp config tier"
+    text = cmakelists.read_text(encoding="utf-8")
+    if marker in text:
+        return  # already injected
+    line = f"target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_{config_tier})  {marker}"
+    # Insert before the closing paren of add_executable or after link libraries
+    text = text.replace(
+        "target_link_libraries(entry PRIVATE",
+        f"{line}\ntarget_link_libraries(entry PRIVATE",
+    )
+    cmakelists.write_text(text, encoding="utf-8")
+
+
+def _build_entry_exe(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK") -> bool:
     v = verification or _VERIFICATION
     genuine_out = v / family_slug / "il2cpp_dist" / "genuine"
     cmakelists = genuine_out / "CMakeLists.txt"
     if not cmakelists.exists():
         print(f"    [build_entry] no CMakeLists.txt at {cmakelists}")
         return False
+
+    # Inject config tier compile definition into CMakeLists.txt
+    _inject_config_tier(cmakelists, config_tier)
 
     # Ensure runtime-patchdata.cpp exists (sentinel if not generated)
     # The enhanced runtime-entry.cpp references kPatchData/kPatchDataSize/kPatchDataHostClassName.
@@ -606,12 +637,15 @@ add_compile_options(/utf-8)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CHAOS_IL2CPP_CONFIG_TIER "{config_tier}")
+
 add_executable(entry
     ${{CHAOS_GEN_DIR}}/runtime-entry.cpp
     {gen_cpp_entries}{patchdata_entry}{supplemental_entry}{stubs_entry}
 )
 
 target_compile_options(entry PRIVATE /GS-)
+target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_${{CHAOS_IL2CPP_CONFIG_TIER}})
 
 target_link_libraries(entry PRIVATE
     ${{NATIVE_LIBS}}
@@ -756,11 +790,12 @@ def _has_synthetic_method_ids(method_subject_ids: list[str]) -> bool:
     return False
 
 
-def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib", variant: str | None = None) -> dict:
+def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib", variant: str | None = None, config_tier: str = "CHECK") -> dict:
     """Run the full pipeline for one family. Returns result dict."""
     verification = _VERIFICATION_BASE / assembly_name
     result = {
         "family": family_slug,
+        "config_tier": config_tier,
         "steps": {},
         "success": False,
     }
@@ -826,7 +861,7 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
 
     # Step 3: Build entry.exe from generated C++ via CMake
     print(f"  [3/3] Building entry.exe from generated C++...")
-    if not _build_entry_exe(family_slug, verification=verification):
+    if not _build_entry_exe(family_slug, verification=verification, config_tier=config_tier):
         result["steps"]["build_entry_exe"] = "FAILED"
         result["error"] = "entry.exe build failed"
         trace("family_entry_build_failed", family=family_slug)
@@ -933,6 +968,8 @@ def main() -> None:
     parser.add_argument("--families", nargs="*", help="Space-separated subset of family slugs to process. Auto-discovers from contracts if not specified.")
     parser.add_argument("--translate-assemblies", action="store_true", help="Translate actual assembly DLLs directly (final-form IL2CPP, no synthetic entrypoints)")
     parser.add_argument("--assembly-dlls", nargs="*", help="Space-separated assembly DLL paths for direct translation")
+    parser.add_argument("--native-config", default="CHECK", choices=["CHECK", "PROFILE", "SHIP"],
+                        help="Native C++ config tier (default: CHECK)")
     args = parser.parse_args()
 
     global _VERIFICATION
@@ -962,14 +999,14 @@ def main() -> None:
     print(f"Verification: {_VERIFICATION}")
     print()
 
-    trace("batch_start", assembly=args.assembly_name, family_count=len(families))
+    trace("batch_start", assembly=args.assembly_name, family_count=len(families), native_config=args.native_config)
 
     results = []
     passed = 0
     failed = 0
 
     for idx, family_slug in enumerate(families):
-        family_result = run_family(family_slug, assembly_name=args.assembly_name)
+        family_result = run_family(family_slug, assembly_name=args.assembly_name, config_tier=args.native_config)
         results.append(family_result)
 
         if family_result["success"]:

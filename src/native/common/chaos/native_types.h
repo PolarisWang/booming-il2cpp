@@ -6,6 +6,8 @@
 // these macros instead of raw std:: types.  Backend implementations
 // are swapped by changing the definitions below.
 
+#include <chaos/config.h>
+
 #include <algorithm>
 #include <array>
 #include <atomic>
@@ -234,13 +236,12 @@
 #define CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(ptr)                                  \
     ::chaos::il2cpp::memory_domain::DomainFreeTagged(const_cast<void*>(static_cast<const void*>(ptr)))
 
-// Reallocate through the current TLS domain heap.
-// NOTE: REALLOC does not preserve the tag.  Use only when allocation and
-// free happen within the same domain context.
+// Reallocate through the current TLS domain heap, preserving the routing
+// tag so that DomainFreeTagged() can find the correct heap regardless of
+// the calling thread's domain context.
 #define CHAOS_IL2CPP_DOMAIN_CURRENT_REALLOC(ptr, new_size)                       \
-    (::chaos::il2cpp::memory_domain::CurrentDomain()                              \
-         ? ::chaos::il2cpp::memory_domain::CurrentDomain()->heap->Reallocate(ptr, new_size) \
-         : CHAOS_IL2CPP_REALLOC(ptr, new_size))
+    ::chaos::il2cpp::memory_domain::DomainCurrentReallocateTagged(               \
+        const_cast<void*>(static_cast<const void*>(ptr)), new_size)
 
 // String duplicate through current domain (uses tagged allocation internally).
 #define CHAOS_IL2CPP_DOMAIN_CURRENT_STRDUP(src)                                \

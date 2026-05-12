@@ -4,8 +4,12 @@
 // Unified logging system for Chaos IL2CPP.
 //
 // ============================================================================
-// Architecture: Per-thread TLS ring buffer (64 entries x 256 B = 16 KB/thread).
-// Hot path (tls_write) is lock-free. Buffer wrap triggers global-mutex flush.
+// Architecture: Direct-write with global mutex. Each CHAOS_IL2CPP_LOG_XXXXX
+// call formats the message and writes it to stdout immediately — no ring
+// buffer, no batching, no explicit fflush needed.
+//
+// stdout must be set to line-buffered mode (_IOLBF) at RuntimeInit so that
+// fputs + '\n' auto-flushes via libc.
 // ============================================================================
 //
 // ── Log levels ──────────────────────────────────────────────────────────────
@@ -18,13 +22,8 @@
 //   CHAOS_TRACE_ENABLED → 3 (DEBUG in Debug build)
 //   otherwise           → 2 (INFO in Ship build)
 //
-// ── Output targets ─────────────────────────────────────────────────────────
-// CHAOS_IL2CPP_LOG_OUTPUT_STDOUT = 1  (default)
-// CHAOS_IL2CPP_LOG_OUTPUT_TRACE  = 2  (route to trace ring buffer)
-// Runtime switchable via CHAOS_IL2CPP_LOG_SET_OUTPUT(mask).
-//
 // ── Usage ───────────────────────────────────────────────────────────────────
-//   // Simple message (no formatting – pure strcpy, lowest overhead)
+//   // Simple message (no formatting)
 //   CHAOS_IL2CPP_LOG_ERROR("Memory", "allocation failed");
 //   CHAOS_IL2CPP_LOG_WARN("GC", "heap near limit");
 //
@@ -32,50 +31,33 @@
 //   CHAOS_IL2CPP_LOG_ERROR_M("Memory", "alloc {0} failed at {1}", size, loc);
 //   CHAOS_IL2CPP_LOG_INFO_M("Init", "loaded {0} types in {1}ms", count, ms);
 //
-//   // Explicit flush (normally auto-flushed on buffer wrap)
-//   CHAOS_IL2CPP_LOG_FLUSH();
-//
-//   // Switch output target at runtime
-//   CHAOS_IL2CPP_LOG_SET_OUTPUT(CHAOS_IL2CPP_LOG_OUTPUT_STDOUT);
+//   // Raw protocol output (no log prefix, machine-consumed)
+//   CHAOS_IL2CPP_LOG_WRITE_RAW("benchmark data\n");
 
 #include <cstdint>
 #include <cstdio>
-#include <cstring>
 #include <atomic>
 #include <mutex>
 #include <string>
 
 #include <chaos/trace.h>
+#include <chaos/config.h>
 #include <fmt/format.h>
 
 // ── Compile-time log level ──────────────────────────────────────────────────
+// Default from config.h: CHECK=3, PROFILE=2, SHIP=0.
+// Individual translation units may override before including this header.
 
 #ifndef CHAOS_IL2CPP_LOG_LEVEL
-#  ifdef CHAOS_TRACE_ENABLED
-#    define CHAOS_IL2CPP_LOG_LEVEL 3  // DEBUG in debug builds
-#  else
-#    define CHAOS_IL2CPP_LOG_LEVEL 2  // INFO in ship builds
-#  endif
+#  define CHAOS_IL2CPP_LOG_LEVEL CHAOS_IL2CPP_DEFAULT_LOG_LEVEL
 #endif
+
+// ── Log level indicator constants ──────────────────────────────────────────
 
 #define CHAOS_IL2CPP_LOG_LEVEL_ERROR 0
 #define CHAOS_IL2CPP_LOG_LEVEL_WARN  1
 #define CHAOS_IL2CPP_LOG_LEVEL_INFO  2
 #define CHAOS_IL2CPP_LOG_LEVEL_DEBUG 3
-
-// ── Output target bitmask ───────────────────────────────────────────────────
-
-#define CHAOS_IL2CPP_LOG_OUTPUT_STDOUT  1u
-#define CHAOS_IL2CPP_LOG_OUTPUT_TRACE   2u
-
-// ── Explicit flush ──────────────────────────────────────────────────────────
-// CHAOS_IL2CPP_LOG_FLUSH()        — flush TLS buffer to configured outputs
-// CHAOS_IL2CPP_LOG_FLUSH_STDOUT() — raw fflush(stdout) under flush mutex
-
-// ── Raw write (machine protocol) ────────────────────────────────────────────
-// CHAOS_IL2CPP_LOG_WRITE_RAW(msg) — write raw text directly to stdout.
-//   Bypasses TLS buffer, no prefix formatting, under flush mutex.
-//   Use for machine-consumed protocol output (e.g., benchmark JSON).
 
 // ============================================================================
 // Implementation (header-only, inline)
@@ -84,27 +66,8 @@
 namespace ChaosIl2cpp::Common {
 namespace log_internal {
 
-constexpr int kLogRingCapacity = 64;
-constexpr int kLogLineMax     = 256;
-
-struct LogEntry {
-    char line[kLogLineMax];
-};
-
-struct ThreadLogBuffer {
-    LogEntry entries[kLogRingCapacity]{};
-    uint32_t head = 0;
-};
-
-// ── Global state ────────────────────────────────────────────────────────────
-inline std::atomic<uint32_t> g_log_output_mask{CHAOS_IL2CPP_LOG_OUTPUT_STDOUT};
-inline std::mutex            g_log_flush_mutex{};
-
-// ── TLS buffer ─────────────────────────────────────────────────────────────
-inline ThreadLogBuffer& tls_buffer() {
-    static thread_local ThreadLogBuffer buf;
-    return buf;
-}
+// ── Global mutex for thread-safe stdout access ──────────────────────────────
+inline std::mutex g_log_mutex{};
 
 // ── Cached timestamp (refreshed at most once per ms) ────────────────────────
 inline const char* cached_log_timestamp() {
@@ -127,75 +90,9 @@ inline const char* cached_log_timestamp() {
     return s_buf;
 }
 
-// ── TLS write (lock-free) ───────────────────────────────────────────────────
-inline void tls_write(const char* line) {
-    auto& buf = tls_buffer();
-    auto idx = buf.head % kLogRingCapacity;
-    std::strncpy(buf.entries[idx].line, line, kLogLineMax - 1);
-    buf.entries[idx].line[kLogLineMax - 1] = '\0';
-    buf.head++;
-}
-
-// ── TLS flush to configured outputs ─────────────────────────────────────────
-inline void flush_tls_buffer(bool force = false) {
-    auto& buf = tls_buffer();
-    auto count = buf.head;
-    if (count == 0) return;
-
-    auto mask = g_log_output_mask.load(std::memory_order_relaxed);
-
-    // Determine range: if head hasn't wrapped, flush [0, head).
-    // If wrapped, flush [head - kLogRingCapacity, head) = the latest ring.
-    auto start = count >= kLogRingCapacity ? count - kLogRingCapacity : 0;
-    auto end   = count;
-
-    std::lock_guard<std::mutex> guard(g_log_flush_mutex);
-
-    for (auto i = start; i < end; ++i) {
-        auto idx = i % kLogRingCapacity;
-        const char* line = buf.entries[idx].line;
-        if (line[0] == '\0') continue;
-
-        if (mask & CHAOS_IL2CPP_LOG_OUTPUT_STDOUT) {
-            std::fputs(line, stdout);
-            std::fputc('\n', stdout);
-        }
-    }
-
-    if (mask & CHAOS_IL2CPP_LOG_OUTPUT_STDOUT) {
-        std::fflush(stdout);
-    }
-
-    // Reset buffer (keep the unflushed tail if force=false and buffer wrapped)
-    if (force || count < kLogRingCapacity) {
-        buf.head = 0;
-    }
-}
-
-// ── Raw write (bypasses TLS buffer, no prefix formatting) ───────────────────
-// Used for machine-consumed protocol output (e.g., benchmark JSON).
-inline void write_raw(const char* msg) {
-    std::lock_guard<std::mutex> guard(g_log_flush_mutex);
-    std::fputs(msg, stdout);
-}
-
-// Formatted raw write: fmtlib-style {0} {1} ...
-template <typename... Args>
-inline void write_raw_fmt(fmt::format_string<Args...> fmt_str,
-                           Args&&... args) {
-    auto formatted = fmt::format(fmt_str, std::forward<Args>(args)...);
-    write_raw(formatted.c_str());
-}
-
-// ── Raw stdout flush ────────────────────────────────────────────────────────
-inline void flush_stdout() {
-    std::lock_guard<std::mutex> guard(g_log_flush_mutex);
-    std::fflush(stdout);
-}
-
 // ── Format helpers ──────────────────────────────────────────────────────────
 
-// Simple message: no format args, pure string copy
+// Simple message: no format args
 inline std::string format_simple(const char* level, const char* category,
                                   const char* message) {
     return fmt::format("[{0}][{1}][{2}] {3}",
@@ -212,13 +109,35 @@ inline std::string format_fmt(const char* level, const char* category,
                        fmt::format(fmt_str, std::forward<Args>(args)...));
 }
 
-// Core log dispatch: format + TLS write + conditional flush
-inline void log_dispatch(const std::string& formatted) {
-    tls_write(formatted.c_str());
-    // Auto-flush on every wrap
-    if (tls_buffer().head % kLogRingCapacity == 0) {
-        flush_tls_buffer();
-    }
+// ── Log write (lock-protected, immediate) ───────────────────────────────────
+// Each call acquires g_log_mutex, writes the formatted line + newline to
+// stdout. With _IOLBF the '\n' triggers libc auto-flush — no fflush needed.
+
+inline void log_write(const std::string& formatted) {
+    std::lock_guard<std::mutex> guard(g_log_mutex);
+    std::fputs(formatted.c_str(), stdout);
+    std::fputc('\n', stdout);
+}
+
+// ── Raw write (bypasses log formatting, no prefix, no newline added) ────────
+// Used for machine-consumed protocol output (e.g., benchmark JSON).
+inline void write_raw(const char* msg) {
+    std::lock_guard<std::mutex> guard(g_log_mutex);
+    std::fputs(msg, stdout);
+}
+
+// Formatted raw write: fmtlib-style {0} {1} ...
+template <typename... Args>
+inline void write_raw_fmt(fmt::format_string<Args...> fmt_str,
+                           Args&&... args) {
+    auto formatted = fmt::format(fmt_str, std::forward<Args>(args)...);
+    write_raw(formatted.c_str());
+}
+
+// ── Raw stdout flush (only needed for write_raw which omits '\n') ───────────
+inline void flush_stdout() {
+    std::lock_guard<std::mutex> guard(g_log_mutex);
+    std::fflush(stdout);
 }
 
 } // namespace log_internal
@@ -232,14 +151,14 @@ inline void log_dispatch(const std::string& formatted) {
 
 #define CHAOS_IL2CPP_LOG_ERROR(category, message)                     do { \
     CHAOS_IL2CPP_LOG_TRACE((category), "error", "message={0}", (message)); \
-    ::ChaosIl2cpp::Common::log_internal::log_dispatch(                     \
-        ::ChaosIl2cpp::Common::log_internal::format_simple(                \
+    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
+        ::ChaosIl2cpp::Common::log_internal::format_simple(                 \
             "ERROR", (category), (message)));                               \
 } while (0)
 
 #define CHAOS_IL2CPP_LOG_ERROR_M(category, fmt_str, ...)              do { \
     CHAOS_IL2CPP_LOG_TRACE((category), "error", "formatted=true");         \
-    ::ChaosIl2cpp::Common::log_internal::log_dispatch(                     \
+    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
         ::ChaosIl2cpp::Common::log_internal::format_fmt(                   \
             "ERROR", (category), (fmt_str), ##__VA_ARGS__));               \
 } while (0)
@@ -249,14 +168,14 @@ inline void log_dispatch(const std::string& formatted) {
 #if CHAOS_IL2CPP_LOG_LEVEL >= 1
 #define CHAOS_IL2CPP_LOG_WARN(category, message)                       do { \
     CHAOS_IL2CPP_LOG_TRACE((category), "warn", "message={0}", (message));   \
-    ::ChaosIl2cpp::Common::log_internal::log_dispatch(                     \
-        ::ChaosIl2cpp::Common::log_internal::format_simple(                \
+    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
+        ::ChaosIl2cpp::Common::log_internal::format_simple(                 \
             "WARN", (category), (message)));                                \
 } while (0)
 
 #define CHAOS_IL2CPP_LOG_WARN_M(category, fmt_str, ...)               do { \
     CHAOS_IL2CPP_LOG_TRACE((category), "warn", "formatted=true");          \
-    ::ChaosIl2cpp::Common::log_internal::log_dispatch(                     \
+    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
         ::ChaosIl2cpp::Common::log_internal::format_fmt(                   \
             "WARN", (category), (fmt_str), ##__VA_ARGS__));                \
 } while (0)
@@ -269,13 +188,13 @@ inline void log_dispatch(const std::string& formatted) {
 
 #if CHAOS_IL2CPP_LOG_LEVEL >= 2
 #define CHAOS_IL2CPP_LOG_INFO(category, message)                      do { \
-    ::ChaosIl2cpp::Common::log_internal::log_dispatch(                     \
-        ::ChaosIl2cpp::Common::log_internal::format_simple(                \
+    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
+        ::ChaosIl2cpp::Common::log_internal::format_simple(                 \
             "INFO", (category), (message)));                                \
 } while (0)
 
 #define CHAOS_IL2CPP_LOG_INFO_M(category, fmt_str, ...)               do { \
-    ::ChaosIl2cpp::Common::log_internal::log_dispatch(                     \
+    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
         ::ChaosIl2cpp::Common::log_internal::format_fmt(                   \
             "INFO", (category), (fmt_str), ##__VA_ARGS__));                \
 } while (0)
@@ -288,13 +207,13 @@ inline void log_dispatch(const std::string& formatted) {
 
 #if CHAOS_IL2CPP_LOG_LEVEL >= 3
 #define CHAOS_IL2CPP_LOG_DEBUG(category, message)                     do { \
-    ::ChaosIl2cpp::Common::log_internal::log_dispatch(                     \
-        ::ChaosIl2cpp::Common::log_internal::format_simple(                \
+    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
+        ::ChaosIl2cpp::Common::log_internal::format_simple(                 \
             "DEBUG", (category), (message)));                               \
 } while (0)
 
 #define CHAOS_IL2CPP_LOG_DEBUG_M(category, fmt_str, ...)              do { \
-    ::ChaosIl2cpp::Common::log_internal::log_dispatch(                     \
+    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
         ::ChaosIl2cpp::Common::log_internal::format_fmt(                   \
             "DEBUG", (category), (fmt_str), ##__VA_ARGS__));               \
 } while (0)
@@ -305,29 +224,21 @@ inline void log_dispatch(const std::string& formatted) {
 
 // ── Control macros ─────────────────────────────────────────────────────────
 
-#define CHAOS_IL2CPP_LOG_FLUSH()                                         do { \
-    ::ChaosIl2cpp::Common::log_internal::flush_tls_buffer(true);              \
-} while (0)
+// CHAOS_IL2CPP_LOG_FLUSH is a no-op: _IOLBF flushes on every '\n'.
+// Keep the macro for source compatibility.
+#define CHAOS_IL2CPP_LOG_FLUSH()                     ((void)0)
 
-#define CHAOS_IL2CPP_LOG_SET_OUTPUT(mask)                                do { \
-    ::ChaosIl2cpp::Common::log_internal::g_log_output_mask.store(             \
-        (mask), std::memory_order_relaxed);                                    \
-} while (0)
-
-// ── Raw protocol output (bypasses log formatting, under flush mutex) ────────
-// For machine-consumed output that must not get log prefixes, e.g. benchmark JSON.
-// Write is pre-formatted by the caller.
+// ── Raw protocol output (bypasses log formatting, under log mutex) ──────────
 #define CHAOS_IL2CPP_LOG_WRITE_RAW(msg)                                   do { \
     ::ChaosIl2cpp::Common::log_internal::write_raw((msg));                     \
 } while (0)
 
-// Formatted raw write: CHAOS_IL2CPP_LOG_WRITE_RAW_M("fmt {0}", arg)
 #define CHAOS_IL2CPP_LOG_WRITE_RAW_M(fmt_str, ...)                        do { \
     ::ChaosIl2cpp::Common::log_internal::write_raw_fmt(                       \
         (fmt_str), ##__VA_ARGS__);                                             \
 } while (0)
 
-// ── Flush stdout under log flush mutex ──────────────────────────────────────
+// ── Flush stdout under log mutex ────────────────────────────────────────────
 #define CHAOS_IL2CPP_LOG_FLUSH_STDOUT()                                   do { \
     ::ChaosIl2cpp::Common::log_internal::flush_stdout();                       \
 } while (0)

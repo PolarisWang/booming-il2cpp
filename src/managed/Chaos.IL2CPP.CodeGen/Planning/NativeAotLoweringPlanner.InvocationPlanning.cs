@@ -132,6 +132,55 @@ public sealed partial class NativeAotLoweringPlanner
         return [];
     }
 
+    /// <summary>
+    /// Scans all reachable methods' instructions for cross-assembly calls that would
+    /// fall through to the chaos_external_runtime_* stub path. These are callees that:
+    ///   1. Are NOT in our method dictionary (cross-assembly, outside compilation closure)
+    ///   2. Are NOT handled by ShapeRegistry (GenericShapeDescriptor/SimpleForward)
+    ///   3. Are NOT instantiation stubs
+    ///
+    /// Such calls are collected into <see cref="_externalRuntimeSubjects"/> with a
+    /// table index, enabling O(1) startup-time-resolved dispatch instead of per-method
+    /// C++ wrapper stubs.
+    /// </summary>
+    private void CollectExternalRuntimeDispatchEntries(
+        IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
+    {
+        int nextIndex = _externalRuntimeSubjects.Count;
+        foreach (var method in reachableMethods)
+        {
+            foreach (var instruction in method.Instructions)
+            {
+                string? callee = instruction.Callee ?? instruction.TargetReference?.SubjectId;
+                if (string.IsNullOrEmpty(callee))
+                    continue;
+
+                // Already in method dictionary → direct call, no dispatch table needed
+                if (_methodsBySubjectId.ContainsKey(callee))
+                    continue;
+
+                // ShapeRegistry/ExternalRuntimeHelper handles it → still register in
+                // the dispatch table so the interpreter's ResolveDirectFn can find it.
+                if (TryCreateExternalRuntimeHelperDefinition(callee, out _))
+                {
+                    _externalRuntimeSubjects.TryAdd(callee, nextIndex++);
+                    continue;
+                }
+
+                // Instantiation stub → has a definition, no table needed
+                if (TryGetInstantiationStubSymbol(instruction.TargetReference?.InstantiationStubId) != null)
+                    continue;
+
+                // This callee would fall through to chaos_external_runtime_* stub generation.
+                // Assign a dispatch table index so the call site can use table-indexed dispatch.
+                if (!_externalRuntimeSubjects.ContainsKey(callee))
+                {
+                    _externalRuntimeSubjects[callee] = nextIndex++;
+                }
+            }
+        }
+    }
+
     private IReadOnlyList<ExternalRuntimeHelperDefinition> CollectExternalRuntimeHelpers(
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
         StaticInitializationSupportModel staticInitializationSupport)
@@ -624,6 +673,26 @@ public sealed partial class NativeAotLoweringPlanner
             return directInvocationTarget;
         }
 
+        // Check if the callee is in the external runtime dispatch table.
+        // These are cross-assembly calls that would otherwise fall through to
+        // chaos_external_runtime_* stubs — we dispatch via startup-time-resolved
+        // function pointer table instead.
+        string? tableKey = instruction.Callee ?? instruction.TargetReference?.SubjectId;
+        if (!string.IsNullOrEmpty(tableKey) &&
+            _externalRuntimeSubjects.TryGetValue(tableKey, out int tableIndex))
+        {
+            string? returnType = instruction.TargetReturnType;
+            if (string.IsNullOrEmpty(returnType) && !string.IsNullOrEmpty(instruction.Callee))
+                returnType = InferReturnTypeFromSubjectId(instruction.Callee);
+
+            return new InvocationTarget(
+                GetExternalRuntimeHelperSymbol(tableKey),
+                CreateLegacyAbiParameterSlots(GetRequiredTargetParameterCount(instruction)),
+                CreateLegacyReturnAbiSlot(returnType ?? instruction.TargetReturnType),
+                EmptyRawArgumentIndices,
+                ExternalRuntimeTableIndex: tableIndex);
+        }
+
         // Fallback: callee is not in our method dictionary and has no registered
         // runtime helper shape (e.g. BCL method like String.Join from a different
         // assembly not included in the closure).  Use instruction-level metadata
@@ -658,16 +727,16 @@ public sealed partial class NativeAotLoweringPlanner
                 (instruction.Callee ?? "<null>") + "'");
         }
 
-        string? returnType = instruction.TargetReturnType;
-        if (string.IsNullOrEmpty(returnType) && !string.IsNullOrEmpty(instruction.Callee))
+        string? returnType2 = instruction.TargetReturnType;
+        if (string.IsNullOrEmpty(returnType2) && !string.IsNullOrEmpty(instruction.Callee))
         {
-            returnType = InferReturnTypeFromSubjectId(instruction.Callee);
+            returnType2 = InferReturnTypeFromSubjectId(instruction.Callee);
         }
 
         return new InvocationTarget(
             symbol,
             CreateLegacyAbiParameterSlots(GetRequiredTargetParameterCount(instruction)),
-            CreateLegacyReturnAbiSlot(returnType ?? instruction.TargetReturnType),
+            CreateLegacyReturnAbiSlot(returnType2 ?? instruction.TargetReturnType),
             EmptyRawArgumentIndices,
             instruction.TargetReference?.OpenDefinitionSubjectId,
             instruction.TargetReference?.SharedGenericBodyId,

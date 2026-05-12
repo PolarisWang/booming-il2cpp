@@ -3,15 +3,32 @@
 #include <algorithm>
 #include <atomic>
 #include <cstring>
+#include <intrin.h>
 
 namespace chaos::il2cpp::runtime_core {
 
 // ── Binary search helpers ──────────────────────────────────────────────
 
+// Composite key for namespace+typename binary search.
+// The HotpatchTypeEntryV0 array is sorted by (namespace, type_name),
+// so bsearch needs a composite key.
+struct TypeNameLookupKey {
+    const char* ns;
+    const char* type_name;
+};
+
 int HotpatchNameRegistry::CompareTypeName(const void* key, const void* elem) noexcept {
-    const char* type_name = static_cast<const char*>(key);
+    const auto* lookup = static_cast<const TypeNameLookupKey*>(key);
     const auto* entry = static_cast<const HotpatchTypeEntryV0*>(elem);
-    return std::strcmp(type_name, entry->type_name);
+
+    // Compare namespace first (entries sorted by namespace, then type_name).
+    // Both the key and the entry always have valid C strings (codegen emits
+    // "" for global namespace types).
+    int cmp = std::strcmp(lookup->ns, entry->namespace_name);
+    if (cmp != 0) return cmp;
+
+    // Namespace matches, compare type_name.
+    return std::strcmp(lookup->type_name, entry->type_name);
 }
 
 int HotpatchNameRegistry::CompareTokenSlot(const void* key, const void* elem) noexcept {
@@ -30,20 +47,76 @@ void HotpatchNameRegistry::RegisterModule(const HotpatchModuleV0* module) noexce
     if (module->token_slot_entries == nullptr && module->token_slot_entry_count > 0) return;
 
     modules_.push_back(module);
+    BuildLookupCacheForModule(module, modules_.size() - 1);
+}
+
+void HotpatchNameRegistry::RegisterAllModules(const HotpatchModuleV0* const* modules, uint32_t count) noexcept {
+    if (modules == nullptr || count == 0) return;
+    for (uint32_t i = 0; i < count; ++i) {
+        RegisterModule(modules[i]);
+    }
+}
+
+void HotpatchNameRegistry::BuildLookupCacheForModule(const HotpatchModuleV0* mod, size_t module_index) noexcept {
+    // Build "ns\0type\0method" → (module_index<<32 | token) cache entries.
+    for (uint32_t ti = 0; ti < mod->type_entry_count; ++ti) {
+        const auto& type_entry = mod->type_entries[ti];
+        if (type_entry.method_count == 0) continue;
+
+        // Use namespace from the type entry (never null — codegen emits "" for global ns).
+        const char* ns = type_entry.namespace_name;
+        if (ns == nullptr) ns = "";
+
+        for (uint16_t mi = 0; mi < type_entry.method_count; ++mi) {
+            const auto& method_entry = mod->method_entries[type_entry.first_method_index + mi];
+
+            // Build key: "namespace\0typename\0methodname"
+            std::string key;
+            key.reserve(std::strlen(ns) + 1 +
+                        std::strlen(type_entry.type_name) + 1 +
+                        std::strlen(method_entry.method_name) + 1);
+            key.append(ns);
+            key.push_back('\0');
+            key.append(type_entry.type_name);
+            key.push_back('\0');
+            key.append(method_entry.method_name);
+
+            uint64_t value = (static_cast<uint64_t>(module_index) << 32) | method_entry.method_token;
+            lookup_cache_.emplace(std::move(key), value);
+        }
+    }
 }
 
 // ── Lookup ────────────────────────────────────────────────────────────
 
-uint64_t HotpatchNameRegistry::LookupMethod(const char* type_name,
+uint64_t HotpatchNameRegistry::LookupMethod(const char* ns,
+                                             const char* type_name,
                                              const char* method_name) const noexcept {
-    if (type_name == nullptr || method_name == nullptr) return 0;
+    if (ns == nullptr || type_name == nullptr || method_name == nullptr) return 0;
 
+    // Fast path: O(1) hash lookup from cache built during registration.
+    std::string key;
+    key.reserve(std::strlen(ns) + 1 + std::strlen(type_name) + 1 + std::strlen(method_name) + 1);
+    key.append(ns);
+    key.push_back('\0');
+    key.append(type_name);
+    key.push_back('\0');
+    key.append(method_name);
+
+    auto it = lookup_cache_.find(key);
+    if (it != lookup_cache_.end()) {
+        return it->second;
+    }
+
+    // Fallback: linear scan with bsearch per module (for modules registered
+    // before cache was added, or dynamic registration at runtime).
+    TypeNameLookupKey lk{ns, type_name};
     for (size_t mi = 0; mi < modules_.size(); ++mi) {
         const auto* mod = modules_[mi];
         if (mod == nullptr) continue;
 
         const auto* type_entry = static_cast<const HotpatchTypeEntryV0*>(
-            std::bsearch(type_name,
+            std::bsearch(&lk,
                          mod->type_entries,
                          mod->type_entry_count,
                          sizeof(HotpatchTypeEntryV0),
@@ -56,7 +129,6 @@ uint64_t HotpatchNameRegistry::LookupMethod(const char* type_name,
 
         for (uint16_t i = 0; i < type_entry->method_count; ++i) {
             if (std::strcmp(method_base[i].method_name, method_name) == 0) {
-                // Return composite key: (module_index << 32) | token
                 return (static_cast<uint64_t>(mi) << 32) | method_base[i].method_token;
             }
         }
@@ -156,11 +228,11 @@ void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, b
 
     if (patched) {
         entry->method_key = reinterpret_cast<uintptr_t>(method_key);
-        std::atomic_thread_fence(std::memory_order_release);
-        entry->flags |= kHotpatchActive;
+        // release: method_key visible before flags (reader uses acquire fence)
+        _InterlockedOr((volatile long*)&entry->flags, kHotpatchActive);
     } else {
-        entry->flags &= ~kHotpatchActive;
-        std::atomic_thread_fence(std::memory_order_release);
+        _InterlockedAnd((volatile long*)&entry->flags, ~kHotpatchActive);
+        // release: method_key visible before flags (reader uses acquire fence)
         entry->method_key = 0;
     }
 }
@@ -174,11 +246,11 @@ void HotpatchNameRegistry::SetPatched(uint32_t token, bool patched,
 
     if (patched) {
         entry->method_key = reinterpret_cast<uintptr_t>(method_key);
-        std::atomic_thread_fence(std::memory_order_release);
-        entry->flags |= kHotpatchActive;
+        // release: method_key visible before flags (reader uses acquire fence)
+        _InterlockedOr((volatile long*)&entry->flags, kHotpatchActive);
     } else {
-        entry->flags &= ~kHotpatchActive;
-        std::atomic_thread_fence(std::memory_order_release);
+        _InterlockedAnd((volatile long*)&entry->flags, ~kHotpatchActive);
+        // release: method_key visible before flags (reader uses acquire fence)
         entry->method_key = 0;
     }
 }

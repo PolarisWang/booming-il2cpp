@@ -38,6 +38,49 @@ FALLBACK_RATE_HIGH = 0.3
 
 DEFAULT_WINDOW_DAYS = 30
 
+# ── JSONL Rotation ───────────────────────────────────────────────────────────
+MAX_JSONL_BYTES = 10 * 1024 * 1024  # 10 MB
+
+
+def rotate_jsonl_if_needed(path: Path) -> None:
+    """Rotate a JSONL file if it exceeds MAX_JSONL_BYTES.
+
+    Archives to <path>.1 (up to .3), then truncates the original.
+    Silently skips if file doesn't exist or is under limit.
+    """
+    if not path.exists() or path.stat().st_size < MAX_JSONL_BYTES:
+        return
+    # Shift existing archives: .2 -> .3, .1 -> .2
+    for i in range(2, 0, -1):
+        src = path.with_suffix(f"{path.suffix}.{i}")
+        dst = path.with_suffix(f"{path.suffix}.{i + 1}")
+        if src.exists():
+            dst.unlink(missing_ok=True)
+            src.rename(dst)
+    # Rename current -> .1
+    archive = path.with_suffix(f"{path.suffix}.1")
+    path.rename(archive)
+    # Create new empty file
+    path.touch()
+    print(f"[rotate] Archived {path.name}: {archive.stat().st_size / 1024 / 1024:.1f}MB -> {path.name} (fresh)")
+
+
+def rotate_all_jsonl(repo_root: Path) -> None:
+    """Rotate all telemetry JSONL files if they exceed size limit."""
+    telemetry_dir = repo_root / "skills" / "lifecycle" / "telemetry"
+    if not telemetry_dir.exists():
+        return
+    for pattern in ["*.jsonl", "failure-patterns.jsonl", "success-patterns.jsonl"]:
+        for f in telemetry_dir.glob(pattern):
+            if f.is_file():
+                rotate_jsonl_if_needed(f)
+    # Signal files
+    signals_dir = repo_root / "skills" / "lifecycle" / "learning" / "signals"
+    if signals_dir.exists():
+        for f in signals_dir.glob("*.jsonl"):
+            if f.is_file():
+                rotate_jsonl_if_needed(f)
+
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -193,6 +236,9 @@ def compute_all_health(
     skill_filter: str | None = None,
 ) -> dict[str, Any]:
     """Load all telemetry and compute health for every skill."""
+    # Rotate JSONL files before loading if they exceed size limit
+    rotate_all_jsonl(repo_root)
+
     telemetry_dir = repo_root / "skills" / "lifecycle" / "telemetry"
     signals_dir = repo_root / "skills" / "lifecycle" / "learning" / "signals"
 

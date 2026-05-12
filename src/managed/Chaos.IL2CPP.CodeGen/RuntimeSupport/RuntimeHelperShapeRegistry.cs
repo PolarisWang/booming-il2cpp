@@ -806,65 +806,29 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1 });
 
 
-            // === Object.GetHashCode (GenericShapeDescriptor -- inline stub, no native function exists) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Object",
-                MethodName: "GetHashCode",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0xDEAD);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === Object.GetHashCode (SimpleForward) ===
+            registry.Register("System.Object", "GetHashCode", ["System.Object"],
+                ShapeKind.SimpleForward, "ChaosObjectGetHashCode",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === Object.ToString (GenericShapeDescriptor -- inline stub, no native function exists) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Object",
-                MethodName: "ToString",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === Object.ToString (SimpleForward) ===
+            registry.Register("System.Object", "ToString", ["System.Object"],
+                ShapeKind.SimpleForward, "ChaosObjectToString",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === Object.GetType (GenericShapeDescriptor -- inline stub, returns placeholder type handle) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Object",
-                MethodName: "GetType",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === Object.GetType (SimpleForward) ===
+            registry.Register("System.Object", "GetType", ["System.Object"],
+                ShapeKind.SimpleForward, "ChaosObjectGetType",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
             // === Object::Equals static (two-arg overload) ===
             registry.Register("System.Object", "Equals", ["System.Object", "System.Object"],
@@ -886,301 +850,120 @@ public sealed partial class NativeAotLoweringPlanner
                 }), CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0, 1 });
 
-            // === Stream.Flush (GenericShapeDescriptor -- no-op stub, no native runtime) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.IO.Stream",
-                MethodName: "Flush",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateVoidAbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === Stream/IO (SimpleForward) ===
+            registry.Register("System.IO.Stream", "Flush", [],
+                ShapeKind.SimpleForward, "ChaosStreamFlush",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === Stream::Seek (stub returning 0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.IO.Stream",
-                MethodName: "Seek",
-                Resolver: static (planner, callee, typeArgs) =>
+            registry.Register("System.IO.Stream", "Seek", ["System.Int64", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosStreamSeek",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                 {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT64", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT64 chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2",
-                    [
-                        "    (void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;",
-                        "    return static_cast<CHAOS_IL2CPP_INT64>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
-                        {
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                            new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                        }),
-                        new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                        new HashSet<int> { 0, 1, 2 });
-                }));
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0, 1, 2 });
 
-            // === Stream::SetLength (stub) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.IO.Stream",
-                MethodName: "SetLength",
-                Resolver: static (planner, callee, typeArgs) =>
+            registry.Register("System.IO.Stream", "SetLength", ["System.Int64"],
+                ShapeKind.SimpleForward, "ChaosStreamSetLength",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT64 chaos_arg_1",
-                    [
-                        "    (void)chaos_arg_0; (void)chaos_arg_1;",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                        {
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                        }),
-                        CreateVoidAbiSlot(),
-                        new HashSet<int> { 0, 1 });
-                }));
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
 
-            // === Stream::get_Length (stub returns 0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.IO.Stream",
-                MethodName: "get_Length",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT64", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT64>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.IO.Stream", "get_Length", [],
+                ShapeKind.SimpleForward, "ChaosStreamGetLength",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
 
-            // === Stream::get_Position (stub returns 0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.IO.Stream",
-                MethodName: "get_Position",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT64", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT64>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.IO.Stream", "get_Position", [],
+                ShapeKind.SimpleForward, "ChaosStreamGetPosition",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
 
-            // === IO: MemoryStream.ctor (no-op stub) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.IO.MemoryStream",
-                MethodName: ".ctor",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateVoidAbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.IO.MemoryStream", ".ctor", [],
+                ShapeKind.SimpleForward, "ChaosMemoryStreamCtor",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === IO: StringReader.ctor(string) (no-op stub) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.IO.StringReader",
-                MethodName: ".ctor",
-                Resolver: static (planner, callee, typeArgs) =>
+            registry.Register("System.IO.StringReader", ".ctor", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosStringReaderCtor",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-                    [
-                        "    (void)chaos_arg_0; (void)chaos_arg_1;",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                        {
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                        }),
-                        CreateVoidAbiSlot(),
-                        new HashSet<int> { 0, 1 });
-                }));
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
 
-            // === IO: StringWriter.ctor (no-op stub) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.IO.StringWriter",
-                MethodName: ".ctor",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateVoidAbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.IO.StringWriter", ".ctor", [],
+                ShapeKind.SimpleForward, "ChaosStringWriterCtor",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === IO: TextReader::ReadLine (stub returns null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.IO.TextReader",
-                MethodName: "ReadLine",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.IO.TextReader", "ReadLine", [],
+                ShapeKind.SimpleForward, "ChaosTextReaderReadLine",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === IO: TextReader::ReadToEnd (stub returns null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.IO.TextReader",
-                MethodName: "ReadToEnd",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.IO.TextReader", "ReadToEnd", [],
+                ShapeKind.SimpleForward, "ChaosTextReaderReadToEnd",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === IO: TextWriter::Write(string) (no-op stub) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.IO.TextWriter",
-                MethodName: "Write",
-                Resolver: static (planner, callee, typeArgs) =>
+            registry.Register("System.IO.TextWriter", "Write", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosTextWriterWrite",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-                    [
-                        "    (void)chaos_arg_0; (void)chaos_arg_1;",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                        {
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                        }),
-                        CreateVoidAbiSlot(),
-                        new HashSet<int> { 0, 1 });
-                }));
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
 
-            // === IO: TextWriter::WriteLine with/without arg (no-op stub) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.IO.TextWriter",
-                MethodName: "WriteLine",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    if (paramTypes.Count == 0)
-                    {
-                        // WriteLine() — 0-arg instance: only `this` on the IL stack
-                        var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                        [
-                            "    (void)chaos_arg_0;",
-                        ]);
-                        return new GenericShapeResolution(src, symbol,
-                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                            CreateVoidAbiSlot(),
-                            new HashSet<int> { 0 });
-                    }
-                    if (paramTypes.Count == 1)
-                    {
-                        // WriteLine(string) — 1-arg instance: `this` + string arg
-                        var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-                        [
-                            "    (void)chaos_arg_0; (void)chaos_arg_1;",
-                        ]);
-                        return new GenericShapeResolution(src, symbol,
-                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                            {
-                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                            }),
-                            CreateVoidAbiSlot(),
-                            new HashSet<int> { 0, 1 });
-                    }
-                    // Fallback: unknown overload — single `this` pointer only
-                    var srcFallback = RenderSimpleExternalRuntimeHelper("void", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                    ]);
-                    return new GenericShapeResolution(srcFallback, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateVoidAbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.IO.TextWriter", "WriteLine", [],
+                ShapeKind.SimpleForward, "ChaosTextWriterWriteLine",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === Array.Empty<T> (GenericShapeDescriptor -- static, returns null stub) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Array",
-                MethodName: "Empty",
-                Resolver: static (planner, callee, typeArgs) =>
+            registry.Register("System.IO.TextWriter", "WriteLine", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosTextWriterWriteLineStr",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
-                    [
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        EmptyRawArgumentIndices);
-                }));
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            // === Array.Empty<T> (SimpleForward — returns null stub) ===
+            registry.Register("System.Array", "Empty", [],
+                ShapeKind.SimpleForward, "ChaosArrayEmpty",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                EmptyRawArgumentIndices);
 
             // === Type::GetMethod generic handler (GenericShapeDescriptor -- handles various overloads) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
@@ -1232,21 +1015,11 @@ public sealed partial class NativeAotLoweringPlanner
                 EmptyRawArgumentIndices);
 
             // === Console (stubs for verification pipelines — tests track via ChaosAssertState.ExitCode) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Console",
-                MethodName: "get_Error",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
-                    [
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        EmptyRawArgumentIndices);
-                }));
+            registry.Register("System.Console", "get_Error", [],
+                ShapeKind.SimpleForward, "ChaosConsoleGetError",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                EmptyRawArgumentIndices);
 
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Console",
@@ -2581,7 +2354,7 @@ public sealed partial class NativeAotLoweringPlanner
                     return null;
                 }));
 
-                        // === Array::Copy (GenericShapeDescriptor -- handles all overloads) ===
+                        // === Array::Copy (GenericShapeDescriptor -- calls ChaosArrayCopy for 5-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "Copy",
@@ -2589,6 +2362,25 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count == 5)
+                    {
+                        var srcFive = RenderSimpleExternalRuntimeHelper("void", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2, CHAOS_IL2CPP_INT32 chaos_arg_3, CHAOS_IL2CPP_INT32 chaos_arg_4",
+                        [
+                            "    ChaosArrayCopy(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);",
+                        ]);
+                        return new GenericShapeResolution(srcFive, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[5]
+                            {
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateInt32AbiSlot(),
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateInt32AbiSlot(),
+                                CreateInt32AbiSlot(),
+                            }),
+                            CreateVoidAbiSlot(),
+                            new HashSet<int> { 0, 1, 2, 3, 4 });
+                    }
                     if (paramTypes.Count == 0)
                     {
                         var src0 = RenderSimpleExternalRuntimeHelper("void", symbol, "",
@@ -2612,11 +2404,11 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol, paramSig,
+                    var srcFallback = RenderSimpleExternalRuntimeHelper("void", symbol, paramSig,
                     [
                         $"    {voidExprs};",
                     ]);
-                    return new GenericShapeResolution(src, symbol,
+                    return new GenericShapeResolution(srcFallback, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
                         CreateVoidAbiSlot(),
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
@@ -2844,40 +2636,15 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateInt32AbiSlot(),
                 new HashSet<int> { 0 });
 
-            // === Monitor::TryEnter (GenericShapeDescriptor -- handles all overloads) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "Monitor",
-                MethodName: "TryEnter",
-                Resolver: static (planner, callee, typeArgs) =>
+            // === Monitor::TryEnter (SimpleForward) ===
+            registry.Register("Monitor", "TryEnter", ["System.Object", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosMonitorTryEnter",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
-                    foreach (var _ in paramTypes)
-                        abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
-                    if (abiSlots.Count == 0)
-                    {
-                        var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "",
-                        [
-                            "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                        ]);
-                        return new GenericShapeResolution(src0, symbol,
-                            Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                            CreateNativeIntAbiSlot(),
-                            EmptyRawArgumentIndices);
-                    }
-                    var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
-                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
-                    [
-                        $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
-                        CreateNativeIntAbiSlot(),
-                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
-                }));
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateInt32AbiSlot(),
+                }), CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
 
             // === String::IndexOf (GenericShapeDescriptor -- handles various overloads) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
@@ -2896,6 +2663,22 @@ public sealed partial class NativeAotLoweringPlanner
                         return new GenericShapeResolution(src0, symbol,
                             Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateInt32AbiSlot(),
                             EmptyRawArgumentIndices);
+                    }
+                    if (paramTypes.Count == 1 && paramTypes[0] == "System.String")
+                    {
+                        var srcIdx = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            "    return ChaosStringIndexOf(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(srcIdx, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                            }),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int> { 0, 1 });
                     }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact> { CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType) };
                     foreach (var _ in paramTypes)
@@ -3008,40 +2791,16 @@ public sealed partial class NativeAotLoweringPlanner
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
-            // === Array::CreateInstance (GenericShapeDescriptor -- handles various overloads) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Array",
-                MethodName: "CreateInstance",
-                Resolver: static (planner, callee, typeArgs) =>
+            // === Array::CreateInstance (SimpleForward — elementType, length) ===
+            registry.Register("System.Array", "CreateInstance", ["System.Type", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosArrayCreateInstance",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    if (paramTypes.Count == 0)
-                    {
-                        var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
-                        [
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                        ]);
-                        return new GenericShapeResolution(src0, symbol,
-                            Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            EmptyRawArgumentIndices);
-                    }
-                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
-                    foreach (var _ in paramTypes)
-                        abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
-                    var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
-                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
-                    [
-                        $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
-                }));
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0, 1 });
 
             // === Assembly::GetCallingAssembly ===
             registry.Register("System.Reflection.Assembly", "GetCallingAssembly", [],
@@ -3108,7 +2867,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }), CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0, 1 });
 
-            // === String::Substring (GenericShapeDescriptor -- handles Int32 and Int32,Int32 overloads) ===
+            // === String::Substring (GenericShapeDescriptor -- calls ChaosStringSubstring for 3-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Substring",
@@ -3116,6 +2875,23 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count == 2)
+                    {
+                        var srcSubstr = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2",
+                        [
+                            "    return ChaosStringSubstring(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
+                        ]);
+                        return new GenericShapeResolution(srcSubstr, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                            {
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateInt32AbiSlot(),
+                                CreateInt32AbiSlot(),
+                            }),
+                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0, 1, 2 });
+                    }
                     if (paramTypes.Count == 0)
                     {
                         var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
@@ -3132,18 +2908,18 @@ public sealed partial class NativeAotLoweringPlanner
                         abiSlots.Add(CreateInt32AbiSlot());
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
+                    var srcFallback = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
                         "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
                     ]);
-                    return new GenericShapeResolution(src, symbol,
+                    return new GenericShapeResolution(srcFallback, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
                         CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
-            // === List<T>::Clear (GenericShapeDescriptor -- handles generic List<T>) ===
+            // === List<T>::Clear (GenericShapeDescriptor -- calls CollectionListClear) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Clear",
@@ -3153,7 +2929,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    (void)chaos_arg_0;",
+                        "    CollectionListClear(chaos_arg_0);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -3162,21 +2938,114 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 });
                 }));
 
-            // === List<T>::ToArray (GenericShapeDescriptor -- zero-param stub) ===
+            // === List<T>::Add (GenericShapeDescriptor -- calls CollectionListAdd) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
-                MethodName: "ToArray",
+                MethodName: "Add",
                 Resolver: static (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    CollectionListAdd(chaos_arg_0, chaos_arg_1);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
-                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                        CreateNativeIntAbiSlot(),
-                        EmptyRawArgumentIndices);
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        }),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0, 1 });
+                }));
+
+            // === List<T>::Contains (GenericShapeDescriptor -- calls CollectionListContains) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.List",
+                MethodName: "Contains",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return CollectionListContains(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1 });
+                }));
+
+            // === List<T>::IndexOf (GenericShapeDescriptor -- calls CollectionListIndexOf) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.List",
+                MethodName: "IndexOf",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return CollectionListIndexOf(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1 });
+                }));
+
+            // === List<T>::Remove (GenericShapeDescriptor -- calls CollectionListRemove) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.List",
+                MethodName: "Remove",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return CollectionListRemove(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1 });
+                }));
+
+            // === List<T>::RemoveAt (GenericShapeDescriptor -- calls CollectionListRemoveAt) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.List",
+                MethodName: "RemoveAt",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1",
+                    [
+                        "    CollectionListRemoveAt(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateInt32AbiSlot(),
+                        }),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0, 1 });
                 }));
 
             // === Span<T>::CopyTo (GenericShapeDescriptor -- handles generic Span<T>) ===
@@ -3326,6 +3195,22 @@ public sealed partial class NativeAotLoweringPlanner
                             CreateInt32AbiSlot(),
                             EmptyRawArgumentIndices);
                     }
+                    if (paramTypes.Count == 2 && paramTypes.All(p => p == "System.String"))
+                    {
+                        var srcCmp = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            "    return ChaosStringCompare(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(srcCmp, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                            }),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int> { 0, 1 });
+                    }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var pt in paramTypes)
                     {
@@ -3366,7 +3251,7 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
-            // === List<T>::Sort (GenericShapeDescriptor -- handles generic List<T>) ===
+            // === List<T>::Sort (GenericShapeDescriptor -- calls CollectionListSort) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Sort",
@@ -3374,16 +3259,19 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>();
-                    abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
+                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>
+                    {
+                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)
+                    };
                     foreach (var _ in paramTypes)
                         abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
                     if (abiSlots.Count == 1)
                     {
+                        // Zero-param overload: Sort() on the list instance
                         var src0 = RenderSimpleExternalRuntimeHelper("void", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
-                            "    (void)chaos_arg_0;",
+                            "    CollectionListSort(chaos_arg_0);",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(abiSlots[0]),
@@ -3548,7 +3436,7 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateInt32AbiSlot(),
                 new HashSet<int> { 0 });
 
-            // === Array::BinarySearch (GenericShapeDescriptor -- handles all generic overloads) ===
+            // === Array::BinarySearch (GenericShapeDescriptor -- calls ChaosArrayBinarySearch for 2-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "BinarySearch",
@@ -3556,6 +3444,22 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count == 2)
+                    {
+                        var srcBinSearch = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            "    return ChaosArrayBinarySearch(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(srcBinSearch, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            }),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int> { 0, 1 });
+                    }
                     if (paramTypes.Count == 0)
                     {
                         var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "",
@@ -3565,6 +3469,26 @@ public sealed partial class NativeAotLoweringPlanner
                         return new GenericShapeResolution(src0, symbol,
                             Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateInt32AbiSlot(),
                             EmptyRawArgumentIndices);
+                    }
+                    if (paramTypes.Count == 4)
+                    {
+                        // BinarySearch(System.Array, System.Int32, System.Int32, System.Object)
+                        // — routes to ChaosArrayBinarySearchRange
+                        var src4 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2, CHAOS_IL2CPP_INTPTR chaos_arg_3",
+                        [
+                            "    return ChaosArrayBinarySearchRange(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), chaos_arg_3);",
+                        ]);
+                        return new GenericShapeResolution(src4, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
+                            {
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateInt32AbiSlot(),
+                                CreateInt32AbiSlot(),
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            }),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int> { 0, 1, 2, 3 });
                     }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var pt in paramTypes)
@@ -3587,17 +3511,17 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
-            // === List<T>::ToArray (GenericShapeDescriptor -- handles generic List<T>) ===
+            // === List<T>::ToArray (GenericShapeDescriptor -- calls CollectionListToArray) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "ToArray",
                 Resolver: static (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return CollectionListToArray(chaos_arg_0);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -3623,7 +3547,7 @@ public sealed partial class NativeAotLoweringPlanner
                         EmptyRawArgumentIndices);
                 }));
 
-            // === Array::IndexOf (GenericShapeDescriptor -- handles generic Array::IndexOf<T>) ===
+            // === Array::IndexOf (GenericShapeDescriptor -- calls ChaosArrayIndexOf for standard 2-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "IndexOf",
@@ -3631,23 +3555,39 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count == 2)
+                    {
+                        var srcIdx = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            "    return ChaosArrayIndexOf(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(srcIdx, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            }),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int> { 0, 1 });
+                    }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var _ in paramTypes)
                         abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
+                    var srcFallback = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
                     [
                         $"    {voidExprs};",
                         "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
                     ]);
-                    return new GenericShapeResolution(src, symbol,
+                    return new GenericShapeResolution(srcFallback, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
                         CreateInt32AbiSlot(),
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
-            // === Array::LastIndexOf (GenericShapeDescriptor -- handles generic Array::LastIndexOf<T>) ===
+            // === Array::LastIndexOf (GenericShapeDescriptor -- calls ChaosArrayLastIndexOf for standard 2-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "LastIndexOf",
@@ -3655,17 +3595,33 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count == 2)
+                    {
+                        var srcLastIdx = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            "    return ChaosArrayLastIndexOf(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(srcLastIdx, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            }),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int> { 0, 1 });
+                    }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var _ in paramTypes)
                         abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
+                    var srcLastIdxFb = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
                     [
                         $"    {voidExprs};",
                         "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
                     ]);
-                    return new GenericShapeResolution(src, symbol,
+                    return new GenericShapeResolution(srcLastIdxFb, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
                         CreateInt32AbiSlot(),
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
@@ -3681,7 +3637,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }), CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0, 1 });
 
-            // === Dictionary<K,V>::get_Count (GenericShapeDescriptor -- handles generic Dictionary) ===
+            // === Dictionary<K,V>::get_Count (GenericShapeDescriptor -- calls CollectionDictionaryGetCount) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
                 MethodName: "get_Count",
@@ -3691,14 +3647,169 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
+                        "    return CollectionDictionaryGetCount(chaos_arg_0);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                             CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                         CreateInt32AbiSlot(),
                         new HashSet<int> { 0 });
+                }));
+
+            // === Dictionary<K,V>::Add (GenericShapeDescriptor -- calls CollectionDictionaryAdd) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
+                MethodName: "Add",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
+                    [
+                        "    CollectionDictionaryAdd(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        }),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0, 1, 2 });
+                }));
+
+            // === Dictionary<K,V>::TryGetValue (GenericShapeDescriptor -- calls CollectionDictionaryTryGetValue) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
+                MethodName: "TryGetValue",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
+                    [
+                        "    return CollectionDictionaryTryGetValue(chaos_arg_0, chaos_arg_1, reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_arg_2));",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1, 2 });
+                }));
+
+            // === Dictionary<K,V>::ContainsKey (GenericShapeDescriptor -- calls CollectionDictionaryContainsKey) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
+                MethodName: "ContainsKey",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return CollectionDictionaryContainsKey(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1 });
+                }));
+
+            // === Dictionary<K,V>::Remove (GenericShapeDescriptor -- calls CollectionDictionaryRemove) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.Dictionary",
+                MethodName: "Remove",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return CollectionDictionaryRemove(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1 });
+                }));
+
+            // === HashSet<T>::Add (GenericShapeDescriptor -- calls CollectionHashSetAdd) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.HashSet",
+                MethodName: "Add",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return CollectionHashSetAdd(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1 });
+                }));
+
+            // === HashSet<T>::Contains (GenericShapeDescriptor -- calls CollectionHashSetContains) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.HashSet",
+                MethodName: "Contains",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return CollectionHashSetContains(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1 });
+                }));
+
+            // === HashSet<T>::Remove (GenericShapeDescriptor -- calls CollectionHashSetRemove) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.HashSet",
+                MethodName: "Remove",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return CollectionHashSetRemove(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1 });
                 }));
 
             // === CultureInfo::get_DateTimeFormat ===
@@ -3816,7 +3927,7 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 });
                 }));
 
-            // === String::Format (GenericShapeDescriptor -- handles all overloads) ===
+            // === String::Format (GenericShapeDescriptor -- dispatches by overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Format",
@@ -3824,35 +3935,87 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    if (paramTypes.Count == 0)
+                    var stringRetAbi = CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+                    var stringRefAbi = CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+                    var objectRefAbi = CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType);
+
+                    // Format(string) — return format string unchanged
+                    if (paramTypes.Count == 1)
                     {
-                        var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                            "    return chaos_arg_0;",
                         ]);
-                        return new GenericShapeResolution(src0, symbol,
-                            Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                            EmptyRawArgumentIndices);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(stringRefAbi),
+                            stringRetAbi, new HashSet<int> { 0 });
                     }
+
+                    // Format(string, object[]) — the core overload
+                    if (paramTypes.Count == 2 && paramTypes[1].Contains("Object["))
+                    {
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            "    return ChaosStringFormatArray(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                stringRefAbi, objectRefAbi,
+                            }), stringRetAbi, new HashSet<int> { 0, 1 });
+                    }
+
+                    // Format(string, object) — single arg convenience overload
+                    if (paramTypes.Count == 2)
+                    {
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            "    return ChaosStringFormat1(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                stringRefAbi, objectRefAbi,
+                            }), stringRetAbi, new HashSet<int> { 0, 1 });
+                    }
+
+                    // Format(string, object, object) — two arg convenience overload
+                    if (paramTypes.Count == 3)
+                    {
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
+                        [
+                            "    return ChaosStringFormat2(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                            {
+                                stringRefAbi, objectRefAbi, objectRefAbi,
+                            }), stringRetAbi, new HashSet<int> { 0, 1, 2 });
+                    }
+
+                    // Fallback: unknown overload (IFormatProvider variants etc.) — return 0 stub
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var pt in paramTypes)
                     {
                         if (pt == "System.String" || pt.Contains("System.String"))
-                            abiSlots.Add(CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType));
+                            abiSlots.Add(stringRefAbi);
                         else
-                            abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
+                            abiSlots.Add(objectRefAbi);
                     }
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
+                    var srcFb = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
                         "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
                     ]);
-                    return new GenericShapeResolution(src, symbol,
+                    return new GenericShapeResolution(srcFb, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
-                        CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                        stringRetAbi,
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
@@ -3882,7 +4045,7 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
-            // === Array::Sort (GenericShapeDescriptor -- handles generic Array::Sort<T>) ===
+            // === Array::Sort (GenericShapeDescriptor -- calls ChaosArraySort for 1-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "Sort",
@@ -3890,22 +4053,35 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count == 1)
+                    {
+                        var srcSort = RenderSimpleExternalRuntimeHelper("void", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                        [
+                            "    ChaosArraySort(chaos_arg_0);",
+                        ]);
+                        return new GenericShapeResolution(srcSort, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                            CreateVoidAbiSlot(),
+                            new HashSet<int> { 0 });
+                    }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var _ in paramTypes)
                         abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol, paramSig,
+                    var srcSortFb = RenderSimpleExternalRuntimeHelper("void", symbol, paramSig,
                     [
                         $"    {voidExprs};",
                     ]);
-                    return new GenericShapeResolution(src, symbol,
+                    return new GenericShapeResolution(srcSortFb, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
                         CreateVoidAbiSlot(),
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
-            // === Array::Reverse (GenericShapeDescriptor -- handles generic Array::Reverse<T>) ===
+            // === Array::Reverse (GenericShapeDescriptor -- calls ChaosArrayReverse for 1-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "Reverse",
@@ -3913,16 +4089,29 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count == 1)
+                    {
+                        var srcRev = RenderSimpleExternalRuntimeHelper("void", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                        [
+                            "    ChaosArrayReverse(chaos_arg_0);",
+                        ]);
+                        return new GenericShapeResolution(srcRev, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                            CreateVoidAbiSlot(),
+                            new HashSet<int> { 0 });
+                    }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var _ in paramTypes)
                         abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol, paramSig,
+                    var srcRevFb = RenderSimpleExternalRuntimeHelper("void", symbol, paramSig,
                     [
                         $"    {voidExprs};",
                     ]);
-                    return new GenericShapeResolution(src, symbol,
+                    return new GenericShapeResolution(srcRevFb, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
                         CreateVoidAbiSlot(),
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
@@ -3946,28 +4135,16 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
-            // === HashCode::Add<T> (GenericShapeDescriptor -- handles generic HashCode::Add<T>) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.HashCode",
-                MethodName: "Add",
-                Resolver: static (planner, callee, typeArgs) =>
+            // === HashCode::Add<T> (SimpleForward) ===
+            registry.Register("System.HashCode", "Add", ["System.Object"],
+                ShapeKind.SimpleForward, "ChaosHashCodeAdd",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
-                    foreach (var _ in paramTypes)
-                        abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
-                    var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
-                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol, paramSig,
-                    [
-                        $"    {voidExprs};",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
-                        CreateVoidAbiSlot(),
-                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
-                }));
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.HashCode", AotCoreIrTypeShapeKind.ValueType),
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
 
             // === Math::Min (SimpleForward stubs) ===
             registry.Register("System.Math", "Min", ["System.Int32", "System.Int32"],
@@ -4096,23 +4273,6 @@ public sealed partial class NativeAotLoweringPlanner
                     CreateInt32AbiSlot(),
                 }), CreateInt32AbiSlot(),
                 new HashSet<int> { 0, 1 });
-
-            // === Array::Empty<T> (stub returning null; generic shape handles all T) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Array",
-                MethodName: "Empty",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
-                    [
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        EmptyRawArgumentIndices);
-                }));
 
             // === CultureInfo::get_CompareInfo ===
             registry.Register("System.Globalization.CultureInfo", "get_CompareInfo", [],
@@ -4264,7 +4424,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }), CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
-            // === Array::GetValue (stub returning null) ===
+            // === Array::GetValue (GenericShapeDescriptor -- calls ChaosArrayGetValue for 2-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "GetValue",
@@ -4272,6 +4432,22 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count == 1)
+                    {
+                        var srcGetVal = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1",
+                        [
+                            "    return ChaosArrayGetValue(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(srcGetVal, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateInt32AbiSlot(),
+                            }),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0, 1 });
+                    }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>
                     {
                         CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)
@@ -4280,18 +4456,18 @@ public sealed partial class NativeAotLoweringPlanner
                         abiSlots.Add(CreateInt32AbiSlot());
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
+                    var srcGetValFb = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
                         "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
                     ]);
-                    return new GenericShapeResolution(src, symbol,
+                    return new GenericShapeResolution(srcGetValFb, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
                         CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
-            // === String::Replace (stub returning null) ===
+            // === String::Replace (GenericShapeDescriptor -- calls ChaosStringReplace for 3-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Replace",
@@ -4299,6 +4475,23 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count == 2)
+                    {
+                        var srcReplace = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
+                        [
+                            "    return ChaosStringReplace(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
+                        ]);
+                        return new GenericShapeResolution(srcReplace, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                            {
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                            }),
+                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0, 1, 2 });
+                    }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>
                     {
                         CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)
@@ -4307,36 +4500,24 @@ public sealed partial class NativeAotLoweringPlanner
                         abiSlots.Add(CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType));
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
+                    var srcReplaceFb = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
                         "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
                     ]);
-                    return new GenericShapeResolution(src, symbol,
+                    return new GenericShapeResolution(srcReplaceFb, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
                         CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
-            // === Type::get_IsByRef (stub returning false) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "get_IsByRef",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === Type::get_IsByRef (SimpleForward stub) ===
+            registry.Register("System.Type", "get_IsByRef", [],
+                ShapeKind.SimpleForward, "ChaosTypeGetIsByRef",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
             // === Math::Pow (SimpleForward stub) ===
             registry.Register("System.Math", "Pow", ["System.Double", "System.Double"],
@@ -4386,72 +4567,33 @@ public sealed partial class NativeAotLoweringPlanner
                     return null;
                 }));
 
-            // === CompareInfo::Compare (stub returning 0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Globalization.CompareInfo",
-                MethodName: "Compare",
-                Resolver: static (planner, callee, typeArgs) =>
+            // === CompareInfo::Compare (SimpleForward stub) ===
+            registry.Register("System.Globalization.CompareInfo", "Compare", ["System.String", "System.String"],
+                ShapeKind.SimpleForward, "ChaosCompareInfoCompare",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                 {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>
-                    {
-                        CreateNativeIntAbiSlot("System.Globalization.CompareInfo", AotCoreIrTypeShapeKind.ReferenceType)
-                    };
-                    foreach (var _ in paramTypes)
-                        abiSlots.Add(CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType));
-                    var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
-                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
-                    [
-                        $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
-                }));
+                    CreateNativeIntAbiSlot("System.Globalization.CompareInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1, 2 });
 
             // === Assembly::GetExportedTypes (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.Assembly",
-                MethodName: "GetExportedTypes",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.Reflection.Assembly", "GetExportedTypes", [],
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyGetExportedTypes",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === Type::MakeArrayType (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "MakeArrayType",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === Type::MakeArrayType (SimpleForward stub) ===
+            registry.Register("System.Type", "MakeArrayType", [],
+                ShapeKind.SimpleForward, "ChaosTypeMakeArrayType",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
             // === FieldInfo/MethodBase::get_IsStatic (stub returning false; broad prefix covers all System.Reflection.*::get_IsStatic) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
@@ -4474,104 +4616,44 @@ public sealed partial class NativeAotLoweringPlanner
                 }));
 
             // === ParameterInfo::GetOptionalCustomModifiers (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.ParameterInfo",
-                MethodName: "GetOptionalCustomModifiers",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.ParameterInfo", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.Reflection.ParameterInfo", "GetOptionalCustomModifiers", [],
+                ShapeKind.SimpleForward, "ChaosReflectionGetOptionalCustomModifiers",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.ParameterInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
             // === Assembly::GetForwardedTypes (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.Assembly",
-                MethodName: "GetForwardedTypes",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.Reflection.Assembly", "GetForwardedTypes", [],
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyGetForwardedTypes",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === Type::MakeByRefType (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "MakeByRefType",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === Type::MakeByRefType (SimpleForward stub) ===
+            registry.Register("System.Type", "MakeByRefType", [],
+                ShapeKind.SimpleForward, "ChaosTypeMakeByRefType",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === Type::get_IsPointer (stub returning false) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "get_IsPointer",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === Type::get_IsPointer (SimpleForward stub) ===
+            registry.Register("System.Type", "get_IsPointer", [],
+                ShapeKind.SimpleForward, "ChaosTypeGetIsPointer",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
             // === FieldInfo::get_IsInitOnly (stub returning false) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.FieldInfo",
-                MethodName: "get_IsInitOnly",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.Reflection.FieldInfo", "get_IsInitOnly", [],
+                ShapeKind.SimpleForward, "ChaosReflectionFieldGetIsInitOnly",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
             // === Math::Sin (SimpleForward stub) ===
             registry.Register("System.Math", "Sin", ["System.Double"],
@@ -4589,7 +4671,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
-            // === String::Split (stub returning null) ===
+            // === String::Split (GenericShapeDescriptor -- handles all overloads) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Split",
@@ -4597,6 +4679,23 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    // 2-param: Split(char) — delegate to ChaosStringSplit
+                    if (paramTypes.Count == 1 && paramTypes[0] == "System.Char")
+                    {
+                        var srcSplit = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            "    return ChaosStringSplit(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(srcSplit, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateInt32AbiSlot(),
+                            }),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0, 1 });
+                    }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>
                     {
                         CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)
@@ -4616,32 +4715,17 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
-            // === CompareInfo::IndexOf (stub returning 0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Globalization.CompareInfo",
-                MethodName: "IndexOf",
-                Resolver: static (planner, callee, typeArgs) =>
+            // === CompareInfo::IndexOf (SimpleForward stub) ===
+            registry.Register("System.Globalization.CompareInfo", "IndexOf", ["System.String", "System.String"],
+                ShapeKind.SimpleForward, "ChaosCompareInfoIndexOf",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                 {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>
-                    {
-                        CreateNativeIntAbiSlot("System.Globalization.CompareInfo", AotCoreIrTypeShapeKind.ReferenceType)
-                    };
-                    foreach (var _ in paramTypes)
-                        abiSlots.Add(CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType));
-                    var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
-                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
-                    [
-                        $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
-                }));
+                    CreateNativeIntAbiSlot("System.Globalization.CompareInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1, 2 });
 
             // === DateTime::DaysInMonth (SimpleForward stub) ===
             registry.Register("System.DateTime", "DaysInMonth", ["System.Int32", "System.Int32"],
@@ -4654,225 +4738,93 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateInt32AbiSlot(),
                 new HashSet<int> { 0, 1 });
 
-            // === System.Type::get_IsNested (stub returning false/0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "get_IsNested",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Type::get_IsNested (SimpleForward stub) ===
+            registry.Register("System.Type", "get_IsNested", [],
+                ShapeKind.SimpleForward, "ChaosTypeGetIsNested",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === System.Type::get_IsNestedPrivate (stub returning false/0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "get_IsNestedPrivate",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Type::get_IsNestedPrivate (SimpleForward stub) ===
+            registry.Register("System.Type", "get_IsNestedPrivate", [],
+                ShapeKind.SimpleForward, "ChaosTypeGetIsNestedPrivate",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === System.Type::get_IsNestedPublic (stub returning false/0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "get_IsNestedPublic",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Type::get_IsNestedPublic (SimpleForward stub) ===
+            registry.Register("System.Type", "get_IsNestedPublic", [],
+                ShapeKind.SimpleForward, "ChaosTypeGetIsNestedPublic",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === System.Type::get_IsNotPublic (stub returning false/0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "get_IsNotPublic",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Type::get_IsNotPublic (SimpleForward stub) ===
+            registry.Register("System.Type", "get_IsNotPublic", [],
+                ShapeKind.SimpleForward, "ChaosTypeGetIsNotPublic",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === System.Type::get_IsPublic (stub returning false/0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "get_IsPublic",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Type::get_IsPublic (SimpleForward stub) ===
+            registry.Register("System.Type", "get_IsPublic", [],
+                ShapeKind.SimpleForward, "ChaosTypeGetIsPublic",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === System.Type::get_UnderlyingSystemType (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "get_UnderlyingSystemType",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Type::get_UnderlyingSystemType (SimpleForward stub) ===
+            registry.Register("System.Type", "get_UnderlyingSystemType", [],
+                ShapeKind.SimpleForward, "ChaosTypeGetUnderlyingSystemType",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === System.Type::GetElementType (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "GetElementType",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Type::GetElementType (SimpleForward stub) ===
+            registry.Register("System.Type", "GetElementType", [],
+                ShapeKind.SimpleForward, "ChaosTypeGetElementType",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === System.Type::GetEvents (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "GetEvents",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Type::GetEvents (SimpleForward stub) ===
+            registry.Register("System.Type", "GetEvents", [],
+                ShapeKind.SimpleForward, "ChaosTypeGetEvents",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === System.Type::GetInterfaces (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "GetInterfaces",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Type::GetInterfaces (SimpleForward stub) ===
+            registry.Register("System.Type", "GetInterfaces", [],
+                ShapeKind.SimpleForward, "ChaosTypeGetInterfaces",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === System.Type::GetNestedTypes (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "GetNestedTypes",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Type::GetNestedTypes (SimpleForward stub) ===
+            registry.Register("System.Type", "GetNestedTypes", [],
+                ShapeKind.SimpleForward, "ChaosTypeGetNestedTypes",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === System.Type::MakePointerType (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Type",
-                MethodName: "MakePointerType",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Type::MakePointerType (SimpleForward stub) ===
+            registry.Register("System.Type", "MakePointerType", [],
+                ShapeKind.SimpleForward, "ChaosTypeMakePointerType",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
             // === System.Type::GetNestedType (stub returning null) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
@@ -4998,64 +4950,28 @@ public sealed partial class NativeAotLoweringPlanner
                 }));
 
             // === System.Reflection.Assembly::GetManifestResourceNames (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.Assembly",
-                MethodName: "GetManifestResourceNames",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.Reflection.Assembly", "GetManifestResourceNames", [],
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyGetManifestResourceNames",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
             // === System.Reflection.Assembly::GetModules (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.Assembly",
-                MethodName: "GetModules",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.Reflection.Assembly", "GetModules", [],
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyGetModules",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
             // === System.Reflection.Assembly::get_EntryPoint (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.Assembly",
-                MethodName: "get_EntryPoint",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.Reflection.Assembly", "get_EntryPoint", [],
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyGetEntryPoint",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
             // === System.Reflection.Assembly::GetManifestResourceStream (stub returning null) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
@@ -5139,327 +5055,123 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
-            // === System.Reflection.AssemblyName::get_CultureInfo (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.AssemblyName",
-                MethodName: "get_CultureInfo",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Reflection.AssemblyName::get_CultureInfo (SimpleForward stub) ===
+            registry.Register("System.Reflection.AssemblyName", "get_CultureInfo", [],
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyNameGetCultureInfo",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === System.Reflection.AssemblyName::get_Version (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.AssemblyName",
-                MethodName: "get_Version",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Reflection.AssemblyName::get_Version (SimpleForward stub) ===
+            registry.Register("System.Reflection.AssemblyName", "get_Version", [],
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyNameGetVersion",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === System.Reflection.FieldInfo::get_FieldHandle (stub returning 0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.FieldInfo",
-                MethodName: "get_FieldHandle",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT64", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT64>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType)),
-                        new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Reflection.FieldInfo::get_FieldHandle (SimpleForward stub returning 0) ===
+            registry.Register("System.Reflection.FieldInfo", "get_FieldHandle", [],
+                ShapeKind.SimpleForward, "ChaosReflectionFieldGetFieldHandle",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
 
-            // === System.Reflection.FieldInfo::get_IsLiteral (stub returning false/0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.FieldInfo",
-                MethodName: "get_IsLiteral",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Reflection.FieldInfo::get_IsLiteral (SimpleForward stub returning false/0) ===
+            registry.Register("System.Reflection.FieldInfo", "get_IsLiteral", [],
+                ShapeKind.SimpleForward, "ChaosReflectionFieldGetIsLiteral",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === System.Reflection.PropertyInfo::GetIndexParameters (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.PropertyInfo",
-                MethodName: "GetIndexParameters",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.PropertyInfo", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Reflection.PropertyInfo::GetIndexParameters (SimpleForward stub returning null) ===
+            registry.Register("System.Reflection.PropertyInfo", "GetIndexParameters", [],
+                ShapeKind.SimpleForward, "ChaosReflectionPropertyGetIndexParameters",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.PropertyInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === System.Reflection.PropertyInfo::get_CanRead (stub returning false/0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.PropertyInfo",
-                MethodName: "get_CanRead",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.PropertyInfo", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Reflection.PropertyInfo::get_CanRead (SimpleForward stub returning false/0) ===
+            registry.Register("System.Reflection.PropertyInfo", "get_CanRead", [],
+                ShapeKind.SimpleForward, "ChaosReflectionPropertyGetCanRead",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.PropertyInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === System.Reflection.PropertyInfo::get_CanWrite (stub returning false/0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.PropertyInfo",
-                MethodName: "get_CanWrite",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.PropertyInfo", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Reflection.PropertyInfo::get_CanWrite (SimpleForward stub returning false/0) ===
+            registry.Register("System.Reflection.PropertyInfo", "get_CanWrite", [],
+                ShapeKind.SimpleForward, "ChaosReflectionPropertyGetCanWrite",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.PropertyInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
             // === System.String::ToLower (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.String",
-                MethodName: "ToLower",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.String", "ToLower", [],
+                ShapeKind.SimpleForward, "ChaosStringToLower",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
             // === System.String::ToUpper (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.String",
-                MethodName: "ToUpper",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.String", "ToUpper", [],
+                ShapeKind.SimpleForward, "ChaosStringToUpper",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
             // === System.String::Trim (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.String",
-                MethodName: "Trim",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            registry.Register("System.String", "Trim", [],
+                ShapeKind.SimpleForward, "ChaosStringTrim",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === System.Globalization.CultureInfo::get_TextInfo (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Globalization.CultureInfo",
-                MethodName: "get_TextInfo",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Globalization.CultureInfo::get_TextInfo (SimpleForward stub) ===
+            registry.Register("System.Globalization.CultureInfo", "get_TextInfo", [],
+                ShapeKind.SimpleForward, "ChaosCultureGetTextInfo",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-            // === System.Globalization.TextInfo::ToLower (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Globalization.TextInfo",
-                MethodName: "ToLower",
-                Resolver: static (planner, callee, typeArgs) =>
+            // === System.Globalization.TextInfo::ToLower (SimpleForward stub) ===
+            registry.Register("System.Globalization.TextInfo", "ToLower", ["System.Char"],
+                ShapeKind.SimpleForward, "ChaosTextInfoToLower",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>
-                    {
-                        CreateNativeIntAbiSlot("System.Globalization.TextInfo", AotCoreIrTypeShapeKind.ReferenceType)
-                    };
-                    foreach (var _ in paramTypes)
-                        abiSlots.Add(CreateInt32AbiSlot());
-                    if (abiSlots.Count == 1)
-                    {
-                        var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                        [
-                            "    (void)chaos_arg_0;",
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                        ]);
-                        return new GenericShapeResolution(src0, symbol,
-                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                                CreateNativeIntAbiSlot("System.Globalization.TextInfo", AotCoreIrTypeShapeKind.ReferenceType)),
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            new HashSet<int> { 0 });
-                    }
-                    var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
-                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
-                    [
-                        $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
-                }));
+                    CreateNativeIntAbiSlot("System.Globalization.TextInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0, 1 });
 
-            // === System.Globalization.TextInfo::ToUpper (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Globalization.TextInfo",
-                MethodName: "ToUpper",
-                Resolver: static (planner, callee, typeArgs) =>
+            // === System.Globalization.TextInfo::ToUpper (SimpleForward stub) ===
+            registry.Register("System.Globalization.TextInfo", "ToUpper", ["System.Char"],
+                ShapeKind.SimpleForward, "ChaosTextInfoToUpper",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>
-                    {
-                        CreateNativeIntAbiSlot("System.Globalization.TextInfo", AotCoreIrTypeShapeKind.ReferenceType)
-                    };
-                    foreach (var _ in paramTypes)
-                        abiSlots.Add(CreateInt32AbiSlot());
-                    if (abiSlots.Count == 1)
-                    {
-                        var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                        [
-                            "    (void)chaos_arg_0;",
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                        ]);
-                        return new GenericShapeResolution(src0, symbol,
-                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                                CreateNativeIntAbiSlot("System.Globalization.TextInfo", AotCoreIrTypeShapeKind.ReferenceType)),
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            new HashSet<int> { 0 });
-                    }
-                    var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
-                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
-                    [
-                        $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
-                }));
+                    CreateNativeIntAbiSlot("System.Globalization.TextInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0, 1 });
 
-            // === System.Globalization.TextInfo::get_CultureName (stub returning null) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Globalization.TextInfo",
-                MethodName: "get_CultureName",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Globalization.TextInfo", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        new HashSet<int> { 0 });
-                }));
+            // === System.Globalization.TextInfo::get_CultureName (SimpleForward stub) ===
+            registry.Register("System.Globalization.TextInfo", "get_CultureName", [],
+                ShapeKind.SimpleForward, "ChaosTextInfoGetCultureName",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Globalization.TextInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
             // === System.Math::BigMul (SimpleForward stub) ===
             registry.Register("System.Math", "BigMul", ["System.Int32", "System.Int32"],
@@ -5480,110 +5192,29 @@ public sealed partial class NativeAotLoweringPlanner
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
-            // === System.Char::IsDigit (stub returning false/0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Char",
-                MethodName: "IsDigit",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>();
-                    foreach (var _ in paramTypes)
-                        abiSlots.Add(CreateInt32AbiSlot());
-                    if (abiSlots.Count == 0)
-                    {
-                        var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "",
-                        [
-                            "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                        ]);
-                        return new GenericShapeResolution(src0, symbol,
-                            Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                            CreateInt32AbiSlot(),
-                            EmptyRawArgumentIndices);
-                    }
-                    var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INT32 chaos_arg_{i}"));
-                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
-                    [
-                        $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
-                }));
+            // === System.Char::IsDigit (SimpleForward stub) ===
+            registry.Register("System.Char", "IsDigit", ["System.Char"],
+                ShapeKind.SimpleForward, "ChaosCharIsDigit",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === System.Char::IsLetter (stub returning false/0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Char",
-                MethodName: "IsLetter",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>();
-                    foreach (var _ in paramTypes)
-                        abiSlots.Add(CreateInt32AbiSlot());
-                    if (abiSlots.Count == 0)
-                    {
-                        var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "",
-                        [
-                            "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                        ]);
-                        return new GenericShapeResolution(src0, symbol,
-                            Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                            CreateInt32AbiSlot(),
-                            EmptyRawArgumentIndices);
-                    }
-                    var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INT32 chaos_arg_{i}"));
-                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
-                    [
-                        $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
-                }));
+            // === System.Char::IsLetter (SimpleForward stub) ===
+            registry.Register("System.Char", "IsLetter", ["System.Char"],
+                ShapeKind.SimpleForward, "ChaosCharIsLetter",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
-            // === System.Char::IsWhiteSpace (stub returning false/0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Char",
-                MethodName: "IsWhiteSpace",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>();
-                    foreach (var _ in paramTypes)
-                        abiSlots.Add(CreateInt32AbiSlot());
-                    if (abiSlots.Count == 0)
-                    {
-                        var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "",
-                        [
-                            "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                        ]);
-                        return new GenericShapeResolution(src0, symbol,
-                            Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                            CreateInt32AbiSlot(),
-                            EmptyRawArgumentIndices);
-                    }
-                    var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INT32 chaos_arg_{i}"));
-                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
-                    [
-                        $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
-                }));
+            // === System.Char::IsWhiteSpace (SimpleForward stub) ===
+            registry.Register("System.Char", "IsWhiteSpace", ["System.Char"],
+                ShapeKind.SimpleForward, "ChaosCharIsWhiteSpace",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
             // === System.TimeSpan::.ctor (SimpleForward stub) ===
             registry.Register("System.TimeSpan", ".ctor", ["System.Int32", "System.Int32", "System.Int32"],
@@ -5650,7 +5281,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType, TypeSubjectId = "System.Private.CoreLib/System.TimeSpan" },
                 new HashSet<int> { 0 });
 
-            // === System.BitConverter::GetBytes (stub returning null) ===
+            // === System.BitConverter::GetBytes (GenericShapeDescriptor -- stub returning null, real for Int32) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.BitConverter",
                 MethodName: "GetBytes",
@@ -5658,6 +5289,20 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    // Int32 overload — delegate to ChaosBitConverterGetBytes
+                    if (paramTypes.Count == 1 && paramTypes[0] == "System.Int32")
+                    {
+                        var srcBytes = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                        [
+                            "    return ChaosBitConverterGetBytes(static_cast<CHAOS_IL2CPP_INTPTR>(0), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));",
+                        ]);
+                        return new GenericShapeResolution(srcBytes, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                CreateInt32AbiSlot()),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0 });
+                    }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>();
                     foreach (var pt in paramTypes)
                     {
@@ -5747,47 +5392,27 @@ public sealed partial class NativeAotLoweringPlanner
             // These let the pipeline complete without lowering BCL methods.
             // Individual method failures are handled as runtime-semantics issues (Cat E).
 
-            // ── System.Guid stubs ─────────────────────────────────────────────
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Guid",
-                MethodName: ".ctor",
-                Resolver: static (planner, callee, typeArgs) =>
+            // === Guid::.ctor(String) ===
+            registry.Register("System.Guid", ".ctor", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosGuidCtor",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = GetExternalRuntimeHelperSymbol(callee);
-                    var instanceAbi = CreateNativeIntAbiSlot("System.Private.CoreLib/System.Guid", AotCoreIrTypeShapeKind.ValueType);
-                    if (paramTypes.Count == 1)
-                    {
-                        var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-                        [
-                            "    (void)chaos_arg_0; (void)chaos_arg_1;",
-                        ]);
-                        return new GenericShapeResolution(src, symbol,
-                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                            {
-                                instanceAbi,
-                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                            }),
-                            CreateVoidAbiSlot(), new HashSet<int> { 0, 1 });
-                    }
-                    if (paramTypes.Count == 2)
-                    {
-                        var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-                        [
-                            "    (void)chaos_arg_0; (void)chaos_arg_1;",
-                        ]);
-                        return new GenericShapeResolution(src, symbol,
-                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                            {
-                                instanceAbi,
-                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
-                            }),
-                            CreateVoidAbiSlot(), new HashSet<int> { 0, 1 });
-                    }
-                    return null;
-                }));
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Guid", AotCoreIrTypeShapeKind.ValueType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            // === Guid::.ctor(Byte[]) ===
+            registry.Register("System.Guid", ".ctor", ["System.Byte[]"],
+                ShapeKind.SimpleForward, "ChaosGuidCtor",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Guid", AotCoreIrTypeShapeKind.ValueType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
 
             // === Guid::Parse(string) ===
             registry.Register("System.Guid", "Parse", ["System.String"],
@@ -5805,23 +5430,13 @@ public sealed partial class NativeAotLoweringPlanner
             // Guid::NewGuid, GetHashCode, ToString registered as SimpleForward above
             // (removed shadowing stubs that returned 0)
 
-            // ── System.Random stubs ────────────────────────────────────────────
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Random",
-                MethodName: ".ctor",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateVoidAbiSlot(), new HashSet<int> { 0 });
-                }));
+            // === Random::.ctor ===
+            registry.Register("System.Random", ".ctor", [],
+                ShapeKind.SimpleForward, "ChaosRandomCtor",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
 
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Random",
@@ -5879,28 +5494,7 @@ public sealed partial class NativeAotLoweringPlanner
             // Removed: GenericShapeDescriptor for NextDouble (uses SimpleForward ChaosRandomNextDouble)
             // Removed: GenericShapeDescriptor for NextBytes (uses SimpleForward ChaosRandomNextBytes)
 
-            // ── System.HashCode stubs ──────────────────────────────────────────
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.HashCode",
-                MethodName: "Add",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    var symbol = GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-                    [
-                        "    (void)chaos_arg_0; (void)chaos_arg_1;",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                        {
-                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.HashCode", AotCoreIrTypeShapeKind.ValueType),
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                        }),
-                        CreateVoidAbiSlot(), new HashSet<int> { 0, 1 });
-                }));
-
+            // === HashCode::ToHashCode (GenericShapeDescriptor -- handles value type) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.HashCode",
                 MethodName: "ToHashCode",

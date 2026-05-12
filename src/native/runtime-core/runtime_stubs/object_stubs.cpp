@@ -31,5 +31,14 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetObjectValue(CHAOS_IL2CPP_INTPTR value)
     return value;
 }
 
+CHAOS_IL2CPP_INT32 ChaosObjectGetHashCode(CHAOS_IL2CPP_INTPTR obj) noexcept
+{
+    if (obj == 0) return 0;
+    auto p = static_cast<CHAOS_IL2CPP_UINTPTR>(obj);
+    return static_cast<CHAOS_IL2CPP_INT32>(p ^ (p >> 32));
+}
+CHAOS_IL2CPP_INTPTR ChaosObjectToString(CHAOS_IL2CPP_INTPTR obj) noexcept { (void)obj; return 0; }
+CHAOS_IL2CPP_INTPTR ChaosObjectGetType(CHAOS_IL2CPP_INTPTR obj) noexcept { (void)obj; return 0; }
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core

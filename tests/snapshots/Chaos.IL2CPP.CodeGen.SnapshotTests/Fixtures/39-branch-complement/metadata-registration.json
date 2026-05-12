@@ -25,6 +25,8 @@
       "memberType": "System.Int32",
       "parameterCount": 0,
       "isImported": false
-    }
+    },
+    { "registrationKind": "type", "slot": 3, "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper", "name": "BranchUnsignedBHelper", "displayName": "BranchUnsignedBHelper", "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper" },
+    { "registrationKind": "method", "slot": 4, "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()", "name": "RunBranchUnsignedB", "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false }
   ]
 }

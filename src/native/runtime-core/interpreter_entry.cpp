@@ -5,7 +5,9 @@
 #include "token_resolver.h"
 #include "module_registry.h"
 #include "reflection_query_model.h"
+#include "fast_frame_pool.h"
 #include "fast_dispatch.h"
+
 #include "../bootstrap/bootstrap.h"
 
 #include <aot_core_ir_reader.h>   // DeserializeAotCoreIrMethod
@@ -14,8 +16,17 @@
 #include <atomic>
 #include <cstring>
 #include <mutex>
+#include "chaos/log.h"
+#include "chaos/profile.h"
 
 namespace chaos::il2cpp::runtime_core {
+
+// Forward declarations
+static void ParseSubjectIdForHotpatchLookup(
+    const char* subject_id,
+    std::string& out_ns,
+    std::string& out_type_name,
+    std::string& out_method_name) noexcept;
 
 // ── ArgBuffer implementation ────────────────────────────────────────────
 
@@ -145,23 +156,209 @@ static void* ResolveSubjectId(
 // During IR lowering, each Call instruction's callee subjectId is looked up
 // in the subjectIds array. If found, direct_fn is set to the corresponding
 // AOT function pointer, bypassing method_invoke (~2200ns) in Handle_Call.
+//
+// The table is registered by generated code (native-aot.generated.cpp)
+// via ChaosRegisterDirectFnTable, so chaos_runtime_core.lib does not
+// directly link the family-specific symbols.
 
-extern "C" const char* const kAotDirectFnSubjectIds[];
-extern "C" const void* const kAotDirectFnTable[];
-extern "C" const int kAotDirectFnCount;
+static const void* const* g_direct_fn_table = nullptr;
+static const char* const* g_direct_fn_subjects = nullptr;
+static int g_direct_fn_count = 0;
+
+extern "C" void ChaosRegisterDirectFnTable(
+    const char* const* subjects,
+    const void* const* table,
+    int count) noexcept
+{
+    g_direct_fn_subjects = subjects;
+    g_direct_fn_table = table;
+    g_direct_fn_count = count;
+}
+
+/// Resolve subjectId to a native AOT function pointer.
+///
+/// Resolution order:
+///   1. Legacy g_direct_fn_table (AotDirectDispatch table, if registered)
+///   2. HotpatchNameRegistry fallback — looks up the method by
+///      (namespace, type_name, method_name) across all registered AOT modules
+///      and returns the direct_ptr (native AOT compiled function).
+///
+/// This ensures that patched methods calling cross-module functions (e.g.
+/// System.Convert::ToChar) get zero-overhead native dispatch, bypassing
+/// the interpreter's method_invoke path.
+
+// Declared in native-aot.generated.cpp — must be visible before ResolveDirectFn
+extern "C" const char* const kChaosExternalRuntimeSubjects[];
+extern "C" void* kChaosExternalRuntimeFnTable[];
+extern "C" int32_t kChaosExternalRuntimeCount;
 
 static void* ResolveDirectFn(
     const char* subject_id,
     void* /*user_data*/) noexcept
 {
-    if (subject_id == nullptr || kAotDirectFnCount <= 0) return nullptr;
-    for (int i = 0; i < kAotDirectFnCount; ++i) {
-        if (kAotDirectFnSubjectIds[i] != nullptr &&
-            std::strcmp(kAotDirectFnSubjectIds[i], subject_id) == 0) {
-            return const_cast<void*>(kAotDirectFnTable[i]);
+    if (subject_id == nullptr) return nullptr;
+
+    // Step 1: Try legacy AotDirectDispatch table.
+    if (g_direct_fn_count > 0) {
+        for (int i = 0; i < g_direct_fn_count; ++i) {
+            if (g_direct_fn_subjects[i] != nullptr &&
+                std::strcmp(g_direct_fn_subjects[i], subject_id) == 0) {
+                CHAOS_IL2CPP_LOG_DEBUG("ResolveDirectFn: AotDirectTable hit for '%s'", subject_id);
+                return const_cast<void*>(g_direct_fn_table[i]);
+            }
         }
     }
+
+    // Step 2: HotpatchNameRegistry fallback — resolves cross-module calls
+    // (e.g. "System.Private.CoreLib/System.Convert::ToChar(System.Byte)")
+    // to the native AOT direct_ptr registered during BootstrapRuntime.
+    {
+        std::string ns, type_name, method_name;
+        ParseSubjectIdForHotpatchLookup(subject_id, ns, type_name, method_name);
+        if (!type_name.empty() && !method_name.empty()) {
+            auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
+            uint64_t lookup = registry.LookupMethod(
+                ns.c_str(), type_name.c_str(), method_name.c_str());
+            if (lookup != 0) {
+                uint32_t module_id = static_cast<uint32_t>(lookup >> 32);
+                uint32_t token = static_cast<uint32_t>(lookup & 0xFFFFFFFFu);
+                uint32_t slot = registry.TokenToSlot(module_id, token);
+                if (slot != ~0u) {
+                    auto* entry = registry.GetDispatchEntryBySlot(module_id, slot);
+                    if (entry != nullptr && entry->direct_ptr != nullptr) {
+                        std::fprintf(stderr, "[hotpatch-resolve] subject='%s' -> module=%u token=%u slot=%u direct_ptr=%p\n",
+                            subject_id,
+                            static_cast<unsigned>(module_id),
+                            static_cast<unsigned>(token),
+                            static_cast<unsigned>(slot),
+                            entry->direct_ptr);
+                        std::fflush(stderr);
+                        return entry->direct_ptr;
+                    }
+                }
+            } else {
+                std::fprintf(stderr, "[hotpatch-resolve] MISS subject='%s' parsed ns='%s' type='%s' method='%s'\n",
+                    subject_id, ns.c_str(), type_name.c_str(), method_name.c_str());
+                std::fflush(stderr);
+            }
+        }
+
+        // Step 3: ExternalRuntimeFnTable fallback — looks up kChaosExternalRuntimeFnTable
+        // by linear search over subjectIds.  Entries for shaped helpers (e.g. Convert.ToChar)
+        // are pre-filled at compile time; other entries are resolved at startup by
+        // ChaosResolveExternalRuntimeFnTable via HotpatchNameRegistry.
+        if (kChaosExternalRuntimeCount > 0) {
+            for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
+                const char* table_subject = kChaosExternalRuntimeSubjects[i];
+                if (table_subject != nullptr &&
+                    std::strcmp(table_subject, subject_id) == 0) {
+                    void* fn = kChaosExternalRuntimeFnTable[i];
+                    if (fn != nullptr) {
+                        std::fprintf(stderr, "[hotpatch-resolve] kChaosExternalRuntimeTable hit for '%s' -> %p\n",
+                            subject_id, fn);
+                        std::fflush(stderr);
+                    }
+                    return fn;
+                }
+            }
+        }
+    }
+
     return nullptr;
+}
+
+// ── External Runtime Dispatch Table Resolution ──────────────────────────
+// Resolves subjectIds → function pointers for the codegen-emitted
+// kChaosExternalRuntimeFnTable.  Uses the HotpatchNameRegistry which is
+// already populated during bootstrap with all AOT modules' dispatch tables.
+//
+// Called from BootstrapRuntime() after all hotpatch modules are registered.
+// The function pointers come from HotpatchEntryV0::direct_ptr, giving O(1)
+// dispatch at call sites without per-method C++ wrapper stubs.
+
+static void ParseSubjectIdForHotpatchLookup(
+    const char* subject_id,
+    std::string& out_ns,
+    std::string& out_type_name,
+    std::string& out_method_name) noexcept
+{
+    out_ns.clear();
+    out_type_name.clear();
+    out_method_name.clear();
+
+    if (subject_id == nullptr) return;
+
+    // Format: "AssemblyName/Namespace.TypeName:MethodName(Params...)"
+    // Find '/' separator between assembly name and type path
+    const char* type_start = std::strchr(subject_id, '/');
+    if (type_start == nullptr) return;
+    ++type_start; // skip '/'
+
+    // Find "::" between type name and method name
+    const char* method_start = std::strstr(type_start, "::");
+    if (method_start == nullptr) return;
+
+    // Find namespace boundary: last '.' before "::"
+    const char* type_name_begin = type_start;
+    for (const char* p = type_start; p < method_start; ++p) {
+        if (*p == '.') type_name_begin = p + 1;
+    }
+
+    // Namespace: everything between '/' and last '.' before type name
+    if (type_name_begin > type_start + 1) {
+        // +1 for the '/', -1 for the trailing '.'
+        out_ns.assign(type_start, type_name_begin - type_start - 1);
+    } else {
+        out_ns.assign(type_start, type_name_begin - type_start);
+    }
+
+    // Type name: from type_name_begin to "::"
+    out_type_name.assign(type_name_begin, method_start - type_name_begin);
+
+    // Method name: from after "::" to '('
+    const char* paren = std::strchr(method_start + 2, '(');
+    if (paren == nullptr) {
+        // No params — take everything after "::"
+        out_method_name.assign(method_start + 2);
+    } else {
+        out_method_name.assign(method_start + 2, paren - method_start - 2);
+    }
+}
+
+extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept
+{
+    if (kChaosExternalRuntimeCount <= 0) return;
+
+    auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
+
+    std::string ns, type_name, method_name;
+
+    for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
+        const char* subject_id = kChaosExternalRuntimeSubjects[i];
+        if (subject_id == nullptr || subject_id[0] == '\0') continue;
+
+        // Parse subjectId into hotpatch lookup components
+        ParseSubjectIdForHotpatchLookup(subject_id, ns, type_name, method_name);
+        if (type_name.empty() || method_name.empty()) continue;
+
+        // Look up across all registered hotpatch modules
+        uint64_t result = registry.LookupMethod(
+            ns.c_str(), type_name.c_str(), method_name.c_str());
+        if (result == 0) continue;
+
+        uint32_t module_index = static_cast<uint32_t>(result >> 32);
+        uint32_t token = static_cast<uint32_t>(result & 0xFFFFFFFFu);
+
+        if (module_index >= registry.ModuleCount()) continue;
+
+        uint32_t slot = registry.TokenToSlot(module_index, token);
+        if (slot == ~0u) continue;
+
+        auto* entry = registry.GetDispatchEntryBySlot(module_index, slot);
+        if (entry != nullptr && entry->direct_ptr != nullptr) {
+            kChaosExternalRuntimeFnTable[i] = entry->direct_ptr;
+        }
+    }
 }
 
 // ── ECMA element_type → ValueTag mapper ────────────────────────────────────
@@ -298,9 +495,16 @@ static void CacheSignature(PatchMethod* patch_method) noexcept {
     remaining -= 1;
 
     // Parse parameter types.
-    // Only cache first 8 args (vast majority of methods).
-    uint32_t args_cached = (total_arg_count > 8) ? 8 : total_arg_count;
-    for (uint32_t i = 0; i < args_cached && remaining > 0; ++i) {
+    // Use small-buffer optimization: ≤8 args fits in cached_arg_types_small,
+    // >8 args gets a heap allocation.
+    uint8_t* arg_types_buf = nullptr;
+    if (total_arg_count > 8) {
+        arg_types_buf = new uint8_t[total_arg_count]();
+        patch_method->cached_arg_types = arg_types_buf;
+        patch_method->cached_arg_capacity = total_arg_count;
+    }
+
+    for (uint32_t i = 0; i < total_arg_count && remaining > 0; ++i) {
         uint8_t elem = ptr[0];
         auto tag = ElementTypeToValueTag(elem);
         patch_method->cached_arg_types[i] = static_cast<uint8_t>(tag);
@@ -664,24 +868,23 @@ static void InlineLeafCallees(
 }
 
 // ── PatchMethod lazy IR deserialization ─────────────────────────────────
-
-// Global mutex for double-checked locking of IR deserialization.
-static std::mutex g_lower_ir_mutex;
+// Uses per-PatchMethod CAS state machine (ir_state: 0=uninit, 1=lowering, 2=done)
+// to avoid global mutex contention across threads.
 
 void PatchMethodLowerIR(uintptr_t method_key) noexcept {
     if (method_key == 0) return;
 
     auto* patch_method = reinterpret_cast<PatchMethod*>(method_key);
+    auto& state = patch_method->ir_state;
 
     // Fast path: already lowered.
-    if (patch_method->cached_ir != nullptr) return;
+    if (state.load(std::memory_order_acquire) == 2) return;
 
-    // Slow path: acquire lock and double-check.
-    std::lock_guard<std::mutex> lock(g_lower_ir_mutex);
-
-    if (patch_method->cached_ir != nullptr) return;
-
-    // Deserialize AotCoreIr JSON → IRMethod.
+    // Try to claim the lowering slot (0 → 1 via CAS).
+    uint32_t expected = 0;
+    if (state.compare_exchange_strong(expected, 1, std::memory_order_acq_rel)) {
+        // ── Exclusive: perform IR lowering ──
+        // Deserialize AotCoreIr JSON → IRMethod.
     const char* json = patch_method->aot_core_ir_json;
     if (json == nullptr || json[0] == '\0') {
         // No JSON — create an empty IR with Ret.
@@ -699,7 +902,7 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
             ResolveSubjectId,
             patch_method->metadata_cache,
             ResolveDirectFn,
-            nullptr));
+            patch_method->metadata_cache));
 
     patch_method->cached_ir = ir;
 
@@ -724,6 +927,13 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
                 if (instr.call_target != nullptr) {
                     call_cache[i] = runtime_instantiation::PrecacheCallTarget(
                         instr.call_target);
+                } else if (instr.direct_fn != nullptr && instr.direct_ret_tag != 0xFF) {
+                    // direct_fn with pre-computed return tag — fill CachedCallInfo
+                    // so Handle_Call can read the correct ValueTag without runtime
+                    // reflection or string parsing.
+                    call_cache[i].ret_tag = instr.direct_ret_tag;
+                    call_cache[i].is_struct_ret = false;
+                    call_cache[i].struct_size = 0;
                 } else {
                     call_cache[i].ret_tag = 0xFF; // not cached
                 }
@@ -742,6 +952,13 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
     //   - struct returns are too complex — skip
     //   - recursive inlining NOT attempted (single level only)
     InlineLeafCallees(*ir, *patch_method);
+
+        // Mark as done (release so readers see complete state).
+        state.store(2, std::memory_order_release);
+    } else {
+        // Another thread is lowering — spin-wait for completion.
+        while (state.load(std::memory_order_acquire) != 2) {}
+    }
 }
 
 // ── InterpreterEntryDirect ──────────────────────────────────────────────
@@ -751,53 +968,25 @@ void InterpreterEntryDirect(
     void*     args_buf,
     void*     ret_buf) noexcept {
 
+    CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect");
+
     if (method_key == 0) return;
 
     auto* patch_method = reinterpret_cast<PatchMethod*>(method_key);
 
-    // Step 0: Set up AOT bridge for cross-module subject ID resolution.
-    // This only runs once per PatchMetadataCache (all methods in a patch
-    // context share the same cache). After the first call, GetBridge()
-    // returns non-null and the entire block is skipped.
-    if (patch_method->metadata_cache != nullptr &&
-        patch_method->metadata_cache->GetBridge() == nullptr) {
-        const auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
-        const auto* bootstrap_state = chaos::il2cpp::bootstrap::PeekBootstrapState();
-        ImageHandle image = 0;
-        if (bootstrap_state != nullptr && bootstrap_state->aot_image_handle != 0) {
-            image = bootstrap_state->aot_image_handle;
-        } else {
-            // In hotupdate test contexts the AOT image handle is obtained
-            // from the first registered module that has types loaded.
-            for (uint32_t mid = 0; mid < kMaxModules; ++mid) {
-                const auto* module = LookupModule(mid);
-                if (module != nullptr && !module->tombstone &&
-                    module->image != nullptr && module->type_count > 0) {
-                    image = EncodeReflectionQueryImageHandle(module->image);
-                    break;
-                }
-            }
-        }
-        if (bridge != nullptr && image != 0) {
-            patch_method->metadata_cache->SetAotBridge(bridge, image);
-        }
+    // Step 1: Lazy AotCoreIr JSON → IR deserialization.
+    {
+    CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.Step1_LowerIR");
+    PatchMethodLowerIR(method_key);
     }
 
-    // Step 1: Lazy AotCoreIr JSON → IR deserialization.
-    PatchMethodLowerIR(method_key);
-
+    // ── Step B: FastExecute path (Layer 1+2) ─────────────────────────
     auto* ir = static_cast<interpreter::IRMethod*>(patch_method->cached_ir);
-    if (ir == nullptr || ir->instructions.empty()) {
+    if (ir == nullptr) {
         return;  // Deserialization failed — nothing to execute.
     }
-
-    // ── Step A: Trivial fast path ────────────────────────────────────────
-    // Detect simple patterns (LdArg+Ret, LdcI4+Ret, LdNull+Ret) and handle
-    // them inline without building ExecutionFrame or calling InterpreterVM.
-    // Also handles single-instruction Ret (empty IR fallback when AotCoreIr
-    // JSON is absent from patchdata).
     if (ir->instructions.empty()) {
-        return;  // No instructions — nothing to execute.
+        return;
     }
     const auto instr_count = ir->instructions.size();
     if (instr_count == 1) {
@@ -805,6 +994,7 @@ void InterpreterEntryDirect(
         return;
     }
     if (instr_count == 2 && ir->seh_clauses.empty()) {
+        CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.Step1c_2InstrFastPath");
         const auto& op0 = ir->instructions[0];
         const auto& op1 = ir->instructions[1];
         if (op1.op_code == interpreter::IROpCode::Ret) {
@@ -862,79 +1052,85 @@ void InterpreterEntryDirect(
     // ── Step B: FastExecute path (Layer 1+2) ─────────────────────────
     // For methods WITHOUT SEH, use function-pointer dispatch + FastFrame.
     if (ir->seh_clauses.empty() && instr_count > 2) {
+        CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.FastExecute");
+
         if (!patch_method->cached_sig_valid) {
             CacheSignature(patch_method);
         }
 
-        FastFrame ff;
-        if (patch_method->cached_sig_valid) {
-            ff.arg_count = patch_method->cached_arg_count;
-        } else {
-            ff.arg_count = 0;
-            if (patch_method->signature_blob != nullptr &&
-                patch_method->signature_len > 1) {
-                const uint8_t* sig = patch_method->signature_blob;
-                const uint8_t* sig_data = sig + 1;
-                uint8_t count_byte = sig_data[1];
-                if (count_byte <= 0x7F) {
-                    ff.arg_count = count_byte;
-                } else if (count_byte <= 0xBF) {
-                    ff.arg_count = static_cast<uint32_t>(
-                        ((count_byte & 0x3F) << 8) | sig_data[2]);
-                }
-                if ((sig_data[0] & 0x20) == 0x20) {
-                    ff.arg_count += 1;
-                }
-            }
+        // Acquire frame from TLS pool (avoids ~416-byte memset ~200ns).
+        FastFrame* ff = tls_frame_pool.Acquire();
+        FastFrame ff_fallback;
+        bool using_pool = true;
+        if (ff == nullptr) {
+            ff = &ff_fallback;
+            memset(ff, 0, sizeof(*ff));
+            using_pool = false;
         }
-        ff.args = args_buf;
 
         // Set up dispatch callback for Call instructions inside FastExecute.
+        {
+        CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.SetupFrame");
         auto* runtime_state = GetCurrentRuntimeState();
         auto* thread_state  = GetCurrentThreadState();
         runtime_instantiation::InterpreterDispatchContext dispatch_ctx;
         dispatch_ctx.runtime_state = runtime_state;
         dispatch_ctx.thread_state  = thread_state;
-        ff.dispatch_fn = reinterpret_cast<void*>(
-            runtime_instantiation::InterpreterDispatch);
-        ff.dispatch_ctx = &dispatch_ctx;
 
-        // Wire call-site metadata cache — one CachedCallInfo per instruction.
-        ff.call_cache = patch_method->call_cache;
-        ff.call_count = static_cast<uint32_t>(ir->instructions.size());
+        // Lightweight frame setup — replaces manual field fills.
+        SetupFastFrame(ff, patch_method, args_buf, ir,
+                       reinterpret_cast<void*>(
+                           runtime_instantiation::InterpreterDispatch),
+                       &dispatch_ctx);
+        }
 
-        bool ok = FastExecute(ff,
+        bool ok;
+        {
+        CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.FastExecuteCall");
+        ok = FastExecute(*ff,
                               ir->instructions.data(),
                               static_cast<uint32_t>(ir->instructions.size()));
+        }
         if (ok) {
-            if (ff.has_ret && ret_buf != nullptr) {
-                auto ret_tag = static_cast<interpreter::ValueTag>(ff.ret_tag);
+            if (ff->has_ret && ret_buf != nullptr) {
+                auto ret_tag = static_cast<interpreter::ValueTag>(ff->ret_tag);
                 ArgBuffer ret_writer(ret_buf);
                 switch (ret_tag) {
                 case interpreter::ValueTag::Int32:
-                    ret_writer.WriteI32(static_cast<int32_t>(ff.ret_val));
+                    ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val));
+                    if (using_pool) tls_frame_pool.Release(ff);
                     return;
                 case interpreter::ValueTag::Int64:
-                    ret_writer.WriteI64(static_cast<int64_t>(ff.ret_val));
+                    ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val));
+                    if (using_pool) tls_frame_pool.Release(ff);
                     return;
                 case interpreter::ValueTag::Float32: {
                     float v;
-                    std::memcpy(&v, &ff.ret_val, sizeof(float));
+                    std::memcpy(&v, &ff->ret_val, sizeof(float));
                     ret_writer.WriteF32(v);
+                    if (using_pool) tls_frame_pool.Release(ff);
                     return;
                 }
                 case interpreter::ValueTag::Float64: {
                     double v;
-                    std::memcpy(&v, &ff.ret_val, sizeof(double));
+                    std::memcpy(&v, &ff->ret_val, sizeof(double));
                     ret_writer.WriteF64(v);
+                    if (using_pool) tls_frame_pool.Release(ff);
                     return;
                 }
                 default:
-                    ret_writer.WritePtr(reinterpret_cast<void*>(ff.ret_val));
+                    ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val));
+                    if (using_pool) tls_frame_pool.Release(ff);
                     return;
                 }
             }
+            if (using_pool) tls_frame_pool.Release(ff);
             return;
+        }
+
+        // FastExecute failed (unsupported opcode) — fall through to VM.
+        if (using_pool) {
+            tls_frame_pool.Release(ff);
         }
     }
 
@@ -982,7 +1178,7 @@ void InterpreterEntryDirect(
     if (type_aware_args) {
         // Type-aware push: use cached ValueTag per argument.
         for (CHAOS_IL2CPP_UINT32 i = 0; i < arg_count; ++i) {
-            auto tag = (i < 8)
+            auto tag = (i < patch_method->cached_arg_capacity)
                 ? static_cast<interpreter::ValueTag>(patch_method->cached_arg_types[i])
                 : interpreter::ValueTag::ObjectRef;
             frame.arguments.push_back(ReadTypedArg(arg_reader, tag));
@@ -1020,6 +1216,28 @@ void InterpreterEntryDirect(
             : interpreter::ValueTag::Void;
         WriteTypedRet(ret_buf, result, ret_tag);
     }
+}
+
+// ── InterpreterEntryDirectFast ─────────────────────────────────────────────
+// Fast-path wrapper: allocates internal args/ret buffers without zero-init,
+// then delegates to InterpreterEntryDirect.
+//
+// Use in --patch-bench mode where the caller (RunNativeAotBench) has no
+// method arguments.  The 32+16 bytes of __chaos_args[4]/__chaos_ret[2]
+// are uninitialized stack — no memset, no `= {}`.
+//
+// Benchmarks: saves ~32-48 bytes zero-init per call (~5-10ns per call).
+void InterpreterEntryDirectFast(
+    uintptr_t method_key) noexcept {
+
+    // Deliberately uninitialized — InterpreterEntryDirect only reads from
+    // args_buf when the method has arguments (via ArgBuffer), and only writes
+    // to ret_buf when the method returns a value.  Unused buffers remain
+    // untouched, so zero-init is wasted cycles.
+    uint64_t __chaos_args[4];
+    uint64_t __chaos_ret[2];
+
+    InterpreterEntryDirect(method_key, __chaos_args, __chaos_ret);
 }
 
 // ── ReapplyInlining ──────────────────────────────────────────────────────────
@@ -1063,6 +1281,10 @@ void ReapplyInlining(PatchMethod* methods, uint32_t method_count) noexcept {
                     instr.op_code == interpreter::IROpCode::CallVirtConstrained) {
                     if (instr.call_target != nullptr) {
                         new_cc[j] = runtime_instantiation::PrecacheCallTarget(instr.call_target);
+                    } else if (instr.direct_fn != nullptr && instr.direct_ret_tag != 0xFF) {
+                        new_cc[j].ret_tag = instr.direct_ret_tag;
+                        new_cc[j].is_struct_ret = false;
+                        new_cc[j].struct_size = 0;
                     } else {
                         new_cc[j].ret_tag = 0xFF;
                     }

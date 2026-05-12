@@ -1331,7 +1331,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 		builder.AppendLine($"{indentation}{{");
 		builder.AppendLine($"{indentation}    const auto chaos_value = {ConsumeEvalStackValueExpression()};");
-		builder.AppendLine($"{indentation}    auto* chaos_boxed = new {GetNativeBoxTypeSymbol(requiredTargetReference.SubjectId)}{{}};");
+		builder.AppendLine($"{indentation}    auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
 		builder.AppendLine($"{indentation}    chaos_boxed->header.type_info = &{GetNativeBoxTypeInfoSymbol(requiredTargetReference.SubjectId)};");
 		if (RequiresStructuredValueTypePayload(requiredTargetReference))
 		{
@@ -1670,6 +1670,10 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			EmitHotpatchResolvedInvocation(builder, slotIndex, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation);
 		}
+		else if (invocationTarget.ExternalRuntimeTableIndex >= 0)
+		{
+			EmitExternalRuntimeTableDispatch(builder, invocationTarget, indentation);
+		}
 		else
 		{
 			EmitLinearResolvedInvocation(builder, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck: false);
@@ -1752,6 +1756,10 @@ public sealed partial class NativeAotLoweringPlanner
 			if (_nativeSymbolToDispatchSlot?.TryGetValue(invocationTarget.TargetSymbol, out int slotIndex) == true)
 			{
 				EmitHotpatchResolvedInvocation(builder, slotIndex, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation);
+			}
+			else if (invocationTarget.ExternalRuntimeTableIndex >= 0)
+			{
+				EmitExternalRuntimeTableDispatch(builder, invocationTarget, indentation);
 			}
 			else
 			{
@@ -1903,7 +1911,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine(indentation + "{");
 			builder.AppendLine(indentation + $"    const auto chaos_method_ptr = {ConsumeEvalStackValueExpression()};");
 			builder.AppendLine(indentation + $"    const auto chaos_target = {ConsumeEvalStackValueExpression()};");
-			builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC {GetNativeTypeSymbol(requiredTargetReference.SubjectId)}{{}};");
+			builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
 			builder.AppendLine($"{indentation}    chaos_object->header.type_info = &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
 			if (_vtableTypes?.Contains(requiredTargetReference.SubjectId) == true)
 			{
@@ -1961,7 +1969,7 @@ public sealed partial class NativeAotLoweringPlanner
 					? $"{indentation}    const auto chaos_arg_{num2} = chaos_raw_arg_{num2};"
 					: $"{indentation}    const auto chaos_arg_{num2} = {FormatInboundAbiArgumentExpression(constructorTarget.ParameterAbis[num2], $"chaos_raw_arg_{num2}")};");
 			}
-			builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC {GetNativeTypeSymbol(requiredTargetReference.SubjectId)}{{}};");
+			builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
 			builder.AppendLine($"{indentation}    chaos_object->header.type_info = &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
 			if (_vtableTypes?.Contains(requiredTargetReference.SubjectId) == true)
 			{
@@ -1976,7 +1984,7 @@ public sealed partial class NativeAotLoweringPlanner
 			return;
 		}
 		builder.AppendLine(indentation + "{");
-		builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC {GetNativeTypeSymbol(requiredTargetReference.SubjectId)}{{}};");
+		builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
 		builder.AppendLine($"{indentation}    chaos_object->header.type_info = &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
 		if (_vtableTypes?.Contains(requiredTargetReference.SubjectId) == true)
 		{
@@ -2037,6 +2045,36 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendFormatted(indentation);
 		handler.AppendLiteral("}");
 		stringBuilder6.AppendLine(ref handler);
+	}
+
+	private void EmitExternalRuntimeTableDispatch(StringBuilder builder, InvocationTarget invocationTarget, string indentation)
+	{
+		string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
+		string paramTypes = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
+		string fnType = string.IsNullOrEmpty(paramTypes)
+			? $"{returnType}(*)()"
+			: $"{returnType}(*)({paramTypes})";
+		int idx = invocationTarget.ExternalRuntimeTableIndex;
+
+		builder.AppendLine($"{indentation}{{");
+		for (int i = invocationTarget.ParameterAbis.Count - 1; i >= 0; i--)
+		{
+			builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {ConsumeEvalStackValueExpression()};");
+			builder.AppendLine(invocationTarget.RawArgumentIndices.Contains(i)
+				? $"{indentation}    const auto chaos_arg_{i} = chaos_raw_arg_{i};"
+				: $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[i], $"chaos_raw_arg_{i}")};");
+		}
+		string args = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
+		if (string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}    reinterpret_cast<{fnType}>(kChaosExternalRuntimeFnTable[{idx}])({args});");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}    const auto chaos_result = reinterpret_cast<{fnType}>(kChaosExternalRuntimeFnTable[{idx}])({args});");
+			EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_result", indentation + "    ");
+		}
+		builder.AppendLine($"{indentation}}}");
 	}
 
 	private void EmitLinearVirtualDispatchCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
@@ -2237,11 +2275,11 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder2.AppendLine(ref handler);
 		stringBuilder = builder;
 		StringBuilder stringBuilder3 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(32, 2, stringBuilder);
+		handler = new StringBuilder.AppendInterpolatedStringHandler(46, 2, stringBuilder);
 		handler.AppendFormatted(indentation);
-		handler.AppendLiteral("    auto* chaos_string = new ");
+		handler.AppendLiteral("    auto* chaos_string = CHAOS_IL2CPP_NEW_GC(");
 		handler.AppendFormatted(GetNativeTypeSymbol("System.Private.CoreLib/System.String"));
-		handler.AppendLiteral("{};");
+		handler.AppendLiteral(");");
 		stringBuilder3.AppendLine(ref handler);
 		stringBuilder = builder;
 		StringBuilder stringBuilder4 = stringBuilder;

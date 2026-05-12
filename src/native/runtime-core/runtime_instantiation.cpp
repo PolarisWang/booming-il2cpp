@@ -8,6 +8,7 @@
 #include "runtime_core.h"       // ManagedExceptionCarrier
 #include "runtime_vtable.h"
 #include "../bootstrap/bootstrap.h"  // GetCodegenBridgeV0
+#include <chaos/profile.h>
 
 #include <chaos/native_types.h>
 
@@ -418,6 +419,8 @@ interpreter::DispatchResult InterpreterDispatch(
     using interpreter::InterpreterValue;
     using interpreter::ValueTag;
 
+    CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterDispatch");
+
     DispatchResult result = {};
 
     auto* ctx = static_cast<InterpreterDispatchContext*>(dispatch_context);
@@ -678,8 +681,9 @@ RawDispatchResult InterpreterDispatchRaw(
 {
     using interpreter::ValueTag;
 
-    RawDispatchResult result = {};
+    CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterDispatchRaw");
 
+    RawDispatchResult result = {};
     auto* ctx = static_cast<InterpreterDispatchContext*>(dispatch_context);
     if (ctx == nullptr || ctx->runtime_state == nullptr) {
         return result;

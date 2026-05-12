@@ -59,7 +59,7 @@ const char* NullTerminate(const char* data, CHAOS_IL2CPP_INT32 len)
 // Convert::ToBoolean(String)
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToBoolean(CHAOS_IL2CPP_INTPTR value)
+extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToBoolean(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -79,7 +79,7 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToBoolean(CHAOS_IL2CPP_INTPTR value)
 // Convert::ToXxx(String) — string→numeric
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_UINT8 ChaosConvertToByte(CHAOS_IL2CPP_INTPTR value)
+extern "C" CHAOS_IL2CPP_UINT8 ChaosConvertToByte(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -99,7 +99,7 @@ extern "C" CHAOS_IL2CPP_UINT8 ChaosConvertToByte(CHAOS_IL2CPP_INTPTR value)
     return static_cast<CHAOS_IL2CPP_UINT8>(result);
 }
 
-extern "C" CHAOS_IL2CPP_INT16 ChaosConvertToInt16(CHAOS_IL2CPP_INTPTR value)
+extern "C" CHAOS_IL2CPP_INT16 ChaosConvertToInt16(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -121,7 +121,7 @@ extern "C" CHAOS_IL2CPP_INT16 ChaosConvertToInt16(CHAOS_IL2CPP_INTPTR value)
     return static_cast<CHAOS_IL2CPP_INT16>(result);
 }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToInt32(CHAOS_IL2CPP_INTPTR value)
+extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToInt32(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -147,7 +147,7 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToInt32(CHAOS_IL2CPP_INTPTR value)
     return static_cast<CHAOS_IL2CPP_INT32>(result);
 }
 
-extern "C" CHAOS_IL2CPP_INT64 ChaosConvertToInt64(CHAOS_IL2CPP_INTPTR value)
+extern "C" CHAOS_IL2CPP_INT64 ChaosConvertToInt64(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -167,7 +167,7 @@ extern "C" CHAOS_IL2CPP_INT64 ChaosConvertToInt64(CHAOS_IL2CPP_INTPTR value)
     return static_cast<CHAOS_IL2CPP_INT64>(result);
 }
 
-extern "C" CHAOS_IL2CPP_FLOAT32 ChaosConvertToSingle(CHAOS_IL2CPP_INTPTR value)
+extern "C" CHAOS_IL2CPP_FLOAT32 ChaosConvertToSingle(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -187,7 +187,7 @@ extern "C" CHAOS_IL2CPP_FLOAT32 ChaosConvertToSingle(CHAOS_IL2CPP_INTPTR value)
     return static_cast<CHAOS_IL2CPP_FLOAT32>(result);
 }
 
-extern "C" CHAOS_IL2CPP_FLOAT64 ChaosConvertToDouble(CHAOS_IL2CPP_INTPTR value)
+extern "C" CHAOS_IL2CPP_FLOAT64 ChaosConvertToDouble(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -210,7 +210,7 @@ extern "C" CHAOS_IL2CPP_FLOAT64 ChaosConvertToDouble(CHAOS_IL2CPP_INTPTR value)
 // Convert::ToDecimal(String) — string→DecimalCarrier
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertToDecimal(CHAOS_IL2CPP_INTPTR value)
+extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertToDecimal(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     double d = ChaosConvertToDouble(value);
     return ChaosDecimalFromDouble(d);
@@ -220,7 +220,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertToDecimal(CHAOS_IL2CPP_INTPTR value)
 // Convert::ToInt32(Double)
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToInt32FromDouble(CHAOS_IL2CPP_FLOAT64 value)
+extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToInt32FromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept
 {
     if (std::isnan(value) ||
         value < static_cast<double>(std::numeric_limits<CHAOS_IL2CPP_INT32>::min()) ||
@@ -237,7 +237,7 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToInt32FromDouble(CHAOS_IL2CPP_FLOAT64
 // Convert::ToString(Int32) / ToString(Double)
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatInt32(CHAOS_IL2CPP_INT32 value)
+extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatInt32(CHAOS_IL2CPP_INT32 value) noexcept
 {
     char buf[16];
     int n = std::snprintf(buf, sizeof(buf), "%d", static_cast<int>(value));
@@ -246,7 +246,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatInt32(CHAOS_IL2CPP_INT32 value)
     return chaos_make_string_id_value(id);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatDouble(CHAOS_IL2CPP_FLOAT64 value)
+extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept
 {
     char buf[64];
     int n = std::snprintf(buf, sizeof(buf), "%.15g", static_cast<double>(value));
@@ -259,17 +259,17 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatDouble(CHAOS_IL2CPP_FLOAT64 value)
 // Int32::Parse / Int64::Parse / Double::Parse
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32(CHAOS_IL2CPP_INTPTR value)
+extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     return ChaosConvertToInt32(value);
 }
 
-extern "C" CHAOS_IL2CPP_INT64 ChaosParseInt64(CHAOS_IL2CPP_INTPTR value)
+extern "C" CHAOS_IL2CPP_INT64 ChaosParseInt64(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     return ChaosConvertToInt64(value);
 }
 
-extern "C" CHAOS_IL2CPP_FLOAT64 ChaosParseDouble(CHAOS_IL2CPP_INTPTR value)
+extern "C" CHAOS_IL2CPP_FLOAT64 ChaosParseDouble(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     return ChaosConvertToDouble(value);
 }
@@ -278,7 +278,7 @@ extern "C" CHAOS_IL2CPP_FLOAT64 ChaosParseDouble(CHAOS_IL2CPP_INTPTR value)
 // Decimal arithmetic
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosDecimalToInt32(CHAOS_IL2CPP_INTPTR carrier_ptr)
+extern "C" CHAOS_IL2CPP_INT32 ChaosDecimalToInt32(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
 {
     using namespace chaos::il2cpp::runtime_core;
     auto* carrier = reinterpret_cast<const DecimalCarrier*>(carrier_ptr);
@@ -304,7 +304,7 @@ static CHAOS_IL2CPP_INTPTR DecimalFromDoubleResult(double result)
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(out);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr)
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
 {
     using namespace chaos::il2cpp::runtime_core;
     auto* l = reinterpret_cast<const DecimalCarrier*>(left_ptr);
@@ -316,7 +316,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHA
     return DecimalFromDoubleResult(ld + rd);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalSubtract(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr)
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalSubtract(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
 {
     using namespace chaos::il2cpp::runtime_core;
     auto* l = reinterpret_cast<const DecimalCarrier*>(left_ptr);
@@ -328,7 +328,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalSubtract(CHAOS_IL2CPP_INTPTR left_ptr
     return DecimalFromDoubleResult(ld - rd);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMultiply(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr)
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMultiply(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
 {
     using namespace chaos::il2cpp::runtime_core;
     auto* l = reinterpret_cast<const DecimalCarrier*>(left_ptr);
@@ -340,7 +340,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMultiply(CHAOS_IL2CPP_INTPTR left_ptr
     return DecimalFromDoubleResult(ld * rd);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr)
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
 {
     using namespace chaos::il2cpp::runtime_core;
     auto* l = reinterpret_cast<const DecimalCarrier*>(left_ptr);
@@ -361,7 +361,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, 
 // Convert::ToDecimal(Double) — double→DecimalCarrier
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromDouble(CHAOS_IL2CPP_FLOAT64 value)
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept
 {
     using namespace chaos::il2cpp::runtime_core;
     auto* out = new DecimalCarrier{};

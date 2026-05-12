@@ -16,6 +16,8 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <string>
+#include <unordered_map>
 #include <vector>
 
 namespace chaos::il2cpp::runtime_core {
@@ -37,12 +39,14 @@ class HotpatchNameRegistry {
 public:
     // ── Registration ────────────────────────────────────────────────
     void RegisterModule(const HotpatchModuleV0* module) noexcept;
+    // Bulk registration for bootstrap — O(total methods) builds lookup_cache_.
+    void RegisterAllModules(const HotpatchModuleV0* const* modules, uint32_t count) noexcept;
 
     size_t ModuleCount() const noexcept { return modules_.size(); }
 
     // ── Lookup ──────────────────────────────────────────────────────
     // Returns composite key: (module_index << 32) | token, or 0 if not found.
-    uint64_t LookupMethod(const char* type_name, const char* method_name) const noexcept;
+    uint64_t LookupMethod(const char* ns, const char* type_name, const char* method_name) const noexcept;
 
     // Token→Slot within a specific module (no cross-module collision).
     uint32_t TokenToSlot(uint32_t module_id, uint32_t token) const noexcept;
@@ -64,6 +68,15 @@ public:
 
 private:
     std::vector<const HotpatchModuleV0*> modules_;
+
+    // ── Fast lookup cache ─────────────────────────────────────────────
+    // Maps "ns\0type\0method" → (module_index << 32) | token.
+    // Populated during RegisterModule / RegisterAllModules.
+    // Avoids O(modules × log(types)) per LookupMethod call.
+    std::unordered_map<std::string, uint64_t> lookup_cache_;
+
+    // Build cache entries for one module (called from RegisterModule).
+    void BuildLookupCacheForModule(const HotpatchModuleV0* mod, size_t module_index) noexcept;
 
     // Single-entry token→module cache: avoids re-scanning all modules.
     mutable uint32_t token_cache_key_ = 0;

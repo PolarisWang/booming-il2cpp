@@ -116,20 +116,21 @@ def _generate_stub(fn_name: str, arg_count: int) -> str:
 
 
 def find_missing_external_runtime_fns(content: str) -> dict[str, int]:
-    """Find chaos_external_runtime_* functions called but not defined.
+    """Find chaos_external_runtime_* or chaos_stub_definition_* functions
+    called but not defined.
 
     Returns dict mapping function name -> argument count at call site.
     """
-    # All chaos_external_runtime_* names referenced in the file
+    # All chaos_external_runtime_* and chaos_stub_definition_* names referenced in the file
     all_refs: set[str] = set()
-    for m in re.finditer(r'chaos_external_runtime_\w+', content):
+    for m in re.finditer(r'(?:chaos_external_runtime_|chaos_stub_definition_)\w+', content):
         all_refs.add(m.group(0))
 
     # Those with definitions: static RET_TYPE fn_name(param_list) {
     defined: set[str] = set()
     for m in re.finditer(
         r'(?:static\s+)?(?:CHAOS_IL2CPP_\w+|void|chaos_valuetype_\w+|double|float)\s+'
-        r'(chaos_external_runtime_\w+)\s*\(',
+        r'(chaos_external_runtime_\w+|chaos_stub_definition_\w+)\s*\(',
         content
     ):
         defined.add(m.group(1))
@@ -188,6 +189,123 @@ def generate_stubs_cpp(content: str, missing: dict[str, int], family_slug: str) 
     return "\n".join(lines)
 
 
+def _subject_id_to_fn_name(subject_id: str) -> str:
+    """Convert a subjectId to the corresponding chaos_external_runtime_* function name.
+
+    Matches naming convention used by codegen:
+    "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)"
+    → "chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Byte_"
+    """
+    result = subject_id
+    for ch in './:(,)':
+        result = result.replace(ch, '_')
+    result = result.rstrip('_')
+    return f'chaos_external_runtime_{result}_'
+
+
+def _populate_fn_table(content: str) -> str:
+    """Replace nullptr entries in kChaosExternalRuntimeFnTable with addresses of
+    static chaos_external_runtime_* stub functions defined in this TU.
+
+    The codegen emits table-indexed dispatch (kChaosExternalRuntimeFnTable[i]()) but
+    leaves entries as nullptr, relying on startup resolution via
+    ChaosResolveExternalRuntimeFnTable. For methods not registered in the hotpatch
+    registry (e.g. runtime intrinsics not in this family's generated module), the
+    entries stay nullptr causing null-pointer dereference. This function fills in
+    addresses of static functions whose subject IDs match the dispatch table entries.
+
+    For entries that would otherwise be nullptr AND are directly called via
+    kChaosExternalRuntimeFnTable[N]() in the generated code, this function also
+    generates minimal stub definitions on-the-fly so the call sites don't crash.
+    """
+    # Parse kChaosExternalRuntimeSubjects array
+    subjects_match = re.search(
+        r'extern "C" const char\* kChaosExternalRuntimeSubjects\[(\d+)\]\s*=\s*\{(.*?)\};',
+        content, re.DOTALL
+    )
+    if not subjects_match:
+        return content
+
+    count = int(subjects_match.group(1))
+    if count == 0:
+        return content
+
+    subject_ids = re.findall(r'"([^"]*)"', subjects_match.group(2))
+    if len(subject_ids) != count:
+        return content
+
+    # Find which fn table indices are called directly in the code
+    # Pattern: kChaosExternalRuntimeFnTable[N]) — the closing paren after
+    # the index bracket means it's a call site, not a declaration.
+    called_indices: set[int] = set()
+    for m in re.finditer(r'kChaosExternalRuntimeFnTable\[(\d+)\]\)', content):
+        called_indices.add(int(m.group(1)))
+
+    # Build replacement fn table entries and collect stubs to generate on-the-fly
+    fn_pointers: list[str] = []
+    extra_stubs: dict[int, tuple[str, str]] = {}  # index -> (fn_name, subject_id)
+
+    for i, sid in enumerate(subject_ids):
+        fn_name = _subject_id_to_fn_name(sid)
+        if f' {fn_name}(' in content:
+            fn_pointers.append(f'    reinterpret_cast<void*>(&{fn_name}),')
+        elif i in called_indices:
+            # This entry is called directly via fn table dispatch but has no
+            # chaos_external_runtime_* stub. Generate one on-the-fly.
+            extra_stubs[i] = (fn_name, sid)
+            fn_pointers.append(f'    reinterpret_cast<void*>(&{fn_name}),')
+        else:
+            fn_pointers.append('    nullptr,')
+
+    if all(p.strip() == 'nullptr,' for p in fn_pointers):
+        return content  # Nothing to wire in
+
+    # Generate extra stubs and insert them before the fn table definition
+    if extra_stubs:
+        stub_lines = [
+            "// Auto-generated stubs for kChaosExternalRuntimeFnTable entries",
+            "// called directly via fn table dispatch (no chaos_external_runtime_*",
+            "// call by name in the generated code).",
+        ]
+        for idx, (fn_name, sid) in sorted(extra_stubs.items()):
+            # 0-arg stub: the call site casts the fn pointer directly
+            stub = _generate_stub(fn_name, 0)
+            stub_lines.append(stub)
+            stub_lines.append("")
+
+        stub_code = "\n".join(stub_lines)
+
+        # Insert before kChaosExternalRuntimeFnTable definition line
+        lines = content.split('\n')
+        fn_table_idx = None
+        for j, line in enumerate(lines):
+            if 'kChaosExternalRuntimeFnTable[' in line:
+                fn_table_idx = j
+                break
+
+        if fn_table_idx is not None:
+            lines.insert(fn_table_idx, "")
+            lines.insert(fn_table_idx, stub_code)
+            content = '\n'.join(lines)
+
+    # Replace the kChaosExternalRuntimeFnTable array body (leave nullptr for
+    # entries with no matching function in this TU — they'll remain deferred
+    # to ChaosResolveExternalRuntimeFnTable startup resolution)
+    fn_table_pattern = re.compile(
+        r'(extern "C" void\* kChaosExternalRuntimeFnTable\[\d+\]\s*=\s*\{)(.*?)(\};)',
+        re.DOTALL
+    )
+
+    def replace_fn_table(m):
+        return m.group(1) + '\n' + '\n'.join(fn_pointers) + '\n' + m.group(3)
+
+    new_content = fn_table_pattern.sub(replace_fn_table, content)
+    wired = sum(1 for p in fn_pointers if 'reinterpret_cast' in p)
+    if wired:
+        print(f"  [gen_ext_stubs] wired {wired}/{count} kChaosExternalRuntimeFnTable entries to stub functions")
+    return new_content
+
+
 def main():
     if len(sys.argv) < 2:
         print("Usage: python _gen_external_runtime_stubs.py <path-to-generated.cpp>")
@@ -231,10 +349,18 @@ def main():
         # Fallback: prepend to file
         new_content = stubs_code + "\n" + content
 
+    # ── Post-processing: populate kChaosExternalRuntimeFnTable entries ────────
+    # The codegen emits table-indexed dispatch via kChaosExternalRuntimeFnTable[i]()
+    # but leaves all entries as nullptr (filled at startup by ChaosResolveExternalRuntimeFnTable
+    # via hotpatch name registry). For methods the runtime can't resolve (e.g. Object.GetHashCode
+    # that lives in the core runtime assembly), the entry stays nullptr → crash.
+    #
+    # After generating stub definitions, wire them into the dispatch table entries
+    # so table-indexed calls work correctly.
+    new_content = _populate_fn_table(new_content)
+
     filepath.write_text(new_content, encoding="utf-8")
 
-    # We also need to add the stubs file to CMakeLists. For now, since we're
-    # appending directly to native-aot.generated.cpp, no CMake change needed.
     print(f"  [gen_ext_stubs] generated {len(missing)} stub(s) in {filepath}")
     for fn_name in sorted(missing.keys()):
         print(f"    + {fn_name} ({missing[fn_name]} args)")

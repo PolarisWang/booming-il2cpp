@@ -5,6 +5,7 @@
 
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
+#include <chaos/profile.h>
 
 #include <cstdlib>
 #include <cstring>
@@ -191,6 +192,7 @@ const void** BuildRuntimeVTable(CHAOS_IL2CPP_UINT64 type_stable_id,
 void* ResolveVirtualMethodPointer(
     CHAOS_IL2CPP_UINT32 instance_type_token,
     CHAOS_IL2CPP_UINT32 declared_method_token) {
+    CHAOS_IL2CPP_PROFILE_SCOPE("ResolveVirtualMethodPointer");
     if (instance_type_token == 0u) {
         return nullptr;
     }

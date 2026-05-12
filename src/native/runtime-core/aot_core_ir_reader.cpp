@@ -5,6 +5,7 @@
 
 #include <cstdlib>
 #include <cstring>
+#include <string>
 #include <vector>
 #include <algorithm>
 
@@ -28,8 +29,89 @@ static const char* JsonStringOr(const json::JsonValue& val) {
     return nullptr;
 }
 
-// Parse the "opCode" field from an instruction JSON object.
-// Returns the numeric opcode value, or -1 if not found/invalid.
+// Count parameters from a callee signature string.
+// Format: "Assembly/Type::Method:ReturnType(Param1,Param2,...)"
+// Returns the parameter count, or -1 if the string can't be parsed.
+static int CountParametersFromCallee(const json::JsonValue& callee_val) {
+    if (callee_val.kind != json::JsonValueKind::String ||
+        callee_val.string_value == nullptr || callee_val.string_length == 0)
+        return -1;
+    std::string s(callee_val.string_value, callee_val.string_length);
+
+    // Find the last '(' which starts the parameter list.
+    auto paren = s.rfind('(');
+    if (paren == std::string::npos) return -1;
+
+    // Empty parens means 0 parameters.
+    if (paren + 1 >= s.size() || s[paren + 1] == ')') return 0;
+
+    // Count top-level commas (not nested in <...> for generics).
+    int count = 1;
+    int depth = 0;
+    for (size_t i = paren + 1; i < s.size() && s[i] != ')'; ++i) {
+        if (s[i] == '<') ++depth;
+        else if (s[i] == '>') --depth;
+        else if (s[i] == ',' && depth == 0) ++count;
+    }
+    return count;
+}
+
+// Extract the return type name from a subjectId string.
+// SubjectId format: "Assembly/Type::MethodName:ReturnType(Params...)"
+// Returns empty string if no return type annotation is present.
+static std::string ExtractReturnTypeFromSubjectId(const std::string& subject_id) {
+    auto found = subject_id.rfind("::");
+    if (found == std::string::npos) return "";
+
+    auto method_part = subject_id.substr(found + 2);
+    auto colon = method_part.rfind(':');
+    auto paren = method_part.find('(');
+
+    if (colon == std::string::npos || colon == 0) return "";
+    // The colon must be before the paren (method-return separator),
+    // not part of the params area.
+    if (paren != std::string::npos && colon > paren) return "";
+
+    size_t ret_start = colon + 1;
+    size_t ret_end = (paren != std::string::npos) ? paren : method_part.size();
+    if (ret_start >= ret_end) return "";
+
+    return method_part.substr(ret_start, ret_end - ret_start);
+}
+
+// Map a .NET return type name to an interpreter ValueTag.
+// Used during IR deserialization to set direct_ret_tag for direct_fn calls.
+static uint8_t InferValueTagFromReturnTypeName(const char* type_name) {
+    if (type_name == nullptr) return 0xFF;
+
+    // ECMA primitive types → Int32
+    if (std::strcmp(type_name, "System.Char") == 0 ||
+        std::strcmp(type_name, "System.Byte") == 0 ||
+        std::strcmp(type_name, "System.SByte") == 0 ||
+        std::strcmp(type_name, "System.Int16") == 0 ||
+        std::strcmp(type_name, "System.UInt16") == 0 ||
+        std::strcmp(type_name, "System.Int32") == 0 ||
+        std::strcmp(type_name, "System.UInt32") == 0 ||
+        std::strcmp(type_name, "System.Boolean") == 0)
+        return static_cast<uint8_t>(interpreter::ValueTag::Int32);
+
+    if (std::strcmp(type_name, "System.Int64") == 0 ||
+        std::strcmp(type_name, "System.UInt64") == 0)
+        return static_cast<uint8_t>(interpreter::ValueTag::Int64);
+
+    if (std::strcmp(type_name, "System.Single") == 0)
+        return static_cast<uint8_t>(interpreter::ValueTag::Float32);
+
+    if (std::strcmp(type_name, "System.Double") == 0)
+        return static_cast<uint8_t>(interpreter::ValueTag::Float64);
+
+    if (std::strcmp(type_name, "System.Void") == 0)
+        return static_cast<uint8_t>(interpreter::ValueTag::Void);
+
+    // Default: ObjectRef for String, Object, DateTime, Decimal, struct, etc.
+    return static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
+}
+
 static int ParseOpCode(const json::JsonValue& instr_obj) {
     auto op_code_val = json::JsonParser::FindKey(instr_obj, "opCode");
     if (op_code_val.kind == json::JsonValueKind::Int64)
@@ -184,7 +266,9 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
             case interpreter::IROpCode::CallVirt:
             case interpreter::IROpCode::CallBridge:
             case interpreter::IROpCode::NewObj:
-                // arg_count from JSON or default to 0.
+                // arg_count from JSON operand or default to 0.
+                // Will be overridden by targetParameterCount below if present,
+                // or derived from callee signature as fallback.
                 instr.arg_count = static_cast<CHAOS_IL2CPP_UINT32>(
                     JsonIntOr(operand_val, 0));
                 break;
@@ -226,6 +310,27 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
             case interpreter::IROpCode::Switch:
                 // Operand is the number of cases.
                 instr.secondary_index = static_cast<CHAOS_IL2CPP_SIZE>(
+                    JsonIntOr(operand_val, 0));
+                break;
+
+            // ── Branch opcodes: operand is the IL byte offset target ──
+            // immediate_i4 is used later by Step 2 (ResolveBranchTarget)
+            // to convert byte offset → instruction index.
+            case interpreter::IROpCode::Br:
+            case interpreter::IROpCode::BrTrue:
+            case interpreter::IROpCode::BrFalse:
+            case interpreter::IROpCode::Beq:
+            case interpreter::IROpCode::Blt:
+            case interpreter::IROpCode::Bgt:
+            case interpreter::IROpCode::Ble:
+            case interpreter::IROpCode::Bge:
+            case interpreter::IROpCode::BneUn:
+            case interpreter::IROpCode::BgeUn:
+            case interpreter::IROpCode::BgtUn:
+            case interpreter::IROpCode::BleUn:
+            case interpreter::IROpCode::BltUn:
+            case interpreter::IROpCode::Leave:
+                instr.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(
                     JsonIntOr(operand_val, 0));
                 break;
 
@@ -290,6 +395,12 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                     auto param_count = json::JsonParser::FindKey(elem, "targetParameterCount");
                     if (param_count.kind == json::JsonValueKind::Int64) {
                         instr.arg_count = static_cast<CHAOS_IL2CPP_UINT32>(param_count.int64_value);
+                    } else {
+                        // Fallback: derive arg_count from callee signature.
+                        int derived = CountParametersFromCallee(callee);
+                        if (derived >= 0) {
+                            instr.arg_count = static_cast<CHAOS_IL2CPP_UINT32>(derived);
+                        }
                     }
                 }
 
@@ -301,9 +412,23 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                     resolve_direct_fn != nullptr && direct_ctx != nullptr)
                 {
                     auto callee = json::JsonParser::FindKey(elem, "callee");
-                    const char* callee_str = JsonStringOr(callee);
-                    if (callee_str != nullptr) {
-                        instr.direct_fn = resolve_direct_fn(callee_str, direct_ctx);
+                    if (callee.kind == json::JsonValueKind::String &&
+                        callee.string_value != nullptr && callee.string_length > 0) {
+                        // JSON reader's string_value may NOT be null-terminated
+                        // for non-escaped strings (points into raw JSON buffer).
+                        // Create a proper C string for strcmp-based resolution.
+                        std::string callee_str(callee.string_value, callee.string_length);
+                        instr.direct_fn = resolve_direct_fn(callee_str.c_str(), direct_ctx);
+
+                        // Infer return type tag from subjectId for direct_fn calls.
+                        // This lets Handle_Call push the correct ValueTag without
+                        // runtime string parsing or reflection queries.
+                        if (instr.direct_fn != nullptr) {
+                            auto ret_type = ExtractReturnTypeFromSubjectId(callee_str);
+                            if (!ret_type.empty()) {
+                                instr.direct_ret_tag = InferValueTagFromReturnTypeName(ret_type.c_str());
+                            }
+                        }
                     }
                 }
             }

@@ -24,7 +24,9 @@
   "evolution_lineage": {
     "parent": null,
     "derived_from": null,
-    "derived_to": [],
+    "derived_to": [
+      "dev-architecture-first-development-planning"
+    ],
     "fixes": [],
     "captured_from": null
   }

@@ -56,7 +56,9 @@ run foundation-dll verify-family <family-slug> --mode strict
 
 **规则：**
 - **禁止直接使用已有数据跳过此步骤** — 无论之前 pipeline 何时跑过，本技能必须重新执行一次
-- 如果 pipeline 执行失败（overall_status = "failed"），分析应基于失败的 pipeline 数据继续，但需在报告中标注 pipeline 本身失败的事实
+- **Fact 阶段必须 100% 通过** — fact 阶段是 pipeline 的正确性硬闸门，任一方法失败即视为 pipeline 未通过。分析报告必须将验收建议定为 **blocked**
+- **HotUpdate 阶段必须 100% 通过**（strict 模式）— hotupdate 是 strict 模式的硬闸门，任一方法失败即视为 pipeline 未通过。分析报告必须将验收建议定为 **blocked**
+- 如果 pipeline 执行失败（overall_status = "failed"），分析应基于失败的 pipeline 数据继续，但需在报告中标注 pipeline 本身失败的事实，验收建议定为 **blocked**
 - 如果 `--mode strict` 指定但 pipeline strict 模式失败，降级为 standard 模式的数据进行分析并标注
 
 ### 第一步：收集数据
@@ -153,9 +155,11 @@ Pipeline 执行完毕后，读取以下产物：
 
 | 条件 | 建议 |
 |------|------|
+| Fact 通过率 < 100% | **blocked** — fact 是正确性硬闸门，不允许任何方法失败 |
+| Strict 模式下 HotUpdate 通过率 < 100% | **blocked** — hotupdate 是 strict 模式硬闸门 |
+| 存在结构性失败（false_passing > 0 / contract 无效） | **blocked** |
 | 所有维度得分 >= 4，且无 blocking 问题 | **approved** |
-| 有维度得分 < 4，但无结构性失败（fact rate < 0.9 / false_passing > 0 / contract 无效） | **review-needed** |
-| 存在结构性失败 | **blocked** |
+| 有维度得分 < 4，但无上述 blocking 条件 | **review-needed** |
 
 ---
 

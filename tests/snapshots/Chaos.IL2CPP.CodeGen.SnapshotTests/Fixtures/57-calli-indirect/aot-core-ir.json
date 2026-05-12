@@ -1,0 +1,104 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.calli-helper.run-calli",
+      "subjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)",
+      "signature": "System.Int32 CalliHelper::RunCalli(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/CalliHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)",
+        "methodId": "snapshot-test-fixtures.calli-helper.run-calli",
+        "signature": "System.Int32 CalliHelper::RunCalli(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_CalliHelper_RunCalli",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldftn",
+          "operand": "System.Int32 Helper::GetValue()",
+          "callee": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+          "ilOffset": 1,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "calli",
+          "operand": "System.Int32(System.Int32)",
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "callee": "SnapshotTestFixtures/CalliHelper::run-calli-target",
+          "callSiteSignature": {
+            "kindCode": 1,
+            "returnType": "System.Int32",
+            "parameterTypes": ["System.Int32"]
+          }
+        },
+        {
+          "op": "ret",
+          "ilOffset": 3
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.helper.get-value",
+      "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+      "signature": "System.Int32 Helper::GetValue()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
+        "definitionSubjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+        "methodId": "snapshot-test-fixtures.helper.get-value",
+        "signature": "System.Int32 Helper::GetValue()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_Helper_GetValue",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 1
+        }
+      ]
+    }
+  ]
+}

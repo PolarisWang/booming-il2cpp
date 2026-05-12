@@ -529,3 +529,190 @@ public static class ArrayRefHelper
     // Used by fixture 53-array-ref
     public static int RunArrayRef() => 0;
 }
+
+// --- Fixture 54: throw-rethrow ---
+public static class ThrowHelper
+{
+    // Used by fixture 54-throw-rethrow
+    public static int CheckPositive(int arg) => arg < 0 ? -1 : arg;
+}
+
+// --- Fixture 55: overflow-add-sub-mul ---
+public static class OverflowHelper
+{
+    public static int RunOverflowAdd() => 0;
+    public static int RunOverflowSub() => 0;
+    public static int RunOverflowMul() => 0;
+}
+
+// --- Fixture 56: overflow-conv ---
+public static class OverflowConvHelper
+{
+    public static int ConvOvfI4() => 0;
+    public static int ConvOvfU1(int val) => 0;
+    public static int ConvOvfI2(int val) => 0;
+    public static int ConvOvfU2(int val) => 0;
+    public static int ConvOvfU4(long val) => 0;
+    public static long ConvOvfI8(float val) => 0;
+    public static long ConvOvfU8(double val) => 0;
+}
+
+// --- Fixture 57: calli-indirect ---
+public static class CalliHelper
+{
+    public static int RunCalli(int arg) => 0;
+}
+
+// --- Fixture 58: ldvirtftn ---
+public class MyClass
+{
+    public int _val;
+    public MyClass(int val) { _val = val; }
+    public virtual int GetValue() => _val;
+}
+
+public static class LdVirtftnHelper
+{
+    public static int RunLdVirtftn() => 0;
+}
+
+// --- Fixture 59: ldelem-all-variants ---
+public static class LdelemAllHelper
+{
+    public static int TestAllElems() => 0;
+}
+
+// --- Fixture 60: stelem-all-variants ---
+public static class StelemAllHelper
+{
+    public static int TestAllElems() => 0;
+}
+
+// --- Fixture 61: cltun-divun-remun ---
+public static class UnsignedOpsHelper
+{
+    public static int TestCltUn() => 0;
+    public static int TestDivUn() => 0;
+    public static int TestRemUn() => 0;
+    public static double TestCkfinite(double val) => 0;
+}
+
+// --- Fixture 62: rare-opcodes ---
+public static class RareOpsHelper
+{
+    public static void TestInitBlk(ref int addr) { }
+    public static int TestStarg(int val) => val;
+    public static int TestConvRUn(float val) => 0;
+}
+
+// --- Fixture 63: string-format ---
+public static class StringFormatHelper
+{
+    public static int TestFormatOne() { string.Format("Value: {0}", 42); return 0; }
+}
+
+// --- Fixture 32 extension: unsigned branch (blt.un, bgt.un) ---
+public static class BranchUnsignedHelper
+{
+    // Used by fixture 32-branch-compare (additional method)
+    public static int RunBranchUnsigned() => 0;
+}
+
+// --- Fixture 39 extension: unsigned branch complement (ble.un) ---
+public static class BranchUnsignedBHelper
+{
+    // Used by fixture 39-branch-complement (additional method)
+    public static int RunBranchUnsignedB() => 0;
+}
+
+// --- Fixture 54 extension: rethrow ---
+public static class RethrowHelper
+{
+    // Used by fixture 54-throw-rethrow (additional method)
+    public static int RunRethrow() { try { return 0; } catch { throw; } }
+}
+
+// --- Fixture 55 extension: overflow signed-un (add.ovf.un, sub.ovf.un, mul.ovf.un) ---
+public static class OverflowUnHelper
+{
+    // Used by fixture 55-overflow-add-sub-mul (additional methods)
+    public static int RunOverflowAddUn() => 0;
+    public static int RunOverflowSubUn() => 0;
+    public static int RunOverflowMulUn() => 0;
+}
+
+// --- Fixture 62 extension: more rare opcodes (arglist, mkrefany, refanyval, refanytype, jmp) ---
+public static class MoreRareOpsHelper
+{
+    // Used by fixture 62-rare-opcodes (additional methods)
+    public static int RunArglist() => 0;
+    public static int RunMkrefany() => 0;
+    public static int RunRefanyval() => 0;
+    public static int RunRefanytype() => 0;
+    public static int RunJmp() => 0;
+}
+
+// --- New fixture 65: overflow conv extended (conv.ovf.i1 + all .un variants) ---
+public static class OverflowConvExtHelper
+{
+    public static int ConvOvfI1(int val) => 0;
+    public static int ConvOvfI1Un(int val) => 0;
+    public static int ConvOvfU1Un(int val) => 0;
+    public static int ConvOvfI2Un(int val) => 0;
+    public static int ConvOvfU2Un(int val) => 0;
+    public static int ConvOvfI4Un(long val) => 0;
+    public static int ConvOvfU4Un(long val) => 0;
+    public static long ConvOvfI8Un(float val) => 0;
+    public static long ConvOvfU8Un(double val) => 0;
+    public static int ConvOvfIUn(int val) => 0;
+    public static int ConvOvfUUn(int val) => 0;
+}
+
+// --- New fixture 66: simple gaps (ldnull, conv.u4, conv.i, ldind.i4, ldind.i, stind.i, conv.ovf.i, conv.ovf.u, conv.ovf.i.un, conv.ovf.u.un) ---
+public static class SimpleGapsHelper
+{
+    public static int RunLdnull() { object o = null; return o == null ? 0 : 1; }
+    public static int RunConvU4() { uint a = 42; return (int)a; }
+    public static int RunConvI() { return 0; }
+    public static int RunConvOvfI(int val) => 0;
+    public static int RunConvOvfU(int val) => 0;
+    public static int RunConvOvfIUn(int val) => 0;
+    public static int RunConvOvfUUn(int val) => 0;
+}
+
+// --- Fixture 66 extension: ldind.i4, ldind.i, stind.i ---
+public static class LdindStindGapsHelper
+{
+    public static int RunLdindI4() { int[] arr = new int[1]; ref int r = ref arr[0]; r = 42; return arr[0]; }
+    public static int RunLdindI() { return 0; }
+    public static int RunStindI() { return 0; }
+}
+public static class CollectionsHelper
+{
+    public static int TestList()
+    {
+        var list = new System.Collections.Generic.List<int>();
+        list.Add(42);
+        return list.Count;
+    }
+
+    public static int TestDict()
+    {
+        var dict = new System.Collections.Generic.Dictionary<int, int>();
+        dict.Add(1, 100);
+        int val;
+        bool found = dict.TryGetValue(1, out val);
+        bool hasKey = dict.ContainsKey(1);
+        dict.Remove(1);
+        return (found ? 1 : 0) + (hasKey ? 1 : 0) + val;
+    }
+
+    public static int TestSet()
+    {
+        var set = new System.Collections.Generic.HashSet<int>();
+        set.Add(10);
+        bool has = set.Contains(10);
+        set.Remove(10);
+        return has ? 1 : 0;
+    }
+}

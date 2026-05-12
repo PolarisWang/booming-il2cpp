@@ -1,6 +1,15 @@
 #ifndef CHAOS_IL2CPP_GC_BUMP_ARENA_H_
 #define CHAOS_IL2CPP_GC_BUMP_ARENA_H_
 
+// ╔══════════════════════════════════════════════════════════════════════╗
+// ║ LEGACY — superseded by GcBumpCache (gc_bump_cache.h).              ║
+// ║                                                                    ║
+// ║ Phase A of the A→B→C allocation roadmap.  GcBumpCache (Phase B)   ║
+// ║ wraps a bump arena with per-size-class TLS free lists and is the   ║
+// ║ active GC allocation path as of 2026-05.  No native code includes  ║
+// ║ this header — retained only as a reference.                        ║
+// ╚══════════════════════════════════════════════════════════════════════╝
+
 #include <chaos/native_types.h>
 
 #include <cstddef>

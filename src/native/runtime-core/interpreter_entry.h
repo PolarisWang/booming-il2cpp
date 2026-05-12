@@ -76,6 +76,31 @@ void InterpreterEntryDirect(
     void*     args_buf,
     void*     ret_buf) noexcept;
 
+// ── InterpreterEntryDirectFast ─────────────────────────────────────────────
+// Fast-path entry point that internally allocates args/ret buffers without
+// zero-init overhead. Used by --patch-bench mode where the caller doesn't
+// have method arguments. The caller only passes method_key; internal buffers
+// are uninitialized stack memory.
+//
+// Compared to InterpreterEntryDirect:
+//   - No args_buf from caller (saves 32 bytes of zero-init per call)
+//   - No ret_buf from caller (saves 16 bytes of zero-init per call)
+//   - Internal buffers are NOT zero-initialized
+//   - Return value is written to internal ret_buf, then discarded
+//
+// Thread safety: same as InterpreterEntryDirect — lock-free after first call.
+void InterpreterEntryDirectFast(
+    uintptr_t method_key) noexcept;
+
+// ── Register direct function table ─────────────────────────────────────────
+// Called by generated code to register kAotDirectFnTable/SubjectIds/Count.
+// Avoids linker errors when chaos_runtime_core.lib doesn't have family-specific
+// extern symbols.
+extern "C" void ChaosRegisterDirectFnTable(
+    const char* const* subjects,
+    const void* const* table,
+    int count) noexcept;
+
 // ── PatchMethod lazy IR lowering (declared for use by InterpreterEntryDirect) ─
 // Lower a PatchMethod's IL to IR if not already cached.
 // Uses double-checked locking for thread safety.

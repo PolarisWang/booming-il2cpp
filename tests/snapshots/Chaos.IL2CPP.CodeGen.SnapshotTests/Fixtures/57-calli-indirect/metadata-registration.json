@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    { "registrationKind": "assembly", "slot": 0, "subjectId": "SnapshotTestFixtures" },
+    { "registrationKind": "type", "slot": 1, "subjectId": "SnapshotTestFixtures/CalliHelper", "name": "CalliHelper", "displayName": "CalliHelper", "definitionSubjectId": "SnapshotTestFixtures/CalliHelper" },
+    { "registrationKind": "method", "slot": 2, "subjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)", "name": "RunCalli", "definitionSubjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)", "declaringTypeSubjectId": "SnapshotTestFixtures/CalliHelper", "memberType": "System.Int32", "parameterCount": 1, "isImported": false },
+    { "registrationKind": "type", "slot": 3, "subjectId": "SnapshotTestFixtures/Helper", "name": "Helper", "displayName": "Helper", "definitionSubjectId": "SnapshotTestFixtures/Helper" },
+    { "registrationKind": "method", "slot": 4, "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()", "name": "GetValue", "definitionSubjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/Helper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false }
+  ]
+}

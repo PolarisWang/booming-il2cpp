@@ -4,10 +4,11 @@
 
 零依赖的公共工具库，是所有生成代码和手写运行时的共享基础设施。位于 `src/native/common/chaos/*.h`，通过 `<chaos/common.h>` 统括头文件暴露。
 
-## 15 个头文件总览
+## 16 个头文件总览
 
 | 文件 | 核心类型/函数 | 设计用途 |
 |------|-------------|---------|
+| `config.h` | `CHAOS_IL2CPP_CONFIG_CHECK/PROFILE/SHIP`, `CHAOS_IL2CPP_DEFAULT_LOG_LEVEL`, `CHAOS_IL2CPP_TRACE_ENABLED` | 构建配置分层：CHECK / PROFILE / SHIP 三级，控制日志级别、trace、assert |
 | `native_types.h` | `CHAOS_IL2CPP_INT32`, `CHAOS_IL2CPP_STRING`, `CHAOS_IL2CPP_MUTEX` 等宏 | 标准库抽象层，所有生成代码必须使用宏而非裸类型 |
 | `arithmetic.h` | `wrap_add/sub/mul`, checked `div/rem`, `shift_left/right/unsigned` | CIL 算术语义的 C++ 实现，移位掩码 5/6 bit |
 | `checked_conv.h` | `checked_conv_ovf_i1/u1/i2/u2` | conv.ovf 指令的溢出检查转换 |
@@ -23,6 +24,72 @@
 | `thread.h` | `ThreadRuntimeEntry`, TLS `current_thread_object`, `allocate_managed_thread_id()` | System.Threading.Thread 运行时模型 |
 | `async.h` | `AsyncTask`, `async_yield_create`, `async_task_get_awaiter()` | async/await 状态机运行时基元 |
 | `common.h` | 统括 include | 单一 `#include <chaos/common.h>` 入口 |
+
+## 构建配置分层（config.h）
+
+### 三级配置概览
+
+| 特性 | CHECK | PROFILE | SHIP |
+|------|-------|---------|------|
+| 编译定义 | `CHAOS_IL2CPP_CONFIG_CHECK` | `CHAOS_IL2CPP_CONFIG_PROFILE` | `CHAOS_IL2CPP_CONFIG_SHIP` |
+| 日志级别 | DEBUG (3) | INFO (2) | ERROR (0) |
+| Trace | 启用 | 启用 | 禁用 |
+| Assert | 启用 (abort) | 空操作 | 空操作 |
+
+### 选择默认配置
+
+当未显式指定时，默认为 `CHAOS_IL2CPP_CONFIG_CHECK`：
+```cpp
+#if !defined(CHAOS_IL2CPP_CONFIG_CHECK) && \
+    !defined(CHAOS_IL2CPP_CONFIG_PROFILE) && \
+    !defined(CHAOS_IL2CPP_CONFIG_SHIP)
+#  define CHAOS_IL2CPP_CONFIG_CHECK
+#endif
+```
+
+### 日志级别映射
+
+```cpp
+// CHAOS_IL2CPP_DEFAULT_LOG_LEVEL
+// CHECK  → 3 (DEBUG + INFO + WARN + ERROR)
+// PROFILE → 2 (INFO + WARN + ERROR)
+// SHIP    → 0 (ERROR only)
+
+// 宏门控：
+// CHAOS_IL2CPP_LOG_DEBUG   — level >= 3
+// CHAOS_IL2CPP_LOG_INFO    — level >= 2
+// CHAOS_IL2CPP_LOG_WARN    — level >= 1
+// CHAOS_IL2CPP_LOG_ERROR   — always compiled
+```
+
+### Trace 门控
+
+```cpp
+// CHECK 和 PROFILE 定义 CHAOS_IL2CPP_TRACE_ENABLED
+// SHIP 中所有 CHAOS_IL2CPP_LOG_TRACE_* 宏展开为 ((void)0)
+```
+
+### Assert 行为
+
+```cpp
+// CHAOS_IL2CPP_ASSERT(cond)
+// CHECK 中: if (!(cond)) std::abort()
+// PROFILE/SHIP 中: ((void)0)
+```
+
+### CMake 集成
+
+在 `runtime-core/CMakeLists.txt` 中通过 `target_compile_definitions` 设置默认配置：
+```cmake
+target_compile_definitions(chaos_runtime_core PUBLIC CHAOS_IL2CPP_CONFIG_CHECK)
+```
+
+上层项目可以通过在包含 chaos 头文件之前定义对应的 `CHAOS_IL2CPP_CONFIG_*` 宏来覆盖配置。
+
+### 位置
+
+- 配置头文件: `src/native/common/chaos/config.h`
+- CMake 设置: `src/native/runtime-core/CMakeLists.txt`
 
 ## 指针标记系统（ptr_tag.h）
 

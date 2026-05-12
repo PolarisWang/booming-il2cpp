@@ -100,7 +100,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_managed_pointer & ~chaos_managed_pointer_local_slot_tag));");
 		builder.AppendLine("        if (*chaos_slot == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("        {");
-		builder.AppendLine("            *chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new TValue{});");
+		builder.AppendLine("            *chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NEW_GC(TValue));");
 		builder.AppendLine("        }");
 		builder.AppendLine("        return reinterpret_cast<TValue*>(*chaos_slot);");
 		builder.AppendLine("    }");

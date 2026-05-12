@@ -48,6 +48,74 @@
 
 技能通过 `.claude/skills/` 注册，支持 `/dev-<skill-name>` 或 Skill 工具调用。完整技能目录见 `skills/discovery/skill-index.md`（自动加载）。自进化系统详情见 `skills/` 目录。
 
+## Native 调试/性能分析规范
+
+### 三档构建配置
+
+| 配置 | LOG_LEVEL | TRACE | ASSERT | PROFILE_SCOPE | 用途 |
+|------|-----------|-------|--------|---------------|------|
+| CHECK | 3 (DEBUG) | 启用 | 启用 | 启用 | 日常开发 |
+| PROFILE | 2 (INFO) | 启用 | 关 | 启用 | 性能分析 |
+| SHIP | 0 (ERROR) | 关 | 关 | 关 | 发布 |
+
+通过 CMakePresets.json 一键切换：`cmake --preset debug` / `cmake --preset profile` / `cmake --preset ship`。
+
+### LOG_DEBUG/INFO 使用规则
+
+- **追逻辑问题**：在怀疑路径直接插入 `CHAOS_IL2CPP_LOG_DEBUG(...)`，定位后**必须删除**（不允许残留到提交）
+- **INFO**：可用于关键生命周期事件（初始化完成、模块加载等），可保留
+- **WARN**：用于可恢复的异常情况，可保留
+- **ERROR**：始终启用，用于不可恢复的错误
+
+### 热点路径约束
+
+`src/native/runtime-core/fast_dispatch.cpp` 是**最热执行路径**，默认 `#define CHAOS_IL2CPP_LOG_LEVEL 0` 仅保留 ERROR：
+```cpp
+// fast_dispatch.cpp 顶部
+#define CHAOS_IL2CPP_LOG_LEVEL 0
+```
+其他文件如需强制覆盖日志级别，在 `#include "chaos/log.h"` 前定义：
+```cpp
+#define CHAOS_IL2CPP_LOG_LEVEL 3  // 临时开启 DEBUG
+#include <chaos/log.h>
+```
+
+### PROFILE_SCOPE 预埋点
+
+以下热点函数已预埋 `CHAOS_IL2CPP_PROFILE_SCOPE`。因 `config.h` 在 CHECK/PROFILE 构建下默认启用 `CHAOS_IL2CPP_PROFILE_ENABLED=1`，这些 scope 在 `cmake --preset debug` / `cmake --preset profile` 中自动生效。如需强制关闭，在包含 config.h 前定义 `#define CHAOS_IL2CPP_PROFILE_ENABLED 0`。
+
+**runtime_core.cpp**: GcAllocate, GcAllocateAtomic, ObjectNew, ArrayNew, StringNewUtf8, BoxValueObject, MethodInvoke
+**fast_dispatch.cpp**: FastExecute(主循环), Handle_Call, Handle_Box, Handle_NewObj, Handle_NewArr, Handle_LdArg, Handle_LdLoc, Handle_StLoc, Handle_LdFld, Handle_StFld, Handle_LdStr, Handle_Ret, Handle_Pop, Handle_Dup, Handle_Br, Handle_BrTrue, Handle_BrFalse, Handle_Throw, Handle_Leave, Handle_Unbox, Handle_LdLen, Handle_Conv_I4, Handle_Conv_I8, Handle_Conv_R4, Handle_Conv_R8, Handle_Add, Handle_Sub, plus 所有比较/分支/位运算 Handler
+**runtime_instantiation.cpp**: InterpreterDispatch, InterpreterDispatchRaw
+**vtable_registry.cpp**: ResolveVirtualMethodPointer
+**method_table.cpp**: ResolveMethodTable
+**thread_state.cpp**: SafepointPoll
+**gc_bump_cache.h**: GcAllocateImpl
+**interpreter_entry.cpp**: InterpreterEntryDirect, Step1_LowerIR, Step1c_2InstrFastPath, FastExecute, SetupFrame, FastExecuteCall
+
+### profile.h 实现特性
+
+`src/native/common/chaos/profile.h` 使用 RDTSC 做零 I/O 热点统计，具备以下优化：
+
+- **Hash 加速槽查找**：FNV-1a 开放寻址哈希表取代 O(n) 线性扫描，scope 进入时 ~O(1) 定位
+- **嵌套层级跟踪**：thread_local depth 计数器，`kProfileHashSize = 128` 低冲突率
+- **RDTSC→ns 校准**：首次构造时通过 `QueryPerformanceFrequency` 校准，dump 输出 avg_ns/total_ns
+- **编译时零开销**：`CHAOS_IL2CPP_PROFILE_ENABLED=0` 时展开为 `NullProfileScope`，编译器完全消除
+
+### 调试模板（AI Agent 使用）
+
+```cpp
+// 1. 追踪值的变化 — 临时插入，用完即删
+CHAOS_IL2CPP_LOG_DEBUG("变量 X 的值: %d (0x%x)", x, x);
+
+// 2. 确认分支到达
+CHAOS_IL2CPP_LOG_DEBUG("进入 OptimizedPath, is_special=%d", is_special);
+
+// 3. 性能热点分析 — 已预埋 PROFILE_SCOPE，只需 cmake 开关
+//    cmake -DCHAOS_IL2CPP_PROFILE_ENABLED=ON ...
+//    运行后查看 stdout 的 RDTSC 耗时表
+```
+
 ## 统一内存分配约束（强制）
 
 IL2CPP 生成 C++ 代码会被引入游戏引擎源码，因此分配行为必须遵循以下约束：
