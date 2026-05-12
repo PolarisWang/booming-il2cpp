@@ -166,6 +166,12 @@ PatchMetadataCache 在加载时从上述段构建本地自洽的 token resolver�
 ```
 ApplyPatchFromMemory(.patchdata)
   │
+  ├─ 0. SetAotBridge(bridge, aot_image_handle)
+  │     ├─ GetCodegenBridgeV0() → bridge
+  │     ├─ PeekBootstrapState() → code_registration
+  │     ├─ code_registration → image → ReflectionQueryImageDescriptor
+  │     └─ HotpatchNameRegistry::SetAotBridge() 供 interpreter 解析 call_target
+  │
   ├─ 1. 校验 header: 魔数(CHPD) + 版本 + 段 count
   │     hash 校验(加载时懒校验, 首次访问触发)
   │
@@ -184,8 +190,13 @@ ApplyPatchFromMemory(.patchdata)
   │          method_key    = (uintptr_t)PatchMethod
   │          flags        |= kDispatchPatched
   │
-  └─ 4. 返回 patched_count / total_count
+  ├─ 4. Pre-lower all PatchMethods (lazy IR→IR lowering 预热)
+  │     each method: LowerILToIR → ReapplyInlining (内联穿越)
+  │
+  └─ 5. 返回 patched_count / total_count
 ```
+
+> **设计变更**: SetAotBridge 从 InterpreterEntryDirect 的 Step0_Bridge 移到了 ApplyPatchFromMemory。旧的 Step0_Bridge 在每个 patched 方法首次执行时重复设置 bridge，现已删除。bridge 现在在 patch 加载时只设置一次。
 
 ### PatchMethod 对象
 
@@ -271,7 +282,7 @@ extern "C" CHAOS_IL2CPP_INT64 InterpreterEntryDirect(
   "schemaVersion": 2,
   "d3PatchApplied": true,
   "d3PatchedCount": 19,
-  "summary": { "totalMethods": 18, "passedMethods": 18, "failedMethods": 0 },
+  "summary": { "totalMethods": 19, "passedMethods": 19, "failedMethods": 0 },
   "methodResults": [
     {
       "methodToken": 100663297,
@@ -290,7 +301,19 @@ extern "C" CHAOS_IL2CPP_INT64 InterpreterEntryDirect(
 - `revertVerified`: 尚未实现 Unpatch 后验证流程
 - `semanticVerified`: 尚未实现完整语义验证
 
-所有 32 个 family 共 459 个方法 Hotpatch 验证通过。
+已验证的基础库 family 全部 19/19 方法通过 hotupdate 验证（包含 SEH 方法和 leaf 方法）。
+
+### Hotupdate Benchmark
+
+`entry.exe --patch-bench` 模式测量 patched 方法通过 interpreter 执行的性能：
+
+| 方法类型 | Pre-patch (ns/op) | Post-patch (ns/op) | Slowdown |
+|---------|:-:|:-:|:-:|
+| Leaf 方法（无 SEH） | ~2 | ~430-580 | ~200-290x |
+| SEH 方法（抛 InvalidCastException） | ~1600-17600 | ~3400-3600 | ~1-2x 或更快 |
+| 多参方法 (2 args) | ~2 | ~583 | ~291x |
+
+Leaf 方法 ~200-290x slowdown 是 interpreter 设计的已知特性（每条指令 decode + dispatch + stack op）。SEH 方法 slowdown 较小，因为 interpreter 的 C++ `try/catch` 比 native AOT 的完整 SEH unwinding 更轻量。
 
 ## 实现状态
 
