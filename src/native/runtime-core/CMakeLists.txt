@@ -7,6 +7,8 @@ project(chaos_runtime_core LANGUAGES CXX)
 
 get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
 
+include("${REPO_ROOT}/cmake/config-tier.cmake")
+
 add_library(chaos_runtime_core STATIC
     runtime_core.cpp
     runtime_core.h
@@ -25,9 +27,12 @@ add_library(chaos_runtime_core STATIC
     string_table.cpp
     type_registry.cpp
     runtime_stubs/math_stubs.cpp
+    runtime_stubs/array_stubs.cpp
     runtime_stubs/datetime_stubs.cpp
+    runtime_stubs/char_stubs.cpp
     runtime_stubs/guid_stubs.cpp
     runtime_stubs/random_stubs.cpp
+    runtime_stubs/stream_stubs.cpp
     runtime_stubs/hashcode_stubs.cpp
     runtime_stubs/interlocked_stubs.cpp
     runtime_stubs/string_stubs.cpp
@@ -35,6 +40,8 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/object_stubs.cpp
     runtime_stubs/threading_stubs.cpp
     runtime_stubs/reflection_stubs.cpp
+    runtime_stubs/convert_stubs.cpp
+    runtime_stubs/collection_stubs.cpp
     runtime_stubs/misc_stubs.cpp
     runtime_stubs/interpreter_entry_direct.cpp
     runtime_stubs/registration_globals.cpp
@@ -67,15 +74,16 @@ add_library(chaos_runtime_core STATIC
     interpreter_entry.cpp
     fast_dispatch.h
     fast_dispatch.cpp
+    fast_frame_pool.h
+    fast_frame_pool.cpp
     gc_bump_cache.h
     native_library.h
     native_library.cpp
     exception_api.cpp
     exception_helpers.h
     exception_helpers.cpp
-    debug_sink.h
-    debug_sink.cpp)
-
+    profile_globals.cpp
+	)
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)
 target_compile_definitions(chaos_runtime_core PUBLIC CHAOS_RUNTIME_ABI_STATIC)

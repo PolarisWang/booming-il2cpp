@@ -405,6 +405,28 @@ public sealed partial class NativeAotLoweringPlanner
 		return typeSubjectId.Substring(num2, typeSubjectId.Length - num2);
 	}
 
+	private static string GetTypeNamespace(string typeSubjectId)
+	{
+		string displayName = GetTypeDisplayName(typeSubjectId);
+		int num = displayName.LastIndexOf('.');
+		if (num <= 0)
+		{
+			return string.Empty;
+		}
+		return displayName.Substring(0, num);
+	}
+
+	private static string GetTypeShortName(string typeSubjectId)
+	{
+		string displayName = GetTypeDisplayName(typeSubjectId);
+		int num = displayName.LastIndexOf('.');
+		if (num <= 0 || num + 1 >= displayName.Length)
+		{
+			return displayName;
+		}
+		return displayName.Substring(num + 1, displayName.Length - num - 1);
+	}
+
 	private static string GetAssemblyNameFromSubjectId(string subjectId)
 	{
 		int num = subjectId.IndexOf('/');

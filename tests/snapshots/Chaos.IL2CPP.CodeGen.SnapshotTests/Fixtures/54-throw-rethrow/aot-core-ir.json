@@ -1,0 +1,120 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.throw-helper.check-positive",
+      "subjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+      "signature": "System.Int32 ThrowHelper::CheckPositive(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/ThrowHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+        "methodId": "snapshot-test-fixtures.throw-helper.check-positive",
+        "signature": "System.Int32 ThrowHelper::CheckPositive(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_ThrowHelper_CheckPositive",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "clt",
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "brfalse",
+          "operand": 8,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 4,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "throw",
+          "ilOffset": 5,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 9
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.rethrow-helper.run-rethrow",
+      "subjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()",
+      "signature": "System.Int32 RethrowHelper::RunRethrow()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/RethrowHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()",
+        "methodId": "snapshot-test-fixtures.rethrow-helper.run-rethrow",
+        "signature": "System.Int32 RethrowHelper::RunRethrow()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_RethrowHelper_RunRethrow",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 0,
+          "tryLength": 3,
+          "handlerOffset": 3,
+          "handlerLength": 2,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+        }
+      ],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "leave", "operand": 7, "ilOffset": 1, "resultType": "System.Void" },
+        { "op": "rethrow", "ilOffset": 3, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 7, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 8 }
+      ]
+    }
+  ]
+}

@@ -276,23 +276,53 @@ IDomainHeap* DefaultHeapFactory(const MemoryDomain* /*domain*/, void* /*user_dat
 // Tagged allocation — cross-domain safe free routing
 //
 // Each allocation prepends an AllocationHeader containing the originating
-// IDomainHeap pointer.  DomainFreeTagged reads this header to route the
-// free() call to the correct heap — no dependency on thread-local domain
-// state, no hash lookup, no race condition.
+// heap pointer OR-tagged with a validity bit (bit 0).  DomainFreeTagged
+// reads this header to route the free() call to the correct heap — no
+// dependency on thread-local domain state, no hash lookup, no race.
+//
+// Magic tag: bit 0 is forced to 1 on all domain allocations.  IDomainHeap
+// pointers are at least 4-byte aligned (vtable), so bit 0 on a legitimate
+// heap pointer is naturally 0.  GC domain and Raw domain pointers likewise
+// have bit 0 = 0.  The tag detects cross-domain pointer misrouting with
+// zero additional memory overhead.
 //
 // Layout:
-//   [ IDomainHeap* | user data ... ]
-//     ^- header     ^- returned pointer
+//   [ uintptr_t (tagged heap ptr) | user data ... ]
+//     ^- header                    ^- returned pointer
 //
-// Overhead: 8 bytes (one pointer) per domain allocation.
+// Overhead: 8 bytes (one pointer) per domain allocation (unchanged).
 // ======================================================================
 
 }  // namespace (anonymous)
 
 // ── Tagged allocation header ──────────────────────────────────────────
+//
+// Uses bit 0 of the stored value as a validity tag.  IDomainHeap pointers
+// are at least 4-byte aligned (vtable requirement), so bit 0 is always 0
+// in a legitimate heap pointer.  Setting it to 1 marks the allocation as
+// domain-tagged, providing zero-cost defense against cross-domain free:
+// GC domain and Raw domain pointers (both naturally even-aligned) will
+// have bit 0 = 0 and be rejected with a diagnostic.
+
+static constexpr uintptr_t kDomainAllocTag = 1;
+
+/// Tag a heap pointer by setting bit 0 (caller ensures pointer is aligned).
+static uintptr_t TagHeapPtr(IDomainHeap* heap) noexcept {
+    return reinterpret_cast<uintptr_t>(heap) | kDomainAllocTag;
+}
+
+/// Strip the tag and return the original heap pointer (nullptr → raw malloc).
+static IDomainHeap* UntagHeapPtr(uintptr_t tagged) noexcept {
+    return reinterpret_cast<IDomainHeap*>(tagged & ~kDomainAllocTag);
+}
+
+/// Returns true when @a tagged has the validity bit set.
+static bool IsTaggedAllocation(uintptr_t tagged) noexcept {
+    return (tagged & kDomainAllocTag) != 0;
+}
 
 struct AllocationHeader {
-    IDomainHeap* heap;
+    uintptr_t heap_or_tagged;  // tagged heap pointer, bit 0 = validity marker
 };
 
 void* DomainAllocateTagged(MemoryDomain* domain, CHAOS_IL2CPP_SIZE size) {
@@ -306,7 +336,8 @@ void* DomainAllocateTagged(MemoryDomain* domain, CHAOS_IL2CPP_SIZE size) {
     if (raw == nullptr) return nullptr;
 
     auto* hdr = static_cast<AllocationHeader*>(raw);
-    hdr->heap = (domain != nullptr && domain->heap != nullptr) ? domain->heap : nullptr;
+    IDomainHeap* heap = (domain != nullptr && domain->heap != nullptr) ? domain->heap : nullptr;
+    hdr->heap_or_tagged = TagHeapPtr(heap);
     return static_cast<void*>(hdr + 1);
 }
 
@@ -317,16 +348,56 @@ void* DomainCurrentAllocateTagged(CHAOS_IL2CPP_SIZE size) {
 void DomainFreeTagged(void* ptr) {
     if (ptr == nullptr) return;
     auto* hdr = static_cast<AllocationHeader*>(static_cast<void*>(ptr)) - 1;
-    IDomainHeap* heap = hdr->heap;
+
+    // Validate: must have the magic tag bit.  GC domain and Raw domain
+    // pointers (even-aligned, bit 0 = 0) are caught here.
+    if (!IsTaggedAllocation(hdr->heap_or_tagged)) {
+        CHAOS_IL2CPP_LOG_WARN("MemoryDomain",
+            "DomainFreeTagged: pointer %p lacks domain magic tag (bit 0 = 0) — "
+            "likely a GC or Raw domain pointer.  Skipping free to prevent heap corruption.",
+            ptr);
+        return;
+    }
+
+    IDomainHeap* heap = UntagHeapPtr(hdr->heap_or_tagged);
     if (heap != nullptr) {
-        // Route to the originating heap.  For bump allocators this is a
-        // no-op; for Win32 HeapAlloc this calls HeapFree.
-        // The header pointer is what the heap originally gave us.
         heap->Free(static_cast<void*>(hdr));
     } else {
-        // Tagged as null-heap = raw malloc, use std::free directly.
+        // Tagged with nullptr → raw malloc allocation.
         std::free(static_cast<void*>(hdr));
     }
+}
+
+void* DomainCurrentReallocateTagged(void* ptr, CHAOS_IL2CPP_SIZE new_size) {
+    if (ptr == nullptr) {
+        return DomainCurrentAllocateTagged(new_size);
+    }
+
+    auto* old_hdr = static_cast<AllocationHeader*>(static_cast<void*>(ptr)) - 1;
+
+    // Validate tag before processing.
+    if (!IsTaggedAllocation(old_hdr->heap_or_tagged)) {
+        CHAOS_IL2CPP_LOG_WARN("MemoryDomain",
+            "DomainCurrentReallocateTagged: pointer %p lacks domain magic tag — "
+            "cannot determine originating heap.  Returning nullptr (original block untouched).",
+            ptr);
+        return nullptr;
+    }
+
+    IDomainHeap* heap = UntagHeapPtr(old_hdr->heap_or_tagged);
+    const CHAOS_IL2CPP_SIZE total = new_size + sizeof(AllocationHeader);
+
+    void* new_raw;
+    if (heap != nullptr) {
+        new_raw = heap->Reallocate(static_cast<void*>(old_hdr), total);
+    } else {
+        new_raw = std::realloc(static_cast<void*>(old_hdr), total);
+    }
+    if (new_raw == nullptr) return nullptr;
+
+    auto* new_hdr = static_cast<AllocationHeader*>(new_raw);
+    new_hdr->heap_or_tagged = TagHeapPtr(heap);
+    return static_cast<void*>(new_hdr + 1);
 }
 
 // ======================================================================

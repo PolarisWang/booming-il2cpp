@@ -249,7 +249,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Convert", "ToBoolean", 1): "Convert.ToBoolean(\"true\")",
     # Convert.ToXxx(string, IFormatProvider) - need null provider
     # Array index-out-of-range with empty arrays
-    ("Array", "GetLength", 1): "new int[4, 4].GetLength(0)",
+    ("Array", "GetLength", 1): "new int[4].GetLength(0)",
     ("Array", "GetValue", 1): "new int[1].GetValue(0)",
     ("Array", "Copy", 3): "Array.Copy(new byte[4], new byte[4], 4)",
     ("Array", "Copy", 5): "Array.Copy(new byte[4], 0, new byte[4], 0, 4)",

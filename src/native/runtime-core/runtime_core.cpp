@@ -2,6 +2,7 @@
 
 #include <chaos/trace.h>
 #include <chaos/log.h>
+#include <chaos/profile.h>
 
 #include "memory_domain.h"
 #include "gc_bump_cache.h"
@@ -274,17 +275,6 @@ static CHAOS_IL2CPP_MUTEX s_gc_handle_mutex;
 static CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_UINT64) s_next_gc_handle{1};
 static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT64, GcHandleEntry) s_gc_handle_table;
 
-void* CHAOS_RUNTIME_ABI_CALL DefaultAllocate(CHAOS_IL2CPP_SIZE size, void* user_data) {
-    (void)user_data;
-    return GC_MALLOC(size);
-}
-
-void CHAOS_RUNTIME_ABI_CALL DefaultDeallocate(void* ptr, void* user_data) {
-    (void)user_data;
-    (void)ptr;
-    // GC manages deallocation automatically — no explicit free needed
-}
-
 // Allocate memory that contains no pointers (e.g., string bytes, boxed value data).
 // GC_MALLOC_ATOMIC allows the GC to skip scanning this region for pointers,
 // improving collection performance.
@@ -299,11 +289,24 @@ static void* AllocateBytesAtomic(CHAOS_IL2CPP_SIZE size) {
 // GcAllocate/GcAllocateAtomic.
 static thread_local chaos::il2cpp::runtime_core::GcBumpCache tls_gc_arena;
 
+void* CHAOS_RUNTIME_ABI_CALL DefaultAllocate(CHAOS_IL2CPP_SIZE size, void* user_data) {
+    (void)user_data;
+    return tls_gc_arena.Allocate(size);
+}
+
+void CHAOS_RUNTIME_ABI_CALL DefaultDeallocate(void* ptr, void* user_data) {
+    (void)user_data;
+    (void)ptr;
+    // GC manages deallocation automatically — no explicit free needed
+}
+
 void* GcAllocate(CHAOS_IL2CPP_SIZE size) {
+    CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocate");
     return tls_gc_arena.Allocate(size);
 }
 
 void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) {
+    CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateAtomic");
     return tls_gc_arena.AllocateAtomic(size);
 }
 
@@ -816,6 +819,10 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     RuntimeState** out_runtime_state) {
     CHAOS_IL2CPP_LOG_TRACE_INIT();
     CHAOS_IL2CPP_LOG_TRACE("runtime", "RuntimeInit", "");
+
+    // Line-buffered stdout: fputs + '\n' auto-flushes, no explicit fflush needed.
+    std::setvbuf(stdout, nullptr, _IOLBF, 0);
+
     if (init_params == nullptr || out_runtime_state == nullptr) {
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
@@ -996,6 +1003,7 @@ void* CHAOS_RUNTIME_ABI_CALL ObjectNew(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
     TypeInfoHandle type) {
+    CHAOS_IL2CPP_PROFILE_SCOPE("ObjectNew");
     if (!IsAttached(runtime_state, thread_state)) {
         return nullptr;
     }
@@ -1071,6 +1079,7 @@ void* CHAOS_RUNTIME_ABI_CALL ArrayNew(
     ThreadState* thread_state,
     TypeInfoHandle element_type,
     CHAOS_IL2CPP_UINTPTR length) {
+    CHAOS_IL2CPP_PROFILE_SCOPE("ArrayNew");
     if (!IsAttached(runtime_state, thread_state) || element_type == 0) {
         return nullptr;
     }
@@ -1099,6 +1108,7 @@ void* CHAOS_RUNTIME_ABI_CALL StringNewUtf8(
     ThreadState* thread_state,
     const char* utf8_bytes,
     CHAOS_IL2CPP_UINTPTR byte_count) {
+    CHAOS_IL2CPP_PROFILE_SCOPE("StringNewUtf8");
     if (!IsAttached(runtime_state, thread_state)) {
         return nullptr;
     }
@@ -1313,12 +1323,13 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL MethodInvoke(
         void* const* argv,
         CHAOS_IL2CPP_UINT32 argc);
 
-    if (!IsAttached(runtime_state, thread_state) || method == 0) {
-        return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
-    }
+    CHAOS_IL2CPP_PROFILE_SCOPE("MethodInvoke");
 
-    if (out_exception != nullptr) {
-        *out_exception = nullptr;
+    if (!IsAttached(runtime_state, thread_state) || method == 0) {
+        if (out_exception != nullptr) {
+            *out_exception = nullptr;
+        }
+        return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
 
     // Decode the method handle to a token agnostically, then look up
@@ -1593,6 +1604,8 @@ void* BoxValueObject(
     TypeInfoHandle value_type,
     const void* value,
     CHAOS_IL2CPP_SIZE value_size) {
+    CHAOS_IL2CPP_PROFILE_SCOPE("BoxValueObject");
+
     if (!IsAttached(runtime_state, thread_state)
         || value_type == 0
         || value == nullptr

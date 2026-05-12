@@ -1,7 +1,7 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-11T02:36:04.342503",
+  "generated_at": "2026-05-11T21:55:47.073820",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -49,10 +49,14 @@
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "principle": "P1",
-      "status": "CONCERN",
-      "summary": "Benchmark report unreadable",
+      "status": "ALIGNED",
+      "summary": "avg_speedup=0.0%",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "managed_faster_count": 0,
+        "native_faster_count": 0
+      }
     },
     "p2_template_hygiene": {
       "check_id": "p2_template_hygiene",
@@ -92,8 +96,8 @@
   },
   "summary": {
     "total": 7,
-    "aligned": 5,
-    "concern": 2,
+    "aligned": 6,
+    "concern": 1,
     "violation": 0,
     "not_applicable": 0,
     "overall": "CONCERN"

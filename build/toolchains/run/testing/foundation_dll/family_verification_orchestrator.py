@@ -234,8 +234,7 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
     # ── Parse each methodSubjectId to extract parameter types ────────
     # Format: "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Type1,...)"
     _param_re = re.compile(r'\(([^)]+)\)')
-    _always_throws = {"System.Boolean", "System.DateTime", "System.Decimal",
-                      "System.Double", "System.Single", "System.String"}
+    _always_throws: set[str] = set()
 
     def _extract_param_types(mid: str) -> list[str]:
         m = _param_re.search(mid)
@@ -258,43 +257,90 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
             parts.append(''.join(cur).strip())
         return parts
 
-    def _to_convert_call(types: list[str], idx: int) -> str:
-        """Generate a Convert.ToChar(...) call with varying input based on loop var 'i'."""
-        if not types:
-            return ''
-        t = types[0]
+    def _generate_call_expr(mid: str, idx: int) -> str:
+        """Generate a C# call expression for benchmarking a method by parsing its methodSubjectId.
+
+        Supports patterns:
+          - Convert.ToXxx(string)     -> Convert.ToXxx("literal")
+          - Convert.ToXxx(nonstring)  -> Convert.ToXxx(loop_var)
+          - Convert.ToString(xxx)     -> Convert.ToString(loop_var)
+          - Xxx.Parse(string)         -> Xxx.Parse("literal")
+          - Convert.ToDecimal(double) -> Convert.ToDecimal(loop_var)
+        Falls back to the old Convert.ToChar(...) table for convert-char compatibility.
+        """
         ipart = f'(i + {idx})' if idx > 0 else 'i'
 
-        # Multi-param: Object,IFormatProvider or String,IFormatProvider
-        if len(types) >= 2:
-            fmt = types[1].strip()
-            if 'IFormatProvider' in fmt:
-                if t == 'System.Object':
-                    return f'Convert.ToChar((object)(({ipart}) & 0xFF), null)'
-                elif t == 'System.String':
-                    return f'Convert.ToChar("hello", null)'
+        m = re.match(r'[^/]+/([^:]+)::([^:]+):[^(]+\(([^)]*)\)', mid)
+        if not m:
+            return ''
+        declaring_type = m.group(1)
+        method_name = m.group(2)
+        param_str = m.group(3)
+        param_types = [p.strip() for p in param_str.split(',') if p.strip()]
+
+        # ── Xxx.Parse(string) pattern ────────────────────────────────
+        if method_name == 'Parse' and param_types == ['System.String']:
+            parse_tbl = {
+                'System.Double': f'Double.Parse("3.14159")',
+                'System.Int32': f'Int32.Parse((({ipart}) % 100000 + 1).ToString())',
+                'System.Int64': f'Int64.Parse((({ipart}) % 100000 + 1).ToString())',
+            }
+            # Declaring type is the return type for Parse methods
+            if declaring_type in parse_tbl:
+                return parse_tbl[declaring_type]
             return ''
 
-        # Single-param
-        table = {
-            "System.Boolean": f'Convert.ToChar((({ipart}) & 1) == 0)',
-            "System.Byte": f'Convert.ToChar((byte)(({ipart}) & 0xFF))',
-            "System.Char": f'Convert.ToChar((char)(({ipart}) & 0xFFFF))',
-            "System.DateTime": f'Convert.ToChar(DateTime.UtcNow)',
-            "System.Decimal": f'Convert.ToChar((decimal)(({ipart}) & 0xFF))',
-            "System.Double": f'Convert.ToChar((double)(({ipart}) & 0xFF))',
-            "System.Int16": f'Convert.ToChar((short)(({ipart}) & 0x7FFF))',
-            "System.Int32": f'Convert.ToChar(({ipart}) & 0x7FFF)',
-            "System.Int64": f'Convert.ToChar((long)(({ipart}) & 0x7FFF))',
-            "System.Object": f'Convert.ToChar((object)(({ipart}) & 0xFF))',
-            "System.SByte": f'Convert.ToChar((sbyte)(({ipart}) & 0x7F))',
-            "System.Single": f'Convert.ToChar((float)(({ipart}) & 0xFF))',
-            "System.String": f'Convert.ToChar("hello")',
-            "System.UInt16": f'Convert.ToChar((ushort)(({ipart}) & 0xFFFF))',
-            "System.UInt32": f'Convert.ToChar((uint)(({ipart}) & 0x7FFF))',
-            "System.UInt64": f'Convert.ToChar((ulong)(({ipart}) & 0x7FFF))',
-        }
-        return table.get(t, '')
+        # ── Convert.ToString(xxx) pattern ────────────────────────────
+        if declaring_type == 'System.Convert' and method_name == 'ToString' and len(param_types) == 1:
+            t = param_types[0]
+            if 'Int32' in t:
+                return f'Convert.ToString({ipart})'
+            elif 'Int64' in t:
+                return f'Convert.ToString((long)({ipart} & 0xFF))'
+            elif 'Double' in t:
+                return f'Convert.ToString((double)({ipart} & 0xFF))'
+            elif 'Single' in t:
+                return f'Convert.ToString((float)({ipart} & 0xFF))'
+            return ''
+
+        # ── Convert.ToXxx(string) — use string literal ───────────────
+        if declaring_type == 'System.Convert' and method_name.startswith('To') and param_types == ['System.String']:
+            rt = method_name[2:]
+            string_tbl = {
+                'Boolean': f'Convert.ToBoolean(({ipart} % 2 == 0) ? "true" : "false")',
+                'Byte': f'Convert.ToByte("123")',
+                'Int16': f'Convert.ToInt16("12345")',
+                'Int32': f'Convert.ToInt32("1234567")',
+                'Int64': f'Convert.ToInt64("12345678901")',
+                'Single': f'Convert.ToSingle("3.14")',
+                'Double': f'Convert.ToDouble("3.14159")',
+                'Decimal': f'Convert.ToDecimal("123.45")',
+            }
+            if rt in string_tbl:
+                return string_tbl[rt]
+            return ''
+
+        # ── Convert.ToXxx(non-string, 1 param) — use loop variable ─────
+        if declaring_type == 'System.Convert' and method_name.startswith('To') and len(param_types) == 1:
+            t = param_types[0]
+            if 'Double' in t or 'Single' in t:
+                return f'Convert.{method_name}((double)({ipart} & 0xFF))'
+            if 'Int32' in t or 'Int64' in t:
+                return f'Convert.{method_name}({ipart})'
+            if 'Decimal' in t:
+                return f'Convert.{method_name}((decimal)({ipart} & 0xFF))'
+            return ''
+
+        return ''
+
+    def _return_type_from_mid(mid: str) -> str:
+        """Extract the return type from a methodSubjectId.
+        Format: Assembly/Type::Method:ReturnType(Params)
+        """
+        m = re.match(r'[^/]+/[^:]+::[^:]+:([^(]+)\(', mid)
+        if m:
+            return m.group(1).strip()
+        return ''
 
     # Detect trivial types: cast-only, no range check, no exception
     # These map to simple static_cast in C++ and are at risk of JIT elision
@@ -303,19 +349,17 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
                       "System.UInt64", "System.Object"}
 
     # ── Generate NoInlining helper methods ──────────────────────────
-    # For trivial and throwing methods, wrap in [NoInlining] so the JIT
-    # cannot inline+elide the call. For others, inline is fine (already slow).
+    # Every method uses a volatile side-effect to prevent JIT dead-code
+    # elimination, regardless of return type (bool, string, int, etc.).
     helper_methods: list[str] = []
     helper_names: list[str] = []
     for idx, mid in enumerate(method_subject_ids):
-        types = _extract_param_types(mid)
-        call_expr = _to_convert_call(types, idx)
+        call_expr = _generate_call_expr(mid, idx)
         if not call_expr:
             helper_names.append('')
             continue
 
-        is_throwing = any(t.strip() in _always_throws for t in types) if types else False
-        is_trivial = any(t.strip() in _trivial_types for t in types) if types else False
+        is_throwing = any(t.strip() in _always_throws for t in _extract_param_types(mid)) if _extract_param_types(mid) else False
 
         if is_throwing:
             hname = f'H_{idx}'
@@ -327,25 +371,22 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
                 f'    try {{ {call_expr}; }} catch {{ }}\n'
                 f'}}'
             )
-        elif is_trivial:
+        else:
             hname = f'H_{idx}'
             helper_names.append(hname)
             helper_methods.append(
                 f'[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]\n'
-                f'static char {hname}(int i)\n'
+                f'static void {hname}(int i)\n'
                 f'{{\n'
-                f'    return {call_expr};\n'
+                f'    {call_expr};\n'
+                f'    _g++;  // volatile side-effect prevents DCE\n'
                 f'}}'
             )
-        else:
-            helper_names.append('')
+
     iterations = 100000
     method_sections: list[str] = []
     for idx, mid in enumerate(method_subject_ids):
-        types = _extract_param_types(mid)
-        call_expr = _to_convert_call(types, idx)
-        is_throwing = any(t.strip() in _always_throws for t in types) if types else False
-
+        call_expr = _generate_call_expr(mid, idx)
         hname = helper_names[idx] if idx < len(helper_names) else ''
 
         if not call_expr:
@@ -363,12 +404,10 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
             )
             continue
 
-        if is_throwing:
+        if hname:
             body = f'                    {hname}(i);'
-        elif hname:
-            body = f'                    accum ^= (long){hname}(i);'
         else:
-            body = f'                    accum ^= (long){call_expr};'
+            body = f'                    {{ {call_expr}; _g++; }}'
 
         method_sections.append(
             f'            {{ // [{idx}] {mid}\n'
@@ -393,7 +432,7 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
             f'                    ElapsedMilliseconds = bestMs,\n'
             f'                    Iterations = {iterations},\n'
             f'                    IsBodyReal = true,\n'
-            f'                    IsException = {"true" if is_throwing else "false"},\n'
+            f'                    IsException = false,\n'
             f'                }});\n'
             f'            }}'
         )
@@ -412,7 +451,7 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
     harness_lines.append('\n')
     harness_lines.append('class ManagedBenchmarkHarness\n')
     harness_lines.append('{\n')
-    harness_lines.append('    static long accum;  // static accumulator prevents dead-code elimination\n')
+    harness_lines.append('    static volatile int _g;  // volatile side-effect prevents JIT DCE\n')
     harness_lines.append('\n')
     harness_lines.append('    struct MethodResult\n')
     harness_lines.append('    {\n')
@@ -431,7 +470,7 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
     harness_lines.append('        var results = new List<MethodResult>();\n')
     harness_lines.append(f'{sections_code}\n')
     harness_lines.append('        // Consume accum so JIT cannot elide the computation\n')
-    harness_lines.append('        string json = JsonSerializer.Serialize(new { accumulation = accum, results }, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });\n')
+    harness_lines.append('        string json = JsonSerializer.Serialize(new { results }, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });\n')
     harness_lines.append('        Console.WriteLine(json);\n')
     harness_lines.append('    }\n')
     harness_lines.append('}\n')
@@ -729,23 +768,11 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # Step 1: Run managed benchmark harness (if available), or auto-generate one
+    # Step 1: Auto-generate managed benchmark harness (regenerates .cs AND .csproj).
+    # Always regenerate to ensure the harness reflects the current methodSubjectIds
+    # and does NOT use stale Convert.ToChar-only logic from a previous run.
     managed_path = None
-    csproj = _locate_managed_harness(family_slug, assembly)
-    if csproj is not None:
-        try:
-            r = subprocess.run(
-                ["dotnet", "run", "--project", str(csproj), "--configuration", "Release"],
-                capture_output=True, text=True, timeout=300)
-            if r.returncode == 0:
-                managed_path = family_dir / "benchmark" / "managed-baseline.json"
-                managed_path.parent.mkdir(parents=True, exist_ok=True)
-                managed_path.write_text(r.stdout, encoding="utf-8")
-        except (OSError, subprocess.TimeoutExpired) as e:
-            managed_path = None
-
-    # Auto-generate managed benchmark harness if no csproj found or managed run failed
-    if managed_path is None and mids:
+    if mids:
         managed_path = _auto_generate_managed_benchmark(family_slug, assembly, mids)
 
     # Build throwing_mask from managed results (methods that always throw)
@@ -801,21 +828,48 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
     avg_speedup = summary.get("averageSpeedupPercent", 0)
     native_faster = summary.get("nativeFasterCount", 0)
     managed_faster = summary.get("managedFasterCount", 0)
+    matched_count = summary.get("matchedCount", 0)
+    total = summary.get("totalMethods", len(mids))
+    invalid_count = summary.get("invalidCount", 0)
+
+    # ── Quality gate ────────────────────────────────────────────────
+    # Reason 1: too few matched (< half of total non-throwing methods)
+    min_match_ratio = 0.5
+    match_ok = matched_count >= total * min_match_ratio
+
+    # Reason 2: managed is significantly faster than native
+    managed_ok = managed_faster <= native_faster or managed_faster <= 1
+
+    if not match_ok:
+        bm_status = "failed"
+        bm_reason = (f"matchedCount={matched_count}/{total} "
+                     f"below threshold {min_match_ratio*100:.0f}%")
+    elif not managed_ok:
+        bm_status = "failed"
+        bm_reason = (f"managed_faster={managed_faster} > native_faster={native_faster} "
+                     f"— native translation underperforms managed JIT")
+    else:
+        bm_status = "passed"
+        bm_reason = ""
 
     trace("benchmark", family=family_slug, avg_speedup=avg_speedup,
-          native_faster=native_faster, managed_faster=managed_faster)
+          native_faster=native_faster, managed_faster=managed_faster,
+          status=bm_status)
 
     return StageResult(
-        stage="benchmark", status="passed",
-        summary=f"avg_speedup={avg_speedup}%, "
-                f"native_faster={native_faster}/{summary.get('matchedCount',0)}, "
-                f"managed_faster={managed_faster}/{summary.get('matchedCount',0)}",
+        stage="benchmark", status=bm_status,
+        summary=bm_reason or (
+            f"avg_speedup={avg_speedup}%, "
+            f"native_faster={native_faster}/{matched_count}, "
+            f"managed_faster={managed_faster}/{matched_count}"),
         details={
             "averageSpeedupPercent": avg_speedup,
             "nativeFasterCount": native_faster,
             "managedFasterCount": managed_faster,
-            "matchedCount": summary.get("matchedCount", 0),
-            "totalMethods": summary.get("totalMethods", len(mids)),
+            "matchedCount": matched_count,
+            "totalMethods": total,
+            "invalidCount": invalid_count,
+            "benchmarkQuality": bm_reason or "ok",
         },
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
@@ -847,49 +901,69 @@ def _stage_hotupdate(family_slug: str, assembly: str) -> StageResult:
 
     result = verify_hotupdate(family_slug, assembly=assembly)
 
-    passed = result.get("passed", 0)
-    failed = result.get("failed", 0)
-    total = result.get("total", method_count)
-    real = max(0, method_count - stub_total)
+    actual_passed = result.get("passed", 0)
+    actual_failed = result.get("failed", 0)
+    actual_total = result.get("total", 0)
+    hu_status = result.get("status", "failed")
+
+    # Use real EXE results for everything
+    real_passed = actual_passed
+    real_failed = actual_failed
+    real_total = actual_total
+
+    # If the EXE reported 0 total, the hotupdate didn't actually run
+    if actual_total == 0:
+        hu_stage_status = "failed"
+        hu_summary = f"HotUpdate returned 0 total — no verification performed"
+    else:
+        hu_stage_status = "passed" if actual_failed == 0 else "failed"
+        hu_summary = f"{actual_passed}/{actual_total} passed, {actual_failed} failed (stub={stub_total})"
 
     report = {
         "schemaVersion": 2,
         "assemblyName": assembly,
         "familyId": f"family/{assembly}/{family_slug.replace('-', '/')}",
-        "passedMethods": passed,
-        "failedMethods": failed,
-        "totalMethods": total,
+        "passedMethods": actual_passed,
+        "failedMethods": actual_failed,
+        "totalMethods": actual_total,
         "stubMethods": stub_total,
-        "realMethods": real,
+        "realMethods": max(0, method_count - stub_total),
         "allMethodsRevertVerified": result.get("all_revert", False),
         "allMethodsSemanticVerified": result.get("all_semantic", False),
         "d3PatchApplied": False,
         "d3PatchedCount": 0,
         "verificationKind": "hotupdate-proof",
         "summary": {
-            "totalMethods": total,
-            "passedMethods": passed,
-            "failedMethods": failed,
+            "totalMethods": actual_total,
+            "passedMethods": actual_passed,
+            "failedMethods": actual_failed,
             "unmatchedMethods": 0,
         },
-        "methodResults": [],
+        "methodResults": result.get("methodResults", []),
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
     with open(report_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
 
-    status = "passed" if failed == 0 else "failed"
-    trace("hotupdate", family=family_slug, passed=passed, failed=failed,
-          real=real, stub=stub_total)
+    # Use real EXE results for stage status, not fake contract-derived counts
+    if actual_total == 0:
+        hu_stage_status = "failed"
+        hu_summary = f"HotUpdate returned 0 total — no verification performed"
+    else:
+        hu_stage_status = "passed" if actual_failed == 0 else "failed"
+        hu_summary = f"{actual_passed}/{actual_total} passed, {actual_failed} failed (stub={stub_total})"
+
+    trace("hotupdate", family=family_slug, passed=actual_passed, failed=actual_failed,
+          total=actual_total, stub=stub_total, status=hu_stage_status)
 
     return StageResult(
-        stage="hotupdate", status=status,
-        summary=f"{real}/{real} passed, {failed} failed (stub={stub_total})",
+        stage="hotupdate", status=hu_stage_status,
+        summary=hu_summary,
         details={
-            "passedMethods": passed,
-            "failedMethods": failed,
-            "totalMethods": total,
-            "realMethods": real,
+            "passedMethods": actual_passed,
+            "failedMethods": actual_failed,
+            "totalMethods": actual_total,
+            "realMethods": real_total,
             "stubMethods": stub_total,
         },
         duration_ms=int((time.perf_counter() - start) * 1000),

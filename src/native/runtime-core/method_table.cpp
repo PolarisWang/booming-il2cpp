@@ -3,6 +3,7 @@
 #include "abi_manifest.h"
 
 #include <chaos/trace.h>
+#include <chaos/profile.h>
 
 #include <cstring>
 
@@ -41,6 +42,7 @@ bool WriteMethodTable(uint32_t index, void* fn_ptr, uint32_t module_gen) {
 }
 
 void* ResolveMethodTable(uint32_t index) {
+    CHAOS_IL2CPP_PROFILE_SCOPE("ResolveMethodTable");
     if (index >= kMethodTableSize) {
         return nullptr;
     }

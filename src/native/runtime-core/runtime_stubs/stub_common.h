@@ -3,26 +3,41 @@
 #include <chaos/native_types.h>
 #include <ctime>
 
-// ── Stub helper structs for Array and String layouts ──────────────
-// These are used by multiple stub files. They mirror the managed
-// object layout so that stubs can read length/data from raw pointers.
-
 struct StubArrayHeader {
     CHAOS_IL2CPP_INTPTR element_type;
     CHAOS_IL2CPP_UINTPTR length;
 };
+
+// ManagedArrayAccessor mirrors chaos_managed_array (FatHeader 24B + fields).
+// Stubs must NOT reinterpret_cast<StubArrayHeader> on codegen arrays.
+struct ManagedArrayAccessor {
+    CHAOS_IL2CPP_UINT8  header_data[24];
+    CHAOS_IL2CPP_UINT8  element_type_shape;
+    CHAOS_IL2CPP_UINT8  padding[7];
+    const void*         element_type_info;
+    CHAOS_IL2CPP_INTPTR length;
+    CHAOS_IL2CPP_INTPTR* elements;
+};
+static_assert(sizeof(ManagedArrayAccessor) == 56,
+    "ManagedArrayAccessor must be 56 bytes");
+
+inline const ManagedArrayAccessor* get_managed_array(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    return reinterpret_cast<const ManagedArrayAccessor*>(handle);
+}
+
+inline ManagedArrayAccessor* get_managed_array_mut(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    return reinterpret_cast<ManagedArrayAccessor*>(handle);
+}
 
 struct StubStringHeader {
     CHAOS_IL2CPP_INTPTR type;
     CHAOS_IL2CPP_UINTPTR byte_count;
 };
 
-// Get UTF-8 data pointer from a managed string.
 inline const char* stub_string_data(const void* str) noexcept {
     return reinterpret_cast<const char*>(static_cast<const StubStringHeader*>(str) + 1);
 }
 
-// Thread-local xorshift32 PRNG used by both Guid and Random stubs.
 inline uint32_t stub_xorshift32() noexcept {
     thread_local uint32_t state = 0;
     if (state == 0) {

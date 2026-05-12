@@ -19,6 +19,7 @@
 
 #include "patch_data.h"
 
+#include <atomic>
 #include <cstddef>
 #include <cstdint>
 #include <string>
@@ -40,15 +41,22 @@ struct PatchMethod {
     class PatchMetadataCache* metadata_cache = nullptr;  // token resolution cache
 
     // ── Cached signature parse results (populated lazily on first invocation) ──
-    uint32_t        cached_arg_count    = 0;       // total arg count (including 'this')
-    uint8_t         cached_ret_tag      = 0;       // ValueTag for return type
-    uint8_t         cached_arg_types[8] = {};       // ValueTag per arg (small-buffer for ≤8 args)
-    bool            cached_sig_valid    = false;   // true when cache is populated
+    uint32_t        cached_arg_count        = 0;       // total arg count (including 'this')
+    uint8_t         cached_ret_tag          = 0;       // ValueTag for return type
+    uint8_t         cached_arg_types_small[8] = {};     // small-buffer for ≤8 args
+    uint8_t*        cached_arg_types = cached_arg_types_small; // points to small buf or heap
+    uint32_t        cached_arg_capacity = 8;            // allocated capacity
+    bool            cached_sig_valid        = false;   // true when cache is populated
 
     // ── Per-instruction call-site metadata cache ──────────────────────────
     // Populated in PatchMethodLowerIR after IR deserialization.
     // Points to heap-allocated CachedCallInfo[instr_count], or nullptr.
     void*           call_cache          = nullptr;   // CachedCallInfo[]
+
+    // ── Lazy IR lowering state ───────────────────────────────────────────
+    // 0=uninitialized, 1=lowering-in-progress, 2=done.
+    // CAS-based to avoid global mutex contention across threads.
+    mutable std::atomic<uint32_t> ir_state{0};
 };
 
 // ── PatchMetadataCache ───────────────────────────────────────────────────
@@ -82,6 +90,10 @@ public:
     // Get declaring type name for a method entry.
     // Returns "UnknownType" if the type token cannot be resolved.
     const char* GetTypeName(const PatchMethodDefEntry* method) const noexcept;
+
+    // Get declaring type namespace for a method entry.
+    // Returns "" (empty string) if the type has no namespace or cannot be resolved.
+    const char* GetTypeNamespace(const PatchMethodDefEntry* method) const noexcept;
 
     // Get full method name (type.method) for diagnostic/lookup purposes.
     // Returns pointer to a thread-local or static buffer — use or copy immediately.

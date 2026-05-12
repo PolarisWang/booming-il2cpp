@@ -1,0 +1,119 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.unsigned-ops-helper.test-cltun",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()",
+      "signature": "System.Int32 UnsignedOpsHelper::TestCltUn()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()",
+        "methodId": "snapshot-test-fixtures.unsigned-ops-helper.test-cltun",
+        "signature": "System.Int32 UnsignedOpsHelper::TestCltUn()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_UnsignedOpsHelper_TestCltUn",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 2, "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "clt.un", "ilOffset": 2, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 3 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.unsigned-ops-helper.test-divun",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()",
+      "signature": "System.Int32 UnsignedOpsHelper::TestDivUn()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()",
+        "methodId": "snapshot-test-fixtures.unsigned-ops-helper.test-divun",
+        "signature": "System.Int32 UnsignedOpsHelper::TestDivUn()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_UnsignedOpsHelper_TestDivUn",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 10, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 3, "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "div.un", "ilOffset": 2, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 3 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.unsigned-ops-helper.test-remun",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()",
+      "signature": "System.Int32 UnsignedOpsHelper::TestRemUn()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()",
+        "methodId": "snapshot-test-fixtures.unsigned-ops-helper.test-remun",
+        "signature": "System.Int32 UnsignedOpsHelper::TestRemUn()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_UnsignedOpsHelper_TestRemUn",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 10, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 3, "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "rem.un", "ilOffset": 2, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 3 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.unsigned-ops-helper.test-ckfinite",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+      "signature": "System.Double UnsignedOpsHelper::TestCkfinite(System.Double)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+        "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+        "methodId": "snapshot-test-fixtures.unsigned-ops-helper.test-ckfinite",
+        "signature": "System.Double UnsignedOpsHelper::TestCkfinite(System.Double)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_UnsignedOpsHelper_TestCkfinite",
+      "isStatic": true,
+      "returnType": "System.Double",
+      "returnAbi": { "carrierKindCode": 12, "typeShape": 2 },
+      "parameterCount": 1,
+      "parameterAbis": [
+        { "carrierKindCode": 12, "typeShape": 2 }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldarg", "operand": 0, "ilOffset": 0, "resultType": "System.Double" },
+        { "op": "ckfinite", "ilOffset": 1, "resultType": "System.Double" },
+        { "op": "ret", "ilOffset": 2 }
+      ]
+    }
+  ]
+}

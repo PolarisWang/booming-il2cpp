@@ -2,8 +2,11 @@
 #define CHAOS_IL2CPP_GC_BUMP_CACHE_H_
 
 #include <chaos/native_types.h>
+#include <chaos/profile.h>
+#include <chaos/log.h>
 
 #include <cstddef>
+#include <cstdio>
 #include <new>
 
 namespace chaos::il2cpp::runtime_core {
@@ -52,6 +55,37 @@ public:
         return AllocateImpl(size, /*atomic*/ true);
     }
 
+    /// Dump allocation counters to stderr (in PROFILE format).
+    /// Call after a benchmark loop or at thread exit.
+    void DumpCounters() const {
+        uint64_t total_hits = 0, total_misses = 0, total_bytes = 0;
+        for (int i = 0; i < kNumSizeClasses; i++) {
+            auto add = [&](const SizeClassState& sc) {
+                if (sc.hits == 0 && sc.misses == 0) return;
+                std::fprintf(stderr, "ALLOC|size_class=%zu|hits=%llu|misses=%llu|bytes=%llu\n",
+                    static_cast<unsigned long long>(kSizeClasses[i]),
+                    static_cast<unsigned long long>(sc.hits),
+                    static_cast<unsigned long long>(sc.misses),
+                    static_cast<unsigned long long>(sc.alloc_bytes));
+                total_hits += sc.hits;
+                total_misses += sc.misses;
+                total_bytes += sc.alloc_bytes;
+            };
+            add(scan_sc_[i]);
+            add(atomic_sc_[i]);
+        }
+        std::fprintf(stderr, "ALLOC|oversized|count=%llu|bytes=%llu\n",
+            static_cast<unsigned long long>(oversized_count_),
+            static_cast<unsigned long long>(oversized_bytes_));
+        std::fprintf(stderr, "ALLOC|total|hits=%llu|misses=%llu|bytes=%llu|hit_rate=%.2f%%\n",
+            static_cast<unsigned long long>(total_hits),
+            static_cast<unsigned long long>(total_misses),
+            static_cast<unsigned long long>(total_bytes),
+            total_hits + total_misses > 0
+                ? 100.0 * static_cast<double>(total_hits) / (total_hits + total_misses)
+                : 0.0);
+    }
+
 private:
     // ── Size class configuration ──────────────────────────────
     // Covers typical .NET managed object sizes (header + fields).
@@ -71,6 +105,9 @@ private:
     struct SizeClassState {
         FreeNode* free_list;   // Thread-local free list head
         int       count;       // Items currently in free_list
+        uint64_t  hits{};      // Cache hit count
+        uint64_t  misses{};    // Cache miss (refill) count
+        uint64_t  alloc_bytes{}; // Total bytes allocated via this class
     };
 
     // ── Bump arena page header ────────────────────────────────
@@ -85,19 +122,31 @@ private:
     }
 
     /// Return the size-class index for a given aligned size, or -1.
-    static int SizeClassIndex(CHAOS_IL2CPP_SIZE aligned_size) {
-        for (int i = 0; i < kNumSizeClasses; i++) {
-            if (kSizeClasses[i] == aligned_size) {
-                return i;
-            }
+    /// Uses constexpr binary search — O(log 20) ≈ 5 comparisons vs 20 for
+    /// linear scan, with negligible real-world impact but zero cost to maintain.
+    static int SizeClassIndex(CHAOS_IL2CPP_SIZE aligned_size) noexcept {
+        static constexpr auto first = kSizeClasses[0];
+        static constexpr auto last = kSizeClasses[kNumSizeClasses - 1];
+        if (aligned_size < first || aligned_size > last) return -1;
+
+        int lo = 0, hi = kNumSizeClasses - 1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            auto v = kSizeClasses[mid];
+            if (v == aligned_size) return mid;
+            if (v < aligned_size) lo = mid + 1;
+            else                  hi = mid - 1;
         }
         return -1;
     }
 
     void* AllocateImpl(CHAOS_IL2CPP_SIZE size, bool atomic) {
+        CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateImpl");
         size = AlignUp(size);
 
         if (size > kMaxInlineSize) {
+            oversized_count_++;
+            oversized_bytes_ += size;
             return atomic ? GC_MALLOC_ATOMIC(size) : GC_MALLOC(size);
         }
 
@@ -105,13 +154,16 @@ private:
         int idx = SizeClassIndex(size);
         if (idx >= 0) {
             SizeClassState& sc = (atomic ? atomic_sc_ : scan_sc_)[idx];
+            sc.alloc_bytes += size;
             if (sc.free_list != nullptr) {
                 void* ptr = sc.free_list;
                 sc.free_list = sc.free_list->next;
                 sc.count--;
+                sc.hits++;
                 return ptr;
             }
             // Miss → refill from bump arena.
+            sc.misses++;
             RefillSizeClass(idx, atomic);
             if (sc.free_list != nullptr) {
                 void* ptr = sc.free_list;
@@ -121,7 +173,8 @@ private:
             }
         }
 
-        // Fallback: bump-allocate directly.
+        // Fallback: bump-allocate directly (size not in any size class).
+        CHAOS_IL2CPP_LOG_DEBUG("GcBumpCache", "size_class_miss");
         return BumpAllocate(size, atomic);
     }
 
@@ -174,6 +227,10 @@ private:
     SizeClassState atomic_sc_[kNumSizeClasses] = {};
     Page* scan_page_ = nullptr;
     Page* atomic_page_ = nullptr;
+
+    // ── Oversized allocation counters ─────────────────────────
+    uint64_t oversized_count_ = 0;
+    uint64_t oversized_bytes_ = 0;
 };
 
 }  // namespace chaos::il2cpp::runtime_core

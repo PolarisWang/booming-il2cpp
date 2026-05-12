@@ -7,6 +7,7 @@
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
 #include "vtable_registry.h"
+#include "generated_code_compat.h"
 
 namespace chaos::il2cpp::interpreter {
 
@@ -851,6 +852,110 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::Call:
             case IROpCode::CallBridge: {
+                // AotDirectDispatch: if direct_fn is set, call the pre-resolved
+                // chaos_external_runtime_* function pointer directly without going
+                // through dispatch_fn / call_target resolution.  This is needed
+                // for SEH-containing methods that fall back from FastExecute.
+                if (instruction.direct_fn != nullptr) {
+                    // Check arg_count bounds.
+                    CHAOS_IL2CPP_SIZE ac = static_cast<CHAOS_IL2CPP_SIZE>(instruction.arg_count);
+                    if (ac > 8) {
+                        break;
+                    }
+                    if (frame->stack.size() < ac) {
+                        break;
+                    }
+
+                    // Pop args as raw uint64_t values from InterpreterValue stack.
+                    uint64_t raw_args[8] = {};
+                    for (CHAOS_IL2CPP_SIZE ai = ac; ai > 0u && ai <= 8; --ai) {
+                        const auto& val = frame->stack.back();
+                        switch (val.tag) {
+                        case ValueTag::Int32:
+                            raw_args[ai - 1u] = static_cast<uint64_t>(static_cast<uint32_t>(val.i32));
+                            break;
+                        case ValueTag::Int64:
+                            raw_args[ai - 1u] = static_cast<uint64_t>(val.i64);
+                            break;
+                        case ValueTag::Float32:
+                            std::memcpy(&raw_args[ai - 1u], &val.f32, sizeof(float));
+                            break;
+                        case ValueTag::Float64:
+                            std::memcpy(&raw_args[ai - 1u], &val.f64, sizeof(double));
+                            break;
+                        default:
+                            raw_args[ai - 1u] = reinterpret_cast<uint64_t>(val.obj);
+                            break;
+                        }
+                        frame->stack.pop_back();
+                    }
+
+                    // Determine return tag from IRInstruction.
+                    uint8_t ret_tag = instruction.direct_ret_tag;
+                    if (ret_tag == 0xFF)
+                        ret_tag = static_cast<uint8_t>(ValueTag::Int32);
+
+                    // Call via uniform 8-arg signature.
+                    // The shaped chaos_external_runtime_* functions may throw
+                    // chaos_managed_exception (e.g. InvalidCastException).
+                    // Catch and propagate through the VM's SEH mechanism.
+                    using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
+                                                  uint64_t, uint64_t, uint64_t, uint64_t);
+                    auto fn = reinterpret_cast<DirectFn>(instruction.direct_fn);
+                    uint64_t raw_ret = 0;
+                    bool direct_fn_threw = false;
+                    uint64_t direct_fn_exception_obj = 0;
+                    try {
+                        raw_ret = fn(raw_args[0], raw_args[1], raw_args[2], raw_args[3],
+                                     raw_args[4], raw_args[5], raw_args[6], raw_args[7]);
+                    } catch (const chaos_managed_exception& e) {
+                        direct_fn_threw = true;
+                        direct_fn_exception_obj = static_cast<uint64_t>(e.object_value);
+                    }
+
+                    // Build DispatchResult for SEH propagation.
+                    {
+                        DispatchResult dret;
+                        if (direct_fn_threw) {
+                            dret.threw_exception = true;
+                            dret.exception_value = InterpreterValue::from_obj(
+                                reinterpret_cast<void*>(direct_fn_exception_obj));
+                        } else if (ret_tag != static_cast<uint8_t>(ValueTag::Void)) {
+                            dret.has_value = true;
+                            switch (static_cast<ValueTag>(ret_tag)) {
+                            case ValueTag::Int32:
+                                dret.value = InterpreterValue::from_i32(
+                                    static_cast<int32_t>(raw_ret & 0xFFFFFFFFu));
+                                break;
+                            case ValueTag::Int64:
+                                dret.value = InterpreterValue::from_i64(
+                                    static_cast<int64_t>(raw_ret));
+                                break;
+                            case ValueTag::Float32: {
+                                float f;
+                                std::memcpy(&f, &raw_ret, sizeof(float));
+                                dret.value = InterpreterValue::from_f32(f);
+                                break;
+                            }
+                            case ValueTag::Float64: {
+                                double d;
+                                std::memcpy(&d, &raw_ret, sizeof(double));
+                                dret.value = InterpreterValue::from_f64(d);
+                                break;
+                            }
+                            default:
+                                dret.value = InterpreterValue::from_obj(
+                                    reinterpret_cast<void*>(raw_ret));
+                                break;
+                            }
+                        }
+                        const DispatchAction da = handleDispatchResult(dret);
+                        if (da == DispatchAction::Return) return result;
+                        if (da == DispatchAction::Continue) continue;
+                    }
+                    break;
+                }
+
                 const CHAOS_IL2CPP_SIZE arg_count = static_cast<CHAOS_IL2CPP_SIZE>(instruction.arg_count);
 
                 if (frame->dispatch_fn != nullptr) {

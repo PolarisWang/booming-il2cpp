@@ -160,7 +160,8 @@ typedef struct HotpatchEntryV0 {
  * (type_name, method_name) → AOT token.  Codegen emits flat sorted arrays
  * in .rodata; the HotpatchNameRegistry performs binary search on them.       */
 typedef struct HotpatchTypeEntryV0 {
-    const char* type_name;          /* fully-qualified type name (UTF-8)    */
+    const char* type_name;          /* short type name (UTF-8, e.g. "String") */
+    const char* namespace_name;     /* namespace (UTF-8, e.g. "System") or ""  */
     uint32_t    first_method_index; /* index into the parallel method array */
     uint16_t    method_count;       /* number of methods in this type       */
 } HotpatchTypeEntryV0;

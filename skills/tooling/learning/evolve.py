@@ -79,6 +79,77 @@ def load_jsonl(path: Path) -> list[dict]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").strip().splitlines() if line.strip()]
 
 
+def load_failure_patterns(repo_root: Path, skill_name: str) -> list[dict]:
+    """Load failure patterns for a specific skill from telemetry."""
+    fp_path = repo_root / "skills" / "lifecycle" / "telemetry" / "failure-patterns.jsonl"
+    all_failures = load_jsonl(fp_path)
+    return [f for f in all_failures if skill_name in (f.get("skill_path") or "")]
+
+
+def load_success_patterns(repo_root: Path, skill_name: str) -> list[dict]:
+    """Load success patterns for a specific skill from telemetry."""
+    sp_path = repo_root / "skills" / "lifecycle" / "telemetry" / "success-patterns.jsonl"
+    all_success = load_jsonl(sp_path)
+    return [s for s in all_success if skill_name in (s.get("skill_path") or "")]
+
+
+def summarize_failures(failures: list[dict]) -> str:
+    """Generate a readable summary of failure patterns."""
+    if not failures:
+        return ""
+    classes: dict[str, int] = {}
+    for f in failures:
+        cls = f.get("error_class", "unknown")
+        classes[cls] = classes.get(cls, 0) + 1
+    total = len(failures)
+    summary = f"该技能的历史使用中记录了 {total} 次工具调用失败:\n"
+    for cls, count in sorted(classes.items(), key=lambda x: -x[1]):
+        pct = count / total * 100
+        examples = [f.get("error_preview", "") for f in failures if f.get("error_class") == cls][:3]
+        summary += f"- {cls} ({count}次, {pct:.0f}%): "
+        if examples:
+            summary += f"例如 \"{examples[0]}\"\n"
+        else:
+            summary += "\n"
+    return summary
+
+
+def summarize_successes(successes: list[dict]) -> str:
+    """Generate a readable summary of success patterns."""
+    if not successes:
+        return ""
+    pattern_types: dict[str, int] = {}
+    for s in successes:
+        pt = s.get("pattern_type", "mixed")
+        pattern_types[pt] = pattern_types.get(pt, 0) + 1
+    dominant = max(pattern_types, key=pattern_types.get) if pattern_types else "mixed"
+    desc = successes[-1].get("pattern_description", "")
+
+    summary = (
+        f"该技能的成功工作模式以「{_pattern_label(dominant)}」为主:\n"
+        f"- {desc}\n"
+        f"- 平均工具调用成功率: {successes[-1].get('success_rate', 1.0)*100:.0f}%\n"
+    )
+    # Extract tool sequence hints
+    last = successes[-1]
+    tool_seq = last.get("tool_sequence_summary", {})
+    if tool_seq:
+        top_tools = sorted(tool_seq.items(), key=lambda x: -x[1])[:5]
+        tools_str = ", ".join(f"{t}({c}次)" for t, c in top_tools)
+        summary += f"- 常用工具序列: {tools_str}\n"
+    return summary
+
+
+def _pattern_label(pt: str) -> str:
+    labels = {
+        "investigation": "查探型",
+        "implementation": "实现型",
+        "execution": "执行型",
+        "mixed": "混合型",
+    }
+    return labels.get(pt, pt)
+
+
 def parse_frontmatter(skill_path: Path) -> dict[str, str]:
     lines = skill_path.read_text(encoding="utf-8").splitlines()
     if len(lines) < 3 or lines[0].lstrip("﻿").strip() != "---":
@@ -192,6 +263,10 @@ def generate_fix_proposal(
         print(f"  [FIX] Proposal already exists: {proposal_id}")
         return None
 
+    # Load failure and success patterns for this skill
+    failures = load_failure_patterns(repo_root, skill_name)
+    successes = load_success_patterns(repo_root, skill_name)
+
     # Copy current skill as baseline for evolution
     shutil.copytree(library_dir, proposal_dir)
 
@@ -214,6 +289,18 @@ def generate_fix_proposal(
             "fallback_rate": metrics.get("fallback_rate", 0),
             "applied_rate": metrics.get("applied_rate", 0),
         },
+        "failure_patterns": {
+            "total_failures": len(failures),
+            "error_classes": dict(sorted(
+                {f.get("error_class", "unknown"): sum(1 for x in failures if x.get("error_class") == f.get("error_class"))
+                 for f in failures}.items(),
+                key=lambda x: -x[1]
+            )) if failures else {},
+        },
+        "success_patterns": {
+            "total_successes": len(successes),
+            "dominant_pattern": successes[-1].get("pattern_type", "mixed") if successes else None,
+        },
         "status": "proposed",
     }
     write_json(proposal_dir / "evolution-proposal.json", proposal)
@@ -230,17 +317,46 @@ def generate_fix_proposal(
     })
     write_json(proposal_dir / "skill.manifest.json", manifest)
 
-    # Update SKILL.md with FIX annotation
+    # Update SKILL.md with FIX annotation AND failure/success insights
     skill_file = proposal_dir / "SKILL.md"
     if skill_file.exists():
         content = skill_file.read_text(encoding="utf-8")
+
+        # Build experience-based sections
+        insight_sections = []
+
+        # Failure patterns section
+        if failures:
+            fail_summary = summarize_failures(failures)
+            insight_sections.append(
+                "## 已知错误模式 (From Failure Pattern Library)\n\n"
+                f"{fail_summary}\n"
+            )
+
+        # Success patterns section
+        if successes:
+            succ_summary = summarize_successes(successes)
+            insight_sections.append(
+                "## 推荐工作模式 (From Success Pattern Library)\n\n"
+                f"{succ_summary}\n"
+            )
+
+        # The evolution annotation always goes first
         annotation = (
             f"\n\n---\n<!-- FIX evolution: {current_version} -> {next_version} -->\n"
             f"**Evolution Note**: This skill was auto-evolved (FIX) on {now_iso()[:10]}. "
             f"Reason: {proposal['reason']}. "
-            f"Review and update the content below to address the identified issues.\n"
         )
-        skill_file.write_text(content + annotation, encoding="utf-8")
+        if not failures and not successes:
+            annotation += "Review and update the content below to address the identified issues.\n"
+        else:
+            annotation += "Experience patterns have been appended below for review.\n"
+
+        # Append annotation and insight sections
+        new_content = content + annotation
+        for section in insight_sections:
+            new_content += "\n" + section
+        skill_file.write_text(new_content, encoding="utf-8")
 
     # Write lineage record
     lineage = {

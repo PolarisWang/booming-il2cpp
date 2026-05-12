@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/array/indexing/copy",
+  "summary": {
+    "totalMethods": 13,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 13,
+    "nativeFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Resize:System.Void(T[]&,System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array,System.Collections.IComparer)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Object)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Int32,System.Int32,System.Object)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::IndexOf:System.Int32(System.Array,System.Object)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(System.Array,System.Object)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Reverse:System.Void(System.Array)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

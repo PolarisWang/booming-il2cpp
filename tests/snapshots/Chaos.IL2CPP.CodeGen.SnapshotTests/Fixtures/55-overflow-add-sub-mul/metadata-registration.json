@@ -1,0 +1,15 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    { "registrationKind": "assembly", "slot": 0, "subjectId": "SnapshotTestFixtures" },
+    { "registrationKind": "type", "slot": 1, "subjectId": "SnapshotTestFixtures/OverflowHelper", "name": "OverflowHelper", "displayName": "OverflowHelper", "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper" },
+    { "registrationKind": "method", "slot": 2, "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32(System.Int32,System.Int32)", "name": "RunOverflowAdd", "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32(System.Int32,System.Int32)", "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowHelper", "memberType": "System.Int32", "parameterCount": 2, "isImported": false },
+    { "registrationKind": "method", "slot": 3, "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32(System.Int32,System.Int32)", "name": "RunOverflowSub", "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32(System.Int32,System.Int32)", "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowHelper", "memberType": "System.Int32", "parameterCount": 2, "isImported": false },
+    { "registrationKind": "method", "slot": 4, "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32(System.Int32,System.Int32)", "name": "RunOverflowMul", "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32(System.Int32,System.Int32)", "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowHelper", "memberType": "System.Int32", "parameterCount": 2, "isImported": false },
+    { "registrationKind": "type", "slot": 5, "subjectId": "SnapshotTestFixtures/OverflowUnHelper", "name": "OverflowUnHelper", "displayName": "OverflowUnHelper", "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper" },
+    { "registrationKind": "method", "slot": 6, "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()", "name": "RunOverflowAddUn", "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowUnHelper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false },
+    { "registrationKind": "method", "slot": 7, "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()", "name": "RunOverflowSubUn", "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowUnHelper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false },
+    { "registrationKind": "method", "slot": 8, "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()", "name": "RunOverflowMulUn", "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowUnHelper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false }
+  ]
+}

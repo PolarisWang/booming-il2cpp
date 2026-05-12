@@ -26,7 +26,7 @@ inc_flags = ' '.join([
     '-I"D:\\agent\\booming-il2cpp\\third_party\\fmt\\include"',
     '-I"D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib"',
 ])
-defines = '-DCHAOS_IL2CPP_CHECK -DCHAOS_RUNTIME_ABI_STATIC'
+defines = '-DCHAOS_IL2CPP_CONFIG_CHECK -DCHAOS_RUNTIME_ABI_STATIC'
 
 ht_cpp = os.path.join(hu_dir, 'HotUpdateTest.cpp')
 gen_cpp = os.path.join(hu_dir, 'genuine-fixed', 'native-aot.generated.cpp')

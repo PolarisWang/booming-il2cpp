@@ -8,6 +8,8 @@
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 
+void ChaosRandomCtor(CHAOS_IL2CPP_INTPTR instance) noexcept { (void)instance; }
+
 void ChaosRandomNextBytes(CHAOS_IL2CPP_INTPTR rng, CHAOS_IL2CPP_INTPTR buffer) noexcept
 {
     (void)rng;

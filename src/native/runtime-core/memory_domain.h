@@ -116,13 +116,18 @@ inline void IDomainHeap::TrackFree(CHAOS_IL2CPP_SIZE size) noexcept {
 // Domain-tagged allocation — cross-domain safe free routing.
 //
 // Each domain allocation prepends an AllocationHeader containing the
-// originating heap pointer.  DOMAIN_CURRENT_FREE reads this header to
-// route the free() call to the correct heap — no dependency on thread-
-// local domain state, no hash lookup, no race condition.
+// originating heap pointer + a magic tag (bit 0).  DomainFreeTagged reads
+// this header to route the free() call to the correct heap — no dependency
+// on thread-local domain state, no hash lookup, no race condition.
 //
-// Layout:  [ IDomainHeap* | user data ... ]
-//            ^- header     ^- returned pointer
-// -----------------------------------------------------------------------
+// The magic tag (bit 0 set on the heap pointer) provides defense-in-depth:
+// untagged pointers (GC domain, Raw domain, wild pointer) are detected and
+// rejected with a CHAOS_IL2CPP_LOG_WARN before they can cause heap
+// corruption.
+//
+// Layout:  [ IDomainHeap* (tagged) | user data ... ]
+//            ^- header              ^- returned pointer
+// Overhead: 8 bytes per allocation (same as before, magic is zero-cost).
 
 /// Allocate @a size bytes through @a domain's heap and prepend a routing
 /// header.  Returns a pointer to the user data (header + sizeof(void*)).
@@ -138,6 +143,13 @@ void* DomainCurrentAllocateTagged(CHAOS_IL2CPP_SIZE size);
 /// originating heap.  Safe to call even after the domain has been
 /// unloaded (no-ops when heap is gone).
 void DomainFreeTagged(void* ptr);
+
+/// Reallocate a tagged pointer, preserving the routing header.
+/// Reads the AllocationHeader from @a ptr, calls the originating heap's
+/// Reallocate (or std::realloc for null-heap allocations), then writes
+/// the header on the new block.  Returns the new user-data pointer, or
+/// nullptr on failure (original block remains valid).
+void* DomainCurrentReallocateTagged(void* ptr, CHAOS_IL2CPP_SIZE new_size);
 // -----------------------------------------------------------------------
 using HeapFactoryFn = IDomainHeap* (*)(const MemoryDomain* domain, void* user_data);
 using HeapFactoryUserData = void*;

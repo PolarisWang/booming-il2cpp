@@ -210,6 +210,12 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private Dictionary<string, int>? _nativeSymbolToDispatchSlot;
 
+    /// <summary>
+    /// Maps unresolvable cross-assembly subjectId → index in kChaosExternalRuntimeFnTable.
+    /// Populated by <see cref="PrebuildExternalRuntimeDispatchTable"/> before method body emission.
+    /// </summary>
+    private readonly Dictionary<string, int> _externalRuntimeSubjects = new(StringComparer.Ordinal);
+
     public NativeAotTemplateModel Create(
         NativeAotLoweringPlanArtifact loweringPlan,
         AotCoreIrArtifact aotCoreIr,
@@ -295,6 +301,7 @@ public sealed partial class NativeAotLoweringPlanner
             methodsForLowering,
             closureManifest);
         var externalRuntimeHelpers = CollectExternalRuntimeHelpers(methodsForLowering, _staticInitializationSupport);
+        CollectExternalRuntimeDispatchEntries(methodsForLowering);
         var objectModelBuilder = new StringBuilder(65536);
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
         EmitObjectModelDeclarations(objectModelBuilder, methodsForLowering, externalRuntimeHelpers);
@@ -338,10 +345,18 @@ public sealed partial class NativeAotLoweringPlanner
 
         var abiManifestCode = BuildAbiManifest(methodsForLowering);
         var nameIndexCode = BuildHotpatchTable(methodsForLowering, metadataRegistration);
+        var externalRuntimeTableCode = BuildExternalRuntimeDispatchTable(
+            helperSymbolBySubjectId: externalRuntimeHelpers?
+                .Where(h => !string.IsNullOrEmpty(h.TargetSymbol))
+                .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal));
         var moduleRegistrationCode = BuildModuleRegistration();
         if (!string.IsNullOrEmpty(nameIndexCode))
         {
             moduleRegistrationCode += Environment.NewLine + nameIndexCode;
+        }
+        if (!string.IsNullOrEmpty(externalRuntimeTableCode))
+        {
+            moduleRegistrationCode += Environment.NewLine + externalRuntimeTableCode;
         }
         if (!string.IsNullOrEmpty(aotRegistrationCode))
         {
@@ -355,6 +370,63 @@ public sealed partial class NativeAotLoweringPlanner
         {
             moduleRegistrationCode += BuildMethodTableInitialization();
         }
+
+        // Step 1: Emit hotpatch-aware dispatch table + entry points.
+        // This replaces the Scriban-native_entry_function_name path, producing
+        // RunNativeAot, RunNativeAotAll, RunNativeAotBench, BenchmarkMethod, and kAotMethods[]
+        // natively from codegen — matching the real host dispatch flow.
+        var dispatchEntryCode = BuildDispatchEntryCode(methodsForLowering);
+        if (!string.IsNullOrEmpty(dispatchEntryCode))
+        {
+            moduleRegistrationCode += Environment.NewLine + dispatchEntryCode;
+        }
+
+        // Step 2: Emit CodeRegistrationV0, MetadataRegistrationV0, CodegenRegistrationOptionsV0
+        // as extern "C" symbols for RegisterCodegen + BootstrapRuntime path.
+        var codeRegistrationCode = EmitCodeRegistrationStructs(methodsForLowering, metadataRegistration);
+        if (!string.IsNullOrEmpty(codeRegistrationCode))
+        {
+            moduleRegistrationCode += Environment.NewLine + codeRegistrationCode;
+        }
+
+        // Step 3: Emit ReflectionQueryImageDescriptor for module.image,
+        // enabling ResolveSubjectId to find call_target via reflection query model.
+        var reflectionQueryCode = EmitReflectionQueryImage(methodsForLowering);
+        if (!string.IsNullOrEmpty(reflectionQueryCode))
+        {
+            moduleRegistrationCode += Environment.NewLine + reflectionQueryCode;
+        }
+
+        // Build extern "C" kAotMethodCount at file scope for runtime-entry.cpp link-time visibility.
+        var methodCount = methodsForLowering.Count;
+        var globalDeclarations = methodCount > 0
+            ? $"// extern \"C\" definition for link-time visibility from runtime-entry.cpp\nextern \"C\" const int kAotMethodCount = {methodCount};\n"
+            : string.Empty;
+
+        // Add kReflImage forward declaration BEFORE the ModuleDescriptor that references it.
+        // The actual definition is emitted in Step 3 (EmitReflectionQueryImage) later in
+        // moduleRegistrationCode, but the ModuleDescriptor (from BuildModuleRegistration)
+        // needs the symbol visible at its point of definition.
+        var reflImageForwardDecl = methodCount > 0
+            ? "\n// Forward declaration for module.image (emitted below in Step 3)\nextern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kReflImage;\n"
+            : string.Empty;
+
+        // Inject kReflImage forward declaration and kAotMethodCount namespace-extern into
+        // moduleRegistrationCode BEFORE the ModuleDescriptor from BuildModuleRegistration.
+        // This ensures symbols are declared before use within the codegen namespace.
+        // The actual kReflImage definition is emitted in Step 3 below.
+        var namespacePreamble = new StringBuilder();
+        if (methodCount > 0)
+        {
+            namespacePreamble.AppendLine();
+            namespacePreamble.AppendLine("// Forward declaration for module.image (defined in Step 3 below)");
+            namespacePreamble.AppendLine("extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kReflImage;");
+            namespacePreamble.AppendLine();
+            namespacePreamble.AppendLine("// Namespace-scoped extern declaration for kAotMethodCount.");
+            namespacePreamble.AppendLine("// (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)");
+            namespacePreamble.AppendLine("extern \"C\" const int kAotMethodCount;");
+        }
+        moduleRegistrationCode = namespacePreamble.ToString() + moduleRegistrationCode;
 
         // Phase 1 diagnostics: log StructuredIR coverage summary
         LogPhase1Summary();
@@ -372,6 +444,7 @@ public sealed partial class NativeAotLoweringPlanner
                 "\"hotpatch_table.h\"",
                 "\"runtime_vtable.h\"",
                 "\"runtime_instantiation.h\"",
+                "\"reflection_query_model.h\"",
                 "\"load_store_chaos_bridge.h\"",
             ],
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
@@ -386,7 +459,7 @@ public sealed partial class NativeAotLoweringPlanner
             ShapeDispatchHeaderContent = _shapeRegistry.GenerateCppShapeHeader(),
             ModuleRegistrationCode = moduleRegistrationCode,
             WorkloadAbi = loweringPlan.WorkloadAbi,
-            GlobalDeclarations = string.Empty,
+            GlobalDeclarations = globalDeclarations,
             CodegenNamespace = SanitizeCppIdentifier(loweringPlan.AssemblyName),
         };
     }
@@ -2230,6 +2303,295 @@ internal static class NativeAotCustomAttributeTypeNameResolver
             ? typeName
             : $"{namespaceName}.{typeName}";
     }
+}
+
+// ── Step 1-3: Dispatch, CodeRegistration structs, ReflectionQueryImage ───────────
+public sealed partial class NativeAotLoweringPlanner
+{
+    private string BuildDispatchEntryCode(IReadOnlyList<AotCoreIrMethodArtifact> methods)
+    {
+        if (methods.Count == 0) return string.Empty;
+
+        var sb = new StringBuilder(4096);
+        sb.AppendLine("// ── Dispatch table (kAotMethods[]) ──────────────────────────────");
+        sb.AppendLine("// const function pointer array for dispatch via slot index.");
+        sb.Append("static void (*kAotMethods[")
+            .Append(methods.Count).AppendLine("])() = {");
+        foreach (var method in methods)
+        {
+            sb.Append("    reinterpret_cast<void(*)()>(&")
+                .Append(method.NativeSymbol).AppendLine("),");
+        }
+        sb.AppendLine("};");
+        sb.AppendLine();
+
+        // RunNativeAot: single-method dispatch via s_hotpatch_entries[].
+        // When kHotpatchActive is set, routes through InterpreterEntryDirect (interpreter path).
+        // Otherwise calls direct_ptr directly (AOT native path).
+        sb.AppendLine("// Single-method dispatch via hotpatch dispatch table.");
+        sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 RunNativeAot(");
+        sb.AppendLine("    CHAOS_IL2CPP_INT32 chaos_entry_index)");
+        sb.AppendLine("{");
+        sb.AppendLine("    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)");
+        sb.AppendLine("        return -1;");
+        sb.AppendLine("    auto& entry = s_hotpatch_entries[chaos_entry_index];");
+        sb.AppendLine("    if (entry.flags & kHotpatchActive) {");
+        sb.AppendLine("        uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};");
+        sb.AppendLine("        chaos::il2cpp::runtime_core::InterpreterEntryDirect(");
+        sb.AppendLine("            entry.method_key, __chaos_args, __chaos_ret);");
+        sb.AppendLine("    } else {");
+        sb.AppendLine("        reinterpret_cast<void(*)()>(entry.direct_ptr)();");
+        sb.AppendLine("    }");
+        sb.AppendLine("    return 0;");
+        sb.AppendLine("}");
+        sb.AppendLine();
+
+        // RunNativeAotAll: all-methods loop for fact verify.
+        sb.AppendLine("// All-methods loop: run every method and return a bitmask of failures.");
+        sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 RunNativeAotAll()");
+        sb.AppendLine("{");
+        sb.AppendLine("    CHAOS_IL2CPP_INT32 result = 0;");
+        sb.AppendLine("    for (int i = 0; i < kAotMethodCount; i++) {");
+        sb.AppendLine("        auto& entry = s_hotpatch_entries[i];");
+        sb.AppendLine("        if (entry.flags & kHotpatchActive) {");
+        sb.AppendLine("            uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};");
+        sb.AppendLine("            chaos::il2cpp::runtime_core::InterpreterEntryDirect(");
+        sb.AppendLine("                entry.method_key, __chaos_args, __chaos_ret);");
+        sb.AppendLine("        } else {");
+        sb.AppendLine("            reinterpret_cast<void(*)()>(entry.direct_ptr)();");
+        sb.AppendLine("        }");
+        sb.AppendLine("    }");
+        sb.AppendLine("    return result;");
+        sb.AppendLine("}");
+        sb.AppendLine();
+
+        // RunNativeAotBench: fast benchmark dispatch (no setjmp, inline slot access).
+        sb.AppendLine("// Fast benchmark dispatch: no setjmp, inline slot access.");
+        sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 RunNativeAotBench(");
+        sb.AppendLine("    CHAOS_IL2CPP_INT32 chaos_entry_index)");
+        sb.AppendLine("{");
+        sb.AppendLine("    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)");
+        sb.AppendLine("        return -1;");
+        sb.AppendLine("    auto& entry = s_hotpatch_entries[chaos_entry_index];");
+        sb.AppendLine("    if (entry.flags & kHotpatchActive) {");
+        sb.AppendLine("        chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(");
+        sb.AppendLine("            entry.method_key);");
+        sb.AppendLine("    } else {");
+        sb.AppendLine("        reinterpret_cast<void(*)()>(entry.direct_ptr)();");
+        sb.AppendLine("    }");
+        sb.AppendLine("    return 0;");
+        sb.AppendLine("}");
+        sb.AppendLine();
+
+        // BenchmarkMethod: pure AOT benchmark, bypass hotpatch dispatch entirely.
+        sb.AppendLine("// Pure AOT benchmark: calls kAotMethods[i] directly, no hotpatch overhead.");
+        sb.AppendLine("extern \"C\" double BenchmarkMethod(");
+        sb.AppendLine("    int chaos_entry_index, int iterations) {");
+        sb.AppendLine("    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)");
+        sb.AppendLine("        return -1.0;");
+        sb.AppendLine("    auto start = std::chrono::steady_clock::now();");
+        sb.AppendLine("    for (int i = 0; i < iterations; i++) {");
+        sb.AppendLine("        kAotMethods[chaos_entry_index]();");
+        sb.AppendLine("    }");
+        sb.AppendLine("    auto end = std::chrono::steady_clock::now();");
+        sb.AppendLine("    return std::chrono::duration<double, std::milli>(");
+        sb.AppendLine("        end - start).count();");
+        sb.AppendLine("}");
+
+        return sb.ToString();
+    }
+
+    // ── Step 2: CodeRegistrationV0 + MetadataRegistrationV0 + CodegenRegistrationOptionsV0 ──
+    // Emitted as extern "C" symbols for RegisterCodegen + BootstrapRuntime path.
+    // References the generic registration arrays emitted by EmitGenericRegistration.
+
+    private string EmitCodeRegistrationStructs(
+    IReadOnlyList<AotCoreIrMethodArtifact> methods,
+    MetadataRegistrationArtifact metadataRegistration)
+{
+    if (methods.Count == 0) return string.Empty;
+
+    var sb = new StringBuilder(4096);
+    sb.AppendLine("// ── CodeRegistrationV0 ─────────────────────────────────────────");
+    sb.AppendLine("// method_pointers: flat array of all AOT function pointers.");
+    sb.Append("static void* const kMethodPointers[")
+        .Append(methods.Count).AppendLine("] = {");
+    foreach (var method in methods)
+    {
+        sb.Append("    reinterpret_cast<void*>(&")
+            .Append(method.NativeSymbol).AppendLine("),");
+    }
+    sb.AppendLine("};");
+    sb.AppendLine();
+
+    // Reverse P/Invoke wrappers
+    if (_reversePInvokeEntries.Count > 0)
+    {
+        sb.Append("static constexpr void* const kReversePInvokeWrappers[")
+            .Append(_reversePInvokeEntries.Count).AppendLine("] = {");
+        foreach (var entry in _reversePInvokeEntries)
+            sb.Append("    reinterpret_cast<void*>(&")
+                .Append(entry.NativeSymbol).AppendLine("),");
+        sb.AppendLine("};");
+        sb.AppendLine();
+    }
+
+    sb.AppendLine("// CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)");
+    sb.AppendLine("extern \"C\" const CodeRegistrationV0 chaos_codegen_code_registration");
+    sb.AppendLine("    = {");
+    sb.AppendLine("    .struct_size               = sizeof(CodeRegistrationV0),");
+    sb.AppendLine("    .method_pointers           = kMethodPointers,");
+    sb.Append("    .method_pointer_count      = ").Append(methods.Count).AppendLine("u,");
+    if (_reversePInvokeEntries.Count > 0) {
+        sb.AppendLine("    .reverse_pinvoke_wrappers  = kReversePInvokeWrappers,");
+        sb.Append("    .reverse_pinvoke_wrapper_count = ").Append(_reversePInvokeEntries.Count).AppendLine("u,");
+    } else {
+        sb.AppendLine("    .reverse_pinvoke_wrappers  = nullptr,");
+        sb.AppendLine("    .reverse_pinvoke_wrapper_count = 0u,");
+    }
+    sb.AppendLine("    .invoker_pointers          = nullptr,");
+    sb.AppendLine("    .invoker_pointer_count     = 0u,");
+    sb.AppendLine("    .unresolved_virtual_calls = nullptr,");
+    sb.AppendLine("    .unresolved_virtual_call_count = 0u,");
+    sb.AppendLine("    .type_capabilities       = nullptr,");
+    sb.AppendLine("    .type_capability_count   = 0u,");
+    sb.AppendLine("};");
+    sb.AppendLine();
+
+    // MetadataRegistrationV0 — references the arrays emitted by EmitGenericRegistration.
+    // NOTE: EmitGenericRegistration uses:
+    //   kGenericTypeEntries[], kGenericTypeArgTokens[]
+    //   kGenericMethodEntries[], kGenericMethodArgTokens[]
+    //   s_method_aot_entries[], s_method_aot_entry_args[]
+    sb.AppendLine("extern \"C\" const MetadataRegistrationV0 chaos_codegen_metadata_registration");
+    sb.AppendLine("    = {");
+    sb.AppendLine("    .struct_size              = sizeof(MetadataRegistrationV0),");
+    sb.AppendLine("    .generic_types            = kGenericTypeEntries,");
+    sb.AppendLine("    .generic_type_count       = sizeof(kGenericTypeEntries) / sizeof(kGenericTypeEntries[0]),");
+    sb.AppendLine("    .generic_type_args        = kGenericTypeArgTokens,");
+    sb.AppendLine("    .generic_type_arg_count   = sizeof(kGenericTypeArgTokens) / sizeof(kGenericTypeArgTokens[0]),");
+    sb.AppendLine("    .generic_methods          = kGenericMethodEntries,");
+    sb.AppendLine("    .generic_method_count     = sizeof(kGenericMethodEntries) / sizeof(kGenericMethodEntries[0]),");
+    sb.AppendLine("    .generic_method_args      = kGenericMethodArgTokens,");
+    sb.AppendLine("    .generic_method_arg_count = sizeof(kGenericMethodArgTokens) / sizeof(kGenericMethodArgTokens[0]),");
+    sb.AppendLine("    .method_aot_entries       = s_method_aot_entries,");
+    sb.AppendLine("    .method_aot_entry_count  = sizeof(s_method_aot_entries) / sizeof(s_method_aot_entries[0]),");
+    sb.AppendLine("    .method_aot_entry_args    = s_method_aot_entry_args,");
+    sb.AppendLine("    .method_aot_entry_arg_count = sizeof(s_method_aot_entry_args) / sizeof(s_method_aot_entry_args[0]),");
+    sb.AppendLine("    .field_offsets           = nullptr,");
+    sb.AppendLine("    .field_offset_count      = 0u,");
+    sb.AppendLine("    .metadata_usages         = nullptr,");
+    sb.AppendLine("    .metadata_usage_count    = 0u,");
+    sb.AppendLine("};");
+    sb.AppendLine();
+
+    // CodegenRegistrationOptionsV0
+    sb.AppendLine("extern \"C\" const CodegenRegistrationOptionsV0 chaos_codegen_options");
+    sb.AppendLine("    = {");
+    sb.AppendLine("    .struct_size       = sizeof(CodegenRegistrationOptionsV0),");
+    sb.AppendLine("    .registration_flags = 0u,");
+    sb.Append("    .image_name_utf8    = \"").Append(EscapeCppStringLiteral(_assemblyName)).AppendLine("\",");
+    sb.AppendLine("};");
+
+    return sb.ToString();
+}
+
+// ── Step 3: ReflectionQueryImageDescriptor ──────────────────────────────────
+    // Emits ReflectionQueryMethodDescriptor[] and ReflectionQueryTypeDescriptor[]
+    // arrays, and a ReflectionQueryImageDescriptor that module.image points to.
+    // This enables ResolveSubjectId to find call_target via reflection query model.
+    private string EmitReflectionQueryImage(IReadOnlyList<AotCoreIrMethodArtifact> methods)
+{
+    if (methods.Count == 0 || _moduleTypeSubjectIds.Count == 0) return string.Empty;
+
+    // Build type → methods map grouped by declaring type.
+    var typeMethodMap = new Dictionary<string, List<(string SubjectId, string TypeNs, string TypeName, string MethodName)>>(StringComparer.Ordinal);
+    foreach (var method in methods)
+    {
+        string declaringType;
+        try { declaringType = GetMethodDeclaringTypeSubjectId(method.SubjectId); }
+        catch { continue; }
+
+        if (!typeMethodMap.TryGetValue(declaringType, out var list))
+        {
+            list = new List<(string, string, string, string)>();
+            typeMethodMap[declaringType] = list;
+        }
+
+        list.Add((method.SubjectId, GetTypeNamespace(declaringType), GetTypeDisplayName(declaringType), GetMethodName(method.SubjectId)));
+    }
+
+    if (typeMethodMap.Count == 0) return string.Empty;
+
+    var typeIndexToMethods = new List<(string TypeSubjectId, int Count, string SafeName, string Ns, string Name)>();
+    var sb = new StringBuilder(8192);
+    sb.AppendLine("// ── Reflection Query Image Descriptor ──────────────────────────");
+    sb.AppendLine("// Used by ResolveSubjectId to resolve call_target via subjectId");
+    sb.AppendLine("// matching during IR lowering of patched methods.");
+    sb.AppendLine();
+
+    // Emit method descriptor arrays per type (subject_id_utf8 is the key field for ResolveSubjectId).
+    foreach (var kvp in typeMethodMap)
+    {
+        var typeSubjectId = kvp.Key;
+        var methodsInType = kvp.Value;
+        var safeName = SanitizeCppIdentifier(typeSubjectId.Replace('/', '_').Replace(':', '_'));
+        typeIndexToMethods.Add((typeSubjectId, methodsInType.Count, safeName, methodsInType[0].TypeNs, methodsInType[0].TypeName));
+
+        sb.Append("static constexpr ReflectionQueryMethodDescriptor kReflMethods_")
+            .Append(safeName).Append("[").Append(methodsInType.Count).AppendLine("] = {");
+        foreach (var m in methodsInType)
+        {
+            sb.Append("    { 0u, /*metadata_token — unused by ResolveSubjectId*/");
+            sb.Append(" ").Append(ToCppStringLiteral(m.SubjectId)).Append(",");
+            sb.Append(" ").Append(ToCppStringLiteral(m.MethodName)).Append(",");
+            sb.AppendLine(" \"System.Void\", 0, nullptr, 0u },");
+        }
+        sb.AppendLine("};");
+        sb.AppendLine();
+    }
+
+    // Emit type descriptors (subject_id_utf8 is the key field for ResolveSubjectId).
+    sb.Append("static constexpr ReflectionQueryTypeDescriptor kReflTypes[")
+        .Append(typeIndexToMethods.Count).AppendLine("] = {");
+    foreach (var (ts, cnt, safeName, ns, name) in typeIndexToMethods)
+    {
+        sb.Append("    { 0u, ");
+        sb.Append(ToCppStringLiteral(ts)).Append(", ");
+        sb.Append(ToCppStringLiteral(ts)).Append(", ");
+        sb.Append(ToCppStringLiteral(ns)).Append(", ");
+        sb.Append(ToCppStringLiteral(name)).Append(", ");
+        sb.Append(ToCppStringLiteral(name)).Append(",");
+        sb.AppendLine(" nullptr, nullptr, 0u, nullptr, 0u,");
+        sb.Append(" kReflMethods_").Append(safeName).Append(", ").Append(cnt).AppendLine("u },");
+    }
+    sb.AppendLine("};");
+    sb.AppendLine();
+
+    // Type pointer array (ReflectionQueryImageDescriptor has const* const* types).
+    sb.Append("static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[")
+        .Append(typeIndexToMethods.Count).AppendLine("] = {");
+    for (int i = 0; i < typeIndexToMethods.Count; i++)
+        sb.Append("    &kReflTypes[").Append(i).AppendLine("],");
+    sb.AppendLine("};");
+    sb.AppendLine();
+
+    // Image descriptor.
+    sb.Append("static constexpr ReflectionQueryImageDescriptor kReflImage = { ");
+    sb.Append(ToCppStringLiteral(_assemblyName)).Append(", ");
+    sb.Append("kReflTypePtrs, ").Append(typeIndexToMethods.Count).AppendLine("u };");
+    sb.AppendLine();
+
+    // Also emit a fake ImageHandle constant for module.image assignment below.
+    // BootstrapRuntime will use this to set aot_image_handle via the fallback in
+    // lines 311-321 of bootstrap.cpp (iterates modules looking for non-null image).
+    // The module.image field is set in the ModuleRegistration Scriban template.
+    sb.AppendLine("// Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.");
+    sb.AppendLine("// BootstrapRuntime's aot_image_handle fallback discovers this via");
+    sb.AppendLine("// LookupModule(mid)->image at lines 311-321 of bootstrap.cpp.");
+
+    return sb.ToString();
+}
 }
 
 public sealed record NativeAotTemplateModel

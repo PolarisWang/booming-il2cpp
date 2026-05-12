@@ -12,7 +12,6 @@
 #include "arithmetic_chaos_bridge.h"
 #include "codegen_bridge.h"       // HotpatchEntryV0, Hotpatch structs, kHotpatchActive
 #include <gc.h>                   // GC_END_STUBBORN_CHANGE for write barriers
-#include "debug_sink.h"           // DebugEventSink ring buffer
 
 // ═══════════════════════════════════════════════════════════════════
 // A5-Trinity Object Header Architecture
@@ -56,6 +55,11 @@ struct FatHeader {
     const void**    vtable      = nullptr;  // [8]
     uint64_t        sync_state  = 0;        // [16] — thin lock / sync block index
 };
+
+// Verify all headers store TypeInfo* at offset 0 (required by chaos_object_get_type_info).
+static_assert(offsetof(PureTypeHeader, type_info) == 0, "PureTypeHeader: type_info must be at offset 0");
+static_assert(offsetof(ThinLockableHeader, type_info) == 0, "ThinLockableHeader: type_info must be at offset 0");
+static_assert(offsetof(FatHeader, type_info) == 0, "FatHeader: type_info must be at offset 0");
 
 // ── Runtime ObjectHeader (24B) ────────────────────────────────────
 // Runtime-internal full layout. Matches FatHeader fields at [0..15]

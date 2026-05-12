@@ -1,0 +1,283 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-ldnull",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()",
+      "signature": "System.Int32 SimpleGapsHelper::RunLdnull()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()",
+        "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-ldnull",
+        "signature": "System.Int32 SimpleGapsHelper::RunLdnull()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunLdnull",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldnull", "ilOffset": 0, "resultType": "System.Object" },
+        { "op": "stloc", "operand": 0, "ilOffset": 1, "resultType": "System.Void" },
+        { "op": "ldloc", "operand": 0, "ilOffset": 2 },
+        { "op": "ldnull", "ilOffset": 3, "resultType": "System.Object" },
+        { "op": "ceq", "ilOffset": 4, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 5 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-conv-u4",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()",
+      "signature": "System.Int32 SimpleGapsHelper::RunConvU4()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()",
+        "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-conv-u4",
+        "signature": "System.Int32 SimpleGapsHelper::RunConvU4()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvU4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 42, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "conv.u4", "ilOffset": 1, "resultType": "System.UInt32" },
+        { "op": "stloc", "operand": 0, "ilOffset": 2, "resultType": "System.Void" },
+        { "op": "ldloc", "operand": 0, "ilOffset": 3 },
+        { "op": "ret", "ilOffset": 4 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-conv-i",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()",
+      "signature": "System.Int32 SimpleGapsHelper::RunConvI()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()",
+        "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-conv-i",
+        "signature": "System.Int32 SimpleGapsHelper::RunConvI()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvI",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 42, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "conv.i", "ilOffset": 1, "resultType": "System.IntPtr" },
+        { "op": "stloc", "operand": 0, "ilOffset": 2, "resultType": "System.Void" },
+        { "op": "ldloc", "operand": 0, "ilOffset": 3 },
+        { "op": "ret", "ilOffset": 4 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-i",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+      "signature": "System.Int32 SimpleGapsHelper::RunConvOvfI(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+        "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-i",
+        "signature": "System.Int32 SimpleGapsHelper::RunConvOvfI(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfI",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 1,
+      "parameterAbis": [ { "carrierKindCode": 1, "typeShape": 2 } ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldarg", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "conv.ovf.i", "ilOffset": 1, "resultType": "System.IntPtr" },
+        { "op": "ret", "ilOffset": 2 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-u",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+      "signature": "System.Int32 SimpleGapsHelper::RunConvOvfU(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+        "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-u",
+        "signature": "System.Int32 SimpleGapsHelper::RunConvOvfU(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfU",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 1,
+      "parameterAbis": [ { "carrierKindCode": 1, "typeShape": 2 } ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldarg", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "conv.ovf.u", "ilOffset": 1, "resultType": "System.UIntPtr" },
+        { "op": "ret", "ilOffset": 2 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-i-un",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+      "signature": "System.Int32 SimpleGapsHelper::RunConvOvfIUn(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+        "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-i-un",
+        "signature": "System.Int32 SimpleGapsHelper::RunConvOvfIUn(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfIUn",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 1,
+      "parameterAbis": [ { "carrierKindCode": 1, "typeShape": 2 } ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldarg", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "conv.ovf.i.un", "ilOffset": 1, "resultType": "System.IntPtr" },
+        { "op": "ret", "ilOffset": 2 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-u-un",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+      "signature": "System.Int32 SimpleGapsHelper::RunConvOvfUUn(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+        "methodId": "snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-u-un",
+        "signature": "System.Int32 SimpleGapsHelper::RunConvOvfUUn(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfUUn",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 1,
+      "parameterAbis": [ { "carrierKindCode": 1, "typeShape": 2 } ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldarg", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "conv.ovf.u.un", "ilOffset": 1, "resultType": "System.UIntPtr" },
+        { "op": "ret", "ilOffset": 2 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.ldind-stind-gaps-helper.run-ldind-i4",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()",
+      "signature": "System.Int32 LdindStindGapsHelper::RunLdindI4()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()",
+        "methodId": "snapshot-test-fixtures.ldind-stind-gaps-helper.run-ldind-i4",
+        "signature": "System.Int32 LdindStindGapsHelper::RunLdindI4()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 42, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "stloc", "operand": 0, "ilOffset": 1, "resultType": "System.Void" },
+        { "op": "ldloca", "operand": 0, "ilOffset": 2, "resultType": "System.Int32&" },
+        { "op": "ldind.i4", "ilOffset": 3, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 4 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.ldind-stind-gaps-helper.run-ldind-i",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()",
+      "signature": "System.Int32 LdindStindGapsHelper::RunLdindI()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()",
+        "methodId": "snapshot-test-fixtures.ldind-stind-gaps-helper.run-ldind-i",
+        "signature": "System.Int32 LdindStindGapsHelper::RunLdindI()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 1 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.ldind-stind-gaps-helper.run-stind-i",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()",
+      "signature": "System.Int32 LdindStindGapsHelper::RunStindI()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()",
+        "methodId": "snapshot-test-fixtures.ldind-stind-gaps-helper.run-stind-i",
+        "signature": "System.Int32 LdindStindGapsHelper::RunStindI()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_LdindStindGapsHelper_RunStindI",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 1 }
+      ]
+    }
+  ]
+}

@@ -25,6 +25,8 @@ static CHAOS_IL2CPP_UINT8 HexNibble(char c) noexcept
     return 0xFF;
 }
 
+void ChaosGuidCtor(CHAOS_IL2CPP_INTPTR instance, CHAOS_IL2CPP_INTPTR value) noexcept { (void)instance; (void)value; }
+
 CHAOS_IL2CPP_INTPTR ChaosGuidNewGuid(void) noexcept
 {
     auto* guid = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(16));

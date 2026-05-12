@@ -7,6 +7,7 @@
 #include "hotpatch_table.h"
 #include "runtime_vtable.h"
 #include "runtime_instantiation.h"
+#include "reflection_query_model.h"
 #include "load_store_chaos_bridge.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
@@ -43,7 +44,11 @@ constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_reference = 1;
 constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_value = 2;
 constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_interface = 3;
 
+#ifdef CHAOS_IL2CPP_VERIFY_MODE
+constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = 0;
+#else
 constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = 1;
+#endif
 
 CHAOS_IL2CPP_INTPTR chaos_normalize_native_int_argument(CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -73,20 +78,13 @@ TValue* chaos_resolve_managed_value_pointer(CHAOS_IL2CPP_INTPTR chaos_managed_po
 }
 
 const void* chaos_vtable_SnapshotTestFixtures_HasFields[];
-inline TypeInfoHot chaos_type_info_SnapshotTestFixtures_HasFields = { nullptr, chaos_vtable_SnapshotTestFixtures_HasFields, 6075661983971539625ULL, 1u, 32 /* warm_delta */, 1 /* reference */, 1 };
-inline TypeInfoWarm chaos_type_info_warm_SnapshotTestFixtures_HasFields = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_HasFields = static_cast<CHAOS_IL2CPP_INTPTR>(6075661983971539625ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_Assembly = { nullptr, nullptr, 5474029880995115448ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
-inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Reflection_Assembly = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_AssemblyName = { nullptr, nullptr, 17082367815459723707ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
-inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Reflection_AssemblyName = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_ConstructorInfo = { nullptr, nullptr, 4137207361503509124ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
-inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Reflection_ConstructorInfo = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_FieldInfo = { nullptr, nullptr, 17040031516751226236ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
-inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Reflection_FieldInfo = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_MethodInfo = { nullptr, nullptr, 10748947813473285525ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
-inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Reflection_MethodInfo = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_String = { nullptr, nullptr, 1782325859292956794ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
-inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_String = { nullptr, nullptr, 0, 0, 0, 0 };
+inline TypeInfoV0 chaos_type_info_v0_SnapshotTestFixtures_HasFields = {{nullptr, chaos_vtable_SnapshotTestFixtures_HasFields, 6075661983971539625ULL, 1u, 32 /* warm_delta */, 1 /* reference */, 2}, {nullptr, nullptr, 0, 0, 0, 0 }};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_HasFields = static_cast<CHAOS_IL2CPP_INTPTR>(6075661983971539625ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
 // ── Virtual method table arrays ──
 extern "C" void SnapshotTestFixtures_HasFields__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
@@ -98,8 +96,8 @@ static const int s_vtreg_SnapshotTestFixtures_HasFields = (::chaos::il2cpp::runt
 
 inline void* chaos_vtable_resolve(const void** vtable, CHAOS_IL2CPP_UINT32 slot) noexcept
 {
-	if (vtable == nullptr) CHAOS_IL2CPP_ABORT();
-	if (vtable[slot] == nullptr) CHAOS_IL2CPP_ABORT();
+	if (vtable == nullptr) CHAOS_IL2CPP_FAIL();
+	if (vtable[slot] == nullptr) CHAOS_IL2CPP_FAIL();
 	return const_cast<void*>(vtable[slot]);
 }
 
@@ -217,7 +215,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_type_info_System_Private_CoreLib_System_String, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_type_info_v0_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);
@@ -236,24 +234,24 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 struct chaos_type_SnapshotTestFixtures_HasFields
 {
-	ThinLockableHeader header{}
+	FatHeader header{};
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
 {
-	ThinLockableHeader header{}
+	ThinLockableHeader header{};
 	CHAOS_IL2CPP_INTPTR runtime_assembly_name_value = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName
 {
-	ThinLockableHeader header{}
+	ThinLockableHeader header{};
 	CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo
 {
-	ThinLockableHeader header{}
+	ThinLockableHeader header{};
 	CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
 	CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
@@ -264,7 +262,7 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo
 {
-	ThinLockableHeader header{}
+	ThinLockableHeader header{};
 	CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
 	CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
@@ -272,7 +270,7 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo
 {
-	ThinLockableHeader header{}
+	ThinLockableHeader header{};
 	CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
 	CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
@@ -283,7 +281,7 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo
 
 struct chaos_type_System_Private_CoreLib_System_String
 {
-	ThinLockableHeader header{}
+	ThinLockableHeader header{};
 	CHAOS_IL2CPP_INTPTR length = 0;
 	const char* utf8_data = nullptr;
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
@@ -301,6 +299,13 @@ static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 extern "C" void SnapshotTestFixtures_HasFields__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_AddressHelper_RunAddress(void);
 
+
+// Forward declaration for module.image (defined in Step 3 below)
+extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kReflImage;
+
+// Namespace-scoped extern declaration for kAotMethodCount.
+// (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
+extern "C" const int kAotMethodCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
@@ -335,7 +340,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 
 // ── Module registration ──
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[66] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[86] = {
 		0u,
 		1548u,
 		1548u,
@@ -402,9 +407,29 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		1548u,
 		1548u,
 		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1536u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
 	};
 
-	static constexpr const char* s_type_names[66] = {
+	static constexpr const char* s_type_names[86] = {
 		"<Module>",
 		"ArithmeticOps",
 		"StringOps",
@@ -470,11 +495,51 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		"LdindWideHelper",
 		"StindWideHelper",
 		"ArrayRefHelper",
+		"ThrowHelper",
+		"OverflowHelper",
+		"OverflowConvHelper",
+		"CalliHelper",
+		"MyClass",
+		"LdVirtftnHelper",
+		"LdelemAllHelper",
+		"StelemAllHelper",
+		"UnsignedOpsHelper",
+		"RareOpsHelper",
+		"StringFormatHelper",
+		"BranchUnsignedHelper",
+		"BranchUnsignedBHelper",
+		"RethrowHelper",
+		"OverflowUnHelper",
+		"MoreRareOpsHelper",
+		"OverflowConvExtHelper",
+		"SimpleGapsHelper",
+		"LdindStindGapsHelper",
+		"CollectionsHelper",
 		"<>O",
 	};
 
-	static constexpr const char* s_type_namespaces[66] = {
+	static constexpr const char* s_type_namespaces[86] = {
 		"",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
@@ -542,7 +607,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		"",
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[66] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[86] = {
 		0u,
 		0u,
 		0u,
@@ -609,9 +674,49 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		0u,
 		0u,
 		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
 	};
 
-	static const TypeInfoHot* const s_type_info_ptrs[66] = {
+	static const TypeInfoHot* const s_type_info_ptrs[86] = {
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
 		nullptr,
 		nullptr,
 		nullptr,
@@ -681,10 +786,10 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[1] = {
-		33554498u,
+		33554518u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[67] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[87] = {
 		0u,
 		0u,
 		0u,
@@ -700,6 +805,26 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		0u,
 		0u,
 		0u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
 		1u,
 		1u,
 		1u,
@@ -754,7 +879,27 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		1u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[67] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[87] = {
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
 		0u,
 		0u,
 		0u,
@@ -828,7 +973,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 
 	static const ::chaos::il2cpp::runtime_core::ModuleDescriptor s_native_aot_module = {
 		/* .name_utf8         = */ "SnapshotTestFixtures",
-		/* .image             = */ nullptr,  // Tier 2 metadata — deferred
+		/* .image             = */ &kReflImage,
 		/* .type_flags        = */ s_type_flags,
 		/* .type_names        = */ s_type_names,
 		/* .type_namespaces   = */ s_type_namespaces,
@@ -838,7 +983,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		/* .nested_type_offset = */ s_nested_type_offset,
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
-		/* .type_count        = */ 66u,
+		/* .type_count        = */ 86u,
 	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
@@ -855,10 +1000,10 @@ static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[2] = {
 	{ ".ctor", 0x00000004u, 0u },  // HasFields
 };
 
-// Type name index entries
+// Type name index entries (namespace, short_name)
 static constexpr HotpatchTypeEntryV0 s_hotpatch_types[2] = {
-	{ "AddressHelper", 0u, 1u },
-	{ "HasFields", 1u, 1u },
+	{ "AddressHelper", "", 0u, 1u },
+	{ "HasFields", "", 1u, 1u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
@@ -886,15 +1031,181 @@ static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	2u,
 };
 
-// Register hotpatch table with the runtime on load
-static const CHAOS_IL2CPP_UINT32 s_hotpatch_registered = []()
+// Expose hotpatch module to BootstrapRuntime
+extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
+	= &s_hotpatch_module;
+
+// ── External Runtime Dispatch Table ──────────────────────────
+// Startup-time-resolved function pointers for cross-assembly calls.
+
+extern "C" const char* kChaosExternalRuntimeSubjects[2] =
 {
-	::chaos::il2cpp::runtime_core::RegisterHotpatchModule(
-		&s_hotpatch_module);
-	return 1u;
-}();
+	"SnapshotTestFixtures/HasFields::instanceVal",
+	"SnapshotTestFixtures/HasFields::staticVal",
+};
+
+extern "C" void* kChaosExternalRuntimeFnTable[2] =
+{
+	nullptr,
+	nullptr,
+};
+
+extern "C" int32_t kChaosExternalRuntimeCount = 2;
+
 
 // (no method AOT entries for this module)
+
+// ── Dispatch table (kAotMethods[]) ──────────────────────────────
+// const function pointer array for dispatch via slot index.
+static void (*kAotMethods[2])() = {
+	reinterpret_cast<void(*)()>(&SnapshotTestFixtures_HasFields__ctor),
+	reinterpret_cast<void(*)()>(&SnapshotTestFixtures_AddressHelper_RunAddress),
+};
+
+// Single-method dispatch via hotpatch dispatch table.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
+	CHAOS_IL2CPP_INT32 chaos_entry_index)
+{
+	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+		return -1;
+	auto& entry = s_hotpatch_entries[chaos_entry_index];
+	if (entry.flags & kHotpatchActive) {
+		uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};
+		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+			entry.method_key, __chaos_args, __chaos_ret);
+	} else {
+		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+	}
+	return 0;
+}
+
+// All-methods loop: run every method and return a bitmask of failures.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
+{
+	CHAOS_IL2CPP_INT32 result = 0;
+	for (int i = 0; i < kAotMethodCount; i++) {
+		auto& entry = s_hotpatch_entries[i];
+		if (entry.flags & kHotpatchActive) {
+			uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};
+			chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+				entry.method_key, __chaos_args, __chaos_ret);
+		} else {
+			reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		}
+	}
+	return result;
+}
+
+// Fast benchmark dispatch: no setjmp, inline slot access.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
+	CHAOS_IL2CPP_INT32 chaos_entry_index)
+{
+	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+		return -1;
+	auto& entry = s_hotpatch_entries[chaos_entry_index];
+	if (entry.flags & kHotpatchActive) {
+		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
+			entry.method_key);
+	} else {
+		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+	}
+	return 0;
+}
+
+// Pure AOT benchmark: calls kAotMethods[i] directly, no hotpatch overhead.
+extern "C" double BenchmarkMethod(
+	int chaos_entry_index, int iterations) {
+	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+		return -1.0;
+	auto start = std::chrono::steady_clock::now();
+	for (int i = 0; i < iterations; i++) {
+		kAotMethods[chaos_entry_index]();
+	}
+	auto end = std::chrono::steady_clock::now();
+	return std::chrono::duration<double, std::milli>(
+		end - start).count();
+}
+
+// ── CodeRegistrationV0 ─────────────────────────────────────────
+// method_pointers: flat array of all AOT function pointers.
+static void* const kMethodPointers[2] = {
+	reinterpret_cast<void*>(&SnapshotTestFixtures_HasFields__ctor),
+	reinterpret_cast<void*>(&SnapshotTestFixtures_AddressHelper_RunAddress),
+};
+
+// CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
+extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
+	= {
+	.struct_size               = sizeof(CodeRegistrationV0),
+	.method_pointers           = kMethodPointers,
+	.method_pointer_count      = 2u,
+	.reverse_pinvoke_wrappers  = nullptr,
+	.reverse_pinvoke_wrapper_count = 0u,
+	.invoker_pointers          = nullptr,
+	.invoker_pointer_count     = 0u,
+	.unresolved_virtual_calls = nullptr,
+	.unresolved_virtual_call_count = 0u,
+	.type_capabilities       = nullptr,
+	.type_capability_count   = 0u,
+};
+
+extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration
+	= {
+	.struct_size              = sizeof(MetadataRegistrationV0),
+	.generic_types            = kGenericTypeEntries,
+	.generic_type_count       = sizeof(kGenericTypeEntries) / sizeof(kGenericTypeEntries[0]),
+	.generic_type_args        = kGenericTypeArgTokens,
+	.generic_type_arg_count   = sizeof(kGenericTypeArgTokens) / sizeof(kGenericTypeArgTokens[0]),
+	.generic_methods          = kGenericMethodEntries,
+	.generic_method_count     = sizeof(kGenericMethodEntries) / sizeof(kGenericMethodEntries[0]),
+	.generic_method_args      = kGenericMethodArgTokens,
+	.generic_method_arg_count = sizeof(kGenericMethodArgTokens) / sizeof(kGenericMethodArgTokens[0]),
+	.method_aot_entries       = s_method_aot_entries,
+	.method_aot_entry_count  = sizeof(s_method_aot_entries) / sizeof(s_method_aot_entries[0]),
+	.method_aot_entry_args    = s_method_aot_entry_args,
+	.method_aot_entry_arg_count = sizeof(s_method_aot_entry_args) / sizeof(s_method_aot_entry_args[0]),
+	.field_offsets           = nullptr,
+	.field_offset_count      = 0u,
+	.metadata_usages         = nullptr,
+	.metadata_usage_count    = 0u,
+};
+
+extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
+	= {
+	.struct_size       = sizeof(CodegenRegistrationOptionsV0),
+	.registration_flags = 0u,
+	.image_name_utf8    = "SnapshotTestFixtures",
+};
+
+// ── Reflection Query Image Descriptor ──────────────────────────
+// Used by ResolveSubjectId to resolve call_target via subjectId
+// matching during IR lowering of patched methods.
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_HasFields[1] = {
+	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "SnapshotTestFixtures/HasFields::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_AddressHelper[1] = {
+	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()", "RunAddress", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryTypeDescriptor kReflTypes[2] = {
+	{ 0u, "SnapshotTestFixtures/HasFields", "SnapshotTestFixtures/HasFields", "", "HasFields", "HasFields", nullptr, nullptr, 0u, nullptr, 0u,
+ kReflMethods_SnapshotTestFixtures_HasFields, 1u },
+	{ 0u, "SnapshotTestFixtures/AddressHelper", "SnapshotTestFixtures/AddressHelper", "", "AddressHelper", "AddressHelper", nullptr, nullptr, 0u, nullptr, 0u,
+ kReflMethods_SnapshotTestFixtures_AddressHelper, 1u },
+};
+
+static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
+	&kReflTypes[0],
+	&kReflTypes[1],
+};
+
+static constexpr ReflectionQueryImageDescriptor kReflImage = { "SnapshotTestFixtures", kReflTypePtrs, 2u };
+
+// Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
+// BootstrapRuntime's aot_image_handle fallback discovers this via
+// LookupModule(mid)->image at lines 311-321 of bootstrap.cpp.
 
 // Populate generic registration arrays from this TU.
 static void ChaosDoPopulateGenericRegistration(
@@ -954,8 +1265,8 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_AddressHelper_RunAddress(void
 
 
 	{
-		auto* chaos_object = new chaos_type_SnapshotTestFixtures_HasFields{};
-		chaos_object->header.type_info = &chaos_type_info_SnapshotTestFixtures_HasFields;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_SnapshotTestFixtures_HasFields, {});
+		chaos_object->header.type_info = &chaos_type_info_v0_SnapshotTestFixtures_HasFields.hot;
 		chaos_object->header.vtable = chaos_vtable_SnapshotTestFixtures_HasFields;
 		SnapshotTestFixtures_HasFields__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -972,12 +1283,9 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_AddressHelper_RunAddress(void
 }
 
 
-// Native AOT entry for SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()
-// Managed symbol: SnapshotTestFixtures_AddressHelper_RunAddress
-extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 chaos_entry_index)
-{
-    return SnapshotTestFixtures_AddressHelper_RunAddress();
-}
 
 }  // namespace chaos::il2cpp::codegen::SnapshotTestFixtures
 #pragma warning(pop)
+
+// extern "C" definition for link-time visibility from runtime-entry.cpp
+extern "C" const int kAotMethodCount = 2;

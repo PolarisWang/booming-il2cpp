@@ -4,6 +4,7 @@
 #include "memory_domain.h"
 #include "method_replacement.h"
 #include "reflection_query_model.h"
+#include "../runtime-core/module_registry.h"
 #include "runtime_core.h"
 #include "../runtime-core/runtime_instantiation.h"   // RegisterMethodAotEntries
 #include "string_table.h"
@@ -15,6 +16,10 @@
 #include <cstdint>
 #include <cstring>
 #include <unordered_map>
+
+// Declared in native-aot.generated.cpp — must be at file scope (MSVC rejects
+// extern "C" inside function body: C2598).
+extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
 
 namespace chaos::il2cpp::bootstrap {
 
@@ -274,9 +279,47 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
         }
     }
 
+    // Register the codegen-emitted hotpatch module (if present).
+    // The symbol is defined in native-aot.generated.cpp — may be nullptr
+    // when the module has no reachable methods with metadata tokens.
+    // Registration is done here (explicit, during single-threaded bootstrap)
+    // instead of via a static IIFE in the generated code, to avoid undefined
+    // static-initialization ordering across 200+ DLLs.
+    if (chaos_il2cpp_aot_hotpatch_module != nullptr) {
+        ::chaos::il2cpp::runtime_core::RegisterHotpatchModule(
+            chaos_il2cpp_aot_hotpatch_module);
+    }
+
+    // Resolve the external runtime dispatch table (kChaosExternalRuntimeFnTable).
+    // This iterates the codegen-emitted subjectId array and resolves each entry
+    // to its direct function pointer via the hotpatch name registry, which has
+    // just been populated with all registered modules' dispatch tables.
+    // Must happen AFTER RegisterHotpatchModule, BEFORE is_bootstrapped = true.
+    extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept;
+    ChaosResolveExternalRuntimeFnTable();
+
     // The AOT module registers its string table via a static initializer in the
     // generated translation unit.  Nothing to do here — g_aot_entries defaults
     // to nullptr, which makes Resolve() fall through to the dynamic table only.
+
+    // ── Ensure aot_image_handle is set ─────────────────────────────────
+    // Used downstream by ApplyPatchFromMemory → SetAotBridge, and by
+    // BootstrapRuntime itself (source_image for generic context registration).
+    // When the host (e.g. game engine) has already set aot_image_handle via
+    // BootstrapState, we keep that.  Otherwise, discover it from the first
+    // registered module that has types loaded.
+    if (g_bootstrap_state.aot_image_handle == 0) {
+        for (uint32_t mid = 0; mid < chaos::il2cpp::runtime_core::kMaxModules; ++mid) {
+            const auto* module = chaos::il2cpp::runtime_core::LookupModule(mid);
+            if (module != nullptr && !module->tombstone &&
+                module->image != nullptr && module->type_count > 0) {
+                g_bootstrap_state.aot_image_handle =
+                    chaos::il2cpp::runtime_core::EncodeReflectionQueryImageHandle(module->image);
+                break;
+            }
+        }
+    }
+
     g_bootstrap_state.is_bootstrapped = true;
 
     return CHAOS_BRIDGE_STATUS_OK;

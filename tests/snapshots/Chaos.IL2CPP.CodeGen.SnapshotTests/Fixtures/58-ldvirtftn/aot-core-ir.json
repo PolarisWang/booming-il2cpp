@@ -1,0 +1,181 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.ldvirtftn-helper.run-ldvirtftn",
+      "subjectId": "SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
+      "signature": "System.Int32 LdVirtftnHelper::RunLdVirtftn()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/LdVirtftnHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
+        "methodId": "snapshot-test-fixtures.ldvirtftn-helper.run-ldvirtftn",
+        "signature": "System.Int32 LdVirtftnHelper::RunLdVirtftn()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newobj",
+          "operand": "System.Void MyClass::.ctor(System.Int32)",
+          "ilOffset": 1,
+          "resultType": "SnapshotTestFixtures/MyClass",
+          "callee": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/MyClass",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "SnapshotTestFixtures/MyClass"
+        },
+        {
+          "op": "ldvirtftn",
+          "operand": "System.Int32 MyClass::GetValue()",
+          "callee": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
+          "ilOffset": 4,
+          "resultType": "System.IntPtr",
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "pop",
+          "ilOffset": 5,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 7
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.my-class.get-value",
+      "subjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
+      "signature": "System.Int32 MyClass::GetValue()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/MyClass",
+        "definitionSubjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
+        "methodId": "snapshot-test-fixtures.my-class.get-value",
+        "signature": "System.Int32 MyClass::GetValue()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_MyClass_GetValue",
+      "isStatic": false,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 99,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 1
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.my-class.ctor",
+      "subjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
+      "signature": "System.Void MyClass::.ctor(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/MyClass",
+        "definitionSubjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
+        "methodId": "snapshot-test-fixtures.my-class.ctor",
+        "signature": "System.Void MyClass::.ctor(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_MyClass__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 1,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 2
+        }
+      ]
+    }
+  ]
+}

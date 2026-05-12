@@ -57,7 +57,7 @@ def compile_assembly_lib(assembly_name: str) -> bool:
         gen_dir,  # for types.h
     ]
     inc_flags = " ".join(f'-I"{d}"' for d in include_dirs)
-    defines = "-DCHAOS_IL2CPP_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED"
+    defines = "-DCHAOS_IL2CPP_CONFIG_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED"
     compile_flags = "/nologo /std:c++20 /c /EHsc /W3 /utf-8 /O2"
 
     build_dir = genuine_dir / "build"

@@ -28,6 +28,44 @@ target_link_libraries(
         chaos_bootstrap
         chaos_interpreter)
 
+# gc_bump_cache_test — GcBumpCache size-class allocator unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
+    add_executable(chaos_gc_bump_cache_test gc_bump_cache_test.cpp)
+    target_compile_features(chaos_gc_bump_cache_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_bump_cache_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_include_directories(
+        chaos_gc_bump_cache_test
+        PRIVATE
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core")
+    target_link_libraries(
+        chaos_gc_bump_cache_test
+        PRIVATE
+            chaos_bdwgc)
+endif()
+
+# memory_domain_test — MemoryDomain lifecycle + tagged allocation unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/memory_domain_test.cpp")
+    add_executable(chaos_memory_domain_test memory_domain_test.cpp)
+    target_compile_features(chaos_memory_domain_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_memory_domain_test PRIVATE
+        CHAOS_RUNTIME_ABI_STATIC
+        _CRT_SECURE_NO_WARNINGS)
+    target_include_directories(
+        chaos_memory_domain_test
+        PRIVATE
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/third_party/bdwgc/include")
+    target_link_libraries(
+        chaos_memory_domain_test
+        PRIVATE
+            chaos_runtime_core
+            chaos_bootstrap
+            chaos_bdwgc)
+endif()
+
 # threading_smoke — thread model + ThreadPool (Phase 5 thread model gap)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
     add_executable(chaos_threading_smoke threading_smoke.cpp)

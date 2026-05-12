@@ -137,7 +137,7 @@ def compile_cpp(
 
     defines = " ".join(f'-D{d}' for d in (extra_defines or []))
     if not defines:
-        defines = '-DCHAOS_IL2CPP_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED'
+        defines = '-DCHAOS_IL2CPP_CONFIG_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED'
 
     # Build compile command
     cmd = (
@@ -224,7 +224,7 @@ def compile_family(
     compile_result = compile_cpp(
         cpp_path,
         output_dir=cpp_path.parent / "obj" if variant == "genuine" else cpp_path.parent,
-        extra_defines=["CHAOS_IL2CPP_CHECK"] if variant == "genuine" else None,
+        extra_defines=["CHAOS_IL2CPP_CONFIG_CHECK"] if variant == "genuine" else None,
     )
 
     result["compiled"] = compile_result["success"]

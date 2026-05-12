@@ -50,6 +50,42 @@
         { "op": "ldc.i4", "operand": 1, "ilOffset": 20, "resultType": "System.Int32" },
         { "op": "ret", "ilOffset": 21 }
       ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.branch-unsigned-helper.run-branch-unsigned",
+      "subjectId": "SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
+      "signature": "System.Int32 BranchUnsignedHelper::RunBranchUnsigned()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/BranchUnsignedHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
+        "methodId": "snapshot-test-fixtures.branch-unsigned-helper.run-branch-unsigned",
+        "signature": "System.Int32 BranchUnsignedHelper::RunBranchUnsigned()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_BranchUnsignedHelper_RunBranchUnsigned",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 2, "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "blt.un", "operand": 5, "ilOffset": 2, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 3, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 4 },
+        { "op": "ldc.i4", "operand": 3, "ilOffset": 5, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 6, "resultType": "System.Int32" },
+        { "op": "bgt.un", "operand": 10, "ilOffset": 7, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 8, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 9 },
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 10, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 11 }
+      ]
     }
   ]
 }

@@ -1,5 +1,7 @@
 #include "thread_state.h"
 
+#include <chaos/profile.h>
+
 #include <atomic>
 #include <new>
 #include <cstdlib>
@@ -94,6 +96,7 @@ bool SafepointRequested() noexcept {
 }
 
 void SafepointPoll() noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("SafepointPoll");
     uint32_t gen = s_generation.load(std::memory_order_acquire);
     if ((gen & kGcGenerationMask) == 0u) {
         return;  // fast path: no GC pending, single load + branch
