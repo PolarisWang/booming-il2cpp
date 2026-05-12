@@ -38,10 +38,106 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
         chaos_gc_bump_cache_test
         PRIVATE
             "${REPO_ROOT}/src/native/common"
-            "${REPO_ROOT}/src/native/runtime-core")
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_gc_bump_cache_test
         PRIVATE
+            chaos_bdwgc
+            chaos_fmt)
+endif()
+
+# gc_region_test — CRAG region framework + card table unit tests (C0.1-C0.3)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_region_test.cpp")
+    add_executable(chaos_gc_region_test gc_region_test.cpp)
+    target_compile_features(chaos_gc_region_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_region_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_region_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_region_test
+        PRIVATE
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/third_party/bdwgc/include"
+            "${REPO_ROOT}/third_party/fmt/include")
+    target_link_libraries(
+        chaos_gc_region_test
+        PRIVATE
+            chaos_runtime_core
+            chaos_bootstrap
+            chaos_fmt
+            chaos_bdwgc)
+endif()
+
+# gc_root_scanner_test — GcSlotMap registry + hybrid root scanning unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_root_scanner_test.cpp")
+    add_executable(chaos_gc_root_scanner_test gc_root_scanner_test.cpp)
+    target_compile_features(chaos_gc_root_scanner_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_root_scanner_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_include_directories(
+        chaos_gc_root_scanner_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/third_party/bdwgc/include"
+            "${REPO_ROOT}/third_party/fmt/include")
+    target_link_libraries(
+        chaos_gc_root_scanner_test
+        PRIVATE
+            chaos_runtime_core
+            chaos_bootstrap
+            chaos_bdwgc
+            chaos_fmt)
+endif()
+
+# domain_unload_test — C4: HotUpdate domain unloader with cross-domain reference checking
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/domain_unload_test.cpp")
+    add_executable(chaos_domain_unload_test domain_unload_test.cpp)
+    target_compile_features(chaos_domain_unload_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_domain_unload_test PRIVATE
+        CHAOS_RUNTIME_ABI_STATIC
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_domain_unload_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_domain_unload_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/third_party/bdwgc/include"
+            "${REPO_ROOT}/third_party/fmt/include")
+    target_link_libraries(
+        chaos_domain_unload_test
+        PRIVATE
+            chaos_runtime_core
+            chaos_bootstrap
+            chaos_fmt
+            chaos_bdwgc)
+endif()
+
+# gc_young_collector_test — Cheney copying young GC unit tests (C2.3-C2.6)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_young_collector_test.cpp")
+    add_executable(chaos_gc_young_collector_test gc_young_collector_test.cpp)
+    target_compile_features(chaos_gc_young_collector_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_young_collector_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_young_collector_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_young_collector_test
+        PRIVATE
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/third_party/bdwgc/include"
+            "${REPO_ROOT}/third_party/fmt/include")
+    target_link_libraries(
+        chaos_gc_young_collector_test
+        PRIVATE
+            chaos_runtime_core
+            chaos_bootstrap
+            chaos_fmt
             chaos_bdwgc)
 endif()
 
@@ -57,13 +153,15 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/memory_domain_test.cpp")
         PRIVATE
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
-            "${REPO_ROOT}/third_party/bdwgc/include")
+            "${REPO_ROOT}/third_party/bdwgc/include"
+            "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_memory_domain_test
         PRIVATE
             chaos_runtime_core
             chaos_bootstrap
-            chaos_bdwgc)
+            chaos_bdwgc
+            chaos_fmt)
 endif()
 
 # threading_smoke — thread model + ThreadPool (Phase 5 thread model gap)
@@ -105,4 +203,28 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
                 chaos_bootstrap
                 chaos_interpreter)
     endif()
+endif()
+
+# gc_stress_test — T.3: 100-thread concurrent allocation + GC stress test
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_stress_test.cpp")
+    add_executable(chaos_gc_stress_test gc_stress_test.cpp)
+    target_compile_features(chaos_gc_stress_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_stress_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_stress_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_stress_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/third_party/bdwgc/include"
+            "${REPO_ROOT}/third_party/fmt/include")
+    target_link_libraries(
+        chaos_gc_stress_test
+        PRIVATE
+            chaos_runtime_core
+            chaos_bootstrap
+            chaos_fmt
+            chaos_bdwgc)
 endif()

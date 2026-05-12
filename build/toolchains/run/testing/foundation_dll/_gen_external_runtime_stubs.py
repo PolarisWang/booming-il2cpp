@@ -192,15 +192,14 @@ def generate_stubs_cpp(content: str, missing: dict[str, int], family_slug: str) 
 def _subject_id_to_fn_name(subject_id: str) -> str:
     """Convert a subjectId to the corresponding chaos_external_runtime_* function name.
 
-    Matches naming convention used by codegen:
+    Must match the codegen's SanitizeSubjectId (NativeAotLoweringPlanner.ObjectModelUtilities.cs):
+    replaces ALL non-alphanumeric characters with '_' (no rstrip, no suffix).
+
     "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)"
     → "chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Byte_"
     """
-    result = subject_id
-    for ch in './:(,)':
-        result = result.replace(ch, '_')
-    result = result.rstrip('_')
-    return f'chaos_external_runtime_{result}_'
+    result = ''.join(c if c.isalnum() else '_' for c in subject_id)
+    return f'chaos_external_runtime_{result}'
 
 
 def _populate_fn_table(content: str) -> str:

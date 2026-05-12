@@ -12,9 +12,9 @@
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Clear:System.Void()",
       "status": "passed",
-      "prePatchNsPerOp": 358.7,
-      "postPatchNsPerOp": 61.1,
-      "slowdownPercent": -82.97
+      "prePatchNsPerOp": 330.8,
+      "postPatchNsPerOp": 237.0,
+      "slowdownPercent": -28.36
     },
     {
       "methodIndex": 2,
@@ -40,17 +40,17 @@
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()",
       "status": "passed",
-      "prePatchNsPerOp": 367.2,
-      "postPatchNsPerOp": 63.2,
-      "slowdownPercent": -82.79
+      "prePatchNsPerOp": 331.5,
+      "postPatchNsPerOp": 280.8,
+      "slowdownPercent": -15.29
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()",
       "status": "passed",
-      "prePatchNsPerOp": 390.9,
-      "postPatchNsPerOp": 84.6,
-      "slowdownPercent": -78.36
+      "prePatchNsPerOp": 428.2,
+      "postPatchNsPerOp": 458.4,
+      "slowdownPercent": 7.05
     },
     {
       "methodIndex": 8,
@@ -61,9 +61,9 @@
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::get_Count:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 367.7,
-      "postPatchNsPerOp": 70.5,
-      "slowdownPercent": -80.83
+      "prePatchNsPerOp": 313.4,
+      "postPatchNsPerOp": 404.0,
+      "slowdownPercent": 28.91
     },
     {
       "methodIndex": 10,
@@ -99,8 +99,8 @@
   "summary": {
     "totalMethods": 16,
     "nonStubMethods": 4,
-    "averageSlowdownPercent": -81.24,
-    "slowdownFactor": 0.18760000000000004,
+    "averageSlowdownPercent": -1.92,
+    "slowdownFactor": 0.9808,
     "slowdownThresholdX": 50.0
   }
 }

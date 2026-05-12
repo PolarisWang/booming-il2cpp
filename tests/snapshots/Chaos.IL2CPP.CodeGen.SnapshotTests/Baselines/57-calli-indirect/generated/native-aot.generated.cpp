@@ -69,7 +69,7 @@ TValue* chaos_resolve_managed_value_pointer(CHAOS_IL2CPP_INTPTR chaos_managed_po
 		auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_managed_pointer & ~chaos_managed_pointer_local_slot_tag));
 		if (*chaos_slot == static_cast<CHAOS_IL2CPP_INTPTR>(0))
 		{
-			*chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new TValue{});
+			*chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NEW_GC(TValue));
 		}
 		return reinterpret_cast<TValue*>(*chaos_slot);
 	}
@@ -999,8 +999,8 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[2] = {
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[2] = {
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Helper_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0u },  // Helper::GetValue
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CalliHelper_RunCalli), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0u },  // CalliHelper::RunCalli
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Helper_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Helper::GetValue
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CalliHelper_RunCalli), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CalliHelper::RunCalli
 };
 
 // Module hotpatch bundle
@@ -1045,6 +1045,11 @@ static void (*kAotMethods[2])() = {
 	reinterpret_cast<void(*)()>(&SnapshotTestFixtures_CalliHelper_RunCalli),
 };
 
+static void (*kBenchmarkWrappers[2])() = {
+	[]() { kAotMethods[0](); },
+	[]() { reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[1])(static_cast<CHAOS_IL2CPP_INTPTR>(0)); },
+};
+
 // Single-method dispatch via hotpatch dispatch table.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
@@ -1052,7 +1057,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
 		return -1;
 	auto& entry = s_hotpatch_entries[chaos_entry_index];
-	if (entry.flags & kHotpatchActive) {
+	if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry) && !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry)) {
 		uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};
 		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 			entry.method_key, __chaos_args, __chaos_ret);
@@ -1068,7 +1073,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
 	CHAOS_IL2CPP_INT32 result = 0;
 	for (int i = 0; i < kAotMethodCount; i++) {
 		auto& entry = s_hotpatch_entries[i];
-		if (entry.flags & kHotpatchActive) {
+	if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry) && !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry)) {
 			uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};
 			chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 				entry.method_key, __chaos_args, __chaos_ret);
@@ -1086,7 +1091,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
 		return -1;
 	auto& entry = s_hotpatch_entries[chaos_entry_index];
-	if (entry.flags & kHotpatchActive) {
+	if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry) && !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry)) {
 		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
 			entry.method_key);
 	} else {
@@ -1102,7 +1107,7 @@ extern "C" double BenchmarkMethod(
 		return -1.0;
 	auto start = std::chrono::steady_clock::now();
 	for (int i = 0; i < iterations; i++) {
-		kAotMethods[chaos_entry_index]();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	auto end = std::chrono::steady_clock::now();
 	return std::chrono::duration<double, std::milli>(

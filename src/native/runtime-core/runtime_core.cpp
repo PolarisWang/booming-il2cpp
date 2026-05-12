@@ -84,7 +84,7 @@ using namespace chaos::il2cpp::runtime_capability;
 namespace {
 
 constexpr CHAOS_IL2CPP_UINT64 kDateTimeTicksMask = 0x3FFFFFFFFFFFFFFFull;
-// struct ManagedExceptionCarrier is declared in runtime_core.h and used as the cold EH payload.
+// chaos_managed_exception (declared in generated_code_compat.h) is used as the cold EH payload.
 
 // ── A5-Trinity Object Header Layouts ────────────────────────────
 // Three header kinds discriminated by TypeInfoHot.flags[1:0]:
@@ -1246,9 +1246,9 @@ void CHAOS_RUNTIME_ABI_CALL RaiseManagedException(
         return;
     }
 
-    throw ManagedExceptionCarrier
+    throw chaos_managed_exception
     {
-        exception,
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(exception),
     };
 }
 
@@ -1395,9 +1395,9 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL MethodInvoke(
         }
 
         return CHAOS_RUNTIME_STATUS_OK;
-    } catch (const ManagedExceptionCarrier& carrier) {
+    } catch (const chaos_managed_exception& carrier) {
         if (out_exception != nullptr) {
-            *out_exception = carrier.exception;
+            *out_exception = reinterpret_cast<ExceptionHandle>(carrier.object_value);
         }
 
         return CHAOS_RUNTIME_STATUS_MANAGED_EXCEPTION;

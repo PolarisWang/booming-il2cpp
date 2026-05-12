@@ -52,9 +52,6 @@ public:
     uint32_t TokenToSlot(uint32_t module_id, uint32_t token) const noexcept;
 
     // ── Dispatch entry access ──────────────────────────────────────
-    // Legacy: global token scan (deprecated for multi-DLL, kept for backward compat).
-    // Non-const because it updates the single-entry token→module cache.
-    HotpatchEntryV0* GetDispatchEntry(uint32_t token) noexcept;
     // Module-scoped lookup (preferred — no token collision).
     HotpatchEntryV0* GetDispatchEntry(uint32_t module_id, uint32_t token) const noexcept;
     HotpatchEntryV0* GetDispatchEntryBySlot(size_t module_index, uint32_t slot) const noexcept;
@@ -62,9 +59,6 @@ public:
     // ── Patch management ────────────────────────────────────────────
     // Module-scoped patch: set/unset patch on (module_id, slot) — O(1).
     void SetPatchedBySlot(uint32_t module_id, uint32_t slot, bool patched, void* method_key) noexcept;
-
-    // Legacy fallback: global token lookup (may cause collisions with 200+ DLLs).
-    void SetPatched(uint32_t token, bool patched, void* method_key) noexcept;
 
 private:
     std::vector<const HotpatchModuleV0*> modules_;
@@ -77,12 +71,6 @@ private:
 
     // Build cache entries for one module (called from RegisterModule).
     void BuildLookupCacheForModule(const HotpatchModuleV0* mod, size_t module_index) noexcept;
-
-    // Single-entry token→module cache: avoids re-scanning all modules.
-    mutable uint32_t token_cache_key_ = 0;
-    mutable size_t   token_cache_value_ = ~static_cast<size_t>(0);
-
-    size_t FindModuleForToken(uint32_t token) const noexcept;
 
     static int CompareTypeName(const void* key, const void* elem) noexcept;
     static int CompareTokenSlot(const void* key, const void* elem) noexcept;
@@ -106,7 +94,41 @@ inline HotpatchEntryV0* HotpatchLookupBySlot(size_t module_index, uint32_t slot)
     return GetHotpatchNameRegistry().GetDispatchEntryBySlot(module_index, slot);
 }
 
-void* HotpatchCallViaSlot(uint32_t module_index, uint32_t slot, void* args_buf, void* ret) noexcept;
+// ── Composite key helpers ─────────────────────────────────────────────
+//
+// LookupMethod returns a composite key: (module_index << 32) | token.
+// These helpers extract the components safely and consistently.
+inline uint32_t ExtractModuleId(uint64_t composite_key) noexcept {
+    return static_cast<uint32_t>(composite_key >> 32);
+}
+
+inline uint32_t ExtractToken(uint64_t composite_key) noexcept {
+    return static_cast<uint32_t>(composite_key & 0xFFFFFFFFu);
+}
+
+// ── Hotpatch dispatch condition helpers ──────────────────────────────
+//
+// These helpers provide acquire-fence-protected reads of the dispatch
+// entry flags field.  The fence pairs with the release fence in
+// SetPatchedBySlot (which uses _InterlockedOr for flags writes).
+//
+// Without the acquire fence, a reader on ARM64 could see kHotpatchActive=1
+// but method_key=0 (stale value) — the data race described in S1 of the
+// architecture risk audit.
+//
+// Usage (emitted by codegen at every dispatch point):
+//   if (HotpatchIsActive(entry) && !HotpatchShouldKeepNative(entry))
+//       InterpreterEntryDirect(entry.method_key, ...);
+//   else
+//       entry.direct_ptr(...);
+inline bool HotpatchIsActive(const HotpatchEntryV0& entry) noexcept {
+    std::atomic_thread_fence(std::memory_order_acquire);
+    return (entry.flags & kHotpatchActive) != 0;
+}
+
+inline bool HotpatchShouldKeepNative(const HotpatchEntryV0& entry) noexcept {
+    return (entry.flags & kHotpatchKeepNative) != 0;
+}
 
 }  // namespace chaos::il2cpp::runtime_core
 

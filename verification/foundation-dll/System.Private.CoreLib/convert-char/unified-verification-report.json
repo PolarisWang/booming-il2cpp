@@ -1,10 +1,10 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "mode": "standard",
-  "timestamp": "2026-05-11T21:55:53",
-  "duration_ms": 15863,
-  "overall_status": "partial",
+  "mode": "strict",
+  "timestamp": "2026-05-13T00:29:10",
+  "duration_ms": 17539,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -17,35 +17,32 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "entry.exe build failed",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_entrypoint": "OK",
-          "convert_to_cpp": "OK",
-          "build_entry_exe": "FAILED"
-        }
+        "methodCount": 18,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint\\build-output\\ConvertCharNativeEntry.dll"
       },
       "errors": [],
-      "duration_ms": 9651
+      "duration_ms": 16679
     },
     "fact": {
       "stage": "fact",
       "status": "passed",
-      "summary": "Fact verify=passed (18/18)",
+      "summary": "Fact verify=passed (19/19)",
       "details": {
         "fact": {
           "status": "passed",
-          "passed": 18,
-          "total": 18
+          "passed": 19,
+          "total": 19
         }
       },
       "errors": [],
-      "duration_ms": 30
+      "duration_ms": 35
     },
     "audit": {
       "stage": "audit",
@@ -59,50 +56,34 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 163
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "failed",
-      "summary": "matchedCount=0/18 below threshold 50%",
-      "details": {
-        "averageSpeedupPercent": 0.0,
-        "nativeFasterCount": 0,
-        "managedFasterCount": 0,
-        "matchedCount": 0,
-        "totalMethods": 18,
-        "invalidCount": 18,
-        "benchmarkQuality": "matchedCount=0/18 below threshold 50%"
-      },
-      "errors": [],
-      "duration_ms": 2485
+      "duration_ms": 155
     },
     "hotupdate": {
       "stage": "hotupdate",
-      "status": "failed",
-      "summary": "HotUpdate returned 0 total — no verification performed",
+      "status": "passed",
+      "summary": "19/19 passed, 0 failed (stub=0)",
       "details": {
-        "passedMethods": 0,
+        "passedMethods": 19,
         "failedMethods": 0,
-        "totalMethods": 0,
-        "realMethods": 0,
+        "totalMethods": 19,
+        "realMethods": 19,
         "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 193
+      "duration_ms": 26
     },
     "post_hotupdate_benchmark": {
       "stage": "post_hotupdate_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (interpreter path — expected)",
+      "summary": "avg_slowdown=19463.3% (195.6x) over 15 methods (interpreter path — expected)",
       "details": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
+        "averageSlowdownPercent": 19463.3,
+        "slowdownFactor": 195.63299999999998,
         "threshold": 50.0,
-        "nonStubMethods": 0
+        "nonStubMethods": 15
       },
       "errors": [],
-      "duration_ms": 3339
+      "duration_ms": 640
     }
   },
   "coverage": {

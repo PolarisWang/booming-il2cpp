@@ -840,6 +840,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				builder.AppendLine($"{indentation}    auto* chaos_object = reinterpret_cast<{GetNativeTypeSymbol(declaringTypeSubjectId)}*>({ConsumeEvalStackValueExpression()});");
 				builder.AppendLine($"{indentation}    chaos_object->{GetNativeFieldMemberName(targetRef.SubjectId)} = chaos_value;");
+				builder.AppendLine($"{indentation}    chaos::il2cpp::runtime_core::DirtyCard(chaos_object);");
 			}
 
 			builder.AppendLine($"{indentation}}}");
@@ -1298,6 +1299,7 @@ public sealed partial class NativeAotLoweringPlanner
 			if (isReferenceElement)
 			{
 				builder.AppendLine($"{indentation}    GC_END_STUBBORN_CHANGE(chaos_array);");
+				builder.AppendLine($"{indentation}    chaos::il2cpp::runtime_core::DirtyCard(chaos_array);");
 			}
 		builder.AppendLine($"{indentation}}}");
 	}
@@ -2051,6 +2053,36 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
 		string paramTypes = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
+
+		// When a DirectNativeSymbol is available, emit a direct function call
+		// instead of an indirect dispatch table call. This enables:
+		//   1. Compiler inlining (the call is a known symbol at compile time)
+		//   2. No function pointer dereference overhead
+		//   3. Better code generation (the compiler sees the full call graph)
+		if (invocationTarget.DirectNativeSymbol is { } nativeSymbol)
+		{
+			builder.AppendLine($"{indentation}{{");
+			for (int i = invocationTarget.ParameterAbis.Count - 1; i >= 0; i--)
+			{
+				builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {ConsumeEvalStackValueExpression()};");
+				builder.AppendLine(invocationTarget.RawArgumentIndices.Contains(i)
+					? $"{indentation}    const auto chaos_arg_{i} = chaos_raw_arg_{i};"
+					: $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[i], $"chaos_raw_arg_{i}")};");
+			}
+			string directNativeArgs = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
+			if (string.Equals(returnType, "void", StringComparison.Ordinal))
+			{
+				builder.AppendLine($"{indentation}    {nativeSymbol}({directNativeArgs});");
+			}
+			else
+			{
+				builder.AppendLine($"{indentation}    const auto chaos_result = {nativeSymbol}({directNativeArgs});");
+				EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_result", indentation + "    ");
+			}
+			builder.AppendLine($"{indentation}}}");
+			return;
+		}
+
 		string fnType = string.IsNullOrEmpty(paramTypes)
 			? $"{returnType}(*)()"
 			: $"{returnType}(*)({paramTypes})";
@@ -2159,7 +2191,8 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine($"{indentation}    {returnType} _d_hpresult{{}};");
 		}
-		builder.AppendLine($"{indentation}    if (_d{dispatchSlotIndex}.flags & kHotpatchActive)");
+		builder.AppendLine($"{indentation}    if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d{dispatchSlotIndex})");
+			builder.AppendLine($"{indentation}        && !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d{dispatchSlotIndex}))");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        alignas(16) uint8_t _d_ab[{argBufferSize}];");
 		builder.AppendLine($"{indentation}        ArgBuffer _d_bw(_d_ab);");
@@ -2267,6 +2300,19 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitLinearLoadStringLiteral(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
 		string requiredStringOperand = GetRequiredStringOperand(instruction);
+
+		// When StringId mapping is available, emit a tagged StringId (zero allocation).
+		// The runtime string_table resolves it, and all downstream consumers
+		// (stfld, stind.ref, stelem.ref, delegate invoke, external runtime helpers)
+		// already materialize StringId via chaos_string_materialize() or handle it internally.
+		if (_stringIdMapping is { Count: > 0 } && TryGetStringId(requiredStringOperand, out _))
+		{
+			builder.AppendLine($"{indentation}{{{{");
+			EmitEvalStackPush(builder, indentation + "    ", $"CHAOS_IL2CPP_STRING_ID({ToCppStringLiteral(requiredStringOperand)})");
+			builder.AppendLine($"{indentation}}}}}");
+			return;
+		}
+
 		StringBuilder stringBuilder = builder;
 		StringBuilder stringBuilder2 = stringBuilder;
 		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(1, 1, stringBuilder);

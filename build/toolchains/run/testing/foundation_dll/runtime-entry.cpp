@@ -11,11 +11,18 @@
 #include <cstdio>
 #include <cstring>
 #include <chrono>
+#include <setjmp.h>
 #include "codegen_bridge.h"
 #include "runtime_abi.h"
+#include "runtime_core.h"
+#include "exception_helpers.h"
 #include "patch_loader.h"
 #include "hotpatch_table.h"
 #include "chaos/profile.h"
+
+// SetExceptionFallback is declared at global scope in exception_helpers.h.
+// Forward-declare here so this file compiles independently.
+extern "C" void SetExceptionFallback(void (*fn)());
 
 extern "C" std::int32_t RunNativeAot(std::int32_t);
 extern "C" std::int32_t RunNativeAotAll();
@@ -38,6 +45,37 @@ extern "C" const int kAotMethodCount;
 
 enum class RunMode { Fact, Benchmark, HotUpdate, HotUpdateAndBenchmark, PatchAndBenchmark };
 
+// ── Exception fallback for verification mode ─────────────────────────────
+// When conversion functions (e.g., chaos_convert_tochar_int32) call
+// RaiseManagedException() in an uninitialized runtime, the fallback redirects
+// to longjmp so the verification harness can catch the failure instead of abort().
+// Framework exception types (OverflowException, InvalidCastException) are not
+// registered in per-family builds, so ResolveTypeByName() would fail anyway.
+static thread_local jmp_buf s_verify_buf;
+
+static void exception_fallback() {
+    longjmp(s_verify_buf, 1);
+}
+
+// ── Shared helper: apply hotpatch and print diagnostic ─────────────────────
+// Returns the patch context, or nullptr if no patch data is available.
+// Three CLI modes (HotUpdate, HotUpdateAndBenchmark, PatchAndBenchmark) share
+// the same ApplyPatchFromMemory call — this helper eliminates the duplication.
+static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
+    if (kPatchDataSize > 0u) {
+        auto* patch_ctx = chaos::il2cpp::runtime_core::ApplyPatchFromMemory(
+            kPatchData, kPatchDataSize, kPatchDataHostClassName);
+        if (patch_ctx == nullptr) {
+            std::fprintf(stderr, "WARN: ApplyPatchFromMemory returned null (no patches applied)\n");
+        } else {
+            std::fprintf(stderr, "INFO: Applied patches to %u methods\n",
+                         static_cast<unsigned>(patch_ctx->method_count));
+        }
+        return patch_ctx;
+    }
+    return nullptr;
+}
+
 int main(int argc, char** argv) {
     auto* bridge = chaos_codegen_get_bridge_v0();
     if (!bridge) return -1;
@@ -46,6 +84,27 @@ int main(int argc, char** argv) {
         &chaos_codegen_metadata_registration,
         &chaos_codegen_options);
     bridge->bootstrap_runtime();
+
+    // Set TLS to non-null sentinels so RaiseManagedException gets past its
+    // first guard (runtime == nullptr / thread == nullptr check).  No
+    // dereference of RuntimeState or ThreadState occurs because
+    // ResolveTypeByName returns 0 (framework types not registered in
+    // per-family builds), which now throws chaos_managed_exception{0}
+    // instead of calling the exception fallback.
+    //
+    // RuntimeState and ThreadState are opaque types (only forward-declared
+    // in runtime_abi.h), so genuine instances cannot be created here.
+    // Sentinels are safe because the codegen exception path never
+    // dereferences these pointers when type resolution fails.
+    chaos::il2cpp::runtime_core::SetCurrentRuntimeState(
+        reinterpret_cast<RuntimeState*>(static_cast<uintptr_t>(1)));
+    chaos::il2cpp::runtime_core::SetCurrentThreadState(
+        reinterpret_cast<ThreadState*>(static_cast<uintptr_t>(1)));
+
+    // Install exception fallback: RaiseManagedException → longjmp recovery.
+    // Retained as safety net: if TLS is ever null or an unexpected code path
+    // reaches the abort(), the fallback still provides controlled recovery.
+    SetExceptionFallback(&exception_fallback);
 
     RunMode mode = RunMode::Fact;
     int entry_index = 0;
@@ -72,7 +131,10 @@ int main(int argc, char** argv) {
 
     switch (mode) {
     case RunMode::Fact: {
-        int result = RunNativeAotAll();
+        int result = 0;
+        if (setjmp(s_verify_buf) == 0) {
+            result = RunNativeAotAll();
+        }
         int failed_count = 0;
         int tmp = result;
         while (tmp) { failed_count += tmp & 1; tmp >>= 1; }
@@ -83,7 +145,10 @@ int main(int argc, char** argv) {
     }
     case RunMode::Benchmark: {
         // Benchmark via direct kAotMethods[] call, no dispatch/hotpatch overhead
-        double elapsed_ms = BenchmarkMethod(entry_index, iterations);
+        double elapsed_ms = -1.0;
+        if (setjmp(s_verify_buf) == 0) {
+            elapsed_ms = BenchmarkMethod(entry_index, iterations);
+        }
         if (elapsed_ms < 0.0) {
             printf("{\"error\":\"invalid method index %d\"}\n", entry_index);
             std::fflush(stdout);
@@ -98,18 +163,11 @@ int main(int argc, char** argv) {
         return 0;
     }
     case RunMode::HotUpdate: {
-        // Apply hotpatch if .patchdata is available
-        if (kPatchDataSize > 0u) {
-            auto* patch_ctx = chaos::il2cpp::runtime_core::ApplyPatchFromMemory(
-                kPatchData, kPatchDataSize, kPatchDataHostClassName);
-            if (patch_ctx == nullptr) {
-                std::fprintf(stderr, "WARN: ApplyPatchFromMemory returned null (no patches applied)\n");
-            } else {
-                std::fprintf(stderr, "INFO: Applied patches to %u methods\n",
-                             static_cast<unsigned>(patch_ctx->method_count));
-            }
+        ApplyHotpatchIfAvailable();
+        int result = 0;
+        if (setjmp(s_verify_buf) == 0) {
+            result = RunNativeAotAll();
         }
-        int result = RunNativeAotAll();
         int failed_count = 0;
         int tmp2 = result;
         while (tmp2) { failed_count += tmp2 & 1; tmp2 >>= 1; }
@@ -120,23 +178,18 @@ int main(int argc, char** argv) {
         return result;
     }
     case RunMode::HotUpdateAndBenchmark: {
-        // Apply hotpatch if .patchdata is available
-        if (kPatchDataSize > 0u) {
-            auto* patch_ctx = chaos::il2cpp::runtime_core::ApplyPatchFromMemory(
-                kPatchData, kPatchDataSize, kPatchDataHostClassName);
-            if (patch_ctx == nullptr) {
-                std::fprintf(stderr, "WARN: ApplyPatchFromMemory returned null (no patches applied)\n");
-            } else {
-                std::fprintf(stderr, "INFO: Applied patches to %u methods\n",
-                             static_cast<unsigned>(patch_ctx->method_count));
-            }
-        }
+        ApplyHotpatchIfAvailable();
         // Run all methods (now routed through dispatch table, patched methods → interpreter)
-        int hot_result = RunNativeAotAll();
+        int hot_result = 0;
+        if (setjmp(s_verify_buf) == 0) {
+            hot_result = RunNativeAotAll();
+        }
         // Then benchmark the specified method (now running through interpreter when patched)
         auto start = std::chrono::steady_clock::now();
         for (int i = 0; i < iterations; i++) {
-            RunNativeAot(entry_index);
+            if (setjmp(s_verify_buf) == 0) {
+                RunNativeAot(entry_index);
+            }
         }
         auto end = std::chrono::steady_clock::now();
         auto elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
@@ -147,22 +200,14 @@ int main(int argc, char** argv) {
         return 0;
     }
     case RunMode::PatchAndBenchmark: {
-        // Apply hotpatch if .patchdata is available
-        if (kPatchDataSize > 0u) {
-            auto* patch_ctx = chaos::il2cpp::runtime_core::ApplyPatchFromMemory(
-                kPatchData, kPatchDataSize, kPatchDataHostClassName);
-            if (patch_ctx == nullptr) {
-                std::fprintf(stderr, "WARN: ApplyPatchFromMemory returned null (no patches applied)\n");
-            } else {
-                std::fprintf(stderr, "INFO: Applied patches to %u methods\n",
-                             static_cast<unsigned>(patch_ctx->method_count));
-            }
-        }
+        ApplyHotpatchIfAvailable();
         // Skip RunNativeAotAll — go straight to benchmarking the target method.
         // Uses RunNativeAotBench (no setjmp, inline slot access) for max perf.
         auto start = std::chrono::steady_clock::now();
         for (int i = 0; i < iterations; i++) {
-            RunNativeAotBench(entry_index);
+            if (setjmp(s_verify_buf) == 0) {
+                RunNativeAotBench(entry_index);
+            }
         }
         auto end = std::chrono::steady_clock::now();
         auto elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();

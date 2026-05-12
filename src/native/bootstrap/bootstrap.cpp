@@ -21,6 +21,9 @@
 // extern "C" inside function body: C2598).
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
 
+// Declared in interpreter_entry.cpp — file scope for the same reason.
+extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept;
+
 namespace chaos::il2cpp::bootstrap {
 
 namespace {
@@ -295,7 +298,6 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
     // to its direct function pointer via the hotpatch name registry, which has
     // just been populated with all registered modules' dispatch tables.
     // Must happen AFTER RegisterHotpatchModule, BEFORE is_bootstrapped = true.
-    extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept;
     ChaosResolveExternalRuntimeFnTable();
 
     // The AOT module registers its string table via a static initializer in the
@@ -550,9 +552,9 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL InvokeVirtual(
                 return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
         }
         return CHAOS_BRIDGE_STATUS_OK;
-    } catch (const chaos::il2cpp::runtime_core::ManagedExceptionCarrier& carrier) {
+    } catch (const chaos_managed_exception& carrier) {
         if (out_exception != nullptr) {
-            *out_exception = carrier.exception;
+            *out_exception = reinterpret_cast<ExceptionHandle>(carrier.object_value);
         }
 
         return CHAOS_BRIDGE_STATUS_MANAGED_EXCEPTION;
@@ -783,9 +785,9 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL DelegateInvoke(
             delegate_handle = delegate_handle->next;
         }
         return CHAOS_BRIDGE_STATUS_OK;
-    } catch (const chaos::il2cpp::runtime_core::ManagedExceptionCarrier& carrier) {
+    } catch (const chaos_managed_exception& carrier) {
         if (out_exception != nullptr) {
-            *out_exception = carrier.exception;
+            *out_exception = reinterpret_cast<ExceptionHandle>(carrier.object_value);
         }
         return CHAOS_BRIDGE_STATUS_MANAGED_EXCEPTION;
     }

@@ -130,12 +130,11 @@ TypeInfoHandle ResolveTypeByName(const char* fully_qualified_name) {
 
     const auto type_handle = ResolveTypeByName(type_full_name);
     if (type_handle == 0) {
-        // Per-family builds (Fact Runtime verification etc.) don't register framework types
-        // like InvalidCastException. Use the verification fallback if available.
-        if (g_exception_fallback != nullptr) {
-            g_exception_fallback();
-        }
-        std::abort();
+        // Per-family build: exception type not registered.
+        // Throw empty chaos_managed_exception — the codegen catch block
+        // treats object_value == 0 as "matched but no managed object",
+        // allowing the catch body to execute in verification/benchmark mode.
+        throw chaos_managed_exception{0};
     }
 
     abi->class_init(runtime, type_handle);

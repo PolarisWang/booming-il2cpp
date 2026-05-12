@@ -61,9 +61,6 @@ RuntimeState* GetCurrentRuntimeState();
 void SetCurrentThreadState(ThreadState* thread_state);
 ThreadState* GetCurrentThreadState();
 
-struct ManagedExceptionCarrier {
-    ExceptionHandle exception;
-};
 
 using EngineLifecycleCallback = void (*)(const char* phase_utf8, void* user_data);
 using FinalizerCallback = void (*)(void* object_instance);

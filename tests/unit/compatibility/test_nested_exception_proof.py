@@ -97,7 +97,7 @@ class NestedExceptionProofTests(unittest.TestCase):
         self.assertIn("TryCreateNestedExceptionLoweringPlan(", planner_source)
         self.assertIn("NativeReferenceProofCatalog.NestedExceptionThrowCatchFinallyMinimal", emitter_source)
         self.assertIn("case NestedExceptionThrowCatchFinallyMinimal:", emitter_source)
-        self.assertIn("ManagedExceptionCarrier", template_source)
+        self.assertIn("chaos_managed_exception", template_source)
         self.assertIn("Nested EH inner finally.", template_source)
         self.assertIn("Nested EH outer finally.", template_source)
 

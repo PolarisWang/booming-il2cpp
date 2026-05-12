@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -72,13 +73,19 @@ public sealed partial class NativeAotLoweringPlanner
 		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
 
 
-    private StringBuilder _sharedMethodSourceBuilder = new(4096);
-
     private IReadOnlyList<IGrouping<string, AotCoreIrMethodArtifact>> _methodsGroupedByDeclaringType =
         Array.Empty<IGrouping<string, AotCoreIrMethodArtifact>>();
 
     private IReadOnlyList<AotCoreIrMethodArtifact> _genericStaticMethodCandidates =
         Array.Empty<AotCoreIrMethodArtifact>();
+
+    // ── Pre-built O(1) indexes for invocation planning ──
+    private Dictionary<string, AotCoreIrMethodArtifact> _asyncMoveNextMethods =
+        new(StringComparer.Ordinal);
+    private HashSet<string> _allDeclaringTypeSubjectIds =
+        new(StringComparer.Ordinal);
+    private Dictionary<string, List<AotCoreIrMethodArtifact>> _methodsByDeclaringType =
+        new(StringComparer.Ordinal);
 
     private IReadOnlyDictionary<string, int>? _vtableSlotMap;
     private IReadOnlyDictionary<string, int>? _vtableLengths;
@@ -274,24 +281,43 @@ public sealed partial class NativeAotLoweringPlanner
             .Where(c => c.IsStatic && c.ParameterCount == 1 && c.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt && c.ParameterAbis.Count == 1 && c.ParameterAbis[0].CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt && c.SubjectId.Contains("!!0", StringComparison.Ordinal))
             .OrderBy(c => c.SubjectId, StringComparer.Ordinal)
             .ToArray();
+
+        // ── Build pre-computed O(1) indexes for invocation planning ──
+        _asyncMoveNextMethods = BuildAsyncMoveNextIndex(_methodsBySubjectId);
+        _allDeclaringTypeSubjectIds = BuildAllDeclaringTypeSubjectIds(
+            _methodsBySubjectId, _referenceTypeBaseSubjectIds, _referenceTypeImplementedInterfaceSubjectIds);
+        _methodsByDeclaringType = BuildMethodsByDeclaringTypeIndex(_methodsBySubjectId);
         CustomAttributeSupportModel? customAttributeSupport = null;
         AssemblyReflectionSupportModel? assemblyReflectionSupport = null;
         ReflectionMemberSupportModel? reflectionMemberSupport = null;
         StaticFieldDataSupportModel? staticFieldDataSupport = null;
 
-        Parallel.Invoke(
-            () => customAttributeSupport = BuildCustomAttributeSupportModel(
-                methodsForLowering,
-                supplementalMetadataTemplate),
-            () => assemblyReflectionSupport = BuildAssemblyReflectionSupportModel(
-                methodsForLowering,
-                supplementalMetadataTemplate),
-            () => reflectionMemberSupport = BuildReflectionMemberSupportModel(
-                methodsForLowering,
-                supplementalMetadataTemplate),
-            () => staticFieldDataSupport = BuildStaticFieldDataSupportModel(
-                methodsForLowering,
-                metadataRegistration));
+        try
+        {
+            Parallel.Invoke(
+                () => customAttributeSupport = BuildCustomAttributeSupportModel(
+                    methodsForLowering,
+                    supplementalMetadataTemplate),
+                () => assemblyReflectionSupport = BuildAssemblyReflectionSupportModel(
+                    methodsForLowering,
+                    supplementalMetadataTemplate),
+                () => reflectionMemberSupport = BuildReflectionMemberSupportModel(
+                    methodsForLowering,
+                    supplementalMetadataTemplate),
+                () => staticFieldDataSupport = BuildStaticFieldDataSupportModel(
+                    methodsForLowering,
+                    metadataRegistration));
+        }
+        catch (AggregateException ae)
+        {
+            // Rethrow the first inner exception preserving the original stack trace
+            // using ExceptionDispatchInfo so the root cause is debuggable.
+            if (ae.InnerExceptions.Count == 1)
+                ExceptionDispatchInfo.Capture(ae.InnerExceptions[0]).Throw();
+            throw new AggregateException(
+                "Parallel model build failed with multiple exceptions:",
+                ae.InnerExceptions);
+        }
 
         _customAttributeSupport = customAttributeSupport!;
         _assemblyReflectionSupport = assemblyReflectionSupport!;
@@ -446,6 +472,14 @@ public sealed partial class NativeAotLoweringPlanner
                 "\"runtime_instantiation.h\"",
                 "\"reflection_query_model.h\"",
                 "\"load_store_chaos_bridge.h\"",
+                // Native bridge headers (e.g., "convert.h") from external runtime
+                // helpers that map to direct native function calls.
+                ..externalRuntimeHelpers
+                    .Select(h => h.DirectNativeHeader)
+                    .Where(h => !string.IsNullOrEmpty(h))
+                    .Distinct(StringComparer.Ordinal)
+                    .Cast<string>()
+                    .ToArray(),
             ],
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
             GenericRegistrationCode = genericRegistrationHelperCode,
@@ -628,6 +662,8 @@ public sealed partial class NativeAotLoweringPlanner
         catch (Exception ex) when (ex is IOException or InvalidOperationException or BadImageFormatException)
         {
             // Graceful fallback: Tier 0 arrays remain empty (code emits nullptr)
+            System.Console.Error.WriteLine(
+                $"[warning] CollectModuleTypeData: failed to read assembly metadata from '{assemblyPath}': {ex.GetType().Name}: {ex.Message}");
             _moduleTypeCount = 0;
             _moduleTypeFlags.Clear();
             _moduleTypeNames.Clear();
@@ -745,13 +781,71 @@ public sealed partial class NativeAotLoweringPlanner
     /// Only methods with metadata tokens are included (the only ones
     /// that appear in s_hotpatch_entries).
     /// </summary>
+    // ── Pre-computed O(1) index builders for invocation planning ──
+
+    private static Dictionary<string, AotCoreIrMethodArtifact> BuildAsyncMoveNextIndex(
+        IReadOnlyDictionary<string, AotCoreIrMethodArtifact> methodsBySubjectId)
+    {
+        var index = new Dictionary<string, AotCoreIrMethodArtifact>(StringComparer.Ordinal);
+        foreach (var method in methodsBySubjectId.Values)
+        {
+            if (!method.IsStatic &&
+                string.Equals(GetMethodName(method.SubjectId), "MoveNext", StringComparison.Ordinal))
+            {
+                index[method.Identity.DeclaringTypeSubjectId] = method;
+            }
+        }
+        return index;
+    }
+
+    private static HashSet<string> BuildAllDeclaringTypeSubjectIds(
+        IReadOnlyDictionary<string, AotCoreIrMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string?> referenceTypeBaseSubjectIds,
+        IReadOnlyDictionary<string, HashSet<string>> referenceTypeImplementedInterfaceSubjectIds)
+    {
+        var capacity = referenceTypeBaseSubjectIds.Count
+            + referenceTypeImplementedInterfaceSubjectIds.Count
+            + methodsBySubjectId.Count;
+        var index = new HashSet<string>(capacity, StringComparer.Ordinal);
+        foreach (var key in referenceTypeBaseSubjectIds.Keys)
+            index.Add(key);
+        foreach (var key in referenceTypeImplementedInterfaceSubjectIds.Keys)
+            index.Add(key);
+        foreach (var method in methodsBySubjectId.Values)
+        {
+            var declaringType = method.Identity.DeclaringTypeSubjectId;
+            if (!string.IsNullOrEmpty(declaringType))
+                index.Add(declaringType);
+        }
+        return index;
+    }
+
+    private static Dictionary<string, List<AotCoreIrMethodArtifact>> BuildMethodsByDeclaringTypeIndex(
+        IReadOnlyDictionary<string, AotCoreIrMethodArtifact> methodsBySubjectId)
+    {
+        var index = new Dictionary<string, List<AotCoreIrMethodArtifact>>(StringComparer.Ordinal);
+        foreach (var method in methodsBySubjectId.Values)
+        {
+            var declaringType = method.Identity.DeclaringTypeSubjectId;
+            if (string.IsNullOrEmpty(declaringType))
+                continue;
+            if (!index.TryGetValue(declaringType, out var list))
+            {
+                list = new List<AotCoreIrMethodArtifact>();
+                index[declaringType] = list;
+            }
+            list.Add(method);
+        }
+        return index;
+    }
+
     private Dictionary<string, int> BuildDispatchSlotMap(
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
         MetadataRegistrationArtifact metadataRegistration)
     {
         var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);
 
-        var entries = new List<(string TypeName, string NativeSymbol, uint Token)>();
+        var entries = new List<(string TypeName, string TypeNamespace, string NativeSymbol, uint Token)>();
         foreach (var method in reachableMethods)
         {
             string typeSubjectId;
@@ -765,17 +859,19 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             var typeName = GetTypeDisplayName(typeSubjectId);
+            var typeNamespace = GetTypeNamespace(typeSubjectId);
             uint token = tokenLookup.TryGetMethodToken(method.SubjectId);
             if (token == 0)
                 continue;
 
-            entries.Add((typeName, method.NativeSymbol, token));
+            entries.Add((typeName, typeNamespace, method.NativeSymbol, token));
         }
 
-        // Same grouping + sort as BuildHotpatchTable
+        // Same grouping + sort as BuildHotpatchTable: group by (TypeNamespace, TypeName)
         var grouped = entries
-            .GroupBy(e => e.TypeName, StringComparer.Ordinal)
-            .OrderBy(g => g.Key, StringComparer.Ordinal)
+            .GroupBy(e => (e.TypeNamespace, e.TypeName))
+            .OrderBy(g => g.Key.TypeNamespace, StringComparer.Ordinal)
+            .ThenBy(g => g.Key.TypeName, StringComparer.Ordinal)
             .ToList();
 
         var result = new Dictionary<string, int>(entries.Count, StringComparer.Ordinal);
@@ -858,8 +954,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     private string BuildMethodSource(AotCoreIrMethodArtifact method)
     {
-        _sharedMethodSourceBuilder.Clear();
-        var builder = _sharedMethodSourceBuilder;
+        var builder = new StringBuilder(4096);
         if (!string.IsNullOrWhiteSpace(method.OpenDefinitionSubjectId) ||
             method.SharedGenericBodyId is not null ||
             method.InstantiationStubId is not null ||
@@ -2308,6 +2403,32 @@ internal static class NativeAotCustomAttributeTypeNameResolver
 // ── Step 1-3: Dispatch, CodeRegistration structs, ReflectionQueryImage ───────────
 public sealed partial class NativeAotLoweringPlanner
 {
+    // ── Shared hotpatch dispatch condition emission ───────────────────────
+    // All dispatch decision points must use this helper so the condition
+    // (flags check + kHotpatchKeepNative exclusion + acquire fence) is
+    // consistent across all call sites.
+    //
+    // Emits:  if (HotpatchIsActive(entry) && !(entry.flags & kHotpatchKeepNative))
+    //
+    // With kHotpatchMakeActive and kHotpatchKeepNative:
+    //   - kHotpatchActive (bit 0):  method has been patched, interpreter IR is ready
+    //   - kHotpatchKeepNative (bit 1): method uses external runtime dispatch;
+    //     interpreter cannot execute it, keep on native path even when patched
+    private static void EmitHotpatchDispatchCondition(StringBuilder sb, string entryExpr, string indent = "    ")
+    {
+        sb.Append(indent).Append("if (chaos::il2cpp::runtime_core::HotpatchIsActive(")
+          .Append(entryExpr).Append(")")
+          .Append(" && !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(")
+          .Append(entryExpr).Append("))");
+    }
+
+    // ── Shared hotpatch entry reference emission ─────────────────────────
+    private static void EmitHotpatchEntryRef(StringBuilder sb, string entryExpr, string indentation)
+    {
+        sb.Append(indentation).Append("auto& ").Append(entryExpr)
+          .Append(" = s_hotpatch_entries[").Append(entryExpr).Append("];");
+    }
+
     private string BuildDispatchEntryCode(IReadOnlyList<AotCoreIrMethodArtifact> methods)
     {
         if (methods.Count == 0) return string.Empty;
@@ -2325,8 +2446,56 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("};");
         sb.AppendLine();
 
+        // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
+        // Each wrapper supplies default argument values based on parameter types.
+        // String params receive a valid StringId; all others receive 0.
+        ulong defaultStringId = 0;
+        if (_stringIdMapping is { Count: > 0 })
+        {
+            defaultStringId = _stringIdMapping.First().Value;
+        }
+        sb.Append("static void (*kBenchmarkWrappers[")
+            .Append(methods.Count).AppendLine("])() = {");
+        for (int i = 0; i < methods.Count; i++)
+        {
+            var method = methods[i];
+            var ac = method.ParameterCount;
+            sb.Append("    []() { ");
+            if (ac == 0)
+            {
+                sb.Append("kAotMethods[").Append(i).Append("]();");
+            }
+            else
+            {
+                sb.Append("reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR");
+                for (int j = 1; j < ac; j++)
+                {
+                    sb.Append(", CHAOS_IL2CPP_INTPTR");
+                }
+                sb.Append(")>(kAotMethods[").Append(i).Append("])(");
+                for (int j = 0; j < ac; j++)
+                {
+                    if (j > 0) sb.Append(", ");
+                    var abi = j < method.ParameterAbis.Count ? method.ParameterAbis[j] : null;
+                    if (abi != null && IsStringParameterSlot(abi) && defaultStringId != 0)
+                    {
+                        sb.Append("chaos_make_string_id_value(").Append(defaultStringId).Append("ULL)");
+                    }
+                    else
+                    {
+                        sb.Append("static_cast<CHAOS_IL2CPP_INTPTR>(0)");
+                    }
+                }
+                sb.Append(");");
+            }
+            sb.AppendLine(" },");
+        }
+        sb.AppendLine("};");
+        sb.AppendLine();
+
         // RunNativeAot: single-method dispatch via s_hotpatch_entries[].
-        // When kHotpatchActive is set, routes through InterpreterEntryDirect (interpreter path).
+        // When kHotpatchActive is set (and kHotpatchKeepNative is NOT set),
+        // routes through InterpreterEntryDirect (interpreter path).
         // Otherwise calls direct_ptr directly (AOT native path).
         sb.AppendLine("// Single-method dispatch via hotpatch dispatch table.");
         sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 RunNativeAot(");
@@ -2335,7 +2504,8 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)");
         sb.AppendLine("        return -1;");
         sb.AppendLine("    auto& entry = s_hotpatch_entries[chaos_entry_index];");
-        sb.AppendLine("    if (entry.flags & kHotpatchActive) {");
+        EmitHotpatchDispatchCondition(sb, "entry");
+        sb.AppendLine(" {");
         sb.AppendLine("        uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};");
         sb.AppendLine("        chaos::il2cpp::runtime_core::InterpreterEntryDirect(");
         sb.AppendLine("            entry.method_key, __chaos_args, __chaos_ret);");
@@ -2353,7 +2523,8 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("    CHAOS_IL2CPP_INT32 result = 0;");
         sb.AppendLine("    for (int i = 0; i < kAotMethodCount; i++) {");
         sb.AppendLine("        auto& entry = s_hotpatch_entries[i];");
-        sb.AppendLine("        if (entry.flags & kHotpatchActive) {");
+        EmitHotpatchDispatchCondition(sb, "entry");
+        sb.AppendLine(" {");
         sb.AppendLine("            uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};");
         sb.AppendLine("            chaos::il2cpp::runtime_core::InterpreterEntryDirect(");
         sb.AppendLine("                entry.method_key, __chaos_args, __chaos_ret);");
@@ -2373,7 +2544,8 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)");
         sb.AppendLine("        return -1;");
         sb.AppendLine("    auto& entry = s_hotpatch_entries[chaos_entry_index];");
-        sb.AppendLine("    if (entry.flags & kHotpatchActive) {");
+        EmitHotpatchDispatchCondition(sb, "entry");
+        sb.AppendLine(" {");
         sb.AppendLine("        chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(");
         sb.AppendLine("            entry.method_key);");
         sb.AppendLine("    } else {");
@@ -2391,7 +2563,7 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("        return -1.0;");
         sb.AppendLine("    auto start = std::chrono::steady_clock::now();");
         sb.AppendLine("    for (int i = 0; i < iterations; i++) {");
-        sb.AppendLine("        kAotMethods[chaos_entry_index]();");
+        sb.AppendLine("        kBenchmarkWrappers[chaos_entry_index]();");
         sb.AppendLine("    }");
         sb.AppendLine("    auto end = std::chrono::steady_clock::now();");
         sb.AppendLine("    return std::chrono::duration<double, std::milli>(");

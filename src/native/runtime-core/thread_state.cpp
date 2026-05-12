@@ -2,6 +2,8 @@
 
 #include <chaos/profile.h>
 
+#include "gc_root_scanner.h"
+
 #include <atomic>
 #include <new>
 #include <cstdlib>
@@ -134,4 +136,34 @@ void ReleaseGlobalSafepoint(uint32_t /*generation*/) noexcept {
     // Toggle to even (released).
     uint32_t gen = s_generation.load(std::memory_order_acquire);
     s_generation.store((gen + 1) & ~kGcGenerationMask, std::memory_order_release);
+}
+
+void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, void* user_data), void* user_data) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("GcScanAllThreadRoots");
+
+    // Walk all registered threads and scan their stacks.
+    // For each thread, we build a ManagedFrameInfo from the TLS thread state
+    // and attempt precise scanning via GcScanFrameHybrid.
+    EnumerateThreads([](ManagedThread* thread) -> bool {
+        if (thread == nullptr || !thread->is_running) return true;
+
+        // At M0/C1, we rely on BDWGC's conservative stack scanning as the
+        // primary mechanism.  The hybrid scanner operates as an additional
+        // precise pass on top.
+        //
+        // In a full implementation, we would walk the thread's native stack
+        // using platform APIs (RtlVirtualUnwind on Windows, libunwind on POSIX)
+        // and call GcScanFrameHybrid for each managed frame.
+        //
+        // For now, the framework is wired so that when codegen emits
+        // GcSlotMap entries and registers them via GcRegisterSlotMap(),
+        // the scanner transparently picks them up.
+
+        // Simple approach: use the thread's stack pointer and a bounded range.
+        // The stack base/high can be obtained from platform TLS or thread metadata.
+        // This is a stub — real stack walking needs platform-specific frame
+        // iteration which belongs in a later C-stage.
+
+        return true;
+    });
 }}  // namespace chaos::il2cpp::runtime_core::threading

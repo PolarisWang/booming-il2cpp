@@ -1066,7 +1066,7 @@ static bool TestRuntimeMethodTypeParamResolution()
 // Test: Exception propagation matching bridge path.
 // When the interpreter throws an unhandled exception, threw_exception is set
 // and exception_value captures the exception object.
-// The bridge checks threw_exception and throws ManagedExceptionCarrier.
+// The bridge checks threw_exception and throws chaos_managed_exception.
 static bool TestRuntimeMethodExceptionPropagation()
 {
     IRMethod method;

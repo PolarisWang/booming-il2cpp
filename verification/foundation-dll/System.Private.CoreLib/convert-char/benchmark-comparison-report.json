@@ -4,86 +4,141 @@
   "familyId": "family/System.Private.CoreLib/convert/char",
   "summary": {
     "totalMethods": 18,
-    "matchedCount": 0,
+    "matchedCount": 14,
     "unmatchedCount": 0,
-    "invalidCount": 18,
-    "nativeFasterCount": 0,
+    "invalidCount": 4,
+    "jitElidedCount": 0,
+    "nativeFasterCount": 14,
     "managedFasterCount": 0,
     "equalCount": 0,
-    "averageSpeedupPercent": 0.0
+    "averageSpeedupPercent": 92.38
   },
   "methodResults": [
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 126.0438,
+      "nativeElapsedMs": 16.544,
+      "speedupPercent": 86.87
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.2966,
+      "nativeElapsedMs": 0.016,
+      "speedupPercent": 94.61
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.2959,
+      "nativeElapsedMs": 0.016,
+      "speedupPercent": 94.59
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 119.622,
+      "nativeElapsedMs": 16.678,
+      "speedupPercent": 86.06
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 120.7193,
+      "nativeElapsedMs": 0.0,
+      "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 124.6197,
+      "nativeElapsedMs": 16.54,
+      "speedupPercent": 86.73
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.2958,
+      "nativeElapsedMs": 0.018,
+      "speedupPercent": 93.91
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.2951,
+      "nativeElapsedMs": 0.016,
+      "speedupPercent": 94.58
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.2952,
+      "nativeElapsedMs": 0.018,
+      "speedupPercent": 93.9
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.7077,
+      "nativeElapsedMs": 0.016,
+      "speedupPercent": 97.74
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 0,
+      "nativeElapsedMs": 0.018,
+      "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.2996,
+      "nativeElapsedMs": 0.016,
+      "speedupPercent": 94.66
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 122.8228,
+      "nativeElapsedMs": 17.084,
+      "speedupPercent": 86.09
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 0.3164,
+      "nativeElapsedMs": 0.0,
+      "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 0,
+      "nativeElapsedMs": 0.0,
+      "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.2981,
+      "nativeElapsedMs": 0.016,
+      "speedupPercent": 94.63
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.2984,
+      "nativeElapsedMs": 0.016,
+      "speedupPercent": 94.64
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.3171,
+      "nativeElapsedMs": 0.018,
+      "speedupPercent": 94.32
     }
   ]
 }

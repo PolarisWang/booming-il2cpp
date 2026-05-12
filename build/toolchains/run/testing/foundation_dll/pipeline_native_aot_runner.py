@@ -496,7 +496,7 @@ def _inject_config_tier(cmakelists: Path, config_tier: str) -> None:
     text = cmakelists.read_text(encoding="utf-8")
     if marker in text:
         return  # already injected
-    line = f"target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_{config_tier})  {marker}"
+    line = f"target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_{config_tier} CHAOS_RUNTIME_ABI_STATIC)  {marker}"
     # Insert before the closing paren of add_executable or after link libraries
     text = text.replace(
         "target_link_libraries(entry PRIVATE",
@@ -607,6 +607,7 @@ cmake_minimum_required(VERSION 3.20)
 # Strip EH from INIT flags; use CMAKE_MSVC_EXCEPTION_HANDLING instead.
 set(CMAKE_CXX_FLAGS_INIT "/DWIN32 /D_WINDOWS")
 set(CMAKE_MSVC_EXCEPTION_HANDLING "Sync")
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
 project(chaos_gen LANGUAGES CXX)
 
 set(REPO_ROOT "{_REPO_ROOT.as_posix()}")
@@ -645,7 +646,7 @@ add_executable(entry
 )
 
 target_compile_options(entry PRIVATE /GS-)
-target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_${{CHAOS_IL2CPP_CONFIG_TIER}})
+target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_${{CHAOS_IL2CPP_CONFIG_TIER}} CHAOS_RUNTIME_ABI_STATIC)
 
 target_link_libraries(entry PRIVATE
     ${{NATIVE_LIBS}}

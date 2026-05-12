@@ -237,27 +237,18 @@ public sealed partial class NativeAotLoweringPlanner
             return false;
         }
 
-        var matches = _methodsBySubjectId.Values
-            .Where(method =>
-                !method.IsStatic &&
-                CanEmitMethodBody(method) &&
-                string.Equals(GetMethodName(method.SubjectId), "MoveNext", StringComparison.Ordinal) &&
-                GetMethodDeclaringTypeSubjectId(method.SubjectId).EndsWith(stateMachineTypeName, StringComparison.Ordinal))
-            .OrderBy(method => method.SubjectId, StringComparer.Ordinal)
-            .ToArray();
-        if (matches.Length == 0)
+        // O(1) lookup via pre-built MoveNext index, filtered by state-machine type suffix
+        foreach (var kvp in _asyncMoveNextMethods)
         {
-            return false;
+            if (kvp.Key.EndsWith(stateMachineTypeName, StringComparison.Ordinal) &&
+                CanEmitMethodBody(kvp.Value))
+            {
+                continuationMethod = kvp.Value;
+                return true;
+            }
         }
 
-        if (matches.Length > 1)
-        {
-            throw new NotSupportedException(
-                $"native-aot lowering found ambiguous async state-machine MoveNext targets for '{callee}'.");
-        }
-
-        continuationMethod = matches[0];
-        return true;
+        return false;
     }
 
     private bool TryResolveStringJoinEnumerableHelperMethods(
@@ -352,11 +343,11 @@ public sealed partial class NativeAotLoweringPlanner
         string declaringTypeSubjectId,
         Func<AotCoreIrMethodArtifact, bool> predicate)
     {
-        return _methodsBySubjectId.Values
-            .Where(method =>
-                string.Equals(method.Identity.DeclaringTypeSubjectId, declaringTypeSubjectId, StringComparison.Ordinal) &&
-                CanEmitMethodBody(method) &&
-                predicate(method))
+        if (!_methodsByDeclaringType.TryGetValue(declaringTypeSubjectId, out var methods))
+            return null;
+
+        return methods
+            .Where(method => CanEmitMethodBody(method) && predicate(method))
             .OrderBy(method => method.SubjectId, StringComparer.Ordinal)
             .FirstOrDefault();
     }
@@ -547,37 +538,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     private IEnumerable<string> EnumerateVirtualDispatchCandidateTypeSubjectIds()
     {
-        var capacity = _referenceTypeBaseSubjectIds.Count
-            + _referenceTypeImplementedInterfaceSubjectIds.Count
-            + _methodsBySubjectId.Count;
-        var seenTypeSubjectIds = new HashSet<string>(capacity, StringComparer.Ordinal);
-
-        foreach (var typeSubjectId in _referenceTypeBaseSubjectIds.Keys.OrderBy(subjectId => subjectId, StringComparer.Ordinal))
-        {
-            if (seenTypeSubjectIds.Add(typeSubjectId))
-            {
-                yield return typeSubjectId;
-            }
-        }
-
-        foreach (var typeSubjectId in _referenceTypeImplementedInterfaceSubjectIds.Keys.OrderBy(subjectId => subjectId, StringComparer.Ordinal))
-        {
-            if (seenTypeSubjectIds.Add(typeSubjectId))
-            {
-                yield return typeSubjectId;
-            }
-        }
-
-        foreach (var typeSubjectId in _methodsBySubjectId.Values
-                     .Select(method => method.Identity.DeclaringTypeSubjectId)
-                     .Where(subjectId => !string.IsNullOrEmpty(subjectId))
-                     .OrderBy(subjectId => subjectId, StringComparer.Ordinal))
-        {
-            if (seenTypeSubjectIds.Add(typeSubjectId))
-            {
-                yield return typeSubjectId;
-            }
-        }
+        return _allDeclaringTypeSubjectIds.OrderBy(subjectId => subjectId, StringComparer.Ordinal);
     }
 
     private AotCoreIrMethodArtifact? TryResolveVirtualDispatchImplementationMethod(
