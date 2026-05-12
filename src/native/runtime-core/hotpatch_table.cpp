@@ -155,29 +155,6 @@ uint32_t HotpatchNameRegistry::TokenToSlot(uint32_t module_id, uint32_t token) c
 
 // ── Dispatch entry access ─────────────────────────────────────────────
 
-HotpatchEntryV0* HotpatchNameRegistry::GetDispatchEntry(uint32_t token) noexcept {
-    // Legacy: global token scan. Kept for backward compat.
-    // With 200+ DLLs this can resolve the wrong module due to token collisions.
-    size_t mi = FindModuleForToken(token);
-    if (mi == ~static_cast<size_t>(0)) return nullptr;
-
-    const auto* mod = modules_[mi];
-    if (mod == nullptr) return nullptr;
-    if (mod->entry_table == nullptr) return nullptr;
-
-    // Re-scan inside the found module.
-    const auto* entry = static_cast<const HotpatchSlotEntryV0*>(
-        std::bsearch(&token,
-                     mod->token_slot_entries,
-                     mod->token_slot_entry_count,
-                     sizeof(HotpatchSlotEntryV0),
-                     CompareTokenSlot));
-    if (entry == nullptr) return nullptr;
-    if (entry->slot >= mod->entry_table_size) return nullptr;
-
-    return &mod->entry_table[entry->slot];
-}
-
 HotpatchEntryV0* HotpatchNameRegistry::GetDispatchEntry(uint32_t module_id, uint32_t token) const noexcept {
     if (token == 0 || module_id >= modules_.size()) return nullptr;
 
@@ -202,23 +179,6 @@ HotpatchEntryV0* HotpatchNameRegistry::GetDispatchEntryBySlot(
     return &mod->entry_table[slot];
 }
 
-size_t HotpatchNameRegistry::FindModuleForToken(uint32_t token) const noexcept {
-    for (size_t mi = 0; mi < modules_.size(); ++mi) {
-        const auto* mod = modules_[mi];
-        if (mod == nullptr) continue;
-        if (mod->token_slot_entries == nullptr || mod->token_slot_entry_count == 0) continue;
-
-        const auto* entry = static_cast<const HotpatchSlotEntryV0*>(
-            std::bsearch(&token,
-                         mod->token_slot_entries,
-                         mod->token_slot_entry_count,
-                         sizeof(HotpatchSlotEntryV0),
-                         CompareTokenSlot));
-        if (entry != nullptr) return mi;
-    }
-    return ~static_cast<size_t>(0);
-}
-
 // ── Patch management ──────────────────────────────────────────────────
 
 void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, bool patched,
@@ -237,29 +197,6 @@ void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, b
     }
 }
 
-void HotpatchNameRegistry::SetPatched(uint32_t token, bool patched,
-                                       void* method_key) noexcept {
-    // Legacy fallback: global token lookup (may cause collisions with 200+ DLLs).
-    HotpatchEntryV0* entry = GetDispatchEntry(token);
-    // NOTE: this path is deprecated for multi-DLL scenarios. Prefer SetPatchedBySlot.
-    if (entry == nullptr) return;
-
-    if (patched) {
-        entry->method_key = reinterpret_cast<uintptr_t>(method_key);
-        // release: method_key visible before flags (reader uses acquire fence)
-        _InterlockedOr((volatile long*)&entry->flags, kHotpatchActive);
-    } else {
-        _InterlockedAnd((volatile long*)&entry->flags, ~kHotpatchActive);
-        // release: method_key visible before flags (reader uses acquire fence)
-        entry->method_key = 0;
-    }
-}
-
-// Legacy: global GetDispatchEntry(token) — kept for backward compat and SetPatched fallback.
-// NOTE: This calls FindModuleForToken internally, which scans all modules and returns
-// the first match. With 200+ DLLs this can resolve the wrong module due to token collisions.
-// New code should use GetDispatchEntry(module_id, token) instead.
-
 // ── Global singleton ──────────────────────────────────────────────────
 
 HotpatchNameRegistry& GetHotpatchNameRegistry() noexcept {
@@ -274,27 +211,6 @@ void RegisterHotpatchModule(const HotpatchModuleV0* module) noexcept {
 void RegisterReversePInvokeWrappers(void* const* wrappers, uint32_t count) noexcept {
     (void)wrappers;
     (void)count;
-}
-
-// ── Dispatch helpers ─────────────────────────────────────────────────
-
-void* HotpatchCallViaSlot(uint32_t module_index, uint32_t slot,
-                           void* args_buf, void* ret) noexcept {
-    (void)args_buf;
-    (void)ret;
-
-    auto* entry = GetHotpatchNameRegistry().GetDispatchEntryBySlot(module_index, slot);
-    if (entry == nullptr) return nullptr;
-
-    // Acquire fence pairs with the release in SetPatchedBySlot so the reader
-    // sees a consistent flags + method_key state.
-    std::atomic_thread_fence(std::memory_order_acquire);
-
-    if (entry->flags & kHotpatchActive) {
-        return entry->interrupt_ptr;
-    }
-
-    return entry->direct_ptr;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

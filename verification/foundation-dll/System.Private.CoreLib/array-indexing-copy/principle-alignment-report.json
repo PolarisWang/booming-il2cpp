@@ -1,7 +1,7 @@
 {
   "family": "array-indexing-copy",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-12T13:55:06.117419",
+  "generated_at": "2026-05-13T01:06:30.774637",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",

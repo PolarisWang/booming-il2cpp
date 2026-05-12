@@ -339,7 +339,12 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                 break;
             }
 
-            // ── Resolve call_target from TargetReference (for call opcodes) ──
+            // ── Resolve call_target ──
+            // For call-like opcodes, priority is: callee (most specific,
+            // already rewritten by C# lowering for constrained overrides)
+            // → targetReference.subjectId → targetSymbol.
+            // For non-call opcodes (NewObj, Box, etc.), targetReference
+            // remains the primary resolution source.
             if (instr.op_code == interpreter::IROpCode::Call ||
                 instr.op_code == interpreter::IROpCode::CallVirt ||
                 instr.op_code == interpreter::IROpCode::CallBridge ||
@@ -357,21 +362,76 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                 instr.op_code == interpreter::IROpCode::LdSFld ||
                 instr.op_code == interpreter::IROpCode::StSFld)
             {
-                auto target_ref = json::JsonParser::FindKey(elem, "targetReference");
-                if (target_ref.IsObject() && resolve_fn != nullptr) {
-                    auto subject_id = json::JsonParser::FindKey(target_ref, "subjectId");
-                    const char* sid = JsonStringOr(subject_id);
-                    if (sid != nullptr) {
-                        instr.call_target = resolve_fn(sid, resolve_ctx);
+                bool const is_call_like =
+                    instr.op_code == interpreter::IROpCode::Call ||
+                    instr.op_code == interpreter::IROpCode::CallVirt ||
+                    instr.op_code == interpreter::IROpCode::CallBridge ||
+                    instr.op_code == interpreter::IROpCode::CallVirtConstrained;
+
+                if (is_call_like)
+                {
+                    // 1st priority: callee — C# lowering rewrites this to the
+                    // value type's own override for constrained callvirt
+                    // (e.g., Guid::GetHashCode instead of Object::GetHashCode).
+                    auto callee_val = json::JsonParser::FindKey(elem, "callee");
+                    if (callee_val.IsString() && resolve_fn != nullptr)
+                    {
+                        std::string callee_subject(callee_val.string_value, callee_val.string_length);
+                        if (!callee_subject.empty())
+                        {
+                            instr.call_target = resolve_fn(callee_subject.c_str(), resolve_ctx);
+                        }
+                    }
+
+                    // 2nd priority: targetReference.subjectId
+                    if (instr.call_target == nullptr)
+                    {
+                        auto target_ref = json::JsonParser::FindKey(elem, "targetReference");
+                        if (target_ref.IsObject() && resolve_fn != nullptr)
+                        {
+                            auto subject_id = json::JsonParser::FindKey(target_ref, "subjectId");
+                            const char* sid = JsonStringOr(subject_id);
+                            if (sid != nullptr)
+                            {
+                                instr.call_target = resolve_fn(sid, resolve_ctx);
+                            }
+                        }
+                    }
+
+                    // 3rd priority: targetSymbol (direct AOT symbol).
+                    if (instr.call_target == nullptr)
+                    {
+                        auto target_sym = json::JsonParser::FindKey(elem, "targetSymbol");
+                        const char* sym = JsonStringOr(target_sym);
+                        if (sym != nullptr && resolve_fn != nullptr)
+                        {
+                            instr.call_target = resolve_fn(sym, resolve_ctx);
+                        }
                     }
                 }
+                else
+                {
+                    // Non-call opcodes: resolve from targetReference → targetSymbol.
+                    auto target_ref = json::JsonParser::FindKey(elem, "targetReference");
+                    if (target_ref.IsObject() && resolve_fn != nullptr)
+                    {
+                        auto subject_id = json::JsonParser::FindKey(target_ref, "subjectId");
+                        const char* sid = JsonStringOr(subject_id);
+                        if (sid != nullptr)
+                        {
+                            instr.call_target = resolve_fn(sid, resolve_ctx);
+                        }
+                    }
 
-                // Also try targetSymbol (direct AOT symbol).
-                if (instr.call_target == nullptr) {
-                    auto target_sym = json::JsonParser::FindKey(elem, "targetSymbol");
-                    const char* sym = JsonStringOr(target_sym);
-                    if (sym != nullptr && resolve_fn != nullptr) {
-                        instr.call_target = resolve_fn(sym, resolve_ctx);
+                    // Also try targetSymbol (direct AOT symbol).
+                    if (instr.call_target == nullptr)
+                    {
+                        auto target_sym = json::JsonParser::FindKey(elem, "targetSymbol");
+                        const char* sym = JsonStringOr(target_sym);
+                        if (sym != nullptr && resolve_fn != nullptr)
+                        {
+                            instr.call_target = resolve_fn(sym, resolve_ctx);
+                        }
                     }
                 }
 

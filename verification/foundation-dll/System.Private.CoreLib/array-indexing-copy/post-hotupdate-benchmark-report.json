@@ -6,20 +6,26 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 13 methods\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' -> 00007FF687FD89E0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' -> 00007FF687FD89F0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Clear:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' -> 00007FF687FD89D0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Emptyu003CSystem.Byteu003E:System.Byte[]()' parsed ns='System' type='Array' method='Emptyu003CSystem.Byteu003E:System.Byte[]'\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Sortu003CSystem.Byteu003E:System.Void(System.Byte[])' parsed ns='System' type='Array' method='Sortu003CSystem.Byteu003E:System.Void'\n"
+      "status": "passed",
+      "prePatchNsPerOp": 510.0,
+      "postPatchNsPerOp": 341.9,
+      "slowdownPercent": -32.96
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 13 methods\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' -> 00007FF687FD89E0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' -> 00007FF687FD89F0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Clear:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' -> 00007FF687FD89D0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Emptyu003CSystem.Byteu003E:System.Byte[]()' parsed ns='System' type='Array' method='Emptyu003CSystem.Byteu003E:System.Byte[]'\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Sortu003CSystem.Byteu003E:System.Void(System.Byte[])' parsed ns='System' type='Array' method='Sortu003CSystem.Byteu003E:System.Void'\n"
+      "status": "passed",
+      "prePatchNsPerOp": 557.2,
+      "postPatchNsPerOp": 326.1,
+      "slowdownPercent": -41.48
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 13 methods\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' -> 00007FF687FD89E0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' -> 00007FF687FD89F0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Clear:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' -> 00007FF687FD89D0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Emptyu003CSystem.Byteu003E:System.Byte[]()' parsed ns='System' type='Array' method='Emptyu003CSystem.Byteu003E:System.Byte[]'\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Sortu003CSystem.Byteu003E:System.Void(System.Byte[])' parsed ns='System' type='Array' method='Sortu003CSystem.Byteu003E:System.Void'\n"
+      "status": "passed",
+      "prePatchNsPerOp": 325.8,
+      "postPatchNsPerOp": 97.7,
+      "slowdownPercent": -70.01
     },
     {
       "methodIndex": 3,
@@ -29,63 +35,81 @@
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 13 methods\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' -> 00007FF687FD89E0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' -> 00007FF687FD89F0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Clear:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' -> 00007FF687FD89D0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Emptyu003CSystem.Byteu003E:System.Byte[]()' parsed ns='System' type='Array' method='Emptyu003CSystem.Byteu003E:System.Byte[]'\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Sortu003CSystem.Byteu003E:System.Void(System.Byte[])' parsed ns='System' type='Array' method='Sortu003CSystem.Byteu003E:System.Void'\n"
+      "status": "passed",
+      "prePatchNsPerOp": 1.9,
+      "postPatchNsPerOp": 4.9,
+      "slowdownPercent": 157.89
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array,System.Collections.IComparer)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 13 methods\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' -> 00007FF687FD89E0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' -> 00007FF687FD89F0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Clear:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' -> 00007FF687FD89D0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Emptyu003CSystem.Byteu003E:System.Byte[]()' parsed ns='System' type='Array' method='Emptyu003CSystem.Byteu003E:System.Byte[]'\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Sortu003CSystem.Byteu003E:System.Void(System.Byte[])' parsed ns='System' type='Array' method='Sortu003CSystem.Byteu003E:System.Void'\n"
+      "status": "passed",
+      "prePatchNsPerOp": 654.9,
+      "postPatchNsPerOp": 394.7,
+      "slowdownPercent": -39.73
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Object)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 13 methods\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' -> 00007FF687FD89E0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' -> 00007FF687FD89F0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Clear:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' -> 00007FF687FD89D0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Emptyu003CSystem.Byteu003E:System.Byte[]()' parsed ns='System' type='Array' method='Emptyu003CSystem.Byteu003E:System.Byte[]'\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Sortu003CSystem.Byteu003E:System.Void(System.Byte[])' parsed ns='System' type='Array' method='Sortu003CSystem.Byteu003E:System.Void'\n"
+      "status": "passed",
+      "prePatchNsPerOp": 399.1,
+      "postPatchNsPerOp": 97.0,
+      "slowdownPercent": -75.7
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Int32,System.Int32,System.Object)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 13 methods\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' -> 00007FF687FD89E0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' -> 00007FF687FD89F0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Clear:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' -> 00007FF687FD89D0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Emptyu003CSystem.Byteu003E:System.Byte[]()' parsed ns='System' type='Array' method='Emptyu003CSystem.Byteu003E:System.Byte[]'\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Sortu003CSystem.Byteu003E:System.Void(System.Byte[])' parsed ns='System' type='Array' method='Sortu003CSystem.Byteu003E:System.Void'\n"
+      "status": "passed",
+      "prePatchNsPerOp": 314.8,
+      "postPatchNsPerOp": 106.3,
+      "slowdownPercent": -66.23
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Array::IndexOf:System.Int32(System.Array,System.Object)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 13 methods\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' -> 00007FF687FD89E0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' -> 00007FF687FD89F0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Clear:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' -> 00007FF687FD89D0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Emptyu003CSystem.Byteu003E:System.Byte[]()' parsed ns='System' type='Array' method='Emptyu003CSystem.Byteu003E:System.Byte[]'\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Sortu003CSystem.Byteu003E:System.Void(System.Byte[])' parsed ns='System' type='Array' method='Sortu003CSystem.Byteu003E:System.Void'\n"
+      "status": "passed",
+      "prePatchNsPerOp": 296.8,
+      "postPatchNsPerOp": 132.0,
+      "slowdownPercent": -55.53
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(System.Array,System.Object)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 13 methods\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' -> 00007FF687FD89E0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' -> 00007FF687FD89F0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Clear:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' -> 00007FF687FD89D0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Emptyu003CSystem.Byteu003E:System.Byte[]()' parsed ns='System' type='Array' method='Emptyu003CSystem.Byteu003E:System.Byte[]'\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Sortu003CSystem.Byteu003E:System.Void(System.Byte[])' parsed ns='System' type='Array' method='Sortu003CSystem.Byteu003E:System.Void'\n"
+      "status": "passed",
+      "prePatchNsPerOp": 354.4,
+      "postPatchNsPerOp": 101.2,
+      "slowdownPercent": -71.44
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Array::Reverse:System.Void(System.Array)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 13 methods\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' -> 00007FF687FD89E0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' -> 00007FF687FD89F0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Clear:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' -> 00007FF687FD89D0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Emptyu003CSystem.Byteu003E:System.Byte[]()' parsed ns='System' type='Array' method='Emptyu003CSystem.Byteu003E:System.Byte[]'\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Sortu003CSystem.Byteu003E:System.Void(System.Byte[])' parsed ns='System' type='Array' method='Sortu003CSystem.Byteu003E:System.Void'\n"
+      "status": "passed",
+      "prePatchNsPerOp": 2.0,
+      "postPatchNsPerOp": 4.7,
+      "slowdownPercent": 135.0
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 13 methods\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' -> 00007FF687FD89E0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' -> 00007FF687FD89F0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Clear:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' -> 00007FF687FD89D0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Emptyu003CSystem.Byteu003E:System.Byte[]()' parsed ns='System' type='Array' method='Emptyu003CSystem.Byteu003E:System.Byte[]'\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Sortu003CSystem.Byteu003E:System.Void(System.Byte[])' parsed ns='System' type='Array' method='Sortu003CSystem.Byteu003E:System.Void'\n"
+      "status": "passed",
+      "prePatchNsPerOp": 313.1,
+      "postPatchNsPerOp": 113.5,
+      "slowdownPercent": -63.75
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 13 methods\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' -> 00007FF687FD89E0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Copy:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' -> 00007FF687FD89F0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' parsed ns='System' type='Array' method='Clear:System.Void'\n[hotpatch-resolve] kChaosExternalRuntimeTable hit for 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' -> 00007FF687FD89D0\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Emptyu003CSystem.Byteu003E:System.Byte[]()' parsed ns='System' type='Array' method='Emptyu003CSystem.Byteu003E:System.Byte[]'\n[hotpatch-resolve] MISS subject='System.Private.CoreLib/System.Array::Sortu003CSystem.Byteu003E:System.Void(System.Byte[])' parsed ns='System' type='Array' method='Sortu003CSystem.Byteu003E:System.Void'\n"
+      "status": "passed",
+      "prePatchNsPerOp": 845.1,
+      "postPatchNsPerOp": 494.8,
+      "slowdownPercent": -41.45
     }
   ],
   "summary": {
     "totalMethods": 13,
-    "nonStubMethods": 0,
-    "averageSlowdownPercent": 0.0,
-    "slowdownFactor": 1.0,
+    "nonStubMethods": 12,
+    "averageSlowdownPercent": -22.12,
+    "slowdownFactor": 0.7787999999999999,
     "slowdownThresholdX": 50.0
   }
 }

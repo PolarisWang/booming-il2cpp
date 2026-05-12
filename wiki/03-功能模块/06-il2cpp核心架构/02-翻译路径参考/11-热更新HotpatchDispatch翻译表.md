@@ -7,10 +7,10 @@
 ```
 构建期 Codegen:
   native-aot.generated.cpp
-    ├─ DispatchEntryV0 table[]     // per-module 平面静态表
+    ├─ HotpatchEntryV0 s_hotpatch_entries[]     // per-module 平面静态表
     ├─ NameIndex 两级索引           // type→method→token
     ├─ Token→Slot 反向映射          // token→dispatch slot
-    └─ Slot 调用站点的模式感知分支     // if (flags & kPatched) ...
+    └─ Slot 调用站点的模式感知分支     // if (flags & kHotpatchActive) ...
 
 运行时 Patch 加载:
   ApplyPatchFromMemory(.patchdata)
@@ -20,29 +20,30 @@
     └─ 标记 dispatch entry:
          interrupt_ptr = &InterpreterEntryDirect
          method_key    = (uintptr_t)PatchMethod
-         flags        |= kDispatchPatched
+         flags        |= kHotpatchActive
 
 运行时 Dispatch:
   调用方 AOT 代码:
-    if (entry.flags & kDispatchPatched) [[unlikely]]
+    if (flags & kHotpatchActive) [[unlikely]]
         → InterpreterEntryDirect(method_key, args...)
     else
         → direct_ptr(args...)         // 零额外开销
+
 ```
 
 ## 关键数据结构
 
-### DispatchEntryV0（运行时核心）
+### HotpatchEntryV0（运行时核心）
 
 ```cpp
-// src/native/runtime-core/hot-update/dispatch_table.h
-struct DispatchEntryV0 {
+// src/native/runtime-core/hotpatch_table.h
+struct HotpatchEntryV0 {
     void*       direct_ptr;       // AOT 编译函数指针（原始 entry）
     void*       interrupt_ptr;    // = &InterpreterEntryDirect（patch 时设置）
     uintptr_t   method_key;       // = PatchMethod*（未 patch 时为 0）
-    uint32_t    flags;            // bit 0: kDispatchPatched
+    uint32_t    flags;            // bit 0: kHotpatchActive
 };
-static constexpr uint32_t kDispatchPatched = 1u << 0;
+static constexpr uint32_t kHotpatchActive = 1u << 0;
 ```
 
 四个字段共 24 字节（x64），直接嵌入到生成的 C++ 文件中作为全局数组。
@@ -87,12 +88,12 @@ struct TokenSlotEntry {
 
 ```cpp
 // 示例: string-char-text-core 的 dispatch table
-extern "C" DispatchEntryV0 g_dispatch_table[] = {
+extern "C" HotpatchEntryV0 s_hotpatch_entries[] = {
     { Method0, nullptr, 0, 0 },   // slot 0
     { Method1, nullptr, 0, 0 },   // slot 1
     // ...
 };
-static_assert(sizeof(g_dispatch_table) / sizeof(g_dispatch_table[0]) == 20);
+static_assert(sizeof(s_hotpatch_entries) / sizeof(s_hotpatch_entries[0]) == 20);
 ```
 
 每个 slot 的 `direct_ptr` 指向 AOT 编译后的方法实体。`interrupt_ptr` 初始为 nullptr，patch 时由 `ApplyPatchFromMemory` 填入 `&InterpreterEntryDirect`。
@@ -130,9 +131,9 @@ extern "C" TokenSlotEntry g_token_slot[] = {
 // before: 直接调用
 //   auto result = Method0(args...);
 // after: 模式感知分支
-//   auto& entry = g_dispatch_table[Method0_SLOT];
+//   auto& entry = s_hotpatch_entries[Method0_SLOT];
 //   CHAOS_IL2CPP_INTPTR result;
-//   if (entry.flags & kDispatchPatched) [[unlikely]]
+//   if (entry.flags & kHotpatchActive) [[unlikely]]
 //       result = entry.interrupt_ptr(entry.method_key, args...);
 //   else
 //       result = entry.direct_ptr(args...);
@@ -188,10 +189,14 @@ ApplyPatchFromMemory(.patchdata)
   │       d. 写入 dispatch_table[slot_index]:
   │          interrupt_ptr = &InterpreterEntryDirect
   │          method_key    = (uintptr_t)PatchMethod
-  │          flags        |= kDispatchPatched
+  │          flags        |= kHotpatchActive
   │
   ├─ 4. Pre-lower all PatchMethods (lazy IR→IR lowering 预热)
   │     each method: LowerILToIR → ReapplyInlining (内联穿越)
+  │
+  │     注意: 当前 ApplyPatchFromMemory 不执行 pre-lowering。
+  │     IR 降级是惰性的（在首次 patched 方法调用时由
+  │     InterpreterEntryDirect 触发）。
   │
   └─ 5. 返回 patched_count / total_count
 ```
@@ -268,7 +273,7 @@ extern "C" CHAOS_IL2CPP_INT64 InterpreterEntryDirect(
 ```
 1. 调用 entry_fn() 获取 AOT baseline 值
 2. ApplyPatchFromMemory(.patchdata) → 标记 dispatch entry
-3. 确认 g_dispatch_table[slot].flags & kDispatchPatched
+3. 确认 s_hotpatch_entries[slot].flags & kHotpatchActive
 4. 调用 entry_fn() → dispatch table 重定向到 InterpreterEntryDirect
 5. InterpreterVM::Execute 执行 patch IL → 返回 patch 值
 6. Unpatch: Revert(token) + 清 flag
@@ -299,7 +304,9 @@ extern "C" CHAOS_IL2CPP_INT64 InterpreterEntryDirect(
 
 当前 limitations:
 - `revertVerified`: 尚未实现 Unpatch 后验证流程
-- `semanticVerified`: 尚未实现完整语义验证
+- `semanticVerified`: 尚未实现完整语义验证（验证仅检查"不崩溃"和"是否路由到 interpreter"，不检查返回值语义正确性）
+- 对复杂方法（含数组分配、循环、分支等），interpreter 四层 dispatch 无法处理。这些方法需在 codegen 端预置 `kHotpatchKeepNative` 标志，使 dispatch 绕过 interpreter 走 native 路径
+- 首次调用 patched 方法总是较慢（包含 IR 反序列化 + inlining 开销），因为 ApplyPatchFromMemory 不执行预降级
 
 已验证的基础库 family 全部 19/19 方法通过 hotupdate 验证（包含 SEH 方法和 leaf 方法）。
 
@@ -323,8 +330,8 @@ Leaf 方法 ~200-290x slowdown 是 interpreter 设计的已知特性（每条指
 | NameIndex emit | `NativeAotLoweringPlanner.StructuredIREmit.cs` | ✅ |
 | Token→Slot emit | `NativeAotLoweringPlanner.StructuredIREmit.cs` | ✅ |
 | PatchDataExtractor (C#) | `PatchDataExtractor.cs` | ✅ |
-| NameIndexRegistry | `runtime-core/hot-update/dispatch_table.cpp` | ✅ |
-| TokenSlotRegistry | `runtime-core/hot-update/dispatch_table.cpp` | ✅ |
+| NameIndexRegistry | `runtime-core/hotpatch_table.cpp` | ✅ |
+| TokenSlotRegistry | `runtime-core/hotpatch_table.cpp` | ✅ |
 | ApplyPatchFromMemory | `runtime-core/hot-update/patch_loader.cpp` | ✅ |
 | PatchMetadataCache | `runtime-core/hot-update/patch_metadata_cache.cpp` | ✅ |
 | InterpreterEntryDirect | `runtime-core/hot-update/interpreter_entry.cpp` | ✅ |
@@ -339,8 +346,8 @@ Leaf 方法 ~200-290x slowdown 是 interpreter 设计的已知特性（每条指
 | Codegen DispatchTable emit | `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.StructuredIREmit.cs` |
 | Codegen NameIndex/Slot emit | `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.StructuredIREmit.cs` |
 | PatchDataExtractor | `src/managed/Chaos.IL2CPP.CodeGen/Emission/PatchDataExtractor.cs` |
-| DispatchEntryV0 定义 | `src/native/runtime-core/hot-update/dispatch_table.h` |
-| NameIndexRegistry | `src/native/runtime-core/hot-update/dispatch_table.cpp` |
+| HotpatchEntryV0 定义 | `src/native/runtime-core/hotpatch_table.h` |
+| HotpatchNameRegistry | `src/native/runtime-core/hotpatch_table.cpp` |
 | ApplyPatchFromMemory | `src/native/runtime-core/hot-update/patch_loader.cpp` |
 | PatchMetadataCache | `src/native/runtime-core/hot-update/patch_metadata_cache.cpp` |
 | InterpreterEntryDirect | `src/native/runtime-core/hot-update/interpreter_entry.cpp` |

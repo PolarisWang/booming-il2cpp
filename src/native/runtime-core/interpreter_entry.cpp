@@ -192,6 +192,39 @@ extern "C" const char* const kChaosExternalRuntimeSubjects[];
 extern "C" void* kChaosExternalRuntimeFnTable[];
 extern "C" int32_t kChaosExternalRuntimeCount;
 
+/// Three-tier fallback chain for resolving a subject ID → native function pointer.
+///
+/// Designed for the interpreter's call_target resolution during IR lowering.
+/// The tiers are ordered by increasing generality (and decreasing performance):
+///
+///   Tier 1 — legacy AotDirectDispatch table (g_direct_fn_table)
+///     Registered by ChaosRegisterDirectFnTable at startup from codegen-emitted
+///     data.  Fastest path (O(n) linear scan over a small array, typically <100
+///     entries).  Only covers methods that codegen explicitly emits direct
+///     dispatch entries for.
+///
+///   Tier 2 — HotpatchNameRegistry direct_ptr
+///     Uses the runtime's name-based method registry (already populated during
+///     BootstrapRuntime with all AOT modules' dispatch tables).  Parses the
+///     subject ID → (namespace, type_name, method_name), looks up the dispatch
+///     entry, and returns its direct_ptr.  Handles all AOT-compiled methods
+///     that have hotpatch dispatch table entries.
+///
+///   Tier 3 — kChaosExternalRuntimeFnTable
+///     The broadest fallback, covering cross-assembly calls that are NOT in the
+///     current module's compilation closure.  Entries are either pre-filled at
+///     compile time (for shaped helpers like Convert.ToChar) or resolved at
+///     startup by ChaosResolveExternalRuntimeFnTable via the HotpatchNameRegistry.
+///
+/// Design rationale for three tiers:
+///   - Tier 1 exists first for historical reasons (pre-hotpatch direct dispatch).
+///   - Tier 2 is the canonical path for hotpatch-aware dispatch (post-refactor).
+///   - Tier 3 catches the remaining cross-module cases that lack direct dispatch
+///     entries.
+///
+/// If all three tiers miss, the interpreter falls back to method_invoke (slow path
+/// through the bridge's resolve_method_by_token + invoke_virtual).  Returns nullptr
+/// if even the fallback fails.
 static void* ResolveDirectFn(
     const char* subject_id,
     void* /*user_data*/) noexcept
@@ -220,8 +253,8 @@ static void* ResolveDirectFn(
             uint64_t lookup = registry.LookupMethod(
                 ns.c_str(), type_name.c_str(), method_name.c_str());
             if (lookup != 0) {
-                uint32_t module_id = static_cast<uint32_t>(lookup >> 32);
-                uint32_t token = static_cast<uint32_t>(lookup & 0xFFFFFFFFu);
+                uint32_t module_id = ExtractModuleId(lookup);
+                uint32_t token = ExtractToken(lookup);
                 uint32_t slot = registry.TokenToSlot(module_id, token);
                 if (slot != ~0u) {
                     auto* entry = registry.GetDispatchEntryBySlot(module_id, slot);
@@ -346,8 +379,8 @@ extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept
             ns.c_str(), type_name.c_str(), method_name.c_str());
         if (result == 0) continue;
 
-        uint32_t module_index = static_cast<uint32_t>(result >> 32);
-        uint32_t token = static_cast<uint32_t>(result & 0xFFFFFFFFu);
+        uint32_t module_index = ExtractModuleId(result);
+        uint32_t token = ExtractToken(result);
 
         if (module_index >= registry.ModuleCount()) continue;
 
@@ -1219,12 +1252,18 @@ void InterpreterEntryDirect(
 }
 
 // ── InterpreterEntryDirectFast ─────────────────────────────────────────────
-// Fast-path wrapper: allocates internal args/ret buffers without zero-init,
-// then delegates to InterpreterEntryDirect.
+// CONSTRAINT: This entry point MUST only be called for zero-arg methods.
 //
-// Use in --patch-bench mode where the caller (RunNativeAotBench) has no
-// method arguments.  The 32+16 bytes of __chaos_args[4]/__chaos_ret[2]
-// are uninitialized stack — no memset, no `= {}`.
+// It allocates internal args/ret buffers WITHOUT zero-initialization,
+// then delegates to InterpreterEntryDirect.  If the method has arguments,
+// InterpreterEntryDirect will read garbage from the uninitialized args_buf.
+//
+// The caller (RunNativeAotBench emitted by codegen) guarantees this contract
+// because it is only used in --patch-bench mode where the patched entry was
+// generated with zero parameters.
+//
+// In CHECK (debug) builds, PatchMethodLowerIR asserts cached_arg_count == 0
+// when this path is taken.  This assertion fires BEFORE the garbage read.
 //
 // Benchmarks: saves ~32-48 bytes zero-init per call (~5-10ns per call).
 void InterpreterEntryDirectFast(

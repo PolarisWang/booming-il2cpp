@@ -1,8 +1,10 @@
 #include "patch_loader.h"
 
 #include "interpreter_entry.h"
+#include <interpreter_vm.h>       // interpreter::IRMethod (for delete in DestroyPatchContext)
 #include "module_registry.h"
 #include "reflection_query_model.h"
+#include "runtime_instantiation.h"  // CachedCallInfo (for delete[] in DestroyPatchContext)
 
 #include "../bootstrap/bootstrap.h"
 
@@ -317,18 +319,30 @@ static void DestroyPatchContext(PatchContext* ctx) {
         ctx->metadata_cache->~PatchMetadataCache();
     }
 
-    // Free cached IR for each method.
+    // Free cached IR and call_cache for each method.
     for (uint32_t i = 0; i < ctx->method_count; ++i) {
-        // Free heap-allocated arg type cache if small-buffer was exceeded.
         auto& m = ctx->methods[i];
+
+        // cached_ir is heap-allocated by PatchMethodLowerIR (new IRMethod).
+        if (m.cached_ir != nullptr) {
+            delete static_cast<interpreter::IRMethod*>(m.cached_ir);
+            m.cached_ir = nullptr;
+        }
+
+        // call_cache is heap-allocated by InlineLeafCallees (new CachedCallInfo[]).
+        // NOTE: if ReapplyInlining replaced the array, the old allocation is leaked
+        // (currently acceptable since InlineLeafCallees is only called once per method).
+        if (m.call_cache != nullptr) {
+            delete[] static_cast<runtime_instantiation::CachedCallInfo*>(m.call_cache);
+            m.call_cache = nullptr;
+        }
+
+        // Free heap-allocated arg type cache if small-buffer was exceeded.
         if (m.cached_arg_types != nullptr &&
             m.cached_arg_types != m.cached_arg_types_small) {
             delete[] m.cached_arg_types;
-            m.cached_arg_types = m.cached_arg_types_small;
-            m.cached_arg_capacity = 8;
+            // No need to restore small-buffer pointer — struct is being destroyed.
         }
-        // cached_ir is owned by the interpreter entry.
-        // For now, no-op (IR cleanup happens in Step 5).
     }
 
     // Destroy the methods array.
@@ -402,8 +416,8 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         }
 
         // Extract module_id and token from composite key.
-        uint32_t module_id = static_cast<uint32_t>(lookup >> 32);
-        uint32_t aot_token = static_cast<uint32_t>(lookup & 0xFFFFFFFFu);
+        uint32_t module_id = ExtractModuleId(lookup);
+        uint32_t aot_token = ExtractToken(lookup);
 
         // Get the dispatch slot for this method within its module.
         uint32_t slot = registry.TokenToSlot(module_id, aot_token);

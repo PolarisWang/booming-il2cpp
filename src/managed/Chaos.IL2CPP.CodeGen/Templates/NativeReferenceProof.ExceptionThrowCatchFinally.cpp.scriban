@@ -135,7 +135,7 @@ extern "C" void* CHAOS_RUNTIME_ABI_CALL {{ instance_method_symbol }}(
     try {
         {{ throw_method_symbol }}(runtime, thread);
         return CreateManagedString(runtime, thread, "unreachable", 11u);
-    } catch (const chaos::il2cpp::runtime_core::ManagedExceptionCarrier&) {
+    } catch (const chaos_managed_exception&) {
         return CreateManagedString(
             runtime,
             thread,

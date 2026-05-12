@@ -75,7 +75,9 @@ public sealed partial class NativeAotLoweringPlanner
 					resolution.ParameterAbis,
 					resolution.ReturnAbi,
 					resolution.RawArgumentIndices,
-					resolution.ReferencedStaticFieldSubjectIds);
+					resolution.ReferencedStaticFieldSubjectIds,
+					DirectNativeSymbol: resolution.DirectNativeSymbol,
+					DirectNativeHeader: resolution.DirectNativeHeader);
 				return true;
 			}
 		}

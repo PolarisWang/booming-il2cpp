@@ -5,7 +5,7 @@
 ///   - AotCoreIr JSON deserialization inside LowerMethodBody
 ///   - V1 signature-aware argument marshalling
 ///   - Return value extraction via tag dispatch
-///   - Exception propagation via ManagedExceptionCarrier
+///   - Exception propagation via chaos_managed_exception
 ///
 /// Unlike the interpreter_integration tests (which call InterpreterVM::Execute
 /// directly), these tests go through the bridge function pointer, exercising
@@ -14,7 +14,7 @@
 #include <chaos/native_types.h>              // CHAOS_IL2CPP_UINT32 etc — MUST be first
 
 #include "interpreter_vm.h"                  // InterpreterValue, ValueTag
-#include "runtime_core.h"                    // RuntimeStatus, ManagedExceptionCarrier
+#include "runtime_core.h"                    // RuntimeStatus, chaos_managed_exception
 #include "reflection_query_model.h"          // descriptors, encode/decode
 #include "generic_method_instantiation.h"    // RuntimeInstantiatedMethod
 #include <runtime_instantiation.h>           // RuntimeInstantiationBridgeV0, ChaosRuntimeInstantiationGetBridgeV0
@@ -28,7 +28,7 @@
 using chaos::il2cpp::runtime_core::EncodeReflectionQueryMethodHandle;
 using chaos::il2cpp::runtime_core::ReflectionQueryMethodDescriptor;
 using chaos::il2cpp::runtime_core::ReflectionQueryParameterDescriptor;
-using chaos::il2cpp::runtime_core::ManagedExceptionCarrier;
+using chaos_managed_exception;
 using chaos::il2cpp::runtime_instantiation::RuntimeInstantiatedMethod;
 using chaos::il2cpp::interpreter::InterpreterValue;
 using chaos::il2cpp::interpreter::ValueTag;
@@ -239,7 +239,7 @@ static bool TestBridgeSignatureAwareArg()
 
 // Test: Exception propagation through InterpretMethodCall.
 //   Method body: ldc.i4 99 + throw → triggers threw_exception.
-//   The bridge converts threw_exception → ManagedExceptionCarrier.
+//   The bridge converts threw_exception → chaos_managed_exception.
 //   We catch the C++ exception and verify it.
 static bool TestBridgeExceptionPropagation()
 {
@@ -273,7 +273,7 @@ static bool TestBridgeExceptionPropagation()
     const auto* bridge = GetBridge();
     if (bridge == nullptr) return false;
 
-    // ── Call bridge — expect ManagedExceptionCarrier ──
+    // ── Call bridge — expect chaos_managed_exception ──
     RuntimeStatus status = CHAOS_RUNTIME_STATUS_OK;
 
     try {
@@ -290,15 +290,15 @@ static bool TestBridgeExceptionPropagation()
         // Should not reach here — the bridge should throw.
         (void)status;
         return false;
-    } catch (const ManagedExceptionCarrier& carrier) {
+    } catch (const chaos_managed_exception& carrier) {
         // Expected: the bridge caught threw_exception and threw.
         // carrier.exception is nullptr because the thrown value is Int32(99),
         // not an ObjectRef with a type_token.  The bridge's V1 exception
         // bridge skips object_new for non-ObjectRef values.
         //
-        // This test validates that the ManagedExceptionCarrier throw path
+        // This test validates that the chaos_managed_exception throw path
         // is correctly triggered, not the quality of the exception handle.
-        return carrier.exception == nullptr;
+        return carrier.object_value == 0;
     } catch (...) {
         // Unexpected exception type.
         return false;

@@ -38,7 +38,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
             return throw_status;
         }
         message = abi->string_new_utf8(runtime, thread, {{ unreachable_literal }}, {{ unreachable_literal_byte_count }}u);
-    } catch (const chaos::il2cpp::runtime_core::ManagedExceptionCarrier&) {
+    } catch (const chaos_managed_exception&) {
         message = abi->string_new_utf8(runtime, thread, {{ caught_literal }}, {{ caught_literal_byte_count }}u);
     }
 

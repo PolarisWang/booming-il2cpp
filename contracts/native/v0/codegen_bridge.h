@@ -136,6 +136,46 @@ typedef struct MetadataRegistrationV0 {
     uint32_t metadata_usage_count;
 } MetadataRegistrationV0;
 
+/* ── GcSlotMap — GC root slot descriptor for managed stack frames ──
+ *
+ * Codegen emits one GcSlotMap per managed method, placed in the
+ * .gc_slot_maps section.  The runtime root scanner reads these maps
+ * during GC to precisely identify object references in each stack frame,
+ * eliminating the need for conservative BDWGC scanning of managed frames.
+ *
+ * Each slot entry encodes the offset within the frame and the reference kind.
+ *
+ * Layout (32 bits per slot):
+ *   bits [0:11] — offset_in_frame (0-4095 bytes from frame base)
+ *   bits [12]   — kind (0 = object reference, 1 = interior/byref pointer)
+ *   bits [13:31] — reserved (must be 0)
+ */
+#define CHAOS_GC_SLOT_OFFSET_MASK   0xFFFu
+#define CHAOS_GC_SLOT_KIND_OFFSET   12u
+#define CHAOS_GC_SLOT_KIND_MASK     (1u << 12)
+#define CHAOS_GC_SLOT_KIND_OBJECT   0u          /* exact object reference */
+#define CHAOS_GC_SLOT_KIND_INTERIOR (1u << 12)  /* interior/byref pointer */
+
+#define CHAOS_GC_SLOT_ENCODE(offset, kind) \
+    (((offset) & CHAOS_GC_SLOT_OFFSET_MASK) | ((kind) & CHAOS_GC_SLOT_KIND_MASK))
+
+/// GcSlotMap header — followed by @a num_gc_slots 32-bit slot entries.
+typedef struct GcSlotMapV0 {
+    uint32_t frame_size;         /* stack frame size in bytes */
+    uint32_t num_gc_slots;       /* number of GC root slots in this frame */
+    uint32_t slots[];            /* variable-length array of slot encodings */
+} GcSlotMapV0;
+
+/// Section attribute for .gc_slot_maps — collected by the linker into
+/// a contiguous range that the runtime can iterate at GC time.
+#if defined(_MSC_VER)
+#define CHAOS_GC_SLOT_MAP_SECTION __declspec(allocate(".gc_slot_maps"))
+#elif defined(__GNUC__) || defined(__clang__)
+#define CHAOS_GC_SLOT_MAP_SECTION __attribute__((section(".gc_slot_maps")))
+#else
+#define CHAOS_GC_SLOT_MAP_SECTION
+#endif
+
 /* ── Hotpatch Dispatch Table entry ─────────────────────────────────────
  *
  * Each AOT module emits a static dispatch table with one entry per public
@@ -145,7 +185,8 @@ typedef struct MetadataRegistrationV0 {
  *
  * The dispatch table is an extern "C" symbol emitted by codegen and consumed
  * by both generated code and the runtime PatchLoader.                           */
-#define kHotpatchActive    (1u << 0)
+#define kHotpatchActive      (1u << 0)
+#define kHotpatchKeepNative  (1u << 1)
 
 typedef struct HotpatchEntryV0 {
     void*       direct_ptr;        /* AOT function pointer (set by codegen)   */

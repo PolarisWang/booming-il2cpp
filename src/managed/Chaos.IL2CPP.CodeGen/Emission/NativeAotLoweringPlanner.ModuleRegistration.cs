@@ -108,8 +108,8 @@ public sealed partial class NativeAotLoweringPlanner
         // Build token lookup from metadata registration.
         var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);
 
-        // Collect (type_name, type_namespace, method_name, token, native_symbol, param_count) tuples.
-        var entries = new List<(string TypeName, string TypeNamespace, string MethodName, uint Token, string NativeSymbol, int ParamCount)>();
+        // Collect (type_name, type_namespace, method_name, token, native_symbol, param_count, subject_id) tuples.
+        var entries = new List<(string TypeName, string TypeNamespace, string MethodName, uint Token, string NativeSymbol, int ParamCount, string SubjectId)>();
         foreach (var method in reachableMethods)
         {
             string typeSubjectId;
@@ -129,7 +129,7 @@ public sealed partial class NativeAotLoweringPlanner
             if (token == 0)
                 continue; // skip methods without metadata tokens
 
-            entries.Add((typeName, typeNamespace, methodName, token, method.NativeSymbol, method.ParameterCount));
+            entries.Add((typeName, typeNamespace, methodName, token, method.NativeSymbol, method.ParameterCount, method.SubjectId));
         }
 
         if (entries.Count == 0)
@@ -195,6 +195,32 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("};");
         sb.AppendLine();
 
+        // Determine kHotpatchKeepNative flag per-method.
+        // External-routable methods have cross-assembly calls handled by
+        // the external runtime dispatch table (kChaosExternalRuntimeFnTable).
+        // For these methods, the interpreter path is unnecessary — the dispatcher
+        // already knows how to route them natively. Setting kHotpatchKeepNative
+        // prevents the interpreter from attempting to execute these methods
+        // (which it cannot handle for complex IL), keeping them on the native path.
+        //
+        // Note: _externalRuntimeSubjects stores callee SubjectIds (e.g.
+        // "System.Array::Copy"), not the entry method SubjectIds. We must scan
+        // each reachable method's instructions to detect whether it calls any
+        // external runtime targets.
+        var methodsCallingExternal = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var method in reachableMethods)
+        {
+            foreach (var instruction in method.Instructions)
+            {
+                if (!string.IsNullOrEmpty(instruction.Callee) &&
+                    _externalRuntimeSubjects.ContainsKey(instruction.Callee))
+                {
+                    methodsCallingExternal.Add(method.SubjectId);
+                    break;
+                }
+            }
+        }
+
         // ── Dispatch table with function pointers ──
         // direct_ptr = &MethodNativeSymbol (extern "C" function emitted elsewhere)
         // interrupt_ptr = &InterpreterEntryDirect (hotpatch dispatch)
@@ -203,8 +229,10 @@ public sealed partial class NativeAotLoweringPlanner
           .Append(entries.Count).AppendLine("] = {");
         foreach (var entry in entries)
         {
+            string flags = methodsCallingExternal.Contains(entry.SubjectId) ? "kHotpatchKeepNative" : "0";
             sb.Append("    { reinterpret_cast<void*>(&").Append(entry.NativeSymbol).Append("), ")
-              .Append("reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0u },");
+              .Append("reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, ")
+              .Append(flags).Append(" },");
             sb.Append("  // ").Append(entry.TypeName).Append("::").Append(entry.MethodName).AppendLine();
         }
         sb.AppendLine("};");
@@ -526,14 +554,22 @@ public sealed partial class NativeAotLoweringPlanner
         return sb.ToString();
     }
 
+    private Dictionary<string, int>? _typeTokenCache;
+
     private uint GetTypeTokenForSubjectId(string subjectId)
     {
-        // Try to find the type token from the module type data first
-        for (int i = 0; i < _moduleTypeSubjectIds.Count; i++)
+        // Build O(1) lookup cache on first access
+        if (_typeTokenCache == null)
         {
-            if (string.Equals(_moduleTypeSubjectIds[i], subjectId, StringComparison.Ordinal))
-                return 0x02000000u | (uint)(i + 1);
+            _typeTokenCache = new Dictionary<string, int>(_moduleTypeSubjectIds.Count, StringComparer.Ordinal);
+            for (int i = 0; i < _moduleTypeSubjectIds.Count; i++)
+                _typeTokenCache[_moduleTypeSubjectIds[i]] = i;
         }
+
+        // Fast path: direct subjectId lookup
+        if (_typeTokenCache.TryGetValue(subjectId, out int index))
+            return 0x02000000u | (uint)(index + 1);
+
         // Fallback: look up via the name-based subject ID format
         // (for types not in this module, like CoreLib attribute types)
         var parts = subjectId.Split('/');

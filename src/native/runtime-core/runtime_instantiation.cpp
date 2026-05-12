@@ -5,7 +5,7 @@
 #include "module_registry.h"    // kMaxModules, GetTypeToken
 #include "hotpatch_table.h"    // Dispatch entry lookup for A2
 #include "reflection_query_model.h"
-#include "runtime_core.h"       // ManagedExceptionCarrier
+#include "runtime_core.h"
 #include "runtime_vtable.h"
 #include "../bootstrap/bootstrap.h"  // GetCodegenBridgeV0
 #include <chaos/profile.h>
@@ -1056,7 +1056,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
         }
 
         // If we couldn't materialize a real handle, ex_handle remains nullptr.
-        throw runtime_core::ManagedExceptionCarrier{ex_handle};
+        throw chaos_managed_exception{reinterpret_cast<CHAOS_IL2CPP_INTPTR>(ex_handle)};
     }
 
     // ── Return value extraction (V0: tag dispatch) ──

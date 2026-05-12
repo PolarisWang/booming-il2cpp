@@ -2251,7 +2251,7 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
         )
 
         for required_fragment in [
-            "ManagedExceptionCarrier",
+            "chaos_managed_exception",
             "throw_stub_name",
             "caught_literal",
             "unreachable_literal",

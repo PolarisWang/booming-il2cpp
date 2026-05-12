@@ -90,11 +90,13 @@ def patch_file(filepath: Path) -> bool:
         print(f"  Cleanup: removed old Program::Main stub ({n} matches)")
 
     # ── Always: #pragma runtime_checks("gs", off) wrapping ────────────────
-    # Insert #pragma runtime_checks("gs", off) after #pragma warning(disable: ...)
+    # Also suppress C4297 (extern "C" function throws C++ exception) because
+    # native bridge functions (convert.cpp) call RaiseManagedException which
+    # throws ManagedExceptionCarrier through extern "C" frames.
     warning_disable = content.find('#pragma warning(disable:')
     if warning_disable != -1:
         disable_line_end = content.find('\n', warning_disable)
-        gs_off = '\n#pragma runtime_checks("gs", off)'
+        gs_off = '\n#pragma warning(disable: 4297)\n#pragma runtime_checks("gs", off)'
         content = content[:disable_line_end] + gs_off + content[disable_line_end:]
 
     # ── Always: Layer 0 CHAOS_IL2CPP_FAIL → longjmp recovery ──────────────
@@ -168,34 +170,9 @@ def patch_file(filepath: Path) -> bool:
                     content = content[:brace_start + 1] + wrapped + content[closing_brace_pos:]
                     print("  Wrapped RunNativeAot in setjmp/longjmp")
 
-    # Also wrap RunNativeAotAll in setjmp/longjmp if it exists and not already wrapped
-    run_all_start = content.find('extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()')
-    if run_all_start != -1:
-        brace_start = content.find('{', run_all_start)
-        if brace_start != -1:
-            inner_after_brace = content[brace_start + 1:brace_start + 200]
-            if 'setjmp' not in inner_after_brace:
-                depth = 1
-                pos = brace_start + 1
-                while depth > 0 and pos < len(content):
-                    if content[pos] == '{': depth += 1
-                    elif content[pos] == '}': depth -= 1
-                    pos += 1
-                if depth == 0:
-                    closing_brace_pos = pos - 1
-                    inner = content[brace_start + 1:closing_brace_pos].strip()
-                    wrapped = (
-                        "\n    // Wrapped in setjmp/longjmp by patch_bypass Layer 0\n"
-                        "    CHAOS_IL2CPP_INT32 chaos_result = 0;\n"
-                        "    g_chaos_abort_flag = 0;\n"
-                        "    if (setjmp(g_chaos_abort_jmp) == 0)\n    {\n"
-                        "        " + inner + "\n"
-                        "    }\n"
-                        "    if (g_chaos_abort_flag) { return 0; }\n"
-                        "    return chaos_result;\n"
-                    )
-                    content = content[:brace_start + 1] + wrapped + content[closing_brace_pos:]
-                    print("  Wrapped RunNativeAotAll in setjmp/longjmp")
+    # NOTE: RunNativeAotAll setjmp wrapping is no longer done here.
+    # runtime-entry.cpp now handles it uniformly via s_verify_buf + SetExceptionFallback,
+    # which catches both CHAOS_IL2CPP_FAIL and RaiseManagedException paths.
 
     # ── Always: Inject #pragma restore before warning(pop) ────────────────
     pragma_pop = content.rfind('#pragma warning(pop)')

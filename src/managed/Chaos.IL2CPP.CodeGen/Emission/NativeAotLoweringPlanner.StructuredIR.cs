@@ -844,15 +844,14 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     builder.AppendLine(inner +
                         "auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_exception.object_value);");
-                    builder.AppendLine(inner + "if (chaos_header == nullptr)");
+                    builder.AppendLine(inner + "if (chaos_header != nullptr)");
                     builder.AppendLine(inner + "{");
-                    builder.AppendLine(inner + "    throw;");
-                    builder.AppendLine(inner + "}");
                     builder.AppendLine(inner +
-                        "if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &" +
+                        "    if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &" +
                         GetNativeTypeInfoSymbol(er.CatchTypeSubjectId) + "))");
-                    builder.AppendLine(inner + "{");
-                    builder.AppendLine(inner + "    throw;");
+                    builder.AppendLine(inner + "    {");
+                    builder.AppendLine(inner + "        throw;");
+                    builder.AppendLine(inner + "    }");
                     builder.AppendLine(inner + "}");
                     EmitEvalStackPush(builder, inner, "chaos_exception.object_value");
                 }
@@ -1592,18 +1591,19 @@ public sealed partial class NativeAotLoweringPlanner
     private static long s_exceptionBodyCount;
     private static long s_irreducibleCount;
     private static long s_totalMethodCount;
-    private static readonly Dictionary<string, long> s_irreducibleReasons = new();
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, long> s_irreducibleReasons
+        = new(System.StringComparer.Ordinal);
     private static long s_flatRegionCount;
 
     private static void LogStructuredMethod(
         AotCoreIrMethodArtifact method, string kind,
         int instrCount, int blocks, int loops, int exceptionRegions)
     {
-        s_totalMethodCount++;
+        Interlocked.Increment(ref s_totalMethodCount);
         if (kind == "exception-body")
-            s_exceptionBodyCount++;
+            Interlocked.Increment(ref s_exceptionBodyCount);
         else
-            s_structuredMethodCount++;
+            Interlocked.Increment(ref s_structuredMethodCount);
 
         System.Console.Error.WriteLine(
             $"TRACE:EMIT method={SafeShortName(method)} " +
@@ -1618,11 +1618,9 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method, bool isException,
         string reason, int instrCount, int blocks, int loops, int exceptionRegions)
     {
-        s_totalMethodCount++;
-        s_irreducibleCount++;
-        if (!s_irreducibleReasons.ContainsKey(reason))
-            s_irreducibleReasons[reason] = 0;
-        s_irreducibleReasons[reason]++;
+        Interlocked.Increment(ref s_totalMethodCount);
+        Interlocked.Increment(ref s_irreducibleCount);
+        s_irreducibleReasons.AddOrUpdate(reason, 1, (_, existing) => existing + 1);
 
         System.Console.Error.WriteLine(
             $"TRACE:FLAT method={SafeShortName(method)} " +

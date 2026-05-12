@@ -46,7 +46,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
                 thread,
                 reinterpret_cast<ExceptionHandle>(const_cast<char*>("nested-phase2-proof")));
             message = abi->string_new_utf8(runtime, thread, "unreachable-inner", 17u);
-        } catch (const chaos::il2cpp::runtime_core::ManagedExceptionCarrier&) {
+        } catch (const chaos_managed_exception&) {
             message = abi->string_new_utf8(runtime, thread, {{ expected_output }}, {{ expected_output_byte_count }}u);
         }
         void* inner_finally_message = abi->string_new_utf8(runtime, thread, "Nested EH inner finally.", 24u);
@@ -57,7 +57,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
         if (inner_finally_status != CHAOS_BRIDGE_STATUS_OK) {
             return inner_finally_status;
         }
-    } catch (const chaos::il2cpp::runtime_core::ManagedExceptionCarrier&) {
+    } catch (const chaos_managed_exception&) {
         message = abi->string_new_utf8(runtime, thread, "unreachable-outer", 17u);
     }
     void* outer_finally_message = abi->string_new_utf8(runtime, thread, {{ finally_literal }}, {{ finally_literal_byte_count }}u);

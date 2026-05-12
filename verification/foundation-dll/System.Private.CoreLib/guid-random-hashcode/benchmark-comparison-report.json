@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/guid/random/hashcode",
+  "summary": {
+    "totalMethods": 14,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 14,
+    "nativeFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.Byte[])",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Guid::ToString:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Random::.ctor:System.Void()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Random::NextDouble:System.Double()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

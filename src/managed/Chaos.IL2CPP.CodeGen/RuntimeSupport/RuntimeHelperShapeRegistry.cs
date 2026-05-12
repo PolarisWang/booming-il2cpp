@@ -45,7 +45,9 @@ public sealed partial class NativeAotLoweringPlanner
             IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis,
             AotCoreIrAbiSlotArtifact ReturnAbi,
             IReadOnlySet<int> RawArgumentIndices,
-            IReadOnlySet<string>? ReferencedStaticFieldSubjectIds = null);
+            IReadOnlySet<string>? ReferencedStaticFieldSubjectIds = null,
+            string? DirectNativeSymbol = null,
+            string? DirectNativeHeader = null);
 
         /// <summary>Descriptor for a shape matched by type+method prefix with a resolver lambda.</summary>
         public sealed record GenericShapeDescriptor(
@@ -2172,7 +2174,9 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 });
                 }));
 
-            // === Convert.ToChar (GenericShapeDescriptor — handles all overloads) ===
+            // === Convert.ToChar (GenericShapeDescriptor — native bridge to convert.cpp) ===
+            // All overloads delegate to chaos_convert_tochar_* functions in convert.cpp.
+            // This eliminates 200+ lines of duplicate StringId/exception body code per overload.
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Convert",
                 MethodName: "ToChar",
@@ -2180,134 +2184,41 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    if (paramTypes.Count == 0)
-                    {
-                        var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_UINT16", symbol, "",
-                        [
-                            "    return static_cast<CHAOS_IL2CPP_UINT16>(0);",
-                        ]);
-                        return new GenericShapeResolution(src0, symbol,
-                            Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                            new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt16, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                            EmptyRawArgumentIndices);
-                    }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var pt in paramTypes)
                         abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
-                    var body = new List<string>();
-                    // Generate StringId-aware code for System.String parameters:
-                    // ldstr now pushes a tagged StringId instead of a heap pointer.
-                    for (int i = 0; i < paramTypes.Count; i++)
-                    {
-                        if (paramTypes[i] == "System.String")
-                        {
-                            body.Add($"    if (chaos_is_string_id(chaos_arg_{i}))");
-                            body.Add($"    {{");
-                            body.Add($"        const auto chaos_view = chaos::il2cpp::string_table::Resolve(chaos_extract_string_id(chaos_arg_{i}));");
-                            // For single-string-parameter overloads (like ToChar(string)),
-                            // read the first UTF-8 byte. If the string has multiple chars,
-                            // throw FormatException (matches managed behavior).
-                            if (paramTypes.Count == 1)
-                            {
-                                body.Add("        if (chaos_view.byte_count > 1) {");
-                                body.Add("            auto* chaos_exc = new chaos_type_System_Private_CoreLib_System_FormatException();");
-                                body.Add("            chaos_exc->header.type_info = &chaos_type_info_v0_System_Private_CoreLib_System_FormatException.hot;");
-                                body.Add("            throw chaos_managed_exception{ reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_exc) };");
-                                body.Add("        }");
-                                body.Add("        return chaos_view.byte_count > 0");
-                                body.Add("            ? static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(chaos_view.utf8_data[0]))");
-                                body.Add("            : static_cast<CHAOS_IL2CPP_UINT16>(0);");
-                            }
-                            else
-                            {
-                                body.Add("        if (chaos_view.byte_count > 1) {");
-                                body.Add("            auto* chaos_exc = new chaos_type_System_Private_CoreLib_System_FormatException();");
-                                body.Add("            chaos_exc->header.type_info = &chaos_type_info_v0_System_Private_CoreLib_System_FormatException.hot;");
-                                body.Add("            throw chaos_managed_exception{ reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_exc) };");
-                                body.Add("        }");
-                                body.Add("        return chaos_view.byte_count > 0");
-                                body.Add("            ? static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(chaos_view.utf8_data[0]))");
-                                body.Add("            : static_cast<CHAOS_IL2CPP_UINT16>(0);");
-                            }
-                            body.Add($"    }}");
-                            // Raw heap-allocated string pointer (not string_id):
-                            // entry methods create chaos_type_System_String via new + utf8_data assignment.
-                            // Handle the same way as string_id: check length, throw FormatException if >1.
-                            body.Add("    auto* chaos_s = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_arg_0);");
-                            body.Add("    if (chaos_s == nullptr) {");
-                            body.Add("        return static_cast<CHAOS_IL2CPP_UINT16>(0);");
-                            body.Add("    }");
-                            body.Add("    auto len = static_cast<CHAOS_IL2CPP_INT32>(chaos_s->length);");
-                            if (paramTypes.Count == 1)
-                            {
-                                body.Add("    if (len > 1) {");
-                                body.Add("        auto* chaos_exc = new chaos_type_System_Private_CoreLib_System_FormatException();");
-                                body.Add("        chaos_exc->header.type_info = &chaos_type_info_v0_System_Private_CoreLib_System_FormatException.hot;");
-                                body.Add("        throw chaos_managed_exception{ reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_exc) };");
-                                body.Add("    }");
-                                body.Add("    return len > 0");
-                                body.Add("        ? static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(chaos_s->utf8_data[0]))");
-                                body.Add("        : static_cast<CHAOS_IL2CPP_UINT16>(0);");
-                            }
-                            else
-                            {
-                                body.Add("    if (len > 1) {");
-                                body.Add("        auto* chaos_exc = new chaos_type_System_Private_CoreLib_System_FormatException();");
-                                body.Add("        chaos_exc->header.type_info = &chaos_type_info_v0_System_Private_CoreLib_System_FormatException.hot;");
-                                body.Add("        throw chaos_managed_exception{ reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_exc) };");
-                                body.Add("    }");
-                                body.Add("    return len > 0");
-                                body.Add("        ? static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(chaos_s->utf8_data[0]))");
-                                body.Add("        : static_cast<CHAOS_IL2CPP_UINT16>(0);");
-                            }
-                        }
-                    }
+                    var retAbi = new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt16, TypeShape = AotCoreIrTypeShapeKind.ValueType };
 
-                    // Determine conversion strategy based on first parameter type.
-                    // Convert.ToChar overloads all convert from a single source value.
-                    if (paramTypes.Count > 0)
+                    // Map parameter types to native chaos_convert_tochar_* symbols
+                    string nativeFn = paramTypes.Count switch
                     {
-                        var firstParam = paramTypes[0];
-                        if (firstParam is "System.Byte" or "System.SByte" or "System.Int16" or "System.UInt16"
-                            or "System.Int32" or "System.UInt32" or "System.Int64" or "System.UInt64"
-                            or "System.Char")
-                        {
-                            // Integral types and char: direct truncation cast.
-                            body.Add($"    return static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0);");
-                        }
-                        else if (firstParam == "System.Object")
-                        {
-                            // Boxed object: the value is a pointer to a heap-allocated
-                            // boxed struct. After Phase 2 (Value type box header -> PureTypeHeader),
-                            // all value-type boxes use PureTypeHeader (8B = type_info),
-                            // so the value is at offset 8 = slots[1].
-                            body.Add($"    auto* chaos_slots = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_arg_0);");
-                            body.Add($"    return static_cast<CHAOS_IL2CPP_UINT16>(chaos_slots[1]);");
-                        }
-                        else
-                        {
-                            // Invalid conversion type (bool, DateTime, Decimal, Double, Single):
-                            // managed Convert.ToChar throws InvalidCastException.
-                            // Use direct C++ throw (NOT RaiseInvalidCastException) to bypass the
-                            // managed ABI — entry.exe has no full managed runtime.
-                            // Prerequisite: CMake /EHsc → /EHs so extern "C" frames propagate.
-                            var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                            body.Add($"    {voidExprs};");
-                            body.Add("    auto* chaos_exc = new chaos_type_System_Private_CoreLib_System_InvalidCastException();");
-                            body.Add("    chaos_exc->header.type_info = &chaos_type_info_v0_System_Private_CoreLib_System_InvalidCastException.hot;");
-                            body.Add("    throw chaos_managed_exception{ reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_exc) };");
-                        }
+                        0 => "chaos_convert_tochar_int32",  // no-arg → return 0
+                        1 => GetToCharNativeSymbol(paramTypes[0]),
+                        2 when paramTypes[0] == "System.Object" => "chaos_convert_tochar_object_provider",
+                        2 when paramTypes[0] == "System.String" => "chaos_convert_tochar_string_provider",
+                        _ => "chaos_convert_tochar_int32",
+                    };
+
+                    // Generate thin forwarding body that calls the native function.
+                    var args = abiSlots.Count == 0 ? "" :
+                        string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"chaos_arg_{i}"));
+                    string[] bodyLines;
+                    if (abiSlots.Count == 0)
+                    {
+                        bodyLines = ["    return static_cast<CHAOS_IL2CPP_UINT16>(0);"];
                     }
                     else
                     {
-                        body.Add("    return static_cast<CHAOS_IL2CPP_UINT16>(0);");
+                        bodyLines = [$"    return {nativeFn}({args});"];
                     }
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_UINT16", symbol, paramSig, body.ToArray());
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_UINT16", symbol, paramSig, bodyLines);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
-                        new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt16, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
+                        retAbi,
+                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)),
+                        DirectNativeSymbol: nativeFn,
+                        DirectNativeHeader: "\"convert.h\"");
                 }));
 
             // === Convert.ToChar — inline shapes for value-type overloads ===
@@ -5681,6 +5592,31 @@ public sealed partial class NativeAotLoweringPlanner
             var paramsPart = subjectId[(parenOpen + 1)..parenClose];
             if (string.IsNullOrEmpty(paramsPart)) return [];
             return paramsPart.Split(',');
+        }
+
+        /// <summary>Map Convert.ToChar parameter type to the corresponding chaos_convert_tochar_* native function.</summary>
+        private static string GetToCharNativeSymbol(string paramType)
+        {
+            return paramType switch
+            {
+                "System.Boolean" => "chaos_convert_tochar_boolean",
+                "System.Byte" => "chaos_convert_tochar_byte",
+                "System.Char" => "chaos_convert_tochar_char",
+                "System.DateTime" => "chaos_convert_tochar_datetime",
+                "System.Decimal" => "chaos_convert_tochar_decimal",
+                "System.Double" => "chaos_convert_tochar_double",
+                "System.Int16" => "chaos_convert_tochar_int16",
+                "System.Int32" => "chaos_convert_tochar_int32",
+                "System.Int64" => "chaos_convert_tochar_int64",
+                "System.Object" => "chaos_convert_tochar_object",
+                "System.SByte" => "chaos_convert_tochar_sbyte",
+                "System.Single" => "chaos_convert_tochar_single",
+                "System.String" => "chaos_convert_tochar_string",
+                "System.UInt16" => "chaos_convert_tochar_uint16",
+                "System.UInt32" => "chaos_convert_tochar_uint32",
+                "System.UInt64" => "chaos_convert_tochar_uint64",
+                _ => "chaos_convert_tochar_int32",
+            };
         }
 
         private static string SanitizeForEnumName(string name)

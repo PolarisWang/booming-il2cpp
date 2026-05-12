@@ -77,6 +77,25 @@ add_library(chaos_runtime_core STATIC
     fast_frame_pool.h
     fast_frame_pool.cpp
     gc_bump_cache.h
+    gc_bit_utils.h
+    gc_scheduler.h
+    gc_scheduler.cpp
+    gc_region.h
+    gc_region.cpp
+    gc_card_table.h
+    gc_card_table.cpp
+    gc_root_scanner.h
+    gc_root_scanner.cpp
+    gc_young_collector.h
+    gc_young_collector.cpp
+    gc_old_gen.h
+    gc_old_gen.cpp
+    gc_layout.h
+    gc_layout.cpp
+    gc_stats.h
+    gc_stats.cpp
+    domain_unloader.h
+    domain_unloader.cpp
     native_library.h
     native_library.cpp
     exception_api.cpp
@@ -89,7 +108,7 @@ target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)
 target_compile_definitions(chaos_runtime_core PUBLIC CHAOS_RUNTIME_ABI_STATIC)
 target_compile_definitions(chaos_runtime_core PUBLIC GC_NOT_DLL)
 target_compile_definitions(chaos_runtime_core PUBLIC NOMINMAX)
-target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /FS>)
+target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /FS /EHs /EHc->)
 target_include_directories(
     chaos_runtime_core
     PUBLIC
@@ -98,6 +117,7 @@ target_include_directories(
         "${CMAKE_CURRENT_LIST_DIR}")
 
 target_link_libraries(chaos_runtime_core PUBLIC chaos_bdwgc)
+target_link_libraries(chaos_runtime_core PRIVATE chaos_fmt)
 target_include_directories(chaos_runtime_core PRIVATE
     "${REPO_ROOT}/third_party/bdwgc/include"
     "${REPO_ROOT}/src/native/interpreter"

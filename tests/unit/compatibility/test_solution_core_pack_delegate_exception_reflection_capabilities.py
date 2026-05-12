@@ -197,13 +197,13 @@ class SolutionCorePackDelegateExceptionReflectionCapabilitiesTests(unittest.Test
         self.assertIn("CreateDelegate(", bootstrap_source)
         self.assertIn("DelegateInvoke(", bootstrap_source)
         self.assertIn("CHAOS_BRIDGE_STATUS_MANAGED_EXCEPTION", bootstrap_source)
-        self.assertIn("catch (const chaos::il2cpp::runtime_core::ManagedExceptionCarrier& carrier)", bootstrap_source)
+        self.assertIn("catch (const chaos_managed_exception& carrier)", bootstrap_source)
 
-        self.assertIn("struct ManagedExceptionCarrier", runtime_core_source)
-        self.assertIn("throw ManagedExceptionCarrier", runtime_core_source)
+        self.assertIn("struct chaos_managed_exception", runtime_core_source)
+        self.assertIn("throw chaos_managed_exception", runtime_core_source)
         self.assertIn("MethodInvoke(", runtime_core_source)
-        self.assertIn("catch (const ManagedExceptionCarrier& carrier)", runtime_core_source)
-        self.assertIn("struct ManagedExceptionCarrier", runtime_core_header_source)
+        self.assertIn("catch (const chaos_managed_exception& carrier)", runtime_core_source)
+        self.assertIn("struct chaos_managed_exception", runtime_core_header_source)
 
 
 if __name__ == "__main__":

@@ -2,7 +2,12 @@
 #define CHAOS_IL2CPP_THREAD_STATE_H_
 
 #include <chaos/native_types.h>
+#include <chaos/type_info.h>
 #include <atomic>
+
+namespace chaos::il2cpp::runtime_core {
+struct NurseryContext;
+}
 
 namespace chaos::il2cpp::runtime_core::threading {
 
@@ -24,6 +29,9 @@ struct ManagedThread {
     std::atomic<bool>        pending_abort{false}; // Thread.Abort pending flag
     bool                     at_safepoint{false}; // Currently paused at safepoint (legacy, kept for compat)
     uint32_t                 safepoint_generation{0}; // Last completed GC generation (legacy)
+    /// TLS nursery context (for cross-thread nursery scanning in full GC).
+    /// Set in NurseryAllocateSlow, cleared in TeardownTlsNursery.
+    chaos::il2cpp::runtime_core::NurseryContext* nursery_ctx{nullptr};
 };
 
 // ── TLS identity (O(1), no lock) ─────────────────────────────────────
@@ -85,6 +93,13 @@ uint32_t RequestGlobalSafepoint() noexcept;
 
 /// Release all threads from the given safepoint.
 void ReleaseGlobalSafepoint(uint32_t generation) noexcept;
+
+/// Hybrid root scanning: scan all threads' managed stacks using GcSlotMap
+/// (precise) where available, falling back to conservative scanning.
+/// Called after RequestGlobalSafepoint, before GC mark phase.
+/// @param callback  Invoked for each precise root (root_addr, is_interior, user_data)
+/// @param user_data  Opaque pointer passed through to callback
+void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, void* user_data), void* user_data) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core::threading
 

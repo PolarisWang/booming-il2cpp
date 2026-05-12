@@ -115,11 +115,28 @@ public sealed class AotCoreIrLowering
                 // Rewrite the callee to the value type's own override method
                 // so the emission path resolves it directly instead of dispatching
                 // through the base type's vtable (Object::GetHashCode → Guid::GetHashCode).
-                if (ResolveConstrainedValueTypeOverride(typedInstruction) is { } overrideSubjectId)
+                // Also correct the TargetReference SubjectId so the JSON artifact
+                // carries the correct method identity for interpreter/hotpatch paths.
+                ManagedInstructionReference? instructionReference = managedInstruction.Reference;
+                var constrainedOverrideSubjectId = ResolveConstrainedValueTypeOverride(typedInstruction);
+                if (constrainedOverrideSubjectId is not null)
                 {
-                    Console.Error.WriteLine($"[constrained] {typedInstruction.ConstrainedTypeSubjectId} :: {typedInstruction.Callee} -> {overrideSubjectId}");
-                    typedInstruction = typedInstruction with { Callee = overrideSubjectId };
+                    Console.Error.WriteLine($"[constrained] {typedInstruction.ConstrainedTypeSubjectId} :: {typedInstruction.Callee} -> {constrainedOverrideSubjectId}");
+                    typedInstruction = typedInstruction with { Callee = constrainedOverrideSubjectId, DispatchKindCode = HybridDispatchKind.Direct };
                     directCallTarget = ResolveDirectCallTarget(typedInstruction, managedMethods, targetSymbols);
+
+                    // Re-resolve TargetReference with corrected SubjectId so
+                    // C++ aot_core_ir_reader uses the override method identity.
+                    if (managedInstruction.Reference is not null &&
+                        managedMethods.TryGetValue(constrainedOverrideSubjectId, out var constrainedOverrideMethod))
+                    {
+                        instructionReference = new ManagedInstructionReference
+                        {
+                            AssemblyName = constrainedOverrideMethod.AssemblyName,
+                            SubjectKind = managedInstruction.Reference.SubjectKind,
+                            SubjectId = constrainedOverrideSubjectId,
+                        };
+                    }
                 }
                 else if (typedInstruction.ConstrainedTypeSubjectId is not null)
                 {
@@ -127,7 +144,7 @@ public sealed class AotCoreIrLowering
                 }
 
                 var targetReference = ResolveTargetReference(
-                    managedInstruction,
+                    instructionReference,
                     typedInstruction,
                     managedTypes,
                     managedFields,
@@ -155,7 +172,7 @@ public sealed class AotCoreIrLowering
                     ResultType = typedInstruction.ResultType,
                     Callee = typedInstruction.Callee,
                     CallSiteSignature = typedInstruction.CallSiteSignature,
-                    Reference = managedInstruction.Reference,
+                    Reference = instructionReference,
                     TargetReference = targetReference,
                     RuntimeServiceKind = ResolveRuntimeServiceKind(typedInstruction),
                     TargetSymbol = directCallTarget.TargetSymbol,
@@ -300,7 +317,19 @@ public sealed class AotCoreIrLowering
         IReadOnlyDictionary<string, ManagedMethodModel> managedMethods,
         IReadOnlyDictionary<string, GenericInstantiationDemandModel> genericDemandLookup)
     {
-        var reference = managedInstruction.Reference;
+        return ResolveTargetReference(
+            managedInstruction.Reference, typedInstruction, managedTypes,
+            managedFields, managedMethods, genericDemandLookup);
+    }
+
+    private static AotCoreIrReferenceArtifact? ResolveTargetReference(
+        ManagedInstructionReference? reference,
+        TypedIlInstructionArtifact typedInstruction,
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, ManagedFieldModel> managedFields,
+        IReadOnlyDictionary<string, ManagedMethodModel> managedMethods,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel> genericDemandLookup)
+    {
         if (reference is null)
         {
             return null;
@@ -464,6 +493,8 @@ public sealed class AotCoreIrLowering
                     genericDemandLookup);
 
             default:
+                System.Console.Error.WriteLine(
+                    $"[warning] AotCoreIrLowering: unknown opcode '{typedInstruction.Op}' in ResolveTargetReference, returning null reference.");
                 return null;
         }
     }
@@ -641,8 +672,14 @@ public sealed class AotCoreIrLowering
             "unbox" => InstructionOpCode.Unbox,
             "unbox.any" => InstructionOpCode.Unbox,
             "xor" => InstructionOpCode.Xor,
-            _ => null,
+            _ => UnknownOpWarning(op),
         };
+    }
+
+    private static InstructionOpCode? UnknownOpWarning(string op)
+    {
+        System.Console.Error.WriteLine($"[warning] AotCoreIrLowering: unknown opcode '{op}' during lowering.");
+        return null;
     }
 
     private static (string? TargetSymbol, int? TargetParameterCount, string? TargetReturnType) ResolveDirectCallTarget(

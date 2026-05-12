@@ -116,6 +116,10 @@ CHAOS_IL2CPP_LOG_DEBUG("进入 OptimizedPath, is_special=%d", is_special);
 //    运行后查看 stdout 的 RDTSC 耗时表
 ```
 
+## 禁止 git stash（强制）
+
+严禁在任何情况下使用 `git stash`。Stash 会隐藏工作区未提交变更，导致其他人或 AI Agent 在后续操作中丢失更改记录。`git stash drop` 更会造成不可逆的数据损失。需要临时切换上下文时，应使用 `git worktree` 或显式提交到分支。
+
 ## 统一内存分配约束（强制）
 
 IL2CPP 生成 C++ 代码会被引入游戏引擎源码，因此分配行为必须遵循以下约束：
