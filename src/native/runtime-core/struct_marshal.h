@@ -2,7 +2,7 @@
 #define CHAOS_IL2CPP_STRUCT_MARSHAL_H_
 
 #include "marshal_abi.h"
-#include "runtime_abi.h"
+#include <runtime_abi.h>
 
 namespace chaos::il2cpp::struct_marshal {
 

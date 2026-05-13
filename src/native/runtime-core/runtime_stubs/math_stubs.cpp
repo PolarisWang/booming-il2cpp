@@ -70,6 +70,11 @@ CHAOS_IL2CPP_INT32 ChaosMathMinInt32(CHAOS_IL2CPP_INT32 a, CHAOS_IL2CPP_INT32 b)
     return (a < b) ? a : b;
 }
 
+CHAOS_IL2CPP_FLOAT64 ChaosMathMinDouble(CHAOS_IL2CPP_FLOAT64 a, CHAOS_IL2CPP_FLOAT64 b) noexcept
+{
+    return (a < b) ? a : b;
+}
+
 CHAOS_IL2CPP_FLOAT64 ChaosMathPow(CHAOS_IL2CPP_FLOAT64 x, CHAOS_IL2CPP_FLOAT64 y) noexcept
 {
     return std::pow(x, y);

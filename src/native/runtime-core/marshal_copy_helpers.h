@@ -2,7 +2,7 @@
 #define CHAOS_IL2CPP_MARSHAL_COPY_HELPERS_H_
 
 #include <chaos/native_types.h>
-#include "runtime_abi.h"
+#include <runtime_abi.h>
 
 namespace chaos::il2cpp::marshal_copy_helpers {
 

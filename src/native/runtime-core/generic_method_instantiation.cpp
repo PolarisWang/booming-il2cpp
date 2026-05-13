@@ -3,7 +3,7 @@
 #include "gc_helpers.h"           // DomainStrDup
 #include "memory_domain.h"        // CurrentDomain, CHAOS_IL2CPP_DOMAIN_CURRENT_*
 #include "runtime_core.h"         // RuntimeMode, RuntimeStatus for gc_helpers.h
-#include "runtime_instantiation.h" // AllocateRuntimeToken
+#include "instantiation_engine.h" // AllocateRuntimeToken
 
 #include <chaos/native_types.h>
 #include <chaos/trace.h>

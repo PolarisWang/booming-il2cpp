@@ -1,7 +1,7 @@
 #ifndef CHAOS_IL2CPP_MODULE_REGISTRY_H_
 #define CHAOS_IL2CPP_MODULE_REGISTRY_H_
 
-#include "runtime_abi.h"
+#include <runtime_abi.h>
 #include "reflection_query_model.h"
 #include "abi_manifest.h"
 #include "hotpatch_table.h"

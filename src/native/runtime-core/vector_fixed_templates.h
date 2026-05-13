@@ -4,7 +4,7 @@
 #include <chaos/native_types.h>
 #include <cstring>
 #include <cstdint>
-#include "runtime_abi.h"
+#include <runtime_abi.h>
 #include "runtime_capability.h"
 #include "numerics_carriers.h"
 

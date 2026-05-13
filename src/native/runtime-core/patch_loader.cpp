@@ -4,7 +4,7 @@
 #include <interpreter_vm.h>       // interpreter::IRMethod (for delete in DestroyPatchContext)
 #include "module_registry.h"
 #include "reflection_query_model.h"
-#include "runtime_instantiation.h"  // CachedCallInfo (for delete[] in DestroyPatchContext)
+#include "instantiation_engine.h"  // CachedCallInfo (for delete[] in DestroyPatchContext)
 
 #include "bootstrap/bootstrap.h"
 

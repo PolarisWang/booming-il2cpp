@@ -12,7 +12,15 @@ extern "C" {
 
 CHAOS_IL2CPP_INTPTR ChaosArrayEmpty(void) noexcept
 {
-    return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    // Allocate a zero-length managed array
+    auto* storage = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(sizeof(ManagedArrayAccessor)));
+    if (storage == nullptr) return 0;
+    auto* arr = reinterpret_cast<ManagedArrayAccessor*>(storage);
+    std::memset(arr, 0, sizeof(ManagedArrayAccessor));
+    arr->element_type_shape = 0;
+    arr->length = 0;
+    arr->elements = nullptr;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
 
 void ChaosArrayCopy(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 sourceIndex, CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INT32 destIndex, CHAOS_IL2CPP_INT32 count) noexcept

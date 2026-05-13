@@ -8,6 +8,7 @@
 
 #include "generated_code_compat.h"
 #include "runtime_stubs/stub_common.h"
+#include "runtime_stubs/string_stubs.h"
 #include "gc_helpers.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -119,14 +120,18 @@ CHAOS_IL2CPP_INTPTR ChaosCultureGetNumberFormat(CHAOS_IL2CPP_INTPTR /*culture*/)
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_stub_subsystem);
 }
 
-CHAOS_IL2CPP_INT32 ChaosCompareInfoCompare(CHAOS_IL2CPP_INTPTR /*compare_info*/, CHAOS_IL2CPP_INTPTR /*a*/, CHAOS_IL2CPP_INTPTR /*b*/) noexcept
+CHAOS_IL2CPP_INT32 ChaosCompareInfoCompare(CHAOS_IL2CPP_INTPTR compare_info, CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b) noexcept
 {
-    return 0;
+    (void)compare_info;
+    // Ordinal string comparison via delegated ChaosStringCompare
+    return static_cast<CHAOS_IL2CPP_INT32>(ChaosStringCompare(a, b));
 }
 
-CHAOS_IL2CPP_INT32 ChaosCompareInfoIndexOf(CHAOS_IL2CPP_INTPTR /*compare_info*/, CHAOS_IL2CPP_INTPTR /*source*/, CHAOS_IL2CPP_INTPTR /*value*/) noexcept
+CHAOS_IL2CPP_INT32 ChaosCompareInfoIndexOf(CHAOS_IL2CPP_INTPTR compare_info, CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    return 0;
+    (void)compare_info;
+    // Ordinal substring search via delegated ChaosStringIndexOf
+    return ChaosStringIndexOf(source, value);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosCultureGetTextInfo(CHAOS_IL2CPP_INTPTR /*culture*/) noexcept

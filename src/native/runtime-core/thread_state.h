@@ -32,6 +32,10 @@ struct ManagedThread {
     /// TLS nursery context (for cross-thread nursery scanning in full GC).
     /// Set in NurseryAllocateSlow, cleared in TeardownTlsNursery.
     chaos::il2cpp::runtime_core::NurseryContext* nursery_ctx{nullptr};
+    /// Stack bounds for conservative root scanning during full GC.
+    /// Populated in RegisterThread, read-only after that.
+    void* stack_base{nullptr};   // High address of the thread's stack
+    void* stack_limit{nullptr};  // Low address of the thread's stack
 };
 
 // ── TLS identity (O(1), no lock) ─────────────────────────────────────

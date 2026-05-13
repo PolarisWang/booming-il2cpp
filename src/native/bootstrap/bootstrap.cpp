@@ -10,9 +10,9 @@
 #include "reflection_query_model.h"
 #include "module_registry.h"
 #include "runtime_core.h"
-// NOTE: file name collision with contracts/native/v0/runtime_instantiation.h (C bridge).
-// Relative path ensures we pick up runtime-core's C++ namespace header.
-#include "../runtime-core/runtime_instantiation.h"   // RegisterMethodAotEntries
+// NOTE: previously collided with contracts/native/v0/runtime_instantiation.h (C bridge).
+// runtime-core renamed to instantiation_engine.h to resolve the collision.
+#include "instantiation_engine.h"   // RegisterMethodAotEntries
 #include "string_table.h"
 #include "support.h"
 #include "vtable_registry.h"
