@@ -503,6 +503,8 @@ bool UnregisterMemoryDomain(DomainId domain_id) {
             }
 
             domain->is_unloaded = true;
+            delete domain;
+            domain = nullptr;
             return true;
         }
     }

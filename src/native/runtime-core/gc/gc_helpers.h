@@ -53,6 +53,7 @@ bool ArrayReverseReferenceRange(
 
 /// Mark the object as changed (for incremental GC write barrier).
 /// No-op when bdwgc is not compiled with MANUAL_VDB.
+/// C3 stub: will be wired for incremental GC in later milestones.
 void GcEndStubbornChange(const void* obj);
 
 /// String duplicate through the current TLS domain heap.

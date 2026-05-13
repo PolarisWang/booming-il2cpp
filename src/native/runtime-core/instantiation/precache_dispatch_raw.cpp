@@ -38,6 +38,64 @@ CachedCallInfo PrecacheCallTarget(void* call_target) noexcept {
     }
 
     info.ret_tag = static_cast<uint8_t>(ret_tag);
+
+    // ── MIC: Resolve direct native function pointer ──────────────────────────
+    // When the target method has a non-patched AOT dispatch entry, cache its
+    // direct_ptr so Handle_Call can skip InterpreterDispatchRaw/method_invoke.
+    if (method_desc != nullptr && method_desc->subject_id_utf8 != nullptr &&
+        method_desc->subject_id_utf8[0] != '\0') {
+        const char* sid = method_desc->subject_id_utf8;
+        // Format: "AssemblyName/Namespace.TypeName:MethodName(Params...)"
+        const char* type_start = std::strchr(sid, '/');
+        if (type_start != nullptr) {
+            ++type_start;
+            const char* method_start = std::strstr(type_start, "::");
+            if (method_start != nullptr) {
+                const char* tname_start = type_start;
+                for (const char* p = type_start; p < method_start; ++p) {
+                    if (*p == '.') tname_start = p + 1;
+                }
+                std::string ns;
+                if (tname_start > type_start) {
+                    ns.assign(type_start, tname_start - type_start - 1);
+                }
+                std::string type_name(tname_start, method_start - tname_start);
+                const char* paren = std::strchr(method_start + 2, '(');
+                std::string method_name;
+                if (paren != nullptr) {
+                    method_name.assign(method_start + 2, paren - method_start - 2);
+                } else {
+                    method_name.assign(method_start + 2);
+                }
+                if (!type_name.empty() && !method_name.empty()) {
+                    auto& registry = runtime_core::GetHotpatchNameRegistry();
+                    uint64_t lookup = registry.LookupMethod(
+                        ns.c_str(), type_name.c_str(), method_name.c_str());
+                    if (lookup != 0) {
+                        info.module_id = runtime_core::ExtractModuleId(lookup);
+                        uint32_t token = runtime_core::ExtractToken(lookup);
+                        info.slot = registry.TokenToSlot(info.module_id, token);
+                        if (info.slot != ~0u) {
+                            auto* entry = registry.GetDispatchEntryBySlot(
+                                info.module_id, info.slot);
+                            if (entry != nullptr) {
+                                // Acquire fence pairs with SetPatchedBySlot release.
+                                std::atomic_thread_fence(std::memory_order_acquire);
+                                bool is_active = (entry->flags & kHotpatchActive) != 0;
+                                if (!is_active && entry->direct_ptr != nullptr) {
+                                    info.direct_ptr = entry->direct_ptr;
+                                    info.is_patched = false;
+                                } else if (is_active) {
+                                    info.is_patched = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     return info;
 }
 

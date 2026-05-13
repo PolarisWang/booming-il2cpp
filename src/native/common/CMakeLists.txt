@@ -5,19 +5,24 @@ add_library(chaos_common STATIC
     chaos/native_types.h
     chaos/checked_conv.h
     chaos/arithmetic.h
-    chaos/load_store.h
+    chaos/config.h
     chaos/finally.h
-    chaos/ptr_tag.h
-    chaos/status.h
-    chaos/static_init.h
-    chaos/span.h
-    chaos/collection.h
-    chaos/monitor.h
-    chaos/thread.h
-    chaos/async.h
-    chaos/trace.h
+    chaos/format.h
+    chaos/json_reader.h
+    chaos/load_store.h
     chaos/log.h
+    chaos/monitor.h
+    chaos/profile.h
+    chaos/ptr_tag.h
+    chaos/span.h
+    chaos/static_init.h
+    chaos/status.h
+    chaos/thread.h
+    chaos/trace.h
+    chaos/type_info.h
     chaos/profile_globals.cpp
+    chaos/collection.h
+    chaos/async.h
     span.cpp
     collection.cpp
     monitor.cpp

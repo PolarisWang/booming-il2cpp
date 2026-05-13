@@ -117,9 +117,10 @@ public:
     /// @param user_data      Opaque user data for root_callback.
     void Collect(void (*root_callback)(void* obj, void* user_data), void* user_data);
 
-    /// Perform a small incremental GC slice.
-    /// Returns true if a full collection was completed.
-    bool CollectIncremental();
+    /// Perform a full mark-sweep collection (synchronous STW).
+    /// At C3 this is a full collect; C3+ will add incremental slices.
+    /// Returns true after collection completes.
+    bool CollectFull();
 
     // ── Pinned root support ─────────────────────────────────────
 
@@ -234,6 +235,9 @@ private:
     std::atomic<uint64_t> marked_count_{0};
 
     // Mark stack for tri-color marking (vector = stack).
+    // Bounded to kMaxMarkStack entries to prevent OOM from deep object graphs.
+    // Overflow triggers a conservative rescan of all pages in lieu of pushing.
+    static constexpr size_t kMaxMarkStack = 256 * 1024;  // 256K entries = 2 MB
     std::vector<void*> mark_stack_;
 
     // Per-size-class last-used-page cache (avoids O(n) page_list walk).

@@ -606,7 +606,7 @@ cmake_minimum_required(VERSION 3.20)
 # /EHsc default blocks exceptions through extern "C" frames.
 # Strip EH from INIT flags; use CMAKE_MSVC_EXCEPTION_HANDLING instead.
 set(CMAKE_CXX_FLAGS_INIT "/DWIN32 /D_WINDOWS")
-set(CMAKE_MSVC_EXCEPTION_HANDLING "Sync")
+set(CMAKE_MSVC_EXCEPTION_HANDLING "Async")
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
 project(chaos_gen LANGUAGES CXX)
 
@@ -630,6 +630,10 @@ set(COMMON_INCLUDE_DIRS
     "${{REPO_ROOT}}/contracts/native/v0"
     "${{REPO_ROOT}}/src/native/common"
     "${{REPO_ROOT}}/src/native/runtime-core"
+    "${{REPO_ROOT}}/src/native/runtime-core/gc"
+    "${{REPO_ROOT}}/src/native/interpreter"
+    "${{REPO_ROOT}}/src/native/interpreter/generated"
+    "${{REPO_ROOT}}/src/native"
     "${{REPO_ROOT}}/third_party/fmt/include"
     "${{REPO_ROOT}}/third_party/bdwgc/include"
 )

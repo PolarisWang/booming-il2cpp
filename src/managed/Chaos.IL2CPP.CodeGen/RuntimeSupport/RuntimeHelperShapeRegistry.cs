@@ -2243,11 +2243,11 @@ public sealed partial class NativeAotLoweringPlanner
                     return null;
                 }));
 
-            // === Convert.ToChar — inline shapes for value-type overloads ===
-            // These emit a direct static_cast at the call site, eliminating
-            // external runtime helper function call overhead (dispatch table
-            // lookup + prolog/epilog).  Managed JIT inlines these to a single
-            // mov instruction — this makes native AOT match that perf.
+            // === Convert.ToChar — always-throw overloads (no possible valid conversion) ===
+            // These emit throw chaos_managed_exception{0} directly at the call site,
+            // eliminating the extern "C" bridge function call, 3 TLS reads, and
+            // ResolveTypeByName module iteration. The arg is consumed from eval stack
+            // but unused in the template (the throw terminates execution).
             registry.RegisterInline(new InlineShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Convert",
                 MethodName: "ToChar",
@@ -2255,12 +2255,12 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     if (paramTypes.Count != 1) return null;
                     var firstParam = paramTypes[0];
-                    if (firstParam is "System.Byte" or "System.SByte" or "System.Int16" or "System.UInt16"
-                        or "System.Int32" or "System.UInt32" or "System.Int64" or "System.UInt64"
-                        or "System.Char")
+                    if (firstParam is "System.Boolean" or "System.DateTime" or "System.Decimal"
+                        or "System.Double" or "System.Single")
                     {
-                        // Direct truncation cast — matches JIT inlining for (char)intValue
-                        return "static_cast<CHAOS_IL2CPP_UINT16>({0})";
+                        // Comma operator: throw terminates execution, second operand
+                        // provides the result type for the caller's eval stack.
+                        return "(throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0))";
                     }
                     return null;
                 }));
@@ -4066,6 +4066,16 @@ public sealed partial class NativeAotLoweringPlanner
                     CreateInt32AbiSlot(),
                 }),
                 CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Math", "Min", ["System.Double", "System.Double"],
+                ShapeKind.SimpleForward, "ChaosMathMinDouble",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0, 1 });
 
             // === Assembly::get_ImageRuntimeVersion ===

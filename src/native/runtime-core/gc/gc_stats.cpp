@@ -3,9 +3,23 @@
 
 #include <chaos/log.h>
 
+#include <cstdlib>
+
 namespace chaos::il2cpp::runtime_core {
 
 GcStats g_gc_stats;
+
+// Register atexit handler via a static initializer.
+namespace {
+    struct AtExitRegistrar {
+        AtExitRegistrar() {
+            std::atexit([]() {
+                GcDumpStats();
+            });
+        }
+    };
+    static AtExitRegistrar s_atexit_registrar;
+}
 
 void GcDumpStats() noexcept {
     // ── Young collection ──────────────────────────────────────────

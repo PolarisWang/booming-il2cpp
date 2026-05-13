@@ -92,8 +92,22 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
         return GetForwardingAddress(obj);
     }
 
-    // Not yet forwarded: copy to a tenured region.
-    CHAOS_IL2CPP_SIZE obj_size = EstimateObjectSize(obj, tls_nursery_ctx.nursery);
+    // Determine the correct nursery for size estimation.
+    // The object may be from a remote thread's nursery (discovered via dirty
+    // card scan in Phase 1).  Using the calling thread's TLS nursery would
+    // give wrong size bounds for cross-thread objects, potentially truncating
+    // the tenured copy and corrupting old-gen data.
+    CHAOS_IL2CPP_SIZE obj_size;
+    if (tls_nursery_ctx.nursery != nullptr &&
+        reinterpret_cast<uintptr_t>(obj) >= reinterpret_cast<uintptr_t>(tls_nursery_ctx.nursery->begin) &&
+        reinterpret_cast<uintptr_t>(obj) < reinterpret_cast<uintptr_t>(tls_nursery_ctx.nursery->current)) {
+        // Object is in the calling thread's own nursery — use TLS bounds.
+        obj_size = EstimateObjectSize(obj, tls_nursery_ctx.nursery);
+    } else {
+        // Cross-thread nursery object — use conservative cap.
+        // C3+ will use precise TypeInfo-based sizing to eliminate this.
+        obj_size = kMaxEstObjectSize;
+    }
 
     void* tenured = g_old_gen.Allocate(obj_size, true);
     if (tenured == nullptr) return nullptr;
@@ -330,6 +344,33 @@ YoungCollectionResult GcYoungCollection(Region* nursery, Region* tenured_target)
                         }
                     }
                     s += sizeof(void*);
+                }
+
+                // Fixup pass: overflow-promoted objects' pointer fields were
+                // not scanned by the BFS.  Walk all forwarded nursery objects
+                // and scan their tenured copies' pointer fields.  Since all
+                // remaining nursery objects are now forwarded, ScanObjectPointers
+                // will find forwarding addresses and fix up any nursery→nursery
+                // pointers without pushing to the (already-full) worklist.
+                // This is O(nursery_used/8) and runs under STW.
+                for (uintptr_t s = nursery_begin; s < nursery_used; ) {
+                    auto* obj = reinterpret_cast<void*>(s);
+                    if (IsForwarded(obj)) {
+                        void* tenured = GetForwardingAddress(obj);
+                        const void* type_info_ptr = *static_cast<const void* const*>(tenured);
+                        if (type_info_ptr != nullptr) {
+                            auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
+                            uint64_t stable_id = hot->stable_id;
+                            const auto* layout = layout_registry.Lookup(stable_id);
+                            if (layout != nullptr && layout->pointer_count > 0) {
+                                ScanObjectPointers(tenured, layout, nursery, &result);
+                            }
+                        }
+                        CHAOS_IL2CPP_SIZE obj_size = EstimateObjectSize(obj, nursery);
+                        s += obj_size;
+                    } else {
+                        s += sizeof(void*);
+                    }
                 }
             }
 

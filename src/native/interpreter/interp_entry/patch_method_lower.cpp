@@ -22,9 +22,46 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
     // Try to claim the lowering slot (0 → 1 via CAS).
     uint32_t expected = 0;
     if (state.compare_exchange_strong(expected, 1, std::memory_order_acq_rel)) {
-        // ── Exclusive: perform IR lowering ──
-        // Deserialize AotCoreIr JSON → IRMethod.
-    const char* json = patch_method->aot_core_ir_json;
+        // ── Phase 0: v2 pre-allocated register IR path ────────────────
+        // When the .patchdata carries pre-serialized RegisterInstruction[] data,
+        // skip JSON deserialization and register allocation entirely.
+        if (patch_method->reg_ir_data != nullptr && patch_method->reg_ir_instr_count > 0) {
+            auto* reg_method = new interpreter::RegisterMethod();
+            auto* raw_instrs = static_cast<const interpreter::RegisterInstruction*>(
+                patch_method->reg_ir_data);
+            reg_method->instructions.assign(raw_instrs,
+                raw_instrs + patch_method->reg_ir_instr_count);
+            reg_method->max_regs = patch_method->reg_ir_max_regs;
+
+            // Copy SEH clauses if present (data follows instructions).
+            if (patch_method->reg_ir_seh_count > 0) {
+                const auto* seh_data = reinterpret_cast<const interpreter::SEHClause*>(
+                    raw_instrs + patch_method->reg_ir_instr_count);
+                reg_method->seh_clauses.assign(seh_data,
+                    seh_data + patch_method->reg_ir_seh_count);
+            }
+
+            patch_method->cached_reg_method = reg_method;
+
+            // Pre-cache signature for fast path.
+            if (!patch_method->cached_sig_valid) {
+                CacheSignature(patch_method);
+            }
+
+            // No call_cache needed (call-site metadata not available in binary IR).
+            // MIC will populate CachedCallInfo on first invocation.
+
+            // Create a minimal IRMethod for compatibility (entry_direct.cpp expects it).
+            auto* ir = new interpreter::IRMethod();
+            ir->instructions.push_back({});  // placeholder Ret
+            patch_method->cached_ir = ir;
+
+            state.store(2, std::memory_order_release);
+            return;
+        }
+
+        // ── Phase 1: Deserialize AotCoreIr JSON → IRMethod (v1 path) ──
+        const char* json = patch_method->aot_core_ir_json;
     if (json == nullptr || json[0] == '\0') {
         // No JSON — create an empty IR with Ret.
         auto* ir = new interpreter::IRMethod();

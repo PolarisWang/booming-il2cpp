@@ -1,5 +1,0 @@
-D3 Hotupdate Test Summary 
-========================= 
- 
-Family | Methods | Passed | Failed | BaselineSkipped | SemanticMismatch | ExitCode 
-------|---------|-------|-------|----------------|-----------------|-------- 

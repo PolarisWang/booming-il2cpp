@@ -19,7 +19,8 @@ namespace chaos::il2cpp::runtime_core {
 
 /// Scan the domain's regions for cross-domain references (domain→core).
 /// At C4, these are cleared (set to null) since the domain is being unloaded.
-static CHAOS_IL2CPP_SIZE ScanAndClearCrossDomainRefs(CHAOS_IL2CPP_UINT32 domain_id) {
+static CHAOS_IL2CPP_SIZE ScanAndClearCrossDomainRefs(CHAOS_IL2CPP_UINT32 domain_id,
+                                                        CHAOS_IL2CPP_SIZE* refs_found_out) {
     CHAOS_IL2CPP_SIZE refs_found = 0;
     CHAOS_IL2CPP_SIZE refs_cleared = 0;
 
@@ -80,12 +81,14 @@ static CHAOS_IL2CPP_SIZE ScanAndClearCrossDomainRefs(CHAOS_IL2CPP_UINT32 domain_
             // Cross-domain reference: clear it.
             *ptr_slot = nullptr;
             refs_cleared++;
+            refs_found++;
         }
     }
 
     CHAOS_IL2CPP_LOG_INFO_M("CRAG", "cross_domain_scan id={0} found={1} cleared={2}",
         domain_id, refs_found, refs_cleared);
-    return refs_found;
+    if (refs_found_out) *refs_found_out = refs_found;
+    return refs_cleared;
 }
 
 // ======================================================================
@@ -108,8 +111,9 @@ DomainUnloadResult UnloadDomain(CHAOS_IL2CPP_UINT32 domain_id) {
     CHAOS_IL2CPP_LOG_DEBUG_M("CRAG", "unload_safepoint gen={0}", gen);
 
     // Phase 2: Scan and clear cross-domain references.
-    result.cross_domain_refs_found = ScanAndClearCrossDomainRefs(domain_id);
-    result.cross_domain_refs_cleared = result.cross_domain_refs_found;
+    CHAOS_IL2CPP_SIZE refs_found = 0;
+    result.cross_domain_refs_cleared = ScanAndClearCrossDomainRefs(domain_id, &refs_found);
+    result.cross_domain_refs_found = refs_found;
 
     // Phase 3: Release all regions owned by this domain.
     RegionManager::Instance().ReleaseDomainRegions(domain_id);

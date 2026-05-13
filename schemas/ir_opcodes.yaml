@@ -4,9 +4,11 @@
 # Each opcode has:
 #   name:     Canonical name (PascalCase)
 #   value:    Integer value (0-98, matches C++ IROpCode enum order)
-#   operands: Ordered list of IRInstruction fields this opcode uses
+#   operands: Ordered list of this opcode's parameters
+#   has_dst:  True if this opcode writes a destination register
+#   has_src:  True if this opcode reads at least one source register
 #
-# Possible operand values:
+# Operand values describe the logical parameters (immediates, targets, etc.):
 #   immediate_i4      - 32-bit integer immediate
 #   immediate_i8      - 64-bit integer immediate
 #   immediate_r8      - 64-bit float immediate
@@ -19,499 +21,703 @@
 #   field_offset      - Field offset for field access
 #   secondary_index   - Secondary index/switch target count
 #   switch_targets    - Switch target array pointer
+#
+# Note: The register allocation pass (ir_reg_alloc.h) converts from stack-based
+# IR (implicit push/pop) to register-based IR (explicit dst/src regs) during
+# IR lowering. The IROpCode enum values remain unchanged — only the execution
+# model changes.  "has_dst: true" means this opcode produces a value;
+# "has_src: true" means it consumes values from source registers.
 
 opcodes:
   - name: LdcI4
     value: 0
+    has_dst: true
+    has_src: false
     operands: [immediate_i4]
-    description: Push int32 constant onto evaluation stack
+    description: Load int32 constant into dst register
 
   - name: LdcI8
     value: 1
+    has_dst: true
+    has_src: false
     operands: [immediate_i8]
-    description: Push int64 constant onto evaluation stack
+    description: Load int64 constant into dst register
 
   - name: LdcR4
     value: 2
+    has_dst: true
+    has_src: false
     operands: [immediate_i4]
-    description: Push float32 constant onto evaluation stack
+    description: Load float32 constant into dst register
 
   - name: LdcR8
     value: 3
+    has_dst: true
+    has_src: false
     operands: [immediate_r8]
-    description: Push float64 constant onto evaluation stack
+    description: Load float64 constant into dst register
 
   - name: LdStr
     value: 4
+    has_dst: true
+    has_src: false
     operands: [string_operand]
-    description: Load string constant
+    description: Load string constant pointer into dst register
 
   - name: LdNull
     value: 5
+    has_dst: true
+    has_src: false
     operands: []
-    description: Push null reference
+    description: Load null reference into dst register
 
   - name: LdArg
     value: 6
+    has_dst: true
+    has_src: false
     operands: [operand_index]
-    description: Load argument by index
+    description: Load argument by index into dst register
 
   - name: LdLoc
     value: 7
+    has_dst: true
+    has_src: false
     operands: [operand_index]
-    description: Load local variable by index
+    description: Load local variable by index into dst register
 
   - name: StLoc
     value: 8
+    has_dst: false
+    has_src: true
     operands: [operand_index]
-    description: Store local variable by index
+    description: Store src register to local variable by index
 
   - name: StArg
     value: 9
+    has_dst: false
+    has_src: true
     operands: [operand_index]
-    description: Store argument by index
+    description: Store src register to argument by index
 
   - name: LdFld
     value: 10
+    has_dst: true
+    has_src: true
     operands: [field_offset, immediate_i4]
-    description: Load instance field
+    description: Load instance field — reads obj from src, writes field to dst
 
   - name: StFld
     value: 11
+    has_dst: false
+    has_src: true
     operands: [field_offset, immediate_i4]
-    description: Store instance field
+    description: Store instance field — reads obj and value from src registers
 
   - name: LdSFld
     value: 12
+    has_dst: true
+    has_src: false
     operands: [field_offset, immediate_i4, call_target]
-    description: Load static field
+    description: Load static field into dst register
 
   - name: StSFld
     value: 13
+    has_dst: false
+    has_src: true
     operands: [field_offset, immediate_i4, call_target]
-    description: Store static field
+    description: Store src register to static field
 
   - name: Call
     value: 14
+    has_dst: true
+    has_src: true
     operands: [call_target, arg_count, is_instance_call]
-    description: Call a method
+    description: Call a method — reads args from src regs, writes return to dst
 
   - name: CallVirt
     value: 15
+    has_dst: true
+    has_src: true
     operands: [call_target, arg_count, is_instance_call]
-    description: Virtual call
+    description: Virtual call — reads args from src regs, writes return to dst
 
   - name: CallBridge
     value: 16
+    has_dst: true
+    has_src: true
     operands: [call_target, arg_count, is_instance_call]
     description: Bridge call (cross-module/interpreter)
 
   - name: Br
     value: 17
+    has_dst: false
+    has_src: false
     operands: [branch_target]
     description: Unconditional branch
 
   - name: BrTrue
     value: 18
+    has_dst: false
+    has_src: true
     operands: [branch_target]
-    description: Branch if true (non-zero)
+    description: Branch if src register is non-zero
 
   - name: BrFalse
     value: 19
+    has_dst: false
+    has_src: true
     operands: [branch_target]
-    description: Branch if false (zero)
+    description: Branch if src register is zero
 
   - name: Beq
     value: 20
+    has_dst: false
+    has_src: true
     operands: [branch_target]
-    description: Branch if equal
+    description: Branch if src1 == src2
 
   - name: Blt
     value: 21
+    has_dst: false
+    has_src: true
     operands: [branch_target]
-    description: Branch if less than
+    description: Branch if src1 < src2 (signed)
 
   - name: Bgt
     value: 22
+    has_dst: false
+    has_src: true
     operands: [branch_target]
-    description: Branch if greater than
+    description: Branch if src1 > src2 (signed)
 
   - name: Ble
     value: 23
+    has_dst: false
+    has_src: true
     operands: [branch_target]
-    description: Branch if less than or equal
+    description: Branch if src1 <= src2 (signed)
 
   - name: Bge
     value: 24
+    has_dst: false
+    has_src: true
     operands: [branch_target]
-    description: Branch if greater than or equal
+    description: Branch if src1 >= src2 (signed)
 
   - name: Add
     value: 25
+    has_dst: true
+    has_src: true
     operands: []
-    description: Add two values
+    description: dst = src1 + src2
 
   - name: Sub
     value: 26
+    has_dst: true
+    has_src: true
     operands: []
-    description: Subtract two values
+    description: dst = src1 - src2
 
   - name: Mul
     value: 27
+    has_dst: true
+    has_src: true
     operands: []
-    description: Multiply two values
+    description: dst = src1 * src2
 
   - name: Div
     value: 28
+    has_dst: true
+    has_src: true
     operands: []
-    description: Divide two values (signed)
+    description: dst = src1 / src2 (signed)
 
   - name: Rem
     value: 29
+    has_dst: true
+    has_src: true
     operands: []
-    description: Remainder (signed)
+    description: dst = src1 % src2 (signed)
 
   - name: Neg
     value: 30
+    has_dst: true
+    has_src: true
     operands: []
-    description: Negate value
+    description: dst = -src1
 
   - name: Ceq
     value: 31
+    has_dst: true
+    has_src: true
     operands: []
-    description: Compare equal
+    description: "dst = (src1 == src2) ? 1 : 0"
 
   - name: Clt
     value: 32
+    has_dst: true
+    has_src: true
     operands: []
-    description: Compare less than (signed)
+    description: "dst = (src1 < src2) ? 1 : 0 (signed)"
 
   - name: Cgt
     value: 33
+    has_dst: true
+    has_src: true
     operands: []
-    description: Compare greater than (signed)
+    description: "dst = (src1 > src2) ? 1 : 0 (signed)"
 
   - name: NewObj
     value: 34
+    has_dst: true
+    has_src: true
     operands: [call_target, arg_count]
-    description: Create new object
+    description: Create new object — reads ctor args from src, writes obj ref to dst
 
   - name: Box
     value: 35
+    has_dst: true
+    has_src: true
     operands: [call_target]
-    description: Box a value type
+    description: Box a value type — reads value from src, writes obj ref to dst
 
   - name: Unbox
     value: 36
+    has_dst: true
+    has_src: true
     operands: [call_target]
-    description: Unbox to value type pointer
+    description: Unbox to value type pointer — reads obj from src, writes ptr to dst
 
   - name: CastClass
     value: 37
+    has_dst: true
+    has_src: true
     operands: [call_target]
-    description: Cast to class (throws on failure)
+    description: Cast to class (throws on failure) — reads obj from src
 
   - name: IsInst
     value: 38
+    has_dst: true
+    has_src: true
     operands: [call_target]
-    description: Type check (returns null on failure)
+    description: Type check — reads obj from src, writes obj/null to dst
 
   - name: Conv_I4
     value: 39
+    has_dst: true
+    has_src: true
     operands: []
-    description: Convert to int32
+    description: Convert src to int32, write to dst
 
   - name: Conv_I8
     value: 40
+    has_dst: true
+    has_src: true
     operands: []
-    description: Convert to int64
+    description: Convert src to int64, write to dst
 
   - name: Conv_R4
     value: 41
+    has_dst: true
+    has_src: true
     operands: []
-    description: Convert to float32
+    description: Convert src to float32, write to dst
 
   - name: Conv_R8
     value: 42
+    has_dst: true
+    has_src: true
     operands: []
-    description: Convert to float64
+    description: Convert src to float64, write to dst
 
   - name: NewArr
     value: 43
+    has_dst: true
+    has_src: true
     operands: [call_target]
-    description: Create new array
+    description: Create new array — reads length from src, writes array ref to dst
 
   - name: LdElem
     value: 44
+    has_dst: true
+    has_src: true
     operands: [immediate_i4]
-    description: Load array element
+    description: Load array element — reads array ref + index from src, writes to dst
 
   - name: StElem
     value: 45
+    has_dst: false
+    has_src: true
     operands: [immediate_i4]
-    description: Store array element
+    description: Store array element — reads array ref + index + value from src
 
   - name: LdLen
     value: 46
+    has_dst: true
+    has_src: true
     operands: []
-    description: Get array length
+    description: Get array length — reads array ref from src, writes i32 to dst
 
   - name: Pop
     value: 47
+    has_dst: false
+    has_src: true
     operands: []
-    description: Pop value from stack
+    description: Discard src register value
 
   - name: Throw
     value: 48
+    has_dst: false
+    has_src: true
     operands: []
-    description: Throw exception
+    description: Throw exception — reads exception obj from src
 
   - name: Rethrow
     value: 49
+    has_dst: false
+    has_src: false
     operands: []
     description: Rethrow current exception
 
   - name: Leave
     value: 50
+    has_dst: false
+    has_src: false
     operands: [branch_target]
     description: Leave try block
 
   - name: EndFinally
     value: 51
+    has_dst: false
+    has_src: false
     operands: []
     description: End finally handler
 
   - name: EndFilter
     value: 52
+    has_dst: false
+    has_src: true
     operands: []
-    description: End filter handler
+    description: End filter handler — reads result from src
 
   - name: Ret
     value: 53
+    has_dst: false
+    has_src: true
     operands: []
-    description: Return from method
+    description: Return from method — reads return value from src reg
 
   - name: Dup
     value: 54
+    has_dst: true
+    has_src: true
     operands: []
-    description: Duplicate top of stack
+    description: dst = src (register-to-register copy)
 
   - name: DivUn
     value: 55
+    has_dst: true
+    has_src: true
     operands: []
-    description: Unsigned divide
+    description: dst = src1 / src2 (unsigned)
 
   - name: RemUn
     value: 56
+    has_dst: true
+    has_src: true
     operands: []
-    description: Unsigned remainder
+    description: dst = src1 % src2 (unsigned)
 
   - name: And
     value: 57
+    has_dst: true
+    has_src: true
     operands: []
-    description: Bitwise AND
+    description: dst = src1 & src2
 
   - name: Or
     value: 58
+    has_dst: true
+    has_src: true
     operands: []
-    description: Bitwise OR
+    description: dst = src1 | src2
 
   - name: Xor
     value: 59
+    has_dst: true
+    has_src: true
     operands: []
-    description: Bitwise XOR
+    description: dst = src1 ^ src2
 
   - name: Not
     value: 60
+    has_dst: true
+    has_src: true
     operands: []
-    description: Bitwise NOT
+    description: dst = ~src1
 
   - name: Shl
     value: 61
+    has_dst: true
+    has_src: true
     operands: []
-    description: Shift left
+    description: dst = src1 << src2
 
   - name: Shr
     value: 62
+    has_dst: true
+    has_src: true
     operands: []
-    description: Shift right (arithmetic)
+    description: dst = src1 >> src2 (arithmetic)
 
   - name: ShrUn
     value: 63
+    has_dst: true
+    has_src: true
     operands: []
-    description: Shift right (logical)
+    description: dst = src1 >> src2 (logical)
 
   - name: ConvRUn
     value: 64
+    has_dst: true
+    has_src: true
     operands: []
-    description: Convert unsigned to float
+    description: Convert unsigned src to float dst
 
   - name: ConvI
     value: 65
+    has_dst: true
+    has_src: true
     operands: []
-    description: Convert to native int
+    description: Convert src to native int, write to dst
 
   - name: ConvU
     value: 66
+    has_dst: true
+    has_src: true
     operands: []
-    description: Convert to native unsigned
+    description: Convert src to native unsigned, write to dst
 
   - name: LdInd
     value: 67
+    has_dst: true
+    has_src: true
     operands: [immediate_i4]
-    description: Load indirect (type via immediate_i4)
+    description: Load indirect — reads address from src, writes value to dst
 
   - name: StInd
     value: 68
+    has_dst: false
+    has_src: true
     operands: [immediate_i4]
-    description: Store indirect (type via immediate_i4)
+    description: Store indirect — reads address + value from src
 
   - name: Switch
     value: 69
+    has_dst: false
+    has_src: true
     operands: [switch_targets, secondary_index, branch_target]
-    description: Switch/jump table
+    description: Switch/jump table — reads index from src
 
   - name: LdToken
     value: 70
+    has_dst: true
+    has_src: false
     operands: [call_target, immediate_i4]
-    description: Load metadata token
+    description: Load metadata token (RuntimeHandle) into dst
 
   - name: InitObj
     value: 71
+    has_dst: false
+    has_src: true
     operands: [call_target]
-    description: Initialize object (zero-init value type)
+    description: Initialize object (zero-init) — reads address from src
 
   - name: SizeOf
     value: 72
+    has_dst: true
+    has_src: false
     operands: [immediate_i4]
-    description: Size of value type
+    description: Size of value type as i32 into dst
 
   - name: LdFtn
     value: 73
+    has_dst: true
+    has_src: false
     operands: [call_target, immediate_i4]
-    description: Load function pointer
+    description: Load function pointer into dst
 
   - name: LdVirtFtn
     value: 74
+    has_dst: true
+    has_src: true
     operands: [call_target, immediate_i4]
-    description: Load virtual function pointer
+    description: Load virtual function pointer — reads obj from src
 
   - name: LdArgA
     value: 75
+    has_dst: true
+    has_src: false
     operands: [operand_index]
-    description: Load argument address
+    description: Load argument address into dst
 
   - name: LdLocA
     value: 76
+    has_dst: true
+    has_src: false
     operands: [operand_index]
-    description: Load local address
+    description: Load local address into dst
 
   - name: LocAlloc
     value: 77
+    has_dst: true
+    has_src: true
     operands: [immediate_i4]
-    description: Allocate on local heap
+    description: Allocate on local heap — reads size from src, writes pointer to dst
 
   - name: Break
     value: 78
+    has_dst: false
+    has_src: false
     operands: []
-    description: Breakpoint
+    description: Breakpoint (debugger hook)
 
   - name: BneUn
     value: 79
+    has_dst: false
+    has_src: true
     operands: [branch_target]
-    description: Branch if not equal (unsigned)
+    description: Branch if src1 != src2 (unsigned)
 
   - name: BgeUn
     value: 80
+    has_dst: false
+    has_src: true
     operands: [branch_target]
-    description: Branch if greater than or equal (unsigned)
+    description: Branch if src1 >= src2 (unsigned)
 
   - name: BgtUn
     value: 81
+    has_dst: false
+    has_src: true
     operands: [branch_target]
-    description: Branch if greater than (unsigned)
+    description: Branch if src1 > src2 (unsigned)
 
   - name: BleUn
     value: 82
+    has_dst: false
+    has_src: true
     operands: [branch_target]
-    description: Branch if less than or equal (unsigned)
+    description: Branch if src1 <= src2 (unsigned)
 
   - name: BltUn
     value: 83
+    has_dst: false
+    has_src: true
     operands: [branch_target]
-    description: Branch if less than (unsigned)
+    description: Branch if src1 < src2 (unsigned)
 
   - name: AddOvf
     value: 84
+    has_dst: true
+    has_src: true
     operands: []
-    description: Add with overflow check
+    description: dst = src1 + src2 with overflow check
 
   - name: SubOvf
     value: 85
+    has_dst: true
+    has_src: true
     operands: []
-    description: Subtract with overflow check
+    description: dst = src1 - src2 with overflow check
 
   - name: MulOvf
     value: 86
+    has_dst: true
+    has_src: true
     operands: []
-    description: Multiply with overflow check
+    description: dst = src1 * src2 with overflow check
 
   - name: ConvOvfI
     value: 87
+    has_dst: true
+    has_src: true
     operands: []
-    description: Overflow-checked convert to native int
+    description: Overflow-checked convert src to native int, write to dst
 
   - name: ConvOvfI4
     value: 88
+    has_dst: true
+    has_src: true
     operands: []
-    description: Overflow-checked convert to int32
+    description: Overflow-checked convert src to int32, write to dst
 
   - name: ConvOvfI8
     value: 89
+    has_dst: true
+    has_src: true
     operands: []
-    description: Overflow-checked convert to int64
+    description: Overflow-checked convert src to int64, write to dst
 
   - name: ConvOvfU
     value: 90
+    has_dst: true
+    has_src: true
     operands: []
-    description: Overflow-checked convert to native unsigned
+    description: Overflow-checked convert src to native uint, write to dst
 
   - name: ConvOvfU4
     value: 91
+    has_dst: true
+    has_src: true
     operands: []
-    description: Overflow-checked convert to uint32
+    description: Overflow-checked convert src to uint32, write to dst
 
   - name: ConvOvfU8
     value: 92
+    has_dst: true
+    has_src: true
     operands: []
-    description: Overflow-checked convert to uint64
+    description: Overflow-checked convert src to uint64, write to dst
 
   - name: LdObj
     value: 93
+    has_dst: true
+    has_src: true
     operands: [immediate_i4]
-    description: Load value type from address
+    description: Load value type from address — reads ptr from src, writes to dst
 
   - name: StObj
     value: 94
+    has_dst: false
+    has_src: true
     operands: [immediate_i4]
-    description: Store value type to address
+    description: Store value type to address — reads ptr + value from src
 
   - name: LdElemA
     value: 95
+    has_dst: true
+    has_src: true
     operands: [immediate_i4]
-    description: Load array element address
+    description: Load array element address — reads arr + idx from src
 
   - name: Cpblk
     value: 96
+    has_dst: false
+    has_src: true
     operands: []
-    description: Copy memory block
+    description: Copy memory block — reads dst + src + size from src regs
 
   - name: InitBlk
     value: 97
+    has_dst: false
+    has_src: true
     operands: []
-    description: Initialize memory block
+    description: Initialize memory block — reads addr + value + size from src regs
 
   - name: CallVirtConstrained
     value: 98
+    has_dst: true
+    has_src: true
     operands: [call_target, arg_count, is_instance_call]
     description: Constrained virtual call

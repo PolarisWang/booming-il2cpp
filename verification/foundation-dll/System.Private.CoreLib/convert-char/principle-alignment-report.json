@@ -1,7 +1,7 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-13T00:29:09.897501",
+  "generated_at": "2026-05-13T08:41:24.629133",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -50,12 +50,12 @@
       "check_id": "p1_benchmark",
       "principle": "P1",
       "status": "ALIGNED",
-      "summary": "avg_speedup=92.38%",
+      "summary": "avg_speedup=94.33%",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 92.38,
+        "average_speedup_percent": 94.33,
         "managed_faster_count": 0,
-        "native_faster_count": 14
+        "native_faster_count": 11
       }
     },
     "p2_template_hygiene": {

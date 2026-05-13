@@ -1,35 +1,11 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "mode": "strict",
-  "timestamp": "2026-05-13T00:29:10",
-  "duration_ms": 17539,
+  "mode": "standard",
+  "timestamp": "2026-05-13T15:57:11",
+  "duration_ms": 12933,
   "overall_status": "passed",
   "stages": {
-    "preflight": {
-      "stage": "preflight",
-      "status": "passed",
-      "summary": "18 methods, 0 custom entries",
-      "details": {
-        "methodCount": 18,
-        "customMethodCount": 0,
-        "hasCustomEntryFile": false,
-        "customMethods": []
-      },
-      "errors": [],
-      "duration_ms": 1
-    },
-    "codegen": {
-      "stage": "codegen",
-      "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
-      "details": {
-        "methodCount": 18,
-        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint\\build-output\\ConvertCharNativeEntry.dll"
-      },
-      "errors": [],
-      "duration_ms": 16679
-    },
     "fact": {
       "stage": "fact",
       "status": "passed",
@@ -42,53 +18,41 @@
         }
       },
       "errors": [],
-      "duration_ms": 35
+      "duration_ms": 53
     },
-    "audit": {
-      "stage": "audit",
+    "benchmark": {
+      "stage": "benchmark",
       "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN",
+      "summary": "avg_speedup=9.35%, native_faster=10/16, managed_faster=6/16",
       "details": {
-        "falsePassing": 0,
-        "stubsFound": 0,
-        "skipsFound": 0,
-        "principleStatus": "CONCERN",
-        "methodsWithoutLowering": 0
+        "averageSpeedupPercent": 9.35,
+        "nativeFasterCount": 10,
+        "managedFasterCount": 6,
+        "matchedCount": 16,
+        "totalMethods": 18,
+        "invalidCount": 2,
+        "benchmarkQuality": "ok"
       },
       "errors": [],
-      "duration_ms": 155
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "19/19 passed, 0 failed (stub=0)",
-      "details": {
-        "passedMethods": 19,
-        "failedMethods": 0,
-        "totalMethods": 19,
-        "realMethods": 19,
-        "stubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 26
+      "duration_ms": 11776
     },
     "post_hotupdate_benchmark": {
       "stage": "post_hotupdate_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=19463.3% (195.6x) over 15 methods (interpreter path — expected)",
+      "summary": "avg_slowdown=126.73% (2.3x) over 18 methods (interpreter path — expected)",
       "details": {
-        "averageSlowdownPercent": 19463.3,
-        "slowdownFactor": 195.63299999999998,
+        "averageSlowdownPercent": 126.73,
+        "slowdownFactor": 2.2673,
         "threshold": 50.0,
-        "nonStubMethods": 15
+        "nonStubMethods": 18
       },
       "errors": [],
-      "duration_ms": 640
+      "duration_ms": 1100
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
-    "testedRate": 100.0,
+    "testedRate": 0.0,
     "overall": 100.0
   },
   "regression": {}

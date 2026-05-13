@@ -1672,7 +1672,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			EmitHotpatchResolvedInvocation(builder, slotIndex, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation);
 		}
-		else if (invocationTarget.ExternalRuntimeTableIndex >= 0)
+		else if (invocationTarget.ExternalRuntimeTableIndex >= 0 || invocationTarget.DirectNativeSymbol != null)
 		{
 			EmitExternalRuntimeTableDispatch(builder, invocationTarget, indentation);
 		}

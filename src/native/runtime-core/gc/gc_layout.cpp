@@ -238,7 +238,7 @@ void CheneyBfsPrecise(void* tenured_begin, void* tenured_end,
             // (or skip if we can't determine size).
             // At C2/C3, this path is minimal since most types have layouts.
             CHAOS_IL2CPP_LOG_DEBUG("CRAG", "cheney_bfs_no_layout");
-            break;
+            continue;
         }
 
         // Scan this object's pointer fields.

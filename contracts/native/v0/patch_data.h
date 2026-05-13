@@ -33,9 +33,11 @@ extern "C" {
 
 // ── Magic and version ────────────────────────────────────────────────
 #define PATCH_DATA_MAGIC     0x50415854u   // "PADT" little-endian
-#define PATCH_DATA_VERSION   1u
+#define PATCH_DATA_VERSION   2u            // v2: added reg_ir_offset/reg_ir_size/reg_ir_count
 
-// ── Main header (fixed-size, 112 bytes) ──────────────────────────────
+// ── Main header (fixed-size, 124 bytes) ──────────────────────────────
+// v1: 112 bytes (aot_core_ir_count was the last field at offset 108)
+// v2: 124 bytes (added reg_ir_offset/reg_ir_size/reg_ir_count after aot_core_ir_count)
 typedef struct PatchDataHeader {
     uint32_t magic;
     uint32_t version;
@@ -76,6 +78,20 @@ typedef struct PatchDataHeader {
     uint32_t aot_core_ir_offset;
     uint32_t aot_core_ir_size;
     uint32_t aot_core_ir_count;
+
+    // Register IR section — pre-allocated register-based IR (v2+).
+    // Each method block (ordered by MethodDef index):
+    //   uint32_t max_regs | uint32_t instr_count | uint32_t seh_count
+    //   RegisterInstruction[instr_count]   (16 bytes each)
+    //   SEHClauseCompact[seh_count]        (24 bytes each: 6 × uint32_t)
+    //
+    // Format: [offsets: uint32_t[count]] [method blocks]
+    // offsets[i] = byte offset of i-th method's block from section start.
+    // GetRegisterMethod(i) = section + offsets[i]  (O(1)).
+    // When reg_ir_count == 0 (v1 fallback or empty), all reg_ir fields are 0.
+    uint32_t reg_ir_offset;
+    uint32_t reg_ir_size;
+    uint32_t reg_ir_count;
 } PatchDataHeader;
 
 // ── Table entry structs ──────────────────────────────────────────────
@@ -146,7 +162,9 @@ typedef struct PatchStandaloneSigEntry {
 static inline uint32_t PatchData_TotalSize(const PatchDataHeader* hdr) {
     uint32_t section_end = hdr->body_data_offset + hdr->body_data_size;
     uint32_t ir_end = hdr->aot_core_ir_offset + hdr->aot_core_ir_size;
-    return (ir_end > section_end) ? ir_end : section_end;
+    uint32_t reg_ir_end = hdr->reg_ir_offset + hdr->reg_ir_size;
+    uint32_t max_end = (ir_end > section_end) ? ir_end : section_end;
+    return (reg_ir_end > max_end) ? reg_ir_end : max_end;
 }
 
 static inline const char* PatchData_String(const PatchDataHeader* hdr, uint32_t offset) {

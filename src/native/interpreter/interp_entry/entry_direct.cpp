@@ -148,18 +148,75 @@ void InterpreterEntryDirect(
                 return;
             }
             if (op0.op_code == interpreter::IROpCode::Neg) {
-                // Neg+Ret: compute -arg0
+                // Neg+Ret: compute -arg0 for any numeric type
                 if (ret_buf != nullptr && patch_method->cached_sig_valid) {
                     auto ret_tag = static_cast<interpreter::ValueTag>(
                         patch_method->cached_ret_tag);
-                    if (ret_tag == interpreter::ValueTag::Int32) {
-                        ArgBuffer args(args_buf);
-                        ArgBuffer ret(ret_buf);
-                        ret.WriteI32(-args.ReadI32());
-                        return;
+                    ArgBuffer args(args_buf);
+                    ArgBuffer ret(ret_buf);
+                    switch (ret_tag) {
+                    case interpreter::ValueTag::Int32:
+                        ret.WriteI32(-args.ReadI32()); return;
+                    case interpreter::ValueTag::Int64:
+                        ret.WriteI64(-args.ReadI64()); return;
+                    case interpreter::ValueTag::Float32:
+                        ret.WriteF32(-args.ReadF32()); return;
+                    case interpreter::ValueTag::Float64:
+                        ret.WriteF64(-args.ReadF64()); return;
+                    default:
+                        break;  // Fall through to normal execution.
                     }
                 }
-                // If not int32, fall through to normal execution.
+                // Fall through if no cached_sig or unsupported type.
+            }
+            if (op0.op_code == interpreter::IROpCode::Not) {
+                // Not+Ret: compute ~arg0 (implicit LdArg(0) + Not)
+                if (ret_buf != nullptr && patch_method->cached_sig_valid) {
+                    auto ret_tag = static_cast<interpreter::ValueTag>(
+                        patch_method->cached_ret_tag);
+                    ArgBuffer args(args_buf);
+                    ArgBuffer ret(ret_buf);
+                    switch (ret_tag) {
+                    case interpreter::ValueTag::Int32:
+                        ret.WriteI32(~args.ReadI32()); return;
+                    case interpreter::ValueTag::Int64:
+                        ret.WriteI64(~args.ReadI64()); return;
+                    default:
+                        break;
+                    }
+                }
+            }
+            if (op0.op_code == interpreter::IROpCode::Conv_I4) {
+                if (ret_buf != nullptr && patch_method->cached_sig_valid) {
+                    ArgBuffer args(args_buf);
+                    ArgBuffer ret(ret_buf);
+                    ret.WriteI32(static_cast<int32_t>(args.ReadI64()));
+                }
+                return;
+            }
+            if (op0.op_code == interpreter::IROpCode::Conv_I8) {
+                if (ret_buf != nullptr && patch_method->cached_sig_valid) {
+                    ArgBuffer args(args_buf);
+                    ArgBuffer ret(ret_buf);
+                    ret.WriteI64(static_cast<int64_t>(args.ReadI64()));
+                }
+                return;
+            }
+            if (op0.op_code == interpreter::IROpCode::Conv_R4) {
+                if (ret_buf != nullptr && patch_method->cached_sig_valid) {
+                    ArgBuffer args(args_buf);
+                    ArgBuffer ret(ret_buf);
+                    ret.WriteF32(static_cast<float>(args.ReadF64()));
+                }
+                return;
+            }
+            if (op0.op_code == interpreter::IROpCode::Conv_R8) {
+                if (ret_buf != nullptr && patch_method->cached_sig_valid) {
+                    ArgBuffer args(args_buf);
+                    ArgBuffer ret(ret_buf);
+                    ret.WriteF64(static_cast<double>(args.ReadF64()));
+                }
+                return;
             }
         }
     }

@@ -176,7 +176,9 @@ RuntimeNumericsVector4Carrier Vector4Transform(RuntimeNumericsVector4Carrier v, 
 RuntimeNumericsVector4Carrier Vector4Transform(RuntimeNumericsVector4Carrier v, RuntimeNumericsQuaternionCarrier q) { auto t = RotateVector3ByQuaternion(MakeVector3(v.x, v.y, v.z), q); return MakeVector4(t.x, t.y, t.z, v.w); }
 bool Vector4TryCopyTo(RuntimeNumericsVector4Carrier v, float* d, CHAOS_IL2CPP_SIZE dl, CHAOS_IL2CPP_SIZE si) { return VectorTryCopyToRaw(v, d, dl, si); }
 
-// Vector64/128/256/512
+// Vector64/128/256/512 — declared in runtime_core.h, require external linkage.
+}  // anonymous namespace
+
 RuntimeIntrinsicVector64Carrier Vector64Reinterpret(RuntimeIntrinsicVector64Carrier v) { return v; }
 RuntimeIntrinsicVector128Carrier Vector128Reinterpret(RuntimeIntrinsicVector128Carrier v) { return v; }
 RuntimeIntrinsicVector256Carrier Vector256Reinterpret(RuntimeIntrinsicVector256Carrier v) { return v; }
@@ -194,5 +196,4 @@ bool Vector128IsSupported() { return true; }
 bool Vector256IsSupported() { return true; }
 bool Vector512IsSupported() { return true; }
 
-}  // anonymous namespace
 }  // namespace chaos::il2cpp::runtime_core

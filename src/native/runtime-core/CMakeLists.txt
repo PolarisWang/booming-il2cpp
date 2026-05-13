@@ -68,6 +68,10 @@ add_library(chaos_runtime_core STATIC
     hotpatch_table.cpp
     patch_loader.h
     patch_loader.cpp
+    metadata_interface.h
+    metadata_interface.cpp
+    assembly_manager.h
+    assembly_manager.cpp
     gc/gc_bump_cache.h
     gc/gc_bit_utils.h
     gc/gc_bump_arena.h
@@ -96,47 +100,6 @@ add_library(chaos_runtime_core STATIC
     exception_api.cpp
     exception_helpers.h
     exception_helpers.cpp
-    core/abi_export.cpp
-    core/abi_reflection.cpp
-    core/char_classification.cpp
-    core/config_normalize.cpp
-    core/delegate_thunks.cpp
-    core/engine_binding.cpp
-    core/engine_lifecycle.cpp
-    core/gc_safepoint.cpp
-    core/hashcode.cpp
-    core/header_layouts.cpp
-    core/marshal_alloc.cpp
-    core/marshal_api.cpp
-    core/marshal_string.cpp
-    core/monitor.cpp
-    core/numerics_vectors.cpp
-    core/object_creation.cpp
-    core/runtime_init.cpp
-    core/runtime_mode.cpp
-    core/state_tls.cpp
-    core/struct_marshal_descriptors.cpp
-    core/sync_mutex.cpp
-    core/type_capability.cpp
-    core/value_type_kernels.cpp
-    instantiation/aot_method_map.cpp
-    instantiation/interpret_method_call.cpp
-    instantiation/interpreter_dispatch.cpp
-    instantiation/precache_dispatch_raw.cpp
-    instantiation/resolve_instantiate.cpp
-    instantiation/token_allocator.cpp
-    instantiation/type_descriptor.cpp
-    reflection/assembly_types.cpp
-    reflection/attributes.cpp
-    reflection/hierarchy.cpp
-    reflection/internal_helpers.cpp
-    reflection/invoke.cpp
-    reflection/members.cpp
-    reflection/misc.cpp
-    reflection/module.cpp
-    reflection/string_concat.cpp
-    reflection/type_properties.cpp
-    reflection/type_resolve.cpp
     )
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)

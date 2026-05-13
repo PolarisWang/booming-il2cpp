@@ -740,7 +740,8 @@ public sealed partial class NativeAotLoweringPlanner
                 helperDefinition!.TargetSymbol,
                 helperDefinition.ParameterAbis,
                 helperDefinition.ReturnAbi,
-                helperDefinition.RawArgumentIndices);
+                helperDefinition.RawArgumentIndices,
+                DirectNativeSymbol: helperDefinition.DirectNativeSymbol);
         }
 
         if (TryGetLowerableMethod(callee) is { } lowerableMethod)
