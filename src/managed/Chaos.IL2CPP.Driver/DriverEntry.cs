@@ -502,13 +502,57 @@ public sealed class DriverEntry
 
     private static int RunEmitPatchData(string[] args)
     {
-        // Usage: chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path> [--aot-core-ir <path>]
+        // Usage:
+        //   chaos-il2cpp emit-patch-data <patch-dll> <output-patchdata> [--aot-core-ir <path>]
+        //   chaos-il2cpp emit-patch-data dump <patchdata-path>
+        //   chaos-il2cpp emit-patch-data full <patch-dll> <output-patchdata>
+        if (args.Length == 0)
+        {
+            Console.Error.WriteLine("Usage:");
+            Console.Error.WriteLine("  chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path> [--aot-core-ir <path>]");
+            Console.Error.WriteLine("  chaos-il2cpp emit-patch-data dump <patchdata-path>");
+            Console.Error.WriteLine("  chaos-il2cpp emit-patch-data full <patch-dll-path> <output-patchdata-path>");
+            return 1;
+        }
+
+        // Subcommand: dump
+        if (args[0] == "dump")
+        {
+            if (args.Length < 2)
+            {
+                Console.Error.WriteLine("Usage: chaos-il2cpp emit-patch-data dump <patchdata-path>");
+                return 1;
+            }
+            return RunDumpPatchData(args[1]);
+        }
+
+        // Subcommand: full (closure pipeline + patch data extraction in one step)
+        if (args[0] == "full")
+        {
+            if (args.Length < 2)
+            {
+                Console.Error.WriteLine("Usage: chaos-il2cpp emit-patch-data full <patch-dll-path> <output-patchdata-path>");
+                return 1;
+            }
+            return RunEmitPatchDataFull(args[1], args.Length > 2 ? args[2] : null);
+        }
+
+        // Help for emit-patch-data
+        if (args[0] is "--help" or "-h" or "/?")
+        {
+            Console.Error.WriteLine("Usage:");
+            Console.Error.WriteLine("  chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path> [--aot-core-ir <path>]");
+            Console.Error.WriteLine("  chaos-il2cpp emit-patch-data dump <patchdata-path>");
+            Console.Error.WriteLine("  chaos-il2cpp emit-patch-data full <patch-dll-path> <output-patchdata-path>");
+            return 0;
+        }
+
+        // Default: extract patch data from a DLL
         if (args.Length < 2)
         {
             Console.Error.WriteLine("Usage: chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path> [--aot-core-ir <path>]");
             return 1;
         }
-
         var dllPath = args[0];
         var outputPath = args[1];
         string? aotCoreIrPath = null;
@@ -539,6 +583,80 @@ public sealed class DriverEntry
         {
             Console.Error.WriteLine($"Error: {exception.Message}");
             return 1;
+        }
+    }
+
+    private static int RunDumpPatchData(string patchdataPath)
+    {
+        if (!File.Exists(patchdataPath))
+        {
+            Console.Error.WriteLine($"Error: patchdata file not found: {patchdataPath}");
+            return 1;
+        }
+
+        try
+        {
+            PatchDataDumper.Dump(patchdataPath, Console.Out);
+            return 0;
+        }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine($"Error dumping patch data: {exception.Message}");
+            return 1;
+        }
+    }
+
+    private static int RunEmitPatchDataFull(string dllPath, string? outputPath)
+    {
+        if (!File.Exists(dllPath))
+        {
+            Console.Error.WriteLine($"Error: patch DLL not found: {dllPath}");
+            return 1;
+        }
+
+        outputPath ??= Path.ChangeExtension(dllPath, ".patchdata");
+
+        var tempDir = Path.Combine(Path.GetTempPath(), "chaos-patchdata-" + Guid.NewGuid().ToString("N"));
+        var irDir = Path.Combine(tempDir, "analysis");
+        Directory.CreateDirectory(irDir);
+
+        Console.WriteLine($"[1/2] Running IL2CPP closure pipeline on: {Path.GetFileName(dllPath)}");
+
+        try
+        {
+            var request = new ManagedClosureRequest(
+                InputAssemblyPath: dllPath,
+                OutputRootPath: irDir,
+                AdditionalAssemblyPaths: null,
+                FullAssemblyClosure: true);
+
+            var pipeline = new PipelinePlan();
+            var result = pipeline.Execute(request);
+
+            // Serialize AotCoreIr to JSON for embedding
+            var aotCoreIrJson = JsonSerializer.Serialize(result.AotCoreIr, JsonOptions);
+            var irPath = Path.Combine(irDir, ManagedClosureArtifactNames.AotCoreIr);
+            File.WriteAllText(irPath, aotCoreIrJson);
+
+            Console.WriteLine($"[2/2] Generating patch data: {outputPath}");
+            ChaosTrace.Point("driver.emit_patch_data_full", "codegen");
+
+            Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(outputPath))!);
+            new PatchDataExtractor().Extract(dllPath, outputPath, aotCoreIrPath: irPath);
+
+            var fileSize = new FileInfo(outputPath).Length;
+            Console.WriteLine($"Patch data written: {outputPath} ({fileSize} bytes)");
+            return 0;
+        }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine($"Error: {exception.Message}");
+            return 1;
+        }
+        finally
+        {
+            if (Directory.Exists(tempDir))
+                Directory.Delete(tempDir, recursive: true);
         }
     }
 

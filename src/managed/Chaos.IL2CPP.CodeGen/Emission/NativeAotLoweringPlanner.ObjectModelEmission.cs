@@ -64,7 +64,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine();
 		builder.AppendLine("struct chaos_managed_array");
 		builder.AppendLine("{");
-		builder.AppendLine("    FatHeader header{};");
+		builder.AppendLine("    ThinLockableHeader header{};");
 		builder.AppendLine("    CHAOS_IL2CPP_UINT8 element_type_shape = 0;");
 		builder.AppendLine("    const TypeInfo* element_type_info = nullptr;");
 		builder.AppendLine("    CHAOS_IL2CPP_INTPTR length = 0;");

@@ -1,13 +1,13 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 46,
-  "audited": 46,
+  "total_methods": 25,
+  "audited": 25,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 46,
+  "methods_without_assert": 25,
   "passed": true,
   "method_details": [
     {
@@ -65,7 +65,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method0",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -74,7 +74,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method1",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -83,7 +83,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method2",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -92,7 +92,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method3",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -101,7 +101,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method4",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -110,7 +110,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method5",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -119,7 +119,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method6",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -128,7 +128,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method7",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -137,7 +137,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method8",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -146,7 +146,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method9",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -155,7 +155,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method10",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -164,7 +164,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method11",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -173,7 +173,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method12",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -182,7 +182,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method13",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -191,7 +191,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method14",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -200,7 +200,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method15",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -209,7 +209,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method16",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -218,7 +218,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method17",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -227,196 +227,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Program_Main",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method0",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method1",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method2",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method3",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method4",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method5",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method6",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method7",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method8",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method9",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method10",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method11",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method12",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method13",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method14",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method15",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method16",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method17",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Program_Main",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RunNativeAot_convert_char_genuine_fixed",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RunNativeAotAll",
+      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Run",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

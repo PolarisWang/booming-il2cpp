@@ -79,11 +79,11 @@ Pipeline 执行完毕后，读取以下产物：
 | 10 | managed_test/tests/*.cs | family/managed_test/tests/ | managed 单元测试 |
 | 11 | family-verification.json | `verification/projections/foundation-dll-audit/` | dashboard projection |
 | 12 | dashboard 详情页 HTML | `projections/.../dlls/<Assembly>/families/<family>-(fact\|benchmark\|hotupdate).html` | dashboard 展示数据 |
-| 13 | native-aot.generated.cpp | `il2cpp_dist/<Class>/generated/` 或 `il2cpp_dist/genuine/<Class>/generated/` | 生成 C++ 代码体积 |
+| 13 | native-aot.generated.cpp | `codegen/<Assembly>/generated/` | 生成 C++ 代码体积 |
 | 14 | console.log | `artifacts/logs/run/<session>/` | pipeline 运行日志 |
 
 **注意：**
-- native-aot.generated.cpp 可能位于 `il2cpp_dist/<ClassName>/generated/` 或 `il2cpp_dist/genuine/<ClassName>/generated/`，具体取决于 codegen 输出结构，需要使用 glob 定位
+- codegen/<Assembly>/generated/ 路径下 — codegen 输出到按 assembly 分组的子目录，使用 glob `codegen/*/generated/native-aot.generated.cpp` 定位
 - benchmark-comparison-report.json 由 pipeline 的 benchmark 阶段生成，如该阶段被跳过则不存在
 
 ### 第二步：Handwrite/AutoGen Pre-check（前置审查）

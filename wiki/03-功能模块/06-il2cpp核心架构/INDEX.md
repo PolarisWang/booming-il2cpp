@@ -12,6 +12,7 @@
 | `02-翻译路径参考` | 按 IL 特性分类的翻译路径表，包括 opcode、异常 shape、委托、helper | [`02-翻译路径参考/INDEX.md`](./02-%E7%BF%BB%E8%AF%91%E8%B7%AF%E5%BE%84%E5%8F%82%E8%80%83/INDEX.md) |
 | `03-架构约束` | 翻译层硬性约束、禁止模式、C++ 约定、合约边界 | [`03-架构约束/INDEX.md`](./03-%E6%9E%B6%E6%9E%84%E7%BA%A6%E6%9D%9F/INDEX.md) |
 | `04-历史决策` | 设计讨论中提炼的最终决策结论 | [`04-历史决策/INDEX.md`](./04-%E5%8E%86%E5%8F%B2%E5%86%B3%E7%AD%96/INDEX.md) |
+| `05-patchdata工具链` | .patchdata 二进制格式定义、CLI 命令、调试工作流 | [`05-patchdata工具链.md`](./05-patchdata%E5%B7%A5%E5%85%B7%E9%93%BE.md) |
 
 ## 本层规则
 

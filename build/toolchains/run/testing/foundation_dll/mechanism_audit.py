@@ -166,12 +166,12 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
         errors.append("stub_detector not available")
 
     # ── 2. Load generated C++ ─────────────────────────────────────────
-    # Prefer namespaced path (new convert-to-cpp pipeline), fall back to legacy flat path.
-    cpp_candidates = sorted(family_dir.glob("il2cpp_dist/genuine/*/generated/native-aot.generated.cpp"))
+    # Prefer codegen/<ClassName>/generated/ (new multi-assembly pipeline), fall back to legacy flat path.
+    cpp_candidates = sorted(family_dir.glob("codegen/*/generated/native-aot.generated.cpp"))
     if cpp_candidates:
         cpp_path = cpp_candidates[0]
     else:
-        cpp_path = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+        cpp_path = family_dir / "codegen" / "generated" / "native-aot.generated.cpp"
     cpp_content = cpp_path.read_text(encoding="utf-8") if cpp_path.exists() else ""
 
     if not cpp_content:
@@ -369,11 +369,7 @@ def run_assembly_audit(assembly: str) -> dict[str, Any]:
     for item in sorted(asm_dir.iterdir()):
         if not item.is_dir() or item.name.startswith("_") or item.name == "reports":
             continue
-        cpp_candidates = sorted(item.glob("il2cpp_dist/genuine/*/generated/native-aot.generated.cpp"))
-        if cpp_candidates:
-            cpp_path = cpp_candidates[0]
-        else:
-            cpp_path = item / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+        cpp_path = item / "codegen" / "generated" / "native-aot.generated.cpp"
         if not cpp_path.exists():
             continue
         families[item.name] = run_full_audit(assembly, item.name)

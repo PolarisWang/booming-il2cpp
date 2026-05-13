@@ -85,32 +85,26 @@ class UnifiedReport:
 # ── Stage runners ─────────────────────────────────────────────────
 
 def _parse_stub_mask(family_slug: str, assembly: str) -> int:
-    """Parse stub methods from generated C# source in the entrypoint directory.
+    """Parse stub methods from generated C# source in managed/subjects/.
 
-    Detects stubs by checking method bodies in generated .cs files (both the
-    NativeEntry.cs and Custom.cs). Methods with empty bodies or bodies containing
-    only TODO/comment lines are stubs. Methods defined in Custom.cs are non-stubs
-    (handwritten). Methods with no definition at all (commented out slots) are stubs.
+    Detects stubs by checking method bodies in generated .cs files in managed/subjects/.
+    Methods with bodies containing only TODO/comment lines are stubs.
     """
     family_dir = _VERIFICATION_BASE / assembly / family_slug
-    entry_dir = family_dir / "il2cpp_dist" / "entrypoint"
-    if not entry_dir.exists():
+    subjects_dir = family_dir / "managed" / "subjects"
+    if not subjects_dir.exists():
         return 0
 
-    # Collect all method definitions from NativeEntry.cs and Custom.cs
+    # Collect all method definitions from Subjects.cs
     # Maps: method_index -> has_real_body
     method_status: dict[int, bool] = {}
 
-    def _extract_method_defs(content: str, known_non_stub: bool = False) -> None:
-        """Extract method definitions and determine if each is a stub."""
+    def _extract_method_defs(content: str) -> None:
         for m in re.finditer(
-            r'public static void ((?:CustomEntry)?)(Method|CustomEntryMethod)(\d+)\(\)\s*\{',
+            r'public static (?:int|void) (Subject_|CustomEntrySubject_)(\d+)\(\)\s*\{',
             content
         ):
-            idx = int(m.group(3))
-            # Skip if already marked as non-stub by Custom.cs
-            if not known_non_stub and method_status.get(idx, False):
-                continue
+            idx = int(m.group(2))
             method_start = m.end() - 1
             brace_depth = 1
             pos = method_start + 1
@@ -121,30 +115,15 @@ def _parse_stub_mask(family_slug: str, assembly: str) -> int:
                     brace_depth -= 1
                 pos += 1
             body = content[method_start + 1:pos - 1].strip()
-
-            if known_non_stub:
-                method_status[idx] = True
-            elif not body:
+            if not body:
                 method_status[idx] = False
             else:
-                # Remove comments and check if anything remains
                 stripped = re.sub(r'//.*', '', body).strip()
                 method_status[idx] = bool(stripped)
 
-    # Process Custom.cs first — methods here are always non-stub (handwritten)
-    for cs_file in sorted(entry_dir.glob("*.cs")):
-        if "Custom" in cs_file.stem and "NativeEntry" in cs_file.stem:
-            try:
-                content = cs_file.read_text(encoding="utf-8")
-                _extract_method_defs(content, known_non_stub=True)
-            except OSError:
-                pass
-            break
-
-    # Process NativeEntry.cs — check body content to detect stubs
-    for cs_file in sorted(entry_dir.glob("*.cs")):
-        name = cs_file.stem
-        if name.endswith("NativeEntry") and "Custom" not in name and "Program" not in name:
+    # Process Subjects.cs
+    for cs_file in sorted(subjects_dir.glob("*.cs")):
+        if "Subjects" in cs_file.stem and "Custom" not in cs_file.stem:
             try:
                 content = cs_file.read_text(encoding="utf-8")
                 _extract_method_defs(content)
@@ -183,23 +162,16 @@ def _load_contract_methods(family_slug: str, assembly: str) -> list[str]:
 
 
 def _locate_entry_exe(family_slug: str, assembly: str) -> Path | None:
-    """Find the native entry EXE in il2cpp_dist/genuine/<AssemblyName>/generated/"""
+    """Find the native entry EXE in native/entry.exe"""
     family_dir = _VERIFICATION_BASE / assembly / family_slug
-    genuine_dir = family_dir / "il2cpp_dist" / "genuine"
-    if not genuine_dir.exists():
-        return None
-    for d in genuine_dir.iterdir():
-        if d.is_dir():
-            candidate = d / "generated" / "entry.exe"
-            if candidate.exists():
-                return candidate
-    return None
+    candidate = family_dir / "native" / "entry.exe"
+    return candidate if candidate.exists() else None
 
 
 def _locate_managed_harness(family_slug: str, assembly: str) -> Path | None:
-    """Find the managed benchmark harness csproj."""
+    """Find the managed benchmark harness csproj in managed/ directory."""
     family_dir = _VERIFICATION_BASE / assembly / family_slug
-    csproj = family_dir / "managed_test" / "benchmarks" / "ManagedBenchmarkHarness.csproj"
+    csproj = family_dir / "managed" / "ConvertChar.csproj"
     return csproj if csproj.exists() else None
 
 
@@ -733,7 +705,7 @@ def _stage_preflight(family_slug: str, assembly: str) -> StageResult:
             custom_methods.append(mc["methodSubjectId"])
 
     # Detect custom entry files
-    custom_entry_path = family_dir / "il2cpp_dist" / "entrypoint" / f"{family_slug.title().replace('-', '').replace('_', '')}NativeEntry.Custom.cs"
+    custom_entry_path = family_dir / "managed" / "subjects" / f"{family_slug.title().replace('-', '').replace('_', '')}Subjects.Custom.cs"
 
     trace("preflight", family=family_slug, method_count=len(mids),
           custom_methods=len(custom_methods),

@@ -1,9 +1,0 @@
-# Hermes Agent - Project-Level Config
-# This file is gitignored. Copy template from skills/runtime/templates/.hermes/
-# Skills are loaded via junction from skills/library/skills/
-#
-# To use project-level skills with Hermes:
-#   hermes -s dev:using-booming
-# Or in a persistent profile:
-#   hermes profile create booming-il2cpp --clone
-#   hermes profile use booming-il2cpp

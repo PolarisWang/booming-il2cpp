@@ -9,15 +9,15 @@
       "family": "convert-char",
       "config_tier": "CHECK",
       "steps": {
-        "build_entrypoint": "OK",
+        "build_subjects": "OK",
         "convert_to_cpp": "OK",
         "build_entry_exe": "OK"
       },
       "success": true,
       "methodCount": 18,
-      "entryPointSubjectId": "ConvertCharNativeEntry/Program::Main:System.Int32()",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint\\build-output\\ConvertCharNativeEntry.dll"
+      "entryPointSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-13T17:14:07"
+  "timestamp": "2026-05-13T21:56:28"
 }

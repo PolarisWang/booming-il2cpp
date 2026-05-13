@@ -53,11 +53,11 @@ def _family_dir(assembly: str, family_slug: str) -> Path:
 
 def _generated_cpp(assembly: str, family_slug: str) -> Path | None:
     family_dir = _family_dir(assembly, family_slug)
-    # Prefer namespaced path (new convert-to-cpp pipeline), fall back to legacy flat path
-    cpp_candidates = sorted(family_dir.glob("il2cpp_dist/genuine/*/generated/native-aot.generated.cpp"))
+    # Prefer codegen/<ClassName>/generated/ (new multi-assembly pipeline), fall back to legacy flat path
+    cpp_candidates = sorted(family_dir.glob("codegen/*/generated/native-aot.generated.cpp"))
     if cpp_candidates:
         return cpp_candidates[0]
-    path = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    path = family_dir / "codegen" / "generated" / "native-aot.generated.cpp"
     return path if path.exists() else None
 
 

@@ -1,10 +1,24 @@
 #ifndef CHAOS_IL2CPP_GC_SCHEDULER_H_
 #define CHAOS_IL2CPP_GC_SCHEDULER_H_
 
-#include <chaos/native_types.h>
-
 #include <atomic>
 #include <cstdint>
+#include <cstring>
+#include <chaos/native_types.h>
+
+namespace chaos::il2cpp::runtime_core {
+
+// V4-M8: Strict-aliasing-safe double↔uint64_t bitcast helpers.
+inline uint64_t DoubleToBits(double d) noexcept {
+    uint64_t bits;
+    std::memcpy(&bits, &d, sizeof(bits));
+    return bits;
+}
+inline double BitsToDouble(uint64_t bits) noexcept {
+    double d;
+    std::memcpy(&d, &bits, sizeof(d));
+    return d;
+}
 
 // ======================================================================
 // GcScheduler — adaptive GC scheduling with EMA survival-rate tracking
@@ -29,8 +43,6 @@
 //   When survival is low → shrink nursery (less to copy on each GC).
 //   When survival is high → grow nursery (buy more time between GCs).
 // ======================================================================
-
-namespace chaos::il2cpp::runtime_core {
 
 enum class GcCollectionKind {
     NONE = 0,
@@ -63,7 +75,9 @@ public:
                                uint64_t pause_ns) noexcept;
 
     /// Record a full collection. Resets allocation counter.
-    void RecordFullCollection(uint64_t pause_ns) noexcept;
+    /// @param total_heap_bytes  Estimated total heap size (old-gen page usage)
+    ///        for scheduling the next full GC trigger threshold.
+    void RecordFullCollection(CHAOS_IL2CPP_SIZE total_heap_bytes, uint64_t pause_ns = 0) noexcept;
 
     // ── Collection decision ──────────────────────────────────────
 
@@ -89,7 +103,9 @@ public:
 
     // ── Diagnostics ──────────────────────────────────────────────
 
-    double SurvivalRate() const noexcept { return survival_rate_; }
+    double SurvivalRate() const noexcept {
+        return BitsToDouble(survival_rate_bits_.load(std::memory_order_relaxed));
+    }
     CHAOS_IL2CPP_SIZE TotalAllocatedSinceLastGC() const noexcept;
 
 private:
@@ -110,8 +126,11 @@ private:
 
     // ── State ────────────────────────────────────────────────────
 
-    // EMA survival rate (0.0 = nothing survives, 1.0 = everything survives).
-    double survival_rate_ = 0.5;  // start at 50% (conservative)
+    // V4-M8: survival_rate_ stored as atomic<uint64_t> (bitcast from double)
+    // to avoid data races between RecordYoungCollection (writer, under safepoint)
+    // and RecommendedNurserySize (reader, any thread, no safepoint).
+    // Start at 0 (BitsToDouble(0) == 0.0, which naturally produces default nursery).
+    std::atomic<uint64_t> survival_rate_bits_{0};
 
     // Last nursery used bytes for sizing calculation.
     std::atomic<CHAOS_IL2CPP_SIZE> last_nursery_used_{kDefaultNurserySize};

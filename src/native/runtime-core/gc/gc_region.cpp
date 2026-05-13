@@ -44,7 +44,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         CHAOS_IL2CPP_LOG_DEBUG("CRAG", "nursery_oversized");
         void* ptr = g_old_gen.Allocate(size, true);
         // g_old_gen.Allocate already zeroes the memory via std::memset internally.
-        if (ptr) GcRecordAlloc(size, true);
+        // GcRecordAlloc is handled inside OldGen::Allocate.
         return ptr;
     }
 
@@ -97,7 +97,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         uint32_t gen = threading::RequestGlobalSafepoint();
         g_old_gen.Collect(nullptr, nullptr);
         threading::ReleaseGlobalSafepoint(gen);
-        g_gc_scheduler.RecordFullCollection(0);
+        // RecordFullCollection is handled inside OldGen::Collect().
 
         // After full GC, try bump from the existing nursery again.
         if (tls_nursery_ctx.nursery != nullptr) {
@@ -106,6 +106,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
             if (next <= tls_nursery_ctx.nursery->end) {
                 tls_nursery_ctx.nursery->current = next;
                 std::memset(ptr, 0, size);
+                g_gc_scheduler.RecordAllocation(size);
                 return ptr;
             }
         }
@@ -124,7 +125,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         // Fallback to old gen if no region available.
         CHAOS_IL2CPP_LOG_WARN("CRAG", "nursery_oom_fallback");
         void* ptr = g_old_gen.Allocate(size, true);
-        if (ptr) std::memset(ptr, 0, size);
+        // g_old_gen.Allocate already zeroes memory AND calls GcRecordAlloc internally.
         return ptr;
     }
 
@@ -149,7 +150,7 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     if (size > kMaxNurseryAlloc) {
         CHAOS_IL2CPP_LOG_DEBUG("CRAG", "nursery_oversized_atomic");
         void* ptr = g_old_gen.Allocate(size, false);
-        if (ptr) std::memset(ptr, 0, size);
+        // g_old_gen.Allocate already zeroes memory AND calls GcRecordAlloc internally.
         return ptr;
     }
 
@@ -192,7 +193,7 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
         uint32_t gen = threading::RequestGlobalSafepoint();
         g_old_gen.Collect(nullptr, nullptr);
         threading::ReleaseGlobalSafepoint(gen);
-        g_gc_scheduler.RecordFullCollection(0);
+        // RecordFullCollection is handled inside OldGen::Collect().
 
         if (tls_nursery_ctx.nursery != nullptr) {
             char* ptr = tls_nursery_ctx.nursery->current;
@@ -200,6 +201,7 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
             if (next <= tls_nursery_ctx.nursery->end) {
                 tls_nursery_ctx.nursery->current = next;
                 std::memset(ptr, 0, size);
+                g_gc_scheduler.RecordAllocation(size);
                 return ptr;
             }
         }
@@ -216,7 +218,7 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     if (new_nursery == nullptr) {
         CHAOS_IL2CPP_LOG_WARN("CRAG", "nursery_oom_fallback_atomic");
         void* ptr = g_old_gen.Allocate(size, false);
-        if (ptr) std::memset(ptr, 0, size);
+        // g_old_gen.Allocate already zeroes memory AND calls GcRecordAlloc internally.
         return ptr;
     }
 
@@ -258,11 +260,15 @@ void* DomainAllocate(CHAOS_IL2CPP_UINT32 domain_id, CHAOS_IL2CPP_SIZE size) {
     // In later M-stones, this will route through RegionManager.
     auto* domain = chaos::il2cpp::memory_domain::FindDomainById(domain_id);
     if (domain && domain->heap) {
-        return domain->heap->Allocate(size);
+        void* ptr = domain->heap->Allocate(size);
+        if (ptr) GcRecordAlloc(size, false);
+        return ptr;
     }
 
     // Fallback: tagged malloc
-    return CHAOS_IL2CPP_MALLOC(size);
+    void* ptr = CHAOS_IL2CPP_MALLOC(size);
+    if (ptr) GcRecordAlloc(size, false);
+    return ptr;
 }
 
 // ======================================================================
@@ -400,6 +406,13 @@ void RegionManager::ReleaseDomainRegions(CHAOS_IL2CPP_UINT32 domain_id) {
     for (CHAOS_IL2CPP_UINT32 i = 0; i < region_count_; i++) {
         Region* r = &region_table_[i];
         if (r->domain_id == domain_id && r->id != kRegionIdInvalid) {
+            // If this is a nursery-kind region, remove its range from the
+            // lock-free nursery lookup table so IsInNursery doesn't return
+            // stale true for the freed region's address range.
+            if (r->kind == RegionKind::REGION_NURSERY) {
+                RemoveNurseryRange(reinterpret_cast<uintptr_t>(r->begin),
+                                   reinterpret_cast<uintptr_t>(r->end));
+            }
             r->next = free_list_;
             free_list_ = r;
             r->id = kRegionIdInvalid;
@@ -513,13 +526,20 @@ void RegionManager::AddNurseryRange(uintptr_t begin, uintptr_t end) {
 
 void RegionManager::RemoveNurseryRange(uintptr_t begin, uintptr_t end) {
     // Scan the array and zero out the slot that matches.
+    // V4-H5: Store end=0 FIRST, then begin=0.  The reader in
+    // IsNurseryPointer loads begin then end — if begin is 0 but
+    // end is still > 0, the slot looks valid (0 < old_end = true)
+    // producing a false positive.  By zeroing end first, the reader
+    // sees either (old_begin, 0) → 0 < 0 = false (skipped correctly),
+    // or (0, 0) → also false.
     int count = nursery_slot_count_.load(std::memory_order_acquire);
     for (int i = 0; i < count; i++) {
         uintptr_t b = nursery_slots_[i].begin.load(std::memory_order_acquire);
         uintptr_t e = nursery_slots_[i].end.load(std::memory_order_acquire);
         if (b == begin && e == end) {
-            nursery_slots_[i].begin.store(0, std::memory_order_release);
             nursery_slots_[i].end.store(0, std::memory_order_release);
+            std::atomic_thread_fence(std::memory_order_release);
+            nursery_slots_[i].begin.store(0, std::memory_order_release);
             return;
         }
     }

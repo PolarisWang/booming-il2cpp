@@ -114,6 +114,35 @@ def _count_methods_in_contract(family_slug: str, *, verification: Path | None = 
     return len(mids)
 
 
+def _build_subjects_dll(
+    family_slug: str,
+    method_subject_ids: list[str],
+    *,
+    assembly_name: str = "System.Private.CoreLib",
+    verification: Path | None = None,
+    variant: str = "benchmark",
+) -> dict:
+    """Build the subjects DLL for a family.
+
+    Uses variant='subjects' to generate a pure-subjects Library DLL
+    (no TestFramework dependency, no Program.cs). Output goes to
+    managed/subjects/ under the family verification directory.
+    """
+    v = verification or _VERIFICATION
+    subjects_dir = v / family_slug / "managed" / "subjects"
+    subjects_dir.mkdir(parents=True, exist_ok=True)
+    from family_entrypoint_generator import generate_and_build
+    result = generate_and_build(
+        subjects_dir,
+        assembly_name=assembly_name,
+        family_id=f"family/{assembly_name}/{family_slug.replace('-', '/')}",
+        method_subject_ids=method_subject_ids,
+        class_name=None,  # auto-derived: e.g. ConvertCharSubjects
+        variant="subjects",
+    )
+    return result
+
+
 def _build_entrypoint(
     family_slug: str,
     method_subject_ids: list[str],
@@ -192,14 +221,13 @@ def _run_convert_to_cpp(
     verification: Path | None = None,
     entry_point_subject_id: str | None = None,
 ) -> bool:
-    """Run chaos-il2cpp convert-to-cpp on the entrypoint DLL.
+    """Run chaos-il2cpp convert-to-cpp on the subjects DLL.
 
-    Uses single-assembly mode with assembly-dir to resolve dependencies.
-    FullAssemblyClosure=true includes all methods from all loaded assemblies.
+    Output goes to codegen/<AssemblyName>/generated/ under verification dir.
     """
     v = verification or _VERIFICATION
-    genuine_out = v / family_slug / "il2cpp_dist" / "genuine"
-    genuine_out.mkdir(parents=True, exist_ok=True)
+    codegen_out = v / family_slug / "codegen"
+    codegen_out.mkdir(parents=True, exist_ok=True)
 
     cmd = [
         "dotnet", "run", "--no-build",
@@ -207,7 +235,7 @@ def _run_convert_to_cpp(
         "--", "convert-to-cpp",
         "--assembly", dll_path,
         "--assembly-dir", str(Path(dll_path).parent),
-        "--output", str(genuine_out),
+        "--output", str(codegen_out),
     ]
     if entry_point_subject_id:
         cmd.extend(["--entry-point", entry_point_subject_id])
@@ -221,18 +249,18 @@ def _run_convert_to_cpp(
             print(f"      {line}")
         return False
 
-    # Check output — multi-assembly mode generates per-assembly subdirectories
+    # Check output — per-assembly subdirectory: codegen/<AssemblyName>/generated/native-aot.generated.cpp
     cpp_found = False
-    for d in genuine_out.iterdir():
-        if d.is_dir() and d.name not in ("build",):
+    for d in sorted(codegen_out.iterdir()):
+        if d.is_dir() and d.name not in ("build", "generated"):
             per_asm_cpp = d / "generated" / "native-aot.generated.cpp"
             if per_asm_cpp.exists():
                 if not cpp_found:
                     cpp_found = True
                     size = per_asm_cpp.stat().st_size
-                    print(f"    convert-to-cpp OK: {size} bytes (in {d.name}/)")
+                    print(f"    convert-to-cpp OK: {size} bytes -> {per_asm_cpp.relative_to(v / family_slug)}")
                 else:
-                    print(f"      + {d.name}/generated/native-aot.generated.cpp")
+                    print(f"      + {per_asm_cpp}")
     if not cpp_found:
         print(f"    convert-to-cpp OK (no .cpp output found)")
     return True
@@ -346,7 +374,7 @@ def _generate_coverage_json(family_slug: str, assembly_name: str,
     methodDetails and numerator/denominator. Without it, the kernel returns 0/18.
     """
     v = verification or _VERIFICATION
-    coverage_dir = v / family_slug / "il2cpp_dist"
+    coverage_dir = v / family_slug / "reports_generated"
     coverage_dir.mkdir(parents=True, exist_ok=True)
     coverage_path = coverage_dir / "native-reference.runtime-skeleton.coverage.json"
     family_id = f"family/{assembly_name}/{family_slug.replace('-', '/')}"
@@ -370,7 +398,7 @@ def _generate_coverage_json(family_slug: str, assembly_name: str,
 
 def _generate_patch_data(family_slug: str, *,
                           verification: Path | None = None) -> bool:
-    """Build patch DLL, emit .patchdata, generate runtime-patchdata.cpp.
+    """Build patch DLL from managed/patch/, emit .patchdata, generate native/runtime-patchdata.cpp.
 
     The generated runtime-patchdata.cpp defines kPatchData[], kPatchDataSize,
     and kPatchDataHostClassName for entry.exe's hotpatch dispatch.
@@ -388,11 +416,11 @@ def _generate_patch_data(family_slug: str, *,
     # Derive class name
     class_name = f"{family_slug.title().replace('-', '').replace('_', '')}NativeEntry"
 
-    # Build patch-variant entrypoint
-    entrypoint_dir = family_dir / "il2cpp_dist" / "entrypoint"
+    # Build patch-variant entrypoint from managed/patch/
+    patch_dir = family_dir / "managed" / "patch"
     from family_entrypoint_generator import generate_and_build
     build_result = generate_and_build(
-        entrypoint_dir,
+        patch_dir,
         assembly_name="System.Private.CoreLib",
         family_id=f"family/System.Private.CoreLib/{family_slug.replace('-', '/')}",
         method_subject_ids=mids,
@@ -405,13 +433,12 @@ def _generate_patch_data(family_slug: str, *,
 
     # Run emit-patch-data
     from batch_hotupdate_runner import _run_emit_patch_data
-    patchdata_dir = family_dir / "il2cpp_dist" / "patch" / "patchdata"
+    patchdata_dir = family_dir / "managed" / "patch" / "patchdata"
     patchdata_dir.mkdir(parents=True, exist_ok=True)
     patchdata_path = patchdata_dir / f"{family_slug}.patchdata"
 
-    # Pass aot-core-ir.json so .patchdata contains pre-lowered IR for interpreter dispatch.
-    # Without this, GetAotCoreIr() returns NULL and FastExecute is never entered.
-    aot_core_ir_path = str(family_dir / "il2cpp_dist" / "genuine" / "aot-core-ir.json")
+    # Pass aot-core-ir.json from codegen/ so .patchdata contains pre-lowered IR
+    aot_core_ir_path = str(family_dir / "codegen" / "aot-core-ir.json")
     if not os.path.exists(aot_core_ir_path):
         aot_core_ir_path = None
 
@@ -420,10 +447,11 @@ def _generate_patch_data(family_slug: str, *,
         print(f"    [gen_patch] emit-patch-data failed")
         return _write_sentinel_patchdata(family_dir)
 
-    # Read .patchdata and generate runtime-patchdata.cpp
+    # Read .patchdata and generate native/runtime-patchdata.cpp
     data = patchdata_path.read_bytes()
-    genuine_out = family_dir / "il2cpp_dist" / "genuine"
-    patchdata_cpp = genuine_out / "runtime-patchdata.cpp"
+    native_dir = family_dir / "native"
+    native_dir.mkdir(parents=True, exist_ok=True)
+    patchdata_cpp = native_dir / "runtime-patchdata.cpp"
 
     host_class_name = f"{class_name}"
     lines = [
@@ -456,15 +484,15 @@ def _generate_patch_data(family_slug: str, *,
 
 
 def _write_sentinel_patchdata(family_dir: Path) -> bool:
-    """Write sentinel runtime-patchdata.cpp with empty .patchdata.
+    """Write sentinel native/runtime-patchdata.cpp with empty .patchdata.
 
     Uses 'extern' on both declarations AND definitions so symbols have external
     linkage. In C++, 'const' at namespace scope defaults to internal linkage,
     which would fail to satisfy the 'extern' declarations in runtime-entry.cpp.
     """
-    genuine_out = family_dir / "il2cpp_dist" / "genuine"
-    genuine_out.mkdir(parents=True, exist_ok=True)
-    patchdata_cpp = genuine_out / "runtime-patchdata.cpp"
+    native_dir = family_dir / "native"
+    native_dir.mkdir(parents=True, exist_ok=True)
+    patchdata_cpp = native_dir / "runtime-patchdata.cpp"
     lines = [
         "// Sentinel: no .patchdata available (hotpatch dispatch disabled)",
         '#include <cstddef>',
@@ -505,40 +533,127 @@ def _inject_config_tier(cmakelists: Path, config_tier: str) -> None:
     cmakelists.write_text(text, encoding="utf-8")
 
 
+def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -> None:
+    """Auto-generate native/CMakeLists.txt if it doesn't exist.
+
+    Uses the same template pattern as convert-char's verified CMakeLists.txt.
+    The generated file references codegen/ and native/runtime-entry.cpp.
+    """
+    if cmakelists.exists():
+        return
+
+    repo_root_str = str(_REPO_ROOT).replace("\\", "/")
+    codegen_rel = str((verification / family_slug / "codegen").resolve()).replace("\\", "/")
+    native_build = str((_REPO_ROOT / "build" / "native").resolve()).replace("\\", "/")
+    cmake_content = (
+        f'cmake_minimum_required(VERSION 3.20)\n'
+        f'project(chaos_entry CXX)\n'
+        f'set(CMAKE_CXX_STANDARD 20)\n'
+        f'\n'
+        f'# Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions\n'
+        f'# thrown by generated code (throw chaos_managed_exception from unresolved calls).\n'
+        f'add_compile_options(/utf-8 /GS-)\n'
+        f'add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)\n'
+        f'add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)\n'
+        f'\n'
+        f'# Paths\n'
+        f'set(CHAOS_PROJECT_ROOT "{repo_root_str}")\n'
+        f'set(CHAOS_CODEGEN_DIR "{codegen_rel}")\n'
+        f'set(CHAOS_NATIVE_BUILD "{native_build}")\n'
+        f'\n'
+        f'# Source files — codegen outputs to codegen/<AssemblyName>/generated/\n'
+        f'file(GLOB CHAOS_CODEGEN_CPP "${{CHAOS_CODEGEN_DIR}}/*/generated/native-aot.generated.cpp")\n'
+        f'set(CHAOS_ENTRY_SOURCES\n'
+        f'    "runtime-entry.cpp"\n'
+        f'    "runtime-patchdata.cpp"\n'
+        f'    ${{CHAOS_CODEGEN_CPP}}\n'
+        f')\n'
+        f'\n'
+        f'# Include directories\n'
+        f'set(CHAOS_ENTRY_INCLUDES\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/common"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/gc"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/bootstrap"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/interpreter"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/interpreter/generated"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/support"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/hot-update"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/contracts/native/v0"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/third_party/fmt/include"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/third_party/bdwgc/include"\n'
+        f')\n'
+        f'\n'
+        f'# Library link directories\n'
+        f'set(CHAOS_LIB_DIRS\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/runtime-core/RelWithDebInfo"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/bootstrap/RelWithDebInfo"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/common/RelWithDebInfo"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/interpreter/RelWithDebInfo"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/support/RelWithDebInfo"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/hot-update/RelWithDebInfo"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/bdwgc_build/RelWithDebInfo"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/fmt_build/RelWithDebInfo"\n'
+        f')\n'
+        f'\n'
+        f'# Runtime libs to link\n'
+        f'set(CHAOS_RUNTIME_LIBS\n'
+        f'    chaos_runtime_core\n'
+        f'    chaos_bootstrap\n'
+        f'    chaos_common\n'
+        f'    chaos_interpreter\n'
+        f'    chaos_support\n'
+        f'    chaos_hot_update\n'
+        f'    chaos_bdwgc\n'
+        f'    chaos_fmt\n'
+        f')\n'
+        f'\n'
+        f'add_executable(entry ${{CHAOS_ENTRY_SOURCES}})\n'
+        f'target_include_directories(entry PRIVATE ${{CHAOS_ENTRY_INCLUDES}})\n'
+        f'target_link_directories(entry PRIVATE ${{CHAOS_LIB_DIRS}})\n'
+        f'target_compile_options(entry PRIVATE /EHa)\n'
+        f'target_link_libraries(entry PRIVATE ${{CHAOS_RUNTIME_LIBS}})\n'
+    )
+    cmakelists.parent.mkdir(parents=True, exist_ok=True)
+    cmakelists.write_text(cmake_content, encoding="utf-8")
+    print(f"    [build_entry] auto-generated CMakeLists.txt at {cmakelists}")
+
+
 def _build_entry_exe(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK") -> bool:
     v = verification or _VERIFICATION
-    genuine_out = v / family_slug / "il2cpp_dist" / "genuine"
-    cmakelists = genuine_out / "CMakeLists.txt"
-    if not cmakelists.exists():
-        print(f"    [build_entry] no CMakeLists.txt at {cmakelists}")
-        return False
+    native_dir = v / family_slug / "native"
+    cmakelists = native_dir / "CMakeLists.txt"
+    # Auto-generate CMakeLists.txt if missing (e.g. after clean delete)
+    _ensure_cmakelists(cmakelists, family_slug, v)
 
     # Inject config tier compile definition into CMakeLists.txt
     _inject_config_tier(cmakelists, config_tier)
 
     # Ensure runtime-patchdata.cpp exists (sentinel if not generated)
-    # The enhanced runtime-entry.cpp references kPatchData/kPatchDataSize/kPatchDataHostClassName.
-    patchdata_cpp = genuine_out / "runtime-patchdata.cpp"
+    patchdata_cpp = native_dir / "runtime-patchdata.cpp"
     if not patchdata_cpp.exists():
-        family_dir = v / family_slug
-        _write_sentinel_patchdata(family_dir)
+        _write_sentinel_patchdata(v / family_slug)
         print(f"    [build_entry] sentinel runtime-patchdata.cpp generated")
 
-    # Copy enhanced runtime-entry.cpp (with --benchmark/--hotupdate support)
-    # over the auto-generated simple version that lacks CLI parsing.
+    # Ensure runtime-entry.cpp exists in native/
     enhanced_runtime_entry = _HERE / "runtime-entry.cpp"
-    if enhanced_runtime_entry.exists():
-        dest = genuine_out / "runtime-entry.cpp"
-        dest.write_text(enhanced_runtime_entry.read_text(encoding="utf-8"), encoding="utf-8")
-        print(f"    [build_entry] using enhanced runtime-entry.cpp from pipeline toolchain")
+    native_runtime_entry = native_dir / "runtime-entry.cpp"
+    if not native_runtime_entry.exists() and enhanced_runtime_entry.exists():
+        native_runtime_entry.write_text(enhanced_runtime_entry.read_text(encoding="utf-8"), encoding="utf-8")
+        print(f"    [build_entry] copied runtime-entry.cpp to native/")
 
-    build_dir = genuine_out / "build"
+    # Ensure CMakeLists.txt exists — auto-generate from template if missing
+    # (families deleted and regenerated from scratch won't have native/CMakeLists.txt)
+    _ensure_cmakelists(cmakelists, family_slug, v)
+
+    build_dir = native_dir / "build"
     build_dir.mkdir(parents=True, exist_ok=True)
 
     # Step 1: CMake configure
     print(f"    [build_entry] cmake configure...")
     cfg_result = subprocess.run(
-        ["cmake", "-S", str(genuine_out), "-B", str(build_dir),
+        ["cmake", "-S", str(native_dir), "-B", str(build_dir),
          "-G", "Visual Studio 17 2022", "-A", "x64"],
         capture_output=True, text=True, timeout=120,
     )
@@ -549,7 +664,6 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
         return False
 
     # Step 1b: Patch vcxproj files to use /EHs /EHc- (extern "C" exception propagation)
-    # Without this, CMake VS generator hardcodes /EHsc which blocks exceptions through extern "C".
     patch_script = _HERE.parents[0] / "_patch_vcxproj.py"
     if patch_script.exists():
         subprocess.run([sys.executable, str(patch_script), str(build_dir)],
@@ -564,128 +678,12 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
         capture_output=True, text=True, timeout=300,
     )
     if build_result.returncode != 0:
-        # The generated CMakeLists.txt may have incorrect paths for single-assembly
-        # mode. Retry with a corrected CMakeLists.txt that references the right paths.
-        print(f"    [build_entry] cmake build FAILED, retrying with corrected CMakeLists.txt")
+        print(f"    [build_entry] cmake build FAILED")
+        for line in build_result.stderr.splitlines()[-15:]:
+            print(f"      {line}")
+        return False
 
-        # Locate ALL generated .cpp files across all assembly subdirectories
-        gen_cpp_files: list[Path] = []
-        for d in genuine_out.iterdir():
-            if d.is_dir() and d.name not in ("build",):
-                extra_cpps = sorted((d / "generated").glob("*.cpp"))
-                gen_cpp_files.extend(extra_cpps)
-
-        if not gen_cpp_files:
-            print(f"    [build_entry] no generated .cpp files found")
-            for line in build_result.stderr.splitlines()[-15:]:
-                print(f"      {line}")
-            for line in build_result.stdout.splitlines()[-15:]:
-                print(f"      {line}")
-            return False
-
-        # Write our own CMakeLists.txt with correct file references
-        gen_cpp_entries = "\n    ".join(f"${{CHAOS_GEN_DIR}}/{f.relative_to(genuine_out).as_posix()}" for f in gen_cpp_files)
-
-        # Check for supplemental dispatch symbols (handwritten entrypoint families)
-        supplemental_cpp = genuine_out / "supplemental-dispatch.cpp"
-        has_supplemental = supplemental_cpp.exists()
-        supplemental_entry = f"\n    ${{CHAOS_GEN_DIR}}/supplemental-dispatch.cpp" if has_supplemental else ""
-
-        # Check for runtime-patchdata.cpp (generated by _generate_patch_data)
-        patchdata_cpp = genuine_out / "runtime-patchdata.cpp"
-        has_patchdata = patchdata_cpp.exists()
-        patchdata_entry = f"\n    ${{CHAOS_GEN_DIR}}/runtime-patchdata.cpp" if has_patchdata else ""
-
-        # Check for per-family stub definitions (generated by _gen_weak_stubs.py)
-        stub_cpp = genuine_out / f"stubs-{family_slug}.cpp"
-        has_stubs = stub_cpp.exists()
-        stubs_entry = f"\n    ${{CHAOS_GEN_DIR}}/stubs-{family_slug}.cpp" if has_stubs else ""
-
-        corrected_cmake = f"""# Generated by chaos-il2cpp convert-to-cpp (corrected by pipeline)
-cmake_minimum_required(VERSION 3.20)
-# /EHsc default blocks exceptions through extern "C" frames.
-# Strip EH from INIT flags; use CMAKE_MSVC_EXCEPTION_HANDLING instead.
-set(CMAKE_CXX_FLAGS_INIT "/DWIN32 /D_WINDOWS")
-set(CMAKE_MSVC_EXCEPTION_HANDLING "Async")
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
-project(chaos_gen LANGUAGES CXX)
-
-set(REPO_ROOT "{_REPO_ROOT.as_posix()}")
-set(CHAOS_GEN_DIR "${{CMAKE_CURRENT_LIST_DIR}}")
-set(NATIVE_LIB_DIR "{(_REPO_ROOT / 'build' / 'native').as_posix()}")
-set(CFG "RelWithDebInfo")
-
-set(NATIVE_LIBS
-    "${{NATIVE_LIB_DIR}}/src/native/runtime-core/${{CFG}}/chaos_runtime_core.lib"
-    "${{NATIVE_LIB_DIR}}/src/native/bootstrap/${{CFG}}/chaos_bootstrap.lib"
-    "${{NATIVE_LIB_DIR}}/src/native/common/${{CFG}}/chaos_common.lib"
-    "${{NATIVE_LIB_DIR}}/src/native/support/${{CFG}}/chaos_support.lib"
-    "${{NATIVE_LIB_DIR}}/src/native/interpreter/${{CFG}}/chaos_interpreter.lib"
-    "${{NATIVE_LIB_DIR}}/src/native/hot-update/${{CFG}}/chaos_hot_update.lib"
-    "${{NATIVE_LIB_DIR}}/bdwgc_build/${{CFG}}/chaos_bdwgc.lib"
-    "${{NATIVE_LIB_DIR}}/fmt_build/${{CFG}}/chaos_fmt.lib"
-)
-
-set(COMMON_INCLUDE_DIRS
-    "${{REPO_ROOT}}/contracts/native/v0"
-    "${{REPO_ROOT}}/src/native/common"
-    "${{REPO_ROOT}}/src/native/runtime-core"
-    "${{REPO_ROOT}}/src/native/runtime-core/gc"
-    "${{REPO_ROOT}}/src/native/interpreter"
-    "${{REPO_ROOT}}/src/native/interpreter/generated"
-    "${{REPO_ROOT}}/src/native"
-    "${{REPO_ROOT}}/third_party/fmt/include"
-    "${{REPO_ROOT}}/third_party/bdwgc/include"
-)
-
-add_compile_options(/utf-8)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-set(CHAOS_IL2CPP_CONFIG_TIER "{config_tier}")
-
-add_executable(entry
-    ${{CHAOS_GEN_DIR}}/runtime-entry.cpp
-    {gen_cpp_entries}{patchdata_entry}{supplemental_entry}{stubs_entry}
-)
-
-target_compile_options(entry PRIVATE /GS-)
-target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_${{CHAOS_IL2CPP_CONFIG_TIER}} CHAOS_RUNTIME_ABI_STATIC)
-
-target_link_libraries(entry PRIVATE
-    ${{NATIVE_LIBS}}
-)
-target_include_directories(entry PRIVATE ${{COMMON_INCLUDE_DIRS}})
-"""
-        cmakelists.write_text(corrected_cmake, encoding="utf-8")
-
-        # Re-run cmake configure + build with corrected CMakeLists.txt
-        cfg_result = subprocess.run(
-            ["cmake", "-S", str(genuine_out), "-B", str(build_dir),
-             "-G", "Visual Studio 17 2022", "-A", "x64"],
-            capture_output=True, text=True, timeout=120,
-        )
-        if cfg_result.returncode != 0:
-            print(f"    [build_entry] cmake configure (retry) FAILED")
-            for line in cfg_result.stderr.splitlines()[-10:]:
-                print(f"      {line}")
-            return False
-
-        build_result = subprocess.run(
-            ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo",
-             "--target", "entry"],
-            capture_output=True, text=True, timeout=300,
-        )
-        if build_result.returncode != 0:
-            print(f"    [build_entry] cmake build (retry) FAILED")
-            for line in build_result.stderr.splitlines()[-15:]:
-                print(f"      {line}")
-            for line in build_result.stdout.splitlines()[-15:]:
-                print(f"      {line}")
-            return False
-
-    # Step 3: Locate entry.exe and copy to generated/
-    # cmake --build drops exe at build_dir/<config>/entry.exe
+    # Step 3: Locate entry.exe
     exe_candidates = [
         build_dir / "RelWithDebInfo" / "entry.exe",
         build_dir / "Release" / "entry.exe",
@@ -702,15 +700,8 @@ target_include_directories(entry PRIVATE ${{COMMON_INCLUDE_DIRS}})
         print(f"    [build_entry] entry.exe not found in build output")
         return False
 
-    # Find assembly subdirectory to place entry.exe inside generated/
-    assembly_dirs = [d for d in genuine_out.iterdir() if d.is_dir() and d.name != "build"
-                     and (d / "generated").exists()]
-    if not assembly_dirs:
-        print(f"    [build_entry] no assembly/generated dir found")
-        return False
-
-    assembly_dir = assembly_dirs[0]
-    target_dir = assembly_dir / "generated"
+    # Copy entry.exe to native/ for discovery by orchestrator
+    target_dir = native_dir
     shutil.copy2(str(exe_path), str(target_dir / "entry.exe"))
     size = (target_dir / "entry.exe").stat().st_size
     print(f"    [build_entry] entry.exe OK: {size} bytes -> {target_dir / 'entry.exe'}")
@@ -819,27 +810,22 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
     print(f"  Methods: {len(mids)}")
     result["methodCount"] = len(mids)
 
-    # Step 1: Build entrypoint (auto-detect synthetic contracts → use patch variant)
+    # Step 1a: Build subjects DLL (il2cpp input via managed/subjects/)
     auto_variant = variant or ("patch" if _has_synthetic_method_ids(mids) else "benchmark")
-    print(f"  [1/3] Building entrypoint (variant={auto_variant})...")
-    build_result = _build_entrypoint(family_slug, mids, assembly_name=assembly_name, verification=verification, variant=auto_variant)
-    # If benchmark build failed and variant was auto-detected, retry with patch
-    if not build_result.get("success") and auto_variant == "benchmark" and not variant:
-        print(f"    benchmark build failed, retrying with patch variant...")
-        auto_variant = "patch"
-        build_result = _build_entrypoint(family_slug, mids, assembly_name=assembly_name, verification=verification, variant="patch")
+    print(f"  [1a/3] Building subjects DLL (variant={auto_variant})...")
+    build_result = _build_subjects_dll(family_slug, mids, assembly_name=assembly_name, verification=verification, variant=auto_variant)
     if not build_result.get("success"):
-        result["steps"]["build_entrypoint"] = "FAILED"
+        result["steps"]["build_subjects"] = "FAILED"
         result["error"] = build_result.get("error", "build failed")
         print(f"    FAILED: {result['error']}")
-        trace("family_entrypoint_build_failed", family=family_slug, error=result["error"])
+        trace("family_subjects_build_failed", family=family_slug, error=result["error"])
         return result
-    result["steps"]["build_entrypoint"] = "OK"
+    result["steps"]["build_subjects"] = "OK"
     result["entryPointSubjectId"] = build_result["entry_point_subject_id"]
     result["dllPath"] = build_result["dll_path"]
 
-    # Step 2: Convert-to-CPP (full pipeline)
-    print(f"  [2/3] Running convert-to-cpp...")
+    # Step 1b: Convert-to-CPP → codegen/
+    print(f"  [1b/3] Running convert-to-cpp...")
     entry_pt = build_result.get("entry_point_subject_id")
     if not _run_convert_to_cpp(family_slug, build_result["dll_path"], verification=verification, entry_point_subject_id=entry_pt):
         result["steps"]["convert_to_cpp"] = "FAILED"
@@ -848,24 +834,17 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
         return result
     result["steps"]["convert_to_cpp"] = "OK"
 
-    # PATCH: Apply 0xC0000409 bypass to all generated native-aot.generated.cpp files
-    # The MSVC compiler crashes (STATUS_STACK_BUFFER_OVERRUN) when a single function
-    # has too many locals (~170 in Program::Main) or too many inline call blocks.
-    # This strips Program::Main() body and replaces RunNativeAot() with a dispatch table + loop.
-    _patch_generated_files(family_slug, verification=verification)
+    # Step 1c: [removed] No post-processing on generated files.
+    # native-aot.generated.cpp is the pure output of chaos-il2cpp.
 
-    # Step 2b: Generate .patchdata for hotpatch dispatch (before entry.exe build)
-    # Builds patch-variant DLL → emit-patch-data → runtime-patchdata.cpp
-    # providing kPatchData[]/kPatchDataSize/kPatchDataHostClassName for entry.exe.
+    # Step 1d: Generate .patchdata for hotpatch dispatch (before entry.exe build)
     _generate_patch_data(family_slug, verification=verification)
 
-    # Step 2c: Generate coverage JSON for dashboard/kernel integration
-    # The dashboard reads native-reference.runtime-skeleton.coverage.json to populate
-    # fact detail pages. Without this, the kernel returns 0/18 with empty methodDetails.
+    # Step 1e: Generate coverage JSON for dashboard/kernel integration
     _generate_coverage_json(family_slug, assembly_name, mids, verification=verification)
 
-    # Step 3: Build entry.exe from generated C++ via CMake
-    print(f"  [3/3] Building entry.exe from generated C++...")
+    # Step 2: Build entry.exe from codegen/native-aot.generated.cpp → native/
+    print(f"  [2/3] Building entry.exe from codegen...")
     if not _build_entry_exe(family_slug, verification=verification, config_tier=config_tier):
         result["steps"]["build_entry_exe"] = "FAILED"
         result["error"] = "entry.exe build failed"
@@ -875,7 +854,7 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
 
     # Family succeeds if all build steps pass
     # (fact/benchmark/hotupdate verification is handled by the orchestrator stages)
-    if result["steps"].get("build_entrypoint") == "OK" \
+    if result["steps"].get("build_subjects") == "OK" \
             and result["steps"].get("convert_to_cpp") == "OK" \
             and result["steps"].get("build_entry_exe") == "OK":
         result["success"] = True

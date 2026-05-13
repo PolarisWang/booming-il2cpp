@@ -9,7 +9,6 @@ try:
     from ..testing import foundation_dll_audit_generator as audit_generator_module
     from ..testing.foundation_dll import execution_entry as execution_entry_module
     from ..testing.foundation_dll import derive as denominator_derive_module
-    from ..testing.foundation_dll import gap_analyzer as gap_analyzer_module
     from ..testing.foundation_dll import promote as denominator_promote_module
     from ..testing import inventory_generator as inventory_generator_module
     from ..testing.foundation_dll import consistency as projection_consistency_module
@@ -21,7 +20,6 @@ except ImportError:
     from testing import foundation_dll_audit_generator as audit_generator_module
     from testing.foundation_dll import execution_entry as execution_entry_module
     from testing.foundation_dll import derive as denominator_derive_module
-    from testing.foundation_dll import gap_analyzer as gap_analyzer_module
     from testing.foundation_dll import promote as denominator_promote_module
     from testing import inventory_generator as inventory_generator_module
     from testing.foundation_dll import consistency as projection_consistency_module
@@ -102,43 +100,6 @@ def _handle_derive(
     _emit_event(progress_callback, event_type="stage-start", completed=0, total=1, active_unit="foundation-dll derive")
     payload = denominator_derive_module.generate_candidate_ledger(repo_root, scope=scope)
     _emit_event(progress_callback, event_type="progress", completed=1, total=1, active_unit="foundation-dll derive", step_status="ok")
-    return _success(command_text, host_platform, payload)
-
-
-def _handle_analyze_gaps(
-    repo_root: Path,
-    host_platform: str,
-    command_text: str,
-    options: dict[str, Any],
-    progress_callback: Callable[[dict[str, Any]], None] | None = None,
-) -> CommandResult:
-    scope = str(_get_option(options, "scope") or "all")
-    update_ledger = _option_is_true(_get_option(options, "update_ledger"))
-    auto_generate = _option_is_true(_get_option(options, "auto_generate"))
-    _emit_event(progress_callback, event_type="stage-start", completed=0, total=1, active_unit="foundation-dll analyze-gaps")
-    payload = gap_analyzer_module.analyze_gaps(
-        repo_root,
-        scope=scope,
-        update_ledger=update_ledger,
-        auto_generate=auto_generate,
-    )
-    _emit_event(progress_callback, event_type="progress", completed=1, total=1, active_unit="foundation-dll analyze-gaps", step_status="ok")
-    return _success(command_text, host_platform, payload)
-
-
-def _handle_check_family(
-    repo_root: Path,
-    host_platform: str,
-    command_text: str,
-    options: dict[str, Any],
-    progress_callback: Callable[[dict[str, Any]], None] | None = None,
-) -> CommandResult:
-    family = str(_get_option(options, "family") or "").strip()
-    if not family:
-        return _failure(command_text, host_platform, "family flag is required for foundation-dll check-family")
-    _emit_event(progress_callback, event_type="stage-start", completed=0, total=1, active_unit="foundation-dll check-family")
-    payload = gap_analyzer_module.analyze_gaps(repo_root, scope=family, update_ledger=False)
-    _emit_event(progress_callback, event_type="progress", completed=1, total=1, active_unit="foundation-dll check-family", step_status="ok")
     return _success(command_text, host_platform, payload)
 
 
@@ -350,10 +311,6 @@ def handle(
     try:
         if command_id == "foundation-dll-derive":
             return _handle_derive(repo_root, host_platform, command_text, opts, progress_callback=progress_callback)
-        if command_id == "foundation-dll-analyze-gaps":
-            return _handle_analyze_gaps(repo_root, host_platform, command_text, opts, progress_callback=progress_callback)
-        if command_id == "foundation-dll-check-family":
-            return _handle_check_family(repo_root, host_platform, command_text, opts, progress_callback=progress_callback)
         if command_id == "foundation-dll-promote":
             return _handle_promote(repo_root, host_platform, command_text, opts, progress_callback=progress_callback)
         if command_id == "foundation-dll-refresh":

@@ -24,17 +24,10 @@ _VERIFICATION = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private
 
 
 def _locate_entry_exe(family_slug: str) -> Path | None:
-    """Find the native entry EXE in il2cpp_dist/genuine/<AssemblyName>/generated/"""
+    """Find the native entry EXE in native/entry.exe"""
     family_dir = _VERIFICATION / family_slug
-    genuine_dir = family_dir / "il2cpp_dist" / "genuine"
-    if not genuine_dir.exists():
-        return None
-    for d in genuine_dir.iterdir():
-        if d.is_dir():
-            candidate = d / "generated" / "entry.exe"
-            if candidate.exists():
-                return candidate
-    return None
+    candidate = family_dir / "native" / "entry.exe"
+    return candidate if candidate.exists() else None
 
 
 def build_and_run(family_slug: str) -> dict:

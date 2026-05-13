@@ -494,7 +494,8 @@ bool UnregisterMemoryDomain(DomainId domain_id) {
     }
 
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_registry_mutex);
-    for (auto& domain : g_domains) {
+    for (size_t i = 0; i < g_domains.size(); ) {
+        auto* domain = g_domains[i];
         if (domain != nullptr && domain->domain_id == domain_id) {
             if (domain->heap != nullptr) {
                 domain->heap->Destroy();
@@ -504,9 +505,14 @@ bool UnregisterMemoryDomain(DomainId domain_id) {
 
             domain->is_unloaded = true;
             delete domain;
-            domain = nullptr;
+            // Compress: replace with last element and pop to avoid
+            // accumulating nullptr tombstones that bloat the vector
+            // and slow down linear scans.
+            g_domains[i] = g_domains.back();
+            g_domains.pop_back();
             return true;
         }
+        i++;
     }
     return false;
 }

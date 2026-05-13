@@ -107,13 +107,16 @@ def _class_name(family_slug: str, variant: str) -> str:
 
 
 def _find_genuine_cpp(family_slug: str) -> Path | None:
-    """Find the genuine native-aot.generated.cpp for a family.
+    """Find the codegen native-aot.generated.cpp for a family.
 
     Used for symbol discovery and aborting-methods detection — needs the
-    file that actually contains MethodN function definitions/bodies.
-
-    Returns NativeEntry-subdirectory version when the flat path is a shim.
+    file that actually contains function definitions/bodies.
     """
+    direct = _VERIFICATION / family_slug / "codegen" / "generated" / "native-aot.generated.cpp"
+    if direct.exists():
+        return direct
+
+    # Fallback for backward compatibility with old paths
     genuine_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine"
     if genuine_dir.is_dir():
         for native_entry_dir in sorted(genuine_dir.iterdir()):
@@ -1087,7 +1090,7 @@ def generate_family(family_slug: str) -> dict[str, Any]:
     # Discover symbols
     host_symbols = _discover_host_symbols(family_slug)
     if not host_symbols:
-        print(f"  [SKIP] no host symbols found at {_VERIFICATION / family_slug / 'il2cpp_dist/genuine/generated/'}")
+        print(f"  [SKIP] no host symbols found at {_VERIFICATION / family_slug / 'codegen/generated/'}")
         return {"family": family_slug, "artifacts": []}
 
     print(f"  Host symbols: {len(host_symbols)}")
