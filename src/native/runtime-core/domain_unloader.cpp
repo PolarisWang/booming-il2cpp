@@ -74,14 +74,17 @@ static CHAOS_IL2CPP_SIZE ScanAndClearCrossDomainRefs(CHAOS_IL2CPP_UINT32 domain_
 
             // Check domain region table: is the value within the domain being unloaded?
             if (mgr.IsInDomain(domain_id, val)) {
-                // Intra-domain reference — keep it intact.
+                // The slot points INTO the domain that is being unloaded.
+                // This is a core→domain dangling pointer — clear it to
+                // prevent use-after-free after the domain memory is released.
+                *ptr_slot = nullptr;
+                refs_cleared++;
+                refs_found++;
                 continue;
             }
 
-            // Cross-domain reference: clear it.
-            *ptr_slot = nullptr;
-            refs_cleared++;
-            refs_found++;
+            // The slot points OUTSIDE the domain (core memory or another domain).
+            // Safe to keep — not affected by this domain's unload.
         }
     }
 

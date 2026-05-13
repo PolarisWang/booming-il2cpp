@@ -1,7 +1,7 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-13T08:41:24.629133",
+  "generated_at": "2026-05-13T23:11:02.353176",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -49,13 +49,13 @@
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "principle": "P1",
-      "status": "ALIGNED",
-      "summary": "avg_speedup=94.33%",
+      "status": "CONCERN",
+      "summary": "avg_speedup=34.27% (1 methods where native is slower than managed)",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 94.33,
-        "managed_faster_count": 0,
-        "native_faster_count": 11
+        "average_speedup_percent": 34.27,
+        "managed_faster_count": 1,
+        "native_faster_count": 10
       }
     },
     "p2_template_hygiene": {
@@ -97,15 +97,15 @@
         "valid_count": 1,
         "stub_patchdata_count": 0,
         "files": [
-          "System.Private.CoreLib\\convert-char\\il2cpp_dist\\patch\\patchdata\\convert-char.patchdata"
+          "System.Private.CoreLib\\convert-char\\managed\\patch\\patchdata\\convert-char.patchdata"
         ]
       }
     }
   },
   "summary": {
     "total": 8,
-    "aligned": 7,
-    "concern": 1,
+    "aligned": 6,
+    "concern": 2,
     "violation": 0,
     "not_applicable": 0,
     "overall": "CONCERN"

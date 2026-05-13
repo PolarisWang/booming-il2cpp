@@ -104,9 +104,30 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
         // Object is in the calling thread's own nursery — use TLS bounds.
         obj_size = EstimateObjectSize(obj, tls_nursery_ctx.nursery);
     } else {
-        // Cross-thread nursery object — use conservative cap.
-        // C3+ will use precise TypeInfo-based sizing to eliminate this.
-        obj_size = kMaxEstObjectSize;
+        // Cross-thread nursery object — use precise TypeInfo-based sizing.
+        // The TypeInfo* is the first word of any managed object; look up its
+        // GcTypeLayout to get the exact instance_size.
+        const void* type_info_ptr = *static_cast<const void* const*>(obj);
+        CHAOS_IL2CPP_SIZE precise_size = 0;
+        if (type_info_ptr != nullptr) {
+            auto& layout_registry = GcLayoutRegistry::Instance();
+            if (layout_registry.IsValidTypeInfoPointer(type_info_ptr)) {
+                auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
+                uint64_t stable_id = hot->stable_id;
+                const auto* layout = layout_registry.Lookup(stable_id);
+                if (layout != nullptr && layout->instance_size > 0) {
+                    precise_size = layout->instance_size;
+                }
+            }
+        }
+        if (precise_size > 0) {
+            obj_size = precise_size;
+        } else {
+            // Fallback: no layout available — use conservative cap.
+            // This is safe (wastes old-gen memory by over-allocating) but
+            // never truncates, avoiding cross-thread data corruption.
+            obj_size = kMaxEstObjectSize;
+        }
     }
 
     void* tenured = g_old_gen.Allocate(obj_size, true);

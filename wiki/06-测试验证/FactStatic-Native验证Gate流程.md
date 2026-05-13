@@ -2,47 +2,113 @@
 
 ## 概述
 
-Foundation DLL 验证管线将 C# entrypoint EXE 通过 il2cpp 翻译为原生可执行文件，直接运行来验证 Assert 全部通过。**不再涉及 C++ host 编译、`expected_checksums.h`、CMake 或静态链接。**
+Foundation DLL 验证管线将 C# 入口点 DLL 通过 il2cpp 翻译为原生可执行文件，直接运行来验证 Assert 全部通过。
+
+## 目录结构（Option 1）
+
+每个 family 的验证目录统一如下：
+
+```
+convert-char/
+│
+├── managed/
+│   ├── subjects/                          ← [自动生成] il2cpp 输入
+│   │   ├── ConvertCharSubjects.cs         → Subject_N + Run(int)
+│   │   └── ConvertCharSubjects.csproj     → Library 输出
+│   │
+│   ├── ConvertChar.csproj                 → 包含 tests + benchmark
+│   ├── ConvertCharTests.cs                ← [手写] xUnit Fact
+│   ├── ConvertCharBenchmark.cs            ← [手写] 基准
+│   │
+│   └── patch/                             ← [手写] 独立工程
+│       ├── ConvertCharPatch.csproj
+│       └── ConvertCharPatchEntry.cs       → Patch 存根
+│
+├── codegen/                               ← [il2cpp 产出] 纯翻译结果
+│   └── native-aot.generated.cpp           ← 仅此一个文件，零后处理
+│
+├── native/                                ← [执行入口] Native wrapper
+│   ├── CMakeLists.txt
+│   ├── runtime-entry.cpp
+│   └── runtime-patchdata.cpp              → Stage 2d 生成
+│
+└── reports/                               ← 验证报告
+```
 
 ## 架构
 
 ```
-managed entrypoint EXE  
-    │
-    ├─ Pass 1 (Probe): int-returning 方法, 在托管 .NET 下运行
-    │     捕获每个 API 调用的真实返回值 / 异常类型
-    │
-    └─ Pass 2 (Emit): void-returning 方法, Assert.Equal(expected, actual)
-           │
-           ▼
-    ChaosProofRunner.RunAll(MethodTable)
-           │
-           ▼
-    每个方法: Reset → 调用 → 读 ExitCode → 累加 failures
-           │
-           ▼
-    Passed: N/M  (exit code 0 = 全部通过)
+                    managed/
+                    subjects/ConvertCharSubjects.csproj
+                    │
+                    │ (auto-gen subjects)
+                    │
+                    ▼
+              ConvertCharSubjects.dll
+                    │
+                    ├── chaos-il2cpp convert-to-cpp ──→ codegen/native-aot.generated.cpp
+                    │
+                    ▼
+              native/CMakeLists.txt
+              + native/runtime-entry.cpp
+                    │
+                    cmake + cl
+                    ▼
+              native/build/entry.exe
+                    │
+                    ├── (no args)        → Fact 模式: run all subjects
+                    ├── --bench N [I]    → Benchmark 模式
+                    ├── --hotupdate      → HotUpdate 模式
+                    └── --patch-bench    → Patch + Benchmark
 ```
 
-## 两阶段探测流程
+### 三个并行验证流
 
-生成 entrypoint 时，自动执行两阶段流程：
+```
+Managed 侧 (dotnet)                 Native 侧 (entry.exe)
+─────────────────────               ─────────────────────
 
-1. **Phase 1 (Probe):** 生成 `static int MethodN()` 方法（返回 API 调用的 int 转换结果），构建为托管 EXE 并运行。输出格式：
-   - `RESULT N:<value>` — 方法正常返回
-   - `EXCEPTION N:<ExceptionType>` — 方法抛出异常
-2. **Phase 2 (Emit):** 利用捕获的预期值生成 `static void MethodN()`，包含：
-   - `Assert.Equal(<expected_value>, <call_expr>)` — 正常方法
-   - `Assert.Throws<ExceptionType>(() => <call_expr>)` — 异常方法
-   - 自定义条目 (Custom.cs) 使用 `Assert.Throws` 模式
+dotnet test ConvertChar.csproj      entry.exe           → Fact Assert
+  ↓ xUnit Fact                        ↓ 所有 Subject_N
+  Convert.ToChar(65) == 'A'           exit code 0 = Pass
+
+dotnet run ConvertChar.csproj       entry.exe --bench N → 性能
+  ↓ JIT 基线 timing                   ↓ Codegen timing
+
+                                    entry.exe --hotupdate → 补丁
+                                      ↓ 加载 patch → 再跑
+```
+
+## 7 阶段管线
+
+`run foundation-dll verify-family` 自动执行以下阶段：
+
+| 阶段 | 名称 | 说明 |
+|------|------|------|
+| 0 | Preflight | Contract 完整性检测 |
+| 1a | Build subjects DLL | 生成 + 编译 Subjects DLL |
+| 1b | Codegen | chaos-il2cpp convert-to-cpp → `codegen/` |
+| 1c | [删除] | **不做任何后处理** |
+| 1d | Patch data | 生成 `native/runtime-patchdata.cpp` |
+| 2 | Build entry.exe | cmake → `native/build/entry.exe` |
+| 3-7 | Fact/Audit/Bench/HU/Aggregate | 运行 + 报告 |
+
+## 中间产物
+
+| # | 产物 | 用途 |
+|---|------|------|
+| 1 | `managed/subjects/ConvertCharSubjects.dll` | il2cpp 输入 |
+| 2 | `codegen/native-aot.generated.cpp` | il2cpp 翻译结果（核心产出） |
+| 3 | `native/runtime-patchdata.cpp` | HotUpdate patch 数据 |
+| 4 | `native/build/entry.exe` | 最终可执行 |
+| 5 | `managed/ConvertChar.dll` | 托管 dotnet test/run |
 
 ## 入口命令
 
 ```bash
-# 通过 run 系统（完整 7 阶段管线）
+# 完整 7 阶段管线
 run foundation-dll verify-family --family convert-char
 run foundation-dll verify-family --family convert-char --mode strict
-run foundation-dll verify-family --family buffer-memory --skip benchmark hotupdate
 
 # 直接运行 pipeline（仅 codegen + fact verify）
 python build/toolchains/run/testing/foundation_dll/pipeline_native_aot_runner.py \
@@ -52,143 +118,30 @@ python build/toolchains/run/testing/foundation_dll/pipeline_native_aot_runner.py
 python build/toolchains/run/testing/foundation_dll/fact_verifier.py convert-char
 ```
 
-## 7 阶段管线
-
-`run foundation-dll verify-family` 自动执行以下阶段：
-
-| 阶段 | 名称 | 说明 |
-|------|------|------|
-| 0 | Preflight | Contract 完整性检测，自定义条目发现 |
-| 1 | Codegen | Entrypoint 生成 + il2cpp 翻译 (delegate to pipeline_native_aot_runner) |
-| 2 | Fact | 运行原生 entry EXE，验证 Assert 全部通过 |
-| 3 | Audit | Mechanism + Principle 审计 |
-| 4 | Benchmark | 性能基线（可选，读取已有报告） |
-| 5 | HotUpdate | 热更新验证（可选，读取已有报告） |
-| 6 | Post-HU Benchmark | 热更新后性能（可选） |
-| 7 | Aggregate | 评分、回归检测、Pass/Fail 判定 |
-
-必过阶段：Preflight、Codegen、Fact、Audit。其余阶段在 standard 模式下为 optional。
-
-## 验证标准
-
-- exit code = 0
-- stdout 包含 `Passed: N/M`
-- 无 `FAIL` 行
-
-## Assert 模式
-
-所有 Assert 通过 `ChaosAssertState.ExitCode` 报告失败，而非抛出异常：
-
-```csharp
-public static void Equal(int expected, int actual)
-{
-    if (expected != actual) ChaosAssertState.RecordFailure();
-}
-
-public static void Throws<TException>(Action action)
-{
-    try { action(); ChaosAssertState.RecordFailure(); }
-    catch (TException) { }
-    catch (Exception) { ChaosAssertState.RecordFailure(); }
-}
-```
-
-## 生成文件结构
-
-```
-handwritten/                          # 手写源（只读，管线不修改，不提交到仓库）
-  ConvertCharNativeEntry.Custom.cs   # partial class，包含 CustomEntryMethodN()
-
-il2cpp_dist/entrypoint/
-  ConvertCharNativeEntry.cs         # 自动生成的主 entry（包含 Run() dispatcher + per-method stubs）
-  ConvertCharNativeEntry.Custom.cs  # 从 handwritten/ 复制（auto-generate 自动包含）
-  Program.cs                        # Main() → 位掩码 exit code 模式
-  ConvertCharNativeEntry.csproj     # Exe OutputType, 自动包含 Custom.cs
-  build-output/
-    ConvertCharNativeEntry.dll      # 托管 DLL（pipeline 用它做 convert-to-cpp）
-
-il2cpp_dist/genuine/<AssemblyName>/generated/
-  native-aot.generated.cpp          # il2cpp 翻译后的原生 C++
-  entry.exe                         # 原生可执行文件（由 fact_verifier 运行）
-```
-
 ## Handwrite 源覆盖保护
 
-`handwritten/` 目录是管线的**只读源**，管线只从该目录读取 `.cs` 文件，从不写入：
-
-| 路径 | 访问模式 | 说明 |
-|------|---------|------|
-| `handwritten/` | **READ ONLY** | 管线仅读 `.cs` 文件，绝不修改此目录 |
-| `il2cpp_dist/entrypoint/` | WRITABLE | `generate_and_build()` 可以覆盖此目录全部文件 |
-
-### 集成模式
-
-**Partial Class 模式（推荐）** — 在 `handwritten/` 中放 `.cs` 文件（不含 `.csproj`）：
-
-1. 管线检测到 `handwritten/` 目录，列出所有 `.cs` 文件
-2. 复制到 `il2cpp_dist/entrypoint/`
-3. **回退到 `generate_and_build()`** 正常执行两阶段探测（Probe → Emit）
-4. `generate_and_build()` 自动检测 `Custom.cs`，在 `.csproj` 中加入 `<Compile Include>`
-5. 根据 `capability-family-contract.json` 的 `customEntryIndices`，为 custom method 生成空桩
-6. Custom.cs 提供 `CustomEntryMethodN()` 实现
-
-**Legacy 全项目模式** — 在 `handwritten/` 中包含 `.csproj`：
-- 管线复制全部文件到 `il2cpp_dist/entrypoint/`，直接 `dotnet build`
-- 不经过 `generate_and_build()`，不执行两阶段探测
-
-### Handwrite 方法约束
-
-```csharp
-// CustomEntryMethodN 必须与 auto-generated 桩签名一致：
-public static void CustomEntryMethod0()
-{
-    _exitCode = 0;
-    try { Convert.ToChar(true); _exitCode = 1; }
-    catch (InvalidCastException) { }
-}
-
-## 与旧流程（已删除）的区别
-
-| 维度 | 旧流程 | 新流程 |
-|------|--------|--------|
-| 验证方式 | C++ host 编译 + 静态链接 | 直接运行 entry.exe |
-| 预期值 | expected_checksums.h + 二阶段 codegen | 托管探测自动捕获 |
-| 断言机制 | Assert.Equal(__result, __result) 自比较 | Assert.Equal(expected, actual) 真实比较 |
-| 失败信号 | ExitCode vs __chaos_assert_failures 错位 | 统一 ExitCode |
-| 所需工具 | MSVC + CMake + 8 个 .lib | 无（entry.exe 已编译完成） |
-| 维护成本 | 高（CRT 匹配、lib 依赖） | 低 |
-
-## 自定义条目
-
-对于会抛出预期异常的方法（如 `Convert.ToChar(true)` → `InvalidCastException`），使用 `handwritten/<Class>.Custom.cs` 手工编写：
-
-```csharp
-public static partial class ConvertCharNativeEntry
-{
-    // [0] Convert.ToChar(bool) always throws InvalidCastException
-    public static void CustomEntryMethod0()
-    {
-        _exitCode = 0;
-        try { Convert.ToChar(true); _exitCode = 1; }
-        catch (InvalidCastException) { }
-    }
-}
-```
-
-**重要**：Custom 方法使用 `_exitCode` 字段而非 `Assert.Throws`，因为 codegen 无法解析外部 assembly 的方法符号。通过 `capability-family-contract.json` 中的 `customEntryIndices` 字段声明哪些索引走自定义条目。
-
-### Handwrite 覆盖保护
-
-`handwritten/` 目录是管线**只读源**，`pipeline_native_aot_runner.py:_build_entrypoint()` 确保：
-
-```python
-handwritten_dir = v / family_slug / "handwritten"
-if handwritten_dir.exists():
-    cs_files = [f for f in handwritten_dir.iterdir() if f.is_file() and f.suffix == ".cs"]
-    # 复制 .cs 到 il2cpp_dist/entrypoint/，然后回退到 generate_and_build()
-```
+`handwritten/` 目录是管线的**只读源**：
 
 | 路径 | 访问模式 | 说明 |
 |------|---------|------|
 | `handwritten/` | **READ ONLY** | 管线仅读 `.cs` 文件，绝不修改 |
-| `il2cpp_dist/` | WRITABLE | auto-generate 可覆盖 |
+| `managed/subjects/` | WRITABLE | auto-generate 可覆盖 |
+| `managed/ConvertCharTests.cs` | **READ ONLY** | 手写，仅首次自动生成骨架 |
+| `managed/ConvertCharBenchmark.cs` | **READ ONLY** | 手写，仅首次自动生成骨架 |
+| `managed/patch/ConvertCharPatchEntry.cs` | **READ ONLY** | 完全手写 |
+
+## 关键原则
+
+1. **subjects 独立工程** — 与 tests/benchmark 分离，避免 il2cpp 闭包扫描拖入 xUnit 等依赖
+2. **codegen 零后处理** — `native-aot.generated.cpp` 是 il2cpp 翻译能力的真实凭证，不被外部脚本修改
+3. **命名清晰** — `Subjects` 前缀表示"被测方法"，`Tests` 表示 Fact，`Benchmark` 表示性能，`PatchEntry` 表示热更新
+
+## 与旧结构的区别
+
+| 维度 | 旧结构 | Option 1 |
+|------|--------|----------|
+| il2cpp 输入 | `il2cpp_dist/entrypoint/ConvertCharNativeEntry.cs` | `managed/subjects/ConvertCharSubjects.cs` |
+| codegen 输出 | `il2cpp_dist/genuine/<Asm>/generated/native-aot.generated.cpp` | `codegen/native-aot.generated.cpp` |
+| native wrapper | 混在 genuine/ 树中 | 独立 `native/` 工程 |
+| 后处理 | 5 个 patch 脚本修改生成的 .cpp | **无**（零后处理） |
+| 工程数 | 4 个分散 | 3 个（subjects + main + patch） |

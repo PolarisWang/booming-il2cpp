@@ -198,6 +198,9 @@ def _generate_entrypoint_source(
 
     if variant == "patch":
         usings: set[str] = set()
+    elif variant == "subjects":
+        usings = _collect_required_usings(method_subject_ids)
+        # subjects DLL is pure il2cpp input — no Chaos.TestFramework dependency
     else:
         usings = _collect_required_usings(method_subject_ids)
         usings.add("Chaos.TestFramework")
@@ -244,12 +247,15 @@ def _generate_entrypoint_source(
     # No Action[] MethodTable — avoids delegate lowering issues in codegen.
     # Instead generates a Run(int entryIndex) switch dispatcher for runtime-entry.cpp
     # to call via --benchmark N or --hotupdate.
+    method_prefix = "Subject_" if variant == "subjects" else "Method"
+    custom_prefix = "CustomEntrySubject_" if variant == "subjects" else "CustomEntryMethod"
+
     for idx, subject_id in enumerate(method_subject_ids):
         lines.append(f"{ns_indent}    // [{idx}] {subject_id}")
         if idx in (custom_method_indices or set()):
             if probe_mode:
                 # Generate int-returning probe stub inline (don't use Custom.cs which has void methods)
-                lines.append(f"{ns_indent}    public static int CustomEntryMethod{idx}()")
+                lines.append(f"{ns_indent}    public static int {custom_prefix}{idx}()")
                 lines.append(f"{ns_indent}    {{")
                 prelude, call_expr = _build_call_expr_for_benchmark(subject_id)
                 if call_expr:
@@ -265,7 +271,7 @@ def _generate_entrypoint_source(
             continue
 
         if variant == "patch":
-            lines.append(f"{ns_indent}    public static int Method{idx}()")
+            lines.append(f"{ns_indent}    public static int {method_prefix}{idx}()")
             lines.append(f"{ns_indent}    {{")
             lines.append(f"{ns_indent}        return unchecked((int)(0xB0000000u + {idx}));")
             lines.append(f"{ns_indent}    }}")
@@ -275,7 +281,7 @@ def _generate_entrypoint_source(
         if probe_mode:
             # Probe mode: return int, capture value under managed .NET
             # Must be public so Program.cs can call it
-            lines.append(f"{ns_indent}    public static int Method{idx}()")
+            lines.append(f"{ns_indent}    public static int {method_prefix}{idx}()")
             lines.append(f"{ns_indent}    {{")
             prelude, call_expr = _build_call_expr_for_benchmark(subject_id)
             if call_expr:
@@ -297,7 +303,7 @@ def _generate_entrypoint_source(
 
         # Normal mode: void entry with proper Assert.Equal(expected, actual)
         # Must be public so Program.cs (different class) can call it
-        lines.append(f"{ns_indent}    public static void Method{idx}()")
+        lines.append(f"{ns_indent}    public static void {method_prefix}{idx}()")
         lines.append(f"{ns_indent}    {{")
 
         ev = (expected_values or {}).get(idx)
@@ -345,8 +351,8 @@ def _generate_entrypoint_source(
     lines.append(f"{ns_indent}        switch (entryIndex)")
     lines.append(f"{ns_indent}        {{")
     for idx in range(len(method_subject_ids)):
-        method_name = f"CustomEntryMethod{idx}" if idx in (custom_method_indices or set()) else f"Method{idx}"
-        lines.append(f"{ns_indent}            case {idx}: {method_name}(); break;")
+        mn = f"{custom_prefix}{idx}" if idx in (custom_method_indices or set()) else f"{method_prefix}{idx}"
+        lines.append(f"{ns_indent}            case {idx}: {mn}(); break;")
     lines.append(f"{ns_indent}        }}")
     lines.append(f"{ns_indent}    }}")
     lines.append("")
@@ -448,10 +454,48 @@ def _generate_csproj(
 ) -> str:
     """Generate the .csproj for the synthetic entry point assembly.
 
-    OutputType is Exe so il2cpp translates it to a native executable.
-    References both TestFramework.Sdk and TestFramework.Runner.
+    For subjects variant: OutputType is Library, no TestFramework refs, no Program.cs.
+    For other variants: OutputType is Exe so il2cpp translates it to a native executable.
     """
     namespace_part = f"<RootNamespace>{class_name}</RootNamespace>"
+
+    if variant == "subjects":
+        # Subjects DLL: pure il2cpp input, no TestFramework, no Program.cs, net8.0
+        return (
+            '<Project Sdk="Microsoft.NET.Sdk">\n'
+            "  <PropertyGroup>\n"
+            "    <OutputType>Library</OutputType>\n"
+            f"    <TargetFramework>net8.0</TargetFramework>\n"
+            "    <Nullable>enable</Nullable>\n"
+            "    <ImplicitUsings>disable</ImplicitUsings>\n"
+            f"    <AssemblyName>{class_name}</AssemblyName>\n"
+            f"    {namespace_part}\n"
+            "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
+            "  </PropertyGroup>\n"
+            "  <ItemGroup>\n"
+            f'    <Compile Include="{cs_file_name}" />\n'
+            "  </ItemGroup>\n"
+            "</Project>\n"
+        )
+
+    if variant == "patch":
+        # Patch DLL: Library, no TestFramework, no Program.cs, net8.0
+        return (
+            '<Project Sdk="Microsoft.NET.Sdk">\n'
+            "  <PropertyGroup>\n"
+            "    <OutputType>Library</OutputType>\n"
+            f"    <TargetFramework>net8.0</TargetFramework>\n"
+            "    <Nullable>enable</Nullable>\n"
+            "    <ImplicitUsings>disable</ImplicitUsings>\n"
+            f"    <AssemblyName>{class_name}</AssemblyName>\n"
+            f"    {namespace_part}\n"
+            "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
+            "  </PropertyGroup>\n"
+            "  <ItemGroup>\n"
+            f'    <Compile Include="{cs_file_name}" />\n'
+            "  </ItemGroup>\n"
+            "</Project>\n"
+        )
 
     # References
     sdk_csproj = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
@@ -511,11 +555,11 @@ def _compute_entry_point_subject_id(
 ) -> str:
     """Compute the subject ID for the entry point.
 
-    For non-patch variants:
+    For non-patch, non-subjects variants:
         Entry is Program.Main() which returns int, takes no args.
         ABI: int()
         Format: <AssemblyName>/Program::Main:System.Int32()
-    For patch variant:
+    For patch and subjects variants:
         Entry is Run(int) which returns int, takes int32.
         ABI: int(int32)
         Format: <AssemblyName>/<FullTypeName>::Run:System.Int32(System.Int32)
@@ -523,6 +567,9 @@ def _compute_entry_point_subject_id(
     if variant == "patch":
         full_type = f"{namespace_name}.{class_name}" if namespace_name else class_name
         return f"{class_name}/{full_type}::Run:System.Int32(System.Int32)"
+    if variant == "subjects":
+        full_type = f"{namespace_name}.{class_name}" if namespace_name else class_name
+        return f"{class_name}/{full_type}::Run:System.Void(System.Int32)"
     # Non-patch: entry is Program.Main()
     return f"{class_name}/Program::Main:System.Int32()"
 
@@ -619,7 +666,9 @@ def generate_and_build(
     if class_name is None:
         class_name = f"{_family_namespace_slug(family_id).title().replace('_', '')}NativeEntry"
 
-    if variant == "patch":
+    if variant == "subjects":
+        class_name = class_name.replace("NativeEntry", "Subjects")
+    elif variant == "patch":
         class_name = class_name.replace("NativeEntry", "PatchEntry")
     elif variant == "semantic-patch":
         class_name = class_name.replace("NativeEntry", "SemanticPatchEntry")
@@ -717,16 +766,75 @@ def generate_and_build(
         custom_method_indices=custom_method_indices,
         expected_values=expected_values,
     )
-    final_program = _generate_program_source(
-        class_name, namespace_name,
-        method_count=len(method_subject_ids),
-        custom_method_indices=custom_method_indices,
-    )
 
     source_path = output_dir / cs_file_name
     csproj_path = output_dir / csproj_name
     output_dir.mkdir(parents=True, exist_ok=True)
     source_path.write_text(final_source, encoding="utf-8")
+
+    entry_point_subject_id = _compute_entry_point_subject_id(class_name, namespace_name, variant=variant)
+
+    # ── Subjects variant: Library, no Program.cs, build as DLL ──
+    if variant == "subjects":
+        (output_dir / csproj_name).write_text(
+            _generate_csproj(
+                assembly_name=assembly_name,
+                class_name=class_name,
+                cs_file_name=cs_file_name,
+                variant=variant,
+            ),
+            encoding="utf-8",
+        )
+        print(f"[subjects] Building {class_name} DLL...")
+        build_out = output_dir / "build-output"
+        result = subprocess.run(
+            ["dotnet", "build", str(csproj_path), "-o", str(build_out), "--nologo", "-v", "quiet"],
+            capture_output=True, text=True,
+        )
+        if result.returncode != 0:
+            print(f"[subjects] Build FAILED for {class_name}:")
+            if result.stdout:
+                print(result.stdout)
+            if result.stderr:
+                print(result.stderr)
+            return {
+                "success": False,
+                "error": result.stderr or result.stdout,
+                "dll_path": None,
+                "csproj_path": str(csproj_path),
+                "source_path": str(source_path),
+                "entry_point_subject_id": entry_point_subject_id,
+            }
+        dll_path = build_out / f"{class_name}.dll"
+        if not dll_path.exists():
+            dlls = list(build_out.glob("*.dll"))
+            if dlls:
+                dll_path = dlls[0]
+            else:
+                return {
+                    "success": False,
+                    "error": "DLL not found after build",
+                    "dll_path": None,
+                    "csproj_path": str(csproj_path),
+                    "source_path": str(source_path),
+                    "entry_point_subject_id": entry_point_subject_id,
+                }
+        print(f"[subjects] Built {dll_path}")
+        return {
+            "success": True,
+            "dll_path": str(dll_path.resolve()),
+            "build_output_dir": str(build_out.resolve()),
+            "csproj_path": str(csproj_path),
+            "source_path": str(source_path),
+            "entry_point_subject_id": entry_point_subject_id,
+        }
+
+    # ── Non-subjects variants: Exe with Program.cs ──
+    final_program = _generate_program_source(
+        class_name, namespace_name,
+        method_count=len(method_subject_ids),
+        custom_method_indices=custom_method_indices,
+    )
     (output_dir / "Program.cs").write_text(final_program, encoding="utf-8")
     (output_dir / csproj_name).write_text(
         _generate_csproj(
@@ -738,9 +846,6 @@ def generate_and_build(
         ),
         encoding="utf-8",
     )
-
-    # Build final EXE
-    entry_point_subject_id = _compute_entry_point_subject_id(class_name, namespace_name, variant=variant)
 
     print(f"[entrypoint] Building {class_name} (final)...")
     build_out = output_dir / "build-output"

@@ -110,14 +110,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     private HeaderKind GetHeaderKind(string typeSubjectId)
     {
-        // Arrays, delegates always use Fat (need explicit vtable* and sync)
-        if (typeSubjectId.Contains("/System.Array") ||
-            typeSubjectId.Contains("/System.Delegate") ||
-            typeSubjectId.Contains("/System.MulticastDelegate") ||
-            typeSubjectId.Contains("/System.Collections.IEnumerator"))
-            return HeaderKind.Fat;
-
-        // String: ThinLockable (sealed, no virtual dispatch, but supports sync via lock())
+        // String: ThinLockable (supports sync via lock())
         if (typeSubjectId.Contains("/System.String"))
             return HeaderKind.ThinLockable;
 
@@ -140,22 +133,7 @@ public sealed partial class NativeAotLoweringPlanner
                 return HeaderKind.PureType;
         }
 
-        // Types with finalizer → Fat
-        // (finalizer detection: check for virtual Finalize method)
-        if (_methodsBySubjectId.Values.Any(m =>
-            !m.IsStatic &&
-            string.Equals(m.Identity.DeclaringTypeSubjectId, typeSubjectId, StringComparison.Ordinal) &&
-            m.SubjectId.Contains("Finalize")))
-            return HeaderKind.Fat;
-
-        // If the type has a non-empty vtable (virtual methods), it needs FatHeader
-        // to store the vtable pointer. ThinLockableHeader has no vtable field.
-        if (_vtableLengths != null &&
-            _vtableLengths.TryGetValue(typeSubjectId, out int vtLen) &&
-            vtLen > 0)
-            return HeaderKind.Fat;
-
-        // Everything else → ThinLockable (default)
+        // Everything else → ThinLockable (default, supports sync + vtable dispatch via type_info)
         return HeaderKind.ThinLockable;
     }
 

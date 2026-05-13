@@ -52,9 +52,11 @@ bool ArrayReverseReferenceRange(
     CHAOS_IL2CPP_UINTPTR length);
 
 /// Mark the object as changed (for incremental GC write barrier).
-/// No-op when bdwgc is not compiled with MANUAL_VDB.
 /// C3 stub: will be wired for incremental GC in later milestones.
-void GcEndStubbornChange(const void* obj);
+inline void GcEndStubbornChange(const void* /*obj*/) noexcept {
+    // No-op: bdwgc not compiled with MANUAL_VDB.
+    // C3+ will implement the actual write-barrier logic here.
+}
 
 /// String duplicate through the current TLS domain heap.
 /// Falls back to std::malloc when no domain is active.

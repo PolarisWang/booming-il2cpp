@@ -24,30 +24,46 @@ void GcScheduler::RecordYoungCollection(CHAOS_IL2CPP_SIZE nursery_used,
     double survival = (nursery_used > 0)
         ? static_cast<double>(bytes_promoted) / static_cast<double>(nursery_used)
         : 0.0;
-    survival_rate_ = (1.0 - kEmaAlpha) * survival_rate_ + kEmaAlpha * survival;
 
-    // Clamp to [0, 1].
-    if (survival_rate_ < 0.0) survival_rate_ = 0.0;
-    if (survival_rate_ > 1.0) survival_rate_ = 1.0;
+    // V4-M8: Atomic read-modify-write of survival_rate via bitcast.
+    uint64_t old_bits = survival_rate_bits_.load(std::memory_order_relaxed);
+    double old_rate = BitsToDouble(old_bits);
+    double new_rate = (1.0 - kEmaAlpha) * old_rate + kEmaAlpha * survival;
+    if (new_rate < 0.0) new_rate = 0.0;
+    if (new_rate > 1.0) new_rate = 1.0;
+    survival_rate_bits_.store(DoubleToBits(new_rate), std::memory_order_relaxed);
 
     // Record nursery used for sizing.
     last_nursery_used_.store(nursery_used, std::memory_order_relaxed);
 
+    // V4-H4: Accumulate actual allocation volume into full-GC counter.
+    // nursery_used = total bytes allocated since last young GC (the entire
+    // nursery content, both live and dead).  Adding this to
+    // alloc_since_last_full_gc_ replaces the previous per-slow-path tracking
+    // which only recorded the single allocation size (e.g., 32 bytes) instead
+    // of the full nursery volume (~256 KB), making the full-GC trigger
+    // effectively dead code.
+    alloc_since_last_full_gc_.fetch_add(nursery_used, std::memory_order_relaxed);
+
     // Reset per-GC allocation counter (the young collection just processed
-    // all nursery allocations).
+    // all nursery allocations).  The per-GC counter drives the young-GC
+    // trigger and accumulates between young GCs via RecordAllocation calls
+    // from the nursery slow path.
     alloc_since_last_gc_.store(0, std::memory_order_relaxed);
 }
 
-void GcScheduler::RecordFullCollection(uint64_t /*pause_ns*/) noexcept {
+void GcScheduler::RecordFullCollection(CHAOS_IL2CPP_SIZE total_heap_bytes, uint64_t /*pause_ns*/) noexcept {
     // Reset full-GC allocation counter.
     alloc_since_last_full_gc_.store(0, std::memory_order_relaxed);
 
-    // Update estimated heap size from the young-collection counters.
-    // This allows DecideCollection() to trigger full GC when allocation
+    // Update estimated heap size from the actual total heap footprint.
+    // This enables DecideCollection() to trigger full GC when allocation
     // exceeds kFullTriggerMultiplier * estimated_heap_size_.
-    CHAOS_IL2CPP_SIZE alloc = alloc_since_last_gc_.load(std::memory_order_relaxed);
-    last_nursery_used_.store(alloc, std::memory_order_relaxed);
-    estimated_heap_size_.store(alloc > 0 ? alloc : kDefaultNurserySize, std::memory_order_relaxed);
+    // Using the actual heap size (old-gen page usage) rather than the
+    // young-collection-level allocation counter, which was ~1000× too
+    // small and would prevent the scheduler from ever triggering full GC.
+    estimated_heap_size_.store(total_heap_bytes > 0 ? total_heap_bytes : kDefaultNurserySize,
+                               std::memory_order_relaxed);
 
     // Clear the full-GC request flag.
     full_gc_requested_.store(false, std::memory_order_relaxed);
@@ -90,7 +106,8 @@ void GcScheduler::RequestFullGc() noexcept {
 // ── Nursery sizing ───────────────────────────────────────────────
 
 CHAOS_IL2CPP_SIZE GcScheduler::RecommendedNurserySize() const noexcept {
-    double survival = survival_rate_;
+    // V4-M8: Atomic read of survival_rate via bitcast.
+    double survival = BitsToDouble(survival_rate_bits_.load(std::memory_order_relaxed));
 
     // Target: 2× the last nursery's survived bytes gives us headroom
     // before the next GC triggers.

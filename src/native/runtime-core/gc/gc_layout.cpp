@@ -203,8 +203,13 @@ int ScanObjectPointers(void* obj, const GcTypeLayout* layout,
 
 // ======================================================================
 // Cheney BFS — walk promoted objects using precise layouts
+//
+// DEPRECATED: Not called from any production path.  Young GC Phase 3
+// uses the inline BFS worklist in GcScavengeObject instead.  This
+// function is retained as a reference implementation for C3+ when a
+// standalone BFS may be needed (e.g., parallel BFS).
 // ======================================================================
-
+[[deprecated("Use inline BFS worklist in GcScavengeObject instead")]]
 void CheneyBfsPrecise(void* tenured_begin, void* tenured_end,
                       Region* nursery, YoungCollectionResult* result) {
     if (tenured_begin == nullptr || tenured_end == nullptr) return;

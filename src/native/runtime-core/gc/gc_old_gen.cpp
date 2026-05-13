@@ -299,7 +299,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
             uint32_t gen = threading::RequestGlobalSafepoint();
             Collect(nullptr, nullptr);
             threading::ReleaseGlobalSafepoint(gen);
-            g_gc_scheduler.RecordFullCollection(0);
+            // RecordFullCollection is handled inside Collect().
         } else if (decision == GcCollectionKind::YOUNG) {
             // For oversized, we don't run young GC (nursery is irrelevant).
             // The scheduler will trigger young GC on the next normal allocation.
@@ -309,6 +309,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
         if (page == nullptr) return nullptr;
         auto* result = page->Payload();
         std::memset(result, 0, size);
+        GcRecordAlloc(size, true);
         return result;
     }
 
@@ -321,24 +322,32 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
         // Fallback: allocate a new page and carve from it.
         auto* page = AllocatePage(kOldGenPageSize, scanning_required);
         if (page == nullptr) return nullptr;
-        // Now retry the free list — the new page was pre-carved.
         sc_idx = SizeClassIndex(size);
         if (sc_idx < 0) {
             // Still no match (shouldn't happen for aligned < 32KB).
-            return page->Payload();
+            auto* result = page->Payload();
+            GcRecordAlloc(size, false);
+            return result;
         }
     }
 
     // Try free lists.
     auto* ptr = TryAllocateFromFreeLists(size, sc_idx);
-    if (ptr != nullptr) return ptr;
+    if (ptr != nullptr) {
+        GcRecordAlloc(size, false);
+        return ptr;
+    }
 
     // Miss: allocate a new page.
     auto* page = AllocatePage(kOldGenPageSize, scanning_required);
     if (page == nullptr) return nullptr;
 
     // Retry free list (new page was pre-carved with size-class blocks).
-    return TryAllocateFromFreeLists(size, sc_idx);
+    ptr = TryAllocateFromFreeLists(size, sc_idx);
+    if (ptr != nullptr) {
+        GcRecordAlloc(size, false);
+    }
+    return ptr;
 }
 
 void MarkSweepOldGen::Free(void* ptr) {
@@ -521,64 +530,76 @@ void MarkSweepOldGen::DrainMarkStack() {
 
     // If the mark stack overflowed, we need a fallback: conservatively
     // scan all pages for any remaining unmarked-but-reachable objects.
-    // This is a slow path but prevents dropped objects.
+    // Uses multi-pass approach: each pass scans pages conservatively,
+    // then drains the mark stack with full transitive closure (pushing
+    // children).  If the stack re-overflows, subsequent passes discover
+    // missed objects.
     if (overflowed) {
         CHAOS_IL2CPP_LOG_WARN("OldGen", "mark_stack_overflow_fallback");
-        std::lock_guard<std::mutex> lock(mutex_);
-        auto* p = page_list_;
-        while (p != nullptr) {
-            if (!p->in_use.load(std::memory_order_acquire) || p->is_oversized) {
-                p = p->next;
-                continue;
-            }
-            // Scan every pointer-aligned slot on this page.
-            auto* bitmap = p->MarkBitmap();
-            char* payload = p->Payload();
-            CHAOS_IL2CPP_SIZE num_slots = p->payload_size / sizeof(void*);
-            for (CHAOS_IL2CPP_SIZE s = 0; s < num_slots; s++) {
-                CHAOS_IL2CPP_SIZE byte_idx = s / 8;
-                int bit_idx = static_cast<int>(s % 8);
-                if (bitmap[byte_idx] & (static_cast<unsigned char>(1u << bit_idx))) {
-                    continue;  // already marked
+        constexpr int kMaxOverflowPasses = 4;
+        for (int pass = 0; pass < kMaxOverflowPasses; pass++) {
+            bool more = false;
+            {
+                std::lock_guard<std::mutex> lock(mutex_);
+                auto* p = page_list_;
+                while (p != nullptr) {
+                    if (!p->in_use.load(std::memory_order_acquire) || p->is_oversized) {
+                        p = p->next;
+                        continue;
+                    }
+                    auto* bitmap = p->MarkBitmap();
+                    char* payload = p->Payload();
+                    CHAOS_IL2CPP_SIZE num_slots = p->payload_size / sizeof(void*);
+                    for (CHAOS_IL2CPP_SIZE s = 0; s < num_slots; s++) {
+                        CHAOS_IL2CPP_SIZE byte_idx = s / 8;
+                        int bit_idx = static_cast<int>(s % 8);
+                        if (bitmap[byte_idx] & (static_cast<unsigned char>(1u << bit_idx))) {
+                            continue;
+                        }
+                        auto* slot_val = *reinterpret_cast<void**>(payload + s * sizeof(void*));
+                        if (slot_val != nullptr && FindPage(slot_val) != nullptr) {
+                            if (MarkObject(slot_val)) {
+                                more = true;
+                                if (mark_stack_.size() < kMaxMarkStack) {
+                                    mark_stack_.push_back(slot_val);
+                                }
+                            }
+                        }
+                    }
+                    p = p->next;
                 }
-                auto* slot_val = *reinterpret_cast<void**>(payload + s * sizeof(void*));
-                if (slot_val != nullptr && FindPage(slot_val) != nullptr) {
-                    if (MarkObject(slot_val)) {
-                        // Attempt push again — if still overflowing, skip
-                        // further transitive closure for this object.
-                        // The object's own mark-bit is set so it won't be
-                        // collected this cycle.
-                        if (mark_stack_.size() < kMaxMarkStack) {
-                            mark_stack_.push_back(slot_val);
+            }
+            // Drain mark stack with FULL transitive closure (push children).
+            while (!mark_stack_.empty()) {
+                void* obj = mark_stack_.back();
+                mark_stack_.pop_back();
+                auto* pg = FindPage(obj);
+                if (pg == nullptr) continue;
+                const void* type_info_ptr = *static_cast<const void* const*>(obj);
+                if (type_info_ptr == nullptr) continue;
+                if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) continue;
+                auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
+                uint64_t stable_id = hot->stable_id;
+                const auto* layout = layout_registry.Lookup(stable_id);
+                if (layout == nullptr || layout->pointer_count == 0) continue;
+                uintptr_t obj_base = reinterpret_cast<uintptr_t>(obj);
+                for (uint16_t i = 0; i < layout->pointer_count; i++) {
+                    uint16_t offset = layout->pointer_offsets[i].offset;
+                    auto* slot = reinterpret_cast<void**>(obj_base + offset);
+                    void* ref = *slot;
+                    if (ref != nullptr && FindPage(ref) != nullptr) {
+                        if (MarkObject(ref)) {
+                            // Push for transitive closure — standard tri-color
+                            // marking.  If stack re-overflows, next pass handles it.
+                            more = true;
+                            if (mark_stack_.size() < kMaxMarkStack) {
+                                mark_stack_.push_back(ref);
+                            }
                         }
                     }
                 }
             }
-            p = p->next;
-        }
-        // Drain any remaining entries from the conservative scan.
-        while (!mark_stack_.empty()) {
-            void* obj = mark_stack_.back();
-            mark_stack_.pop_back();
-            // Minimal transitive closure: scan pointer fields without pushing.
-            auto* page = FindPage(obj);
-            if (page == nullptr) continue;
-            const void* type_info_ptr = *static_cast<const void* const*>(obj);
-            if (type_info_ptr == nullptr) continue;
-            if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) continue;
-            auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-            uint64_t stable_id = hot->stable_id;
-            const auto* layout = layout_registry.Lookup(stable_id);
-            if (layout == nullptr || layout->pointer_count == 0) continue;
-            uintptr_t obj_base = reinterpret_cast<uintptr_t>(obj);
-            for (uint16_t i = 0; i < layout->pointer_count; i++) {
-                uint16_t offset = layout->pointer_offsets[i].offset;
-                auto* slot = reinterpret_cast<void**>(obj_base + offset);
-                void* ref = *slot;
-                if (ref != nullptr && FindPage(ref) != nullptr) {
-                    MarkObject(ref);
-                }
-            }
+            if (!more) break;
         }
     }
 }
@@ -797,15 +818,25 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_start page_count={0}", page_count_);
 
+    // V4-H3: Snapshot pinned_roots_ under mutex to avoid data race with
+    // AddPinnedRoot (which pushes under the same mutex).  Iterating the
+    // vector without locking is UB if a concurrent push_back triggers
+    // reallocation — the iterator becomes dangling.
+    std::vector<PinnedRoot> pinned_snapshot;
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        pinned_snapshot = pinned_roots_;
+    }
+
     // Phase 1: Mark roots.
-    bool has_roots = (root_callback != nullptr) || !pinned_roots_.empty();
+    bool has_roots = (root_callback != nullptr) || !pinned_snapshot.empty();
 
     if (root_callback != nullptr) {
         root_callback(nullptr, user_data);  // signal start (optional)
     }
 
-    // Mark pinned roots.
-    for (auto& pr : pinned_roots_) {
+    // Mark pinned roots from snapshot (no lock needed).
+    for (auto& pr : pinned_snapshot) {
         if (MarkObject(pr.addr)) {
             mark_stack_.push_back(pr.addr);
             has_roots = true;
@@ -828,10 +859,17 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 auto* nursery = thread->nursery_ctx->nursery;
                 if (nursery == nullptr) return true;
 
-                void* nursery_begin = nursery->begin;
-                void* nursery_cur   = nursery->current;
-                if (nursery_cur > nursery_begin) {
-                    g_old_gen.ScanRangeForRoots(nursery_begin, nursery_cur);
+                // V4-M3: Snapshot nursery range under safepoint, then use it.
+                // The thread whose nursery we're scanning is paused at
+                // SafepointPoll, so TeardownTlsNursery cannot run concurrently.
+                // But capture begin/cur to a local struct anyway so we don't
+                // read nursery fields after a potential context switch.
+                struct { void* begin; void* cur; } snap = {
+                    nursery->begin,
+                    nursery->current
+                };
+                if (snap.cur > snap.begin) {
+                    g_old_gen.ScanRangeForRoots(snap.begin, snap.cur);
                 }
                 return true;  // continue enumeration
             });
@@ -978,12 +1016,16 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         marked_count_.exchange(0, std::memory_order_relaxed));
 
     // Record into GcStats.
+    CHAOS_IL2CPP_SIZE total_heap_bytes = static_cast<CHAOS_IL2CPP_SIZE>(page_count_) * kOldGenPageSize;
     GcRecordFullCollection(
         static_cast<CHAOS_IL2CPP_SIZE>(page_count_),
         marked_count,
         total_reclaimed,
         finalizers_run,
         pause_ns);
+
+    // Record into scheduler with actual heap size for full GC trigger decisions.
+    g_gc_scheduler.RecordFullCollection(total_heap_bytes, pause_ns);
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_done reclaimed={0} pause_ns={1}",
         static_cast<unsigned long long>(total_reclaimed), pause_ns);

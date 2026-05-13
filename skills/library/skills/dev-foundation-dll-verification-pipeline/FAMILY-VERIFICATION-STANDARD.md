@@ -41,41 +41,35 @@ run foundation-dll verify-family --family <family-slug> --skip benchmark hotupda
 
 ### 阶段 1: Codegen
 
-生成目录结构：
+生成目录结构（新结构，已验证 convert-char 可用）：
 
 ```
-il2cpp_dist/
-├── entrypoint/                          # C# 入口点项目
-│   ├── <ClassName>NativeEntry.cs        # Auto-generated entry class
-│   ├── <ClassName>NativeEntry.csproj    # 项目文件（引用 Shared Runner）
-│   ├── <ClassName>PatchEntry.cs         # Patch entry（hotupdate 用）
-│   ├── <ClassName>PatchEntry.csproj
-│   ├── Program.cs                       # Main() 入口
-│   ├── build-output/                    # dotnet build 产物
-│   │   ├── <ClassName>NativeEntry.dll
-│   │   ├── <ClassName>NativeEntry.exe
-│   │   ├── Chaos.TestFramework.Runner.dll   # Shared Runner
-│   │   └── Chaos.TestFramework.Sdk.dll
-│   └── obj/                             # MSBuild 中间产物
-├── genuine/                             # IL2CPP 转换输出
-│   ├── <ClassName>/generated/
-│   │   ├── native-aot.generated.cpp      # 生成的 C++ 代码（含 chaos_eval_stack）
-│   │   ├── runtime_helper_shapes.h
-│   │   └── entry.exe                     # 编译好的验证可执行文件（~845KB）
-│   ├── build/                           # CMake 构建目录（含 .obj/.lib/.pdb）
-│   ├── runtime-entry.cpp                # 增强版 runtime 入口（pipeline 提供）
-│   ├── runtime-patchdata.cpp            # Patch 数据
-│   ├── *.json                           # IL2CPP 元数据（aot-core-ir, manifest, closure 等）
-│   └── hot-update/supplemental-metadata-template.json
-└── patch/
-    └── patchdata/
-        └── <family>.patchdata           # 二进制 patch 数据
+managed/
+├── subjects/                            # Subjects DLL 项目
+│   ├── <ClassName>Subjects.cs             # Auto-generated subject methods
+│   ├── <ClassName>Subjects.csproj         # Library 项目（纯代码，无 TestFramework 依赖）
+│   └── build-output/                      # dotnet build 产物（.dll）
+codegen/
+├── <AssemblyName>/generated/             # IL2CPP 转换输出
+│   └── native-aot.generated.cpp           # 生成的 C++ 代码
+native/
+├── CMakeLists.txt                        # 每个 family 一份（模板固定，pipeline 不覆盖）
+├── runtime-entry.cpp                     # 增强版 runtime 入口（pipeline 从 toolchain 复制）
+├── runtime-patchdata.cpp                 # Patch 数据（pipeline 自动生成）
+├── entry.exe                             # 编译好的验证可执行文件
+└── build/                                # CMake 构建目录（.obj/.lib/.pdb）
+managed/patch/                            # Patch 变体项目（由 _generate_patch_data 管理）
+├── <ClassName>PatchEntry.cs
+├── Program.cs
+└── patchdata/
+    └── <family>.patchdata                # 二进制 patch 数据
 ```
 
-**代码生成后处理**（`_patch_bypass_0xC0000409.py`）：
-1. 剥离 `Program::Main()` body → `return 0`
-2. 生成方法指针调度表 `kAotMethods[]` + `extern "C" const int kAotMethodCount`
-3. 生成 `.patchdata` → `runtime-patchdata.cpp`（`kPatchData[]/kPatchDataSize`）
+**关键变更**（对比旧 il2cpp_dist/ 结构）：
+1. **Subjects DLL** 取代旧 entrypoint EXE，作为 convert-to-cpp 输入
+2. **codegen/** 取代 il2cpp_dist/genuine/，输出到 `codegen/<Assembly>/generated/`（按 assembly 分组）
+3. **native/** 集中管理 CMake 项目、runtime 入口、build 目录、entry.exe
+4. **无后处理**：`_patch_bypass_0xC0000409.py` 不再需要（新结构不产生 Program::Main）
 
 ### 阶段 2: Fact
 

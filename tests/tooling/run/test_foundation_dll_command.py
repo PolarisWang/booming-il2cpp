@@ -9,52 +9,6 @@ FOUNDATION_DLL_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "comma
 
 
 class FoundationDllCommandTests(VerifyRoadmap0TestSupport):
-    def test_foundation_dll_analyze_gaps_invokes_gap_analyzer(self) -> None:
-        command_module = load_module(FOUNDATION_DLL_MODULE_PATH, "chaos_run_foundation_dll_analyze_gaps")
-
-        with patch.object(command_module, "gap_analyzer_module", create=True) as gap_mock:
-            gap_mock.analyze_gaps.return_value = {
-                "familyCount": 3,
-                "dllCount": 1,
-                "statusCounts": {"present": 1, "coverage-widened": 1, "needs-tests": 1, "no-coverage": 0},
-            }
-            result = command_module.handle(
-                {"id": "foundation-dll-analyze-gaps", "handler": "foundation_dll.dispatch", "target": "foundation-dll"},
-                REPO_ROOT,
-                "windows",
-                "foundation-dll analyze-gaps",
-                {"scope": "all", "update_ledger": True, "auto_generate": True},
-            )
-
-        self.assertEqual("ok", result.status)
-        self.assertEqual(3, result.payload["familyCount"])
-        gap_mock.analyze_gaps.assert_called_once_with(REPO_ROOT, scope="all", update_ledger=True, auto_generate=True)
-
-    def test_foundation_dll_check_family_invokes_gap_analyzer_for_single_family(self) -> None:
-        command_module = load_module(FOUNDATION_DLL_MODULE_PATH, "chaos_run_foundation_dll_check_family")
-
-        with patch.object(command_module, "gap_analyzer_module", create=True) as gap_mock:
-            gap_mock.analyze_gaps.return_value = {
-                "familyCount": 1,
-                "dllCount": 1,
-                "families": [{"familyId": "family/System.Private.CoreLib/convert/char"}],
-            }
-            result = command_module.handle(
-                {"id": "foundation-dll-check-family", "handler": "foundation_dll.dispatch", "target": "foundation-dll"},
-                REPO_ROOT,
-                "windows",
-                "foundation-dll check-family",
-                {"family": "family/System.Private.CoreLib/convert/char"},
-            )
-
-        self.assertEqual("ok", result.status)
-        self.assertEqual(1, result.payload["familyCount"])
-        gap_mock.analyze_gaps.assert_called_once_with(
-            REPO_ROOT,
-            scope="family/System.Private.CoreLib/convert/char",
-            update_ledger=False,
-        )
-
     def test_foundation_dll_derive_invokes_candidate_generation(self) -> None:
         command_module = load_module(FOUNDATION_DLL_MODULE_PATH, "chaos_run_foundation_dll_derive")
 

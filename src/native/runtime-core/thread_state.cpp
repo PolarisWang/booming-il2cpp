@@ -1,5 +1,6 @@
 #include "thread_state.h"
 
+#include <chaos/log.h>
 #include <chaos/profile.h>
 
 #include "gc_region.h"
@@ -119,10 +120,23 @@ int32_t GetThreadCount() noexcept {
 //
 // Even generation = idle (no GC activity).  Odd generation = GC in progress.
 // Threads check via single atomic load + compare on every SafepointPoll.
+//
+// Nesting support: a thread that already holds the safepoint can safely
+// re-enter (e.g., young GC inside a full-GC callback).  A depth counter
+// tracks the nesting level; only the outermost ReleaseGlobalSafepoint
+// toggles the generation back to even.  s_safepoint_owner prevents two
+// distinct threads from both holding the safepoint simultaneously.
 
 namespace {
 std::atomic<uint32_t> s_generation{0};
 constexpr uint32_t kGcGenerationMask = 1u;
+thread_local int s_safepoint_depth = 0;
+
+/// V4-H1: Process-level safepoint owner.
+/// Only the thread whose ManagedThread* is stored here may toggle the
+/// generation or perform GC work.  CAS arbitration prevents two threads
+/// from both holding the safepoint simultaneously.
+std::atomic<ManagedThread*> s_safepoint_owner{nullptr};
 }  // anonymous namespace
 
 bool SafepointRequested() noexcept {
@@ -144,11 +158,14 @@ void SafepointPoll() noexcept {
     thread->last_seen_gen = gen;
 
     // Spin with yield until generation flips (even = released).
-    // Timeout: after ~10ms without confirmation, GC proceeds with
-    // conservative stack scanning anyway (bdwgc fallback).
+    // V4-M2: No hard timeout — silently breaking out of the safepoint
+    // while GC is in progress would corrupt the heap.  If a thread is
+    // in a deep native frame that never polls, it won't reach this
+    // code path at all (conservative stack scanning handles that case).
+    constexpr int kYieldAfter = 10000;
     int spins = 0;
     while ((s_generation.load(std::memory_order_acquire) & kGcGenerationMask) != 0u) {
-        if (++spins > 10000) {
+        if (++spins > kYieldAfter) {
             std::this_thread::yield();
             spins = 0;
         }
@@ -158,17 +175,68 @@ void SafepointPoll() noexcept {
 }
 
 uint32_t RequestGlobalSafepoint() noexcept {
+    // Support nesting: if the calling thread already holds the safepoint,
+    // just bump the depth counter and return the current generation.
+    // This allows safe re-entrancy (e.g., a GC-triggered callback that
+    // itself calls RequestGlobalSafepoint).
+    if (s_safepoint_depth > 0) {
+        s_safepoint_depth++;
+        return s_generation.load(std::memory_order_acquire);
+    }
+
+    // V4-H1: Acquire process-level safepoint ownership via CAS.
+    // Only one thread may hold the safepoint at any time.
+    auto* self = tls_this_thread;
+    if (self != nullptr) {
+        ManagedThread* expected = nullptr;
+        if (!s_safepoint_owner.compare_exchange_strong(expected, self,
+                std::memory_order_acq_rel, std::memory_order_acquire)) {
+            // Another thread holds the safepoint — spin-wait with yield.
+            for (int spins = 0; ; spins++) {
+                if (spins > 10000) {
+                    std::this_thread::yield();
+                    spins = 0;
+                }
+                expected = nullptr;
+                if (s_safepoint_owner.compare_exchange_strong(expected, self,
+                        std::memory_order_acq_rel, std::memory_order_acquire)) {
+                    break;
+                }
+            }
+        }
+    }
+
     // Toggle to odd (GC in progress).
     uint32_t gen = s_generation.load(std::memory_order_acquire);
     uint32_t desired = (gen + 1) | kGcGenerationMask;
     s_generation.store(desired, std::memory_order_release);
+    s_safepoint_depth = 1;
+
+    // V4-H2: Brief bounded yield to allow managed threads to reach
+    // SafepointPoll before GC work begins.  A full confirmation protocol
+    // would require O(threads) iteration per GC cycle — too expensive.
+    // Threads in deep native frames that never poll are handled by
+    // conservative stack scanning as fallback.
+    std::this_thread::yield();
+
     return desired;
 }
 
 void ReleaseGlobalSafepoint(uint32_t /*generation*/) noexcept {
+    // Support nesting: decrement depth counter.  Only toggle the
+    // generation back to even when the outermost release occurs.
+    if (s_safepoint_depth > 1) {
+        s_safepoint_depth--;
+        return;
+    }
+
     // Toggle to even (released).
     uint32_t gen = s_generation.load(std::memory_order_acquire);
     s_generation.store((gen + 1) & ~kGcGenerationMask, std::memory_order_release);
+    s_safepoint_depth = 0;
+
+    // V4-H1: Release safepoint ownership.
+    s_safepoint_owner.store(nullptr, std::memory_order_release);
 }
 
 void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, void* user_data), void* user_data) noexcept {

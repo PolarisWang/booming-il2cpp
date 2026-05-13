@@ -30,18 +30,10 @@ except ImportError:
 
 
 def _locate_entry_exe(family_slug: str, *, assembly: str) -> Path | None:
-    """Find the native entry EXE in il2cpp_dist/genuine/<AssemblyName>/generated/"""
+    """Find the native entry EXE in native/entry.exe"""
     family_dir = _VERIFICATION_BASE / assembly / family_slug
-    genuine_dir = family_dir / "il2cpp_dist" / "genuine"
-    if not genuine_dir.exists():
-        return None
-    # Scan for per-assembly subdirectory
-    for d in genuine_dir.iterdir():
-        if d.is_dir():
-            candidate = d / "generated" / "entry.exe"
-            if candidate.exists():
-                return candidate
-    return None
+    candidate = family_dir / "native" / "entry.exe"
+    return candidate if candidate.exists() else None
 
 
 def verify_fact(family_slug: str, *, assembly: str = "System.Private.CoreLib",

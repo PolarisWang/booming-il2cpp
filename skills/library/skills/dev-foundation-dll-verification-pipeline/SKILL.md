@@ -44,15 +44,10 @@ run foundation-dll verify-family <family-slug> --assembly System.Private.CoreLib
                   ❌ 失败 = 停止，不继续
 
 [1] Codegen     — 委托 pipeline_native_aot_runner.run_family()
-                  1. 生成 entrypoint C# → dotnet build DLL
-                  2. chaos-il2cpp convert-to-cpp → native-aot.generated.cpp
-                  3. _patch_bypass_0xC0000409.py 后处理：
-                     - 剥离 Program::Main() body → return 0
-                     - 生成方法指针调度表 kAotMethods[] + kAotMethodCount
-                     - 生成 BenchmarkMethod(entry_index, iterations) 函数，直接调用
-                       kAotMethods[index]()，绕过 DispatchSlotGet/HotpatchLookupBySlot 开销
-                  4. 生成 .patchdata → runtime-patchdata.cpp（kPatchData[]/kPatchDataSize）
-                  5. CMake build entry.exe（使用增强版 runtime-entry.cpp 支持 5 种模式）
+                  1. 生成 subjects C# 项目 → dotnet build DLL (managed/subjects/)
+                  2. chaos-il2cpp convert-to-cpp → native-aot.generated.cpp (codegen/<Assembly>/generated/)
+                  3. 生成 .patchdata → runtime-patchdata.cpp (native/)
+                  4. CMake build entry.exe from native/ (使用 native/runtime-entry.cpp + codegen/*/generated/*.cpp)
                   run_family() 只负责构建，不再运行 fact/benchmark/hotupdate 验证
                   ❌ 失败 = strict 模式下停止
 
