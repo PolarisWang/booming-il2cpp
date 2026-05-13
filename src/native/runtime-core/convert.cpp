@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 #include "convert.h"
 #include "exception_helpers.h"
 #include "string_table.h"
@@ -131,14 +133,16 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_single(CHAOS_IL2CPP_INTPTR v
 }
 
 // ── Object overloads (unbox then convert) ──────────────────────────────
+// Boxed Int32 uses PureTypeHeader (8B: type_info) + value (8B) = 16B.
+// Payload is at offset 8 = intptr slot [1].
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_object(CHAOS_IL2CPP_INTPTR value)
 {
-    // The value is a pointer to a heap-allocated boxed struct:
-    //   FatHeader (24B: type_info + vtable + sync_state) + payload (8B).
-    // Extract the payload at offset 24 (= slot [3] when viewed as intptr[]).
+    // The value is a pointer to a stack-allocated boxed struct:
+    //   PureTypeHeader (8B: type_info) + payload (8B) = 16B total.
+    // Extract the payload at offset 8 (= slot [1] when viewed as intptr[]).
     auto* chaos_slots = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(value);
-    CHAOS_IL2CPP_INTPTR payload = chaos_slots[3];
+    CHAOS_IL2CPP_INTPTR payload = chaos_slots[1];
     return chaos_convert_tochar_int32(payload);
 }
 
@@ -147,7 +151,7 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_object_provider(
 {
     (void)provider;
     auto* chaos_slots = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(value);
-    CHAOS_IL2CPP_INTPTR payload = chaos_slots[3];
+    CHAOS_IL2CPP_INTPTR payload = chaos_slots[1];
     return chaos_convert_tochar_int32(payload);
 }
 

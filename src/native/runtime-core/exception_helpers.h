@@ -24,6 +24,12 @@ TypeInfoHandle ResolveTypeByName(const char* fully_qualified_name);
 /// longjmp back to the verification harness).
 extern "C" void SetExceptionFallback(void (*fn)());
 
+/// Register a fallback callback for Fact Static verification mode.
+/// When RaiseManagedException detects an uninitialized runtime, it calls this
+/// callback instead of aborting. The callback must NOT return (typically uses
+/// longjmp back to the verification harness).
+extern "C" void SetExceptionFallback(void (*fn)());
+
 // ── Convenience inline wrappers for common BCL exception types ──
 
 [[noreturn]] inline void RaiseInvalidCastException() {

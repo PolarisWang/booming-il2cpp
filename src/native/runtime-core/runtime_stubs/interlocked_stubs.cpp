@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // interlocked_stubs.cpp — Interlocked/Volatile implementations
 #include <chaos/native_types.h>
 #include <atomic>

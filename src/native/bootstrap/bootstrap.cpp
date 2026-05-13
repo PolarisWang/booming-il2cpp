@@ -1,11 +1,17 @@
+// ── ABI exports: extern "C" linkage ──
+// These functions must use C linkage to be callable from managed/NativeAOT stubs.
+// (No C++ name mangling on the exported symbol.)
+
 #include "bootstrap.h"
 
 #include "generic_context.h"
 #include "memory_domain.h"
 #include "method_replacement.h"
 #include "reflection_query_model.h"
-#include "../runtime-core/module_registry.h"
+#include "module_registry.h"
 #include "runtime_core.h"
+// NOTE: file name collision with contracts/native/v0/runtime_instantiation.h (C bridge).
+// Relative path ensures we pick up runtime-core's C++ namespace header.
 #include "../runtime-core/runtime_instantiation.h"   // RegisterMethodAotEntries
 #include "string_table.h"
 #include "support.h"

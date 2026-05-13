@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // ── Array stub implementations (real) ───────────────
 #include "array_stubs.h"
 

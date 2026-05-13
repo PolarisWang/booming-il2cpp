@@ -283,7 +283,7 @@
 #define CHAOS_IL2CPP_RAW_POINTER_TAG  CHAOS_IL2CPP_UINTPTR(1) << 63
 
 // Resolve a native int slot pointer — used by chaos_load_indirect / chaos_store_indirect.
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 inline CHAOS_IL2CPP_INTPTR* chaos_resolve_native_int_slot(CHAOS_IL2CPP_INTPTR chaos_value)
 {
@@ -311,10 +311,10 @@ inline void chaos_store_indirect(CHAOS_IL2CPP_INTPTR address, T value) {
     *chaos_resolve_native_int_slot(address) = static_cast<CHAOS_IL2CPP_INTPTR>(value);
 }
 
-}  // namespace ChaosIl2cpp::Common
+}  // namespace chaos::il2cpp::common
 
 // Expose at global scope so all code (including generated code in anonymous
 // namespaces) can use these helpers without qualification.
-using namespace ChaosIl2cpp::Common;
+using namespace chaos::il2cpp::common;
 
 #endif  // CHAOS_IL2CPP_COMMON_NATIVE_TYPES_H_

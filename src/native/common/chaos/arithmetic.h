@@ -6,7 +6,7 @@
 #include <limits>
 #include <type_traits>
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 // Wrapping arithmetic (unsigned-cast to avoid UB).
 
@@ -86,6 +86,6 @@ inline CHAOS_IL2CPP_INT32 shift_right_unsigned(CHAOS_IL2CPP_INT32 value, CHAOS_I
     return static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(value) >> shift);
 }
 
-} // namespace ChaosIl2cpp::Common
+} // namespace chaos::il2cpp::common
 
 #endif // CHAOS_IL2CPP_COMMON_ARITHMETIC_H_

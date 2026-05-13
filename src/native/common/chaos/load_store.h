@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <cstring>
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 // Float32 store/load via bitcast through CHAOS_IL2CPP_INTPTR.
 
@@ -75,6 +75,6 @@ inline CHAOS_IL2CPP_UINT64 load_uint64(CHAOS_IL2CPP_INTPTR value) noexcept
     return result;
 }
 
-} // namespace ChaosIl2cpp::Common
+} // namespace chaos::il2cpp::common
 
 #endif // CHAOS_IL2CPP_COMMON_LOAD_STORE_H_

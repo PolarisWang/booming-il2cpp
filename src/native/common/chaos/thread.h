@@ -8,7 +8,7 @@
 #include <thread>
 #include <unordered_map>
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 struct ThreadRuntimeEntry
 {
@@ -72,6 +72,6 @@ inline ThreadRuntimeEntry& require_thread_runtime_entry(CHAOS_IL2CPP_INTPTR thre
     return *entry;
 }
 
-} // namespace ChaosIl2cpp::Common
+} // namespace chaos::il2cpp::common
 
 #endif // CHAOS_IL2CPP_COMMON_THREAD_H_

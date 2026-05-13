@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // misc_stubs.cpp — Miscellaneous stub implementations
 // Array, Buffer, Type marshalling, Culture, GC, Environment, Console, Delegate
 #include <chaos/native_types.h>

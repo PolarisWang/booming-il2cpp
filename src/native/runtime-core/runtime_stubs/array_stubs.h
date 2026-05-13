@@ -1,7 +1,7 @@
 // ── Array stub declarations ────────────────────────────────────
 #pragma once
 
-#include "chaos/native_types.h"
+#include <chaos/native_types.h>
 
 extern "C" {
 

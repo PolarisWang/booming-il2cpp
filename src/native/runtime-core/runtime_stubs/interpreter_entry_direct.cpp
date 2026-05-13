@@ -11,7 +11,7 @@
 extern "C" void InterpreterEntryDirect(
     uintptr_t method_key,
     void*     args_buf,
-    void*     ret_buf) noexcept
+    void*     ret_buf)
 {
     chaos::il2cpp::runtime_core::InterpreterEntryDirect(method_key, args_buf, ret_buf);
 }

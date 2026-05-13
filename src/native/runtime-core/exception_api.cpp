@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // exception_api.cpp — Native AOT exception support implementation
 //
 // Provides extern "C" implementations for exception metadata functions

@@ -130,3 +130,67 @@ IL2CPP 生成 C++ 代码会被引入游戏引擎源码，因此分配行为必�
 4. **新分配策略必须通过 GcAllocate/GcAllocateAtomic 内部切换** — A→B→C 三阶段（Bump Arena → TLS GC Cache → Precise Generational GC）对 codegen 完全透明，codegen 输出无需修改。
 
 详见 `wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/17-统一内存分配体系.md`。
+
+## 命名空间规范（强制）
+
+所有 native C++ 代码使用命名空间形式 `chaos::il2cpp::<module>`：
+
+| 模块 | 命名空间 |
+|------|----------|
+| `common/chaos/` | `chaos::il2cpp::common` |
+| `runtime-core/` | `chaos::il2cpp::runtime_core` |
+| `bootstrap/` | `chaos::il2cpp::bootstrap` |
+| `interpreter/` | `chaos::il2cpp::interpreter` |
+| `support/` | `chaos::il2cpp::support` |
+| `hot-update/` | `chaos::il2cpp::hot_update` / `chaos::il2cpp::method_replacement` |
+
+`ChaosIl2cpp::Common` 是旧命名空间**别名**（通过 `namespace ChaosIl2cpp { namespace Common = chaos::il2cpp::common; }` 提供向后兼容），新代码**不得**直接使用 `ChaosIl2cpp::Common` 声明或引用。
+
+禁止：
+- 在头文件中使用 `using namespace`（文件作用域）
+- 头文件中在 namespace 块外部放置类型声明
+
+## Include 规范（强制）
+
+四档优先级顺序（clang-format 自动管理）：
+
+1. **对应的 `.h` 文件**（.cpp 中第一个 include）— `"foo.h"`（引号）
+2. **项目内部头文件** — `<chaos/header.h>`（尖括号，`chaos/` 前缀）
+3. **合约头文件** — `<contracts/header.h>`（尖括号，`contracts/` 前缀）
+4. **标准库头文件** — `<cstdint>`、`<vector>`、`<string>` 等（尖括号）
+5. **外部依赖** — `<gc.h>`、`<fmt/format.h>` 等（尖括号）
+
+禁止：
+- **禁止使用 `#include "../module/header.h"` 相对路径** — 改用 CMake `target_include_directories` 后直接用 `"module/header.h"` 或 `<module/header.h>`
+- **禁止使用 `#include "chaos/header.h"` 引号风格** — 统一使用 `<chaos/header.h>`
+
+### clang-format 设置
+
+项目 `.clang-format` 配置了 `IncludeBlocks: Regroup` 和 `IncludeCategories`。AI Agent 和开发者应运行以下命令统一格式：
+
+```bash
+clang-format -i src/native/**/*.cpp src/native/**/*.h
+```
+
+## extern "C" 使用规范
+
+`extern "C"` 用于 ABI 导出，必须搭配注释说明原因：
+
+```cpp
+// ABI export: required for C-language linkage from managed/NativeAot code
+extern "C" void ChaosFunction() noexcept;
+```
+
+所有 `extern "C"` 声明应放在：
+- **集中化声明**：尽量放在对应的 `.h` 头文件中的 `extern "C" { ... }` 块内
+- **避免散落定义**：函数定义应避免在 `.cpp` 文件中以 `extern "C"` 前缀修饰（不用 `extern "C"` 修饰函数定义体，改用头文件声明 + 普通 C++ 定义）
+
+## 头文件原则
+
+1. **自包含**：每个 `.h` 文件必须包含它自己的所有依赖，不依赖前置 include
+2. **Include Guard**：统一使用 `#ifndef CHAOS_IL2CPP_*_H_` / `#define` / `#endif` 风格
+3. **最小依赖**：头文件只 include 它直接使用的类型，不包含"可能用到的"
+4. **Umbrella header 分层**：
+   - `chaos/common.h` — 所有 common 头文件的聚合
+   - `runtime_core.h` — 所有 runtime-core 头文件的聚合（有 namespace 块，保证声明顺序）
+   - 子模块头文件不要相互 include 形成循环依赖

@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // char_stubs.cpp — Char stub implementations
 #include <chaos/native_types.h>
 #include "generated_code_compat.h"

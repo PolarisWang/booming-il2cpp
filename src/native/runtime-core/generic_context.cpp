@@ -1,5 +1,5 @@
 #include "generic_context.h"
-#include "../bootstrap/bootstrap.h"
+#include "bootstrap/bootstrap.h"
 #include <codegen_bridge.h>
 #include "reflection_query_model.h"
 

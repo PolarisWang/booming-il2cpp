@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // datetime_stubs.cpp — DateTime/TimeSpan stub implementations
 #include <chaos/native_types.h>
 #include <cstdio>

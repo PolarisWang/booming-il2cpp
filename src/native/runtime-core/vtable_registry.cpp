@@ -233,7 +233,7 @@ void* ResolveVirtualMethodPointer(
             const TypeVTable* vtable = it->second;
             if (vtable->iface_map != nullptr && vtable->iface_count > 0u &&
                 vtable->vtable_array != nullptr) {
-                const auto* iface_entries = static_cast<const ChaosIl2cpp::Common::InterfaceMapEntry*>(vtable->iface_map);
+                const auto* iface_entries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(vtable->iface_map);
                 // When calling through an interface, declared_method_token is a small
                 // zero-based slot index within that interface's method table.
                 // Scan all interfaces to find one whose slots cover this index.

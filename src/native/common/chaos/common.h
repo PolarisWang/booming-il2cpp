@@ -1,12 +1,12 @@
 #ifndef CHAOS_IL2CPP_COMMON_H_
 #define CHAOS_IL2CPP_COMMON_H_
 
-// ChaosIl2cpp::Common — shared foundation library for all generated C++ code.
+// chaos::il2cpp::common — shared foundation library for all generated C++ code.
 // Provides high-performance, header-only utilities and minimal compiled modules.
 //
 // Usage: #include <chaos/common.h>
 //
-// Namespace: ChaosIl2cpp::Common
+// Namespace: chaos::il2cpp::common
 // Types: PascalCase
 // Functions: snake_case
 // Constants: k_ + snake_case
@@ -27,8 +27,11 @@
 #include "async.h"
 #include "log.h"
 
-// Umbrella header — all symbols are in ChaosIl2cpp::Common via individual headers.
-namespace ChaosIl2cpp::Common {
-} // namespace ChaosIl2cpp::Common
+// Umbrella header — all symbols are in chaos::il2cpp::common via individual headers.
+namespace chaos::il2cpp::common {
+} // namespace chaos::il2cpp::common
+
+// Backward-compat alias for generated code using the old namespace name.
+namespace ChaosIl2cpp { namespace Common = chaos::il2cpp::common; }
 
 #endif // CHAOS_IL2CPP_COMMON_H_

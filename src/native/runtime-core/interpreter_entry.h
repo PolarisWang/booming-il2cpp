@@ -74,7 +74,7 @@ private:
 void InterpreterEntryDirect(
     uintptr_t method_key,
     void*     args_buf,
-    void*     ret_buf) noexcept;
+    void*     ret_buf);
 
 // ── InterpreterEntryDirectFast ─────────────────────────────────────────────
 // Fast-path entry point that internally allocates args/ret buffers without
@@ -90,7 +90,7 @@ void InterpreterEntryDirect(
 //
 // Thread safety: same as InterpreterEntryDirect — lock-free after first call.
 void InterpreterEntryDirectFast(
-    uintptr_t method_key) noexcept;
+    uintptr_t method_key);
 
 // ── Register direct function table ─────────────────────────────────────────
 // Called by generated code to register kAotDirectFnTable/SubjectIds/Count.

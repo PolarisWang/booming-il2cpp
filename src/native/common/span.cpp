@@ -1,10 +1,10 @@
-#include "chaos/span.h"
-#include "chaos/ptr_tag.h"
+#include <chaos/span.h>
+#include <chaos/ptr_tag.h>
 
 #include <cstdint>
 #include <cstdlib>
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 namespace {
 
@@ -136,4 +136,4 @@ CHAOS_IL2CPP_INTPTR span_int32_get_item_address(CHAOS_IL2CPP_INTPTR span_handle,
     }
 }
 
-} // namespace ChaosIl2cpp::Common
+} // namespace chaos::il2cpp::common

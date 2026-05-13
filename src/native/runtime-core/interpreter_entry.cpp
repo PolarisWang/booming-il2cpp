@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 #include "interpreter_entry.h"
 #include "patch_loader.h"
 #include "runtime_core.h"
@@ -8,7 +10,7 @@
 #include "fast_frame_pool.h"
 #include "fast_dispatch.h"
 
-#include "../bootstrap/bootstrap.h"
+#include "bootstrap/bootstrap.h"
 
 #include <aot_core_ir_reader.h>   // DeserializeAotCoreIrMethod
 #include <interpreter_vm.h>       // ExecutionFrame, InterpreterVM, IRMethod, InterpreterValue
@@ -16,8 +18,8 @@
 #include <atomic>
 #include <cstring>
 #include <mutex>
-#include "chaos/log.h"
-#include "chaos/profile.h"
+#include <chaos/log.h>
+#include <chaos/profile.h>
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -999,7 +1001,7 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
 void InterpreterEntryDirect(
     uintptr_t method_key,
     void*     args_buf,
-    void*     ret_buf) noexcept {
+    void*     ret_buf) {
 
     CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect");
 

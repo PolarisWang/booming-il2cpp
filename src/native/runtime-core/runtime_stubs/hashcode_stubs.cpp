@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // hashcode_stubs.cpp — HashCode helper implementations (real)
 #include <chaos/native_types.h>
 #include "generated_code_compat.h"

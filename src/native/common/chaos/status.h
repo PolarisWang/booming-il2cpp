@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 // Unified status codes covering both RuntimeAbi and CodegenBridge ranges.
 
@@ -23,6 +23,6 @@ enum class Status : CHAOS_IL2CPP_INT32 {
 inline constexpr bool is_ok(Status s) noexcept { return s == Status::kOk; }
 inline constexpr bool is_failure(Status s) noexcept { return s != Status::kOk; }
 
-} // namespace ChaosIl2cpp::Common
+} // namespace chaos::il2cpp::common
 
 #endif // CHAOS_IL2CPP_COMMON_STATUS_H_

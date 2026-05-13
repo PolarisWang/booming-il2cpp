@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 #include "parse_convert.h"
 #include "runtime_core.h"
 #include "exception_helpers.h"

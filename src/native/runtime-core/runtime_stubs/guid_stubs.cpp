@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // guid_stubs.cpp — Guid stub implementations (real, not stubs)
 #include <chaos/native_types.h>
 #include <cstdio>

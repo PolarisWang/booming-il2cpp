@@ -1,12 +1,11 @@
 #include <chaos/config.h>
-#include "chaos/profile.h"
+#include <chaos/profile.h>
 
 #if CHAOS_IL2CPP_PROFILE_ENABLED
 
 #include <windows.h>
 
-namespace ChaosIl2cpp {
-namespace Common {
+namespace chaos::il2cpp::common {
 
 // Single-instance globals — defined here, declared extern in profile.h.
 ProfileSlot g_profile_table[kProfileMaxSlots] = {};
@@ -49,7 +48,6 @@ void CalibrateProfileTsc() noexcept {
     g_profile_calibrated = true;
 }
 
-} // namespace Common
-} // namespace ChaosIl2cpp
+} // namespace chaos::il2cpp::common
 
 #endif // CHAOS_IL2CPP_PROFILE_ENABLED

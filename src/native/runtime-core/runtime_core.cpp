@@ -1,4 +1,6 @@
-﻿#include "runtime_core.h"
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
+#include "runtime_core.h"
 
 #include <chaos/trace.h>
 #include <chaos/log.h>
@@ -10,7 +12,7 @@
 #include "generic_context.h"
 #include "vtable_registry.h"
 #include "runtime_vtable.h"
-#include "../bootstrap/bootstrap.h"
+#include "bootstrap/bootstrap.h"
 #include "runtime_instantiation.h"
 #include "reflection_query_model.h"
 #include "module_registry.h"
@@ -80,6 +82,7 @@ struct ThreadState {
 namespace chaos::il2cpp::runtime_core {
 
 using namespace chaos::il2cpp::runtime_capability;
+using namespace chaos::il2cpp::marshal_abi;
 
 namespace {
 

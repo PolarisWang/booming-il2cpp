@@ -61,6 +61,9 @@ void GcLayoutRegistry::Register(uint64_t stable_id, uint32_t instance_size,
             if (hash_keys_[idx].compare_exchange_strong(expected, stable_id,
                     std::memory_order_release, std::memory_order_acquire)) {
                 hash_values_[idx] = layout;
+                // Release fence: readers who see the key (via acquire load)
+                // are guaranteed to see the value write too.
+                std::atomic_thread_fence(std::memory_order_release);
                 return;
             }
             // Race lost — slot was taken, try next.
