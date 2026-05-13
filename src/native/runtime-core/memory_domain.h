@@ -1,7 +1,7 @@
 #ifndef CHAOS_IL2CPP_MEMORY_DOMAIN_H_
 #define CHAOS_IL2CPP_MEMORY_DOMAIN_H_
 
-#include "runtime_abi.h"
+#include <runtime_abi.h>
 
 #include <chaos/native_types.h>
 #include <chaos/log.h>

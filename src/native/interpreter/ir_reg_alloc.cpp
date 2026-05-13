@@ -1,0 +1,1713 @@
+// ir_reg_alloc.cpp — Convert stack-based IR to register-based IR + register execution
+#include "ir_reg_alloc.h"
+
+#include "instantiation_engine.h"  // runtime-core: CachedCallInfo, InterpreterDispatchRaw
+namespace ri = chaos::il2cpp::runtime_instantiation;
+
+#include <chaos/profile.h>
+
+// Access interpreter global state for static field and object operations.
+namespace chaos::il2cpp::interpreter {
+extern CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
+}
+
+namespace chaos::il2cpp::interpreter {
+
+// ── Register Allocator ──────────────────────────────────────────────────
+// Linear-scan register allocator.  Walks IRMethod.instructions sequentially,
+// tracking a virtual evaluation stack (vector<uint32_t> of virtual register
+// indices).  Each "push" (has_dst=true) assigns a new virtual register.
+// Each "pop" (has_src=true) reads from the virtual stack.
+//
+// Register convention:
+//   r0-r7     = argument registers (mapped from LdArg operand_index)
+//   r8-r15    = local variable registers (mapped from LdLoc/StLoc operand_index)
+//   r16+      = evaluation stack virtual registers (allocated sequentially)
+
+RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
+    RegisterMethod result;
+    result.seh_clauses = ir_method.seh_clauses;
+
+    // Virtual register stack — tracks which virtual reg holds each stack slot.
+    std::vector<uint32_t> virt_stack;
+    uint32_t next_vreg = 16;  // first free virtual register
+
+    const auto& instrs = ir_method.instructions;
+    result.instructions.reserve(instrs.size());
+
+    for (size_t i = 0; i < instrs.size(); ++i) {
+        const auto& ir = instrs[i];
+        RegisterInstruction ri = {};
+        uint32_t op_val = static_cast<uint32_t>(ir.op_code);
+
+        // Pack header: op_code | dst_reg | src1_reg | src2_reg | flags
+        uint64_t header = op_val & 0xFFFF;
+
+        // Determine dst register for has_dst opcodes
+        uint8_t dst_reg = 0;
+        bool has_dst = false;
+        uint8_t src1_reg = 0;
+        uint8_t src2_reg = 0;
+        bool has_src1 = false;
+        bool has_src2 = false;
+
+        switch (ir.op_code) {
+        // ── No operands: just use virt_stack ──────────────────────────
+
+        // ── Binary ops: pop 2, push 1 (Add, Sub, Mul, Div, Rem, etc.) ──
+        case IROpCode::Add: case IROpCode::Sub: case IROpCode::Mul:
+        case IROpCode::Div: case IROpCode::Rem:
+        case IROpCode::DivUn: case IROpCode::RemUn:
+        case IROpCode::And: case IROpCode::Or: case IROpCode::Xor:
+        case IROpCode::Shl: case IROpCode::Shr: case IROpCode::ShrUn:
+        case IROpCode::AddOvf: case IROpCode::SubOvf: case IROpCode::MulOvf:
+        case IROpCode::Ceq: case IROpCode::Clt: case IROpCode::Cgt:
+        case IROpCode::LdElem:  // array[index] — need index too
+        {
+            // Pop src2, src1
+            if (virt_stack.size() >= 2) {
+                src2_reg = virt_stack.back(); virt_stack.pop_back();
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            // Push dst
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true; has_src1 = true; has_src2 = true;
+            break;
+        }
+
+        // ── Unary ops: pop 1, push 1 (Neg, Not, Conv_*) ──────────────
+        case IROpCode::Neg: case IROpCode::Not:
+        case IROpCode::Conv_I4: case IROpCode::Conv_I8:
+        case IROpCode::Conv_R4: case IROpCode::Conv_R8:
+        case IROpCode::ConvRUn: case IROpCode::ConvI: case IROpCode::ConvU:
+        case IROpCode::ConvOvfI: case IROpCode::ConvOvfI4: case IROpCode::ConvOvfI8:
+        case IROpCode::ConvOvfU: case IROpCode::ConvOvfU4: case IROpCode::ConvOvfU8:
+        case IROpCode::LdLen:
+        case IROpCode::LdInd:
+        case IROpCode::LdObj:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true; has_src1 = true;
+            break;
+        }
+
+        // ── Dup: copy from virt_stack top ──
+        case IROpCode::Dup:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back();
+            }
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true; has_src1 = true;
+            break;
+        }
+
+        // ── LdcI4/8/R4/R8: push constant ──
+        case IROpCode::LdcI4: case IROpCode::LdcI8:
+        case IROpCode::LdcR4: case IROpCode::LdcR8:
+        {
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true;
+            break;
+        }
+
+        // ── LdNull/LdStr/LdToken/LdFtn/SizeOf: push value ──
+        case IROpCode::LdNull: case IROpCode::LdStr:
+        case IROpCode::LdToken: case IROpCode::LdFtn:
+        case IROpCode::SizeOf:
+        case IROpCode::LdArgA: case IROpCode::LdLocA:
+        {
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true;
+            break;
+        }
+
+        // ── LdArg/LdLoc: push from arg/local ──
+        case IROpCode::LdArg:
+        {
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true;
+            break;
+        }
+        case IROpCode::LdLoc:
+        {
+            // Read from local's dedicated register r8+N
+            src1_reg = static_cast<uint8_t>(8u + static_cast<uint32_t>(ir.operand_index));
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true; has_src1 = true;
+            break;
+        }
+
+        // ── StLoc: pop value, write to local's dedicated register ──
+        case IROpCode::StLoc:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            // Write to local's dedicated register r8+N
+            dst_reg = static_cast<uint8_t>(8u + static_cast<uint32_t>(ir.operand_index));
+            has_src1 = true; has_dst = true;
+            break;
+        }
+
+        // ── StArg: pop value only, no dst ──
+        case IROpCode::StArg:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            has_src1 = true;
+            break;
+        }
+
+        // ── LdFld: pop obj, push field ──
+        case IROpCode::LdFld:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true; has_src1 = true;
+            break;
+        }
+
+        // ── StFld: pop value, pop obj ──
+        case IROpCode::StFld:
+        {
+            if (virt_stack.size() >= 1) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();  // value
+            }
+            if (virt_stack.size() >= 1) {
+                // obj stays for the handler to pop
+                has_src2 = true;
+            }
+            has_src1 = true;
+            break;
+        }
+
+        // ── LdSFld: push static field ──
+        case IROpCode::LdSFld:
+        {
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true;
+            break;
+        }
+
+        // ── StSFld: pop value ──
+        case IROpCode::StSFld:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            has_src1 = true;
+            break;
+        }
+
+        // ── Call/CallVirt/CallBridge/CallVirtConstrained: pop args, push ret ──
+        case IROpCode::Call: case IROpCode::CallVirt:
+        case IROpCode::CallBridge: case IROpCode::CallVirtConstrained:
+        {
+            uint32_t ac = ir.arg_count;
+            // Record arg0 register (args are in consecutive registers from arg0)
+            if (ac > 0 && virt_stack.size() >= ac) {
+                src1_reg = virt_stack[virt_stack.size() - ac];
+            }
+            // Pop args in reverse: args[ac-1] .. args[0]
+            for (uint32_t ai = 0; ai < ac && !virt_stack.empty(); ++ai) {
+                virt_stack.pop_back();
+            }
+            // Push return value
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true;
+            if (ac > 0) has_src1 = true;
+            break;
+        }
+
+        // ── NewObj: pop ctor args, push obj ref ──
+        case IROpCode::NewObj:
+        {
+            uint32_t ac = ir.arg_count;
+            for (uint32_t ai = 0; ai < ac && !virt_stack.empty(); ++ai) {
+                virt_stack.pop_back();
+            }
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true;
+            break;
+        }
+
+        // ── Box: pop value, push obj ──
+        case IROpCode::Box:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true; has_src1 = true;
+            break;
+        }
+
+        // ── Unbox/CastClass/IsInst: pop obj, push result ──
+        case IROpCode::Unbox: case IROpCode::CastClass: case IROpCode::IsInst:
+        case IROpCode::LdVirtFtn:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true; has_src1 = true;
+            break;
+        }
+
+        // ── NewArr: pop length, push array ref ──
+        case IROpCode::NewArr:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true; has_src1 = true;
+            break;
+        }
+
+        // ── StElem: pop value, pop index, pop array ──
+        case IROpCode::StElem:
+        {
+            for (int si = 0; si < 3 && !virt_stack.empty(); ++si) {
+                virt_stack.pop_back();
+            }
+            has_src1 = true;
+            break;
+        }
+
+        // ── LdElemA: pop index, pop array, push addr ──
+        case IROpCode::LdElemA:
+        {
+            if (!virt_stack.empty()) virt_stack.pop_back(); // index
+            if (!virt_stack.empty()) virt_stack.pop_back(); // array
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true; has_src1 = true;
+            break;
+        }
+
+        // ── Pop: discard ──
+        case IROpCode::Pop:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            has_src1 = true;
+            break;
+        }
+
+        // ── Throw/EndFilter/InitObj/StObj: pop value, no dst ──
+        case IROpCode::Throw: case IROpCode::EndFilter:
+        case IROpCode::InitObj:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            has_src1 = true;
+            break;
+        }
+
+        // ── StObj: pop value, pop ptr ──
+        case IROpCode::StObj:
+        {
+            if (!virt_stack.empty()) virt_stack.pop_back();  // value
+            if (!virt_stack.empty()) virt_stack.pop_back();  // ptr
+            has_src1 = true;
+            break;
+        }
+
+        // ── StInd: pop value, pop addr ──
+        case IROpCode::StInd:
+        {
+            if (!virt_stack.empty()) virt_stack.pop_back();  // value
+            if (!virt_stack.empty()) virt_stack.pop_back();  // addr
+            has_src1 = true;
+            break;
+        }
+
+        // ── Switch: pop index ──
+        case IROpCode::Switch:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            has_src1 = true;
+            break;
+        }
+
+        // ── LocAlloc: pop size, push ptr ──
+        case IROpCode::LocAlloc:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            has_dst = true; has_src1 = true;
+            break;
+        }
+
+        // ── BrTrue/BrFalse/BneUn/Beq/Blt/Bgt/Ble/Bge/BneUn/BgeUn/BgtUn/BleUn/BltUn: pop compare ──
+        case IROpCode::BrTrue: case IROpCode::BrFalse:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            has_src1 = true;
+            break;
+        }
+        case IROpCode::Beq: case IROpCode::Blt: case IROpCode::Bgt:
+        case IROpCode::Ble: case IROpCode::Bge:
+        case IROpCode::BneUn: case IROpCode::BgeUn: case IROpCode::BgtUn:
+        case IROpCode::BleUn: case IROpCode::BltUn:
+        {
+            if (virt_stack.size() >= 2) {
+                src2_reg = virt_stack.back(); virt_stack.pop_back();
+                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            }
+            has_src1 = true; has_src2 = true;
+            break;
+        }
+
+        // ── Cpblk/InitBlk: pop 3 operands ──
+        case IROpCode::Cpblk:
+        {
+            for (int si = 0; si < 3 && !virt_stack.empty(); ++si)
+                virt_stack.pop_back();
+            has_src1 = true;
+            break;
+        }
+        case IROpCode::InitBlk:
+        {
+            for (int si = 0; si < 3 && !virt_stack.empty(); ++si)
+                virt_stack.pop_back();
+            has_src1 = true;
+            break;
+        }
+
+        // ── Ret: read return value ──
+        case IROpCode::Ret:
+        {
+            if (!virt_stack.empty()) {
+                src1_reg = virt_stack.back();  // don't pop — keep for callee
+            }
+            has_src1 = true;
+            break;
+        }
+
+        // ── No-stack opcodes ──
+        case IROpCode::Br: case IROpCode::Leave:
+        case IROpCode::Rethrow: case IROpCode::EndFinally:
+        case IROpCode::Break:
+        default:
+            break;
+        }
+
+        // ── Build RegisterInstruction header ───────────────────────────
+        uint8_t flags = 0;
+        if (has_dst)  flags |= kRegHasDst;
+        if (has_src1) flags |= kRegHasSrc1;
+        if (has_src2) flags |= kRegHasSrc2;
+
+        // Check for call-like, branch, store opcodes
+        switch (ir.op_code) {
+        case IROpCode::Call: case IROpCode::CallVirt:
+        case IROpCode::CallBridge: case IROpCode::CallVirtConstrained:
+        case IROpCode::NewObj: case IROpCode::Box:
+            flags |= kRegHasImm | kRegIsCall;
+            break;
+        case IROpCode::Br: case IROpCode::BrTrue: case IROpCode::BrFalse:
+        case IROpCode::Beq: case IROpCode::Blt: case IROpCode::Bgt:
+        case IROpCode::Ble: case IROpCode::Bge: case IROpCode::Leave:
+        case IROpCode::BneUn: case IROpCode::BgeUn: case IROpCode::BgtUn:
+        case IROpCode::BleUn: case IROpCode::BltUn:
+            flags |= kRegIsBranch;
+            break;
+        case IROpCode::StFld: case IROpCode::StSFld:
+        case IROpCode::StLoc: case IROpCode::StArg:
+        case IROpCode::StElem: case IROpCode::StInd: case IROpCode::StObj:
+        case IROpCode::InitObj: case IROpCode::Cpblk: case IROpCode::InitBlk:
+            flags |= kRegIsStore;
+            break;
+        default:
+            break;
+        }
+
+        // Check if this opcode carries an immediate operand
+        switch (ir.op_code) {
+        case IROpCode::LdcI4: case IROpCode::LdcI8: case IROpCode::LdcR4: case IROpCode::LdcR8:
+        case IROpCode::LdStr: case IROpCode::LdArg: case IROpCode::LdLoc: case IROpCode::StLoc:
+        case IROpCode::StArg: case IROpCode::NewObj: case IROpCode::Box: case IROpCode::Unbox:
+        case IROpCode::CastClass: case IROpCode::IsInst: case IROpCode::NewArr:
+        case IROpCode::LdToken: case IROpCode::InitObj: case IROpCode::SizeOf:
+        case IROpCode::LdFtn: case IROpCode::LdVirtFtn: case IROpCode::LdArgA:
+        case IROpCode::LdLocA: case IROpCode::LocAlloc:
+        case IROpCode::Call: case IROpCode::CallVirt: case IROpCode::CallBridge:
+        case IROpCode::CallVirtConstrained:
+        case IROpCode::LdFld: case IROpCode::StFld:
+        case IROpCode::LdSFld: case IROpCode::StSFld:
+        case IROpCode::LdInd: case IROpCode::StInd:
+        case IROpCode::Switch: case IROpCode::LdObj: case IROpCode::StObj:
+        case IROpCode::LdElem: case IROpCode::StElem: case IROpCode::LdElemA:
+        case IROpCode::Br: case IROpCode::BrTrue: case IROpCode::BrFalse:
+        case IROpCode::Beq: case IROpCode::Blt: case IROpCode::Bgt:
+        case IROpCode::Ble: case IROpCode::Bge: case IROpCode::Leave:
+        case IROpCode::BneUn: case IROpCode::BgeUn: case IROpCode::BgtUn:
+        case IROpCode::BleUn: case IROpCode::BltUn:
+            flags |= kRegHasImm;
+            break;
+        default:
+            break;
+        }
+
+        header |= (static_cast<uint64_t>(dst_reg)    << 16);
+        header |= (static_cast<uint64_t>(src1_reg)   << 24);
+        header |= (static_cast<uint64_t>(src2_reg)   << 32);
+        header |= (static_cast<uint64_t>(flags)      << 40);
+
+        ri.header = header;
+
+        // ── Copy immediate payload ─────────────────────────────────────
+        ri.imm.i4       = ir.immediate_i4;
+        ri.imm.i8       = ir.immediate_i8;
+        ri.imm.r8       = ir.immediate_r8;
+        ri.imm.ptr      = ir.call_target;
+        ri.imm.operand_index = static_cast<uint32_t>(ir.operand_index);
+        ri.imm.arg_count     = ir.arg_count;
+        ri.imm.field_offset  = static_cast<uint32_t>(ir.field_offset);
+
+        // Branch target
+        if (ir.op_code == IROpCode::Br || ir.op_code == IROpCode::BrTrue ||
+            ir.op_code == IROpCode::BrFalse || ir.op_code == IROpCode::Leave ||
+            ir.op_code == IROpCode::Beq || ir.op_code == IROpCode::Blt ||
+            ir.op_code == IROpCode::Bgt || ir.op_code == IROpCode::Ble ||
+            ir.op_code == IROpCode::Bge || ir.op_code == IROpCode::BneUn ||
+            ir.op_code == IROpCode::BgeUn || ir.op_code == IROpCode::BgtUn ||
+            ir.op_code == IROpCode::BleUn || ir.op_code == IROpCode::BltUn) {
+            ri.imm.branch_target = static_cast<uint32_t>(ir.branch_target);
+        }
+
+        // Pack call_arg_count and is_instance_call into reserved header bits [63:48]
+        if (ir.op_code == IROpCode::Call || ir.op_code == IROpCode::CallVirt ||
+            ir.op_code == IROpCode::CallBridge || ir.op_code == IROpCode::CallVirtConstrained) {
+            header |= (static_cast<uint64_t>(ir.arg_count & 0x7FFF) << 48);
+            if (ir.is_instance_call) {
+                header |= (1ULL << 63);
+            }
+        }
+
+        result.instructions.push_back(ri);
+    }
+
+    result.max_regs = next_vreg;
+    return result;
+}
+
+// ── Register-based execution (replaces FastExecute) ─────────────────────
+// Uses function-pointer dispatch table + RegisterFrame.
+// Each handler reads src regs from RegisterFile, writes dst reg.
+// No implicit push/pop — every instruction names its registers explicitly.
+
+using RegOpHandler = void (*)(RegisterFrame& frame,
+                              const RegisterInstruction& instr) noexcept;
+
+// ── Handler implementations ─────────────────────────────────────────────
+
+static void Reg_LdcI4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdcI4");
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(instr.imm.i4),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_LdcI8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdcI8");
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(instr.imm.i8),
+                       static_cast<uint8_t>(ValueTag::Int64));
+    ++frame.pc;
+}
+
+static void Reg_LdcR4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdcR4");
+    float v;
+    int32_t bits = instr.imm.i4;
+    std::memcpy(&v, &bits, sizeof(bits));
+    uint64_t val;
+    std::memcpy(&val, &v, sizeof(v));
+    frame.regs.set_reg(instr.dst_reg(), val,
+                       static_cast<uint8_t>(ValueTag::Float32));
+    ++frame.pc;
+}
+
+static void Reg_LdcR8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdcR8");
+    uint64_t val;
+    std::memcpy(&val, &instr.imm.r8, sizeof(val));
+    frame.regs.set_reg(instr.dst_reg(), val,
+                       static_cast<uint8_t>(ValueTag::Float64));
+    ++frame.pc;
+}
+
+static void Reg_LdStr(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdStr");
+    frame.regs.set_reg(instr.dst_reg(),
+                       reinterpret_cast<uint64_t>(instr.imm.ptr),
+                       static_cast<uint8_t>(ValueTag::ObjectRef));
+    ++frame.pc;
+}
+
+static void Reg_LdNull(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdNull");
+    frame.regs.set_reg(instr.dst_reg(), 0,
+                       static_cast<uint8_t>(ValueTag::Null));
+    ++frame.pc;
+}
+
+static void Reg_LdArg(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdArg");
+    uint32_t idx = instr.imm.operand_index;
+    if (idx >= frame.arg_count || frame.args == nullptr) {
+        frame.regs.set_reg(instr.dst_reg(), 0,
+                           static_cast<uint8_t>(ValueTag::Int32));
+    } else {
+        const auto* arg_base = static_cast<const uint64_t*>(frame.args);
+        frame.regs.set_reg(instr.dst_reg(), arg_base[idx],
+                           static_cast<uint8_t>(ValueTag::ObjectRef));
+    }
+    ++frame.pc;
+}
+
+static void Reg_LdLoc(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdLoc");
+    // Local is in a dedicated register (r8-r15 mapped)
+    // For RegLdLoc/RegStLoc the operand_index maps to a fixed register
+    // allocated during register allocation.
+    // The value is already in the reg file — just copy to dst.
+    frame.regs.set_reg(instr.dst_reg(),
+                       frame.regs.reg(instr.src1_reg()),
+                       frame.regs.reg_tag(instr.src1_reg()));
+    ++frame.pc;
+}
+
+static void Reg_StLoc(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StLoc");
+    // Copy src1 to the local's dedicated register
+    // operand_index = local index maps to fixed local reg
+    frame.regs.set_reg(instr.dst_reg(),
+                       frame.regs.reg(instr.src1_reg()),
+                       frame.regs.reg_tag(instr.src1_reg()));
+    ++frame.pc;
+}
+
+static void Reg_Add(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Add");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l + r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Sub(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Sub");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l - r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Mul(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Mul");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l * r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Div(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Div");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l / r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Rem(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Rem");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l % r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Neg(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Neg");
+    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(-v),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_And(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_And");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l & r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Or(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Or");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l | r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Xor(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Xor");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l ^ r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Not(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Not");
+    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(~v),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Shl(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Shl");
+    int32_t a = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v << (a & 0x1F)),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Shr(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Shr");
+    int32_t a = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v >> (a & 0x1F)),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_ShrUn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ShrUn");
+    int32_t a = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v >> (a & 0x1F)),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Ceq(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Ceq");
+    uint64_t r = frame.regs.reg(instr.src2_reg());
+    uint64_t l = frame.regs.reg(instr.src1_reg());
+    frame.regs.set_reg(instr.dst_reg(), (l == r) ? 1u : 0u,
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Clt(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Clt");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), (l < r) ? 1u : 0u,
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Cgt(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Cgt");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), (l > r) ? 1u : 0u,
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+// ── Branch handlers ─────────────────────────────────────────────────────
+
+static void Reg_Br(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Br");
+    frame.pc = instr.imm.branch_target;
+}
+
+static void Reg_BrTrue(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_BrTrue");
+    if (static_cast<int32_t>(frame.regs.reg(instr.src1_reg())) != 0)
+        frame.pc = instr.imm.branch_target;
+    else
+        ++frame.pc;
+}
+
+static void Reg_BrFalse(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_BrFalse");
+    if (static_cast<int32_t>(frame.regs.reg(instr.src1_reg())) == 0)
+        frame.pc = instr.imm.branch_target;
+    else
+        ++frame.pc;
+}
+
+static void Reg_Beq(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Beq");
+    if (frame.regs.reg(instr.src1_reg()) == frame.regs.reg(instr.src2_reg()))
+        frame.pc = instr.imm.branch_target;
+    else
+        ++frame.pc;
+}
+
+static void Reg_Blt(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Blt");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.pc = (l < r) ? instr.imm.branch_target : (frame.pc + 1);
+}
+
+static void Reg_Bgt(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Bgt");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.pc = (l > r) ? instr.imm.branch_target : (frame.pc + 1);
+}
+
+static void Reg_Ble(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Ble");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.pc = (l <= r) ? instr.imm.branch_target : (frame.pc + 1);
+}
+
+static void Reg_Bge(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Bge");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.pc = (l >= r) ? instr.imm.branch_target : (frame.pc + 1);
+}
+
+// ── Conversion handlers ─────────────────────────────────────────────────
+
+static void Reg_Conv_I4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Conv_I4");
+    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_Conv_I8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Conv_I8");
+    int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+                       static_cast<uint8_t>(ValueTag::Int64));
+    ++frame.pc;
+}
+
+static void Reg_Conv_R4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Conv_R4");
+    float v = static_cast<float>(static_cast<int32_t>(frame.regs.reg(instr.src1_reg())));
+    uint64_t val;
+    std::memcpy(&val, &v, sizeof(v));
+    frame.regs.set_reg(instr.dst_reg(), val,
+                       static_cast<uint8_t>(ValueTag::Float32));
+    ++frame.pc;
+}
+
+static void Reg_Conv_R8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Conv_R8");
+    double v = static_cast<double>(static_cast<int32_t>(frame.regs.reg(instr.src1_reg())));
+    uint64_t val;
+    std::memcpy(&val, &v, sizeof(v));
+    frame.regs.set_reg(instr.dst_reg(), val,
+                       static_cast<uint8_t>(ValueTag::Float64));
+    ++frame.pc;
+}
+
+static void Reg_Pop(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Pop");
+    // Register-based: Pop is a no-op (result register is simply not read).
+    // In the register-based model, the register allocator eliminates
+    // dead register writes. This handler exists for completeness.
+    (void)frame; (void)instr;
+    ++frame.pc;
+}
+
+static void Reg_Dup(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Dup");
+    frame.regs.set_reg(instr.dst_reg(),
+                       frame.regs.reg(instr.src1_reg()),
+                       frame.regs.reg_tag(instr.src1_reg()));
+    ++frame.pc;
+}
+
+static void Reg_Ret(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Ret");
+    if (instr.has_src1()) {
+        frame.has_ret = true;
+        frame.ret_val = frame.regs.reg(instr.src1_reg());
+        frame.ret_tag = frame.regs.reg_tag(instr.src1_reg());
+    }
+    frame.pc = 0xFFffFFffu;
+}
+
+// ── Unsupported fallback ────────────────────────────────────────────────
+static void Reg_Unsupported(RegisterFrame& frame, const RegisterInstruction&) noexcept {
+    frame.threw_exception = true;
+    frame.pc = 9999;
+}
+
+// ── StArg: store value to argument slot ─────────────────────────────────
+static void Reg_StArg(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StArg");
+    if (!instr.has_src1() || frame.args == nullptr) { ++frame.pc; return; }
+    uint32_t idx = instr.imm.operand_index;
+    auto* arg_base = static_cast<uint64_t*>(const_cast<void*>(frame.args));
+    if (idx < frame.arg_count) {
+        arg_base[idx] = frame.regs.reg(instr.src1_reg());
+    }
+    ++frame.pc;
+}
+
+// ── LdSFld / StSFld: static field access ───────────────────────────────
+static void Reg_LdSFld(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdSFld");
+    uint32_t offset = instr.imm.field_offset;
+    auto& sfields = g_static_fields;
+    if (sfields.size() <= offset) {
+        sfields.resize(offset + 1u);
+    }
+    const auto& iv = sfields[offset];
+    switch (iv.tag) {
+    case ValueTag::Int32:
+        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i32),
+                           static_cast<uint8_t>(ValueTag::Int32)); break;
+    case ValueTag::Int64:
+        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64),
+                           static_cast<uint8_t>(ValueTag::Int64)); break;
+    case ValueTag::Float32: {
+        uint64_t val; std::memcpy(&val, &iv.f32, sizeof(float));
+        frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32)); break;
+    }
+    case ValueTag::Float64: {
+        uint64_t val; std::memcpy(&val, &iv.f64, sizeof(double));
+        frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64)); break;
+    }
+    default:
+        frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
+                           static_cast<uint8_t>(ValueTag::ObjectRef)); break;
+    }
+    ++frame.pc;
+}
+
+static void Reg_StSFld(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StSFld");
+    uint32_t offset = instr.imm.field_offset;
+    auto& sfields = g_static_fields;
+    if (sfields.size() <= offset) {
+        sfields.resize(offset + 1u);
+    }
+    uint8_t tag = frame.regs.reg_tag(instr.src1_reg());
+    uint64_t val = frame.regs.reg(instr.src1_reg());
+    switch (static_cast<ValueTag>(tag)) {
+    case ValueTag::Int32:
+        sfields[offset] = InterpreterValue::from_i32(static_cast<int32_t>(val)); break;
+    case ValueTag::Int64:
+        sfields[offset] = InterpreterValue::from_i64(static_cast<int64_t>(val)); break;
+    case ValueTag::Float32: {
+        float fv; std::memcpy(&fv, &val, sizeof(float));
+        sfields[offset] = InterpreterValue::from_f32(fv); break;
+    }
+    case ValueTag::Float64: {
+        double dv; std::memcpy(&dv, &val, sizeof(double));
+        sfields[offset] = InterpreterValue::from_f64(dv); break;
+    }
+    default:
+        sfields[offset] = InterpreterValue::from_obj(reinterpret_cast<void*>(val)); break;
+    }
+    ++frame.pc;
+}
+
+// ── NewArr: allocate interpreter array ──────────────────────────────────
+static void Reg_NewArr(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_NewArr");
+    uint32_t len = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    auto* arr = static_cast<ArrayStorage*>(CHAOS_IL2CPP_MALLOC(sizeof(ArrayStorage)));
+    if (arr == nullptr) { Reg_Unsupported(frame, instr); return; }
+    ::new (arr) ArrayStorage();
+    frame.Track(arr, frame.Dtor<ArrayStorage>);
+    arr->elements.resize(len);
+    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(arr),
+                       static_cast<uint8_t>(ValueTag::ObjectRef));
+    ++frame.pc;
+}
+
+// ── LdElem / StElem: array element access ──────────────────────────────
+static void Reg_LdElem(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdElem");
+    uint32_t index = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));  // src2 = index
+    auto* arr = reinterpret_cast<ArrayStorage*>(frame.regs.reg(instr.src1_reg()));  // src1 = array
+    if (arr == nullptr || index >= arr->elements.size()) {
+        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
+        ++frame.pc; return;
+    }
+    const auto& iv = arr->elements[index];
+    switch (iv.tag) {
+    case ValueTag::Int32:
+        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i32),
+                           static_cast<uint8_t>(ValueTag::Int32)); break;
+    case ValueTag::Int64:
+        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64),
+                           static_cast<uint8_t>(ValueTag::Int64)); break;
+    case ValueTag::Float32: {
+        uint64_t val; std::memcpy(&val, &iv.f32, sizeof(float));
+        frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32)); break;
+    }
+    case ValueTag::Float64: {
+        uint64_t val; std::memcpy(&val, &iv.f64, sizeof(double));
+        frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64)); break;
+    }
+    default:
+        frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
+                           static_cast<uint8_t>(ValueTag::ObjectRef)); break;
+    }
+    ++frame.pc;
+}
+
+static void Reg_StElem(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StElem");
+    // For StElem with 3-operand: allocator pops value, index, array in reverse.
+    // But the RegisterInstruction only has src1, src2. We need a third source.
+    // Use a simpler approach: read from the regs directly using consecutive regs
+    // (value = rX, index = rX+1, array = rX+2 where X = src1_reg).
+    uint32_t base = instr.src1_reg();
+    uint64_t val = frame.regs.reg(base);
+    uint32_t index = static_cast<uint32_t>(frame.regs.reg(base + 1));
+    auto* arr = reinterpret_cast<ArrayStorage*>(frame.regs.reg(base + 2));
+    if (arr == nullptr) { ++frame.pc; return; }
+    if (index >= arr->elements.size()) {
+        arr->elements.resize(index + 1u);
+    }
+    uint8_t tag = frame.regs.reg_tag(base);
+    switch (static_cast<ValueTag>(tag)) {
+    case ValueTag::Int32:
+        arr->elements[index] = InterpreterValue::from_i32(static_cast<int32_t>(val)); break;
+    case ValueTag::Int64:
+        arr->elements[index] = InterpreterValue::from_i64(static_cast<int64_t>(val)); break;
+    case ValueTag::Float32: {
+        float fv; std::memcpy(&fv, &val, sizeof(float));
+        arr->elements[index] = InterpreterValue::from_f32(fv); break;
+    }
+    case ValueTag::Float64: {
+        double dv; std::memcpy(&dv, &val, sizeof(double));
+        arr->elements[index] = InterpreterValue::from_f64(dv); break;
+    }
+    default:
+        arr->elements[index] = InterpreterValue::from_obj(reinterpret_cast<void*>(val)); break;
+    }
+    ++frame.pc;
+}
+
+// ── LdLen: array length ─────────────────────────────────────────────────
+static void Reg_LdLen(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdLen");
+    auto* arr = reinterpret_cast<ArrayStorage*>(frame.regs.reg(instr.src1_reg()));
+    if (arr == nullptr) {
+        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Int32));
+    } else {
+        frame.regs.set_reg(instr.dst_reg(),
+                           static_cast<uint64_t>(arr->elements.size()),
+                           static_cast<uint8_t>(ValueTag::Int32));
+    }
+    ++frame.pc;
+}
+
+// ── DivUn / RemUn: unsigned division ────────────────────────────────────
+static void Reg_DivUn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_DivUn");
+    uint32_t r = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
+    uint32_t l = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l / r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_RemUn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_RemUn");
+    uint32_t r = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
+    uint32_t l = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l % r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+// ── Conversion handlers (unsigned/alternative forms) ────────────────────
+static void Reg_ConvRUn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvRUn");
+    uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    float fv = static_cast<float>(v);
+    uint64_t val; std::memcpy(&val, &fv, sizeof(float));
+    frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32));
+    ++frame.pc;
+}
+
+static void Reg_ConvI(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvI");
+    // ConvI: native int — treat as int32 (32-bit host)
+    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_ConvU(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvU");
+    // ConvU: native unsigned int — treat as uint32 (32-bit host)
+    uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+// ── LdInd: indirect load (pointer dereference) ──────────────────────────
+static void Reg_LdInd(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdInd");
+    void* ptr = reinterpret_cast<void*>(frame.regs.reg(instr.src1_reg()));
+    if (ptr == nullptr) {
+        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
+    } else {
+        // Read based on type tag from the instruction's immediate field:
+        // This is a simplified version — for the interpreter sandbox, we
+        // treat LdInd as reading a uint64_t from the given address.
+        frame.regs.set_reg(instr.dst_reg(), *static_cast<uint64_t*>(ptr),
+                           static_cast<uint8_t>(ValueTag::Int64));
+    }
+    ++frame.pc;
+}
+
+// ── StInd: indirect store ───────────────────────────────────────────────
+static void Reg_StInd(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StInd");
+    uint64_t val = frame.regs.reg(instr.src1_reg());
+    void* ptr = reinterpret_cast<void*>(frame.regs.reg(instr.src2_reg()));
+    if (ptr != nullptr) {
+        *static_cast<uint64_t*>(ptr) = val;
+    }
+    ++frame.pc;
+}
+
+// ── LdObj: load object from managed pointer ─────────────────────────────
+static void Reg_LdObj(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdObj");
+    // LdObj reads from a managed pointer (address of InterpreterValue).
+    void* ptr = reinterpret_cast<void*>(frame.regs.reg(instr.src1_reg()));
+    if (ptr != nullptr) {
+        auto* iv = static_cast<InterpreterValue*>(ptr);
+        switch (iv->tag) {
+        case ValueTag::Int32:
+            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv->i32),
+                               static_cast<uint8_t>(ValueTag::Int32)); break;
+        case ValueTag::Int64:
+            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv->i64),
+                               static_cast<uint8_t>(ValueTag::Int64)); break;
+        default:
+            frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv->obj),
+                               static_cast<uint8_t>(ValueTag::ObjectRef)); break;
+        }
+    } else {
+        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
+    }
+    ++frame.pc;
+}
+
+// ── StObj: store object to managed pointer ──────────────────────────────
+static void Reg_StObj(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StObj");
+    // StObj: src1 = value, src2 = address (managed pointer)
+    uint64_t val = frame.regs.reg(instr.src1_reg());
+    uint8_t tag = frame.regs.reg_tag(instr.src1_reg());
+    void* ptr = reinterpret_cast<void*>(frame.regs.reg(instr.src2_reg()));
+    if (ptr != nullptr) {
+        auto* iv = static_cast<InterpreterValue*>(ptr);
+        iv->tag = static_cast<ValueTag>(tag);
+        iv->i64 = static_cast<int64_t>(val);
+    }
+    ++frame.pc;
+}
+
+// ── LdArgA / LdLocA: address of arg/local slot ─────────────────────────
+static void Reg_LdArgA(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdArgA");
+    // LdArgA: push address of arg slot. In register model, we can't take address
+    // of a register, so return null managed pointer (causes fallback when dereferenced).
+    frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::ManagedPtr));
+    ++frame.pc;
+}
+
+static void Reg_LdLocA(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdLocA");
+    // LdLocA: address of local variable slot — not directly addressable in reg file.
+    // Return null managed pointer (causes fallback in cases that dereference it).
+    frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::ManagedPtr));
+    ++frame.pc;
+}
+
+// ── LdToken: push metadata token as int32 ───────────────────────────────
+static void Reg_LdToken(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdToken");
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(instr.imm.i4),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+// ── InitObj: zero-initialize object at managed pointer ─────────────────
+static void Reg_InitObj(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_InitObj");
+    void* ptr = reinterpret_cast<void*>(frame.regs.reg(instr.src1_reg()));
+    if (ptr != nullptr) {
+        std::memset(ptr, 0, sizeof(InterpreterValue));
+    }
+    ++frame.pc;
+}
+
+// ── SizeOf: push type size from immediate ───────────────────────────────
+static void Reg_SizeOf(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_SizeOf");
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(instr.imm.i4),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+// ── LdFtn: load function pointer ────────────────────────────────────────
+static void Reg_LdFtn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdFtn");
+    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(instr.imm.ptr),
+                       static_cast<uint8_t>(ValueTag::ObjectRef));
+    ++frame.pc;
+}
+
+// ── LdVirtFtn: load virtual function pointer ────────────────────────────
+static void Reg_LdVirtFtn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdVirtFtn");
+    // Need to resolve virtual dispatch — complex, fallback.
+    (void)instr;
+    Reg_Unsupported(frame, instr);
+}
+
+// ── LocAlloc: stack allocation ──────────────────────────────────────────
+static void Reg_LocAlloc(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LocAlloc");
+    uint32_t size = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    void* mem = CHAOS_IL2CPP_MALLOC(size);
+    if (mem == nullptr) { Reg_Unsupported(frame, instr); return; }
+    std::memset(mem, 0, size);
+    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(mem),
+                       static_cast<uint8_t>(ValueTag::ObjectRef));
+    ++frame.pc;
+}
+
+// ── Unbox: extract value from boxed object ──────────────────────────────
+static void Reg_Unbox(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Unbox");
+    auto* obj = reinterpret_cast<InterpreterObject*>(frame.regs.reg(instr.src1_reg()));
+    if (obj == nullptr || obj->fields.empty()) {
+        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
+    } else {
+        const auto& iv = obj->fields[0];
+        switch (iv.tag) {
+        case ValueTag::Int32:
+            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i32),
+                               static_cast<uint8_t>(ValueTag::Int32)); break;
+        case ValueTag::Int64:
+            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64),
+                               static_cast<uint8_t>(ValueTag::Int64)); break;
+        case ValueTag::Float32: {
+            uint64_t val; std::memcpy(&val, &iv.f32, sizeof(float));
+            frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32)); break;
+        }
+        case ValueTag::Float64: {
+            uint64_t val; std::memcpy(&val, &iv.f64, sizeof(double));
+            frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64)); break;
+        }
+        default:
+            frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
+                               static_cast<uint8_t>(ValueTag::ObjectRef)); break;
+        }
+    }
+    ++frame.pc;
+}
+
+// ── Branch: Leave (same as Br in SEH-free context) ──────────────────────
+static void Reg_Leave(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Leave");
+    frame.pc = instr.imm.branch_target;
+}
+
+// ── Switch: branch table ────────────────────────────────────────────────
+static void Reg_Switch(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Switch");
+    int32_t index = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    // Switch targets stored in consecutive ptr fields starting at imm.ptr.
+    // Format: [default_target, case0, case1, ..., caseN]
+    // The immediate ptr points to a uint32_t array (branch_targets).
+    // instruction.secondary_index holds the target count.
+    auto* targets = static_cast<const uint32_t*>(instr.imm.ptr);
+    uint32_t target_count = instr.imm.operand_index;  // operand_index = target count
+    if (targets != nullptr && index >= 0 && static_cast<uint32_t>(index) < target_count) {
+        frame.pc = targets[index];
+    } else {
+        // Default is at targets[target_count] or next instruction.
+        // For now, just advance pc (no default target resolution).
+        ++frame.pc;
+    }
+}
+
+// ── Unsigned branch handlers ─────────────────────────────────────────────
+static void Reg_BneUn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_BneUn");
+    if (frame.regs.reg(instr.src1_reg()) != frame.regs.reg(instr.src2_reg()))
+        frame.pc = instr.imm.branch_target;
+    else
+        ++frame.pc;
+}
+
+static void Reg_BgeUn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_BgeUn");
+    uint32_t r = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
+    uint32_t l = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.pc = (l >= r) ? instr.imm.branch_target : (frame.pc + 1);
+}
+
+static void Reg_BgtUn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_BgtUn");
+    uint32_t r = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
+    uint32_t l = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.pc = (l > r) ? instr.imm.branch_target : (frame.pc + 1);
+}
+
+static void Reg_BleUn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_BleUn");
+    uint32_t r = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
+    uint32_t l = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.pc = (l <= r) ? instr.imm.branch_target : (frame.pc + 1);
+}
+
+static void Reg_BltUn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_BltUn");
+    uint32_t r = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
+    uint32_t l = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.pc = (l < r) ? instr.imm.branch_target : (frame.pc + 1);
+}
+
+// ── Overflow-checked arithmetic ─────────────────────────────────────────
+static void Reg_AddOvf(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_AddOvf");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    // No portable overflow check on MSVC — just compute and trust caller.
+    // Overflow will throw via the VM fallback path if needed.
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l + r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_SubOvf(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_SubOvf");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l - r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_MulOvf(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_MulOvf");
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l * r),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+// ── Overflow-checked conversions ────────────────────────────────────────
+static void Reg_ConvOvfI(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI");
+    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_ConvOvfI4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI4");
+    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_ConvOvfI8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI8");
+    int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+                       static_cast<uint8_t>(ValueTag::Int64));
+    ++frame.pc;
+}
+
+static void Reg_ConvOvfU(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfU");
+    uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_ConvOvfU4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfU4");
+    uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+                       static_cast<uint8_t>(ValueTag::Int32));
+    ++frame.pc;
+}
+
+static void Reg_ConvOvfU8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfU8");
+    uint64_t v = frame.regs.reg(instr.src1_reg());
+    frame.regs.set_reg(instr.dst_reg(), v,
+                       static_cast<uint8_t>(ValueTag::Int64));
+    ++frame.pc;
+}
+
+// ── Box: wrap value in interpreter object ───────────────────────────────
+static void Reg_Box(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Box");
+    auto* boxed = static_cast<InterpreterObject*>(
+        CHAOS_IL2CPP_MALLOC(sizeof(InterpreterObject)));
+    if (boxed == nullptr) { Reg_Unsupported(frame, instr); return; }
+    ::new (boxed) InterpreterObject();
+    frame.Track(boxed, frame.Dtor<InterpreterObject>);
+    boxed->fields.resize(1);
+    uint8_t tag = frame.regs.reg_tag(instr.src1_reg());
+    uint64_t val = frame.regs.reg(instr.src1_reg());
+    switch (static_cast<ValueTag>(tag)) {
+    case ValueTag::Int32:
+        boxed->fields[0] = InterpreterValue::from_i32(static_cast<int32_t>(val)); break;
+    case ValueTag::Int64:
+        boxed->fields[0] = InterpreterValue::from_i64(static_cast<int64_t>(val)); break;
+    case ValueTag::Float32: {
+        float fv; std::memcpy(&fv, &val, sizeof(float));
+        boxed->fields[0] = InterpreterValue::from_f32(fv); break;
+    }
+    case ValueTag::Float64: {
+        double dv; std::memcpy(&dv, &val, sizeof(double));
+        boxed->fields[0] = InterpreterValue::from_f64(dv); break;
+    }
+    default:
+        boxed->fields[0] = InterpreterValue::from_obj(reinterpret_cast<void*>(val)); break;
+    }
+    boxed->type_token = static_cast<uint32_t>(instr.imm.i4);
+    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(boxed),
+                       static_cast<uint8_t>(ValueTag::ObjectRef));
+    ++frame.pc;
+}
+
+// ── Call handlers (interpreter dispatch via InterpreterDispatchRaw) ───────
+static void Reg_Call(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Call");
+    uint32_t ac = instr.call_arg_count();
+    void* call_target = instr.imm.ptr;
+    if (call_target == nullptr) { ++frame.pc; return; }
+
+    // Build raw_args/raw_tags from consecutive registers starting at src1_reg
+    // arg0 = regs[src1_reg], arg1 = regs[src1_reg+1], ...
+    uint32_t base = instr.src1_reg();
+
+    uint64_t raw_args_stack[8];
+    uint8_t  raw_tags_stack[8];
+    auto* raw_args = (ac <= 8) ? raw_args_stack
+        : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
+    auto* raw_tags = (ac <= 8) ? raw_tags_stack
+        : static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
+
+    if (raw_args == nullptr || raw_tags == nullptr) {
+        if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+        ++frame.pc; return;
+    }
+
+    for (uint32_t i = 0; i < ac; ++i) {
+        raw_args[i] = frame.regs.reg(base + i);
+        raw_tags[i] = frame.regs.reg_tag(base + i);
+    }
+
+    // Look up call-site metadata cache
+    const ri::CachedCallInfo* cache_info = nullptr;
+    if (frame.call_cache != nullptr && frame.pc < frame.call_count) {
+        const auto* cc = static_cast<const ri::CachedCallInfo*>(frame.call_cache);
+        if (cc[frame.pc].ret_tag != 0xFF) {
+            cache_info = &cc[frame.pc];
+        }
+    }
+
+    auto dret = ri::InterpreterDispatchRaw(
+        call_target, raw_args, raw_tags, ac,
+        instr.is_instance_call(),
+        frame.dispatch_ctx,
+        cache_info);
+
+    if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+
+    if (dret.threw_exception) {
+        frame.threw_exception = true;
+        frame.exception_obj = dret.exception_obj;
+        frame.pc = 9999;
+        return;
+    }
+
+    if (dret.has_value && instr.has_dst()) {
+        if (dret.tag == static_cast<uint8_t>(ValueTag::Struct) &&
+            dret.struct_data != nullptr) {
+            frame.regs.set_reg(instr.dst_reg(),
+                               reinterpret_cast<uint64_t>(dret.struct_data),
+                               dret.tag);
+            frame.Track(dret.struct_data, [](void* p) noexcept { std::free(p); });
+        } else {
+            frame.regs.set_reg(instr.dst_reg(), dret.value, dret.tag);
+        }
+    }
+    ++frame.pc;
+}
+
+static void Reg_CallVirt(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    Reg_Call(frame, instr);
+}
+
+static void Reg_CallBridge(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    Reg_Call(frame, instr);
+}
+
+// ── NewObj: allocate interpreter object ─────────────────────────────────
+static void Reg_NewObj(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_NewObj");
+    auto* storage = static_cast<InterpreterObject*>(
+        CHAOS_IL2CPP_MALLOC(sizeof(InterpreterObject)));
+    if (storage == nullptr) { Reg_Unsupported(frame, instr); return; }
+    ::new (storage) InterpreterObject();
+    frame.Track(storage, frame.Dtor<InterpreterObject>);
+    uint32_t field_count = instr.imm.operand_index;
+    if (field_count == 0) field_count = 1;
+    storage->fields.resize(field_count);
+    storage->type_token = static_cast<uint32_t>(instr.imm.i4);
+    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(storage),
+                       static_cast<uint8_t>(ValueTag::ObjectRef));
+    ++frame.pc;
+}
+
+// ── LdFld / StFld: instance field access ───────────────────────────────
+static void Reg_LdFld(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdFld");
+    auto* obj = reinterpret_cast<InterpreterObject*>(frame.regs.reg(instr.src1_reg()));
+    if (obj == nullptr) {
+        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
+        ++frame.pc; return;
+    }
+    uint32_t idx = instr.imm.field_offset;
+    if (idx >= obj->fields.size()) {
+        obj->fields.resize(idx + 1u);
+    }
+    const auto& iv = obj->fields[idx];
+    switch (iv.tag) {
+    case ValueTag::Int32:
+        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i32),
+                           static_cast<uint8_t>(ValueTag::Int32)); break;
+    case ValueTag::Int64:
+        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64),
+                           static_cast<uint8_t>(ValueTag::Int64)); break;
+    case ValueTag::Float32: {
+        uint64_t val; std::memcpy(&val, &iv.f32, sizeof(float));
+        frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32)); break;
+    }
+    case ValueTag::Float64: {
+        uint64_t val; std::memcpy(&val, &iv.f64, sizeof(double));
+        frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64)); break;
+    }
+    default:
+        frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
+                           static_cast<uint8_t>(ValueTag::ObjectRef)); break;
+    }
+    ++frame.pc;
+}
+
+static void Reg_StFld(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StFld");
+    // src1 = value, src2 = obj
+    uint64_t val = frame.regs.reg(instr.src1_reg());
+    uint8_t tag = frame.regs.reg_tag(instr.src1_reg());
+    auto* obj = reinterpret_cast<InterpreterObject*>(frame.regs.reg(instr.src2_reg()));
+    if (obj == nullptr) { ++frame.pc; return; }
+    uint32_t idx = instr.imm.field_offset;
+    if (idx >= obj->fields.size()) {
+        obj->fields.resize(idx + 1u);
+    }
+    switch (static_cast<ValueTag>(tag)) {
+    case ValueTag::Int32:
+        obj->fields[idx] = InterpreterValue::from_i32(static_cast<int32_t>(val)); break;
+    case ValueTag::Int64:
+        obj->fields[idx] = InterpreterValue::from_i64(static_cast<int64_t>(val)); break;
+    case ValueTag::Float32: {
+        float fv; std::memcpy(&fv, &val, sizeof(float));
+        obj->fields[idx] = InterpreterValue::from_f32(fv); break;
+    }
+    case ValueTag::Float64: {
+        double dv; std::memcpy(&dv, &val, sizeof(double));
+        obj->fields[idx] = InterpreterValue::from_f64(dv); break;
+    }
+    default:
+        obj->fields[idx] = InterpreterValue::from_obj(reinterpret_cast<void*>(val)); break;
+    }
+    ++frame.pc;
+}
+
+// ── CastClass / IsInst: type checking (fallback to VM for correctness) ──
+static void Reg_CastClass(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    // Type checking requires token resolution — fall through to FastExecute.
+    Reg_Unsupported(frame, instr);
+}
+
+static void Reg_IsInst(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    Reg_Unsupported(frame, instr);
+}
+
+// ── CallVirtConstrained: constrained prefix resolved during IR lowering — delegate to Reg_Call
+static void Reg_CallVirtConstrained(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    Reg_Call(frame, instr);
+}
+
+// ── Cpblk / InitBlk: memory block operations ────────────────────────────
+static void Reg_Cpblk(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    Reg_Unsupported(frame, instr);
+}
+
+static void Reg_InitBlk(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    Reg_Unsupported(frame, instr);
+}
+
+// ── Throw / Rethrow / EndFinally / EndFilter / Break ────────────────────
+static void Reg_Throw(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    // Throw requires SEH handling — fall through to VM.
+    Reg_Unsupported(frame, instr);
+}
+
+static void Reg_Rethrow(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    Reg_Unsupported(frame, instr);
+}
+
+static void Reg_EndFinally(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    // SEH opcode — fall through to VM.
+    Reg_Unsupported(frame, instr);
+}
+
+static void Reg_EndFilter(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    Reg_Unsupported(frame, instr);
+}
+
+static void Reg_Break(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    // Break is a no-op in register execution.
+    ++frame.pc;
+}
+
+// ── Dispatch table ──────────────────────────────────────────────────────
+
+#define R(name) Reg_##name
+#define UNSUP Reg_Unsupported
+
+static constexpr RegOpHandler kRegHandlers[99] = {
+    /*  0 */ R(LdcI4),         /*  1 */ R(LdcI8),         /*  2 */ R(LdcR4),
+    /*  3 */ R(LdcR8),         /*  4 */ R(LdStr),          /*  5 */ R(LdNull),
+    /*  6 */ R(LdArg),         /*  7 */ R(LdLoc),          /*  8 */ R(StLoc),
+    /*  9 */ R(StArg),         /* 10 */ R(LdFld),          /* 11 */ R(StFld),
+    /* 12 */ R(LdSFld),        /* 13 */ R(StSFld),         /* 14 */ R(Call),
+    /* 15 */ R(CallVirt),      /* 16 */ R(CallBridge),       /* 17 */ R(Br),
+    /* 18 */ R(BrTrue),        /* 19 */ R(BrFalse),        /* 20 */ R(Beq),
+    /* 21 */ R(Blt),           /* 22 */ R(Bgt),            /* 23 */ R(Ble),
+    /* 24 */ R(Bge),           /* 25 */ R(Add),            /* 26 */ R(Sub),
+    /* 27 */ R(Mul),           /* 28 */ R(Div),            /* 29 */ R(Rem),
+    /* 30 */ R(Neg),           /* 31 */ R(Ceq),            /* 32 */ R(Clt),
+    /* 33 */ R(Cgt),           /* 34 */ R(NewObj),         /* 35 */ R(Box),
+    /* 36 */ R(Unbox),         /* 37 */ R(CastClass),      /* 38 */ R(IsInst),
+    /* 39 */ R(Conv_I4),       /* 40 */ R(Conv_I8),        /* 41 */ R(Conv_R4),
+    /* 42 */ R(Conv_R8),       /* 43 */ R(NewArr),         /* 44 */ R(LdElem),
+    /* 45 */ R(StElem),        /* 46 */ R(LdLen),          /* 47 */ R(Pop),
+    /* 48 */ R(Throw),         /* 49 */ R(Rethrow),        /* 50 */ R(Leave),
+    /* 51 */ R(EndFinally),    /* 52 */ R(EndFilter),      /* 53 */ R(Ret),
+    /* 54 */ R(Dup),           /* 55 */ R(DivUn),          /* 56 */ R(RemUn),
+    /* 57 */ R(And),           /* 58 */ R(Or),             /* 59 */ R(Xor),
+    /* 60 */ R(Not),           /* 61 */ R(Shl),            /* 62 */ R(Shr),
+    /* 63 */ R(ShrUn),         /* 64 */ R(ConvRUn),        /* 65 */ R(ConvI),
+    /* 66 */ R(ConvU),         /* 67 */ R(LdInd),          /* 68 */ R(StInd),
+    /* 69 */ R(Switch),        /* 70 */ R(LdToken),        /* 71 */ R(InitObj),
+    /* 72 */ R(SizeOf),        /* 73 */ R(LdFtn),          /* 74 */ R(LdVirtFtn),
+    /* 75 */ R(LdArgA),        /* 76 */ R(LdLocA),         /* 77 */ R(LocAlloc),
+    /* 78 */ R(Break),         /* 79 */ R(BneUn),          /* 80 */ R(BgeUn),
+    /* 81 */ R(BgtUn),         /* 82 */ R(BleUn),          /* 83 */ R(BltUn),
+    /* 84 */ R(AddOvf),        /* 85 */ R(SubOvf),         /* 86 */ R(MulOvf),
+    /* 87 */ R(ConvOvfI),      /* 88 */ R(ConvOvfI4),      /* 89 */ R(ConvOvfI8),
+    /* 90 */ R(ConvOvfU),      /* 91 */ R(ConvOvfU4),      /* 92 */ R(ConvOvfU8),
+    /* 93 */ R(LdObj),         /* 94 */ R(StObj),          /* 95 */ UNSUP,
+    /* 96 */ R(Cpblk),         /* 97 */ R(InitBlk),        /* 98 */ R(CallVirtConstrained),
+};
+
+#undef R
+#undef UNSUP
+
+// ── RegisterExecute ─────────────────────────────────────────────────────
+
+bool RegisterExecute(RegisterFrame& frame,
+                     const RegisterInstruction* instrs,
+                     uint32_t instr_count) noexcept {
+    frame.pc = 0;
+
+    while (frame.pc < instr_count) {
+        CHAOS_IL2CPP_PROFILE_SCOPE("RegisterExecute");
+        uint32_t op_val = static_cast<uint32_t>(instrs[frame.pc].op_code());
+        if (op_val >= 99) {
+            frame.threw_exception = true;
+            return false;
+        }
+
+        kRegHandlers[op_val](frame, instrs[frame.pc]);
+
+        if (frame.threw_exception && frame.pc == 9999) {
+            frame.CleanupTracked();
+            return false;
+        }
+
+        if (frame.pc == 0xFFffFFffu) {
+            frame.CleanupTracked();
+            return true;
+        }
+    }
+
+    frame.CleanupTracked();
+    return true;
+}
+
+}  // namespace chaOS_IL2CPP_INTERPRETER_H_

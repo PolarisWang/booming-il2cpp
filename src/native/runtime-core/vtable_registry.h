@@ -11,7 +11,7 @@
 // Supports both rich slot descriptors (method_token + method_pointer pairs)
 // and flat function-pointer arrays (for AOT codegen direct dispatch).
 
-#include "runtime_abi.h"
+#include <runtime_abi.h>
 #include <chaos/native_types.h>
 
 namespace chaos::il2cpp::vtable_registry {

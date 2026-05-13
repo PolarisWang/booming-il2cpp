@@ -36,6 +36,7 @@ struct PatchMethod {
     const uint8_t*  signature_blob  = nullptr;   // method signature blob
     uint32_t        signature_len   = 0;          // signature blob length
     void*           cached_ir       = nullptr;   // cached IRMethod (lazy, null = not lowered)
+    void*           cached_reg_method = nullptr; // cached RegisterMethod (register-allocated, lazy)
     uint32_t        token;                        // AOT metadata token for this method
     uint32_t        module_id;                    // module index for module-scoped dispatch
     class PatchMetadataCache* metadata_cache = nullptr;  // token resolution cache
@@ -52,6 +53,13 @@ struct PatchMethod {
     // Populated in PatchMethodLowerIR after IR deserialization.
     // Points to heap-allocated CachedCallInfo[instr_count], or nullptr.
     void*           call_cache          = nullptr;   // CachedCallInfo[]
+
+    // ── Call count for hot path detection (A2.3) ────────────────────────
+    // Atomically incremented on each call to InterpreterEntryDirect.
+    // When call_count exceeds kHotCallThreshold, method is promoted to
+    // hot path with priority inlining.
+    mutable std::atomic<uint32_t> call_count{0};
+    static constexpr uint32_t kHotCallThreshold = 100;
 
     // ── Lazy IR lowering state ───────────────────────────────────────────
     // 0=uninitialized, 1=lowering-in-progress, 2=done.

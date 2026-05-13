@@ -3,7 +3,7 @@
 
 #include <chaos/native_types.h>
 
-#include "runtime_abi.h"
+#include <runtime_abi.h>
 #include "module_registry.h"
 #include "reflection_query_model.h"
 

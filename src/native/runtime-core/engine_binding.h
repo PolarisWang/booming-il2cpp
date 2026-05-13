@@ -2,7 +2,7 @@
 #define CHAOS_IL2CPP_ENGINE_BINDING_H_
 
 #include <chaos/native_types.h>
-#include "runtime_abi.h"
+#include <runtime_abi.h>
 #include "runtime_capability.h"
 
 namespace chaos::il2cpp::runtime_core {

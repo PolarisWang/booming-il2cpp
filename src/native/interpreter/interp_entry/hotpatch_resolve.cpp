@@ -1,0 +1,97 @@
+namespace chaos::il2cpp::runtime_core {
+
+// ── External Runtime Dispatch Table Resolution ──────────────────────────
+// Resolves subjectIds → function pointers for the codegen-emitted
+// kChaosExternalRuntimeFnTable.  Uses the HotpatchNameRegistry which is
+// already populated during bootstrap with all AOT modules' dispatch tables.
+//
+// Called from BootstrapRuntime() after all hotpatch modules are registered.
+// The function pointers come from HotpatchEntryV0::direct_ptr, giving O(1)
+// dispatch at call sites without per-method C++ wrapper stubs.
+
+static void ParseSubjectIdForHotpatchLookup(
+    const char* subject_id,
+    std::string& out_ns,
+    std::string& out_type_name,
+    std::string& out_method_name) noexcept
+{
+    out_ns.clear();
+    out_type_name.clear();
+    out_method_name.clear();
+
+    if (subject_id == nullptr) return;
+
+    // Format: "AssemblyName/Namespace.TypeName:MethodName(Params...)"
+    // Find '/' separator between assembly name and type path
+    const char* type_start = std::strchr(subject_id, '/');
+    if (type_start == nullptr) return;
+    ++type_start; // skip '/'
+
+    // Find "::" between type name and method name
+    const char* method_start = std::strstr(type_start, "::");
+    if (method_start == nullptr) return;
+
+    // Find namespace boundary: last '.' before "::"
+    const char* type_name_begin = type_start;
+    for (const char* p = type_start; p < method_start; ++p) {
+        if (*p == '.') type_name_begin = p + 1;
+    }
+
+    // Namespace: everything between '/' and last '.' before type name
+    if (type_name_begin > type_start + 1) {
+        // +1 for the '/', -1 for the trailing '.'
+        out_ns.assign(type_start, type_name_begin - type_start - 1);
+    } else {
+        out_ns.assign(type_start, type_name_begin - type_start);
+    }
+
+    // Type name: from type_name_begin to "::"
+    out_type_name.assign(type_name_begin, method_start - type_name_begin);
+
+    // Method name: from after "::" to '('
+    const char* paren = std::strchr(method_start + 2, '(');
+    if (paren == nullptr) {
+        // No params — take everything after "::"
+        out_method_name.assign(method_start + 2);
+    } else {
+        out_method_name.assign(method_start + 2, paren - method_start - 2);
+    }
+}
+
+extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept
+{
+    if (kChaosExternalRuntimeCount <= 0) return;
+
+    auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
+
+    std::string ns, type_name, method_name;
+
+    for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
+        const char* subject_id = kChaosExternalRuntimeSubjects[i];
+        if (subject_id == nullptr || subject_id[0] == '\0') continue;
+
+        // Parse subjectId into hotpatch lookup components
+        ParseSubjectIdForHotpatchLookup(subject_id, ns, type_name, method_name);
+        if (type_name.empty() || method_name.empty()) continue;
+
+        // Look up across all registered hotpatch modules
+        uint64_t result = registry.LookupMethod(
+            ns.c_str(), type_name.c_str(), method_name.c_str());
+        if (result == 0) continue;
+
+        uint32_t module_index = ExtractModuleId(result);
+        uint32_t token = ExtractToken(result);
+
+        if (module_index >= registry.ModuleCount()) continue;
+
+        uint32_t slot = registry.TokenToSlot(module_index, token);
+        if (slot == ~0u) continue;
+
+        auto* entry = registry.GetDispatchEntryBySlot(module_index, slot);
+        if (entry != nullptr && entry->direct_ptr != nullptr) {
+            kChaosExternalRuntimeFnTable[i] = entry->direct_ptr;
+        }
+    }
+}
+
+}  // namespace chaos::il2cpp::runtime_core

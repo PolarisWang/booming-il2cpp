@@ -38,6 +38,8 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_subdirectory(src/native/engine-bridge)
     add_subdirectory(src/native/support)
     add_subdirectory(src/native/bootstrap)
+    add_subdirectory(src/native/benchmark-host)
+    add_subdirectory(src/native/proof-host)
     add_subdirectory(tests/contracts/native/abi)
     add_subdirectory(tests/contracts/native/engine-binding)
     add_subdirectory(tests/contracts/native/hot-update)
@@ -61,7 +63,9 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
             chaos_interpreter
             chaos_support
             chaos_bootstrap
-            chaos_engine_bridge)
+            chaos_engine_bridge
+            chaos_benchmark_host
+            chaos_proof_host)
         foreach(MODULE ${CHAOS_NATIVE_MODULES})
             add_custom_target(check_arch_${MODULE}
                 COMMAND ${Python3_EXECUTABLE} build/check_arch.py --module ${MODULE}

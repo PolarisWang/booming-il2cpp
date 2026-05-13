@@ -62,22 +62,24 @@ static CHAOS_IL2CPP_SIZE ScanAndClearCrossDomainRefs(CHAOS_IL2CPP_UINT32 domain_
             auto* ptr_slot = reinterpret_cast<void**>(slot);
             void* val = *ptr_slot;
 
+            // Check if the slot value points WITHIN the domain being unloaded.
+            // If the target is inside this domain's regions, it's an intra-domain
+            // reference (normal, should NOT be cleared — only cross-domain refs
+            // become dangling after the domain is released).
+            // If the target is outside this domain, it IS a cross-domain reference
+            // and should be cleared (nulled) to prevent dangling pointers from
+            // core into the released domain memory.
             if (val == nullptr) continue;
 
-            // Check if the slot points into a domain region.
-            // If it does and the target is a core (non-domain) region,
-            // this is a cross-domain ref to clear.
-            //
-            // At C4, we conservatively clear all domain-region references
-            // since we're about to release the domain's memory.
-            // This is safe because we're in STW and no thread can race.
+            // Check domain region table: is the value within the domain being unloaded?
+            if (mgr.IsInDomain(domain_id, val)) {
+                // Intra-domain reference — keep it intact.
+                continue;
+            }
 
-            // Simple heuristic: clear the reference.
-            // A production implementation would use the region table to
-            // check if the target is outside the domain being unloaded.
+            // Cross-domain reference: clear it.
             *ptr_slot = nullptr;
             refs_cleared++;
-            refs_found++;
         }
     }
 

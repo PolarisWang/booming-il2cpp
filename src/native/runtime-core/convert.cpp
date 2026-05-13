@@ -4,6 +4,7 @@
 #include "exception_helpers.h"
 #include "string_table.h"
 #include "codegen_bridge.h"
+#include "generated_code_compat.h"
 
 #include <cstdint>
 #include <limits>
@@ -99,37 +100,31 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_uint64(CHAOS_IL2CPP_INTPTR v
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_boolean(CHAOS_IL2CPP_INTPTR value)
 {
     (void)value;
-    chaos::il2cpp::runtime_core::RaiseInvalidCastException();
+    throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_datetime(CHAOS_IL2CPP_INTPTR value)
 {
     (void)value;
-    chaos::il2cpp::runtime_core::RaiseInvalidCastException();
+    throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_decimal(CHAOS_IL2CPP_INTPTR value)
 {
-    // Decimal needs full runtime support — in Fact Static verification mode the
-    // uninitialized runtime will longjmp (setjmp fallback). In production
-    // with runtime init, this correctly raises InvalidCastException since
-    // a raw pointer cannot be interpreted as a decimal.
     (void)value;
-    chaos::il2cpp::runtime_core::RaiseManagedException(
-        "System.InvalidCastException",
-        "Specified cast is not valid.");
+    throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_double(CHAOS_IL2CPP_INTPTR value)
 {
     (void)value;
-    chaos::il2cpp::runtime_core::RaiseInvalidCastException();
+    throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_single(CHAOS_IL2CPP_INTPTR value)
 {
     (void)value;
-    chaos::il2cpp::runtime_core::RaiseInvalidCastException();
+    throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
 }
 
 // ── Object overloads (unbox then convert) ──────────────────────────────
@@ -167,17 +162,12 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_string(CHAOS_IL2CPP_INTPTR v
             chaos_extract_string_id(value));
         if (chaos_view.byte_count == 0)
         {
-            chaos::il2cpp::runtime_core::RaiseManagedException(
-                "System.FormatException",
-                "String must be exactly one character long.");
+            throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
         }
         return static_cast<CHAOS_IL2CPP_UINT16>(
             static_cast<unsigned char>(chaos_view.utf8_data[0]));
     }
-    // No heap string pointer — in Fact Static mode strings are always StringIds
-    chaos::il2cpp::runtime_core::RaiseManagedException(
-        "System.FormatException",
-        "String must be exactly one character long.");
+    throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_string_provider(

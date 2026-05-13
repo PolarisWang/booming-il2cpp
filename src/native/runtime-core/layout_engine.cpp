@@ -1,5 +1,5 @@
 #include "layout_engine.h"
-#include "runtime_instantiation.h"
+#include "instantiation_engine.h"
 
 #include <chaos/native_types.h>
 #include <chaos/trace.h>
