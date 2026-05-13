@@ -112,6 +112,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_MATH_FLOOR_SYSTEM_DOUBLE = 0x32FF00B1u,
     SHAPE_SYSTEM_MATH_MAX_SYSTEM_DOUBLE_SYSTEM_DOUBLE = 0x61F8C811u,
     SHAPE_SYSTEM_MATH_MAX_SYSTEM_INT32_SYSTEM_INT32 = 0x25C383CFu,
+    SHAPE_SYSTEM_MATH_MIN_SYSTEM_DOUBLE_SYSTEM_DOUBLE = 0xC9FB52B3u,
     SHAPE_SYSTEM_MATH_MIN_SYSTEM_INT32_SYSTEM_INT32 = 0xF775F9A9u,
     SHAPE_SYSTEM_MATH_POW_SYSTEM_DOUBLE_SYSTEM_DOUBLE = 0x106AF321u,
     SHAPE_SYSTEM_MATH_ROUND_SYSTEM_DOUBLE = 0xC5A20343u,
@@ -275,7 +276,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_TYPE_MAKEPOINTERTYPE = 0xDBA001CEu,
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
 
-    SHAPE_COUNT = 261u,
+    SHAPE_COUNT = 262u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -504,6 +505,10 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_MATH_MAX_SYSTEM_DOUBLE_SYSTEM_DOUBLE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosMathMaxDouble(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_MATH_MIN_SYSTEM_DOUBLE_SYSTEM_DOUBLE) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosMathMinDouble(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_MATH_POW_SYSTEM_DOUBLE_SYSTEM_DOUBLE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1311,7 +1316,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 261u,
+static_assert(SHAPE_COUNT == 262u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

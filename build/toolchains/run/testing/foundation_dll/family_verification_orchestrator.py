@@ -926,7 +926,7 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
 
     # Step 2: Run native benchmarks (skip throwing methods)
     native_results, native_path = _run_native_benchmarks(
-        family_slug, assembly, mids, stub_mask, throwing_mask, iterations=10000)
+        family_slug, assembly, mids, stub_mask, throwing_mask, iterations=100000)
 
     # Step 3: Compare
     if managed_path and managed_path.exists():

@@ -105,6 +105,18 @@ build/native-runtime/src/
 build/native-runtime/tests/
 build/native-runtime/verification/
 
+# Root-level object/build artifact files (tracked accidentally, now excluded)
+*.obj
+
+# Root-level scratch/test binary
+chaos-il2cpp
+
+# Windows-style captured temp paths from debug scripts
+%TEMP%compile_test.log
+C:*_stderr.txt
+C:*_stdout.txt
+tmpdyazankc.cpp
+
 # Build intermediate output directories
 build/managed-build/
 build/temp_output/
@@ -114,6 +126,13 @@ verification-history/
 verification/foundation-dll/*/*/native_test/
 
 # Root-level debug scripts and logs (not part of the project)
+/_*.bat
+/_*.ps1
+/_*.py
+/_*.txt
+_build_all_d3.bat
+_build_all_hotpatch.bat
+_build_and_run_debug.bat
 _check_*.cmd
 _check_*.py
 _pipeline_debug.log
@@ -147,4 +166,11 @@ build/tests/
 build/verification/
 
 # Root-level scratch
-chaos-il2cpp
+d3_*.txt
+agentbooming-il2cpp*
+
+# Visual Studio debug symbols
+*.pdb
+*.idb
+*.ipdb
+*.iobj

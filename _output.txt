@@ -1,6 +1,0 @@
-DEBUG: entering main()
-DEBUG: about to call chaos_codegen_get_bridge_v0
-DEBUG: bridge=00007FF789DD23C0
-DEBUG: register_codegen OK
-DEBUG: bootstrap_runtime OK
-DEBUG: about to probe dispatch table

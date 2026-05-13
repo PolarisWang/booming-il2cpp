@@ -12,6 +12,7 @@
 
 #include "memory_domain.h"
 #include "gc_region.h"
+#include "gc_stats.h"
 #include "reflection_query_model.h"
 #include "generic_context.h"
 #include "vtable_registry.h"

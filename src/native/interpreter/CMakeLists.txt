@@ -12,16 +12,7 @@ add_library(chaos_interpreter STATIC
     token_resolver.cpp
     token_resolver.h
     ir_reg_alloc.cpp
-    ir_reg_alloc.h
-    interp_entry/aot_direct_dispatch.cpp
-    interp_entry/arg_buffer.cpp
-    interp_entry/entry_direct.cpp
-    interp_entry/hotpatch_resolve.cpp
-    interp_entry/inlining.cpp
-    interp_entry/patch_method_lower.cpp
-    interp_entry/reapply_inlining.cpp
-    interp_entry/signature_cache.cpp
-    interp_entry/subject_id_resolver.cpp)
+    ir_reg_alloc.h)
 
 target_compile_features(chaos_interpreter PUBLIC cxx_std_17)
 target_compile_options(chaos_interpreter PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)

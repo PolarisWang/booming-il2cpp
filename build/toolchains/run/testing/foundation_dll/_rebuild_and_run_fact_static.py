@@ -29,11 +29,13 @@ INC = " ".join(f'-I"{d}"' for d in [
     REPO_ROOT / "src" / "native" / "common" / "chaos",
     REPO_ROOT / "contracts" / "native" / "v0",
     REPO_ROOT / "src" / "native" / "runtime-core",
+    REPO_ROOT / "src" / "native" / "runtime-core" / "gc",
     REPO_ROOT / "src" / "native" / "bootstrap",
     REPO_ROOT / "src" / "native" / "interpreter",
+    REPO_ROOT / "src" / "native" / "interpreter" / "generated",
+    REPO_ROOT / "src" / "native",
     REPO_ROOT / "third_party" / "fmt" / "include",
     REPO_ROOT / "third_party" / "bdwgc" / "include",
-    REPO_ROOT / "src" / "native" / "verification-host",
     BUILD_DIR,
 ])
 DEFS = "-DCHAOS_IL2CPP_CONFIG_CHECK -DCHAOS_IL2CPP_VERIFY_MODE -DGC_NOT_DLL -DCHAOS_RUNTIME_ABI_STATIC"

@@ -31,12 +31,20 @@ namespace chaos::il2cpp::runtime_core {
 // ── PatchMethod ─────────────────────────────────────────────────────────
 // Represents a single patched method with its AotCoreIr JSON and cached lowered IR.
 struct PatchMethod {
-    const char*     aot_core_ir_json        = nullptr;   // serialized AotCoreIr method JSON
+    const char*     aot_core_ir_json        = nullptr;   // serialized AotCoreIr method JSON (v1)
     uint32_t        aot_core_ir_json_length = 0;          // JSON string length
     const uint8_t*  signature_blob  = nullptr;   // method signature blob
     uint32_t        signature_len   = 0;          // signature blob length
     void*           cached_ir       = nullptr;   // cached IRMethod (lazy, null = not lowered)
     void*           cached_reg_method = nullptr; // cached RegisterMethod (register-allocated, lazy)
+
+    // ── v2 .patchdata: pre-allocated register IR binary data ─────────
+    // When non-null, PatchMethodLowerIR skips JSON deserialization + register
+    // allocation pass and directly builds RegisterMethod from binary data.
+    const void*     reg_ir_data         = nullptr;  // raw RegisterInstruction[] block
+    uint32_t        reg_ir_instr_count  = 0;         // number of instructions
+    uint32_t        reg_ir_seh_count    = 0;         // number of SEH clauses
+    uint32_t        reg_ir_max_regs     = 0;         // highest register used
     uint32_t        token;                        // AOT metadata token for this method
     uint32_t        module_id;                    // module index for module-scoped dispatch
     class PatchMetadataCache* metadata_cache = nullptr;  // token resolution cache
@@ -90,6 +98,16 @@ public:
     // Get the AotCoreIr JSON for a method by its index in the MethodDef table.
     // Returns nullptr if the index is out of range or the section is empty.
     const char* GetAotCoreIr(uint32_t method_index) const noexcept;
+
+    // Get the pre-allocated register IR binary block for a method (v2+).
+    // Returns {nullptr, 0, 0, 0} if the section is empty or index out of range.
+    struct RegisterIrBlock {
+        const void*    data;         // pointer to RegisterInstruction[]
+        uint32_t       instr_count;  // number of instructions
+        uint32_t       seh_count;    // number of SEH clauses
+        uint32_t       max_regs;     // highest register used
+    };
+    RegisterIrBlock GetRegisterIr(uint32_t method_index) const noexcept;
 
     // Iterate methods: return the i-th MethodDef entry.
     const PatchMethodDefEntry* GetMethodDef(uint32_t index) const noexcept;

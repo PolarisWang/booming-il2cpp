@@ -60,6 +60,29 @@ const char* PatchMetadataCache::GetAotCoreIr(uint32_t method_index) const noexce
     return str_start + offset;
 }
 
+PatchMetadataCache::RegisterIrBlock PatchMetadataCache::GetRegisterIr(uint32_t method_index) const noexcept {
+    RegisterIrBlock result = {};
+    if (header_ == nullptr || header_->version < 2) return result;
+    if (header_->reg_ir_offset == 0 || header_->reg_ir_count == 0) return result;
+    if (method_index >= header_->reg_ir_count) return result;
+
+    const auto* base = reinterpret_cast<const uint8_t*>(header_);
+    const auto* section = base + header_->reg_ir_offset;
+
+    // Format: [offsets: uint32_t[count]] [method blocks]
+    const auto* offsets = reinterpret_cast<const uint32_t*>(section);
+    uint32_t block_off = offsets[method_index];
+    const auto* block = section + sizeof(uint32_t) * header_->reg_ir_count + block_off;
+
+    // Block header: max_regs | instr_count | seh_count (3 × uint32_t)
+    result.max_regs    = *reinterpret_cast<const uint32_t*>(block);      block += 4;
+    result.instr_count = *reinterpret_cast<const uint32_t*>(block);      block += 4;
+    result.seh_count   = *reinterpret_cast<const uint32_t*>(block);      block += 4;
+    result.data        = reinterpret_cast<const void*>(block);
+
+    return result;
+}
+
 const PatchMethodDefEntry* PatchMetadataCache::GetMethodDef(uint32_t index) const noexcept {
     if (header_ == nullptr || index >= header_->method_def_count) return nullptr;
     const auto* base = reinterpret_cast<const uint8_t*>(header_);
@@ -363,11 +386,13 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
     auto* header = static_cast<const PatchDataHeader*>(data);
     HOTPATCH_DIAG("DIAG[APFM]: magic=%x ver=%u\n", header->magic, header->version);
 
-    // Validate magic and version.
+    // Validate magic and version (accept v1 or v2).
     if (header->magic != PATCH_DATA_MAGIC) return nullptr;
-    if (header->version != PATCH_DATA_VERSION) return nullptr;
-    if (header->header_size < sizeof(PatchDataHeader)) return nullptr;
-    HOTPATCH_DIAG("DIAG[APFM]: validation OK\n");
+    if (header->version != 1 && header->version != 2) return nullptr;
+    // v1 header: 112 bytes, v2 header: 124 bytes
+    uint32_t min_header = (header->version == 1) ? 112 : sizeof(PatchDataHeader);
+    if (header->header_size < min_header) return nullptr;
+    HOTPATCH_DIAG("DIAG[APFM]: validation OK (v%u header_size=%u)\n", header->version, header->header_size);
 
     // Validate structural integrity: total size must include AotCoreIr section.
     uint32_t expected_size = header->body_data_offset + header->body_data_size;
@@ -435,6 +460,18 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         patch_method.module_id = module_id;
         patch_method.aot_core_ir_json = cache->GetAotCoreIr(i);
         patch_method.aot_core_ir_json_length = 0;  // null-terminated, length determined by strlen
+
+        // v2+: populate pre-allocated register IR data on PatchMethod.
+        // PatchMethodLowerIR will skip JSON deserialization when this is present.
+        if (header->version >= 2) {
+            auto reg_ir = cache->GetRegisterIr(i);
+            if (reg_ir.data != nullptr) {
+                patch_method.reg_ir_data         = reg_ir.data;
+                patch_method.reg_ir_instr_count  = reg_ir.instr_count;
+                patch_method.reg_ir_seh_count    = reg_ir.seh_count;
+                patch_method.reg_ir_max_regs     = reg_ir.max_regs;
+            }
+        }
 
         // Store reference to the metadata cache for call_target resolution during IR lowering.
         patch_method.metadata_cache = cache;

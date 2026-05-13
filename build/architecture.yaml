@@ -59,6 +59,14 @@ modules:
       - chaos::il2cpp::string_table
       - chaos::il2cpp::vector_fixed
       - chaos::il2cpp::vtable_registry
+    sub_namespaces:
+      - chaos::il2cpp::struct_marshal          # core/struct_marshal_descriptors.cpp via unity file
+      - chaos::il2cpp::runtime_stubs           # runtime_stubs/*.cpp
+    conventions:
+      unity_file_structure: |
+        runtime_core.cpp includes core/*.cpp (23 files) as single TU
+        reflection_api.cpp includes reflection/*.cpp (11 files) as single TU
+        instantiation_engine.cpp includes instantiation/*.cpp (7 files) as single TU
     visibility: public
     dependencies:
       - chaos_bdwgc
@@ -110,6 +118,9 @@ modules:
     visibility: internal
     dependencies:
       - chaos_runtime_core
+      - chaos_bootstrap          # InterpreterEntryDirect, FastExecute
+    sub_namespaces:
+      - chaos::il2cpp::interpreter_entry       # interp_entry/*.cpp via unity file
     allowed_includes:
       public:
         - contracts/native/v0/
@@ -122,6 +133,7 @@ modules:
       naming_types: PascalCase
       naming_functions: PascalCase
       naming_constants: k + PascalCase
+      note: "interpreter_entry.cpp includes interp_entry/*.cpp (9 files) as single TU (unity file)"
 
   chaos_support:
     path: src/native/support

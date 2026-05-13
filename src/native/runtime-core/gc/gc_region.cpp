@@ -5,6 +5,7 @@
 #include "gc_layout.h"
 #include "gc_old_gen.h"
 #include "gc_scheduler.h"
+#include "gc_stats.h"
 #include "gc_young_collector.h"
 #include "memory_domain.h"
 #include "thread_state.h"
@@ -43,6 +44,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         CHAOS_IL2CPP_LOG_DEBUG("CRAG", "nursery_oversized");
         void* ptr = g_old_gen.Allocate(size, true);
         // g_old_gen.Allocate already zeroes the memory via std::memset internally.
+        if (ptr) GcRecordAlloc(size, true);
         return ptr;
     }
 
@@ -81,6 +83,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         if (next <= tls_nursery_ctx.nursery->end) {
             tls_nursery_ctx.nursery->current = next;
             std::memset(ptr, 0, size);
+            g_gc_scheduler.RecordAllocation(size);
             return ptr;
         }
     }
@@ -137,6 +140,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     char* ptr = new_nursery->current;
     new_nursery->current = ptr + size;
     std::memset(ptr, 0, size);
+    g_gc_scheduler.RecordAllocation(size);
     return ptr;
 }
 
@@ -177,6 +181,7 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
         if (next <= tls_nursery_ctx.nursery->end) {
             tls_nursery_ctx.nursery->current = next;
             std::memset(ptr, 0, size);
+            g_gc_scheduler.RecordAllocation(size);
             return ptr;
         }
     }
@@ -226,6 +231,7 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     char* ptr = new_nursery->current;
     new_nursery->current = ptr + size;
     std::memset(ptr, 0, size);
+    g_gc_scheduler.RecordAllocation(size);
     return ptr;
 }
 

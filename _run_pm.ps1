@@ -1,6 +1,0 @@
-$exe = 'D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\convert-char\il2cpp_dist\genuine\build\RelWithDebInfo\entry.exe'
-$p = Start-Process -NoNewWindow -FilePath $exe -Wait -PassThru
-Write-Host ('CODE=' + $p.ExitCode)
-Start-Sleep -Milliseconds 500
-Write-Host '---DEBUG---'
-Get-Content 'D:\agent\booming-il2cpp\_crash_debug.txt'

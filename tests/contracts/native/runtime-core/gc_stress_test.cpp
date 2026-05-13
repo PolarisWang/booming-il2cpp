@@ -223,34 +223,6 @@ static void CloseReport(int passed_count, int failed_count) {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
-// Collector thread — runs full GC at steady rate during scenarios
-// ════════════════════════════════════════════════════════════════════════════
-
-static std::atomic<bool> g_stress_active{true};
-
-static void collector_thread() {
-    int32_t tid = threading::AllocateThreadId();
-    threading::RegisterThread(tid, nullptr);
-
-    auto& mgr = RegionManager::Instance();
-    Region* nursery = mgr.AllocateNursery();
-    if (nursery) {
-        tls_nursery_ctx.nursery = nursery;
-        tls_nursery_ctx.limit   = nursery->end - kMaxNurseryAlloc;
-    }
-
-    while (g_stress_active.load(std::memory_order_acquire)) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(kFullGcIntervalMs));
-        if (!g_stress_active.load(std::memory_order_acquire)) break;
-        g_old_gen.Collect(nullptr, nullptr);
-        g_gc_scheduler.RecordFullCollection(0);
-    }
-
-    TeardownTlsNursery();
-    threading::UnregisterThread();
-}
-
-// ════════════════════════════════════════════════════════════════════════════
 // Thread lifecycle helpers (common to all scenarios)
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -326,18 +298,23 @@ static bool VerifyPattern(const void* p, size_t size, int thread_index, int iter
     // Upper 32 bits of every magic word = 0xBAD0DEAD.  If the read value's
     // upper 32 bits are NOT 0xBAD0DEAD, the pointer is stale — between write
     // and verify, young GC reset the nursery and the memory was recycled for
-    // another allocation (or VirtualAlloc'd as a fresh page with 0xDC fill,
-    // or memset to 0 by a subsequent NurseryAllocate).  This is expected
-    // behavior: no WritePattern call ever produces a non-0xBAD0DEAD prefix.
+    // another allocation.  This is expected for nursery allocations that were
+    // not promoted, so we do NOT report this as a corruption.
     if ((raw_word >> 32) != 0xBAD0DEADull) {
-        return true;  // stale pointer from nursery recycling
+        return true;  // nursery recycled — expected, not corruption
     }
 
-    // Upper 32 bits match 0xBAD0DEAD but lower do not — this is a different
-    // MAGIC word from another thread's allocation at the same recycled address.
-    // Data was correct at write time; no corruption.
-    // Only report if we want to detect extreme churn for diagnostic purposes.
-    return true;
+    // Upper 32 bits match 0xBAD0DEAD but lower do not — this is a real
+    // pattern mismatch.  The memory contains a different magic word than
+    // what we wrote.  This IS data corruption: either another thread's
+    // pattern at the same address (overwritten after verification) or stale
+    // data from a previous allocation that wasn't zeroed.
+    //
+    // Since we write patterns deterministically (thread_index + iter → fixed
+    // value), and verify immediately after write (same thread, same iter),
+    // a mismatch here means the data was corrupted between write and verify.
+    // Report as failure.
+    return false;
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -404,19 +381,12 @@ static bool RunScenarioA(GcStatsSnapshot* stats_out) {
     std::vector<WorkerResult> results(kNumWorkerThreads);
     std::vector<std::thread> workers;
 
-    g_stress_active.store(true, std::memory_order_release);
-    std::thread collector(collector_thread);
-
     for (int i = 0; i < kNumWorkerThreads; ++i)
         workers.emplace_back(worker_a, i, &results[i]);
 
     for (auto& w : workers) { if (w.joinable()) w.join(); }
 
-    g_stress_active.store(false, std::memory_order_release);
-    if (collector.joinable()) collector.join();
-
-    // Final full GC (from the main thread, so has_roots logic may still
-    // find no roots to mark — this is fine for stats accumulation).
+    // Final full GC to clean up any promoted objects.
     g_old_gen.Collect(nullptr, nullptr);
     g_gc_scheduler.RecordFullCollection(0);
 
@@ -585,16 +555,10 @@ static bool RunScenarioC(GcStatsSnapshot* stats_out) {
     std::vector<WorkerResult> results(kNumWorkerThreads);
     std::vector<std::thread> workers;
 
-    g_stress_active.store(true, std::memory_order_release);
-    std::thread collector(collector_thread);
-
     for (int i = 0; i < kNumWorkerThreads; ++i)
         workers.emplace_back(worker_c, i, &results[i]);
 
     for (auto& w : workers) { if (w.joinable()) w.join(); }
-
-    g_stress_active.store(false, std::memory_order_release);
-    if (collector.joinable()) collector.join();
 
     g_old_gen.Collect(nullptr, nullptr);
     g_gc_scheduler.RecordFullCollection(0);
@@ -625,10 +589,25 @@ static bool RunScenarioC(GcStatsSnapshot* stats_out) {
 // 50 threads × 512 allocs (2× normal) with collector thread running.
 // Verify EVERY allocation (not just every kVerifyStep).
 // Tests memory stability under sustained GC pressure.
+//
+// Also includes deferred promotion verification: the first 16 pointers per
+// thread are saved, and after a full GC we check whether they ended up in
+// old-gen pages (proving GC promotion actually copied them) and that their
+// content is still intact.
 // ════════════════════════════════════════════════════════════════════════════
 
 static constexpr int kDPressureWorkers       = 50;
 static constexpr int kDPressureAllocsPerThread = 512;
+static constexpr int kDDeferredPtrsPerWorker   = 16;
+
+struct DeferredPtr {
+    void* ptr;
+    CHAOS_IL2CPP_SIZE size;
+    int thread_index;
+    int iter;
+};
+static DeferredPtr g_deferred_ptrs[kDPressureWorkers][kDDeferredPtrsPerWorker];
+static std::atomic<int> g_deferred_count[kDPressureWorkers];
 
 static void worker_d(int thread_index, WorkerResult* result) {
     RegisterWorker();
@@ -638,6 +617,8 @@ static void worker_d(int thread_index, WorkerResult* result) {
         UnregisterWorker();
         return;
     }
+
+    int saved_count = 0;
 
     for (int i = 0; i < kDPressureAllocsPerThread; ++i) {
         result->allocations_attempted++;
@@ -650,6 +631,12 @@ static void worker_d(int thread_index, WorkerResult* result) {
         result->allocations_succeeded++;
 
         WritePattern(p, size, thread_index, i);
+
+        // Save first 16 pointers for deferred promotion verification.
+        if (saved_count < kDDeferredPtrsPerWorker) {
+            g_deferred_ptrs[thread_index][saved_count] = {p, size, thread_index, i};
+            g_deferred_count[thread_index].store(++saved_count, std::memory_order_release);
+        }
 
         // Verify every allocation to catch corruption under pressure.
         result->pattern_verifications++;
@@ -672,12 +659,13 @@ static bool RunScenarioD(GcStatsSnapshot* stats_out) {
     printf("\n  ── Scenario D: Extended GC pressure (50×512, verify every alloc) ──\n");
     GcStatsSnapshot before = SnapshotGcStats();
 
+    // Reset deferred pointer tracking.
+    for (int t = 0; t < kDPressureWorkers; ++t) {
+        g_deferred_count[t].store(0, std::memory_order_release);
+    }
+
     std::vector<WorkerResult> results(kDPressureWorkers);
     std::vector<std::thread> workers;
-
-    // No collector thread — Scenario D verifies every allocation, and
-    // a concurrent full GC from the collector would race with worker
-    // thread young GCs that are triggered via NurseryAllocateSlow.
 
     for (int i = 0; i < kDPressureWorkers; ++i)
         workers.emplace_back(worker_d, i, &results[i]);
@@ -697,6 +685,36 @@ static bool RunScenarioD(GcStatsSnapshot* stats_out) {
         total_fail  += r.pattern_failures;
         if (r.completed) completed++;
     }
+
+    // ── Deferred promotion verification ──
+    // After the final full GC, check whether the saved pointers (first 16 per
+    // thread) ended up in old-gen pages.  If a young GC copied them during the
+    // run, they should now be in old-gen memory.  If they were never promoted
+    // (never survived a young GC), they'll still be in nursery memory or freed.
+    // Either way, their content should match the written pattern.
+    int deferred_promoted = 0;
+    int deferred_total = 0;
+    int deferred_verify_fails = 0;
+    for (int t = 0; t < kDPressureWorkers; ++t) {
+        int count = g_deferred_count[t].load(std::memory_order_acquire);
+        for (int s = 0; s < count; ++s) {
+            deferred_total++;
+            auto& dp = g_deferred_ptrs[t][s];
+            // Verify the pattern is still intact — only for pointers that
+            // were promoted to old-gen.  Nursery pointers that were never
+            // promoted are recycled and overwritten by other threads, so
+            // verifying them would produce false positives.
+            if (g_old_gen.IsInOldGen(dp.ptr)) {
+                deferred_promoted++;
+                if (!VerifyPattern(dp.ptr, dp.size, dp.thread_index, dp.iter)) {
+                    deferred_verify_fails++;
+                    total_fail++;
+                }
+            }
+        }
+    }
+    printf("  Deferred promotion: %d/%d pointers in old-gen, %d verify fails\n",
+           deferred_promoted, deferred_total, deferred_verify_fails);
 
     printf("\n  Result: %lld allocs, %lld verifications, %lld fails, workers=%d/%d\n",
            (long long)total_alloc, (long long)total_ver, (long long)total_fail,

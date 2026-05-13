@@ -183,8 +183,11 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
     // it as a potential root.  The mark phase's caller will check whether
     // the value at each slot points into GC-managed memory.
 
-    // Use a static helper since EnumerateThreads takes a C function pointer.
-    // Single-threaded GC context — safe to use file-scoped globals.
+    // Use file-scoped statics to bridge the C function pointer API of
+    // EnumerateThreads.  This is safe because GcScanAllThreadRoots is only
+    // ever called from within a STW safepoint (generation is odd), and
+    // the safepoint protocol ensures only one GC thread is active at a time.
+    // No concurrent clobbering is possible.
     static void (*s_callback)(void*, bool, void*) = nullptr;
     static void* s_user_data = nullptr;
     s_callback = callback;

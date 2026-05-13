@@ -103,3 +103,9 @@ extern "C" CHAOS_RUNTIME_ABI_EXPORT const RuntimeInstantiationBridgeV0*
 CHAOS_RUNTIME_ABI_CALL chaos_runtime_get_instantiation_bridge_v0(void) {
     return chaos::il2cpp::runtime_instantiation::GetBridgeV0();
 }
+
+// Alias for the contract-declared name used by abi_reflection.cpp.
+extern "C" CHAOS_RUNTIME_ABI_EXPORT const RuntimeInstantiationBridgeV0*
+CHAOS_RUNTIME_ABI_CALL ChaosRuntimeInstantiationGetBridgeV0(void) {
+    return chaos::il2cpp::runtime_instantiation::GetBridgeV0();
+}
