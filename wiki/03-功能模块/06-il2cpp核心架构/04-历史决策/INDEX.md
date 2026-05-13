@@ -25,3 +25,4 @@
 | [`17-GenericContextRegistry-B+SegmentedShard-决策.md`](./17-GenericContextRegistry-B%2BSegmentedShard-%E5%86%B3%E7%AD%96.md) | GenericContextRegistry B+ 重构：Per-Module Shard + 两级注册 (Eager Open + Lazy Closed) + O(1) 热更卸载，消除 arg_buffer[8] 和 owned_entries 泄漏 |
 | [`18-HotUpdateDispatchHotpatch-决策.md`](./18-HotUpdateDispatchHotpatch-%E5%86%B3%E7%AD%96.md) | HotUpdate Hotpatch 双层分派架构：静态 Dispatch Table + 模式感知分支 + 构建期 .patchdata 提取 + PatchMetadataCache 本地自洽 |
 | [`19-A4-Dual+V2-ObjectHeader优化决策.md`](./19-A4-Dual%2BV2-ObjectHeader%E4%BC%98%E5%8C%96%E5%86%B3%E7%AD%96.md) | A4-Dual+V2 ObjectHeader 优化：PureType(8B)/ThinLockable(8B)/Fat(16B) 分型 header + V2 inline vtable + 2-bit Magic 判别 + CoreCLR 风格薄锁，ObjectHeader 56B→~9.6B |
+| [`20-工程规范统一决策.md`](./20-%E5%B7%A5%E7%A8%8B%E8%A7%84%E8%8C%83%E7%BB%9F%E4%B8%80%E5%86%B3%E7%AD%96.md) | 命名空间统一(ChaosIl2cpp::Common→chaos::il2cpp::common)、Include风格统一(<chaos/>)、clang-format配置、extern "C"文档化 |

@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 constexpr CHAOS_IL2CPP_INTPTR k_managed_pointer_local_slot_tag = 1;
 constexpr CHAOS_IL2CPP_INTPTR k_raw_int32_pointer_tag = 2;
@@ -33,6 +33,6 @@ inline void* resolve_block_copy_address(CHAOS_IL2CPP_INTPTR address) noexcept
     return reinterpret_cast<void*>(address);
 }
 
-} // namespace ChaosIl2cpp::Common
+} // namespace chaos::il2cpp::common
 
 #endif // CHAOS_IL2CPP_COMMON_PTR_TAG_H_

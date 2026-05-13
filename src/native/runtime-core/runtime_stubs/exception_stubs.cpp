@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // exception_stubs.cpp — Exception helper stub implementations
 #include <chaos/native_types.h>
 #include "generated_code_compat.h"

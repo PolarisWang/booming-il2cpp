@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // random_stubs.cpp — Random stub implementations (real xorshift32 PRNG)
 #include <chaos/native_types.h>
 #include <cstring>

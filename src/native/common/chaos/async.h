@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <cstdlib>
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 struct AsyncTask
 {
@@ -100,6 +100,6 @@ inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_result_raw(CHAOS_IL2CPP_INTPTR
     return task->result;
 }
 
-} // namespace ChaosIl2cpp::Common
+} // namespace chaos::il2cpp::common
 
 #endif // CHAOS_IL2CPP_COMMON_ASYNC_H_

@@ -3,7 +3,7 @@
 
 #include <type_traits>
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 template <typename TAction>
 class FinallyGuard
@@ -38,6 +38,6 @@ FinallyGuard<TAction> make_finally_guard(TAction action)
     return FinallyGuard<TAction>(action);
 }
 
-} // namespace ChaosIl2cpp::Common
+} // namespace chaos::il2cpp::common
 
 #endif // CHAOS_IL2CPP_COMMON_FINALLY_H_

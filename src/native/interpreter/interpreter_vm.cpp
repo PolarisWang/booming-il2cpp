@@ -818,7 +818,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 // Interface compatibility check: scan implemented interfaces
                 if (!compatible) {
                     const auto* target_vtable = chaos::il2cpp::vtable_registry::TryGetTypeVTable(target_type_token);
-                    if (target_vtable != nullptr && target_vtable->type_shape == ChaosIl2cpp::Common::chaos_type_shape_interface) {
+                    if (target_vtable != nullptr && target_vtable->type_shape == chaos::il2cpp::common::chaos_type_shape_interface) {
                         // Target is an interface — check if instance type implements it.
                         // Walk instance type's interface map (through all ancestors).
                         CHAOS_IL2CPP_UINT32 scan_token = obj_type_token;
@@ -826,7 +826,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                             const auto* scan_vtable = chaos::il2cpp::vtable_registry::TryGetTypeVTable(scan_token);
                             if (scan_vtable == nullptr) break;
                             if (scan_vtable->iface_map != nullptr && scan_vtable->iface_count > 0u) {
-                                const auto* iface_entries = static_cast<const ChaosIl2cpp::Common::InterfaceMapEntry*>(scan_vtable->iface_map);
+                                const auto* iface_entries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(scan_vtable->iface_map);
                                 for (CHAOS_IL2CPP_UINT32 ifi = 0u; ifi < scan_vtable->iface_count; ++ifi) {
                                     // Compare stable_id against target's stable_id.
                                     const auto* target_vt2 = chaos::il2cpp::vtable_registry::TryGetTypeVTable(target_type_token);

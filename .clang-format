@@ -27,7 +27,7 @@ ConstructorInitializerAllOnOneLineOrOnePerLine: false
 Cpp11BracedListStyle: true
 DerivePointerAlignment: false
 FixNamespaceComments: true
-IncludeBlocks: Preserve
+IncludeBlocks: Regroup
 IndentCaseLabels: true
 IndentPPDirectives: None
 IndentWidth: 4
@@ -36,7 +36,18 @@ MaxEmptyLinesToKeep: 2
 NamespaceIndentation: None
 PointerAlignment: Left
 ReflowComments: true
-SortIncludes: false
+SortIncludes: true
+IncludeCategories:
+  - Regex: '^".*\.h"'
+    Priority: 0
+  - Regex: '^<chaos/'
+    Priority: 1
+  - Regex: '^<contracts/'
+    Priority: 2
+  - Regex: '^<(cstdint|cstddef|algorithm|vector|string|map|memory|atomic|mutex|thread|chrono|cstring|cstdio|cstdlib|cmath|limits|type_traits|new|unordered_map|unordered_set|functional|sstream|fstream|iostream|array|optional|variant|tuple|utility|numeric|cmath|cfloat|climits|cassert|cstdarg|csetjmp|csignal|cwchar|cwctype|codecvt|complex|valarray|bitset|deque|forward_list|list|queue|set|stack|iterator|algorithm|execution|functional|random|ratio|chrono|scoped_allocator|memory_resource)>
+    Priority: 3
+  - Regex: '.*'
+    Priority: 4
 SpaceAfterCStyleCast: false
 SpaceAfterLogicalNot: false
 SpaceBeforeAssignmentOperators: true

@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // exception_helpers.cpp — Runtime exception raising for generated code
 //
 // Provides ResolveTypeByName (module-scanned type resolution) and
@@ -35,7 +37,9 @@
 // fallback is registered, std::abort() is still called.
 //
 // This avoids C++ exception propagation through extern "C" frames, which
-// requires non-default MSVC EH flags (/EHa or /EHs).
+// requires non-default MSVC EH flags (/EHa or /EHs).  The chaos_runtime_core
+// lib is compiled with /EHs (see CMakeLists.txt) specifically to allow
+// C++ exceptions to propagate through extern "C" frames in convert.cpp.
 
 static thread_local void (*g_exception_fallback)() = nullptr;
 
@@ -134,6 +138,9 @@ TypeInfoHandle ResolveTypeByName(const char* fully_qualified_name) {
         // Throw empty chaos_managed_exception — the codegen catch block
         // treats object_value == 0 as "matched but no managed object",
         // allowing the catch body to execute in verification/benchmark mode.
+        // NOTE: This throw crosses extern "C" frames in convert.cpp.
+        // chaos_runtime_core MUST be compiled with /EHs (not /EHsc) for
+        // MSVC to allow this propagation; see CMakeLists.txt.
         throw chaos_managed_exception{0};
     }
 

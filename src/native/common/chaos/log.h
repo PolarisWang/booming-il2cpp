@@ -63,7 +63,7 @@
 // Implementation (header-only, inline)
 // ============================================================================
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 namespace log_internal {
 
 // ── Global mutex for thread-safe stdout access ──────────────────────────────
@@ -141,7 +141,7 @@ inline void flush_stdout() {
 }
 
 } // namespace log_internal
-} // namespace ChaosIl2cpp::Common
+} // namespace chaos::il2cpp::common
 
 // ============================================================================
 // Public macros
@@ -151,15 +151,15 @@ inline void flush_stdout() {
 
 #define CHAOS_IL2CPP_LOG_ERROR(category, message)                     do { \
     CHAOS_IL2CPP_LOG_TRACE((category), "error", "message={0}", (message)); \
-    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
-        ::ChaosIl2cpp::Common::log_internal::format_simple(                 \
+    ::chaos::il2cpp::common::log_internal::log_write(                        \
+        ::chaos::il2cpp::common::log_internal::format_simple(                 \
             "ERROR", (category), (message)));                               \
 } while (0)
 
 #define CHAOS_IL2CPP_LOG_ERROR_M(category, fmt_str, ...)              do { \
     CHAOS_IL2CPP_LOG_TRACE((category), "error", "formatted=true");         \
-    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
-        ::ChaosIl2cpp::Common::log_internal::format_fmt(                   \
+    ::chaos::il2cpp::common::log_internal::log_write(                        \
+        ::chaos::il2cpp::common::log_internal::format_fmt(                   \
             "ERROR", (category), (fmt_str), ##__VA_ARGS__));               \
 } while (0)
 
@@ -168,15 +168,15 @@ inline void flush_stdout() {
 #if CHAOS_IL2CPP_LOG_LEVEL >= 1
 #define CHAOS_IL2CPP_LOG_WARN(category, message)                       do { \
     CHAOS_IL2CPP_LOG_TRACE((category), "warn", "message={0}", (message));   \
-    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
-        ::ChaosIl2cpp::Common::log_internal::format_simple(                 \
+    ::chaos::il2cpp::common::log_internal::log_write(                        \
+        ::chaos::il2cpp::common::log_internal::format_simple(                 \
             "WARN", (category), (message)));                                \
 } while (0)
 
 #define CHAOS_IL2CPP_LOG_WARN_M(category, fmt_str, ...)               do { \
     CHAOS_IL2CPP_LOG_TRACE((category), "warn", "formatted=true");          \
-    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
-        ::ChaosIl2cpp::Common::log_internal::format_fmt(                   \
+    ::chaos::il2cpp::common::log_internal::log_write(                        \
+        ::chaos::il2cpp::common::log_internal::format_fmt(                   \
             "WARN", (category), (fmt_str), ##__VA_ARGS__));                \
 } while (0)
 #else
@@ -188,14 +188,14 @@ inline void flush_stdout() {
 
 #if CHAOS_IL2CPP_LOG_LEVEL >= 2
 #define CHAOS_IL2CPP_LOG_INFO(category, message)                      do { \
-    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
-        ::ChaosIl2cpp::Common::log_internal::format_simple(                 \
+    ::chaos::il2cpp::common::log_internal::log_write(                        \
+        ::chaos::il2cpp::common::log_internal::format_simple(                 \
             "INFO", (category), (message)));                                \
 } while (0)
 
 #define CHAOS_IL2CPP_LOG_INFO_M(category, fmt_str, ...)               do { \
-    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
-        ::ChaosIl2cpp::Common::log_internal::format_fmt(                   \
+    ::chaos::il2cpp::common::log_internal::log_write(                        \
+        ::chaos::il2cpp::common::log_internal::format_fmt(                   \
             "INFO", (category), (fmt_str), ##__VA_ARGS__));                \
 } while (0)
 #else
@@ -207,14 +207,14 @@ inline void flush_stdout() {
 
 #if CHAOS_IL2CPP_LOG_LEVEL >= 3
 #define CHAOS_IL2CPP_LOG_DEBUG(category, message)                     do { \
-    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
-        ::ChaosIl2cpp::Common::log_internal::format_simple(                 \
+    ::chaos::il2cpp::common::log_internal::log_write(                        \
+        ::chaos::il2cpp::common::log_internal::format_simple(                 \
             "DEBUG", (category), (message)));                               \
 } while (0)
 
 #define CHAOS_IL2CPP_LOG_DEBUG_M(category, fmt_str, ...)              do { \
-    ::ChaosIl2cpp::Common::log_internal::log_write(                        \
-        ::ChaosIl2cpp::Common::log_internal::format_fmt(                   \
+    ::chaos::il2cpp::common::log_internal::log_write(                        \
+        ::chaos::il2cpp::common::log_internal::format_fmt(                   \
             "DEBUG", (category), (fmt_str), ##__VA_ARGS__));               \
 } while (0)
 #else
@@ -230,17 +230,17 @@ inline void flush_stdout() {
 
 // ── Raw protocol output (bypasses log formatting, under log mutex) ──────────
 #define CHAOS_IL2CPP_LOG_WRITE_RAW(msg)                                   do { \
-    ::ChaosIl2cpp::Common::log_internal::write_raw((msg));                     \
+    ::chaos::il2cpp::common::log_internal::write_raw((msg));                     \
 } while (0)
 
 #define CHAOS_IL2CPP_LOG_WRITE_RAW_M(fmt_str, ...)                        do { \
-    ::ChaosIl2cpp::Common::log_internal::write_raw_fmt(                       \
+    ::chaos::il2cpp::common::log_internal::write_raw_fmt(                       \
         (fmt_str), ##__VA_ARGS__);                                             \
 } while (0)
 
 // ── Flush stdout under log mutex ────────────────────────────────────────────
 #define CHAOS_IL2CPP_LOG_FLUSH_STDOUT()                                   do { \
-    ::ChaosIl2cpp::Common::log_internal::flush_stdout();                       \
+    ::chaos::il2cpp::common::log_internal::flush_stdout();                       \
 } while (0)
 
 #endif // CHAOS_IL2CPP_COMMON_LOG_H_

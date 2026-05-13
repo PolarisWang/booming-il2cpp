@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // math_stubs.cpp — Math stub implementations
 #include <chaos/native_types.h>
 #include <cmath>

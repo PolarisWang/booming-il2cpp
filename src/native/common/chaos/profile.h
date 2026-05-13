@@ -57,8 +57,7 @@
 #error "profile.h requires _M_AMD64 for GetCurrentProcessorNumber"
 #endif
 
-namespace ChaosIl2cpp {
-namespace Common {
+namespace chaos::il2cpp::common {
 
 // ── Config ───────────────────────────────────────────────────────────────
 constexpr int kProfileMaxSlots   = 64;
@@ -215,24 +214,22 @@ inline void ProfileReset() noexcept {
     }
 }
 
-} // namespace Common
-} // namespace ChaosIl2cpp
+} // namespace chaos::il2cpp::common
 
 #define CHAOS_IL2CPP_PROFILE_SCOPE(name)                                  \
-    ::ChaosIl2cpp::Common::ProfileScope                                   \
+    ::chaos::il2cpp::common::ProfileScope                                   \
         CHAOS_IL2CPP_PROFILE_JOIN(__profile_scope_, __LINE__)(name)
 
 #define CHAOS_IL2CPP_PROFILE_DUMP()                                       \
-    ::ChaosIl2cpp::Common::ProfileDump()
+    ::chaos::il2cpp::common::ProfileDump()
 
 #define CHAOS_IL2CPP_PROFILE_RESET()                                      \
-    ::ChaosIl2cpp::Common::ProfileReset()
+    ::chaos::il2cpp::common::ProfileReset()
 
 #else // CHAOS_IL2CPP_PROFILE_ENABLED == 0
 
 // ── No-op stubs: compiler eliminates all profile code ─────────────────────
-namespace ChaosIl2cpp {
-namespace Common {
+namespace chaos::il2cpp::common {
 struct NullProfileScope {
     // constexpr + (void)name avoids embedding the string literal in .rdata
     // when profiling is disabled.  The compiler fully eliminates this.
@@ -243,11 +240,10 @@ struct NullProfileScope {
 
 // NullProfileScope constructor is constexpr → compiler eliminates
 // both the object and the string argument entirely.
-} // namespace Common
-} // namespace ChaosIl2cpp
+} // namespace chaos::il2cpp::common
 
 #define CHAOS_IL2CPP_PROFILE_SCOPE(name)                                  \
-    ::ChaosIl2cpp::Common::NullProfileScope                               \
+    ::chaos::il2cpp::common::NullProfileScope                               \
         CHAOS_IL2CPP_PROFILE_JOIN(__prof_noop_, __LINE__)(name)
 
 #define CHAOS_IL2CPP_PROFILE_DUMP()                                       \

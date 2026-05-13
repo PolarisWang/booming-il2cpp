@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 #include "abi_manifest.h"
 #include <chaos/native_types.h>
 #include <cstring>

@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <string>
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 /// Efficient int32-to-string conversion (replaces snprintf + char[64] pattern).
 inline CHAOS_IL2CPP_STRING format_int32(CHAOS_IL2CPP_INT32 value)
@@ -41,6 +41,6 @@ inline void format_append_to(CHAOS_IL2CPP_STRING& output, fmt::format_string<Arg
     fmt::format_to(std::back_inserter(output), fmt_str, std::forward<Args>(args)...);
 }
 
-}  // namespace ChaosIl2cpp::Common
+}  // namespace chaos::il2cpp::common
 
 #endif  // CHAOS_IL2CPP_COMMON_FORMAT_H_

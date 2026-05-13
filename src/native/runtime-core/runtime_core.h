@@ -37,8 +37,8 @@
 namespace chaos::il2cpp::runtime_core {
 
 // Bring types from other namespaces into runtime_core for convenient use.
-using namespace chaos::il2cpp::marshal_abi;
-using chaos::il2cpp::marshal_abi::MarshalPlatformAbiRootV1;   // explicit to avoid ambiguity with MarshalPlatformAbiRootV1 member
+// Note: explicit using-declarations only -- no blanket using-namespace directives.
+using chaos::il2cpp::marshal_abi::MarshalPlatformAbiRootV1;
 using chaos::il2cpp::marshal_abi::TaskRuntimeKernelV1;
 using chaos::il2cpp::runtime_capability::ValueTypeKernelBackendKind;
 using chaos::il2cpp::runtime_capability::VectorKernelBackendKind;

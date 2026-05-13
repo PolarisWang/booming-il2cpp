@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 #include "runtime_instantiation.h"
 #include "generic_context.h"
 #include "generic_method_instantiation.h"
@@ -7,7 +9,7 @@
 #include "reflection_query_model.h"
 #include "runtime_core.h"
 #include "runtime_vtable.h"
-#include "../bootstrap/bootstrap.h"  // GetCodegenBridgeV0
+#include "bootstrap/bootstrap.h"  // GetCodegenBridgeV0
 #include <chaos/profile.h>
 
 #include <chaos/native_types.h>

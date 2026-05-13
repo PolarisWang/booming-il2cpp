@@ -8,8 +8,8 @@ namespace ri = chaos::il2cpp::runtime_instantiation;
 #include <cstring>
 #include <vector>
 #define CHAOS_IL2CPP_LOG_LEVEL 1  // WARN+ERROR visible; DEBUG/INFO compiled out for hot-path perf
-#include "chaos/log.h"
-#include "chaos/profile.h"
+#include <chaos/log.h>
+#include <chaos/profile.h>
 
 // Global static field storage from the full InterpreterVM.
 // FastFrame reads/writes this directly so StSFld/LdSFld don't trigger fallback.

@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // threading_stubs.cpp — Threading stub implementations
 #include <chaos/native_types.h>
 #include "generated_code_compat.h"

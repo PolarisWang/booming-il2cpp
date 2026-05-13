@@ -6,7 +6,7 @@
 #include "reflection_query_model.h"
 #include "runtime_instantiation.h"  // CachedCallInfo (for delete[] in DestroyPatchContext)
 
-#include "../bootstrap/bootstrap.h"
+#include "bootstrap/bootstrap.h"
 
 #include <cstdio>
 #include <cstring>

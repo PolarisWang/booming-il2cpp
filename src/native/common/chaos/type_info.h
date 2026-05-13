@@ -17,7 +17,7 @@
 
 #include <chaos/native_types.h>
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 // ── 64-bit FNV-1a hash ─────────────────────────────────────────
 // The C# codegen side (NativeAotLoweringPlanner.ObjectModelUtilities.cs)
@@ -167,8 +167,8 @@ inline constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_interface = 3;
 // ── HotUpdate dynamic type registration ─────────────────────────
 inline constexpr CHAOS_IL2CPP_SIZE kChaosMaxDynamicTypes = 256;
 
-}  // namespace ChaosIl2cpp::Common
+}  // namespace chaos::il2cpp::common
 
-using namespace ChaosIl2cpp::Common;
+using namespace chaos::il2cpp::common;
 
 #endif  // CHAOS_IL2CPP_COMMON_TYPE_INFO_H_

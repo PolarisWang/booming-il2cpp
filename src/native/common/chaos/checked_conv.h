@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <limits>
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 inline CHAOS_IL2CPP_INTPTR checked_conv_ovf_i1(CHAOS_IL2CPP_INTPTR value) noexcept
 {
@@ -46,6 +46,6 @@ inline CHAOS_IL2CPP_INTPTR checked_conv_ovf_u2(CHAOS_IL2CPP_INTPTR value) noexce
     return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(value));
 }
 
-} // namespace ChaosIl2cpp::Common
+} // namespace chaos::il2cpp::common
 
 #endif // CHAOS_IL2CPP_COMMON_CHECKED_CONV_H_

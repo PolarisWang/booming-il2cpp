@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // string_stubs.cpp — String helper stub implementations
 #include <chaos/native_types.h>
 #include <cstring>

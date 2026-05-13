@@ -8,7 +8,7 @@
 #include <utility>
 #include <vector>
 
-namespace ChaosIl2cpp::Common {
+namespace chaos::il2cpp::common {
 
 template <typename TValue>
 struct ListRuntimeStorage
@@ -56,6 +56,6 @@ DictionaryRuntimeStorage<TKey, TValue>* require_dictionary_runtime_storage(CHAOS
     return storage.get();
 }
 
-} // namespace ChaosIl2cpp::Common
+} // namespace chaos::il2cpp::common
 
 #endif // CHAOS_IL2CPP_COMMON_COLLECTION_H_

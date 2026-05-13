@@ -1,3 +1,5 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
+
 // reflection_api.cpp — Native AOT reflection API implementation
 //
 // Provides extern "C" implementations for chaos_reflection_* functions
