@@ -1,0 +1,225 @@
+using chaos_delegate_invocation_list = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR);
+
+struct chaos_type_System_Private_CoreLib_System_Delegate
+{
+    FatHeader header{};
+    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;
+};
+
+chaos_type_System_Private_CoreLib_System_Delegate* chaos_require_delegate(CHAOS_IL2CPP_INTPTR chaos_delegate_value)
+{
+    if (chaos_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    {
+        CHAOS_IL2CPP_FAIL();
+    }
+
+    return reinterpret_cast<chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_delegate_value);
+}
+
+const chaos_delegate_invocation_list* chaos_try_get_delegate_invocation_list(
+    const chaos_type_System_Private_CoreLib_System_Delegate* chaos_delegate) noexcept
+{
+    if (chaos_delegate == nullptr ||
+        chaos_delegate->chaos_delegate_invocation_list == static_cast<CHAOS_IL2CPP_INTPTR>(0) ||
+        chaos_delegate->chaos_delegate_invocation_count <= static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    {
+        return nullptr;
+    }
+
+    return reinterpret_cast<const chaos_delegate_invocation_list*>(chaos_delegate->chaos_delegate_invocation_list);
+}
+
+bool chaos_delegate_single_entry_equals(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value) noexcept
+{
+    if (chaos_left_value == chaos_right_value)
+    {
+        return true;
+    }
+
+    if (chaos_left_value == static_cast<CHAOS_IL2CPP_INTPTR>(0) ||
+        chaos_right_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    {
+        return false;
+    }
+
+    const auto* chaos_left = reinterpret_cast<const chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_left_value);
+    const auto* chaos_right = reinterpret_cast<const chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_right_value);
+    return chaos_left->header.type_info == chaos_right->header.type_info &&
+           chaos_left->chaos_delegate_target == chaos_right->chaos_delegate_target &&
+           chaos_left->chaos_delegate_method_ptr == chaos_right->chaos_delegate_method_ptr;
+}
+
+void chaos_delegate_append_flattened_entries(
+    chaos_delegate_invocation_list& chaos_entries,
+    CHAOS_IL2CPP_INTPTR chaos_delegate_value)
+{
+    if (chaos_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    {
+        return;
+    }
+
+    auto* chaos_delegate = chaos_require_delegate(chaos_delegate_value);
+    const auto* chaos_invocation_list = chaos_try_get_delegate_invocation_list(chaos_delegate);
+    if (chaos_invocation_list == nullptr)
+    {
+        if (chaos_delegate->chaos_delegate_method_ptr == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+        {
+            CHAOS_IL2CPP_FAIL();
+        }
+
+        chaos_entries.push_back(chaos_delegate_value);
+        return;
+    }
+
+    if (static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)
+    {
+        CHAOS_IL2CPP_FAIL();
+    }
+
+    for (const auto chaos_entry_value : *chaos_invocation_list)
+    {
+        chaos_delegate_append_flattened_entries(chaos_entries, chaos_entry_value);
+    }
+}
+
+void chaos_delegate_validate_entry_types(const chaos_delegate_invocation_list& chaos_entries)
+{
+    if (chaos_entries.empty())
+    {
+        return;
+    }
+
+    const auto* chaos_first = chaos_require_delegate(chaos_entries.front());
+    for (const auto chaos_entry_value : chaos_entries)
+    {
+        const auto* chaos_entry = chaos_require_delegate(chaos_entry_value);
+        if (chaos_entry->header.type_info != chaos_first->header.type_info)
+        {
+            CHAOS_IL2CPP_FAIL();
+        }
+    }
+}
+
+CHAOS_IL2CPP_INTPTR chaos_delegate_allocate_with_type_info(const TypeInfo* chaos_delegate_type_info)
+{
+    switch (chaos_delegate_type_info->stable_id)
+    {
+{% for entry in delegate_entries %}
+        case {{ entry.type_id_symbol }}:
+        {
+            auto* chaos_delegate = CHAOS_IL2CPP_NEW_GC({{ entry.native_type_symbol }}, {});
+            chaos_delegate->header.type_info = &{{ entry.type_info_symbol }};
+{% if entry.has_vtable %}
+            chaos_delegate->header.vtable = {{ entry.vtable_symbol }};
+{% endif %}
+            return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_delegate);
+        }
+{% endfor %}
+        default:
+            CHAOS_IL2CPP_FAIL();
+    }
+}
+
+CHAOS_IL2CPP_INTPTR chaos_delegate_create_multicast_like(
+    CHAOS_IL2CPP_INTPTR chaos_template_delegate_value,
+    const chaos_delegate_invocation_list& chaos_entries)
+{
+    if (chaos_entries.empty())
+    {
+        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    }
+
+    if (chaos_entries.size() == 1)
+    {
+        return chaos_entries.front();
+    }
+
+    const auto* chaos_template_delegate = chaos_require_delegate(chaos_template_delegate_value);
+    const auto chaos_delegate_value = chaos_delegate_allocate_with_type_info(chaos_template_delegate->header.type_info);
+    auto* chaos_delegate = chaos_require_delegate(chaos_delegate_value);
+    auto* chaos_invocation_list = CHAOS_IL2CPP_NEW_GC(chaos_delegate_invocation_list, (chaos_entries));
+    chaos_delegate->chaos_delegate_target = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    chaos_delegate->chaos_delegate_method_ptr = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    chaos_delegate->chaos_delegate_invocation_list = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list);
+    chaos_delegate->chaos_delegate_invocation_count = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size());
+    return chaos_delegate_value;
+}
+
+CHAOS_IL2CPP_INTPTR chaos_delegate_combine(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value)
+{
+    if (chaos_left_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    {
+        return chaos_right_value;
+    }
+
+    if (chaos_right_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    {
+        return chaos_left_value;
+    }
+
+    chaos_delegate_invocation_list chaos_entries{};
+    chaos_delegate_append_flattened_entries(chaos_entries, chaos_left_value);
+    chaos_delegate_append_flattened_entries(chaos_entries, chaos_right_value);
+    chaos_delegate_validate_entry_types(chaos_entries);
+    return chaos_delegate_create_multicast_like(chaos_left_value, chaos_entries);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_delegate_remove(CHAOS_IL2CPP_INTPTR chaos_source_value, CHAOS_IL2CPP_INTPTR chaos_value_to_remove)
+{
+    if (chaos_source_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    {
+        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    }
+
+    if (chaos_value_to_remove == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    {
+        return chaos_source_value;
+    }
+
+    chaos_delegate_invocation_list chaos_source_entries{};
+    chaos_delegate_invocation_list chaos_remove_entries{};
+    chaos_delegate_append_flattened_entries(chaos_source_entries, chaos_source_value);
+    chaos_delegate_append_flattened_entries(chaos_remove_entries, chaos_value_to_remove);
+    if (chaos_remove_entries.empty() || chaos_source_entries.size() < chaos_remove_entries.size())
+    {
+        return chaos_source_value;
+    }
+
+    for (CHAOS_IL2CPP_INTPTR chaos_start = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_source_entries.size() - chaos_remove_entries.size());
+         chaos_start >= static_cast<CHAOS_IL2CPP_INTPTR>(0);
+         --chaos_start)
+    {
+        bool chaos_matches = true;
+        for (CHAOS_IL2CPP_SIZE chaos_index = 0; chaos_index < chaos_remove_entries.size(); ++chaos_index)
+        {
+            if (!chaos_delegate_single_entry_equals(chaos_source_entries[static_cast<CHAOS_IL2CPP_SIZE>(chaos_start) + chaos_index], chaos_remove_entries[chaos_index]))
+            {
+                chaos_matches = false;
+                break;
+            }
+        }
+
+        if (!chaos_matches)
+        {
+            continue;
+        }
+
+        chaos_source_entries.erase(chaos_source_entries.begin() + static_cast<CHAOS_IL2CPP_SIZE>(chaos_start), chaos_source_entries.begin() + static_cast<CHAOS_IL2CPP_SIZE>(chaos_start) + chaos_remove_entries.size());
+        if (chaos_source_entries.empty())
+        {
+            return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+        }
+
+        if (chaos_source_entries.size() == 1)
+        {
+            return chaos_source_entries.front();
+        }
+
+        return chaos_delegate_create_multicast_like(chaos_source_value, chaos_source_entries);
+    }
+
+    return chaos_source_value;
+}

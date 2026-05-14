@@ -1,0 +1,22 @@
+// ── Struct marshalling descriptors (codegen static) ──
+
+{% for desc in descriptors %}
+// {{ desc.type_subject_id }}
+static constexpr StructFieldDescriptorV1 {{ desc.field_array_symbol }}[] =
+{
+{% for field in desc.fields %}
+    { static_cast<StructFieldKind>({{ field.kind_value }}), {{ field.offset }}, {{ field.size }}, {{ field.array_count }}, static_cast<NativeElementType>({{ field.element_type_value }}), 0, {{ field.nested_ptr_expr }} }{% if !forloop.last %},{% endif %}
+{% endfor %}
+};
+
+constinit StructMarshallingDescriptorV1 {{ desc.symbol }} =
+{
+    {{ desc.total_size }},
+    {{ desc.field_count }},
+    {{ desc.field_array_symbol }}[0]
+};
+
+static const int s_ms_reg_{{ desc.safe_name }} = (::chaos::il2cpp::runtime_core::RegisterStaticMarshallingDescriptor(
+    CHAOS_IL2CPP_UINT64_C({{ desc.stable_id }}), &{{ desc.symbol }}), 0);
+
+{% endfor %}
