@@ -39,10 +39,7 @@ void CHAOS_RUNTIME_ABI_CALL RaiseManagedException(
     ExceptionHandle exception) {
     if (!IsAttached(runtime_state, thread_state)) return;
 
-    throw chaos_managed_exception
-    {
-        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(exception),
-    };
+    chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(exception));
 }
 
 RuntimeStatus CHAOS_RUNTIME_ABI_CALL FieldGetValue(
