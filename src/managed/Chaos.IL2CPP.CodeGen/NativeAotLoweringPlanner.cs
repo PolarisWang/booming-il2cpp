@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Chaos.IL2CPP.Contracts;
+using Scriban.Runtime;
 
 namespace Chaos.IL2CPP.CodeGen;
 
@@ -456,8 +458,8 @@ public sealed partial class NativeAotLoweringPlanner
                     .Select(h => h.DirectNativeHeader)
                     .Where(h => !string.IsNullOrEmpty(h))
                     .Distinct(StringComparer.Ordinal)
-                    .Cast<string>()
-                    .ToArray(),
+                    .Select(h => h!)
+                    .ToArray()
             ],
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
             GenericRegistrationCode = genericRegistrationHelperCode,
@@ -901,33 +903,32 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private string BuildMethodTableInitialization()
     {
-        var sb = new System.Text.StringBuilder(512);
-        sb.AppendLine();
-        sb.AppendLine("// ── Method table initialization ────────────────────────────────");
-        sb.AppendLine("// Fills the global method table with function pointers for");
-        sb.AppendLine("// cross-module dispatch targets.");
-        sb.AppendLine("static const CHAOS_IL2CPP_UINT32 s_method_table_init = []()");
-        sb.AppendLine("{");
-        foreach (var (entryIndex, nativeSymbol) in _methodTableEntries)
+        var entries = new ScriptObject[_methodTableEntries.Count];
+        for (int i = 0; i < _methodTableEntries.Count; i++)
         {
-            sb.Append("    ::chaos::il2cpp::method_table::WriteMethodTable(");
-            sb.Append(entryIndex);
-            sb.Append(", reinterpret_cast<void*>(");
-            sb.Append(nativeSymbol);
-            sb.AppendLine("), 1u);");
-            // Record ABI origin for cross-module validation
-            if (_methodNativeSymbolToManifestIndex.TryGetValue(nativeSymbol, out int manifestIdx))
+            var (entryIndex, nativeSymbol) = _methodTableEntries[i];
+            bool hasManifestIndex = _methodNativeSymbolToManifestIndex.TryGetValue(nativeSymbol, out int manifestIdx);
+            var entryModel = new ScriptObject
             {
-                sb.Append("    ::chaos::il2cpp::method_table::SetMethodOrigin(");
-                sb.Append(entryIndex);
-                sb.Append(", s_native_aot_module_id, ");
-                sb.Append(manifestIdx);
-                sb.AppendLine("u);");
+                ["index"] = entryIndex,
+                ["native_symbol"] = nativeSymbol,
+                ["has_manifest_index"] = hasManifestIndex,
+            };
+            if (hasManifestIndex)
+            {
+                entryModel["manifest_index"] = manifestIdx;
             }
+            entries[i] = entryModel;
         }
-        sb.AppendLine("    return 0u;");
-        sb.AppendLine("}();");
-        return sb.ToString();
+
+        var model = new ScriptObject
+        {
+            ["entries"] = entries,
+        };
+
+        var result = ScribanTemplateRenderer.RenderTemplate(
+            NativeAotTemplateCatalog.GetMethodTableInitializationTemplate(), model);
+        return "\n" + result;
     }
 
     private string BuildMethodSource(AotCoreIrMethodArtifact method)
@@ -979,245 +980,33 @@ public sealed partial class NativeAotLoweringPlanner
                 !string.Equals(subjectId, DelegateTypeSubjectId, StringComparison.Ordinal) &&
                 !string.Equals(subjectId, MulticastDelegateTypeSubjectId, StringComparison.Ordinal));
 
-        builder.AppendLine("using chaos_delegate_invocation_list = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR);");
-        builder.AppendLine();
-
-        // Emit struct definition for System.Delegate so the helper functions below can use it
-        builder.AppendLine("struct chaos_type_System_Private_CoreLib_System_Delegate");
-        builder.AppendLine("{");
-        builder.AppendLine("    FatHeader header{};");
-        builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;");
-        builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;");
-        builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;");
-        builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;");
-        builder.AppendLine("};");
-        builder.AppendLine();
-        builder.AppendLine("chaos_type_System_Private_CoreLib_System_Delegate* chaos_require_delegate(CHAOS_IL2CPP_INTPTR chaos_delegate_value)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        CHAOS_IL2CPP_FAIL();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return reinterpret_cast<chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_delegate_value);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("const chaos_delegate_invocation_list* chaos_try_get_delegate_invocation_list(");
-        builder.AppendLine("    const chaos_type_System_Private_CoreLib_System_Delegate* chaos_delegate) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_delegate == nullptr ||");
-        builder.AppendLine("        chaos_delegate->chaos_delegate_invocation_list == static_cast<CHAOS_IL2CPP_INTPTR>(0) ||");
-        builder.AppendLine("        chaos_delegate->chaos_delegate_invocation_count <= static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return nullptr;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine(
-            "    return reinterpret_cast<const chaos_delegate_invocation_list*>(chaos_delegate->chaos_delegate_invocation_list);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("bool chaos_delegate_single_entry_equals(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_left_value == chaos_right_value)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return true;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    if (chaos_left_value == static_cast<CHAOS_IL2CPP_INTPTR>(0) ||");
-        builder.AppendLine("        chaos_right_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return false;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    const auto* chaos_left = reinterpret_cast<const chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_left_value);");
-        builder.AppendLine("    const auto* chaos_right = reinterpret_cast<const chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_right_value);");
-        builder.AppendLine("    return chaos_left->header.type_info == chaos_right->header.type_info &&");
-        builder.AppendLine("           chaos_left->chaos_delegate_target == chaos_right->chaos_delegate_target &&");
-        builder.AppendLine("           chaos_left->chaos_delegate_method_ptr == chaos_right->chaos_delegate_method_ptr;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("void chaos_delegate_append_flattened_entries(");
-        builder.AppendLine("    chaos_delegate_invocation_list& chaos_entries,");
-        builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_value)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    auto* chaos_delegate = chaos_require_delegate(chaos_delegate_value);");
-        builder.AppendLine("    const auto* chaos_invocation_list = chaos_try_get_delegate_invocation_list(chaos_delegate);");
-        builder.AppendLine("    if (chaos_invocation_list == nullptr)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        if (chaos_delegate->chaos_delegate_method_ptr == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-        builder.AppendLine("        {");
-        builder.AppendLine("            CHAOS_IL2CPP_FAIL();");
-        builder.AppendLine("        }");
-        builder.AppendLine();
-        builder.AppendLine("        chaos_entries.push_back(chaos_delegate_value);");
-        builder.AppendLine("        return;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine(
-            "    if (static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        CHAOS_IL2CPP_FAIL();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    for (const auto chaos_entry_value : *chaos_invocation_list)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        chaos_delegate_append_flattened_entries(chaos_entries, chaos_entry_value);");
-        builder.AppendLine("    }");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("void chaos_delegate_validate_entry_types(const chaos_delegate_invocation_list& chaos_entries)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_entries.empty())");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    const auto* chaos_first = chaos_require_delegate(chaos_entries.front());");
-        builder.AppendLine("    for (const auto chaos_entry_value : chaos_entries)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto* chaos_entry = chaos_require_delegate(chaos_entry_value);");
-        builder.AppendLine("        if (chaos_entry->header.type_info != chaos_first->header.type_info)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            CHAOS_IL2CPP_FAIL();");
-        builder.AppendLine("        }");
-        builder.AppendLine("    }");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_delegate_allocate_with_type_info(const TypeInfo* chaos_delegate_type_info)");
-        builder.AppendLine("{");
-        builder.AppendLine("    switch (chaos_delegate_type_info->stable_id)");
-        builder.AppendLine("    {");
-        foreach (var delegateTypeSubjectId in delegateTypeSubjectIds)
-        {
-            builder.AppendLine($"        case {GetNativeTypeIdSymbol(delegateTypeSubjectId)}:");
-            builder.AppendLine("        {");
-            builder.AppendLine($"            auto* chaos_delegate = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(delegateTypeSubjectId)}, {{}});");
-            builder.AppendLine($"            chaos_delegate->header.type_info = &{GetNativeTypeInfoSymbol(delegateTypeSubjectId)};");
-            if (_vtableTypes?.Contains(delegateTypeSubjectId) == true)
+        // Build delegate entry models for the Scriban switch block
+        var delegateEntryModels = delegateTypeSubjectIds
+            .Select(subjectId =>
             {
-                builder.AppendLine($"            chaos_delegate->header.vtable = {GetNativeVTableSymbol(delegateTypeSubjectId)};");
-            }
-            builder.AppendLine("            return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_delegate);");
-            builder.AppendLine("        }");
-        }
+                var model = new ScriptObject
+                {
+                    ["type_id_symbol"] = GetNativeTypeIdSymbol(subjectId),
+                    ["native_type_symbol"] = GetNativeTypeSymbol(subjectId),
+                    ["type_info_symbol"] = GetNativeTypeInfoSymbol(subjectId),
+                    ["has_vtable"] = _vtableTypes?.Contains(subjectId) == true,
+                };
+                if (_vtableTypes?.Contains(subjectId) == true)
+                {
+                    model["vtable_symbol"] = GetNativeVTableSymbol(subjectId);
+                }
+                return model;
+            })
+            .ToArray();
 
-        builder.AppendLine("        default:");
-        builder.AppendLine("            CHAOS_IL2CPP_FAIL();");
-        builder.AppendLine("    }");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_delegate_create_multicast_like(");
-        builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_template_delegate_value,");
-        builder.AppendLine("    const chaos_delegate_invocation_list& chaos_entries)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_entries.empty())");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return static_cast<CHAOS_IL2CPP_INTPTR>(0);");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    if (chaos_entries.size() == 1)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return chaos_entries.front();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    const auto* chaos_template_delegate = chaos_require_delegate(chaos_template_delegate_value);");
-        builder.AppendLine(
-            "    const auto chaos_delegate_value = chaos_delegate_allocate_with_type_info(chaos_template_delegate->header.type_info);");
-        builder.AppendLine("    auto* chaos_delegate = chaos_require_delegate(chaos_delegate_value);");
-        builder.AppendLine("    auto* chaos_invocation_list = CHAOS_IL2CPP_NEW_GC(chaos_delegate_invocation_list, (chaos_entries));");
-        builder.AppendLine("    chaos_delegate->chaos_delegate_target = static_cast<CHAOS_IL2CPP_INTPTR>(0);");
-        builder.AppendLine("    chaos_delegate->chaos_delegate_method_ptr = static_cast<CHAOS_IL2CPP_INTPTR>(0);");
-        builder.AppendLine(
-            "    chaos_delegate->chaos_delegate_invocation_list = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list);");
-        builder.AppendLine(
-            "    chaos_delegate->chaos_delegate_invocation_count = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size());");
-        builder.AppendLine("    return chaos_delegate_value;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_delegate_combine(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_left_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return chaos_right_value;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    if (chaos_right_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return chaos_left_value;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    chaos_delegate_invocation_list chaos_entries{};");
-        builder.AppendLine("    chaos_delegate_append_flattened_entries(chaos_entries, chaos_left_value);");
-        builder.AppendLine("    chaos_delegate_append_flattened_entries(chaos_entries, chaos_right_value);");
-        builder.AppendLine("    chaos_delegate_validate_entry_types(chaos_entries);");
-        builder.AppendLine("    return chaos_delegate_create_multicast_like(chaos_left_value, chaos_entries);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_delegate_remove(CHAOS_IL2CPP_INTPTR chaos_source_value, CHAOS_IL2CPP_INTPTR chaos_value_to_remove)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_source_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return static_cast<CHAOS_IL2CPP_INTPTR>(0);");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    if (chaos_value_to_remove == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return chaos_source_value;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    chaos_delegate_invocation_list chaos_source_entries{};");
-        builder.AppendLine("    chaos_delegate_invocation_list chaos_remove_entries{};");
-        builder.AppendLine("    chaos_delegate_append_flattened_entries(chaos_source_entries, chaos_source_value);");
-        builder.AppendLine("    chaos_delegate_append_flattened_entries(chaos_remove_entries, chaos_value_to_remove);");
-        builder.AppendLine("    if (chaos_remove_entries.empty() || chaos_source_entries.size() < chaos_remove_entries.size())");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return chaos_source_value;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine(
-            "    for (CHAOS_IL2CPP_INTPTR chaos_start = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_source_entries.size() - chaos_remove_entries.size());");
-        builder.AppendLine("         chaos_start >= static_cast<CHAOS_IL2CPP_INTPTR>(0);");
-        builder.AppendLine("         --chaos_start)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        bool chaos_matches = true;");
-        builder.AppendLine("        for (CHAOS_IL2CPP_SIZE chaos_index = 0; chaos_index < chaos_remove_entries.size(); ++chaos_index)");
-        builder.AppendLine("        {");
-        builder.AppendLine(
-            "            if (!chaos_delegate_single_entry_equals(chaos_source_entries[static_cast<CHAOS_IL2CPP_SIZE>(chaos_start) + chaos_index], chaos_remove_entries[chaos_index]))");
-        builder.AppendLine("            {");
-        builder.AppendLine("                chaos_matches = false;");
-        builder.AppendLine("                break;");
-        builder.AppendLine("            }");
-        builder.AppendLine("        }");
-        builder.AppendLine();
-        builder.AppendLine("        if (!chaos_matches)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            continue;");
-        builder.AppendLine("        }");
-        builder.AppendLine();
-        builder.AppendLine(
-            "        chaos_source_entries.erase(chaos_source_entries.begin() + static_cast<CHAOS_IL2CPP_SIZE>(chaos_start), chaos_source_entries.begin() + static_cast<CHAOS_IL2CPP_SIZE>(chaos_start) + chaos_remove_entries.size());");
-        builder.AppendLine("        if (chaos_source_entries.empty())");
-        builder.AppendLine("        {");
-        builder.AppendLine("            return static_cast<CHAOS_IL2CPP_INTPTR>(0);");
-        builder.AppendLine("        }");
-        builder.AppendLine();
-        builder.AppendLine("        if (chaos_source_entries.size() == 1)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            return chaos_source_entries.front();");
-        builder.AppendLine("        }");
-        builder.AppendLine();
-        builder.AppendLine("        return chaos_delegate_create_multicast_like(chaos_source_value, chaos_source_entries);");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return chaos_source_value;");
-        builder.AppendLine("}");
-        builder.AppendLine();
+        var model = new ScriptObject
+        {
+            ["delegate_entries"] = delegateEntryModels,
+        };
+
+        var result = ScribanTemplateRenderer.RenderTemplate(
+            NativeAotTemplateCatalog.GetDelegateRuntimeSupportTemplate(), model);
+        builder.AppendLine(result);
     }
 
     private IReadOnlyList<string> CollectReachableDelegateTypeSubjectIds(
@@ -2411,144 +2200,47 @@ public sealed partial class NativeAotLoweringPlanner
     {
         if (methods.Count == 0) return string.Empty;
 
-        var sb = new StringBuilder(4096);
-        sb.AppendLine("// ── Dispatch table (kAotMethods[]) ──────────────────────────────");
-        sb.AppendLine("// const function pointer array for dispatch via slot index.");
-        sb.Append("static void (*kAotMethods[")
-            .Append(methods.Count).AppendLine("])() = {");
-        foreach (var method in methods)
-        {
-            sb.Append("    reinterpret_cast<void(*)()>(&")
-                .Append(method.NativeSymbol).AppendLine("),");
-        }
-        sb.AppendLine("};");
-        sb.AppendLine();
+        ulong defaultStringId = _stringIdMapping is { Count: > 0 }
+            ? _stringIdMapping.First().Value
+            : 0UL;
 
-        // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
-        // Each wrapper supplies default argument values based on parameter types.
-        // String params receive a valid StringId; all others receive 0.
-        ulong defaultStringId = 0;
-        if (_stringIdMapping is { Count: > 0 })
-        {
-            defaultStringId = _stringIdMapping.First().Value;
-        }
-        sb.Append("static void (*kBenchmarkWrappers[")
-            .Append(methods.Count).AppendLine("])() = {");
+        var methodEntries = new List<ScriptObject>(methods.Count);
         for (int i = 0; i < methods.Count; i++)
         {
             var method = methods[i];
             var ac = method.ParameterCount;
-            sb.Append("    []() { ");
-            if (ac == 0)
+
+            // extra_params: array of size (param_count - 1) for the reinterpret_cast signature
+            var extraParams = new object[Math.Max(0, ac - 1)];
+
+            // params: each entry has is_string(bool)
+            var parameterSlots = new List<ScriptObject>(ac);
+            for (int j = 0; j < ac; j++)
             {
-                sb.Append("kAotMethods[").Append(i).Append("]();");
+                var abi = j < method.ParameterAbis.Count ? method.ParameterAbis[j] : null;
+                var isString = abi != null && IsStringParameterSlot(abi);
+                parameterSlots.Add(new ScriptObject { ["is_string"] = isString });
             }
-            else
+
+            methodEntries.Add(new ScriptObject
             {
-                sb.Append("reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR");
-                for (int j = 1; j < ac; j++)
-                {
-                    sb.Append(", CHAOS_IL2CPP_INTPTR");
-                }
-                sb.Append(")>(kAotMethods[").Append(i).Append("])(");
-                for (int j = 0; j < ac; j++)
-                {
-                    if (j > 0) sb.Append(", ");
-                    var abi = j < method.ParameterAbis.Count ? method.ParameterAbis[j] : null;
-                    if (abi != null && IsStringParameterSlot(abi) && defaultStringId != 0)
-                    {
-                        sb.Append("chaos_make_string_id_value(").Append(defaultStringId).Append("ULL)");
-                    }
-                    else
-                    {
-                        sb.Append("static_cast<CHAOS_IL2CPP_INTPTR>(0)");
-                    }
-                }
-                sb.Append(");");
-            }
-            sb.AppendLine(" },");
+                ["index"] = i,
+                ["native_symbol"] = method.NativeSymbol,
+                ["param_count"] = ac,
+                ["extra_params"] = extraParams,
+                ["params"] = parameterSlots,
+            });
         }
-        sb.AppendLine("};");
-        sb.AppendLine();
 
-        // RunNativeAot: single-method dispatch via s_hotpatch_entries[].
-        // When kHotpatchActive is set (and kHotpatchKeepNative is NOT set),
-        // routes through InterpreterEntryDirect (interpreter path).
-        // Otherwise calls direct_ptr directly (AOT native path).
-        sb.AppendLine("// Single-method dispatch via hotpatch dispatch table.");
-        sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 RunNativeAot(");
-        sb.AppendLine("    CHAOS_IL2CPP_INT32 chaos_entry_index)");
-        sb.AppendLine("{");
-        sb.AppendLine("    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)");
-        sb.AppendLine("        return -1;");
-        sb.AppendLine("    auto& entry = s_hotpatch_entries[chaos_entry_index];");
-        EmitHotpatchDispatchCondition(sb, "entry");
-        sb.AppendLine(" {");
-        sb.AppendLine("        uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};");
-        sb.AppendLine("        chaos::il2cpp::runtime_core::InterpreterEntryDirect(");
-        sb.AppendLine("            entry.method_key, __chaos_args, __chaos_ret);");
-        sb.AppendLine("    } else {");
-        sb.AppendLine("        reinterpret_cast<void(*)()>(entry.direct_ptr)();");
-        sb.AppendLine("    }");
-        sb.AppendLine("    return 0;");
-        sb.AppendLine("}");
-        sb.AppendLine();
+        var model = new ScriptObject
+        {
+            ["methods"] = methodEntries,
+            ["methods_count"] = methods.Count,
+            ["default_string_id"] = (long)defaultStringId,
+        };
 
-        // RunNativeAotAll: all-methods loop for fact verify.
-        sb.AppendLine("// All-methods loop: run every method and return a bitmask of failures.");
-        sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 RunNativeAotAll()");
-        sb.AppendLine("{");
-        sb.AppendLine("    CHAOS_IL2CPP_INT32 result = 0;");
-        sb.AppendLine("    for (int i = 0; i < kAotMethodCount; i++) {");
-        sb.AppendLine("        auto& entry = s_hotpatch_entries[i];");
-        EmitHotpatchDispatchCondition(sb, "entry");
-        sb.AppendLine(" {");
-        sb.AppendLine("            uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};");
-        sb.AppendLine("            chaos::il2cpp::runtime_core::InterpreterEntryDirect(");
-        sb.AppendLine("                entry.method_key, __chaos_args, __chaos_ret);");
-        sb.AppendLine("        } else {");
-        sb.AppendLine("            reinterpret_cast<void(*)()>(entry.direct_ptr)();");
-        sb.AppendLine("        }");
-        sb.AppendLine("    }");
-        sb.AppendLine("    return result;");
-        sb.AppendLine("}");
-        sb.AppendLine();
-
-        // RunNativeAotBench: fast benchmark dispatch (no setjmp, inline slot access).
-        sb.AppendLine("// Fast benchmark dispatch: no setjmp, inline slot access.");
-        sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 RunNativeAotBench(");
-        sb.AppendLine("    CHAOS_IL2CPP_INT32 chaos_entry_index)");
-        sb.AppendLine("{");
-        sb.AppendLine("    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)");
-        sb.AppendLine("        return -1;");
-        sb.AppendLine("    auto& entry = s_hotpatch_entries[chaos_entry_index];");
-        EmitHotpatchDispatchCondition(sb, "entry");
-        sb.AppendLine(" {");
-        sb.AppendLine("        chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(");
-        sb.AppendLine("            entry.method_key);");
-        sb.AppendLine("    } else {");
-        sb.AppendLine("        reinterpret_cast<void(*)()>(entry.direct_ptr)();");
-        sb.AppendLine("    }");
-        sb.AppendLine("    return 0;");
-        sb.AppendLine("}");
-        sb.AppendLine();
-
-        // BenchmarkMethod: pure AOT benchmark, bypass hotpatch dispatch entirely.
-        sb.AppendLine("// Pure AOT benchmark: calls kAotMethods[i] directly, no hotpatch overhead.");
-        sb.AppendLine("extern \"C\" double BenchmarkMethod(");
-        sb.AppendLine("    int chaos_entry_index, int iterations) {");
-        sb.AppendLine("    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)");
-        sb.AppendLine("        return -1.0;");
-        sb.AppendLine("    auto start = std::chrono::steady_clock::now();");
-        sb.AppendLine("    for (int i = 0; i < iterations; i++) {");
-        sb.AppendLine("        kBenchmarkWrappers[chaos_entry_index]();");
-        sb.AppendLine("    }");
-        sb.AppendLine("    auto end = std::chrono::steady_clock::now();");
-        sb.AppendLine("    return std::chrono::duration<double, std::milli>(");
-        sb.AppendLine("        end - start).count();");
-        sb.AppendLine("}");
-
-        return sb.ToString();
+        var template = NativeAotTemplateCatalog.GetDispatchEntryCodeTemplate();
+        return ScribanTemplateRenderer.RenderTemplate(template, model);
     }
 
     // ── Step 2: CodeRegistrationV0 + MetadataRegistrationV0 + CodegenRegistrationOptionsV0 ──
@@ -2559,91 +2251,26 @@ public sealed partial class NativeAotLoweringPlanner
     IReadOnlyList<AotCoreIrMethodArtifact> methods,
     MetadataRegistrationArtifact metadataRegistration)
 {
+    _ = metadataRegistration; // unused — kept to avoid changing callers
     if (methods.Count == 0) return string.Empty;
 
-    var sb = new StringBuilder(4096);
-    sb.AppendLine("// ── CodeRegistrationV0 ─────────────────────────────────────────");
-    sb.AppendLine("// method_pointers: flat array of all AOT function pointers.");
-    sb.Append("static void* const kMethodPointers[")
-        .Append(methods.Count).AppendLine("] = {");
-    foreach (var method in methods)
+    var model = new ScriptObject
     {
-        sb.Append("    reinterpret_cast<void*>(&")
-            .Append(method.NativeSymbol).AppendLine("),");
-    }
-    sb.AppendLine("};");
-    sb.AppendLine();
+        ["methods"] = methods
+            .Select(m => new ScriptObject { ["native_symbol"] = m.NativeSymbol })
+            .ToArray(),
+        ["methods_count"] = methods.Count,
+        ["reverse_pinvoke_count"] = _reversePInvokeEntries.Count,
+        ["reverse_pinvoke_entries"] = _reversePInvokeEntries.Count > 0
+            ? _reversePInvokeEntries
+                .Select(e => new ScriptObject { ["native_symbol"] = e.NativeSymbol })
+                .ToArray()
+            : Array.Empty<ScriptObject>(),
+        ["assembly_name"] = EscapeCppStringLiteral(_assemblyName),
+    };
 
-    // Reverse P/Invoke wrappers
-    if (_reversePInvokeEntries.Count > 0)
-    {
-        sb.Append("static constexpr void* const kReversePInvokeWrappers[")
-            .Append(_reversePInvokeEntries.Count).AppendLine("] = {");
-        foreach (var entry in _reversePInvokeEntries)
-            sb.Append("    reinterpret_cast<void*>(&")
-                .Append(entry.NativeSymbol).AppendLine("),");
-        sb.AppendLine("};");
-        sb.AppendLine();
-    }
-
-    sb.AppendLine("// CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)");
-    sb.AppendLine("extern \"C\" const CodeRegistrationV0 chaos_codegen_code_registration");
-    sb.AppendLine("    = {");
-    sb.AppendLine("    .struct_size               = sizeof(CodeRegistrationV0),");
-    sb.AppendLine("    .method_pointers           = kMethodPointers,");
-    sb.Append("    .method_pointer_count      = ").Append(methods.Count).AppendLine("u,");
-    if (_reversePInvokeEntries.Count > 0) {
-        sb.AppendLine("    .reverse_pinvoke_wrappers  = kReversePInvokeWrappers,");
-        sb.Append("    .reverse_pinvoke_wrapper_count = ").Append(_reversePInvokeEntries.Count).AppendLine("u,");
-    } else {
-        sb.AppendLine("    .reverse_pinvoke_wrappers  = nullptr,");
-        sb.AppendLine("    .reverse_pinvoke_wrapper_count = 0u,");
-    }
-    sb.AppendLine("    .invoker_pointers          = nullptr,");
-    sb.AppendLine("    .invoker_pointer_count     = 0u,");
-    sb.AppendLine("    .unresolved_virtual_calls = nullptr,");
-    sb.AppendLine("    .unresolved_virtual_call_count = 0u,");
-    sb.AppendLine("    .type_capabilities       = nullptr,");
-    sb.AppendLine("    .type_capability_count   = 0u,");
-    sb.AppendLine("};");
-    sb.AppendLine();
-
-    // MetadataRegistrationV0 — references the arrays emitted by EmitGenericRegistration.
-    // NOTE: EmitGenericRegistration uses:
-    //   kGenericTypeEntries[], kGenericTypeArgTokens[]
-    //   kGenericMethodEntries[], kGenericMethodArgTokens[]
-    //   s_method_aot_entries[], s_method_aot_entry_args[]
-    sb.AppendLine("extern \"C\" const MetadataRegistrationV0 chaos_codegen_metadata_registration");
-    sb.AppendLine("    = {");
-    sb.AppendLine("    .struct_size              = sizeof(MetadataRegistrationV0),");
-    sb.AppendLine("    .generic_types            = kGenericTypeEntries,");
-    sb.AppendLine("    .generic_type_count       = sizeof(kGenericTypeEntries) / sizeof(kGenericTypeEntries[0]),");
-    sb.AppendLine("    .generic_type_args        = kGenericTypeArgTokens,");
-    sb.AppendLine("    .generic_type_arg_count   = sizeof(kGenericTypeArgTokens) / sizeof(kGenericTypeArgTokens[0]),");
-    sb.AppendLine("    .generic_methods          = kGenericMethodEntries,");
-    sb.AppendLine("    .generic_method_count     = sizeof(kGenericMethodEntries) / sizeof(kGenericMethodEntries[0]),");
-    sb.AppendLine("    .generic_method_args      = kGenericMethodArgTokens,");
-    sb.AppendLine("    .generic_method_arg_count = sizeof(kGenericMethodArgTokens) / sizeof(kGenericMethodArgTokens[0]),");
-    sb.AppendLine("    .method_aot_entries       = s_method_aot_entries,");
-    sb.AppendLine("    .method_aot_entry_count  = sizeof(s_method_aot_entries) / sizeof(s_method_aot_entries[0]),");
-    sb.AppendLine("    .method_aot_entry_args    = s_method_aot_entry_args,");
-    sb.AppendLine("    .method_aot_entry_arg_count = sizeof(s_method_aot_entry_args) / sizeof(s_method_aot_entry_args[0]),");
-    sb.AppendLine("    .field_offsets           = nullptr,");
-    sb.AppendLine("    .field_offset_count      = 0u,");
-    sb.AppendLine("    .metadata_usages         = nullptr,");
-    sb.AppendLine("    .metadata_usage_count    = 0u,");
-    sb.AppendLine("};");
-    sb.AppendLine();
-
-    // CodegenRegistrationOptionsV0
-    sb.AppendLine("extern \"C\" const CodegenRegistrationOptionsV0 chaos_codegen_options");
-    sb.AppendLine("    = {");
-    sb.AppendLine("    .struct_size       = sizeof(CodegenRegistrationOptionsV0),");
-    sb.AppendLine("    .registration_flags = 0u,");
-    sb.Append("    .image_name_utf8    = \"").Append(EscapeCppStringLiteral(_assemblyName)).AppendLine("\",");
-    sb.AppendLine("};");
-
-    return sb.ToString();
+    return ScribanTemplateRenderer.RenderTemplate(
+        NativeAotTemplateCatalog.GetCodeRegistrationTemplate(), model);
 }
 
 // ── Step 3: ReflectionQueryImageDescriptor ──────────────────────────────────
@@ -2674,13 +2301,7 @@ public sealed partial class NativeAotLoweringPlanner
     if (typeMethodMap.Count == 0) return string.Empty;
 
     var typeIndexToMethods = new List<(string TypeSubjectId, int Count, string SafeName, string Ns, string Name)>();
-    var sb = new StringBuilder(8192);
-    sb.AppendLine("// ── Reflection Query Image Descriptor ──────────────────────────");
-    sb.AppendLine("// Used by ResolveSubjectId to resolve call_target via subjectId");
-    sb.AppendLine("// matching during IR lowering of patched methods.");
-    sb.AppendLine();
-
-    // Emit method descriptor arrays per type (subject_id_utf8 is the key field for ResolveSubjectId).
+    var typeGroups = new List<object>();
     foreach (var kvp in typeMethodMap)
     {
         var typeSubjectId = kvp.Key;
@@ -2688,59 +2309,35 @@ public sealed partial class NativeAotLoweringPlanner
         var safeName = SanitizeCppIdentifier(typeSubjectId.Replace('/', '_').Replace(':', '_'));
         typeIndexToMethods.Add((typeSubjectId, methodsInType.Count, safeName, methodsInType[0].TypeNs, methodsInType[0].TypeName));
 
-        sb.Append("static constexpr ReflectionQueryMethodDescriptor kReflMethods_")
-            .Append(safeName).Append("[").Append(methodsInType.Count).AppendLine("] = {");
-        foreach (var m in methodsInType)
+        var methodEntries = methodsInType.Select(m => new
         {
-            sb.Append("    { 0u, /*metadata_token — unused by ResolveSubjectId*/");
-            sb.Append(" ").Append(ToCppStringLiteral(m.SubjectId)).Append(",");
-            sb.Append(" ").Append(ToCppStringLiteral(m.MethodName)).Append(",");
-            sb.AppendLine(" \"System.Void\", 0, nullptr, 0u },");
-        }
-        sb.AppendLine("};");
-        sb.AppendLine();
+            subject_id_literal = EscapeCppStringLiteral(m.SubjectId),
+            method_name_literal = EscapeCppStringLiteral(m.MethodName),
+        }).ToArray();
+
+        typeGroups.Add(new
+        {
+            safe_name = safeName,
+            method_count = methodsInType.Count,
+            subject_id_literal = EscapeCppStringLiteral(typeSubjectId),
+            namespace_literal = EscapeCppStringLiteral(methodsInType[0].TypeNs),
+            name_literal = EscapeCppStringLiteral(methodsInType[0].TypeName),
+            methods = methodEntries,
+        });
     }
 
-    // Emit type descriptors (subject_id_utf8 is the key field for ResolveSubjectId).
-    sb.Append("static constexpr ReflectionQueryTypeDescriptor kReflTypes[")
-        .Append(typeIndexToMethods.Count).AppendLine("] = {");
-    foreach (var (ts, cnt, safeName, ns, name) in typeIndexToMethods)
+    var typeGroupIndices = Enumerable.Range(0, typeIndexToMethods.Count).ToArray();
+
+    var model = new ScriptObject
     {
-        sb.Append("    { 0u, ");
-        sb.Append(ToCppStringLiteral(ts)).Append(", ");
-        sb.Append(ToCppStringLiteral(ts)).Append(", ");
-        sb.Append(ToCppStringLiteral(ns)).Append(", ");
-        sb.Append(ToCppStringLiteral(name)).Append(", ");
-        sb.Append(ToCppStringLiteral(name)).Append(",");
-        sb.AppendLine(" nullptr, nullptr, 0u, nullptr, 0u,");
-        sb.Append(" kReflMethods_").Append(safeName).Append(", ").Append(cnt).AppendLine("u },");
-    }
-    sb.AppendLine("};");
-    sb.AppendLine();
+        ["type_groups"] = typeGroups,
+        ["type_group_count"] = typeIndexToMethods.Count,
+        ["type_group_indices"] = typeGroupIndices,
+        ["assembly_name_literal"] = EscapeCppStringLiteral(_assemblyName),
+    };
 
-    // Type pointer array (ReflectionQueryImageDescriptor has const* const* types).
-    sb.Append("static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[")
-        .Append(typeIndexToMethods.Count).AppendLine("] = {");
-    for (int i = 0; i < typeIndexToMethods.Count; i++)
-        sb.Append("    &kReflTypes[").Append(i).AppendLine("],");
-    sb.AppendLine("};");
-    sb.AppendLine();
-
-    // Image descriptor.
-    sb.Append("static constexpr ReflectionQueryImageDescriptor kReflImage = { ");
-    sb.Append(ToCppStringLiteral(_assemblyName)).Append(", ");
-    sb.Append("kReflTypePtrs, ").Append(typeIndexToMethods.Count).AppendLine("u };");
-    sb.AppendLine();
-
-    // Also emit a fake ImageHandle constant for module.image assignment below.
-    // BootstrapRuntime will use this to set aot_image_handle via the fallback in
-    // lines 311-321 of bootstrap.cpp (iterates modules looking for non-null image).
-    // The module.image field is set in the ModuleRegistration Scriban template.
-    sb.AppendLine("// Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.");
-    sb.AppendLine("// BootstrapRuntime's aot_image_handle fallback discovers this via");
-    sb.AppendLine("// LookupModule(mid)->image at lines 311-321 of bootstrap.cpp.");
-
-    return sb.ToString();
+    return ScribanTemplateRenderer.RenderTemplate(
+        NativeAotTemplateCatalog.GetReflectionQueryImageTemplate(), model);
 }
 }
 

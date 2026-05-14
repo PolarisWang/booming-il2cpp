@@ -94,18 +94,14 @@ public sealed partial class NativeAotLoweringPlanner
         if (reachableMethods == null || reachableMethods.Count == 0)
         {
             // No methods — emit nullptr so the linker always resolves the symbol.
-            var emptySb = new StringBuilder(256);
-            emptySb.AppendLine("// ── Hotpatch dispatch table (empty — no reachable methods) ──");
-            emptySb.AppendLine("// No hotpatch data for this module");
-            emptySb.AppendLine("extern \"C\" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module");
-            emptySb.AppendLine("    = nullptr;");
-            return emptySb.ToString();
+            var emptyModel = new ScriptObject
+            {
+                ["is_empty"] = true,
+            };
+            return ScribanTemplateRenderer.RenderTemplate(
+                NativeAotTemplateCatalog.GetHotpatchTableTemplate(), emptyModel);
         }
 
-        var sb = new StringBuilder(4096);
-        sb.AppendLine("// ── Hotpatch name index + dispatch table ────────────────────");
-
-        // Build token lookup from metadata registration.
         var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);
 
         // Collect (type_name, type_namespace, method_name, token, native_symbol, param_count, subject_id) tuples.
@@ -136,77 +132,13 @@ public sealed partial class NativeAotLoweringPlanner
             return string.Empty;
 
         // Group by (namespace, type_name) tuple and sort lexicographically.
-        // This mirrors the C++ CompareTypeName which compares namespace first, then type_name.
         var grouped = entries
             .GroupBy(e => (e.TypeNamespace, e.TypeName))
             .OrderBy(g => g.Key.TypeNamespace, StringComparer.Ordinal)
             .ThenBy(g => g.Key.TypeName, StringComparer.Ordinal)
             .ToList();
 
-        // ── Method entries (grouped by type, in type-sorted order) ──
-        sb.AppendLine("// Method name index entries");
-        sb.Append("static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[")
-          .Append(entries.Count).AppendLine("] = {");
-        foreach (var group in grouped)
-        {
-            foreach (var entry in group)
-            {
-                sb.Append("    { ").Append(ToCppStringLiteral(entry.MethodName)).Append(", ")
-                  .Append("0x").Append(entry.Token.ToString("X8")).Append("u, ")
-                  .Append((ushort)entry.ParamCount).Append("u },");
-                sb.Append("  // ").Append(entry.TypeName).AppendLine();
-            }
-        }
-        sb.AppendLine("};");
-        sb.AppendLine();
-
-        // ── Type entries with first_method_index ──
-        sb.AppendLine("// Type name index entries (namespace, short_name)");
-        sb.Append("static constexpr HotpatchTypeEntryV0 s_hotpatch_types[")
-          .Append(grouped.Count).AppendLine("] = {");
-        uint methodIndex = 0;
-        foreach (var group in grouped)
-        {
-            sb.Append("    { ").Append(ToCppStringLiteral(group.Key.TypeName)).Append(", ")
-              .Append(ToCppStringLiteral(group.Key.TypeNamespace)).Append(", ")
-              .Append(methodIndex).Append("u, ")
-              .Append((ushort)group.Count()).Append("u },");
-            sb.AppendLine();
-            methodIndex += (uint)group.Count();
-        }
-        sb.AppendLine("};");
-        sb.AppendLine();
-
-        // ── Token→Slot mapping (sorted by token for bsearch) ──
-        var tokenSlotList = entries
-            .Select((e, idx) => (Token: e.Token, Slot: (uint)idx))
-            .OrderBy(ts => ts.Token)
-            .ToList();
-
-        sb.AppendLine("// Token→Slot mapping (sorted by token for binary search)");
-        sb.Append("static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[")
-          .Append(tokenSlotList.Count).AppendLine("] = {");
-        foreach (var ts in tokenSlotList)
-        {
-            sb.Append("    { 0x").Append(ts.Token.ToString("X8")).Append("u, ")
-              .Append(ts.Slot).Append("u },");
-            sb.AppendLine();
-        }
-        sb.AppendLine("};");
-        sb.AppendLine();
-
         // Determine kHotpatchKeepNative flag per-method.
-        // External-routable methods have cross-assembly calls handled by
-        // the external runtime dispatch table (kChaosExternalRuntimeFnTable).
-        // For these methods, the interpreter path is unnecessary — the dispatcher
-        // already knows how to route them natively. Setting kHotpatchKeepNative
-        // prevents the interpreter from attempting to execute these methods
-        // (which it cannot handle for complex IL), keeping them on the native path.
-        //
-        // Note: _externalRuntimeSubjects stores callee SubjectIds (e.g.
-        // "System.Array::Copy"), not the entry method SubjectIds. We must scan
-        // each reachable method's instructions to detect whether it calls any
-        // external runtime targets.
         var methodsCallingExternal = new HashSet<string>(StringComparer.Ordinal);
         foreach (var method in reachableMethods)
         {
@@ -221,68 +153,96 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
-        // ── Dispatch table with function pointers ──
-        // direct_ptr = &MethodNativeSymbol (extern "C" function emitted elsewhere)
-        // interrupt_ptr = &InterpreterEntryDirect (hotpatch dispatch)
-        sb.AppendLine("// Dispatch table (function pointers)");
-        sb.Append("static HotpatchEntryV0 s_hotpatch_entries[")
-          .Append(entries.Count).AppendLine("] = {");
-        foreach (var entry in entries)
+        // Token→Slot mapping (sorted by token for bsearch)
+        var tokenSlotList = entries
+            .Select((e, idx) => (Token: e.Token, Slot: (uint)idx))
+            .OrderBy(ts => ts.Token)
+            .ToList();
+
+        // ── Build Scriban model ──
+
+        // Type groups with nested method models
+        var typeGroupModels = new ScriptObject[grouped.Count];
+        uint methodIndex = 0;
+        for (int gi = 0; gi < grouped.Count; gi++)
         {
-            string flags = methodsCallingExternal.Contains(entry.SubjectId) ? "kHotpatchKeepNative" : "0";
-            sb.Append("    { reinterpret_cast<void*>(&").Append(entry.NativeSymbol).Append("), ")
-              .Append("reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, ")
-              .Append(flags).Append(" },");
-            sb.Append("  // ").Append(entry.TypeName).Append("::").Append(entry.MethodName).AppendLine();
-        }
-        sb.AppendLine("};");
-        sb.AppendLine();
-
-        // ── HotpatchModuleV0 bundle ──
-        sb.AppendLine("// Module hotpatch bundle");
-        sb.AppendLine("static constexpr HotpatchModuleV0 s_hotpatch_module = {");
-        sb.Append("    ").Append(ToCppStringLiteral(_assemblyName)).AppendLine(",");
-        sb.AppendLine("    s_hotpatch_types,");
-        sb.Append("    ").Append(grouped.Count).AppendLine("u,");
-        sb.AppendLine("    s_hotpatch_methods,");
-        sb.Append("    ").Append(entries.Count).AppendLine("u,");
-        sb.AppendLine("    s_hotpatch_slots,");
-        sb.Append("    ").Append(tokenSlotList.Count).AppendLine("u,");
-        sb.AppendLine("    s_hotpatch_entries,");
-        sb.Append("    ").Append(entries.Count).AppendLine("u,");
-        sb.AppendLine("};");
-        sb.AppendLine();
-
-        // ── Expose module to BootstrapRuntime via extern "C" ──
-        sb.AppendLine("// Expose hotpatch module to BootstrapRuntime");
-        sb.AppendLine("extern \"C\" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module");
-        sb.AppendLine("    = &s_hotpatch_module;");
-
-        // ── Reverse P/Invoke (UnmanagedCallersOnly) wrapper registration ──
-        if (_reversePInvokeEntries.Count > 0)
-        {
-            sb.AppendLine();
-            sb.AppendLine("// ── Reverse P/Invoke wrapper registration ──────────────────");
-            sb.Append("static constexpr void* s_reverse_pinvoke_wrappers[")
-              .Append(_reversePInvokeEntries.Count).AppendLine("] =");
-            sb.AppendLine("{");
-            for (int i = 0; i < _reversePInvokeEntries.Count; i++)
+            var group = grouped[gi];
+            var methodModels = new ScriptObject[group.Count()];
+            int mi = 0;
+            foreach (var entry in group)
             {
-                sb.Append("    reinterpret_cast<void*>(&")
-                  .Append(_reversePInvokeEntries[i].NativeSymbol).AppendLine("),");
+                methodModels[mi] = new ScriptObject
+                {
+                    ["method_name_literal"] = EscapeCppStringLiteral(entry.MethodName),
+                    ["token_hex"] = entry.Token.ToString("X8"),
+                    ["param_count"] = (ushort)entry.ParamCount,
+                };
+                mi++;
             }
-            sb.AppendLine("};");
-            sb.AppendLine();
-            sb.AppendLine("static const CHAOS_IL2CPP_UINT32 s_reverse_pinvoke_registered = []()");
-            sb.AppendLine("{");
-            sb.AppendLine("    ::chaos::il2cpp::runtime_core::RegisterReversePInvokeWrappers(");
-            sb.Append("        s_reverse_pinvoke_wrappers, ")
-              .Append(_reversePInvokeEntries.Count).AppendLine("u);");
-            sb.AppendLine("    return 1u;");
-            sb.AppendLine("}();");
+            typeGroupModels[gi] = new ScriptObject
+            {
+                ["type_name"] = group.Key.TypeName,
+                ["type_name_literal"] = EscapeCppStringLiteral(group.Key.TypeName),
+                ["type_namespace_literal"] = EscapeCppStringLiteral(group.Key.TypeNamespace),
+                ["first_method_index"] = methodIndex,
+                ["method_count"] = group.Count(),
+                ["methods"] = methodModels,
+            };
+            methodIndex += (uint)group.Count();
         }
 
-        return sb.ToString();
+        // Flat dispatch entry models
+        var entryModels = new ScriptObject[entries.Count];
+        for (int i = 0; i < entries.Count; i++)
+        {
+            var entry = entries[i];
+            string flags = methodsCallingExternal.Contains(entry.SubjectId) ? "kHotpatchKeepNative" : "0";
+            entryModels[i] = new ScriptObject
+            {
+                ["native_symbol"] = entry.NativeSymbol,
+                ["type_name"] = entry.TypeName,
+                ["method_name"] = entry.MethodName,
+                ["flags"] = flags,
+            };
+        }
+
+        // Token→Slot models
+        var tokenSlotModels = new ScriptObject[tokenSlotList.Count];
+        for (int i = 0; i < tokenSlotList.Count; i++)
+        {
+            tokenSlotModels[i] = new ScriptObject
+            {
+                ["token_hex"] = tokenSlotList[i].Token.ToString("X8"),
+                ["slot"] = tokenSlotList[i].Slot,
+            };
+        }
+
+        // Reverse P/Invoke entry models
+        var reversePInvokeModels = new ScriptObject[_reversePInvokeEntries.Count];
+        for (int i = 0; i < _reversePInvokeEntries.Count; i++)
+        {
+            reversePInvokeModels[i] = new ScriptObject
+            {
+                ["native_symbol"] = _reversePInvokeEntries[i].NativeSymbol,
+            };
+        }
+
+        var model = new ScriptObject
+        {
+            ["is_empty"] = false,
+            ["assembly_name_literal"] = EscapeCppStringLiteral(_assemblyName),
+            ["total_method_count"] = entries.Count,
+            ["type_groups"] = typeGroupModels,
+            ["type_group_count"] = grouped.Count,
+            ["entries"] = entryModels,
+            ["token_slots"] = tokenSlotModels,
+            ["slot_count"] = tokenSlotList.Count,
+            ["reverse_pinvoke_count"] = _reversePInvokeEntries.Count,
+            ["reverse_pinvoke_entries"] = reversePInvokeModels,
+        };
+
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeAotTemplateCatalog.GetHotpatchTableTemplate(), model);
     }
 
     // ── CustomAttribute blob data emission ──────────────────────────
@@ -692,77 +652,61 @@ public sealed partial class NativeAotLoweringPlanner
             return string.Empty;
         }
 
-        var sb = new StringBuilder(4096);
-        sb.AppendLine("// ── ABI manifest ──────────────────────────────────────────────");
-        sb.AppendLine("// Single contiguous struct: header + entries + params in same object");
-        sb.AppendLine("// so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.");
-        sb.AppendLine("// NOTE: reinterpret_cast is needed because MSVC rejects &anon_struct.header");
-
         int totalParams = reachableMethods.Sum(m => m.ParameterAbis.Count);
         uint checksum = ComputeAbiManifestChecksum(reachableMethods);
 
-        // Prefix-sum array (separate constexpr so we can reference it in header initializer)
-        sb.Append("// Param offset prefix-sum: [i] = cumulative parameter count before method i").AppendLine();
-        sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[")
-            .Append(reachableMethods.Count + 1).AppendLine("] = {");
+        // Prefix-sum array
+        var prefixSums = new int[reachableMethods.Count + 1];
+        uint runningTotal = 0;
+        for (int i = 0; i < reachableMethods.Count; i++)
         {
-            uint runningTotal = 0;
-            for (int i = 0; i < reachableMethods.Count; i++)
-            {
-                sb.Append("    ").Append(runningTotal).Append("u,");
-                sb.AppendLine();
-                runningTotal += (uint)reachableMethods[i].ParameterAbis.Count;
-            }
-            sb.Append("    ").Append(runningTotal).AppendLine("u");
+            prefixSums[i] = (int)runningTotal;
+            runningTotal += (uint)reachableMethods[i].ParameterAbis.Count;
         }
-        sb.AppendLine("};");
-        sb.AppendLine();
+        prefixSums[reachableMethods.Count] = (int)runningTotal;
 
-        sb.Append("static constexpr struct {").AppendLine();
-        sb.Append("    ::ChaosAbiManifestV0 header;").AppendLine();
-        sb.Append("    ::ChaosAbiMethodEntryV0 entries[").Append(reachableMethods.Count).AppendLine("];");
-        sb.Append("    CHAOS_IL2CPP_UINT8 params[").Append(totalParams > 0 ? totalParams : 1).AppendLine("];");
-        sb.Append("} s_abi_manifest_storage = {").AppendLine();
-        sb.AppendLine("    {");
-        sb.AppendLine("        CHAOS_ABI_MANIFEST_VERSION,");
-        sb.Append("        ").Append(reachableMethods.Count).AppendLine("u,");
-        sb.Append("        ").Append(totalParams).AppendLine("u,");
-        sb.Append("        ").Append(checksum).AppendLine("u,  // FNV-1a over entries+params");
-        sb.AppendLine("        s_abi_manifest_prefix_sum  // O(1) prefix-sum");
-        sb.AppendLine("    },");
-        sb.AppendLine("    {");
+        // Method entry models
+        var methodModels = new ScriptObject[reachableMethods.Count];
         for (int i = 0; i < reachableMethods.Count; i++)
         {
             var method = reachableMethods[i];
-            sb.Append("        { ").Append((int)method.ReturnAbi.CarrierKindCode).Append("u, ")
-                .Append(method.ParameterAbis.Count).Append("u },");
-            sb.Append("  // ").Append(method.NativeSymbol);
-            sb.AppendLine();
+            methodModels[i] = new ScriptObject
+            {
+                ["return_carrier"] = (int)method.ReturnAbi.CarrierKindCode,
+                ["param_count"] = method.ParameterAbis.Count,
+                ["native_symbol"] = method.NativeSymbol,
+            };
         }
-        sb.AppendLine("    },");
-        sb.AppendLine("    {");
+
+        // Flat parameter carrier array
+        int totalParamsActual = totalParams > 0 ? totalParams : 1;
+        var paramCarriers = new int[totalParamsActual];
         if (totalParams > 0)
         {
-            int paramIndex = 0;
+            int idx = 0;
             foreach (var method in reachableMethods)
             {
                 foreach (var abi in method.ParameterAbis)
                 {
-                    sb.Append("        ").Append((int)abi.CarrierKindCode).Append("u,");
-                    paramIndex++;
-                    if (paramIndex < totalParams)
-                        sb.AppendLine();
+                    paramCarriers[idx++] = (int)abi.CarrierKindCode;
                 }
             }
-            sb.AppendLine();
         }
-        sb.AppendLine("    },");
-        sb.AppendLine("};");
-        sb.Append("static const ::ChaosAbiManifestV0* const s_abi_manifest =");
-        sb.Append(" reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);");
-        sb.AppendLine();
 
-        return sb.ToString();
+        var model = new ScriptObject
+        {
+            ["methods_count"] = reachableMethods.Count,
+            ["method_count_plus_one"] = reachableMethods.Count + 1,
+            ["total_params"] = totalParams,
+            ["total_params_actual"] = totalParamsActual,
+            ["checksum"] = checksum,
+            ["prefix_sums"] = prefixSums,
+            ["methods"] = methodModels,
+            ["param_carriers"] = paramCarriers,
+        };
+
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeAotTemplateCatalog.GetAbiManifestTemplate(), model);
     }
 
     private static string EscapeCppStringLiteral(string value)
@@ -815,52 +759,33 @@ public sealed partial class NativeAotLoweringPlanner
             .OrderBy(kv => kv.Key, StringComparer.Ordinal)
             .ToArray();
 
-        // Build a lookup: subjectId → chaos_external_runtime_* symbol (for shaped entries)
-        // If caller passed helperSymbolBySubjectId, use it directly; otherwise build from optional IReadOnlyList<>.
-
-        var sb = new StringBuilder(4096);
-        sb.AppendLine("// ── External Runtime Dispatch Table ──────────────────────────");
-        sb.AppendLine("// Startup-time-resolved function pointers for cross-assembly calls.");
-        sb.AppendLine();
-
-        // SubjectId strings (compiler can merge duplicates across TUs)
-        sb.Append("extern \"C\" const char* kChaosExternalRuntimeSubjects[")
-            .Append(sorted.Length).AppendLine("] =");
-        sb.AppendLine("{");
-        foreach (var kv in sorted)
-        {
-            sb.Append("    ").Append(ToCppStringLiteral(kv.Key)).AppendLine(",");
-        }
-        sb.AppendLine("};");
-        sb.AppendLine();
-
-        // Function pointer table — pre-filled for shaped entries, nullptr for others
-        sb.Append("extern \"C\" void* kChaosExternalRuntimeFnTable[")
-            .Append(sorted.Length).AppendLine("] =");
-        sb.AppendLine("{");
+        // Build entry models
+        var entryModels = new ScriptObject[sorted.Length];
         for (int i = 0; i < sorted.Length; i++)
         {
             string subjectId = sorted[i].Key;
-            if (helperSymbolBySubjectId.TryGetValue(subjectId, out var helperSymbol))
+            string? resolvedHelper = null;
+            bool hasHelper = helperSymbolBySubjectId?.TryGetValue(subjectId, out resolvedHelper) == true;
+            var entryModel = new ScriptObject
             {
-                // Shaped entry: pre-fill with the chaos_external_runtime_* function pointer
-                sb.Append("    reinterpret_cast<void*>(&").Append(helperSymbol).AppendLine("),");
-            }
-            else
+                ["subject_literal"] = EscapeCppStringLiteral(subjectId),
+                ["has_helper_symbol"] = hasHelper,
+            };
+            if (hasHelper)
             {
-                // Non-shaped entry: resolved at startup by ChaosResolveExternalRuntimeFnTable()
-                sb.AppendLine("    nullptr,");
+                entryModel["helper_symbol"] = resolvedHelper!;
             }
+            entryModels[i] = entryModel;
         }
-        sb.AppendLine("};");
-        sb.AppendLine();
 
-        // Count
-        sb.Append("extern \"C\" int32_t kChaosExternalRuntimeCount = ")
-            .Append(sorted.Length).AppendLine(";");
-        sb.AppendLine();
+        var model = new ScriptObject
+        {
+            ["subject_count"] = sorted.Length,
+            ["entries"] = entryModels,
+        };
 
-        return sb.ToString();
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeAotTemplateCatalog.GetExternalRuntimeDispatchTableTemplate(), model);
     }
 
     private static uint ComputeAbiManifestChecksum(IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
