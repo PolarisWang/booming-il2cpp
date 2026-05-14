@@ -2,6 +2,7 @@
 
 #include "convert.h"
 #include "exception_helpers.h"
+#include "exception_jmp.h"
 #include "string_table.h"
 #include "codegen_bridge.h"
 #include "generated_code_compat.h"
@@ -100,31 +101,31 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_uint64(CHAOS_IL2CPP_INTPTR v
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_boolean(CHAOS_IL2CPP_INTPTR value)
 {
     (void)value;
-    throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
+    chaos::il2cpp::runtime_core::chaos_raise_exception(0);
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_datetime(CHAOS_IL2CPP_INTPTR value)
 {
     (void)value;
-    throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
+    chaos::il2cpp::runtime_core::chaos_raise_exception(0);
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_decimal(CHAOS_IL2CPP_INTPTR value)
 {
     (void)value;
-    throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
+    chaos::il2cpp::runtime_core::chaos_raise_exception(0);
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_double(CHAOS_IL2CPP_INTPTR value)
 {
     (void)value;
-    throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
+    chaos::il2cpp::runtime_core::chaos_raise_exception(0);
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_single(CHAOS_IL2CPP_INTPTR value)
 {
     (void)value;
-    throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
+    chaos::il2cpp::runtime_core::chaos_raise_exception(0);
 }
 
 // ── Object overloads (unbox then convert) ──────────────────────────────
@@ -162,12 +163,12 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_string(CHAOS_IL2CPP_INTPTR v
             chaos_extract_string_id(value));
         if (chaos_view.byte_count == 0)
         {
-            throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
+            chaos::il2cpp::runtime_core::chaos_raise_exception(0);
         }
         return static_cast<CHAOS_IL2CPP_UINT16>(
             static_cast<unsigned char>(chaos_view.utf8_data[0]));
     }
-    throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)};
+    chaos::il2cpp::runtime_core::chaos_raise_exception(0);
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_string_provider(

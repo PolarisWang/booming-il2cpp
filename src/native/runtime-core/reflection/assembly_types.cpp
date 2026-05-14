@@ -32,7 +32,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromAssemblyBool(
         if (throw_on_error) {
             // V1: propagate error without a managed TypeLoadException object.
             // Future: create TypeLoadException via ABI and raise it properly.
-            throw chaos_managed_exception{0};
+            chaos_raise_exception(0);
         }
         return 0;
     }

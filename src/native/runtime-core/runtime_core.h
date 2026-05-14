@@ -10,10 +10,16 @@
 #include <limits>
 #include <type_traits>
 
+// ── Finally scope guard (RAII for generated code try/finally in CPP_THROW mode) ──
+#include <chaos/finally.h>
+
 // ── Compatibility declarations for older generated .cpp files ──
 // Must be included early (before any namespace) so declarations are at
 // global scope and visible inside anonymous namespaces in generated files.
 #include "generated_code_compat.h"
+
+// ── Exception delivery (dual-path: setjmp/longjmp or C++ throw) ───────
+#include "exception_jmp.h"
 
 // ── Type-only sub-headers (each declares types in its own namespace) ──
 #include "marshal_abi.h"

@@ -11,17 +11,29 @@
 //   via runtime_core.h. On exception types not yet loaded, ResolveTypeByName
 //   iterates all registered modules and finds the type by (namespace, name).
 //   The TypeInfoHandle is used with abi->object_new() to create the exception,
-//   then abi->raise_managed_exception() to throw it.
-//
-//   Pattern matches the existing scriban template: creates message string
-//   but uses (void)msg_obj for the constructor call (matches current behavior).
+//   then either throws or longjmps depending on EH mode (CHAOS_IL2CPP_EH_*).
 
 #include "exception_helpers.h"
+
+#include <chaos/config.h>
+
+#if defined(CHAOS_IL2CPP_EH_SETJMP)
+#  include "exception_jmp.h"
+#endif
 
 #include "runtime_core.h"
 
 #include <cstdlib>
 #include <cstring>
+
+// ── TLS definitions for exception_jmp.h (SETJMP mode only) ──────────────
+#if defined(CHAOS_IL2CPP_EH_SETJMP)
+namespace chaos::il2cpp::runtime_core {
+thread_local jmp_buf g_chaos_exception_jmp_stack[kMaxNestedTry] = {};
+thread_local int g_chaos_exception_jmp_depth = 0;
+thread_local void* volatile g_chaos_exception_obj = nullptr;
+}  // namespace
+#endif
 
 // ── Fact Static verification fallback: callback instead of abort ──────────
 //
@@ -135,13 +147,9 @@ TypeInfoHandle ResolveTypeByName(const char* fully_qualified_name) {
     const auto type_handle = ResolveTypeByName(type_full_name);
     if (type_handle == 0) {
         // Per-family build: exception type not registered.
-        // Throw empty chaos_managed_exception — the codegen catch block
-        // treats object_value == 0 as "matched but no managed object",
-        // allowing the catch body to execute in verification/benchmark mode.
-        // NOTE: This throw crosses extern "C" frames in convert.cpp.
-        // chaos_runtime_core MUST be compiled with /EHs (not /EHsc) for
-        // MSVC to allow this propagation; see CMakeLists.txt.
-        throw chaos_managed_exception{0};
+        // Raise via chaos_raise_exception — dispatches through either
+        // longjmp (SETJMP mode) or C++ throw (CPP_THROW mode).
+        chaos_raise_exception(0);
     }
 
     abi->class_init(runtime, type_handle);

@@ -25,6 +25,65 @@
 #  define CHAOS_IL2CPP_CONFIG_CHECK
 #endif
 
+// ── Platform detection ────────────────────────────────────
+// CMakeLists.txt passes explicit CHAOS_IL2CPP_TARGET_PLATFORM_* via
+// add_compile_definitions() for each preset target.
+//
+// When building outside the preset system (e.g. direct `cmake -B`),
+// fall back to compiler built-in macros.
+// ============================================================================
+
+#if !defined(CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS) \
+    && !defined(CHAOS_IL2CPP_TARGET_PLATFORM_ANDROID) \
+    && !defined(CHAOS_IL2CPP_TARGET_PLATFORM_IOS) \
+    && !defined(CHAOS_IL2CPP_TARGET_PLATFORM_MACOS) \
+    && !defined(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX)
+#  if defined(__ANDROID__)
+#    define CHAOS_IL2CPP_TARGET_PLATFORM_ANDROID 1
+#  elif defined(__APPLE__) && defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
+#    define CHAOS_IL2CPP_TARGET_PLATFORM_IOS 1
+#  elif defined(__APPLE__) && defined(__arm64__)
+#    define CHAOS_IL2CPP_TARGET_PLATFORM_MACOS 1
+#  elif defined(__APPLE__)
+#    define CHAOS_IL2CPP_TARGET_PLATFORM_MACOS 1
+#  elif defined(_WIN32) || defined(_WIN64)
+#    define CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS 1
+#  elif defined(__linux__)
+#    define CHAOS_IL2CPP_TARGET_PLATFORM_LINUX 1
+#  else
+#    error "Unknown target platform — define CHAOS_IL2CPP_TARGET_PLATFORM_* via CMake"
+#  endif
+#endif
+
+// ── Exception handling mode (dual-path) ─────────────────────────────────
+//
+// Two mutually exclusive EH strategies for managed exception propagation:
+//
+//   CHAOS_IL2CPP_EH_SETJMP (recommended for mobile, default on iOS/Android)
+//     Uses setjmp/longjmp for ~5x faster throw (~300ns vs ~1700ns) and zero
+//     LSDA/.ARM.extab tables.  Finally/fault semantics are handled by the
+//     codegen emitting manual if/else blocks instead of RAII scope guards.
+//     The runtime uses TLS exception_obj + nested jmp_buf stack.
+//
+//   CHAOS_IL2CPP_EH_CPP_THROW (recommended for desktop, default elsewhere)
+//     Uses C++ throw/catch with full RAII unwind.  Generates LSDA exception
+//     tables (larger binary).  Simpler codegen — natural C++ try/catch/finally.
+//
+// If neither is defined at build time, the platform-based default applies.
+// ============================================================================
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_CPP_THROW)
+  // Platform → EH mode mapping:
+  //   Mobile (iOS, Android)  → SETJMP — zero EH tables, smaller binary
+  //   Desktop (Windows, macOS, Linux) → CPP_THROW — natural C++ EH
+#  if defined(CHAOS_IL2CPP_TARGET_PLATFORM_IOS) \
+      || defined(CHAOS_IL2CPP_TARGET_PLATFORM_ANDROID)
+#    define CHAOS_IL2CPP_EH_SETJMP
+#  else
+#    define CHAOS_IL2CPP_EH_CPP_THROW
+#  endif
+#endif
+
 // ── Compile-time assertion macro ─────────────────────────────────────────
 // CHAOS_IL2CPP_ASSERT(cond)  — abort if condition false (CHECK only).
 //                              no-op in PROFILE and SHIP.
