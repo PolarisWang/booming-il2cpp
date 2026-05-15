@@ -100,6 +100,46 @@ inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_result_raw(CHAOS_IL2CPP_INTPTR
     return task->result;
 }
 
+/// Task.Run: queue a delegate for execution on the thread pool.
+/// The task is created, queued, and the task handle is returned.
+/// When the delegate completes, the task is marked as completed.
+inline CHAOS_IL2CPP_INTPTR async_task_run(CHAOS_IL2CPP_INTPTR delegate_fn) noexcept
+{
+    auto* task = new (std::nothrow) AsyncTask();
+    if (task == nullptr) return 0;
+
+    struct RunContext {
+        AsyncTask* task;
+        CHAOS_IL2CPP_INTPTR delegate;
+    };
+    auto* ctx = new (std::nothrow) RunContext{task, delegate_fn};
+    if (ctx == nullptr) {
+        delete task;
+        return 0;
+    }
+
+    chaos::il2cpp::runtime_core::threading::ThreadPoolQueueUserWorkItem(
+        [](void* state) {
+            auto* rc = static_cast<RunContext*>(state);
+            // Invoke the delegate via codegen bridge.
+            auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
+            if (bridge != nullptr && bridge->delegate_invoke != nullptr && rc->delegate != 0) {
+                void* return_value = nullptr;
+                bridge->delegate_invoke(
+                    nullptr, nullptr,
+                    reinterpret_cast<void*>(rc->delegate),
+                    nullptr, 0,
+                    &return_value, sizeof(void*),
+                    nullptr);
+            }
+            rc->task->completed = true;
+            delete rc;
+        },
+        ctx);
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task);
+}
+
 } // namespace chaos::il2cpp::common
 
 #endif // CHAOS_IL2CPP_COMMON_ASYNC_H_

@@ -60,7 +60,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine();
 		builder.AppendLine();
 		builder.AppendLine("constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;");
-		builder.AppendLine("inline TypeInfo chaos_type_info_managed_array = { nullptr, nullptr, 1ULL, 0, 32, 2, 0 };");
+		builder.AppendLine("inline TypeInfoV0 chaos_type_info_managed_array = {{ nullptr, nullptr, 1ULL, 0, 32, 2, 0 }, { nullptr, nullptr, 0, 0, 0, 0 }};");
 		builder.AppendLine();
 		builder.AppendLine("struct chaos_managed_array");
 		builder.AppendLine("{");
@@ -522,9 +522,9 @@ public sealed partial class NativeAotLoweringPlanner
 				HeaderKind hdrKind = GetHeaderKind(item);
 				byte flags = (byte)hdrKind; // PureType=0, ThinLockable=1, Fat=2
 				_vtableLengths.TryGetValue(item, out int vtLen);
-				// TypeInfoV0 = Hot (32B) + Warm (32B), guaranteed contiguous
+				// TypeInfoV0 = hot(32B) + warm(32B) nested initializer
 				handler.AppendLiteral("inline TypeInfoV0 ");
-				handler.AppendFormatted(GetNativeTypeInfoV0Symbol(item));
+				handler.AppendFormatted(GetNativeMethodTableSymbol(item));
 				handler.AppendLiteral(" = {{");
 				handler.AppendFormatted(parentExpr);
 				handler.AppendLiteral(", ");
@@ -534,13 +534,13 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(stableId.ToString() + "ULL");
 				handler.AppendLiteral(", ");
 				handler.AppendFormatted(vtLen.ToString());
-				handler.AppendLiteral("u, 32 /* warm_delta */, 1 /* reference */, ");
+				handler.AppendLiteral("u, 32, 1, ");
 				handler.AppendFormatted(flags.ToString());
 				handler.AppendLiteral("}, {");
 				handler.AppendFormatted(ifaceMapExpr);
 				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);
-				handler.AppendLiteral(", 0, 0, 0 }};");
+				handler.AppendLiteral(", 0, 0, 0}};");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -561,10 +561,10 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
 				handler.AppendLiteral("inline TypeInfoV0 ");
-				handler.AppendFormatted(GetNativeTypeInfoV0Symbol(item2));
+				handler.AppendFormatted(GetNativeMethodTableSymbol(item2));
 				handler.AppendLiteral(" = {{nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", 0u, 32 /* warm_delta */, 3 /* interface */, 0}, {nullptr, nullptr, 0, 0, 0, 0}};");
+				handler.AppendLiteral(", 0u, 32, 3, 0}, {nullptr, nullptr, 0, 0, 0, 0}};");
 				stringBuilder.AppendLine(ref handler);
 			}
 
@@ -577,10 +577,10 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
 				handler.AppendLiteral("inline TypeInfoV0 ");
-				handler.AppendFormatted(GetNativeTypeInfoV0Symbol(item3));
+				handler.AppendFormatted(GetNativeMethodTableSymbol(item3));
 				handler.AppendLiteral(" = {{nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", 0u, 32 /* warm_delta */, 2 /* value */, 0}, {nullptr, nullptr, 0, 0, 0, 0}};");
+				handler.AppendLiteral(", 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -638,10 +638,10 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
 				handler.AppendLiteral("inline TypeInfoV0 ");
-				handler.AppendFormatted(GetNativeTypeInfoV0Symbol(item3));
+				handler.AppendFormatted(GetNativeMethodTableSymbol(item3));
 				handler.AppendLiteral(" = {{nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", 0u, 32 /* warm_delta */, 2 /* value (boxed) */, 0}, {");
+				handler.AppendLiteral(", 0u, 32, 2, 0}, {");
 				handler.AppendFormatted(ifaceMapExpr);
 				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);

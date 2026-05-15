@@ -5,6 +5,7 @@
 
 #include "gc_region.h"
 #include "gc_root_scanner.h"
+#include "generated_code_compat.h"  // chaos_managed_exception for Thread.Abort throw
 
 #include <atomic>
 #include <new>
@@ -148,6 +149,28 @@ void SafepointPoll() noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("SafepointPoll");
     uint32_t gen = s_generation.load(std::memory_order_acquire);
     if ((gen & kGcGenerationMask) == 0u) {
+        // ── pending_abort check (unlikely branch, ~0.5ns when clear) ─
+        // Thread.Abort integration: check the per-thread abort flag
+        // without disturbing the GC fast path.  This branch is only
+        // reached when no GC is active — the LSB of s_generation is 0.
+        auto* thread = tls_this_thread;
+        if (thread != nullptr && thread->pending_abort.load(std::memory_order_acquire)) {
+            thread->pending_abort.store(false, std::memory_order_release);
+            // Throw at the next catch boundary.  The managed exception
+            // dispatch will unwind managed frames to the nearest catch.
+            // Implementation detail: this longjmps through the interpreter
+            // frame chain; generated AOT code catches via the normal
+            // chaos_managed_exception mechanism.
+            throw chaos_managed_exception{0};
+        }
+        // ── pending_interrupt check (unlikely branch) ──────────────
+        // Thread.Interrupt integration: check the per-thread interrupt
+        // flag.  If set, throw ThreadInterruptedException at the next
+        // catch boundary (same mechanism as Thread.Abort).
+        if (thread != nullptr && thread->pending_interrupt.load(std::memory_order_acquire)) {
+            thread->pending_interrupt.store(false, std::memory_order_release);
+            throw chaos_managed_exception{0};
+        }
         return;  // fast path: no GC pending, single load + branch
     }
 

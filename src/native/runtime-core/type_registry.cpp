@@ -1,4 +1,4 @@
-// type_registry.cpp — HotUpdate dynamic TypeInfo registry
+// type_registry.cpp — HotUpdate dynamic type registry
 //
 // Implements the runtime-registration side of the Hybrid TypeInfoHot* identity
 // system: chaos_register_type() and chaos_find_type_by_stable_id().
@@ -22,7 +22,7 @@
 namespace {
 
 struct Registry {
-    TypeInfoHot* types[kChaosMaxDynamicTypes];
+    MethodTable* types[kChaosMaxDynamicTypes];
     CHAOS_IL2CPP_SIZE count;
     std::mutex mtx;
 };
@@ -30,7 +30,6 @@ struct Registry {
 Registry& GetRegistry() noexcept
 {
     // C++11 function-local static is thread-safe (compiler-generated guard).
-    // Zero-initialises POD members, calls default ctor for std::mutex.
     static Registry reg;
     return reg;
 }
@@ -41,9 +40,9 @@ Registry& GetRegistry() noexcept
 
 namespace chaos::il2cpp::runtime_core {
 
-TypeInfoHot* chaos_register_type(
+MethodTable* chaos_register_type(
     const char* name,
-    const TypeInfoHot* parent,
+    const MethodTable* parent,
     CHAOS_IL2CPP_UINT8 type_shape,
     const InterfaceMapEntry* iface_map,
     CHAOS_IL2CPP_UINT32 iface_count,
@@ -74,27 +73,28 @@ TypeInfoHot* chaos_register_type(
         return nullptr;
     }
 
-    // Allocate TypeInfoHot + TypeInfoWarm as a contiguous pair.
-    auto* hot = CHAOS_IL2CPP_DOMAIN_CURRENT_NEW(TypeInfoHot);
-    auto* warm = CHAOS_IL2CPP_DOMAIN_CURRENT_NEW(TypeInfoWarm);
+    // Allocate a single MethodTable (64B: hot + warm contiguous).
+    auto* mt = CHAOS_IL2CPP_DOMAIN_CURRENT_NEW(MethodTable);
 
-    hot->parent        = parent;
-    hot->vtable_array  = nullptr;
-    hot->stable_id     = stable_id;
-    hot->vtable_length = 0;
-    hot->warm_delta    = static_cast<uint16_t>(
-        reinterpret_cast<uint8_t*>(warm) - reinterpret_cast<uint8_t*>(hot));
-    hot->type_shape    = type_shape;
-    hot->flags         = 0;
+    // ── Hot section (32B, bit-compat with TypeInfoHot) ──
+    mt->parent_mt        = parent;
+    mt->vtable_array     = nullptr;
+    mt->stable_id        = stable_id;
+    mt->vtable_length    = 0;
+    mt->warm_delta       = static_cast<uint16_t>(
+        reinterpret_cast<uint8_t*>(&mt->iface_map) - reinterpret_cast<uint8_t*>(mt));
+    mt->type_shape       = type_shape;
+    mt->flags            = 0;
 
-    warm->iface_map          = iface_map;
-    warm->runtime_iface_map  = nullptr;
-    warm->iface_count        = iface_count;
-    warm->runtime_iface_count = 0;
-    warm->cold_delta         = 0;
-    warm->_reserved          = 0;
+    // ── Warm section (32B) ──
+    mt->iface_map          = iface_map;
+    mt->runtime_iface_map  = nullptr;
+    mt->iface_count        = iface_count;
+    mt->runtime_iface_count = 0;
+    mt->cold_delta         = 0;
+    mt->_reserved          = 0;
 
-    reg.types[reg.count] = hot;
+    reg.types[reg.count] = mt;
     reg.count++;
 
     // Build vtable for the new HotUpdate type (copies parent vtable if registered).
@@ -103,10 +103,10 @@ TypeInfoHot* chaos_register_type(
     }
 
     if (out_stable_id) *out_stable_id = stable_id;
-    return hot;
+    return mt;
 }
 
-const TypeInfoHot* chaos_find_type_by_stable_id(
+const MethodTable* chaos_find_type_by_stable_id(
     CHAOS_IL2CPP_UINT64 stable_id) noexcept
 {
     const auto& reg = GetRegistry();
@@ -124,46 +124,44 @@ const TypeInfoHot* chaos_find_type_by_stable_id(
 
 
 bool ChaosTypeAddInterface(
-    TypeInfoHot* ti,
+    MethodTable* mt,
     CHAOS_IL2CPP_UINT64 iface_stable_id,
     CHAOS_IL2CPP_UINT32 vtable_offset,
     CHAOS_IL2CPP_UINT32 method_count) noexcept
 {
-    if (ti == nullptr) return false;
-
-    auto* warm = GetWarmPtr(ti);
+    if (mt == nullptr) return false;
 
     // Check if already present in AOT iface_map.
-    for (CHAOS_IL2CPP_UINT32 i = 0; i < warm->iface_count; ++i)
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < mt->iface_count; ++i)
     {
-        if (warm->iface_map[i].iface_stable_id == iface_stable_id)
+        if (mt->iface_map[i].iface_stable_id == iface_stable_id)
             return true;  // already mapped by AOT
     }
 
     // Check if already present in runtime_iface_map.
-    for (CHAOS_IL2CPP_UINT32 i = 0; i < warm->runtime_iface_count; ++i)
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < mt->runtime_iface_count; ++i)
     {
-        if (warm->runtime_iface_map[i].iface_stable_id == iface_stable_id)
+        if (mt->runtime_iface_map[i].iface_stable_id == iface_stable_id)
             return true;  // already added
     }
 
     auto& reg = GetRegistry();
     std::lock_guard<std::mutex> lock(reg.mtx);
 
-    CHAOS_IL2CPP_UINT32 newCount = warm->runtime_iface_count + 1;
+    CHAOS_IL2CPP_UINT32 newCount = mt->runtime_iface_count + 1;
     auto* newMap = static_cast<InterfaceMapEntry*>(
         CHAOS_IL2CPP_DOMAIN_CURRENT_REALLOC(
-            const_cast<InterfaceMapEntry*>(warm->runtime_iface_map),
+            const_cast<InterfaceMapEntry*>(mt->runtime_iface_map),
             newCount * sizeof(InterfaceMapEntry)));
 
     if (newMap == nullptr) return false;
 
-    newMap[warm->runtime_iface_count].iface_stable_id = iface_stable_id;
-    newMap[warm->runtime_iface_count].vtable_offset   = vtable_offset;
-    newMap[warm->runtime_iface_count].method_count    = method_count;
+    newMap[mt->runtime_iface_count].iface_stable_id = iface_stable_id;
+    newMap[mt->runtime_iface_count].vtable_offset   = vtable_offset;
+    newMap[mt->runtime_iface_count].method_count    = method_count;
 
-    warm->runtime_iface_map  = newMap;
-    warm->runtime_iface_count = newCount;
+    mt->runtime_iface_map  = newMap;
+    mt->runtime_iface_count = newCount;
     return true;
 }
 

@@ -2,7 +2,7 @@
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ConvertCharSubjects",
-  "entrySubjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
+  "entrySubjectId": "",
   "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [

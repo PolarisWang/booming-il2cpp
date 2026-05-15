@@ -1,12 +1,12 @@
 #ifndef CHAOS_IL2CPP_COMMON_TYPE_INFO_H_
 #define CHAOS_IL2CPP_COMMON_TYPE_INFO_H_
 
-// A5-Trinity Type Identity System
+// A5-Trinity Type Identity System — Phase 0 CoreCLR Alignment
 //
 // Three-layer TypeInfo layout:
 //   TypeInfoHot  (32B) — hot path: parent, vtable_array, stable_id
 //   TypeInfoWarm (32B) — warm path: iface_map, runtime_iface_map
-//   Cold section        — reflection metadata (future)
+//   Cold section        — reflection metadata (future: EEClass)
 //
 // TypeInfoHot is always at offset [0] and stores warm_delta to reach
 // TypeInfoWarm via GetWarmPtr().  The `using TypeInfo = TypeInfoHot`
@@ -14,6 +14,14 @@
 //
 // Static AOT types: inline constexpr across TUs (C++17 guarantees).
 // Dynamic HotUpdate types: heap-allocated Hot+Warm pair.
+//
+// ── Migration to MethodTable ──────────────────────────────────────
+// MethodTable (64B) is the unified type descriptor replacing TypeInfoV0.
+// Its first 32B are bit-for-bit compatible with TypeInfoHot; the full
+// 64B layout matches TypeInfoV0.  This allows incremental migration:
+//   - Phase 0:  MethodTable = TypeInfoV0 alias (same memory layout)
+//   - Phase 1+: MethodTable warm section restructured with eeclass ptr
+//   - Existing code using TypeInfoHot* continues unchanged.
 
 #include <chaos/native_types.h>
 
@@ -48,8 +56,9 @@ struct InterfaceMapEntry {
 static_assert(sizeof(InterfaceMapEntry) == 16,
     "InterfaceMapEntry: stable_id(8) + vtable_offset(4) + method_count(4) = 16 bytes");
 
-// ── Forward declaration ──────────────────────────────────────────
+// ── Forward declarations ──────────────────────────────────────────
 struct TypeInfoWarm;
+struct MethodTable;
 
 // ── TypeInfoHot (32B) — Hot path ────────────────────────────────
 // Accessed on every virtual dispatch, type check, and object creation.
@@ -73,6 +82,10 @@ struct TypeInfoHot {
     uint16_t           warm_delta;              // [28] 2B — &TypeInfoWarm = this + warm_delta
     uint8_t            type_shape;              // [30] 1B
     uint8_t            flags;                   // [31] 1B
+
+    /// Convert to MethodTable* when this TypeInfoHot is the hot section of one.
+    MethodTable*       AsMethodTable() noexcept;
+    const MethodTable* AsMethodTable() const noexcept;
 };
 
 static_assert(sizeof(TypeInfoHot) == 32,
@@ -166,6 +179,128 @@ inline constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_interface = 3;
 
 // ── HotUpdate dynamic type registration ─────────────────────────
 inline constexpr CHAOS_IL2CPP_SIZE kChaosMaxDynamicTypes = 256;
+
+// ═══════════════════════════════════════════════════════════════════
+// MethodTable — CoreCLR-aligned unified type descriptor (64B)
+// ═══════════════════════════════════════════════════════════════════
+// Replaces TypeInfoV0 as the codegen-emitted type descriptor.
+// The first 32B are bit-for-bit compatible with TypeInfoHot, enabling
+// reinterpret_cast between them. The warm section now carries the
+// EEClass pointer (future lazy reflection metadata).
+//
+// Layout comparison:
+//   TypeInfoV0:       [hot:32][warm:32]       total 64B
+//   MethodTable:      [hot:32][warm:32]       total 64B (Phase 0: exact match)
+//   MethodTable+EECL: [hot:32][eeclass:8]...  Phase 1+: warm section restructured
+//
+// Static AOT types: codegen emits inline constexpr MethodTable.
+// Dynamic types:    heap-allocated MethodTable + EEClass pair.
+
+struct MethodTable {
+    // ── Hot section (32B, bit-compat with TypeInfoHot) ──────────
+    const MethodTable*  parent_mt;             // [0]  8B — base type MethodTable
+    const void**        vtable_array;          // [8]  8B — virtual method dispatch
+    uint64_t            stable_id;             // [16] 8B — FNV-1a cross-module identity
+    uint32_t            vtable_length;         // [24] 4B — number of vtable slots
+    uint16_t            warm_delta;            // [28] 2B — to TypeInfoWarm (typically 32)
+    uint8_t             type_shape;            // [30] 1B — 1=ref, 2=value, 3=interface
+    uint8_t             flags;                 // [31] 1B — header_kind, has_finalizer
+
+    // ── Warm section (32B) — Phase 0: matches TypeInfoWarm ─────
+    // Phase 1+: eeclass pointer added here, other fields reshuffled.
+    const InterfaceMapEntry* iface_map;            // [32] 8B — AOT iface_map
+    const InterfaceMapEntry* runtime_iface_map;    // [40] 8B — HotUpdate (heap)
+    uint32_t                 iface_count;          // [48] 4B — AOT iface count
+    uint32_t                 runtime_iface_count;  // [52] 4B — HotUpdate iface count
+    uint32_t                 cold_delta;           // [56] 4B — to cold section / EEClass
+    uint32_t                 _reserved;            // [60] 4B
+
+    /// Cast to TypeInfoHot* (same pointer, first 32B compatible).
+    inline const TypeInfoHot* AsTypeInfoHot() const noexcept {
+        return reinterpret_cast<const TypeInfoHot*>(this);
+    }
+    inline TypeInfoHot* AsTypeInfoHot() noexcept {
+        return reinterpret_cast<TypeInfoHot*>(this);
+    }
+};
+
+static_assert(sizeof(MethodTable) == 64,
+    "MethodTable: hot(32) + warm(32) = 64 bytes");
+
+// Verify MethodTable hot section is bit-compatible with TypeInfoHot.
+static_assert(offsetof(MethodTable, parent_mt) == offsetof(TypeInfoHot, parent),
+    "MethodTable.parent_mt must match TypeInfoHot.parent offset");
+static_assert(offsetof(MethodTable, vtable_array) == offsetof(TypeInfoHot, vtable_array),
+    "MethodTable.vtable_array offset must match TypeInfoHot");
+static_assert(offsetof(MethodTable, stable_id) == offsetof(TypeInfoHot, stable_id),
+    "MethodTable.stable_id offset must match TypeInfoHot");
+static_assert(offsetof(MethodTable, vtable_length) == offsetof(TypeInfoHot, vtable_length),
+    "MethodTable.vtable_length offset must match TypeInfoHot");
+static_assert(offsetof(MethodTable, warm_delta) == offsetof(TypeInfoHot, warm_delta),
+    "MethodTable.warm_delta offset must match TypeInfoHot");
+static_assert(offsetof(MethodTable, type_shape) == offsetof(TypeInfoHot, type_shape),
+    "MethodTable.type_shape offset must match TypeInfoHot");
+static_assert(offsetof(MethodTable, flags) == offsetof(TypeInfoHot, flags),
+    "MethodTable.flags offset must match TypeInfoHot");
+
+// ── TypeInfoHot → MethodTable conversion ───────────────────────────
+// Only valid when TypeInfoHot is the hot section of a MethodTable.
+inline const MethodTable* TypeInfoHot::AsMethodTable() const noexcept {
+    return reinterpret_cast<const MethodTable*>(this);
+}
+inline MethodTable* TypeInfoHot::AsMethodTable() noexcept {
+    return reinterpret_cast<MethodTable*>(this);
+}
+
+// ── TypeHandle encoding helpers (uint64_t) ─────────────────────────
+// Three-state encoding for cross-DLL type identity:
+//   bit[63]=1:          Direct MethodTable* pointer (AOT types)
+//   bit[62]=1,bit[63]=0: Dynamic MethodTable index
+//   bit[62]=0,bit[63]=0: Module-registry handle [module_id:32 << 32 | token:32]
+//
+// This enables the hot path (case bit[63]=1) to be a single pointer
+// dereference, matching the performance of TypeInfoHot* direct access.
+
+/// Highest bit tag for direct MethodTable* encoding.
+inline constexpr uint64_t kTypeHandleMethodTableTag  = 1ull << 63;
+
+/// Second-highest bit tag for dynamic MethodTable index encoding.
+inline constexpr uint64_t kTypeHandleDynamicIndexTag = 1ull << 62;
+
+/// Encode a MethodTable* as a direct TypeInfoHandle (bit[63]=1).
+inline uint64_t EncodeMethodTableHandle(const MethodTable* mt) noexcept {
+    return mt != nullptr
+        ? (reinterpret_cast<uint64_t>(mt) | kTypeHandleMethodTableTag)
+        : 0ull;
+}
+
+/// Decode a direct MethodTable* from a TypeInfoHandle.
+/// Returns nullptr if the handle is NOT a direct MethodTable pointer.
+inline const MethodTable* DecodeMethodTableHandle(uint64_t handle) noexcept {
+    if ((handle & kTypeHandleMethodTableTag) == 0) return nullptr;
+    return reinterpret_cast<const MethodTable*>(handle & ~kTypeHandleMethodTableTag);
+}
+
+inline MethodTable* DecodeMethodTableHandleNonConst(uint64_t handle) noexcept {
+    if ((handle & kTypeHandleMethodTableTag) == 0) return nullptr;
+    return reinterpret_cast<MethodTable*>(handle & ~kTypeHandleMethodTableTag);
+}
+
+/// Check if a TypeInfoHandle is a direct MethodTable pointer (bit[63]=1).
+inline bool IsDirectMethodTableHandle(uint64_t handle) noexcept {
+    return (handle & kTypeHandleMethodTableTag) != 0;
+}
+
+/// Check if a TypeInfoHandle is a dynamic MethodTable index (bit[62]=1, bit[63]=0).
+inline bool IsDynamicMethodTableHandle(uint64_t handle) noexcept {
+    return (handle & kTypeHandleMethodTableTag) == 0
+        && (handle & kTypeHandleDynamicIndexTag) != 0;
+}
+
+/// Check if a TypeInfoHandle is a module-registry handle (bits[63:62]=00).
+inline bool IsModuleRegistryHandle(uint64_t handle) noexcept {
+    return (handle & (kTypeHandleMethodTableTag | kTypeHandleDynamicIndexTag)) == 0;
+}
 
 }  // namespace chaos::il2cpp::common
 
