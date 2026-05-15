@@ -48,6 +48,10 @@ WaitHandleEntry* AllocateHandle() noexcept {
 int32_t WaitOnHandle(WaitHandleEntry* entry, int32_t timeout_ms) noexcept {
     if (entry == nullptr) return -1;
 
+    // Set WaitSleepJoin state before blocking.
+    auto* thread = GetCurrentThread();
+    if (thread) thread->managed_state = ManagedThreadState::WaitSleepJoin;
+
     GC_TRANSITION_TO_PREEMPTIVE();
 
     std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
@@ -57,11 +61,13 @@ int32_t WaitOnHandle(WaitHandleEntry* entry, int32_t timeout_ms) noexcept {
             entry->signalled = false;  // AutoReset: consume the signal
         }
         GC_TRANSITION_TO_COOPERATIVE();
+        if (thread) thread->managed_state = ManagedThreadState::Running;
         return 1;  // signalled
     }
 
     if (timeout_ms == 0) {
         GC_TRANSITION_TO_COOPERATIVE();
+        if (thread) thread->managed_state = ManagedThreadState::Running;
         return 0;  // poll: not signalled
     }
 
@@ -81,6 +87,7 @@ int32_t WaitOnHandle(WaitHandleEntry* entry, int32_t timeout_ms) noexcept {
     }
 
     GC_TRANSITION_TO_COOPERATIVE();
+    if (thread) thread->managed_state = ManagedThreadState::Running;
     return result;
 }
 
@@ -192,11 +199,13 @@ int32_t WaitHandleWaitAny(const uint32_t* handle_ids, uint32_t count, int32_t ti
 
     if (timeout_ms == 0) return -1;  // Poll: none signalled.
 
-    // Blocking wait: spin with short sleeps until one is signalled or timeout.
+    // Blocking wait: use condition variables for O(1) wakeup instead of polling.
+    // When any handle is Set, its CV notify_one/notify_all wakes us immediately.
     GC_TRANSITION_TO_PREEMPTIVE();
 
     int32_t result = -1;
     while (std::chrono::steady_clock::now() < deadline) {
+        // Recheck all handles under their locks.
         for (uint32_t i = 0; i < count; i++) {
             if (entries[i] == nullptr) continue;
             std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
@@ -209,7 +218,38 @@ int32_t WaitHandleWaitAny(const uint32_t* handle_ids, uint32_t count, int32_t ti
                 return result;
             }
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+        // No handle signalled — wait on the first valid handle's CV.
+        // When any handle is Set, its CV notify wakes us and we recheck all.
+        // The predicate rechecks ALL handles to handle the case where a
+        // different handle was Set (not the one we're waiting on).
+        auto remaining = std::chrono::duration_cast<std::chrono::milliseconds>(
+            deadline - std::chrono::steady_clock::now());
+        if (remaining.count() <= 0) break;
+
+        for (uint32_t i = 0; i < count; i++) {
+            if (entries[i] == nullptr) continue;
+            std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
+            entries[i]->cv.wait_for(lock, remaining, [&entries, count]() {
+                for (uint32_t j = 0; j < count; j++) {
+                    if (entries[j] != nullptr && entries[j]->signalled) return true;
+                }
+                return false;
+            });
+            // Recheck after wakeup.
+            for (uint32_t j = 0; j < count; j++) {
+                if (entries[j] == nullptr) continue;
+                if (entries[j]->signalled) {
+                    if (entries[j]->type == WaitHandleType::AutoResetEvent) {
+                        entries[j]->signalled = false;
+                    }
+                    result = static_cast<int32_t>(j);
+                    GC_TRANSITION_TO_COOPERATIVE();
+                    return result;
+                }
+            }
+            break;  // Only wait on one CV per iteration; loop rechecks all.
+        }
     }
 
     GC_TRANSITION_TO_COOPERATIVE();
@@ -246,10 +286,11 @@ int32_t WaitHandleWaitAll(const uint32_t* handle_ids, uint32_t count, int32_t ti
 
     if (timeout_ms == 0) return -1;
 
-    // Blocking wait.
+    // Blocking wait: use CV for O(1) wakeup.
     GC_TRANSITION_TO_PREEMPTIVE();
 
     while (std::chrono::steady_clock::now() < deadline) {
+        // Recheck all handles.
         bool all = true;
         for (uint32_t i = 0; i < count; i++) {
             if (entries[i] == nullptr) continue;
@@ -263,7 +304,26 @@ int32_t WaitHandleWaitAll(const uint32_t* handle_ids, uint32_t count, int32_t ti
             GC_TRANSITION_TO_COOPERATIVE();
             return 0;
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+        auto remaining = std::chrono::duration_cast<std::chrono::milliseconds>(
+            deadline - std::chrono::steady_clock::now());
+        if (remaining.count() <= 0) break;
+
+        // Wait on the first non-signalled handle's CV.  When any handle is Set,
+        // its CV notify wakes us and we recheck all handles.
+        for (uint32_t i = 0; i < count; i++) {
+            if (entries[i] == nullptr) continue;
+            std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
+            if (!entries[i]->signalled) {
+                entries[i]->cv.wait_for(lock, remaining, [&entries, count]() {
+                    for (uint32_t j = 0; j < count; j++) {
+                        if (entries[j] != nullptr && !entries[j]->signalled) return false;
+                    }
+                    return true;  // All signalled.
+                });
+                break;  // Only wait on one CV per iteration.
+            }
+        }
     }
 
     GC_TRANSITION_TO_COOPERATIVE();

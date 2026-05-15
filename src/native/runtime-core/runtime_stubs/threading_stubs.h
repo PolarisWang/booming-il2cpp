@@ -25,3 +25,13 @@ void chaos_thread_yield(void) noexcept;
 // Background threads do not prevent process exit.
 CHAOS_IL2CPP_INT32 chaos_thread_is_background(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;
 void chaos_thread_set_background(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INT32 value) noexcept;
+
+// Thread.ThreadState: get the current managed thread state.
+CHAOS_IL2CPP_INT32 chaos_thread_get_state(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;
+
+// Thread.Priority: get/set thread priority.
+CHAOS_IL2CPP_INT32 chaos_thread_get_priority(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;
+void chaos_thread_set_priority(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INT32 value) noexcept;
+
+// Thread.IsThreadPoolThread: query whether thread is a ThreadPool worker.
+CHAOS_IL2CPP_INT32 chaos_thread_is_threadpool(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;

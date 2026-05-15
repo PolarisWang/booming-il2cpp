@@ -1,5 +1,6 @@
 // monitor.cpp — Monitor (lock) implementation
 #include "wait_handle.h"
+#include "thread_state.h"
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -128,6 +129,10 @@ bool MonitorIsEntered(void* monitor_target) {
 
 bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
     if (monitor_target == nullptr) return false;
+
+    // Set WaitSleepJoin before entering the wait.
+    auto* thread = threading::GetCurrentThread();
+    if (thread) thread->managed_state = threading::ManagedThreadState::WaitSleepJoin;
     auto* sync_ptr = GetSyncStatePtr(monitor_target);
     uint64_t sync = *sync_ptr;
     SyncBlock* sb = nullptr;
@@ -146,12 +151,19 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
         }
     }
     if (sb == nullptr) return false;
+
+    bool result;
     if (timeout_ms < 0) {
         sb->cond.wait(sb->mutex);
-        return true;
+        result = true;
+    } else {
+        result = sb->cond.wait_for(sb->mutex,
+            std::chrono::milliseconds(timeout_ms)) == std::cv_status::no_timeout;
     }
-    return sb->cond.wait_for(sb->mutex,
-        std::chrono::milliseconds(timeout_ms)) == std::cv_status::no_timeout;
+
+    // Restore Running state after wait completes.
+    if (thread) thread->managed_state = threading::ManagedThreadState::Running;
+    return result;
 }
 
 bool MonitorPulse(void* monitor_target) {
@@ -182,6 +194,7 @@ bool ThreadSleep(int32_t timeout_ms) {
     if (thread != nullptr && thread->pending_abort.load(std::memory_order_acquire)) {
         return false;
     }
+    if (thread) thread->managed_state = threading::ManagedThreadState::WaitSleepJoin;
     GC_TRANSITION_TO_PREEMPTIVE();
     if (timeout_ms == 0) {
         std::this_thread::yield();
@@ -189,6 +202,7 @@ bool ThreadSleep(int32_t timeout_ms) {
         std::this_thread::sleep_for(std::chrono::milliseconds(timeout_ms));
     }
     GC_TRANSITION_TO_COOPERATIVE();
+    if (thread) thread->managed_state = threading::ManagedThreadState::Running;
     return true;
 }
 

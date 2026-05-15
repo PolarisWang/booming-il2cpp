@@ -13,6 +13,30 @@ namespace chaos::il2cpp::runtime_core::threading {
 
 constexpr int32_t kMainThreadId = 1;
 
+// ── Managed thread state (mirrors System.Threading.ThreadState) ─────────
+
+enum class ManagedThreadState : int32_t {
+    Running         = 0,
+    StopRequested   = 1,
+    SuspendRequested = 2,
+    Background      = 4,
+    Unstarted       = 8,
+    Stopped         = 16,
+    WaitSleepJoin   = 32,
+    Aborted         = 256,
+    AbortRequested  = 512,
+};
+
+// ── Thread priority (matches System.Threading.ThreadPriority) ───────────
+
+enum class ManagedThreadPriority : int32_t {
+    Lowest         = 0,
+    BelowNormal    = 1,
+    Normal         = 2,
+    AboveNormal    = 3,
+    Highest        = 4,
+};
+
 /// Managed thread descriptor.
 ///
 /// Allocated per thread, linked into a lock-free global list for
@@ -29,6 +53,9 @@ struct ManagedThread {
     std::atomic<bool>        pending_abort{false};    // Thread.Abort pending flag
     std::atomic<bool>        pending_interrupt{false}; // Thread.Interrupt pending flag
     bool                     is_background{false};    // Thread.IsBackground flag
+    bool                     is_threadpool{false};    // ThreadPool worker flag (IsThreadPoolThread)
+    ManagedThreadState       managed_state{ManagedThreadState::Unstarted};  // ThreadState
+    ManagedThreadPriority    priority{ManagedThreadPriority::Normal};       // ThreadPriority
     bool                     at_safepoint{false}; // Currently paused at safepoint (legacy, kept for compat)
     uint32_t                 safepoint_generation{0}; // Last completed GC generation (legacy)
     /// TLS nursery context (for cross-thread nursery scanning in full GC).

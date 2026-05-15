@@ -179,5 +179,96 @@ void chaos_thread_set_background(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_IN
     });
 }
 
+CHAOS_IL2CPP_INT32 chaos_thread_get_state(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
+{
+    using chaos::il2cpp::runtime_core::threading::EnumerateThreads;
+    using chaos::il2cpp::runtime_core::threading::ManagedThread;
+
+    if (thread_obj == 0) return 0;
+
+    static CHAOS_IL2CPP_INTPTR s_target = 0;
+    static CHAOS_IL2CPP_INT32 s_result = 0;
+    s_target = thread_obj;
+    s_result = 0;
+
+    EnumerateThreads([](ManagedThread* mt) -> bool {
+        if (mt != nullptr && mt->managed_object == reinterpret_cast<void*>(s_target)) {
+            s_result = static_cast<CHAOS_IL2CPP_INT32>(mt->managed_state);
+            s_target = 0;
+            return false;
+        }
+        return true;
+    });
+    return s_result;
+}
+
+CHAOS_IL2CPP_INT32 chaos_thread_get_priority(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
+{
+    using chaos::il2cpp::runtime_core::threading::EnumerateThreads;
+    using chaos::il2cpp::runtime_core::threading::ManagedThread;
+
+    if (thread_obj == 0) return static_cast<CHAOS_IL2CPP_INT32>(threading::ManagedThreadPriority::Normal);
+
+    static CHAOS_IL2CPP_INTPTR s_target = 0;
+    static CHAOS_IL2CPP_INT32 s_result = 0;
+    s_target = thread_obj;
+    s_result = static_cast<CHAOS_IL2CPP_INT32>(threading::ManagedThreadPriority::Normal);
+
+    EnumerateThreads([](ManagedThread* mt) -> bool {
+        if (mt != nullptr && mt->managed_object == reinterpret_cast<void*>(s_target)) {
+            s_result = static_cast<CHAOS_IL2CPP_INT32>(mt->priority);
+            s_target = 0;
+            return false;
+        }
+        return true;
+    });
+    return s_result;
+}
+
+void chaos_thread_set_priority(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INT32 value) noexcept
+{
+    using chaos::il2cpp::runtime_core::threading::EnumerateThreads;
+    using chaos::il2cpp::runtime_core::threading::ManagedThread;
+
+    if (thread_obj == 0) return;
+
+    static CHAOS_IL2CPP_INTPTR s_target = 0;
+    static CHAOS_IL2CPP_INT32 s_new_pri = 0;
+    s_target = thread_obj;
+    s_new_pri = value;
+
+    EnumerateThreads([](ManagedThread* mt) -> bool {
+        if (mt != nullptr && mt->managed_object == reinterpret_cast<void*>(s_target)) {
+            mt->priority = static_cast<threading::ManagedThreadPriority>(s_new_pri);
+            s_target = 0;
+            return false;
+        }
+        return true;
+    });
+}
+
+CHAOS_IL2CPP_INT32 chaos_thread_is_threadpool(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
+{
+    using chaos::il2cpp::runtime_core::threading::EnumerateThreads;
+    using chaos::il2cpp::runtime_core::threading::ManagedThread;
+
+    if (thread_obj == 0) return 0;
+
+    static CHAOS_IL2CPP_INTPTR s_target = 0;
+    static CHAOS_IL2CPP_INT32 s_result = 0;
+    s_target = thread_obj;
+    s_result = 0;
+
+    EnumerateThreads([](ManagedThread* mt) -> bool {
+        if (mt != nullptr && mt->managed_object == reinterpret_cast<void*>(s_target)) {
+            s_result = mt->is_threadpool ? 1 : 0;
+            s_target = 0;
+            return false;
+        }
+        return true;
+    });
+    return s_result;
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
