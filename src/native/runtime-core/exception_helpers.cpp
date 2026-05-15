@@ -27,10 +27,12 @@
 #include <cstring>
 
 // ── TLS definitions for exception_jmp.h (SETJMP mode only) ──────────────
-#if defined(CHAOS_IL2CPP_EH_SETJMP)
+#if defined(CHAOS_IL2CPP_EH_SETJMP) || defined(CHAOS_IL2CPP_EH_WIN32_SEH)
 namespace chaos::il2cpp::runtime_core {
+#if defined(CHAOS_IL2CPP_EH_SETJMP)
 thread_local jmp_buf g_chaos_exception_jmp_stack[kMaxNestedTry] = {};
 thread_local int g_chaos_exception_jmp_depth = 0;
+#endif
 thread_local void* volatile g_chaos_exception_obj = nullptr;
 }  // namespace
 #endif

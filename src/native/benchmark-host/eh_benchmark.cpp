@@ -1,17 +1,26 @@
 // ── EH mechanism micro-benchmark ────────────────────────────────────────
 //
-// Compares C++ throw/catch vs setjmp/longjmp for managed exception delivery.
-// Both paths measured: throw (raise) and happy (no exception, enter/leave).
+// Compares C++ throw/catch vs setjmp/longjmp vs Win32 SEH for managed
+// exception delivery.  Both paths measured: throw (raise) and happy
+// (no exception, enter/leave).
 //
 // Build:
 //   cl /EHsc /O2 /std:c++17 /DCHAOS_IL2CPP_EH_CPP_THROW eh_benchmark.cpp /Fe:eh_cpp_throw.exe
 //   cl /EHsc /O2 /std:c++17 /DCHAOS_IL2CPP_EH_SETJMP eh_benchmark.cpp /Fe:eh_setjmp.exe
+//   cl /EHca /O2 /std:c++17 /DCHAOS_IL2CPP_EH_WIN32_SEH eh_benchmark.cpp /Fe:eh_win32_seh.exe
 
 #include <chrono>
 #include <csetjmp>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
+
+#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+#  ifndef NOMINMAX
+#    define NOMINMAX
+#  endif
+#  include <windows.h>
+#endif
 
 // ── Simulated managed exception type ────────────────────────────────────
 using CHAOS_IL2CPP_INTPTR = int64_t;
@@ -44,6 +53,26 @@ static void pop_exception_jmp_buf() noexcept {
     std::abort();
 }
 
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+
+static constexpr unsigned long kChaosManagedExceptionCode = 0xE0000001;
+
+// GetExceptionInformation() intrinsic is only valid within __except()
+// filter expression.  Define a macro so the expansion stays in filter context.
+#define CHAOS_SEH_FILTER_ALL_IMPL \
+    (GetExceptionCode() == kChaosManagedExceptionCode ? \
+        (g_chaos_exception_obj = reinterpret_cast<void*>( \
+            GetExceptionInformation()->ExceptionRecord->ExceptionInformation[0]), \
+         EXCEPTION_EXECUTE_HANDLER) : \
+        EXCEPTION_CONTINUE_SEARCH)
+
+[[noreturn]] static void chaos_raise_exception(CHAOS_IL2CPP_INTPTR obj) noexcept {
+    g_chaos_exception_obj = reinterpret_cast<void*>(obj);
+    RaiseException(kChaosManagedExceptionCode, 0, 1,
+        reinterpret_cast<const ULONG_PTR*>(&obj));
+    std::abort();
+}
+
 #else  // CPP_THROW
 
 [[noreturn]] static void chaos_raise_exception(CHAOS_IL2CPP_INTPTR obj) {
@@ -68,7 +97,14 @@ struct Timer {
 static int64_t bench_throw_catch(int iterations) {
     int64_t checksum = 0;
     for (int i = 0; i < iterations; i++) {
-#if defined(CHAOS_IL2CPP_EH_CPP_THROW)
+#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+        __try {
+            chaos_raise_exception(static_cast<CHAOS_IL2CPP_INTPTR>(i));
+        } __except(CHAOS_SEH_FILTER_ALL_IMPL) {
+            checksum += static_cast<int64_t>(
+                reinterpret_cast<CHAOS_IL2CPP_INTPTR>(g_chaos_exception_obj));
+        }
+#elif defined(CHAOS_IL2CPP_EH_CPP_THROW)
         try {
             chaos_raise_exception(static_cast<CHAOS_IL2CPP_INTPTR>(i));
         } catch (const chaos_managed_exception& e) {
@@ -93,7 +129,12 @@ static int64_t bench_throw_catch(int iterations) {
 static int64_t bench_happy_path(int iterations) {
     int64_t checksum = 0;
     for (int i = 0; i < iterations; i++) {
-#if defined(CHAOS_IL2CPP_EH_CPP_THROW)
+#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+        __try {
+            checksum += i;
+        } __finally {
+        }
+#elif defined(CHAOS_IL2CPP_EH_CPP_THROW)
         try {
             checksum += i;
         } catch (const chaos_managed_exception&) {
@@ -146,6 +187,8 @@ int main() {
 
 #if defined(CHAOS_IL2CPP_EH_SETJMP)
     printf("Mode: SETJMP\n");
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+    printf("Mode: WIN32_SEH\n");
 #else
     printf("Mode: CPP_THROW\n");
 #endif
