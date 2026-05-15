@@ -28,6 +28,12 @@ target_link_libraries(
         chaos_bootstrap
         chaos_interpreter)
 
+# All GC test targets need chaos_interpreter because chaos_runtime_core.lib
+# contains instantiation_engine.obj which references InterpreterValue symbols,
+# and chaos_bootstrap.lib references ChaosResolveExternalRuntimeFnTable
+# (defined in hotpatch_resolve.cpp, part of chaos_interpreter).
+set(CHAOS_GC_COMMON_LIBS chaos_runtime_core chaos_bootstrap chaos_interpreter chaos_fmt chaos_bdwgc)
+
 # gc_bump_cache_test — GcBumpCache size-class allocator unit tests
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
     add_executable(chaos_gc_bump_cache_test gc_bump_cache_test.cpp)
@@ -39,6 +45,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
         PRIVATE
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/bdwgc/include"
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_gc_bump_cache_test
@@ -47,9 +55,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
             chaos_fmt)
 endif()
 
+set(CHAOS_GC_TEST_STUBS gc_test_stubs.cpp)
+
 # gc_region_test — CRAG region framework + card table unit tests (C0.1-C0.3)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_region_test.cpp")
-    add_executable(chaos_gc_region_test gc_region_test.cpp)
+    add_executable(chaos_gc_region_test gc_region_test.cpp ${CHAOS_GC_TEST_STUBS})
     target_compile_features(chaos_gc_region_test PRIVATE cxx_std_17)
     target_compile_definitions(chaos_gc_region_test PRIVATE
         _CRT_SECURE_NO_WARNINGS)
@@ -64,18 +74,16 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_region_test.cpp")
     target_link_libraries(
         chaos_gc_region_test
         PRIVATE
-            chaos_runtime_core
-            chaos_bootstrap
-            chaos_fmt
-            chaos_bdwgc)
+            ${CHAOS_GC_COMMON_LIBS})
 endif()
 
 # gc_root_scanner_test — GcSlotMap registry + hybrid root scanning unit tests
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_root_scanner_test.cpp")
-    add_executable(chaos_gc_root_scanner_test gc_root_scanner_test.cpp)
-    target_compile_features(chaos_gc_root_scanner_test PRIVATE cxx_std_17)
+    add_executable(chaos_gc_root_scanner_test gc_root_scanner_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_root_scanner_test PRIVATE cxx_std_20)
     target_compile_definitions(chaos_gc_root_scanner_test PRIVATE
         _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_root_scanner_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
     target_include_directories(
         chaos_gc_root_scanner_test
         PRIVATE
@@ -87,15 +95,12 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_root_scanner_test.cpp")
     target_link_libraries(
         chaos_gc_root_scanner_test
         PRIVATE
-            chaos_runtime_core
-            chaos_bootstrap
-            chaos_bdwgc
-            chaos_fmt)
+            ${CHAOS_GC_COMMON_LIBS})
 endif()
 
 # domain_unload_test — C4: HotUpdate domain unloader with cross-domain reference checking
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/domain_unload_test.cpp")
-    add_executable(chaos_domain_unload_test domain_unload_test.cpp)
+    add_executable(chaos_domain_unload_test domain_unload_test.cpp ${CHAOS_GC_TEST_STUBS})
     target_compile_features(chaos_domain_unload_test PRIVATE cxx_std_17)
     target_compile_definitions(chaos_domain_unload_test PRIVATE
         CHAOS_RUNTIME_ABI_STATIC
@@ -112,15 +117,12 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/domain_unload_test.cpp")
     target_link_libraries(
         chaos_domain_unload_test
         PRIVATE
-            chaos_runtime_core
-            chaos_bootstrap
-            chaos_fmt
-            chaos_bdwgc)
+            ${CHAOS_GC_COMMON_LIBS})
 endif()
 
 # gc_young_collector_test — Cheney copying young GC unit tests (C2.3-C2.6)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_young_collector_test.cpp")
-    add_executable(chaos_gc_young_collector_test gc_young_collector_test.cpp)
+    add_executable(chaos_gc_young_collector_test gc_young_collector_test.cpp ${CHAOS_GC_TEST_STUBS})
     target_compile_features(chaos_gc_young_collector_test PRIVATE cxx_std_17)
     target_compile_definitions(chaos_gc_young_collector_test PRIVATE
         _CRT_SECURE_NO_WARNINGS)
@@ -135,19 +137,17 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_young_collector_test.cpp")
     target_link_libraries(
         chaos_gc_young_collector_test
         PRIVATE
-            chaos_runtime_core
-            chaos_bootstrap
-            chaos_fmt
-            chaos_bdwgc)
+            ${CHAOS_GC_COMMON_LIBS})
 endif()
 
 # memory_domain_test — MemoryDomain lifecycle + tagged allocation unit tests
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/memory_domain_test.cpp")
-    add_executable(chaos_memory_domain_test memory_domain_test.cpp)
+    add_executable(chaos_memory_domain_test memory_domain_test.cpp ${CHAOS_GC_TEST_STUBS})
     target_compile_features(chaos_memory_domain_test PRIVATE cxx_std_17)
     target_compile_definitions(chaos_memory_domain_test PRIVATE
         CHAOS_RUNTIME_ABI_STATIC
         _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_memory_domain_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
     target_include_directories(
         chaos_memory_domain_test
         PRIVATE
@@ -158,10 +158,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/memory_domain_test.cpp")
     target_link_libraries(
         chaos_memory_domain_test
         PRIVATE
-            chaos_runtime_core
-            chaos_bootstrap
-            chaos_bdwgc
-            chaos_fmt)
+            ${CHAOS_GC_COMMON_LIBS})
 endif()
 
 # threading_smoke — thread model + ThreadPool (Phase 5 thread model gap)
@@ -207,7 +204,7 @@ endif()
 
 # gc_stress_test — T.3: 100-thread concurrent allocation + GC stress test
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_stress_test.cpp")
-    add_executable(chaos_gc_stress_test gc_stress_test.cpp)
+    add_executable(chaos_gc_stress_test gc_stress_test.cpp ${CHAOS_GC_TEST_STUBS})
     target_compile_features(chaos_gc_stress_test PRIVATE cxx_std_17)
     target_compile_definitions(chaos_gc_stress_test PRIVATE
         _CRT_SECURE_NO_WARNINGS)
@@ -223,8 +220,5 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_stress_test.cpp")
     target_link_libraries(
         chaos_gc_stress_test
         PRIVATE
-            chaos_runtime_core
-            chaos_bootstrap
-            chaos_fmt
-            chaos_bdwgc)
+            ${CHAOS_GC_COMMON_LIBS})
 endif()

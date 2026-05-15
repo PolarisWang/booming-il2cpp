@@ -48,15 +48,21 @@ static CHAOS_IL2CPP_SIZE ScanAndClearCrossDomainRefs(CHAOS_IL2CPP_UINT32 domain_
     uintptr_t heap_base = g_heap_base;
     if (heap_base == 0) return 0;
 
-    // For each possible card, check if it's dirty and belongs to a
-    // domain region.  At C4 this is simplified: we make a single pass
-    // over the card table.  A production implementation would use the
-    // region table for precise domain→card mapping.
-    for (uintptr_t card_idx = 0; card_idx < kCardTableEntries; card_idx++) {
-        if (g_card_table[card_idx] == 0) continue;  // clean card
+    // Walk the two-level card table: L1 segments (64K entries, lazily
+    // allocated) × L2 cards (128 cards per segment, 512B each).
+    uintptr_t l1_max = static_cast<uintptr_t>(kCardL1Entries);
+    for (uintptr_t seg_idx = 0; seg_idx < l1_max; seg_idx++) {
+        auto* seg = g_card_l1[seg_idx].load(std::memory_order_acquire);
+        if (seg == nullptr) continue;  // no segment allocated
 
-        uintptr_t card_start = heap_base + (card_idx << kCardShift);
-        uintptr_t card_end = card_start + kCardSize;
+        for (uintptr_t ci = 0; ci < static_cast<uintptr_t>(kCardsPerSegment); ci++) {
+            if (seg->cards[ci] == 0) continue;  // clean card
+
+            uintptr_t global_card_idx = seg_idx * kCardsPerSegment + ci;
+            uintptr_t card_start = heap_base + (global_card_idx << kCardShift);
+            // Clamp to prevent overflow from wrapping around.
+            if (card_start < heap_base) continue;
+            uintptr_t card_end = card_start + kCardSize;
 
         // Scan pointer-aligned slots in this card.
         for (uintptr_t slot = card_start; slot < card_end; slot += sizeof(void*)) {
@@ -86,7 +92,8 @@ static CHAOS_IL2CPP_SIZE ScanAndClearCrossDomainRefs(CHAOS_IL2CPP_UINT32 domain_
             // The slot points OUTSIDE the domain (core memory or another domain).
             // Safe to keep — not affected by this domain's unload.
         }
-    }
+        }  // close ci for
+    }  // close seg for
 
     CHAOS_IL2CPP_LOG_INFO_M("CRAG", "cross_domain_scan id={0} found={1} cleared={2}",
         domain_id, refs_found, refs_cleared);

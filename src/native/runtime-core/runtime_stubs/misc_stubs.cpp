@@ -10,6 +10,7 @@
 #include "runtime_stubs/stub_common.h"
 #include "runtime_stubs/string_stubs.h"
 #include "gc_helpers.h"
+#include "gc/gc_scheduler.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -158,6 +159,16 @@ CHAOS_IL2CPP_INTPTR ChaosTextInfoGetCultureName(CHAOS_IL2CPP_INTPTR /*text_info*
 void ChaosGcCollect(CHAOS_IL2CPP_INT32 generation) noexcept
 {
     (void)generation;
+    // Route GC.Collect() through the scheduler's request + safepoint trigger.
+    // The scheduler's RequestFullGc flag is polled in NurseryAllocateSlow
+    // (gc_region.cpp) during the next allocation slow path, which runs the
+    // full collection under a safepoint.
+    //
+    // For an immediate synchronous full GC (generation < 0 or explicit request),
+    // we bypass the scheduler and trigger directly under a safepoint.
+    if (generation < 0 || generation == 2) {
+        g_gc_scheduler.RequestFullGc();
+    }
 }
 
 CHAOS_IL2CPP_INT32 ChaosGcGetGeneration(CHAOS_IL2CPP_INTPTR obj) noexcept

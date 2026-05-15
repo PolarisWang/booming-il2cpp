@@ -11,6 +11,7 @@
 #include <vector>
 
 #include "gc_card_table.h"
+#include "gc_layout.h"
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -68,6 +69,10 @@ struct OldGenPage {
     // Mark bitmap follows immediately after the header at offset sizeof(OldGenPage).
     unsigned char* MarkBitmap() {
         return reinterpret_cast<unsigned char*>(this) + sizeof(OldGenPage);
+    }
+
+    const unsigned char* MarkBitmap() const {
+        return reinterpret_cast<const unsigned char*>(this) + sizeof(OldGenPage);
     }
 
     // Payload starts after header + bitmap at offset sizeof(OldGenPage) + bitmap_bytes.
@@ -210,13 +215,54 @@ private:
     bool MarkObject(void* obj);
 
     /// Mark all objects on the mark stack (transitive closure).
+    /// Sequential — used for small mark sets and finalizer re-mark.
     void DrainMarkStack();
+
+    /// Parallel transitive closure marking using chunked work-stealing.
+    /// Replaces DrainMarkStack() for the primary full-GC mark phase.
+    /// @param pages     Snapshot of all pages.
+    /// @param page_count Number of pages.
+    void DrainMarkStackParallel(OldGenPage** pages, int page_count);
 
     /// Sweep a single page: reclaim unmarked blocks.
     CHAOS_IL2CPP_SIZE SweepPage(OldGenPage* page);
 
     /// Coalesce adjacent free blocks on a page.
     void CoalescePage(OldGenPage* page);
+
+    /// Reclaim retired GcLayout tables (safe during STW).
+    void ReclaimGcLayoutTables() {
+        GcLayoutRegistry::Instance().ReclaimRetiredTables();
+    }
+
+    /// Phase 3b re-mark pass: iterate GCHandle table and mark reachable objects.
+    /// Must be called from within Collect() after RunFinalizers().
+    void HandleReMarkPass();
+
+    /// Compute fragmentation ratio for a page: 1.0 - (live_bytes / payload_size).
+    float PageFragmentation(const OldGenPage* page) const;
+
+    // ── Compaction support (Phase 4) ─────────────────────────────
+
+    /// Compaction mode for a full-GC cycle.
+    enum class CompactMode : uint8_t {
+        NONE,          ///< No compaction (standard mark-sweep)
+        COMPACT        ///< Compact each page (plan → relocate → compact)
+    };
+
+    /// Plan compaction for a single page: compute new addresses.
+    /// @return Number of bytes that would be saved (fragmentation reduction).
+    CHAOS_IL2CPP_SIZE PlanPageCompaction(OldGenPage* page,
+                                          CHAOS_IL2CPP_SIZE* out_live_bytes);
+
+    /// Relocate all pointer references in old-gen pages to use compacted addresses.
+    void RelocatePage(OldGenPage* page);
+
+    /// Compact a page: memmove objects to their planned positions.
+    void CompactPage(OldGenPage* page);
+
+    /// Check fragmentation ratio and decide compaction mode.
+    CompactMode DecideCompactMode();
 
     // ── State ───────────────────────────────────────────────────
 
@@ -231,13 +277,17 @@ private:
     // Auto-init guard: true after Init() completes.
     std::atomic<bool> initialized_{false};
 
+    // Separate mutex for auto-init (Allocate holds init_mutex_, then Init()
+    // calls AllocatePage which internally takes mutex_, so we cannot use
+    // mutex_ for the init guard).
+    std::mutex init_mutex_;
+
     // Marked-object counter (reset each cycle, used by GcStats).
     std::atomic<uint64_t> marked_count_{0};
 
     // Mark stack for tri-color marking (vector = stack).
-    // Bounded to kMaxMarkStack entries to prevent OOM from deep object graphs.
-    // Overflow triggers a conservative rescan of all pages in lieu of pushing.
-    static constexpr size_t kMaxMarkStack = 256 * 1024;  // 256K entries = 2 MB
+    // Used for sequential mark (finalizer re-mark) and as the seed source
+    // for parallel mark.  Grows dynamically (no hard bound).
     std::vector<void*> mark_stack_;
 
     // Per-size-class last-used-page cache (avoids O(n) page_list walk).

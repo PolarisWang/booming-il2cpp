@@ -5,6 +5,7 @@
 #include <chaos/log.h>
 
 #include <algorithm>
+#include <cmath>
 #include <cstdlib>
 
 namespace chaos::il2cpp::runtime_core {
@@ -12,6 +13,12 @@ namespace chaos::il2cpp::runtime_core {
 // ======================================================================
 // GcLayoutRegistry singleton
 // ======================================================================
+
+GcLayoutRegistry::GcLayoutRegistry() {
+    // Allocate initial table.
+    auto* table = new GcLayoutTable(kGcLayoutMinCapacity);
+    current_table_.store(table, std::memory_order_release);
+}
 
 GcLayoutRegistry& GcLayoutRegistry::Instance() {
     static GcLayoutRegistry instance;
@@ -22,10 +29,78 @@ GcLayoutRegistry& GcLayoutRegistry::Instance() {
 // Registration
 // ======================================================================
 
+bool GcLayoutRegistry::InsertIntoTable(GcLayoutTable* table, uint64_t key, GcTypeLayout* value) {
+    int idx = static_cast<int>(key % static_cast<uint64_t>(table->capacity));
+    for (int probe = 0; probe < table->capacity; probe++) {
+        uint64_t existing = table->keys[idx].load(std::memory_order_acquire);
+        if (existing == kGcLayoutEmptySlot) {
+            uint64_t expected = kGcLayoutEmptySlot;
+            if (table->keys[idx].compare_exchange_strong(expected, key,
+                    std::memory_order_release, std::memory_order_acquire)) {
+                table->values[idx] = value;
+                table->count++;
+                return true;
+            }
+            // Race lost — retry.
+        } else if (existing == key) {
+            // Duplicate — update in-place.
+            table->values[idx] = value;
+            return true;
+        }
+        idx = (idx + 1) % table->capacity;
+    }
+    return false;  // table full
+}
+
+void GcLayoutRegistry::GrowTable() {
+    auto* old_table = current_table_.load(std::memory_order_acquire);
+
+    int new_capacity = old_table->capacity * 2;
+    if (new_capacity > 1024 * 1024) {
+        CHAOS_IL2CPP_LOG_WARN_M("GcLayout", "table capacity clamped at 1M slots");
+        new_capacity = 1024 * 1024;
+    }
+
+    auto* new_table = new GcLayoutTable(new_capacity);
+
+    // Rehash all existing entries.
+    for (int i = 0; i < old_table->capacity; i++) {
+        uint64_t key = old_table->keys[i].load(std::memory_order_acquire);
+        if (key != kGcLayoutEmptySlot) {
+            InsertIntoTable(new_table, key, old_table->values[i]);
+            // GcTypeLayout* objects are re-linked — not freed.
+        }
+    }
+
+    // Publish new table.
+    current_table_.store(new_table, std::memory_order_release);
+
+    // Retire old table (deferred free via ReclaimRetiredTables).
+    RetireTable(old_table);
+}
+
+void GcLayoutRegistry::RetireTable(GcLayoutTable* table) {
+    retired_tables_.push_back(table);
+}
+
+void GcLayoutRegistry::ReclaimRetiredTables() {
+    // Must be called from a safepoint (no concurrent Lookup readers).
+    size_t n = retired_tables_.size();
+    for (auto* table : retired_tables_) {
+        delete table;
+    }
+    retired_tables_.clear();
+
+    if (n > 0) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("GcLayout", "reclaimed {0} retired tables",
+            static_cast<unsigned long long>(n));
+    }
+}
+
 void GcLayoutRegistry::Register(uint64_t stable_id, uint32_t instance_size,
                                 const uint16_t* pointer_offsets,
                                 uint16_t pointer_count) {
-    if (stable_id == kEmptySlot) return;
+    if (stable_id == kGcLayoutEmptySlot) return;
 
     std::lock_guard<std::mutex> lock(register_mutex_);
 
@@ -42,59 +117,49 @@ void GcLayoutRegistry::Register(uint64_t stable_id, uint32_t instance_size,
     layout->_reserved = 0;
     layout->_reserved2 = 0;
 
-    // Copy pointer offsets (sorted by construction).
     for (uint16_t i = 0; i < layout->pointer_count; i++) {
         layout->pointer_offsets[i].offset = pointer_offsets[i];
     }
-    // Zero remaining.
     for (uint16_t i = layout->pointer_count; i < kGcLayoutMaxInlinePointers; i++) {
         layout->pointer_offsets[i].offset = 0;
     }
 
-    // Insert into hash table (linear probing).
-    uint32_t idx = static_cast<uint32_t>(stable_id % kHashSize);
-    for (int probe = 0; probe < kHashSize; probe++) {
-        uint64_t key = hash_keys_[idx].load(std::memory_order_acquire);
-        if (key == kEmptySlot) {
-            // Empty slot — claim it.
-            uint64_t expected = kEmptySlot;
-            if (hash_keys_[idx].compare_exchange_strong(expected, stable_id,
-                    std::memory_order_release, std::memory_order_acquire)) {
-                hash_values_[idx] = layout;
-                // Release fence: readers who see the key (via acquire load)
-                // are guaranteed to see the value write too.
-                std::atomic_thread_fence(std::memory_order_release);
-                return;
-            }
-            // Race lost — slot was taken, try next.
-        } else if (key == stable_id) {
-            // Already registered — update.
-            CHAOS_IL2CPP_FREE(hash_values_[idx]);
-            hash_values_[idx] = layout;
+    // Insert into current table — grow if load factor exceeded.
+    auto* table = current_table_.load(std::memory_order_acquire);
+    if (!InsertIntoTable(table, stable_id, layout)) {
+        // Table full — grow and retry.
+        GrowTable();
+        table = current_table_.load(std::memory_order_acquire);
+        if (!InsertIntoTable(table, stable_id, layout)) {
+            // Should not happen after growth, but handle gracefully.
+            CHAOS_IL2CPP_LOG_ERROR_M("GcLayout", "insert failed after grow for stable_id={0:x}", stable_id);
+            CHAOS_IL2CPP_FREE(layout);
             return;
         }
-        idx = (idx + 1) % kHashSize;
     }
 
-    // Table full — leak the layout and log.
-    CHAOS_IL2CPP_LOG_ERROR_M("GcLayout", "hash table full, dropping stable_id={0:x}", stable_id);
-    CHAOS_IL2CPP_FREE(layout);
+    // Check load factor — grow proactively if >75%.
+    if (static_cast<float>(table->count) / static_cast<float>(table->capacity) > kGcLayoutLoadFactorThreshold) {
+        GrowTable();
+    }
 }
 
 const GcTypeLayout* GcLayoutRegistry::Lookup(uint64_t stable_id) const {
-    if (stable_id == kEmptySlot) return nullptr;
+    if (stable_id == kGcLayoutEmptySlot) return nullptr;
 
-    uint32_t idx = static_cast<uint32_t>(stable_id % kHashSize);
-    for (int probe = 0; probe < kHashSize; probe++) {
-        uint64_t key = hash_keys_[idx].load(std::memory_order_acquire);
-        if (key == kEmptySlot) {
-            // Not found (empty slot in probing chain).
-            return nullptr;
+    auto* table = current_table_.load(std::memory_order_acquire);
+    if (table == nullptr) return nullptr;
+
+    int idx = static_cast<int>(stable_id % static_cast<uint64_t>(table->capacity));
+    for (int probe = 0; probe < table->capacity; probe++) {
+        uint64_t key = table->keys[idx].load(std::memory_order_acquire);
+        if (key == kGcLayoutEmptySlot) {
+            return nullptr;  // not found
         }
         if (key == stable_id) {
-            return hash_values_[idx];
+            return table->values[idx];
         }
-        idx = (idx + 1) % kHashSize;
+        idx = (idx + 1) % table->capacity;
     }
 
     return nullptr;  // table full or not found
@@ -104,25 +169,15 @@ void GcLayoutRegistry::RegisterTypeInfoRange(uintptr_t range_begin,
                                               uintptr_t range_end) {
     if (range_begin >= range_end) return;
 
-    // Use the lock-free fixed-size array.
-    // Linear scan existing entries (max 64, one-time registration).
     for (int i = 0; i < typeinfo_range_count_.load(std::memory_order_acquire); i++) {
         auto& r = typeinfo_ranges_[i];
         if (range_begin <= r.end && range_end >= r.begin) {
-            // Extend existing range (no need for atomic update since
-            // registration is single-threaded at startup).
             if (range_begin < r.begin) r.begin = range_begin;
             if (range_end > r.end) r.end = range_end;
             return;
         }
     }
 
-    // IMPORTANT: Write data into the slot BEFORE publishing via the count.
-    // Since registration is single-threaded at startup, no concurrent
-    // registration race exists.  However, GC workers may call
-    // IsValidTypeInfoPointer concurrently — read the current count as
-    // the insertion index, write data, then store the incremented count
-    // with release ordering so that the data writes are visible.
     int idx = typeinfo_range_count_.load(std::memory_order_acquire);
     if (idx >= kMaxTypeInfoRanges) {
         CHAOS_IL2CPP_LOG_ERROR_M("GcLayout", "too many TypeInfo ranges ({0}), dropping", idx);
@@ -149,23 +204,18 @@ bool GcLayoutRegistry::IsValidTypeInfoPointer(const void* ptr) const {
 }
 
 void GcLayoutRegistry::RegisterRawAllocType(uint32_t instance_size) {
-    // Register a pointer-free layout.
     uint64_t stable_id = RegisterOrGetRawAllocType(instance_size);
     (void)stable_id;
 }
 
 uint64_t GcLayoutRegistry::RegisterOrGetRawAllocType(uint32_t instance_size) {
-    // Generate a deterministic stable_id for this size.
-    // The formula ensures that same-size allocs share the same layout.
     uint64_t stable_id = kGcLayoutRawAllocStableId ^
         (static_cast<uint64_t>(instance_size) << 16);
 
-    // Check if already registered.
     if (Lookup(stable_id) != nullptr) {
         return stable_id;
     }
 
-    // Register pointer-free layout.
     Register(stable_id, instance_size, nullptr, 0);
     return stable_id;
 }
@@ -189,10 +239,9 @@ int ScanObjectPointers(void* obj, const GcTypeLayout* layout,
         if (val == nullptr) continue;
 
         if (IsInNursery(val)) {
-            // This pointer references a nursery object — scavenge it.
             void* tenured = GcScavengeObject(val, result);
             if (tenured != nullptr && tenured != val) {
-                *slot = tenured;  // Update the reference.
+                *slot = tenured;
             }
             found++;
         }
@@ -217,39 +266,28 @@ void CheneyBfsPrecise(void* tenured_begin, void* tenured_end,
 
     auto& registry = GcLayoutRegistry::Instance();
 
-    // Walk the promoted region object-by-object.
     uintptr_t scan = reinterpret_cast<uintptr_t>(tenured_begin);
     uintptr_t end  = reinterpret_cast<uintptr_t>(tenured_end);
 
     while (scan < end) {
         auto* obj = reinterpret_cast<void*>(scan);
 
-        // Read TypeInfo* from first word.
         const void* type_info_ptr = *static_cast<const void* const*>(obj);
         if (type_info_ptr == nullptr) {
-            // End of valid objects (padding).
             break;
         }
 
-        // Look up the GC layout.
-        // For promoted objects, the TypeInfo* is the canonical TIB pointer.
-        // We need to derive the stable_id from it.
         auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
         uint64_t stable_id = hot->stable_id;
 
         const auto* layout = registry.Lookup(stable_id);
         if (layout == nullptr) {
-            // No layout registered — fall back to instance_size from TypeInfo
-            // (or skip if we can't determine size).
-            // At C2/C3, this path is minimal since most types have layouts.
             CHAOS_IL2CPP_LOG_DEBUG("CRAG", "cheney_bfs_no_layout");
             continue;
         }
 
-        // Scan this object's pointer fields.
         ScanObjectPointers(obj, layout, nursery, result);
 
-        // Advance to next object.
         scan += layout->instance_size;
     }
 }
