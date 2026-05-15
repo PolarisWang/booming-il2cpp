@@ -183,6 +183,26 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
             chaos_runtime_core
             chaos_bdwgc)
 
+    # synchronization_smoke — SemaphoreSlim, RWLock, WaitHandle, TimerQueue
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/synchronization_smoke.cpp")
+        add_executable(chaos_synchronization_smoke synchronization_smoke.cpp)
+        target_compile_features(chaos_synchronization_smoke PRIVATE cxx_std_17)
+        target_compile_definitions(chaos_synchronization_smoke PRIVATE
+            CHAOS_RUNTIME_ABI_STATIC
+            _CRT_SECURE_NO_WARNINGS)
+        target_include_directories(
+            chaos_synchronization_smoke
+            PRIVATE
+                "${REPO_ROOT}/contracts/native/v0"
+                "${REPO_ROOT}/src/native/common"
+                "${REPO_ROOT}/src/native/runtime-core")
+        target_link_libraries(
+            chaos_synchronization_smoke
+            PRIVATE
+                chaos_runtime_core
+                chaos_bdwgc)
+    endif()
+
     # threading_benchmark — native microbenchmark (Release only)
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_benchmark.cpp")
         add_executable(chaos_threading_benchmark threading_benchmark.cpp)
@@ -225,6 +245,32 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_stress_test.cpp")
         PRIVATE
             chaos_runtime_core
             chaos_bootstrap
+            chaos_fmt
+            chaos_bdwgc)
+endif()
+
+# capacity_stress_test — 200+ DLL / 100+ hot-update DLL capacity verification
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
+    add_executable(chaos_capacity_stress_test capacity_stress_test.cpp)
+    target_compile_features(chaos_capacity_stress_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_capacity_stress_test PRIVATE
+        CHAOS_RUNTIME_ABI_STATIC
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_capacity_stress_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_capacity_stress_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/third_party/bdwgc/include"
+            "${REPO_ROOT}/third_party/fmt/include")
+    target_link_libraries(
+        chaos_capacity_stress_test
+        PRIVATE
+            chaos_runtime_core
+            chaos_bootstrap
+            chaos_interpreter
             chaos_fmt
             chaos_bdwgc)
 endif()

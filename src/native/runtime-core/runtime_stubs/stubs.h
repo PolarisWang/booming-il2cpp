@@ -22,7 +22,6 @@ extern "C" {
 #include "exception_stubs.h"
 #include "object_stubs.h"
 #include "threading_stubs.h"
-#include "reflection_stubs.h"
 #include "collection_stubs.h"
 #include "misc_stubs.h"
 

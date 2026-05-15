@@ -10,3 +10,4 @@ CHAOS_IL2CPP_INT32  ChaosInterlockedCompareExchangeInt32(CHAOS_IL2CPP_INT32* loc
 CHAOS_IL2CPP_INT64  ChaosInterlockedCompareExchangeInt64(CHAOS_IL2CPP_INT64* location, CHAOS_IL2CPP_INT64 value, CHAOS_IL2CPP_INT64 comparand) noexcept;
 void    ChaosInterlockedStoreNoBarrier(CHAOS_IL2CPP_INT64* location, CHAOS_IL2CPP_INT64 value) noexcept;
 CHAOS_IL2CPP_INT32  ChaosVolatileRead(CHAOS_IL2CPP_INTPTR ptr) noexcept;
+void    ChaosVolatileWrite(CHAOS_IL2CPP_INTPTR ptr, CHAOS_IL2CPP_INT32 value) noexcept;

@@ -1,5 +1,7 @@
+// monitor.cpp — Monitor (lock) implementation
+#include "wait_handle.h"
+
 namespace chaos::il2cpp::runtime_core {
-namespace {
 
 bool MonitorEnter(void* monitor_target) {
     if (monitor_target == nullptr) return false;
@@ -211,9 +213,46 @@ bool LockEnter(void* lock_target) { return MonitorEnter(lock_target); }
 
 bool LockExit(void* lock_target) { return MonitorExit(lock_target); }
 
-bool WaitHandleSet(void* /*wait_handle*/) { return false; }
+bool WaitHandleSet(void* wait_handle) {
+    if (wait_handle == nullptr) return false;
+    uint32_t handle_id = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(wait_handle));
+    return threading::WaitHandleSet(handle_id);
+}
 
-bool WaitHandleReset(void* /*wait_handle*/) { return false; }
+bool WaitHandleReset(void* wait_handle) {
+    if (wait_handle == nullptr) return false;
+    uint32_t handle_id = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(wait_handle));
+    return threading::WaitHandleReset(handle_id);
+}
 
-}  // anonymous namespace
 }  // namespace chaos::il2cpp::runtime_core
+
+// ── extern "C" ABI exports ──────────────────────────────────────────
+extern "C" {
+namespace chaos::il2cpp::runtime_core {
+
+CHAOS_IL2CPP_INT32 ChaosMonitorTryEnter(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 timeout) noexcept
+{
+    if (obj == 0) return 0;
+    void* monitor_target = reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_INTPTR>(obj));
+
+    if (timeout == 0) {
+        return MonitorTryEnter(monitor_target) ? 1 : 0;
+    }
+
+    if (timeout < 0) {
+        MonitorEnter(monitor_target);
+        return 1;
+    }
+
+    auto deadline = std::chrono::steady_clock::now() + std::chrono::milliseconds(timeout);
+    do {
+        if (MonitorTryEnter(monitor_target)) return 1;
+        std::this_thread::yield();
+    } while (std::chrono::steady_clock::now() < deadline);
+
+    return 0;
+}
+
+}  // namespace chaos::il2cpp::runtime_core
+}  // extern "C"

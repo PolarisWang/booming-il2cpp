@@ -61,6 +61,14 @@ RuntimeState* GetCurrentRuntimeState();
 void SetCurrentThreadState(ThreadState* thread_state);
 ThreadState* GetCurrentThreadState();
 
+// Thread lifecycle — declared here for cross-TU visibility (used by threading_stubs.cpp).
+RuntimeStatus CHAOS_RUNTIME_ABI_CALL ThreadAttach(
+    RuntimeState* runtime_state,
+    ThreadState** out_thread_state);
+void CHAOS_RUNTIME_ABI_CALL ThreadDetach(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state);
+
 
 using EngineLifecycleCallback = void (*)(const char* phase_utf8, void* user_data);
 using FinalizerCallback = void (*)(void* object_instance);

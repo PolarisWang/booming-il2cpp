@@ -7,7 +7,7 @@ struct DelegateThunkEntry {
     CHAOS_IL2CPP_INTPTR* target_slot;
 };
 
-static constexpr CHAOS_IL2CPP_INT32 kMaxDelegateThunks = 64;
+static constexpr CHAOS_IL2CPP_INT32 kMaxDelegateThunks = 256;
 static DelegateThunkEntry g_delegate_thunks[kMaxDelegateThunks];
 static CHAOS_IL2CPP_INT32 g_delegate_thunk_count = 0;
 

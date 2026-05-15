@@ -15,6 +15,12 @@
 #include <thread>
 #include <vector>
 
+// ── Stubs for symbols normally emitted by AOT codegen ─────────────────────
+extern "C" const void* chaos_il2cpp_aot_hotpatch_module = nullptr;
+extern "C" const char* const kChaosExternalRuntimeSubjects[] = { nullptr };
+extern "C" void* kChaosExternalRuntimeFnTable[] = { nullptr };
+extern "C" int32_t kChaosExternalRuntimeCount = 0;
+
 // Forward-declare MonitorEnter/MonitorExit (declared in engine_binding.h but we avoid
 // including it here due to ValueTypeKernelBackendKind redefinition in this TU).
 #include "runtime_abi.h"

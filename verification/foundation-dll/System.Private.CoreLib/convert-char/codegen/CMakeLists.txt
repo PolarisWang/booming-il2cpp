@@ -6,9 +6,9 @@ set(CMAKE_CXX_FLAGS_INIT "/DWIN32 /D_WINDOWS")
 set(CMAKE_MSVC_EXCEPTION_HANDLING "Sync")
 project(chaos_gen LANGUAGES CXX)
 
-set(REPO_ROOT "D:/agent/booming-il2cpp")
+set(REPO_ROOT "D:/agent/booming-il2cpp/.claude/worktrees/coreclr-alignment-phase0")
 set(CHAOS_GEN_DIR "${CMAKE_CURRENT_LIST_DIR}")
-set(NATIVE_LIB_DIR "D:/agent/booming-il2cpp/build/native")
+set(NATIVE_LIB_DIR "D:/agent/booming-il2cpp/.claude/worktrees/coreclr-alignment-phase0/build/native")
 set(CFG "RelWithDebInfo")
 
 set(NATIVE_LIBS
