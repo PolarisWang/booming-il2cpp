@@ -44,10 +44,10 @@ Skill 加载后强制实施：
 
 ### 第零步：执行 Pipeline（强制）
 
-在开始任何分析前，必须先执行 verify-family pipeline，确保数据是最新的。
+在开始任何分析前，必须先执行 verify-family pipeline，确保数据是最新的。Pipeline 现在包含 8 个阶段（含 stage 4 AsmCompare 指令级分析）。
 
 ```bash
-# 标准模式
+# 标准模式（含 asm-compare 指令级分析）
 run foundation-dll verify-family <family-slug>
 
 # 严格模式（含 hotupdate + post-HU benchmark）
@@ -81,6 +81,7 @@ Pipeline 执行完毕后，读取以下产物：
 | 12 | dashboard 详情页 HTML | `projections/.../dlls/<Assembly>/families/<family>-(fact\|benchmark\|hotupdate).html` | dashboard 展示数据 |
 | 13 | native-aot.generated.cpp | `codegen/<Assembly>/generated/` | 生成 C++ 代码体积 |
 | 14 | console.log | `artifacts/logs/run/<session>/` | pipeline 运行日志 |
+| 15 | **asm-compare-report.json** | `verification/foundation-dll/<Assembly>/<family>/` | **JIT vs AOT 指令级确定性指标（stage 4），替换 AI 自分析 managed/native 代码** |
 
 **注意：**
 - codegen/<Assembly>/generated/ 路径下 — codegen 输出到按 assembly 分组的子目录，使用 glob `codegen/*/generated/native-aot.generated.cpp` 定位
@@ -347,6 +348,17 @@ D.热更新适配  ████████░░  x.x
   - 哪些方法被 JIT 优化掉
   - 缺失的数据点是否影响 benchmark 结论有效性
 
+#### B5. JIT vs AOT 指令级对比（asm-compare 确定性指标）
+- **数据：** asm-compare-report.json 中的 per-method metrics 和汇总统计
+- **评分：** 0 / 3 / 5
+- **AI 分析：**
+  - IR 膨胀比（aotInstructionCount / jitInstructionCount）：大值指示翻译低效
+  - ExternalRuntime 调用占比：高占比意味着大量调用走 runtime dispatch 而非直接执行
+  - Virtual dispatch 占比：虚调用无法内联，影响 AOT 性能
+  - boxing 操作数：GC 分配压力指标
+  - **不再由 AI 直接阅读 managed/native 代码判断** — 消费 asm-compare-report.json 确定性指标
+  - 按 method 分组分析异常值
+
 #### B 维度总结
 `**得分：x.x/5 — pass/warn/fail**`
 文字总结。
@@ -379,12 +391,16 @@ D.热更新适配  ████████░░  x.x
 - **AI 分析：**
   - 是否需要 codegen 修复
 
-#### C4. 生成代码结构
-- **数据：** native-aot.generated.cpp 行数/字节数
+#### C4. 生成代码结构（基于 asm-compare-report.json 确定性指标）
+- **数据：** native-aot.generated.cpp 行数/字节数 + asm-compare-report.json 中的 metrics
 - **评分：** 0 / 3 / 5
 - **AI 分析：**
-  - 代码是否有明显冗余或不合理模式
-  - 与同类 family 的对比
+  - 使用 asm-compare-report.json 的确定性指标：
+    - IR 膨胀比（aotInstructionCount / jitInstructionCount）：越高说明 AOT 翻译引入越多指令
+    - dispatch 类型分布：external runtime / virtual / direct 占比
+    - boxing 操作数：过多的 boxing 指示代码生成优化不足
+  - 对比同类 family 的 metrics 判断异常值
+  - **不再由 AI 直接阅读 C++ 代码判断质量** — 使用量化指标评估
 
 #### C 维度总结
 `**得分：x.x/5 — pass/warn/fail**`

@@ -151,7 +151,7 @@ public sealed class NativeAotEmitter
             }
             foreach (var warning in result.Warnings)
             {
-                System.Console.WriteLine($"[NativeCodegenValidator] {generatedSource.RelativePath}: WARNING: {warning}");
+                System.Console.Error.WriteLine($"[NativeCodegenValidator] {generatedSource.RelativePath}: WARNING: {warning}");
             }
         }
 

@@ -107,6 +107,7 @@ public sealed class DriverEntry
             "emit-native-aot" => RunLegacyEmitNativeAot(args),
             "emit-patch-data" => RunEmitPatchData(args[1..]),
             "convert-to-cpp" => ConvertToCppHandler.Run(args[1..]),
+            "asm-compare" => AsmCompareHandler.Run(args[1..]),
             _ when !command.StartsWith('-') => RunLegacyConvert(args),
             _ => ShowHelpAndFail(),
         };
@@ -761,6 +762,7 @@ public sealed class DriverEntry
         Console.WriteLine("Commands:");
         Console.WriteLine("  convert          Convert C# project/DLLs to native source code");
         Console.WriteLine("  convert-to-cpp   Full assembly IL→C++ translation (Unity IL2CPP style)");
+        Console.WriteLine("  asm-compare      Compare JIT vs IL2CPP AOT translation for a method");
         Console.WriteLine("  build            Build native source code for a target platform");
         Console.WriteLine("  publish          Convert and build in one step");
         Console.WriteLine();
