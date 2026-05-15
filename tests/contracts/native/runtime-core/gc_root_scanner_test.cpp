@@ -90,10 +90,15 @@ static void test_registry() {
     // Register two slot maps and verify lookup.
     SUBTEST("register and lookup");
     uint32_t slots_a[] = { CHAOS_GC_SLOT_ENCODE(8, CHAOS_GC_SLOT_KIND_OBJECT) };
-    GcSlotMapV0 map_a = { .frame_size = 32, .num_gc_slots = 1 };
-    // Can't copy slots[] directly in C++ initializer; use memcpy.
-    GcSlotMapV0 map_a_stored;
-    std::memcpy(&map_a_stored, &map_a, sizeof(map_a));
+    // Can't use designated initializer GcSlotMapV0 map_a = {.frame_size=32}
+    // in C++17 (requires C++20), and GcSlotMapV0 has flexible array member
+    // slots[] which prevents direct aggregation in C++17. Use raw bytes + memcpy.
+    alignas(GcSlotMapV0) uint8_t map_a_buf[sizeof(GcSlotMapV0) + sizeof(uint32_t)] = {};
+    auto& map_a_stored = *reinterpret_cast<GcSlotMapV0*>(map_a_buf);
+    map_a_stored.frame_size = 32;
+    map_a_stored.num_gc_slots = 1;
+    // First slot at offset 8.
+    std::memcpy(map_a_buf + sizeof(GcSlotMapV0), slots_a, sizeof(uint32_t));
 
     uint32_t slots_b[] = {
         CHAOS_GC_SLOT_ENCODE(8, CHAOS_GC_SLOT_KIND_OBJECT),
@@ -114,11 +119,9 @@ static void test_registry() {
     found = GcLookupSlotMap(addr_b);
     if (found != nullptr) { FAIL("map_b should not be registered"); return; }
 
-    // Lookup of unregistered address.
     found = GcLookupSlotMap(reinterpret_cast<void*>(0x3000));
     if (found != nullptr) { FAIL("unregistered addr should return null"); return; }
 
-    // Null lookup.
     found = GcLookupSlotMap(nullptr);
     if (found != nullptr) { FAIL("null addr should return null"); return; }
 
@@ -153,18 +156,20 @@ static void test_precise_scan() {
     void* fake_obj = reinterpret_cast<void*>(0xBEEF);
     std::memcpy(frame_memory + 8, &fake_obj, sizeof(void*));
 
-    // Create a slot map describing offset 8 as an object reference.
     uint32_t slots[] = { CHAOS_GC_SLOT_ENCODE(8, CHAOS_GC_SLOT_KIND_OBJECT) };
-    GcSlotMapV0 map;
-    // Using memcpy to work around C flexible array member limitation.
-    // We allocate enough space for header + 1 slot.
+
+    // Need a flat struct that does NOT embed GcSlotMapV0 (which has a flexible
+    // array member slots[], rejected by MSVC when embedded in another struct).
     struct SlotMapWithSlots {
-        GcSlotMapV0 header;
+        uint32_t frame_size;
+        uint32_t num_gc_slots;
         uint32_t slots[1];
     };
+    static_assert(sizeof(SlotMapWithSlots) == sizeof(GcSlotMapV0) + sizeof(uint32_t),
+                  "layout must match GcSlotMapV0 with 1 slot");
     SlotMapWithSlots sm = {};
-    sm.header.frame_size = 64;
-    sm.header.num_gc_slots = 1;
+    sm.frame_size = 64;
+    sm.num_gc_slots = 1;
     sm.slots[0] = slots[0];
 
     ManagedFrameInfo frame = {};
@@ -173,7 +178,7 @@ static void test_precise_scan() {
     frame.return_address = reinterpret_cast<void*>(0x1000);
 
     ScanResult result = {};
-    GcScanPreciseFrame(frame, sm.header, precise_callback, &result);
+    GcScanPreciseFrame(frame, reinterpret_cast<const GcSlotMapV0&>(sm), precise_callback, &result);
 
     if (!result.called) { FAIL("callback not invoked"); return; }
     if (result.root_addr != &frame_memory[8]) { FAIL("wrong root address"); return; }
@@ -239,18 +244,19 @@ static void test_hybrid_scan() {
     // Register a slot map at address 0x3000.
     uint32_t slots[] = { CHAOS_GC_SLOT_ENCODE(8, CHAOS_GC_SLOT_KIND_OBJECT) };
     struct SlotMapWithSlots {
-        GcSlotMapV0 header;
+        uint32_t frame_size;
+        uint32_t num_gc_slots;
         uint32_t slots[1];
     };
     static SlotMapWithSlots s_sm = {};
-    s_sm.header.frame_size = 64;
-    s_sm.header.num_gc_slots = 1;
+    s_sm.frame_size = 64;
+    s_sm.num_gc_slots = 1;
     s_sm.slots[0] = slots[0];
-    GcRegisterSlotMap(reinterpret_cast<void*>(0x3000), &s_sm.header);
+    GcRegisterSlotMap(reinterpret_cast<void*>(0x3000), reinterpret_cast<const GcSlotMapV0*>(&s_sm));
 
     alignas(void*) uint8_t frame_memory[64] = {};
     std::memset(frame_memory, 0, 64);
-    void* fake_obj = reinterpret_cast<void*>(0xBEEF);
+    void* fake_obj = reinterpret_cast<void*>(0xBEE8);
     std::memcpy(frame_memory + 8, &fake_obj, sizeof(void*));
 
     SUBTEST("precise path for registered frame");

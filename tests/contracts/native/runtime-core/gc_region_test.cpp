@@ -271,7 +271,7 @@ static void test_card_table() {
     // A pointer before the heap base should not crash.
     DirtyCard(reinterpret_cast<void*>(base - 4096));
     // A pointer beyond the card table coverage should not crash.
-    DirtyCard(reinterpret_cast<void*>(base + (static_cast<uintptr_t>(kCardTableEntries) << kCardShift) + 65536));
+    DirtyCard(reinterpret_cast<void*>(base + (static_cast<uintptr_t>(kCardL1Entries) << kCardShift) + 65536));
     PASS();
 }
 

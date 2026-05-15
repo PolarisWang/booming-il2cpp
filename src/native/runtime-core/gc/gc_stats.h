@@ -4,6 +4,7 @@
 #include <chaos/native_types.h>
 
 #include <atomic>
+#include <chrono>
 #include <cstdint>
 
 namespace chaos::il2cpp::runtime_core {
@@ -14,6 +15,11 @@ namespace chaos::il2cpp::runtime_core {
 // All counters are std::atomic<uint64_t> with memory_order_relaxed for
 // thread-safe, low-contention recording.  GcDumpStats() emits GC|-prefixed
 // lines to stdout at process exit (see gc_stats.cpp).
+//
+// Phase 7 additions:
+// - GcGetSnapshot(): atomic snapshot of all counters
+// - Pause time histogram: 0-1ms / 1-5ms / 5-10ms / 10-50ms / 50-100ms / 100+ms
+// - Ring buffer: last 64 GC events (young + full)
 // ======================================================================
 
 struct GcStats {
@@ -41,6 +47,93 @@ struct GcStats {
 
 extern GcStats g_gc_stats;
 
+// ── Pause time histogram buckets (in nanoseconds) ───────────────
+
+/// Histogram bucket boundaries (inclusive upper bound, nanoseconds).
+static constexpr uint64_t kGcPauseBucketsNs[] = {
+    1'000'000,       // 0-1 ms
+    5'000'000,       // 1-5 ms
+    10'000'000,      // 5-10 ms
+    50'000'000,      // 10-50 ms
+    100'000'000,     // 50-100 ms
+    UINT64_MAX       // 100+ ms
+};
+static constexpr int kGcPauseBucketCount = 6;
+
+extern std::atomic<uint64_t> g_gc_pause_histogram[kGcPauseBucketCount];
+
+/// Record a pause time into the histogram.
+inline void GcRecordPauseHistogram(uint64_t pause_ns) noexcept {
+    for (int i = 0; i < kGcPauseBucketCount; i++) {
+        if (pause_ns <= kGcPauseBucketsNs[i]) {
+            g_gc_pause_histogram[i].fetch_add(1, std::memory_order_relaxed);
+            break;
+        }
+    }
+}
+
+// ── GC event ring buffer ───────────────────────────────────────
+
+/// Maximum events in the ring buffer.
+static constexpr int kGcEventRingSize = 64;
+
+/// One ring buffer entry.
+struct GcEventEntry {
+    bool     is_full_gc;       ///< true = full GC, false = young GC
+    uint64_t pause_ns;         ///< Pause time in nanoseconds
+    uint64_t objects_processed;///< Objects promoted (young) or marked (full)
+    uint64_t bytes_reclaimed;  ///< Bytes freed
+};
+
+/// Ring buffer head index (atomic, wraps at kGcEventRingSize).
+extern std::atomic<int> g_gc_event_ring_head;
+
+/// Ring buffer entries.
+extern GcEventEntry g_gc_event_ring[kGcEventRingSize];
+
+/// Record an event in the ring buffer.
+inline void GcRecordEventRing(bool is_full_gc, uint64_t pause_ns,
+                               uint64_t objects_processed, uint64_t bytes_reclaimed) noexcept {
+    int head = g_gc_event_ring_head.fetch_add(1, std::memory_order_relaxed);
+    int idx = head % kGcEventRingSize;
+    g_gc_event_ring[idx].is_full_gc = is_full_gc;
+    g_gc_event_ring[idx].pause_ns = pause_ns;
+    g_gc_event_ring[idx].objects_processed = objects_processed;
+    g_gc_event_ring[idx].bytes_reclaimed = bytes_reclaimed;
+}
+
+// ── Snapshot structure ─────────────────────────────────────────
+
+/// Atomic snapshot of all GC counters (returned by GcGetSnapshot).
+struct GcSnapshot {
+    // Counters
+    uint64_t young_collections;
+    uint64_t full_collections;
+    uint64_t young_objects_promoted;
+    uint64_t young_bytes_promoted;
+    uint64_t young_bytes_reclaimed;
+    uint64_t young_cards_scanned;
+    uint64_t full_pages_collected;
+    uint64_t full_objects_marked;
+    uint64_t full_bytes_reclaimed;
+    uint64_t full_finalizers_run;
+    uint64_t alloc_total;
+    uint64_t alloc_bytes;
+    uint64_t alloc_oversized;
+
+    // Derived
+    uint64_t young_pause_ns_total;
+    uint64_t full_pause_ns_total;
+    uint64_t young_pause_ns_avg;
+    uint64_t full_pause_ns_avg;
+
+    // Histogram
+    uint64_t pause_histogram[kGcPauseBucketCount];
+};
+
+/// Take an atomic snapshot of all GC counters.
+GcSnapshot GcGetSnapshot() noexcept;
+
 // ── Inline record helpers (hot-path, header for max inlining) ─────
 
 inline void GcRecordYoungCollection(
@@ -56,6 +149,8 @@ inline void GcRecordYoungCollection(
     g_gc_stats.young_bytes_reclaimed.fetch_add(bytes_reclaimed, std::memory_order_relaxed);
     g_gc_stats.young_cards_scanned.fetch_add(cards_scanned, std::memory_order_relaxed);
     g_gc_stats.young_pause_ns.fetch_add(pause_ns, std::memory_order_relaxed);
+    GcRecordPauseHistogram(pause_ns);
+    GcRecordEventRing(false, pause_ns, objects_promoted, bytes_reclaimed);
 }
 
 inline void GcRecordFullCollection(
@@ -71,6 +166,8 @@ inline void GcRecordFullCollection(
     g_gc_stats.full_bytes_reclaimed.fetch_add(bytes_reclaimed, std::memory_order_relaxed);
     g_gc_stats.full_finalizers_run.fetch_add(finalizers_run, std::memory_order_relaxed);
     g_gc_stats.full_pause_ns.fetch_add(pause_ns, std::memory_order_relaxed);
+    GcRecordPauseHistogram(pause_ns);
+    GcRecordEventRing(true, pause_ns, objects_marked, bytes_reclaimed);
 }
 
 inline void GcRecordAlloc(CHAOS_IL2CPP_SIZE bytes, bool oversized) noexcept {

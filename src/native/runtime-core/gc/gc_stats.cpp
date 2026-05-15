@@ -9,6 +9,50 @@ namespace chaos::il2cpp::runtime_core {
 
 GcStats g_gc_stats;
 
+// ── Pause time histogram ───────────────────────────────────────
+std::atomic<uint64_t> g_gc_pause_histogram[kGcPauseBucketCount];
+
+// ── GC event ring buffer ──────────────────────────────────────
+std::atomic<int> g_gc_event_ring_head{0};
+GcEventEntry g_gc_event_ring[kGcEventRingSize] = {};
+
+// ── Snapshot ──────────────────────────────────────────────────
+
+GcSnapshot GcGetSnapshot() noexcept {
+    GcSnapshot snap;
+
+    // Read all counters with acquire semantics for causal consistency.
+    snap.young_collections   = g_gc_stats.young_collections.load(std::memory_order_acquire);
+    snap.full_collections    = g_gc_stats.full_collections.load(std::memory_order_acquire);
+    snap.young_objects_promoted = g_gc_stats.young_objects_promoted.load(std::memory_order_acquire);
+    snap.young_bytes_promoted   = g_gc_stats.young_bytes_promoted.load(std::memory_order_acquire);
+    snap.young_bytes_reclaimed  = g_gc_stats.young_bytes_reclaimed.load(std::memory_order_acquire);
+    snap.young_cards_scanned    = g_gc_stats.young_cards_scanned.load(std::memory_order_acquire);
+    snap.full_pages_collected   = g_gc_stats.full_pages_collected.load(std::memory_order_acquire);
+    snap.full_objects_marked    = g_gc_stats.full_objects_marked.load(std::memory_order_acquire);
+    snap.full_bytes_reclaimed   = g_gc_stats.full_bytes_reclaimed.load(std::memory_order_acquire);
+    snap.full_finalizers_run    = g_gc_stats.full_finalizers_run.load(std::memory_order_acquire);
+    snap.alloc_total     = g_gc_stats.alloc_total.load(std::memory_order_acquire);
+    snap.alloc_bytes     = g_gc_stats.alloc_bytes.load(std::memory_order_acquire);
+    snap.alloc_oversized = g_gc_stats.alloc_oversized.load(std::memory_order_acquire);
+
+    // Derived pause totals.
+    snap.young_pause_ns_total = g_gc_stats.young_pause_ns.load(std::memory_order_acquire);
+    snap.full_pause_ns_total  = g_gc_stats.full_pause_ns.load(std::memory_order_acquire);
+
+    snap.young_pause_ns_avg = (snap.young_collections > 0)
+        ? snap.young_pause_ns_total / snap.young_collections : 0;
+    snap.full_pause_ns_avg = (snap.full_collections > 0)
+        ? snap.full_pause_ns_total / snap.full_collections : 0;
+
+    // Histogram snapshot.
+    for (int i = 0; i < kGcPauseBucketCount; i++) {
+        snap.pause_histogram[i] = g_gc_pause_histogram[i].load(std::memory_order_acquire);
+    }
+
+    return snap;
+}
+
 // Register atexit handler via a static initializer.
 namespace {
     struct AtExitRegistrar {

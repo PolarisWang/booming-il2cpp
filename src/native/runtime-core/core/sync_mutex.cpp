@@ -84,15 +84,15 @@ static bool InflateAndEnter(void* obj, uint64_t current_sync) noexcept {
     uint64_t sync = *sync_ptr;
     if ((sync & kSyncInflatedBit) != 0) {
         const auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-        if (sb != nullptr) {
-            for (auto& [ptr, block] : stripe.entries) {
-                if (ptr == obj && block != nullptr) {
-                    block->mutex.lock();
-                    return true;
-                }
-            }
+    if (sb != nullptr) {
+        // O(1) lookup via unordered_map::find instead of O(n) linear scan.
+        auto it = stripe.entries.find(obj);
+        if (it != stripe.entries.end() && it->second != nullptr) {
+            it->second->mutex.lock();
+            return true;
         }
         return false;
+    }
     }
 
     auto* sb = new SyncBlock();

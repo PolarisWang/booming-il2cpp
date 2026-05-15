@@ -103,6 +103,12 @@ add_library(chaos_runtime_core STATIC
     gc/gc_old_gen.cpp
     gc/gc_layout.h
     gc/gc_layout.cpp
+    gc/gc_loh.h
+    gc/gc_loh.cpp
+    gc/gc_parallel_mark.h
+    gc/gc_parallel_mark.cpp
+    gc/gc_events.h
+    gc/gc_events.cpp
     gc/gc_stats.h
     gc/gc_stats.cpp
     domain_unloader.h
