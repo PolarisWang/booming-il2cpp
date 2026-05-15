@@ -22,14 +22,17 @@
 ## 验证执行步骤
 
 ```bash
-# 标准模式（7 阶段全跑）
+# 标准模式（8 阶段全跑）
 run foundation-dll verify-family --family <family-slug>
 
 # 跳过特定阶段（调试时使用）
 run foundation-dll verify-family --family <family-slug> --skip benchmark hotupdate
+
+# 跳过 asm-compare 阶段（无需 instruction-level 对比时）
+run foundation-dll verify-family --family <family-slug> --skip asm_compare
 ```
 
-## 7 阶段输出产物
+## 8 阶段输出产物
 
 每个阶段在 `verification/foundation-dll/<Assembly>/<family>/` 下生成以下产物：
 
@@ -107,7 +110,23 @@ managed/patch/                            # Patch 变体项目（由 _generate_p
 
 > `methods_without_assert=21` 是正常值——runtime-entry.cpp 的 fact 模式使用返回码比较而非 assert intrinsic，所有 entry 函数会被标记为 assert 未触发。这不表示验证无效。
 
-### 阶段 4: Benchmark
+### 阶段 4: AsmCompare
+
+| 文件 | 生成 |
+|------|------|
+| `asm-compare-report.json` | ✅ 每次 pipeline 运行重新生成 |
+
+- 对 contract 中每个 methodSubjectId 运行 `chaos-il2cpp asm-compare --format json --sections metrics`
+- 聚合确定性指标：
+  - JIT 指令数 / AOT IR 指令数 / IR 膨胀比
+  - JIT 代码大小 / AOT 近似代码大小
+  - 外部 runtime 调用数 / virtual dispatch 数 / boxing 操作数
+- 输出汇总统计（min/max/avg/total per metric）
+- **不阻塞 overall status**（advisory stage）
+- 当 subjects DLL 不存在时自动跳过（依赖 codegen 阶段先执行）
+- 替换了 AI 自分析 managed vs native 代码——现在由确定性工具产生数据
+
+### 阶段 5: Benchmark
 
 | 文件 | 生成 |
 |------|------|
@@ -119,7 +138,7 @@ managed/patch/                            # Patch 变体项目（由 _generate_p
 - 若不存在 → 所有方法标记为 `managed_harness_unavailable`，avg_speedup=0%
 - throwing 方法会被过滤出 benchmark 对比
 
-### 阶段 5: HotUpdate
+### 阶段 6: HotUpdate
 
 | 文件 | 生成 |
 |------|------|
@@ -129,7 +148,7 @@ managed/patch/                            # Patch 变体项目（由 _generate_p
 - 解析 passedMethods/failedMethods/totalMethods
 - 期望：18/18 passed，0 failed
 
-### 阶段 6: Post-HotUpdate Benchmark
+### 阶段 7: Post-HotUpdate Benchmark
 
 | 文件 | 生成 |
 |------|------|
@@ -139,7 +158,7 @@ managed/patch/                            # Patch 变体项目（由 _generate_p
 - interpreter 路径下有 300-55000x slowdown 是正常的（interpreter 开销）
 - **此项在 standard mode 下不阻塞 overall status**
 
-### 阶段 7: Aggregate
+### 阶段 8: Aggregate
 
 | 文件 | 生成 |
 |------|------|
@@ -180,6 +199,7 @@ overall        = mean(methodCoverage, skipRate)
 | Codegen | ✅ 通过（entry.exe 编译成功） |
 | Fact | ✅ 通过（N/N = 100%） |
 | Audit | ✅ 通过（false_passing=0，principle != VIOLATION） |
+| AsmCompare | 不阻塞（advisory — instruction-level deterministic metrics） |
 | Benchmark | 不阻塞 |
 | HotUpdate | 不阻塞 |
 | PostHotBench | 不阻塞 |
@@ -199,6 +219,9 @@ overall        = mean(methodCoverage, skipRate)
 | skipsFound 异常（负 skipRate） | mechanism_audit 未按 family 过滤 | 检查 `_get_skip_entries()` 的 `relevant_type_names` 参数 |
 | managed_harness_unavailable | managed_test/benchmarks/ 不存在 | 这是正常的——没有 managed harness 时跳过对比 |
 | post_hotupdate_benchmark failed | interpreter 路径的固有高延迟 | 标准模式下不阻塞 |
+| asm-compare 所有方法 fail 或 skip | subjects DLL 未构建或 contract 为空 | 先跑 codegen 阶段，再跑 asm-compare |
+| asm-compare JSON 解析失败 | driver 输出非 JSON 前缀（如错误信息） | 查看 stdout/stderr，确认 asm-compare --format json 生效 |
+| asm-compare 超时 | 方法过于复杂或 pipeline 过载 | 增大超时或跳过 asm_compare 阶段 |
 
 ## Dashboard 更新
 
@@ -219,7 +242,9 @@ run verify verification-v1 --json
 
 ## Post-Pipeline AI Analysis
 
-Pipeline 只产出 raw 验证数据（unified report、benchmark 对比、审计报告等）。**分析验收交由 AI 完成**，使用 `dev-foundation-dll-verify-analysis` 技能。
+Pipeline 产出 raw 验证数据（unified report、benchmark 对比、审计报告、**asm-compare-report.json** 确定性 JIT vs AOT metrics）。**分析验收交由 AI 完成**，使用 `dev-foundation-dll-verify-analysis` 技能。
+
+**变更说明**：Managed vs native 代码分析不再由 AI 直接阅读源码判断，而是消费 asm-compare stage（stage 4）产出的 `asm-compare-report.json`。该文件包含 deterministic instruction-level metrics（指令数、IR 膨胀比、dispatch 分布、boxing 操作数等），消除了 AI 自分析 managed/native 代码的不确定性和幻觉风险。AI 分析阶段的角色从"阅读并理解 managed/native 代码"转变为"解读确定性指标并给出优化建议"。
 
 ### 调用方式
 

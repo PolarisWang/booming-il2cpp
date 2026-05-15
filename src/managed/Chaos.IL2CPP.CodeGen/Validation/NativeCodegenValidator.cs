@@ -188,7 +188,7 @@ public sealed class NativeCodegenValidator
 
         foreach (var warning in result.Warnings)
         {
-            System.Console.WriteLine($"[NativeCodegenValidator] WARNING: {warning}");
+            System.Console.Error.WriteLine($"[NativeCodegenValidator] WARNING: {warning}");
         }
 
         return result.IsValid;
