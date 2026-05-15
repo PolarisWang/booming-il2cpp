@@ -3510,18 +3510,40 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 				case "throw":
 				{
-					builder.AppendLine($"    throw chaos_managed_exception{{{ConsumeEvalStackValueExpression()}}};");
+					string throwVal = ConsumeEvalStackValueExpression();
+					builder.AppendLine("#if defined(CHAOS_IL2CPP_EH_CPP_THROW)");
+					builder.AppendLine($"    throw chaos_managed_exception{{{throwVal}}};");
+					builder.AppendLine("#else");
+					// SETJMP and WIN32_SEH both use chaos_raise_exception
+					builder.AppendLine($"    chaos::il2cpp::runtime_core::chaos_raise_exception({throwVal});");
+					builder.AppendLine("#endif");
 					break;
 				}
 				case "rethrow":
 				{
-					builder.AppendLine($"    throw;");
+					builder.AppendLine("#if defined(CHAOS_IL2CPP_EH_CPP_THROW)");
+					builder.AppendLine("    throw;");
+					builder.AppendLine("#else");
+					// SETJMP and WIN32_SEH
+					builder.AppendLine("    chaos::il2cpp::runtime_core::chaos_raise_exception(");
+					builder.AppendLine("        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
+					builder.AppendLine("            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
+					builder.AppendLine("#endif");
 					break;
 				}
 				case "endfilter":
 				{
 					builder.AppendLine($"    if ({ConsumeEvalStackValueExpression()} == 0)");
-					builder.AppendLine($"        throw;");
+					builder.AppendLine("    {");
+					builder.AppendLine("#if defined(CHAOS_IL2CPP_EH_CPP_THROW)");
+					builder.AppendLine("        throw;");
+					builder.AppendLine("#else");
+					// SETJMP and WIN32_SEH
+					builder.AppendLine("        chaos::il2cpp::runtime_core::chaos_raise_exception(");
+					builder.AppendLine("            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
+					builder.AppendLine("                chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
+					builder.AppendLine("#endif");
+					builder.AppendLine("    }");
 					break;
 				}
 				case "endfinally":
