@@ -1,0 +1,34 @@
+// ── Generic registration proof-host helper ─────────────────
+// Populate generic registration arrays from this TU.
+static void ChaosDoPopulateGenericRegistration(
+    CHAOS_IL2CPP_UINT32* out_type_count,
+    const GenericTypeRegistrationEntryV0** out_type_entries,
+    const CHAOS_IL2CPP_UINT32** out_type_args,
+    CHAOS_IL2CPP_UINT32* out_type_arg_count,
+    CHAOS_IL2CPP_UINT32* out_method_count,
+    const GenericMethodRegistrationEntryV0** out_method_entries,
+    const CHAOS_IL2CPP_UINT32** out_method_args,
+    CHAOS_IL2CPP_UINT32* out_method_arg_count)
+{
+    *out_type_count = {{ type_entry_count }};
+    *out_type_entries = kGenericTypeEntries;
+    *out_type_args = kGenericTypeArgTokens;
+    *out_type_arg_count = {{ type_arg_count }};
+    *out_method_count = {{ method_entry_count }};
+    *out_method_entries = kGenericMethodEntries;
+    *out_method_args = kGenericMethodArgTokens;
+    *out_method_arg_count = {{ method_arg_count }};
+}
+
+// Static initializer registers the callback.
+extern "C" void (*g_chaos_populate_generic_registration)(
+    CHAOS_IL2CPP_UINT32*, const GenericTypeRegistrationEntryV0**, const CHAOS_IL2CPP_UINT32**, CHAOS_IL2CPP_UINT32*,
+    CHAOS_IL2CPP_UINT32*, const GenericMethodRegistrationEntryV0**, const CHAOS_IL2CPP_UINT32**, CHAOS_IL2CPP_UINT32*);
+namespace {
+struct ChaosGenericRegistrationInit {
+    ChaosGenericRegistrationInit() {
+        g_chaos_populate_generic_registration =
+            &ChaosDoPopulateGenericRegistration;
+    }
+} g_chaos_reg_init;
+}

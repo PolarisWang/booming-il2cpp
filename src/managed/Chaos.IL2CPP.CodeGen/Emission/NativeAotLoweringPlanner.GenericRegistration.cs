@@ -1,5 +1,6 @@
 using System.Text;
 using Chaos.IL2CPP.Contracts;
+using Scriban.Runtime;
 
 namespace Chaos.IL2CPP.CodeGen;
 
@@ -39,14 +40,12 @@ public partial class NativeAotLoweringPlanner
     {
         // Phase 1: collect generic types and methods with their token info.
         BuildGenericTypeRegistration(
-            builder,
             supplementalMetadataTemplate,
             metadataRegistration,
             out var typeEntries,
             out var typeArgTokens);
 
         BuildGenericMethodRegistration(
-            builder,
             supplementalMetadataTemplate,
             metadataRegistration,
             out var methodEntries,
@@ -59,156 +58,65 @@ public partial class NativeAotLoweringPlanner
             out var methodAotEntries,
             out var methodAotArgTokens);
 
-        // ── Type arg tokens ──
-        if (typeArgTokens.Count > 0)
-        {
-            builder.Append("static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[] = { ");
-            builder.Append(string.Join(", ", typeArgTokens));
-            builder.AppendLine(" };");
-        }
-        else
-        {
-            builder.AppendLine("static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };");
-        }
+        // ── Format and render via Scriban template ──
+        var typeEntryStrings = typeEntries
+            .Select(e => $"{{ 0x{e.OpenToken:X8}u, 0x{e.ClosedToken:X8}u, {e.ArgCount}u, {e.ArgsStartIndex}u }}")
+            .ToArray();
+        var methodEntryStrings = methodEntries
+            .Select(e => $"{{ 0x{e.MethodToken:X8}u, {e.ClassArgCount}u, {e.MethodArgCount}u, {e.ArgsStartIndex}u }}")
+            .ToArray();
+        var methodAotEntryStrings = methodAotEntries
+            .Select(e => $"{{ 0x{e.OpenToken:X8}u, 0x{e.ClosedToken:X8}u, {e.ArgCount}u, {e.ArgsStartIndex}u }}")
+            .ToArray();
 
-        // ── Type entries ──
-        if (typeEntries.Count > 0)
+        var model = new ScriptObject
         {
-            builder.AppendLine("static constexpr GenericTypeRegistrationEntryV0 kGenericTypeEntries[] = {");
-            foreach (var entry in typeEntries)
-            {
-                builder.AppendLine(
-                    $"    {{ 0x{entry.OpenToken:X8}u, 0x{entry.ClosedToken:X8}u, {entry.ArgCount}u, {entry.ArgsStartIndex}u }},");
-            }
-            builder.AppendLine("};");
-        }
-        else
-        {
-            builder.AppendLine("static constexpr GenericTypeRegistrationEntryV0 kGenericTypeEntries[1] = { { 0, 0, 0, 0 } };");
-        }
+            ["indentation"] = "",
+            ["has_type_arg_tokens"] = typeArgTokens.Count > 0,
+            ["type_arg_tokens_text"] = string.Join(", ", typeArgTokens),
+            ["has_type_entries"] = typeEntries.Count > 0,
+            ["type_entries"] = typeEntryStrings,
+            ["has_method_arg_tokens"] = methodArgTokens.Count > 0,
+            ["method_arg_tokens_text"] = string.Join(", ", methodArgTokens),
+            ["has_method_entries"] = methodEntries.Count > 0,
+            ["method_entries"] = methodEntryStrings,
+            ["has_method_aot_entries"] = methodAotEntries.Count > 0,
+            ["method_aot_entries"] = methodAotEntryStrings,
+            ["method_aot_arg_tokens_text"] = string.Join(", ", methodAotArgTokens),
+        };
 
-        // ── Method arg tokens ──
-        if (methodArgTokens.Count > 0)
-        {
-            builder.Append("static constexpr CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[] = { ");
-            builder.Append(string.Join(", ", methodArgTokens));
-            builder.AppendLine(" };");
-        }
-        else
-        {
-            builder.AppendLine("static constexpr CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[1] = { 0 };");
-        }
-
-        // ── Method entries ──
-        if (methodEntries.Count > 0)
-        {
-            builder.AppendLine("static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[] = {");
-            foreach (var entry in methodEntries)
-            {
-                builder.AppendLine(
-                    $"    {{ 0x{entry.MethodToken:X8}u, {entry.ClassArgCount}u, {entry.MethodArgCount}u, {entry.ArgsStartIndex}u }},");
-            }
-            builder.AppendLine("};");
-        }
-        else
-        {
-            builder.AppendLine("static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { { 0, 0, 0, 0 } };");
-        }
-
-        // ── Method AOT entries (GenericMethodAotEntryV0[]) ──
-        int methodAotEntryCount = methodAotEntries.Count;
-        int methodAotArgTokenCount = methodAotArgTokens.Count;
-
-        if (methodAotEntries.Count > 0)
-        {
-            builder.AppendLine("static constexpr GenericMethodAotEntryV0 s_method_aot_entries[] = {");
-            foreach (var entry in methodAotEntries)
-            {
-                builder.AppendLine(
-                    $"    {{ 0x{entry.OpenToken:X8}u, 0x{entry.ClosedToken:X8}u, {entry.ArgCount}u, {entry.ArgsStartIndex}u }},");
-            }
-            builder.AppendLine("};");
-
-            builder.Append("static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[] = { ");
-            builder.Append(string.Join(", ", methodAotArgTokens));
-            builder.AppendLine(" };");
-        }
-        else
-        {
-            builder.AppendLine("static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };");
-            builder.AppendLine("static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };");
-        }
+        builder.AppendLine(
+            ScribanTemplateRenderer.RenderTemplate(
+                NativeAotTemplateCatalog.GetGenericRegistrationTemplate(), model).TrimEnd());
+        builder.AppendLine();
 
         // ── AOT registration code (emitted into module registration section) ──
-        // Registered at module load via a static-init lambda that calls
-        // RegisterMethodAotEntries().  The lambda lives in the anonymous
-        // namespace of the module registration code section where
-        // s_native_aot_module_id is already declared.
-        var aotReg = new StringBuilder(256);
-        if (methodAotEntryCount > 0)
+        int methodAotEntryCount = methodAotEntries.Count;
+        int methodAotArgTokenCount = methodAotArgTokens.Count;
+        var aotModel = new ScriptObject
         {
-            aotReg.AppendLine("// ── Register method AOT entries ─────────────────────────────");
-            aotReg.AppendLine("static const CHAOS_IL2CPP_UINT32 s_register_method_aot = []()");
-            aotReg.AppendLine("{");
-            aotReg.AppendLine("    ::chaos::il2cpp::runtime_instantiation::RegisterMethodAotEntries(");
-            aotReg.AppendLine("        s_native_aot_module_id,");
-            aotReg.AppendLine("        s_method_aot_entries,");
-            aotReg.Append("        ").Append(methodAotEntryCount).AppendLine("u,");
-            aotReg.AppendLine("        s_method_aot_entry_args,");
-            aotReg.Append("        ").Append(methodAotArgTokenCount).AppendLine("u);");
-            aotReg.AppendLine("    return 0u;");
-            aotReg.AppendLine("}();");
-        }
-        else
-        {
-            aotReg.AppendLine("// (no method AOT entries for this module)");
-        }
-        aotRegistrationCode = aotReg.ToString();
+            ["has_aot_entries"] = methodAotEntryCount > 0,
+            ["aot_entry_count"] = methodAotEntryCount,
+            ["aot_arg_token_count"] = methodAotArgTokenCount,
+        };
+        aotRegistrationCode = ScribanTemplateRenderer.RenderTemplate(
+            NativeAotTemplateCatalog.GetGenericAotRegistrationTemplate(), aotModel).TrimEnd();
 
         // ── Generic registration helper for proof host ──
-        // A static initializer sets a global function pointer that the
-        // proof host checks before calling.  No extern symbol conflict
-        // with Python skeletons — they don't define this pointer.
         var typeEntryCount = typeEntries.Count;
         var typeArgCount = typeArgTokens.Count;
         var methodEntryCount = methodEntries.Count;
         var methodArgCount = methodArgTokens.Count;
 
-        var helper = new StringBuilder(512);
-        helper.AppendLine("// Populate generic registration arrays from this TU.");
-        helper.AppendLine("static void ChaosDoPopulateGenericRegistration(");
-        helper.AppendLine("    CHAOS_IL2CPP_UINT32* out_type_count,");
-        helper.AppendLine("    const GenericTypeRegistrationEntryV0** out_type_entries,");
-        helper.AppendLine("    const CHAOS_IL2CPP_UINT32** out_type_args,");
-        helper.AppendLine("    CHAOS_IL2CPP_UINT32* out_type_arg_count,");
-        helper.AppendLine("    CHAOS_IL2CPP_UINT32* out_method_count,");
-        helper.AppendLine("    const GenericMethodRegistrationEntryV0** out_method_entries,");
-        helper.AppendLine("    const CHAOS_IL2CPP_UINT32** out_method_args,");
-        helper.AppendLine("    CHAOS_IL2CPP_UINT32* out_method_arg_count)");
-        helper.AppendLine("{");
-        helper.AppendLine($"    *out_type_count = {typeEntryCount};");
-        helper.AppendLine("    *out_type_entries = kGenericTypeEntries;");
-        helper.AppendLine("    *out_type_args = kGenericTypeArgTokens;");
-        helper.AppendLine($"    *out_type_arg_count = {typeArgCount};");
-        helper.AppendLine($"    *out_method_count = {methodEntryCount};");
-        helper.AppendLine("    *out_method_entries = kGenericMethodEntries;");
-        helper.AppendLine("    *out_method_args = kGenericMethodArgTokens;");
-        helper.AppendLine($"    *out_method_arg_count = {methodArgCount};");
-        helper.AppendLine("}");
-        helper.AppendLine("");
-        helper.AppendLine("// Static initializer registers the callback.");
-        helper.AppendLine("extern \"C\" void (*g_chaos_populate_generic_registration)(");
-        helper.AppendLine("    CHAOS_IL2CPP_UINT32*, const GenericTypeRegistrationEntryV0**, const CHAOS_IL2CPP_UINT32**, CHAOS_IL2CPP_UINT32*,");
-        helper.AppendLine("    CHAOS_IL2CPP_UINT32*, const GenericMethodRegistrationEntryV0**, const CHAOS_IL2CPP_UINT32**, CHAOS_IL2CPP_UINT32*);");
-        helper.AppendLine("namespace {");
-        helper.AppendLine("struct ChaosGenericRegistrationInit {");
-        helper.AppendLine("    ChaosGenericRegistrationInit() {");
-        helper.AppendLine("        g_chaos_populate_generic_registration =");
-        helper.AppendLine("            &ChaosDoPopulateGenericRegistration;");
-        helper.AppendLine("    }");
-        helper.AppendLine("} g_chaos_reg_init;");
-        helper.AppendLine("}");
-        helperCode = helper.ToString();
+        var helperModel = new ScriptObject
+        {
+            ["type_entry_count"] = typeEntryCount,
+            ["type_arg_count"] = typeArgCount,
+            ["method_entry_count"] = methodEntryCount,
+            ["method_arg_count"] = methodArgCount,
+        };
+        helperCode = ScribanTemplateRenderer.RenderTemplate(
+            NativeAotTemplateCatalog.GetGenericRegistrationHelperTemplate(), helperModel).TrimEnd();
     }
 
     private sealed record TypeEntry(uint OpenToken, uint ClosedToken, uint ArgCount, uint ArgsStartIndex);
@@ -216,7 +124,6 @@ public partial class NativeAotLoweringPlanner
     private sealed record MethodAotEntry(uint OpenToken, uint ClosedToken, uint ArgCount, uint ArgsStartIndex);
 
     private void BuildGenericTypeRegistration(
-        StringBuilder builder,
         SupplementalMetadataTemplateArtifact supplemental,
         MetadataRegistrationArtifact metadataRegistration,
         out List<TypeEntry> entries,
@@ -293,7 +200,6 @@ public partial class NativeAotLoweringPlanner
     }
 
     private void BuildGenericMethodRegistration(
-        StringBuilder builder,
         SupplementalMetadataTemplateArtifact supplemental,
         MetadataRegistrationArtifact metadataRegistration,
         out List<MethodEntry> entries,
