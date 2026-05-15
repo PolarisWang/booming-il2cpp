@@ -31,6 +31,8 @@
 
 #include "gc_transition.h"
 
+#include <gc.h>
+
 // Spin-loop hint (x86 PAUSE / ARM YIELD)
 #if defined(_M_ARM64) || defined(__aarch64__)
     #define CHAOS_SPIN_HINT()  __yield()

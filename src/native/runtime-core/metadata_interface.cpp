@@ -36,7 +36,7 @@ const TypeInfoHot* ModuleAwareResolveTypeInfo(
             uint64_t stable_id = chaos_compute_type_stable_id(desc->subject_id_utf8);
             const auto* dyn_type = chaos_find_type_by_stable_id(stable_id);
             if (dyn_type != nullptr) {
-                return dyn_type;
+                return dyn_type->AsTypeInfoHot();
             }
         }
     }

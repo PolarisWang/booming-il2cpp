@@ -30,7 +30,7 @@ using namespace chaos::il2cpp::runtime_core;
 
 
 constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;
-inline TypeInfo chaos_type_info_managed_array = { nullptr, nullptr, 1ULL, 0, 32, 2, 0 };
+inline TypeInfoV0 chaos_type_info_managed_array = {{ nullptr, nullptr, 1ULL, 0, 32, 2, 0 }, { nullptr, nullptr, 0, 0, 0, 0 }};
 
 struct chaos_managed_array
 {
@@ -78,15 +78,15 @@ TValue* chaos_resolve_managed_value_pointer(CHAOS_IL2CPP_INTPTR chaos_managed_po
 	return reinterpret_cast<TValue*>(chaos_managed_pointer);
 }
 
-inline TypeInfoV0 chaos_type_info_v0_ConvertCharSubjects_ConvertCharSubjects = {{nullptr, nullptr, 8962533832043168636ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ConvertCharSubjects_ConvertCharSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(8962533832043168636ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_Decimal = {{nullptr, nullptr, 1126810584598443822ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Decimal = static_cast<CHAOS_IL2CPP_INTPTR>(1126810584598443822ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1}, {nullptr, nullptr, 0, 0, 0, 0 }};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);inline TypeInfoV0 chaos_type_info_v0_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32 /* warm_delta */, 2 /* value (boxed) */, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_ConvertCharSubjects_ConvertCharSubjects = {{nullptr, nullptr, 8962533832043168636ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ConvertCharSubjects_ConvertCharSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(8962533832043168636ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Decimal = {{nullptr, nullptr, 1126810584598443822ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Decimal = static_cast<CHAOS_IL2CPP_INTPTR>(1126810584598443822ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
 
 // ── Virtual method table arrays ──
@@ -211,7 +211,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_type_info_v0_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);
@@ -329,7 +329,7 @@ CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) no
 	const auto chaos_view = chaos::il2cpp::string_table::Resolve(chaos_id);
 
 	auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String, {});
-	chaos_string->header.type_info = &chaos_type_info_v0_System_Private_CoreLib_System_String.hot;
+	chaos_string->header.type_info = &chaos_mt_System_Private_CoreLib_System_String.hot;
 	chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_view.byte_count);
 	auto* owned_utf8 = static_cast<char*>(chaos::il2cpp::runtime_core::GcAllocateAtomic(chaos_view.byte_count + 1));
 	CHAOS_IL2CPP_MEMCPY(owned_utf8, chaos_view.utf8_data, chaos_view.byte_count);
@@ -460,7 +460,16 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_0(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_11(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_12(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_13(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_14(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_15(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_16(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_1(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_2(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_3(void);
@@ -470,15 +479,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_6(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_7(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_8(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_9(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_11(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_12(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_13(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_14(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_15(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_16(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -494,24 +494,24 @@ extern "C" const int kAotMethodCount;
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
 static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[20] = {
 	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	0u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
+	1u,
 	1u
 };
 
@@ -524,11 +524,20 @@ static constexpr struct {
 		CHAOS_ABI_MANIFEST_VERSION,
 		19u,
 		1u,
-		117252817u,  // FNV-1a over entries+params
+		229782721u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
+		{ 0u, 1u },  // ConvertCharSubjects_ConvertCharSubjects_Run
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_0
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_10
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_11
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_12
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_13
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_14
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_15
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_16
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_17
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_1
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_2
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_3
@@ -538,15 +547,6 @@ static constexpr struct {
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_7
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_8
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_9
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_10
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_11
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_12
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_13
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_14
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_15
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_16
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_17
-		{ 0u, 1u },  // ConvertCharSubjects_ConvertCharSubjects_Run
 	},
 	{
 		1u,
@@ -578,7 +578,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 
 	static const TypeInfoHot* const s_type_info_ptrs[2] = {
 		nullptr,
-		&chaos_type_info_v0_ConvertCharSubjects_ConvertCharSubjects.hot,
+		&chaos_mt_ConvertCharSubjects_ConvertCharSubjects.hot,
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
@@ -620,25 +620,25 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
 static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[19] = {
-	{ "Subject_0", 0x00000004u, 0u },  // ConvertCharSubjects
-	{ "Subject_1", 0x00000005u, 0u },  // ConvertCharSubjects
-	{ "Subject_2", 0x00000006u, 0u },  // ConvertCharSubjects
-	{ "Subject_3", 0x00000007u, 0u },  // ConvertCharSubjects
-	{ "Subject_4", 0x00000008u, 0u },  // ConvertCharSubjects
-	{ "Subject_5", 0x00000009u, 0u },  // ConvertCharSubjects
-	{ "Subject_6", 0x0000000Au, 0u },  // ConvertCharSubjects
-	{ "Subject_7", 0x0000000Bu, 0u },  // ConvertCharSubjects
-	{ "Subject_8", 0x0000000Cu, 0u },  // ConvertCharSubjects
-	{ "Subject_9", 0x0000000Du, 0u },  // ConvertCharSubjects
-	{ "Subject_10", 0x0000000Eu, 0u },  // ConvertCharSubjects
-	{ "Subject_11", 0x0000000Fu, 0u },  // ConvertCharSubjects
-	{ "Subject_12", 0x00000010u, 0u },  // ConvertCharSubjects
-	{ "Subject_13", 0x00000011u, 0u },  // ConvertCharSubjects
-	{ "Subject_14", 0x00000012u, 0u },  // ConvertCharSubjects
-	{ "Subject_15", 0x00000013u, 0u },  // ConvertCharSubjects
-	{ "Subject_16", 0x00000014u, 0u },  // ConvertCharSubjects
-	{ "Subject_17", 0x00000015u, 0u },  // ConvertCharSubjects
-	{ "Run", 0x00000003u, 1u },  // ConvertCharSubjects
+	{ "Run", 0x00000015u, 1u },  // ConvertCharSubjects
+	{ "Subject_0", 0x00000003u, 0u },  // ConvertCharSubjects
+	{ "Subject_10", 0x0000000Du, 0u },  // ConvertCharSubjects
+	{ "Subject_11", 0x0000000Eu, 0u },  // ConvertCharSubjects
+	{ "Subject_12", 0x0000000Fu, 0u },  // ConvertCharSubjects
+	{ "Subject_13", 0x00000010u, 0u },  // ConvertCharSubjects
+	{ "Subject_14", 0x00000011u, 0u },  // ConvertCharSubjects
+	{ "Subject_15", 0x00000012u, 0u },  // ConvertCharSubjects
+	{ "Subject_16", 0x00000013u, 0u },  // ConvertCharSubjects
+	{ "Subject_17", 0x00000014u, 0u },  // ConvertCharSubjects
+	{ "Subject_1", 0x00000004u, 0u },  // ConvertCharSubjects
+	{ "Subject_2", 0x00000005u, 0u },  // ConvertCharSubjects
+	{ "Subject_3", 0x00000006u, 0u },  // ConvertCharSubjects
+	{ "Subject_4", 0x00000007u, 0u },  // ConvertCharSubjects
+	{ "Subject_5", 0x00000008u, 0u },  // ConvertCharSubjects
+	{ "Subject_6", 0x00000009u, 0u },  // ConvertCharSubjects
+	{ "Subject_7", 0x0000000Au, 0u },  // ConvertCharSubjects
+	{ "Subject_8", 0x0000000Bu, 0u },  // ConvertCharSubjects
+	{ "Subject_9", 0x0000000Cu, 0u },  // ConvertCharSubjects
 };
 
 // Type name index entries (namespace, short_name)
@@ -648,30 +648,39 @@ static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
 
 // Token→Slot mapping (sorted by token for binary search)
 static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[19] = {
-	{ 0x00000003u, 18u },
-	{ 0x00000004u, 0u },
-	{ 0x00000005u, 1u },
-	{ 0x00000006u, 2u },
-	{ 0x00000007u, 3u },
-	{ 0x00000008u, 4u },
-	{ 0x00000009u, 5u },
-	{ 0x0000000Au, 6u },
-	{ 0x0000000Bu, 7u },
-	{ 0x0000000Cu, 8u },
-	{ 0x0000000Du, 9u },
-	{ 0x0000000Eu, 10u },
-	{ 0x0000000Fu, 11u },
-	{ 0x00000010u, 12u },
-	{ 0x00000011u, 13u },
-	{ 0x00000012u, 14u },
-	{ 0x00000013u, 15u },
-	{ 0x00000014u, 16u },
-	{ 0x00000015u, 17u },
+	{ 0x00000003u, 1u },
+	{ 0x00000004u, 10u },
+	{ 0x00000005u, 11u },
+	{ 0x00000006u, 12u },
+	{ 0x00000007u, 13u },
+	{ 0x00000008u, 14u },
+	{ 0x00000009u, 15u },
+	{ 0x0000000Au, 16u },
+	{ 0x0000000Bu, 17u },
+	{ 0x0000000Cu, 18u },
+	{ 0x0000000Du, 2u },
+	{ 0x0000000Eu, 3u },
+	{ 0x0000000Fu, 4u },
+	{ 0x00000010u, 5u },
+	{ 0x00000011u, 6u },
+	{ 0x00000012u, 7u },
+	{ 0x00000013u, 8u },
+	{ 0x00000014u, 9u },
+	{ 0x00000015u, 0u },
 };
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[19] = {
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ConvertCharSubjects::Run
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_0
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_10
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_11
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_12
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_13
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_14
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_15
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_16
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_17
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_1
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_2
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_3
@@ -681,15 +690,6 @@ static HotpatchEntryV0 s_hotpatch_entries[19] = {
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_7
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_8
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_9
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_10
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_11
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_12
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_13
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_14
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_15
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_16
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_17
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ConvertCharSubjects::Run
 };
 
 // Module hotpatch bundle
@@ -770,7 +770,16 @@ extern "C" int32_t kChaosExternalRuntimeCount = 21;
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[19])() = {
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Run),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_0),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_11),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_12),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_13),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_14),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_2),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_3),
@@ -780,19 +789,10 @@ static void (*kAotMethods[19])() = {
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_7),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_8),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_9),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_11),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_12),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_13),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_14),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Run),
 };
 
 static void (*kBenchmarkWrappers[19])() = {
-	[]() { kAotMethods[0](); },
+	[]() { reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[0])(static_cast<CHAOS_IL2CPP_INTPTR>(0)); },
 	[]() { kAotMethods[1](); },
 	[]() { kAotMethods[2](); },
 	[]() { kAotMethods[3](); },
@@ -810,7 +810,7 @@ static void (*kBenchmarkWrappers[19])() = {
 	[]() { kAotMethods[15](); },
 	[]() { kAotMethods[16](); },
 	[]() { kAotMethods[17](); },
-	[]() { reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[18])(static_cast<CHAOS_IL2CPP_INTPTR>(0)); },
+	[]() { kAotMethods[18](); },
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -880,7 +880,16 @@ extern "C" double BenchmarkMethod(
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[19] = {
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Run),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_0),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_11),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_12),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_13),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_14),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_1),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_2),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_3),
@@ -890,15 +899,6 @@ static void* const kMethodPointers[19] = {
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_7),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_8),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_9),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_11),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_12),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_13),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_14),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Run),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -950,7 +950,16 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ConvertCharSubjects_ConvertCharSubjects[19] = {
+	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
 	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
+	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
+	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
+	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
+	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
+	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
+	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
+	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u },
+	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u },
 	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
 	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
 	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
@@ -960,15 +969,6 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_ConvertCharSubject
 	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
 	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
 	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
-	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
-	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
-	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
-	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
-	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u },
-	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u },
-	{ 0u, /*metadata_token — unused by ResolveSubjectId*/ "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
@@ -1018,6 +1018,377 @@ struct ChaosGenericRegistrationInit {
 			&ChaosDoPopulateGenericRegistration;
 	}
 } g_chaos_reg_init;
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Run(System.Int32)
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = chaos_args[0];
+	chaos_locals[1] = _s0;
+	_s0 = chaos_locals[1];
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		switch (chaos_switch_value)
+		{
+			case 0:
+			{
+				{
+					auto& _d1 = s_hotpatch_entries[1];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d1.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_0();
+					}
+				}
+				break;
+			}
+			case 1:
+			{
+				{
+					auto& _d10 = s_hotpatch_entries[10];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d10.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_1();
+					}
+				}
+				break;
+			}
+			case 2:
+			{
+				{
+					auto& _d11 = s_hotpatch_entries[11];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d11.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_2();
+					}
+				}
+				break;
+			}
+			case 3:
+			{
+				{
+					auto& _d12 = s_hotpatch_entries[12];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d12.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_3();
+					}
+				}
+				break;
+			}
+			case 4:
+			{
+				{
+					auto& _d13 = s_hotpatch_entries[13];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d13.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_4();
+					}
+				}
+				break;
+			}
+			case 5:
+			{
+				{
+					auto& _d14 = s_hotpatch_entries[14];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d14.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_5();
+					}
+				}
+				break;
+			}
+			case 6:
+			{
+				{
+					auto& _d15 = s_hotpatch_entries[15];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d15)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d15))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d15.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_6();
+					}
+				}
+				break;
+			}
+			case 7:
+			{
+				{
+					auto& _d16 = s_hotpatch_entries[16];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d16.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_7();
+					}
+				}
+				break;
+			}
+			case 8:
+			{
+				{
+					auto& _d17 = s_hotpatch_entries[17];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d17)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d17))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d17.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_8();
+					}
+				}
+				break;
+			}
+			case 9:
+			{
+				{
+					auto& _d18 = s_hotpatch_entries[18];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d18)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d18))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d18.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_9();
+					}
+				}
+				break;
+			}
+			case 10:
+			{
+				{
+					auto& _d2 = s_hotpatch_entries[2];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d2.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_10();
+					}
+				}
+				break;
+			}
+			case 11:
+			{
+				{
+					auto& _d3 = s_hotpatch_entries[3];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d3.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_11();
+					}
+				}
+				break;
+			}
+			case 12:
+			{
+				{
+					auto& _d4 = s_hotpatch_entries[4];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d4.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_12();
+					}
+				}
+				break;
+			}
+			case 13:
+			{
+				{
+					auto& _d5 = s_hotpatch_entries[5];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d5.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_13();
+					}
+				}
+				break;
+			}
+			case 14:
+			{
+				{
+					auto& _d6 = s_hotpatch_entries[6];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d6.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_14();
+					}
+				}
+				break;
+			}
+			case 15:
+			{
+				{
+					auto& _d7 = s_hotpatch_entries[7];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d7.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_15();
+					}
+				}
+				break;
+			}
+			case 16:
+			{
+				{
+					auto& _d8 = s_hotpatch_entries[8];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d8.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_16();
+					}
+				}
+				break;
+			}
+			case 17:
+			{
+				{
+					auto& _d9 = s_hotpatch_entries[9];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
+					{
+						alignas(16) uint8_t _d_ab[1];
+						ArgBuffer _d_bw(_d_ab);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d9.method_key, _d_ab, nullptr);
+					}
+					else
+					{
+						ConvertCharSubjects_ConvertCharSubjects_Subject_17();
+					}
+				}
+				break;
+			}
+			default:
+			{
+				return;
+				break;
+			}
+		}
+	}
+	return;
 }
 
 // Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_0()
@@ -1075,531 +1446,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_0(void)
 	}
 }
 
-// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_1()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_2()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
-	{
-		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
-	{
-		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_3()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_3(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__get_UtcNow_System_DateTime__();
-		_s0 = ChaosStoreInt64(chaos_result);
-	}
-	{
-		const auto chaos_inline_result = (throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0));
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__get_UtcNow_System_DateTime__();
-		_s1 = ChaosStoreInt64(chaos_result);
-	}
-	{
-		const auto chaos_inline_result = (throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0));
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_4()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_4(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Decimal, {});
-		chaos_object->header.type_info = &chaos_type_info_v0_System_Private_CoreLib_System_Decimal.hot;
-		chaos_external_runtime_System_Private_CoreLib_System_Decimal___ctor_System_Void_System_Int32_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		const auto chaos_inline_result = (throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0));
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Decimal, {});
-		chaos_object->header.type_info = &chaos_type_info_v0_System_Private_CoreLib_System_Decimal.hot;
-		chaos_external_runtime_System_Private_CoreLib_System_Decimal___ctor_System_Void_System_Int32_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		const auto chaos_inline_result = (throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0));
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_5()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_5(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	_s0 = ChaosStoreFloat64(42);
-	{
-		const auto chaos_inline_result = (throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0));
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	_s1 = ChaosStoreFloat64(42);
-	{
-		const auto chaos_inline_result = (throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0));
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	{
-		const auto chaos_right = ChaosLoadFloat64(_s1);
-		const auto chaos_left = ChaosLoadFloat64(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_6()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_6(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_7()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_7(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_8()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_8(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	{
-		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
-	{
-		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_9()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_9(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
 // Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_10()
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void)
 {
@@ -1626,7 +1472,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void)
 	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_0{};
 	{
 		const auto chaos_value = _s0;
-		chaos_box_storage_0.header.type_info = &chaos_type_info_v0_System_Private_CoreLib_System_Int32.hot;
+		chaos_box_storage_0.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
 		chaos_box_storage_0.value = chaos_value;
 	}
 	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
@@ -1643,7 +1489,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void)
 	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_1{};
 	{
 		const auto chaos_value = _s1;
-		chaos_box_storage_1.header.type_info = &chaos_type_info_v0_System_Private_CoreLib_System_Int32.hot;
+		chaos_box_storage_1.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
 		chaos_box_storage_1.value = chaos_value;
 	}
 	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
@@ -2100,375 +1946,529 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void)
 	}
 }
 
-// Managed method: ConvertCharSubjects/ConvertCharSubjects::Run(System.Int32)
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_1()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
-	_s0 = chaos_args[0];
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
 	chaos_locals[0] = _s0;
 	_s0 = chaos_locals[0];
 	{
-		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-		switch (chaos_switch_value)
+		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
 		{
-			case 0:
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				{
-					auto& _d0 = s_hotpatch_entries[0];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d0.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_0();
-					}
-				}
-				break;
-			}
-			case 1:
-			{
-				{
-					auto& _d1 = s_hotpatch_entries[1];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d1.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_1();
-					}
-				}
-				break;
-			}
-			case 2:
-			{
-				{
-					auto& _d2 = s_hotpatch_entries[2];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d2.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_2();
-					}
-				}
-				break;
-			}
-			case 3:
-			{
-				{
-					auto& _d3 = s_hotpatch_entries[3];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d3.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_3();
-					}
-				}
-				break;
-			}
-			case 4:
-			{
-				{
-					auto& _d4 = s_hotpatch_entries[4];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d4.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_4();
-					}
-				}
-				break;
-			}
-			case 5:
-			{
-				{
-					auto& _d5 = s_hotpatch_entries[5];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d5.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_5();
-					}
-				}
-				break;
-			}
-			case 6:
-			{
-				{
-					auto& _d6 = s_hotpatch_entries[6];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d6.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_6();
-					}
-				}
-				break;
-			}
-			case 7:
-			{
-				{
-					auto& _d7 = s_hotpatch_entries[7];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d7.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_7();
-					}
-				}
-				break;
-			}
-			case 8:
-			{
-				{
-					auto& _d8 = s_hotpatch_entries[8];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d8.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_8();
-					}
-				}
-				break;
-			}
-			case 9:
-			{
-				{
-					auto& _d9 = s_hotpatch_entries[9];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d9.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_9();
-					}
-				}
-				break;
-			}
-			case 10:
-			{
-				{
-					auto& _d10 = s_hotpatch_entries[10];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d10.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_10();
-					}
-				}
-				break;
-			}
-			case 11:
-			{
-				{
-					auto& _d11 = s_hotpatch_entries[11];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d11.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_11();
-					}
-				}
-				break;
-			}
-			case 12:
-			{
-				{
-					auto& _d12 = s_hotpatch_entries[12];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d12.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_12();
-					}
-				}
-				break;
-			}
-			case 13:
-			{
-				{
-					auto& _d13 = s_hotpatch_entries[13];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d13.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_13();
-					}
-				}
-				break;
-			}
-			case 14:
-			{
-				{
-					auto& _d14 = s_hotpatch_entries[14];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d14.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_14();
-					}
-				}
-				break;
-			}
-			case 15:
-			{
-				{
-					auto& _d15 = s_hotpatch_entries[15];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d15)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d15))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d15.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_15();
-					}
-				}
-				break;
-			}
-			case 16:
-			{
-				{
-					auto& _d16 = s_hotpatch_entries[16];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d16.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_16();
-					}
-				}
-				break;
-			}
-			case 17:
-			{
-				{
-					auto& _d17 = s_hotpatch_entries[17];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d17)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d17))
-					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d17.method_key, _d_ab, nullptr);
-					}
-					else
-					{
-						ConvertCharSubjects_ConvertCharSubjects_Subject_17();
-					}
-				}
-				break;
-			}
-			default:
-			{
-				return;
-				break;
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 		}
+		return;
 	}
-	return;
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_2()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_3()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_3(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+
+
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__get_UtcNow_System_DateTime__();
+		_s0 = ChaosStoreInt64(chaos_result);
+	}
+	{
+		const auto chaos_inline_result = (throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	{
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__get_UtcNow_System_DateTime__();
+		_s1 = ChaosStoreInt64(chaos_result);
+	}
+	{
+		const auto chaos_inline_result = (throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_4()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_4(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_raw_arg_1 = _s0;
+		const auto chaos_arg_1 = chaos_raw_arg_1;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Decimal, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Decimal.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_Decimal___ctor_System_Void_System_Int32_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		const auto chaos_inline_result = (throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_raw_arg_1 = _s1;
+		const auto chaos_arg_1 = chaos_raw_arg_1;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Decimal, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Decimal.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_Decimal___ctor_System_Void_System_Int32_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		const auto chaos_inline_result = (throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_5()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_5(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+
+
+	_s0 = ChaosStoreFloat64(42);
+	{
+		const auto chaos_inline_result = (throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = ChaosStoreFloat64(42);
+	{
+		const auto chaos_inline_result = (throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	{
+		const auto chaos_right = ChaosLoadFloat64(_s1);
+		const auto chaos_left = ChaosLoadFloat64(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_6()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_6(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_7()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_7(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_8()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_8(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_9()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_9(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
 }
 
 
