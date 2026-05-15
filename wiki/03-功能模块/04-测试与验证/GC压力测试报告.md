@@ -2,7 +2,7 @@
 
 ## 概述
 
-CRAG (Chaos Region-Aware GC) 压力测试套件位于 `tests/contracts/native/runtime-core/gc_stress_test.cpp`，包含 4 个场景，覆盖并发分配、混合大小、young GC 震荡、延迟验证等路径。输出结构化 JSON 报告到 `artifacts/native-runtime-core-test/reports/gc_stress_report_<ts>.json`。
+CRAG (Chaos Region-Aware GC) 压力测试套件位于 `tests/contracts/native/runtime-core/gc_stress_test.cpp`，包含 **7 个场景**，覆盖并发分配、混合大小、young GC 震荡、延迟验证、域卸载、并发 pinned root、超大对象等路径。输出结构化 JSON 报告到 `artifacts/native-runtime-core-test/reports/gc_stress_report_<ts>.json`。
 
 构建与运行：
 
@@ -19,8 +19,80 @@ cmake --build artifacts/presets/debug --target chaos_gc_stress_test --config Deb
 | B | mixed_size | 100 | 256 | 随机大小 16B-32KB，4 个 bucket 覆盖 fast/slow/oversized |
 | C | aggressive_young_gc | 100 | 256 | 高频率 nursery 耗尽，触发大量 young GC |
 | D | extended_gc_pressure | 50 | 512 | 每次分配立即 verify，safepoint 间隔 16 次 |
+| E | domain_unload | 10 domains | 200/domain | 创建 N 个域，分配内存，验证模式，卸载所有域 |
+| F | concurrent_pinned_root | 20 | 20 | 混合 old-gen/nursery 分配 + 并发 AddPinnedRoot + full GC |
+| G | oversized_objects | 20 | 16 | 33KB-256KB 直接 old-gen 分配 + 并发 full GC |
 
-## C3 精确扫描对比 (2026-05-13)
+## Phase 7 最终状态 (2026-05-15)
+
+在全部 7 阶段开发计划完成后，CRAG GC 实现了以下能力矩阵：
+
+### 已实现功能
+
+| 功能 | 状态 | 说明 |
+|------|------|------|
+| 两层卡表 (L1+L2) | 完成 | 64K L1 entries × 128 cards/segment × 512B = 4GB 覆盖，写屏障无 mutex |
+| Young GC (Cheney 复制) | 完成 | Phase 1: dirty card scan → Phase 2: 精确 GcLayout 扫描 → Phase 3: Cheney BFS → Phase 4: sweep |
+| 精确 GcLayout 扫描 | 完成 | TypeInfo stable_id → hash table lookup → 只扫描 pointer offsets |
+| 并行标记 (work-stealing) | 完成 | Chunked deques, XorShift32 PRNG, atomic mark bitmap |
+| 老年代压缩 (page 内) | 完成 | Plan → Relocate → Compact, 30% 碎片阈值触发 |
+| Large Object Heap | 完成 | 85KB 阈值, VirtualAlloc segments, mark-sweep, free list trim |
+| BFS worklist 动态增长 | 完成 | 初始 64K, capacity × 2 realloc, 无保守回退 |
+| GcLayout RCU epoch | 完成 | Epoch-based deferred reclamation, 2 epoch 延迟释放 |
+| GC 事件回调 | 完成 | GC_START/MARK_DONE/SWEEP_DONE/COMPACT_DONE/GC_END |
+| GC 统计 + 直方图 | 完成 | 原子快照, 6 bucket pause histogram, 64 event ring buffer |
+| 域卸载集成 | 完成 | safepoint → 跨域引用扫描 → 释放 domain regions |
+| Weak ref young GC 处理 | 完成 | 扫描 weak ref 表: 未 promoted 置空, 已 promoted 更新地址 |
+| PreciseObjectSize | 完成 | TypeInfo/GcLayout 精确大小, 消除 2KB 截断 bug |
+
+### 修复的正确性 Bug
+
+| # | 问题 | 修复 |
+|---|------|------|
+| 1 | Compaction 地址计算错误 (sizeof(void*) 假设) | 改用 GcLayout 精确大小 + binary search |
+| 2 | LOH finalizer 复活对象未重标记 | HandleReMarkPass 增加 g_loh.MarkObject() |
+| 3 | PlanPageCompaction bitmap 扫描重复条目 | 使用 local remaining 副本 + 内层 while 循环 |
+| 4 | Young GC >2KB 对象截断 | kMaxEstObjectSize 2048 → 32768 + PreciseObjectSize |
+| 5 | Young GC 无事件 | 增加 GC_START/GC_END 事件 |
+| 6 | ClearAllCards O(64K) | 改用 tracked segment list, O(allocated_segments) |
+| 7 | rand() 线程不安全 | 改用 thread-local XorShift32 |
+| 8 | LOH 内存泄漏 (free segments 不释放) | 增加 free list trim, 保留 4 个, 超额释放 |
+
+### 性能数据 (Debug 构建, 100 线程并发)
+
+| 指标 | 值 |
+|------|-----|
+| Young GC 平均暂停 | ~350µs (256KB nursery) |
+| Full GC 平均暂停 (小堆) | ~20µs |
+| Full GC 并行标记 (100MB+) | ~130ms (8 workers) |
+| Full GC 压缩 | ~180ms |
+| Pattern verification failures | **0 (稳定)** |
+| 卡表写屏障 | ~6 指令, 无 mutex |
+
+### 与 CoreCLR/Mono/Unity IL2CPP 对比
+
+| 能力 | CRAG GC | CoreCLR | Mono GC | Unity IL2CPP (BDWGC) |
+|------|---------|---------|---------|---------------------|
+| 分代 | 2 代 | 3 代 | 2 代 | 无 |
+| 并行标记 | 是 | 是 (BGC 并发) | 是 | 无 |
+| 并发标记 | 否 (计划中) | 是 | 否 | 无 |
+| 压缩 | 是 (page 内) | 是 | 是 | 无 |
+| 写屏障 | 两层卡表 | 卡表 + card word | 写屏障 | 无 |
+| 精确扫描 | 是 | 是 | 是 | 否 |
+| LOH | 是 (85KB) | 是 (85KB) | 是 | N/A |
+| 热更新支持 | **原生** | 无 | 无 | 无 |
+| 暂停时间 (100MB) | ~130ms | ~50ms (BGC) | ~200ms | ~500ms+ |
+
+### 已知差距
+
+1. **无并发标记 (BGC)**：Full GC 完全 STW，大堆 (>500MB) 暂停可能超过 500ms
+2. **无三代分代**：CoreCLR 的 gen0/gen1 快速回收 + gen2 完整回收模式更高效
+3. **Region 框架 O(R) 扫描**：FreeRegion 和 IsInDomain 线性扫描 region 表
+4. **FindPage O(N)**：OldGen 的 page 查找是线性扫描
+
+## 历史数据
+
+### C3 精确扫描对比 (2026-05-13)
 
 在 9 项修复基础上，C3 实现了精确 GC 布局扫描：
 

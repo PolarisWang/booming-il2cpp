@@ -154,6 +154,9 @@ void SafepointPoll() noexcept {
     auto* thread = tls_this_thread;
     if (thread == nullptr) return;
 
+    // Publish confirmation BEFORE entering the spin loop.
+    // This tells the safepoint initiator that this thread has acknowledged
+    // the odd generation and is about to stop for GC.
     thread->at_safepoint = true;
     thread->last_seen_gen = gen;
 
@@ -212,12 +215,49 @@ uint32_t RequestGlobalSafepoint() noexcept {
     s_generation.store(desired, std::memory_order_release);
     s_safepoint_depth = 1;
 
-    // V4-H2: Brief bounded yield to allow managed threads to reach
-    // SafepointPoll before GC work begins.  A full confirmation protocol
-    // would require O(threads) iteration per GC cycle — too expensive.
-    // Threads in deep native frames that never poll are handled by
-    // conservative stack scanning as fallback.
-    std::this_thread::yield();
+    // V4-H2: Bounded confirmation loop — wait for all managed threads to
+    // acknowledge the odd generation via their last_seen_gen field.
+    // Threads that reach SafepointPoll will set last_seen_gen = odd gen.
+    // Threads in deep native frames that never poll remain unconfirmed
+    // and are handled by conservative stack scanning as fallback.
+    // We spin with yield up to ~10ms to let threads reach a poll point.
+    // NOTE: MSVC does not allow capturing lambdas to decay to C function
+    // pointers, so we use file-static helper variables (same pattern as
+    // GcScanAllThreadRoots) — safe since only one GC thread runs at a time.
+    {
+        constexpr int kMaxConfirmSpin = 1 << 20;  // ~10ms at 3GHz
+        static ManagedThread* s_confirm_self = nullptr;
+        static uint32_t s_confirm_desired = 0;
+        static int* s_confirm_out = nullptr;
+        s_confirm_self = self;
+        s_confirm_desired = desired;
+
+        int confirm_spins = 0;
+        s_confirm_out = &confirm_spins;
+        EnumerateThreads([](ManagedThread* t) -> bool {
+            if (t == s_confirm_self) return true;
+            if (t->last_seen_gen == s_confirm_desired) return true;
+            (*s_confirm_out)++;
+            return true;
+        });
+        if (confirm_spins > 0) {
+            int remaining = 0;
+            for (int i = 0; i < kMaxConfirmSpin; i++) {
+                remaining = 0;
+                s_confirm_out = &remaining;
+                EnumerateThreads([](ManagedThread* t) -> bool {
+                    if (t == s_confirm_self) return true;
+                    if (t->last_seen_gen != s_confirm_desired) (*s_confirm_out)++;
+                    return true;
+                });
+                if (remaining == 0) break;
+                if (i > 10000) std::this_thread::yield();
+            }
+        }
+        s_confirm_self = nullptr;
+        s_confirm_desired = 0;
+        s_confirm_out = nullptr;
+    }
 
     return desired;
 }
@@ -230,13 +270,14 @@ void ReleaseGlobalSafepoint(uint32_t /*generation*/) noexcept {
         return;
     }
 
+    // V4-H1: Release safepoint ownership BEFORE toggling generation.
+    // This ensures the safepoint owner is cleared before threads resume.
+    s_safepoint_owner.store(nullptr, std::memory_order_release);
+
     // Toggle to even (released).
     uint32_t gen = s_generation.load(std::memory_order_acquire);
     s_generation.store((gen + 1) & ~kGcGenerationMask, std::memory_order_release);
     s_safepoint_depth = 0;
-
-    // V4-H1: Release safepoint ownership.
-    s_safepoint_owner.store(nullptr, std::memory_order_release);
 }
 
 void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, void* user_data), void* user_data) noexcept {

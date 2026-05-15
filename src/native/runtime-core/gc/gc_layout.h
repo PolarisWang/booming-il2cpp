@@ -80,9 +80,49 @@ struct TypeInfoRange {
 };
 
 // ======================================================================
+// GcLayoutTable — dynamically growable hash table for GC layouts
+//
+// RCU-managed: published atomically via GcLayoutRegistry::current_table_.
+// Readers (Lookup) load the pointer and probe lock-free; writers publish
+// a new table and retire the old one for deferred reclamation.
+// ======================================================================
+
+/// Load factor threshold that triggers GrowTable (75%).
+static constexpr float kGcLayoutLoadFactorThreshold = 0.75f;
+
+/// Minimum table capacity (must be >= initial entry count).
+static constexpr int kGcLayoutMinCapacity = 4096;
+
+/// Sentinel for empty slots.
+static constexpr uint64_t kGcLayoutEmptySlot = 0;
+
+struct GcLayoutTable {
+    std::atomic<uint64_t>* keys;      // stable_id keys, allocated array
+    GcTypeLayout**         values;    // GcTypeLayout* values, allocated array
+    int                    capacity;  // total slots
+    int                    count;     // occupied slots
+
+    GcLayoutTable(int cap)
+        : keys(new std::atomic<uint64_t>[static_cast<size_t>(cap)]())
+        , values(new GcTypeLayout*[static_cast<size_t>(cap)]())
+        , capacity(cap)
+        , count(0) {}
+
+    ~GcLayoutTable() {
+        delete[] keys;
+        delete[] values;
+        // Note: GcTypeLayout objects are NOT owned by the table — they are
+        // allocated and owned by the registrar (GcLayoutRegistry delegates
+        // to the currently-active table on lookup; layout objects survive
+        // table retirement and are re-linked into the new table).
+    }
+};
+
+// ======================================================================
 // GcLayoutRegistry — process-wide registry of GC layouts
 //
-// Thread-safe: reads (Lookup) are lock-free; writes (Register) use a mutex.
+// Thread-safe: reads (Lookup) are lock-free via RCU-protected table pointer;
+// writes (Register) use a mutex and publish new table atomically.
 // ======================================================================
 
 class GcLayoutRegistry {
@@ -100,7 +140,7 @@ public:
 
     /// Look up a layout by stable_id.
     /// Returns nullptr if no layout is registered.
-    /// Lock-free (read-only atomic load of the hash table).
+    /// Lock-free (atomic load of current table + linear probe).
     const GcTypeLayout* Lookup(uint64_t stable_id) const;
 
     /// Register a range of memory that contains valid TypeInfo structs.
@@ -119,21 +159,30 @@ public:
     /// Returns the stable_id used so the caller can write it at offset 0.
     uint64_t RegisterOrGetRawAllocType(uint32_t instance_size);
 
+    /// Reclaim all retired (old) tables that are no longer in use.
+    /// Safe to call inside a GC safepoint — no concurrent Lookup.
+    /// Called from Collect() after mark-sweep completes.
+    void ReclaimRetiredTables();
+
 private:
-    GcLayoutRegistry() = default;
+    GcLayoutRegistry();
     ~GcLayoutRegistry() = default;
     GcLayoutRegistry(const GcLayoutRegistry&) = delete;
     GcLayoutRegistry& operator=(const GcLayoutRegistry&) = delete;
 
-    // Hash table parameters.
-    static constexpr int kHashSize = 4096;
-    static constexpr uint64_t kEmptySlot = 0;
+    /// Grow the hash table to 2x capacity.  Must hold register_mutex_.
+    void GrowTable();
 
-    // Lock-free hash table: stable_id → GcTypeLayout*.
-    // Slot 0 is reserved (kEmptySlot).
-    // Open-addressing with linear probing.
-    std::atomic<uint64_t> hash_keys_[kHashSize]{};
-    GcTypeLayout*         hash_values_[kHashSize]{};
+    /// Insert a (key, value) pair into the given table.
+    /// Returns true on success, false if table is full.
+    static bool InsertIntoTable(GcLayoutTable* table, uint64_t key, GcTypeLayout* value);
+
+    /// Retire an old table for deferred reclamation.
+    void RetireTable(GcLayoutTable* table);
+
+    // RCU-managed hash table: readers load this atomically; writers
+    // publish a new table under register_mutex_.
+    std::atomic<GcLayoutTable*> current_table_{nullptr};
 
     // TypeInfo address ranges (lock-free: fixed array with atomic index).
     TypeInfoRange typeinfo_ranges_[kMaxTypeInfoRanges]{};
@@ -144,6 +193,10 @@ private:
 
     // Last raw-alloc serial number (for generating unique stable_ids).
     std::atomic<uint32_t> raw_alloc_serial_{0};
+
+    // Retired tables pending safe reclamation.
+    // Access is serialized by register_mutex_.
+    std::vector<GcLayoutTable*> retired_tables_;
 };
 
 // ======================================================================
