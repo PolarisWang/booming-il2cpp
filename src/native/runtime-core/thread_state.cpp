@@ -36,6 +36,24 @@ std::atomic<ManagedThread*> s_thread_list{nullptr};
 /// Monotonically increasing thread ID allocator.
 std::atomic<int32_t> s_next_thread_id{kMainThreadId + 1};
 
+/// Map ManagedThreadPriority to OS thread priority.
+/// Called on RegisterThread and chaos_thread_set_priority.
+int32_t OsThreadPriorityFromManaged(ManagedThreadPriority pri) noexcept {
+#if defined(_WIN32) || defined(_WIN64)
+    switch (pri) {
+        case ManagedThreadPriority::Lowest:      return THREAD_PRIORITY_LOWEST;
+        case ManagedThreadPriority::BelowNormal: return THREAD_PRIORITY_BELOW_NORMAL;
+        case ManagedThreadPriority::Normal:      return THREAD_PRIORITY_NORMAL;
+        case ManagedThreadPriority::AboveNormal: return THREAD_PRIORITY_ABOVE_NORMAL;
+        case ManagedThreadPriority::Highest:     return THREAD_PRIORITY_HIGHEST;
+        default:                                 return THREAD_PRIORITY_NORMAL;
+    }
+#else
+    (void)pri;
+    return 0;
+#endif
+}
+
 }  // anonymous namespace
 
 void RegisterThread(int32_t managed_id, void* managed_obj) noexcept {
@@ -43,6 +61,12 @@ void RegisterThread(int32_t managed_id, void* managed_obj) noexcept {
     thread->managed_id     = managed_id;
     thread->managed_object = managed_obj;
     thread->is_running     = true;
+    thread->managed_state  = ManagedThreadState::Running;
+
+#if defined(_WIN32) || defined(_WIN64)
+    // Set default OS thread priority to THREAD_PRIORITY_NORMAL.
+    ::SetThreadPriority(::GetCurrentThread(), THREAD_PRIORITY_NORMAL);
+#endif
 
     // Capture stack bounds for conservative root scanning during full GC.
     // Using stack-based address heuristics: the address of a local variable
@@ -81,6 +105,7 @@ void UnregisterThread() noexcept {
     if (thread == nullptr) return;
 
     thread->is_running = false;
+    thread->managed_state = ManagedThreadState::Stopped;
 
     // Return the TLS nursery to the region manager before clearing TLS.
     // Otherwise the nursery region leaks until process exit.

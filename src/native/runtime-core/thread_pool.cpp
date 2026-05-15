@@ -78,6 +78,10 @@ void WorkerLoop() noexcept {
     // Register this thread for managed identity.
     int32_t tid = AllocateThreadId();
     RegisterThread(tid, nullptr);
+    // Mark as thread-pool worker for IsThreadPoolThread.
+    if (auto* mt = GetCurrentThread()) {
+        mt->is_threadpool = true;
+    }
 
     for (;;) {
         WorkItem item;
