@@ -1,0 +1,86 @@
+// ── Dispatch table (kAotMethods[]) ──────────────────────────────
+// const function pointer array for dispatch via slot index.
+static void (*kAotMethods[{{ methods_count }}])() = {
+{% for method in methods %}
+    reinterpret_cast<void(*)()>(&{{ method.native_symbol }}),
+{% endfor %}
+};
+
+// ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
+// Each wrapper supplies default argument values based on parameter types.
+// String params receive a valid StringId; all others receive 0.
+static void (*kBenchmarkWrappers[{{ methods_count }}])() = {
+{% for method in methods %}
+    []() { {% if method.param_count == 0 %}kAotMethods[{{ method.index }}]();{% else %}reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR{% for i in method.extra_params %}, CHAOS_IL2CPP_INTPTR{% endfor %})>(kAotMethods[{{ method.index }}])({% for param in method.params %}{% if param.is_string and default_string_id != 0 %}chaos_make_string_id_value({{ default_string_id }}ULL){% else %}static_cast<CHAOS_IL2CPP_INTPTR>(0){% endif %}{% if !forlast %}, {% endif %}{% endfor %});{% endif %} },
+{% endfor %}
+};
+
+// Single-method dispatch via hotpatch dispatch table.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
+    CHAOS_IL2CPP_INT32 chaos_entry_index)
+{
+    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+        return -1;
+    auto& entry = s_hotpatch_entries[chaos_entry_index];
+    if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
+        && !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
+    {
+        uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};
+        chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+            entry.method_key, __chaos_args, __chaos_ret);
+    } else {
+        reinterpret_cast<void(*)()>(entry.direct_ptr)();
+    }
+    return 0;
+}
+
+// All-methods loop: run every method and return a bitmask of failures.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
+{
+    CHAOS_IL2CPP_INT32 result = 0;
+    for (int i = 0; i < kAotMethodCount; i++) {
+        auto& entry = s_hotpatch_entries[i];
+        if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
+            && !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
+        {
+            uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};
+            chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+                entry.method_key, __chaos_args, __chaos_ret);
+        } else {
+            reinterpret_cast<void(*)()>(entry.direct_ptr)();
+        }
+    }
+    return result;
+}
+
+// Fast benchmark dispatch: no setjmp, inline slot access.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
+    CHAOS_IL2CPP_INT32 chaos_entry_index)
+{
+    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+        return -1;
+    auto& entry = s_hotpatch_entries[chaos_entry_index];
+    if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
+        && !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
+    {
+        chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
+            entry.method_key);
+    } else {
+        reinterpret_cast<void(*)()>(entry.direct_ptr)();
+    }
+    return 0;
+}
+
+// Pure AOT benchmark: calls kAotMethods[i] directly, no hotpatch overhead.
+extern "C" double BenchmarkMethod(
+    int chaos_entry_index, int iterations) {
+    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+        return -1.0;
+    auto start = std::chrono::steady_clock::now();
+    for (int i = 0; i < iterations; i++) {
+        kBenchmarkWrappers[chaos_entry_index]();
+    }
+    auto end = std::chrono::steady_clock::now();
+    return std::chrono::duration<double, std::milli>(
+        end - start).count();
+}

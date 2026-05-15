@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using Chaos.IL2CPP.Contracts;
+using Scriban.Runtime;
 
 namespace Chaos.IL2CPP.CodeGen;
 
@@ -1280,31 +1281,19 @@ public sealed partial class NativeAotLoweringPlanner
 			if (descriptors == null || descriptors.Count == 0)
 				return;
 
-			builder.AppendLine();
-			builder.AppendLine("// ── Struct marshalling descriptors (codegen static) ──");
-			builder.AppendLine();
-
 			// Build a lookup for nested type references
 			var descriptorByTypeId = descriptors.ToDictionary(d => d.TypeSubjectId, StringComparer.Ordinal);
 
-			// Emit each descriptor
-			foreach (var desc in descriptors)
+			// Build descriptor models
+			var descriptorModels = descriptors.Select(desc =>
 			{
 				string safeName = SanitizeSubjectId(desc.TypeSubjectId);
 				string descSymbol = GetNativeStructMarshallingDescriptorSymbol(desc.TypeSubjectId);
 				string fieldArraySymbol = "s_marshal_fields_" + safeName;
+				ulong stableId = ComputeStableTypeId(desc.TypeSubjectId);
 
-				// Emit the field descriptor array as a static constexpr array
-				builder.Append("static constexpr StructFieldDescriptorV1 ");
-				builder.Append(fieldArraySymbol);
-				builder.AppendLine("[] =");
-				builder.AppendLine("{");
-
-				for (int i = 0; i < desc.Fields.Count; i++)
+				var fieldModels = desc.Fields.Select(f =>
 				{
-					var f = desc.Fields[i];
-
-					// Resolve nested descriptor pointer expression
 					string nestedPtrExpr;
 					if (f.Kind == "NestedStruct" && f.NestedTypeSubjectId != null
 						&& descriptorByTypeId.ContainsKey(f.NestedTypeSubjectId))
@@ -1316,60 +1305,38 @@ public sealed partial class NativeAotLoweringPlanner
 						nestedPtrExpr = "nullptr";
 					}
 
-					int kindVal = GetStructFieldKindValue(f.Kind);
-					int elemTypeVal = GetNativeElementTypeValue(f.ElementType);
+					return new ScriptObject
+					{
+						["kind_value"] = GetStructFieldKindValue(f.Kind),
+						["offset"] = f.Offset,
+						["size"] = f.Size,
+						["array_count"] = f.ArrayCount,
+						["element_type_value"] = GetNativeElementTypeValue(f.ElementType),
+						["nested_ptr_expr"] = nestedPtrExpr,
+					};
+				}).ToArray();
 
-					builder.Append("    { static_cast<StructFieldKind>(");
-					builder.Append(kindVal.ToString());
-					builder.Append("), ");
-					builder.Append(f.Offset.ToString());
-					builder.Append(", ");
-					builder.Append(f.Size.ToString());
-					builder.Append(", ");
-					builder.Append(f.ArrayCount.ToString());
-					builder.Append(", static_cast<NativeElementType>(");
-					builder.Append(elemTypeVal.ToString());
-					builder.Append("), 0, ");
-					builder.Append(nestedPtrExpr);
-					builder.Append(" }");
+				return new ScriptObject
+				{
+					["type_subject_id"] = desc.TypeSubjectId,
+					["safe_name"] = safeName,
+					["symbol"] = descSymbol,
+					["field_array_symbol"] = fieldArraySymbol,
+					["total_size"] = desc.TotalSize,
+					["field_count"] = desc.Fields.Count,
+					["stable_id"] = stableId.ToString(),
+					["fields"] = fieldModels,
+				};
+			}).ToArray();
 
-					if (i < desc.Fields.Count - 1)
-						builder.AppendLine(",");
-					else
-						builder.AppendLine();
-				}
+			var model = new ScriptObject
+			{
+				["descriptors"] = descriptorModels,
+			};
 
-				builder.AppendLine("};");
-
-				// Emit the StructMarshallingDescriptorV1 instance
-				builder.Append("constinit StructMarshallingDescriptorV1 ");
-				builder.Append(descSymbol);
-				builder.AppendLine(" =");
-				builder.AppendLine("{");
-				builder.Append("    ");
-				builder.Append(desc.TotalSize.ToString());
-				builder.AppendLine(",");
-				builder.Append("    ");
-				builder.Append(desc.Fields.Count.ToString());
-				builder.AppendLine(",");
-				builder.Append("    "); // fields[] flexible array initialization
-				builder.Append(fieldArraySymbol);
-				builder.AppendLine("[0]");
-				builder.AppendLine("};");
-
-				// Emit static registration (same pattern as VTable registration)
-				ulong stableId = ComputeStableTypeId(desc.TypeSubjectId);
-				builder.Append("static const int s_ms_reg_");
-				builder.Append(safeName);
-				builder.Append(" = (::chaos::il2cpp::runtime_core::RegisterStaticMarshallingDescriptor(");
-				builder.Append("CHAOS_IL2CPP_UINT64_C(");
-				builder.Append(stableId.ToString());
-				builder.Append("), &");
-				builder.Append(descSymbol);
-				builder.AppendLine("), 0);");
-
-				builder.AppendLine();
-			}
+			var result = ScribanTemplateRenderer.RenderTemplate(
+				NativeAotTemplateCatalog.GetStructMarshallingDescriptorsTemplate(), model);
+			builder.AppendLine(result);
 		}
 
 }
