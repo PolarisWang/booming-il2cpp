@@ -25,11 +25,11 @@ extern "C" CHAOS_IL2CPP_INTPTR {{ helper_symbol }}(CHAOS_IL2CPP_INTPTR chaos_arg
     };
 
     const auto* chaos_enumerable_ti = chaos_object_get_type_info(reinterpret_cast<const void*>(chaos_arg_1));
-    if (chaos_enumerable_ti == &chaos_type_info_managed_array)
+    if (chaos_enumerable_ti == &chaos_type_info_managed_array.hot)
     {
         auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_arg_1);
         if (chaos_array->element_type_shape != {{ reference_type_shape_value }} ||
-            chaos_array->element_type_info != {{ string_type_info_symbol }})
+            chaos_array->element_type_info != &{{ string_type_info_symbol }})
         {
             CHAOS_IL2CPP_FAIL();
         }

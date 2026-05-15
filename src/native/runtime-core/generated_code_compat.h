@@ -4,34 +4,32 @@
 // ── Runtime API declarations exposed to generated code ──
 //
 // This header provides declarations used by generated .cpp files via
-// runtime_core.h. After the A4-Dual+V2 migration, generated code uses
-// FatHeader (16B: type_info + vtable) for all object headers.
+// runtime_core.h. All object headers use PureType (8B) or ThinLockable (16B).
+// FatHeader has been removed — all types use type_info->vtable_array for dispatch.
 
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
 #include "arithmetic_chaos_bridge.h"
 #include "codegen_bridge.h"       // HotpatchEntryV0, Hotpatch structs, kHotpatchActive
-#include <gc.h>                   // GC_END_STUBBORN_CHANGE for write barriers
+// V5: <gc.h> removed — CRAG uses its own write barriers.
 
 // ═══════════════════════════════════════════════════════════════════
-// A5-Trinity Object Header Architecture
+// A5-Trinity Object Header Architecture (Dual-Variant)
 // ═══════════════════════════════════════════════════════════════════
-// Three header variants discriminated by TypeInfo.flags[1:0]:
+// Two header variants discriminated by TypeInfo.flags[1:0]:
 //
-//   PureType (00):  8B  {TypeInfo* type_info}
+//   PureType (00):    8B  {TypeInfo* type_info}
 //                       — no sync, no vtable
 //   ThinLockable (01): 16B {TypeInfo* type_info, uint64_t sync_state}
-//                       — thin-lock capable, no vtable
-//   Fat (10):          24B {TypeInfo* type_info, void** vtable, uint64_t sync_state}
-//                       — full dispatch + sync
+//                       — thin-lock capable, dispatch via type_info->vtable_array
 //
-// All three store TypeInfo* at offset [0], so chaos_object_get_type_info()
-// is a single *(TypeInfoHot**)obj read — no bit magic needed.
+// Both store TypeInfo* at offset [0], so chaos_object_get_type_info()
+// is a single *(MethodTable**)obj read — no bit magic needed.
 //
 // PureType: value-type boxes, sealed types with 0 virtual methods,
 //           compiler-verified no-sync.
-// ThinLockable: most reference types (no virtual dispatch, can sync).
-// Fat: types with virtual methods (vtable dispatch + sync).
+// ThinLockable: all reference types (virtual dispatch via type_info->vtable_array,
+//               sync via thin-lock / SyncBlock inflation).
 // ═══════════════════════════════════════════════════════════════════
 
 // ── PureType header (8B) ──────────────────────────────────────────
@@ -42,37 +40,36 @@ struct PureTypeHeader {
 };
 
 // ── ThinLockable header (16B) ─────────────────────────────────────
-// Used for most reference types. sync_state at [8] for thin locking.
+// Used for all reference types. sync_state at [8] for thin locking.
+// Virtual dispatch goes through type_info->vtable_array.
 struct ThinLockableHeader {
     const TypeInfoHot* type_info   = nullptr;  // [0]
     uint64_t        sync_state  = 0;        // [8] — thin lock / sync block index
 };
 
-// ── Fat header (24B) ──────────────────────────────────────────────
-// Full-featured: virtual dispatch table + type identity + sync.
-struct FatHeader {
-    const TypeInfoHot* type_info   = nullptr;  // [0]
-    const void**    vtable      = nullptr;  // [8]
-    uint64_t        sync_state  = 0;        // [16] — thin lock / sync block index
-};
+// Legacy alias: FatHeader is removed, but ThinLockableHeader is the
+// unified 16B header for all reference types. The old "Fat" flag
+// bit (0x02) is still recognized in TypeInfoHot.flags for backward
+// compatibility, but maps to the same ThinLockable layout.
+using FatHeader = ThinLockableHeader;
 
 // Verify all headers store TypeInfo* at offset 0 (required by chaos_object_get_type_info).
 static_assert(offsetof(PureTypeHeader, type_info) == 0, "PureTypeHeader: type_info must be at offset 0");
 static_assert(offsetof(ThinLockableHeader, type_info) == 0, "ThinLockableHeader: type_info must be at offset 0");
 static_assert(offsetof(FatHeader, type_info) == 0, "FatHeader: type_info must be at offset 0");
 
-// ── Runtime ObjectHeader (24B) ────────────────────────────────────
-// Runtime-internal full layout. Matches FatHeader fields at [0..15]
-// so reinterpret_cast between them is safe.
-// struct RuntimeObjectHeader {
-//     FatHeader   header;         // 16B {type_info, vtable}
-//     uint64_t    sync_state = 0; // 8B  — thin lock / sync block index
-// };  // 24B (defined in runtime_core.cpp)
-
 // ── Unified type_info accessor ─────────────────────────────────────
 // All three header kinds store TypeInfoHot* at offset [0].
+// In Phase 0 migration, TypeInfoHot* and MethodTable* are interchangeable
+// (MethodTable's first 32B are bit-compatible with TypeInfoHot).
 inline const TypeInfoHot* chaos_object_get_type_info(const void* obj) noexcept {
     return *static_cast<const TypeInfoHot* const*>(obj);
+}
+
+/// Accessor that returns MethodTable* directly (preferred new code).
+inline const MethodTable* chaos_object_get_method_table(const void* obj) noexcept {
+    auto* ti = *static_cast<const TypeInfoHot* const*>(obj);
+    return ti != nullptr ? ti->AsMethodTable() : nullptr;
 }
 
 // ── Managed string type ──────────────────────────────────────────

@@ -3,706 +3,6 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "convert-char-subjects.convert-char-subjects.run",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
-      "signature": "System.Void ConvertCharSubjects::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "ConvertCharSubjects",
-        "declaringTypeSubjectId": "ConvertCharSubjects/ConvertCharSubjects",
-        "definitionSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
-        "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
-        "methodId": "convert-char-subjects.convert-char-subjects.run",
-        "signature": "System.Void ConvertCharSubjects::Run(System.Int32)"
-      },
-      "nativeSymbol": "ConvertCharSubjects_ConvertCharSubjects_Run",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 1,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 2,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 3
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 4,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 5
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            88,
-            99,
-            110,
-            118,
-            126,
-            134,
-            142,
-            150,
-            158,
-            166,
-            174,
-            182,
-            190,
-            198,
-            206,
-            214,
-            222,
-            230
-          ],
-          "ilOffset": 6,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 83,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 88,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 94,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 99,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 105,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 110,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 116,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 118,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 124,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 126,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 132,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 134,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 140,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 142,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_6:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_6:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_6:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 148,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 150,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 156,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 158,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 164,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 166,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 172,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 174,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 180,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 182,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 188,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 190,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 196,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 198,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 204,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 206,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 212,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 214,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 220,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 222,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 228,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 230,
-          "resultType": "System.Void",
-          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()",
-          "reference": {
-            "assemblyName": "ConvertCharSubjects",
-            "subjectKind": "method",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ConvertCharSubjects",
-            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 238,
-          "ilOffset": 236,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 238
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
-    },
-    {
       "methodId": "convert-char-subjects.convert-char-subjects.subject-0",
       "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
       "signature": "System.Void ConvertCharSubjects::Subject_0()",
@@ -3856,6 +3156,706 @@
           "op": "ret",
           "opCode": 53,
           "ilOffset": 32
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "convert-char-subjects.convert-char-subjects.run",
+      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
+      "signature": "System.Void ConvertCharSubjects::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ConvertCharSubjects",
+        "declaringTypeSubjectId": "ConvertCharSubjects/ConvertCharSubjects",
+        "definitionSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
+        "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
+        "methodId": "convert-char-subjects.convert-char-subjects.run",
+        "signature": "System.Void ConvertCharSubjects::Run(System.Int32)"
+      },
+      "nativeSymbol": "ConvertCharSubjects_ConvertCharSubjects_Run",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            88,
+            99,
+            110,
+            118,
+            126,
+            134,
+            142,
+            150,
+            158,
+            166,
+            174,
+            182,
+            190,
+            198,
+            206,
+            214,
+            222,
+            230
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 88,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 94,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 99,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 105,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 110,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 116,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 118,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 124,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 126,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 132,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 134,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 140,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 142,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_6:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_6:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_6:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 148,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 150,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 156,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 158,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 164,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 166,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 172,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 174,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 180,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 182,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 188,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 190,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 196,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 198,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 204,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 206,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 212,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 214,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 220,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 222,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 228,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 230,
+          "resultType": "System.Void",
+          "callee": "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()",
+          "reference": {
+            "assemblyName": "ConvertCharSubjects",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharSubjects",
+            "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 238,
+          "ilOffset": 236,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 238
         }
       ],
       "isPInvoke": false,

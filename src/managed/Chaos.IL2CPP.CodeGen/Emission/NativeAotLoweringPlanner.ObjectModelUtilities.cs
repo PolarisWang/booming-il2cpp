@@ -311,12 +311,18 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static string GetNativeTypeInfoSymbol(string subjectId)
 	{
-		return GetNativeSymbol("chaos_type_info_v0_", subjectId) + ".hot";
+	    // Phase 4: TypeInfoV0 (.hot member) emitted as chaos_mt_X, no cast needed.
+	    return GetNativeMethodTableSymbol(subjectId) + ".hot";
 	}
 
 	private static string GetNativeTypeInfoV0Symbol(string subjectId)
 	{
-		return GetNativeSymbol("chaos_type_info_v0_", subjectId);
+		return GetNativeMethodTableSymbol(subjectId);
+	}
+
+	private static string GetNativeMethodTableSymbol(string subjectId)
+	{
+		return GetNativeSymbol("chaos_mt_", subjectId);
 	}
 
 	private static string GetNativeVTableSymbol(string subjectId)
@@ -336,7 +342,8 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static string GetNativeTypeInfoWarmSymbol(string subjectId)
 	{
-		return GetNativeTypeInfoV0Symbol(subjectId) + ".warm";
+		// MethodTable has warm fields inline at offset 32; use .warm member access.
+		return GetNativeMethodTableSymbol(subjectId) + ".warm";
 	}
 
 	private static string GetNativeBoxTypeInfoSymbol(string subjectId)

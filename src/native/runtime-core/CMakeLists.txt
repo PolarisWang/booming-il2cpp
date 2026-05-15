@@ -26,6 +26,8 @@ add_library(chaos_runtime_core STATIC
     string_table.h
     string_table.cpp
     type_registry.cpp
+    eeclass.h
+    eeclass.cpp
     runtime_stubs/math_stubs.cpp
     runtime_stubs/array_stubs.cpp
     runtime_stubs/datetime_stubs.cpp
@@ -39,7 +41,6 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/exception_stubs.cpp
     runtime_stubs/object_stubs.cpp
     runtime_stubs/threading_stubs.cpp
-    runtime_stubs/reflection_stubs.cpp
     runtime_stubs/convert_stubs.cpp
     runtime_stubs/collection_stubs.cpp
     runtime_stubs/misc_stubs.cpp
@@ -55,6 +56,17 @@ add_library(chaos_runtime_core STATIC
     thread_state.h
     thread_pool.cpp
     thread_pool.h
+    timer_queue.cpp
+    timer_queue.h
+    wait_handle.cpp
+    wait_handle.h
+    synchronization.cpp
+    synchronization.h
+    execution_context.cpp
+    execution_context.h
+    cancellation_token.cpp
+    cancellation_token.h
+    task_runner.cpp
     generic_method_instantiation.cpp
     generic_method_instantiation.h
     aot_core_ir_reader.cpp

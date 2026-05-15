@@ -28,8 +28,11 @@ extern "C" {
 #define CHAOS_GC_HANDLE_INVALID ((GCHandle)0u)
 
 /* Reflection and runtime handles — uint64_t encoding for cross-DLL identity.
- * TypeInfoHandle: [module_id:32 << 32 | token:32] (B2 Module Registry).
- * Other handles follow the same (module_id, token) pattern where applicable.
+ * TypeInfoHandle: three-state encoding (Phase 0 CoreCLR alignment):
+ *   bit[63]=1:          Direct MethodTable* pointer (AOT, zero-cost dereference)
+ *   bit[62]=1,bit[63]=0: Dynamic MethodTable index (for runtime-created types)
+ *   bit[62]=0,bit[63]=0: Module-registry handle [module_id:32 << 32 | token:32]
+ * Other handles follow the same patterns where applicable.
  * GenericContextHandle/AssemblyHandle/ExceptionHandle remain opaque pointers. */
 typedef uint64_t TypeInfoHandle;
 typedef uint64_t MethodInfoHandle;

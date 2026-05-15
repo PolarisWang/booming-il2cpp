@@ -1,7 +1,8 @@
-// assembly_manager.cpp — Assembly-level lifecycle for hot-update packages
+// assembly_manager.cpp — AssemblyLoadContext lifecycle for hot-update packages
 //
 // Implements per-assembly static field isolation, load/unload lifecycle,
-// and dispatch entry registration via hotpatch table integration.
+// dispatch entry registration via hotpatch table integration, and
+// ALC-level tombstone unloading via domain_unloader.
 
 #include "assembly_manager.h"
 
@@ -72,7 +73,7 @@ AssemblyManager* AssemblyManager::Get() noexcept {
 
 // ── LoadAssembly ──────────────────────────────────────────────────────
 
-AssemblyDescriptor* AssemblyManager::LoadAssembly(
+AssemblyLoadContext* AssemblyManager::LoadAssembly(
     const void* patch_data,
     size_t patch_size,
     const char* assembly_name,
@@ -151,6 +152,7 @@ AssemblyDescriptor* AssemblyManager::LoadAssembly(
         }
 
         auto& desc = assemblies_[slot];
+        desc.alc_id                 = AssemblyManager::NextAlcId();
         desc.module_id              = module_id;
         desc.name                   = assembly_name;
         desc.patch_context          = ctx;
@@ -159,53 +161,67 @@ AssemblyDescriptor* AssemblyManager::LoadAssembly(
         desc.domain_id              = domain_id;
         desc.generics_registered    = false;
         desc.is_loaded              = true;
+        desc.is_unloading.store(false, std::memory_order_relaxed);
 
         ++loaded_count_;
         return &desc;
     }
 }
 
-// ── UnloadAssembly ────────────────────────────────────────────────────
+// ── UnloadAssembly (ALC unload) ──────────────────────────────────────────
 
-bool AssemblyManager::UnloadAssembly(AssemblyDescriptor* asm_desc) noexcept {
-    if (asm_desc == nullptr || !asm_desc->is_loaded) {
+bool AssemblyManager::UnloadAssembly(AssemblyLoadContext* alc) noexcept {
+    if (alc == nullptr || !alc->is_loaded) {
         return false;
     }
 
-    uint32_t module_id = asm_desc->module_id;
+    // Set unloading flag — prevents new type lookups during teardown.
+    alc->is_unloading.store(true, std::memory_order_release);
 
-    // 1. Unpatch — clear kHotpatchActive flags on all dispatch entries.
-    if (asm_desc->patch_context != nullptr) {
-        Unpatch(asm_desc->patch_context);
-        asm_desc->patch_context = nullptr;
+    uint32_t module_id = alc->module_id;
+
+    // 1. Mark module tombstone — prevents future handle resolution.
+    //    LookupModule(module_id) still returns a valid pointer but
+    //    type_flags/image/type_info_ptrs are nulled for safety.
+    MarkModuleTombstone(module_id);
+
+    // 2. Unpatch — clear kHotpatchActive flags on all dispatch entries.
+    if (alc->patch_context != nullptr) {
+        Unpatch(alc->patch_context);
+        alc->patch_context = nullptr;
     }
 
-    // 2. Unregister generic instantiations for this module.
-    if (asm_desc->generics_registered) {
+    // 3. Unregister generic instantiations for this module.
+    if (alc->generics_registered) {
         generic_context::UnregisterModuleGenerics(module_id);
-        asm_desc->generics_registered = false;
+        alc->generics_registered = false;
     }
 
-    // 3. Destroy the memory domain — bulk-frees static field storage
-    //    and any per-assembly allocations.  The domain heap's Destroy()
-    //    releases all memory without individual InterpreterValue dtors.
-    if (asm_desc->domain_id != 0) {
-        memory_domain::UnregisterMemoryDomain(asm_desc->domain_id);
-        asm_desc->domain_id = 0;
+    // 4. Destroy the memory domain (safe stop-the-world teardown).
+    //    UnloadDomain handles:
+    //      - Safepoint request
+    //      - Cross-domain reference scan + clear
+    //      - Domain memory release
+    //      - Memory domain unregistration
+    //    The InterpreterValue[] static field storage is bulk-freed here.
+    if (alc->domain_id != 0) {
+        auto result = UnloadDomain(alc->domain_id);
+        (void)result;  // Phase 2+: log cross_domain_refs_found/cleared
+        alc->domain_id = 0;
     }
 
-    // 4. Clear the descriptor.
-    asm_desc->module_id            = 0;
-    asm_desc->name.clear();
-    asm_desc->patch_context        = nullptr;
-    asm_desc->static_field_ptr     = nullptr;
-    asm_desc->static_field_count   = 0;
-    asm_desc->generics_registered  = false;
-    asm_desc->is_loaded            = false;
+    // 5. Clear the descriptor.
+    alc->alc_id                 = 0;
+    alc->module_id              = 0;
+    alc->name.clear();
+    alc->patch_context          = nullptr;
+    alc->static_field_ptr       = nullptr;
+    alc->static_field_count     = 0;
+    alc->generics_registered    = false;
+    alc->is_loaded              = false;
+    alc->is_unloading.store(false, std::memory_order_relaxed);
 
-    // 5. Update count (thread-safe increment is fine since we already
-    //    hold the conceptual "slot" — a full table scan for decrement
-    //    is not needed; just an atomic-ish decrement).
+    // 6. Update count.
     if (loaded_count_ > 0) {
         --loaded_count_;
     }
@@ -215,7 +231,7 @@ bool AssemblyManager::UnloadAssembly(AssemblyDescriptor* asm_desc) noexcept {
 
 // ── FindAssembly ─────────────────────────────────────────────────────
 
-AssemblyDescriptor* AssemblyManager::FindAssembly(const char* name) noexcept {
+AssemblyLoadContext* AssemblyManager::FindAssembly(const char* name) noexcept {
     if (name == nullptr || name[0] == '\0') return nullptr;
 
     for (uint32_t i = 0; i < kMaxAssemblies; ++i) {
@@ -227,48 +243,59 @@ AssemblyDescriptor* AssemblyManager::FindAssembly(const char* name) noexcept {
     return nullptr;
 }
 
+// ── FindByModuleId ───────────────────────────────────────────────────
+
+AssemblyLoadContext* AssemblyManager::FindByModuleId(uint32_t module_id) noexcept {
+    if (module_id == 0) return nullptr;
+
+    for (uint32_t i = 0; i < kMaxAssemblies; ++i) {
+        auto& desc = assemblies_[i];
+        if (desc.is_loaded && desc.module_id == module_id) {
+            return &desc;
+        }
+    }
+    return nullptr;
+}
+
 // ── GetStaticField ───────────────────────────────────────────────────
 
 void* AssemblyManager::GetStaticField(uint32_t module_id,
                                        uint32_t field_offset) noexcept {
-    // Find the assembly that owns this module_id.
-    AssemblyDescriptor* asm_desc = nullptr;
+    // Find the ALC that owns this module_id.
+    AssemblyLoadContext* alc = nullptr;
     for (uint32_t i = 0; i < kMaxAssemblies; ++i) {
         if (assemblies_[i].is_loaded && assemblies_[i].module_id == module_id) {
-            asm_desc = &assemblies_[i];
+            alc = &assemblies_[i];
             break;
         }
     }
-    if (asm_desc == nullptr) return nullptr;
+    if (alc == nullptr) return nullptr;
 
     // Grow the static field array if needed (realloc on the domain heap).
-    if (field_offset >= asm_desc->static_field_count) {
-        auto* domain = memory_domain::FindDomainById(asm_desc->domain_id);
+    if (field_offset >= alc->static_field_count) {
+        auto* domain = memory_domain::FindDomainById(alc->domain_id);
         if (domain == nullptr) return nullptr;
 
         memory_domain::DomainScope scope(domain);
         uint32_t new_count = field_offset + 1u;
-        // Round up to next power-of-2-ish boundary to amortize reallocs.
-        if (new_count < asm_desc->static_field_count * 2) {
-            new_count = asm_desc->static_field_count * 2;
+        if (new_count < alc->static_field_count * 2) {
+            new_count = alc->static_field_count * 2;
         }
 
         void* grown = GrowStaticFieldStorage(
-            asm_desc->static_field_ptr,
-            asm_desc->static_field_count,
+            alc->static_field_ptr,
+            alc->static_field_count,
             new_count);
         if (grown == nullptr) {
-            // Grow failed — can still access up to current count.
             return nullptr;
         }
 
-        asm_desc->static_field_ptr   = grown;
-        asm_desc->static_field_count = new_count;
+        alc->static_field_ptr   = grown;
+        alc->static_field_count = new_count;
     }
 
-    // Return pointer to the InterpreterValue at field_offset.
     auto* fields = static_cast<interpreter::InterpreterValue*>(
-        asm_desc->static_field_ptr);
+        alc->static_field_ptr);
     return &fields[field_offset];
 }
 

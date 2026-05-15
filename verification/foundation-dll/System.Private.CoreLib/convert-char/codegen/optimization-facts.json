@@ -9,11 +9,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
-      "reason": "closed-world-entry"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
@@ -100,6 +95,11 @@
     {
       "subjectKind": "method",
       "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],

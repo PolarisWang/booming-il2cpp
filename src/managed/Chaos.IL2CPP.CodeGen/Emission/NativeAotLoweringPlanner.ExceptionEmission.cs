@@ -1153,7 +1153,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL();");
 		builder.AppendLine($"{indentation}    }}");
 		builder.AppendLine($"{indentation}    auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {{}});");
-		builder.AppendLine($"{indentation}    chaos_array->header.type_info = &chaos_type_info_managed_array;");
+		builder.AppendLine($"{indentation}    chaos_array->header.type_info = &chaos_type_info_managed_array.hot;");
 		builder.AppendLine($"{indentation}    chaos_array->element_type_shape = {GetNativeTypeShapeValue(typeShape)};");
 		builder.AppendLine($"{indentation}    chaos_array->element_type_info = {GetRuntimeTypeInfoExpression(subjectId)};");
 		builder.AppendLine($"{indentation}    chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);");
@@ -1415,7 +1415,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}        auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);");
 		if (HasArrayElementReference(requiredTargetReference))
 		{
-			builder.AppendLine($"{indentation}        if (chaos_object_get_type_info(chaos_header) != &chaos_type_info_managed_array)");
+			builder.AppendLine($"{indentation}        if (chaos_object_get_type_info(chaos_header) != &chaos_type_info_managed_array.hot)");
 			builder.AppendLine($"{indentation}        {{");
 			builder.AppendLine($"{indentation}            CHAOS_IL2CPP_FAIL();");
 			builder.AppendLine($"{indentation}        }}");
@@ -1457,7 +1457,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}        auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);");
 		if (HasArrayElementReference(requiredTargetReference))
 		{
-			builder.AppendLine($"{indentation}        if (chaos_object_get_type_info(chaos_header) == &chaos_type_info_managed_array)");
+			builder.AppendLine($"{indentation}        if (chaos_object_get_type_info(chaos_header) == &chaos_type_info_managed_array.hot)");
 			builder.AppendLine($"{indentation}        {{");
 			builder.AppendLine($"{indentation}            auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_value);");
 			builder.AppendLine($"{indentation}            chaos_matches = chaos_is_array_type_compatible(chaos_array->element_type_shape, chaos_array->element_type_info, {GetNativeTypeShapeValue(requiredTargetReference.ArrayElementTypeShape)}, {GetRuntimeTypeInfoExpression(requiredTargetReference.ArrayElementSubjectId)});");

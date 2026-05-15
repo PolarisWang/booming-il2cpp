@@ -72,7 +72,7 @@ static constexpr CHAOS_IL2CPP_UINT64 kGcLayoutRawAllocStableId =
 // is O(log N) with no mutex contention.
 // ======================================================================
 
-static constexpr int kMaxTypeInfoRanges = 64;
+static constexpr int kMaxTypeInfoRanges = 512;
 
 struct TypeInfoRange {
     uintptr_t begin;

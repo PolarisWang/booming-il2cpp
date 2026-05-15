@@ -26,7 +26,9 @@ struct ManagedThread {
     /// Generation-based GC safepoint cooperation (Scheme C).
     std::atomic<uint32_t>    gc_mode{0};          // 0=COOPERATIVE, 1=PREEMPTIVE
     uint32_t                 last_seen_gen{0};     // Last confirmed generation
-    std::atomic<bool>        pending_abort{false}; // Thread.Abort pending flag
+    std::atomic<bool>        pending_abort{false};    // Thread.Abort pending flag
+    std::atomic<bool>        pending_interrupt{false}; // Thread.Interrupt pending flag
+    bool                     is_background{false};    // Thread.IsBackground flag
     bool                     at_safepoint{false}; // Currently paused at safepoint (legacy, kept for compat)
     uint32_t                 safepoint_generation{0}; // Last completed GC generation (legacy)
     /// TLS nursery context (for cross-thread nursery scanning in full GC).

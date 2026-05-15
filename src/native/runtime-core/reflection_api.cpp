@@ -44,3 +44,5 @@
 #include "reflection/misc.cpp"
 #include "reflection/assembly_types.cpp"
 #include "reflection/string_concat.cpp"
+#include "reflection/type_stubs.cpp"
+#include "reflection/remaining_stubs.cpp"

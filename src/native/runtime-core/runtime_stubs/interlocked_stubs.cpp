@@ -79,5 +79,10 @@ CHAOS_IL2CPP_INT32 ChaosVolatileRead(CHAOS_IL2CPP_INTPTR ptr) noexcept
     return *reinterpret_cast<volatile CHAOS_IL2CPP_INT32*>(ptr);
 }
 
+void ChaosVolatileWrite(CHAOS_IL2CPP_INTPTR ptr, CHAOS_IL2CPP_INT32 value) noexcept
+{
+    *reinterpret_cast<volatile CHAOS_IL2CPP_INT32*>(ptr) = value;
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
