@@ -187,7 +187,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
         }
 
         // If we couldn't materialize a real handle, ex_handle remains nullptr.
-        throw chaos_managed_exception{reinterpret_cast<CHAOS_IL2CPP_INTPTR>(ex_handle)};
+        chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(ex_handle));
     }
 
     // ── Return value extraction (V0: tag dispatch) ──
