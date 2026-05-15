@@ -1,4 +1,4 @@
-"""Family Verification Orchestrator — 7-stage unified verification pipeline.
+"""Family Verification Orchestrator — 8-stage unified verification pipeline.
 
 Usage (via run.py manifest):
     run foundation-dll verify-family <family-slug>
@@ -6,14 +6,15 @@ Usage (via run.py manifest):
     run foundation-dll verify-family <family-slug> --skip benchmark
 
 Stage overview:
-  0. Preflight   — contract integrity, custom entry discovery
-  1. Codegen     — entrypoint generation + IL2CPP compile
-  2. Fact        — Fact Static verify + Fact Runtime verify
-  3. Audit       — Mechanism + Principle audit
-  4. Benchmark   — managed vs native performance baseline
-  5. HotUpdate   — patch data generation + verify
-  6. PostHotBench — performance under hotpatch (interpreter path)
-  7. Aggregate   — scoring, regression, pass/fail gate
+  0. Preflight    — contract integrity, custom entry discovery
+  1. Codegen      — entrypoint generation + IL2CPP compile
+  2. Fact         — Fact Static verify + Fact Runtime verify
+  3. Audit        — Mechanism + Principle audit
+  4. AsmCompare   — JIT vs AOT instruction-level analysis (deterministic)
+  5. Benchmark    — managed vs native performance baseline
+  6. HotUpdate    — patch data generation + verify
+  7. PostHotBench — performance under hotpatch (interpreter path)
+  8. Aggregate    — scoring, regression, pass/fail gate
 """
 
 from __future__ import annotations
@@ -846,6 +847,43 @@ def _stage_audit(family_slug: str, assembly: str) -> StageResult:
     )
 
 
+def _stage_asm_compare(family_slug: str, assembly: str) -> StageResult:
+    """Stage 4: JIT vs AOT instruction-level analysis via asm-compare.
+
+    Runs asm-compare for each subject method with --format json --sections metrics,
+    aggregates deterministic metrics (instruction count, IR expansion ratio, dispatch
+    distribution, boxing ops) into asm-compare-report.json.
+
+    Replaces the previous AI self-analysis of managed vs native code with
+    deterministic, reproducible metric comparison.
+    """
+    start = time.perf_counter()
+    try:
+        from asm_compare_verifier import verify_family_asm_compare
+    except ImportError:
+        return StageResult(
+            stage="asm_compare", status="error",
+            summary="asm_compare_verifier not importable",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    result = verify_family_asm_compare(family_slug, assembly)
+    status = result.get("status", "failed")
+    summary = result.get("summary", "")
+    details = result.get("details", {})
+
+    trace("asm_compare", family=family_slug, status=status,
+          ok_count=details.get("okCount", 0),
+          total=details.get("totalMethods", 0))
+
+    return StageResult(
+        stage="asm_compare", status=status,
+        summary=summary,
+        details=details,
+        duration_ms=int((time.perf_counter() - start) * 1000),
+    )
+
+
 def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
     """Stage 4: Managed vs native benchmark comparison.
 
@@ -1351,7 +1389,7 @@ def verify_family(family_slug: str,
                   mode: str = "standard",
                   skip_stages: list[str] | None = None,
                   verbose: bool = False) -> dict[str, Any]:
-    """Run the full 7-stage verification pipeline for a single family.
+    """Run the full 8-stage verification pipeline for a single family.
 
     Args:
         family_slug:  e.g. "convert-char"
@@ -1376,7 +1414,7 @@ def verify_family(family_slug: str,
 
     # Stage 0: Preflight
     if "preflight" not in skip:
-        print(f"[0/7] Preflight...")
+        print(f"[0/8] Preflight...")
         sr = _stage_preflight(family_slug, assembly)
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
@@ -1388,11 +1426,11 @@ def verify_family(family_slug: str,
             _write_report(report, family_slug, assembly)
             return report.to_dict()
     else:
-        print(f"[0/7] Preflight... skipped")
+        print(f"[0/8] Preflight... skipped")
 
     # Stage 1: Codegen
     if "codegen" not in skip:
-        print(f"[1/7] Codegen...")
+        print(f"[1/8] Codegen...")
         sr = _stage_codegen(family_slug, assembly, stage_results[0] if stage_results else StageResult("preflight", "passed"))
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
@@ -1403,11 +1441,11 @@ def verify_family(family_slug: str,
             _write_report(report, family_slug, assembly)
             return report.to_dict()
     else:
-        print(f"[1/7] Codegen... skipped")
+        print(f"[1/8] Codegen... skipped")
 
     # Stage 2: Fact
     if "fact" not in skip:
-        print(f"[2/7] Fact (Static+Runtime)...")
+        print(f"[2/8] Fact (Static+Runtime)...")
         try:
             sr = _stage_fact(family_slug, assembly)
         except Exception as e:
@@ -1417,11 +1455,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[2/7] Fact... skipped")
+        print(f"[2/8] Fact... skipped")
 
     # Stage 3: Audit
     if "audit" not in skip:
-        print(f"[3/7] Mechanism + Principle Audit...")
+        print(f"[3/8] Mechanism + Principle Audit...")
         try:
             sr = _stage_audit(family_slug, assembly)
         except Exception as e:
@@ -1431,11 +1469,25 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[3/7] Audit... skipped")
+        print(f"[3/8] Audit... skipped")
 
-    # Stage 4: Benchmark
+    # Stage 4: AsmCompare
+    if "asm_compare" not in skip:
+        print(f"[4/8] AsmCompare (JIT vs AOT instruction-level)...")
+        try:
+            sr = _stage_asm_compare(family_slug, assembly)
+        except Exception as e:
+            trace("asm_compare", family=family_slug, error=str(e))
+            sr = StageResult(stage="asm_compare", status="failed",
+                             summary=f"AsmCompare stage crashed: {e}")
+        stage_results.append(sr)
+        print(f"  {sr.status}: {sr.summary}")
+    else:
+        print(f"[4/8] AsmCompare... skipped")
+
+    # Stage 5: Benchmark
     if "benchmark" not in skip:
-        print(f"[4/7] Benchmark...")
+        print(f"[5/8] Benchmark...")
         try:
             sr = _stage_benchmark(family_slug, assembly)
         except Exception as e:
@@ -1445,11 +1497,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[4/7] Benchmark... skipped")
+        print(f"[5/8] Benchmark... skipped")
 
-    # Stage 5: HotUpdate
+    # Stage 6: HotUpdate
     if "hotupdate" not in skip:
-        print(f"[5/7] HotUpdate...")
+        print(f"[6/8] HotUpdate...")
         try:
             sr = _stage_hotupdate(family_slug, assembly)
         except Exception as e:
@@ -1459,11 +1511,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[5/7] HotUpdate... skipped")
+        print(f"[6/8] HotUpdate... skipped")
 
-    # Stage 6: Post-HU Benchmark
+    # Stage 7: Post-HU Benchmark
     if "post_hotupdate_benchmark" not in skip:
-        print(f"[6/7] Post-HotUpdate Benchmark...")
+        print(f"[7/8] Post-HotUpdate Benchmark...")
         try:
             sr = _stage_post_hotupdate_benchmark(family_slug, assembly)
         except Exception as e:
@@ -1473,10 +1525,10 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[6/7] Post-HotUpdate Benchmark... skipped")
+        print(f"[7/8] Post-HotUpdate Benchmark... skipped")
 
-    # Stage 7: Aggregate
-    print(f"[7/7] Aggregating...")
+    # Stage 8: Aggregate
+    print(f"[8/8] Aggregating...")
     report = _aggregate(family_slug, assembly, stage_results, mode,
                         int((time.perf_counter() - overall_start) * 1000))
     report_path = _write_report(report, family_slug, assembly)
@@ -1503,7 +1555,7 @@ def main() -> None:
     parser.add_argument("--assembly", default="System.Private.CoreLib")
     parser.add_argument("--mode", choices=["standard", "strict"], default="standard")
     parser.add_argument("--skip", nargs="*", default=[],
-                        help="Stages to skip: preflight codegen fact audit benchmark hotupdate post_hotupdate_benchmark")
+                        help="Stages to skip: preflight codegen fact audit asm_compare benchmark hotupdate post_hotupdate_benchmark")
     parser.add_argument("--verbose", "-v", action="store_true")
     args = parser.parse_args()
 
