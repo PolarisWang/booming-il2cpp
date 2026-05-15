@@ -114,9 +114,19 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
 
     // Current nursery exhausted (or GC didn't free enough) — get a fresh one
     // from the manager, using the scheduler's recommended size.
-    // Free the old nursery first so the lock-free range array doesn't leak slots.
+    // CRITICAL: Clear TLS nursery pointer BEFORE FreeRegion, because another
+    // thread's concurrent GcYoungCollection may scan this thread's stack via
+    // GcScanAllThreadRoots and find the ManagedThread::nursery_ctx pointer.
+    // If the Region is freed before we clear the TLS reference, the scanner
+    // dereferences a dangling pointer → SIGSEGV.
     if (tls_nursery_ctx.nursery != nullptr) {
-        RegionManager::Instance().FreeRegion(tls_nursery_ctx.nursery->id);
+        RegionId old_id = tls_nursery_ctx.nursery->id;
+        if (auto* mt = threading::GetCurrentThread()) {
+            mt->nursery_ctx = nullptr;
+        }
+        tls_nursery_ctx.nursery = nullptr;
+        tls_nursery_ctx.limit = nullptr;
+        RegionManager::Instance().FreeRegion(old_id);
     }
 
     CHAOS_IL2CPP_SIZE nursery_size = g_gc_scheduler.RecommendedNurserySize();
@@ -207,10 +217,17 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
         }
     }
 
-    // Free the old nursery first to avoid leaking the region and its
-    // lock-free range slot.  (Matching what NurseryAllocateSlow does.)
+    // CRITICAL: Clear TLS nursery pointer BEFORE FreeRegion (same rationale as
+    // NurseryAllocateSlow — concurrent GcYoungCollection may scan this thread's
+    // nursery_ctx and dereference a freed Region → SIGSEGV).
     if (tls_nursery_ctx.nursery != nullptr) {
-        RegionManager::Instance().FreeRegion(tls_nursery_ctx.nursery->id);
+        RegionId old_id = tls_nursery_ctx.nursery->id;
+        if (auto* mt = threading::GetCurrentThread()) {
+            mt->nursery_ctx = nullptr;
+        }
+        tls_nursery_ctx.nursery = nullptr;
+        tls_nursery_ctx.limit = nullptr;
+        RegionManager::Instance().FreeRegion(old_id);
     }
 
     CHAOS_IL2CPP_SIZE nursery_size = g_gc_scheduler.RecommendedNurserySize();
