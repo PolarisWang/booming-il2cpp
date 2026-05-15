@@ -43,10 +43,12 @@ public sealed class CmakeGenerator
         // so try/catch in extern "C" codegen entry methods cannot catch stub throws.
         // Two-prong fix:
         //   1. Set CMAKE_MSVC_EXCEPTION_HANDLING before project() so the toolchain
-        //      generates <ExceptionHandling>Sync</ExceptionHandling> in .vcxproj.
+        //      generates <ExceptionHandling>Async</ExceptionHandling> in .vcxproj.
+        //      Async (/EHa) is required for Win32 SEH (__try/__except/__finally)
+        //      interop with C++ destructors in CHAOS_IL2CPP_EH_WIN32_SEH mode.
         //   2. Strip /EHsc from INIT flags so toolchain doesn't prefer flag-based mode.
         sb.AppendLine("set(CMAKE_CXX_FLAGS_INIT \"/DWIN32 /D_WINDOWS\")");
-        sb.AppendLine("set(CMAKE_MSVC_EXCEPTION_HANDLING \"Sync\")");
+        sb.AppendLine("set(CMAKE_MSVC_EXCEPTION_HANDLING \"Async\")");
         sb.AppendLine($"project(chaos_gen LANGUAGES CXX)");
         sb.AppendLine();
 

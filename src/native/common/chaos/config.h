@@ -55,30 +55,38 @@
 #  endif
 #endif
 
-// ── Exception handling mode (dual-path) ─────────────────────────────────
+// ── Exception handling mode (dual-path + Win32 SEH) ─────────────────────────
 //
-// Two mutually exclusive EH strategies for managed exception propagation:
+// Three mutually exclusive EH strategies for managed exception propagation:
 //
-//   CHAOS_IL2CPP_EH_SETJMP (recommended for mobile, default on iOS/Android)
+//   CHAOS_IL2CPP_EH_SETJMP (iOS/Android)
 //     Uses setjmp/longjmp for ~5x faster throw (~300ns vs ~1700ns) and zero
 //     LSDA/.ARM.extab tables.  Finally/fault semantics are handled by the
 //     codegen emitting manual if/else blocks instead of RAII scope guards.
 //     The runtime uses TLS exception_obj + nested jmp_buf stack.
 //
-//   CHAOS_IL2CPP_EH_CPP_THROW (recommended for desktop, default elsewhere)
+//   CHAOS_IL2CPP_EH_WIN32_SEH (Windows)
+//     Uses Win32 __try/__except/__finally + RaiseException.  Avoids C++ EH
+//     RTTI matching and _CxxFrameHandler3 overhead.  Expect ~1200ns per
+//     throw/catch vs ~2300ns for CPP_THROW on Windows.
+//
+//   CHAOS_IL2CPP_EH_CPP_THROW (macOS/Linux)
 //     Uses C++ throw/catch with full RAII unwind.  Generates LSDA exception
 //     tables (larger binary).  Simpler codegen — natural C++ try/catch/finally.
 //
-// If neither is defined at build time, the platform-based default applies.
+// If none is defined at build time, the platform-based default applies.
 // ============================================================================
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_CPP_THROW)
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_CPP_THROW) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
   // Platform → EH mode mapping:
   //   Mobile (iOS, Android)  → SETJMP — zero EH tables, smaller binary
-  //   Desktop (Windows, macOS, Linux) → CPP_THROW — natural C++ EH
+  //   Windows                → WIN32_SEH — SEH __except, skips C++ EH overhead
+  //   macOS, Linux           → CPP_THROW — natural C++ EH
 #  if defined(CHAOS_IL2CPP_TARGET_PLATFORM_IOS) \
       || defined(CHAOS_IL2CPP_TARGET_PLATFORM_ANDROID)
 #    define CHAOS_IL2CPP_EH_SETJMP
+#  elif defined(CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS)
+#    define CHAOS_IL2CPP_EH_WIN32_SEH
 #  else
 #    define CHAOS_IL2CPP_EH_CPP_THROW
 #  endif
