@@ -38,6 +38,20 @@ static constexpr size_t kObjectHeaderSize = 56;  // vtable(8)+type_info(8)+sync_
 // ── Benchmark 1: Thin lock uncontended ──────────────────────────────────
 // Matches managed MonitorAndLockingBenchmark: 10000 lock/unlock per sample
 
+// A minimal TypeInfoHot stub for the lock benchmark object.
+// Must have flags with kTypeInfoHeaderKindThin (0x01) so that
+// GetSyncStatePtr() correctly locates the sync_state field at offset 8.
+// The buffer is zeroed except for this pointer at offset 0.
+static const chaos::il2cpp::common::TypeInfoHot g_lock_type_info_stub = {
+    nullptr,  // parent
+    nullptr,  // vtable_array
+    0,        // stable_id
+    0,        // vtable_length
+    0,        // warm_delta
+    0,        // type_shape
+    chaos::il2cpp::common::kTypeInfoHeaderKindThin  // flags = ThinLockable
+};
+
 static void* g_lock_obj = nullptr;
 static uint64_t g_lock_checksum = 0;
 
@@ -45,6 +59,9 @@ static void lock_setup() {
     threading::RegisterThread(threading::kMainThreadId, nullptr);
     g_lock_obj = std::malloc(kObjectHeaderSize);
     std::memset(g_lock_obj, 0, kObjectHeaderSize);
+    // Set up a valid TypeInfoHot* at offset 0 so MonitorEnter can read flags.
+    // Without this, GetSyncStatePtr dereferences nullptr -> SIGSEGV.
+    *static_cast<const void**>(g_lock_obj) = &g_lock_type_info_stub;
     g_lock_checksum = 0;
 }
 

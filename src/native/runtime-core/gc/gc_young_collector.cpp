@@ -341,8 +341,16 @@ YoungCollectionResult GcYoungCollection(Region* nursery, Region* tenured_target)
                 // Read TypeInfo* from first word of the tenured copy.
                 const void* type_info_ptr = *static_cast<const void* const*>(promoted);
                 if (type_info_ptr == nullptr) continue;
+                // CRITICAL: Validate the TypeInfo pointer before dereferencing.
+                // Phase 1 (dirty card scan) can promote garbage objects when a
+                // non-pointer value in a dirty card happens to look like a nursery
+                // pointer.  Such garbage has no valid TypeInfo in its first word.
+                // Without this check, dereferencing the garbage TypeInfo* → SIGSEGV.
+                if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) continue;
+
 
                 auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
+
                 uint64_t stable_id = hot->stable_id;
                 const auto* layout = layout_registry.Lookup(stable_id);
 
