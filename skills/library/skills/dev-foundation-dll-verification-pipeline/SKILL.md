@@ -1,13 +1,13 @@
 ---
 name: dev-foundation-dll-verification-pipeline
-description: Master orchestrator for foundation DLL verification — unified verify_family() 7-stage pipeline. Enforces no-skip policy, mechanism audit, principle alignment.
+description: Master orchestrator for foundation DLL verification — unified verify_family() 8-stage pipeline. Enforces no-skip policy, mechanism audit, principle alignment, asm-compare instruction-level analysis.
 ---
 
 # Foundation DLL Verification Pipeline
 
 ## 概述
 
-完整的 foundation DLL 验证管线编排。统一入口为 `verify_family()`（`family_verification_orchestrator.py`），覆盖 codegen → fact → audit → benchmark → hotupdate → aggregate。
+完整的 foundation DLL 验证管线编排。统一入口为 `verify_family()`（`family_verification_orchestrator.py`），覆盖 codegen → fact → audit → asm_compare → benchmark → hotupdate → aggregate。
 
 **核心原则**（所有验证必须遵守）：
 
@@ -36,53 +36,61 @@ run foundation-dll verify-family <family-slug> --assembly System.Private.CoreLib
 
 代码入口：`build/toolchains/run/testing/foundation_dll/family_verification_orchestrator.py:verify_family()`
 
-## 7 阶段管线
+## 8 阶段管线
 
 ```
-[0] Preflight   — 检查 capability-family-contract.json 存在性、提取 methodSubjectIds、检测 custom entry
-                  (_stage_preflight)
-                  ❌ 失败 = 停止，不继续
+[0] Preflight    — 检查 capability-family-contract.json 存在性、提取 methodSubjectIds、检测 custom entry
+                   (_stage_preflight)
+                   ❌ 失败 = 停止，不继续
 
-[1] Codegen     — 委托 pipeline_native_aot_runner.run_family()
-                  1. 生成 subjects C# 项目 → dotnet build DLL (managed/subjects/)
-                  2. chaos-il2cpp convert-to-cpp → native-aot.generated.cpp (codegen/<Assembly>/generated/)
-                  3. 生成 .patchdata → runtime-patchdata.cpp (native/)
-                  4. CMake build entry.exe from native/ (使用 native/runtime-entry.cpp + codegen/*/generated/*.cpp)
-                  run_family() 只负责构建，不再运行 fact/benchmark/hotupdate 验证
-                  ❌ 失败 = strict 模式下停止
+[1] Codegen      — 委托 pipeline_native_aot_runner.run_family()
+                   1. 生成 subjects C# 项目 → dotnet build DLL (managed/subjects/)
+                   2. chaos-il2cpp convert-to-cpp → native-aot.generated.cpp (codegen/<Assembly>/generated/)
+                   3. 生成 .patchdata → runtime-patchdata.cpp (native/)
+                   4. CMake build entry.exe from native/ (使用 native/runtime-entry.cpp + codegen/*/generated/*.cpp)
+                   run_family() 只负责构建，不再运行 fact/benchmark/hotupdate 验证
+                   ❌ 失败 = strict 模式下停止
 
-[2] Fact        — 委托 fact_verifier.verify_fact()
-                  运行 entry.exe，解析 stdout 中 Passed: N/M
-                  N/M 现在使用真实方法计数（bitmask population count），不再是硬编码 1/1
-                  ❌ 失败 = 记录，不阻塞继续
+[2] Fact         — 委托 fact_verifier.verify_fact()
+                   运行 entry.exe，解析 stdout 中 Passed: N/M
+                   N/M 现在使用真实方法计数（bitmask population count），不再是硬编码 1/1
+                   ❌ 失败 = 记录，不阻塞继续
 
-[3] Audit       — 委托 mechanism_audit.run_full_audit()
-                  stub 检测 + _METHOD_OVERRIDES skip 审计 + 7 项原则检查
-                  ❌ 失败 = 记录，不阻塞继续
+[3] Audit        — 委托 mechanism_audit.run_full_audit()
+                   stub 检测 + _METHOD_OVERRIDES skip 审计 + 7 项原则检查
+                   ❌ 失败 = 记录，不阻塞继续
 
-[4] Benchmark   — 托管 vs 原生性能对比
-                  1. stub_detect 解析 entrypoint 源码识别 stub 方法
-                  2. 自动生成 managed benchmark harness（从 entrypoint Program.cs 提取
-                     方法调用序列，包裹 in Stopwatch 循环）。managed 端也在 native AOT 内
-                     执行，通过运行 entry.exe --managed-benchmark N 获取基线
-                  3. 如 managed harness 已存在（managed_test/benchmark/*.cs），使用已有的；
-                     不存在则自动生成临时 harness
-                  4. 对每个非 stub 方法运行 entry.exe --benchmark N
-                     - native 端调用 BenchmarkMethod(index, iterations) — 生成代码内直接
-                       调用 kAotMethods[index]()，绕过 hotpatch dispatch 开销
-                     - 测量纯 AOT 生成代码的真实性能
-                  5. benchmark_comparator.compare() 生成对比报告
-                  输出 benchmark-comparison-report.json
-                  [标准模式 advisory；无 managed harness 时退化为 native-only 记录]
+[4] AsmCompare   — JIT vs AOT 指令级确定性对比（新增 Stage 3.5 → 4）
+                   委托 asm_compare_verifier.verify_family_asm_compare()
+                   对 contract 中每个 methodSubjectId 运行 asm-compare --format json --sections metrics
+                   聚合确定性指标：指令数、IR 膨胀比、调用分布、boxing 操作数
+                   输出 asm-compare-report.json（per-method metrics + 汇总统计）
+                   替换 AI 自分析 managed vs native 代码，用确定性量化数据替代
+                   ❌ 失败 = 记录，不阻塞继续
 
-[5] HotUpdate   — 热补丁验证
-                  1. stub_detect 解析 entrypoint 源码
-                  2. 运行 entry.exe --hotupdate
-                  3. 解析 JSON 输出（passedMethods/failedMethods/totalMethods）
-                  输出 hotupdate-verification-report.json
-                  [严格模式 required]
+[5] Benchmark    — 托管 vs 原生性能对比
+                   1. stub_detect 解析 entrypoint 源码识别 stub 方法
+                   2. 自动生成 managed benchmark harness（从 entrypoint Program.cs 提取
+                      方法调用序列，包裹 in Stopwatch 循环）。managed 端也在 native AOT 内
+                      执行，通过运行 entry.exe --managed-benchmark N 获取基线
+                   3. 如 managed harness 已存在（managed_test/benchmark/*.cs），使用已有的；
+                      不存在则自动生成临时 harness
+                   4. 对每个非 stub 方法运行 entry.exe --benchmark N
+                      - native 端调用 BenchmarkMethod(index, iterations) — 生成代码内直接
+                        调用 kAotMethods[index]()，绕过 hotpatch dispatch 开销
+                      - 测量纯 AOT 生成代码的真实性能
+                   5. benchmark_comparator.compare() 生成对比报告
+                   输出 benchmark-comparison-report.json
+                   [标准模式 advisory；无 managed harness 时退化为 native-only 记录]
 
-[6] PostHotBench — 热补丁后性能对比（interpreter 路径）
+[6] HotUpdate    — 热补丁验证
+                   1. stub_detect 解析 entrypoint 源码
+                   2. 运行 entry.exe --hotupdate
+                   3. 解析 JSON 输出（passedMethods/failedMethods/totalMethods）
+                   输出 hotupdate-verification-report.json
+                   [严格模式 required]
+
+[7] PostHotBench — 热补丁后性能对比（interpreter 路径）
                    1. 读取 unified-verification-report.json 中的 native benchmark
                       数据获取 pre-patch ns/op
                    2. 对每个非 stub 方法运行 entry.exe --hotupdate-and-benchmark N
@@ -92,17 +100,21 @@ run foundation-dll verify-family <family-slug> --assembly System.Private.CoreLib
                    设计的已知特性，不作为失败判定。**
                    [严格模式 required；不阻塞 pipeline]
 
-[7] Aggregate   — 汇总全部 stage 结果
-                  计算 coverage（methodCoverage, testedRate）
-                  - methodCoverage: fact.details.fact.passed / total（之前 Bug: 读取不存在的 l2）
-                  - testedRate: 1 - (skipsFound / total_methods)，下限 max(0, ...)（之前 Bug: 可负）
-                  - overall: methodCoverage 和 testedRate 的均值
-                  回归检测（baseline_manager.compare_checksum/benchmark）
-                  输出 unified-verification-report.json
+[8] Aggregate    — 汇总全部 stage 结果
+                   计算 coverage（methodCoverage, testedRate）
+                   - methodCoverage: fact.details.fact.passed / total（之前 Bug: 读取不存在的 l2）
+                   - testedRate: 1 - (skipsFound / total_methods)，下限 max(0, ...)（之前 Bug: 可负）
+                   - overall: methodCoverage 和 testedRate 的均值
+                   回归检测（baseline_manager.compare_checksum/benchmark）
+                   输出 unified-verification-report.json
 ```
 
 **Standard 模式必过阶段**：preflight, codegen, fact, audit
 **Strict 模式额外必过**：hotupdate, post_hotupdate_benchmark
+
+> **AsmCompare 阶段**（stage 4）在所有模式下均为 advisory（不阻塞 overall_status），
+> 提供 deterministic instruction-level metrics 供 AI 分析消费。
+> 当 asm-compare 无法运行时（DLL 未构建、MSVC 缺失等），自动跳过。
 
 ## 输出
 
@@ -111,6 +123,7 @@ run foundation-dll verify-family <family-slug> --assembly System.Private.CoreLib
 | `unified-verification-report.json` | `verification/foundation-dll/<Assembly>/<family>/` |
 | `mechanism-audit-report.json` | 同上（审计独立文件） |
 | `principle-alignment-report.json` | 同上（原则对齐独立文件） |
+| `asm-compare-report.json` | 同上（JIT vs AOT 指令级分析，stage 4） |
 
 ### unified-verification-report.json 格式
 
@@ -128,6 +141,7 @@ run foundation-dll verify-family <family-slug> --assembly System.Private.CoreLib
                     "details": {"fact": {"status": "passed", "passed": 18, "total": 18}} },
     "audit":      { "status": "passed",  "summary": "false_passing=0, principle=CONCERN",
                     "details": {"falsePassing": 0, "skipsFound": 0, "principleStatus": "CONCERN"} },
+    "asm_compare": { "status": "passed",  "summary": "10/10 methods OK, avg JIT=42.3 instr, avg AOT IR=156.7 instr, expansion=3.7x" },
     "benchmark":  { "status": "passed",  "summary": "avg_speedup=75.3%, native_faster=11/11" },
     "hotupdate":  { "status": "passed",  "summary": "18/18 passed, 0 failed" }
   },
@@ -173,6 +187,10 @@ python build/toolchains/run/testing/foundation_dll/pipeline_native_aot_runner.py
 | Audit | **skipsFound 计数异常（负 skipRate）** | 检查 `mechanism_audit.py` `_get_skip_entries()` 是否按 family 过滤 `_METHOD_OVERRIDES` |
 | Benchmark | managed_faster > 0 | 排查翻译质量，标记 regression |
 | HotUpdate | failed > 0 | 检查 codegen 输出 → 标记失败 |
+| AsmCompare | subjects DLL 未构建（在 codegen 前运行） | 确保 codegen 阶段先执行 — asm-compare 依赖 subjects DLL |
+| AsmCompare | asm-compare 超时（120s） | 检查 subject method 是否过于复杂；考虑增大超时或跳过 |
+| AsmCompare | JSON 解析失败 | 查看 asm-compare 原始 stdout/stderr；检查 driver 是否输出非 JSON 前缀 |
+| AsmCompare | 所有方法 fail 或 skip | 确认 contract 中 methodSubjectIds 非空、subjects DLL 包含对应方法 |
 
 ### 闸门失败标准流程
 
@@ -253,11 +271,14 @@ il2cpp_dist/  → 可覆盖 — 所有 entrypoint/ 下的文件可由 generate_a
 | `verify-aggregate` | 跨 family 聚合策略、回归检测逻辑 | 单 family 验证执行 |
 | `verify-data-integrity` | dashboard 数据一致性检查 | 验证执行 |
 | `onboard-family` | 新 family 接入流程 | 已有 family 验证 |
-| `verify-analysis` | pipeline 产物的 AI 综合分析 | pipeline 执行、数据生成 |
+| `asm-compare-verifier` | asm-compare 指令级确定性对比、JIT vs AOT metrics 聚合 | pipeline 执行、分析消费 |
+| `verify-analysis` | pipeline 产物（含 asm-compare-report.json）的 AI 综合分析 | pipeline 执行、数据生成 |
 
 ## AI 综合分析
 
-Pipeline 只产出 raw 验证数据。**分析验收交由 `dev-foundation-dll-verify-analysis` 技能完成。**
+Pipeline 产出 raw 验证数据 + **确定性 asm-compare 指令级指标**。**分析验收交由 `dev-foundation-dll-verify-analysis` 技能完成。**
+
+**变更说明**：Managed vs native 代码对比不再由 AI 直接阅读源码判断，而是由 asm-compare stage 产出确定性 JSON 指标（指令数、IR 膨胀比、调用分布、dispatch 类型分布、boxing 操作数），AI 综合分析阶段**消费这些指标**而非自分析 managed/native 代码。这消除了 AI 自分析的不确定性和幻觉风险。
 
 调用方式：
 
@@ -284,7 +305,7 @@ Pipeline 只产出 raw 验证数据。**分析验收交由 `dev-foundation-dll-v
 - 入口: `family_verification_orchestrator.py` / `verify_family()`
 - Codegen: `pipeline_native_aot_runner.py` / `run_family()`
 - Fact: `fact_verifier.py` / `verify_fact()`
-- Audit: `mechanism_audit.py` / `run_full_audit()`
+- AsmCompare: `asm_compare_verifier.py` / `verify_family_asm_compare()`
 - Principle: `principle_auto_checks.py` / `run_all_checks()`
 - CLI 路由: `commands/foundation_dll.py` / `_handle_verify_family()`
 - 下游: `dev-foundation-dll-verify-analysis`（AI 综合分析）

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/convert/char",
+  "capturedAt": "2026-05-15T02:57:16",
+  "summary": {
+    "totalMethods": 5,
+    "okCount": 3,
+    "failedCount": 2,
+    "skippedCount": 0,
+    "jitInstructionCount": {
+      "min": 10,
+      "max": 10,
+      "avg": 10.0,
+      "total": 30
+    },
+    "aotInstructionCount": {
+      "min": 50,
+      "max": 50,
+      "avg": 50.0,
+      "total": 150
+    },
+    "totalExternalRuntimeCalls": 0,
+    "totalVirtualDispatches": 0,
+    "totalBoxingOps": 0,
+    "overallIrExpansionRatio": 5.0
+  },
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "mid_0",
+      "shortName": "Subject_0",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 10,
+        "aotInstructionCount": 50,
+        "ratio": 5.0,
+        "jitCodeSize": 40
+      },
+      "jit": {
+        "status": "ok",
+        "size": 40,
+        "instructions": 10
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "sym",
+        "instructions": 50
+      },
+      "analysis": []
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "mid_1",
+      "shortName": "Subject_1",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 10,
+        "aotInstructionCount": 50,
+        "ratio": 5.0,
+        "jitCodeSize": 40
+      },
+      "jit": {
+        "status": "ok",
+        "size": 40,
+        "instructions": 10
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "sym",
+        "instructions": 50
+      },
+      "analysis": []
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "mid_2",
+      "shortName": "Subject_2",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 10,
+        "aotInstructionCount": 50,
+        "ratio": 5.0,
+        "jitCodeSize": 40
+      },
+      "jit": {
+        "status": "ok",
+        "size": 40,
+        "instructions": 10
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "sym",
+        "instructions": 50
+      },
+      "analysis": []
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "mid_3",
+      "shortName": "Subject_3",
+      "status": "error",
+      "error": "timed out"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "mid_4",
+      "shortName": "Subject_4",
+      "status": "error",
+      "error": "timed out"
+    }
+  ]
+}

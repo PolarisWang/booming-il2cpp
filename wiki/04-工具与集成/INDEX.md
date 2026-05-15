@@ -38,7 +38,7 @@
 | [`共享-contract-v0.md`](./共享-contract-v0.md) | 共享 contract v0 | 固化 `contracts/shared/v0/` 的长期约束、验证入口与使用边界。 |
 | [`统一入口脚本.md`](./统一入口脚本.md) | 统一入口脚本 `run.*` | 固化 bootstrap、TUI、prepare / clean、`--json` 与 harness 接线规则。 |
 | [`unified-project-workspaces-and-deploy-core.md`](./unified-project-workspaces-and-deploy-core.md) | project workspaces and deploy core | 固化 `generate/build project`、`deploy core`、`subject-exec` 与 `artifacts/projects/**` / `deploy/core/**` 边界。 |
-| [`Claude技能测试入口.md`](./Claude技能测试入口.md) | Claude 技能测试入口 | 固化 `.codex/tests/claude-code/` 的入口与约束。 |
+| [`asm-compare-diagnostic-tool.md`](./asm-compare-diagnostic-tool.md) | ASM-COMPARE 诊断工具 | JIT vs IL2CPP AOT 方法级汇编对比工具，支持分段报告和 IL offset 对齐的 side-by-side 对比。 |
 
 ## 维护约定
 
