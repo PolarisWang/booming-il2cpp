@@ -429,11 +429,22 @@ Region* RegionManager::AllocateNurseryOfSize(CHAOS_IL2CPP_SIZE size) {
 }
 
 CHAOS_IL2CPP_SIZE RegionManager::PromoteNursery(Region* nursery) {
-    // Stub: in C2/C3, this scans the nursery, copies live objects to
-    // a tenured region, and returns the total promoted bytes.
-    // For M0, this is a no-op.
-    (void)nursery;
-    return 0;
+    if (nursery == nullptr) return 0;
+
+    // Delegate to the young collector which performs precise GcLayout scanning
+    // of the nursery, copies live objects to old-gen via GcScavengeObject, and
+    // sets forwarding pointers for transitive closure via Cheney BFS.
+    //
+    // The return value is the total bytes promoted from this nursery.
+    YoungCollectionResult result = GcYoungCollection(nursery);
+
+    if (result.objects_promoted > 0) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("CRAG", "promote_nursery objects={0} bytes={1}",
+            static_cast<unsigned long long>(result.objects_promoted),
+            static_cast<unsigned long long>(result.bytes_promoted));
+    }
+
+    return result.bytes_promoted;
 }
 
 void RegionManager::DumpRegions() const {

@@ -41,6 +41,15 @@ inline int GcCtz64(uint64_t word) noexcept {
 #endif
 }
 
+/// Returns the number of 1-bits in @a word (population count / Hamming weight).
+inline int GcPopCount64(uint64_t word) noexcept {
+#if defined(_MSC_VER) && !defined(__clang__)
+    return static_cast<int>(__popcnt64(word));
+#else
+    return static_cast<int>(__builtin_popcountll(word));
+#endif
+}
+
 // ======================================================================
 // Bitmap iteration helpers
 // ======================================================================
