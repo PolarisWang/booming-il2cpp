@@ -149,7 +149,7 @@ internal static class Program
         self.assertIn("// Managed method: FilterOnlyEhNativeAotHarness/Program::CatchWithCondition(System.Int32)", generated_cpp)
         self.assertIn("catch (const chaos_managed_exception& chaos_exception)", generated_cpp)
         self.assertIn("chaos_reflection_get_exception_param_name", generated_cpp)
-        self.assertIn("chaos_reflection_get_exception_message", generated_cpp)
+        self.assertIn("ChaosReflectionGetExceptionMessage", generated_cpp)
 
 
 if __name__ == "__main__":
