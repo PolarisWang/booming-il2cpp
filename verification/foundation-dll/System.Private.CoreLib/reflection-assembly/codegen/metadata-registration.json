@@ -1,0 +1,290 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ReflectionAssemblySubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "name": "ReflectionAssemblySubjects",
+      "displayName": "ReflectionAssemblySubjects",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::_exitCode",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Run:System.Void(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
+      "name": "Subject_10",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_11:System.Void()",
+      "name": "Subject_11",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_12:System.Void()",
+      "name": "Subject_12",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_13:System.Void()",
+      "name": "Subject_13",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_14:System.Void()",
+      "name": "Subject_14",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_15:System.Void()",
+      "name": "Subject_15",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_16:System.Void()",
+      "name": "Subject_16",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_16:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 21,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_17:System.Void()",
+      "name": "Subject_17",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_17:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 22,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_18:System.Void()",
+      "name": "Subject_18",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_18:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 23,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_19:System.Void()",
+      "name": "Subject_19",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_19:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 24,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_20:System.Void()",
+      "name": "Subject_20",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_20:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 25,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
+      "name": "Subject_21",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 26,
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Run:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

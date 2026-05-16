@@ -20,125 +20,136 @@ class ManagedBenchmarkHarness
     }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_0(int i)
+static bool H_0(int i)
 {
-    try { Convert.ToChar((i % 2 == 0)); } catch { }
+    try { Convert.ToChar((i % 2 == 0)); return false; } catch { return true; }
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_1(int i)
+static bool H_1(int i)
 {
     Convert.ToChar((byte)((i + 1) & 0xFF));
     _g++;  // volatile side-effect prevents DCE
+    return false;
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_2(int i)
+static bool H_2(int i)
 {
     Convert.ToChar((char)((i + 2) & 0xFF));
     _g++;  // volatile side-effect prevents DCE
+    return false;
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_3(int i)
+static bool H_3(int i)
 {
-    try { Convert.ToChar(System.DateTime.Now); } catch { }
+    try { Convert.ToChar(System.DateTime.Now); return false; } catch { return true; }
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_4(int i)
+static bool H_4(int i)
 {
-    try { Convert.ToChar((decimal)((i + 4) & 0xFF)); } catch { }
+    try { Convert.ToChar((decimal)((i + 4) & 0xFF)); return false; } catch { return true; }
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_5(int i)
+static bool H_5(int i)
 {
-    try { Convert.ToChar((double)((i + 5) & 0xFF)); } catch { }
+    try { Convert.ToChar((double)((i + 5) & 0xFF)); return false; } catch { return true; }
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_6(int i)
+static bool H_6(int i)
 {
     Convert.ToChar((short)((i + 6) & 0xFF));
     _g++;  // volatile side-effect prevents DCE
+    return false;
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_7(int i)
+static bool H_7(int i)
 {
     Convert.ToChar(((i + 7) & 0xFF));
     _g++;  // volatile side-effect prevents DCE
+    return false;
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_8(int i)
+static bool H_8(int i)
 {
     Convert.ToChar(((i + 8) & 0xFF));
     _g++;  // volatile side-effect prevents DCE
+    return false;
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_9(int i)
+static bool H_9(int i)
 {
-    try { Convert.ToChar((object)((i + 9) & 0xFF)); } catch { }
+    try { Convert.ToChar((object)((i + 9) & 0xFF)); return false; } catch { return true; }
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_11(int i)
+static bool H_11(int i)
 {
     Convert.ToChar((sbyte)((i + 11) & 0x7F));
     _g++;  // volatile side-effect prevents DCE
+    return false;
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_12(int i)
+static bool H_12(int i)
 {
-    try { Convert.ToChar((float)((i + 12) & 0xFF)); } catch { }
+    try { Convert.ToChar((float)((i + 12) & 0xFF)); return false; } catch { return true; }
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_13(int i)
+static bool H_13(int i)
 {
     Convert.ToChar("A");
     _g++;  // volatile side-effect prevents DCE
+    return false;
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_15(int i)
+static bool H_15(int i)
 {
     Convert.ToChar((ushort)((i + 15) & 0xFF));
     _g++;  // volatile side-effect prevents DCE
+    return false;
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_16(int i)
+static bool H_16(int i)
 {
     Convert.ToChar((uint)((i + 16) & 0xFF));
     _g++;  // volatile side-effect prevents DCE
+    return false;
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void H_17(int i)
+static bool H_17(int i)
 {
     Convert.ToChar((ulong)((i + 17) & 0xFF));
     _g++;  // volatile side-effect prevents DCE
+    return false;
 }
 
     static void Main()
     {
         var results = new List<MethodResult>();
             { // [0] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_0(i);
+                    if (H_0(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_0(i);
+                    if (H_0(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -150,20 +161,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [1] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_1(i);
+                    if (H_1(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_1(i);
+                    if (H_1(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -175,20 +187,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [2] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_2(i);
+                    if (H_2(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_2(i);
+                    if (H_2(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -200,20 +213,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [3] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_3(i);
+                    if (H_3(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_3(i);
+                    if (H_3(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -225,20 +239,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [4] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_4(i);
+                    if (H_4(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_4(i);
+                    if (H_4(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -250,20 +265,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [5] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_5(i);
+                    if (H_5(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_5(i);
+                    if (H_5(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -275,20 +291,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [6] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_6(i);
+                    if (H_6(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_6(i);
+                    if (H_6(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -300,20 +317,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [7] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_7(i);
+                    if (H_7(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_7(i);
+                    if (H_7(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -325,20 +343,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [8] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_8(i);
+                    if (H_8(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_8(i);
+                    if (H_8(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -350,20 +369,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [9] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_9(i);
+                    if (H_9(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_9(i);
+                    if (H_9(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -375,7 +395,7 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [10] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider) — unsupported type
@@ -389,16 +409,17 @@ static void H_17(int i)
                 });
             }
             { // [11] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_11(i);
+                    if (H_11(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_11(i);
+                    if (H_11(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -410,20 +431,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [12] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_12(i);
+                    if (H_12(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_12(i);
+                    if (H_12(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -435,20 +457,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [13] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_13(i);
+                    if (H_13(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_13(i);
+                    if (H_13(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -460,7 +483,7 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [14] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider) — unsupported type
@@ -474,16 +497,17 @@ static void H_17(int i)
                 });
             }
             { // [15] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_15(i);
+                    if (H_15(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_15(i);
+                    if (H_15(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -495,20 +519,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [16] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_16(i);
+                    if (H_16(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_16(i);
+                    if (H_16(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -520,20 +545,21 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
             { // [17] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)
+                bool threw = false;
                 // Warmup: JIT compile before measurement
                 for (int i = 0; i < 100000; i++) {
-                    H_17(i);
+                    if (H_17(i)) threw = true;
                 }
                 // 3 rounds, take minimum to reduce GC/scheduling noise
                 double bestMs = double.MaxValue;
                 for (int r = 0; r < 3; r++) {
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     for (int i = 0; i < 100000; i++) {
-                    H_17(i);
+                    if (H_17(i)) threw = true;
                     }
                     sw.Stop();
                     double ms = sw.Elapsed.TotalMilliseconds;
@@ -545,7 +571,7 @@ static void H_17(int i)
                     ElapsedMilliseconds = bestMs,
                     Iterations = 100000,
                     IsBodyReal = true,
-                    IsException = false,
+                    IsException = threw,
                 });
             }
         // Consume accum so JIT cannot elide the computation

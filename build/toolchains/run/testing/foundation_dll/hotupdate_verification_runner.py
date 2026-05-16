@@ -109,6 +109,8 @@ def generate_per_family_reports(
             "assemblyName": assembly_name,
             "familyId": family_id,
             "verificationKind": "hotupdate-proof",
+            "allMethodsRevertVerified": all(r.get("revertVerified", False) for r in raw_results),
+            "allMethodsSemanticVerified": all(r.get("semanticVerified", False) for r in raw_results),
             "hotpatchPatchApplied": data.get("d3PatchApplied", False),
             "hotpatchPatchedCount": data.get("d3PatchedCount", 0),
             "summary": {

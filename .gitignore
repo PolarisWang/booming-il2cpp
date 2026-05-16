@@ -23,6 +23,7 @@ Thumbs.db
 artifacts/
 .artifact/
 verification/workspaces/
+verification/foundation-dll/.asm-compare-cache/
 deploy/
 !contracts/artifacts/
 !contracts/artifacts/v0/

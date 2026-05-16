@@ -1,3 +1,5 @@
+#include "gc_bgc.h"
+
 namespace chaos::il2cpp::runtime_core {
 
 RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
@@ -40,6 +42,9 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     }
 
     runtime_state->internal_state = ::new (internal_mem) RuntimeInternalState();
+
+    // Start the BGC background thread for concurrent mark/sweep.
+    BgcController::Instance().Start();
 
     SetRuntimeMode(RuntimeMode::Aot);
     *out_runtime_state = runtime_state;

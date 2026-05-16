@@ -27,11 +27,16 @@ namespace chaos::il2cpp::runtime_core {
 
 /// GC event types.
 enum class GcEvent : uint8_t {
-    GC_START       = 0,
-    MARK_DONE      = 1,
-    SWEEP_DONE     = 2,
-    COMPACT_DONE   = 3,
-    GC_END         = 4
+    GC_START       = 0,    // Full GC began (kept for compatibility)
+    MARK_DONE      = 1,    // Mark phase complete
+    SWEEP_DONE     = 2,    // Sweep phase complete (free lists rebuilt)
+    COMPACT_DONE   = 3,    // Compaction complete (if applicable)
+    GC_END         = 4,    // Full GC complete (kept for compatibility)
+    GC_YOUNG_START = 5,    // Young GC began
+    GC_YOUNG_DONE  = 6,    // Young GC completed (with stats)
+    GC_FULL_START  = 7,    // Full GC began
+    GC_FULL_DONE   = 8,    // Full GC completed (with stats)
+    GC_OOM         = 9,    // Out-of-memory condition (allocation failed after GC)
 };
 
 /// Maximum number of registered callbacks.
@@ -79,6 +84,53 @@ void GcIterateHandleTable(void (*callback)(void* object, void* user_data),
 ///   - Nursery objects that were NOT promoted → null the handle
 /// Called between young GC Phase 3 (BFS done) and Phase 4 (nursery sweep).
 void GcProcessWeakHandlesAfterYoungGC() noexcept;
+
+// ── DependentHandle API (for ConditionalWeakTable / Ephemeron) ─────────
+
+/// Allocate a new dependent handle (primary → secondary).
+CHAOS_IL2CPP_UINT64 GcCreateDependentHandle(void* primary, void* secondary) noexcept;
+
+/// Get the primary object of a dependent handle.
+void* GcGetDependentHandlePrimary(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
+
+/// Get the secondary object of a dependent handle.
+void* GcGetDependentHandleSecondary(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
+
+/// Set the secondary object of a dependent handle.
+void GcSetDependentHandleSecondary(CHAOS_IL2CPP_UINT64 handle_id, void* secondary) noexcept;
+
+/// Free a dependent handle.
+void GcFreeDependentHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
+
+/// Process dependent handles after a young GC (promote secondary with primary).
+void GcProcessDependentHandlesAfterYoungGC() noexcept;
+
+/// Process dependent handles after a full GC (fixed-point iteration up to 3 rounds).
+int GcProcessDependentHandlesAfterFullGC() noexcept;
+
+// ── Pinned object set (for GCHandleType.Pinned / POH) ──────────────────
+
+/// Register a pinned object (prevented from being moved by young GC).
+/// Called when GCHandleType.Pinned is created.
+void GcAddPinnedObject(void* obj) noexcept;
+
+/// Unregister a pinned object (allow normal GC behavior again).
+/// Called when a pinned GCHandle is freed.
+void GcRemovePinnedObject(void* obj) noexcept;
+
+/// Check if an object is currently pinned (preventing young GC copy).
+bool GcIsPinnedObject(void* obj) noexcept;
+
+/// Allocate an object directly in the Pinned Object Heap (POH).
+/// Returns zeroed memory.  POH objects never participate in young GC
+/// copying — they are allocated in separate REGION_POH regions and use
+/// mark-sweep collection (same as old gen).
+/// This is the preferred path for allocations that the caller knows
+/// will be pinned (e.g., fixed buffers, GCHandleType.Pinned targets).
+void* GcAllocatePinned(CHAOS_IL2CPP_SIZE size) noexcept;
+
+/// Check if @a ptr falls within a POH region.
+bool GcIsPohPointer(const void* ptr) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

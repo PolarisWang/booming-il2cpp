@@ -83,30 +83,34 @@ AssemblyLoadContext* AssemblyManager::LoadAssembly(
         return nullptr;
     }
 
-    // 1. Apply patch from memory — validates, resolves methods via
-    //    HotpatchNameRegistry, marks dispatch entries as kHotpatchActive.
-    auto* ctx = ApplyPatchFromMemory(patch_data, patch_size, host_type_name);
-    if (ctx == nullptr || ctx->method_count == 0) {
-        if (ctx != nullptr) {
-            Unpatch(ctx);
-        }
-        return nullptr;
-    }
-
-    // 2. Determine module_id from the first patched method.
-    //    All methods in one .patchdata belong to the same module.
-    uint32_t module_id = ctx->methods[0].module_id;
-
-    // 3. Create a memory domain for per-assembly allocations.
+    // 1. Create a memory domain for per-assembly allocations BEFORE applying
+    //    the patch so that PatchContext/metadata (CreatePatchContext) uses
+    //    domain-tagged allocation (R10: MD/IL metadata → MemoryDomain).
     memory_domain::DomainId domain_id = memory_domain::RegisterMemoryDomain(
         {assembly_name, 1 /* HotUpdate */, 0 /* unlimited */, nullptr});
     if (domain_id == memory_domain::kDomainIdInvalid) {
-        Unpatch(ctx);
         return nullptr;
     }
 
-    // 4. Pre-allocate static field storage on the assembly domain.
+    // 2. Apply patch from memory within the domain scope — PatchContext and
+    //    all metadata allocations land on the domain heap.
     auto* domain = memory_domain::FindDomainById(domain_id);
+    memory_domain::DomainScope scope(domain);
+
+    auto* ctx = ApplyPatchFromMemory(patch_data, patch_size, host_type_name);
+    if (ctx == nullptr || ctx->method_count == 0) {
+        if (ctx != nullptr) {
+            Unpatch(ctx);  // DomainFreeTagged — safe while domain heap lives
+        }
+        memory_domain::UnregisterMemoryDomain(domain_id);
+        return nullptr;
+    }
+
+    // 3. Determine module_id from the first patched method.
+    //    All methods in one .patchdata belong to the same module.
+    uint32_t module_id = ctx->methods[0].module_id;
+
+    // 4. Pre-allocate static field storage on the assembly domain.
     void* static_fields = AllocateStaticFieldStorage(domain, kDefaultStaticFieldCount);
     if (static_fields == nullptr) {
         memory_domain::UnregisterMemoryDomain(domain_id);
@@ -131,20 +135,20 @@ AssemblyLoadContext* AssemblyManager::LoadAssembly(
     //    carries generic instantiation tables.
 
     // 6. Find a free slot and register the assembly.
-    uint32_t slot = kMaxAssemblies;
+    uint32_t slot = static_cast<uint32_t>(assemblies_.size());
     {
         // Thread-safe: only one load/unload at a time for the table.
         static std::mutex table_mutex;
         std::lock_guard<std::mutex> lock(table_mutex);
 
-        for (uint32_t i = 0; i < kMaxAssemblies; ++i) {
+        for (uint32_t i = 0; i < assemblies_.size(); ++i) {
             if (!assemblies_[i].is_loaded) {
                 slot = i;
                 break;
             }
         }
 
-        if (slot >= kMaxAssemblies) {
+        if (slot >= assemblies_.size()) {
             // Table full — roll back.
             memory_domain::UnregisterMemoryDomain(domain_id);
             Unpatch(ctx);
@@ -234,7 +238,7 @@ bool AssemblyManager::UnloadAssembly(AssemblyLoadContext* alc) noexcept {
 AssemblyLoadContext* AssemblyManager::FindAssembly(const char* name) noexcept {
     if (name == nullptr || name[0] == '\0') return nullptr;
 
-    for (uint32_t i = 0; i < kMaxAssemblies; ++i) {
+    for (uint32_t i = 0; i < assemblies_.size(); ++i) {
         auto& desc = assemblies_[i];
         if (desc.is_loaded && desc.name == name) {
             return &desc;
@@ -248,7 +252,7 @@ AssemblyLoadContext* AssemblyManager::FindAssembly(const char* name) noexcept {
 AssemblyLoadContext* AssemblyManager::FindByModuleId(uint32_t module_id) noexcept {
     if (module_id == 0) return nullptr;
 
-    for (uint32_t i = 0; i < kMaxAssemblies; ++i) {
+    for (uint32_t i = 0; i < assemblies_.size(); ++i) {
         auto& desc = assemblies_[i];
         if (desc.is_loaded && desc.module_id == module_id) {
             return &desc;
@@ -263,7 +267,7 @@ void* AssemblyManager::GetStaticField(uint32_t module_id,
                                        uint32_t field_offset) noexcept {
     // Find the ALC that owns this module_id.
     AssemblyLoadContext* alc = nullptr;
-    for (uint32_t i = 0; i < kMaxAssemblies; ++i) {
+    for (uint32_t i = 0; i < assemblies_.size(); ++i) {
         if (assemblies_[i].is_loaded && assemblies_[i].module_id == module_id) {
             alc = &assemblies_[i];
             break;

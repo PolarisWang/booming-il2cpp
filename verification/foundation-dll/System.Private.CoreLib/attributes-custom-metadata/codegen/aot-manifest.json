@@ -1,0 +1,114 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Run:System.Void(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectKind": "field",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)",
+      "reason": "external-call"
+    }
+  ]
+}

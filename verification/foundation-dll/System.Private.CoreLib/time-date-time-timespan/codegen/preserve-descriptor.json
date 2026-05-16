@@ -1,0 +1,120 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Run:System.Void(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_5:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_6:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_7:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_8:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_9:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_10:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_11:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_12:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_13:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_14:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_15:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

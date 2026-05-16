@@ -1,0 +1,122 @@
+{
+  "family": "string-char-text-core",
+  "assembly": "System.Private.CoreLib",
+  "mode": "standard",
+  "timestamp": "2026-05-14T19:52:43",
+  "duration_ms": 13397,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "20 methods, 0 custom entries",
+      "details": {
+        "methodCount": 20,
+        "customMethodCount": 0,
+        "hasCustomEntryFile": false,
+        "customMethods": []
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 20,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\string-char-text-core\\managed\\subjects\\build-output\\StringCharTextCoreSubjects.dll",
+        "bloatReports": [
+          {
+            "BaseMethodsCount": 21,
+            "AppliedMethodsCount": 21,
+            "BloatRatio": 1,
+            "Strategy": "MethodLevel",
+            "AssemblyName": "StringCharTextCoreSubjects",
+            "ExtraMethodsFromVTable": 0,
+            "ExtraMethodsFromTypeLevel": 0
+          }
+        ]
+      },
+      "errors": [],
+      "duration_ms": 9834
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (21/21)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 21,
+          "total": 21
+        }
+      },
+      "errors": [],
+      "duration_ms": 252
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "CONCERN",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 90
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/20 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 20,
+        "invalidCount": 20,
+        "benchmarkQuality": "matchedCount=0/20 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 2226
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "21/21 passed, 0 failed (stub=0)",
+      "details": {
+        "passedMethods": 21,
+        "failedMethods": 0,
+        "totalMethods": 21,
+        "realMethods": 21,
+        "stubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 20
+    },
+    "post_hotupdate_benchmark": {
+      "stage": "post_hotupdate_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (interpreter path — expected)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 971
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 100.0,
+    "overall": 100.0
+  },
+  "regression": {}
+}

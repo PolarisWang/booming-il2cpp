@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <cmath>
 
+#include "gc_bgc.h"
+
 namespace chaos::il2cpp::runtime_core {
 
 // ── Global instance ────────────────────────────────────────────────
@@ -78,10 +80,19 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
     }
 
     // 2. Snapshot multi-variable state for consistent decision.
-    //    Read all atomics once to avoid skew between successive loads.
     CHAOS_IL2CPP_SIZE alloc_full = alloc_since_last_full_gc_.load(std::memory_order_relaxed);
     CHAOS_IL2CPP_SIZE heap_est = estimated_heap_size_.load(std::memory_order_relaxed);
+
     if (heap_est > 0 && alloc_full > static_cast<CHAOS_IL2CPP_SIZE>(heap_est * kFullTriggerMultiplier)) {
+        // Full collection threshold exceeded.  Prefer BGC over STW when:
+        //   - BGC thread is running
+        //   - BGC is not already busy with a cycle
+        //   - This is not a forced full GC (emergency)
+        auto& bgc = BgcController::Instance();
+        if (!bgc.IsBusy()) {
+            return GcCollectionKind::FULL_BGC;
+        }
+        // BGC is busy — fall back to STW full (emergency).
         return GcCollectionKind::FULL;
     }
 

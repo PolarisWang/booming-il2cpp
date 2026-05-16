@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "AttributesCustomMetadataSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Run",
+          "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Run:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_0",
+          "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_1",
+          "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_2",
+          "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_3",
+          "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_4",
+          "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_5",
+          "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_6",
+          "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_7",
+          "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_8",
+          "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_8:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

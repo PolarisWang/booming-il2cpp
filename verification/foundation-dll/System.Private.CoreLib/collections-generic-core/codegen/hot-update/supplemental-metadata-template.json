@@ -1,0 +1,155 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663313,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()",
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

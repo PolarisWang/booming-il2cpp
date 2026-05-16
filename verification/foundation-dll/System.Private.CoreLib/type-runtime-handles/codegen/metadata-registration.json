@@ -1,0 +1,191 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "TypeRuntimeHandlesSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "name": "TypeRuntimeHandlesSubjects",
+      "displayName": "TypeRuntimeHandlesSubjects",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Run:System.Void(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_10:System.Void()",
+      "name": "Subject_10",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_11:System.Void()",
+      "name": "Subject_11",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_12:System.Void()",
+      "name": "Subject_12",
+      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 17,
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Run:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

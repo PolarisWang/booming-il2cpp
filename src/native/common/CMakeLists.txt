@@ -22,6 +22,7 @@ add_library(chaos_common STATIC
     chaos/type_info.h
     chaos/profile_globals.cpp
     chaos/collection.h
+    chaos/unordered_dense.h
     chaos/async.h
     span.cpp
     collection.cpp
@@ -32,7 +33,8 @@ add_library(chaos_common STATIC
 target_compile_features(chaos_common PUBLIC cxx_std_17)
 
 # chaos_common uses fmtlib for type-safe string formatting.
-target_link_libraries(chaos_common PUBLIC chaos_fmt)
+# Also exposes ankerl::unordered_dense include path for opt-in use.
+target_link_libraries(chaos_common PUBLIC chaos_fmt chaos_unordered_dense)
 
 # chaos_common is a dependency-free foundation library.
 # It does NOT depend on chaos_runtime_core, BDWGC, or any other module.

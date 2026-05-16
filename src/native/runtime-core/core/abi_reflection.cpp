@@ -14,8 +14,7 @@ GCHandle CHAOS_RUNTIME_ABI_CALL GcHandleNew(
     s_gc_handle_table[handle] = GcHandleEntry{ object_instance, pinned, false /*weak*/ };
 
     if (pinned) {
-        GC_add_roots(object_instance,
-            static_cast<char*>(object_instance) + sizeof(void*));
+        GcAddPinnedObject(object_instance);
     }
 
     return static_cast<GCHandle>(handle);
@@ -29,6 +28,9 @@ void CHAOS_RUNTIME_ABI_CALL GcHandleFree(
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(s_gc_handle_mutex);
     auto it = s_gc_handle_table.find(static_cast<CHAOS_IL2CPP_UINT64>(gc_handle));
     if (it != s_gc_handle_table.end()) {
+        if (it->second.pinned) {
+            GcRemovePinnedObject(it->second.object_instance);
+        }
         s_gc_handle_table.erase(it);
     }
 }

@@ -3,13 +3,19 @@
 #include <chaos/log.h>
 
 #include <cstdlib>
+#include <memory>
 #include <mutex>
 #include <new>
 
 namespace chaos::il2cpp::runtime_core {
 
-// ── L1 segment pointer table (512 KB, lazily populated) ───────
-std::atomic<CardSegment*> g_card_l1[kCardL1Entries] = {};
+// ── L1 segment pointer table (dynamically growing) ──────────────
+// Initial size: kCardL1Entries (64K entries = 512 KB for 4 GB coverage).
+// Grows via GcRegisterHeapRange when the heap exceeds 4 GB.
+// unique_ptr<T[]> used because std::atomic is not copyable (MSVC STL).
+std::unique_ptr<std::atomic<CardSegment*>[]> g_card_l1(
+    new std::atomic<CardSegment*>[kCardL1Entries]());
+std::atomic<size_t> g_card_l1_size{kCardL1Entries};
 
 // ── Tracked segment list for O(allocated) ClearAllCards ───────
 struct CardSegmentNode {
@@ -33,7 +39,31 @@ void GcRegisterHeapRange(uintptr_t start, uintptr_t end) {
     uintptr_t first_seg = first_idx / kCardsPerSegment;
     uintptr_t last_seg  = last_idx / kCardsPerSegment;
 
-    for (uintptr_t si = first_seg; si <= last_seg && si < static_cast<uintptr_t>(kCardL1Entries); si++) {
+    // Grow L1 table if this range exceeds current coverage.
+    // The write barrier (DirtyCard) reads g_card_l1_size atomically,
+    // so resizing is safe: entries are zero-initialized (nullptr), and
+    // segments are allocated in the loop below.  The new ptr is published
+    // via g_card_l1_size.store (release) AFTER allocation to ensure
+    // readers see the full-sized table.
+    size_t current_size = g_card_l1_size.load(std::memory_order_acquire);
+    if (last_seg >= current_size) {
+        size_t new_size = current_size;
+        while (last_seg >= new_size) {
+            new_size *= 2;  // double until coverage is sufficient
+        }
+        auto new_table = std::make_unique<std::atomic<CardSegment*>[]>(new_size);
+        // Copy existing entries (relaxed: no concurrent writers during resize).
+        for (size_t i = 0; i < current_size; i++) {
+            new_table[i].store(g_card_l1[i].load(std::memory_order_relaxed),
+                               std::memory_order_relaxed);
+        }
+        // Publish new table before updating size.
+        g_card_l1.swap(new_table);
+        g_card_l1_size.store(new_size, std::memory_order_release);
+        current_size = new_size;
+    }
+
+    for (uintptr_t si = first_seg; si <= last_seg; si++) {
         CardSegment* existing = g_card_l1[si].load(std::memory_order_acquire);
         if (existing != nullptr) continue;  // already allocated
 

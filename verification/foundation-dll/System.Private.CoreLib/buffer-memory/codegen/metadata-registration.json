@@ -1,0 +1,158 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "BufferMemorySubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "name": "BufferMemorySubjects",
+      "displayName": "BufferMemorySubjects",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 14,
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

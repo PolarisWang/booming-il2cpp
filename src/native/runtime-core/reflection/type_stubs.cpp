@@ -11,14 +11,17 @@ namespace chaos::il2cpp::runtime_core {
 // ── Type flag queries (delegate to ModuleRegistry Tier 0) ──────────────
 
 CHAOS_IL2CPP_INT32 ChaosTypeGetIsByRef(CHAOS_IL2CPP_INTPTR type) noexcept {
-    // ByRef is not a ModuleRegistry flag — resolve descriptor to check
-    (void)type;
-    return 0;  // Phase 1: ByRef tracking TBD
+    TypeRef tr;
+    if (ResolveTypeRef(type, tr))
+        return (tr.module->type_flags[tr.type_index] & kFlagIsByRef) != 0u ? 1 : 0;
+    return 0;
 }
 
 CHAOS_IL2CPP_INT32 ChaosTypeGetIsPointer(CHAOS_IL2CPP_INTPTR type) noexcept {
-    (void)type;
-    return 0;  // Phase 1: Pointer tracking TBD
+    TypeRef tr;
+    if (ResolveTypeRef(type, tr))
+        return (tr.module->type_flags[tr.type_index] & kFlagIsPointer) != 0u ? 1 : 0;
+    return 0;
 }
 
 CHAOS_IL2CPP_INT32 ChaosTypeGetIsNested(CHAOS_IL2CPP_INTPTR type) noexcept {
@@ -109,11 +112,19 @@ CHAOS_IL2CPP_INTPTR ChaosTypeGetProperty(
 CHAOS_IL2CPP_INTPTR ChaosTypeGetFieldBindingFlags(
     CHAOS_IL2CPP_INTPTR type,
     CHAOS_IL2CPP_INTPTR name,
-    CHAOS_IL2CPP_INTPTR bindingFlags) noexcept
+    CHAOS_IL2CPP_INTPTR /*bindingFlags*/) noexcept
 {
-    // Phase 2+: implement BindingFlags filtering. For now, return all fields.
-    (void)type; (void)name; (void)bindingFlags;
-    return 0;
+    // Resolve type descriptor and find field by name.
+    auto* desc = GetTypeDescriptorFromHandle(type);
+    if (desc == nullptr || desc->fields == nullptr) return 0;
+
+    const char* field_name = DecodeAndNullTerminateString(name);
+    if (field_name == nullptr) return 0;
+
+    const auto* field = FindReflectionQueryField(desc, field_name);
+    if (field == nullptr) return 0;
+
+    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryFieldHandle(field));
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeGetMembers(CHAOS_IL2CPP_INTPTR type) noexcept {

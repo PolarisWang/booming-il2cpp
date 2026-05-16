@@ -1,0 +1,9 @@
+{
+  "BaseMethodsCount": 19,
+  "AppliedMethodsCount": 19,
+  "BloatRatio": 1,
+  "Strategy": "MethodLevel",
+  "AssemblyName": "ConvertCharSubjects",
+  "ExtraMethodsFromVTable": 0,
+  "ExtraMethodsFromTypeLevel": 0
+}

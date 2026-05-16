@@ -1,6 +1,7 @@
 // monitor.cpp — Monitor (lock) implementation
 #include "wait_handle.h"
 #include "thread_state.h"
+#include <thread>
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -31,15 +32,19 @@ bool MonitorEnter(void* monitor_target) {
 
         const int32_t owner_tid = static_cast<int32_t>((sync & ~3ull) >> kSyncThreadShift);
         if (owner_tid == tid) {
+            // Tier 1D: We already hold the lock — relaxed store is safe because
+            // only this thread writes the thin lock bits (inflation by another
+            // thread could overwrite, but that's benign: MonitorExit will see
+            // inflated bit and route to the SyncBlock correctly).
             const uint64_t recursion = (sync >> kSyncRecursionShift) + 1;
             const uint64_t desired = kSyncLockedBit | tid_bits | (recursion << kSyncRecursionShift);
-            if (AtomicCAS(sync_ptr, sync, desired, __ATOMIC_RELAXED, __ATOMIC_RELAXED)) {
-                return true;
-            }
-            continue;
+            AtomicStoreRelaxed(sync_ptr, desired);
+            return true;
         }
 
-        for (uint32_t spin = 0; spin < kSyncBlockSpinMax; ++spin) {
+        // Tier 1C: Adaptive spin — 3-phase strategy.
+        // Phase 1: 64 fast pauses (CHAOS_SPIN_HINT / _mm_pause / __yield).
+        for (uint32_t spin = 0; spin < 64; ++spin) {
             CHAOS_SPIN_HINT();
             sync = *sync_ptr;
             if ((sync & kSyncLockedBit) == 0) {
@@ -56,6 +61,26 @@ bool MonitorEnter(void* monitor_target) {
             }
         }
 
+        // Phase 2: 64 pauses with periodic yield (every 8 iterations).
+        for (uint32_t spin = 0; spin < 64; ++spin) {
+            CHAOS_SPIN_HINT();
+            if ((spin & 7) == 0) std::this_thread::yield();
+            sync = *sync_ptr;
+            if ((sync & kSyncLockedBit) == 0) {
+                const uint64_t desired = kSyncLockedBit | tid_bits;
+                if (AtomicCAS(sync_ptr, sync, desired, __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
+                    return true;
+                }
+                break;
+            }
+            if ((sync & kSyncInflatedBit) != 0) {
+                auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+                if (sb != nullptr) { sb->mutex.lock(); return true; }
+                return false;
+            }
+        }
+
+        // Phase 3: Inflate immediately — no more wasteful spinning.
         return InflateAndEnter(monitor_target, sync);
     }
 }
@@ -140,7 +165,7 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
         sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
     } else {
         if ((sync & kSyncLockedBit) == 0) return false;
-        sb = new SyncBlock();
+        sb = AllocateSyncBlockFromPool();
         const uint32_t stripe_idx = SyncBlockStripeIndex(monitor_target);
         auto& stripe = g_sync_block_stripes[stripe_idx];
         {

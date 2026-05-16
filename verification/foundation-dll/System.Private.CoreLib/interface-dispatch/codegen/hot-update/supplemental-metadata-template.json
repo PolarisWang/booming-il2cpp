@@ -1,0 +1,411 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ISimple",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ISimple",
+      "metadataToken": 33554435
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/IWithDefault",
+      "definitionSubjectId": "InterfaceDispatchSubjects/IWithDefault",
+      "metadataToken": 33554436
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ICalculator",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ICalculator",
+      "metadataToken": 33554437
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/IBase",
+      "definitionSubjectId": "InterfaceDispatchSubjects/IBase",
+      "metadataToken": 33554438
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/IDerived",
+      "definitionSubjectId": "InterfaceDispatchSubjects/IDerived",
+      "metadataToken": 33554439
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplSimple",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplSimple",
+      "metadataToken": 33554440
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplWithDefault",
+      "metadataToken": 33554441
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/CalcAdd",
+      "definitionSubjectId": "InterfaceDispatchSubjects/CalcAdd",
+      "metadataToken": 33554442
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/CalcMul",
+      "definitionSubjectId": "InterfaceDispatchSubjects/CalcMul",
+      "metadataToken": 33554443
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond",
+      "metadataToken": 33554444
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond2",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond2",
+      "metadataToken": 33554445
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "metadataToken": 33554446
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ISimple::GetValue:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ISimple::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ISimple",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/IWithDefault::GetValue:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/IWithDefault::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/IWithDefault",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ICalculator",
+      "metadataToken": 100663309,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ICalculator::Multiply:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ICalculator::Multiply:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ICalculator",
+      "metadataToken": 100663310,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/IBase::BaseMethod:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/IBase::BaseMethod:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/IBase",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/IDerived::DerivedMethod:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/IDerived::DerivedMethod:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/IDerived",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplSimple::GetValue:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplSimple::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ImplSimple",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplSimple::.ctor:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplSimple::.ctor:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ImplSimple",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ImplWithDefault",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/CalcAdd",
+      "metadataToken": 100663316,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/CalcAdd",
+      "metadataToken": 100663317,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/CalcAdd::.ctor:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/CalcAdd::.ctor:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/CalcAdd",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/CalcMul",
+      "metadataToken": 100663319,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/CalcMul",
+      "metadataToken": 100663320,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/CalcMul::.ctor:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/CalcMul::.ctor:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/CalcMul",
+      "metadataToken": 100663321,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond::BaseMethod:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond::BaseMethod:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ImplDiamond",
+      "metadataToken": 100663322,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond::DerivedMethod:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond::DerivedMethod:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ImplDiamond",
+      "metadataToken": 100663323,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond::.ctor:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond::.ctor:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ImplDiamond",
+      "metadataToken": 100663324,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::BaseMethod:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond2::BaseMethod:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ImplDiamond2",
+      "metadataToken": 100663325,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ImplDiamond2",
+      "metadataToken": 100663326,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::.ctor:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond2::.ctor:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ImplDiamond2",
+      "metadataToken": 100663327,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "metadataToken": 100663328,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "metadataToken": 100663329,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "metadataToken": 100663330,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "metadataToken": 100663331,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestIsCheck:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestIsCheck:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "metadataToken": 100663332,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "metadataToken": 100663333,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "metadataToken": 100663334,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "metadataToken": 100663335,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchSubjects",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "metadataToken": 100663336,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

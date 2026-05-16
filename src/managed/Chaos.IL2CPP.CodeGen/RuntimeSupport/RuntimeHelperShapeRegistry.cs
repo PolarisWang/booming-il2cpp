@@ -755,12 +755,12 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === GC operations (inline body — native fn symbol is not a real function call) ===
             registry.Register("System.GC", "Collect", [],
-                ShapeKind.InlineBody, "CHAOS_IL2CPP_FAIL",
+                ShapeKind.InlineBody, "chaos_gc_collect()",
                 Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateVoidAbiSlot(),
                 EmptyRawArgumentIndices);
 
             registry.Register("System.GC", "WaitForPendingFinalizers", [],
-                ShapeKind.InlineBody, "CHAOS_IL2CPP_FAIL",
+                ShapeKind.InlineBody, "chaos_gc_wait_for_pending_finalizers()",
                 Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateVoidAbiSlot(),
                 EmptyRawArgumentIndices);
 

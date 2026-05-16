@@ -1,3 +1,8 @@
+#include <chaos/unordered_dense.h>
+#include <chaos/log.h>
+
+#include "gc_region.h"
+
 namespace chaos::il2cpp::runtime_core {
 namespace {
 
@@ -65,10 +70,25 @@ struct SyncBlock {
 
 struct SyncBlockStripe {
     CHAOS_IL2CPP_MUTEX                              table_lock;
-    CHAOS_IL2CPP_UNORDERED_MAP(void*, SyncBlock*)   entries;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(void*, SyncBlock*)   entries;
 };
 
 SyncBlockStripe g_sync_block_stripes[kSyncBlockStripes];
+
+// Tier 1E: Pre-allocated SyncBlock pool — avoids heap allocation in the
+// inflation hot path. SyncBlock contains std::recursive_mutex (non-movable),
+// so we use a fixed array and a lock-free bump counter.
+constexpr uint32_t kSyncBlockPoolSize = 128;
+SyncBlock g_sync_block_pool[kSyncBlockPoolSize];
+std::atomic<uint32_t> g_sync_block_pool_next{0};
+
+SyncBlock* AllocateSyncBlockFromPool() noexcept {
+    uint32_t idx = g_sync_block_pool_next.fetch_add(1, std::memory_order_relaxed);
+    if (idx < kSyncBlockPoolSize) {
+        return &g_sync_block_pool[idx];
+    }
+    return new SyncBlock();
+}
 
 inline uint32_t SyncBlockStripeIndex(void* obj) noexcept {
     return (reinterpret_cast<uintptr_t>(obj) >> 3) % kSyncBlockStripes;
@@ -95,7 +115,7 @@ static bool InflateAndEnter(void* obj, uint64_t current_sync) noexcept {
     }
     }
 
-    auto* sb = new SyncBlock();
+    auto* sb = AllocateSyncBlockFromPool();
     stripe.entries[obj] = sb;
 
     const uint64_t inflated_val = kSyncInflatedBit | reinterpret_cast<uint64_t>(sb);
@@ -113,4 +133,35 @@ bool IsLikelyMetadataTokenHandle(MethodInfoHandle method) {
 }
 
 }  // anonymous namespace
+
+// ======================================================================
+// DrainSyncBlocksForDomain — remove SyncBlock stripe entries for domain
+// ======================================================================
+void DrainSyncBlocksForDomain(CHAOS_IL2CPP_UINT32 domain_id) noexcept {
+    uint32_t removed = 0;
+    RegionManager& mgr = RegionManager::Instance();
+
+    for (uint32_t si = 0; si < kSyncBlockStripes; si++) {
+        auto& stripe = g_sync_block_stripes[si];
+        CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(stripe.table_lock);
+
+        auto it = stripe.entries.begin();
+        while (it != stripe.entries.end()) {
+            void* obj = it->first;
+            // Check if the object is in the domain being unloaded.
+            if (obj != nullptr && mgr.IsInDomain(domain_id, obj)) {
+                it = stripe.entries.erase(it);
+                removed++;
+            } else {
+                ++it;
+            }
+        }
+    }
+
+    if (removed > 0) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("SyncBlock", "drain_domain id={0} removed={1}",
+            domain_id, removed);
+    }
+}
+
 }  // namespace chaos::il2cpp::runtime_core

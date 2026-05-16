@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <memory>
 #include <mutex>
-#include <unordered_map>
+#include <chaos/unordered_dense.h>
 
 namespace chaos::il2cpp::common {
 
@@ -21,7 +21,7 @@ inline MonitorRuntimeEntry& require_monitor_runtime_entry(CHAOS_IL2CPP_INTPTR ob
         CHAOS_IL2CPP_ABORT();
     }
     static CHAOS_IL2CPP_MUTEX table_mutex;
-    static std::unordered_map<CHAOS_IL2CPP_INTPTR, std::unique_ptr<MonitorRuntimeEntry>> table;
+    static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_INTPTR, std::unique_ptr<MonitorRuntimeEntry>) table;
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(table_mutex);
     auto& entry = table[object_value];
     if (!entry)

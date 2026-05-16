@@ -17,11 +17,11 @@
 #include "support.h"
 #include "vtable_registry.h"
 
-#include <gc.h>
+#include "gc/gc_old_gen.h"
 
 #include <cstdint>
 #include <cstring>
-#include <unordered_map>
+#include <chaos/unordered_dense.h>
 
 // Declared in native-aot.generated.cpp — must be at file scope (MSVC rejects
 // extern "C" inside function body: C2598).
@@ -76,7 +76,7 @@ BootstrapState g_bootstrap_state = {};/// Invoker pointer table built at Registe
 /// Keyed by method_token, used by MethodInvoke to dispatch calls correctly
 /// regardless of whether the caller passes an opaque token, a reflection-query
 /// handle, or a raw function pointer.
-static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, void*) g_invoker_table;
+static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT32, void*) g_invoker_table;
 
 template <typename THandle>
 THandle MakeOpaqueHandle(CHAOS_IL2CPP_UINT32 token) {
@@ -572,11 +572,11 @@ static DelegateInstance* AllocateDelegateNode(
     void* method_pointer,
     void* target_instance,
     DelegateInstance* next) {
-    // GC_MALLOC is required here (not domain heap) because DelegateInstance
+    // Use CRAG old-gen (GC-scanned) allocation since DelegateInstance
     // nodes contain managed object pointers (target_instance, next) that
-    // BDWGC must scan for reachability.  Domain heaps are raw allocators
-    // with no GC tracing.
-    auto* node = static_cast<DelegateInstance*>(GC_MALLOC(sizeof(DelegateInstance)));
+    // must be traced by the GC for reachability.
+    auto* node = static_cast<DelegateInstance*>(
+        chaos::il2cpp::runtime_core::g_old_gen.Allocate(sizeof(DelegateInstance), true));
     node->method_token = method_token;
     node->method_pointer = method_pointer;
     node->target_instance = target_instance;

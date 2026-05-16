@@ -2,11 +2,14 @@
 
 #include "interpreter_entry.h"
 #include <interpreter_vm.h>       // interpreter::IRMethod (for delete in DestroyPatchContext)
+#include "memory_domain.h"        // DomainCurrentAllocateTagged / DomainFreeTagged
 #include "module_registry.h"
 #include "reflection_query_model.h"
 #include "instantiation_engine.h"  // CachedCallInfo (for delete[] in DestroyPatchContext)
 
 #include "bootstrap/bootstrap.h"
+
+#include <atomic>
 
 #include <cstdio>
 #include <cstring>
@@ -20,6 +23,11 @@
 #endif
 
 namespace chaos::il2cpp::runtime_core {
+
+// Global patch generation counter. Incremented on each ApplyPatchFromMemory.
+// Used by CallVirt MIC to invalidate stale cache entries. Relaxed ordering
+// since the counter is compared but not used for synchronizing other state.
+std::atomic<uint64_t> g_patch_generation{0};
 
 // ── PatchMetadataCache implementation ────────────────────────────────────
 
@@ -308,12 +316,15 @@ uint32_t PatchMetadataCache::ResolveToken(uint32_t token) const noexcept {
 
 static PatchContext* CreatePatchContext(const PatchDataHeader* header, size_t total_size) {
     // Allocate PatchContext + PatchMetadataCache + PatchMethod array in one block.
+    // Use domain-tagged allocation so the block is bulk-freed when the
+    // assembly domain is destroyed (R10: MD/IL metadata → MemoryDomain).
     uint32_t method_count = header->method_def_count;
     size_t ctx_size = sizeof(PatchContext);
     size_t cache_size = sizeof(PatchMetadataCache);
     size_t methods_size = sizeof(PatchMethod) * method_count;
 
-    auto* block = static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(ctx_size + cache_size + methods_size));
+    auto* block = static_cast<uint8_t*>(
+        memory_domain::DomainCurrentAllocateTagged(ctx_size + cache_size + methods_size));
     if (block == nullptr) return nullptr;
 
     auto* ctx = new (block) PatchContext();
@@ -373,8 +384,9 @@ static void DestroyPatchContext(PatchContext* ctx) {
         ctx->methods[i].~PatchMethod();
     }
 
-    // Free the block (all allocations are in one contiguous block).
-    CHAOS_IL2CPP_FREE(ctx);
+    // Free the block (domain-tagged allocation — DomainFreeTagged routes
+    // to the originating heap or std::free for fallback allocations).
+    memory_domain::DomainFreeTagged(ctx);
 }
 
 // ── Public API ──────────────────────────────────────────────────────────
@@ -510,6 +522,9 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         }
     }
     HOTPATCH_DIAG("DIAG[APFM]: returning ctx method_count=%u\n", static_cast<unsigned>(ctx->method_count));
+
+    // Bump patch generation for CallVirt MIC cache invalidation.
+    g_patch_generation.fetch_add(1, std::memory_order_relaxed);
 
     return ctx;
 }

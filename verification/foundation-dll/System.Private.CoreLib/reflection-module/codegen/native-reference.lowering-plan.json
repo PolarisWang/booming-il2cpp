@@ -1,0 +1,14 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceLoweringPlan",
+  "planKind": "generic-analysis-only",
+  "assemblyName": "ReflectionModuleSubjects",
+  "entrySubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Run:System.Void(System.Int32)",
+  "includeHeader": "codegen_bridge.h",
+  "nativeEntryFunctionName": "RunNativeReference",
+  "entrySymbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Run",
+  "referenceTypeToken": "0u",
+  "capturedFieldToken": "0u",
+  "entryMethodToken": "0u",
+  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)"
+}

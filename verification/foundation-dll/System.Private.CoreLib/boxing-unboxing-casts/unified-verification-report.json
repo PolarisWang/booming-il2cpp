@@ -1,0 +1,122 @@
+{
+  "family": "boxing-unboxing-casts",
+  "assembly": "System.Private.CoreLib",
+  "mode": "standard",
+  "timestamp": "2026-05-14T19:52:28",
+  "duration_ms": 12597,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "11 methods, 0 custom entries",
+      "details": {
+        "methodCount": 11,
+        "customMethodCount": 0,
+        "hasCustomEntryFile": false,
+        "customMethods": []
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 11,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\boxing-unboxing-casts\\managed\\subjects\\build-output\\BoxingUnboxingCastsSubjects.dll",
+        "bloatReports": [
+          {
+            "BaseMethodsCount": 12,
+            "AppliedMethodsCount": 12,
+            "BloatRatio": 1,
+            "Strategy": "MethodLevel",
+            "AssemblyName": "BoxingUnboxingCastsSubjects",
+            "ExtraMethodsFromVTable": 0,
+            "ExtraMethodsFromTypeLevel": 0
+          }
+        ]
+      },
+      "errors": [],
+      "duration_ms": 10365
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (12/12)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 12,
+          "total": 12
+        }
+      },
+      "errors": [],
+      "duration_ms": 286
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=ALIGNED",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 7,
+        "principleStatus": "ALIGNED",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 87
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/11 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 11,
+        "invalidCount": 11,
+        "benchmarkQuality": "matchedCount=0/11 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 1721
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "failed",
+      "summary": "HotUpdate returned 0 total — no verification performed",
+      "details": {
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "totalMethods": 0,
+        "realMethods": 0,
+        "stubMethods": 1
+      },
+      "errors": [],
+      "duration_ms": 13
+    },
+    "post_hotupdate_benchmark": {
+      "stage": "post_hotupdate_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (interpreter path — expected)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 122
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 36.36,
+    "overall": 68.18
+  },
+  "regression": {}
+}

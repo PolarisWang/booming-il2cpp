@@ -14,7 +14,7 @@ namespace chaos::il2cpp::runtime_core {
 // ── Constants ──────────────────────────────────────────────────────────
 
 constexpr uint32_t kModuleIdBits = 32;
-constexpr uint32_t kMaxModules = 1024;
+constexpr uint32_t kMaxModules = 4096;
 constexpr uint32_t kInvalidModuleId = 0xFFFFFFFFu;
 
 // ── Type flag bit definitions ──────────────────────────────────────────
@@ -30,6 +30,8 @@ constexpr uint32_t kFlagIsGenericTypeDef     = 1u << 7;
 constexpr uint32_t kFlagIsConstructedGeneric = 1u << 8;
 constexpr uint32_t kFlagIsNested             = 1u << 9;
 constexpr uint32_t kFlagIsPublic             = 1u << 10;
+constexpr uint32_t kFlagIsByRef              = 1u << 11;
+constexpr uint32_t kFlagIsPointer            = 1u << 12;
 
 // ── ModuleDescriptor ───────────────────────────────────────────────────
 

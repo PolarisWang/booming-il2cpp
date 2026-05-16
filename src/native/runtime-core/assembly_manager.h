@@ -103,8 +103,8 @@ public:
     /// Number of loaded assemblies.
     uint32_t LoadedCount() const noexcept { return loaded_count_; }
 
-    /// Maximum number of concurrent assemblies.
-    static constexpr uint32_t kMaxAssemblies = 256;
+    /// Maximum number of concurrent assemblies (soft limit, auto-grows).
+    static constexpr uint32_t kInitialAssemblies = 256;
 
     /// Next ALC ID (monotonically increasing, 0 = SharedContext reserved).
     static uint32_t NextAlcId() noexcept {
@@ -119,7 +119,7 @@ private:
     AssemblyManager(const AssemblyManager&) = delete;
     AssemblyManager& operator=(const AssemblyManager&) = delete;
 
-    AssemblyLoadContext assemblies_[kMaxAssemblies]{};
+    std::vector<AssemblyLoadContext> assemblies_{kInitialAssemblies};
     uint32_t loaded_count_ = 0;
 };
 

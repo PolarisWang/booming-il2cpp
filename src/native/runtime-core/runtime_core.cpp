@@ -12,7 +12,11 @@
 
 #include "memory_domain.h"
 #include "gc_region.h"
+#include "gc_old_gen.h"
+#include "gc_loh.h"
+#include "gc_young_collector.h"
 #include "gc_stats.h"
+#include "gc_events.h"
 #include "reflection_query_model.h"
 #include "generic_context.h"
 #include "vtable_registry.h"

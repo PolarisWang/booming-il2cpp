@@ -1,0 +1,198 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Run:System.Void(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "subjectKind": "field",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Interlocked::MemoryBarrier:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Volatile::Read:System.Int32(System.Int32\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Monitor::Enter:System.Void(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Monitor::Exit:System.Void(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Monitor::Pulse:System.Void(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Monitor::PulseAll:System.Void(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Monitor::Wait:System.Boolean(System.Object,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Interlocked::Increment:System.Int32(System.Int32\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Interlocked::Decrement:System.Int32(System.Int32\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Interlocked::Exchange:System.Int32(System.Int32\u0026,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Interlocked::CompareExchange:System.Int32(System.Int32\u0026,System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/Interlocked::Add:System.Int32(System.Int32\u0026,System.Int32)",
+      "reason": "external-call"
+    }
+  ]
+}

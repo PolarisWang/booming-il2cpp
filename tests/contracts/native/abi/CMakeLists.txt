@@ -20,7 +20,6 @@ target_include_directories(
 add_executable(chaos_method_table_abi_test
     method_table_abi_test.cpp)
 target_compile_features(chaos_method_table_abi_test PRIVATE cxx_std_17)
-target_compile_definitions(chaos_method_table_abi_test PRIVATE CHAOS_RUNTIME_ABI_STATIC)
 target_include_directories(
     chaos_method_table_abi_test
     PRIVATE

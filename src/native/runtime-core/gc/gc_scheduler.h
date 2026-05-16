@@ -47,7 +47,8 @@ inline double BitsToDouble(uint64_t bits) noexcept {
 enum class GcCollectionKind {
     NONE = 0,
     YOUNG = 1,
-    FULL = 2,
+    FULL = 2,       // STW full GC (memory pressure / emergency)
+    FULL_BGC = 3,   // Background concurrent mark (low-latency)
 };
 
 class GcScheduler {
@@ -82,6 +83,9 @@ public:
     // ── Collection decision ──────────────────────────────────────
 
     /// Decide what kind of collection is needed right now.
+    /// Returns FULL_BGC when the allocation threshold is exceeded and
+    /// neither a young GC nor a forced full GC is more urgent.
+    /// Returns FULL when BGC is already busy or memory pressure is high.
     GcCollectionKind DecideCollection() const noexcept;
 
     /// Check whether a full GC has been requested by any thread.

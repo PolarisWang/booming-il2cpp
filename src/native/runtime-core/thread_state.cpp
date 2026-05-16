@@ -11,6 +11,8 @@
 #include <new>
 #include <cstdlib>
 #include <thread>
+#include <cerrno>
+#include <cstring>
 
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
@@ -49,8 +51,23 @@ int32_t OsThreadPriorityFromManaged(ManagedThreadPriority pri) noexcept {
         default:                                 return THREAD_PRIORITY_NORMAL;
     }
 #else
-    (void)pri;
-    return 0;
+    // POSIX: map managed priority to nice value (-20..19 for SCHED_OTHER).
+    // SCHED_OTHER only allows nice-based prioritization within the same
+    // scheduling policy; root privileges are NOT required for nice values.
+    int nice_value;
+    switch (pri) {
+        case ManagedThreadPriority::Lowest:      nice_value = 19;  break;
+        case ManagedThreadPriority::BelowNormal: nice_value = 10;  break;
+        case ManagedThreadPriority::AboveNormal: nice_value = -10; break;
+        case ManagedThreadPriority::Highest:     nice_value = -20; break;
+        case ManagedThreadPriority::Normal:
+        default:                                 nice_value = 0;   break;
+    }
+    errno = 0;
+    if (setpriority(PRIO_PROCESS, 0, nice_value) != 0 && errno != 0) {
+        CHAOS_IL2CPP_LOG_WARN("Thread", "setpriority failed: {0}", std::strerror(errno));
+    }
+    return nice_value;
 #endif
 }
 

@@ -3,13 +3,13 @@
 // cross-module dispatch targets.
 static const CHAOS_IL2CPP_UINT32 s_method_table_init = []()
 {
-{% for entry in entries %}
+{{~ for entry in entries ~}}
     ::chaos::il2cpp::method_table::WriteMethodTable(
         {{ entry.index }}, reinterpret_cast<void*>({{ entry.native_symbol }}), 1u);
-{% if entry.has_manifest_index %}
+{{~ if entry.has_manifest_index ~}}
     ::chaos::il2cpp::method_table::SetMethodOrigin(
         {{ entry.index }}, s_native_aot_module_id, {{ entry.manifest_index }}u);
-{% endif %}
-{% endfor %}
+{{~ end ~}}
+{{~ end ~}}
     return 0u;
 }();

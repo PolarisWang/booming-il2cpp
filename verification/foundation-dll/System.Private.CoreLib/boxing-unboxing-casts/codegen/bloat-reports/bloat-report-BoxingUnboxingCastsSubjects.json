@@ -1,0 +1,9 @@
+{
+  "BaseMethodsCount": 12,
+  "AppliedMethodsCount": 12,
+  "BloatRatio": 1,
+  "Strategy": "MethodLevel",
+  "AssemblyName": "BoxingUnboxingCastsSubjects",
+  "ExtraMethodsFromVTable": 0,
+  "ExtraMethodsFromTypeLevel": 0
+}

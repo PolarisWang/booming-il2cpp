@@ -1,18 +1,18 @@
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[{{ methods_count }}])() = {
-{% for method in methods %}
+{{~ for method in methods ~}}
     reinterpret_cast<void(*)()>(&{{ method.native_symbol }}),
-{% endfor %}
+{{~ end ~}}
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
 static void (*kBenchmarkWrappers[{{ methods_count }}])() = {
-{% for method in methods %}
-    []() { {% if method.param_count == 0 %}kAotMethods[{{ method.index }}]();{% else %}reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR{% for i in method.extra_params %}, CHAOS_IL2CPP_INTPTR{% endfor %})>(kAotMethods[{{ method.index }}])({% for param in method.params %}{% if param.is_string and default_string_id != 0 %}chaos_make_string_id_value({{ default_string_id }}ULL){% else %}static_cast<CHAOS_IL2CPP_INTPTR>(0){% endif %}{% if !forlast %}, {% endif %}{% endfor %});{% endif %} },
-{% endfor %}
+{{~ for method in methods ~}}
+    []() { {{~ if method.param_count == 0 ~}}kAotMethods[{{ method.index }}]();{{~ else ~}}reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR{{~ for i in method.extra_params ~}}, CHAOS_IL2CPP_INTPTR{{~ end ~}})>(kAotMethods[{{ method.index }}])({{~ for param in method.params ~}}{{~ if param.is_string && default_string_id != 0 ~}}chaos_make_string_id_value({{ default_string_id }}ULL){{~ else ~}}static_cast<CHAOS_IL2CPP_INTPTR>(0){{~ end ~}}{{~ if !for.last ~}}, {{~ end ~}}{{~ end ~}});{{~ end ~}} },
+{{~ end ~}}
 };
 
 // Single-method dispatch via hotpatch dispatch table.

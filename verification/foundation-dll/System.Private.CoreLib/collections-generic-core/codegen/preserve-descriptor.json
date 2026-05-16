@@ -1,0 +1,120 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Run:System.Void(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

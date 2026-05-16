@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [],
+  "registeredMethods": [],
+  "reservedSlots": {
+    "typeCount": 0,
+    "methodCount": 0,
+    "genericInstantiationCount": 0
+  }
+}

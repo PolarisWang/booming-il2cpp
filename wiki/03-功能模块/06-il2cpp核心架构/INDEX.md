@@ -13,6 +13,8 @@
 | `03-架构约束` | 翻译层硬性约束、禁止模式、C++ 约定、合约边界 | [`03-架构约束/INDEX.md`](./03-%E6%9E%B6%E6%9E%84%E7%BA%A6%E6%9D%9F/INDEX.md) |
 | `04-历史决策` | 设计讨论中提炼的最终决策结论 | [`04-历史决策/INDEX.md`](./04-%E5%8E%86%E5%8F%B2%E5%86%B3%E7%AD%96/INDEX.md) |
 | `05-patchdata工具链` | .patchdata 二进制格式定义、CLI 命令、调试工作流 | [`05-patchdata工具链.md`](./05-patchdata%E5%B7%A5%E5%85%B7%E9%93%BE.md) |
+| `20-threading-optimizations` | Threading 子系统深度优化（ThreadPool 工作窃取、Hill Climbing、WaitHandle O(1)、Monitor 自适应自旋、SyncBlock 池、iOS 热更适配） | [`20-threading-optimizations.md`](./20-threading-optimizations.md) |
+| `21-interpreter-optimizations` | Interpreter 子系统深度优化（FastFrame 池深度、每指令检查开销降级、Handle_Call 拆分、CallVirt Monomorphic Inline Cache） | [`21-interpreter-optimizations.md`](./21-interpreter-optimizations.md) |
 
 ## 本层规则
 

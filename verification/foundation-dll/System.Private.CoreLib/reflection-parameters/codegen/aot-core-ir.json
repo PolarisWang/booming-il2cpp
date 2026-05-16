@@ -1,0 +1,2386 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.run",
+      "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Run:System.Void(System.Int32)",
+      "signature": "System.Void ReflectionParametersSubjects::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ReflectionParametersSubjects",
+        "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+        "definitionSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Run:System.Void(System.Int32)",
+        "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Run:System.Void(System.Int32)",
+        "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.run",
+        "signature": "System.Void ReflectionParametersSubjects::Run(System.Int32)"
+      },
+      "nativeSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Run",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            53,
+            61,
+            69,
+            77,
+            85,
+            93,
+            101,
+            109,
+            117,
+            125
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 51,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "callee": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_0:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_0:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_0:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 59,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 61,
+          "resultType": "System.Void",
+          "callee": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_1:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_1:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_1:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 67,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 69,
+          "resultType": "System.Void",
+          "callee": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_2:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_2:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_2:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 75,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 77,
+          "resultType": "System.Void",
+          "callee": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_3:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_3:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_3:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 85,
+          "resultType": "System.Void",
+          "callee": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_4:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_4:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_4:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 91,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 93,
+          "resultType": "System.Void",
+          "callee": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_5:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_5:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_5:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 99,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 101,
+          "resultType": "System.Void",
+          "callee": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_6:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_6:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_6:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 107,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 109,
+          "resultType": "System.Void",
+          "callee": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_7:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_7:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_7:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 117,
+          "resultType": "System.Void",
+          "callee": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_8:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_8:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_8:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 125,
+          "resultType": "System.Void",
+          "callee": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_9:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_9:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_9:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 131,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 133
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-0",
+      "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_0:System.Void()",
+      "signature": "System.Void ReflectionParametersSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "ReflectionParametersSubjects",
+        "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+        "definitionSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_0:System.Void()",
+        "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_0:System.Void()",
+        "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-0",
+        "signature": "System.Void ReflectionParametersSubjects::Subject_0()"
+      },
+      "nativeSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 2,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Name:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Name:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Name:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 12,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 13,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Name:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Name:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Name:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 29
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 38,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 38
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-1",
+      "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_1:System.Void()",
+      "signature": "System.Void ReflectionParametersSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "ReflectionParametersSubjects",
+        "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+        "definitionSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_1:System.Void()",
+        "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_1:System.Void()",
+        "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-1",
+        "signature": "System.Void ReflectionParametersSubjects::Subject_1()"
+      },
+      "nativeSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 2,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_ParameterType:System.Type()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_ParameterType:System.Type()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_ParameterType:System.Type()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 12,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 13,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_ParameterType:System.Type()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_ParameterType:System.Type()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_ParameterType:System.Type()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 29
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 38,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 38
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-2",
+      "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_2:System.Void()",
+      "signature": "System.Void ReflectionParametersSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "ReflectionParametersSubjects",
+        "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+        "definitionSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_2:System.Void()",
+        "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_2:System.Void()",
+        "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-2",
+        "signature": "System.Void ReflectionParametersSubjects::Subject_2()"
+      },
+      "nativeSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_DefaultValue:System.Object()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_DefaultValue:System.Object()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_DefaultValue:System.Object()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 12,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 13,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_DefaultValue:System.Object()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_DefaultValue:System.Object()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_DefaultValue:System.Object()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 29
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 38,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 38
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-3",
+      "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_3:System.Void()",
+      "signature": "System.Void ReflectionParametersSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "ReflectionParametersSubjects",
+        "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+        "definitionSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_3:System.Void()",
+        "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_3:System.Void()",
+        "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-3",
+        "signature": "System.Void ReflectionParametersSubjects::Subject_3()"
+      },
+      "nativeSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_RawDefaultValue:System.Object()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_RawDefaultValue:System.Object()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_RawDefaultValue:System.Object()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 12,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 13,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_RawDefaultValue:System.Object()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_RawDefaultValue:System.Object()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_RawDefaultValue:System.Object()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 29
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 38,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 38
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-4",
+      "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_4:System.Void()",
+      "signature": "System.Void ReflectionParametersSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "ReflectionParametersSubjects",
+        "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+        "definitionSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_4:System.Void()",
+        "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_4:System.Void()",
+        "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-4",
+        "signature": "System.Void ReflectionParametersSubjects::Subject_4()"
+      },
+      "nativeSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 2,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_HasDefaultValue:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_HasDefaultValue:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_HasDefaultValue:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 12,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 9,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 13,
+          "ilOffset": 10,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 12,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 13,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 14,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_HasDefaultValue:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_HasDefaultValue:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_HasDefaultValue:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 24,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 21,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 25,
+          "ilOffset": 22,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 24,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 27,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 28,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 31
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 40,
+          "ilOffset": 32,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 34,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+          "ilOffset": 35,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 40
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-5",
+      "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_5:System.Void()",
+      "signature": "System.Void ReflectionParametersSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "ReflectionParametersSubjects",
+        "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+        "definitionSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_5:System.Void()",
+        "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_5:System.Void()",
+        "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-5",
+        "signature": "System.Void ReflectionParametersSubjects::Subject_5()"
+      },
+      "nativeSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 2,
+          "resultType": "System.Reflection.ParameterAttributes",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Attributes:System.Reflection.ParameterAttributes()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Attributes:System.Reflection.ParameterAttributes()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Attributes:System.Reflection.ParameterAttributes()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 7,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 8,
+          "resultType": "System.Reflection.ParameterAttributes",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Attributes:System.Reflection.ParameterAttributes()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Attributes:System.Reflection.ParameterAttributes()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Attributes:System.Reflection.ParameterAttributes()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 13,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 16,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 28,
+          "ilOffset": 20,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 22,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 28
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-6",
+      "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_6:System.Void()",
+      "signature": "System.Void ReflectionParametersSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "ReflectionParametersSubjects",
+        "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+        "definitionSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_6:System.Void()",
+        "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_6:System.Void()",
+        "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-6",
+        "signature": "System.Void ReflectionParametersSubjects::Subject_6()"
+      },
+      "nativeSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Position:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Position:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Position:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 7,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Position:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Position:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Position:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 13,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 16,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 28,
+          "ilOffset": 20,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 22,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 28
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-7",
+      "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_7:System.Void()",
+      "signature": "System.Void ReflectionParametersSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "ReflectionParametersSubjects",
+        "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+        "definitionSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_7:System.Void()",
+        "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_7:System.Void()",
+        "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-7",
+        "signature": "System.Void ReflectionParametersSubjects::Subject_7()"
+      },
+      "nativeSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 2,
+          "resultType": "System.Type[]",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 7,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 9,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 10,
+          "resultType": "System.Type[]",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 15,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 16,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 17,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 20,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 22,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 23
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 32,
+          "ilOffset": 24,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 26,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 32
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-8",
+      "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_8:System.Void()",
+      "signature": "System.Void ReflectionParametersSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "ReflectionParametersSubjects",
+        "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+        "definitionSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_8:System.Void()",
+        "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_8:System.Void()",
+        "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-8",
+        "signature": "System.Void ReflectionParametersSubjects::Subject_8()"
+      },
+      "nativeSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 2,
+          "resultType": "System.Type[]",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 7,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 9,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 10,
+          "resultType": "System.Type[]",
+          "callee": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 15,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 16,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 17,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 20,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 22,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 23
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 32,
+          "ilOffset": 24,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 26,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 32
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-9",
+      "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_9:System.Void()",
+      "signature": "System.Void ReflectionParametersSubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "ReflectionParametersSubjects",
+        "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+        "definitionSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_9:System.Void()",
+        "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_9:System.Void()",
+        "methodId": "reflection-parameters-subjects.reflection-parameters-subjects.subject-9",
+        "signature": "System.Void ReflectionParametersSubjects::Subject_9()"
+      },
+      "nativeSymbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 2,
+          "resultType": "System.Reflection.ParameterInfo[]",
+          "callee": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 7,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 9,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 10,
+          "resultType": "System.Reflection.ParameterInfo[]",
+          "callee": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 15,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 16,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 17,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 20,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 22,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 23
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 32,
+          "ilOffset": 24,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 26,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ReflectionParametersSubjects",
+            "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 32
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    }
+  ]
+}

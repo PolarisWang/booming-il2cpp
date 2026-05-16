@@ -8,6 +8,43 @@ namespace Chaos.IL2CPP.CodeGen.SnapshotTests;
 /// </summary>
 public sealed class NegationTests : SnapshotTestBase
 {
+    /// <summary>
+    /// Fixture names that are negative emitter tests.
+    /// These are excluded from SnapshotTests.EmittedCodeMatchesBaseline.
+    /// </summary>
+    internal static readonly HashSet<string> NegativeFixtureNames = new()
+    {
+        "73-negative-empty-assembly",
+        "74-negative-missing-artifact",
+        "75-negative-invalid-plan-kind",
+    };
+
+    [Fact]
+    public void Emitter_EmptyAssembly_ThrowsEntryMethodMissing()
+    {
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            AssertSnapshotMatches("73-negative-empty-assembly"));
+        Assert.Contains("entry method", ex.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("missing", ex.Message, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void Emitter_MissingMetadataRegistration_ThrowsLoadError()
+    {
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            AssertSnapshotMatches("74-negative-missing-artifact"));
+        Assert.Contains("load", ex.Message, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void Emitter_InvalidPlanKind_ThrowsNotSupported()
+    {
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            AssertSnapshotMatches("75-negative-invalid-plan-kind"));
+        Assert.Contains("plan kind", ex.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("invalid-plan-type", ex.Message, StringComparison.OrdinalIgnoreCase);
+    }
+
     [Fact]
     public void SnapshotTest_Fails_WhenBaselineDiffers()
     {

@@ -452,6 +452,11 @@ public sealed partial class NativeAotLoweringPlanner
                 "\"runtime_instantiation.h\"",
                 "\"reflection_query_model.h\"",
                 "\"load_store_chaos_bridge.h\"",
+                // Interpreter dispatch for hotpatch-kept-native & flat-goto fallback
+                "\"interpreter_entry.h\"",
+                // Common generated runtime prelude (shared header, ~200 lines
+                // of helper functions previously emitted inline in every file).
+                "<ChaosGeneratedRuntimePrelude.h>",
                 // Native bridge headers (e.g., "convert.h") from external runtime
                 // helpers that map to direct native function calls.
                 ..externalRuntimeHelpers

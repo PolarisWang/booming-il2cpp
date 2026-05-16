@@ -1,0 +1,158 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "name": "DelegateCoreInvocationSubjects",
+      "displayName": "DelegateCoreInvocationSubjects",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Run:System.Void(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 14,
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Run:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

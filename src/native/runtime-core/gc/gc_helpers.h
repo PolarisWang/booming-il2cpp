@@ -63,6 +63,15 @@ inline void GcEndStubbornChange(const void* /*obj*/) noexcept {
 /// Returns nullptr on OOM or null input.
 char* DomainStrDup(const char* src);
 
+// ── GC collection API (extern "C" for codegen inline body) ─────────
+
+/// Trigger a full blocking GC collection from managed code (System.GC.Collect()).
+/// Runs young collection + full old-gen mark-sweep + pending finalizers.
+extern "C" void chaos_gc_collect() noexcept;
+
+/// Wait for pending finalizers (System.GC.WaitForPendingFinalizers()).
+extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_HELPERS_H_

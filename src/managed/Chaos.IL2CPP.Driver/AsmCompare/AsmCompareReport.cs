@@ -58,9 +58,9 @@ internal static class AsmCompareReport
         return sb.ToString();
     }
 
-    // ── JSON output ──────────────────────────────────────────────────────────
+    // ── JSON entry for batch mode (returns dictionary, caller serializes) ──
 
-    public static string GenerateJson(
+    public static Dictionary<string, object?> GenerateJsonEntry(
         string assemblyPath,
         string methodName,
         JitAsmCapture.JitCaptureResult jitResult,
@@ -75,6 +75,7 @@ internal static class AsmCompareReport
         data["method"] = methodName;
         data["assembly"] = assemblyPath;
         data["capturedAt"] = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
+        data["status"] = jitResult.Success ? "ok" : "failed";
 
         // HEADER
         data["jit"] = new Dictionary<string, object?>
@@ -198,7 +199,22 @@ internal static class AsmCompareReport
                 data["analysis"] = findings;
         }
 
-        return JsonSerializer.Serialize(data, JsonOptions);
+        return data;
+    }
+
+    // ── JSON output (single method) ──────────────────────────────────────────
+
+    public static string GenerateJson(
+        string assemblyPath,
+        string methodName,
+        JitAsmCapture.JitCaptureResult jitResult,
+        AotCoreIrMethodArtifact? aotMethod,
+        string cppSource,
+        NativeCompile.NativeCompileResult? nativeResult,
+        AsmCompareConfig config)
+    {
+        var entry = GenerateJsonEntry(assemblyPath, methodName, jitResult, aotMethod, cppSource, nativeResult, config);
+        return JsonSerializer.Serialize(entry, JsonOptions);
     }
 
     // ── Section: HEADER ─────────────────────────────────────────────────────

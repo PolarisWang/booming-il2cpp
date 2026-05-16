@@ -1,0 +1,9 @@
+{
+  "BaseMethodsCount": 17,
+  "AppliedMethodsCount": 17,
+  "BloatRatio": 1,
+  "Strategy": "MethodLevel",
+  "AssemblyName": "CollectionsGenericCoreSubjects",
+  "ExtraMethodsFromVTable": 0,
+  "ExtraMethodsFromTypeLevel": 0
+}

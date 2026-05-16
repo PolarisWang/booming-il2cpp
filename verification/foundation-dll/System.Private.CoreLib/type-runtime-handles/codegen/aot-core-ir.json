@@ -1,0 +1,3517 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.run",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Run:System.Void(System.Int32)",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Run:System.Void(System.Int32)",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Run:System.Void(System.Int32)",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.run",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Run(System.Int32)"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Run",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            65,
+            73,
+            81,
+            89,
+            97,
+            105,
+            113,
+            121,
+            129,
+            137,
+            145,
+            153,
+            161
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 63,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 65,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 71,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 73,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_1:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_1:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_1:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 79,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 81,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_2:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_2:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_2:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 87,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 89,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_3:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_3:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_3:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 95,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 97,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_4:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_4:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_4:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 103,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 105,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_5:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_5:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_5:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 111,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 113,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_6:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_6:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_6:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 119,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 121,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_7:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_7:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_7:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 127,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 129,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_8:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_8:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_8:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 135,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 137,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_9:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_9:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_9:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 143,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 145,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_10:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_10:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_10:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 151,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 153,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_11:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_11:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_11:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 159,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 161,
+          "resultType": "System.Void",
+          "callee": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_12:System.Void()",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "method",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_12:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_12:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 169,
+          "ilOffset": 167,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 169
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-0",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-0",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_0()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-1",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_1:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_1:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_1:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-1",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_1()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-2",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_2:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_2:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_2:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-2",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_2()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-3",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_3:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_3:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_3:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-3",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_3()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 1,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.RuntimeTypeHandle",
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 9
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 10,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 20,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.RuntimeTypeHandle",
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 28
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 29,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 34,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 39,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 41,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 42,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 44,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 45
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 54,
+          "ilOffset": 46,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 48,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+          "ilOffset": 49,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "field",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 54
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-4",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_4:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_4:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_4:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-4",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_4()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 21,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 22,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 22,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 27,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 32,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 42,
+          "ilOffset": 37,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 39,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 43,
+          "ilOffset": 40,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 42,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 43,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 45,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 46,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 48,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 49
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 58,
+          "ilOffset": 50,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 52,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "field",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 58
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-5",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_5:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_5:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_5:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-5",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_5()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 21,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 22,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 22,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 27,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 32,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 42,
+          "ilOffset": 37,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 39,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 43,
+          "ilOffset": 40,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 42,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 43,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 45,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 46,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 48,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 49
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 58,
+          "ilOffset": 50,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 52,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "field",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 58
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-6",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_6:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_6:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_6:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-6",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_6()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 21,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 22,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 22,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 27,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 32,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 42,
+          "ilOffset": 37,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 39,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 43,
+          "ilOffset": 40,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 42,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 43,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 45,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 46,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 48,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 49
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 58,
+          "ilOffset": 50,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 52,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "field",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 58
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-7",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_7:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_7:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_7:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-7",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_7()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.RuntimeTypeHandle",
+          "callee": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 17,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.RuntimeTypeHandle::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 24,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 29,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 34,
+          "resultType": "System.RuntimeTypeHandle",
+          "callee": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 39,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 40,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 42,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.RuntimeTypeHandle::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 47,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 49,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 50,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 52,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 53
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 62,
+          "ilOffset": 54,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 56,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+          "ilOffset": 57,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "field",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 62
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-8",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_8:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_8:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_8:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-8",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_8()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Type::get_FullName:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_FullName:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_FullName:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 21,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 26,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 31,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Type::get_FullName:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_FullName:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_FullName:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 36,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 41,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 43,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 44,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 46,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 47
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 56,
+          "ilOffset": 48,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 50,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+          "ilOffset": 51,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "field",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 56
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-9",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_9:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_9:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_9:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-9",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_9()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 21,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 26,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 31,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 36,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 41,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 43,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 44,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 46,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 47
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 56,
+          "ilOffset": 48,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 50,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+          "ilOffset": 51,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "field",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 56
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-10",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_10:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_10()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_10:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_10:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-10",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_10()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_10",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 21,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 26,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 31,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 36,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 41,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 43,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 44,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 46,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 47
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 56,
+          "ilOffset": 48,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 50,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+          "ilOffset": 51,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "field",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 56
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-11",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_11:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_11()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_11:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_11:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-11",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_11()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_11",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Reflection.MethodInfo[]",
+          "callee": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 16,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 17,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 18,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 23,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 28,
+          "resultType": "System.Reflection.MethodInfo[]",
+          "callee": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 33,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 34,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 35,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 37,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 38,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 40,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 41
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 50,
+          "ilOffset": 42,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 44,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "field",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 50
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-12",
+      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_12:System.Void()",
+      "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_12()",
+      "identity": {
+        "assemblyName": "TypeRuntimeHandlesSubjects",
+        "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+        "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_12:System.Void()",
+        "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_12:System.Void()",
+        "methodId": "type-runtime-handles-subjects.type-runtime-handles-subjects.subject-12",
+        "signature": "System.Void TypeRuntimeHandlesSubjects::Subject_12()"
+      },
+      "nativeSymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_12",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Reflection.FieldInfo[]",
+          "callee": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 16,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 17,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 18,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 23,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 28,
+          "resultType": "System.Reflection.FieldInfo[]",
+          "callee": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 33,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 34,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 35,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 37,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 38,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 40,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 41
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 50,
+          "ilOffset": 42,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 44,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectKind": "field",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "TypeRuntimeHandlesSubjects",
+            "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 50
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    }
+  ]
+}

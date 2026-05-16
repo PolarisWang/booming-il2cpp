@@ -170,8 +170,8 @@ YoungCollectionResult GcYoungCollection(Region* nursery, Region* tenured_target)
         static_cast<void*>(nursery->end),
         static_cast<unsigned long long>(nursery->current - nursery->begin));
 
-    // Fire GC_START event for young GC.
-    GcFireEvent(GcEvent::GC_START);
+    // Fire GC_YOUNG_START event for young GC.
+    GcFireEvent(GcEvent::GC_YOUNG_START);
 
     // ── Phase 1: Scan dirty cards for old→nursery cross-gen references ──
     // Scan dirty cards ACROSS ALL old-gen pages, not the nursery range.
@@ -377,6 +377,10 @@ YoungCollectionResult GcYoungCollection(Region* nursery, Region* tenured_target)
     // weak handles pointing to non-promoted (collected) nursery objects.
     GcProcessWeakHandlesAfterYoungGC();
 
+    // Phase 3c: Process dependent handles (ConditionalWeakTable).
+    // Promote secondary objects whose primary survived the young GC.
+    GcProcessDependentHandlesAfterYoungGC();
+
     // ── Phase 4: Sweep nursery ──
     // Clear the nursery for reuse.  All live objects have been forwarded.
     // The nursery region can be reset or returned to the free pool.
@@ -411,8 +415,8 @@ YoungCollectionResult GcYoungCollection(Region* nursery, Region* tenured_target)
         static_cast<unsigned long long>(result.objects_promoted),
         static_cast<unsigned long long>(result.dirty_cards_scanned), pause_ns);
 
-    // Fire GC_END event for young GC.
-    GcFireEvent(GcEvent::GC_END);
+    // Fire GC_YOUNG_DONE event for young GC.
+    GcFireEvent(GcEvent::GC_YOUNG_DONE);
 
     (void)tenured_target;
     return result;

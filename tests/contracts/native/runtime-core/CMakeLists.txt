@@ -13,7 +13,6 @@ add_executable(chaos_method_aot_map_test
 
 target_compile_features(chaos_method_aot_map_test PRIVATE cxx_std_17)
 target_compile_definitions(chaos_method_aot_map_test PRIVATE
-    CHAOS_RUNTIME_ABI_STATIC
     _CRT_SECURE_NO_WARNINGS)
 target_include_directories(
     chaos_method_aot_map_test
@@ -103,7 +102,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/domain_unload_test.cpp")
     add_executable(chaos_domain_unload_test domain_unload_test.cpp ${CHAOS_GC_TEST_STUBS})
     target_compile_features(chaos_domain_unload_test PRIVATE cxx_std_17)
     target_compile_definitions(chaos_domain_unload_test PRIVATE
-        CHAOS_RUNTIME_ABI_STATIC
+        
         _CRT_SECURE_NO_WARNINGS)
     target_compile_options(chaos_domain_unload_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
     target_include_directories(
@@ -145,7 +144,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/memory_domain_test.cpp")
     add_executable(chaos_memory_domain_test memory_domain_test.cpp ${CHAOS_GC_TEST_STUBS})
     target_compile_features(chaos_memory_domain_test PRIVATE cxx_std_17)
     target_compile_definitions(chaos_memory_domain_test PRIVATE
-        CHAOS_RUNTIME_ABI_STATIC
+        
         _CRT_SECURE_NO_WARNINGS)
     target_compile_options(chaos_memory_domain_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
     target_include_directories(
@@ -166,7 +165,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
     add_executable(chaos_threading_smoke threading_smoke.cpp)
     target_compile_features(chaos_threading_smoke PRIVATE cxx_std_17)
     target_compile_definitions(chaos_threading_smoke PRIVATE
-        CHAOS_RUNTIME_ABI_STATIC
+        
         _CRT_SECURE_NO_WARNINGS)
     target_include_directories(
         chaos_threading_smoke
@@ -185,7 +184,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
         add_executable(chaos_synchronization_smoke synchronization_smoke.cpp)
         target_compile_features(chaos_synchronization_smoke PRIVATE cxx_std_17)
         target_compile_definitions(chaos_synchronization_smoke PRIVATE
-            CHAOS_RUNTIME_ABI_STATIC
+            
             _CRT_SECURE_NO_WARNINGS)
         target_include_directories(
             chaos_synchronization_smoke
@@ -205,7 +204,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
         add_executable(chaos_threading_benchmark threading_benchmark.cpp)
         target_compile_features(chaos_threading_benchmark PRIVATE cxx_std_17)
         target_compile_definitions(chaos_threading_benchmark PRIVATE
-            CHAOS_RUNTIME_ABI_STATIC
+            
             _CRT_SECURE_NO_WARNINGS)
         target_include_directories(
             chaos_threading_benchmark
@@ -243,12 +242,33 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_stress_test.cpp")
             ${CHAOS_GC_COMMON_LIBS})
 endif()
 
+# gc_sanity_test — R12/R13 quick sanity (POH + ThinLock unload, no BDWGC init)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_sanity_test.cpp")
+    add_executable(chaos_gc_sanity_test gc_sanity_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_sanity_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_sanity_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_sanity_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_sanity_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/third_party/bdwgc/include"
+            "${REPO_ROOT}/third_party/fmt/include")
+    target_link_libraries(
+        chaos_gc_sanity_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
 # capacity_stress_test — 200+ DLL / 100+ hot-update DLL capacity verification
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
     add_executable(chaos_capacity_stress_test capacity_stress_test.cpp)
     target_compile_features(chaos_capacity_stress_test PRIVATE cxx_std_17)
     target_compile_definitions(chaos_capacity_stress_test PRIVATE
-        CHAOS_RUNTIME_ABI_STATIC
+        
         _CRT_SECURE_NO_WARNINGS)
     target_compile_options(chaos_capacity_stress_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
     target_include_directories(

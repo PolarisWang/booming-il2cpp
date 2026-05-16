@@ -1,4 +1,4 @@
-"""Family Verification Orchestrator — 8-stage unified verification pipeline.
+"""Family Verification Orchestrator — 9-stage unified verification pipeline.
 
 Usage (via run.py manifest):
     run foundation-dll verify-family <family-slug>
@@ -11,6 +11,7 @@ Stage overview:
   2. Fact         — Fact Static verify + Fact Runtime verify
   3. Audit        — Mechanism + Principle audit
   4. AsmCompare   — JIT vs AOT instruction-level analysis (deterministic)
+  4.5 Microbench  — Interpreter internal metrics (FramePool, FastExecute, CallVirt dispatch)
   5. Benchmark    — managed vs native performance baseline
   6. HotUpdate    — patch data generation + verify
   7. PostHotBench — performance under hotpatch (interpreter path)
@@ -74,6 +75,7 @@ class UnifiedReport:
     overall_status: str = "pending"  # "passed" | "failed" | "partial"
     stages: dict[str, dict[str, Any]] = field(default_factory=dict)
     coverage: dict[str, float] = field(default_factory=dict)
+    dashboard: dict[str, Any] = field(default_factory=dict)
     regression: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -163,10 +165,21 @@ def _load_contract_methods(family_slug: str, assembly: str) -> list[str]:
 
 
 def _locate_entry_exe(family_slug: str, assembly: str) -> Path | None:
-    """Find the native entry EXE in native/entry.exe"""
+    """Find the native entry EXE in native/ directory.
+
+    Checks paths in priority order:
+      1. native/build/Release/entry.exe  (CMake Release build output)
+      2. native/entry.exe                (root-level copy/symlink)
+    """
     family_dir = _VERIFICATION_BASE / assembly / family_slug
-    candidate = family_dir / "native" / "entry.exe"
-    return candidate if candidate.exists() else None
+    candidates = [
+        family_dir / "native" / "build" / "Release" / "entry.exe",
+        family_dir / "native" / "entry.exe",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
 
 
 def _locate_managed_harness(family_slug: str, assembly: str) -> Path | None:
@@ -440,6 +453,46 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
                 return f'HashCode.Combine({ipart}, {ipart})', False
             return '', False
 
+        # ── System.Threading.Thread methods ─────────────────────────────
+        if declaring_type == 'System.Threading.Thread':
+            if method_name == 'get_CurrentThread' and len(param_types) == 0:
+                return '_ = System.Threading.Thread.CurrentThread.GetHashCode()', False
+            elif method_name == 'get_ManagedThreadId' and len(param_types) == 0:
+                return '_ = System.Threading.Thread.CurrentThread.ManagedThreadId', False
+            elif method_name == 'Sleep' and param_types == ['System.Int32']:
+                # Sleep(0) yields without actually blocking
+                return 'System.Threading.Thread.Sleep(0)', False
+            elif method_name == 'Start' and len(param_types) == 0:
+                # Start a thread that immediately exits
+                return 'new System.Threading.Thread(() => {}).Start()', False
+            return '', False
+
+        # ── System.Threading.Tasks.Task methods ─────────────────────────
+        if declaring_type == 'System.Threading.Tasks.Task':
+            if method_name == 'get_IsCompleted' and len(param_types) == 0:
+                return '_ = System.Threading.Tasks.Task.CompletedTask.IsCompleted', False
+            elif method_name == 'get_Status' and len(param_types) == 0:
+                return '_ = (int)System.Threading.Tasks.Task.CompletedTask.Status', False
+            elif method_name == 'Run' and param_types == ['System.Action']:
+                return 'System.Threading.Tasks.Task.Run(() => { _g++; })', False
+            elif method_name == 'Run' and param_types == ['System.Func`1']:
+                return 'System.Threading.Tasks.Task.FromResult(42)', False
+            elif method_name == 'Delay' and param_types == ['System.Int32']:
+                return 'System.Threading.Tasks.Task.Delay(0).Wait()', False
+            elif method_name == 'Wait' and len(param_types) == 0:
+                return 'System.Threading.Tasks.Task.FromResult(42).Wait()', False
+            elif method_name == 'Wait' and param_types == ['System.Boolean', 'System.Int32']:
+                return 'System.Threading.Tasks.Task.FromResult(42).Wait(true, System.Threading.Timeout.Infinite)', False
+            elif method_name == 'ContinueWith' and param_types == ['System.Action`1']:
+                return 'System.Threading.Tasks.Task.CompletedTask.ContinueWith(_ => { _g++; })', False
+            elif method_name == 'WhenAll' and param_types == ['System.Threading.Tasks.Task[]']:
+                return 'System.Threading.Tasks.Task.WhenAll(System.Threading.Tasks.Task.CompletedTask)', False
+            elif method_name == 'WhenAny' and param_types == ['System.Threading.Tasks.Task[]']:
+                return '_ = System.Threading.Tasks.Task.WhenAny(System.Threading.Tasks.Task.CompletedTask)', False
+            elif method_name == 'FromResult':
+                return '_ = System.Threading.Tasks.Task.FromResult(42)', False
+            return '', False
+
         return '', False
 
     def _return_type_from_mid(mid: str) -> str:
@@ -475,9 +528,9 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
             helper_names.append(hname)
             helper_methods.append(
                 f'[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]\n'
-                f'static void {hname}(int i)\n'
+                f'static bool {hname}(int i)\n'
                 f'{{\n'
-                f'    try {{ {call_expr}; }} catch {{ }}\n'
+                f'    try {{ {call_expr}; return false; }} catch {{ return true; }}\n'
                 f'}}'
             )
         else:
@@ -485,10 +538,11 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
             helper_names.append(hname)
             helper_methods.append(
                 f'[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]\n'
-                f'static void {hname}(int i)\n'
+                f'static bool {hname}(int i)\n'
                 f'{{\n'
                 f'    {call_expr};\n'
                 f'    _g++;  // volatile side-effect prevents DCE\n'
+                f'    return false;\n'
                 f'}}'
             )
 
@@ -514,12 +568,13 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
             continue
 
         if hname:
-            body = f'                    {hname}(i);'
+            body = f'                    if ({hname}(i)) threw = true;'
         else:
-            body = f'                    {{ {call_expr}; _g++; }}'
+            body = f'                    {{ try {{ {call_expr}; _g++; }} catch {{ threw = true; }} }}'
 
         method_sections.append(
             f'            {{ // [{idx}] {mid}\n'
+            f'                bool threw = false;\n'
             f'                // Warmup: JIT compile before measurement\n'
             f'                for (int i = 0; i < {iterations}; i++) {{\n'
             f'{body}\n'
@@ -541,7 +596,7 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
             f'                    ElapsedMilliseconds = bestMs,\n'
             f'                    Iterations = {iterations},\n'
             f'                    IsBodyReal = true,\n'
-            f'                    IsException = false,\n'
+            f'                    IsException = threw,\n'
             f'                }});\n'
             f'            }}'
         )
@@ -884,8 +939,124 @@ def _stage_asm_compare(family_slug: str, assembly: str) -> StageResult:
     )
 
 
+def _stage_microbench(family_slug: str, assembly: str) -> StageResult:
+    """Stage 4.5: Interpreter microbenchmark — measures internal interpreter efficiency.
+
+    Runs entry.exe --microbench and captures:
+      - FastFramePool: Acquire+Release ns/op
+      - FastExecute: per-instruction overhead (ns/instr)
+      - CallVirt: handler dispatch, MIC hit, raw fallback latencies
+
+    Writes interpreter-microbench-report.json to family directory.
+    """
+    start = time.perf_counter()
+    import re
+
+    exe_path = _locate_entry_exe(family_slug, assembly)
+    if exe_path is None:
+        return StageResult(
+            stage="microbench", status="skipped",
+            summary="entry.exe not found — cannot run microbenchmark",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    try:
+        r = subprocess.run(
+            [str(exe_path), "--microbench"],
+            capture_output=True, text=True, timeout=120)
+    except (OSError, subprocess.TimeoutExpired) as e:
+        return StageResult(
+            stage="microbench", status="error",
+            summary=f"Microbenchmark execution failed: {e}",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    output = r.stdout or ""
+
+    # Parse microbenchmark results using regex
+    metrics = {}
+
+    # FastFramePool: "Batch Acquire+Release: 3.5 ns/op"
+    m = re.search(r'Benchmark 1: FastFramePool.*\((?:kPoolSize)=(\d+)\)', output)
+    pool_size = int(m.group(1)) if m else 0
+    m = re.search(r'Batch Acquire\+Release:\s+([\d.]+)\s*ns/op\s+.*?(\d+)\s+batches\s+x\s+(\d+)\s*frames', output)
+    if m:
+        metrics["framePool"] = {
+            "acquireReleaseNsPerOp": float(m.group(1)),
+            "batchCount": int(m.group(2)),
+            "framesPerBatch": int(m.group(3)),
+        }
+
+    # FastExecute: "8 instructions x 20000 runs: 4.7 ns/instr"
+    m = re.search(r'Benchmark 2: FastExecute.*\n\s+(\d+) instructions\s+x\s+(\d+) runs:\s+([\d.]+)\s*ns/instr', output)
+    if m:
+        metrics["fastExecute"] = {
+            "instructionCount": int(m.group(1)),
+            "runCount": int(m.group(2)),
+            "nsPerInstruction": float(m.group(3)),
+        }
+
+    # CallVirt dispatch overhead: "Handler dispatch overhead (LdcI4): 20.4 ns/call"
+    m = re.search(r'Handler dispatch overhead \(LdcI4\):\s+([\d.]+)\s*ns/call', output)
+    if m:
+        metrics["callVirt"] = metrics.get("callVirt") or {}
+        metrics["callVirt"]["handlerDispatchNs"] = float(m.group(1))
+
+    # CallVirt empty-stack: "CallVirt empty-stack: 20.6 ns/call"
+    m = re.search(r'CallVirt empty-stack:\s+([\d.]+)\s*ns/call', output)
+    if m:
+        metrics["callVirt"] = metrics.get("callVirt") or {}
+        metrics["callVirt"]["emptyStackNs"] = float(m.group(1))
+
+    # Notes (MIC hit, raw fallback)
+    m = re.search(r'MIC hit path.*?~(\d+)ns', output)
+    if m:
+        metrics["callVirt"] = metrics.get("callVirt") or {}
+        metrics["callVirt"]["micHitNs"] = int(m.group(1))
+    m = re.search(r'Raw fallback.*?~(\d+)ns', output)
+    if m:
+        metrics["callVirt"] = metrics.get("callVirt") or {}
+        metrics["callVirt"]["rawFallbackNs"] = int(m.group(1))
+
+    metrics["poolSize"] = pool_size
+
+    # Write report
+    family_dir = _VERIFICATION_BASE / assembly / family_slug
+    report_path = family_dir / "interpreter-microbench-report.json"
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report = {
+        "schemaVersion": 1,
+        "assemblyName": assembly,
+        "familyId": f"family/{assembly}/{family_slug.replace('-', '/')}",
+        "capturedAt": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "metrics": metrics,
+        "rawOutput": output,
+    }
+    import json as _json
+    report_path.write_text(_json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    status = "passed" if metrics else "failed"
+    ns_per_instr = metrics.get("fastExecute", {}).get("nsPerInstruction", 0)
+    frame_pool_ns = metrics.get("framePool", {}).get("acquireReleaseNsPerOp", 0)
+    dispatch_ns = metrics.get("callVirt", {}).get("handlerDispatchNs", 0)
+    trace("microbench", family=family_slug, ns_per_instr=ns_per_instr,
+          frame_pool_ns=frame_pool_ns, dispatch_ns=dispatch_ns, status=status)
+
+    return StageResult(
+        stage="microbench", status=status,
+        summary=(
+            f"FramePool={frame_pool_ns:.1f}ns/op | "
+            f"FastExecute={ns_per_instr:.1f}ns/instr | "
+            f"CallVirt dispatch={dispatch_ns:.1f}ns" if metrics
+            else "No metrics captured"
+        ),
+        details=metrics,
+        duration_ms=int((time.perf_counter() - start) * 1000),
+    )
+
+
 def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
-    """Stage 4: Managed vs native benchmark comparison.
+    """Stage 5: Managed vs native benchmark comparison.
 
     Self-contained: runs managed harness, runs native benchmarks for each
     non-stub method, compares via benchmark_comparator, writes report.
@@ -1277,7 +1448,114 @@ def _stage_post_hotupdate_benchmark(family_slug: str, assembly: str) -> StageRes
     )
 
 
-# ── Aggregation ───────────────────────────────────────────────────
+# ── Dashboard Builder ──────────────────────────────────────────────
+
+def _build_dashboard(family_slug: str, assembly: str,
+                     stages: dict[str, StageResult]) -> dict[str, Any]:
+    """Build a cross-stage dashboard summarizing all metrics from the verification run.
+
+    Aggregates data from:
+      - AsmCompare (Stage 4): IR expansion ratio, instruction mix
+      - Microbench (Stage 4.5): interpreter internal performance
+      - Benchmark (Stage 5): managed vs native speedup
+      - HotUpdate (Stage 6): hotpatch correctness
+      - PostHotBench (Stage 7): interpreter slowdown factor
+    """
+    import json as _json
+
+    family_dir = _VERIFICATION_BASE / assembly / family_slug
+    dashboard: dict[str, Any] = {
+        "interpreter": {},
+        "irTranslation": {},
+        "performance": {},
+        "hotupdate": {},
+    }
+
+    # ── 1. Interpreter internals (from microbench stage result details) ──
+    microbench = stages.get("microbench")
+    if microbench and microbench.details:
+        mb = microbench.details
+        dashboard["interpreter"] = {
+            "fastFramePoolNsPerOp": mb.get("framePool", {}).get("acquireReleaseNsPerOp", 0),
+            "fastExecuteNsPerInstr": mb.get("fastExecute", {}).get("nsPerInstruction", 0),
+            "callVirtHandlerDispatchNs": mb.get("callVirt", {}).get("handlerDispatchNs", 0),
+            "callVirtMicHitNs": mb.get("callVirt", {}).get("micHitNs", 0),
+            "callVirtRawFallbackNs": mb.get("callVirt", {}).get("rawFallbackNs", 0),
+            "poolSize": mb.get("poolSize", 0),
+        }
+
+    # ── 2. IR translation quality (from asm-compare-report.json) ──────────
+    asm_report_path = family_dir / "asm-compare-report.json"
+    if asm_report_path.exists():
+        try:
+            asm_data = _json.loads(asm_report_path.read_text(encoding="utf-8"))
+            s = asm_data.get("summary", {})
+            dashboard["irTranslation"] = {
+                "totalMethods": s.get("totalMethods", 0),
+                "okCount": s.get("okCount", 0),
+                "failedCount": s.get("failedCount", 0),
+                "overallIrExpansionRatio": s.get("overallIrExpansionRatio", 0),
+                "averageExpansionRatio": s.get("averageExpansionRatio", 0),
+                "maxExpansionRatio": s.get("maxExpansionRatio", 0),
+                "jitInstructionAvg": s.get("jitInstructionCount", {}).get("avg", 0),
+                "aotInstructionAvg": s.get("aotInstructionCount", {}).get("avg", 0),
+                "totalExternalRuntimeCalls": s.get("totalExternalRuntimeCalls", 0),
+                "totalVirtualDispatches": s.get("totalVirtualDispatches", 0),
+                "totalBoxingOps": s.get("totalBoxingOps", 0),
+                "topInstructionCategories": s.get("topInstructionCategories", {}),
+            }
+        except (OSError, ValueError):
+            pass
+
+    # ── 3. Performance comparison (from benchmark stage) ─────────────────
+    benchmark = stages.get("benchmark")
+    if benchmark and benchmark.details:
+        bd = benchmark.details
+        dashboard["performance"] = {
+            "averageSpeedupPercent": bd.get("averageSpeedupPercent", 0),
+            "nativeFasterCount": bd.get("nativeFasterCount", 0),
+            "managedFasterCount": bd.get("managedFasterCount", 0),
+            "matchedCount": bd.get("matchedCount", 0),
+            "totalMethods": bd.get("totalMethods", 0),
+            "invalidCount": bd.get("invalidCount", 0),
+        }
+
+    # ── 4. HotUpdate results ─────────────────────────────────────────────
+    hotupdate = stages.get("hotupdate")
+    if hotupdate and hotupdate.details:
+        hd = hotupdate.details
+        dashboard["hotupdate"]["functional"] = {
+            "passedMethods": hd.get("passedMethods", 0),
+            "failedMethods": hd.get("failedMethods", 0),
+            "totalMethods": hd.get("totalMethods", 0),
+        }
+
+    # ── 5. Post-hotupdate interpreter overhead ───────────────────────────
+    posthu = stages.get("post_hotupdate_benchmark")
+    if posthu and posthu.details:
+        ph = posthu.details
+        dashboard["hotupdate"]["interpreterOverhead"] = {
+            "averageSlowdownPercent": ph.get("averageSlowdownPercent", 0),
+            "slowdownFactor": ph.get("slowdownFactor", 0),
+            "nonStubMethods": ph.get("nonStubMethods", 0),
+        }
+
+    # ── 6. Compute key ratios ────────────────────────────────────────────
+    perf = dashboard.get("performance", {})
+    matched = perf.get("matchedCount", 0)
+    native_faster = perf.get("nativeFasterCount", 0)
+    ir = dashboard.get("irTranslation", {})
+    hu = dashboard.get("hotupdate", {}).get("interpreterOverhead", {})
+
+    dashboard["keyRatios"] = {
+        "nativeFasterRatio": round(native_faster / matched, 2) if matched > 0 else 0,
+        "irExpansionRatio": ir.get("overallIrExpansionRatio", 0),
+        "interpreterSlowdownFactor": hu.get("slowdownFactor", 0),
+        "asmPassRate": round(ir.get("okCount", 0) / max(ir.get("totalMethods", 1), 1) * 100, 1),
+    }
+
+    return dashboard
+
 
 def _compute_coverage(stages: dict[str, StageResult]) -> dict[str, float]:
     """Compute coverage score from stage results."""
@@ -1326,6 +1604,12 @@ def _aggregate(family_slug: str, assembly: str,
 
     coverage = _compute_coverage({sr.stage: sr for sr in stage_results})
 
+    # ── Build comprehensive dashboard ─────────────────────────────────
+    dashboard = _build_dashboard(
+        family_slug, assembly,
+        {sr.stage: sr for sr in stage_results},
+    )
+
     # Run baseline regression detection
     regression = _detect_regression(family_slug, assembly, stage_results)
 
@@ -1357,6 +1641,7 @@ def _aggregate(family_slug: str, assembly: str,
         overall_status=overall_status,
         stages=stages_map,
         coverage=coverage,
+        dashboard=dashboard,
         regression=regression,
     )
 
@@ -1473,7 +1758,7 @@ def verify_family(family_slug: str,
 
     # Stage 4: AsmCompare
     if "asm_compare" not in skip:
-        print(f"[4/8] AsmCompare (JIT vs AOT instruction-level)...")
+        print(f"[4/9] AsmCompare (JIT vs AOT instruction-level)...")
         try:
             sr = _stage_asm_compare(family_slug, assembly)
         except Exception as e:
@@ -1483,11 +1768,25 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[4/8] AsmCompare... skipped")
+        print(f"[4/9] AsmCompare... skipped")
+
+    # Stage 4.5: Microbench (interpreter internals)
+    if "microbench" not in skip:
+        print(f"[4.5/9] Microbench (interpreter internal metrics)...")
+        try:
+            sr = _stage_microbench(family_slug, assembly)
+        except Exception as e:
+            trace("microbench", family=family_slug, error=str(e))
+            sr = StageResult(stage="microbench", status="failed",
+                             summary=f"Microbench stage crashed: {e}")
+        stage_results.append(sr)
+        print(f"  {sr.status}: {sr.summary}")
+    else:
+        print(f"[4.5/9] Microbench... skipped")
 
     # Stage 5: Benchmark
     if "benchmark" not in skip:
-        print(f"[5/8] Benchmark...")
+        print(f"[5/9] Benchmark...")
         try:
             sr = _stage_benchmark(family_slug, assembly)
         except Exception as e:
@@ -1501,7 +1800,7 @@ def verify_family(family_slug: str,
 
     # Stage 6: HotUpdate
     if "hotupdate" not in skip:
-        print(f"[6/8] HotUpdate...")
+        print(f"[6/9] HotUpdate...")
         try:
             sr = _stage_hotupdate(family_slug, assembly)
         except Exception as e:
@@ -1511,11 +1810,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[6/8] HotUpdate... skipped")
+        print(f"[6/9] HotUpdate... skipped")
 
     # Stage 7: Post-HU Benchmark
     if "post_hotupdate_benchmark" not in skip:
-        print(f"[7/8] Post-HotUpdate Benchmark...")
+        print(f"[7/9] Post-HotUpdate Benchmark...")
         try:
             sr = _stage_post_hotupdate_benchmark(family_slug, assembly)
         except Exception as e:
@@ -1528,7 +1827,7 @@ def verify_family(family_slug: str,
         print(f"[7/8] Post-HotUpdate Benchmark... skipped")
 
     # Stage 8: Aggregate
-    print(f"[8/8] Aggregating...")
+    print(f"[8/9] Aggregating...")
     report = _aggregate(family_slug, assembly, stage_results, mode,
                         int((time.perf_counter() - overall_start) * 1000))
     report_path = _write_report(report, family_slug, assembly)
@@ -1536,6 +1835,20 @@ def verify_family(family_slug: str,
     print(f"\n{'='*60}")
     print(f"Result: {report.overall_status}")
     print(f"Coverage: {report.coverage}")
+    # Print dashboard key metrics if available
+    d = report.dashboard
+    if d:
+        kr = d.get("keyRatios", {})
+        if kr:
+            print(f"  native_faster={kr.get('nativeFasterRatio', 0)} | "
+                  f"IR_expansion={kr.get('irExpansionRatio', 0)}x | "
+                  f"interp_slowdown={kr.get('interpreterSlowdownFactor', 0)}x | "
+                  f"asm_pass={kr.get('asmPassRate', 0)}%")
+        interp = d.get("interpreter", {})
+        if interp:
+            print(f"  interpreter: {interp.get('fastExecuteNsPerInstr', '?')} ns/instr | "
+                  f"CallVirt dispatch={interp.get('callVirtHandlerDispatchNs', '?')} ns | "
+                  f"MIC hit≈{interp.get('callVirtMicHitNs', '?')}ns")
     print(f"Report: {report_path}")
     print(f"{'='*60}")
 

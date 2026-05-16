@@ -1,0 +1,32 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.hot-update-with-generics-demo.run",
+      "subjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()",
+      "signature": "System.Int32 HotUpdateWithGenericsDemo::Run()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo",
+        "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()",
+        "methodId": "snapshot-test-fixtures.hot-update-with-generics-demo.run",
+        "signature": "System.Int32 HotUpdateWithGenericsDemo::Run()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_HotUpdateWithGenericsDemo_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 1 }
+      ]
+    }
+  ]
+}

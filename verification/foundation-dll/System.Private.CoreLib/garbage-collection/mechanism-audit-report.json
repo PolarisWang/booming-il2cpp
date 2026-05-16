@@ -1,0 +1,24 @@
+{
+  "family": "garbage-collection",
+  "assembly": "System.Private.CoreLib",
+  "total_methods": 0,
+  "audited": 0,
+  "false_passing": 0,
+  "stubs_found": 0,
+  "skips_found": 1,
+  "methods_without_lowering": 0,
+  "methods_without_assert": 0,
+  "passed": true,
+  "method_details": [],
+  "skip_details": [
+    {
+      "type_name": "Array",
+      "method_name": "Resize",
+      "param_count": 2,
+      "override_value": "skip"
+    }
+  ],
+  "errors": [
+    "Generated C++ not found"
+  ]
+}

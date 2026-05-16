@@ -249,47 +249,4 @@ int ScanObjectPointers(void* obj, const GcTypeLayout* layout,
 
     return found;
 }
-
-// ======================================================================
-// Cheney BFS — walk promoted objects using precise layouts
-//
-// DEPRECATED: Not called from any production path.  Young GC Phase 3
-// uses the inline BFS worklist in GcScavengeObject instead.  This
-// function is retained as a reference implementation for C3+ when a
-// standalone BFS may be needed (e.g., parallel BFS).
-// ======================================================================
-[[deprecated("Use inline BFS worklist in GcScavengeObject instead")]]
-void CheneyBfsPrecise(void* tenured_begin, void* tenured_end,
-                      Region* nursery, YoungCollectionResult* result) {
-    if (tenured_begin == nullptr || tenured_end == nullptr) return;
-    if (tenured_begin >= tenured_end) return;
-
-    auto& registry = GcLayoutRegistry::Instance();
-
-    uintptr_t scan = reinterpret_cast<uintptr_t>(tenured_begin);
-    uintptr_t end  = reinterpret_cast<uintptr_t>(tenured_end);
-
-    while (scan < end) {
-        auto* obj = reinterpret_cast<void*>(scan);
-
-        const void* type_info_ptr = *static_cast<const void* const*>(obj);
-        if (type_info_ptr == nullptr) {
-            break;
-        }
-
-        auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-        uint64_t stable_id = hot->stable_id;
-
-        const auto* layout = registry.Lookup(stable_id);
-        if (layout == nullptr) {
-            CHAOS_IL2CPP_LOG_DEBUG("CRAG", "cheney_bfs_no_layout");
-            continue;
-        }
-
-        ScanObjectPointers(obj, layout, nursery, result);
-
-        scan += layout->instance_size;
-    }
-}
-
 }  // namespace chaos::il2cpp::runtime_core

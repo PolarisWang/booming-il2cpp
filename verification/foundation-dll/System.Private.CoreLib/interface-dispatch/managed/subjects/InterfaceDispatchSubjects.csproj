@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>InterfaceDispatchSubjects</AssemblyName>
+    <RootNamespace>InterfaceDispatchSubjects</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="InterfaceDispatchSubjects.cs" />
+    <Compile Include="InterfaceDispatchNativeEntry.cs" />
+  </ItemGroup>
+</Project>

@@ -5,6 +5,7 @@
 #include "gc_young_collector.h"
 #include "memory_domain.h"
 #include "thread_state.h"
+#include "vtable_registry.h"  // ClearDomainPointers
 
 #include <chaos/log.h>
 
@@ -12,6 +13,27 @@
 #include <cstring>
 
 namespace chaos::il2cpp::runtime_core {
+
+// ======================================================================
+// LockDrain — Phase 0 of domain unload
+//
+// Before entering the STW safepoint, drain all SyncBlock stripe entries
+// that reference objects in the domain being unloaded.  This prevents
+// dangling SyncBlock pointers after domain memory is released.
+//
+// For ThinLocks (non-inflated): the lock state is embedded in the object
+// header which lives in the GC heap (not the domain heap), so no action
+// is needed — the lock remains valid after domain unload.
+// ======================================================================
+static CHAOS_IL2CPP_SIZE LockDrain(CHAOS_IL2CPP_UINT32 domain_id) {
+    CHAOS_IL2CPP_LOG_INFO_M("CRAG", "lock_drain_start id={0}", domain_id);
+
+    // Drain SyncBlock stripes — remove entries pointing into domain memory.
+    DrainSyncBlocksForDomain(domain_id);
+
+    CHAOS_IL2CPP_LOG_INFO_M("CRAG", "lock_drain_done id={0}", domain_id);
+    return 0;  // future: return count of drained entries
+}
 
 // ======================================================================
 // Cross-domain reference scan
@@ -116,6 +138,12 @@ DomainUnloadResult UnloadDomain(CHAOS_IL2CPP_UINT32 domain_id) {
         return result;
     }
 
+    // Phase 0: LockDrain — drain SyncBlock entries for this domain.
+    // Runs BEFORE the STW safepoint while threads are still running,
+    // so any thread holding a lock on a domain object can release it.
+    // SyncBlock entries pointing to freed domain memory are removed.
+    result.lock_drain_count = LockDrain(domain_id);
+
     // Phase 1: STW safepoint.
     uint32_t gen = threading::RequestGlobalSafepoint();
     CHAOS_IL2CPP_LOG_DEBUG_M("CRAG", "unload_safepoint gen={0}", gen);
@@ -124,6 +152,12 @@ DomainUnloadResult UnloadDomain(CHAOS_IL2CPP_UINT32 domain_id) {
     CHAOS_IL2CPP_SIZE refs_found = 0;
     result.cross_domain_refs_cleared = ScanAndClearCrossDomainRefs(domain_id, &refs_found);
     result.cross_domain_refs_found = refs_found;
+
+    // Phase 2b: Clear vtable registry pointers into this domain.
+    // During the STW window, null any iface_map / vtable_array entries
+    // that reference domain memory — prevents use-after-free when
+    // threads resume and the domain heap is destroyed.
+    vtable_registry::ClearDomainPointers(domain_id);
 
     // Phase 3: Release all regions owned by this domain.
     RegionManager::Instance().ReleaseDomainRegions(domain_id);

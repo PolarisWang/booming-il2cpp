@@ -3,6 +3,7 @@
 
 #include <chaos/native_types.h>
 #include <chaos/log.h>
+#include <chaos/unordered_dense.h>
 
 #include <atomic>
 #include <cstddef>
@@ -45,12 +46,14 @@ enum class RegionKind : CHAOS_IL2CPP_UINT8 {
     REGION_DOMAIN        = 2,  // Per-module metadata (bump-pointer, bulk-release on unload)
     REGION_RAW           = 3,  // Raw/temp allocations (malloc-backed)
     REGION_FOH           = 4,  // Freakishly large object heap (>85 KB, BDWGC mark-sweep)
+    REGION_POH           = 5,  // Pinned object heap (bump-pointer, no young GC copy)
 };
 
 // ── Region structure ───────────────────────────────────────────
 // Each contiguous memory span managed by the CRAG system.
 struct Region {
     RegionId        id;
+    int             table_slot;     // index in RegionManager::region_table_
     RegionKind      kind;
     CHAOS_IL2CPP_UINT32 domain_id;  // 0 = global / no domain
     char*           begin;
@@ -85,6 +88,9 @@ struct NurseryContext {
 // Larger allocations go directly to the old gen or FOH.
 static constexpr CHAOS_IL2CPP_SIZE kMaxNurseryAlloc = 32 * 1024;  // 32 KB
 
+// POH region size (per pinned-object heap segment).
+static constexpr CHAOS_IL2CPP_SIZE kPohRegionSize = 64 * 1024;   // 64 KB
+
 extern thread_local NurseryContext tls_nursery_ctx;
 
 /// Slow path for NurseryAllocate — acquires a new nursery region or
@@ -95,9 +101,22 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size);
 /// passes scanning_required=false for pointer-free allocations.
 void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size);
 
+/// Allocate in the Pinned Object Heap (POH), bypassing nursery.
+/// POH objects never participate in young GC copying (they are not in
+/// nursery regions).  Allocation is bump-pointer within the current POH
+/// region; falls back to allocating a new POH region when exhausted.
+/// Returns zeroed memory, nullptr on OOM.
+void* PohAllocate(CHAOS_IL2CPP_SIZE size) noexcept;
+
+/// Check if @a ptr falls within any REGION_POH region.
+bool IsPohPointer(const void* ptr) noexcept;
+
 /// Release the current TLS nursery back to the region manager's free pool.
 /// Called when a thread exits cooperative GC mode.
 void TeardownTlsNursery();
+
+/// Release the current TLS POH bump context (called on thread detach).
+void TeardownTlsPoh() noexcept;
 
 /// Inline bump-pointer allocation from the current thread's nursery.
 /// Returns zeroed memory.
@@ -213,6 +232,13 @@ public:
     /// Used during hot-update domain unload.
     void ReleaseDomainRegions(CHAOS_IL2CPP_UINT32 domain_id);
 
+    /// Return the first region of kind REGION_POH (for PohAllocate fallback).
+    /// Returns nullptr if no POH region exists yet.
+    Region* GetFirstPohRegion() const;
+
+    /// Return the total number of POH regions (for sweep iteration).
+    int GetPohRegionCount() const;
+
     // ── Nursery management ─────────────────────────────────────
 
     /// Allocate a fresh nursery for the calling thread.
@@ -249,6 +275,11 @@ public:
     /// via atomic store with release ordering.
     bool IsNurseryPointer(const void* ptr) const;
 
+    /// Check if @a ptr falls within any REGION_POH region.
+    /// Lock-free (reads poh_slots_ array with atomic loads).
+    /// Used by IsPohPointer to detect pinned-object-heap membership.
+    bool IsPohPointer(const void* ptr) const;
+
 private:
     RegionManager() = default;
     ~RegionManager() = default;
@@ -266,11 +297,26 @@ private:
     mutable NurseryRangeSlot nursery_slots_[kMaxNurserySlots]{};
     mutable std::atomic<int> nursery_slot_count_{0};
 
+    // Lock-free POH range slot (same design as nursery_slots_).
+    struct PohRangeSlot {
+        std::atomic<uintptr_t> begin{0};
+        std::atomic<uintptr_t> end{0};
+    };
+    static constexpr int kMaxPohSlots = 64;
+    mutable PohRangeSlot poh_slots_[kMaxPohSlots]{};
+    mutable std::atomic<int> poh_slot_count_{0};
+
     /// Add a nursery range or find a reusable slot.
     void AddNurseryRange(uintptr_t begin, uintptr_t end);
 
     /// Remove a nursery range (mark as invalid).
     void RemoveNurseryRange(uintptr_t begin, uintptr_t end);
+
+    /// Add a POH range for lock-free IsPohPointer.
+    void AddPohRange(uintptr_t begin, uintptr_t end);
+
+    /// Remove a POH range.
+    void RemovePohRange(uintptr_t begin, uintptr_t end);
 
     /// Grow the region table to accommodate a new region.
     /// Returns the index of the new slot, or -1 on OOM.
@@ -286,6 +332,13 @@ private:
     std::atomic<CHAOS_IL2CPP_UINT64> total_allocated_bytes_{0};
 
     mutable std::mutex mutex_;
+
+    // O(1) index: region id → region_table_ slot number.
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(RegionId, CHAOS_IL2CPP_INT32) region_index_;
+
+    // Domain index: domain_id → vector of region_table_ slot numbers.
+    // Enables O(k) ReleaseDomainRegions and IsInDomain (k = regions per domain).
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT32, CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INT32)) domain_regions_;
 };
 
 }  // namespace chaos::il2cpp::runtime_core

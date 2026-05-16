@@ -1,0 +1,221 @@
+{
+  "family": "boxing-unboxing-casts",
+  "assembly": "System.Private.CoreLib",
+  "total_methods": 18,
+  "audited": 18,
+  "false_passing": 0,
+  "stubs_found": 0,
+  "skips_found": 7,
+  "methods_without_lowering": 0,
+  "methods_without_assert": 18,
+  "passed": true,
+  "method_details": [
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAot",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotBench",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BenchmarkMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    }
+  ],
+  "skip_details": [
+    {
+      "type_name": "Array",
+      "method_name": "Resize",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Type",
+      "method_name": "GetType",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Type",
+      "method_name": "GetType",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Type",
+      "method_name": "GetType",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "RuntimeHelpers",
+      "method_name": "RunClassConstructor",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "RuntimeHelpers",
+      "method_name": "InitializeArray",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "RuntimeHelpers",
+      "method_name": "GetSubArray",
+      "param_count": 2,
+      "override_value": "skip"
+    }
+  ],
+  "errors": []
+}

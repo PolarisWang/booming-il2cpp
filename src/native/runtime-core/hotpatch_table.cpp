@@ -209,6 +209,8 @@ void RegisterHotpatchModule(const HotpatchModuleV0* module) noexcept {
 }
 
 void RegisterReversePInvokeWrappers(void* const* wrappers, uint32_t count) noexcept {
+    // Stub: codegen templates reference this for reverse P/Invoke wrapper registration.
+    // Implementation deferred until the wrapper format and lifecycle are determined.
     (void)wrappers;
     (void)count;
 }

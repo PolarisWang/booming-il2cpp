@@ -1,0 +1,114 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "TimeDateTimeTimespanSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Run",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Run:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_0",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_1",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_2",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_3",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_4",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_5",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_6",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_7",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_8",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_9",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_10",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_11",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_12",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_13",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_14",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_15",
+          "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_15:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -74,7 +74,7 @@ private:
 void InterpreterEntryDirect(
     uintptr_t method_key,
     void*     args_buf,
-    void*     ret_buf);
+    void*     ret_buf) noexcept;
 
 // ── InterpreterEntryDirectFast ─────────────────────────────────────────────
 // Fast-path entry point that internally allocates args/ret buffers without

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Chaos.IL2CPP.Contracts;
@@ -666,16 +667,16 @@ public sealed partial class NativeAotLoweringPlanner
         prefixSums[reachableMethods.Count] = (int)runningTotal;
 
         // Method entry models
-        var methodModels = new ScriptObject[reachableMethods.Count];
+        var methodModels = new List<ScriptObject>(reachableMethods.Count);
         for (int i = 0; i < reachableMethods.Count; i++)
         {
             var method = reachableMethods[i];
-            methodModels[i] = new ScriptObject
+            methodModels.Add(new ScriptObject
             {
                 ["return_carrier"] = (int)method.ReturnAbi.CarrierKindCode,
                 ["param_count"] = method.ParameterAbis.Count,
                 ["native_symbol"] = method.NativeSymbol,
-            };
+            });
         }
 
         // Flat parameter carrier array

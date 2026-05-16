@@ -1,4 +1,5 @@
 #include "vtable_registry.h"
+#include "gc_region.h"           // RegionManager::IsInDomain
 #include "reflection_query_model.h"
 #include "runtime_core.h"
 #include "type_registry.h"
@@ -11,7 +12,6 @@
 #include <cstring>
 #include <mutex>
 #include <new>
-#include <unordered_map>
 #include <vector>
 
 namespace chaos::il2cpp::vtable_registry {
@@ -21,12 +21,12 @@ namespace {
 struct VTableRegistryState {
     CHAOS_IL2CPP_SHARED_MUTEX                                         mutex;
     // Primary key: stable_id → vtable
-    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT64, const TypeVTable*)       by_stable_id;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, const TypeVTable*)       by_stable_id;
     // Secondary key: type_token → vtable
-    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, const TypeVTable*)       by_type_token;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT32, const TypeVTable*)       by_type_token;
     // Flat vtable arrays (for AOT codegen direct dispatch)
-    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT64, const void**)            flat_vtables;
-    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT64, CHAOS_IL2CPP_UINT32)     flat_lengths;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, const void**)            flat_vtables;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, CHAOS_IL2CPP_UINT32)     flat_lengths;
 };
 
 VTableRegistryState& GetState() {
@@ -268,6 +268,52 @@ CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount() {
     auto& state = GetState();
     CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
     return static_cast<CHAOS_IL2CPP_UINT32>(state.by_type_token.size());
+}
+
+void ClearDomainPointers(CHAOS_IL2CPP_UINT32 domain_id) {
+    if (domain_id == 0u) return;
+
+    auto& state = GetState();
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
+
+    auto& mgr = chaos::il2cpp::runtime_core::RegionManager::Instance();
+
+    // Scan by_stable_id — null iface_map / vtable_array if they point
+    // into the domain being unloaded.
+    for (auto& [stable_id, vtable] : state.by_stable_id) {
+        (void)stable_id;
+        if (vtable == nullptr) continue;
+
+        if (vtable->iface_map != nullptr &&
+            mgr.IsInDomain(domain_id, vtable->iface_map)) {
+            const_cast<TypeVTable*>(vtable)->iface_map = nullptr;
+            const_cast<TypeVTable*>(vtable)->iface_count = 0u;
+        }
+
+        if (vtable->vtable_array != nullptr &&
+            mgr.IsInDomain(domain_id, vtable->vtable_array)) {
+            const_cast<TypeVTable*>(vtable)->vtable_array = nullptr;
+            const_cast<TypeVTable*>(vtable)->vtable_length = 0u;
+        }
+    }
+
+    // Also check by_type_token — entries may only be in this index.
+    for (auto& [token, vtable] : state.by_type_token) {
+        (void)token;
+        if (vtable == nullptr) continue;
+
+        if (vtable->iface_map != nullptr &&
+            mgr.IsInDomain(domain_id, vtable->iface_map)) {
+            const_cast<TypeVTable*>(vtable)->iface_map = nullptr;
+            const_cast<TypeVTable*>(vtable)->iface_count = 0u;
+        }
+
+        if (vtable->vtable_array != nullptr &&
+            mgr.IsInDomain(domain_id, vtable->vtable_array)) {
+            const_cast<TypeVTable*>(vtable)->vtable_array = nullptr;
+            const_cast<TypeVTable*>(vtable)->vtable_length = 0u;
+        }
+    }
 }
 
 }  // namespace chaos::il2cpp::vtable_registry

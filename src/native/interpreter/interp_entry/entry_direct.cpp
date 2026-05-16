@@ -12,18 +12,30 @@ static void WriteTypedRet(void* ret_buf, const interpreter::ExecutionResult& res
 void InterpreterEntryDirect(
     uintptr_t method_key,
     void*     args_buf,
-    void*     ret_buf) {
+    void*     ret_buf) noexcept {
 
     CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect");
 
     if (method_key == 0) return;
+
+    // Tier 0A: Verify TLS is properly initialized (iOS hot-update safety).
+    // InterpreterEntryDirect is called for hotpatched methods; if TLS is not
+    // set, Monitor.Enter's thin lock CAS would use tid=0, corrupting lock state.
+    CHAOS_IL2CPP_ASSERT(threading::tls_this_thread != nullptr
+        && "InterpreterEntryDirect: thread TLS not attached");
+    CHAOS_IL2CPP_ASSERT(threading::tls_this_thread_id > 0
+        && "InterpreterEntryDirect: invalid thread ID");
+
+    // Tier 0B: Verify thread is in cooperative GC mode (managed code context).
+    CHAOS_IL2CPP_ASSERT(threading::tls_this_thread->gc_mode.load(std::memory_order_relaxed) == kGcModeCooperative
+        && "InterpreterEntryDirect: thread not in cooperative mode");
 
     auto* patch_method = reinterpret_cast<PatchMethod*>(method_key);
 
     // A2.3: Increment call count for hot path detection.
     patch_method->call_count.fetch_add(1, std::memory_order_relaxed);
 
-    // Step 1: Lazy AotCoreIr JSON → IR deserialization.
+    // Step 1: Lazy AotCoreIr JSON → IR deserialization (see wiki: 翻译管线/IR lowering).
     {
     CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.Step1_LowerIR");
     PatchMethodLowerIR(method_key);

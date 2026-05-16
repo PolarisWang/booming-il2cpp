@@ -1041,7 +1041,6 @@ def _generate_hotupdate_cmake_full(family_slug: str) -> str:
         f"{cmake_sources}"
         ")\n"
         f"target_compile_features({target} PRIVATE cxx_std_17)\n"
-        f"target_compile_definitions({target} PRIVATE CHAOS_RUNTIME_ABI_STATIC)\n"
         f"target_compile_definitions({target} PRIVATE NOMINMAX)\n"
         f"target_include_directories({target} PRIVATE\n"
         "    ${REPO_ROOT}/src/native/common\n"

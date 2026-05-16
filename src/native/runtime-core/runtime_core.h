@@ -3,6 +3,7 @@
 
 #include <runtime_abi.h>
 #include <chaos/native_types.h>
+#include <chaos/unordered_dense.h>
 #include <cmath>
 #include <cstddef>
 #include <cstdint>
@@ -137,6 +138,7 @@ ResolveStructMarshallingDescriptor(const TypeInfo* type) noexcept;
 #include "engine_binding.h"
 #include "char_classification.h"
 #include "half_classification.h"
+#include "runtime_stubs/threading_stubs.h"
 
 // ── Template/inline helpers in their own sub-namespaces ──
 // These must come AFTER gc_helpers.h so that qualified names like

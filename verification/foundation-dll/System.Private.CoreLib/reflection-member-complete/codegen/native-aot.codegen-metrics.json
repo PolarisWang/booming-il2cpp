@@ -1,0 +1,15 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeCodegenMetrics",
+  "codegenKind": "native-aot",
+  "planKind": "generic-managed-entry",
+  "generatedSourcePaths": [
+    "generated/native-aot.generated.cpp",
+    "generated/runtime_helper_shapes.h"
+  ],
+  "generatedCppFileCount": 2,
+  "generatedCppTotalBytes": 188614,
+  "largestGeneratedCppBytes": 121148,
+  "generatedSymbolCount": 28,
+  "peakWorkingSetBytes": 495550464
+}

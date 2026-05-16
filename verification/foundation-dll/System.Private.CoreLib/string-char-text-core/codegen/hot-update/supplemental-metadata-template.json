@@ -1,0 +1,187 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663317,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_10:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_11:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_12:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_13:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_14:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_15:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_16:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_16:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_17:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_17:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_18:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_18:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StringCharTextCoreSubjects",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_19:System.Void()",
+      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_19:System.Void()",
+      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}
