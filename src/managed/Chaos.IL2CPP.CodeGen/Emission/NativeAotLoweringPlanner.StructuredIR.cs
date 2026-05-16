@@ -289,6 +289,31 @@ public sealed partial class NativeAotLoweringPlanner
         };
     }
 
+    private static bool IsControlFlowTerminator(StructuredIRNode node)
+    {
+        return node switch
+        {
+            IRReturn => true,
+            IRThrow => true,
+            IRBlock { Terminator: { Op: "ret" or "throw" or "rethrow" } } => true,
+            IRSequence seq => seq.Nodes.Count > 0 && IsControlFlowTerminator(seq.Nodes[^1]),
+            IRIfThenElse ite => IsControlFlowTerminator(ite.ThenBody)
+                && (ite.ElseBody is null || IsControlFlowTerminator(ite.ElseBody)),
+            _ => false,
+        };
+    }
+
+    private static bool IsEmptyBody(StructuredIRNode node)
+    {
+        return node switch
+        {
+            IRSequence { Nodes.Count: 0 } => true,
+            IRBlock { BodyInstructions.Count: 0, Terminator: null } => true,
+            IRBlock { BodyInstructions.Count: 0, Terminator: { Op: "br" or "leave" } } => true,
+            _ => false,
+        };
+    }
+
     private static StructuredIRNode StripExceptionPartitionExitTerminators(StructuredIRNode node)
     {
         return node switch
@@ -461,7 +486,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             case "endfilter":
                 builder.AppendLine(indentation +
-                    $"if ({ConsumeEvalStackValueExpression()} == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+                    $"if ({ConsumeEvalStackValueExpression()} == 0)");
                 builder.AppendLine(indentation + "{");
                 EmitRethrowCpp(builder, indentation + "    ");
                 builder.AppendLine(indentation + "}");
@@ -491,6 +516,33 @@ public sealed partial class NativeAotLoweringPlanner
     {
         var terminator = ite.BranchTerminator;
 
+        // Normalize: if then-body is empty and else-body is not, invert condition and swap.
+        // This eliminates the C++ pattern "if (x) { } else { ... }".
+        if (IsEmptyBody(ite.ThenBody) && ite.ElseBody != null && !IsEmptyBody(ite.ElseBody))
+        {
+            string invertedOp = terminator.Op switch
+            {
+                "brtrue" => "brfalse",
+                "brfalse" => "brtrue",
+                "beq" => "bne.un",
+                "bne.un" => "beq",
+                "bge" => "blt",
+                "bgt" => "ble",
+                "ble" => "bgt",
+                "blt" => "bge",
+                "bge.un" => "blt.un",
+                _ => terminator.Op,
+            };
+            var invTerm = new AotCoreIrInstructionArtifact
+            {
+                Op = invertedOp,
+                Operand = terminator.Operand,
+                IlOffset = terminator.IlOffset,
+            };
+            ite = ite with { BranchTerminator = invTerm, ThenBody = ite.ElseBody, ElseBody = null };
+            terminator = invTerm;
+        }
+
         // Capture depth before condition instructions — both branches must start
         // from this depth so they converge on the same slot names.
         int preConditionDepth = _activeStructuredSlotContext?.Depth ?? 0;
@@ -517,8 +569,8 @@ public sealed partial class NativeAotLoweringPlanner
                     ? $"ChaosLoadFloat64({_cSlot}) != 0.0"
                     : $"ChaosLoadFloat64({_cSlot}) == 0.0",
                 _ => branchOnNonZero
-                    ? $"{_cSlot} != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
-                    : $"{_cSlot} == static_cast<CHAOS_IL2CPP_INTPTR>(0)",
+                    ? $"{_cSlot} != 0"
+                    : $"{_cSlot} == 0",
             };
 
             builder.AppendLine(indentation + "{");
@@ -655,8 +707,8 @@ public sealed partial class NativeAotLoweringPlanner
                     ? $"ChaosLoadFloat64({_cSlot}) != 0.0"
                     : $"ChaosLoadFloat64({_cSlot}) == 0.0",
                 _ => branchOnNonZero
-                    ? $"{_cSlot} != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
-                    : $"{_cSlot} == static_cast<CHAOS_IL2CPP_INTPTR>(0)",
+                    ? $"{_cSlot} != 0"
+                    : $"{_cSlot} == 0",
             };
 
             builder.AppendLine(indentation + "{");
@@ -758,8 +810,8 @@ public sealed partial class NativeAotLoweringPlanner
                         ? $"ChaosLoadFloat64({_cSlot}) != 0.0"
                         : $"ChaosLoadFloat64({_cSlot}) == 0.0",
                     _ => branchOnNonZero
-                        ? $"{_cSlot} != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
-                        : $"{_cSlot} == static_cast<CHAOS_IL2CPP_INTPTR>(0)",
+                        ? $"{_cSlot} != 0"
+                        : $"{_cSlot} == 0",
                 };
 
                 builder.AppendLine(bodyIndent + "if (!(" + _condition + ")) break;");
@@ -805,7 +857,8 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(caseIndent + "case " + caseValue + ":");
             builder.AppendLine(caseIndent + "{");
             EmitStructuredIRNode(builder, body, method, bodyIndent);
-            builder.AppendLine(caseIndent + "    break;");
+            if (!IsControlFlowTerminator(body))
+                builder.AppendLine(caseIndent + "    break;");
             builder.AppendLine(caseIndent + "}");
         }
 
@@ -814,7 +867,8 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(caseIndent + "default:");
             builder.AppendLine(caseIndent + "{");
             EmitStructuredIRNode(builder, sw.DefaultBody, method, bodyIndent);
-            builder.AppendLine(caseIndent + "    break;");
+            if (!IsControlFlowTerminator(sw.DefaultBody))
+                builder.AppendLine(caseIndent + "    break;");
             builder.AppendLine(caseIndent + "}");
         }
 
@@ -847,7 +901,7 @@ public sealed partial class NativeAotLoweringPlanner
                 if (er.CatchTypeSubjectId != null)
                 {
                     builder.AppendLine(inner +
-                        "auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_exception.object_value);");
+                        "auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);");
                     builder.AppendLine(inner + "if (chaos_header != nullptr)");
                     builder.AppendLine(inner + "{");
                     builder.AppendLine(inner +
@@ -878,7 +932,7 @@ public sealed partial class NativeAotLoweringPlanner
                     string typeInfoSym = GetNativeTypeInfoSymbol(er.CatchTypeSubjectId);
                     builder.AppendLine(inner + "__except(CHAOS_SEH_FILTER_ALL())");
                     builder.AppendLine(indentation + "{");
-                    builder.AppendLine(inner + "auto* chaos_header = reinterpret_cast<FatHeader*>(");
+                    builder.AppendLine(inner + "auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(");
                     builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::g_chaos_exception_obj);");
                     builder.AppendLine(inner + "if (chaos_header != nullptr)");
                     builder.AppendLine(inner + "{");
@@ -920,7 +974,7 @@ public sealed partial class NativeAotLoweringPlanner
                 if (er.CatchTypeSubjectId != null)
                 {
                     builder.AppendLine(inner +
-                        "auto* chaos_header = reinterpret_cast<FatHeader*>(");
+                        "auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(");
                     builder.AppendLine(inner +
                         "    chaos::il2cpp::runtime_core::g_chaos_exception_obj);");
                     builder.AppendLine(inner + "if (chaos_header != nullptr)");
@@ -1034,7 +1088,7 @@ public sealed partial class NativeAotLoweringPlanner
                     if (hasTerminalEndFilter)
                     {
                         builder.AppendLine(inner +
-                            $"if ({ConsumeEvalStackValueExpression()} == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+                            $"if ({ConsumeEvalStackValueExpression()} == 0)");
                         builder.AppendLine(inner + "{");
                         builder.AppendLine(inner + "    throw;");
                         builder.AppendLine(inner + "}");
@@ -1071,7 +1125,7 @@ public sealed partial class NativeAotLoweringPlanner
                     if (hasTerminalEndFilter)
                     {
                         builder.AppendLine(inner +
-                            $"if ({ConsumeEvalStackValueExpression()} == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+                            $"if ({ConsumeEvalStackValueExpression()} == 0)");
                         builder.AppendLine(inner + "{");
                         builder.AppendLine(inner +
                             "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
@@ -1117,7 +1171,7 @@ public sealed partial class NativeAotLoweringPlanner
                     if (hasTerminalEndFilter)
                     {
                         builder.AppendLine(inner +
-                            $"if ({ConsumeEvalStackValueExpression()} == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+                            $"if ({ConsumeEvalStackValueExpression()} == 0)");
                         builder.AppendLine(inner + "{");
                         builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::pop_exception_jmp_buf();");
                         builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::chaos_raise_exception(");

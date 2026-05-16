@@ -319,7 +319,10 @@ def main():
     missing = find_missing_external_runtime_fns(content)
 
     if not missing:
-        print("  [gen_ext_stubs] no missing chaos_external_runtime_* functions found")
+        print("  [gen_ext_stubs] no missing chaos_external_runtime_* functions found (checking fn table dispatch)")
+        # Still need to populate fn table entries for table-indexed dispatches
+        new_content = _populate_fn_table(content)
+        filepath.write_text(new_content, encoding="utf-8")
         sys.exit(0)
 
     # Determine family slug from path

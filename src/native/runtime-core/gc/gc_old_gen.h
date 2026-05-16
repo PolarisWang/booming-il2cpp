@@ -139,6 +139,12 @@ public:
     /// to avoid starving mutators.
     void BgcSweep();
 
+    /// Compact pages under safepoint after BGC concurrent sweep.
+    /// Reuses the mark bitmap left intact by BgcSweep() to decide
+    /// fragmentation and plan relocation.  Clears the bitmap after
+    /// compaction to prepare for the next BGC cycle.
+    void BgcCompact();
+
     // ── Pinned root support ─────────────────────────────────────
 
     /// Register a pinned root (object that must never be moved/collected).
@@ -225,6 +231,10 @@ private:
     /// Find the page containing @a ptr, or nullptr.
     OldGenPage* FindPage(const void* ptr) const;
 
+    /// Rebuild the sorted page index from page_list_.
+    /// Caller MUST hold mutex_.
+    void RebuildPageArray();
+
     // ── Allocation helpers ──────────────────────────────────────
 
     /// Round up to the nearest size class. Returns size class index or -1.
@@ -246,7 +256,10 @@ private:
     void DrainMarkStackParallel(OldGenPage** pages, int page_count);
 
     /// Sweep a single page: reclaim unmarked blocks.
-    CHAOS_IL2CPP_SIZE SweepPage(OldGenPage* page);
+    /// @param clear_bitmap  If true, clear the mark bitmap after sweeping.
+    ///                      Pass false during BGC sweep to preserve bitmap
+    ///                      for subsequent compaction planning.
+    CHAOS_IL2CPP_SIZE SweepPage(OldGenPage* page, bool clear_bitmap = true);
 
     /// Coalesce adjacent free blocks on a page.
     void CoalescePage(OldGenPage* page);
@@ -268,22 +281,66 @@ private:
     /// Compaction mode for a full-GC cycle.
     enum class CompactMode : uint8_t {
         NONE,          ///< No compaction (standard mark-sweep)
-        COMPACT        ///< Compact each page (plan → relocate → compact)
+        COMPACT,       ///< Compact each page (plan → relocate → compact)
+        CROSS_PAGE     ///< Cross-page evacuation (evacuate fragmented pages)
+    };
+
+    /// Per-object relocation plan entry.
+    struct CompactPlanEntry {
+        void*   old_addr;      ///< Current object address
+        void*   new_addr;      ///< New (compacted) object address
+        CHAOS_IL2CPP_SIZE size;  ///< Object size in bytes
+    };
+
+    /// Per-page compaction plan produced by a single bitmap walk.
+    struct CompactPlan {
+        std::vector<CompactPlanEntry> entries;
+        CHAOS_IL2CPP_SIZE live_bytes{0};
+        CHAOS_IL2CPP_SIZE saved_bytes{0};
     };
 
     /// Plan compaction for a single page: compute new addresses.
-    /// @return Number of bytes that would be saved (fragmentation reduction).
+    /// Fills @a out_plan with entries mapping old_addr → new_addr for each
+    /// marked object.  @return Number of bytes that would be saved.
     CHAOS_IL2CPP_SIZE PlanPageCompaction(OldGenPage* page,
-                                          CHAOS_IL2CPP_SIZE* out_live_bytes);
+                                          CompactPlan& out_plan);
 
-    /// Relocate all pointer references in old-gen pages to use compacted addresses.
-    void RelocatePage(OldGenPage* page);
+    /// Relocate all pointer references in old-gen pages to use compacted
+    /// addresses from @a plan.
+    void RelocatePage(OldGenPage* page, const CompactPlan& plan);
 
-    /// Compact a page: memmove objects to their planned positions.
-    void CompactPage(OldGenPage* page);
+    /// Compact a page: memmove objects to their planned positions in @a plan.
+    void CompactPage(OldGenPage* page, const CompactPlan& plan);
 
     /// Check fragmentation ratio and decide compaction mode.
     CompactMode DecideCompactMode();
+
+    // ── Cross-page compaction (Phase 4b) ──────────────────────────
+
+    static constexpr float kCrossPageFragThreshold = 0.40f;     // min frag to evacuate
+    static constexpr CHAOS_IL2CPP_SIZE kMaxCrossPageCompactBytes = 128 * 1024;  // per cycle
+
+    /// Run cross-page compaction: evacuate fragmented pages by moving
+    /// live objects to free space on other pages, then freeing source pages.
+    void CrossPageCompact();
+
+    /// Build evacuation plan for a single source page.
+    void PlanPageEvacuation(OldGenPage* page, CompactPlan& out_plan);
+
+    /// Global relocation: walk all pages once and update pointers using
+    /// a consolidated old→new address map from @a entries.
+    static void GlobalRelocate(const std::vector<CompactPlanEntry>& entries,
+                               OldGenPage* page_list);
+
+    // ── Page index (sorted array for O(log n) lookup) ────────────
+
+    /// Sorted page array for O(log n) FindPage/IsInOldGen.
+    /// Rebuilt under mutex_ after each page_list_ mutation.
+    /// Readers: atomic load, then read-only (pages are stable once published).
+    struct PageArray {
+        OldGenPage** pages;  // sorted by page address ascending
+        int count;
+    };
 
     // ── State ───────────────────────────────────────────────────
 
@@ -310,6 +367,13 @@ private:
     // Used for sequential mark (finalizer re-mark) and as the seed source
     // for parallel mark.  Grows dynamically (no hard bound).
     std::vector<void*> mark_stack_;
+
+    // Atomic page array for lock-free FindPage/IsInOldGen.
+    // Written under mutex_, read with atomic load + deferred free.
+    std::atomic<PageArray*> page_array_{nullptr};
+
+    // Retired page array freed on next RebuildPageArray call.
+    PageArray* page_array_retired_ = nullptr;
 
     // Per-size-class last-used-page cache (avoids O(n) page_list walk).
     OldGenPage* last_alloc_page_[kOldGenNumSizeClasses]{};

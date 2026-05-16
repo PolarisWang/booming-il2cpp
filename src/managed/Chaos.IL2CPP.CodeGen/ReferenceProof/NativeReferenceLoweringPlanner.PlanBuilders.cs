@@ -1306,6 +1306,7 @@ public sealed partial class NativeReferenceLoweringPlanner
             FieldSubjectId = fieldRegistration.SubjectId,
             MethodSubjectId = methodRegistration.SubjectId,
             ParameterSubjectId = parameterRegistration.SubjectId,
+            ParameterAttributes = parameterRegistration.ParameterAttributes,
             ClosedTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", closedTypeRegistration.SubjectId)),
             GenericTypeDefinitionToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", genericTypeDefinitionRegistration.SubjectId)),
             ClosedTypeNamespaceName = closedTypeRegistration.NamespaceName ?? string.Empty,

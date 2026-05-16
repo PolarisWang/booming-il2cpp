@@ -192,7 +192,7 @@ def resolve_cli_command(
         if command["id"] == "capability":
             return command
 
-        if len(positional) != len(tokens):
+        if not command.get("pass_through", False) and len(positional) != len(tokens):
             continue
 
         required_options = command.get("options", {})

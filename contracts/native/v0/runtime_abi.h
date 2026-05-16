@@ -240,6 +240,20 @@ typedef struct RuntimeAbiV0 {
     TypeInfoHandle (CHAOS_RUNTIME_ABI_CALL* generic_context_get_method_arg)(
         GenericContextHandle generic_context,
         uint32_t index);
+
+    /* Extended GC handle helpers (added in ABI v2). */
+    GCHandle (CHAOS_RUNTIME_ABI_CALL* gc_handle_new_ex)(
+        RuntimeState* runtime_state,
+        void* object_instance,
+        bool pinned,
+        bool weak);
+    void* (CHAOS_RUNTIME_ABI_CALL* gc_handle_get)(
+        RuntimeState* runtime_state,
+        GCHandle gc_handle);
+    void (CHAOS_RUNTIME_ABI_CALL* gc_handle_set)(
+        RuntimeState* runtime_state,
+        GCHandle gc_handle,
+        void* object_instance);
 } RuntimeAbiV0;
 
 /* Returns the process-wide v0 table or null when the ABI is unavailable. */

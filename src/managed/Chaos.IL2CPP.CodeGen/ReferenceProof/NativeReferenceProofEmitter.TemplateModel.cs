@@ -94,6 +94,7 @@ public sealed partial class NativeReferenceProofEmitter
         AddIfNotNull(model, "method_query_name", loweringPlan.MethodQueryName);
         AddIfNotNull(model, "method_parameter_count", loweringPlan.MethodParameterCount);
         AddIfNotNull(model, "parameter_index", loweringPlan.ParameterIndex);
+        AddIfNotNull(model, "parameter_attributes", loweringPlan.ParameterAttributes);
         AddIfNotNull(model, "output_prefix", loweringPlan.OutputPrefix);
         AddIfNotNull(model, "expected_output", loweringPlan.ExpectedOutput);
         AddIfNotNull(model, "expected_output_byte_count", loweringPlan.ExpectedOutputByteCount);

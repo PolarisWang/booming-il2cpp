@@ -158,6 +158,8 @@ public sealed record ManagedParameterModel
     public required string Name { get; init; }
 
     public required string Type { get; init; }
+
+    public int Attributes { get; init; }
 }
 
 public sealed record ManagedMethodBodyModel

@@ -18,6 +18,7 @@ if __package__ in (None, ""):
     from commands import test as test_commands
     from commands import verify as verify_commands
     from commands import benchmark as benchmark_commands
+    from commands import stress as stress_commands
     from core import manifest as manifest_module
     from core import operation_reporting as operation_reporting_module
     import runtime as runtime_module
@@ -36,6 +37,7 @@ else:
     from .commands import test as test_commands
     from .commands import verify as verify_commands
     from .commands import benchmark as benchmark_commands
+    from .commands import stress as stress_commands
     from .core import manifest as manifest_module
     from .core import operation_reporting as operation_reporting_module
     from . import runtime as runtime_module
@@ -336,6 +338,19 @@ def execute_command(
             status=status,
             errors=[],
             text=f"benchmark {status}\n",
+        )
+
+    if command["handler"] == "stress.dispatch":
+        remaining = command_text.split()[1:]
+        exit_code = stress_commands.dispatch(remaining, repo_root, host_platform)
+        status = "ok" if exit_code <= 0 else "fail"
+        return CommandResult(
+            command=command_text,
+            host_platform=host_platform,
+            target=command.get("id", "stress"),
+            status=status,
+            errors=[],
+            text=f"stress {status}\n",
         )
 
     return CommandResult.failure(

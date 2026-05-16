@@ -61,7 +61,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
 	}
 
-	auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);
+	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
 	if (chaos_array->element_type_shape == chaos_type_shape_interface)
 	{
 		return chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), chaos_array->element_type_info);
@@ -172,8 +172,8 @@ struct chaos_boxed_type_System_Private_CoreLib_System_Int32
 			return false;
 		}
 		
-		auto* chaos_left_header = reinterpret_cast<FatHeader*>(chaos_left_value);
-		auto* chaos_right_header = reinterpret_cast<FatHeader*>(chaos_right_value);
+		auto* chaos_left_header = reinterpret_cast<ThinLockableHeader*>(chaos_left_value);
+		auto* chaos_right_header = reinterpret_cast<ThinLockableHeader*>(chaos_right_value);
 		const auto* chaos_left_ti = chaos_object_get_type_info(reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_left_value)));
 		const auto* chaos_right_ti = chaos_object_get_type_info(reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_right_value)));
 		if (chaos_left_ti != chaos_right_ti

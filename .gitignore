@@ -100,7 +100,6 @@ build/native-runtime/*.vcxproj
 build/native-runtime/*.vcxproj.filters
 build/native-runtime/*.sln
 build/native-runtime/cmake_install.cmake
-build/native-runtime/bdwgc_build/
 build/native-runtime/fmt_build/
 build/native-runtime/src/
 build/native-runtime/tests/
@@ -160,7 +159,6 @@ run_pnc_fact.bat
 build/_*.bat
 build/toolchains/run/testing/foundation_dll/_*.bat
 build/toolchains/run/testing/foundation_dll/fact_l2_verifier.py
-build/bdwgc_build/
 build/fmt_build/
 build/src/
 build/tests/

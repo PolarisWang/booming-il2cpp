@@ -366,6 +366,7 @@ public sealed partial class NativeReferenceProofEmitter
             PropertySubjectId = propertyRegistration.SubjectId,
             MethodSubjectId = queryMethodRegistration.SubjectId,
             ParameterSubjectId = parameterRegistration.SubjectId,
+            ParameterAttributes = parameterRegistration.ParameterAttributes,
             ClosedTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", closedTypeRegistration.SubjectId)),
             GenericTypeDefinitionToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", genericTypeDefinitionRegistration.SubjectId)),
             ClosedTypeNamespaceName = closedTypeRegistration.NamespaceName ?? string.Empty,

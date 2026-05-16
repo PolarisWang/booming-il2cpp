@@ -3,7 +3,6 @@
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
-#include <gc.h>
 
 #include "gc_card_table.h"
 #include "gc_events.h"

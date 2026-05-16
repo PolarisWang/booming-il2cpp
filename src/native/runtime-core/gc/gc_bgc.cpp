@@ -144,6 +144,20 @@ void BgcController::StartConcurrentSweep() {
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_sweep_started");
 }
 
+void BgcController::StwCompact() {
+    // Must be called under safepoint.
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "stw_compact_start");
+
+    // Run compaction using the mark bitmap left intact by BgcSweep().
+    // BgcCompact handles DecideCompactMode + compaction + bitmap clear.
+    g_old_gen.BgcCompact();
+
+    // Transition to FINISHED, signaling BGC thread to reset to IDLE.
+    phase_.store(BgcPhase::FINISHED, std::memory_order_release);
+
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "stw_compact_done");
+}
+
 void BgcController::WaitForCycleComplete() {
     while (!cycle_complete_.load(std::memory_order_acquire)) {
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
@@ -373,6 +387,24 @@ void BgcController::BgcThreadMain() {
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_sweep_complete");
         }
 
+        // ── Phase 4: Signal compaction needed ────────────────────
+        // After concurrent sweep, transition to COMPACT_NEEDED.
+        // The BGC thread sleeps here until a mutator detects the
+        // phase under an allocation slow path, enters a safepoint,
+        // runs StwCompact(), and transitions to FINISHED.
+        if (phase_.load(std::memory_order_acquire) == BgcPhase::CONCURRENT_SWEEP) {
+            phase_.store(BgcPhase::COMPACT_NEEDED, std::memory_order_release);
+            CHAOS_IL2CPP_LOG_DEBUG("BGC", "compact_needed_waiting");
+        }
+
+        // BGC thread waits while STW compaction happens (executed by the
+        // requesting mutator under safepoint).  The phase will be set to
+        // FINISHED by StwCompact() after compaction completes.
+        while (phase_.load(std::memory_order_acquire) == BgcPhase::COMPACT_NEEDED &&
+               bgc_running_.load(std::memory_order_acquire)) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        }
+
         // ── Finish ────────────────────────────────────────────────
         if (phase_.load(std::memory_order_acquire) != BgcPhase::FINISHED) {
             phase_.store(BgcPhase::FINISHED, std::memory_order_release);
@@ -418,23 +450,70 @@ void BgcController::StopParallelMarkWorkers() {
     bgc_parallel_worker_count_.store(0, std::memory_order_relaxed);
 }
 
-void BgcController::BgcWorkerMain() {
-    // Worker loop: pop from shared mark_stack_ and process grey objects
-    // until the BGC thread signals completion.
-    while (!bgc_parallel_done_.load(std::memory_order_acquire)) {
-        void* obj = nullptr;
-        {
-            std::lock_guard<std::mutex> lock(mark_stack_mutex_);
-            if (!mark_stack_.empty()) {
-                obj = mark_stack_.back();
-                mark_stack_.pop_back();
+namespace {
+    /// Scan pointer slots of a grey object and collect newly-marked children.
+    /// Does NOT acquire any lock — results are stored in @a out_children for
+    /// batch push by the caller.
+    void ScanObjectChildren(void* obj, std::vector<void*>& out_children) {
+        const void* type_info_ptr = *static_cast<const void* const*>(obj);
+        if (type_info_ptr == nullptr) return;
+
+        auto& layout_registry = GcLayoutRegistry::Instance();
+        if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) return;
+
+        auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
+        uint64_t stable_id = hot->stable_id;
+        const auto* layout = layout_registry.Lookup(stable_id);
+        if (layout == nullptr || layout->pointer_count == 0) return;
+
+        uintptr_t obj_base = reinterpret_cast<uintptr_t>(obj);
+        for (uint16_t i = 0; i < layout->pointer_count; i++) {
+            uint16_t offset = layout->pointer_offsets[i].offset;
+            auto* slot = reinterpret_cast<void**>(obj_base + offset);
+            void* ref = *slot;
+            if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
+                if (g_old_gen.BgcTryMark(ref)) {
+                    out_children.push_back(ref);
+                }
             }
         }
-        if (obj != nullptr) {
-            ProcessGreyObject(obj);
-        } else {
-            // Mark stack empty — brief pause before re-checking.
+    }
+}
+
+void BgcController::BgcWorkerMain() {
+    // Worker loop: batch-pop from shared mark_stack_, process locally,
+    // batch-push children back.  Reduces mutex contention ~8x vs per-object.
+    std::vector<void*> local_queue;
+    local_queue.reserve(kBgcPopBatchSize * 2);
+
+    while (!bgc_parallel_done_.load(std::memory_order_acquire)) {
+        local_queue.clear();
+        {
+            std::lock_guard<std::mutex> lock(mark_stack_mutex_);
+            int batch = 0;
+            while (!mark_stack_.empty() && batch < kBgcPopBatchSize) {
+                local_queue.push_back(mark_stack_.back());
+                mark_stack_.pop_back();
+                ++batch;
+            }
+        }
+
+        if (local_queue.empty()) {
             std::this_thread::yield();
+            continue;
+        }
+
+        // Process each object locally — children accumulate in local_queue.
+        std::vector<void*> children;
+        children.reserve(kBgcPopBatchSize * 2);
+        for (void* obj : local_queue) {
+            ScanObjectChildren(obj, children);
+        }
+
+        // Batch push all children back to the shared mark stack.
+        if (!children.empty()) {
+            std::lock_guard<std::mutex> lock(mark_stack_mutex_);
+            mark_stack_.insert(mark_stack_.end(), children.begin(), children.end());
         }
     }
 }
@@ -442,35 +521,11 @@ void BgcController::BgcWorkerMain() {
 // ── Grey object processing ───────────────────────────────────────────
 
 void BgcController::ProcessGreyObject(void* obj) {
-    const void* type_info_ptr = *static_cast<const void* const*>(obj);
-    if (type_info_ptr == nullptr) return;
-
-    auto& layout_registry = GcLayoutRegistry::Instance();
-    if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) {
-        // Not a valid TypeInfo pointer — conservative fallback would scan
-        // all pointer-aligned slots.  For P2, skip conservative scan and
-        // rely on the SATB pre-write barrier to capture any references.
-        return;
-    }
-
-    auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-    uint64_t stable_id = hot->stable_id;
-    const auto* layout = layout_registry.Lookup(stable_id);
-    if (layout == nullptr || layout->pointer_count == 0) return;
-
-    // Precise scan: iterate only declared pointer offsets.
-    uintptr_t obj_base = reinterpret_cast<uintptr_t>(obj);
-    for (uint16_t i = 0; i < layout->pointer_count; i++) {
-        uint16_t offset = layout->pointer_offsets[i].offset;
-        auto* slot = reinterpret_cast<void**>(obj_base + offset);
-        void* ref = *slot;
-
-        if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
-            if (g_old_gen.BgcTryMark(ref)) {
-                std::lock_guard<std::mutex> lock(mark_stack_mutex_);
-                mark_stack_.push_back(ref);
-            }
-        }
+    std::vector<void*> children;
+    ScanObjectChildren(obj, children);
+    if (!children.empty()) {
+        std::lock_guard<std::mutex> lock(mark_stack_mutex_);
+        mark_stack_.insert(mark_stack_.end(), children.begin(), children.end());
     }
 }
 
@@ -478,16 +533,36 @@ void BgcController::ProcessGreyObject(void* obj) {
 
 CHAOS_IL2CPP_SIZE BgcController::DrainMarkStack(CHAOS_IL2CPP_SIZE batch_limit) {
     CHAOS_IL2CPP_SIZE count = 0;
+    std::vector<void*> local_queue;
+    std::vector<void*> children;
+    local_queue.reserve(kBgcPopBatchSize * 2);
+    children.reserve(kBgcPopBatchSize * 2);
+
     while (true) {
-        void* obj;
+        local_queue.clear();
+        children.clear();
         {
             std::lock_guard<std::mutex> lock(mark_stack_mutex_);
-            if (mark_stack_.empty()) break;
-            obj = mark_stack_.back();
-            mark_stack_.pop_back();
+            int batch = 0;
+            while (!mark_stack_.empty() && batch < kBgcPopBatchSize) {
+                local_queue.push_back(mark_stack_.back());
+                mark_stack_.pop_back();
+                ++batch;
+            }
         }
-        ProcessGreyObject(obj);
-        ++count;
+
+        if (local_queue.empty()) break;
+
+        for (void* obj : local_queue) {
+            ScanObjectChildren(obj, children);
+            ++count;
+        }
+
+        if (!children.empty()) {
+            std::lock_guard<std::mutex> lock(mark_stack_mutex_);
+            mark_stack_.insert(mark_stack_.end(), children.begin(), children.end());
+        }
+
         if (batch_limit > 0 && count >= batch_limit) break;
     }
     return count;

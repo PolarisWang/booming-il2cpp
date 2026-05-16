@@ -190,6 +190,14 @@ def raw_benchmark_records_path(repo_root: Path, owner_id: str) -> Path:
     return raw_benchmark_records_root(repo_root) / str(owner_id).strip() / "records.jsonl"
 
 
+def raw_stress_records_root(repo_root: Path) -> Path:
+    return repo_root / ".artifact" / "verification" / "stress-records"
+
+
+def raw_stress_records_path(repo_root: Path, test_name: str) -> Path:
+    return raw_stress_records_root(repo_root) / str(test_name).strip() / "records.jsonl"
+
+
 def repo_root_from_owner_manifest(manifest_path: Path) -> Path:
     resolved = manifest_path.resolve()
     for parent in resolved.parents:

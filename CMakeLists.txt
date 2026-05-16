@@ -32,7 +32,6 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
 
     add_subdirectory(third_party/fmt fmt_build)
     add_subdirectory(third_party/unordered_dense unordered_dense_build)
-    add_subdirectory(third_party/bdwgc bdwgc_build)
     add_subdirectory(src/native/common)
     add_subdirectory(src/native/runtime-core)
     add_subdirectory(src/native/hot-update)

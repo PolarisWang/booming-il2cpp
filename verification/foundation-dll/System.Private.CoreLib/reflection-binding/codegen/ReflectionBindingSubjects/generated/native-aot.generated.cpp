@@ -236,7 +236,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_type_info_v0_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
 	}
 
-	auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);
+	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
 	if (chaos_array->element_type_shape == chaos_type_shape_interface)
 	{
 		return chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), chaos_array->element_type_info);
@@ -561,7 +561,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMemberName(CHAOS_IL2CPP_INTPTR chaos_membe
 		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	}
 
-	auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_member_value);
+	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_member_value);
 	if (chaos_object_get_type_info(chaos_header) == &chaos_type_info_v0_System_Private_CoreLib_System_Type.hot
 		|| chaos_object_get_type_info(chaos_header)->stable_id == (&chaos_type_info_v0_System_Private_CoreLib_System_Type.hot)->stable_id)
 	{
@@ -606,7 +606,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetDeclaringType(CHAOS_IL2CPP_INTPTR chaos_me
 		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	}
 
-	auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_member_value);
+	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_member_value);
 	CHAOS_IL2CPP_INTPTR chaos_declaring_type_handle = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	if (chaos_object_get_type_info(chaos_header) == &chaos_type_info_v0_System_Private_CoreLib_System_Type.hot
 		|| chaos_object_get_type_info(chaos_header)->stable_id == (&chaos_type_info_v0_System_Private_CoreLib_System_Type.hot)->stable_id)
@@ -645,7 +645,7 @@ CHAOS_IL2CPP_INT32 ChaosReflectionGetMetadataToken(CHAOS_IL2CPP_INTPTR chaos_mem
 		return 0;
 	}
 
-	auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_member_value);
+	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_member_value);
 	if (chaos_object_get_type_info(chaos_header) == &chaos_type_info_v0_System_Private_CoreLib_System_Type.hot
 		|| chaos_object_get_type_info(chaos_header)->stable_id == (&chaos_type_info_v0_System_Private_CoreLib_System_Type.hot)->stable_id)
 	{
@@ -793,7 +793,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameters(CHAOS_IL2CPP_INTPTR chaos_metho
 			static_cast<CHAOS_IL2CPP_SIZE>(0));
 	}
 
-	auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_method_value);
+	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_method_value);
 	CHAOS_IL2CPP_INTPTR chaos_method_handle = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	if (chaos_object_get_type_info(chaos_header) == &chaos_type_info_v0_System_Private_CoreLib_System_Reflection_MethodInfo.hot
 		|| chaos_object_get_type_info(chaos_header)->stable_id == (&chaos_type_info_v0_System_Private_CoreLib_System_Reflection_MethodInfo.hot)->stable_id)

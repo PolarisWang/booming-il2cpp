@@ -57,7 +57,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
 	}
 
-	auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);
+	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
 	if (chaos_array->element_type_shape == chaos_type_shape_interface)
 	{
 		return chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), chaos_array->element_type_info);
@@ -1148,7 +1148,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_EhHelper_SafeDivide(void)
 	}
 	catch (const chaos_managed_exception& chaos_exception)
 	{
-		auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_exception.object_value);
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
@@ -1173,7 +1173,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_EhHelper_SafeDivide(void)
 	}
 		__except(CHAOS_SEH_FILTER_ALL())
 	{
-		auto* chaos_header = reinterpret_cast<FatHeader*>(
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
@@ -1204,7 +1204,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_EhHelper_SafeDivide(void)
 		}
 		else
 		{
-		auto* chaos_header = reinterpret_cast<FatHeader*>(
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{

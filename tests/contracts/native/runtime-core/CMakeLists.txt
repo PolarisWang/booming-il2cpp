@@ -35,7 +35,7 @@ target_link_libraries(
 # contains instantiation_engine.obj which references InterpreterValue symbols,
 # and chaos_bootstrap.lib references ChaosResolveExternalRuntimeFnTable
 # (defined in hotpatch_resolve.cpp, part of chaos_interpreter).
-set(CHAOS_GC_COMMON_LIBS chaos_runtime_core chaos_bootstrap chaos_interpreter chaos_fmt chaos_bdwgc)
+set(CHAOS_GC_COMMON_LIBS chaos_runtime_core chaos_bootstrap chaos_interpreter chaos_fmt)
 
 # gc_bump_cache_test — GcBumpCache size-class allocator unit tests
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
@@ -50,12 +50,10 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/bdwgc/include"
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_gc_bump_cache_test
         PRIVATE
-            chaos_bdwgc
             chaos_fmt
             chaos_common)
 endif()
@@ -182,8 +180,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
         PRIVATE
             chaos_runtime_core
             chaos_bootstrap
-            chaos_interpreter
-            chaos_bdwgc)
+            chaos_interpreter)
 
     # synchronization_smoke — SemaphoreSlim, RWLock, WaitHandle, TimerQueue
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/synchronization_smoke.cpp")
@@ -203,8 +200,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
             PRIVATE
                 chaos_runtime_core
                 chaos_bootstrap
-                chaos_interpreter
-                chaos_bdwgc)
+                chaos_interpreter)
     endif()
 
     # threading_benchmark — native microbenchmark (Release only)
@@ -264,7 +260,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_worker_pool_smoke.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/bdwgc/include"
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_gc_worker_pool_smoke
@@ -293,6 +288,27 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_sanity_test.cpp")
             ${CHAOS_GC_COMMON_LIBS})
 endif()
 
+# gc_bgc_smoke — BGC concurrent mark/sweep smoke test (P1 verification)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bgc_smoke.cpp")
+    add_executable(chaos_gc_bgc_smoke gc_bgc_smoke.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_bgc_smoke PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_bgc_smoke PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_bgc_smoke PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_bgc_smoke
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/third_party/bdwgc/include"
+            "${REPO_ROOT}/third_party/fmt/include")
+    target_link_libraries(
+        chaos_gc_bgc_smoke
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
 # capacity_stress_test — 200+ DLL / 100+ hot-update DLL capacity verification
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
     add_executable(chaos_capacity_stress_test capacity_stress_test.cpp)
@@ -315,6 +331,5 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
             chaos_runtime_core
             chaos_bootstrap
             chaos_interpreter
-            chaos_fmt
-            chaos_bdwgc)
+            chaos_fmt)
 endif()

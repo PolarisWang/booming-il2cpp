@@ -55,20 +55,14 @@ void* CHAOS_RUNTIME_ABI_CALL ObjectNew(
     const void** vtable = nullptr;
     ResolveObjectTypeInfo(type, type_info, vtable);
     if (type_info == nullptr) return nullptr;
+    (void)vtable;
 
     const CHAOS_IL2CPP_SIZE header_size = HeaderSizeFromFlags(type_info->flags);
-    auto* object = static_cast<ObjectHeaderFat*>(AllocateBytes(runtime_state->config, header_size));
+    auto* object = static_cast<ObjectHeaderThin*>(AllocateBytes(runtime_state->config, header_size));
     if (object == nullptr) return nullptr;
 
     object->type_info = type_info;
-    const auto kind = type_info->flags & kTypeInfoHeaderKindMask;
-    if (kind == kTypeInfoHeaderKindFat) {
-        object->vtable = vtable;
-        object->sync_state = 0;
-    } else if (kind == kTypeInfoHeaderKindThin) {
-        auto* thin = static_cast<ObjectHeaderThin*>(static_cast<void*>(object));
-        thin->sync_state = 0;
-    }
+    object->sync_state = 0;
 
     return object;
 }
@@ -79,22 +73,16 @@ void* CHAOS_RUNTIME_ABI_CALL ObjectNewDirect(
     const TypeInfoHot* type_info,
     const void** vtable) noexcept
 {
+    (void)vtable;  // ABI compat — vtable no longer stored per-object; dispatch via type_info->vtable_array
     if (!IsAttached(runtime_state, thread_state)) return nullptr;
     if (type_info == nullptr) return nullptr;
 
     const CHAOS_IL2CPP_SIZE header_size = HeaderSizeFromFlags(type_info->flags);
-    auto* object = static_cast<ObjectHeaderFat*>(AllocateBytes(runtime_state->config, header_size));
+    auto* object = static_cast<ObjectHeaderThin*>(AllocateBytes(runtime_state->config, header_size));
     if (object == nullptr) return nullptr;
 
     object->type_info = type_info;
-    const auto kind = type_info->flags & kTypeInfoHeaderKindMask;
-    if (kind == kTypeInfoHeaderKindFat) {
-        object->vtable = vtable;
-        object->sync_state = 0;
-    } else if (kind == kTypeInfoHeaderKindThin) {
-        auto* thin = static_cast<ObjectHeaderThin*>(static_cast<void*>(object));
-        thin->sync_state = 0;
-    }
+    object->sync_state = 0;
     return object;
 }
 

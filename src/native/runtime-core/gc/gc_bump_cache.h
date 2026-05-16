@@ -5,7 +5,7 @@
 #include <chaos/profile.h>
 #include <chaos/log.h>
 
-#include <gc.h>
+#include "gc_old_gen.h"
 
 #include <cstddef>
 #include <cstdio>
@@ -149,7 +149,7 @@ private:
         if (size > kMaxInlineSize) {
             oversized_count_++;
             oversized_bytes_ += size;
-            return atomic ? GC_MALLOC_ATOMIC(size) : GC_MALLOC(size);
+            return g_old_gen.Allocate(size, !atomic);
         }
 
         // Fast path: size-class hit → pop from free list.
@@ -213,9 +213,7 @@ private:
     }
 
     Page* AllocatePage(bool atomic) {
-        void* raw = atomic
-            ? GC_MALLOC_ATOMIC(sizeof(Page) + kPageSize)
-            : GC_MALLOC(sizeof(Page) + kPageSize);
+        void* raw = g_old_gen.Allocate(sizeof(Page) + kPageSize, !atomic);
 
         auto* page = static_cast<Page*>(raw);
         page->next = atomic ? atomic_page_ : scan_page_;

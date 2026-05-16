@@ -87,6 +87,16 @@ MarkSweepOldGen::~MarkSweepOldGen() {
     }
     page_list_ = nullptr;
     page_count_ = 0;
+
+    auto* old_array = page_array_.load(std::memory_order_relaxed);
+    if (old_array != nullptr) {
+        std::free(old_array->pages);
+        delete old_array;
+    }
+    if (page_array_retired_ != nullptr) {
+        std::free(page_array_retired_->pages);
+        delete page_array_retired_;
+    }
 }
 
 // ======================================================================
@@ -105,6 +115,8 @@ bool MarkSweepOldGen::Init(uintptr_t heap_hint, int initial_pages) {
             return false;
         }
     }
+
+    RebuildPageArray();
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "init done base=0x{0} pages={1}",
         static_cast<unsigned long long>(heap_base_), page_count_);
@@ -191,6 +203,7 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning)
         // can find L2 segments for objects allocated in this page.
         GcRegisterHeapRange(reinterpret_cast<uintptr_t>(mem),
                             reinterpret_cast<uintptr_t>(mem) + total_size);
+        RebuildPageArray();
     }
 
     total_allocated_.fetch_add(total_size, std::memory_order_relaxed);
@@ -202,17 +215,72 @@ void MarkSweepOldGen::FreePage(OldGenPage* page) {
     VirtualFreePage(page, page->page_size);
 }
 
+// ── Sorted page index (doubly-buffered for lock-free reads) ──────
+
+void MarkSweepOldGen::RebuildPageArray() {
+    // Collect all in-use pages.
+    int count = 0;
+    for (auto* p = page_list_; p != nullptr; p = p->next) {
+        if (p->in_use.load(std::memory_order_acquire)) count++;
+    }
+
+    auto* new_pages = static_cast<OldGenPage**>(
+        std::malloc(static_cast<size_t>(count) * sizeof(OldGenPage*)));
+    if (new_pages == nullptr) return;
+
+    int idx = 0;
+    for (auto* p = page_list_; p != nullptr; p = p->next) {
+        if (p->in_use.load(std::memory_order_acquire)) {
+            new_pages[idx++] = p;
+        }
+    }
+    // Sort by page address ascending.
+    std::sort(new_pages, new_pages + count,
+        [](OldGenPage* a, OldGenPage* b) { return a < b; });
+
+    auto* new_array = new PageArray{new_pages, count};
+    auto* old_array = page_array_.exchange(new_array, std::memory_order_acq_rel);
+
+    // Retire old array for deferred free (no concurrent reader is accessing it
+    // once we've swapped, but we defer free to ensure in-flight readers finish).
+    if (page_array_retired_ != nullptr) {
+        std::free(page_array_retired_->pages);
+        delete page_array_retired_;
+    }
+    page_array_retired_ = old_array;
+}
+
 OldGenPage* MarkSweepOldGen::FindPage(const void* ptr) const {
     if (ptr == nullptr) return nullptr;
-    auto* page = page_list_;
-    while (page != nullptr) {
+    uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
+
+    auto* arr = page_array_.load(std::memory_order_acquire);
+    if (arr == nullptr || arr->count == 0) {
+        // Fallback: linear scan during initialization.
+        auto* page = page_list_;
+        while (page != nullptr) {
+            uintptr_t start = reinterpret_cast<uintptr_t>(page);
+            uintptr_t end = start + page->page_size;
+            if (addr >= start && addr < end) return page;
+            page = page->next;
+        }
+        return nullptr;
+    }
+
+    // Binary search on sorted page addresses.
+    int lo = 0, hi = arr->count - 1;
+    while (lo <= hi) {
+        int mid = lo + (hi - lo) / 2;
+        auto* page = arr->pages[mid];
         uintptr_t start = reinterpret_cast<uintptr_t>(page);
         uintptr_t end = start + page->page_size;
-        uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
-        if (addr >= start && addr < end) {
+        if (addr < start) {
+            hi = mid - 1;
+        } else if (addr >= end) {
+            lo = mid + 1;
+        } else {
             return page;
         }
-        page = page->next;
     }
     return nullptr;
 }
@@ -220,14 +288,33 @@ OldGenPage* MarkSweepOldGen::FindPage(const void* ptr) const {
 bool MarkSweepOldGen::IsInOldGen(const void* ptr) const {
     if (ptr == nullptr) return false;
     uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
-    auto* page = page_list_;
-    while (page != nullptr) {
+
+    auto* arr = page_array_.load(std::memory_order_acquire);
+    if (arr == nullptr || arr->count == 0) {
+        // Fallback: linear scan during initialization.
+        auto* page = page_list_;
+        while (page != nullptr) {
+            uintptr_t start = reinterpret_cast<uintptr_t>(page->Payload());
+            uintptr_t end = start + page->payload_size;
+            if (addr >= start && addr < end) return true;
+            page = page->next;
+        }
+        return false;
+    }
+
+    int lo = 0, hi = arr->count - 1;
+    while (lo <= hi) {
+        int mid = lo + (hi - lo) / 2;
+        auto* page = arr->pages[mid];
         uintptr_t start = reinterpret_cast<uintptr_t>(page->Payload());
         uintptr_t end = start + page->payload_size;
-        if (addr >= start && addr < end) {
+        if (addr < start) {
+            hi = mid - 1;
+        } else if (addr >= end) {
+            lo = mid + 1;
+        } else {
             return true;
         }
-        page = page->next;
     }
     return false;
 }
@@ -417,6 +504,7 @@ void MarkSweepOldGen::Free(void* ptr) {
             pp = &(*pp)->next;
         }
         VirtualFreePage(page, page->page_size);
+        RebuildPageArray();
         return;
     }
 
@@ -441,21 +529,23 @@ void* MarkSweepOldGen::Reallocate(void* ptr, CHAOS_IL2CPP_SIZE new_size) {
     auto* new_ptr = Allocate(new_size, true);
     if (new_ptr == nullptr) return nullptr;
 
-    auto* page = FindPage(ptr);
+    // FindPage needs mutex_ protection to avoid racing with page_list_ mutations.
     CHAOS_IL2CPP_SIZE old_size = new_size;
-    if (page != nullptr) {
-        auto addr = reinterpret_cast<uintptr_t>(ptr);
-        auto pstart = reinterpret_cast<uintptr_t>(page->Payload());
-        auto remaining = page->payload_size - (addr - pstart);
-        old_size = std::min(remaining, new_size);
+    bool oversized = false;
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        auto* page = FindPage(ptr);
+        if (page != nullptr) {
+            auto addr = reinterpret_cast<uintptr_t>(ptr);
+            auto pstart = reinterpret_cast<uintptr_t>(page->Payload());
+            auto remaining = page->payload_size - (addr - pstart);
+            old_size = std::min(remaining, new_size);
+            oversized = page->is_oversized;
+        }
     }
     std::memcpy(new_ptr, ptr, old_size);
 
-    // For C3, we do NOT free the old pointer (let GC sweep handle it).
-    // Free() is not reliable without size tracking — call it for oversized pages
-    // where FindPage+Free is safe (immediate VirtualFree of oversized page).
-    // For non-oversized, the old block will be reclaimed at next sweep.
-    if (page != nullptr && page->is_oversized) {
+    if (oversized) {
         Free(ptr);
     }
 
@@ -741,7 +831,7 @@ void MarkSweepOldGen::HandleReMarkPass() {
 // GC Collection — Sweep phase
 // ======================================================================
 
-CHAOS_IL2CPP_SIZE MarkSweepOldGen::SweepPage(OldGenPage* page) {
+CHAOS_IL2CPP_SIZE MarkSweepOldGen::SweepPage(OldGenPage* page, bool clear_bitmap) {
     if (page == nullptr) return 0;
 
     // Oversized pages: single-object.  If nothing is marked, the entire page
@@ -854,8 +944,10 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::SweepPage(OldGenPage* page) {
         slot += 64;
     }
 
-    // Clear bitmap for next cycle.
-    std::memset(page->MarkBitmap(), 0, page->bitmap_bytes);
+    // Clear bitmap for next cycle (unless preserved for BGC compaction).
+    if (clear_bitmap) {
+        std::memset(page->MarkBitmap(), 0, page->bitmap_bytes);
+    }
 
     return reclaimed;
 }
@@ -944,20 +1036,6 @@ void MarkSweepOldGen::CoalescePage(OldGenPage* page) {
 // GC Collection — full collect
 // ======================================================================
 
-/// Per-page relocation plan entry for compaction.
-struct CompactPlanEntry {
-    void*   old_addr;      ///< Current object address
-    void*   new_addr;      ///< New (compacted) object address
-    CHAOS_IL2CPP_SIZE size;  ///< Object size in bytes
-};
-
-/// Per-page compaction plan.
-struct CompactPlan {
-    std::vector<CompactPlanEntry> entries;
-    CHAOS_IL2CPP_SIZE live_bytes{0};
-    CHAOS_IL2CPP_SIZE saved_bytes{0};
-};
-
 float MarkSweepOldGen::PageFragmentation(const OldGenPage* page) const {
     if (page == nullptr || page->is_oversized) return 0.0f;
     auto* bitmap = reinterpret_cast<const uint64_t*>(page->MarkBitmap());
@@ -972,29 +1050,58 @@ float MarkSweepOldGen::PageFragmentation(const OldGenPage* page) const {
 }
 
 MarkSweepOldGen::CompactMode MarkSweepOldGen::DecideCompactMode() {
-    // Check fragmentation across all pages.  If any size class has >30%
-    // fragmentation on average, trigger compaction.
-    // For C4, we use a simple threshold: if ANY page has >30% fragmentation.
     std::lock_guard<std::mutex> lock(mutex_);
+
+    int candidate_pages = 0;
+    int total_pages = 0;
+    CHAOS_IL2CPP_SIZE total_live = 0;
+    CHAOS_IL2CPP_SIZE total_payload = 0;
+
     auto* p = page_list_;
     while (p != nullptr) {
         if (p->in_use.load(std::memory_order_acquire) && !p->is_oversized) {
+            total_pages++;
+            total_payload += p->payload_size;
             float frag = PageFragmentation(p);
             if (frag > 0.30f) {
-                return CompactMode::COMPACT;
+                candidate_pages++;
+                // Estimate live bytes from mark bitmap.
+                auto* bitmap = reinterpret_cast<const uint64_t*>(p->MarkBitmap());
+                CHAOS_IL2CPP_SIZE num_words = p->bitmap_bytes / sizeof(uint64_t);
+                CHAOS_IL2CPP_SIZE marked_slots = 0;
+                for (CHAOS_IL2CPP_SIZE w = 0; w < num_words; w++) {
+                    marked_slots += static_cast<CHAOS_IL2CPP_SIZE>(GcPopCount64(bitmap[w]));
+                }
+                total_live += marked_slots * sizeof(void*);
             }
         }
         p = p->next;
     }
-    return CompactMode::NONE;
+
+    if (candidate_pages == 0) return CompactMode::NONE;
+
+    // Cross-page compaction if global fragmentation > 40% (most pages
+    // have some waste) or there are enough candidate pages to make
+    // evacuation worthwhile.
+    float global_frag = (total_payload > 0)
+        ? 1.0f - (static_cast<float>(total_live) / static_cast<float>(total_payload))
+        : 0.0f;
+
+    if (global_frag > kCrossPageFragThreshold || candidate_pages >= total_pages / 2) {
+        return CompactMode::CROSS_PAGE;
+    }
+
+    // Otherwise, per-page compaction for individually fragmented pages.
+    return CompactMode::COMPACT;
 }
 
 CHAOS_IL2CPP_SIZE MarkSweepOldGen::PlanPageCompaction(OldGenPage* page,
-                                                        CHAOS_IL2CPP_SIZE* out_live_bytes) {
-    if (page == nullptr || page->is_oversized) {
-        if (out_live_bytes) *out_live_bytes = 0;
-        return 0;
-    }
+                                                        CompactPlan& out_plan) {
+    out_plan.entries.clear();
+    out_plan.live_bytes = 0;
+    out_plan.saved_bytes = 0;
+
+    if (page == nullptr || page->is_oversized) return 0;
 
     auto* bitmap = reinterpret_cast<const uint64_t*>(page->MarkBitmap());
     char* payload = page->Payload();
@@ -1018,9 +1125,6 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::PlanPageCompaction(OldGenPage* page,
             slot = (w + 1) * 64;
             continue;
         }
-        // Scan all set bits in this word using a local copy that we
-        // progressively clear.  We must NOT re-read bitmap[w] each
-        // iteration (that would re-process the first set bit forever).
         uint64_t remaining = word;
         while (remaining != 0) {
             int bit = GcCtz64(remaining);
@@ -1029,7 +1133,6 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::PlanPageCompaction(OldGenPage* page,
             if (obj_slot >= num_slots) break;
             void* obj = payload + obj_slot * sizeof(void*);
 
-            // Determine object size from TypeInfo layout.
             CHAOS_IL2CPP_SIZE obj_size = sizeof(void*);
             const void* type_info_ptr = *static_cast<const void* const*>(obj);
             if (type_info_ptr != nullptr) {
@@ -1049,95 +1152,41 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::PlanPageCompaction(OldGenPage* page,
         slot = (w + 1) * 64;
     }
 
-    if (marked.empty()) {
-        if (out_live_bytes) *out_live_bytes = 0;
-        return 0;
-    }
+    if (marked.empty()) return 0;
 
     // Plan: compact objects to start of page payload, preserving order.
-    // Pinned objects are skipped (they stay in place and force gaps).
-    std::vector<CompactPlanEntry> plan;
-    plan.reserve(marked.size());
+    out_plan.entries.reserve(marked.size());
     char* cursor = payload;
     CHAOS_IL2CPP_SIZE total_live = 0;
 
     for (auto& mo : marked) {
-        plan.push_back({mo.addr, cursor, mo.size});
+        out_plan.entries.push_back({mo.addr, cursor, mo.size});
         cursor += mo.size;
         total_live += mo.size;
     }
 
-    CHAOS_IL2CPP_SIZE saved = static_cast<CHAOS_IL2CPP_SIZE>(
-        reinterpret_cast<uintptr_t>(cursor) - reinterpret_cast<uintptr_t>(payload));
-    saved = page->payload_size - saved;
-    // saved is actually the total live bytes packed into a smaller space.
-    // The actual saving is: payload_size - total_live.
-    if (out_live_bytes) *out_live_bytes = total_live;
-    return page->payload_size - total_live;
+    out_plan.live_bytes = total_live;
+    out_plan.saved_bytes = page->payload_size - total_live;
+    return out_plan.saved_bytes;
 }
 
-void MarkSweepOldGen::RelocatePage(OldGenPage* page) {
-    if (page == nullptr || page->is_oversized) return;
-    // Relocate all old-gen pointer references to point to compacted addresses.
-    // Walk every pointer-aligned slot in every old-gen page; if the slot value
-    // points to an object in this page that was moved, update the slot.
-    // This runs under STW so no concurrent access concerns.
-    //
-    // Build a sorted old→new address map from the mark bitmap using precise
-    // object sizes (from GcLayout).  Then use it for O(log N) lookup per slot.
+void MarkSweepOldGen::RelocatePage(OldGenPage* page, const CompactPlan& plan) {
+    if (page == nullptr || page->is_oversized || plan.entries.empty()) return;
+
+    // Build sorted old→new address map from CompactPlan.
+    struct AddrPair { uintptr_t old_addr; uintptr_t new_addr; };
+    std::vector<AddrPair> addr_map;
+    addr_map.reserve(plan.entries.size());
+    for (auto& e : plan.entries) {
+        addr_map.push_back({
+            reinterpret_cast<uintptr_t>(e.old_addr),
+            reinterpret_cast<uintptr_t>(e.new_addr)
+        });
+    }
 
     char* payload = page->Payload();
     uintptr_t page_start = reinterpret_cast<uintptr_t>(payload);
     uintptr_t page_end = page_start + page->payload_size;
-    CHAOS_IL2CPP_SIZE num_slots = page->payload_size / sizeof(void*);
-    CHAOS_IL2CPP_SIZE num_words = page->bitmap_bytes / sizeof(uint64_t);
-    auto* bitmap = reinterpret_cast<const uint64_t*>(page->MarkBitmap());
-
-    // Build sorted vector of (old_addr, new_addr) for all marked objects.
-    struct AddrPair { uintptr_t old_addr; uintptr_t new_addr; };
-    std::vector<AddrPair> addr_map;
-    addr_map.reserve(1024);
-
-    uintptr_t compact_cursor = page_start;
-    CHAOS_IL2CPP_SIZE slot = 0;
-    while (slot < num_slots) {
-        CHAOS_IL2CPP_SIZE w = slot / 64;
-        if (w >= num_words) break;
-        uint64_t word = bitmap[w];
-        if (word == 0) {
-            slot = (w + 1) * 64;
-            continue;
-        }
-        uint64_t remaining = word;
-        while (remaining != 0) {
-            int bit = GcCtz64(remaining);
-            remaining &= remaining - 1;
-            CHAOS_IL2CPP_SIZE obj_slot = w * 64 + static_cast<CHAOS_IL2CPP_SIZE>(bit);
-            if (obj_slot >= num_slots) break;
-            uintptr_t obj_addr = page_start + obj_slot * sizeof(void*);
-
-            // Determine object size from TypeInfo layout.
-            CHAOS_IL2CPP_SIZE obj_size = sizeof(void*);
-            const void* type_info_ptr = *reinterpret_cast<void* const*>(obj_addr);
-            if (type_info_ptr != nullptr) {
-                auto& registry = GcLayoutRegistry::Instance();
-                if (registry.IsValidTypeInfoPointer(type_info_ptr)) {
-                    auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-                    uint64_t stable_id = hot->stable_id;
-                    const auto* layout = registry.Lookup(stable_id);
-                    if (layout != nullptr && layout->instance_size > 0) {
-                        obj_size = layout->instance_size;
-                    }
-                }
-            }
-
-            addr_map.push_back({obj_addr, compact_cursor});
-            compact_cursor += obj_size;
-        }
-        slot = (w + 1) * 64;
-    }
-
-    if (addr_map.empty()) return;
 
     // Walk all old-gen pages to find pointers into this page's objects.
     std::lock_guard<std::mutex> lock(mutex_);
@@ -1153,7 +1202,6 @@ void MarkSweepOldGen::RelocatePage(OldGenPage* page) {
             uintptr_t val_addr = reinterpret_cast<uintptr_t>(val);
             if (val_addr < page_start || val_addr >= page_end) continue;
 
-            // Binary search in addr_map for this old address.
             auto it = std::lower_bound(addr_map.begin(), addr_map.end(), val_addr,
                 [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
             if (it != addr_map.end() && it->old_addr == val_addr) {
@@ -1163,73 +1211,26 @@ void MarkSweepOldGen::RelocatePage(OldGenPage* page) {
     }
 }
 
-void MarkSweepOldGen::CompactPage(OldGenPage* page) {
-    if (page == nullptr || page->is_oversized) return;
-    // Compact marked objects to the start of the payload.
-    // Walk all marked objects and memmove them to their compacted positions.
-    auto* bitmap = reinterpret_cast<const uint64_t*>(page->MarkBitmap());
+void MarkSweepOldGen::CompactPage(OldGenPage* page, const CompactPlan& plan) {
+    if (page == nullptr || page->is_oversized || plan.entries.empty()) return;
+
     char* payload = page->Payload();
-    CHAOS_IL2CPP_SIZE num_slots = page->payload_size / sizeof(void*);
-    CHAOS_IL2CPP_SIZE num_words = page->bitmap_bytes / sizeof(uint64_t);
-
-    // Collect all marked objects with their sizes.
-    struct MovedObj {
-        void* old_addr;
-        void* new_addr;
-        CHAOS_IL2CPP_SIZE size;
-    };
-    std::vector<MovedObj> to_move;
-    to_move.reserve(1024);
-
-    char* compact_cursor = payload;
-    CHAOS_IL2CPP_SIZE slot = 0;
-    while (slot < num_slots) {
-        CHAOS_IL2CPP_SIZE w = slot / 64;
-        if (w >= num_words) break;
-        uint64_t word = bitmap[w];
-        if (word == 0) {
-            slot = (w + 1) * 64;
-            continue;
-        }
-        uint64_t remaining = word;
-        while (remaining != 0) {
-            int bit = GcCtz64(remaining);
-            remaining &= remaining - 1;
-            CHAOS_IL2CPP_SIZE obj_slot = w * 64 + static_cast<CHAOS_IL2CPP_SIZE>(bit);
-            if (obj_slot >= num_slots) break;
-            void* obj = payload + obj_slot * sizeof(void*);
-
-            CHAOS_IL2CPP_SIZE obj_size = sizeof(void*);
-            const void* type_info_ptr = *static_cast<const void* const*>(obj);
-            if (type_info_ptr != nullptr) {
-                auto& registry = GcLayoutRegistry::Instance();
-                if (registry.IsValidTypeInfoPointer(type_info_ptr)) {
-                    auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-                    uint64_t stable_id = hot->stable_id;
-                    const auto* layout = registry.Lookup(stable_id);
-                    if (layout != nullptr && layout->instance_size > 0) {
-                        obj_size = layout->instance_size;
-                    }
-                }
-            }
-
-            to_move.push_back({obj, compact_cursor, obj_size});
-            compact_cursor += obj_size;
-        }
-        slot = (w + 1) * 64;
-    }
 
     // Perform the memmove from last to first (safe for overlapping regions
     // when compacting toward lower addresses).
-    for (auto it = to_move.rbegin(); it != to_move.rend(); ++it) {
+    for (auto it = plan.entries.rbegin(); it != plan.entries.rend(); ++it) {
         if (it->new_addr != it->old_addr) {
             std::memmove(it->new_addr, it->old_addr, it->size);
         }
     }
 
     // Rebuild free lists from remaining space after compact_cursor.
+    char* compact_end = reinterpret_cast<char*>(plan.entries.back().new_addr) +
+                        plan.entries.back().size;
+    // Use the compact cursor as the first live end boundary.
+    // Since entries are packed at the start, compute end from last entry end.
     CHAOS_IL2CPP_SIZE remaining_bytes = page->payload_size -
-        static_cast<CHAOS_IL2CPP_SIZE>(compact_cursor - payload);
+        static_cast<CHAOS_IL2CPP_SIZE>(compact_end - payload);
 
     // Clear existing free lists.
     for (int i = 0; i < kOldGenNumSizeClasses; i++) {
@@ -1237,7 +1238,7 @@ void MarkSweepOldGen::CompactPage(OldGenPage* page) {
     }
 
     // Add remaining space as free blocks, split by size class.
-    char* free_cursor = compact_cursor;
+    char* free_cursor = compact_end;
     while (remaining_bytes > 0) {
         int sc_idx = SizeClassIndex(remaining_bytes);
         if (sc_idx < 0) sc_idx = kOldGenNumSizeClasses - 1;
@@ -1255,8 +1256,191 @@ void MarkSweepOldGen::CompactPage(OldGenPage* page) {
     }
 
     CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "compacted_page objects={0} free_after={1}",
-        static_cast<unsigned long long>(to_move.size()),
+        static_cast<unsigned long long>(plan.entries.size()),
         static_cast<unsigned long long>(remaining_bytes));
+}
+
+// ======================================================================
+// Cross-page compaction
+// ======================================================================
+
+void MarkSweepOldGen::PlanPageEvacuation(OldGenPage* page, CompactPlan& out_plan) {
+    if (page == nullptr || page->is_oversized) return;
+
+    auto* bitmap = reinterpret_cast<const uint64_t*>(page->MarkBitmap());
+    char* payload = page->Payload();
+    CHAOS_IL2CPP_SIZE num_words = page->bitmap_bytes / sizeof(uint64_t);
+    CHAOS_IL2CPP_SIZE num_slots = page->payload_size / sizeof(void*);
+
+    CHAOS_IL2CPP_SIZE slot = 0;
+    while (slot < num_slots) {
+        CHAOS_IL2CPP_SIZE w = slot / 64;
+        if (w >= num_words) break;
+        uint64_t word = bitmap[w];
+        if (word == 0) {
+            slot = (w + 1) * 64;
+            continue;
+        }
+        uint64_t remaining = word;
+        while (remaining != 0) {
+            int bit = GcCtz64(remaining);
+            remaining &= remaining - 1;
+            CHAOS_IL2CPP_SIZE obj_slot = w * 64 + static_cast<CHAOS_IL2CPP_SIZE>(bit);
+            if (obj_slot >= num_slots) break;
+            void* obj = payload + obj_slot * sizeof(void*);
+
+            // Determine object size from type info.
+            CHAOS_IL2CPP_SIZE obj_size = sizeof(void*);
+            const void* type_info_ptr = *static_cast<const void* const*>(obj);
+            if (type_info_ptr != nullptr) {
+                auto& registry = GcLayoutRegistry::Instance();
+                if (registry.IsValidTypeInfoPointer(type_info_ptr)) {
+                    auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
+                    uint64_t stable_id = hot->stable_id;
+                    const auto* layout = registry.Lookup(stable_id);
+                    if (layout != nullptr && layout->instance_size > 0) {
+                        obj_size = layout->instance_size;
+                    }
+                }
+            }
+
+            // Allocate target space in old-gen (under STW, no concurrent frees).
+            // This is safe during Phase 4b because sweep already ran and
+            // free lists are populated.
+            void* new_addr = Allocate(obj_size, true);
+            if (new_addr != nullptr) {
+                out_plan.entries.push_back({obj, new_addr, obj_size});
+            }
+        }
+        slot = (w + 1) * 64;
+    }
+}
+
+void MarkSweepOldGen::GlobalRelocate(
+    const std::vector<CompactPlanEntry>& entries,
+    OldGenPage* page_list) {
+    if (entries.empty()) return;
+
+    // Build sorted old→new address map.
+    struct AddrPair { uintptr_t old_addr; uintptr_t new_addr; };
+    std::vector<AddrPair> addr_map;
+    addr_map.reserve(entries.size());
+    for (auto& e : entries) {
+        addr_map.push_back({
+            reinterpret_cast<uintptr_t>(e.old_addr),
+            reinterpret_cast<uintptr_t>(e.new_addr)
+        });
+    }
+
+    // Walk all old-gen pages once and update pointers.
+    for (auto* src = page_list; src != nullptr; src = src->next) {
+        if (!src->in_use.load(std::memory_order_acquire)) continue;
+        char* src_payload = src->Payload();
+        CHAOS_IL2CPP_SIZE src_slots = src->payload_size / sizeof(void*);
+
+        for (CHAOS_IL2CPP_SIZE s = 0; s < src_slots; s++) {
+            auto* slot_ptr = reinterpret_cast<void**>(src_payload + s * sizeof(void*));
+            void* val = *slot_ptr;
+            if (val == nullptr) continue;
+            uintptr_t val_addr = reinterpret_cast<uintptr_t>(val);
+
+            auto it = std::lower_bound(addr_map.begin(), addr_map.end(), val_addr,
+                [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
+            if (it != addr_map.end() && it->old_addr == val_addr) {
+                *slot_ptr = reinterpret_cast<void*>(it->new_addr);
+            }
+        }
+    }
+}
+
+void MarkSweepOldGen::CrossPageCompact() {
+    std::lock_guard<std::mutex> lock(mutex_);
+
+    // Phase 1: Select source pages (most fragmented).
+    struct PageScore { OldGenPage* page; float frag; };
+    std::vector<PageScore> candidates;
+    candidates.reserve(static_cast<size_t>(page_count_));
+
+    for (auto* p = page_list_; p != nullptr; p = p->next) {
+        if (!p->in_use.load(std::memory_order_acquire) || p->is_oversized) continue;
+        float frag = PageFragmentation(p);
+        if (frag > kCrossPageFragThreshold) {
+            candidates.push_back({p, frag});
+        }
+    }
+    if (candidates.empty()) return;
+
+    // Sort by fragmentation descending (evacuate worst first).
+    std::sort(candidates.begin(), candidates.end(),
+        [](const PageScore& a, const PageScore& b) { return a.frag > b.frag; });
+
+    // Select source pages up to budget.
+    std::vector<OldGenPage*> source_pages;
+    CHAOS_IL2CPP_SIZE total_evacuate = 0;
+    for (auto& c : candidates) {
+        source_pages.push_back(c.page);
+        auto* bitmap = reinterpret_cast<const uint64_t*>(c.page->MarkBitmap());
+        CHAOS_IL2CPP_SIZE num_words = c.page->bitmap_bytes / sizeof(uint64_t);
+        CHAOS_IL2CPP_SIZE marked_slots = 0;
+        for (CHAOS_IL2CPP_SIZE w = 0; w < num_words; w++) {
+            marked_slots += static_cast<CHAOS_IL2CPP_SIZE>(GcPopCount64(bitmap[w]));
+        }
+        total_evacuate += marked_slots * sizeof(void*);
+        if (total_evacuate >= kMaxCrossPageCompactBytes) break;
+    }
+
+    // Phase 2: Build evacuation plan.
+    CompactPlan global_plan;
+    for (auto* src : source_pages) {
+        PlanPageEvacuation(src, global_plan);
+    }
+    if (global_plan.entries.empty()) return;
+
+    CHAOS_IL2CPP_LOG_INFO_M("OldGen",
+        "cross_page_compact pages={0} objects={1}",
+        static_cast<unsigned>(source_pages.size()),
+        static_cast<unsigned long long>(global_plan.entries.size()));
+
+    // Phase 3: Global relocation.
+    GlobalRelocate(global_plan.entries, page_list_);
+
+    // Phase 4: Copy objects from source pages to new addresses.
+    for (auto& e : global_plan.entries) {
+        if (e.new_addr != e.old_addr) {
+            std::memcpy(e.new_addr, e.old_addr, e.size);
+            std::memset(e.old_addr, 0, e.size);
+        }
+    }
+
+    // Phase 5: Sweep evacuated source pages.
+    for (auto* src : source_pages) {
+        std::memset(src->MarkBitmap(), 0, src->bitmap_bytes);
+        for (int i = 0; i < kOldGenNumSizeClasses; i++) {
+            src->free_lists[i] = nullptr;
+        }
+        char* payload = src->Payload();
+        CHAOS_IL2CPP_SIZE remaining = src->payload_size;
+        char* cursor = payload;
+        while (remaining > 0) {
+            int sc_idx = SizeClassIndex(remaining);
+            if (sc_idx < 0) sc_idx = kOldGenNumSizeClasses - 1;
+            CHAOS_IL2CPP_SIZE sc_size = kOldGenSizeClasses[sc_idx];
+            if (sc_size > remaining) {
+                sc_size = sizeof(void*);
+                sc_idx = SizeClassIndex(sc_size);
+                if (sc_idx < 0) break;
+            }
+            auto* block = reinterpret_cast<OldGenFreeBlock*>(cursor);
+            block->next = src->free_lists[sc_idx];
+            src->free_lists[sc_idx] = block;
+            cursor += sc_size;
+            remaining -= sc_size;
+        }
+    }
+
+    CHAOS_IL2CPP_LOG_INFO_M("OldGen",
+        "cross_page_compact_done bytes={0}",
+        static_cast<unsigned long long>(total_evacuate));
 }
 
 void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data), void* user_data) {
@@ -1506,7 +1690,12 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     // Phase 4b: Compaction (when fragmentation exceeds threshold).
     CompactMode compact_mode = DecideCompactMode();
-    if (compact_mode == CompactMode::COMPACT) {
+
+    if (compact_mode == CompactMode::CROSS_PAGE) {
+        CHAOS_IL2CPP_LOG_INFO_M("OldGen", "cross_page_compact_mode_enabled");
+        CrossPageCompact();
+        GcFireEvent(GcEvent::COMPACT_DONE);
+    } else if (compact_mode == CompactMode::COMPACT) {
         CHAOS_IL2CPP_LOG_INFO_M("OldGen", "compact_mode_enabled");
         CHAOS_IL2CPP_SIZE total_saved = 0;
         std::lock_guard<std::mutex> lock(mutex_);
@@ -1516,9 +1705,10 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 float frag = PageFragmentation(p);
                 if (frag > 0.30f) {
                     // Plan → Relocate → Compact for this page.
-                    CHAOS_IL2CPP_SIZE saved = PlanPageCompaction(p, nullptr);
-                    RelocatePage(p);
-                    CompactPage(p);
+                    CompactPlan plan;
+                    CHAOS_IL2CPP_SIZE saved = PlanPageCompaction(p, plan);
+                    RelocatePage(p, plan);
+                    CompactPage(p, plan);
                     total_saved += saved;
                 }
             }
@@ -1736,7 +1926,7 @@ void MarkSweepOldGen::BgcSweep() {
 
         {
             std::lock_guard<std::mutex> lock(mutex_);
-            SweepPage(page);
+            SweepPage(page, false/*preserve bitmap for BgcCompact*/);
             CoalescePage(page);
         }
 
@@ -1766,6 +1956,7 @@ void MarkSweepOldGen::BgcSweep() {
             }
         }
     }
+    RebuildPageArray();
 
     // Reclaim retired GcLayout tables (safe during BGC sweep since the
     // BGC thread is the only concurrent GC activity; mutators are running
@@ -1773,6 +1964,61 @@ void MarkSweepOldGen::BgcSweep() {
     GcLayoutRegistry::Instance().ReclaimRetiredTables();
 
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_sweep_done");
+}
+
+// ── BGC concurrent compaction ────────────────────────────────────
+
+void MarkSweepOldGen::BgcCompact() {
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "compact_begin");
+
+    // Phase 1: Decide compaction mode (reads mark bitmap preserved by BgcSweep).
+    CompactMode compact_mode = DecideCompactMode();
+
+    if (compact_mode == CompactMode::CROSS_PAGE) {
+        CHAOS_IL2CPP_LOG_INFO("BGC", "cross_page_compact_mode_enabled");
+        CrossPageCompact();
+        GcFireEvent(GcEvent::COMPACT_DONE);
+    } else if (compact_mode == CompactMode::COMPACT) {
+        CHAOS_IL2CPP_LOG_INFO("BGC", "compact_mode_enabled");
+        CHAOS_IL2CPP_SIZE total_saved = 0;
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            auto* p = page_list_;
+            while (p != nullptr) {
+                if (p->in_use.load(std::memory_order_acquire) && !p->is_oversized) {
+                    float frag = PageFragmentation(p);
+                    if (frag > 0.30f) {
+                        CompactPlan plan;
+                        CHAOS_IL2CPP_SIZE saved = PlanPageCompaction(p, plan);
+                        RelocatePage(p, plan);
+                        CompactPage(p, plan);
+                        total_saved += saved;
+                    }
+                }
+                p = p->next;
+            }
+        }
+        CHAOS_IL2CPP_LOG_INFO_M("BGC", "compact_done saved_bytes={0}",
+            static_cast<unsigned long long>(total_saved));
+        GcFireEvent(GcEvent::COMPACT_DONE);
+    }
+
+    // Phase 2: Clear all page mark bitmaps (preserved by BgcSweep's
+    // SweepPage(..., false) call).  Must be cleared before the next BGC
+    // cycle's BgcTryMark, which uses atomic test-and-set and would
+    // incorrectly report stale bits as "already marked".
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        auto* p = page_list_;
+        while (p != nullptr) {
+            if (p->in_use.load(std::memory_order_acquire)) {
+                std::memset(p->MarkBitmap(), 0, p->bitmap_bytes);
+            }
+            p = p->next;
+        }
+    }
+
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "compact_complete");
 }
 
 }  // namespace chaos::il2cpp::runtime_core

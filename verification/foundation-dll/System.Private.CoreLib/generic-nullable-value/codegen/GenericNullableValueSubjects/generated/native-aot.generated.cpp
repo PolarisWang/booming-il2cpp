@@ -212,7 +212,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_type_info_v0_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
 	}
 
-	auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);
+	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
 	if (chaos_array->element_type_shape == chaos_type_shape_interface)
 	{
 		return chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), chaos_array->element_type_info);
@@ -311,8 +311,8 @@ struct chaos_boxed_type_System_Private_CoreLib_System_Int32
 			return false;
 		}
 		
-		auto* chaos_left_header = reinterpret_cast<FatHeader*>(chaos_left_value);
-		auto* chaos_right_header = reinterpret_cast<FatHeader*>(chaos_right_value);
+		auto* chaos_left_header = reinterpret_cast<ThinLockableHeader*>(chaos_left_value);
+		auto* chaos_right_header = reinterpret_cast<ThinLockableHeader*>(chaos_right_value);
 		const auto* chaos_left_ti = chaos_object_get_type_info(reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_left_value)));
 		const auto* chaos_right_ti = chaos_object_get_type_info(reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_right_value)));
 		if (chaos_left_ti != chaos_right_ti
@@ -351,17 +351,17 @@ CHAOS_IL2CPP_INT32 chaos_static_GenericNullableValueSubjects_GenericNullableValu
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_Int32___GetValueOrDefault_System_Int32_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	// nullable struct layout: FatHeader(24B) | hasValue(int32, 4B) | value(T)
-	// For value types passed by pointer, offset to value field is sizeof(FatHeader) + 4
+	// For value types passed by pointer, offset to value field is sizeof(ThinLockableHeader) + 4
 	if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0)) return 0;
-	return *reinterpret_cast<CHAOS_IL2CPP_INT32*>(reinterpret_cast<char*>(chaos_arg_0) + sizeof(FatHeader) + 4);
+	return *reinterpret_cast<CHAOS_IL2CPP_INT32*>(reinterpret_cast<char*>(chaos_arg_0) + sizeof(ThinLockableHeader) + 4);
 }
 
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_Int32___GetValueOrDefault_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	// nullable struct layout: FatHeader(24B) | hasValue(int32, 4B) | value(T)
-	// For value types passed by pointer, offset to value field is sizeof(FatHeader) + 4
+	// For value types passed by pointer, offset to value field is sizeof(ThinLockableHeader) + 4
 	if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0)) return 0;
-	return *reinterpret_cast<CHAOS_IL2CPP_INT32*>(reinterpret_cast<char*>(chaos_arg_0) + sizeof(FatHeader) + 4);
+	return *reinterpret_cast<CHAOS_IL2CPP_INT32*>(reinterpret_cast<char*>(chaos_arg_0) + sizeof(ThinLockableHeader) + 4);
 }
 
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_Int32___get_HasValue_System_Boolean__(CHAOS_IL2CPP_INTPTR chaos_arg_0)

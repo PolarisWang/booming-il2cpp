@@ -530,7 +530,7 @@ public sealed partial class NativeAotLoweringPlanner
                     [
                         "    return chaos_object_equals(chaos_arg_0, chaos_arg_1)",
                         "        ? static_cast<CHAOS_IL2CPP_INTPTR>(1)",
-                        "        : static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "        : 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -553,7 +553,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))",
+                        "    if (chaos_arg_0 == 0)",
                         "    {",
                         "        CHAOS_IL2CPP_FAIL();",
                         "    }",
@@ -592,7 +592,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "        CHAOS_IL2CPP_FAIL();",
                         "    }",
                         string.Empty,
-                        "    if (chaos_arg_1 == static_cast<CHAOS_IL2CPP_INTPTR>(0))",
+                        "    if (chaos_arg_1 == 0)",
                         "    {",
                         "        CHAOS_IL2CPP_FAIL();",
                         "    }",
@@ -611,7 +611,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "            : static_cast<CHAOS_IL2CPP_INTPTR>(reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(chaos_arg_1)->length));",
                         "    if (chaos_prefix_length > chaos_instance_length)",
                         "    {",
-                        "        return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "        return 0;",
                         "    }",
                         string.Empty,
                         "    if (chaos_prefix_length == 0)",
@@ -627,7 +627,7 @@ public sealed partial class NativeAotLoweringPlanner
                         string.Empty,
                         "    return CHAOS_IL2CPP_MEMCMP(chaos_instance_utf8, chaos_prefix_utf8, chaos_prefix_length) == 0",
                         "        ? static_cast<CHAOS_IL2CPP_INTPTR>(1)",
-                        "        : static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "        : 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
@@ -656,7 +656,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "        CHAOS_IL2CPP_FAIL();",
                         "    }",
                         string.Empty,
-                        "    if (chaos_arg_1 == static_cast<CHAOS_IL2CPP_INTPTR>(0))",
+                        "    if (chaos_arg_1 == 0)",
                         "    {",
                         "        CHAOS_IL2CPP_FAIL();",
                         "    }",
@@ -680,7 +680,7 @@ public sealed partial class NativeAotLoweringPlanner
                         string.Empty,
                         "    if (chaos_value_length > chaos_instance_length)",
                         "    {",
-                        "        return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "        return 0;",
                         "    }",
                         string.Empty,
                         "    if ((chaos_instance_utf8 == nullptr && chaos_instance_length != 0) ||",
@@ -698,7 +698,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "        }",
                         "    }",
                         string.Empty,
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
@@ -771,6 +771,20 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
 
+            registry.Register("System.GC", "SuppressFinalize", ["System.Object"],
+                ShapeKind.SimpleForward, "chaos_gc_suppress_finalize",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.GC", "ReRegisterForFinalize", ["System.Object"],
+                ShapeKind.SimpleForward, "chaos_gc_reregister_finalize",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
             // === Delegate ===
             registry.Register("System.Delegate", "Combine", ["System.Delegate", "System.Delegate"],
                 ShapeKind.SimpleForward, "chaos_delegate_combine",
@@ -809,7 +823,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 
             // === Object.GetHashCode (SimpleForward) ===
-            registry.Register("System.Object", "GetHashCode", ["System.Object"],
+            registry.Register("System.Object", "GetHashCode", [],
                 ShapeKind.SimpleForward, "ChaosObjectGetHashCode",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
@@ -817,7 +831,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0 });
 
             // === Object.ToString (SimpleForward) ===
-            registry.Register("System.Object", "ToString", ["System.Object"],
+            registry.Register("System.Object", "ToString", [],
                 ShapeKind.SimpleForward, "ChaosObjectToString",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
@@ -981,7 +995,7 @@ public sealed partial class NativeAotLoweringPlanner
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                         [
                             "    (void)chaos_arg_0; (void)chaos_arg_1;",
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                            "    return 0;",
                         ]);
                         return new GenericShapeResolution(src, symbol,
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -996,7 +1010,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
                     [
                         "    (void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src2, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
@@ -1067,7 +1081,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "#if defined(_WIN32)",
                         "    return static_cast<CHAOS_IL2CPP_INTPTR>(1);",
                         "#else",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                         "#endif",
                     ]);
                     return new GenericShapeResolution(src, symbol,
@@ -1086,7 +1100,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "#if defined(__linux__)",
                         "    return static_cast<CHAOS_IL2CPP_INTPTR>(1);",
                         "#else",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                         "#endif",
                     ]);
                     return new GenericShapeResolution(src, symbol,
@@ -1105,7 +1119,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "#if defined(__APPLE__)",
                         "    return static_cast<CHAOS_IL2CPP_INTPTR>(1);",
                         "#else",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                         "#endif",
                     ]);
                     return new GenericShapeResolution(src, symbol,
@@ -1176,7 +1190,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
                         "    const char* chaos_format_utf8 = nullptr;",
-                        "    if (chaos_arg_1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))",
+                        "    if (chaos_arg_1 != 0)",
                         "    {",
                         "        chaos_format_utf8 = chaos_reflection_get_string_utf8(chaos_arg_1);",
                         "    }",
@@ -1214,7 +1228,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
                         "    const char* chaos_format_utf8 = nullptr;",
-                        "    if (chaos_arg_1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))",
+                        "    if (chaos_arg_1 != 0)",
                         "    {",
                         "        chaos_format_utf8 = chaos_reflection_get_string_utf8(chaos_arg_1);",
                         "    }",
@@ -1312,9 +1326,9 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))",
+                        "    if (chaos_arg_0 == 0)",
                         "    {",
-                        "        return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "        return 0;",
                         "    }",
                         string.Empty,
                         "    auto* chaos_string = reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(chaos_arg_0);",
@@ -1340,8 +1354,8 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    return chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0)",
-                        "        ? static_cast<CHAOS_IL2CPP_INTPTR>(0)",
+                        "    return chaos_arg_0 == 0",
+                        "        ? 0",
                         "        : chaos_reflection_create_string_literal(reinterpret_cast<const char*>(chaos_arg_0));",
                     ]);
                     return new GenericShapeResolution(src, symbol,
@@ -1479,10 +1493,10 @@ public sealed partial class NativeAotLoweringPlanner
                         "    auto* chaos_runtime = chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
                         "    if (chaos_runtime == nullptr) { CHAOS_IL2CPP_FAIL(); }",
                         $"    const auto* chaos_desc = {structDescSymbol};",
-                        "    if (chaos_desc == nullptr) return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    if (chaos_desc == nullptr) return 0;",
                         "    auto* chaos_blob = static_cast<unsigned char*>(",
                         "        CHAOS_IL2CPP_MALLOC(chaos_desc->total_size));",
-                        "    if (chaos_blob == nullptr) return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    if (chaos_blob == nullptr) return 0;",
                         "    chaos::il2cpp::struct_marshal::MarshalStructNativeToManaged(",
                         "        chaos_desc, chaos_blob,",
                         "        reinterpret_cast<const unsigned char*>(chaos_arg_0),",
@@ -1596,18 +1610,18 @@ public sealed partial class NativeAotLoweringPlanner
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2",
                     [
                         "    (void)chaos_arg_2;",
-                        "    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0) || chaos_arg_1 == static_cast<CHAOS_IL2CPP_INTPTR>(0))",
+                        "    if (chaos_arg_0 == 0 || chaos_arg_1 == 0)",
                         "    {",
                         "        return 0;",
                         "    }",
                         string.Empty,
                         $"    auto* chaos_type = reinterpret_cast<{typeTypeSymbol}*>(chaos_arg_1);",
-                        "    if (chaos_type->runtime_type_handle == static_cast<CHAOS_IL2CPP_INTPTR>(0))",
+                        "    if (chaos_type->runtime_type_handle == 0)",
                         "    {",
                         "        return 0;",
                         "    }",
                         string.Empty,
-                        "    return ChaosReflectionGetCustomAttribute(chaos_arg_0, chaos_type->runtime_type_handle) == static_cast<CHAOS_IL2CPP_INTPTR>(0)",
+                        "    return ChaosReflectionGetCustomAttribute(chaos_arg_0, chaos_type->runtime_type_handle) == 0",
                         "        ? 0",
                         "        : 1;",
                     ]);
@@ -1938,7 +1952,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -2009,7 +2023,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -2033,7 +2047,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -2057,7 +2071,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -2199,7 +2213,7 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 });
                 }));
 
-            // === Nullable<T>.get_HasValue — reads the hasValue field at offset sizeof(FatHeader) ===
+            // === Nullable<T>.get_HasValue — reads the hasValue field at offset sizeof(ThinLockableHeader) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Nullable`1",
                 MethodName: "get_HasValue",
@@ -2213,7 +2227,7 @@ public sealed partial class NativeAotLoweringPlanner
                         var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
-                            "    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0)) return 0;",
+                            "    if (chaos_arg_0 == 0) return 0;",
                             "    return *reinterpret_cast<CHAOS_IL2CPP_INT32*>(chaos_arg_0);",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
@@ -2236,7 +2250,7 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
-            // === Nullable<T>.GetValueOrDefault() — reads the value field after FatHeader+hasValue ===
+            // === Nullable<T>.GetValueOrDefault() — reads the value field after ThinLockableHeader+hasValue ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Nullable`1",
                 MethodName: "GetValueOrDefault",
@@ -2248,19 +2262,19 @@ public sealed partial class NativeAotLoweringPlanner
                     var retType = "CHAOS_IL2CPP_INTPTR";
                     var bodyLines = new List<string>
                     {
-                        "    // nullable struct layout: FatHeader(24B) | hasValue(int32, 4B) | value(T)",
-                        "    // For value types passed by pointer, offset to value field is sizeof(FatHeader) + 4",
-                        "    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0)) return 0;",
+                        "    // nullable struct layout: ThinLockableHeader(24B) | hasValue(int32, 4B) | value(T)",
+                        "    // For value types passed by pointer, offset to value field is sizeof(ThinLockableHeader) + 4",
+                        "    if (chaos_arg_0 == 0) return 0;",
                     };
                     if (typeArgs != null && typeArgs.Count > 0 && typeArgs[0] == "System.Int32")
                     {
                         retType = "CHAOS_IL2CPP_INT32";
                         returnAbi = CreateInt32AbiSlot();
-                        bodyLines.Add("    return *reinterpret_cast<CHAOS_IL2CPP_INT32*>(reinterpret_cast<char*>(chaos_arg_0) + sizeof(FatHeader) + 4);");
+                        bodyLines.Add("    return *reinterpret_cast<CHAOS_IL2CPP_INT32*>(reinterpret_cast<char*>(chaos_arg_0) + sizeof(ThinLockableHeader) + 4);");
                     }
                     else
                     {
-                        bodyLines.Add("    return *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(chaos_arg_0) + sizeof(FatHeader) + 4);");
+                        bodyLines.Add("    return *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(chaos_arg_0) + sizeof(ThinLockableHeader) + 4);");
                     }
                     var src = RenderSimpleExternalRuntimeHelper(retType, symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
@@ -2358,7 +2372,7 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         // Comma operator: throw terminates execution, second operand
                         // provides the result type for the caller's eval stack.
-                        return "(throw chaos_managed_exception{static_cast<CHAOS_IL2CPP_INTPTR>(0)}, static_cast<CHAOS_IL2CPP_UINT16>(0))";
+                        return "(throw chaos_managed_exception{0}, static_cast<CHAOS_IL2CPP_UINT16>(0))";
                     }
                     return null;
                 }));
@@ -2446,7 +2460,7 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
                         [
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                            "    return 0;",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             Array.Empty<AotCoreIrAbiSlotArtifact>(),
@@ -2461,7 +2475,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -2560,7 +2574,7 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
                         [
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                            "    return 0;",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             Array.Empty<AotCoreIrAbiSlotArtifact>(),
@@ -2572,7 +2586,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -2763,7 +2777,7 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "",
                         [
-                            "    return ChaosRandomNext(static_cast<CHAOS_IL2CPP_INTPTR>(0));",
+                            "    return ChaosRandomNext(0);",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             Array.Empty<AotCoreIrAbiSlotArtifact>(),
@@ -2776,7 +2790,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
                     [
-                        "    return ChaosRandomNextMax(static_cast<CHAOS_IL2CPP_INTPTR>(0), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));",
+                        "    return ChaosRandomNextMax(0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -2905,7 +2919,7 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
                         [
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                            "    return 0;",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             Array.Empty<AotCoreIrAbiSlotArtifact>(),
@@ -2920,7 +2934,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var srcFallback = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(srcFallback, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -3308,7 +3322,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
                     [
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         Array.Empty<AotCoreIrAbiSlotArtifact>(),
@@ -3548,7 +3562,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
                     [
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         Array.Empty<AotCoreIrAbiSlotArtifact>(),
@@ -3927,7 +3941,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
                         "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -4020,7 +4034,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var srcFb = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(srcFb, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -4327,7 +4341,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
                         "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -4500,7 +4514,7 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
                         [
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                            "    return 0;",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             Array.Empty<AotCoreIrAbiSlotArtifact>(),
@@ -4512,7 +4526,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -4594,7 +4608,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var srcGetValFb = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(srcGetValFb, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -4638,7 +4652,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var srcReplaceFb = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(srcReplaceFb, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -4842,7 +4856,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -4981,7 +4995,7 @@ public sealed partial class NativeAotLoweringPlanner
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
                             "    (void)chaos_arg_0;",
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                            "    return 0;",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -4994,7 +5008,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -5022,7 +5036,7 @@ public sealed partial class NativeAotLoweringPlanner
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
                             "    (void)chaos_arg_0;",
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                            "    return 0;",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -5035,7 +5049,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -5063,7 +5077,7 @@ public sealed partial class NativeAotLoweringPlanner
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
                             "    (void)chaos_arg_0;",
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                            "    return 0;",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -5076,7 +5090,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -5128,7 +5142,7 @@ public sealed partial class NativeAotLoweringPlanner
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
                             "    (void)chaos_arg_0;",
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                            "    return 0;",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -5141,7 +5155,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -5169,7 +5183,7 @@ public sealed partial class NativeAotLoweringPlanner
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
                             "    (void)chaos_arg_0;",
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                            "    return 0;",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -5182,7 +5196,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -5430,7 +5444,7 @@ public sealed partial class NativeAotLoweringPlanner
                         var srcBytes = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
-                            "    return ChaosBitConverterGetBytes(static_cast<CHAOS_IL2CPP_INTPTR>(0), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));",
+                            "    return ChaosBitConverterGetBytes(0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));",
                         ]);
                         return new GenericShapeResolution(srcBytes, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -5450,7 +5464,7 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
                         [
-                            "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                            "    return 0;",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             Array.Empty<AotCoreIrAbiSlotArtifact>(),
@@ -5462,7 +5476,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),

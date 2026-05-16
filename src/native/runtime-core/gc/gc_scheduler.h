@@ -80,6 +80,19 @@ public:
     ///        for scheduling the next full GC trigger threshold.
     void RecordFullCollection(CHAOS_IL2CPP_SIZE total_heap_bytes, uint64_t pause_ns = 0) noexcept;
 
+    // ── GC rate limiting ──────────────────────────────────────────
+
+    /// Try to claim a "GC slot" — returns true if enough time has passed
+    /// since the last GC completed.  Used to prevent safepoint storms:
+    /// when multiple threads exhaust their nursery simultaneously, only
+    /// the one that claims the slot proceeds; others skip the GC and just
+    /// reallocate a fresh nursery.  Call RecordGcCompleted() after the GC
+    /// finishes so the next GC can proceed.
+    bool TryClaimGcSlot() noexcept;
+
+    /// Record that a GC just completed (sets the rate-limiter timestamp).
+    void RecordGcCompleted() noexcept;
+
     // ── Collection decision ──────────────────────────────────────
 
     /// Decide what kind of collection is needed right now.
@@ -106,6 +119,17 @@ public:
     }
 
     // ── Diagnostics ──────────────────────────────────────────────
+
+    /// Quick check: has allocation since last GC exceeded the young threshold?
+    /// Non-binding hint — actual decision is made in DecideCollection().
+    /// Called from NurseryAllocate fast path to proactively trigger GC before
+    /// any thread exhausts its TLS nursery.
+    bool ShouldTriggerGc() const noexcept {
+        auto nursery_size = last_nursery_used_.load(std::memory_order_relaxed);
+        auto threshold = static_cast<CHAOS_IL2CPP_SIZE>(
+            kYoungTriggerMultiplier * nursery_size);
+        return alloc_since_last_gc_.load(std::memory_order_relaxed) >= threshold;
+    }
 
     double SurvivalRate() const noexcept {
         return BitsToDouble(survival_rate_bits_.load(std::memory_order_relaxed));
@@ -154,6 +178,20 @@ private:
 
     // Estimated heap size (updated after full GC).
     std::atomic<CHAOS_IL2CPP_SIZE> estimated_heap_size_{0};
+
+    // GC rate limiter: timestamp (steady_clock ns) of the last GC completion.
+    // Threads check this before initiating a new GC; if the last GC was too
+    // recent, they skip the GC and just reallocate the nursery.  This prevents
+    // safepoint storms where 100 threads cascade GC initiations back-to-back.
+    // Initialized to 0 (no GC has completed yet — first GC always allowed).
+    std::atomic<uint64_t> last_gc_completion_ns_{0};
+
+    /// Minimum interval between GC completions (in nanoseconds).
+    /// 500 µs — enough to let all threads resume and make progress before
+    /// the next safepoint.  Prevents the cascading safepoint-storm pattern
+    /// where thread A's GC completes, thread B immediately starts another
+    /// GC before other threads have resumed, causing all 99 threads to spin.
+    static constexpr uint64_t kMinGcIntervalNs = 500 * 1000;  // 500 µs
 };
 
 /// Process-wide GC scheduler instance.

@@ -163,7 +163,8 @@ public sealed partial class NativeAotLoweringPlanner
                 // the dispatch table so the interpreter's ResolveDirectFn can find it.
                 if (TryCreateExternalRuntimeHelperDefinition(callee, out _))
                 {
-                    _externalRuntimeSubjects.TryAdd(callee, nextIndex++);
+                    if (_externalRuntimeSubjects.TryAdd(callee, nextIndex))
+                        nextIndex++;
                     continue;
                 }
 

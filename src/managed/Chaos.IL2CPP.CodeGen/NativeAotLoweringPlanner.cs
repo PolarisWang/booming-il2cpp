@@ -99,9 +99,9 @@ public sealed partial class NativeAotLoweringPlanner
     /// <summary>
     /// Determines the ObjectHeader kind for a given type. PureType = no sync (value types,
     /// boxed primitives, sealed types with no finalizer). ThinLockable = default for reference
-    /// types. Fat = types with finalizers, types needing explicit vtable*, string, array, delegate.
+    /// types (unified 16B header; virtual dispatch via type_info->vtable_array).
     /// </summary>
-    private enum HeaderKind { PureType, ThinLockable, Fat }
+    private enum HeaderKind { PureType, ThinLockable }
 
     /// <summary>
     /// VTable variant: V0 (no vtable — interfaces, pure value types in V0 emission),

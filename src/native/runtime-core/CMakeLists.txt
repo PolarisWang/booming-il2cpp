@@ -125,7 +125,6 @@ add_library(chaos_runtime_core STATIC
     )
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)
-target_compile_definitions(chaos_runtime_core PUBLIC GC_NOT_DLL)
 target_compile_definitions(chaos_runtime_core PUBLIC NOMINMAX)
 target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /FS /EHa>)
 target_include_directories(
