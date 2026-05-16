@@ -2,8 +2,8 @@
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-13T23:11:10",
-  "duration_ms": 17634,
+  "timestamp": "2026-05-16T12:02:00",
+  "duration_ms": 24451,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 9177
+      "duration_ms": 12088
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 217
+      "duration_ms": 241
     },
     "audit": {
       "stage": "audit",
@@ -56,14 +56,55 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 95
+      "duration_ms": 254
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "failed",
+      "summary": "asm-compare: 0/18 methods OK, avg JIT=0 instr, avg AOT IR=0 instr, expansion=0x",
+      "details": {
+        "totalMethods": 18,
+        "okCount": 0,
+        "failedCount": 18,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "aotInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {},
+        "overallIrExpansionRatio": 0,
+        "averageExpansionRatio": 0
+      },
+      "errors": [],
+      "duration_ms": 2710
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=0.0ns/op | FastExecute=0.0ns/instr | CallVirt dispatch=0.0ns",
+      "details": {
+        "poolSize": 0
+      },
+      "errors": [],
+      "duration_ms": 25
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "passed",
-      "summary": "avg_speedup=35.55%, native_faster=10/11, managed_faster=1/11",
+      "summary": "avg_speedup=35.57%, native_faster=10/11, managed_faster=1/11",
       "details": {
-        "averageSpeedupPercent": 35.55,
+        "averageSpeedupPercent": 35.57,
         "nativeFasterCount": 10,
         "managedFasterCount": 1,
         "matchedCount": 11,
@@ -72,7 +113,7 @@
         "benchmarkQuality": "ok"
       },
       "errors": [],
-      "duration_ms": 5119
+      "duration_ms": 4856
     },
     "hotupdate": {
       "stage": "hotupdate",
@@ -86,7 +127,7 @@
         "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 184
+      "duration_ms": 226
     },
     "post_hotupdate_benchmark": {
       "stage": "post_hotupdate_benchmark",
@@ -99,13 +140,63 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 2838
+      "duration_ms": 4044
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
     "testedRate": 100.0,
     "overall": 100.0
+  },
+  "dashboard": {
+    "interpreter": {
+      "fastFramePoolNsPerOp": 0,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 0,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 0
+    },
+    "irTranslation": {
+      "totalMethods": 18,
+      "okCount": 0,
+      "failedCount": 18,
+      "overallIrExpansionRatio": 0,
+      "averageExpansionRatio": 0,
+      "maxExpansionRatio": 0,
+      "jitInstructionAvg": 0,
+      "aotInstructionAvg": 0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {}
+    },
+    "performance": {
+      "averageSpeedupPercent": 35.57,
+      "nativeFasterCount": 10,
+      "managedFasterCount": 1,
+      "matchedCount": 11,
+      "totalMethods": 18,
+      "invalidCount": 7
+    },
+    "hotupdate": {
+      "functional": {
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "totalMethods": 0
+      },
+      "interpreterOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0.91,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 1.0,
+      "asmPassRate": 0.0
+    }
   },
   "regression": {}
 }

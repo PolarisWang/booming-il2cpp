@@ -1,0 +1,3394 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.run",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Run:System.Void(System.Int32)",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Run:System.Void(System.Int32)",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Run:System.Void(System.Int32)",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.run",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Run(System.Int32)"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Run",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            73,
+            81,
+            89,
+            97,
+            105,
+            113,
+            121,
+            129,
+            137,
+            145,
+            153,
+            161,
+            169,
+            177,
+            185
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 71,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 73,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_0:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_0:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_0:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 79,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 81,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_1:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_1:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_1:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 87,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 89,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_2:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_2:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_2:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 95,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 97,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_3:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_3:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_3:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 103,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 105,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_4:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_4:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_4:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 111,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 113,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_5:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_5:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_5:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 119,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 121,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_6:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_6:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_6:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 127,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 129,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_7:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_7:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_7:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 135,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 137,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_8:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_8:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_8:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 143,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 145,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_9:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_9:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_9:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 151,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 153,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_10:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_10:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_10:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 159,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 161,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_11:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_11:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_11:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 167,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 169,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_12:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_12:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_12:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 175,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 177,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_13:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_13:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_13:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 183,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 185,
+          "resultType": "System.Void",
+          "callee": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_14:System.Void()",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "method",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_14:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_14:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 193,
+          "ilOffset": 191,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 193
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-0",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_0:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_0:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_0:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-0",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_0()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "true",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 16,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 17,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 16,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "true",
+          "ilOffset": 17,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 22,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 32,
+          "ilOffset": 27,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 33,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 33,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 35,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 36,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 38,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 39
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 48,
+          "ilOffset": 40,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 42,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 43,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 48
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-1",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_1:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_1:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_1:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-1",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_1()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Byte",
+          "callee": "System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 11,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 16,
+          "resultType": "System.Byte",
+          "callee": "System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 27
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 36
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-2",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_2:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_2:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_2:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-2",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_2()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Int16",
+          "callee": "System.Private.CoreLib/System.Convert::ToInt16:System.Int16(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt16:System.Int16(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt16:System.Int16(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 11,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 16,
+          "resultType": "System.Int16",
+          "callee": "System.Private.CoreLib/System.Convert::ToInt16:System.Int16(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt16:System.Int16(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt16:System.Int16(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 27
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 36
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-3",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_3:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_3:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_3:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-3",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_3()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 11,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 27
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 36
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-4",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_4:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_4:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_4:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-4",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_4()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.Convert::ToInt64:System.Int64(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt64:System.Int64(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt64:System.Int64(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 11,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 12,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 17,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.Convert::ToInt64:System.Int64(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt64:System.Int64(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt64:System.Int64(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 22,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 29
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 38,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 38
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-5",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_5:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_5:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_5:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-5",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_5()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Single",
+          "callee": "System.Private.CoreLib/System.Convert::ToSingle:System.Single(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToSingle:System.Single(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToSingle:System.Single(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 11,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 12,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 17,
+          "resultType": "System.Single",
+          "callee": "System.Private.CoreLib/System.Convert::ToSingle:System.Single(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToSingle:System.Single(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToSingle:System.Single(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 22,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 29
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 38,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 38
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-6",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_6:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_6:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_6:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-6",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_6()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Convert::ToDouble:System.Double(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToDouble:System.Double(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToDouble:System.Double(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 11,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 12,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 17,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Convert::ToDouble:System.Double(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToDouble:System.Double(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToDouble:System.Double(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 22,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 29
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 38,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 38
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-7",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_7:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_7:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_7:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-7",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_7()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Decimal",
+          "callee": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 16,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 21,
+          "resultType": "System.Decimal",
+          "callee": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 31,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 33,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 34,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 36,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 37
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 46,
+          "ilOffset": 38,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 40,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 41,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 46
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-8",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_8:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_8:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_8:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-8",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_8()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 3,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 13,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 15,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 27,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 28,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 31
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 40,
+          "ilOffset": 32,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 34,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 35,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 40
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-9",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_9:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_9:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_9:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-9",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_9()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "opCode": 3,
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 10,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.r8",
+          "opCode": 3,
+          "operand": 42,
+          "ilOffset": 20,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 29,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 34,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 39,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 41,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 42,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 44,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 45
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 54,
+          "ilOffset": 46,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 48,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 49,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 54
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-10",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_10:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_10()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_10:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_10:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-10",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_10()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_10",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Decimal",
+          "callee": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 16,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 21,
+          "resultType": "System.Decimal",
+          "callee": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 31,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 33,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 34,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 36,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 37
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 46,
+          "ilOffset": 38,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 40,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 41,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 46
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-11",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_11:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_11()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_11:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_11:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-11",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_11()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_11",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 11,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 27
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 36
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-12",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_12:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_12()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_12:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_12:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-12",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_12()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_12",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 11,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 27
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 36
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-13",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_13:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_13()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_13:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_13:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-13",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_13()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_13",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 11,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 12,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 17,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 22,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 29
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 38,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 38
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-14",
+      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_14:System.Void()",
+      "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_14()",
+      "identity": {
+        "assemblyName": "PrimitiveNumericConversionsSubjects",
+        "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+        "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_14:System.Void()",
+        "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_14:System.Void()",
+        "methodId": "primitive-numeric-conversions-subjects.primitive-numeric-conversions-subjects.subject-14",
+        "signature": "System.Void PrimitiveNumericConversionsSubjects::Subject_14()"
+      },
+      "nativeSymbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Double::Parse:System.Double(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Double::Parse:System.Double(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Double::Parse:System.Double(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 11,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "42",
+          "ilOffset": 12,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 17,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Double::Parse:System.Double(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Double::Parse:System.Double(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Double::Parse:System.Double(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 22,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 29
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 38,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PrimitiveNumericConversionsSubjects",
+            "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 38
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    }
+  ]
+}

@@ -14,11 +14,12 @@
 
 #include "native_library.h"
 
+#include <chaos/unordered_dense.h>
+
 #include <cstring>
 #include <mutex>
 #include <shared_mutex>
 #include <string>
-#include <unordered_map>
 
 #if defined(_WIN32)
 #include <Windows.h>
@@ -35,7 +36,7 @@ struct NativeLibraryEntry {
     uint32_t   refcount = 0;
 };
 
-using NativeLibraryMap = std::unordered_map<std::string, NativeLibraryEntry>;
+using NativeLibraryMap = CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_STRING, NativeLibraryEntry);
 
 // Global state guarded by a reader-writer lock.
 NativeLibraryMap     s_library_map;

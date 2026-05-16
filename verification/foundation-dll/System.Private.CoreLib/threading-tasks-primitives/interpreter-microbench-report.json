@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/threading/tasks/primitives",
+  "capturedAt": "2026-05-16T02:41:00",
+  "metrics": {
+    "framePool": {
+      "acquireReleaseNsPerOp": 3.5,
+      "batchCount": 200000,
+      "framesPerBatch": 8
+    },
+    "fastExecute": {
+      "instructionCount": 8,
+      "runCount": 20000,
+      "nsPerInstruction": 4.6
+    },
+    "callVirt": {
+      "handlerDispatchNs": 19.7,
+      "emptyStackNs": 21.2,
+      "micHitNs": 30,
+      "rawFallbackNs": 2200
+    },
+    "poolSize": 32
+  },
+  "rawOutput": "{\"microbenchmark\":true,\"iterations\":200000}\n\n--- Benchmark 1: FastFramePool (kPoolSize=32) ---\n  Batch Acquire+Release:    3.5 ns/op  (avg over 200000 batches x 8 frames)\n\n--- Benchmark 2: FastExecute Per-Instruction Overhead ---\n  8 instructions x 20000 runs:    4.6 ns/instr (0.737 ms total)\n  Note: TLS hoist + relaxed + 1/64 frequency is hard-compiled.\n  To A/B compare, rebuild with the optimization reverted.\n\n--- Benchmark 3: CallVirt MIC (Monomorphic Inline Cache) ---\n  Handler dispatch overhead (LdcI4):   19.7 ns/call\n  CallVirt empty-stack:            21.2 ns/call (kHandlers dispatch + empty check + return)\n  Note: MIC hit path (cached + type match) is ~30ns.\n  MIC vtable resolution path is ~2200ns (requires registered vtable).\n  Raw fallback (InterpreterDispatchRaw) is ~2200ns.\n\n=== MICROBENCH COMPLETE ===\nGC|region|active=0|total_allocated=0\n"
+}

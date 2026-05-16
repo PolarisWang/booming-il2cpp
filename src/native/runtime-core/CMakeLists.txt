@@ -111,6 +111,9 @@ add_library(chaos_runtime_core STATIC
     gc/gc_events.cpp
     gc/gc_stats.h
     gc/gc_stats.cpp
+    gc/gc_bgc.h
+    gc/gc_bgc.cpp
+    gc/gc_bgc_inline.h
     domain_unloader.h
     domain_unloader.cpp
     native_library.h
@@ -121,7 +124,6 @@ add_library(chaos_runtime_core STATIC
     )
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)
-target_compile_definitions(chaos_runtime_core PUBLIC CHAOS_RUNTIME_ABI_STATIC)
 target_compile_definitions(chaos_runtime_core PUBLIC GC_NOT_DLL)
 target_compile_definitions(chaos_runtime_core PUBLIC NOMINMAX)
 target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /FS /EHa>)

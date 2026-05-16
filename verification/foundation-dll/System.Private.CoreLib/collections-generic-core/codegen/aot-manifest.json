@@ -1,0 +1,150 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Run:System.Void(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "subjectKind": "field",
+      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Clear:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Sort:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::ToArray:System.Int32[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    }
+  ]
+}

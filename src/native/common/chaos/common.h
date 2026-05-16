@@ -22,6 +22,7 @@
 #include "static_init.h"
 #include "span.h"
 #include "collection.h"
+#include "unordered_dense.h"
 #include "monitor.h"
 #include "thread.h"
 #include "async.h"

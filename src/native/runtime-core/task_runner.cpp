@@ -64,7 +64,8 @@ CHAOS_IL2CPP_INTPTR TaskRun(CHAOS_IL2CPP_INTPTR delegate_fn) noexcept {
     ctx->delegate = delegate_fn;
     ctx->ctx = ExecutionContextCapture();
 
-    ThreadPoolQueueUserWorkItem(TaskRunCallback, ctx);
+    // Queue without EC capture — TaskRunCallback manages EC internally.
+    ThreadPoolQueueUserWorkItemUnsafe(TaskRunCallback, ctx);
 
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task);
 }

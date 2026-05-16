@@ -716,3 +716,54 @@ public static class CollectionsHelper
         return has ? 1 : 0;
     }
 }
+
+// ── Phase 1: Cross-DLL / External dispatch fixtures ──
+public static class ExternalCaller
+{
+    // Used by fixture 67-cross-dll-external-dispatch
+    public static int CallExternal() => 0;
+}
+
+public static class MultiDispatcher
+{
+    // Used by fixture 68-cross-dll-hotpatch-native
+    public static int DispatchBoth() => 0;
+}
+
+public static class InternalHelper
+{
+    // Used by fixture 68-cross-dll-hotpatch-native
+    public static int Double(int x) => x * 2;
+}
+
+public static class StringConcatHelper
+{
+    // Used by fixture 70-external-runtime-helper
+    public static int TestConcat() { Helper.ConsumeString("Hello"); return 0; }
+}
+
+// ── Phase 2: Combined scenario fixtures ──
+public static class GenericsVirtEhDemo
+{
+    // Used by fixture 71-combined-generics-virt-eh
+    public static int DemoCombine() { try { var list = new System.Collections.Generic.List<int>(); return list.Count; } catch { return -1; } }
+}
+
+public static class BoxInterfaceArrayDemo
+{
+    // Used by fixture 72-combined-box-interface-array
+    public static int DemoBoxStore() { return 0; }
+}
+
+// ── Phase 3: Hot-update fixtures ──
+public static class HotUpdateWithTypesDemo
+{
+    // Used by fixture 76-hotupdate-with-types
+    public static int Run() => 0;
+}
+
+public static class HotUpdateWithGenericsDemo
+{
+    // Used by fixture 77-hotupdate-with-generics
+    public static int Run() => 0;
+}

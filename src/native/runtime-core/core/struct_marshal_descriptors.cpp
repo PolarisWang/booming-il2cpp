@@ -10,7 +10,7 @@ static constexpr CHAOS_IL2CPP_SIZE kMaxStaticDescriptors = 256;
 static MarshallingDescriptorEntry g_static_descriptors[kMaxStaticDescriptors];
 static CHAOS_IL2CPP_INT32 g_static_descriptor_count = 0;
 
-static std::unordered_map<CHAOS_IL2CPP_UINT64, std::unique_ptr<StructMarshallingDescriptorV1>> g_runtime_descriptor_cache;
+static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, std::unique_ptr<StructMarshallingDescriptorV1>) g_runtime_descriptor_cache;
 static std::mutex g_runtime_descriptor_mutex;
 
 }  // anonymous namespace

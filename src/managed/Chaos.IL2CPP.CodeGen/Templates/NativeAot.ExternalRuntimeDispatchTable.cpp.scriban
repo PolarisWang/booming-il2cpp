@@ -2,19 +2,19 @@
 // Startup-time-resolved function pointers for cross-assembly calls.
 
 extern "C" const char* kChaosExternalRuntimeSubjects[{{ subject_count }}] = {
-{% for entry in entries %}
+{{~ for entry in entries ~}}
     "{{ entry.subject_literal }}",
-{% endfor %}
+{{~ end ~}}
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[{{ subject_count }}] = {
-{% for entry in entries %}
-{% if entry.has_helper_symbol %}
+{{~ for entry in entries ~}}
+{{~ if entry.has_helper_symbol ~}}
     reinterpret_cast<void*>(&{{ entry.helper_symbol }}),
-{% else %}
+{{~ else ~}}
     nullptr,
-{% endif %}
-{% endfor %}
+{{~ end ~}}
+{{~ end ~}}
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = {{ subject_count }};

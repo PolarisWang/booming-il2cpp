@@ -1,4 +1,4 @@
-{%~ if has_aot_entries ~%}
+{{~ if has_aot_entries ~}}
 // ── Register method AOT entries ─────────────────────────────
 static const CHAOS_IL2CPP_UINT32 s_register_method_aot = []()
 {
@@ -10,6 +10,6 @@ static const CHAOS_IL2CPP_UINT32 s_register_method_aot = []()
         {{ aot_arg_token_count }}u);
     return 0u;
 }();
-{%~ else ~%}
+{{~ else ~}}
 // (no method AOT entries for this module)
-{%~ end ~%}
+{{~ end ~}}

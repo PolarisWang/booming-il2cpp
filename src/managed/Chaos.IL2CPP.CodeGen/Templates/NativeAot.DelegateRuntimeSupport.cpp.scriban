@@ -107,17 +107,17 @@ CHAOS_IL2CPP_INTPTR chaos_delegate_allocate_with_type_info(const TypeInfo* chaos
 {
     switch (chaos_delegate_type_info->stable_id)
     {
-{% for entry in delegate_entries %}
+{{~ for entry in delegate_entries ~}}
         case {{ entry.type_id_symbol }}:
         {
             auto* chaos_delegate = CHAOS_IL2CPP_NEW_GC({{ entry.native_type_symbol }}, {});
             chaos_delegate->header.type_info = &{{ entry.type_info_symbol }};
-{% if entry.has_vtable %}
+{{~ if entry.has_vtable ~}}
             chaos_delegate->header.vtable = {{ entry.vtable_symbol }};
-{% endif %}
+{{~ end ~}}
             return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_delegate);
         }
-{% endfor %}
+{{~ end ~}}
         default:
             CHAOS_IL2CPP_FAIL();
     }

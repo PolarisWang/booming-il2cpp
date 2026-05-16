@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "EnumParsingSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Run",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_0",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_1",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_2",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_3",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_4",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_5",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_6",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_7",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_8",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_9",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_10",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_11",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_11:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

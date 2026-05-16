@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
+#include <memory>
 
 #include "gc_region.h"
 
@@ -59,10 +60,14 @@ struct CardSegment {
     uint8_t cards[kCardsPerSegment];
 };
 
-/// L1 segment pointer table (512 KB).
+/// L1 segment pointer table (dynamically growing).
 /// Each entry is atomic for lock-free concurrent read in DirtyCard and
 /// single-writer CAS in GcRegisterHeapRange.
-extern std::atomic<CardSegment*> g_card_l1[kCardL1Entries];
+/// Initial size: 64K entries (512 KB), auto-grows for heaps > 4 GB.
+/// Uses unique_ptr<T[]> because std::atomic is not copyable (MSVC).
+/// Size tracked separately in g_card_l1_size (atomic for lock-free read).
+extern std::unique_ptr<std::atomic<CardSegment*>[]> g_card_l1;
+extern std::atomic<size_t> g_card_l1_size;
 
 /// Base address of the managed heap.  Set once at startup via GcSetHeapBase().
 extern uintptr_t g_heap_base;
@@ -79,7 +84,7 @@ inline void DirtyCard(const void* obj) noexcept {
     }
     uintptr_t idx = (addr - g_heap_base) >> kCardShift;
     uintptr_t seg_idx = idx / kCardsPerSegment;
-    if (seg_idx >= static_cast<uintptr_t>(kCardL1Entries)) [[unlikely]] {
+    if (seg_idx >= g_card_l1_size.load(std::memory_order_acquire)) [[unlikely]] {
         return;  // beyond card table coverage — not managed
     }
     uintptr_t card_idx = idx % kCardsPerSegment;
@@ -95,7 +100,7 @@ inline bool IsDirty(const void* obj) noexcept {
     if (addr < g_heap_base) return false;
     uintptr_t idx = (addr - g_heap_base) >> kCardShift;
     uintptr_t seg_idx = idx / kCardsPerSegment;
-    if (seg_idx >= static_cast<uintptr_t>(kCardL1Entries)) return false;
+    if (seg_idx >= g_card_l1_size.load(std::memory_order_acquire)) return false;
     uintptr_t card_idx = idx % kCardsPerSegment;
     auto* seg = g_card_l1[seg_idx].load(std::memory_order_acquire);
     if (seg == nullptr) return false;
@@ -108,7 +113,7 @@ inline void ClearCard(const void* obj) noexcept {
     if (addr < g_heap_base) return;
     uintptr_t idx = (addr - g_heap_base) >> kCardShift;
     uintptr_t seg_idx = idx / kCardsPerSegment;
-    if (seg_idx >= static_cast<uintptr_t>(kCardL1Entries)) return;
+    if (seg_idx >= g_card_l1_size.load(std::memory_order_acquire)) return;
     uintptr_t card_idx = idx % kCardsPerSegment;
     auto* seg = g_card_l1[seg_idx].load(std::memory_order_relaxed);
     if (seg != nullptr) {
@@ -149,7 +154,7 @@ inline void ScanDirtyCards(uintptr_t start, uintptr_t end, Fn&& callback) noexce
     uintptr_t first_seg = first / kCardsPerSegment;
     uintptr_t last_seg  = last / kCardsPerSegment;
 
-    for (uintptr_t si = first_seg; si <= last_seg && si < static_cast<uintptr_t>(kCardL1Entries); si++) {
+    for (uintptr_t si = first_seg; si <= last_seg && si < g_card_l1_size.load(std::memory_order_acquire); si++) {
         auto* seg = g_card_l1[si].load(std::memory_order_acquire);
         if (seg == nullptr) continue;
 

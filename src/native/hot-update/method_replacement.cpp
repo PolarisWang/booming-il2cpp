@@ -3,14 +3,14 @@
 #include <chaos/native_types.h>
 
 #include <mutex>
-#include <unordered_map>
+#include <chaos/unordered_dense.h>
 
 namespace chaos::il2cpp::method_replacement {
 
 namespace {
 
 CHAOS_IL2CPP_SHARED_MUTEX g_method_replacement_mutex;
-CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, MethodReplacementEntry) g_method_replacements;
+CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT32, MethodReplacementEntry) g_method_replacements;
 
 }  // namespace
 

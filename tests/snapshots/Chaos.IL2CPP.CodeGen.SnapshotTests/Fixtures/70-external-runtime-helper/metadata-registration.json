@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/StringConcatHelper",
+      "name": "StringConcatHelper",
+      "displayName": "StringConcatHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/StringConcatHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()",
+      "name": "TestConcat",
+      "definitionSubjectId": "SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/StringConcatHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

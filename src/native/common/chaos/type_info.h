@@ -252,55 +252,14 @@ inline MethodTable* TypeInfoHot::AsMethodTable() noexcept {
     return reinterpret_cast<MethodTable*>(this);
 }
 
-// ── TypeHandle encoding helpers (uint64_t) ─────────────────────────
-// Three-state encoding for cross-DLL type identity:
-//   bit[63]=1:          Direct MethodTable* pointer (AOT types)
-//   bit[62]=1,bit[63]=0: Dynamic MethodTable index
-//   bit[62]=0,bit[63]=0: Module-registry handle [module_id:32 << 32 | token:32]
+// ═══════════════════════════════════════════════════════════════════════════
+// TypeInfoHandle is always a Module Registry handle: (module_id << 32 | token).
+// See module_registry.h for encode/decode helpers (GetModuleId, GetTypeToken,
+// MakeTypeHandle) and resolution helpers (ResolveMethodTable, ResolveTypeDescriptor).
 //
-// This enables the hot path (case bit[63]=1) to be a single pointer
-// dereference, matching the performance of TypeInfoHot* direct access.
-
-/// Highest bit tag for direct MethodTable* encoding.
-inline constexpr uint64_t kTypeHandleMethodTableTag  = 1ull << 63;
-
-/// Second-highest bit tag for dynamic MethodTable index encoding.
-inline constexpr uint64_t kTypeHandleDynamicIndexTag = 1ull << 62;
-
-/// Encode a MethodTable* as a direct TypeInfoHandle (bit[63]=1).
-inline uint64_t EncodeMethodTableHandle(const MethodTable* mt) noexcept {
-    return mt != nullptr
-        ? (reinterpret_cast<uint64_t>(mt) | kTypeHandleMethodTableTag)
-        : 0ull;
-}
-
-/// Decode a direct MethodTable* from a TypeInfoHandle.
-/// Returns nullptr if the handle is NOT a direct MethodTable pointer.
-inline const MethodTable* DecodeMethodTableHandle(uint64_t handle) noexcept {
-    if ((handle & kTypeHandleMethodTableTag) == 0) return nullptr;
-    return reinterpret_cast<const MethodTable*>(handle & ~kTypeHandleMethodTableTag);
-}
-
-inline MethodTable* DecodeMethodTableHandleNonConst(uint64_t handle) noexcept {
-    if ((handle & kTypeHandleMethodTableTag) == 0) return nullptr;
-    return reinterpret_cast<MethodTable*>(handle & ~kTypeHandleMethodTableTag);
-}
-
-/// Check if a TypeInfoHandle is a direct MethodTable pointer (bit[63]=1).
-inline bool IsDirectMethodTableHandle(uint64_t handle) noexcept {
-    return (handle & kTypeHandleMethodTableTag) != 0;
-}
-
-/// Check if a TypeInfoHandle is a dynamic MethodTable index (bit[62]=1, bit[63]=0).
-inline bool IsDynamicMethodTableHandle(uint64_t handle) noexcept {
-    return (handle & kTypeHandleMethodTableTag) == 0
-        && (handle & kTypeHandleDynamicIndexTag) != 0;
-}
-
-/// Check if a TypeInfoHandle is a module-registry handle (bits[63:62]=00).
-inline bool IsModuleRegistryHandle(uint64_t handle) noexcept {
-    return (handle & (kTypeHandleMethodTableTag | kTypeHandleDynamicIndexTag)) == 0;
-}
+// This is a single-canonical-representation design: every TypeInfoHandle uses
+// exactly one encoding, eliminating tag-bit collisions and handle identity bugs.
+// ═══════════════════════════════════════════════════════════════════════════
 
 }  // namespace chaos::il2cpp::common
 

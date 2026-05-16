@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/convert/char",
+  "capturedAt": "2026-05-16T12:01:51",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": "Passed: 19/19\nGC|region|active=0|total_allocated=0\n"
+}

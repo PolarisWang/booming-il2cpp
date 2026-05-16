@@ -198,7 +198,7 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
                             image_desc, token, &field_idx);
                         if (declaring_type != nullptr) {
                             TypeInfoHandle decl_handle =
-                                EncodeReflectionQueryTypeHandle(declaring_type);
+                                chaos::il2cpp::runtime_core::EncodeReflectionQueryTypeHandle(declaring_type);
                             const auto* layout =
                                 ctx->layout_engine->GetOrComputeLayout(
                                     decl_handle, ctx->type_args, ctx->arg_count);

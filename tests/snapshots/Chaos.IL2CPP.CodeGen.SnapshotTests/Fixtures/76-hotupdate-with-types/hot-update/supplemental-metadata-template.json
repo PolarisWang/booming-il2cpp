@@ -1,0 +1,41 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MyHotSwappedType",
+      "definitionSubjectId": "SnapshotTestFixtures/MyHotSwappedType",
+      "metadataToken": 33554433
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/AnotherHotType",
+      "definitionSubjectId": "SnapshotTestFixtures/AnotherHotType",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MyHotSwappedType::Compute:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/MyHotSwappedType::Compute:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/MyHotSwappedType",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/AnotherHotType::GetName:System.String()",
+      "definitionSubjectId": "SnapshotTestFixtures/AnotherHotType::GetName:System.String()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/AnotherHotType",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

@@ -461,6 +461,7 @@ def _generate_csproj(
 
     if variant == "subjects":
         # Subjects DLL: pure il2cpp input, no TestFramework, no Program.cs, net8.0
+        custom_cs = f'    <Compile Include="{class_name}.Custom.cs" />\n' if has_custom_entry else ""
         return (
             '<Project Sdk="Microsoft.NET.Sdk">\n'
             "  <PropertyGroup>\n"
@@ -474,6 +475,7 @@ def _generate_csproj(
             "  </PropertyGroup>\n"
             "  <ItemGroup>\n"
             f'    <Compile Include="{cs_file_name}" />\n'
+            f"{custom_cs}"
             "  </ItemGroup>\n"
             "</Project>\n"
         )
@@ -782,6 +784,7 @@ def generate_and_build(
                 class_name=class_name,
                 cs_file_name=cs_file_name,
                 variant=variant,
+                has_custom_entry=has_custom_entry,
             ),
             encoding="utf-8",
         )

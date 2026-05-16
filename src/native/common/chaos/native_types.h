@@ -144,6 +144,67 @@
 #define CHAOS_IL2CPP_MEMORY_ORDER_ACQ_REL std::memory_order_acq_rel
 #define CHAOS_IL2CPP_MEMORY_ORDER_RELAXED std::memory_order_relaxed
 
+// Atomic intrinsic helpers for Interlocked/Volatile codegen inline shapes.
+// These are used by generated C++ code at the call site to emit platform
+// intrinsic instructions directly, eliminating extern "C" ABI stub overhead.
+#if defined(_MSC_VER)
+  #include <intrin.h>
+  // _Interlocked* intrinsics return the OLD value; arithmetic ops need adjustment.
+  #pragma intrinsic(_InterlockedIncrement, _InterlockedDecrement, _InterlockedExchange,\
+                    _InterlockedCompareExchange, _InterlockedExchangeAdd, _InterlockedAnd,\
+                    _InterlockedOr, _InterlockedIncrement64, _InterlockedDecrement64,\
+                    _InterlockedExchange64, _InterlockedCompareExchange64, _InterlockedExchangeAdd64,\
+                    _ReadWriteBarrier, _mm_mfence)
+  // Increment/Decrement/Add return the NEW value
+  #define CHAOS_IL2CPP_ATOMIC_INC(ptr)       _InterlockedIncrement(reinterpret_cast<volatile long*>(ptr))
+  #define CHAOS_IL2CPP_ATOMIC_DEC(ptr)       _InterlockedDecrement(reinterpret_cast<volatile long*>(ptr))
+  #define CHAOS_IL2CPP_ATOMIC_INC64(ptr)     _InterlockedIncrement64(reinterpret_cast<volatile __int64*>(ptr))
+  #define CHAOS_IL2CPP_ATOMIC_DEC64(ptr)     _InterlockedDecrement64(reinterpret_cast<volatile __int64*>(ptr))
+  // Exchange returns the OLD value (correct for Interlocked.Exchange return semantics)
+  #define CHAOS_IL2CPP_ATOMIC_XCHG(ptr, val)  _InterlockedExchange(reinterpret_cast<volatile long*>(ptr), static_cast<long>(val))
+  #define CHAOS_IL2CPP_ATOMIC_XCHG64(ptr, val) _InterlockedExchange64(reinterpret_cast<volatile __int64*>(ptr), static_cast<__int64>(val))
+  #define CHAOS_IL2CPP_ATOMIC_XCHGPTR(ptr, val) _InterlockedExchangePointer(reinterpret_cast<void* volatile*>(ptr), reinterpret_cast<void*>(val))
+  // CompareExchange returns the OLD value (correct for Interlocked.CompareExchange)
+  #define CHAOS_IL2CPP_ATOMIC_CAS(ptr, cmp, val)  _InterlockedCompareExchange(reinterpret_cast<volatile long*>(ptr), static_cast<long>(val), static_cast<long>(cmp))
+  #define CHAOS_IL2CPP_ATOMIC_CAS64(ptr, cmp, val) _InterlockedCompareExchange64(reinterpret_cast<volatile __int64*>(ptr), static_cast<__int64>(val), static_cast<__int64>(cmp))
+  #define CHAOS_IL2CPP_ATOMIC_CASPTR(ptr, cmp, val) _InterlockedCompareExchangePointer(reinterpret_cast<void* volatile*>(ptr), reinterpret_cast<void*>(val), reinterpret_cast<void*>(cmp))
+  // Add returns the NEW value (Interlocked.Add returns new value)
+  #define CHAOS_IL2CPP_ATOMIC_ADD(ptr, val)   (_InterlockedExchangeAdd(reinterpret_cast<volatile long*>(ptr), static_cast<long>(val)) + (val))
+  #define CHAOS_IL2CPP_ATOMIC_ADD64(ptr, val) (_InterlockedExchangeAdd64(reinterpret_cast<volatile __int64*>(ptr), static_cast<__int64>(val)) + (val))
+  // Memory barrier
+  #define CHAOS_IL2CPP_ATOMIC_FENCE()         (_ReadWriteBarrier(), _mm_mfence())
+  // Volatile load/store using acquire/release semantics
+  #define CHAOS_IL2CPP_VOLATILE_LOAD(ptr)     (*(const volatile CHAOS_IL2CPP_INT32*)(ptr))
+  #define CHAOS_IL2CPP_VOLATILE_STORE(ptr, v) (*(volatile CHAOS_IL2CPP_INT32*)(ptr) = (v))
+  #define CHAOS_IL2CPP_VOLATILE_LOAD64(ptr)    (*(const volatile CHAOS_IL2CPP_INT64*)(ptr))
+  #define CHAOS_IL2CPP_VOLATILE_STORE64(ptr, v) (*(volatile CHAOS_IL2CPP_INT64*)(ptr) = (v))
+#else
+  // GCC/Clang __atomic_* builtins — cross-platform, work on raw pointers.
+  // Increment/Decrement/Add return the NEW value
+  #define CHAOS_IL2CPP_ATOMIC_INC(ptr)        __atomic_add_fetch((ptr), 1, __ATOMIC_SEQ_CST)
+  #define CHAOS_IL2CPP_ATOMIC_DEC(ptr)        __atomic_sub_fetch((ptr), 1, __ATOMIC_SEQ_CST)
+  #define CHAOS_IL2CPP_ATOMIC_INC64(ptr)      __atomic_add_fetch((ptr), 1ll, __ATOMIC_SEQ_CST)
+  #define CHAOS_IL2CPP_ATOMIC_DEC64(ptr)      __atomic_sub_fetch((ptr), 1ll, __ATOMIC_SEQ_CST)
+  // Exchange returns the OLD value
+  #define CHAOS_IL2CPP_ATOMIC_XCHG(ptr, val)   __atomic_exchange_n((ptr), (val), __ATOMIC_SEQ_CST)
+  #define CHAOS_IL2CPP_ATOMIC_XCHG64(ptr, val) __atomic_exchange_n((ptr), (val), __ATOMIC_SEQ_CST)
+  #define CHAOS_IL2CPP_ATOMIC_XCHGPTR(ptr, val) __atomic_exchange_n((ptr), (val), __ATOMIC_SEQ_CST)
+  // CompareExchange: __sync version returns old value directly
+  #define CHAOS_IL2CPP_ATOMIC_CAS(ptr, cmp, val)    __sync_val_compare_and_swap((ptr), (cmp), (val))
+  #define CHAOS_IL2CPP_ATOMIC_CAS64(ptr, cmp, val)  __sync_val_compare_and_swap((ptr), (cmp), (val))
+  #define CHAOS_IL2CPP_ATOMIC_CASPTR(ptr, cmp, val) __sync_val_compare_and_swap((ptr), (cmp), (val))
+  // Add with __sync_fetch_and_add returns OLD value, add val to get NEW
+  #define CHAOS_IL2CPP_ATOMIC_ADD(ptr, val)   __atomic_add_fetch((ptr), (val), __ATOMIC_SEQ_CST)
+  #define CHAOS_IL2CPP_ATOMIC_ADD64(ptr, val) __atomic_add_fetch((ptr), (val), __ATOMIC_SEQ_CST)
+  // Memory barrier
+  #define CHAOS_IL2CPP_ATOMIC_FENCE()         __atomic_thread_fence(__ATOMIC_SEQ_CST)
+  // Volatile load/store using acquire/release semantics
+  #define CHAOS_IL2CPP_VOLATILE_LOAD(ptr)     __atomic_load_n((ptr), __ATOMIC_ACQUIRE)
+  #define CHAOS_IL2CPP_VOLATILE_STORE(ptr, v) __atomic_store_n((ptr), (v), __ATOMIC_RELEASE)
+  #define CHAOS_IL2CPP_VOLATILE_LOAD64(ptr)    __atomic_load_n((ptr), __ATOMIC_ACQUIRE)
+  #define CHAOS_IL2CPP_VOLATILE_STORE64(ptr, v) __atomic_store_n((ptr), (v), __ATOMIC_RELEASE)
+#endif
+
 // ── Chrono ──────────────────────────────────────────────────
 #define CHAOS_IL2CPP_CHRONO_STEADY_CLOCK            std::chrono::steady_clock
 #define CHAOS_IL2CPP_CHRONO_DURATION(T, P)          std::chrono::duration<T, P>
@@ -267,17 +328,22 @@
 #define CHAOS_IL2CPP_NUMERIC_LIMITS_INFINITY(T) (std::numeric_limits<T>::infinity)()
 #define CHAOS_IL2CPP_NUMERIC_LIMITS_QUIET_NAN(T) (std::numeric_limits<T>::quiet_NaN)()
 
-// ── Explicit *_[MIN|MAX] constants (for generated C++ overflow checks) ──
-#define CHAOS_IL2CPP_INT8_MAX     (std::numeric_limits<CHAOS_IL2CPP_INT8>::max)()
-#define CHAOS_IL2CPP_INT16_MAX    (std::numeric_limits<CHAOS_IL2CPP_INT16>::max)()
-#define CHAOS_IL2CPP_INT32_MAX    (std::numeric_limits<CHAOS_IL2CPP_INT32>::max)()
-#define CHAOS_IL2CPP_INT64_MAX    (std::numeric_limits<CHAOS_IL2CPP_INT64>::max)()
-#define CHAOS_IL2CPP_UINT8_MAX    (std::numeric_limits<CHAOS_IL2CPP_UINT8>::max)()
-#define CHAOS_IL2CPP_UINT16_MAX   (std::numeric_limits<CHAOS_IL2CPP_UINT16>::max)()
-#define CHAOS_IL2CPP_UINT32_MAX   (std::numeric_limits<CHAOS_IL2CPP_UINT32>::max)()
-#define CHAOS_IL2CPP_UINT64_MAX   (std::numeric_limits<CHAOS_IL2CPP_UINT64>::max)()
-#define CHAOS_IL2CPP_INTPTR_MAX   (std::numeric_limits<CHAOS_IL2CPP_INTPTR>::max)()
-#define CHAOS_IL2CPP_UINTPTR_MAX  (std::numeric_limits<CHAOS_IL2CPP_UINTPTR>::max)()
+	// ── Explicit *_[MIN|MAX] constants (for generated C++ overflow checks) ──
+	#define CHAOS_IL2CPP_INT8_MIN     (std::numeric_limits<CHAOS_IL2CPP_INT8>::min)()
+	#define CHAOS_IL2CPP_INT8_MAX     (std::numeric_limits<CHAOS_IL2CPP_INT8>::max)()
+	#define CHAOS_IL2CPP_INT16_MIN    (std::numeric_limits<CHAOS_IL2CPP_INT16>::min)()
+	#define CHAOS_IL2CPP_INT16_MAX    (std::numeric_limits<CHAOS_IL2CPP_INT16>::max)()
+	#define CHAOS_IL2CPP_INT32_MIN    (std::numeric_limits<CHAOS_IL2CPP_INT32>::min)()
+	#define CHAOS_IL2CPP_INT32_MAX    (std::numeric_limits<CHAOS_IL2CPP_INT32>::max)()
+	#define CHAOS_IL2CPP_INT64_MIN    (std::numeric_limits<CHAOS_IL2CPP_INT64>::min)()
+	#define CHAOS_IL2CPP_INT64_MAX    (std::numeric_limits<CHAOS_IL2CPP_INT64>::max)()
+	#define CHAOS_IL2CPP_UINT8_MAX    (std::numeric_limits<CHAOS_IL2CPP_UINT8>::max)()
+	#define CHAOS_IL2CPP_UINT16_MAX   (std::numeric_limits<CHAOS_IL2CPP_UINT16>::max)()
+	#define CHAOS_IL2CPP_UINT32_MAX   (std::numeric_limits<CHAOS_IL2CPP_UINT32>::max)()
+	#define CHAOS_IL2CPP_UINT64_MAX   (std::numeric_limits<CHAOS_IL2CPP_UINT64>::max)()
+	#define CHAOS_IL2CPP_INTPTR_MIN   (std::numeric_limits<CHAOS_IL2CPP_INTPTR>::min)()
+	#define CHAOS_IL2CPP_INTPTR_MAX   (std::numeric_limits<CHAOS_IL2CPP_INTPTR>::max)()
+	#define CHAOS_IL2CPP_UINTPTR_MAX  (std::numeric_limits<CHAOS_IL2CPP_UINTPTR>::max)()
 
 // ── Indirect load/store templates ────────────────────────────
 #define CHAOS_IL2CPP_RAW_POINTER_TAG  CHAOS_IL2CPP_UINTPTR(1) << 63

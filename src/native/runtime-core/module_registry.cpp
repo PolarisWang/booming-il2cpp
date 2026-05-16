@@ -6,11 +6,14 @@
 
 #include <cstring>
 
+#include <shared_mutex>
+
 namespace chaos::il2cpp::runtime_core {
 
 // ── Global state ───────────────────────────────────────────────────────
 
 // Sufficiently-aligned storage to avoid static initialization order issues.
+// kMaxModules = 4096 supports 200+ DLL scenarios.
 static ModuleDescriptor g_module_storage[kMaxModules] = {};
 static uint32_t g_module_count = 1;  // [0] = CoreLib fallback, always present
 
@@ -24,12 +27,22 @@ static auto& g_free_list() {
     return list;
 }
 
+// Reader-writer lock guarding all module registry state:
+//   g_module_storage[], g_module_count, g_free_list()
+// Read paths (LookupModule, LookupModuleByName, etc.) acquire shared_lock.
+// Write paths (RegisterModule, MarkModuleTombstone) acquire unique_lock.
+// Must NOT be recursively acquired -- internal callers must not call
+// another locked function while holding the lock.
+static std::shared_mutex g_module_mutex;
+
 // ── Registry API ───────────────────────────────────────────────────────
 
 uint32_t RegisterModule(const char* name, const ModuleDescriptor* descriptor) {
     if (name == nullptr || descriptor == nullptr) {
         return kInvalidModuleId;
     }
+
+    std::unique_lock lock(g_module_mutex);
 
     uint32_t id = kInvalidModuleId;
 
@@ -67,25 +80,29 @@ uint32_t RegisterModule(const char* name, const ModuleDescriptor* descriptor) {
 }
 
 const ModuleDescriptor* LookupModule(uint32_t module_id) {
+    std::shared_lock lock(g_module_mutex);
+
     if (module_id >= kMaxModules) {
         return nullptr;
     }
     // g_module_storage[id] is always populated for valid IDs (including
     // tombstone modules, where the entry is retained for handle safety).
-    if (module_id >= g_module_count && !IsModuleTombstone(module_id)) {
+    if (module_id >= g_module_count && !g_module_storage[module_id].tombstone) {
         return nullptr;  // not yet allocated and not tombstone
     }
     return &g_module_storage[module_id];
 }
 
 const ModuleDescriptor* LookupModuleByName(const char* name) {
+    std::shared_lock lock(g_module_mutex);
+
     if (name == nullptr) {
         return nullptr;
     }
 
     for (uint32_t i = 0; i < kMaxModules; i++) {
         // Skip unallocated slots and tombstone modules.
-        if (i >= g_module_count && !IsModuleTombstone(i)) {
+        if (i >= g_module_count && !g_module_storage[i].tombstone) {
             break;
         }
         if (g_module_storage[i].tombstone) {
@@ -102,6 +119,9 @@ const ModuleDescriptor* LookupModuleByName(const char* name) {
 
 void MarkModuleTombstone(uint32_t module_id) {
     CHAOS_IL2CPP_LOG_TRACE("runtime", "MarkModuleTombstone", "\"module_id\"=%u", module_id);
+
+    std::unique_lock lock(g_module_mutex);
+
     if (module_id >= kMaxModules) {
         return;
     }
@@ -129,6 +149,8 @@ void MarkModuleTombstone(uint32_t module_id) {
 }
 
 bool IsModuleTombstone(uint32_t module_id) {
+    std::shared_lock lock(g_module_mutex);
+
     if (module_id >= kMaxModules) {
         return false;
     }
@@ -136,10 +158,13 @@ bool IsModuleTombstone(uint32_t module_id) {
 }
 
 uint32_t GetModuleCount() {
+    std::shared_lock lock(g_module_mutex);
     return g_module_count;
 }
 
 const ModuleDescriptor* GetModuleByIndex(uint32_t index) {
+    std::shared_lock lock(g_module_mutex);
+
     if (index >= g_module_count) return nullptr;
     if (g_module_storage[index].tombstone) return nullptr;
     return &g_module_storage[index];

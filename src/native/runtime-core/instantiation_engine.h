@@ -62,6 +62,15 @@ struct CachedCallInfo {
     bool     is_patched       = false;    // true = method has active patch
     uint32_t module_id        = 0;        // module owning the target method
     uint32_t slot             = 0;        // dispatch table slot index
+
+    // ── CallVirt MIC (Monomorphic Inline Cache) ────────────────────────────
+    // Runtime-populated fields for virtual call optimization.  Handle_CallVirt
+    // caches the vtable-resolved function pointer + receiver type_token so
+    // monomorphic call sites (same receiver type repeated) skip the ~2200ns
+    // vtable walk.  Updated under benign races (all racers compute same value).
+    void*    mic_dispatch_ptr = nullptr;  // cached vtable-resolved fn ptr
+    uint32_t mic_type_token   = 0;        // cached receiver type_token
+    uint64_t mic_generation   = 0;        // g_patch_generation at cache-fill time
 };
 
 /// Pre-compute call metadata for a single call_target (MethodInfoHandle).

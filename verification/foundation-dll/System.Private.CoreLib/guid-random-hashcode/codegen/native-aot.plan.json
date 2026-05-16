@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "generic-managed-entry",
+  "assemblyName": "GuidRandomHashcodeSubjects",
+  "entrySubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Run:System.Void(System.Int32)",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Run",
+  "entryMethodToken": "0u",
+  "workloadAbi": "void(int32)"
+}

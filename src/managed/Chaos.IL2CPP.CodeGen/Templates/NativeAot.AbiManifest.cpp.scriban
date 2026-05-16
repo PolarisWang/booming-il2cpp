@@ -4,9 +4,9 @@
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
 static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[{{ method_count_plus_one }}] = {
-{% for prefix in prefix_sums %}
+{{~ for prefix in prefix_sums ~}}
     {{ prefix }}u,
-{% endfor %}
+{{~ end ~}}
 };
 
 static constexpr struct {
@@ -22,16 +22,16 @@ static constexpr struct {
         s_abi_manifest_prefix_sum  // O(1) prefix-sum
     },
     {
-{% for method in methods %}
+{{~ for method in methods ~}}
         { {{ method.return_carrier }}u, {{ method.param_count }}u },  // {{ method.native_symbol }}
-{% endfor %}
+{{~ end ~}}
     },
     {
-{% if total_params > 0 %}
-{% for carrier in param_carriers %}
+{{~ if total_params > 0 ~}}
+{{~ for carrier in param_carriers ~}}
         {{ carrier }}u,
-{% endfor %}
-{% endif %}
+{{~ end ~}}
+{{~ end ~}}
     },
 };
 static const ::ChaosAbiManifestV0* const s_abi_manifest =

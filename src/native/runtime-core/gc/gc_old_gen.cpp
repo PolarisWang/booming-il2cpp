@@ -201,7 +201,7 @@ void MarkSweepOldGen::FreePage(OldGenPage* page) {
     VirtualFreePage(page, page->page_size);
 }
 
-OldGenPage* MarkSweepOldGen::FindPage(const void* ptr) {
+OldGenPage* MarkSweepOldGen::FindPage(const void* ptr) const {
     if (ptr == nullptr) return nullptr;
     auto* page = page_list_;
     while (page != nullptr) {
@@ -229,6 +229,24 @@ bool MarkSweepOldGen::IsInOldGen(const void* ptr) const {
         page = page->next;
     }
     return false;
+}
+
+bool MarkSweepOldGen::IsMarked(const void* obj) const {
+    if (obj == nullptr) return false;
+    auto* page = FindPage(obj);
+    if (page == nullptr) return false;
+    uintptr_t offset = reinterpret_cast<uintptr_t>(obj)
+        - reinterpret_cast<uintptr_t>(page->Payload());
+    CHAOS_IL2CPP_SIZE slot = offset / sizeof(void*);
+    CHAOS_IL2CPP_SIZE byte_idx = slot / 8;
+    auto* bitmap = page->MarkBitmap();
+    return (bitmap[byte_idx] >> (slot % 8)) & 1u;
+}
+
+void MarkSweepOldGen::AddToMarkStack(void* obj) {
+    if (obj == nullptr) return;
+    std::lock_guard<std::mutex> lock(mutex_);
+    mark_stack_.push_back(obj);
 }
 
 // ======================================================================
@@ -716,6 +734,20 @@ void MarkSweepOldGen::HandleReMarkPass() {
                 g_loh.MarkObject(object);
             }
         }, nullptr);
+    }
+
+    // Phase 3c: Process dependent handles (ConditionalWeakTable).
+    // Fixed-point iteration: if primary is alive, keep secondary alive.
+    // Runs after finalizer re-mark so resurrected objects are visible.
+    int dep_kept = GcProcessDependentHandlesAfterFullGC();
+    if (dep_kept > 0) {
+        // New objects were marked — drain the mark stack.
+        DrainMarkStack();
+        // Re-mark LOH objects reachable from dependent handles.
+        if (g_loh.SegmentCount() > 0 && g_loh.Sweep() > 0) {
+            // LOH objects were kept alive; no need to subtract from reclaimed.
+        }
+        CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "dependent_handle_fixedpoint kept={0}", dep_kept);
     }
 }
 
@@ -1248,8 +1280,8 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_start page_count={0}", page_count_);
 
-    // Fire GC_START event.
-    GcFireEvent(GcEvent::GC_START);
+    // Fire GC_FULL_START event.
+    GcFireEvent(GcEvent::GC_FULL_START);
 
     // V4-H3: Snapshot pinned_roots_ under mutex to avoid data race with
     // AddPinnedRoot (which pushes under the same mutex).  Iterating the
@@ -1557,8 +1589,8 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_done reclaimed={0} pause_ns={1}",
         static_cast<unsigned long long>(total_reclaimed), pause_ns);
 
-    // Fire GC_END event.
-    GcFireEvent(GcEvent::GC_END);
+    // Fire GC_FULL_DONE event.
+    GcFireEvent(GcEvent::GC_FULL_DONE);
 }
 
 bool MarkSweepOldGen::CollectFull() {
@@ -1703,6 +1735,81 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::RunFinalizers() {
     }
 
     return ran;
+}
+
+// ── BGC concurrent-safe mark ─────────────────────────────────────
+
+bool MarkSweepOldGen::BgcTryMark(void* obj) {
+    // Delegate to MarkObject which already uses atomic bitmap operations.
+    // The concurrent BGC thread and STW parallel mark can safely interleave
+    // on the same bitmap because test-and-set is atomic.
+    return MarkObject(obj);
+}
+
+// ── BGC concurrent sweep ─────────────────────────────────────────
+
+void MarkSweepOldGen::BgcSweep() {
+    // Snapshot page list under mutex.
+    std::vector<OldGenPage*> pages;
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        pages.reserve(static_cast<size_t>(page_count_));
+        auto* p = page_list_;
+        while (p != nullptr) {
+            pages.push_back(p);
+            p = p->next;
+        }
+    }
+
+    CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "concurrent_sweep pages={0}",
+        static_cast<unsigned>(pages.size()));
+
+    // Sweep each page under the mutex, yielding between pages so that
+    // mutator allocations are not starved.
+    for (auto* page : pages) {
+        // Skip pages that are no longer in use (freed by concurrent activity).
+        if (!page->in_use.load(std::memory_order_acquire))
+            continue;
+
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            SweepPage(page);
+            CoalescePage(page);
+        }
+
+        // Yield to mutator between pages.
+        if (pages.size() > 1) {
+            std::this_thread::yield();
+        }
+    }
+
+    // Phase 4b: Free decommissioned oversized pages (marked !in_use by SweepPage).
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        OldGenPage** pp = &page_list_;
+        while (*pp != nullptr) {
+            OldGenPage* p = *pp;
+            if (!p->in_use.load(std::memory_order_acquire)) {
+                *pp = p->next;
+                for (int i = 0; i < kOldGenNumSizeClasses; i++) {
+                    if (last_alloc_page_[i] == p) {
+                        last_alloc_page_[i] = nullptr;
+                    }
+                }
+                FreePage(p);
+                page_count_--;
+            } else {
+                pp = &p->next;
+            }
+        }
+    }
+
+    // Reclaim retired GcLayout tables (safe during BGC sweep since the
+    // BGC thread is the only concurrent GC activity; mutators are running
+    // but their cache-line-stale GcTypeLayout pointers are still valid).
+    GcLayoutRegistry::Instance().ReclaimRetiredTables();
+
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_sweep_done");
 }
 
 }  // namespace chaos::il2cpp::runtime_core

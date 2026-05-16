@@ -194,3 +194,22 @@ extern "C" void ChaosFunction() noexcept;
    - `chaos/common.h` — 所有 common 头文件的聚合
    - `runtime_core.h` — 所有 runtime-core 头文件的聚合（有 namespace 块，保证声明顺序）
    - 子模块头文件不要相互 include 形成循环依赖
+
+## unordered_dense 选型规则（AI Agent 专用）
+
+编写 native C++ 代码时，遇到需要用 `unordered_map` 的场景，按以下规则选择宏：
+
+**先用 `CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY`，降级按以下链判断：**
+
+1. Key 类型是指针、整数、枚举、已哈希值（不是 string） → 选 `CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY`（用 `chaos::il2cpp::common::identity_hash` 跳过 wyhash）
+2. Key 类型是 string，但无数据依赖需求 → 选 `CHAOS_IL2CPP_UNORDERED_DENSE_MAP`（默认 wyhash）
+
+**退回到 `CHAOS_IL2CPP_UNORDERED_MAP` (std) 的条件：**
+1. 需要 iterator/pointer 在 insert/erase 后仍然有效
+2. 需要 heterogeneous lookup (`find("literal"sv)` on `map<string,T>`)
+3. 代码属于 codegen 输出/热更新路径（保持语义一致）
+4. value 类型 > 128 字节且 insert/erase 频繁
+5. map 持有元素指针/引用在跨 insert 后访问
+
+**经验法则**：查找表、注册表、缓存、id→ptr 映射、type→handler 映射，无脑用 `MAP_IDENTITY`。
+string key 的查找表用 `MAP`。只有依赖 std 链式桶语义时才回退。

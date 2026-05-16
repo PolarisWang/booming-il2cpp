@@ -1,0 +1,1533 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-0",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "SnapshotProverSubjects",
+        "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-0",
+        "signature": "System.Void SnapshotProverSubjects::Subject_0()"
+      },
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 3,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 4,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 3
+        },
+        {
+          "op": "add",
+          "opCode": 25,
+          "ilOffset": 4,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 7,
+          "ilOffset": 5,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "beq",
+          "opCode": 20,
+          "operand": 14,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+          "ilOffset": 9,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "field",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 14
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-1",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "SnapshotProverSubjects",
+        "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-1",
+        "signature": "System.Void SnapshotProverSubjects::Subject_1()"
+      },
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 9,
+          "ilOffset": 1,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 3,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "field",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 9
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-2",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "SnapshotProverSubjects",
+        "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-2",
+        "signature": "System.Void SnapshotProverSubjects::Subject_2()"
+      },
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 1
+        },
+        {
+          "op": "mul",
+          "opCode": 27,
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 25,
+          "ilOffset": 3,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "beq",
+          "opCode": 20,
+          "operand": 13,
+          "ilOffset": 5,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "field",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 13
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-3",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "SnapshotProverSubjects",
+        "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-3",
+        "signature": "System.Void SnapshotProverSubjects::Subject_3()"
+      },
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "cgt",
+          "opCode": 33,
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 5,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "beq",
+          "opCode": 20,
+          "operand": 16,
+          "ilOffset": 8,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 10,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "field",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 16
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-4",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "SnapshotProverSubjects",
+        "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-4",
+        "signature": "System.Void SnapshotProverSubjects::Subject_4()"
+      },
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 100,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 58,
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "sub",
+          "opCode": 26,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "beq",
+          "opCode": 20,
+          "operand": 17,
+          "ilOffset": 9,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 11,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+          "ilOffset": 12,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "field",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 17
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-5",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "SnapshotProverSubjects",
+        "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-5",
+        "signature": "System.Void SnapshotProverSubjects::Subject_5()"
+      },
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 84,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 2,
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 4
+        },
+        {
+          "op": "div",
+          "opCode": 28,
+          "ilOffset": 5,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "beq",
+          "opCode": 20,
+          "operand": 16,
+          "ilOffset": 8,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 10,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "field",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 16
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-6",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "SnapshotProverSubjects",
+        "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-6",
+        "signature": "System.Void SnapshotProverSubjects::Subject_6()"
+      },
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 100,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "conv.i8",
+          "opCode": 40,
+          "ilOffset": 2,
+          "resultType": "System.Int64"
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 3,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 100,
+          "ilOffset": 4,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "beq",
+          "opCode": 20,
+          "operand": 14,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+          "ilOffset": 9,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "field",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 14
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-7",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "SnapshotProverSubjects",
+        "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-7",
+        "signature": "System.Void SnapshotProverSubjects::Subject_7()"
+      },
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 14,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 6
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 7
+        },
+        {
+          "op": "add",
+          "opCode": 25,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 9,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 10
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 11,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "add",
+          "opCode": 25,
+          "ilOffset": 12,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 14
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "blt",
+          "opCode": 21,
+          "operand": 6,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 18
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 10,
+          "ilOffset": 19,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "beq",
+          "opCode": 20,
+          "operand": 29,
+          "ilOffset": 21,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "field",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 29
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-8",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "SnapshotProverSubjects",
+        "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-8",
+        "signature": "System.Void SnapshotProverSubjects::Subject_8()"
+      },
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 9,
+          "ilOffset": 1,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 3,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "field",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 9
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-9",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "SnapshotProverSubjects",
+        "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-9",
+        "signature": "System.Void SnapshotProverSubjects::Subject_9()"
+      },
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 3
+        },
+        {
+          "op": "and",
+          "opCode": 57,
+          "ilOffset": 4,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 10,
+          "ilOffset": 5,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 11,
+          "ilOffset": 8,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 10,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 11,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "beq",
+          "opCode": 20,
+          "operand": 20,
+          "ilOffset": 12,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 14,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "field",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 20
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.run",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
+      "signature": "System.Void SnapshotProverSubjects::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotProverSubjects",
+        "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.run",
+        "signature": "System.Void SnapshotProverSubjects::Run(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Run",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            47,
+            53,
+            59,
+            65,
+            71,
+            77,
+            83,
+            89,
+            95,
+            101
+          ],
+          "ilOffset": 1,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 46
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 47,
+          "resultType": "System.Void",
+          "callee": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "method",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 52
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "callee": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "method",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 58
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 59,
+          "resultType": "System.Void",
+          "callee": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "method",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 64
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 65,
+          "resultType": "System.Void",
+          "callee": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "method",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 70
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 71,
+          "resultType": "System.Void",
+          "callee": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "method",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 76
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 77,
+          "resultType": "System.Void",
+          "callee": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "method",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 82
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 83,
+          "resultType": "System.Void",
+          "callee": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "method",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 88
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 89,
+          "resultType": "System.Void",
+          "callee": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "method",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 94
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 95,
+          "resultType": "System.Void",
+          "callee": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "method",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 100
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 101,
+          "resultType": "System.Void",
+          "callee": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "method",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 106
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    }
+  ]
+}

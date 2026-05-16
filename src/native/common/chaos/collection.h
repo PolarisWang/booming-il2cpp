@@ -4,9 +4,19 @@
 #include <cstdint>
 #include <cstdlib>
 #include <memory>
-#include <unordered_map>
 #include <utility>
 #include <vector>
+
+// Compile-time toggle: define CHAOS_IL2CPP_USE_DENSE_MAP before including
+// collection.h to replace internal std::unordered_map with unordered_dense
+// for runtime storage lookups.  See <chaos/unordered_dense.h> for limitations.
+#if defined(CHAOS_IL2CPP_USE_DENSE_MAP)
+#  include <chaos/unordered_dense.h>
+#  define CHAOS_IL2CPP_COLLECTION_MAP(K, V) CHAOS_IL2CPP_UNORDERED_DENSE_MAP(K, V)
+#else
+#  include <unordered_map>
+#  define CHAOS_IL2CPP_COLLECTION_MAP(K, V) std::unordered_map<K, V>
+#endif
 
 namespace chaos::il2cpp::common {
 
@@ -23,7 +33,7 @@ ListRuntimeStorage<TValue>* require_list_runtime_storage(CHAOS_IL2CPP_INTPTR han
     {
         CHAOS_IL2CPP_ABORT();
     }
-    using StorageMap = std::unordered_map<CHAOS_IL2CPP_INTPTR, std::unique_ptr<ListRuntimeStorage<TValue>>>;
+    using StorageMap = CHAOS_IL2CPP_COLLECTION_MAP(CHAOS_IL2CPP_INTPTR, std::unique_ptr<ListRuntimeStorage<TValue>>);
     static StorageMap storage_by_handle;
     auto& storage = storage_by_handle[handle];
     if (storage == nullptr)
@@ -46,7 +56,8 @@ DictionaryRuntimeStorage<TKey, TValue>* require_dictionary_runtime_storage(CHAOS
     {
         CHAOS_IL2CPP_ABORT();
     }
-    using StorageMap = std::unordered_map<CHAOS_IL2CPP_INTPTR, std::unique_ptr<DictionaryRuntimeStorage<TKey, TValue>>>;
+    using MapValueT = std::unique_ptr<DictionaryRuntimeStorage<TKey, TValue>>;
+    using StorageMap = CHAOS_IL2CPP_COLLECTION_MAP(CHAOS_IL2CPP_INTPTR, MapValueT);
     static StorageMap storage_by_handle;
     auto& storage = storage_by_handle[handle];
     if (storage == nullptr)

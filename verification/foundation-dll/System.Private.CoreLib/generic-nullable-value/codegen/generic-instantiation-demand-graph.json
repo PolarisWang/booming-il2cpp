@@ -1,0 +1,64 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "GenericNullableValueSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int32\u003E::GetValueOrDefault:System.Int32()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::GetValueOrDefault:!0()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::GetValueOrDefault:!0()",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "GenericNullableValueSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int32\u003E::GetValueOrDefault:System.Int32(System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::GetValueOrDefault:!0(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::GetValueOrDefault:!0(!0)",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "GenericNullableValueSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int32\u003E::get_HasValue:System.Boolean()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_HasValue:System.Boolean()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_HasValue:System.Boolean()",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
+}

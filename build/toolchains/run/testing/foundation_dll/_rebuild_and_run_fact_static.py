@@ -38,7 +38,7 @@ INC = " ".join(f'-I"{d}"' for d in [
     REPO_ROOT / "third_party" / "bdwgc" / "include",
     BUILD_DIR,
 ])
-DEFS = "-DCHAOS_IL2CPP_CONFIG_CHECK -DCHAOS_IL2CPP_VERIFY_MODE -DGC_NOT_DLL -DCHAOS_RUNTIME_ABI_STATIC"
+DEFS = "-DCHAOS_IL2CPP_CONFIG_CHECK -DCHAOS_IL2CPP_VERIFY_MODE -DGC_NOT_DLL"
 
 LIBS = " ".join(f'"{NATIVE_LIB / p}"' for p in [
     "src/native/runtime-core/RelWithDebInfo/chaos_runtime_core.lib",

@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "generic-managed-entry",
+  "assemblyName": "GlobalizationCultureSubjects",
+  "entrySubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Run:System.Void(System.Int32)",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Run",
+  "entryMethodToken": "0u",
+  "workloadAbi": "void(int32)"
+}

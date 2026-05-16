@@ -1,0 +1,125 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.box-interface-array-demo.demo-box-store",
+      "subjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
+      "signature": "System.Int32 BoxInterfaceArrayDemo::DemoBoxStore()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo",
+        "definitionSubjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
+        "methodId": "snapshot-test-fixtures.box-interface-array-demo.demo-box-store",
+        "signature": "System.Int32 BoxInterfaceArrayDemo::DemoBoxStore()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBoxStore",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 3,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Object",
+          "ilOffset": 1,
+          "resultType": "System.Object[]",
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 3,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Int32",
+          "ilOffset": 4,
+          "resultType": "System.Object",
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stelem.ref",
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 8
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 9,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldelem.ref",
+          "ilOffset": 10,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 12,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 13
+        }
+      ]
+    }
+  ]
+}

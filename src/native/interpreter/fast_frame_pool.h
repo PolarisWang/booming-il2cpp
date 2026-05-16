@@ -23,7 +23,7 @@ namespace chaos::il2cpp::runtime_core {
 
 class FastFramePool {
 public:
-    static constexpr uint32_t kPoolSize = 8;
+    static constexpr uint32_t kPoolSize = 32;
 
     FastFramePool() noexcept;
 

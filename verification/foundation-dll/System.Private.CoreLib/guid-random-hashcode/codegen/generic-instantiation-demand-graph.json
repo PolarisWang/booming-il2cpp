@@ -1,0 +1,45 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "GuidRandomHashcodeSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Int32\u003E:System.Void(System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(!!0)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(!!0)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "GuidRandomHashcodeSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.HashCode::Combine\u003CSystem.Int32,System.Int32\u003E:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.HashCode::Combine:System.Int32(!!0,!!1)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Private.CoreLib/System.HashCode::Combine:System.Int32(!!0,!!1)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32",
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    }
+  ]
+}

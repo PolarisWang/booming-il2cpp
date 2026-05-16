@@ -2,28 +2,28 @@
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
-{% for type_group in type_groups %}
+{{~ for type_group in type_groups ~}}
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_{{ type_group.safe_name }}[{{ type_group.method_count }}] = {
-{% for method in type_group.methods %}
-    { 0u, {{ method.subject_id_literal }}, {{ method.method_name_literal }}, "System.Void", 0, nullptr, 0u },
-{% endfor %}
+{{~ for method in type_group.methods ~}}
+    { 0u, "{{ method.subject_id_literal }}", "{{ method.method_name_literal }}", "System.Void", 0, nullptr, 0u },
+{{~ end ~}}
 };
 
-{% endfor %}
+{{~ end ~}}
 static constexpr ReflectionQueryTypeDescriptor kReflTypes[{{ type_group_count }}] = {
-{% for type_group in type_groups %}
-    { 0u, {{ type_group.subject_id_literal }}, {{ type_group.subject_id_literal }}, {{ type_group.namespace_literal }}, {{ type_group.name_literal }}, {{ type_group.name_literal }}, nullptr, nullptr, 0u, nullptr, 0u,
+{{~ for type_group in type_groups ~}}
+    { 0u, "{{ type_group.subject_id_literal }}", "{{ type_group.subject_id_literal }}", "{{ type_group.namespace_literal }}", "{{ type_group.name_literal }}", "{{ type_group.name_literal }}", nullptr, nullptr, 0u, nullptr, 0u,
     kReflMethods_{{ type_group.safe_name }}, {{ type_group.method_count }}u },
-{% endfor %}
+{{~ end ~}}
 };
 
 static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[{{ type_group_count }}] = {
-{% for i in type_group_indices %}
+{{~ for i in type_group_indices ~}}
     &kReflTypes[{{ i }}],
-{% endfor %}
+{{~ end ~}}
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { {{ assembly_name_literal }}, kReflTypePtrs, {{ type_group_count }}u };
+static constexpr ReflectionQueryImageDescriptor kReflImage = { "{{ assembly_name_literal }}", kReflTypePtrs, {{ type_group_count }}u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

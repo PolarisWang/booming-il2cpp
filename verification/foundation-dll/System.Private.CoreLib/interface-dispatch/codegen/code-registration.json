@@ -1,0 +1,252 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "InterfaceDispatchSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Run",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Run:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "InterfaceDispatchSubjects_ISimple_GetValue",
+          "subjectId": "InterfaceDispatchSubjects/ISimple::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "InterfaceDispatchSubjects_IWithDefault_GetValue",
+          "subjectId": "InterfaceDispatchSubjects/IWithDefault::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "InterfaceDispatchSubjects_ICalculator_Add",
+          "subjectId": "InterfaceDispatchSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "InterfaceDispatchSubjects_ICalculator_Multiply",
+          "subjectId": "InterfaceDispatchSubjects/ICalculator::Multiply:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "InterfaceDispatchSubjects_IBase_BaseMethod",
+          "subjectId": "InterfaceDispatchSubjects/IBase::BaseMethod:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "InterfaceDispatchSubjects_IDerived_DerivedMethod",
+          "subjectId": "InterfaceDispatchSubjects/IDerived::DerivedMethod:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "InterfaceDispatchSubjects_ImplSimple_GetValue",
+          "subjectId": "InterfaceDispatchSubjects/ImplSimple::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "InterfaceDispatchSubjects_ImplSimple__ctor",
+          "subjectId": "InterfaceDispatchSubjects/ImplSimple::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "InterfaceDispatchSubjects_ImplWithDefault__ctor",
+          "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "InterfaceDispatchSubjects_CalcAdd_Add",
+          "subjectId": "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "InterfaceDispatchSubjects_CalcAdd_Multiply",
+          "subjectId": "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "InterfaceDispatchSubjects_CalcAdd__ctor",
+          "subjectId": "InterfaceDispatchSubjects/CalcAdd::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "InterfaceDispatchSubjects_CalcMul_Add",
+          "subjectId": "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "InterfaceDispatchSubjects_CalcMul_Multiply",
+          "subjectId": "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "InterfaceDispatchSubjects_CalcMul__ctor",
+          "subjectId": "InterfaceDispatchSubjects/CalcMul::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "InterfaceDispatchSubjects_ImplDiamond_BaseMethod",
+          "subjectId": "InterfaceDispatchSubjects/ImplDiamond::BaseMethod:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "InterfaceDispatchSubjects_ImplDiamond_DerivedMethod",
+          "subjectId": "InterfaceDispatchSubjects/ImplDiamond::DerivedMethod:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "InterfaceDispatchSubjects_ImplDiamond__ctor",
+          "subjectId": "InterfaceDispatchSubjects/ImplDiamond::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "InterfaceDispatchSubjects_ImplDiamond2_BaseMethod",
+          "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::BaseMethod:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod",
+          "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "InterfaceDispatchSubjects_ImplDiamond2__ctor",
+          "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestIsCheck:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti",
+          "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

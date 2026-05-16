@@ -31,6 +31,7 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     find_package(Python3 QUIET)
 
     add_subdirectory(third_party/fmt fmt_build)
+    add_subdirectory(third_party/unordered_dense unordered_dense_build)
     add_subdirectory(third_party/bdwgc bdwgc_build)
     add_subdirectory(src/native/common)
     add_subdirectory(src/native/runtime-core)
@@ -48,6 +49,7 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_subdirectory(tests/contracts/native/gc)
     add_subdirectory(tests/contracts/native/runtime-core)
     add_subdirectory(tests/contracts/native/common)
+    add_subdirectory(tests/perf/unordered-map-bench)
 
     # ── Foundation DLL native family skeletons ────────────────────
     add_subdirectory(verification/foundation-dll)

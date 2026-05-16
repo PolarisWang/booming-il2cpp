@@ -11,9 +11,7 @@ extern "C" {
 
 #if defined(_WIN32)
 /* Static-library consumers collapse import/export decoration to plain declarations. */
-#if defined(CHAOS_RUNTIME_ABI_STATIC)
-#define CHAOS_RUNTIME_ABI_EXPORT
-#elif defined(CHAOS_RUNTIME_ABI_EXPORTS)
+#if defined(CHAOS_RUNTIME_ABI_EXPORTS)
 #define CHAOS_RUNTIME_ABI_EXPORT __declspec(dllexport)
 #else
 #define CHAOS_RUNTIME_ABI_EXPORT __declspec(dllimport)

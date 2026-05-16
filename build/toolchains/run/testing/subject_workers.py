@@ -179,7 +179,6 @@ endfunction()
 
 function(chaos_configure_subject_target target_name)
     target_compile_features("${{target_name}}" PRIVATE cxx_std_17)
-    target_compile_definitions("${{target_name}}" PRIVATE CHAOS_RUNTIME_ABI_STATIC)
     target_include_directories(
         "${{target_name}}"
         PRIVATE

@@ -9,6 +9,7 @@ internal sealed class AsmCompareConfig
 {
     public string AssemblyPath { get; init; } = "";
     public string MethodName { get; init; } = "";
+    public IReadOnlyList<string> MethodNames { get; init; } = Array.Empty<string>();
     public string? OutputPath { get; init; }
     public HashSet<string> Sections { get; init; } = new(StringComparer.OrdinalIgnoreCase);
     public bool AllSections { get; init; } = true;
@@ -32,6 +33,7 @@ internal sealed class AsmCompareConfig
 
         string? assemblyPath = null;
         string? methodName = null;
+        List<string>? methodNames = null;
         string? outputPath = null;
         HashSet<string>? sections = null;
         bool keepTemp = false;
@@ -43,6 +45,10 @@ internal sealed class AsmCompareConfig
             {
                 case "--method" when i + 1 < args.Length:
                     methodName = args[++i];
+                    break;
+                case "--methods" when i + 1 < args.Length:
+                    methodNames = new List<string>(
+                        args[++i].Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
                     break;
                 case "--output" or "-o" when i + 1 < args.Length:
                     outputPath = args[++i];
@@ -87,9 +93,13 @@ internal sealed class AsmCompareConfig
             return new AsmCompareConfig { IsHelp = true };
         }
 
-        if (string.IsNullOrWhiteSpace(methodName))
+        if (!string.IsNullOrWhiteSpace(methodName))
         {
-            Console.Error.WriteLine("Error: --method is required.");
+            methodNames = new List<string> { methodName };
+        }
+        else if (methodNames is null || methodNames.Count == 0)
+        {
+            Console.Error.WriteLine("Error: --method or --methods is required.");
             PrintHelp();
             return new AsmCompareConfig { IsHelp = true };
         }
@@ -97,7 +107,8 @@ internal sealed class AsmCompareConfig
         return new AsmCompareConfig
         {
             AssemblyPath = assemblyPath,
-            MethodName = methodName,
+            MethodName = methodNames![0],
+            MethodNames = methodNames,
             OutputPath = outputPath,
             Sections = sections ?? new HashSet<string>(AllSectionNames, StringComparer.OrdinalIgnoreCase),
             AllSections = sections is null,
@@ -116,7 +127,8 @@ internal sealed class AsmCompareConfig
         Console.WriteLine("  chaos-il2cpp asm-compare <managed.dll|exe> --method <name> [options]");
         Console.WriteLine();
         Console.WriteLine("Options:");
-        Console.WriteLine("  --method <name>               Method to compare (e.g. TypeName::MethodName)");
+        Console.WriteLine("  --method <name>               Single method to compare (e.g. TypeName::MethodName)");
+        Console.WriteLine("  --methods <names>             Comma-separated method list for batch mode");
         Console.WriteLine("  --output, -o <file>           Output report file (default: stdout)");
         Console.WriteLine("  --sections <list>             Comma-separated sections (default: all)");
         Console.WriteLine("    Available: " + string.Join(", ", AllSectionNames));

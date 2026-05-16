@@ -325,7 +325,6 @@ add_executable({fdef['hotupdate_target']}
     semantic-patch/native-aot.semantic-patch.generated.cpp
 )
 target_compile_features({fdef['hotupdate_target']} PRIVATE cxx_std_17)
-target_compile_definitions({fdef['hotupdate_target']} PRIVATE CHAOS_RUNTIME_ABI_STATIC)
 target_include_directories({fdef['hotupdate_target']} PRIVATE
     ${{CMAKE_SOURCE_DIR}}/src/native/common
     ${{CMAKE_SOURCE_DIR}}/src/native/runtime-core

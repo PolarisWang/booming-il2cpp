@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Text;
 using System.Text.Json;
 using Chaos.IL2CPP.CodeGen;
@@ -17,6 +18,19 @@ internal static class AsmCompareHandler
         NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals,
     };
 
+    // Sections that require C++ generation / NativeAotEmitter
+    private static readonly HashSet<string> CppRequiredSections = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "raw-cpp", "raw-aot", "side-by-side", "inline-map", "il-dump", "ir-trace",
+    };
+
+    // Sections that require the full closure AotCoreIr
+    private static readonly HashSet<string> ClosureRequiredSections = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "header", "il-dump", "ir-trace", "raw-cpp", "side-by-side", "raw-aot",
+        "inline-map", "metrics", "analysis",
+    };
+
     public static int Run(string[] args)
     {
         var config = AsmCompareConfig.Parse(args);
@@ -24,10 +38,11 @@ internal static class AsmCompareHandler
             return 0;
 
         var tempDir = Path.Combine(Path.GetTempPath(), "chaos-asm-compare-" + Guid.NewGuid().ToString("N"));
+        var needsCpp = _needsCppGeneration(config);
 
         try
         {
-            // ── Step 1: Run IL2CPP closure pipeline ────────────────────────
+            // ── Step 1: Run IL2CPP closure pipeline (once for all methods) ──
             Console.Error.Write("  [1/3] Running IL2CPP pipeline...");
             ChaosTrace.Point("asm-compare.pipeline", "codegen");
 
@@ -41,102 +56,164 @@ internal static class AsmCompareHandler
 
             Console.Error.WriteLine($" {closureResult.AotCoreIr.Methods.Count} methods lowered");
 
-            // Find the target method in the closure results
-            var aotMethod = FindMethodInClosure(closureResult, config.MethodName);
-            if (aotMethod is null)
+            // P0: Pre-build method lookup dictionary (avoid N×3-pass search)
+            var methodMap = new Dictionary<string, AotCoreIrMethodArtifact>(StringComparer.OrdinalIgnoreCase);
+            foreach (var m in closureResult.AotCoreIr.Methods)
             {
-                Console.Error.WriteLine($"Error: method '{config.MethodName}' not found in IL2CPP pipeline output.");
-                Console.Error.WriteLine("Available methods (first 30):");
-                var count = 0;
-                foreach (var m in closureResult.AotCoreIr.Methods)
+                // Index by short name (last segment after / or ::)
+                var shortName = m.SubjectId.Contains("::")
+                    ? m.SubjectId.Substring(m.SubjectId.LastIndexOf("::", StringComparison.Ordinal) + 2)
+                    : m.SubjectId;
+                methodMap[shortName] = m;
+                methodMap[m.SubjectId] = m;
+                methodMap[m.MethodId] = m;
+            }
+
+            // ── Step 2 (P0): Generate C++ only if sections need it ──────────
+            NativeAotResult? emitResult = null;
+            if (needsCpp)
+            {
+                Console.Error.Write("  [2/3] Generating C++ (NativeAot)...");
+                ChaosTrace.Point("asm-compare.codegen", "codegen");
+
+                WriteArtifacts(tempDir, closureResult);
+
+                var emitter = new NativeAotEmitter();
+                emitResult = emitter.Generate(new NativeAotRequest(tempDir, tempDir));
+
+                foreach (var source in emitResult.GeneratedSources)
                 {
-                    if (count++ >= 30) break;
-                    Console.Error.WriteLine($"  {m.SubjectId}");
+                    var targetPath = Path.Combine(tempDir, source.RelativePath.Replace('/', Path.DirectorySeparatorChar));
+                    Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
+                    File.WriteAllText(targetPath, source.Contents);
                 }
-                return 1;
+
+                WriteJson(Path.Combine(tempDir, NativeAotArtifactNames.LoweringPlan), emitResult.LoweringPlan);
+                WriteJson(Path.Combine(tempDir, NativeAotArtifactNames.Manifest), emitResult.Manifest);
+                WriteJson(Path.Combine(tempDir, NativeAotArtifactNames.CodegenMetrics), emitResult.CodegenMetrics);
+
+                Console.Error.WriteLine($" {emitResult.GeneratedSources.Count} files");
             }
-
-            // ── Step 2: Run NativeAotEmitter to generate C++ ──────────────
-            Console.Error.Write("  [2/3] Generating C++ (NativeAot)...");
-            ChaosTrace.Point("asm-compare.codegen", "codegen");
-
-            WriteArtifacts(tempDir, closureResult);
-
-            var emitter = new NativeAotEmitter();
-            var emitResult = emitter.Generate(new NativeAotRequest(tempDir, tempDir));
-
-            foreach (var source in emitResult.GeneratedSources)
-            {
-                var targetPath = Path.Combine(tempDir, source.RelativePath.Replace('/', Path.DirectorySeparatorChar));
-                Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
-                File.WriteAllText(targetPath, source.Contents);
-            }
-
-            // Write codegen metrics/lowering plan too
-            WriteJson(Path.Combine(tempDir, NativeAotArtifactNames.LoweringPlan), emitResult.LoweringPlan);
-            WriteJson(Path.Combine(tempDir, NativeAotArtifactNames.Manifest), emitResult.Manifest);
-            WriteJson(Path.Combine(tempDir, NativeAotArtifactNames.CodegenMetrics), emitResult.CodegenMetrics);
-
-            Console.Error.WriteLine($" {emitResult.GeneratedSources.Count} files");
-
-            // Read generated C++ content for this method
-            var cppSource = ReadGeneratedCppForMethod(emitResult, aotMethod);
-
-            // ── Step 3: Capture JIT asm ───────────────────────────────────
-            Console.Error.Write("  [3/3] Capturing JIT asm...");
-            ChaosTrace.Point("asm-compare.jit_capture", "codegen");
-
-            var jitResult = JitAsmCapture.Capture(config.AssemblyPath, config.MethodName);
-            if (!jitResult.Success)
-                Console.Error.WriteLine($" warning: {jitResult.Error}");
             else
-                Console.Error.WriteLine($" {jitResult.Size} bytes, {jitResult.Instructions?.Count ?? 0} instructions");
-
-            // ── Step 3b: Native AOT compilation (Phase 3) ─────────────────
-            NativeCompile.NativeCompileResult? nativeResult = null;
-            if (config.HasSection("raw-aot") || config.HasSection("side-by-side"))
             {
-                Console.Error.Write("  [3b/4] Compiling AOT native...");
-                ChaosTrace.Point("asm-compare.native_compile", "codegen");
-                nativeResult = NativeCompile.Compile(tempDir, aotMethod?.NativeSymbol ?? "");
-                if (nativeResult.FoundMsvc && nativeResult.CompileSuccess)
-                    Console.Error.WriteLine($" OK ({nativeResult.ObjectSize})");
-                else if (!nativeResult.FoundMsvc)
-                    Console.Error.WriteLine(" MSVC not found");
-                else
-                    Console.Error.WriteLine(" FAIL (see report)");
+                Console.Error.WriteLine("  [2/3] Skipping C++ generation (not needed for metrics/analysis)");
             }
 
-            // ── Step 4: Generate report ───────────────────────────────────
-            var report = config.Format == "json"
-                ? AsmCompareReport.GenerateJson(
-                    config.AssemblyPath,
-                    config.MethodName,
-                    jitResult,
-                    aotMethod,
-                    cppSource,
-                    nativeResult,
-                    config)
-                : AsmCompareReport.Generate(
-                    config.AssemblyPath,
-                    config.MethodName,
-                    jitResult,
-                    aotMethod,
-                    cppSource,
-                    nativeResult,
-                    config);
+            // ── Step 3 (P1): Parallel JIT capture for all methods ──────────
+            int totalMethods = config.MethodNames.Count;
+            var methodResults = new ConcurrentDictionary<int, Dictionary<string, object?>>();
+            var consoleLock = new object();
+
+            System.Threading.Tasks.Parallel.For(0, totalMethods, idx =>
+            {
+                var methodName = config.MethodNames[idx];
+
+                // Find method in closure (O(1) from pre-built dictionary)
+                var aotMethod = methodMap.TryGetValue(methodName, out var found)
+                    ? found
+                    : FindMethodInClosure(closureResult, methodName);
+
+                lock (consoleLock)
+                {
+                    Console.Error.Write($"  [3/3-{idx + 1}/{totalMethods}] {methodName}...");
+                }
+
+                if (aotMethod is null)
+                {
+                    lock (consoleLock)
+                        Console.Error.WriteLine(" not found in closure");
+                    methodResults[idx] = new Dictionary<string, object?>
+                    {
+                        ["methodName"] = methodName,
+                        ["status"] = "not_found",
+                        ["error"] = "Method not found in IL2CPP pipeline output",
+                    };
+                    return;
+                }
+
+                // Read C++ source only if C++ generation happened
+                string cppSource = "";
+                if (needsCpp && emitResult is not null)
+                    cppSource = ReadGeneratedCppForMethod(emitResult, aotMethod);
+
+                // Capture JIT asm
+                var jitResult = JitAsmCapture.Capture(config.AssemblyPath, methodName);
+
+                lock (consoleLock)
+                {
+                    if (!jitResult.Success)
+                        Console.Error.WriteLine($" warning: {jitResult.Error}");
+                    else
+                        Console.Error.WriteLine($" {jitResult.Size} bytes, {jitResult.Instructions?.Count ?? 0} instr");
+                }
+
+                // Native AOT compilation (only if requested sections)
+                NativeCompile.NativeCompileResult? nativeResult = null;
+                if (config.HasSection("raw-aot") || config.HasSection("side-by-side"))
+                {
+                    lock (consoleLock)
+                        Console.Error.Write("    [3b] Compiling AOT native...");
+                    ChaosTrace.Point("asm-compare.native_compile", "codegen");
+                    nativeResult = NativeCompile.Compile(tempDir, aotMethod.NativeSymbol ?? "");
+                    lock (consoleLock)
+                    {
+                        if (nativeResult.FoundMsvc && nativeResult.CompileSuccess)
+                            Console.Error.WriteLine($" OK ({nativeResult.ObjectSize})");
+                        else if (!nativeResult.FoundMsvc)
+                            Console.Error.WriteLine(" MSVC not found");
+                        else
+                            Console.Error.WriteLine(" FAIL");
+                    }
+                }
+
+                // Generate report entry
+                var entry = config.Format == "json"
+                    ? AsmCompareReport.GenerateJsonEntry(
+                        config.AssemblyPath, methodName, jitResult, aotMethod, cppSource, nativeResult, config)
+                    : new Dictionary<string, object?>
+                    {
+                        ["methodName"] = methodName,
+                        ["status"] = jitResult.Success ? "ok" : "failed",
+                    };
+
+                methodResults[idx] = entry;
+            });
+
+            // ── Output: restore ordered list ───────────────────────────────
+            var orderedResults = new List<Dictionary<string, object?>>(totalMethods);
+            for (int i = 0; i < totalMethods; i++)
+                orderedResults.Add(methodResults[i]);
+
+            string output;
+            if (config.Format == "json")
+            {
+                output = totalMethods == 1
+                    ? JsonSerializer.Serialize(orderedResults[0], JsonOptions)
+                    : JsonSerializer.Serialize(orderedResults, JsonOptions);
+            }
+            else
+            {
+                var sb = new StringBuilder();
+                int ok = 0, fail = 0;
+                foreach (var r in orderedResults)
+                {
+                    var s = r.GetValueOrDefault("status", "")?.ToString();
+                    if (s == "ok" || s is "not_found") ok++; else fail++;
+                }
+                sb.AppendLine($"asm-compare batch: {ok}/{orderedResults.Count} OK, {fail} failed");
+                output = sb.ToString();
+            }
 
             if (config.OutputPath is not null)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(config.OutputPath))!);
-                File.WriteAllText(config.OutputPath, report);
+                File.WriteAllText(config.OutputPath, output);
                 Console.Error.WriteLine($"Report written: {config.OutputPath}");
             }
             else
             {
                 Console.WriteLine();
-                Console.WriteLine("════════════════════════════════════════════════════════════════════════════");
-                Console.WriteLine(report);
+                Console.WriteLine(output);
             }
 
             return 0;
@@ -153,11 +230,23 @@ internal static class AsmCompareHandler
         }
     }
 
+    // P0: Determine if any requested section requires C++ code generation
+    private static bool _needsCppGeneration(AsmCompareConfig config)
+    {
+        if (config.AllSections)
+            return true;
+        foreach (var section in config.Sections)
+        {
+            if (CppRequiredSections.Contains(section))
+                return true;
+        }
+        return false;
+    }
+
     private static AotCoreIrMethodArtifact? FindMethodInClosure(ManagedClosureResult result, string methodName)
     {
         var searchName = methodName.Replace("::", "/").Trim();
 
-        // Prefer SubjectId suffix match: "ConvertCharSubjects/ConvertCharSubjects::Run"
         foreach (var method in result.AotCoreIr.Methods)
         {
             if (method.SubjectId.EndsWith(searchName, StringComparison.OrdinalIgnoreCase) ||
@@ -165,14 +254,12 @@ internal static class AsmCompareHandler
                 return method;
         }
 
-        // Broader: SubjectId contains the method name
         foreach (var method in result.AotCoreIr.Methods)
         {
             if (method.SubjectId.Contains(methodName, StringComparison.OrdinalIgnoreCase))
                 return method;
         }
 
-        // Broader: MethodId matches
         foreach (var method in result.AotCoreIr.Methods)
         {
             if (method.MethodId.EndsWith(methodName, StringComparison.OrdinalIgnoreCase))
@@ -193,7 +280,6 @@ internal static class AsmCompareHandler
 
             var content = source.Contents;
 
-            // Try to extract just the function for this method
             var symbol = method.NativeSymbol;
             if (!string.IsNullOrEmpty(symbol) && content.Contains(symbol))
             {
@@ -202,7 +288,6 @@ internal static class AsmCompareHandler
             }
             else
             {
-                // Show entire file if method-specific extraction fails
                 sb.AppendLine(content);
             }
 
@@ -214,7 +299,6 @@ internal static class AsmCompareHandler
 
     private static string ExtractFunctionContent(string content, string symbol)
     {
-        // Find the function definition and extract it
         var lines = content.Split('\n');
         var result = new StringBuilder();
         bool inFunction = false;

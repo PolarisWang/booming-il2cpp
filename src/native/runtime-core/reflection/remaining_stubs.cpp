@@ -4,6 +4,10 @@
 // These are either not yet wired to data sources (assembly-level queries,
 // custom attributes) or waiting on EEClass expansion.
 // Keeping them in one place makes it easy to track Phase 1+ progress.
+//
+// Note: This file is #included from reflection_api.cpp, so it shares
+// the same translation unit — internal helpers from internal_helpers.cpp
+// (GetTypeDescriptorFromHandle, GetTypeInfoFromHandle, etc.) are available.
 
 extern "C" {
 namespace chaos::il2cpp::runtime_core {
@@ -38,6 +42,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetRawDefaultValue(CHAOS_IL2CPP_INTPTR param)
 
 // ── MethodInfo stubs ────────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsVirtual(CHAOS_IL2CPP_INTPTR /*member*/) noexcept {
+    // TODO: Requires flags field in ReflectionQueryMethodDescriptor (codegen change).
     return 0;
 }
 
@@ -46,46 +51,58 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseDefinition(CHAOS_IL2CPP_INTPTR member_
 }
 
 // ── Runtime type handle stubs ───────────────────────────────────────
-// Phase 2+: implement managed System.Type identity resolution.
-CHAOS_IL2CPP_INTPTR ChaosRuntimeTypeFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept {
-    (void)handle;
-    return 0;
-}
 
 CHAOS_IL2CPP_INTPTR ChaosTypeGetTypeFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept {
-    (void)handle;
-    return 0;
+    // Resolve the TypeInfoHandle → ReflectionQueryTypeDescriptor → encoded Type handle.
+    auto* desc = GetTypeDescriptorFromHandle(handle);
+    if (desc == nullptr) return 0;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(desc));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosRuntimeTypeFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    // A RuntimeTypeHandle is a TypeInfoHandle. Convert to Type handle.
+    return ChaosTypeGetTypeFromHandle(handle);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeEquals(CHAOS_IL2CPP_INTPTR type_a, CHAOS_IL2CPP_INTPTR type_b) noexcept {
-    (void)type_a; (void)type_b;
-    return 0;
+    if (type_a == 0 || type_b == 0) return 0;
+    // Fast path: identical handles are the same type.
+    if (type_a == type_b) return 1;
+    // Full path: decode both to descriptors and compare pointers.
+    auto* desc_a = GetTypeDescriptorFromHandle(type_a);
+    auto* desc_b = GetTypeDescriptorFromHandle(type_b);
+    return (desc_a != nullptr && desc_a == desc_b) ? 1 : 0;
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeGetTypeInfo(CHAOS_IL2CPP_INTPTR type) noexcept {
-    (void)type;
-    return 0;
+    // Return the TypeInfoHot* for this type handle, if type_info_ptrs is populated.
+    auto* type_info = GetTypeInfoFromHandle(type);
+    if (type_info == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<TypeInfoHot*>(type_info));
 }
 
-// ── Assembly stubs (Phase 2: ALC iteration) ─────────────────────────
-CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetExportedTypes(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept {
-    return 0;
+// ── Assembly stubs ──────────────────────────────────────────────────
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetExportedTypes(CHAOS_IL2CPP_INTPTR assembly) noexcept {
+    // In AOT, all types are exported types — delegate to GetTypes.
+    return ChaosReflectionAssemblyGetTypes(assembly);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetForwardedTypes(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept {
-    return 0;
+    return 0;  // Forwarded type forwarding not tracked in AOT metadata.
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetManifestResourceNames(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept {
-    return 0;
+    return 0;  // Manifest resources not tracked in AOT.
 }
 
-CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetModules(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept {
-    return 0;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetModules(CHAOS_IL2CPP_INTPTR assembly) noexcept {
+    // AOT assemblies have exactly one module — the assembly itself.
+    // Return the image handle as a module handle (same encoding as ImageHandle).
+    return assembly;
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetEntryPoint(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept {
-    return 0;
+    return 0;  // Module not specified / EntryPoint not tracked in AOT.
 }
 
 // ── ParameterInfo stubs ─────────────────────────────────────────────
@@ -95,14 +112,17 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetOptionalCustomModifiers(CHAOS_IL2CPP_INTPT
 
 // ── FieldInfo stubs (Phase 2+: ModuleRegistry Tier 0 flags) ─────────
 CHAOS_IL2CPP_INT32 ChaosReflectionFieldGetIsInitOnly(CHAOS_IL2CPP_INTPTR /*field*/) noexcept {
+    // TODO: Requires flags field in ReflectionQueryFieldDescriptor (codegen change).
     return 0;
 }
 
 CHAOS_IL2CPP_INT64 ChaosReflectionFieldGetFieldHandle(CHAOS_IL2CPP_INTPTR /*field*/) noexcept {
+    // TODO: Needs RuntimeFieldHandle construction from metadata token.
     return 0;
 }
 
 CHAOS_IL2CPP_INT32 ChaosReflectionFieldGetIsLiteral(CHAOS_IL2CPP_INTPTR /*field*/) noexcept {
+    // TODO: Requires flags field in ReflectionQueryFieldDescriptor (codegen change).
     return 0;
 }
 
@@ -112,20 +132,22 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetIndexParameters(CHAOS_IL2CPP_INTPT
 }
 
 CHAOS_IL2CPP_INT32 ChaosReflectionPropertyGetCanRead(CHAOS_IL2CPP_INTPTR /*prop*/) noexcept {
+    // TODO: Requires flags field in ReflectionQueryPropertyDescriptor (codegen change).
     return 0;
 }
 
 CHAOS_IL2CPP_INT32 ChaosReflectionPropertyGetCanWrite(CHAOS_IL2CPP_INTPTR /*prop*/) noexcept {
+    // TODO: Requires flags field in ReflectionQueryPropertyDescriptor (codegen change).
     return 0;
 }
 
-// ── AssemblyName stubs (Phase 2+: metadata tables) ──────────────────
+// ── AssemblyName stubs ──────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCultureInfo(CHAOS_IL2CPP_INTPTR /*name*/) noexcept {
-    return 0;
+    return 0;  // Invariant culture = nullptr/0.
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetVersion(CHAOS_IL2CPP_INTPTR /*name*/) noexcept {
-    return 0;
+    return 0;  // Version info not tracked in AOT.
 }
 
 }  // namespace chaos::il2cpp::runtime_core

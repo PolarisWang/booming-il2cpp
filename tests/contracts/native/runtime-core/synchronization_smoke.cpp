@@ -2,7 +2,7 @@
 // ReaderWriterLockSlim, WaitHandle (ManualResetEvent + AutoResetEvent),
 // and TimerQueue.
 //
-// Build: requires CHAOS_RUNTIME_ABI_STATIC for internal linkage.
+// Build: requires CHAOS_RUNTIME_ABI_EXPORTS for internal linkage.
 
 #include "synchronization.h"
 #include "wait_handle.h"

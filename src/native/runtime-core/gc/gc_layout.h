@@ -253,17 +253,6 @@ int ScanObjectPointers(void* obj, const GcTypeLayout* layout,
 // Enhanced Cheney BFS — walks promoted objects using precise layouts
 // ======================================================================
 
-/// Perform Cheney BFS over the promoted tenured range, scanning each
-/// object's pointer fields using registered GC layouts, and scavenging
-/// any pointers back into the nursery.
-///
-/// @param tenured_begin  Start of the tenured region containing promoted objs.
-/// @param tenured_end    End of the tenured region.
-/// @param nursery        The nursery region.
-/// @param result         Young collection result accumulator.
-void CheneyBfsPrecise(void* tenured_begin, void* tenured_end,
-                      Region* nursery, YoungCollectionResult* result);
-
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_LAYOUT_H_

@@ -1,0 +1,142 @@
+{
+  "family": "threading-tasks-primitives",
+  "assembly": "System.Private.CoreLib",
+  "mode": "standard",
+  "timestamp": "2026-05-15T15:07:30",
+  "duration_ms": 1557747,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "15 methods, 0 custom entries",
+      "details": {
+        "methodCount": 15,
+        "customMethodCount": 0,
+        "hasCustomEntryFile": false,
+        "customMethods": []
+      },
+      "errors": [],
+      "duration_ms": 1
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "convert-to-cpp failed",
+      "details": {
+        "steps": {
+          "build_subjects": "OK",
+          "convert_to_cpp": "FAILED"
+        }
+      },
+      "errors": [],
+      "duration_ms": 20474
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (16/16)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 16,
+          "total": 16
+        }
+      },
+      "errors": [],
+      "duration_ms": 531
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=ALIGNED",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 13,
+        "principleStatus": "ALIGNED",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 340
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "failed",
+      "summary": "asm-compare: 0/15 methods OK, avg JIT=0 instr, avg AOT IR=0 instr, expansion=0x",
+      "details": {
+        "totalMethods": 15,
+        "okCount": 0,
+        "failedCount": 15,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "aotInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "overallIrExpansionRatio": 0
+      },
+      "errors": [],
+      "duration_ms": 1524136
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/15 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 15,
+        "invalidCount": 15,
+        "benchmarkQuality": "matchedCount=0/15 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 12161
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "16/16 passed, 0 failed (stub=14)",
+      "details": {
+        "passedMethods": 16,
+        "failedMethods": 0,
+        "totalMethods": 16,
+        "realMethods": 16,
+        "stubMethods": 14
+      },
+      "errors": [],
+      "duration_ms": 49
+    },
+    "post_hotupdate_benchmark": {
+      "stage": "post_hotupdate_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (interpreter path — expected)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 52
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 13.33,
+    "overall": 56.66
+  },
+  "regression": {}
+}

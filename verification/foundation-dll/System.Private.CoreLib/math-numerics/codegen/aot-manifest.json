@@ -1,0 +1,216 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Run:System.Void(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)",
+      "reason": "external-call"
+    }
+  ]
+}

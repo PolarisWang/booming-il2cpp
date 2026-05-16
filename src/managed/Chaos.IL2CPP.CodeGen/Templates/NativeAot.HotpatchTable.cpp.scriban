@@ -1,37 +1,37 @@
 // ── Hotpatch name index + dispatch table ────────────────────
-{% if is_empty %}
+{{~ if is_empty ~}}
 // No hotpatch data for this module
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
     = nullptr;
-{% else %}
+{{~ else ~}}
 // Method name index entries
 static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[{{ total_method_count }}] = {
-{% for type_group in type_groups %}
-{% for entry in type_group.methods %}
+{{~ for type_group in type_groups ~}}
+{{~ for entry in type_group.methods ~}}
     { "{{ entry.method_name_literal }}", 0x{{ entry.token_hex }}u, {{ entry.param_count }}u },  // {{ type_group.type_name }}
-{% endfor %}
-{% endfor %}
+{{~ end ~}}
+{{~ end ~}}
 };
 
 // Type name index entries (namespace, short_name)
 static constexpr HotpatchTypeEntryV0 s_hotpatch_types[{{ type_group_count }}] = {
-{% for type_group in type_groups %}
+{{~ for type_group in type_groups ~}}
     { "{{ type_group.type_name_literal }}", "{{ type_group.type_namespace_literal }}", {{ type_group.first_method_index }}u, {{ type_group.method_count }}u },
-{% endfor %}
+{{~ end ~}}
 };
 
 // Token→Slot mapping (sorted by token for binary search)
 static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[{{ slot_count }}] = {
-{% for slot in token_slots %}
+{{~ for slot in token_slots ~}}
     { 0x{{ slot.token_hex }}u, {{ slot.slot }}u },
-{% endfor %}
+{{~ end ~}}
 };
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[{{ total_method_count }}] = {
-{% for entry in entries %}
+{{~ for entry in entries ~}}
     { reinterpret_cast<void*>(&{{ entry.native_symbol }}), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, {{ entry.flags }} },  // {{ entry.type_name }}::{{ entry.method_name }}
-{% endfor %}
+{{~ end ~}}
 };
 
 // Module hotpatch bundle
@@ -51,12 +51,12 @@ static constexpr HotpatchModuleV0 s_hotpatch_module = {
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
     = &s_hotpatch_module;
 
-{% if reverse_pinvoke_count > 0 %}
+{{~ if reverse_pinvoke_count > 0 ~}}
 // ── Reverse P/Invoke wrapper registration ──────────────────
 static constexpr void* s_reverse_pinvoke_wrappers[{{ reverse_pinvoke_count }}] = {
-{% for entry in reverse_pinvoke_entries %}
+{{~ for entry in reverse_pinvoke_entries ~}}
     reinterpret_cast<void*>(&{{ entry.native_symbol }}),
-{% endfor %}
+{{~ end ~}}
 };
 
 static const CHAOS_IL2CPP_UINT32 s_reverse_pinvoke_registered = []()
@@ -65,5 +65,5 @@ static const CHAOS_IL2CPP_UINT32 s_reverse_pinvoke_registered = []()
         s_reverse_pinvoke_wrappers, {{ reverse_pinvoke_count }}u);
     return 1u;
 }();
-{% endif %}
-{% endif %}
+{{~ end ~}}
+{{~ end ~}}

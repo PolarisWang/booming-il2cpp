@@ -122,22 +122,26 @@ extern "C" TokenSlotEntry g_token_slot[] = {
 
 ### 模式感知分支 emit
 
-当前阶段：Hotpatch codegen 已验证 dispatch table + NameIndex + token→slot 映射的正确性。调用站点的模式感知分支 emit 尚未实现（见"实现状态"）。
+模式感知分支 emit 已完整实现，位于 `NativeAotLoweringPlanner.ExceptionEmission.cs:EmitHotpatchResolvedInvocation`。
 
-计划 emit 方式：
+调用站点生成代码如下：
 
 ```cpp
 // 调用站点生成代码
 // before: 直接调用
 //   auto result = Method0(args...);
-// after: 模式感知分支
-//   auto& entry = s_hotpatch_entries[Method0_SLOT];
-//   CHAOS_IL2CPP_INTPTR result;
-//   if (entry.flags & kHotpatchActive) [[unlikely]]
-//       result = entry.interrupt_ptr(entry.method_key, args...);
+// after: 模式感知分支 (via EmitHotpatchResolvedInvocation)
+//   auto& _d0 = s_hotpatch_entries[0];
+//   CHAOS_IL2CPP_INTPTR _d_hpresult{};
+//   if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0))
+//       ::chaos::il2cpp::runtime_core::HotpatchDispatchPatch(&_d0, ...);
+//   else if (::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
+//       _d_hpresult = _d0.direct_ptr(...);
 //   else
-//       result = entry.direct_ptr(args...);
+//       _d_hpresult = Method0(...);
 ```
+
+emit 逻辑在 `EmitLinearResolvedInvocation` 中检测 `_nativeSymbolToDispatchSlot` 映射，匹配时路由到 `EmitHotpatchResolvedInvocation`。详见 `NativeAotLoweringPlanner.InvocationPlanning.cs`。运行时根据 entry 状态选择 direct call、hotpatch dispatch 或 native keep-alive 三种路径。
 
 ## PATCHDATA 结构
 

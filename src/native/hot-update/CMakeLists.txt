@@ -7,7 +7,6 @@ add_library(chaos_hot_update STATIC
     method_replacement.h)
 
 target_compile_features(chaos_hot_update PUBLIC cxx_std_17)
-target_compile_definitions(chaos_hot_update PUBLIC CHAOS_RUNTIME_ABI_STATIC)
 target_compile_options(chaos_hot_update PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
 target_include_directories(
     chaos_hot_update

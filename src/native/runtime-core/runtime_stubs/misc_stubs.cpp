@@ -10,7 +10,11 @@
 #include "runtime_stubs/stub_common.h"
 #include "runtime_stubs/string_stubs.h"
 #include "gc_helpers.h"
+#include "gc/gc_old_gen.h"
+#include "gc/gc_region.h"
 #include "gc/gc_scheduler.h"
+#include "gc/gc_young_collector.h"
+#include "thread_state.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -158,17 +162,32 @@ CHAOS_IL2CPP_INTPTR ChaosTextInfoGetCultureName(CHAOS_IL2CPP_INTPTR /*text_info*
 // ── GC stubs ──
 void ChaosGcCollect(CHAOS_IL2CPP_INT32 generation) noexcept
 {
-    (void)generation;
-    // Route GC.Collect() through the scheduler's request + safepoint trigger.
-    // The scheduler's RequestFullGc flag is polled in NurseryAllocateSlow
-    // (gc_region.cpp) during the next allocation slow path, which runs the
-    // full collection under a safepoint.
+    // Synchronous blocking collection:
+    //   generation < 0 or gen==2 → full collection (all generations)
+    //   gen==0 → young collection only
+    //   gen==1 → full collection (young + old)
     //
-    // For an immediate synchronous full GC (generation < 0 or explicit request),
-    // we bypass the scheduler and trigger directly under a safepoint.
-    if (generation < 0 || generation == 2) {
-        g_gc_scheduler.RequestFullGc();
+    // 1. Young collection on the calling thread's TLS nursery (if any).
+    // 2. Full old-gen mark-sweep (STW safepoint) when gen >= 1.
+    // 3. Run pending finalizers.
+
+    // Step 1: Young collection (gen 0 or full).
+    if (tls_nursery_ctx.nursery != nullptr &&
+        tls_nursery_ctx.nursery->current > tls_nursery_ctx.nursery->begin) {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        GcYoungCollection(tls_nursery_ctx.nursery);
+        threading::ReleaseGlobalSafepoint(gen);
     }
+
+    // Step 2: Full collection when gen >= 1 or default (-1).
+    if (generation < 0 || generation >= 1) {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        g_old_gen.Collect(nullptr, nullptr);
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+
+    // Step 3: Run pending finalizers.
+    g_old_gen.RunFinalizers();
 }
 
 CHAOS_IL2CPP_INT32 ChaosGcGetGeneration(CHAOS_IL2CPP_INTPTR obj) noexcept

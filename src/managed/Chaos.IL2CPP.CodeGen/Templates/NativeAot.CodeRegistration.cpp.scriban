@@ -1,32 +1,32 @@
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[{{ methods_count }}] = {
-{% for method in methods %}
+{{~ for method in methods ~}}
     reinterpret_cast<void*>(&{{ method.native_symbol }}),
-{% endfor %}
+{{~ end ~}}
 };
 
-{% if reverse_pinvoke_count > 0 %}
+{{~ if reverse_pinvoke_count > 0 ~}}
 static constexpr void* const kReversePInvokeWrappers[{{ reverse_pinvoke_count }}] = {
-{% for entry in reverse_pinvoke_entries %}
+{{~ for entry in reverse_pinvoke_entries ~}}
     reinterpret_cast<void*>(&{{ entry.native_symbol }}),
-{% endfor %}
+{{~ end ~}}
 };
 
-{% endif %}
+{{~ end ~}}
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
     = {
     .struct_size               = sizeof(CodeRegistrationV0),
     .method_pointers           = kMethodPointers,
     .method_pointer_count      = {{ methods_count }}u,
-{% if reverse_pinvoke_count > 0 %}
+{{~ if reverse_pinvoke_count > 0 ~}}
     .reverse_pinvoke_wrappers  = kReversePInvokeWrappers,
     .reverse_pinvoke_wrapper_count = {{ reverse_pinvoke_count }}u,
-{% else %}
+{{~ else ~}}
     .reverse_pinvoke_wrappers  = nullptr,
     .reverse_pinvoke_wrapper_count = 0u,
-{% endif %}
+{{~ end ~}}
     .invoker_pointers          = nullptr,
     .invoker_pointer_count     = 0u,
     .unresolved_virtual_calls = nullptr,

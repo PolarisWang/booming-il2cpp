@@ -1,0 +1,123 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663309,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_10:System.Void()",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionGenericsSubjects",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_11:System.Void()",
+      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

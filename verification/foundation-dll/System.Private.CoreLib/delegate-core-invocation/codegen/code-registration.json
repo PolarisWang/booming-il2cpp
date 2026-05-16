@@ -1,0 +1,78 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "DelegateCoreInvocationSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Run",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Run:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

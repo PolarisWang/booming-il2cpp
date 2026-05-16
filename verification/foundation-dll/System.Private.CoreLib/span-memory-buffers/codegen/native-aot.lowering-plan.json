@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "generic-managed-entry",
+  "assemblyName": "SpanMemoryBuffersSubjects",
+  "entrySubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Run:System.Void(System.Int32)",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Run",
+  "entryMethodToken": "0u",
+  "workloadAbi": "void(int32)"
+}

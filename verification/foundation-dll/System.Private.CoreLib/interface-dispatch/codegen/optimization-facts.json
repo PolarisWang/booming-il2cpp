@@ -1,0 +1,348 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/ISimple",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/IWithDefault",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/ICalculator",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/IBase",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/IDerived",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/ImplSimple",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/CalcAdd",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/CalcMul",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond2",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Run:System.Void(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_2:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_3:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_4:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_5:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_6:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ISimple::GetValue:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/IWithDefault::GetValue:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ICalculator::Multiply:System.Int32(System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/IBase::BaseMethod:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/IDerived::DerivedMethod:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ImplSimple::GetValue:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ImplSimple::.ctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/CalcAdd::.ctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/CalcMul::.ctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond::BaseMethod:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond::DerivedMethod:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond::.ctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::BaseMethod:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::.ctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestIsCheck:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()",
+      "dispatchKind": "callvirt.interface-runtime-helper",
+      "targetSubjectId": "InterfaceDispatchSubjects/ImplSimple::GetValue:System.Int32()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()",
+      "dispatchKind": "callvirt.interface-runtime-helper",
+      "targetSubjectId": "InterfaceDispatchSubjects/IWithDefault::GetValue:System.Int32()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()",
+      "dispatchKind": "callvirt.interface-runtime-helper",
+      "targetSubjectId": "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()",
+      "dispatchKind": "callvirt.interface-runtime-helper",
+      "targetSubjectId": "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()",
+      "dispatchKind": "callvirt.interface-runtime-helper",
+      "targetSubjectId": "InterfaceDispatchSubjects/ISimple::GetValue:System.Int32()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()",
+      "dispatchKind": "callvirt.interface-runtime-helper",
+      "targetSubjectId": "InterfaceDispatchSubjects/ImplDiamond::BaseMethod:System.Int32()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()",
+      "dispatchKind": "callvirt.interface-runtime-helper",
+      "targetSubjectId": "InterfaceDispatchSubjects/ImplDiamond::DerivedMethod:System.Int32()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()",
+      "dispatchKind": "callvirt.interface-runtime-helper",
+      "targetSubjectId": "InterfaceDispatchSubjects/ImplDiamond::BaseMethod:System.Int32()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()",
+      "dispatchKind": "callvirt.interface-runtime-helper",
+      "targetSubjectId": "InterfaceDispatchSubjects/ImplDiamond::DerivedMethod:System.Int32()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()",
+      "dispatchKind": "callvirt.interface-runtime-helper",
+      "targetSubjectId": "InterfaceDispatchSubjects/ImplDiamond2::BaseMethod:System.Int32()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()",
+      "dispatchKind": "callvirt.interface-runtime-helper",
+      "targetSubjectId": "InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod:System.Int32()",
+      "devirtualized": true
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": []
+}

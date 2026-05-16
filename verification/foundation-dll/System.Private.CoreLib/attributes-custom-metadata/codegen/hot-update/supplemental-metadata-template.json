@@ -1,0 +1,99 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

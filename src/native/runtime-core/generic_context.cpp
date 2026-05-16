@@ -5,12 +5,12 @@
 
 #include <chaos/native_types.h>
 #include <chaos/trace.h>
+#include <chaos/unordered_dense.h>
 
 #include <atomic>
 #include <cstdint>
 #include <cstring>
 #include <mutex>
-#include <unordered_map>
 #include <vector>
 
 namespace chaos::il2cpp::generic_context {
@@ -150,7 +150,7 @@ struct Registry {
         InstantiationVector closed_types;
         ModuleShard*        owner_shard;   // nullptr = no lazy data (standalone registration)
     };
-    CHAOS_IL2CPP_UNORDERED_MAP(TypeInfoHandle, TypeEntry) by_open_type;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(TypeInfoHandle, TypeEntry) by_open_type;
 
     // Reverse index: closed_type → (open_type, type_args, module_id)
     // Enables O(1) GetClosedTypeGenericArgs lookup instead of linear scan.
@@ -159,15 +159,15 @@ struct Registry {
         CHAOS_IL2CPP_VECTOR(TypeInfoHandle) type_args;
         CHAOS_IL2CPP_UINT32 module_id;
     };
-    CHAOS_IL2CPP_UNORDERED_MAP(TypeInfoHandle, ClosedTypeArgs) by_closed_type;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(TypeInfoHandle, ClosedTypeArgs) by_closed_type;
 
     // Method instantiation index.
     using MethodInstantiationVector = CHAOS_IL2CPP_VECTOR(MethodInstantiationEntry);
-    CHAOS_IL2CPP_UNORDERED_MAP(MethodInfoHandle, MethodInstantiationVector) by_open_method;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(MethodInfoHandle, MethodInstantiationVector) by_open_method;
 
     // Method generic context index (bare ptr owned by shard).
-    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, MethodGenericContextEntry*) by_method_token;
-    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, ModuleShard*) method_token_owners;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT32, MethodGenericContextEntry*) by_method_token;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT32, ModuleShard*) method_token_owners;
 
     // Orphan entries for AOT-root (module_id=0) standalone registrations.
     using EntryPtrVector = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_UNIQUE_PTR(MethodGenericContextEntry));

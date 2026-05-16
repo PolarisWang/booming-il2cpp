@@ -27,6 +27,7 @@ struct ReflectionQueryMethodDescriptor {
     CHAOS_IL2CPP_INT32 parameter_count;
     const ReflectionQueryParameterDescriptor* parameters;
     CHAOS_IL2CPP_UINT32 parameter_descriptor_count;
+    const void* default_value_blob;
 };
 
 struct ReflectionQueryFieldDescriptor {
@@ -56,6 +57,9 @@ struct ReflectionQueryTypeDescriptor {
     CHAOS_IL2CPP_UINT32 property_count;
     const ReflectionQueryMethodDescriptor* methods;
     CHAOS_IL2CPP_UINT32 method_count;
+    const void* generic_parameters;
+    CHAOS_IL2CPP_UINT32 generic_param_count;
+    CHAOS_IL2CPP_UINT32 reserved_flags;
 };
 
 struct ReflectionQueryImageDescriptor {

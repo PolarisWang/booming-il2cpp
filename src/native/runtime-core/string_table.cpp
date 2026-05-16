@@ -1,11 +1,11 @@
 #include "string_table.h"
 
 #include <chaos/native_types.h>
+#include <chaos/unordered_dense.h>
 
 #include <algorithm>
 #include <cstring>
 #include <mutex>
-#include <unordered_map>
 #include <vector>
 
 namespace chaos::il2cpp::string_table {
@@ -22,10 +22,10 @@ CHAOS_IL2CPP_UINT32 g_aot_entry_count = 0u;
 thread_local struct { StringId id; StringView view; } g_tls_resolve = {};
 
 CHAOS_IL2CPP_MUTEX g_dynamic_mutex;
-CHAOS_IL2CPP_UNORDERED_MAP(StringId, StringView) g_dynamic_entries;
+CHAOS_IL2CPP_UNORDERED_DENSE_MAP(StringId, StringView) g_dynamic_entries;
 // Intermediate typedef avoids MSVC >> issue with nested macros
 using DomainVector = CHAOS_IL2CPP_VECTOR(StringId);
-using DomainRegistrations = CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, DomainVector);
+using DomainRegistrations = CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT32, DomainVector);
 DomainRegistrations g_domain_registrations;
 
 }  // anonymous namespace

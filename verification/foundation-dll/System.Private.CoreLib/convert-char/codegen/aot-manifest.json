@@ -5,6 +5,12 @@
     {
       "assemblyName": "ConvertCharSubjects",
       "subjectKind": "method",
+      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ConvertCharSubjects",
+      "subjectKind": "method",
       "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
@@ -108,12 +114,6 @@
       "assemblyName": "ConvertCharSubjects",
       "subjectKind": "method",
       "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "ConvertCharSubjects",
-      "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
       "reason": "generated-direct-call"
     },
     {

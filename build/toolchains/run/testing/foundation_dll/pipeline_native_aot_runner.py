@@ -524,7 +524,7 @@ def _inject_config_tier(cmakelists: Path, config_tier: str) -> None:
     text = cmakelists.read_text(encoding="utf-8")
     if marker in text:
         return  # already injected
-    line = f"target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_{config_tier} CHAOS_RUNTIME_ABI_STATIC)  {marker}"
+    line = f"target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_{config_tier})  {marker}"
     # Insert before the closing paren of add_executable or after link libraries
     text = text.replace(
         "target_link_libraries(entry PRIVATE",
@@ -583,6 +583,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'    "${{CHAOS_PROJECT_ROOT}}/contracts/native/v0"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/third_party/fmt/include"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/third_party/bdwgc/include"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/third_party/unordered_dense/include"\n'
         f')\n'
         f'\n'
         f'# Library link directories\n'

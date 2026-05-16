@@ -6,7 +6,6 @@ add_library(chaos_bootstrap STATIC
 
 target_compile_features(chaos_bootstrap PUBLIC cxx_std_17)
 target_compile_definitions(chaos_bootstrap PRIVATE CHAOS_RUNTIME_ABI_EXPORTS _CRT_SECURE_NO_WARNINGS)
-target_compile_definitions(chaos_bootstrap PUBLIC CHAOS_RUNTIME_ABI_STATIC)
 target_compile_options(chaos_bootstrap PRIVATE /utf-8)
 target_include_directories(
     chaos_bootstrap
@@ -20,7 +19,6 @@ target_include_directories(
         "${REPO_ROOT}/src/native/support"
         "${REPO_ROOT}/src/native/interpreter"
         "${REPO_ROOT}/src/native/interpreter/generated"
-        "${REPO_ROOT}/third_party/bdwgc/include"
         "${REPO_ROOT}/third_party/fmt/include")
 target_link_libraries(
     chaos_bootstrap

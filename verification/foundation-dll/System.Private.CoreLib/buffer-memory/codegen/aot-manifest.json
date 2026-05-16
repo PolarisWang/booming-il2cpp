@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "field",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+      "reason": "external-call"
+    }
+  ]
+}

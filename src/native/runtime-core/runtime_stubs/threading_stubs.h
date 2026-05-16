@@ -2,6 +2,8 @@
 #pragma once
 
 CHAOS_IL2CPP_INTPTR chaos_thread_get_current(void) noexcept;
+void chaos_monitor_enter(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32* lockTaken) noexcept;
+void chaos_monitor_exit(CHAOS_IL2CPP_INTPTR obj) noexcept;
 CHAOS_IL2CPP_INT32 ChaosMonitorTryEnter(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 timeout) noexcept;
 
 // Thread lifecycle: .ctor stores the delegate, Start spawns a native thread,

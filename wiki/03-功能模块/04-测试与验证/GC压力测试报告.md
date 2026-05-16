@@ -2,7 +2,7 @@
 
 ## 概述
 
-CRAG (Chaos Region-Aware GC) 压力测试套件位于 `tests/contracts/native/runtime-core/gc_stress_test.cpp`，包含 **7 个场景**，覆盖并发分配、混合大小、young GC 震荡、延迟验证、域卸载、并发 pinned root、超大对象等路径。输出结构化 JSON 报告到 `artifacts/native-runtime-core-test/reports/gc_stress_report_<ts>.json`。
+CRAG (Chaos Region-Aware GC) 压力测试套件位于 `tests/contracts/native/runtime-core/gc_stress_test.cpp`，包含 **11 个场景** (A-K)，覆盖并发分配、混合大小、young GC 震荡、延迟验证、域卸载、并发 pinned root、超大对象、域卸载风暴、DependentHandle、混合 pin/unpin、LOH sweep 等路径。输出结构化 JSON 报告到 `artifacts/native-runtime-core-test/reports/gc_stress_report_<ts>.json`。
 
 构建与运行：
 
@@ -22,6 +22,10 @@ cmake --build artifacts/presets/debug --target chaos_gc_stress_test --config Deb
 | E | domain_unload | 10 domains | 200/domain | 创建 N 个域，分配内存，验证模式，卸载所有域 |
 | F | concurrent_pinned_root | 20 | 20 | 混合 old-gen/nursery 分配 + 并发 AddPinnedRoot + full GC |
 | G | oversized_objects | 20 | 16 | 33KB-256KB 直接 old-gen 分配 + 并发 full GC |
+| H | domain_unload_storm | 20 | 50 | 多线程并发 domain 加载/卸载，验证无泄漏无崩溃 |
+| I | dependent_handle | 1 | 2000 | DependentHandle lifecycle: key 存活 → value 存活; key dead → value dead; 多轮 GC 正确性 |
+| J | pinned_unpinned_mixed | 20 | 200 | 混合 pinned/unpinned 分配，young GC 后 pin 对象地址不变 |
+| K | loh_sweep_verify | 10 | 50 | 分配释放大量 >85KB 对象，LOH sweep 正确回收，内存不泄漏 |
 
 ## Phase 7 最终状态 (2026-05-15)
 

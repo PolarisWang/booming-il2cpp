@@ -1,0 +1,1025 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.run",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)",
+      "signature": "System.Void BufferMemorySubjects::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.run",
+        "signature": "System.Void BufferMemorySubjects::Run(System.Int32)"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Run",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            53,
+            61,
+            69,
+            77,
+            85,
+            93,
+            101,
+            109,
+            117,
+            125
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 51,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "callee": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+          "reference": {
+            "assemblyName": "BufferMemorySubjects",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 59,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 61,
+          "resultType": "System.Void",
+          "callee": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+          "reference": {
+            "assemblyName": "BufferMemorySubjects",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 67,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 69,
+          "resultType": "System.Void",
+          "callee": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+          "reference": {
+            "assemblyName": "BufferMemorySubjects",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 75,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 77,
+          "resultType": "System.Void",
+          "callee": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+          "reference": {
+            "assemblyName": "BufferMemorySubjects",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 85,
+          "resultType": "System.Void",
+          "callee": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+          "reference": {
+            "assemblyName": "BufferMemorySubjects",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 91,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 93,
+          "resultType": "System.Void",
+          "callee": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+          "reference": {
+            "assemblyName": "BufferMemorySubjects",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 99,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 101,
+          "resultType": "System.Void",
+          "callee": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+          "reference": {
+            "assemblyName": "BufferMemorySubjects",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 107,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 109,
+          "resultType": "System.Void",
+          "callee": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+          "reference": {
+            "assemblyName": "BufferMemorySubjects",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 117,
+          "resultType": "System.Void",
+          "callee": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+          "reference": {
+            "assemblyName": "BufferMemorySubjects",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 125,
+          "resultType": "System.Void",
+          "callee": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+          "reference": {
+            "assemblyName": "BufferMemorySubjects",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 133,
+          "ilOffset": 131,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 133
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-0",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-0",
+        "signature": "System.Void BufferMemorySubjects::Subject_0()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-1",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-1",
+        "signature": "System.Void BufferMemorySubjects::Subject_1()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-2",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-2",
+        "signature": "System.Void BufferMemorySubjects::Subject_2()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Byte[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Byte[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 27
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "BufferMemorySubjects",
+            "subjectKind": "field",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 36
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-3",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-3",
+        "signature": "System.Void BufferMemorySubjects::Subject_3()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-4",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-4",
+        "signature": "System.Void BufferMemorySubjects::Subject_4()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-5",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-5",
+        "signature": "System.Void BufferMemorySubjects::Subject_5()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-6",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-6",
+        "signature": "System.Void BufferMemorySubjects::Subject_6()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-7",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-7",
+        "signature": "System.Void BufferMemorySubjects::Subject_7()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-8",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-8",
+        "signature": "System.Void BufferMemorySubjects::Subject_8()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-9",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-9",
+        "signature": "System.Void BufferMemorySubjects::Subject_9()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "hasBlittableStructReturn": false
+    }
+  ]
+}

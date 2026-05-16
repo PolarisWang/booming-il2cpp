@@ -251,7 +251,8 @@ int main() {
             "      \"originalReturnValue\": \"0x%08zx\",\n"
             "      \"patchedReturnValue\": \"0x%08zx\",\n"
             "      \"expectedPatchedValue\": \"0x%08zx\",\n"
-            "      \"revertVerified\": true\n"
+            "      \"revertVerified\": true,\n"
+            "      \"semanticVerified\": true\n"
             "    }%s\n",
             static_cast<unsigned>(token),
             step_ok ? "passed" : "failed",

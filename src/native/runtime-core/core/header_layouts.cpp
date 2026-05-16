@@ -17,7 +17,7 @@ struct RuntimeInternalState {
 };
 
 struct ThreadInternalState {
-    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_STRING, CHAOS_IL2CPP_INT32) thread_static_int32_slots;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_STRING, CHAOS_IL2CPP_INT32) thread_static_int32_slots;
     CHAOS_IL2CPP_VECTOR(ThreadRootRecord) reported_roots;
     bool at_gc_safepoint = false;
 };

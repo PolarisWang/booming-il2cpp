@@ -12,12 +12,12 @@
 // registration happens during single-threaded bootstrap).
 
 #include <chaos/native_types.h>
+#include <chaos/unordered_dense.h>
 #include "codegen_bridge.h"
 
 #include <cstddef>
 #include <cstdint>
 #include <string>
-#include <unordered_map>
 #include <vector>
 
 namespace chaos::il2cpp::runtime_core {
@@ -67,7 +67,7 @@ private:
     // Maps "ns\0type\0method" → (module_index << 32) | token.
     // Populated during RegisterModule / RegisterAllModules.
     // Avoids O(modules × log(types)) per LookupMethod call.
-    std::unordered_map<std::string, uint64_t> lookup_cache_;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_STRING, CHAOS_IL2CPP_UINT64) lookup_cache_;
 
     // Build cache entries for one module (called from RegisterModule).
     void BuildLookupCacheForModule(const HotpatchModuleV0* mod, size_t module_index) noexcept;

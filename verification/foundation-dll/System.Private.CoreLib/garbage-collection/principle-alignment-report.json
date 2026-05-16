@@ -1,0 +1,86 @@
+{
+  "family": "garbage-collection",
+  "assembly": "System.Private.CoreLib",
+  "generated_at": "2026-05-15T16:54:11.366732",
+  "checks": {
+    "p1_lowering": {
+      "check_id": "p1_lowering",
+      "principle": "P1",
+      "status": "VIOLATION",
+      "summary": "Generated C++ not found — no lowering exists",
+      "details": [],
+      "evidence": {}
+    },
+    "p1_no_redundant_branch": {
+      "check_id": "p1_no_redundant_branch",
+      "principle": "P1",
+      "status": "VIOLATION",
+      "summary": "Generated C++ not found",
+      "details": [],
+      "evidence": {}
+    },
+    "p1_no_unnecessary_indirection": {
+      "check_id": "p1_no_unnecessary_indirection",
+      "principle": "P1",
+      "status": "VIOLATION",
+      "summary": "Generated C++ not found",
+      "details": [],
+      "evidence": {}
+    },
+    "p1_benchmark": {
+      "check_id": "p1_benchmark",
+      "principle": "P1",
+      "status": "ALIGNED",
+      "summary": "avg_speedup=0.0%",
+      "details": [],
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "managed_faster_count": 0,
+        "native_faster_count": 0
+      }
+    },
+    "p2_template_hygiene": {
+      "check_id": "p2_template_hygiene",
+      "principle": "P2",
+      "status": "ALIGNED",
+      "summary": "All Scriban templates clean — no semantic decision logic",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_no_bare_new": {
+      "check_id": "p2_no_bare_new",
+      "principle": "P2",
+      "status": "NOT_APPLICABLE",
+      "summary": "Generated C++ not found",
+      "details": [],
+      "evidence": {}
+    },
+    "p3_patch_entry": {
+      "check_id": "p3_patch_entry",
+      "principle": "P3",
+      "status": "NOT_APPLICABLE",
+      "summary": "Generated C++ not found",
+      "details": [],
+      "evidence": {}
+    },
+    "p3_patchdata": {
+      "check_id": "p3_patchdata",
+      "principle": "P3",
+      "status": "VIOLATION",
+      "summary": "HotUpdate test exists but no .patchdata files found",
+      "details": [],
+      "evidence": {
+        "patchdata_count": 0,
+        "hotupdate_report_exists": true
+      }
+    }
+  },
+  "summary": {
+    "total": 8,
+    "aligned": 2,
+    "concern": 0,
+    "violation": 4,
+    "not_applicable": 2,
+    "overall": "VIOLATION"
+  }
+}

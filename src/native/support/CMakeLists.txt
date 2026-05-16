@@ -5,7 +5,6 @@ add_library(chaos_support STATIC
     support.h)
 
 target_compile_features(chaos_support PUBLIC cxx_std_17)
-target_compile_definitions(chaos_support PUBLIC CHAOS_RUNTIME_ABI_STATIC)
 target_compile_options(chaos_support PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
 target_include_directories(
     chaos_support

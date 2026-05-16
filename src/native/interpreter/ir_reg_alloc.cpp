@@ -15,7 +15,7 @@ namespace chaos::il2cpp::interpreter {
 
 // ── Register Allocator ──────────────────────────────────────────────────
 // Linear-scan register allocator.  Walks IRMethod.instructions sequentially,
-// tracking a virtual evaluation stack (vector<uint32_t> of virtual register
+// tracking a virtual evaluation stack (uint32_t[256] of virtual register
 // indices).  Each "push" (has_dst=true) assigns a new virtual register.
 // Each "pop" (has_src=true) reads from the virtual stack.
 //
@@ -29,7 +29,9 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
     result.seh_clauses = ir_method.seh_clauses;
 
     // Virtual register stack — tracks which virtual reg holds each stack slot.
-    std::vector<uint32_t> virt_stack;
+    // Fixed-size array avoids heap allocation from std::vector.
+    uint32_t virt_stack[256];
+    uint32_t virt_sp = 0;
     uint32_t next_vreg = 16;  // first free virtual register
 
     const auto& instrs = ir_method.instructions;
@@ -65,12 +67,12 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::LdElem:  // array[index] — need index too
         {
             // Pop src2, src1
-            if (virt_stack.size() >= 2) {
-                src2_reg = virt_stack.back(); virt_stack.pop_back();
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (virt_sp >= 2) {
+                src2_reg = virt_stack[--virt_sp];
+                src1_reg = virt_stack[--virt_sp];
             }
             // Push dst
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true; has_src1 = true; has_src2 = true;
             break;
         }
@@ -86,10 +88,10 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::LdInd:
         case IROpCode::LdObj:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true; has_src1 = true;
             break;
         }
@@ -97,10 +99,10 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── Dup: copy from virt_stack top ──
         case IROpCode::Dup:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[virt_sp - 1];
             }
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true; has_src1 = true;
             break;
         }
@@ -109,7 +111,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::LdcI4: case IROpCode::LdcI8:
         case IROpCode::LdcR4: case IROpCode::LdcR8:
         {
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true;
             break;
         }
@@ -120,7 +122,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::SizeOf:
         case IROpCode::LdArgA: case IROpCode::LdLocA:
         {
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true;
             break;
         }
@@ -128,7 +130,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── LdArg/LdLoc: push from arg/local ──
         case IROpCode::LdArg:
         {
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true;
             break;
         }
@@ -136,7 +138,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         {
             // Read from local's dedicated register r8+N
             src1_reg = static_cast<uint8_t>(8u + static_cast<uint32_t>(ir.operand_index));
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true; has_src1 = true;
             break;
         }
@@ -144,8 +146,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── StLoc: pop value, write to local's dedicated register ──
         case IROpCode::StLoc:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
             // Write to local's dedicated register r8+N
             dst_reg = static_cast<uint8_t>(8u + static_cast<uint32_t>(ir.operand_index));
@@ -156,8 +158,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── StArg: pop value only, no dst ──
         case IROpCode::StArg:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
             has_src1 = true;
             break;
@@ -166,10 +168,10 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── LdFld: pop obj, push field ──
         case IROpCode::LdFld:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true; has_src1 = true;
             break;
         }
@@ -177,10 +179,10 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── StFld: pop value, pop obj ──
         case IROpCode::StFld:
         {
-            if (virt_stack.size() >= 1) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();  // value
+            if (virt_sp >= 1) {
+                src1_reg = virt_stack[--virt_sp];  // value
             }
-            if (virt_stack.size() >= 1) {
+            if (virt_sp >= 1) {
                 // obj stays for the handler to pop
                 has_src2 = true;
             }
@@ -191,7 +193,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── LdSFld: push static field ──
         case IROpCode::LdSFld:
         {
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true;
             break;
         }
@@ -199,8 +201,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── StSFld: pop value ──
         case IROpCode::StSFld:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
             has_src1 = true;
             break;
@@ -212,15 +214,15 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         {
             uint32_t ac = ir.arg_count;
             // Record arg0 register (args are in consecutive registers from arg0)
-            if (ac > 0 && virt_stack.size() >= ac) {
-                src1_reg = virt_stack[virt_stack.size() - ac];
+            if (ac > 0 && virt_sp >= ac) {
+                src1_reg = virt_stack[virt_sp - ac];
             }
             // Pop args in reverse: args[ac-1] .. args[0]
-            for (uint32_t ai = 0; ai < ac && !virt_stack.empty(); ++ai) {
-                virt_stack.pop_back();
+            for (uint32_t ai = 0; ai < ac && !virt_sp == 0; ++ai) {
+                --virt_sp;
             }
             // Push return value
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true;
             if (ac > 0) has_src1 = true;
             break;
@@ -230,10 +232,10 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::NewObj:
         {
             uint32_t ac = ir.arg_count;
-            for (uint32_t ai = 0; ai < ac && !virt_stack.empty(); ++ai) {
-                virt_stack.pop_back();
+            for (uint32_t ai = 0; ai < ac && !virt_sp == 0; ++ai) {
+                --virt_sp;
             }
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true;
             break;
         }
@@ -241,10 +243,10 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── Box: pop value, push obj ──
         case IROpCode::Box:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true; has_src1 = true;
             break;
         }
@@ -253,10 +255,10 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::Unbox: case IROpCode::CastClass: case IROpCode::IsInst:
         case IROpCode::LdVirtFtn:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true; has_src1 = true;
             break;
         }
@@ -264,10 +266,10 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── NewArr: pop length, push array ref ──
         case IROpCode::NewArr:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true; has_src1 = true;
             break;
         }
@@ -275,8 +277,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── StElem: pop value, pop index, pop array ──
         case IROpCode::StElem:
         {
-            for (int si = 0; si < 3 && !virt_stack.empty(); ++si) {
-                virt_stack.pop_back();
+            for (int si = 0; si < 3 && !virt_sp == 0; ++si) {
+                --virt_sp;
             }
             has_src1 = true;
             break;
@@ -285,9 +287,9 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── LdElemA: pop index, pop array, push addr ──
         case IROpCode::LdElemA:
         {
-            if (!virt_stack.empty()) virt_stack.pop_back(); // index
-            if (!virt_stack.empty()) virt_stack.pop_back(); // array
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            if (!virt_sp == 0) --virt_sp; // index
+            if (!virt_sp == 0) --virt_sp; // array
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true; has_src1 = true;
             break;
         }
@@ -295,8 +297,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── Pop: discard ──
         case IROpCode::Pop:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
             has_src1 = true;
             break;
@@ -306,8 +308,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::Throw: case IROpCode::EndFilter:
         case IROpCode::InitObj:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
             has_src1 = true;
             break;
@@ -316,8 +318,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── StObj: pop value, pop ptr ──
         case IROpCode::StObj:
         {
-            if (!virt_stack.empty()) virt_stack.pop_back();  // value
-            if (!virt_stack.empty()) virt_stack.pop_back();  // ptr
+            if (!virt_sp == 0) --virt_sp;  // value
+            if (!virt_sp == 0) --virt_sp;  // ptr
             has_src1 = true;
             break;
         }
@@ -325,8 +327,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── StInd: pop value, pop addr ──
         case IROpCode::StInd:
         {
-            if (!virt_stack.empty()) virt_stack.pop_back();  // value
-            if (!virt_stack.empty()) virt_stack.pop_back();  // addr
+            if (!virt_sp == 0) --virt_sp;  // value
+            if (!virt_sp == 0) --virt_sp;  // addr
             has_src1 = true;
             break;
         }
@@ -334,8 +336,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── Switch: pop index ──
         case IROpCode::Switch:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
             has_src1 = true;
             break;
@@ -344,10 +346,10 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── LocAlloc: pop size, push ptr ──
         case IROpCode::LocAlloc:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
-            dst_reg = next_vreg++; virt_stack.push_back(dst_reg);
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true; has_src1 = true;
             break;
         }
@@ -355,8 +357,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── BrTrue/BrFalse/BneUn/Beq/Blt/Bgt/Ble/Bge/BneUn/BgeUn/BgtUn/BleUn/BltUn: pop compare ──
         case IROpCode::BrTrue: case IROpCode::BrFalse:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];
             }
             has_src1 = true;
             break;
@@ -366,9 +368,9 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::BneUn: case IROpCode::BgeUn: case IROpCode::BgtUn:
         case IROpCode::BleUn: case IROpCode::BltUn:
         {
-            if (virt_stack.size() >= 2) {
-                src2_reg = virt_stack.back(); virt_stack.pop_back();
-                src1_reg = virt_stack.back(); virt_stack.pop_back();
+            if (virt_sp >= 2) {
+                src2_reg = virt_stack[--virt_sp];
+                src1_reg = virt_stack[--virt_sp];
             }
             has_src1 = true; has_src2 = true;
             break;
@@ -377,15 +379,15 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── Cpblk/InitBlk: pop 3 operands ──
         case IROpCode::Cpblk:
         {
-            for (int si = 0; si < 3 && !virt_stack.empty(); ++si)
-                virt_stack.pop_back();
+            for (int si = 0; si < 3 && !virt_sp == 0; ++si)
+                --virt_sp;
             has_src1 = true;
             break;
         }
         case IROpCode::InitBlk:
         {
-            for (int si = 0; si < 3 && !virt_stack.empty(); ++si)
-                virt_stack.pop_back();
+            for (int si = 0; si < 3 && !virt_sp == 0; ++si)
+                --virt_sp;
             has_src1 = true;
             break;
         }
@@ -393,8 +395,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── Ret: read return value ──
         case IROpCode::Ret:
         {
-            if (!virt_stack.empty()) {
-                src1_reg = virt_stack.back();  // don't pop — keep for callee
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[virt_sp - 1];  // don't pop — keep for callee
             }
             has_src1 = true;
             break;

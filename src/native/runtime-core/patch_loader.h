@@ -20,10 +20,13 @@
 #include "patch_data.h"
 
 #include <atomic>
+
+#include <chaos/unordered_dense.h>
+
+#include <atomic>
 #include <cstddef>
 #include <cstdint>
 #include <string>
-#include <unordered_map>
 #include <vector>
 
 namespace chaos::il2cpp::runtime_core {
@@ -167,13 +170,13 @@ private:
     // Maps (module_id << 32 | token) to the PatchMethod that overrides it.
     // Built during ApplyPatchFromMemory after all methods are pre-lowered.
     // Used by InlineLeafCallees to find callee IR for same-patch-context inlining.
-    std::unordered_map<uint64_t, PatchMethod*> inlining_map_;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, PatchMethod*) inlining_map_;
 
     // Cached UTF-8 strings decoded from the #US heap.
     // Populated lazily by GetUserString(). Keyed by offset into the #US heap
     // for O(1) lookup and pointer stability (unordered_map does not invalidate
     // references on insertion).
-    mutable std::unordered_map<uint32_t, std::string> user_string_cache_;
+    mutable CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, CHAOS_IL2CPP_STRING) user_string_cache_;
 };
 
 // ── PatchContext ─────────────────────────────────────────────────────────
@@ -185,6 +188,11 @@ struct PatchContext {
     uint32_t               method_count    = 0;         // number of methods
     PatchMetadataCache*    metadata_cache  = nullptr;   // token resolution cache
 };
+
+// Global patch generation counter. Incremented on each ApplyPatchFromMemory.
+// Used by CallVirt MIC (Monomorphic Inline Cache) to detect stale cache entries
+// after a hotpatch. Relaxed ordering is sufficient for the counter itself.
+extern std::atomic<uint64_t> g_patch_generation;
 
 // ── Public API ──────────────────────────────────────────────────────────
 

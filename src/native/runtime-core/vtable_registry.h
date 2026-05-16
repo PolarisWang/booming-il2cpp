@@ -97,6 +97,14 @@ void* ResolveVirtualMethodPointerByHandle(
 /// Returns the number of registered vtables (for diagnostics).
 CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount();
 
+/// Clear iface_map and vtable_array pointers for any TypeVTable entries
+/// that reference memory within the domain being unloaded.
+/// Called from UnloadDomain during the STW safepoint window — no concurrent
+/// readers are active.  Nulled pointers prevent use-after-free when threads
+/// resume and the domain heap is destroyed.
+/// @param domain_id  The domain whose regions are being released.
+void ClearDomainPointers(CHAOS_IL2CPP_UINT32 domain_id);
+
 }  // namespace chaos::il2cpp::vtable_registry
 
 #endif  // CHAOS_IL2CPP_VTABLE_REGISTRY_H_

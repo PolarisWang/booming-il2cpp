@@ -127,6 +127,18 @@ public:
     /// Returns true after collection completes.
     bool CollectFull();
 
+    // ── BGC concurrent mark support ─────────────────────────────
+
+    /// Concurrent-safe mark: atomic test-and-set on the mark bitmap.
+    /// Returns true if the object was newly marked (first time in this cycle).
+    /// Called by the BGC thread during concurrent mark phase.
+    bool BgcTryMark(void* obj);
+
+    /// Sweep all pages concurrently (called by BGC thread after re-mark).
+    /// Iterates pages one at a time under mutex_, with yields between pages
+    /// to avoid starving mutators.
+    void BgcSweep();
+
     // ── Pinned root support ─────────────────────────────────────
 
     /// Register a pinned root (object that must never be moved/collected).
@@ -189,6 +201,18 @@ public:
     /// Used by stress test deferred verification to confirm GC promotion.
     bool IsInOldGen(const void* ptr) const;
 
+    /// Check if an object in old-gen is marked (reachable in current GC cycle).
+    /// Returns false if the object is not in old-gen or not marked.
+    bool IsMarked(const void* obj) const;
+
+    /// Mark an object as reachable. Returns false if already marked.
+    /// Public: called by DependentHandle/weak-handle processing during full GC.
+    bool MarkObject(void* obj);
+
+    /// Add an object to the parallel mark stack for transitive closure.
+    /// Used by DependentHandle fixed-point iteration during full GC.
+    void AddToMarkStack(void* obj);
+
 private:
     // ── Page management ─────────────────────────────────────────
 
@@ -199,7 +223,7 @@ private:
     void FreePage(OldGenPage* page);
 
     /// Find the page containing @a ptr, or nullptr.
-    OldGenPage* FindPage(const void* ptr);
+    OldGenPage* FindPage(const void* ptr) const;
 
     // ── Allocation helpers ──────────────────────────────────────
 
@@ -210,9 +234,6 @@ private:
     void* TryAllocateFromFreeLists(CHAOS_IL2CPP_SIZE size, int sc_idx);
 
     // ── GC helpers ──────────────────────────────────────────────
-
-    /// Mark an object as reachable. Returns false if already marked.
-    bool MarkObject(void* obj);
 
     /// Mark all objects on the mark stack (transitive closure).
     /// Sequential — used for small mark sets and finalizer re-mark.

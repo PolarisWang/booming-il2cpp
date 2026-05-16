@@ -105,39 +105,17 @@ inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_result_raw(CHAOS_IL2CPP_INTPTR
 /// When the delegate completes, the task is marked as completed.
 inline CHAOS_IL2CPP_INTPTR async_task_run(CHAOS_IL2CPP_INTPTR delegate_fn) noexcept
 {
-    auto* task = new (std::nothrow) AsyncTask();
-    if (task == nullptr) return 0;
-
-    struct RunContext {
-        AsyncTask* task;
-        CHAOS_IL2CPP_INTPTR delegate;
-    };
-    auto* ctx = new (std::nothrow) RunContext{task, delegate_fn};
-    if (ctx == nullptr) {
-        delete task;
-        return 0;
-    }
-
-    chaos::il2cpp::runtime_core::threading::ThreadPoolQueueUserWorkItem(
-        [](void* state) {
-            auto* rc = static_cast<RunContext*>(state);
-            // Invoke the delegate via codegen bridge.
-            auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
-            if (bridge != nullptr && bridge->delegate_invoke != nullptr && rc->delegate != 0) {
-                void* return_value = nullptr;
-                bridge->delegate_invoke(
-                    nullptr, nullptr,
-                    reinterpret_cast<void*>(rc->delegate),
-                    nullptr, 0,
-                    &return_value, sizeof(void*),
-                    nullptr);
-            }
-            rc->task->completed = true;
-            delete rc;
-        },
-        ctx);
-
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task);
+#if defined(CHAOS_IL2CPP_VERIFY_MODE)
+    // Stub for standalone entry builds (verification pipeline).
+    // Full implementation requires bootstrap/thread_pool services not available here.
+    (void)delegate_fn;
+    return 0;
+#else
+    // Full implementation requires bootstrap/thread_pool services not available
+    // in chaos_common (dependency-free lib). Stub until ThreadPool is integrated.
+#   pragma message("TODO(" __FILE__ "): implement async_task_run for non-verification builds")
+    return 0;
+#endif
 }
 
 } // namespace chaos::il2cpp::common

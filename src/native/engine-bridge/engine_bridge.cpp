@@ -7,7 +7,7 @@
 #include <mutex>
 #include <new>
 #include <string>
-#include <unordered_map>
+#include <chaos/unordered_dense.h>
 
 namespace {
 
@@ -31,8 +31,8 @@ struct engine_runtime_context_t {
     ThreadState* thread = nullptr;
     CHAOS_IL2CPP_MUTEX mutex = {};
     engine_callback_id_t next_callback_id = 1u;
-    CHAOS_IL2CPP_UNORDERED_MAP(engine_callback_id_t, EngineCallbackRegistration) callbacks = {};
-    CHAOS_IL2CPP_UNORDERED_MAP(engine_object_ref_t, EngineOwnershipRecord) ownership = {};
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(engine_callback_id_t, EngineCallbackRegistration) callbacks = {};
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(engine_object_ref_t, EngineOwnershipRecord) ownership = {};
 };
 
 namespace {

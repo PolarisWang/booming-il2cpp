@@ -2,6 +2,7 @@
 #define CHAOS_IL2CPP_LAYOUT_ENGINE_H_
 
 #include <chaos/native_types.h>
+#include <chaos/unordered_dense.h>
 
 #include <runtime_abi.h>
 #include "module_registry.h"
@@ -182,11 +183,11 @@ private:
     // ── Cache state ─────────────────────────────────────────────────────
 
     /// Primary cache: TypeInfoHandle → heap-allocated TypeLayout.
-    CHAOS_IL2CPP_UNORDERED_MAP(TypeInfoHandle, TypeLayout*) cache_;
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(TypeInfoHandle, TypeLayout*) cache_;
 
     /// Module index: module_id → list of TypeInfoHandle entries in `cache_`.
     /// Allows O(1) bulk invalidation when a module is unloaded.
-    CHAOS_IL2CPP_UNORDERED_MAP(
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(
         CHAOS_IL2CPP_UINT32,
         CHAOS_IL2CPP_VECTOR(TypeInfoHandle)) module_index_;
 

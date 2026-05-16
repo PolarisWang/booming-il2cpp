@@ -1,0 +1,60 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.external-caller.call-external",
+      "subjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
+      "signature": "System.Int32 ExternalCaller::CallExternal()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/ExternalCaller",
+        "definitionSubjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
+        "methodId": "snapshot-test-fixtures.external-caller.call-external",
+        "signature": "System.Int32 ExternalCaller::CallExternal()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_ExternalCaller_CallExternal",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "callee": "SomeOtherAssembly/ExternalClass::Compute:System.Int32(System.Int32)",
+          "reference": {
+            "assemblyName": "SomeOtherAssembly",
+            "subjectKind": "method",
+            "subjectId": "SomeOtherAssembly/ExternalClass::Compute:System.Int32(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SomeOtherAssembly",
+            "subjectId": "SomeOtherAssembly/ExternalClass::Compute:System.Int32(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ret",
+          "ilOffset": 2
+        }
+      ]
+    }
+  ]
+}

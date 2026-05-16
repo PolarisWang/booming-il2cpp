@@ -1,0 +1,33 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/io/streams/basics",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 18,
+  "emittedMethodCount": 18,
+  "uncoveredMethodCount": 0,
+  "uncoveredReasonCounts": {},
+  "uncoveredMethodSubjectIds": [],
+  "coveredMethodSubjectIds": [
+    "System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
+    "System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
+    "System.Private.CoreLib/System.IO.Stream::Flush:System.Void()",
+    "System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+    "System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)",
+    "System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()",
+    "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()",
+    "System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)",
+    "System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()",
+    "System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()",
+    "System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)",
+    "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
+    "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()",
+    "System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()",
+    "System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()",
+    "System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()",
+    "System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)",
+    "System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.String)"
+  ]
+}
