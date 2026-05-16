@@ -12,6 +12,14 @@
   "registeredMethods": [
     {
       "assemblyName": "BoxingUnboxingCastsSubjects",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "metadataToken": 100663308,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "BoxingUnboxingCastsSubjects",
       "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
@@ -97,14 +105,6 @@
       "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
       "metadataToken": 100663307,
       "parameterCount": 0
-    },
-    {
-      "assemblyName": "BoxingUnboxingCastsSubjects",
-      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
-      "metadataToken": 100663308,
-      "parameterCount": 1
     }
   ],
   "reservedSlots": {

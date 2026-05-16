@@ -9,6 +9,11 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Run:System.Void(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
@@ -60,11 +65,6 @@
     {
       "subjectKind": "method",
       "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_10:System.Void()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],

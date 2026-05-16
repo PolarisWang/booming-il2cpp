@@ -1715,6 +1715,104 @@ public sealed partial class NativeAotLoweringPlanner
                 Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateNativeIntAbiSlot(),
                 EmptyRawArgumentIndices);
 
+
+            // === Thread::Sleep ===
+            registry.Register("System.Threading.Thread", "Sleep", ["System.Int32"],
+                ShapeKind.SimpleForward, "chaos_thread_sleep",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact
+                    {
+                        CarrierKindCode = AotCoreIrAbiCarrierKind.Int32,
+                        TypeShape = AotCoreIrTypeShapeKind.ValueType
+                    }),
+                CreateVoidAbiSlot(),
+                EmptyRawArgumentIndices);
+
+            // === Thread::Yield ===
+            registry.Register("System.Threading.Thread", "Yield", [],
+                ShapeKind.SimpleForward, "chaos_thread_yield",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateInt32AbiSlot(),
+                EmptyRawArgumentIndices);
+
+            // === Thread::Abort ===
+            registry.Register("System.Threading.Thread", "Abort", ["System.Object"],
+                ShapeKind.SimpleForward, "chaos_thread_abort",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Threading.Thread", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Object", AotCoreIrTypeShapeKind.ReferenceType),
+                }), CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            // === Thread::Interrupt ===
+            registry.Register("System.Threading.Thread", "Interrupt", [],
+                ShapeKind.SimpleForward, "chaos_thread_interrupt",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Threading.Thread", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // === Thread::get_IsBackground ===
+            registry.Register("System.Threading.Thread", "get_IsBackground", [],
+                ShapeKind.SimpleForward, "chaos_thread_is_background",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Threading.Thread", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            // === Thread::set_IsBackground ===
+            registry.Register("System.Threading.Thread", "set_IsBackground", ["System.Boolean"],
+                ShapeKind.SimpleForward, "chaos_thread_set_background",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Threading.Thread", AotCoreIrTypeShapeKind.ReferenceType),
+                    new AotCoreIrAbiSlotArtifact
+                    {
+                        CarrierKindCode = AotCoreIrAbiCarrierKind.Int32,
+                        TypeShape = AotCoreIrTypeShapeKind.ValueType
+                    },
+                }), CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // === Thread::get_Priority ===
+            registry.Register("System.Threading.Thread", "get_Priority", [],
+                ShapeKind.SimpleForward, "chaos_thread_get_priority",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Threading.Thread", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            // === Thread::set_Priority ===
+            registry.Register("System.Threading.Thread", "set_Priority", ["System.Threading.ThreadPriority"],
+                ShapeKind.SimpleForward, "chaos_thread_set_priority",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Threading.Thread", AotCoreIrTypeShapeKind.ReferenceType),
+                    new AotCoreIrAbiSlotArtifact
+                    {
+                        CarrierKindCode = AotCoreIrAbiCarrierKind.Int32,
+                        TypeShape = AotCoreIrTypeShapeKind.ValueType
+                    },
+                }), CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // === Thread::get_ThreadState ===
+            registry.Register("System.Threading.Thread", "get_ThreadState", [],
+                ShapeKind.SimpleForward, "chaos_thread_get_state",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Threading.Thread", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            // === Thread::get_IsThreadPoolThread ===
+            registry.Register("System.Threading.Thread", "get_IsThreadPoolThread", [],
+                ShapeKind.SimpleForward, "chaos_thread_is_threadpool",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Threading.Thread", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
             // === DateTime ===
             registry.Register("System.DateTime", "get_UtcNow", [],
                 ShapeKind.SimpleForward, "ChaosDatetimeGetUtcNow",
@@ -3937,6 +4035,106 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 EmptyRawArgumentIndices);
 
+
+            // === Interlocked::Read ===
+            registry.Register("Interlocked", "Read", ["System.Int64&"],
+                ShapeKind.SimpleForward, "ChaosInterlockedReadInt64",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                new AotCoreIrAbiSlotArtifact
+                {
+                    CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                    TypeShape = AotCoreIrTypeShapeKind.ValueType
+                },
+                new HashSet<int> { 0 });
+
+            // === Interlocked::Increment ===
+            registry.Register("Interlocked", "Increment", ["System.Int64&"],
+                ShapeKind.SimpleForward, "ChaosInterlockedIncrementInt64",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                new AotCoreIrAbiSlotArtifact
+                {
+                    CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                    TypeShape = AotCoreIrTypeShapeKind.ValueType
+                },
+                new HashSet<int> { 0 });
+
+            // === Interlocked::Decrement ===
+            registry.Register("Interlocked", "Decrement", ["System.Int64&"],
+                ShapeKind.SimpleForward, "ChaosInterlockedDecrementInt64",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                new AotCoreIrAbiSlotArtifact
+                {
+                    CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                    TypeShape = AotCoreIrTypeShapeKind.ValueType
+                },
+                new HashSet<int> { 0 });
+
+            // === Interlocked::Exchange ===
+            registry.Register("Interlocked", "Exchange", ["System.Int64&", "System.Int64"],
+                ShapeKind.SimpleForward, "ChaosInterlockedExchangeInt64",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    new AotCoreIrAbiSlotArtifact
+                    {
+                        CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                        TypeShape = AotCoreIrTypeShapeKind.ValueType
+                    },
+                }),
+                new AotCoreIrAbiSlotArtifact
+                {
+                    CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                    TypeShape = AotCoreIrTypeShapeKind.ValueType
+                },
+                new HashSet<int> { 0 });
+
+            // === Interlocked::CompareExchange (Int32) ===
+            registry.Register("Interlocked", "CompareExchange", ["System.Int32&", "System.Int32", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosInterlockedCompareExchangeInt32",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                {
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    new AotCoreIrAbiSlotArtifact
+                    {
+                        CarrierKindCode = AotCoreIrAbiCarrierKind.Int32,
+                        TypeShape = AotCoreIrTypeShapeKind.ValueType
+                    },
+                    new AotCoreIrAbiSlotArtifact
+                    {
+                        CarrierKindCode = AotCoreIrAbiCarrierKind.Int32,
+                        TypeShape = AotCoreIrTypeShapeKind.ValueType
+                    },
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            // === Interlocked::CompareExchange (Int64) ===
+            registry.Register("Interlocked", "CompareExchange", ["System.Int64&", "System.Int64", "System.Int64"],
+                ShapeKind.SimpleForward, "ChaosInterlockedCompareExchangeInt64",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                {
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    new AotCoreIrAbiSlotArtifact
+                    {
+                        CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                        TypeShape = AotCoreIrTypeShapeKind.ValueType
+                    },
+                    new AotCoreIrAbiSlotArtifact
+                    {
+                        CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                        TypeShape = AotCoreIrTypeShapeKind.ValueType
+                    },
+                }),
+                new AotCoreIrAbiSlotArtifact
+                {
+                    CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                    TypeShape = AotCoreIrTypeShapeKind.ValueType
+                },
+                new HashSet<int> { 0 });
+
             // === DateTime::AddHours (SimpleForward stub) ===
             registry.Register("System.DateTime", "AddHours", ["System.Double"],
                 ShapeKind.SimpleForward, "ChaosDateTimeAddHours",
@@ -4154,6 +4352,22 @@ public sealed partial class NativeAotLoweringPlanner
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+
+            // === Volatile::Write ===
+            registry.Register("Volatile", "Write", ["System.Int32&", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosVolatileWrite",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    new AotCoreIrAbiSlotArtifact
+                    {
+                        CarrierKindCode = AotCoreIrAbiCarrierKind.Int32,
+                        TypeShape = AotCoreIrTypeShapeKind.ValueType
+                    },
+                }),
+                CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
 
             // === DateTime::AddMinutes (SimpleForward stub) ===

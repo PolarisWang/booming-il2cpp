@@ -3,6 +3,8 @@
 #include <chaos/json_reader.h>
 #include <chaos/native_types.h>
 
+#include <reflection_query_model.h>
+
 #include <cstdlib>
 #include <cstring>
 #include <string>
@@ -579,8 +581,15 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                 auto catch_type = json::JsonParser::FindKey(elem, "catchTypeSubjectId");
                 const char* type_sid = JsonStringOr(catch_type);
                 if (type_sid != nullptr && resolve_fn != nullptr) {
-                    clause.class_token = static_cast<uint32_t>(
-                        reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(resolve_fn(type_sid, resolve_ctx)));
+                    void* raw_handle = resolve_fn(type_sid, resolve_ctx);
+                    if (raw_handle != nullptr) {
+                        TypeInfoHandle type_handle = static_cast<TypeInfoHandle>(
+                            reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(raw_handle));
+                        const auto* desc = TryDecodeReflectionQueryTypeHandle(type_handle);
+                        if (desc != nullptr) {
+                            clause.class_token = desc->metadata_token;
+                        }
+                    }
                 }
 
                 result.seh_clauses.push_back(clause);

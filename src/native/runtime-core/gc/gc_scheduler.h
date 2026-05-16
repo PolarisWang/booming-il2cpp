@@ -122,7 +122,11 @@ private:
 
     // Young GC trigger: allocation since last young GC exceeds this
     // multiplier × last nursery size.
-    static constexpr float kYoungTriggerMultiplier = 1.0f;
+    // Increased from 1.0 to 2.0 to reduce GC frequency — fewer safepoint
+    // cycles and less overhead from BFS worklist / nursery scanning.
+    // Trade-off: longer per-GC pauses (more objects to scan), but net
+    // throughput is higher with reduced safepoint serialization.
+    static constexpr float kYoungTriggerMultiplier = 2.0f;
 
     // Full GC trigger: allocation since last full GC exceeds this
     // multiplier × estimated heap size.

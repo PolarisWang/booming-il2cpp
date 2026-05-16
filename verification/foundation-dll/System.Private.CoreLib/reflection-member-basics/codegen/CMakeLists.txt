@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.20)
 set(CMAKE_CXX_FLAGS_INIT "/DWIN32 /D_WINDOWS")
-set(CMAKE_MSVC_EXCEPTION_HANDLING "Sync")
+set(CMAKE_MSVC_EXCEPTION_HANDLING "Async")
 project(chaos_gen LANGUAGES CXX)
 
 set(REPO_ROOT "D:/agent/booming-il2cpp")
@@ -18,7 +18,6 @@ set(NATIVE_LIBS
     "${NATIVE_LIB_DIR}/src/native/support/${CFG}/chaos_support.lib"
     "${NATIVE_LIB_DIR}/src/native/interpreter/${CFG}/chaos_interpreter.lib"
     "${NATIVE_LIB_DIR}/src/native/hot-update/${CFG}/chaos_hot_update.lib"
-    "${NATIVE_LIB_DIR}/bdwgc_build/${CFG}/chaos_bdwgc.lib"
     "${NATIVE_LIB_DIR}/fmt_build/${CFG}/chaos_fmt.lib"
 )
 
@@ -26,11 +25,13 @@ set(COMMON_INCLUDE_DIRS
     "${REPO_ROOT}/contracts/native/v0"
     "${REPO_ROOT}/src/native/common"
     "${REPO_ROOT}/src/native/runtime-core"
+    "${REPO_ROOT}/src/native/runtime-core/gc"
+    "${REPO_ROOT}/src/native/interpreter"
     "${REPO_ROOT}/third_party/fmt/include"
-    "${REPO_ROOT}/third_party/bdwgc/include"
 )
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+
 # Assembly: ReflectionMemberBasicsSubjects
 add_library(chaos_gen_ReflectionMemberBasicsSubjects STATIC
     ${CHAOS_GEN_DIR}/ReflectionMemberBasicsSubjects/generated/native-aot.generated.cpp
@@ -39,6 +40,7 @@ add_library(chaos_gen_ReflectionMemberBasicsSubjects STATIC
 target_include_directories(chaos_gen_ReflectionMemberBasicsSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
 target_compile_features(chaos_gen_ReflectionMemberBasicsSubjects PUBLIC cxx_std_20)
 target_compile_options(chaos_gen_ReflectionMemberBasicsSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+
 
 # Entry executable — links generated code + native runtime
 add_executable(entry
@@ -49,6 +51,6 @@ target_link_libraries(entry PRIVATE
     chaos_gen_ReflectionMemberBasicsSubjects
     ${NATIVE_LIBS}
 )
+
 target_include_directories(entry PRIVATE ${COMMON_INCLUDE_DIRS})
 target_compile_options(entry PRIVATE ${COMMON_COMPILE_OPTIONS})
-

@@ -5,6 +5,8 @@
 #include <chaos/profile.h>
 #include <chaos/log.h>
 
+#include <gc.h>
+
 #include <cstddef>
 #include <cstdio>
 #include <new>

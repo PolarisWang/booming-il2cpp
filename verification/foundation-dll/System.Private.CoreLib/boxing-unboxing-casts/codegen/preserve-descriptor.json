@@ -16,6 +16,12 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Run:System.Void(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_0:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
@@ -77,12 +83,6 @@
     {
       "subjectKind": "method",
       "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_10:System.Void()",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

@@ -125,9 +125,13 @@ CHAOS_IL2CPP_SIZE GcScheduler::RecommendedNurserySize() const noexcept {
     CHAOS_IL2CPP_SIZE last_used = last_nursery_used_.load(std::memory_order_relaxed);
     double target = survival * 2.0 * static_cast<double>(last_used);
 
-    // Fallback: if last_used is 0 or survival is near 0, use default.
+    // Fallback: if last_used is 0 or survival is near 0, use max nursery size
+    // to reduce GC frequency (no point doing frequent GCs on an empty nursery).
     if (target < static_cast<double>(kMinNurserySize)) {
-        target = static_cast<double>(kDefaultNurserySize);
+        // Survival rate near zero → prefer max nursery for fewer GC cycles.
+        // The default size (256 KB) causes excessive safepoint overhead in
+        // high-throughput scenarios like the 100-thread stress test.
+        target = static_cast<double>(kMaxNurserySize);
     }
 
     CHAOS_IL2CPP_SIZE size = static_cast<CHAOS_IL2CPP_SIZE>(target);

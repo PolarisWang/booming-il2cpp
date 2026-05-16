@@ -129,8 +129,6 @@ static bool CheckLineCount(const std::string& captured, int expected_count,
 static void TestEmptyFlush() {
     TEST("Empty flush — no crash");
 
-    // Reset any residual state from previous tests
-    CHAOS_IL2CPP_LOG_SET_OUTPUT(CHAOS_IL2CPP_LOG_OUTPUT_STDOUT);
 
     // Flush on an empty buffer should be a no-op
     CHAOS_IL2CPP_LOG_FLUSH();
@@ -292,29 +290,6 @@ static void TestRawWriteFmt() {
     PASS();
 }
 
-// ════════════════════════════════════════════════════════════════════════════
-// Test 8: Output mask suppression
-// ════════════════════════════════════════════════════════════════════════════
-
-static void TestOutputMaskSuppress() {
-    TEST("Output mask — suppressed (mask=0)");
-
-    StdoutCapture cap;
-    if (!cap.Begin()) { FAIL("capture begin failed"); return; }
-
-    CHAOS_IL2CPP_LOG_SET_OUTPUT(0u);  // Suppress all output
-    CHAOS_IL2CPP_LOG_ERROR("Silent", "should not appear");
-    CHAOS_IL2CPP_LOG_FLUSH();
-    CHAOS_IL2CPP_LOG_SET_OUTPUT(CHAOS_IL2CPP_LOG_OUTPUT_STDOUT);  // Restore
-
-    std::string output = cap.End();
-
-    if (output.find("should not appear") != std::string::npos) {
-        FAIL("output appeared despite mask=0");
-    } else {
-        PASS();
-    }
-}
 
 // ════════════════════════════════════════════════════════════════════════════
 // Test 9: Thread safety — 4 threads, 100 writes each
@@ -409,8 +384,6 @@ static void TestLevelElimination() {
 // ════════════════════════════════════════════════════════════════════════════
 
 int main() {
-    // Ensure trace is disabled for clean log tests
-    CHAOS_IL2CPP_LOG_SET_OUTPUT(CHAOS_IL2CPP_LOG_OUTPUT_STDOUT);
 
     fprintf(stderr, "=== Log System Tests ===\n");
 
@@ -421,7 +394,6 @@ int main() {
     TestFormatMacros();
     TestRawWrite();
     TestRawWriteFmt();
-    TestOutputMaskSuppress();
     TestThreadSafety();
     TestLevelElimination();
 

@@ -966,11 +966,14 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
             uint32_t receiver_token = static_cast<interpreter::InterpreterObject*>(
                 reinterpret_cast<void*>(raw_args[0]))->type_token;
 
-            if (mic.mic_type_token == receiver_token &&
-                mic.mic_dispatch_ptr != nullptr &&
-                mic.mic_generation == g_patch_generation.load(std::memory_order_relaxed)) {
+            // MIC read: relaxed load (benign race — all racers compute same value).
+            if (mic.mic_type_token.load(std::memory_order_relaxed) == receiver_token &&
+                mic.mic_dispatch_ptr.load(std::memory_order_relaxed) != nullptr &&
+                mic.mic_generation.load(std::memory_order_relaxed) ==
+                    g_patch_generation.load(std::memory_order_relaxed)) {
                 // MIC hit — call cached vtable entry directly.
-                uint64_t result = CallDirectVoidPtr(mic.mic_dispatch_ptr, raw_args, ac);
+                uint64_t result = CallDirectVoidPtr(
+                    mic.mic_dispatch_ptr.load(std::memory_order_relaxed), raw_args, ac);
 
                 if (mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
                     frame.stack[frame.sp] = result;
@@ -989,9 +992,11 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
                     receiver_token, declared_method_token);
                 if (resolved != nullptr) {
                     // Cache for next time (benign race: all racers compute same value).
-                    mic.mic_dispatch_ptr = resolved;
-                    mic.mic_type_token   = receiver_token;
-                    mic.mic_generation   = g_patch_generation.load(std::memory_order_relaxed);
+                    mic.mic_dispatch_ptr.store(resolved, std::memory_order_relaxed);
+                    mic.mic_type_token.store(receiver_token, std::memory_order_relaxed);
+                    mic.mic_generation.store(
+                        g_patch_generation.load(std::memory_order_relaxed),
+                        std::memory_order_relaxed);
 
                     uint64_t result = CallDirectVoidPtr(resolved, raw_args, ac);
 

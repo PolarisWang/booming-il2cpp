@@ -1,7 +1,12 @@
 // ── Reflection stub declarations (deferred stubs only) ─────────
 // Core reflection APIs are in reflection_api.h. This file covers
-// the deferred stubs implemented in reflection_stubs.cpp.
+// the deferred stubs implemented in remaining_stubs.cpp.
 #pragma once
+
+#include <chaos/native_types.h>
+
+extern "C" {
+namespace chaos::il2cpp::runtime_core {
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionIsDefined(CHAOS_IL2CPP_INTPTR assembly, CHAOS_IL2CPP_INTPTR type) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR param) noexcept;
@@ -62,3 +67,6 @@ CHAOS_IL2CPP_INT32 ChaosReflectionPropertyGetCanWrite(CHAOS_IL2CPP_INTPTR prop) 
 // AssemblyName stubs
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCultureInfo(CHAOS_IL2CPP_INTPTR name) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetVersion(CHAOS_IL2CPP_INTPTR name) noexcept;
+
+}  // namespace chaos::il2cpp::runtime_core
+}  // extern "C"

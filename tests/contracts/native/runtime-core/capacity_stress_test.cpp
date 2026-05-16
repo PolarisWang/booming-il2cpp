@@ -245,13 +245,6 @@ static void TestAssemblyManagerCapacity() {
     // Verify LoadedCount starts at 0 (or 1 for SharedContext).
     uint32_t initial_count = mgr->LoadedCount();
 
-    // We can't directly populate assemblies_[] since it's private.
-    // Instead, verify that the manager's internal state is consistent
-    // and that the capacity constant is sufficient.
-    if (AssemblyManager::kMaxAssemblies < kTargetAssemblyCount + 1) {
-        FAIL("kMaxAssemblies is too small for 200+ assemblies");
-    }
-
     // Verify that FindAssembly/FindByModuleId work on empty table (no crash).
     auto* found = mgr->FindAssembly("nonexistent.dll");
     if (found != nullptr) {

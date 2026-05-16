@@ -26,7 +26,9 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     }
 
     static CHAOS_IL2CPP_ONCE_FLAG s_gc_init_flag;
+#if defined(CHAOS_IL2CPP_GC_ENABLED)
     CHAOS_IL2CPP_CALL_ONCE(s_gc_init_flag, []() { GC_INIT(); });
+#endif
 
     RuntimeState* runtime_state = static_cast<RuntimeState*>(AllocateBytes(normalized_config, sizeof(RuntimeState)));
     if (runtime_state == nullptr) {

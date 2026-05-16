@@ -1,0 +1,222 @@
+{
+  "family": "exception-throw-diagnostics",
+  "assembly": "System.Private.CoreLib",
+  "mode": "standard",
+  "timestamp": "2026-05-16T19:25:22",
+  "duration_ms": 148308,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "14 methods, 0 custom entries",
+      "details": {
+        "methodCount": 14,
+        "customMethodCount": 0,
+        "hasCustomEntryFile": false,
+        "customMethods": []
+      },
+      "errors": [],
+      "duration_ms": 1
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 14,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\exception-throw-diagnostics\\managed\\subjects\\build-output\\ExceptionThrowDiagnosticsSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 27483
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "failed",
+      "summary": "Fact verify=failed (0/0)",
+      "details": {
+        "fact": {
+          "status": "failed",
+          "passed": 0,
+          "total": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 1364
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 1,
+        "principleStatus": "CONCERN",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 216
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "failed",
+      "summary": "asm-compare: 0/14 methods OK, avg JIT=0 instr, avg AOT IR=0 instr, expansion=0x",
+      "details": {
+        "totalMethods": 14,
+        "okCount": 0,
+        "failedCount": 14,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "aotInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {},
+        "overallIrExpansionRatio": 0,
+        "averageExpansionRatio": 0
+      },
+      "errors": [],
+      "duration_ms": 98690
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=0.0ns/op | FastExecute=0.0ns/instr | CallVirt dispatch=0.0ns",
+      "details": {
+        "poolSize": 0
+      },
+      "errors": [],
+      "duration_ms": 661
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/14 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 14,
+        "invalidCount": 14,
+        "benchmarkQuality": "matchedCount=0/14 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 10570
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "failed",
+      "summary": "HotUpdate returned 0 total — no verification performed",
+      "details": {
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "totalMethods": 0,
+        "realMethods": 0,
+        "stubMethods": 1
+      },
+      "errors": [],
+      "duration_ms": 664
+    },
+    "post_hotupdate_benchmark": {
+      "stage": "post_hotupdate_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (interpreter path — expected)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 8654
+    }
+  },
+  "coverage": {
+    "methodCoverage": 0.0,
+    "testedRate": 92.86,
+    "overall": 92.86
+  },
+  "dashboard": {
+    "interpreter": {
+      "fastFramePoolNsPerOp": 0,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 0,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 0
+    },
+    "irTranslation": {
+      "totalMethods": 14,
+      "okCount": 0,
+      "failedCount": 14,
+      "overallIrExpansionRatio": 0,
+      "averageExpansionRatio": 0,
+      "maxExpansionRatio": 0,
+      "jitInstructionAvg": 0,
+      "aotInstructionAvg": 0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {}
+    },
+    "performance": {
+      "averageSpeedupPercent": 0.0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 14,
+      "invalidCount": 14
+    },
+    "hotupdate": {
+      "functional": {
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "totalMethods": 0
+      },
+      "interpreterOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 1.0,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 14,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 14,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

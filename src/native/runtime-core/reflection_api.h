@@ -3,6 +3,9 @@
 
 #include <chaos/native_types.h>
 
+// ── Deferred stub declarations (reflection_api.cpp also includes remaining_stubs.cpp) ──
+#include "runtime_stubs/reflection_stubs.h"
+
 // ── extern "C" reflection API functions ──
 // These are implemented in reflection_api.cpp and called from generated C++ code.
 // Forward declarations are needed because the generated .cpp includes runtime_core.h

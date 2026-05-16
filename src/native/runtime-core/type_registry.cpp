@@ -183,13 +183,7 @@ const TypeInfoHot* TryResolveTypeInfo(TypeInfoHandle handle) noexcept
     uint32_t module_id = GetModuleId(handle);
     uint32_t token = GetTypeToken(handle);
     if (token != 0) {
-        const auto* mod = LookupModule(module_id != 0u ? module_id : 0u);
-        if (mod != nullptr && !mod->tombstone && mod->type_flags != nullptr) {
-            uint32_t idx = TokenToIndex(token);
-            if (idx < mod->type_count && mod->type_info_ptrs != nullptr) {
-                return mod->type_info_ptrs[idx];
-            }
-        }
+        return LookupTypeInfoPtr(module_id != 0u ? module_id : 0u, token);
     }
 
     // ── Path 3: Raw metadata token or unknown encoding ──

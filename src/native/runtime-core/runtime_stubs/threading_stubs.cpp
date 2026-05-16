@@ -129,9 +129,15 @@ void chaos_thread_abort(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
     });
 }
 
-void chaos_thread_yield(void) noexcept
+CHAOS_IL2CPP_INT32 chaos_thread_yield(void) noexcept
 {
     std::this_thread::yield();
+    return 1;
+}
+
+void chaos_thread_sleep(CHAOS_IL2CPP_INT32 timeout_ms) noexcept
+{
+    std::this_thread::sleep_for(std::chrono::milliseconds(timeout_ms));
 }
 
 CHAOS_IL2CPP_INT32 chaos_thread_is_background(CHAOS_IL2CPP_INTPTR thread_obj) noexcept

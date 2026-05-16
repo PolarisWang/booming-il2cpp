@@ -1,6 +1,7 @@
 #ifndef CHAOS_IL2CPP_METHOD_TABLE_H_
 #define CHAOS_IL2CPP_METHOD_TABLE_H_
 
+#include <atomic>
 #include <cstdint>
 
 namespace chaos::il2cpp::method_table {
@@ -21,9 +22,11 @@ constexpr uint32_t kInvalidGeneration = 0;
 /// Each entry stores a function pointer and a generation stamp for hotupdate
 /// version tracking.
 struct MethodTableEntry {
-    void*    fn_ptr;       ///< Function pointer (nullptr = uninitialized)
-    uint32_t module_gen;   ///< Module generation for hotupdate tracking (0 = uninitialized)
-    uint32_t reserved;     ///< Reserved for future use (alignment / flags)
+    std::atomic<void*>   fn_ptr;       ///< Function pointer (nullptr = uninitialized)
+    std::atomic<uint32_t> module_gen;   ///< Module generation for hotupdate tracking (0 = uninitialized)
+    uint32_t             reserved;     ///< Reserved for future use (alignment / flags)
+
+    MethodTableEntry() noexcept : fn_ptr(nullptr), module_gen(0), reserved(0) {}
 };
 
 // ── MethodTableOrigin ──────────────────────────────────────────────────
@@ -31,9 +34,13 @@ struct MethodTableEntry {
 /// Origin tracking for cross-DLL ABI validation.
 /// Records which module owns this method table slot and its index within
 /// that module's ABI manifest.
-struct MethodTableOrigin {
-    uint32_t module_id;            ///< Module that owns this method (0 = unknown)
-    uint32_t manifest_method_index; ///< Index into the module's ABI manifest
+/// module_id is atomic for lock-free concurrent read from resolve paths.
+struct alignas(8) MethodTableOrigin {
+    std::atomic<uint32_t> module_id;            ///< Module that owns this method (kInvalidModuleId = unknown)
+    uint32_t              manifest_method_index; ///< Index into the module's ABI manifest
+
+    MethodTableOrigin() noexcept : module_id(0), manifest_method_index(0) {}
+    MethodTableOrigin(uint32_t mid, uint32_t idx) noexcept : module_id(mid), manifest_method_index(idx) {}
 };
 
 // ── Global table declarations ──────────────────────────────────────────

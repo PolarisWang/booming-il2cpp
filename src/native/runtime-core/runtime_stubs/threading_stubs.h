@@ -21,7 +21,11 @@ void chaos_thread_interrupt(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;
 void chaos_thread_abort(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;
 
 // Thread.Yield: yield the current thread's time slice.
-void chaos_thread_yield(void) noexcept;
+// Returns nonzero (true) on success to match .NET bool return.
+CHAOS_IL2CPP_INT32 chaos_thread_yield(void) noexcept;
+
+// Thread.Sleep: block the current thread for the specified timeout in milliseconds.
+void chaos_thread_sleep(CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
 
 // Thread.IsBackground: get/set background status.
 // Background threads do not prevent process exit.

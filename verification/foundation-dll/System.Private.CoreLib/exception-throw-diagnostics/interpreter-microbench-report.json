@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/exception/throw/diagnostics",
+  "capturedAt": "2026-05-16T19:25:02",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": ""
+}
