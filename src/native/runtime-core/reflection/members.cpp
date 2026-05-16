@@ -118,11 +118,11 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(
     if (method_name == nullptr) return 0;
 
     if (param_types != 0) {
-        // Layout: object_header (24 bytes FatHeader) + length (4 bytes)
+        // Layout: object_header (16 bytes ThinLockableHeader) + length (4 bytes)
         const auto* arr_bytes = reinterpret_cast<const uint8_t*>(
             static_cast<CHAOS_IL2CPP_INTPTR>(param_types));
         int32_t param_count = *reinterpret_cast<const CHAOS_IL2CPP_INT32*>(
-            arr_bytes + sizeof(FatHeader));
+            arr_bytes + sizeof(ThinLockableHeader));
         if (param_count < 0) param_count = 0;
 
         auto* method = FindReflectionQueryMethod(desc, method_name, param_count);

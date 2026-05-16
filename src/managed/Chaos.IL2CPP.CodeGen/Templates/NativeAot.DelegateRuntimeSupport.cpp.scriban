@@ -2,7 +2,7 @@ using chaos_delegate_invocation_list = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR);
 
 struct chaos_type_System_Private_CoreLib_System_Delegate
 {
-    FatHeader header{};
+    ThinLockableHeader header{};
     CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;
     CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;
     CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;
@@ -112,9 +112,6 @@ CHAOS_IL2CPP_INTPTR chaos_delegate_allocate_with_type_info(const TypeInfo* chaos
         {
             auto* chaos_delegate = CHAOS_IL2CPP_NEW_GC({{ entry.native_type_symbol }}, {});
             chaos_delegate->header.type_info = &{{ entry.type_info_symbol }};
-{{~ if entry.has_vtable ~}}
-            chaos_delegate->header.vtable = {{ entry.vtable_symbol }};
-{{~ end ~}}
             return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_delegate);
         }
 {{~ end ~}}

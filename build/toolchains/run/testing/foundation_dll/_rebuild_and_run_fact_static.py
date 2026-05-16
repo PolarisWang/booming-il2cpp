@@ -35,10 +35,9 @@ INC = " ".join(f'-I"{d}"' for d in [
     REPO_ROOT / "src" / "native" / "interpreter" / "generated",
     REPO_ROOT / "src" / "native",
     REPO_ROOT / "third_party" / "fmt" / "include",
-    REPO_ROOT / "third_party" / "bdwgc" / "include",
     BUILD_DIR,
 ])
-DEFS = "-DCHAOS_IL2CPP_CONFIG_CHECK -DCHAOS_IL2CPP_VERIFY_MODE -DGC_NOT_DLL"
+DEFS = "-DCHAOS_IL2CPP_CONFIG_CHECK -DCHAOS_IL2CPP_VERIFY_MODE"
 
 LIBS = " ".join(f'"{NATIVE_LIB / p}"' for p in [
     "src/native/runtime-core/RelWithDebInfo/chaos_runtime_core.lib",
@@ -48,7 +47,6 @@ LIBS = " ".join(f'"{NATIVE_LIB / p}"' for p in [
     "src/native/support/RelWithDebInfo/chaos_support.lib",
     "src/native/hot-update/RelWithDebInfo/chaos_hot_update.lib",
     "fmt_build/RelWithDebInfo/chaos_fmt.lib",
-    "bdwgc_build/RelWithDebInfo/chaos_bdwgc.lib",
 ])
 
 SRC = BUILD_DIR / "fact_verify_combined.cpp"

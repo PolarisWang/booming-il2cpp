@@ -53,6 +53,8 @@ public sealed record MetadataRegistrationEntry
 
     public int? ParameterIndex { get; init; }
 
+    public int? ParameterAttributes { get; init; }
+
     public int? ParameterCount { get; init; }
 
     public bool? IsImported { get; init; }
@@ -593,6 +595,8 @@ public sealed record NativeReferenceLoweringPlanArtifact
     public int? MethodParameterCount { get; init; }
 
     public int? ParameterIndex { get; init; }
+
+    public int? ParameterAttributes { get; init; }
 
     public string? OutputPrefix { get; init; }
 

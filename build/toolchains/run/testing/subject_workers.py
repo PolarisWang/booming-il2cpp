@@ -191,7 +191,6 @@ function(chaos_configure_subject_target target_name)
     chaos_apply_subject_variant("${{target_name}}")
 endfunction()
 
-add_subdirectory("{repo_root_text}/third_party/bdwgc" "bdwgc")
 add_subdirectory("{repo_root_text}/src/native/runtime-core" "runtime-core")
 add_subdirectory("{repo_root_text}/src/native/hot-update" "hot-update")
 add_subdirectory("{repo_root_text}/src/native/support" "support")

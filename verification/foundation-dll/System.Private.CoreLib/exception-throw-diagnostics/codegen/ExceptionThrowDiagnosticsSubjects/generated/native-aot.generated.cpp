@@ -64,7 +64,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
 	}
 
-	auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);
+	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
 	if (chaos_array->element_type_shape == chaos_type_shape_interface)
 	{
 		return chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), chaos_array->element_type_info);
@@ -86,36 +86,64 @@ struct chaos_type_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSub
 struct chaos_type_System_Private_CoreLib_System_ArgumentException
 {
 	ThinLockableHeader header{};
+	CHAOS_IL2CPP_INTPTR _message = 0;
+	CHAOS_IL2CPP_INTPTR _innerException = 0;
+	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_ArgumentNullException
 {
 	ThinLockableHeader header{};
+	CHAOS_IL2CPP_INTPTR _message = 0;
+	CHAOS_IL2CPP_INTPTR _innerException = 0;
+	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException
 {
 	ThinLockableHeader header{};
+	CHAOS_IL2CPP_INTPTR _message = 0;
+	CHAOS_IL2CPP_INTPTR _innerException = 0;
+	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Exception
 {
 	ThinLockableHeader header{};
+	CHAOS_IL2CPP_INTPTR _message = 0;
+	CHAOS_IL2CPP_INTPTR _innerException = 0;
+	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_InvalidOperationException
 {
 	ThinLockableHeader header{};
+	CHAOS_IL2CPP_INTPTR _message = 0;
+	CHAOS_IL2CPP_INTPTR _innerException = 0;
+	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_NotImplementedException
 {
 	ThinLockableHeader header{};
+	CHAOS_IL2CPP_INTPTR _message = 0;
+	CHAOS_IL2CPP_INTPTR _innerException = 0;
+	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_NotSupportedException
 {
 	ThinLockableHeader header{};
+	CHAOS_IL2CPP_INTPTR _message = 0;
+	CHAOS_IL2CPP_INTPTR _innerException = 0;
+	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
@@ -260,6 +288,16 @@ static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_
 static void chaos_external_runtime_System_Private_CoreLib_System_InvalidOperationException___ctor_System_Void_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
 	ChaosReflectionSetExceptionMetadata(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	return ChaosObjectGetHashCode(chaos_fn_arg_0);
+}
+
+static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	return ChaosObjectToString(chaos_fn_arg_0);
 }
 
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
@@ -519,43 +557,43 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // Startup-time-resolved function pointers for cross-assembly calls.
 
 extern "C" const char* kChaosExternalRuntimeSubjects[17] = {
+	"System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
+	"System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)",
+	"System.Private.CoreLib/System.Exception::.ctor:System.Void()",
+	"System.Private.CoreLib/System.Exception::get_Message:System.String()",
+	"System.Private.CoreLib/System.String::get_Length:System.Int32()",
 	"ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
+	"System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()",
+	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+	"System.Private.CoreLib/System.Exception::get_HResult:System.Int32()",
+	"System.Private.CoreLib/System.Object::ToString:System.String()",
+	"System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
 	"System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)",
 	"System.Private.CoreLib/System.ArgumentNullException::.ctor:System.Void(System.String)",
 	"System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String)",
-	"System.Private.CoreLib/System.Exception::.ctor:System.Void()",
-	"System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
-	"System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)",
-	"System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
-	"System.Private.CoreLib/System.Exception::get_HResult:System.Int32()",
-	"System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()",
-	"System.Private.CoreLib/System.Exception::get_Message:System.String()",
 	"System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)",
-	"System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)",
 	"System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)",
-	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-	"System.Private.CoreLib/System.Object::ToString:System.String()",
-	"System.Private.CoreLib/System.String::get_Length:System.Int32()",
+	"System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)",
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[17] = {
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_),
 	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception__GetBaseException_System_Exception__),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception__get_HResult_System_Int32__),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception__get_InnerException_System_Exception__),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception__get_Message_System_String__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__),
+	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception__get_InnerException_System_Exception__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception__get_HResult_System_Int32__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception__GetBaseException_System_Exception__),
+	nullptr,
+	nullptr,
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_InvalidOperationException___ctor_System_Void_System_String_),
 	nullptr,
 	nullptr,
-	nullptr,
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__),
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 17;
@@ -932,10 +970,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	chaos_locals[0] = _s0;
 	_s0 = chaos_locals[0];
 	{
-		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-		}
-		else
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -977,42 +1012,51 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[9])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_raw_arg_0 = _s0;
+		const auto chaos_arg_0 = chaos_raw_arg_0;
+		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
-		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s2;
+		const auto chaos_raw_arg_0 = _s1;
 		const auto chaos_arg_0 = chaos_raw_arg_0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Exception__get_InnerException_System_Exception__(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[9])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s2;
-	_s2 = chaos_locals[0];
-	{
-		if (_s2 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_raw_arg_0 = _s1;
+		const auto chaos_arg_0 = chaos_raw_arg_0;
+		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
 		{
+			CHAOS_IL2CPP_FAIL();
 		}
-		else
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1086,10 +1130,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	chaos_locals[0] = _s0;
 	_s0 = chaos_locals[0];
 	{
-		if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-		}
-		else
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1125,7 +1166,38 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[13])();
+		const auto chaos_raw_arg_0 = _s0;
+		const auto chaos_arg_0 = chaos_raw_arg_0;
+		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_raw_arg_0 = _s0;
+		const auto chaos_arg_0 = chaos_raw_arg_0;
+		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		const auto chaos_raw_arg_0 = _s1;
+		const auto chaos_arg_0 = chaos_raw_arg_0;
+		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -1139,42 +1211,20 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
-		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
 	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[13])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
 	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
 	{
-		const auto chaos_raw_arg_0 = _s3;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s2;
-	_s2 = chaos_locals[0];
-	{
-		if (_s2 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-		{
-		}
-		else
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1220,46 +1270,55 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[9])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_raw_arg_0 = _s0;
+		const auto chaos_arg_0 = chaos_raw_arg_0;
+		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
-		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s2;
+		const auto chaos_raw_arg_0 = _s1;
 		const auto chaos_arg_0 = chaos_raw_arg_0;
 		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Exception__GetBaseException_System_Exception__(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[9])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s2;
-	_s2 = chaos_locals[0];
-	{
-		if (_s2 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_raw_arg_0 = _s1;
+		const auto chaos_arg_0 = chaos_raw_arg_0;
+		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
 		{
+			CHAOS_IL2CPP_FAIL();
 		}
-		else
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1686,7 +1745,6 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 			default:
 			{
 				return;
-				break;
 			}
 		}
 	}

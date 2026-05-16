@@ -5,7 +5,6 @@
 //
 // This header provides declarations used by generated .cpp files via
 // runtime_core.h. All object headers use PureType (8B) or ThinLockable (16B).
-// FatHeader has been removed — all types use type_info->vtable_array for dispatch.
 
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
@@ -47,19 +46,13 @@ struct ThinLockableHeader {
     uint64_t        sync_state  = 0;        // [8] — thin lock / sync block index
 };
 
-// Legacy alias: FatHeader is removed, but ThinLockableHeader is the
-// unified 16B header for all reference types. The old "Fat" flag
-// bit (0x02) is still recognized in TypeInfoHot.flags for backward
-// compatibility, but maps to the same ThinLockable layout.
-using FatHeader = ThinLockableHeader;
 
 // Verify all headers store TypeInfo* at offset 0 (required by chaos_object_get_type_info).
 static_assert(offsetof(PureTypeHeader, type_info) == 0, "PureTypeHeader: type_info must be at offset 0");
 static_assert(offsetof(ThinLockableHeader, type_info) == 0, "ThinLockableHeader: type_info must be at offset 0");
-static_assert(offsetof(FatHeader, type_info) == 0, "FatHeader: type_info must be at offset 0");
 
 // ── Unified type_info accessor ─────────────────────────────────────
-// All three header kinds store TypeInfoHot* at offset [0].
+// All header kinds store TypeInfoHot* at offset [0].
 // In Phase 0 migration, TypeInfoHot* and MethodTable* are interchangeable
 // (MethodTable's first 32B are bit-compatible with TypeInfoHot).
 inline const TypeInfoHot* chaos_object_get_type_info(const void* obj) noexcept {

@@ -11,6 +11,8 @@
 #include <cstring>
 #include <mutex>
 
+#include "gc_scheduler.h"
+
 namespace chaos::il2cpp::runtime_core {
 
 // ======================================================================
@@ -142,6 +144,12 @@ inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
     if (ptr != nullptr && next <= ctx->nursery->end) [[likely]] {
         ctx->nursery->current = next;
         std::memset(ptr, 0, size);
+        g_gc_scheduler.RecordAllocation(size);
+        // Proactive GC trigger: if the scheduler's allocation budget is
+        // exceeded, route to the slow path for GC initiation.
+        if (g_gc_scheduler.ShouldTriggerGc()) [[unlikely]] {
+            return NurseryAllocateSlow(size);
+        }
         return ptr;
     }
     // The slow path is never inlined — it's a full function call.
@@ -164,6 +172,7 @@ inline void* NurseryAllocateAtomic(CHAOS_IL2CPP_SIZE size) noexcept {
     if (ptr != nullptr && next <= ctx->nursery->end) [[likely]] {
         ctx->nursery->current = next;
         std::memset(ptr, 0, size);
+        g_gc_scheduler.RecordAllocation(size);
         return ptr;
     }
     return NurseryAllocateAtomicSlow(size);

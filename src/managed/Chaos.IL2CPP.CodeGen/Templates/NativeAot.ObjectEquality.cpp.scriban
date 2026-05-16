@@ -17,13 +17,11 @@
 {{ indentation }}{{ tab }}{{ tab }}return true;
 {{ indentation }}{{ tab }}}
 {{ indentation }}{{ tab }}
-{{ indentation }}{{ tab }}if (chaos_left_value == static_cast<CHAOS_IL2CPP_INTPTR>(0) || chaos_right_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+{{ indentation }}{{ tab }}if (chaos_left_value == 0 || chaos_right_value == 0)
 {{ indentation }}{{ tab }}{
 {{ indentation }}{{ tab }}{{ tab }}return false;
 {{ indentation }}{{ tab }}}
 {{ indentation }}{{ tab }}
-{{ indentation }}{{ tab }}auto* chaos_left_header = reinterpret_cast<FatHeader*>(chaos_left_value);
-{{ indentation }}{{ tab }}auto* chaos_right_header = reinterpret_cast<FatHeader*>(chaos_right_value);
 {{ indentation }}{{ tab }}const auto* chaos_left_ti = chaos_object_get_type_info(reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_left_value)));
 {{ indentation }}{{ tab }}const auto* chaos_right_ti = chaos_object_get_type_info(reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_right_value)));
 {{ indentation }}{{ tab }}if (chaos_left_ti != chaos_right_ti

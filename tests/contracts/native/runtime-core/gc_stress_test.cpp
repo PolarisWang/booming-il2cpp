@@ -12,6 +12,8 @@
 
 #include <chaos/native_types.h>
 
+#include <chaos/profile.h>
+
 #include "domain_unloader.h"
 #include "gc_events.h"
 #include "gc_region.h"
@@ -387,16 +389,32 @@ static void worker_a(int thread_index, WorkerResult* result) {
 }
 
 static bool RunScenarioA(GcStatsSnapshot* stats_out) {
-    printf("\n  ── Scenario A: Baseline concurrent (100×256 small allocs) ──\n");
+    printf("\n  ── Scenario A: Baseline concurrent (%d×%d small allocs) ──\n",
+           kNumWorkerThreads, kAllocationsPerThread);
     GcStatsSnapshot before = SnapshotGcStats();
 
+    auto t0 = std::chrono::steady_clock::now();
     std::vector<WorkerResult> results(kNumWorkerThreads);
     std::vector<std::thread> workers;
 
     for (int i = 0; i < kNumWorkerThreads; ++i)
         workers.emplace_back(worker_a, i, &results[i]);
+    auto t1 = std::chrono::steady_clock::now();
 
     for (auto& w : workers) { if (w.joinable()) w.join(); }
+    auto t2 = std::chrono::steady_clock::now();
+
+    uint64_t create_us = static_cast<uint64_t>(
+        std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count());
+    uint64_t join_us = static_cast<uint64_t>(
+        std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count());
+    uint64_t total_us = static_cast<uint64_t>(
+        std::chrono::duration_cast<std::chrono::microseconds>(t2 - t0).count());
+    std::fprintf(stderr, "SCENARIO_A|create_us=%llu|join_us=%llu|total_us=%llu\n",
+        static_cast<unsigned long long>(create_us),
+        static_cast<unsigned long long>(join_us),
+        static_cast<unsigned long long>(total_us));
+    std::fflush(stderr);
 
     // Final full GC to clean up any promoted objects.
     g_old_gen.Collect(nullptr, nullptr);
@@ -1498,6 +1516,10 @@ static int run_scenarios() {
             printf("  >>> SCENARIO FAILED (%d sub-test failures) <<<\n", g_failures);
             failed_count++;
         }
+
+        // Dump and reset PROFILE_SCOPE accumulators between scenarios.
+        CHAOS_IL2CPP_PROFILE_DUMP();
+        CHAOS_IL2CPP_PROFILE_RESET();
 
         // Estimate total bytes for report.
         int64_t total_allocs_est = static_cast<int64_t>(scenarios[s].workers)

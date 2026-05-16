@@ -41,41 +41,30 @@ using namespace chaos::il2cpp::marshal_abi;
 // Three header kinds discriminated by TypeInfoHot.flags[1:0]:
 //   PureType (00):  8B  {TypeInfoHot* type_info}
 //   ThinLockable (01): 16B {TypeInfoHot* type_info, uint64_t sync_state}
-//   Fat (10):          24B {TypeInfoHot* type_info, void** vtable, uint64_t sync_state}
+//   Fat (10):          24B {TypeInfoHot* type_info, void** vtable, uint64_t sync_state} [removed — all non-PureType use ThinLockable]
 
 namespace {
 
 constexpr CHAOS_IL2CPP_UINT64 kDateTimeTicksMask = 0x3FFFFFFFFFFFFFFFull;
 
-struct ObjectHeaderFat {  // 24B — full dispatch + sync
-    const TypeInfoHot* type_info   = nullptr;  // [0]
-    const void**       vtable      = nullptr;  // [8]
-    uint64_t           sync_state  = 0;        // [16]
-};
 
 struct ObjectHeaderThin {  // 16B — sync only, no vtable
     const TypeInfoHot* type_info   = nullptr;  // [0]
     uint64_t           sync_state  = 0;        // [8]
 };
 
-// Legacy alias for code that handles Fat objects specifically.
-using ObjectHeader = ObjectHeaderFat;
+// FatHeader removed — all non-PureType use ThinLockable (16B).
 
 // ── Header size helpers ──────────────────────────────────────────
 inline CHAOS_IL2CPP_SIZE HeaderSizeFromFlags(CHAOS_IL2CPP_UINT8 flags) noexcept {
-    switch (flags & kTypeInfoHeaderKindMask) {
-        case kTypeInfoHeaderKindPure: return 8;  // PureTypeHeader
-        case kTypeInfoHeaderKindThin: return 16; // ObjectHeaderThin
-        default:                     return 24;  // ObjectHeaderFat
-    }
+    return (flags & kTypeInfoHeaderKindMask) == kTypeInfoHeaderKindPure ? 8 : 16;
 }
 
 inline uint64_t* GetSyncStatePtr(void* obj) noexcept {
     const auto* ti = *static_cast<const TypeInfoHot* const*>(obj);
     const auto kind = ti->flags & kTypeInfoHeaderKindMask;
-    if (kind == kTypeInfoHeaderKindThin)
-        return &static_cast<ObjectHeaderThin*>(obj)->sync_state;
-    return &static_cast<ObjectHeaderFat*>(obj)->sync_state;
+    if (kind == kTypeInfoHeaderKindPure) return nullptr;
+    return &static_cast<ObjectHeaderThin*>(obj)->sync_state;
 }
 
 struct StringObjectHeader {

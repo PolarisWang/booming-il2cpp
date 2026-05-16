@@ -8,7 +8,8 @@ bool GcSafepoint(RuntimeState* runtime_state, ThreadState* thread_state) {
     if (thread_internal_state == nullptr) return false;
 
     thread_internal_state->at_gc_safepoint = true;
-    GC_collect_a_little();
+    // CRAG handles GC cycles through allocator slow paths and BGC thread.
+    // No explicit incremental collect needed at safepoint.
     thread_internal_state->at_gc_safepoint = false;
     return true;
 }
@@ -43,15 +44,7 @@ bool EnqueueFinalizer(
             FinalizerWorkItem{ object_instance, finalizer });
     }
 
-    GC_register_finalizer_no_order(
-        object_instance,
-        [](void* obj, void* client_data) {
-            auto* cb = reinterpret_cast<FinalizerCallback>(client_data);
-            if (cb) { cb(obj); }
-        },
-        reinterpret_cast<void*>(finalizer),
-        nullptr, nullptr);
-
+    g_old_gen.RegisterFinalizer(object_instance, finalizer);
     return true;
 }
 
@@ -59,7 +52,8 @@ CHAOS_IL2CPP_SIZE DrainFinalizerQueue(RuntimeState* runtime_state) {
     auto* runtime_internal_state = GetRuntimeInternalState(runtime_state);
     if (runtime_internal_state == nullptr) return 0u;
 
-    GC_invoke_finalizers();
+    // Run CRAG finalizers for unreachable objects.
+    g_old_gen.RunFinalizers();
 
     CHAOS_IL2CPP_VECTOR(FinalizerWorkItem) pending_finalizers = {};
     {

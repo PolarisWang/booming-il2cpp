@@ -1852,9 +1852,9 @@ def _rename_and_fix_patch_file(src: Path, dst: Path, ns_slug: str, suffix: str =
         # so ChaosArrayClear, ChaosArrayGetLength etc. (declared inside
         # namespace chaos::il2cpp::runtime_core in generated_code_compat.h)
         # are findable from the old-format anonymous-ns / file-scope TU.
-        # Also inject `chaos_object_header = FatHeader` typedef since the
-        # old codegen emits `chaos_object_header header{};` but the
-        # A5-Trinity migration renamed it to FatHeader with no global alias.
+        # Also inject `chaos_object_header = ThinLockableHeader` typedef since the
+        # old codegen emits `chaos_object_header header{};` but ThinLockableHeader
+        # is the unified 16B header (FatHeader alias removed).
         # Find a good insertion point: after the last #include line.
         last_include = -1
         for idx, ln in enumerate(content.splitlines(keepends=True)):
@@ -1869,7 +1869,7 @@ def _rename_and_fix_patch_file(src: Path, dst: Path, ns_slug: str, suffix: str =
                 ns_inject = (
                     '\n'
                     'using namespace chaos::il2cpp::runtime_core;\n'
-                    'using chaos_object_header = FatHeader;\n'
+                    'using chaos_object_header = ThinLockableHeader;\n'
                     '\n'
                 )
                 lines.insert(insert_pos, ns_inject)

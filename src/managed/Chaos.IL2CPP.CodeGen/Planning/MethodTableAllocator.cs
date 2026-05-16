@@ -12,7 +12,7 @@ namespace Chaos.IL2CPP.CodeGen.Planning;
 /// </summary>
 internal sealed class MethodTableAllocator
 {
-    private const uint MaxMethodTableSize = 65536;
+    private const uint MaxMethodTableSize = 524288;
     private uint _nextIndex = 0;
 
     /// <summary>

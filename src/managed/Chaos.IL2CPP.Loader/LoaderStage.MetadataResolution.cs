@@ -81,11 +81,20 @@ public sealed partial class LoaderStage
             })
             .ToArray();
 
+        var parameterFlags = methodDefinition
+            .GetParameters()
+            .Select(parameterHandle => metadataReader.GetParameter(parameterHandle))
+            .Where(parameter => parameter.SequenceNumber > 0)
+            .OrderBy(parameter => parameter.SequenceNumber)
+            .Select(parameter => (int)parameter.Attributes)
+            .ToArray();
+
         var parameters = parameterTypes
             .Select((parameterType, index) => new ManagedParameterModel
             {
                 Name = index < parameterNames.Length ? parameterNames[index] : $"arg{index}",
                 Type = parameterType,
+                Attributes = index < parameterFlags.Length ? parameterFlags[index] : 0,
             })
             .ToList();
 

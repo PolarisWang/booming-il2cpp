@@ -26,7 +26,6 @@ modules:
     forbidden_includes:
       - runtime_core
       - bootstrap
-      - bdwgc
       - hot_update
       - support
       - interpreter
@@ -68,14 +67,12 @@ modules:
         reflection_api.cpp includes reflection/*.cpp (11 files) as single TU
         instantiation_engine.cpp includes instantiation/*.cpp (7 files) as single TU
     visibility: public
-    dependencies:
-      - chaos_bdwgc
+    dependencies: []
     allowed_includes:
       public:
         - contracts/native/v0/
       private:
         - src/native/runtime-core/
-        - third_party/bdwgc/
         - src/native/bootstrap/       # PeekBootstrapState
     forbidden_includes:
       - src/native/hot-update/
@@ -166,7 +163,6 @@ modules:
         - src/native/runtime-core/
         - src/native/hot-update/
         - src/native/support/
-        - third_party/bdwgc/
     forbidden_includes:
       - src/native/common/
 
@@ -222,14 +218,6 @@ modules:
     conventions:
       note: "entry-point host for foundation-dll proof verification; extern C main-like functions"
 
-  chaos_bdwgc:
-    path: third_party/bdwgc
-    namespace: ""                    # C library, no C++ namespace
-    visibility: public
-    dependencies: []
-    conventions:
-      note: "vendored C library; C++ naming conventions do not apply"
-
   chaos_fmt:
     path: third_party/fmt
     namespace: ""                    # C++ library, no project namespace
@@ -252,10 +240,8 @@ global_conventions:
       message: "use nullptr instead of NULL"
     - pattern: "\bbare_int\b"
       message: "use <cstdint> types (std::int32_t) instead of bare 'int'"
-      exclude_modules: [chaos_bdwgc]
     - pattern: "\bbare_long\b"
       message: "use <cstdint> types instead of bare 'long'"
-      exclude_modules: [chaos_bdwgc]
 
   # required header formatting
   include_guard_format: CHAOS_IL2CPP_{MODULE}_H_
@@ -266,10 +252,9 @@ global_conventions:
 # Direction: rows may depend on columns.
 
 dependency_matrix:
-  chaos_bdwgc: []
   chaos_fmt: []
   chaos_common: []
-  chaos_runtime_core: [chaos_bdwgc]
+  chaos_runtime_core: []
   chaos_hot_update: [chaos_runtime_core]
   chaos_interpreter: [chaos_runtime_core]
   chaos_support: [chaos_runtime_core]

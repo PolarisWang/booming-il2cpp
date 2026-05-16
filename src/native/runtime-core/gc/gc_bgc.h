@@ -52,7 +52,8 @@ enum class BgcPhase : uint8_t {
     REMARK_NEEDED    = 3,  ///< Concurrent mark done; waiting for STW re-mark
     STW_REMARK       = 4,  ///< STW safepoint: drain SATB + dirty cards
     CONCURRENT_SWEEP = 5,  ///< BGC thread sweeping unmarked pages
-    FINISHED         = 6,  ///< BGC cycle complete; reset to IDLE
+    COMPACT_NEEDED   = 6,  ///< Concurrent sweep done; waiting for STW compaction
+    FINISHED         = 7,  ///< BGC cycle complete; reset to IDLE
 };
 
 // ======================================================================
@@ -133,6 +134,11 @@ public:
         return phase_.load(std::memory_order_acquire) == BgcPhase::REMARK_NEEDED;
     }
 
+    /// True when concurrent sweep has completed and STW compaction is needed.
+    bool IsCompactNeeded() const noexcept {
+        return phase_.load(std::memory_order_acquire) == BgcPhase::COMPACT_NEEDED;
+    }
+
     // ── SATB buffer flush ─────────────────────────────────────────
 
     /// Flush the calling thread's SATB buffer to the global queue.
@@ -167,6 +173,11 @@ public:
 
     /// Signal BGC thread to begin concurrent sweep after re-mark.
     void StartConcurrentSweep();
+
+    /// Perform STW compaction after concurrent sweep.
+    /// Must be called under a safepoint.  Reuses the mark bitmap left
+    /// intact by BgcSweep() to decide fragmentation and plan relocation.
+    void StwCompact();
 
     /// Wait for the BGC cycle to complete (busy-wait with yield).
     /// Called when an emergency full STW GC is needed.
@@ -248,6 +259,11 @@ private:
     // ── Parallel mark workers ─────────────────────────────────────
 
     static constexpr int kMaxBgcWorkers = 8;
+
+    /// Batch size for popping grey objects from the shared mark stack.
+    /// Larger batches reduce mutex contention; 32 balances locality vs.
+    /// fair distribution across parallel workers.
+    static constexpr CHAOS_IL2CPP_SIZE kBgcPopBatchSize = 32;
 
     /// Flag: set by BGC thread to signal parallel workers to stop.
     std::atomic<bool> bgc_parallel_done_{false};

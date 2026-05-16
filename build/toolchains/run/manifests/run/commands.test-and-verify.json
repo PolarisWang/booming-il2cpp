@@ -18,6 +18,24 @@
       ]
     },
     {
+      "id": "stress-test",
+      "title": "Run pressure/stress tests with history, comparison, and regression detection",
+      "group": "Test And Verify",
+      "handler": "stress.dispatch",
+      "platforms": ["windows"],
+      "pass_through": true,
+      "tokens": ["stress"],
+      "syntax": "stress <test-name> [--quick] [--record] [--json] [--build]",
+      "show_in_menu": true,
+      "examples": [
+        "run stress gc-stress --quick --record --json",
+        "run stress gc-stress-mode --mode 1 --record",
+        "run stress list",
+        "run stress status",
+        "run stress history gc-stress"
+      ]
+    },
+    {
       "id": "test-suite",
       "title": "Run a suite by selector or object id",
       "group": "Test And Verify",

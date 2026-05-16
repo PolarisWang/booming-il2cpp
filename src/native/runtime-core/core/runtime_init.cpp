@@ -1,3 +1,4 @@
+#include "gc_old_gen.h"
 #include "gc_bgc.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -25,10 +26,6 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
 
-    static CHAOS_IL2CPP_ONCE_FLAG s_gc_init_flag;
-#if defined(CHAOS_IL2CPP_GC_ENABLED)
-    CHAOS_IL2CPP_CALL_ONCE(s_gc_init_flag, []() { GC_INIT(); });
-#endif
 
     RuntimeState* runtime_state = static_cast<RuntimeState*>(AllocateBytes(normalized_config, sizeof(RuntimeState)));
     if (runtime_state == nullptr) {
@@ -87,13 +84,11 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL ThreadAttach(
 
     thread_state->internal_state = ::new (internal_mem) ThreadInternalState();
 
-#if !defined(_WIN32) && !defined(_WIN64)
-    struct GC_stack_base sb;
-    if (GC_get_stack_base(&sb) == GC_SUCCESS) {
-        const int gc_reg_result = GC_register_my_thread(&sb);
-        (void)gc_reg_result;
-    }
-#endif
+    // Register approximate thread stack bounds for conservative GC scanning.
+    // Use address of a local as near-CFP reference (stack grows downward).
+    void* stack_near_cfp = &thread_state;
+    void* stack_limit = static_cast<char*>(stack_near_cfp) - (1024 * 1024);
+    g_old_gen.RegisterThreadStack(stack_near_cfp, stack_limit);
 
     *out_thread_state = thread_state;
     SetCurrentThreadState(thread_state);
@@ -108,9 +103,7 @@ void CHAOS_RUNTIME_ABI_CALL ThreadDetach(
     ThreadState* thread_state) {
     if (runtime_state == nullptr || thread_state == nullptr) return;
 
-#if !defined(_WIN32) && !defined(_WIN64)
-    GC_unregister_my_thread();
-#endif
+    g_old_gen.UnregisterThreadStack();
 
     if (thread_state->internal_state != nullptr) {
         thread_state->internal_state->~ThreadInternalState();

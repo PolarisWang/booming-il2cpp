@@ -137,6 +137,7 @@ public sealed class MetadataWriterStage
                     DeclaringMethodSubjectId = method.SubjectId,
                     MemberType = parameter.Type,
                     ParameterIndex = parameterIndex,
+                    ParameterAttributes = parameter.Attributes != 0 ? parameter.Attributes : null,
                 });
             }
         }

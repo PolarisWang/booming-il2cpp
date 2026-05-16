@@ -735,8 +735,8 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		return value.Kind switch
 		{
-			CustomAttributeLiteralKind.Null => "static_cast<CHAOS_IL2CPP_INTPTR>(0)", 
-			CustomAttributeLiteralKind.Boolean => ((bool)value.Value!) ? "static_cast<CHAOS_IL2CPP_INTPTR>(1)" : "static_cast<CHAOS_IL2CPP_INTPTR>(0)", 
+			CustomAttributeLiteralKind.Null => "0", 
+			CustomAttributeLiteralKind.Boolean => ((bool)value.Value!) ? "static_cast<CHAOS_IL2CPP_INTPTR>(1)" : "0", 
 			CustomAttributeLiteralKind.Byte => $"static_cast<CHAOS_IL2CPP_INTPTR>({(byte)value.Value!})",
 			CustomAttributeLiteralKind.SByte => $"static_cast<CHAOS_IL2CPP_INTPTR>({(sbyte)value.Value!})",
 			CustomAttributeLiteralKind.Int16 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(short)value.Value!})",
@@ -749,7 +749,7 @@ public sealed partial class NativeAotLoweringPlanner
 			CustomAttributeLiteralKind.Single => $"ChaosStoreFloat32({(float)value.Value!}f)",
 			CustomAttributeLiteralKind.Double => $"ChaosStoreFloat64({(double)value.Value!})",
 			CustomAttributeLiteralKind.String => "chaos_reflection_create_string_literal(" + ToCppStringLiteral((string)value.Value!) + ")",
-			CustomAttributeLiteralKind.Type or CustomAttributeLiteralKind.Enum => "static_cast<CHAOS_IL2CPP_INTPTR>(0)",
+			CustomAttributeLiteralKind.Type or CustomAttributeLiteralKind.Enum => "0",
 			_ => throw new NotSupportedException($"unsupported custom attribute literal kind '{value.Kind}'."), 
 		};
 	}

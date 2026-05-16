@@ -472,6 +472,8 @@ public sealed partial class NativeAotLoweringPlanner
 				// Determine header flags from decision engine
 				HeaderKind hdrKind = GetHeaderKind(item);
 				byte flags = (byte)hdrKind; // PureType=0, ThinLockable=1, Fat=2
+					if (TypeHasFinalizer(item))
+					    flags |= 0x04; // kTypeInfoHasFinalizer
 				_vtableLengths.TryGetValue(item, out int vtLen);
 				// TypeInfoV0 = hot(32B) + warm(32B) nested initializer
 				handler.AppendLiteral("inline TypeInfoV0 ");
@@ -697,7 +699,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        return false;");
 		builder.AppendLine("    }");
 		builder.AppendLine();
-		builder.AppendLine("    if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+		builder.AppendLine("    if (chaos_value == 0)");
 		builder.AppendLine("    {");
 		builder.AppendLine("        return true;");
 		builder.AppendLine("    }");
@@ -713,7 +715,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine(", chaos_array->element_type_info);");
 		builder.AppendLine("    }");
 		builder.AppendLine();
-		builder.AppendLine("    auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);");
+		builder.AppendLine("    auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);");
 		builder.AppendLine("    if (chaos_array->element_type_shape == chaos_type_shape_interface)");
 		builder.AppendLine("    {");
 		builder.AppendLine("        return chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), chaos_array->element_type_info);");
@@ -750,13 +752,9 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine();
 				continue;
 			}
-			// When a type inherits from a base AND needs its own vtable, skip C++
-			// inheritance to avoid header field shadowing: the derived class's
-			// FatHeader would shadow the base class's ThinLockableHeader at offset 0,
-			// but chaos_object_get_type_info() reads from offset 0, getting an
-			// uninitialized base header → segfault. Emit a standalone struct instead.
-			bool _skipInheritanceDueToVTable = _vtableLengths != null && _vtableLengths.TryGetValue(typeSubjectId, out int _baseVtLen) && _baseVtLen > 0;
-			if (!_skipInheritanceDueToVTable && referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string? value6) && !string.IsNullOrWhiteSpace(value6) && referenceTypeSubjectIds.Contains(value6))
+			// Always use C++ inheritance. The unified ThinLockableHeader (16B)
+			// has no vtable field, so no header shadowing can occur.
+			if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string? value6) && !string.IsNullOrWhiteSpace(value6) && referenceTypeSubjectIds.Contains(value6))
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder stringBuilder13 = stringBuilder;
@@ -777,19 +775,17 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder14.AppendLine(ref handler);
 			}
 			builder.AppendLine("{");
-			// Emit header always for types without base. For types WITH base but
-			// needing own vtable, force FatHeader so header.vtable = ... compiles.
+			// Emit header always for types without base. Types with base inherit
+			// it through C++ inheritance.
 			bool _hasBase = referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string? value7) && !string.IsNullOrWhiteSpace(value7) && referenceTypeSubjectIds.Contains(value7);
-			bool _needsOwnVTable = _vtableLengths != null && _vtableLengths.TryGetValue(typeSubjectId, out int _vtLen) && _vtLen > 0;
-			if (!_hasBase || _needsOwnVTable)
+			if (!_hasBase)
 			{
-								// Use GetHeaderKind for correct header variant
-				HeaderKind hdrKind = _needsOwnVTable ? HeaderKind.Fat : GetHeaderKind(typeSubjectId);
+				HeaderKind hdrKind = GetHeaderKind(typeSubjectId);
 				string headerType = hdrKind switch
 				{
 				    HeaderKind.PureType => "PureTypeHeader",
 				    HeaderKind.ThinLockable => "ThinLockableHeader",
-				    _ => "FatHeader"
+				    _ => "ThinLockableHeader"
 				};
 				builder.AppendLine($"    {headerType} header{{}};");
 
@@ -840,6 +836,21 @@ public sealed partial class NativeAotLoweringPlanner
 			if (flag10)
 			{
 				builder.AppendLine("    CHAOS_IL2CPP_INTPTR runtime_name_value = 0;");
+			}
+			// System.Exception instance fields — the runtime accesses these by hardcoded
+			// offset (see exception_api.cpp kException*Offset), so the C++ struct must
+			// have exactly the layout the runtime expects: header(16) + _message(8) +
+			// _innerException(8) + _stackTrace(8) + _HResult(4) = 44 bytes (padded to 48).
+			// All Exception-derived types need these fields since runtime helpers operate
+			// on the base Exception layout at fixed offsets from the header.
+			bool isExceptionOrDerived =
+				ns.StartsWith("System.Private.CoreLib/", StringComparison.Ordinal) &&
+				ns.EndsWith("Exception", StringComparison.Ordinal);
+			if (isExceptionOrDerived){
+				builder.AppendLine("    CHAOS_IL2CPP_INTPTR _message = 0;");
+				builder.AppendLine("    CHAOS_IL2CPP_INTPTR _innerException = 0;");
+				builder.AppendLine("    CHAOS_IL2CPP_INTPTR _stackTrace = 0;");
+				builder.AppendLine("    CHAOS_IL2CPP_INT32 _HResult = 0;");
 			}
 			if (list.Count == 0)
 			{
@@ -1178,4 +1189,16 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine(result);
 		}
 
+
+
+	private bool TypeHasFinalizer(string typeSubjectId)
+	{
+		// System.Object has a default (empty) Finalize — not a real finalizer.
+		if (typeSubjectId.Contains("/System.Object"))
+			return false;
+		return _methodsBySubjectId.Values.Any(m =>
+			!m.IsStatic &&
+			string.Equals(GetMethodName(m.SubjectId), "Finalize", StringComparison.Ordinal) &&
+			string.Equals(m.Identity.DeclaringTypeSubjectId, typeSubjectId, StringComparison.Ordinal));
+	}
 }

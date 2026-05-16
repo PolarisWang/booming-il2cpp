@@ -151,6 +151,26 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         }
     }
 
+    // Check if BGC concurrent sweep has completed and needs STW compaction.
+    if (BgcController::Instance().IsCompactNeeded()) {
+        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "bgc_compact_in_nursery_alloc_slow");
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StwCompact();
+        threading::ReleaseGlobalSafepoint(gen);
+        g_gc_scheduler.RecordFullCollection(g_old_gen.TotalAllocated());
+
+        if (tls_nursery_ctx.nursery != nullptr) {
+            char* ptr = tls_nursery_ctx.nursery->current;
+            char* next = ptr + size;
+            if (next <= tls_nursery_ctx.nursery->end) {
+                tls_nursery_ctx.nursery->current = next;
+                std::memset(ptr, 0, size);
+                g_gc_scheduler.RecordAllocation(size);
+                return ptr;
+            }
+        }
+    }
+
     // Check if a full GC has been requested by the scheduler.
     if (g_gc_scheduler.IsFullGcRequested()) {
         CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_gc_in_nursery_alloc_slow");
@@ -290,6 +310,26 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
         BgcController::Instance().StwRemark();
         threading::ReleaseGlobalSafepoint(gen);
         BgcController::Instance().StartConcurrentSweep();
+        g_gc_scheduler.RecordFullCollection(g_old_gen.TotalAllocated());
+
+        if (tls_nursery_ctx.nursery != nullptr) {
+            char* ptr = tls_nursery_ctx.nursery->current;
+            char* next = ptr + size;
+            if (next <= tls_nursery_ctx.nursery->end) {
+                tls_nursery_ctx.nursery->current = next;
+                std::memset(ptr, 0, size);
+                g_gc_scheduler.RecordAllocation(size);
+                return ptr;
+            }
+        }
+    }
+
+    // Check if BGC concurrent sweep has completed and needs STW compaction.
+    if (BgcController::Instance().IsCompactNeeded()) {
+        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "bgc_compact_in_nursery_alloc_atomic_slow");
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StwCompact();
+        threading::ReleaseGlobalSafepoint(gen);
         g_gc_scheduler.RecordFullCollection(g_old_gen.TotalAllocated());
 
         if (tls_nursery_ctx.nursery != nullptr) {

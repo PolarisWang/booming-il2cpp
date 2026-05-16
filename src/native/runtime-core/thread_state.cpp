@@ -230,13 +230,22 @@ void SafepointPoll() noexcept {
     // while GC is in progress would corrupt the heap.  If a thread is
     // in a deep native frame that never polls, it won't reach this
     // code path at all (conservative stack scanning handles that case).
-    constexpr int kYieldAfter = 10000;
+    // NOTE: Uses CPU pause instead of yield() to avoid a 30ms context
+    // switch per iteration.  The GC duration is ~400µs — busy-waiting
+    // with pause is vastly cheaper than yielding (which deschedules the
+    // thread, incurring a full OS quantum delay on wakeup).
+#if defined(_MSC_VER)
+    constexpr int kPauseAfter = 10000;
+#else
+    constexpr int kPauseAfter = 10000;
+#endif
     int spins = 0;
     while ((s_generation.load(std::memory_order_acquire) & kGcGenerationMask) != 0u) {
-        if (++spins > kYieldAfter) {
-            std::this_thread::yield();
-            spins = 0;
-        }
+#if defined(_MSC_VER)
+        _mm_pause();
+#else
+        __builtin_ia32_pause();
+#endif
     }
 
     thread->at_safepoint = false;
@@ -259,12 +268,9 @@ uint32_t RequestGlobalSafepoint() noexcept {
         ManagedThread* expected = nullptr;
         if (!s_safepoint_owner.compare_exchange_strong(expected, self,
                 std::memory_order_acq_rel, std::memory_order_acquire)) {
-            // Another thread holds the safepoint — spin-wait with yield.
-            for (int spins = 0; ; spins++) {
-                if (spins > 10000) {
-                    std::this_thread::yield();
-                    spins = 0;
-                }
+            // Another thread holds the safepoint — spin-wait with pause.
+            for (;;) {
+                _mm_pause();
                 expected = nullptr;
                 if (s_safepoint_owner.compare_exchange_strong(expected, self,
                         std::memory_order_acq_rel, std::memory_order_acquire)) {
@@ -285,7 +291,7 @@ uint32_t RequestGlobalSafepoint() noexcept {
     // Threads that reach SafepointPoll will set last_seen_gen = odd gen.
     // Threads in deep native frames that never poll remain unconfirmed
     // and are handled by conservative stack scanning as fallback.
-    // We spin with yield up to ~10ms to let threads reach a poll point.
+    // We spin with pause up to ~10ms to let threads reach a poll point.
     // NOTE: MSVC does not allow capturing lambdas to decay to C function
     // pointers, so we use file-static helper variables (same pattern as
     // GcScanAllThreadRoots) — safe since only one GC thread runs at a time.
@@ -316,7 +322,7 @@ uint32_t RequestGlobalSafepoint() noexcept {
                     return true;
                 });
                 if (remaining == 0) break;
-                if (i > 10000) std::this_thread::yield();
+                _mm_pause();
             }
         }
         s_confirm_self = nullptr;

@@ -755,16 +755,22 @@ public sealed partial class NativeAotLoweringPlanner
             return emptySb.ToString();
         }
 
-        // Sort by subjectId for deterministic output
-        var sorted = _externalRuntimeSubjects
-            .OrderBy(kv => kv.Key, StringComparer.Ordinal)
-            .ToArray();
+        // Emit entries in dict-value index order so the table position matches
+        // the ExternalRuntimeTableIndex used by call sites.  The dict is populated
+        // deterministically (same input → same scan order), so this is stable.
+        var entriesByIndex = new KeyValuePair<string, int>[_externalRuntimeSubjects.Count];
+        foreach (var kvp in _externalRuntimeSubjects)
+        {
+            int idx = kvp.Value;
+            if (idx >= 0 && idx < entriesByIndex.Length)
+                entriesByIndex[idx] = kvp;
+        }
 
         // Build entry models
-        var entryModels = new ScriptObject[sorted.Length];
-        for (int i = 0; i < sorted.Length; i++)
+        var entryModels = new ScriptObject[entriesByIndex.Length];
+        for (int i = 0; i < entriesByIndex.Length; i++)
         {
-            string subjectId = sorted[i].Key;
+            string subjectId = entriesByIndex[i].Key;
             string? resolvedHelper = null;
             bool hasHelper = helperSymbolBySubjectId?.TryGetValue(subjectId, out resolvedHelper) == true;
             var entryModel = new ScriptObject
@@ -781,7 +787,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         var model = new ScriptObject
         {
-            ["subject_count"] = sorted.Length,
+            ["subject_count"] = entriesByIndex.Length,
             ["entries"] = entryModels,
         };
 
