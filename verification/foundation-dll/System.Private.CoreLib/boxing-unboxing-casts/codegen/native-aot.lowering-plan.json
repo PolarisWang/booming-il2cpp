@@ -1,11 +1,11 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
-  "planKind": "full-assembly-entry",
+  "planKind": "generic-managed-entry",
   "assemblyName": "BoxingUnboxingCastsSubjects",
   "entrySubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Run:System.Void(System.Int32)",
-  "nativeEntryFunctionName": "",
+  "nativeEntryFunctionName": "RunNativeAot",
   "entrySymbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run",
   "entryMethodToken": "0u",
-  "workloadAbi": "full-assembly"
+  "workloadAbi": "void(int32)"
 }

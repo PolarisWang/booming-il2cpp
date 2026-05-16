@@ -86,7 +86,6 @@ add_library(chaos_runtime_core STATIC
     assembly_manager.cpp
     gc/gc_bump_cache.h
     gc/gc_bit_utils.h
-    gc/gc_bump_arena.h
     gc/gc_helpers.h
     gc/gc_transition.h
     gc/gc_scheduler.h
@@ -111,6 +110,8 @@ add_library(chaos_runtime_core STATIC
     gc/gc_events.cpp
     gc/gc_stats.h
     gc/gc_stats.cpp
+    gc/gc_worker_pool.h
+    gc/gc_worker_pool.cpp
     gc/gc_bgc.h
     gc/gc_bgc.cpp
     gc/gc_bgc_inline.h

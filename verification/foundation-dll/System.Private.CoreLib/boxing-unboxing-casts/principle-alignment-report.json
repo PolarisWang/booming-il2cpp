@@ -1,7 +1,7 @@
 {
   "family": "boxing-unboxing-casts",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-14T19:52:27.028266",
+  "generated_at": "2026-05-16T15:04:42.284484",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -42,10 +42,14 @@
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "principle": "P1",
-      "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available",
+      "status": "ALIGNED",
+      "summary": "avg_speedup=0.0%",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "managed_faster_count": 0,
+        "native_faster_count": 0
+      }
     },
     "p2_template_hygiene": {
       "check_id": "p2_template_hygiene",
@@ -93,10 +97,10 @@
   },
   "summary": {
     "total": 8,
-    "aligned": 7,
+    "aligned": 8,
     "concern": 0,
     "violation": 0,
-    "not_applicable": 1,
+    "not_applicable": 0,
     "overall": "ALIGNED"
   }
 }

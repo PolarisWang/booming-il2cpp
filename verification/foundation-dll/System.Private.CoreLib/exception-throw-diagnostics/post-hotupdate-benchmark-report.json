@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/exception/throw/diagnostics",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::get_Message:System.String()",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::get_StackTrace:System.String()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::get_HResult:System.Int32()",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::ToString:System.String()",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.ArgumentNullException::.ctor:System.Void(System.String)",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String)",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)",
+      "status": "failed",
+      "error": "INFO: Applied patches to 0 methods\n"
+    }
+  ],
+  "summary": {
+    "totalMethods": 14,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
+    "slowdownThresholdX": 50.0
+  }
+}

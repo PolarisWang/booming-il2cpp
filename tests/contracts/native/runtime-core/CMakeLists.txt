@@ -8,8 +8,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
 
+# Stub symbols for codegen-emitted globals; required by targets linking
+# chaos_bootstrap or chaos_interpreter (which reference these symbols).
+set(CHAOS_GC_TEST_STUBS gc_test_stubs.cpp)
+
 add_executable(chaos_method_aot_map_test
-    method_aot_map_test.cpp)
+    method_aot_map_test.cpp ${CHAOS_GC_TEST_STUBS})
 
 target_compile_features(chaos_method_aot_map_test PRIVATE cxx_std_17)
 target_compile_definitions(chaos_method_aot_map_test PRIVATE
@@ -39,6 +43,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
     target_compile_features(chaos_gc_bump_cache_test PRIVATE cxx_std_17)
     target_compile_definitions(chaos_gc_bump_cache_test PRIVATE
         _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_bump_cache_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
     target_include_directories(
         chaos_gc_bump_cache_test
         PRIVATE
@@ -51,10 +56,9 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
         chaos_gc_bump_cache_test
         PRIVATE
             chaos_bdwgc
-            chaos_fmt)
+            chaos_fmt
+            chaos_common)
 endif()
-
-set(CHAOS_GC_TEST_STUBS gc_test_stubs.cpp)
 
 # gc_region_test — CRAG region framework + card table unit tests (C0.1-C0.3)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_region_test.cpp")
@@ -162,7 +166,7 @@ endif()
 
 # threading_smoke — thread model + ThreadPool (Phase 5 thread model gap)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
-    add_executable(chaos_threading_smoke threading_smoke.cpp)
+    add_executable(chaos_threading_smoke threading_smoke.cpp ${CHAOS_GC_TEST_STUBS})
     target_compile_features(chaos_threading_smoke PRIVATE cxx_std_17)
     target_compile_definitions(chaos_threading_smoke PRIVATE
         
@@ -177,11 +181,13 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
         chaos_threading_smoke
         PRIVATE
             chaos_runtime_core
+            chaos_bootstrap
+            chaos_interpreter
             chaos_bdwgc)
 
     # synchronization_smoke — SemaphoreSlim, RWLock, WaitHandle, TimerQueue
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/synchronization_smoke.cpp")
-        add_executable(chaos_synchronization_smoke synchronization_smoke.cpp)
+        add_executable(chaos_synchronization_smoke synchronization_smoke.cpp ${CHAOS_GC_TEST_STUBS})
         target_compile_features(chaos_synchronization_smoke PRIVATE cxx_std_17)
         target_compile_definitions(chaos_synchronization_smoke PRIVATE
             
@@ -196,6 +202,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
             chaos_synchronization_smoke
             PRIVATE
                 chaos_runtime_core
+                chaos_bootstrap
+                chaos_interpreter
                 chaos_bdwgc)
     endif()
 
@@ -238,6 +246,28 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_stress_test.cpp")
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_gc_stress_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_worker_pool_smoke — GcWorkerPool parallel mark/sweep smoke test
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_worker_pool_smoke.cpp")
+    add_executable(chaos_gc_worker_pool_smoke gc_worker_pool_smoke.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_worker_pool_smoke PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_worker_pool_smoke PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_worker_pool_smoke PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_worker_pool_smoke
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/bdwgc/include"
+            "${REPO_ROOT}/third_party/fmt/include")
+    target_link_libraries(
+        chaos_gc_worker_pool_smoke
         PRIVATE
             ${CHAOS_GC_COMMON_LIBS})
 endif()

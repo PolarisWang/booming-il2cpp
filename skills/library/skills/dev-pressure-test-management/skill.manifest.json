@@ -1,0 +1,30 @@
+{
+  "kind": "project",
+  "domain": "testing",
+  "name": "dev-pressure-test-management",
+  "summary": "压力测试管理：通过 run stress CLI 运行 GC/容量/线程压力测试，记录结果，检测回归。",
+  "trigger_signals": [
+    "修改了 GC、内存分配、线程调度相关代码后需要验证稳定性时",
+    "需要查看压力测试历史记录或回归检测结果时",
+    "AI 开发过程中需要快速验证改动没有引入性能退化时"
+  ],
+  "owner": "00-skills-maintainers",
+  "status": "active",
+  "version": "1.0.0",
+  "startup_visible": false,
+  "token_budget": "small",
+  "version_history": [
+    {
+      "version": "1.0.0",
+      "date": "2026-05-16",
+      "type": "initial"
+    }
+  ],
+  "evolution_lineage": {
+    "parent": null,
+    "derived_from": null,
+    "derived_to": [],
+    "fixes": [],
+    "captured_from": null
+  }
+}

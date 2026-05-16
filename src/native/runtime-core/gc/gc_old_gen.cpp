@@ -12,6 +12,7 @@
 #include "gc_region.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
+#include "gc_worker_pool.h"
 #include "thread_pool.h"
 #include "thread_state.h"
 
@@ -631,30 +632,15 @@ void MarkSweepOldGen::DrainMarkStackParallel(OldGenPage** pages, int page_count)
     }
 
     // Spawn thread pool workers (1..N-1).
-    int spawned = 0;
-    for (int i = 1; i < ctx->worker_count; i++) {
-        threading::ThreadPoolQueueUserWorkItem(
-            [](void* param) {
-                auto p = static_cast<std::pair<ParallelMarkContext*, int>*>(param);
-                ParallelMarkWorkerLoop(p->first, p->second);
-                delete p;
-            },
-            new std::pair<ParallelMarkContext*, int>(ctx, i));
-        spawned++;
-    }
-
-    // Signal all workers to start.
+    // Signal all workers to start before dispatching.
     ctx->drain_started.store(true, std::memory_order_release);
 
-    // Worker 0 participates as a parallel worker.
-    if (ctx->worker_count >= 1) {
-        ParallelMarkWorkerLoop(ctx, 0);
-    }
-
-    // Wait for all spawned workers to finish.
-    while (ctx->active_workers.load(std::memory_order_acquire) > 0) {
-        CHAOS_OLDGEN_SPIN_HINT();
-    }
+    // Use GcWorkerPool for parallel mark (not ThreadPool — ThreadPool
+    // workers are registered managed threads that spin in SafepointPoll
+    // and would deadlock when called inside a safepoint).
+    GcWorkerPool::Instance().RunWorkers(ctx->worker_count, [ctx](int idx) {
+        ParallelMarkWorkerLoop(ctx, idx);
+    });
 
     // Drain any remaining chunks left in deques (workers may have been preempted).
     // As a safety net, process any remaining mark entries sequentially.
@@ -1450,48 +1436,25 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         }
 
         // Parallel sweep: dispatch pages via atomic index.
-        // Main thread participates alongside thread pool workers.
+        // Main thread participates alongside GcWorkerPool threads.
         // Cap workers to min(hardware_concurrency, total_pages) to avoid
         // oversubscribing high-core-count machines with few pages to sweep.
         std::atomic<int> next_page{0};
         std::atomic<CHAOS_IL2CPP_SIZE> parallel_reclaimed{0};
-        std::atomic<int> workers_done{0};
         int max_workers = std::min(static_cast<int>(std::thread::hardware_concurrency()), total_pages);
         if (max_workers < 2) max_workers = 2;
 
-        auto sweep_worker = [&](bool is_main) {
+        GcWorkerPool::Instance().RunWorkers(max_workers, [&](int idx) {
+            (void)idx;
             CHAOS_IL2CPP_SIZE local_reclaimed = 0;
             while (true) {
-                int idx = next_page.fetch_add(1, std::memory_order_relaxed);
-                if (idx >= total_pages) break;
-                local_reclaimed += SweepPage(pages[static_cast<size_t>(idx)]);
-                CoalescePage(pages[static_cast<size_t>(idx)]);
+                int idx2 = next_page.fetch_add(1, std::memory_order_relaxed);
+                if (idx2 >= total_pages) break;
+                local_reclaimed += SweepPage(pages[static_cast<size_t>(idx2)]);
+                CoalescePage(pages[static_cast<size_t>(idx2)]);
             }
             parallel_reclaimed.fetch_add(local_reclaimed, std::memory_order_relaxed);
-            if (!is_main) {
-                workers_done.fetch_add(1, std::memory_order_release);
-            }
-        };
-
-        // Spawn thread pool workers.
-        int spawned = 0;
-        for (int i = 0; i < max_workers - 1; i++) {
-            threading::ThreadPoolQueueUserWorkItem(
-                [](void* ctx) {
-                    auto* worker_fn = static_cast<decltype(&sweep_worker)>(ctx);
-                    (*worker_fn)(false);
-                },
-                &sweep_worker);
-            spawned++;
-        }
-
-        // Main thread participates.
-        sweep_worker(true);
-
-        // Wait for all spawned workers to finish.
-        while (workers_done.load(std::memory_order_acquire) < spawned) {
-            CHAOS_OLDGEN_SPIN_HINT();
-        }
+        });
 
         total_reclaimed = parallel_reclaimed.load(std::memory_order_relaxed);
     } else {

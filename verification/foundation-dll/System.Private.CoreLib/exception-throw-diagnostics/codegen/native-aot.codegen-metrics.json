@@ -8,8 +8,8 @@
     "generated/runtime_helper_shapes.h"
   ],
   "generatedCppFileCount": 2,
-  "generatedCppTotalBytes": 147517,
-  "largestGeneratedCppBytes": 80051,
+  "generatedCppTotalBytes": 141515,
+  "largestGeneratedCppBytes": 74049,
   "generatedSymbolCount": 20,
-  "peakWorkingSetBytes": 499134464
+  "peakWorkingSetBytes": 503508992
 }

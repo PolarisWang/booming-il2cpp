@@ -1648,13 +1648,103 @@ def _aggregate(family_slug: str, assembly: str,
 
 def _detect_regression(family_slug: str, assembly: str,
                         stage_results: list[StageResult]) -> dict[str, Any]:
-    """Run baseline regression detection on checksums and benchmarks."""
-    from baseline_manager import compare_checksum_baseline, compare_benchmark_baseline
+    """Run regression detection on benchmark metrics vs stored baseline.
 
-    result: dict[str, Any] = {}
+    Reads benchmark-comparison-report.json and detects:
+      - Speedup drop >20% from baseline
+      - Managed-faster ratio exceeding native-faster ratio
+    """
+    import json
 
-    trace("regression_check", family=family_slug,
-          benchmark_status=result.get("benchmark", {}).get("status", "none"))
+    result: dict[str, Any] = {
+        "benchmark": {},
+        "hasRegression": False,
+        "regressions": [],
+    }
+
+    family_dir = _VERIFICATION_BASE / assembly / family_slug
+    benchmark_report_path = family_dir / "benchmark-comparison-report.json"
+
+    if not benchmark_report_path.exists():
+        result["benchmark"] = {
+            "status": "skipped",
+            "message": "No benchmark report found",
+        }
+        return result
+
+    try:
+        with open(benchmark_report_path, encoding="utf-8") as f:
+            bm_report = json.load(f)
+    except (OSError, json.JSONDecodeError) as e:
+        result["benchmark"] = {"status": "error", "message": str(e)}
+        return result
+
+    summary = bm_report.get("summary", {})
+    total_methods = summary.get("totalMethods", 0)
+    matched_count = summary.get("matchedCount", 0)
+    native_faster = summary.get("nativeFasterCount", 0)
+    managed_faster = summary.get("managedFasterCount", 0)
+    avg_speedup = summary.get("averageSpeedupPercent", 0)
+
+    current_metrics = {
+        "totalMethods": total_methods,
+        "matchedCount": matched_count,
+        "nativeFasterCount": native_faster,
+        "managedFasterCount": managed_faster,
+        "averageSpeedupPercent": avg_speedup,
+    }
+
+    # Managed-faster ratio check
+    if matched_count > 0 and managed_faster > 0:
+        mf_ratio = managed_faster / max(matched_count, 1)
+        nf_ratio = native_faster / max(matched_count, 1)
+        if mf_ratio > 0.5 and nf_ratio < 0.5:
+            result["regressions"].append(
+                f"Managed-faster ratio {mf_ratio:.0%} exceeds native-faster "
+                f"ratio {nf_ratio:.0%} ({managed_faster}/{matched_count} methods)"
+            )
+            result["hasRegression"] = True
+
+    # Load / auto-create baseline
+    baseline_path = _VERIFICATION_BASE.parent.parent / "verification-history" / assembly / family_slug / "baseline-benchmark.json"
+    if baseline_path.exists():
+        try:
+            with open(baseline_path, encoding="utf-8") as f:
+                baseline = json.load(f)
+            bm = baseline.get("metrics", {})
+
+            bm_speedup = bm.get("averageSpeedupPercent", 0)
+            if bm_speedup > 0 and avg_speedup < bm_speedup * 0.8:
+                drop = (bm_speedup - avg_speedup) / bm_speedup * 100
+                result["regressions"].append(
+                    f"Speedup regression: {avg_speedup:.1f}% vs "
+                    f"baseline {bm_speedup:.1f}% (dropped {drop:.0f}%)"
+                )
+                result["hasRegression"] = True
+
+            result["benchmark"] = {
+                "status": "matched" if not result["hasRegression"] else "regressed",
+                "baselineMetrics": bm,
+                "currentMetrics": current_metrics,
+            }
+        except (OSError, json.JSONDecodeError) as e:
+            result["benchmark"] = {"status": "error", "message": f"read baseline: {e}"}
+    else:
+        baseline_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(baseline_path, "w", encoding="utf-8") as f:
+            json.dump({
+                "schemaVersion": 1,
+                "family": family_slug,
+                "assembly": assembly,
+                "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+                "metrics": current_metrics,
+            }, f, indent=2, ensure_ascii=False)
+        result["benchmark"] = {
+            "status": "no_baseline",
+            "message": "Baseline auto-created from this run",
+            "currentMetrics": current_metrics,
+        }
+
     return result
 
 

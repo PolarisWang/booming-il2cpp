@@ -85,10 +85,12 @@ const ModuleDescriptor* LookupModule(uint32_t module_id) {
     if (module_id >= kMaxModules) {
         return nullptr;
     }
-    // g_module_storage[id] is always populated for valid IDs (including
-    // tombstone modules, where the entry is retained for handle safety).
-    if (module_id >= g_module_count && !g_module_storage[module_id].tombstone) {
-        return nullptr;  // not yet allocated and not tombstone
+    // Check if slot is actually occupied by comparing name_utf8 (set to
+    // nullptr on tombstone, never set for unallocated slots).  Using
+    // g_module_count + tombstone fails when RegisterModule reuses a
+    // freed slot with index >= g_module_count.
+    if (g_module_storage[module_id].name_utf8 == nullptr) {
+        return nullptr;  // slot not occupied
     }
     return &g_module_storage[module_id];
 }
@@ -168,6 +170,21 @@ const ModuleDescriptor* GetModuleByIndex(uint32_t index) {
     if (index >= g_module_count) return nullptr;
     if (g_module_storage[index].tombstone) return nullptr;
     return &g_module_storage[index];
+}
+
+const TypeInfoHot* LookupTypeInfoPtr(uint32_t module_id, uint32_t token) {
+    std::shared_lock lock(g_module_mutex);
+
+    if (module_id >= kMaxModules) return nullptr;
+    if (g_module_storage[module_id].name_utf8 == nullptr) return nullptr;
+    if (g_module_storage[module_id].tombstone) return nullptr;
+    if (g_module_storage[module_id].type_flags == nullptr) return nullptr;
+    if (g_module_storage[module_id].type_info_ptrs == nullptr) return nullptr;
+
+    uint32_t idx = TokenToIndex(token);
+    if (idx >= g_module_storage[module_id].type_count) return nullptr;
+
+    return g_module_storage[module_id].type_info_ptrs[idx];
 }
 
 }  // namespace chaos::il2cpp::runtime_core

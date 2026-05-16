@@ -280,22 +280,27 @@ static inline uint8_t FillByte(int thread_index, int iter, size_t size) {
 
 static void WritePattern(void* p, size_t size, int thread_index, int iter) {
     uint64_t magic = MagicWord(thread_index, iter);
-    std::memcpy(p, &magic, sizeof(magic));
+    // Write magic at offset 8, preserving bytes 0-7 (TypeInfo header) for
+    // GC precise scanning.  A zeroed TypeInfo (= null) causes the scanner
+    // to skip the object, which is fine — pattern verification is purely
+    // a test concern.
+    std::memcpy(static_cast<uint8_t*>(p) + 8, &magic, sizeof(magic));
     uint8_t fill = FillByte(thread_index, iter, size);
-    if (size > sizeof(magic)) {
-        std::memset(static_cast<uint8_t*>(p) + sizeof(magic), fill, size - sizeof(magic));
+    if (size > 16) {
+        std::memset(static_cast<uint8_t*>(p) + 16, fill, size - 16);
     }
 }
 
 static bool VerifyPattern(const void* p, size_t size, int thread_index, int iter) {
     uint64_t expected_magic = MagicWord(thread_index, iter);
 
-    // Check first 8 bytes (magic word).
-    auto raw_word = *static_cast<const volatile uint64_t*>(p);
+    // Check forwarding pointer in byte 0 (GC sets bit 0 for forwarding
+    // during young GC).  If forwarded, content was correct at write time.
+    if ((*static_cast<const volatile uint64_t*>(p) & 1u) != 0) return true;
 
-    // If bit 0 is set, a young GC forwarded the object between write and
-    // verify — content was correct at write time.
-    if ((raw_word & 1u) != 0) return true;
+    // Read magic word from offset 8 (bytes 0-7 are TypeInfo header).
+    auto raw_word = *reinterpret_cast<const volatile uint64_t*>(
+        static_cast<const uint8_t*>(p) + 8);
 
     if (raw_word != expected_magic) {
         // Upper 32 bits of every magic word = 0xBAD0DEAD.  If the read value's
@@ -311,11 +316,11 @@ static bool VerifyPattern(const void* p, size_t size, int thread_index, int iter
         return false;
     }
 
-    // Check fill bytes (beyond the first 8-byte magic word).
-    if (size > sizeof(uint64_t)) {
+    // Check fill bytes (from offset 16 onwards).
+    if (size > 16) {
         uint8_t expected_fill = FillByte(thread_index, iter, size);
         const uint8_t* bytes = static_cast<const uint8_t*>(p);
-        for (size_t i = sizeof(uint64_t); i < size; i++) {
+        for (size_t i = 16; i < size; i++) {
             if (bytes[i] != expected_fill) {
                 return false;
             }
@@ -361,7 +366,6 @@ static void worker_a(int thread_index, WorkerResult* result) {
         size_t size = LcgSize(thread_index, i, kMinAllocSize, kMaxAllocSize);
         size = (size + 7) & ~static_cast<size_t>(7);
 
-        g_gc_scheduler.RecordAllocation(size);
         void* p = NurseryAllocate(size);
         if (!p) continue;
         result->allocations_succeeded++;
@@ -454,7 +458,6 @@ static void worker_b(int thread_index, WorkerResult* result) {
         }
         size = (size + 7) & ~static_cast<size_t>(7);
 
-        g_gc_scheduler.RecordAllocation(size);
         void* p = NurseryAllocate(size);
         if (!p) continue;
         result->allocations_succeeded++;
@@ -538,7 +541,6 @@ static void worker_c(int thread_index, WorkerResult* result) {
         }
         size = (size + 7) & ~static_cast<size_t>(7);
 
-        g_gc_scheduler.RecordAllocation(size);
         void* p = NurseryAllocate(size);
         if (!p) continue;
         result->allocations_succeeded++;
@@ -641,7 +643,6 @@ static void worker_d(int thread_index, WorkerResult* result) {
         size_t size = LcgSize(thread_index, i, kMinAllocSize, kMaxAllocSize);
         size = (size + 7) & ~static_cast<size_t>(7);
 
-        g_gc_scheduler.RecordAllocation(size);
         void* p = NurseryAllocate(size);
         if (!p) continue;
         result->allocations_succeeded++;
@@ -886,7 +887,6 @@ static void worker_f(int thread_index, WorkerResult* result) {
             // Nursery allocation.
             size = LcgSize(thread_index, i + 5000, 16, 2048);
             size = (size + 7) & ~static_cast<size_t>(7);
-            g_gc_scheduler.RecordAllocation(size);
             p = NurseryAllocate(size);
         }
         if (!p) continue;
@@ -1272,7 +1272,6 @@ static void worker_j(int thread_index, WorkerResult* result) {
             }
         } else {
             // Normal nursery allocation.
-            g_gc_scheduler.RecordAllocation(size);
             p = NurseryAllocate(size);
         }
 
@@ -1531,12 +1530,9 @@ static int run_scenarios() {
 // ════════════════════════════════════════════════════════════════════════════
 
 int main() {
+    setvbuf(stdout, nullptr, _IONBF, 0);
     puts("CRAG T.3 stress test suite (11 scenarios):");
     puts("══════════════════════════════════════════\n");
-
-    // No GC_INIT needed — CRAG uses static initialization (RegionManager
-    // Meyer's singleton + global g_old_gen / gc_layout_registry).
-    // BDWGC is NOT required for any CRAG allocation path.
 
     int failures = run_scenarios();
 

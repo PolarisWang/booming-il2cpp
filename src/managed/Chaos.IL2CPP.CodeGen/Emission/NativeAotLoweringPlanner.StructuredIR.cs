@@ -447,22 +447,12 @@ public sealed partial class NativeAotLoweringPlanner
             case "throw":
             {
                 string throwVal = ConsumeEvalStackValueExpression();
-                builder.AppendLine("#if defined(CHAOS_IL2CPP_EH_SETJMP) || defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
-                builder.AppendLine(indentation + $"chaos::il2cpp::runtime_core::chaos_raise_exception({throwVal});");
-                builder.AppendLine("#else");
-                builder.AppendLine(indentation + $"throw chaos_managed_exception{{{throwVal}}};");
-                builder.AppendLine("#endif");
+                EmitThrowCpp(builder, throwVal, indentation);
                 break;
             }
 
             case "rethrow":
-                builder.AppendLine("#if defined(CHAOS_IL2CPP_EH_SETJMP) || defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
-                builder.AppendLine(indentation + "chaos::il2cpp::runtime_core::chaos_raise_exception(");
-                builder.AppendLine(indentation + "    reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
-                builder.AppendLine(indentation + "        chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
-                builder.AppendLine("#else");
-                builder.AppendLine(indentation + "throw;");
-                builder.AppendLine("#endif");
+                EmitRethrowCpp(builder, indentation);
                 break;
 
             case "endfinally":
@@ -473,13 +463,7 @@ public sealed partial class NativeAotLoweringPlanner
                 builder.AppendLine(indentation +
                     $"if ({ConsumeEvalStackValueExpression()} == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
                 builder.AppendLine(indentation + "{");
-                builder.AppendLine("#if defined(CHAOS_IL2CPP_EH_SETJMP) || defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
-                builder.AppendLine(indentation + "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
-                builder.AppendLine(indentation + "        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
-                builder.AppendLine(indentation + "            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
-                builder.AppendLine("#else");
-                builder.AppendLine(indentation + "    throw;");
-                builder.AppendLine("#endif");
+                EmitRethrowCpp(builder, indentation + "    ");
                 builder.AppendLine(indentation + "}");
                 break;
 
@@ -853,7 +837,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             case IRExceptionKind.TryCatch:
             {
-                builder.AppendLine("#if defined(CHAOS_IL2CPP_EH_CPP_THROW)");
+                builder.AppendLine("#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
                 builder.AppendLine(indentation + "try");
                 builder.AppendLine(indentation + "{");
                 EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
@@ -973,9 +957,9 @@ public sealed partial class NativeAotLoweringPlanner
 
                 // WIN32_SEH: __try/__finally maps naturally — no slot depth issues
                 // because __finally is a true finally (runs on both normal and exceptional exit).
-                builder.AppendLine("#if defined(CHAOS_IL2CPP_EH_CPP_THROW)");
+                builder.AppendLine("#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
                 // RAII scope guard: HandlerBody then TryBody in sequence (original path).
-                // NOTE: RestoreDepth disabled for CPP_THROW — TryBody's internal
+                // NOTE: RestoreDepth disabled for C++ throw mode — TryBody's internal
                 // if-then-else depends on residual slot state from HandlerBody.
                 // Pre-existing bug: some finally shapes (e.g. MarshalUtf8) underflow.
                 builder.AppendLine(indentation + "{");
@@ -1026,7 +1010,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             case IRExceptionKind.TryFilter:
             {
-                builder.AppendLine("#if defined(CHAOS_IL2CPP_EH_CPP_THROW)");
+                builder.AppendLine("#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
                 builder.AppendLine(indentation + "try");
                 builder.AppendLine(indentation + "{");
                 EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);

@@ -212,20 +212,10 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_STRING_TOLOWER = 0x3EFF2DB4u,
     SHAPE_SYSTEM_STRING_TOUPPER = 0x6B4D6BD1u,
     SHAPE_SYSTEM_STRING_TRIM = 0x8A7D9884u,
-    SHAPE_SYSTEM_THREADING_MONITOR_TRYENTER_SYSTEM_OBJECT_SYSTEM_INT32 = 0xB08CBD8Bu,
     SHAPE_SYSTEM_THREADING_TASKS_TASK_YIELD = 0x21E4D84Du,
     SHAPE_SYSTEM_THREADING_THREAD_GET_CURRENTTHREAD = 0x8CE16B91u,
-    SHAPE_SYSTEM_THREADING_THREAD_GET_ISBACKGROUND = 0xD3F202A2u,
-    SHAPE_SYSTEM_THREADING_THREAD_GET_ISTHREADPOOLTHREAD = 0x44FE449Cu,
-    SHAPE_SYSTEM_THREADING_THREAD_GET_MANAGEDTHREADID = 0xD2D543B4u,
-    SHAPE_SYSTEM_THREADING_THREAD_GET_PRIORITY = 0xE5D74EAEu,
-    SHAPE_SYSTEM_THREADING_THREAD_GET_THREADSTATE = 0xE2BCFA95u,
     SHAPE_SYSTEM_THREADING_THREAD_JOIN = 0x411949DFu,
-    SHAPE_SYSTEM_THREADING_THREAD_SET_ISBACKGROUND_SYSTEM_BOOLEAN = 0x7158F50Bu,
-    SHAPE_SYSTEM_THREADING_THREAD_SET_PRIORITY_SYSTEM_THREADING_THREADPRIORITY = 0x442BB921u,
-    SHAPE_SYSTEM_THREADING_THREAD_SLEEP_SYSTEM_INT32 = 0x37A1F7C9u,
     SHAPE_SYSTEM_THREADING_THREAD_START = 0x4236E9C3u,
-    SHAPE_SYSTEM_THREADING_THREAD_YIELD = 0xD30B5802u,
     SHAPE_SYSTEM_THREADING_THREAD__CTOR_SYSTEM_THREADING_THREADSTART = 0xCCAB9078u,
     SHAPE_SYSTEM_TIMESPAN_FROMDAYS_SYSTEM_DOUBLE = 0x8E547793u,
     SHAPE_SYSTEM_TIMESPAN_FROMHOURS_SYSTEM_DOUBLE = 0x65BA4E29u,
@@ -286,7 +276,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_TYPE_MAKEPOINTERTYPE = 0xDBA001CEu,
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
 
-    SHAPE_COUNT = 272u,
+    SHAPE_COUNT = 262u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -1118,20 +1108,8 @@ void DispatchVoid(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_JOIN) {
         chaos_thread_join(args...);
     }
-    else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_SET_ISBACKGROUND_SYSTEM_BOOLEAN) {
-        chaos_thread_set_background(args...);
-    }
-    else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_SET_PRIORITY_SYSTEM_THREADING_THREADPRIORITY) {
-        chaos_thread_set_priority(args...);
-    }
-    else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_SLEEP_SYSTEM_INT32) {
-        chaos_thread_sleep(args...);
-    }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_START) {
         chaos_thread_start(args...);
-    }
-    else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_YIELD) {
-        chaos_thread_yield(args...);
     }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD__CTOR_SYSTEM_THREADING_THREADSTART) {
         chaos_thread_ctor(args...);
@@ -1283,30 +1261,6 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             chaos_string_get_length(args...));
     }
-    else if constexpr (S == SHAPE_SYSTEM_THREADING_MONITOR_TRYENTER_SYSTEM_OBJECT_SYSTEM_INT32) {
-        return static_cast<CHAOS_IL2CPP_INT32>(
-            ChaosMonitorTryEnter(args...));
-    }
-    else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_GET_ISBACKGROUND) {
-        return static_cast<CHAOS_IL2CPP_INT32>(
-            chaos_thread_is_background(args...));
-    }
-    else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_GET_ISTHREADPOOLTHREAD) {
-        return static_cast<CHAOS_IL2CPP_INT32>(
-            chaos_thread_is_threadpool(args...));
-    }
-    else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_GET_MANAGEDTHREADID) {
-        return static_cast<CHAOS_IL2CPP_INT32>(
-            chaos_thread_get_managed_id(args...));
-    }
-    else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_GET_PRIORITY) {
-        return static_cast<CHAOS_IL2CPP_INT32>(
-            chaos_thread_get_priority(args...));
-    }
-    else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_GET_THREADSTATE) {
-        return static_cast<CHAOS_IL2CPP_INT32>(
-            chaos_thread_get_state(args...));
-    }
     else if constexpr (S == SHAPE_SYSTEM_TYPE_GET_GENERICPARAMETERPOSITION) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosReflectionGetGenericParamPos(args...));
@@ -1362,7 +1316,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 272u,
+static_assert(SHAPE_COUNT == 262u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

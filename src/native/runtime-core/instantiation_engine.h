@@ -6,6 +6,7 @@
 #include <runtime_instantiation.h>
 #include <interpreter_vm.h>
 
+#include <atomic>
 #include <cstdint>
 #include <cstdlib>
 #include <new>
@@ -68,9 +69,57 @@ struct CachedCallInfo {
     // caches the vtable-resolved function pointer + receiver type_token so
     // monomorphic call sites (same receiver type repeated) skip the ~2200ns
     // vtable walk.  Updated under benign races (all racers compute same value).
-    void*    mic_dispatch_ptr = nullptr;  // cached vtable-resolved fn ptr
-    uint32_t mic_type_token   = 0;        // cached receiver type_token
-    uint64_t mic_generation   = 0;        // g_patch_generation at cache-fill time
+    std::atomic<void*>   mic_dispatch_ptr {nullptr};  // cached vtable-resolved fn ptr
+    std::atomic<uint32_t> mic_type_token   {0};        // cached receiver type_token
+    std::atomic<uint64_t> mic_generation   {0};        // g_patch_generation at cache-fill time
+
+    // PrecacheCallTarget returns by value; std::atomic members delete the
+    // implicit copy ctor, so we provide an explicit one.
+    CachedCallInfo() = default;
+    CachedCallInfo(const CachedCallInfo& other) noexcept
+        : ret_tag(other.ret_tag)
+        , is_struct_ret(other.is_struct_ret)
+        , struct_size(other.struct_size)
+        , direct_ptr(other.direct_ptr)
+        , is_patched(other.is_patched)
+        , module_id(other.module_id)
+        , slot(other.slot)
+        , mic_dispatch_ptr(other.mic_dispatch_ptr.load(std::memory_order_relaxed))
+        , mic_type_token(other.mic_type_token.load(std::memory_order_relaxed))
+        , mic_generation(other.mic_generation.load(std::memory_order_relaxed))
+    {}
+    CachedCallInfo(CachedCallInfo&& other) noexcept
+        : ret_tag(other.ret_tag)
+        , is_struct_ret(other.is_struct_ret)
+        , struct_size(other.struct_size)
+        , direct_ptr(other.direct_ptr)
+        , is_patched(other.is_patched)
+        , module_id(other.module_id)
+        , slot(other.slot)
+        , mic_dispatch_ptr(other.mic_dispatch_ptr.load(std::memory_order_relaxed))
+        , mic_type_token(other.mic_type_token.load(std::memory_order_relaxed))
+        , mic_generation(other.mic_generation.load(std::memory_order_relaxed))
+    {
+        other.ret_tag = 0xFF;
+        other.direct_ptr = nullptr;
+        other.mic_dispatch_ptr.store(nullptr, std::memory_order_relaxed);
+        other.mic_type_token.store(0, std::memory_order_relaxed);
+        other.mic_generation.store(0, std::memory_order_relaxed);
+    }
+    CachedCallInfo& operator=(const CachedCallInfo& other) noexcept
+    {
+        ret_tag = other.ret_tag;
+        is_struct_ret = other.is_struct_ret;
+        struct_size = other.struct_size;
+        direct_ptr = other.direct_ptr;
+        is_patched = other.is_patched;
+        module_id = other.module_id;
+        slot = other.slot;
+        mic_dispatch_ptr.store(other.mic_dispatch_ptr.load(std::memory_order_relaxed), std::memory_order_relaxed);
+        mic_type_token.store(other.mic_type_token.load(std::memory_order_relaxed), std::memory_order_relaxed);
+        mic_generation.store(other.mic_generation.load(std::memory_order_relaxed), std::memory_order_relaxed);
+        return *this;
+    }
 };
 
 /// Pre-compute call metadata for a single call_target (MethodInfoHandle).

@@ -106,6 +106,12 @@ inline const ChaosAbiManifestV0* LookupModuleAbiManifest(uint32_t module_id) {
     return desc != nullptr ? desc->abi_manifest : nullptr;
 }
 
+/// Thread-safe lookup of a type's TypeInfoHot* pointer.
+/// Reads the module's type_info_ptrs array under the internal shared_mutex
+/// so MarkModuleTombstone cannot concurrently nullptr the guard pointers.
+/// @return TypeInfoHot* or nullptr if module is tombstoned / type not found.
+const TypeInfoHot* LookupTypeInfoPtr(uint32_t module_id, uint32_t token);
+
 /// Returns the total number of registered module slots (including slot 0).
 /// Iterate [0, GetModuleCount()) with GetModuleByIndex().
 uint32_t GetModuleCount();
