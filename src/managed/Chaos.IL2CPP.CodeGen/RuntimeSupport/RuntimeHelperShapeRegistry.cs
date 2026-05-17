@@ -832,6 +832,14 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
 
+            // === GCMemoryInfo ===
+            registry.Register("System.GC", "GetMemoryInfo", ["System.GCMemoryInfoData&"],
+                ShapeKind.SimpleForward, "chaos_gc_get_memory_info",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType)),
+                CreateVoidAbiSlot(),
+                EmptyRawArgumentIndices);
+
             // === Delegate ===
             registry.Register("System.Delegate", "Combine", ["System.Delegate", "System.Delegate"],
                 ShapeKind.SimpleForward, "chaos_delegate_combine",

@@ -1,6 +1,6 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
-#include <chaos/com_ccw.h>
+#include "com_ccw.h"
 #include "runtime_core.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -1189,6 +1189,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ValueTypeHelper_RunValueType(
 		const auto chaos_value = _s1;
 		auto* chaos_destination = chaos_resolve_managed_value_pointer<CHAOS_IL2CPP_INTPTR>(_s0);
 		*chaos_destination = chaos_value;
+		chaos_gc_dirty_card(chaos_destination);
 	}
 	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 	{

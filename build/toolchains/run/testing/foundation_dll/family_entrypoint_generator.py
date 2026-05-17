@@ -451,16 +451,25 @@ def _generate_csproj(
     *,
     variant: str = "benchmark",
     has_custom_entry: bool = False,
+    output_dir: Path | None = None,
 ) -> str:
     """Generate the .csproj for the synthetic entry point assembly.
 
     For subjects variant: OutputType is Library, no TestFramework refs, no Program.cs.
+    Includes all .cs files from output_dir so handwritten native entry copies in the
+    subjects directory are compiled as part of the subjects DLL.
     For other variants: OutputType is Exe so il2cpp translates it to a native executable.
     """
     namespace_part = f"<RootNamespace>{class_name}</RootNamespace>"
 
     if variant == "subjects":
         # Subjects DLL: pure il2cpp input, no TestFramework, no Program.cs, net8.0
+        # Include all .cs files from the subjects directory (handwritten native entries, custom files, etc.)
+        extra_cs = ""
+        if output_dir is not None and output_dir.is_dir():
+            for f in sorted(output_dir.iterdir()):
+                if f.suffix == ".cs" and f.name != cs_file_name:
+                    extra_cs += f'    <Compile Include="{f.name}" />\n'
         custom_cs = f'    <Compile Include="{class_name}.Custom.cs" />\n' if has_custom_entry else ""
         return (
             '<Project Sdk="Microsoft.NET.Sdk">\n'
@@ -475,6 +484,7 @@ def _generate_csproj(
             "  </PropertyGroup>\n"
             "  <ItemGroup>\n"
             f'    <Compile Include="{cs_file_name}" />\n'
+            f"{extra_cs}"
             f"{custom_cs}"
             "  </ItemGroup>\n"
             "</Project>\n"
@@ -785,6 +795,7 @@ def generate_and_build(
                 cs_file_name=cs_file_name,
                 variant=variant,
                 has_custom_entry=has_custom_entry,
+                output_dir=output_dir,
             ),
             encoding="utf-8",
         )

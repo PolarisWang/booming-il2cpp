@@ -73,6 +73,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_GC_ADDMEMORYPRESSURE_SYSTEM_INT64 = 0x0D6763A0u,
     SHAPE_SYSTEM_GC_COLLECT = 0xBC962311u,
     SHAPE_SYSTEM_GC_COLLECT_SYSTEM_INT32_SYSTEM_GCCOLLECTIONMODE = 0xF2752978u,
+    SHAPE_SYSTEM_GC_GETMEMORYINFO_SYSTEM_GCMEMORYINFODATA_ = 0xE39AD216u,
     SHAPE_SYSTEM_GC_GETTOTALMEMORY_SYSTEM_BOOLEAN = 0x6E1AEB6Fu,
     SHAPE_SYSTEM_GC_GET_LATENCYMODE = 0x1F0DE7D9u,
     SHAPE_SYSTEM_GC_KEEPALIVE_SYSTEM_OBJECT = 0x4546B70Fu,
@@ -306,7 +307,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 292u,
+    SHAPE_COUNT = 293u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -1118,6 +1119,9 @@ void DispatchVoid(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_GC_COLLECT_SYSTEM_INT32_SYSTEM_GCCOLLECTIONMODE) {
         chaos_gc_collect_with_mode(args...);
     }
+    else if constexpr (S == SHAPE_SYSTEM_GC_GETMEMORYINFO_SYSTEM_GCMEMORYINFODATA_) {
+        chaos_gc_get_memory_info(args...);
+    }
     else if constexpr (S == SHAPE_SYSTEM_GC_KEEPALIVE_SYSTEM_OBJECT) {
         chaos_gc_keepalive(args...);
     }
@@ -1453,7 +1457,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 292u,
+static_assert(SHAPE_COUNT == 293u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

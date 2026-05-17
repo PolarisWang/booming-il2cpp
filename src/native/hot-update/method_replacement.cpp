@@ -10,6 +10,12 @@
 // to call UpdateVTableSlotByMethodToken and FindMethodPointerByMethodToken.
 #include <vtable_registry.h>
 
+// Hotpatch dispatch entry activation — links method_replacement into
+// the per-call-site hotpatch dispatch mechanism so that after Register(),
+// all dispatch points that check HotpatchIsActive() will route through
+// the replacement thunk instead of calling the original AOT native code.
+#include <hotpatch_table.h>
+
 namespace chaos::il2cpp::method_replacement {
 
 namespace {
@@ -40,6 +46,21 @@ bool Register(CHAOS_IL2CPP_UINT32 method_token, void* thunk) {
     lock.unlock();
     chaos::il2cpp::vtable_registry::UpdateVTableSlotByMethodToken(method_token, thunk);
 
+    // Activate the hotpatch dispatch entry so per-call-site dispatch points
+    // (the s_hotpatch_entries pattern-aware branches emitted by codegen) route
+    // through the replacement instead of calling the original AOT native code.
+    {
+        auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
+        uint64_t composite = registry.FindToken(method_token);
+        if (composite != 0) {
+            uint32_t mod_id = chaos::il2cpp::runtime_core::ExtractModuleId(composite);
+            uint32_t slot = registry.TokenToSlot(mod_id, method_token);
+            if (slot != ~0u) {
+                registry.SetPatchedBySlot(mod_id, slot, true, thunk);
+            }
+        }
+    }
+
     return true;
 }
 
@@ -57,6 +78,20 @@ bool Revert(CHAOS_IL2CPP_UINT32 method_token) {
         lock.lock();
     }
 
+    // Deactivate hotpatch dispatch entry even if no vtable was set up
+    // (e.g., early bootstrap or test scenario without full vtable_registry).
+    {
+        auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
+        uint64_t composite = registry.FindToken(method_token);
+        if (composite != 0) {
+            uint32_t mod_id = chaos::il2cpp::runtime_core::ExtractModuleId(composite);
+            uint32_t slot = registry.TokenToSlot(mod_id, method_token);
+            if (slot != ~0u) {
+                registry.SetPatchedBySlot(mod_id, slot, false, nullptr);
+            }
+        }
+    }
+
     g_method_replacements.erase(it);
     return true;
 }
@@ -70,6 +105,19 @@ void RevertAll() {
             chaos::il2cpp::vtable_registry::UpdateVTableSlotByMethodToken(
                 method_token, entry.original_pointer);
             lock.lock();
+        }
+
+        // Deactivate hotpatch dispatch entry unconditionally.
+        {
+            auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
+            uint64_t composite = registry.FindToken(method_token);
+            if (composite != 0) {
+                uint32_t mod_id = chaos::il2cpp::runtime_core::ExtractModuleId(composite);
+                uint32_t slot = registry.TokenToSlot(mod_id, method_token);
+                if (slot != ~0u) {
+                    registry.SetPatchedBySlot(mod_id, slot, false, nullptr);
+                }
+            }
         }
     }
     g_method_replacements.clear();

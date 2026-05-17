@@ -51,6 +51,11 @@ public:
     // Token→Slot within a specific module (no cross-module collision).
     uint32_t TokenToSlot(uint32_t module_id, uint32_t token) const noexcept;
 
+    // Token→(module_index<<32 | token) across all modules (bsearch).
+    // Returns composite key usable with ExtractModuleId/ExtractToken,
+    // or 0 if token not found in any module.
+    uint64_t FindToken(CHAOS_IL2CPP_UINT32 method_token) const noexcept;
+
     // ── Dispatch entry access ──────────────────────────────────────
     // Module-scoped lookup (preferred — no token collision).
     HotpatchEntryV0* GetDispatchEntry(uint32_t module_id, uint32_t token) const noexcept;

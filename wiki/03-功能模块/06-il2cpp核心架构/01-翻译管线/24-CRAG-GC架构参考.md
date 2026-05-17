@@ -297,13 +297,12 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 **剩余演进方向**（非阻塞）：
 1. **三代分代**：CoreCLR 的 gen0/gen1 过渡代可减少 promotion 波动
 2. **Region 框架 O(R) 扫描**：FreeRegion 和 IsInDomain 线性扫描 region 表，200+ DLL 时 region 数 ≤ 数千，仍可接受
-3. **并发 BGC Sweep**：当前 BGC sweep 阶段仍串行执行，后续可并行化
-4. **值类型嵌套引用写屏障**：codegen stfld 值类型路径缺少 DirtyCard，需 runtime GC-heap-pointer 检测函数
-5. **完整 GCMemoryInfo 结构体**：BCL 侧缺少 GCMemoryInfo 类型，当前仅通过 chaos_gc_get_heap_size() 提供部分信息
+3. **值类型嵌套引用写屏障（runtime GC-heap-pointer 检测函数）**：当前 codegen 通过 `chaos_gc_dirty_card(chaos_value_owner)` 对任意值类型赋值触发写屏障，存在假阳性（栈上值类型不需要 DirtyCard），可增加 runtime GC-heap-pointer 检测函数避免不必要的 barrier
+4. **完整 GCMemoryInfo 结构体（BCL 侧）**：native 侧 `GcMemoryInfoNative` 结构已实现并可通过 `chaos_gc_get_memory_info()` 获取，但 BCL 侧缺少对应的 `GCMemoryInfo` 托管类型定义
 
 ## 文档更新
 
-- `2026-05-17`：新增 GCCollectionMode/GCLatencyMode、per-domain GC 分配追踪、Handle table 世代感知遍历、值类型写屏障审计、LOH CompactMode 默认 AUTOMATIC；更新完成度矩阵
+- `2026-05-17`：完成值类型嵌套字段写屏障修复、完整 GCMemoryInfo、BGC 并发 sweep；更新完成度矩阵和演进方向
 
 ## 关键数据流
 
@@ -459,11 +458,14 @@ BGC 的根集扫描从 `GcIterateHandleTable` 迁移到 `GcIterateTenuredHandles
 
 ## 值类型嵌套引用字段写屏障审计
 
-**审计结论**：codegen 的 `stfld` 翻译路径在修改值类型内部的托管引用字段时，未发出 DirtyCard 写屏障。
+**审计结论**（已修复）：codegen 的 `stfld` 翻译路径在修改值类型内部的托管引用字段时，原本未发出 DirtyCard 写屏障。现已在 stfld/stelem.ref/stobj 三条路径中插入 `chaos_gc_dirty_card()` 调用。
 
-**风险等级**：中。如果该值类型实例嵌在 GC 堆对象中（例如 `class Foo { ValueType Bar; }` 且 `Bar` 内部有托管引用字段），写入 `Bar.managed_ref = new_obj` 后卡表未标记脏卡，young GC 可能漏扫该引用，导致悬挂指针。
+**风险等级**：中 → 已修复。值类型实例嵌在 GC 堆对象中（例如 `class Foo { ValueType Bar; }` 且 `Bar` 内部有托管引用字段），写入 `Bar.managed_ref = new_obj` 后卡表正确标记脏卡，young GC 不再漏扫引用。
 
-**修复方向**：写屏障需在运行时检测目标对象的 GC 堆归属。当前 codegen 路径缺少这个「内嵌值类型写托管引用 → DirtyCard」的判断。修复需要 runtime 层提供一个 GC-heap-pointer 检测函数，并在 codegen 的值类型 `stfld` 路径中插入该检测后的 barrier。
+**修复方式**：
+- `gc_helpers.h` / `gc_api.cpp`：添加 `extern "C" void chaos_gc_dirty_card(const void* obj)`，委托给 `DirtyCard()`
+- `NativeAotLoweringPlanner.ExceptionEmission.cs`：5 个 DirtyCard 发射点（值类型 stfld、引用类型 stfld、stelem.ref、cpobj/stobj 值类型复制）
+- 快照基线同步更新（4 个测试文件 + 1 个验证文件）
 
 ---
 
@@ -506,7 +508,9 @@ BGC 的根集扫描从 `GcIterateHandleTable` 迁移到 `GcIterateTenuredHandles
 | InterfaceMap RCU | 完成 | 100% | STW safepoint-based ClearDomainPointers |
 | SATB GC-heap 迁移 | 完成 | 100% | TLS index + 全局缓冲池 (iOS 安全) |
 | GCCollectionMode / GCLatencyMode | 完成 | 100% | Native API + codegen 注册 + 调度器 mode 字段 |
-| GC.GetGCMemoryInfo | 完成 | 90% | native GcMemoryInfo 结构 + chaos_gc_get_heap_size；完整结构需 BCL GCMemoryInfo 类型 |
+| GC.GetGCMemoryInfo | 完成 | 100% | GcMemoryInfoNative 11 字段从 GcGetSnapshot + heap size + GlobalMemoryStatusEx 填充 |
+| 并发 BGC Sweep | 完成 | 100% | GcWorkerPool 并行化 sweep + per-page sweep_lock |
+| 值类型嵌套字段写屏障 | 完成 | 100% | codegen stfld/stelem.ref/stobj 路径插入 chaos_gc_dirty_card |
 | Per-domain GC 分配追踪 | 完成 | 100% | gc_allocated_bytes 字段 + GcTrackDomainAlloc 分布在 NurseryAllocateSlow/OldGen::Allocate |
 | Handle table 世代感知遍历 | 完成 | 100% | GcIterateTenuredHandles/NurseryHandles/Strong/Weak/Pinned |
 | LOH 默认 AUTOMATIC 压缩 | 完成 | 100% | CompactMode 默认从 NONE 改为 AUTOMATIC |

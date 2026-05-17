@@ -62,6 +62,7 @@ struct OldGenPage {
     bool            scanning;         // true = scanned (contains pointers)
     bool            is_oversized;     // true = single-object oversized page
     std::atomic<bool> in_use;         // true = actively used for allocation
+    std::atomic<bool> sweep_lock{false}; // spinlock for concurrent sweep
 
     // Free-list heads (one per size class, indexed by kOldGenSizeClasses).
     OldGenFreeBlock* free_lists[kOldGenNumSizeClasses];

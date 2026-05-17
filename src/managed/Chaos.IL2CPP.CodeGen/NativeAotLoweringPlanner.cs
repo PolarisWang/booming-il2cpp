@@ -533,7 +533,7 @@ public sealed partial class NativeAotLoweringPlanner
             [
                 "<chaos/common.h>",
                 "<chaos/type_info.h>",
-                "<chaos/com_ccw.h>",
+                "\"com_ccw.h\"",
                 "\"runtime_core.h\"",
                 "\"codegen_bridge.h\"",
                 "\"module_registry.h\"",

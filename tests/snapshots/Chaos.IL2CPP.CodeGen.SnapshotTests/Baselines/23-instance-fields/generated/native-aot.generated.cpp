@@ -1,6 +1,6 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
-#include <chaos/com_ccw.h>
+#include "com_ccw.h"
 #include "runtime_core.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -1240,7 +1240,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_InstanceFieldHelper_CreateAnd
 		auto chaos_value = _s2;
 		auto* chaos_object = reinterpret_cast<chaos_type_SnapshotTestFixtures_HasInstanceFields*>(_s1);
 		chaos_object->field_SnapshotTestFixtures_HasInstanceFields__Value = chaos_value;
-		chaos::il2cpp::runtime_core::DirtyCard(chaos_object);
+		chaos_gc_dirty_card(chaos_object);
 	}
 	{
 		auto* chaos_object = reinterpret_cast<chaos_type_SnapshotTestFixtures_HasInstanceFields*>(_s0);

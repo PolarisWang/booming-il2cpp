@@ -248,7 +248,68 @@ public sealed partial class NativeAotLoweringPlanner
 		case "ldftn":
 		{
 			var targetSymbol = GetRequiredFunctionPointerTargetSymbol(instruction);
-			EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&{targetSymbol})");
+
+			// If the target has a hotpatch dispatch slot, emit a forwarding thunk
+			// so that ldftn/delegate invocations go through hotpatch-aware dispatch.
+			if (_nativeSymbolToDispatchSlot?.TryGetValue(targetSymbol, out int ftnSlot) == true
+			    && instruction.Callee != null
+			    && _methodsBySubjectId.TryGetValue(instruction.Callee, out var ftnMethod))
+			{
+				var ftnParams = GetMethodAbiParameterSlots(ftnMethod);
+				string ftnRet = MapAbiSlotReturnType(ftnMethod.ReturnAbi);
+				bool ftnHasReturn = !string.Equals(ftnRet, "void", StringComparison.Ordinal);
+				string ftnSig = FormatAbiSlotParameterSignature(ftnParams);
+				string ftnTypes = FormatAbiSlotParameterTypes(ftnParams);
+				string ftnAbSize = ftnParams.Count > 0 ? CalculateArgBufferSize(ftnParams).ToString() : "0";
+
+				builder.AppendLine($"{indentation}{{");
+				builder.AppendLine($"{indentation}    // Hotpatch-aware ldftn wrapper (slot {ftnSlot})");
+				builder.AppendLine($"{indentation}    static auto* chaos_ftn_thunk = +[]({ftnSig}) -> {ftnRet} {{");
+				builder.AppendLine($"{indentation}        auto& _d_entry = s_hotpatch_entries[{ftnSlot}];");
+				builder.AppendLine($"{indentation}        if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)");
+				builder.AppendLine($"{indentation}            && !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))");
+				builder.AppendLine($"{indentation}        {{");
+				if (ftnParams.Count > 0)
+				{
+					builder.AppendLine($"{indentation}            alignas(16) uint8_t _d_ab[{ftnAbSize}];");
+					builder.AppendLine($"{indentation}            ArgBuffer _d_bw(_d_ab);");
+					for (int i = 0; i < ftnParams.Count; i++)
+					{
+						builder.AppendLine($"{indentation}            _d_bw.{GetArgBufferWriteCall(ftnParams[i].CarrierKindCode, $"chaos_fn_arg_{i}")};");
+					}
+				}
+				string ftnAb = ftnParams.Count > 0 ? "_d_ab" : "nullptr";
+				string directCallArgs = string.Join(", ", Enumerable.Range(0, ftnParams.Count).Select(i => $"chaos_fn_arg_{i}"));
+				if (ftnHasReturn)
+				{
+					builder.AppendLine($"{indentation}            {ftnRet} _d_ret{{}};");
+					builder.AppendLine($"{indentation}            ::chaos::il2cpp::runtime_core::InterpreterEntryDirect(");
+					builder.AppendLine($"{indentation}                _d_entry.method_key, {ftnAb}, &_d_ret);");
+					builder.AppendLine($"{indentation}            return _d_ret;");
+				}
+				else
+				{
+					builder.AppendLine($"{indentation}            ::chaos::il2cpp::runtime_core::InterpreterEntryDirect(");
+					builder.AppendLine($"{indentation}                _d_entry.method_key, {ftnAb}, nullptr);");
+					builder.AppendLine($"{indentation}            return;");
+				}
+				builder.AppendLine($"{indentation}        }}");
+				if (ftnHasReturn)
+				{
+					builder.AppendLine($"{indentation}        return reinterpret_cast<{ftnRet}(*)({ftnTypes})>(_d_entry.direct_ptr)({directCallArgs});");
+				}
+				else
+				{
+					builder.AppendLine($"{indentation}        reinterpret_cast<void(*)({ftnTypes})>(_d_entry.direct_ptr)({directCallArgs});");
+				}
+				builder.AppendLine($"{indentation}    }};");
+				EmitEvalStackPush(builder, indentation, "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk)");
+				builder.AppendLine($"{indentation}}}");
+			}
+			else
+			{
+				EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&{targetSymbol})");
+			}
 			break;
 		}
 		case "stloc":
@@ -901,12 +962,13 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				builder.AppendLine($"{indentation}    auto* chaos_value_owner = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(declaringTypeSubjectId)}>({ConsumeEvalStackValueExpression()});");
 				builder.AppendLine($"{indentation}    chaos_value_owner->{GetNativeFieldMemberName(targetRef.SubjectId)} = chaos_value;");
+				builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_value_owner);");
 			}
 			else
 			{
 				builder.AppendLine($"{indentation}    auto* chaos_object = reinterpret_cast<{GetNativeTypeSymbol(declaringTypeSubjectId)}*>({ConsumeEvalStackValueExpression()});");
 				builder.AppendLine($"{indentation}    chaos_object->{GetNativeFieldMemberName(targetRef.SubjectId)} = chaos_value;");
-				builder.AppendLine($"{indentation}    chaos::il2cpp::runtime_core::DirtyCard(chaos_object);");
+				builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_object);");
 			}
 
 			builder.AppendLine($"{indentation}}}");
@@ -1419,7 +1481,7 @@ public sealed partial class NativeAotLoweringPlanner
 		if (isReferenceElement)
 		{
 			builder.AppendLine($"{indentation}    GC_END_STUBBORN_CHANGE(chaos_array);");
-			builder.AppendLine($"{indentation}    chaos::il2cpp::runtime_core::DirtyCard(chaos_array);");
+			builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_array);");
 		}
 		builder.AppendLine($"{indentation}}}");
 	}
@@ -1722,13 +1784,15 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL();");
 			builder.AppendLine($"{indentation}    }}");
 			builder.AppendLine($"{indentation}    *chaos_destination = *chaos_source;");
-		}
+
+			builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_destination);");		}
 		else
 		{
 			builder.AppendLine($"{indentation}    const auto chaos_value = {ConsumeEvalStackValueExpression()};");
 			builder.AppendLine($"{indentation}    auto* chaos_destination = chaos_resolve_managed_value_pointer<CHAOS_IL2CPP_INTPTR>({ConsumeEvalStackValueExpression()});");
 			builder.AppendLine($"{indentation}    *chaos_destination = chaos_value;");
-		}
+
+			builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_destination);");		}
 		builder.AppendLine($"{indentation}}}");
 	}
 
@@ -1823,9 +1887,23 @@ public sealed partial class NativeAotLoweringPlanner
 		if (devirtKey.Length > 0 && _devirtualizationHints.TryGetValue(devirtKey, out DevirtualizationHint devirtHint) && devirtHint.CanDevirtualize)
 		{
 			AotCoreIrMethodArtifact devirtMethod = _methodsBySubjectId[devirtHint.ImplementationMethodSubjectId];
+			string devirtSymbol = devirtMethod.NativeSymbol;
+
+			// If the devirtualized method has a hotpatch dispatch slot, use
+			// hotpatch-aware dispatch so method_replacement can intercept at runtime.
+			if (_nativeSymbolToDispatchSlot?.TryGetValue(devirtSymbol, out int devirtSlot) == true)
+			{
+				EmitHotpatchResolvedInvocation(
+					builder, devirtSlot, devirtSymbol,
+					GetMethodAbiParameterSlots(devirtMethod),
+					devirtMethod.ReturnAbi,
+					EmptyRawArgumentIndices,
+					indentation);
+				return;
+			}
+
 			IReadOnlyList<AotCoreIrAbiSlotArtifact> devirtParams = GetMethodAbiParameterSlots(devirtMethod);
 			string devirtRet = MapAbiSlotReturnType(devirtMethod.ReturnAbi);
-			string devirtSymbol = devirtMethod.NativeSymbol;
 			// Pop arguments from eval stack and create converted variables (same as EmitLinearResolvedInvocation)
 			builder.AppendLine($"{indentation}{{");
 			for (int devirtIdx = devirtParams.Count - 1; devirtIdx >= 0; devirtIdx--)
@@ -1840,15 +1918,49 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL();");
 				builder.AppendLine($"{indentation}    }}");
 			}
-			string devirtArgs = FormatAbiInvocationArgumentList(devirtParams);
-			if (string.Equals(devirtRet, "void", StringComparison.Ordinal))
+			if (devirtHint.GuardTypeSubjectId != null)
 			{
-				builder.AppendLine($"{indentation}    {devirtSymbol}({devirtArgs});");
+				// Guard-based devirtualization: check runtime type, direct call if match, vtable fallback otherwise.
+				string guardStableIdExpr = GetNativeTypeIdSymbol(devirtHint.GuardTypeSubjectId);
+				if (!string.Equals(devirtRet, "void", StringComparison.Ordinal))
+				{
+					builder.AppendLine($"{indentation}    {devirtRet} chaos_dt_result{{}};");
+				}
+				builder.AppendLine($"{indentation}    auto* chaos_dt_ti = chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0));");
+				builder.AppendLine($"{indentation}    if (chaos_dt_ti->stable_id == {guardStableIdExpr})");
+				builder.AppendLine($"{indentation}    {{");
+				string devirtArgs = FormatAbiInvocationArgumentList(devirtParams);
+				if (string.Equals(devirtRet, "void", StringComparison.Ordinal))
+				{
+					builder.AppendLine($"{indentation}        {devirtSymbol}({devirtArgs});");
+				}
+				else
+				{
+					builder.AppendLine($"{indentation}        chaos_dt_result = {devirtSymbol}({devirtArgs});");
+				}
+				builder.AppendLine($"{indentation}    }}");
+				builder.AppendLine($"{indentation}    else");
+				builder.AppendLine($"{indentation}    {{");
+				EmitDevirtFallbackVTableDispatch(builder, instruction, devirtParams, devirtMethod.ReturnAbi, devirtRet, $"{indentation}        ");
+				builder.AppendLine($"{indentation}    }}");
+				if (!string.Equals(devirtRet, "void", StringComparison.Ordinal))
+				{
+					EmitAbiReturnPush(builder, devirtMethod.ReturnAbi, "chaos_dt_result", $"{indentation}    ");
+				}
 			}
 			else
 			{
-				builder.AppendLine($"{indentation}    auto chaos_devirt_result = {devirtSymbol}({devirtArgs});");
-				EmitAbiReturnPush(builder, devirtMethod.ReturnAbi, "chaos_devirt_result", $"{indentation}    ");
+				// Sealed/monomorphic: unconditional direct call
+				string devirtArgs = FormatAbiInvocationArgumentList(devirtParams);
+				if (string.Equals(devirtRet, "void", StringComparison.Ordinal))
+				{
+					builder.AppendLine($"{indentation}    {devirtSymbol}({devirtArgs});");
+				}
+				else
+				{
+					builder.AppendLine($"{indentation}    auto chaos_devirt_result = {devirtSymbol}({devirtArgs});");
+					EmitAbiReturnPush(builder, devirtMethod.ReturnAbi, "chaos_devirt_result", $"{indentation}    ");
+				}
 			}
 			builder.AppendLine($"{indentation}}}");
 			return;
@@ -2384,6 +2496,36 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitAbiReturnPush(builder, dispatchSlotMethod.ReturnAbi, "chaos_callvirt_result", indentation + "    ");
 		}
 		builder.AppendLine($"{indentation}}}");
+	}
+
+	private void EmitDevirtFallbackVTableDispatch(StringBuilder builder, AotCoreIrInstructionArtifact instruction,
+		IReadOnlyList<AotCoreIrAbiSlotArtifact> paramAbis, AotCoreIrAbiSlotArtifact returnAbi,
+		string returnType, string indentation)
+	{
+		AotCoreIrMethodArtifact dispatchSlotMethod = ResolveRequiredDispatchSlotMethod(instruction);
+		string vtableSlotSig = GetMethodSignatureSuffix(dispatchSlotMethod.SubjectId);
+
+		if (_vtableSlotMap != null && _vtableSlotMap.TryGetValue(vtableSlotSig, out int vtableSlot))
+		{
+			string vtableArgs = FormatAbiInvocationArgumentList(paramAbis, "chaos_arg_0");
+			string vtableParamSig = FormatAbiSlotParameterSignature(paramAbis);
+			string vtableFnType = string.IsNullOrEmpty(vtableParamSig)
+				? $"{returnType}(*)()"
+				: $"{returnType}(*)({vtableParamSig})";
+			string fnCall = $"reinterpret_cast<{vtableFnType}>(chaos_vtable_resolve(chaos_dt_ti->vtable_array, {vtableSlot}u))";
+			if (string.Equals(returnType, "void", StringComparison.Ordinal))
+			{
+				builder.AppendLine($"{indentation}(*{fnCall})({vtableArgs});");
+			}
+			else
+			{
+				builder.AppendLine($"{indentation}chaos_dt_result = (*{fnCall})({vtableArgs});");
+			}
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}CHAOS_IL2CPP_FAIL();");
+		}
 	}
 
 	private void EmitHotpatchResolvedInvocation(StringBuilder builder, int dispatchSlotIndex, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, string indentation)

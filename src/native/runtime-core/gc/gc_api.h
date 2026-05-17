@@ -41,8 +41,12 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_set_latency_mode(
 
 /// Get GC memory info snapshot (for GC.GetGCMemoryInfo()).
 /// Returns heap size bytes (total allocated in old gen + LOH).
-/// The full GcMemoryInfoNative struct is obtainable via chaos_gc_get_memory_info_ptr().
+/// The full GcMemoryInfoNative struct is obtainable via chaos_gc_get_memory_info().
 extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_heap_size() noexcept;
+
+/// Populate a GcMemoryInfoNative struct with the current GC memory snapshot.
+/// @param out  Pointer to a GcMemoryInfoNative struct to fill.
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(void* out) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

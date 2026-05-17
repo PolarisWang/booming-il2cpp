@@ -1466,7 +1466,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		}
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 		GC_END_STUBBORN_CHANGE(chaos_array);
-		chaos::il2cpp::runtime_core::DirtyCard(chaos_array);
+		chaos_gc_dirty_card(chaos_array);
 	}
 	_s1 = _s0;
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1478,7 +1478,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 		GC_END_STUBBORN_CHANGE(chaos_array);
-		chaos::il2cpp::runtime_core::DirtyCard(chaos_array);
+		chaos_gc_dirty_card(chaos_array);
 	}
 	{
 		const auto chaos_raw_arg_0 = _s0;
