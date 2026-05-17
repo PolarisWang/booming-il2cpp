@@ -180,7 +180,7 @@ public sealed class AotCoreIrLowering
                     TargetReturnType = directCallTarget.TargetReturnType,
                     DispatchKindCode = dispatchKind,
                     ComVtableSlot = comVtableSlot,
-                    IsPreserveSig = true,  // V1 default: no HRESULT wrapping
+                    IsPreserveSig = method.IsPreserveSig,
                     ConstrainedTypeSubjectId = typedInstruction.ConstrainedTypeSubjectId,
                 });
             }

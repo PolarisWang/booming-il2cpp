@@ -911,6 +911,12 @@ public sealed partial class NativeAotLoweringPlanner
                 builder.AppendLine(indentation + "}");
                 builder.AppendLine(indentation + "catch (const chaos_managed_exception& chaos_exception)");
                 builder.AppendLine(indentation + "{");
+                // Phase 5: ThreadAbort/ThreadInterrupt sentinel guard.
+                // Sentinel values (object_value < 0) are not valid managed object
+                // pointers — they must propagate to the managed exception dispatch
+                // layer rather than being reinterpret_cast and type-checked.
+                builder.AppendLine(inner +
+                    "if (chaos_exception.object_value < 0) { throw; }");
                 if (er.CatchTypeSubjectId != null)
                 {
                     builder.AppendLine(inner +
@@ -945,6 +951,19 @@ public sealed partial class NativeAotLoweringPlanner
                     string typeInfoSym = GetNativeTypeInfoSymbol(er.CatchTypeSubjectId);
                     builder.AppendLine(inner + "__except(CHAOS_SEH_FILTER_ALL())");
                     builder.AppendLine(indentation + "{");
+                    // Phase 5: sentinel guard — re-raise sentinel exceptions
+                    // through WIN32_SEH to the next outer handler.
+                    builder.AppendLine(inner +
+                        "if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
+                        "chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)");
+                    builder.AppendLine(inner + "{");
+                    builder.AppendLine(inner +
+                        "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
+                    builder.AppendLine(inner +
+                        "        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
+                    builder.AppendLine(inner +
+                        "            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
+                    builder.AppendLine(inner + "}");
                     builder.AppendLine(inner + "auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(");
                     builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::g_chaos_exception_obj);");
                     builder.AppendLine(inner + "if (chaos_header != nullptr)");
@@ -966,6 +985,19 @@ public sealed partial class NativeAotLoweringPlanner
                     // Catch-all: no type filter needed
                     builder.AppendLine(inner + "__except(CHAOS_SEH_FILTER_ALL())");
                     builder.AppendLine(indentation + "{");
+                    // Phase 5: sentinel guard — re-raise sentinel exceptions
+                    // through WIN32_SEH to the next outer handler.
+                    builder.AppendLine(inner +
+                        "if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
+                        "chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)");
+                    builder.AppendLine(inner + "{");
+                    builder.AppendLine(inner +
+                        "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
+                    builder.AppendLine(inner +
+                        "        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
+                    builder.AppendLine(inner +
+                        "            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
+                    builder.AppendLine(inner + "}");
                     EmitEvalStackPush(builder, inner,
                         "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
                         "chaos::il2cpp::runtime_core::g_chaos_exception_obj)");
@@ -984,8 +1016,32 @@ public sealed partial class NativeAotLoweringPlanner
                 builder.AppendLine(inner + "}");
                 builder.AppendLine(inner + "else");
                 builder.AppendLine(inner + "{");
+                // Phase 5: catch-all sentinel guard — re-raise sentinel
+                // exceptions to the next outer CPP_THROW/WIN32_SEH handler.
+                builder.AppendLine(inner +
+                    "if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
+                    "chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)");
+                builder.AppendLine(inner + "{");
+                builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::pop_exception_jmp_buf();");
+                builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
+                builder.AppendLine(inner + "        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
+                builder.AppendLine(inner +
+                    "            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
+                builder.AppendLine(inner + "}");
                 if (er.CatchTypeSubjectId != null)
                 {
+                    // Phase 5: sentinel guard — re-raise sentinel exceptions
+                    // through SETJMP to the next outer handler.
+                    builder.AppendLine(inner +
+                        "if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
+                        "chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)");
+                    builder.AppendLine(inner + "{");
+                    builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::pop_exception_jmp_buf();");
+                    builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
+                    builder.AppendLine(inner + "        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
+                    builder.AppendLine(inner +
+                        "            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
+                    builder.AppendLine(inner + "}");
                     builder.AppendLine(inner +
                         "auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(");
                     builder.AppendLine(inner +

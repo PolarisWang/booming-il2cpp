@@ -109,6 +109,7 @@ public sealed partial class LoaderStage
         var import = TryDescribeMethodImport(metadataReader, methodDefinition);
         var isPreserved = HasPreserveAttribute(metadataReader, handle);
         var isUnmanagedCallersOnly = HasUnmanagedCallersOnlyAttribute(metadataReader, handle);
+        var isPreserveSig = HasPreserveSigAttribute(metadataReader, handle);
 
         return new MethodSummary
         {
@@ -127,6 +128,7 @@ public sealed partial class LoaderStage
             IsFinal = methodDefinition.Attributes.HasFlag(MethodAttributes.Final),
             IsPreserved = isPreserved,
             IsUnmanagedCallersOnly = isUnmanagedCallersOnly,
+            IsPreserveSig = isPreserveSig,
             MetadataToken = MetadataTokens.GetToken(handle),
             Parameters = parameters,
             Import = import,
@@ -421,6 +423,31 @@ public sealed partial class LoaderStage
         {
             if (TryGetAttributeTypeName(metadataReader, attributeHandle, out var namespaceName, out var typeName) &&
                 string.Equals($"{namespaceName}.{typeName}", unmanagedCallersOnlyAttributeFullName, StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Checks whether the given method is annotated with
+    /// <see cref="System.Runtime.InteropServices.PreserveSigAttribute"/>.
+    /// In .NET 5+, COM interface methods default to PreserveSig=true; this attribute
+    /// is only present when explicitly applied. Absence implies the default (true).
+    /// </summary>
+    private static bool HasPreserveSigAttribute(
+        MetadataReader metadataReader,
+        MethodDefinitionHandle methodHandle)
+    {
+        const string preserveSigAttributeFullName = "System.Runtime.InteropServices.PreserveSigAttribute";
+        var methodDefinition = metadataReader.GetMethodDefinition(methodHandle);
+
+        foreach (var attributeHandle in methodDefinition.GetCustomAttributes())
+        {
+            if (TryGetAttributeTypeName(metadataReader, attributeHandle, out var namespaceName, out var typeName) &&
+                string.Equals($"{namespaceName}.{typeName}", preserveSigAttributeFullName, StringComparison.Ordinal))
             {
                 return true;
             }

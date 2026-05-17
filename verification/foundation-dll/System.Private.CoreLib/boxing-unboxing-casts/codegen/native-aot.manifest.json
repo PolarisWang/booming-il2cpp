@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "BoxingUnboxingCastsSubjects",
   "entrySubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Run:System.Void(System.Int32)",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/boxing-unboxing-casts/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/boxing-unboxing-casts/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

@@ -433,6 +433,7 @@ public sealed partial class LoaderStage
                 IsFinal = methodSummary.IsFinal,
                 IsPreserved = methodSummary.IsPreserved,
                 IsUnmanagedCallersOnly = methodSummary.IsUnmanagedCallersOnly,
+                IsPreserveSig = methodSummary.IsPreserveSig,
                 MetadataToken = methodSummary.MetadataToken,
                 Parameters = methodSummary.Parameters,
                 Import = methodSummary.Import,

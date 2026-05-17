@@ -8,6 +8,16 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
 
+# Dependency libraries are built by the debug preset.
+link_directories(
+    "${REPO_ROOT}/artifacts/presets/debug/src/native/runtime-core/Debug"
+    "${REPO_ROOT}/artifacts/presets/debug/src/native/bootstrap/Debug"
+    "${REPO_ROOT}/artifacts/presets/debug/src/native/interpreter/Debug"
+    "${REPO_ROOT}/artifacts/presets/debug/fmt_build/Debug"
+    "${REPO_ROOT}/artifacts/presets/debug/src/native/common/Debug"
+    "${REPO_ROOT}/artifacts/presets/debug/src/native/hot-update/Debug"
+    "${REPO_ROOT}/artifacts/presets/debug/src/native/support/Debug")
+
 # Stub symbols for codegen-emitted globals; required by targets linking
 # chaos_bootstrap or chaos_interpreter (which reference these symbols).
 set(CHAOS_GC_TEST_STUBS gc_test_stubs.cpp)
@@ -36,7 +46,7 @@ target_link_libraries(
 # contains instantiation_engine.obj which references InterpreterValue symbols,
 # and chaos_bootstrap.lib references ChaosResolveExternalRuntimeFnTable
 # (defined in hotpatch_resolve.cpp, part of chaos_interpreter).
-set(CHAOS_GC_COMMON_LIBS chaos_runtime_core chaos_bootstrap chaos_interpreter chaos_fmt)
+set(CHAOS_GC_COMMON_LIBS chaos_runtime_core chaos_bootstrap chaos_interpreter chaos_fmt chaos_common chaos_support chaos_hot_update)
 
 # gc_bump_cache_test — GcBumpCache size-class allocator unit tests
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
@@ -51,7 +61,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/fmt/include")
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_gc_bump_cache_test
         PRIVATE
@@ -72,7 +83,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_region_test.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/fmt/include")
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_gc_region_test
         PRIVATE
@@ -93,7 +105,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_root_scanner_test.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/fmt/include")
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_gc_root_scanner_test
         PRIVATE
@@ -115,7 +128,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/domain_unload_test.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/fmt/include")
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_domain_unload_test
         PRIVATE
@@ -135,7 +149,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_young_collector_test.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/fmt/include")
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_gc_young_collector_test
         PRIVATE
@@ -156,7 +171,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/memory_domain_test.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/fmt/include")
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_memory_domain_test
         PRIVATE
@@ -182,7 +198,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
         PRIVATE
             chaos_runtime_core
             chaos_bootstrap
-            chaos_interpreter)
+            chaos_interpreter
+            chaos_fmt
+            chaos_common
+            chaos_support
+            chaos_hot_update)
 
     # synchronization_smoke — SemaphoreSlim, RWLock, WaitHandle, TimerQueue
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/synchronization_smoke.cpp")
@@ -202,7 +222,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
             PRIVATE
                 chaos_runtime_core
                 chaos_bootstrap
-                chaos_interpreter)
+                chaos_interpreter
+                chaos_fmt
+                chaos_common
+                chaos_support
+                chaos_hot_update)
     endif()
 
     # threading_benchmark — native microbenchmark (Release only)
@@ -210,7 +234,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
         add_executable(chaos_threading_benchmark threading_benchmark.cpp)
         target_compile_features(chaos_threading_benchmark PRIVATE cxx_std_17)
         target_compile_definitions(chaos_threading_benchmark PRIVATE
-            
+
             _CRT_SECURE_NO_WARNINGS)
         target_include_directories(
             chaos_threading_benchmark
@@ -223,7 +247,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
             PRIVATE
                 chaos_runtime_core
                 chaos_bootstrap
-                chaos_interpreter)
+                chaos_interpreter
+                chaos_fmt
+                chaos_common
+                chaos_support
+                chaos_hot_update)
     endif()
 endif()
 
@@ -241,7 +269,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_stress_test.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/fmt/include")
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_gc_stress_test
         PRIVATE
@@ -262,7 +291,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_worker_pool_smoke.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/fmt/include")
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_gc_worker_pool_smoke
         PRIVATE
@@ -283,7 +313,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_sanity_test.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/fmt/include")
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_gc_sanity_test
         PRIVATE
@@ -304,7 +335,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bgc_smoke.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/fmt/include")
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_gc_bgc_smoke
         PRIVATE
@@ -326,7 +358,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/runtime-core/gc"
-            "${REPO_ROOT}/third_party/fmt/include")
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_capacity_stress_test
         PRIVATE

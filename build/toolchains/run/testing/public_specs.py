@@ -146,6 +146,22 @@ PUBLIC_TEST_SPECS = [
             "All marshalling tests passed.",
         ],
     ),
+    _public_smoke_suite(
+        suite="com-interop-basic",
+        project_name="ComInteropLite",
+        primary_module_id="interop",
+        module_ids=["interop"],
+        subsystem_ids=["native-bridge"],
+        expected_patterns=[
+            "com=init:0x",
+            "com=uninit",
+            "com=create:0x",
+            "com=vtable:addref_before:",
+            "com=vtable:qi_identity:ok",
+            "com=vtable:final_release:",
+            "All COM interop tests passed.",
+        ],
+    ),
     _suite_spec(
         suite_id="contract/analysis-schema",
         family="contract",

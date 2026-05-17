@@ -24,5 +24,6 @@ extern "C" {
 #include "threading_stubs.h"
 #include "collection_stubs.h"
 #include "misc_stubs.h"
+#include "mutex_stubs.h"
 
 }  // extern "C"

@@ -15,6 +15,7 @@ FAMILIES = [
     "guid-random-hashcode", "math-numerics", "object-equality-identity",
     "primitive-numeric-conversions", "string-char-text-core",
     "time-date-time-timespan", "threading-monitor-interlocked",
+    "threading-thread-basics",
     "attributes-custom-metadata", "boxing-unboxing-casts",
     "delegate-core-invocation", "exception-throw-diagnostics",
     "globalization-culture", "io-streams-basics",

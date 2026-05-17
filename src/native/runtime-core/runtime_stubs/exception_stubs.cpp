@@ -20,8 +20,12 @@ CHAOS_IL2CPP_INTPTR ChaosExceptionGetInnerException(CHAOS_IL2CPP_INTPTR exc) noe
 
 CHAOS_IL2CPP_INT32 ChaosExceptionGetHresult(CHAOS_IL2CPP_INTPTR exc) noexcept
 {
-    (void)exc;
-    return 0;
+    if (exc == 0) return 0;
+    // Exception layout: ThinLockableHeader(16B) + _message(8B) +
+    //   _innerException(8B) + _stackTrace(8B) + _HResult(4B)
+    const auto hr_offset = sizeof(ThinLockableHeader) + 3 * sizeof(CHAOS_IL2CPP_INTPTR);
+    return *reinterpret_cast<CHAOS_IL2CPP_INT32*>(
+        static_cast<CHAOS_IL2CPP_UINT8*>(reinterpret_cast<void*>(exc)) + hr_offset);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosRuntimewrappedGetWrappedException(CHAOS_IL2CPP_INTPTR exc) noexcept
