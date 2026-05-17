@@ -10,8 +10,6 @@ public sealed partial class NativeReferenceProofEmitter
         return subjectId.Contains("/System.Runtime.InteropServices.", StringComparison.Ordinal) &&
                !subjectId.Contains("/System.Runtime.InteropServices.Marshal::", StringComparison.Ordinal) &&
                !subjectId.Contains("SafeBuffer", StringComparison.Ordinal) &&
-               !subjectId.Contains("SafeHandle", StringComparison.Ordinal) &&
-               !subjectId.Contains("CriticalHandle", StringComparison.Ordinal) &&
                !subjectId.Contains("GCHandle", StringComparison.Ordinal) &&
                !subjectId.Contains("OSPlatform", StringComparison.Ordinal) &&
                !subjectId.Contains("NFloat", StringComparison.Ordinal) &&

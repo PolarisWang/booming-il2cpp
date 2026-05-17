@@ -110,7 +110,7 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
     DrainGlobalSatbQueue();
 
     // Drain mark stack to completion.
-    CHAOS_IL2CPP_SIZE marked = DrainMarkStack(0);
+    CHAOS_IL2CPP_SIZE marked = DrainWorkerDeque(0, 0);
 
     // Scan dirty cards: any old-gen pages may have new cross-gen references
     // from concurrent mark phase that aren't captured by SATB alone
@@ -127,15 +127,16 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
                 void* ref = *slot;
                 if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
                     if (g_old_gen.BgcTryMark(ref)) {
-                        std::lock_guard<std::mutex> lock(mark_stack_mutex_);
-                        mark_stack_.push_back(ref);
+                        std::lock_guard<std::mutex> lock(
+                            BgcController::Instance().bgc_workers_[0].steal_mutex);
+                        BgcController::Instance().bgc_workers_[0].deque.push_back(ref);
                     }
                 }
             }
         });
 
     // Drain again after dirty cards.
-    marked += DrainMarkStack(0);
+    marked += DrainWorkerDeque(0, 0);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "stw_remark_done marked={0} cards={1}",
         static_cast<unsigned long long>(marked),
@@ -177,10 +178,12 @@ void BgcController::ForceComplete() {
     if (phase_.load(std::memory_order_acquire) == BgcPhase::IDLE)
         return;
 
-    // Drain remaining SATB + mark stack.
+    // Drain remaining SATB + all workers' deques.
     DrainAllTlsSatbBuffers();
     DrainGlobalSatbQueue();
-    DrainMarkStack(0);
+    for (int i = 0; i < kMaxBgcWorkers; i++) {
+        DrainWorkerDeque(i, 0);
+    }
 
     // Notify BGC thread to skip to finish.
     phase_.store(BgcPhase::FINISHED, std::memory_order_release);
@@ -225,8 +228,9 @@ void BgcController::PopulateRootSet() {
                     void* ref = *slot;
                     if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
                         if (g_old_gen.BgcTryMark(ref)) {
-                            std::lock_guard<std::mutex> lock(ctrl.mark_stack_mutex_);
-                            ctrl.mark_stack_.push_back(ref);
+                            std::lock_guard<std::mutex> lock(
+                                ctrl.bgc_workers_[0].steal_mutex);
+                            ctrl.bgc_workers_[0].deque.push_back(ref);
                         }
                     }
                 }
@@ -246,8 +250,8 @@ void BgcController::PopulateRootSet() {
                 if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
                     if (g_old_gen.BgcTryMark(ref)) {
                         std::lock_guard<std::mutex> lock(
-                            BgcController::Instance().mark_stack_mutex_);
-                        BgcController::Instance().mark_stack_.push_back(ref);
+                            BgcController::Instance().bgc_workers_[0].steal_mutex);
+                        BgcController::Instance().bgc_workers_[0].deque.push_back(ref);
                     }
                 }
             },
@@ -265,8 +269,8 @@ void BgcController::PopulateRootSet() {
                 if (g_old_gen.IsInOldGen(object)) {
                     if (g_old_gen.BgcTryMark(object)) {
                         std::lock_guard<std::mutex> lock(
-                            BgcController::Instance().mark_stack_mutex_);
-                        BgcController::Instance().mark_stack_.push_back(object);
+                            BgcController::Instance().bgc_workers_[0].steal_mutex);
+                        BgcController::Instance().bgc_workers_[0].deque.push_back(object);
                     }
                 }
             },
@@ -275,7 +279,7 @@ void BgcController::PopulateRootSet() {
 
     // Phase 1e: Process initial mark stack to build transitive root closure.
     // This runs under safepoint, so it's fast (no concurrent interference).
-    DrainMarkStack(0);
+    DrainWorkerDeque(0, 0);
 }
 
 // ── BGC thread main ──────────────────────────────────────────────────
@@ -284,11 +288,17 @@ void BgcController::BgcThreadMain() {
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "thread_started");
 
     while (bgc_running_.load(std::memory_order_acquire)) {
-        // Wait for a start request.
-        if (!bgc_start_requested_.load(std::memory_order_acquire)) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-            continue;
+        // Wait for a start request.  Uses condition_variable for event-driven
+        // wake-up (P1-4: replaces sleep_for polling).
+        {
+            std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
+            bgc_cv_.wait_for(lock, std::chrono::milliseconds(100), [this]() {
+                return bgc_start_requested_.load(std::memory_order_acquire) ||
+                       !bgc_running_.load(std::memory_order_acquire);
+            });
         }
+        if (!bgc_start_requested_.load(std::memory_order_acquire))
+            continue;
 
         // ── Phase 2: Concurrent Mark ──────────────────────────────
         // The root set was already populated by StartBgcCycle under
@@ -298,11 +308,10 @@ void BgcController::BgcThreadMain() {
         if (phase_.load(std::memory_order_acquire) == BgcPhase::CONCURRENT_MARK) {
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_mark_begin");
 
-            // Spawn parallel workers for faster mark stack draining.
-            // Workers share the mutex-protected mark_stack_: each pops one
-            // object at a time, calls ProcessGreyObject, and pushes
-            // newly-marked children back.  The BGC thread handles SATB
-            // draining AND participates in mark stack processing.
+            // Spawn parallel workers for mark stack processing.
+            // Uses per-worker deques with work-stealing (P1-1):
+            // - Worker 0 = BGC thread (coordinator)
+            // - Workers 1..N = parallel mark workers with steal support
             int n_workers = SpawnParallelMarkWorkers();
             CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "parallel_workers spawned={0}",
                 static_cast<unsigned>(n_workers));
@@ -313,14 +322,28 @@ void BgcController::BgcThreadMain() {
             while (true) {
                 bool progressed = false;
 
-                // Process a batch of grey objects.
-                if (DrainMarkStack(kBatchSize) > 0) {
+                // Process from worker 0's deque (BGC thread's own work).
+                if (DrainWorkerDeque(0, kBatchSize) > 0) {
                     progressed = true;
                 }
 
-                // Drain global SATB queue.
+                // Drain global SATB queue — pushes newly-marked entries to
+                // worker 0's deque where they'll be picked up next round.
                 if (DrainGlobalSatbQueue() > 0) {
                     progressed = true;
+                }
+
+                // If idle, sweep all workers' deques (coordinator drain).
+                // The BGC thread helps idle workers by draining their
+                // deques, acting as a natural load-balancing mechanism
+                // that complements worker-initiated stealing.
+                if (!progressed) {
+                    for (int i = 1; i < n_workers; i++) {
+                        if (DrainWorkerDeque(i, kBatchSize) > 0) {
+                            progressed = true;
+                            break;  // Found work — resume normal loop.
+                        }
+                    }
                 }
 
                 if (progressed) {
@@ -330,19 +353,23 @@ void BgcController::BgcThreadMain() {
                 } else {
                     idle_rounds++;
                     // After several idle rounds with no progress,
-                    // check if we're truly done (mark stack + SATB both empty).
-                    bool mark_done;
-                    {
-                        std::lock_guard<std::mutex> lock(mark_stack_mutex_);
-                        mark_done = mark_stack_.empty();
+                    // check if we're truly done (all deques + SATB empty).
+                    bool all_done = true;
+                    for (int i = 0; i < n_workers; i++) {
+                        std::lock_guard<std::mutex> lock(bgc_workers_[i].steal_mutex);
+                        if (!bgc_workers_[i].deque.empty()) {
+                            all_done = false;
+                            break;
+                        }
                     }
+
                     bool satb_done;
                     {
                         std::lock_guard<std::mutex> lock(global_satb_mutex_);
                         satb_done = global_satb_.empty();
                     }
 
-                    if (mark_done && satb_done) {
+                    if (all_done && satb_done) {
                         break;  // Concurrent mark complete.
                     }
 
@@ -364,8 +391,10 @@ void BgcController::BgcThreadMain() {
             // Signal parallel workers to stop and join them.
             StopParallelMarkWorkers();
 
-            // Final drain of any last items added by in-flight workers.
-            DrainMarkStack(0);
+            // Safety drain: any work left in deques after workers stopped.
+            for (int i = 0; i < n_workers; i++) {
+                DrainWorkerDeque(i, 0);
+            }
 
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_mark_complete");
         }
@@ -458,6 +487,7 @@ void BgcController::BgcThreadMain() {
             bgc_start_requested_.store(false, std::memory_order_release);
             phase_.store(BgcPhase::IDLE, std::memory_order_release);
             cycle_complete_.store(true, std::memory_order_release);
+            NotifyBgc();
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "cycle_finished");
         }
 
@@ -516,13 +546,19 @@ int BgcController::SpawnParallelMarkWorkers() {
     int n_workers = std::min(hw, kMaxBgcWorkers);
     if (n_workers < 2) return 1;  // No benefit from parallel.
 
+    // Initialize per-worker deques (worker 0 = BGC thread).
+    for (int i = 0; i < n_workers; i++) {
+        std::lock_guard<std::mutex> lock(bgc_workers_[i].steal_mutex);
+        bgc_workers_[i].deque.clear();
+    }
+    bgc_worker_count_.store(n_workers, std::memory_order_release);
+
     // Spawn N-1 additional workers (the BGC thread itself is worker 0).
     bgc_parallel_done_.store(false, std::memory_order_release);
-    bgc_parallel_worker_count_.store(n_workers - 1, std::memory_order_relaxed);
     bgc_parallel_workers_.clear();
 
     for (int i = 1; i < n_workers; i++) {
-        bgc_parallel_workers_.emplace_back(&BgcController::BgcWorkerMain, this);
+        bgc_parallel_workers_.emplace_back(&BgcController::BgcWorkerMain, this, i);
     }
     return n_workers;
 }
@@ -533,7 +569,7 @@ void BgcController::StopParallelMarkWorkers() {
         if (w.joinable()) w.join();
     }
     bgc_parallel_workers_.clear();
-    bgc_parallel_worker_count_.store(0, std::memory_order_relaxed);
+    bgc_worker_count_.store(0, std::memory_order_relaxed);
 }
 
 namespace {
@@ -566,40 +602,68 @@ namespace {
     }
 }
 
-void BgcController::BgcWorkerMain() {
-    // Worker loop: batch-pop from shared mark_stack_, process locally,
-    // batch-push children back.  Reduces mutex contention ~8x vs per-object.
-    std::vector<void*> local_queue;
-    local_queue.reserve(kBgcPopBatchSize * 2);
+void BgcController::BgcWorkerMain(int worker_idx) {
+    // Worker loop: per-worker deque with work-stealing (P1-1).
+    // Each worker pops from its own deque (under steal_mutex).
+    // When empty, attempts up to 3 random steals from other workers.
+    // Newly-marked children are pushed to the worker's own deque.
+    auto& ws = bgc_workers_[worker_idx];
+
+    // Simple deterministic PRNG seed for random victim selection.
+    // Not thread_local (MSVC rejects capturing thread_local in lambdas).
+    // Simple linear congruential is sufficient — we don't need cryptographic
+    // randomness, just distributed victim selection.
+    uint32_t prng = static_cast<uint32_t>(
+        reinterpret_cast<uintptr_t>(&ws) ^
+        static_cast<uint32_t>(worker_idx * 0x9E3779B9));
 
     while (!bgc_parallel_done_.load(std::memory_order_acquire)) {
-        local_queue.clear();
+        void* obj = nullptr;
+
+        // Phase 1: Try local pop from own deque.
         {
-            std::lock_guard<std::mutex> lock(mark_stack_mutex_);
-            int batch = 0;
-            while (!mark_stack_.empty() && batch < kBgcPopBatchSize) {
-                local_queue.push_back(mark_stack_.back());
-                mark_stack_.pop_back();
-                ++batch;
+            std::lock_guard<std::mutex> lock(ws.steal_mutex);
+            if (!ws.deque.empty()) {
+                obj = ws.deque.back();
+                ws.deque.pop_back();
             }
         }
 
-        if (local_queue.empty()) {
-            std::this_thread::yield();
+        // Phase 2: If local empty, try steal (up to 3 random attempts).
+        if (obj == nullptr) {
+            int n = bgc_worker_count_.load(std::memory_order_acquire);
+            for (int attempt = 0; attempt < 3 && n > 1; attempt++) {
+                // Simple LCG instead of XorShift32 (avoids thread_local capture issues on MSVC).
+                prng = prng * 1103515245u + 12345u;
+                int victim = static_cast<int>(prng % n);
+                if (victim == worker_idx) continue;
+
+                auto& vw = bgc_workers_[victim];
+                std::lock_guard<std::mutex> lock(vw.steal_mutex);
+                if (!vw.deque.empty()) {
+                    // Steal from front (oldest work) — victim continues
+                    // from back (newest), preserving temporal locality.
+                    obj = vw.deque.front();
+                    vw.deque.erase(vw.deque.begin());
+                    break;
+                }
+            }
+        }
+
+        if (obj == nullptr) {
+            // Brief sleep to avoid starving mutators when no work available.
+            // CoreCLR workers use a condition variable; we use a short sleep
+            // to avoid rebuilding the entire wake-up protocol.
+            std::this_thread::sleep_for(std::chrono::microseconds(50));
             continue;
         }
 
-        // Process each object locally — children accumulate in local_queue.
+        // Process object: scan children, push to own deque.
         std::vector<void*> children;
-        children.reserve(kBgcPopBatchSize * 2);
-        for (void* obj : local_queue) {
-            ScanObjectChildren(obj, children);
-        }
-
-        // Batch push all children back to the shared mark stack.
+        ScanObjectChildren(obj, children);
         if (!children.empty()) {
-            std::lock_guard<std::mutex> lock(mark_stack_mutex_);
-            mark_stack_.insert(mark_stack_.end(), children.begin(), children.end());
+            std::lock_guard<std::mutex> lock(ws.steal_mutex);
+            ws.deque.insert(ws.deque.end(), children.begin(), children.end());
         }
     }
 }
@@ -610,43 +674,47 @@ void BgcController::ProcessGreyObject(void* obj) {
     std::vector<void*> children;
     ScanObjectChildren(obj, children);
     if (!children.empty()) {
-        std::lock_guard<std::mutex> lock(mark_stack_mutex_);
-        mark_stack_.insert(mark_stack_.end(), children.begin(), children.end());
+        std::lock_guard<std::mutex> lock(bgc_workers_[0].steal_mutex);
+        bgc_workers_[0].deque.insert(bgc_workers_[0].deque.end(),
+                                     children.begin(), children.end());
     }
 }
 
 // ── Drain helpers ────────────────────────────────────────────────────
 
-CHAOS_IL2CPP_SIZE BgcController::DrainMarkStack(CHAOS_IL2CPP_SIZE batch_limit) {
+CHAOS_IL2CPP_SIZE BgcController::DrainWorkerDeque(int idx, CHAOS_IL2CPP_SIZE batch_limit) {
+    /// Drain up to @a batch_limit entries from worker @a idx's deque.
+    /// Processes each entry and pushes newly-marked children to the same deque.
     CHAOS_IL2CPP_SIZE count = 0;
-    std::vector<void*> local_queue;
+    auto& ws = bgc_workers_[idx];
+    std::vector<void*> batch;
     std::vector<void*> children;
-    local_queue.reserve(kBgcPopBatchSize * 2);
+    batch.reserve(kBgcPopBatchSize * 2);
     children.reserve(kBgcPopBatchSize * 2);
 
     while (true) {
-        local_queue.clear();
+        batch.clear();
         children.clear();
         {
-            std::lock_guard<std::mutex> lock(mark_stack_mutex_);
-            int batch = 0;
-            while (!mark_stack_.empty() && batch < kBgcPopBatchSize) {
-                local_queue.push_back(mark_stack_.back());
-                mark_stack_.pop_back();
-                ++batch;
+            std::lock_guard<std::mutex> lock(ws.steal_mutex);
+            int n = 0;
+            while (!ws.deque.empty() && n < kBgcPopBatchSize) {
+                batch.push_back(ws.deque.back());
+                ws.deque.pop_back();
+                ++n;
             }
         }
 
-        if (local_queue.empty()) break;
+        if (batch.empty()) break;
 
-        for (void* obj : local_queue) {
+        for (void* obj : batch) {
             ScanObjectChildren(obj, children);
             ++count;
         }
 
         if (!children.empty()) {
-            std::lock_guard<std::mutex> lock(mark_stack_mutex_);
-            mark_stack_.insert(mark_stack_.end(), children.begin(), children.end());
+            std::lock_guard<std::mutex> lock(ws.steal_mutex);
+            ws.deque.insert(ws.deque.end(), children.begin(), children.end());
         }
 
         if (batch_limit > 0 && count >= batch_limit) break;
@@ -656,6 +724,7 @@ CHAOS_IL2CPP_SIZE BgcController::DrainMarkStack(CHAOS_IL2CPP_SIZE batch_limit) {
 
 CHAOS_IL2CPP_SIZE BgcController::DrainGlobalSatbQueue() {
     CHAOS_IL2CPP_SIZE count = 0;
+    auto& w0 = bgc_workers_[0];
     while (true) {
         SatbEntry entry;
         {
@@ -666,8 +735,8 @@ CHAOS_IL2CPP_SIZE BgcController::DrainGlobalSatbQueue() {
         }
         if (entry != nullptr && g_old_gen.IsInOldGen(entry)) {
             if (g_old_gen.BgcTryMark(entry)) {
-                std::lock_guard<std::mutex> lock(mark_stack_mutex_);
-                mark_stack_.push_back(entry);
+                std::lock_guard<std::mutex> lock(w0.steal_mutex);
+                w0.deque.push_back(entry);
             }
         }
         ++count;

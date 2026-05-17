@@ -747,8 +747,12 @@ public sealed partial class NativeAotLoweringPlanner
 
         if (TryGetLowerableMethod(callee) is { } lowerableMethod)
         {
+            // For shared generic instantiations, call the canonical body directly
+            // instead of going through the per-instantiation stub. This enables
+            // C++ inlining and eliminates the forwarding call overhead.
+            string targetSymbol = ResolveCallTargetNativeSymbol(lowerableMethod);
             return new InvocationTarget(
-                TryGetInstantiationStubSymbol(lowerableMethod) ?? lowerableMethod.NativeSymbol,
+                TryGetInstantiationStubSymbol(lowerableMethod) ?? targetSymbol,
                 GetMethodAbiParameterSlots(lowerableMethod),
                 lowerableMethod.ReturnAbi,
                 EmptyRawArgumentIndices,
@@ -764,8 +768,9 @@ public sealed partial class NativeAotLoweringPlanner
         // implementation directly (e.g., InternalCall methods, BCL intrinsics).
         if (_methodsBySubjectId.TryGetValue(callee, out var anyMethod))
         {
+            string targetSymbol = ResolveCallTargetNativeSymbol(anyMethod);
             return new InvocationTarget(
-                TryGetInstantiationStubSymbol(anyMethod) ?? anyMethod.NativeSymbol,
+                TryGetInstantiationStubSymbol(anyMethod) ?? targetSymbol,
                 GetMethodAbiParameterSlots(anyMethod),
                 anyMethod.ReturnAbi,
                 EmptyRawArgumentIndices,

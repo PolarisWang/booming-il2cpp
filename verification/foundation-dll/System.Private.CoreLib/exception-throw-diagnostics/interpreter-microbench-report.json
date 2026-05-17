@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/exception/throw/diagnostics",
-  "capturedAt": "2026-05-17T00:03:04",
+  "capturedAt": "2026-05-17T11:31:31",
   "metrics": {
     "poolSize": 0
   },
-  "rawOutput": "Passed: 15/15\nGC|alloc|total=18|bytes=864|oversized=0\nGC|region|active=1|total_allocated=262144\n"
+  "rawOutput": ""
 }

@@ -94,6 +94,7 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlySet<string>? _vtableTypes;
     private IReadOnlySet<string>? _interfaceTypeSubjectIds;
     private IReadOnlySet<string>? _sealedTypeSubjectIds;
+    private HashSet<string> _typesWithInstanceMethods = new(StringComparer.Ordinal);
 
     // ── A4-Dual+V2 Header kind / vtable variant decision engine ──
     /// <summary>
@@ -125,14 +126,10 @@ public sealed partial class NativeAotLoweringPlanner
             return HeaderKind.PureType;
 
         // Sealed types with no virtual methods → PureType
-        if (_sealedTypeSubjectIds?.Contains(typeSubjectId) == true)
+        if (_sealedTypeSubjectIds?.Contains(typeSubjectId) == true &&
+            !_typesWithInstanceMethods.Contains(typeSubjectId))
         {
-            // Check if type has any virtual methods
-            bool hasVirtual = _methodsBySubjectId.Values.Any(m =>
-                !m.IsStatic &&
-                string.Equals(m.Identity.DeclaringTypeSubjectId, typeSubjectId, StringComparison.Ordinal));
-            if (!hasVirtual)
-                return HeaderKind.PureType;
+            return HeaderKind.PureType;
         }
 
         // Everything else → ThinLockable (default, supports sync + vtable dispatch via type_info)
@@ -207,6 +204,21 @@ public sealed partial class NativeAotLoweringPlanner
     private Dictionary<string, string> _moduleSymbolTable =
         new(StringComparer.Ordinal);
 
+    // ══════════════════════════════════════════════════════════════════════════════════════════
+    // Structured recovery metrics (instance-level, collected per codegen run)
+    // ══════════════════════════════════════════════════════════════════════════════════════════
+
+    internal int StructuredMethodCount;
+    internal int StructuredExceptionBodyCount;
+    internal int FlatFallbackCount;
+    internal int TotalMethodCount;
+
+    /// <summary>Number of methods reachable from the entry point via AOT call graph.</summary>
+    internal int AotReachableMethodCount;
+
+    /// <summary>Number of methods not reachable from the entry point.</summary>
+    internal int AotUnreachableMethodCount;
+
     /// <summary>
     /// Maps unresolvable cross-assembly subjectId → index in kChaosExternalRuntimeFnTable.
     /// Populated by <see cref="PrebuildExternalRuntimeDispatchTable"/> before method body emission.
@@ -242,6 +254,12 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         _methodsBySubjectId = aotCoreIr.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
+        // Build index of types with at least one instance method (O(m) once, then O(1) per type lookup).
+        foreach (var method in aotCoreIr.Methods)
+        {
+            if (!method.IsStatic && method.Identity.DeclaringTypeSubjectId is { } dt)
+                _typesWithInstanceMethods.Add(dt);
+        }
         _assemblyName = loweringPlan.AssemblyName;
 
         // Build module-local symbol table: all methods in this codegen output
@@ -258,6 +276,12 @@ public sealed partial class NativeAotLoweringPlanner
         _valueTypeSubjectIds = CollectValueTypeSubjectIds(aotCoreIr);
         _sealedTypeSubjectIds = CollectSealedTypeSubjectIds(aotCoreIr);
 
+        // Build generic sharing canonical map: group generic methods by open
+        // definition and determine which reference-type instantiations can share
+        // a single canonical body.
+        _genericSharingCanonicalMap = BuildGenericSharingCanonicalMap(
+            _methodsBySubjectId, _valueTypeSubjectIds);
+
         var methodsForLowering = fullAssemblyMode
             ? CollectAllMethods(aotCoreIr)
             : CollectReachableMethods(aotCoreIr, entryMethod);
@@ -267,6 +291,16 @@ public sealed partial class NativeAotLoweringPlanner
             .ToDictionary(t => t.NativeSymbol, t => t.idx);
         _nativeSymbolToDispatchSlot = BuildDispatchSlotMap(methodsForLowering, metadataRegistration);
         var stringLiterals = CollectStringLiterals(methodsForLowering);
+
+        // Compute AOT call-graph reachability from the entry point method.
+        // Only methods reachable via call/callvirt/newobj/ldftn instructions
+        // from the entry point need full C++ function bodies.
+        var aotReachableSubjectIds = ComputeAotReachableSubjectIds(
+            entryMethod?.SubjectId, methodsForLowering);
+        AotReachableMethodCount = aotReachableSubjectIds.Count;
+        // Only count unreachable among the methods we're actually emitting full bodies for.
+        var loweringSubjectIds = new HashSet<string>(methodsForLowering.Select(m => m.SubjectId), StringComparer.Ordinal);
+        AotUnreachableMethodCount = loweringSubjectIds.Count(sid => !aotReachableSubjectIds.Contains(sid));
         _stringIdMapping = BuildStringIdMapping(stringLiterals);
         _cachedClosureAssemblyPaths = EnumerateClosureAssemblyPaths(closureManifest).ToArray();
         _closureAssemblyPathByName = BuildClosureAssemblyPathByNameCore(_cachedClosureAssemblyPaths);
@@ -362,7 +396,9 @@ public sealed partial class NativeAotLoweringPlanner
                 return new NativeAotMethodTemplateModel
                 {
                     SubjectId = method.SubjectId,
-                    MethodSource = BuildMethodSource(method),
+                    MethodSource = aotReachableSubjectIds.Contains(method.SubjectId)
+                        ? BuildMethodSource(method)
+                        : BuildAotUnreachableMethodStub(method),
                 };
             })
             .ToList();
@@ -375,25 +411,29 @@ public sealed partial class NativeAotLoweringPlanner
                 .Where(h => !string.IsNullOrEmpty(h.TargetSymbol))
                 .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal));
         var moduleRegistrationCode = BuildModuleRegistration();
+        var moduleRegSb = new StringBuilder(moduleRegistrationCode, 65536);
         if (!string.IsNullOrEmpty(nameIndexCode))
         {
-            moduleRegistrationCode += Environment.NewLine + nameIndexCode;
+            moduleRegSb.Append(Environment.NewLine);
+            moduleRegSb.Append(nameIndexCode);
         }
         if (!string.IsNullOrEmpty(externalRuntimeTableCode))
         {
-            moduleRegistrationCode += Environment.NewLine + externalRuntimeTableCode;
+            moduleRegSb.Append(Environment.NewLine);
+            moduleRegSb.Append(externalRuntimeTableCode);
         }
         if (!string.IsNullOrEmpty(aotRegistrationCode))
         {
-            moduleRegistrationCode += Environment.NewLine + aotRegistrationCode;
+            moduleRegSb.Append(Environment.NewLine);
+            moduleRegSb.Append(aotRegistrationCode);
         }
         if (!string.IsNullOrEmpty(abiManifestCode))
         {
-            moduleRegistrationCode = abiManifestCode + Environment.NewLine + moduleRegistrationCode;
+            moduleRegSb.Insert(0, abiManifestCode + Environment.NewLine);
         }
         if (_methodTableEntries.Count > 0)
         {
-            moduleRegistrationCode += BuildMethodTableInitialization();
+            moduleRegSb.Append(BuildMethodTableInitialization());
         }
 
         // Step 1: Emit hotpatch-aware dispatch table + entry points.
@@ -403,7 +443,8 @@ public sealed partial class NativeAotLoweringPlanner
         var dispatchEntryCode = BuildDispatchEntryCode(methodsForLowering);
         if (!string.IsNullOrEmpty(dispatchEntryCode))
         {
-            moduleRegistrationCode += Environment.NewLine + dispatchEntryCode;
+            moduleRegSb.Append(Environment.NewLine);
+            moduleRegSb.Append(dispatchEntryCode);
         }
 
         // Step 2: Emit CodeRegistrationV0, MetadataRegistrationV0, CodegenRegistrationOptionsV0
@@ -411,7 +452,8 @@ public sealed partial class NativeAotLoweringPlanner
         var codeRegistrationCode = EmitCodeRegistrationStructs(methodsForLowering, metadataRegistration);
         if (!string.IsNullOrEmpty(codeRegistrationCode))
         {
-            moduleRegistrationCode += Environment.NewLine + codeRegistrationCode;
+            moduleRegSb.Append(Environment.NewLine);
+            moduleRegSb.Append(codeRegistrationCode);
         }
 
         // Step 3: Emit ReflectionQueryImageDescriptor for module.image,
@@ -419,7 +461,8 @@ public sealed partial class NativeAotLoweringPlanner
         var reflectionQueryCode = EmitReflectionQueryImage(methodsForLowering);
         if (!string.IsNullOrEmpty(reflectionQueryCode))
         {
-            moduleRegistrationCode += Environment.NewLine + reflectionQueryCode;
+            moduleRegSb.Append(Environment.NewLine);
+            moduleRegSb.Append(reflectionQueryCode);
         }
 
         // Build extern "C" kAotMethodCount at file scope for runtime-entry.cpp link-time visibility.
@@ -451,7 +494,7 @@ public sealed partial class NativeAotLoweringPlanner
             namespacePreamble.AppendLine("// (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)");
             namespacePreamble.AppendLine("extern \"C\" const int kAotMethodCount;");
         }
-        moduleRegistrationCode = namespacePreamble.ToString() + moduleRegistrationCode;
+        moduleRegistrationCode = namespacePreamble.ToString() + moduleRegSb.ToString();
 
         // Phase 1 diagnostics: log StructuredIR coverage summary
         LogPhase1Summary();
@@ -994,6 +1037,110 @@ public sealed partial class NativeAotLoweringPlanner
         var result = ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetMethodTableInitializationTemplate(), model);
         return "\n" + result;
+    }
+
+    /// <summary>
+    /// Computes the set of method subjectIds reachable via AOT call graph
+    /// traversal from the given entry point. BFS through call/callvirt/newobj/
+    /// ldftn/ldvirtftn instructions, resolving callees through _methodsBySubjectId.
+    /// </summary>
+    private static HashSet<string> ComputeAotReachableSubjectIds(
+        string? entrySubjectId,
+        IReadOnlyList<AotCoreIrMethodArtifact> methods)
+    {
+        var reachable = new HashSet<string>(StringComparer.Ordinal);
+        if (string.IsNullOrEmpty(entrySubjectId))
+            return reachable;
+
+        var bySubjectId = methods
+            .GroupBy(m => m.SubjectId, StringComparer.Ordinal)
+            .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.Ordinal);
+
+        var queue = new Queue<string>();
+        queue.Enqueue(entrySubjectId);
+        reachable.Add(entrySubjectId);
+
+        while (queue.Count > 0)
+        {
+            var current = queue.Dequeue();
+            if (!bySubjectId.TryGetValue(current, out var methodVariants))
+                continue;
+
+            foreach (var method in methodVariants)
+            {
+                if (method.Instructions == null)
+                    continue;
+
+                foreach (var instr in method.Instructions)
+                {
+                    string op = instr.Op;
+                    if (op != "call" && op != "callvirt" && op != "newobj" &&
+                        op != "ldftn" && op != "ldvirtftn")
+                        continue;
+
+                    string? callee = instr.Callee ?? instr.TargetReference?.SubjectId;
+                    if (string.IsNullOrEmpty(callee))
+                        continue;
+
+                    // Add both the exact callee and any open-definition variant
+                    if (reachable.Add(callee))
+                        queue.Enqueue(callee);
+
+                    // Also follow to the resolved instantiation if available
+                    if (instr.TargetReference?.SubjectId is { } targetRef &&
+                        targetRef != callee &&
+                        reachable.Add(targetRef))
+                        queue.Enqueue(targetRef);
+                }
+            }
+        }
+
+        return reachable;
+    }
+
+    /// <summary>
+    /// Builds a minimal C++ function body stub for AOT-unreachable methods.
+    /// Unreachable methods still need a dispatchable entry point (for the
+    /// interpreter dispatch table) but do not require a full native body.
+    /// This stub will CHAOS_IL2CPP_FAIL if unexpectedly invoked at runtime,
+    /// serving as a safety net for reachability analysis accuracy.
+    /// </summary>
+    private static string BuildAotUnreachableMethodStub(AotCoreIrMethodArtifact method)
+    {
+        var returnAbi = method.ReturnAbi;
+        var returnType = MapAbiSlotReturnType(returnAbi);
+        var paramAbis = method.ParameterAbis;
+        var paramList = FormatAbiSlotParameterSignature(paramAbis);
+        var symbol = method.NativeSymbol;
+
+        var builder = new StringBuilder();
+        builder.AppendLine($"// AOT-unreachable stub: {method.SubjectId}");
+        builder.AppendLine($"extern \"C\" {returnType} {symbol}({paramList})");
+        builder.AppendLine("{");
+        builder.AppendLine($"    CHAOS_IL2CPP_FAIL(\"AOT-unreachable method invoked: {method.SubjectId}\");");
+        // For non-void return, add unreachable return to satisfy compiler
+        if (!string.IsNullOrEmpty(returnType) && returnType != "void")
+            builder.AppendLine($"    return {{}};");
+        builder.AppendLine("}");
+
+        // Also emit the generic instantiation stub definition if this method
+        // has an InstantiationStubId. The codegen may reference the stub symbol
+        // from other method bodies even when this method is not AOT-reachable,
+        // so the stub must exist as a valid C++ symbol.
+        if (method.InstantiationStubId is not null)
+        {
+            var stubSymbol = ManagedNaming.CreateInstantiationStubSymbol(method.InstantiationStubId);
+            builder.AppendLine();
+            builder.AppendLine($"// AOT-unreachable generic instantiation stub: {method.SubjectId}");
+            builder.AppendLine($"extern \"C\" {returnType} {stubSymbol}({paramList})");
+            builder.AppendLine("{");
+            builder.AppendLine($"    CHAOS_IL2CPP_FAIL(\"AOT-unreachable generic stub invoked: {method.SubjectId}\");");
+            if (!string.IsNullOrEmpty(returnType) && returnType != "void")
+                builder.AppendLine($"    return {{}};");
+            builder.AppendLine("}");
+        }
+
+        return builder.ToString();
     }
 
     private string BuildMethodSource(AotCoreIrMethodArtifact method)
@@ -1634,6 +1781,41 @@ public sealed partial class NativeAotLoweringPlanner
             assignments.Add(new CustomAttributeFieldAssignment(
                 ResolveAttributeStorageField(DllImportAttributeTypeSubjectId, "SetLastError"),
                 new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Boolean, true)));
+        }
+
+        // P1.3: CallingConvention mapping (MethodImportAttributes → System.Runtime.InteropServices.CallingConvention).
+        var ccBits = import.Attributes & MethodImportAttributes.CallingConventionMask;
+        if (ccBits != 0) // 0 = WinApi (default, skip)
+        {
+            int ccValue = ccBits switch
+            {
+                MethodImportAttributes.CallingConventionWinApi => 1,   // CallingConvention.WinApi
+                MethodImportAttributes.CallingConventionCDecl => 2,    // CallingConvention.CDecl
+                MethodImportAttributes.CallingConventionStdCall => 3,  // CallingConvention.StdCall
+                MethodImportAttributes.CallingConventionThisCall => 4, // CallingConvention.ThisCall
+                MethodImportAttributes.CallingConventionFastCall => 5, // CallingConvention.FastCall
+                _ => 1, // fallback: WinApi
+            };
+            assignments.Add(new CustomAttributeFieldAssignment(
+                ResolveAttributeStorageField(DllImportAttributeTypeSubjectId, "CallingConvention"),
+                new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Int32, ccValue)));
+        }
+
+        // P1.3: CharSet mapping (MethodImportAttributes → System.Runtime.InteropServices.CharSet).
+        var csBits = import.Attributes & MethodImportAttributes.CharSetMask;
+        // 0x0000 = default (Ansi, skip); explicit Ansi=0x0002, Unicode=0x0004, Auto=0x0006
+        if (csBits != 0)
+        {
+            int csValue = csBits switch
+            {
+                MethodImportAttributes.CharSetAnsi => 2,    // CharSet.Ansi
+                (MethodImportAttributes)0x0004 => 3,        // CharSet.Unicode
+                MethodImportAttributes.CharSetAuto => 4,    // CharSet.Auto
+                _ => 2, // fallback: Ansi
+            };
+            assignments.Add(new CustomAttributeFieldAssignment(
+                ResolveAttributeStorageField(DllImportAttributeTypeSubjectId, "CharSet"),
+                new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Int32, csValue)));
         }
 
         return new CustomAttributeMaterializationPlan(

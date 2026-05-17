@@ -214,7 +214,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Attribute", "GetCustomAttributes", 1): "skip",  # returns IEnumerable<Attribute>, not Attribute[] -> no .Length
     ("Attribute", "IsDefined", 2): "typeof(byte).Assembly.IsDefined(typeof(AssemblyDescriptionAttribute))",
     # Array.Sort with null comparer is ambiguous between IComparer<T> and Comparison<T>
-    ("Array", "Sort", 2): "Array.Sort<byte>(new byte[1], (IComparer<byte>)null!)",
+    ("Array", "Sort", 2): "Array.Sort(new byte[1], Comparer<byte>.Default)",
     # DateTime/TimeSpan with out-of-range constructor values or invalid parse inputs
     ("DateTime", "TryParse", 2): "skip",    # out DateTime -> CS1620 with 'ref'
     ("DateTime", "Parse", 1): "DateTime.Parse(\"2024-01-01\")",

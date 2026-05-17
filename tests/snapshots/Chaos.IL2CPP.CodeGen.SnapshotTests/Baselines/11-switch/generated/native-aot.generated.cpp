@@ -44,7 +44,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -1133,20 +1133,15 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SwitchHelper_Classify(void)
 			{
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 				return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-				break;
 			}
 			case 1:
 			{
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
 				return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-				break;
 			}
 			default:
-			{
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 				return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-				break;
-			}
 		}
 	}
 }

@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.20)
 set(CMAKE_CXX_FLAGS_INIT "/DWIN32 /D_WINDOWS")
-set(CMAKE_MSVC_EXCEPTION_HANDLING "Sync")
+set(CMAKE_MSVC_EXCEPTION_HANDLING "Async")
 project(chaos_gen LANGUAGES CXX)
 
 set(REPO_ROOT "D:/agent/booming-il2cpp")
@@ -31,6 +31,7 @@ set(COMMON_INCLUDE_DIRS
 )
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+
 # Assembly: PrimitiveNumericConversionsSubjects
 add_library(chaos_gen_PrimitiveNumericConversionsSubjects STATIC
     ${CHAOS_GEN_DIR}/PrimitiveNumericConversionsSubjects/generated/native-aot.generated.cpp
@@ -39,6 +40,7 @@ add_library(chaos_gen_PrimitiveNumericConversionsSubjects STATIC
 target_include_directories(chaos_gen_PrimitiveNumericConversionsSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
 target_compile_features(chaos_gen_PrimitiveNumericConversionsSubjects PUBLIC cxx_std_20)
 target_compile_options(chaos_gen_PrimitiveNumericConversionsSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+
 
 # Entry executable — links generated code + native runtime
 add_executable(entry
@@ -49,6 +51,6 @@ target_link_libraries(entry PRIVATE
     chaos_gen_PrimitiveNumericConversionsSubjects
     ${NATIVE_LIBS}
 )
+
 target_include_directories(entry PRIVATE ${COMMON_INCLUDE_DIRS})
 target_compile_options(entry PRIVATE ${COMMON_COMPILE_OPTIONS})
-

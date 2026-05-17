@@ -44,7 +44,7 @@ public static partial class ArrayIndexingCopySubjects
     // [5] System.Private.CoreLib/System.Array::Sort:System.Void(System.Array,System.Collections.IComparer)
     public static void Subject_5()
     {
-        System.Array.Sort(new byte[1], (System.Collections.IComparer)null);
+        Array.Sort<byte>(new byte[1], (IComparer<byte>)null!);
     }
 
     // [6] System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Object)

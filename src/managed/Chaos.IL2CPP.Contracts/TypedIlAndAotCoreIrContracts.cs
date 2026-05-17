@@ -436,9 +436,27 @@ public sealed record AotCoreIrMethodArtifact
     /// For P/Invoke methods: the native entry-point name (e.g. "Sleep").
     public string? ImportEntryPointName { get; init; }
 
+    /// <summary>
+    /// For P/Invoke methods: raw <see cref="System.Reflection.MethodImportAttributes"/>
+    /// calling-convention bits (mask 0x0700). 0 = default (WinApi).
+    /// </summary>
+    public int ImportCallingConvention { get; init; }
+
+    /// <summary>
+    /// For P/Invoke methods: raw <see cref="System.Reflection.MethodImportAttributes"/>
+    /// CharSet bits (mask 0x0006). 0 = default (Ansi).
+    /// </summary>
+    public int ImportCharSet { get; init; }
+
     /// For P/Invoke methods: indices of parameters whose managed type is
     /// System.String and therefore need UTF-8 marshalling.
     public IReadOnlyList<int>? StringParameterIndices { get; init; }
+
+    /// For P/Invoke methods: indices of parameters whose managed type derives
+    /// from <see cref="System.Runtime.InteropServices.SafeHandle"/>.
+    /// These are marshalled by extracting the inner handle value (IntPtr)
+    /// via <c>MarshalSafeHandleGetHandle</c> before the native call.
+    public IReadOnlyList<int>? SafeHandleParameterIndices { get; init; }
 
     /// For P/Invoke methods: indices of parameters whose managed type is a
     /// blittable value type (struct composed of blittable primitive fields).

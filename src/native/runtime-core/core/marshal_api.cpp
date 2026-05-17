@@ -113,5 +113,88 @@ CHAOS_IL2CPP_INT32 TaskKernelNewId() {
     return g_next_task_id.fetch_add(1, CHAOS_IL2CPP_MEMORY_ORDER_ACQ_REL);
 }
 
+void* MarshalPtrToStringWide(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    CHAOS_IL2CPP_INTPTR wide_buffer,
+    CHAOS_IL2CPP_INT32 length,
+    bool has_explicit_length) {
+    if (!IsAttached(runtime_state, thread_state) || wide_buffer == 0) return nullptr;
+
+    const CHAOS_IL2CPP_UINT16* wide_chars = reinterpret_cast<const CHAOS_IL2CPP_UINT16*>(wide_buffer);
+    CHAOS_IL2CPP_INT32 wide_len;
+    if (has_explicit_length) {
+        if (length < 0) return nullptr;
+        wide_len = length;
+    } else {
+        const CHAOS_IL2CPP_UINT16* p = wide_chars;
+        while (*p != 0) { ++p; }
+        wide_len = static_cast<CHAOS_IL2CPP_INT32>(p - wide_chars);
+    }
+
+    return MarshalWideToString(runtime_state, thread_state, wide_chars, wide_len);
+}
+
+CHAOS_IL2CPP_INTPTR MarshalStringToCoTaskMemWide(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    void* managed_string) {
+    if (!IsAttached(runtime_state, thread_state) || managed_string == nullptr) return 0;
+
+    CHAOS_IL2CPP_INT32 wide_needed = MarshalStringToWide(managed_string, nullptr, 0);
+    if (wide_needed < 0) return 0;
+
+    CHAOS_IL2CPP_SIZE alloc_size = static_cast<CHAOS_IL2CPP_SIZE>(wide_needed + 1) * sizeof(CHAOS_IL2CPP_UINT16);
+    auto memory = AllocateMarshalBlock(runtime_state, alloc_size, MarshalAllocationKind::CoTaskMem);
+    if (memory == 0) return 0;
+
+    auto* target = reinterpret_cast<CHAOS_IL2CPP_UINT16*>(GetMarshalAllocationStorage(memory));
+    MarshalStringToWide(managed_string, target, wide_needed);
+    target[wide_needed] = 0;
+    return memory;
+}
+
+CHAOS_IL2CPP_INTPTR MarshalSafeHandleGetHandle(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    void* safe_handle_obj) {
+    if (!IsAttached(runtime_state, thread_state) || safe_handle_obj == nullptr) return 0;
+
+    // Object header starts with a TypeInfoHot* pointer (8 bytes).
+    // The instance data begins at offset = header_size where header_size is
+    //   8  for PureType  (flags & 0x03 == 0x00)
+    //   16 for ThinLockable (flags & 0x03 == 0x01)
+    // SafeHandle/CriticalHandle has 'handle' (IntPtr) as the first instance field,
+    // which immediately follows the header.
+    using chaos::il2cpp::common::kTypeInfoHeaderKindMask;
+    using chaos::il2cpp::common::kTypeInfoHeaderKindPure;
+    const auto* ti = *static_cast<const TypeInfoHot* const*>(safe_handle_obj);
+    const CHAOS_IL2CPP_SIZE header_size = (ti->flags & kTypeInfoHeaderKindMask) == kTypeInfoHeaderKindPure ? 8u : 16u;
+
+    return *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        static_cast<uint8_t*>(safe_handle_obj) + header_size);
+}
+
+CHAOS_IL2CPP_INT32 MarshalSizeOf(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    const TypeInfoHot* type_info) {
+    (void)thread_state;
+    if (runtime_state == nullptr || type_info == nullptr) return 0;
+
+    // Try the struct marshalling descriptor first (covers complex value types).
+    auto* desc = ResolveStructMarshallingDescriptor(type_info);
+    if (desc != nullptr) {
+        return static_cast<CHAOS_IL2CPP_INT32>(desc->total_size);
+    }
+
+    // For types without a descriptor, use the GC instance_size minus header.
+    // instance_size includes the object header; managed size excludes it.
+    auto header_size = (type_info->flags & kTypeInfoHeaderKindMask) == kTypeInfoHeaderKindPure ? 8u : 16u;
+    // instance_size might not be directly available here.
+    // Fallback: return 0 for types without a registered descriptor.
+    return 0;
+}
+
 }  // anonymous namespace
 }  // namespace chaos::il2cpp::runtime_core

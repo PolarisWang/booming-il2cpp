@@ -110,8 +110,10 @@ void* MarshalGetFunctionPointerForDelegateImpl(
 
 /// Runtime helper for Marshal.GetDelegateForFunctionPointer.
 /// Creates a wrapper delegate that forwards to the native function pointer.
-/// V1: returns nullptr (not yet fully implemented — use GetFunctionPointerForDelegate
-/// for the reverse direction when possible).
+/// The native function is invoked through an arity-aware dispatch thunk
+/// that strips the managed calling convention (RuntimeState*, ThreadState*)
+/// and forwards pointer-sized arguments directly.
+/// V1 limitation: all args treated as CHAOS_IL2CPP_INTPTR; no CallingConvention.
 void* MarshalGetDelegateForFunctionPointerImpl(
     RuntimeState* runtime_state,
     ThreadState* thread_state,

@@ -53,7 +53,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -1148,7 +1148,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CallVirtHelper_CreateAndUse(v
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_SnapshotTestFixtures_InstanceHelper, {});
 		chaos_object->header.type_info = &chaos_mt_SnapshotTestFixtures_InstanceHelper.hot;
-		chaos_object->header.vtable = chaos_vtable_SnapshotTestFixtures_InstanceHelper;
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);

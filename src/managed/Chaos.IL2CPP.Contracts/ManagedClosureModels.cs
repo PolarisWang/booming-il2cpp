@@ -151,6 +151,18 @@ public sealed record ManagedImportModel
     public required string ModuleName { get; init; }
 
     public required string EntryPointName { get; init; }
+
+    /// <summary>
+    /// Raw <see cref="System.Reflection.MethodImportAttributes"/> calling-convention bits
+    /// (mask 0x0700: WinApi=0x0100, CDecl=0x0200, StdCall=0x0300, ThisCall=0x0400, FastCall=0x0500).
+    /// </summary>
+    public int CallingConvention { get; init; }
+
+    /// <summary>
+    /// Raw <see cref="System.Reflection.MethodImportAttributes"/> CharSet bits
+    /// (mask 0x0006: Ansi=0x0002, Unicode=0x0004, Auto=0x0006).
+    /// </summary>
+    public int CharSet { get; init; }
 }
 
 public sealed record ManagedParameterModel

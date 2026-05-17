@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/exception/throw/diagnostics",
-  "capturedAt": "2026-05-16T20:10:09",
+  "capturedAt": "2026-05-17T11:31:31",
   "batchMode": true,
   "summary": {
     "totalMethods": 14,
@@ -36,7 +36,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 1,
@@ -45,7 +45,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 2,
@@ -54,7 +54,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 3,
@@ -63,7 +63,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 4,
@@ -72,7 +72,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 5,
@@ -81,7 +81,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 6,
@@ -90,7 +90,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 7,
@@ -99,7 +99,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 8,
@@ -108,7 +108,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 9,
@@ -117,7 +117,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 10,
@@ -126,7 +126,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 11,
@@ -135,7 +135,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 12,
@@ -144,7 +144,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     },
     {
       "methodIndex": 13,
@@ -153,7 +153,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 135)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::.ctor\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_Message\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Exception::get_InnerException\",\n    \"status\"",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/14] System.Exception::.ctor... not found in closure\n  [3/3-2/14] System.Exception::.ctor... not found in closure\n  [3/3-3/14] System.Exception::get_Message... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure\n  [3/3-5/14] System.Exception::get_StackTrace... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... n"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-7/14] System.Exception::ToString... not found in closure\n  [3/3-6/14] System.Exception::get_HResult... not found in closure\n  [3/3-8/14] System.Exception::GetBaseException...  [3/3-10/14] System.ArgumentNullException::.ctor...  [3/3-13/14] System.NotSupportedException::.ctor... not found in closure\n  [3/3-4/14] System.Exception::get_InnerException... not found in closure"
     }
   ]
 }

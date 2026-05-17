@@ -44,7 +44,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -1153,10 +1153,8 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_VoidCaller_DoNothing(void)
 		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
 			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
 		{
-			alignas(16) uint8_t _d_ab[1];
-			ArgBuffer _d_bw(_d_ab);
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d0.method_key, _d_ab, nullptr);
+				_d0.method_key, nullptr, nullptr);
 		}
 		else
 		{

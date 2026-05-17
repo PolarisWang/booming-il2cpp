@@ -301,11 +301,18 @@ public sealed partial class NativeAotLoweringPlanner
 		if (_reflectionMemberSupport.MethodEntries.Count > 0)
 		{
 			TrackReferenceType("System.Private.CoreLib/System.Reflection.ParameterInfo", "System.Private.CoreLib/System.Object");
-			if (_reflectionMemberSupport.MethodEntries.Any((ReflectionMemberMethodEntry entry) => entry.IsConstructor))
+			bool hasConstructor = false;
+			bool hasMethod = false;
+			foreach (var entry in _reflectionMemberSupport.MethodEntries)
+			{
+				if (entry.IsConstructor) hasConstructor = true;
+				else hasMethod = true;
+			}
+			if (hasConstructor)
 			{
 				TrackReferenceType("System.Private.CoreLib/System.Reflection.ConstructorInfo", "System.Private.CoreLib/System.Object");
 			}
-			if (_reflectionMemberSupport.MethodEntries.Any((ReflectionMemberMethodEntry entry) => !entry.IsConstructor))
+			if (hasMethod)
 			{
 				TrackReferenceType("System.Private.CoreLib/System.Reflection.MethodInfo", "System.Private.CoreLib/System.Object");
 			}
@@ -358,7 +365,8 @@ public sealed partial class NativeAotLoweringPlanner
 				list.Add(method);
 			}
 			int nextSlot = 0;
-			foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
+			var sortedReferenceTypes = TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds).ToArray();
+			foreach (string typeId in sortedReferenceTypes)
 			{
 				if (methodsByDeclaringTypeVT.TryGetValue(typeId, out var typeMethods))
 				{
@@ -378,7 +386,7 @@ public sealed partial class NativeAotLoweringPlanner
 			// Global nextSlot ensures slot uniqueness (interface dispatch correctness),
 			// but vtableLengths must only cover the type's own hierarchy to avoid
 			// unnecessary trailing nullptr entries from unrelated hierarchies.
-			foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
+			foreach (string typeId in sortedReferenceTypes)
 			{
 				int maxSlot = -1;
 				string? current = typeId;
@@ -414,16 +422,16 @@ public sealed partial class NativeAotLoweringPlanner
 		// ── Forward-declare vtable arrays so TypeInfoHot.vtable_array can reference them ──
 			if (referenceTypeSubjectIds.Count > 0)
 			{
-				foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
-				{
-					if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
+				foreach (string typeId in sortedReferenceTypes)
+					{
+						if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
 					builder.Append("const void* ");
 					builder.Append(GetNativeVTableSymbol(typeId));
 					builder.AppendLine("[];");
 				}
 			}
 			// ── TypeInfo instances (replace integer type_id system) ──
-		foreach (string item in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
+		foreach (string item in sortedReferenceTypes)
 		{
 			ulong stableId = ComputeStableTypeId(item);
 			string parentExpr = "nullptr";
@@ -622,7 +630,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 				builder.AppendLine("// ── Virtual method table arrays ──");
 				// RegisterVTable is declared via #include "runtime_vtable.h"
-			foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
+			foreach (string typeId in sortedReferenceTypes)
 			{
 				if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
 				var entries = new AotCoreIrMethodArtifact?[vtLen];

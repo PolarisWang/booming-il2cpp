@@ -68,6 +68,16 @@ CHAOS_IL2CPP_INTPTR MarshalStringToCoTaskMemUtf8(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
     void* managed_string);
+void* MarshalPtrToStringWide(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    CHAOS_IL2CPP_INTPTR wide_buffer,
+    CHAOS_IL2CPP_INT32 length,
+    bool has_explicit_length);
+CHAOS_IL2CPP_INTPTR MarshalStringToCoTaskMemWide(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    void* managed_string);
 CHAOS_IL2CPP_UINT8 MarshalReadByte(CHAOS_IL2CPP_INTPTR address, CHAOS_IL2CPP_INT32 offset);
 CHAOS_IL2CPP_INT16 MarshalReadInt16(CHAOS_IL2CPP_INTPTR address, CHAOS_IL2CPP_INT32 offset);
 CHAOS_IL2CPP_INT32 MarshalReadInt32(CHAOS_IL2CPP_INTPTR address, CHAOS_IL2CPP_INT32 offset);
@@ -118,6 +128,21 @@ void* MarshalWideToString(RuntimeState* runtime_state, ThreadState* thread_state
 /// Convert a native ANSI/UTF-8 buffer to a managed UTF-8 string.
 /// Returns a managed String object.
 void* MarshalAnsiToString(RuntimeState* runtime_state, ThreadState* thread_state, const char* ansi_buf, CHAOS_IL2CPP_INT32 byte_len);
+
+/// Extract the inner handle value from a SafeHandle (or CriticalHandle) object.
+/// Returns the raw IntPtr handle value, or 0 if the object is nullptr.
+CHAOS_IL2CPP_INTPTR MarshalSafeHandleGetHandle(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    void* safe_handle_obj);
+
+/// Return the marshalled size of a value type via its StructMarshallingDescriptorV1.
+/// Falls back to the type's instance_size when no descriptor is registered.
+/// Returns 0 for unknown types.
+CHAOS_IL2CPP_INT32 MarshalSizeOf(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    const TypeInfoHot* type_info);
 
 }  // namespace chaos::il2cpp::runtime_core
 

@@ -90,4 +90,5 @@ using namespace chaos::il2cpp::marshal_abi;
 #include "core/numerics_vectors.cpp"
 #include "core/delegate_thunks.cpp"
 #include "core/struct_marshal_descriptors.cpp"
+#include "core/struct_marshal.cpp"
 #include "core/abi_export.cpp"
