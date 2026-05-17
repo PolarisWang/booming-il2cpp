@@ -289,7 +289,7 @@ def check_dependencies(modules: dict) -> list:
         mod_path = REPO_ROOT / mod_cfg["path"]
         if not mod_path.exists():
             continue
-        allowed_deps = set(mod_cfg.get("dependencies", [])) | {mod_name, "chaos_bdwgc"}
+        allowed_deps = set(mod_cfg.get("dependencies", [])) | {mod_name}
 
         for file_path in sorted(mod_path.rglob("*.cpp")):
             if any(part.startswith("__") or part.startswith(".") for part in file_path.parts):

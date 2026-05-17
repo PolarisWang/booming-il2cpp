@@ -70,7 +70,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_region_test.cpp")
         PRIVATE
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
-            "${REPO_ROOT}/third_party/bdwgc/include"
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_gc_region_test
@@ -91,7 +90,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_root_scanner_test.cpp")
             "${REPO_ROOT}/contracts/native/v0"
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
-            "${REPO_ROOT}/third_party/bdwgc/include"
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_gc_root_scanner_test
@@ -113,7 +111,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/domain_unload_test.cpp")
             "${REPO_ROOT}/contracts/native/v0"
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
-            "${REPO_ROOT}/third_party/bdwgc/include"
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_domain_unload_test
@@ -133,7 +130,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_young_collector_test.cpp")
         PRIVATE
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
-            "${REPO_ROOT}/third_party/bdwgc/include"
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_gc_young_collector_test
@@ -154,7 +150,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/memory_domain_test.cpp")
         PRIVATE
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
-            "${REPO_ROOT}/third_party/bdwgc/include"
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_memory_domain_test
@@ -238,7 +233,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_stress_test.cpp")
             "${REPO_ROOT}/contracts/native/v0"
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
-            "${REPO_ROOT}/third_party/bdwgc/include"
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_gc_stress_test
@@ -280,7 +274,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_sanity_test.cpp")
             "${REPO_ROOT}/contracts/native/v0"
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
-            "${REPO_ROOT}/third_party/bdwgc/include"
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_gc_sanity_test
@@ -301,7 +294,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bgc_smoke.cpp")
             "${REPO_ROOT}/contracts/native/v0"
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
-            "${REPO_ROOT}/third_party/bdwgc/include"
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_gc_bgc_smoke
@@ -323,7 +315,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
             "${REPO_ROOT}/contracts/native/v0"
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
-            "${REPO_ROOT}/third_party/bdwgc/include"
             "${REPO_ROOT}/third_party/fmt/include")
     target_link_libraries(
         chaos_capacity_stress_test

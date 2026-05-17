@@ -137,8 +137,7 @@ target_include_directories(
         "${CMAKE_CURRENT_LIST_DIR}"
         "${CMAKE_CURRENT_LIST_DIR}/gc")
 
-target_link_libraries(chaos_runtime_core PUBLIC chaos_bdwgc chaos_fmt chaos_common)
+target_link_libraries(chaos_runtime_core PUBLIC chaos_fmt chaos_common)
 target_include_directories(chaos_runtime_core PRIVATE
-    "${REPO_ROOT}/third_party/bdwgc/include"
     "${REPO_ROOT}/src/native"
     "${REPO_ROOT}/third_party/fmt/include")

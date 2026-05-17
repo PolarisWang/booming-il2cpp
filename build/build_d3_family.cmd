@@ -2,7 +2,7 @@
 call "C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvarsall.bat" x64 >nul 2>&1
 if %ERRORLEVEL% neq 0 exit /b 1
 
-set INC=-I"D:\agent\booming-il2cpp\src\native\common" -I"D:\agent\booming-il2cpp\src\native\common\chaos" -I"D:\agent\booming-il2cpp\contracts\native\v0" -I"D:\agent\booming-il2cpp\src\native\runtime-core" -I"D:\agent\booming-il2cpp\src\native\bootstrap" -I"D:\agent\booming-il2cpp\src\native\interpreter" -I"D:\agent\booming-il2cpp\third_party\fmt\include" -I"D:\agent\booming-il2cpp\third_party\bdwgc\include" -I"D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib"
+set INC=-I"D:\agent\booming-il2cpp\src\native\common" -I"D:\agent\booming-il2cpp\src\native\common\chaos" -I"D:\agent\booming-il2cpp\contracts\native\v0" -I"D:\agent\booming-il2cpp\src\native\runtime-core" -I"D:\agent\booming-il2cpp\src\native\bootstrap" -I"D:\agent\booming-il2cpp\src\native\interpreter" -I"D:\agent\booming-il2cpp\third_party\fmt\include" -I"D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib"
 
 set DEF=-DCHAOS_IL2CPP_CHECK
 set CFLAGS=/nologo /std:c++17 /c /EHac /W3 /utf-8 /O2 /MD /GS-

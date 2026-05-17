@@ -135,11 +135,6 @@ public:
         auto nursery_size = last_nursery_used_.load(std::memory_order_relaxed);
         auto threshold = static_cast<CHAOS_IL2CPP_SIZE>(
             kYoungTriggerMultiplier * nursery_size);
-        // Cap threshold to prevent tail-phase starvation: with large nurseries
-        // and few remaining threads, the global allocation counter takes too long
-        // to reach the nursery-size-based threshold.
-        constexpr CHAOS_IL2CPP_SIZE kMaxTriggerBytes = 48 * 1024;
-        if (threshold > kMaxTriggerBytes) threshold = kMaxTriggerBytes;
         if (alloc_since_last_gc_.load(std::memory_order_relaxed) < threshold)
             return false;
         // Cooldown: skip triggering if the cooldown counter is above zero.

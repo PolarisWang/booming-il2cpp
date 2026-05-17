@@ -18,8 +18,6 @@
 #include "gc_young_collector.h"
 #include "memory_domain.h"
 
-#include <gc.h>
-
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
@@ -91,8 +89,6 @@ static void test_nonexistent_domain() {
 
 static void test_basic_unload() {
     TEST("UnloadDomain basic lifecycle");
-
-    GC_INIT();
 
     // Set heap base for card table ops.
     GcSetHeapBase(reinterpret_cast<void*>(0x1000000));
@@ -178,8 +174,6 @@ static void test_basic_unload() {
 static void test_multi_region_unload() {
     TEST("UnloadDomain releases multiple domain regions");
 
-    GC_INIT();
-
     DomainInit init{};
     init.module_name = "multi_region_test.dll";
     init.module_kind = 1;
@@ -240,8 +234,6 @@ static void test_multi_region_unload() {
 
 static void test_preserves_other_domain() {
     TEST("UnloadDomain does not affect unrelated domains");
-
-    GC_INIT();
 
     // Register two domains.
     DomainInit init_a{}, init_b{};
@@ -312,8 +304,6 @@ static void test_preserves_other_domain() {
 int main() {
     puts("CRAG C4 tests (domain unloader):");
     puts("════════════════════════════════\n");
-
-    GC_INIT();
 
     test_invalid_domain();
     test_nonexistent_domain();

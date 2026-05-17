@@ -33,7 +33,7 @@ contracts/              — Native ABI contracts (v0)
 tests/                  — Snapshot tests, integration tests, verification suites
 verification/           — Foundation DLL verification pipeline
 wiki/                   — Project wiki and architecture documentation
-third_party/            — External dependencies (bdwgc, fmt, mono.cecil, scriban)
+third_party/            — External dependencies (fmt, mono.cecil, scriban)
 ```
 
 ## Prerequisites
@@ -70,7 +70,6 @@ dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests
 
 ## Key Dependencies
 
-- [bdwgc](https://github.com/ivmai/bdwgc) — Conservative garbage collector (base layer)
 - [fmt](https://github.com/fmtlib/fmt) — Type-safe string formatting
 - [Mono.Cecil](https://github.com/jbevain/cecil) — .NET assembly inspection
 - [Scriban](https://github.com/scriban/scriban) — Template engine for code generation

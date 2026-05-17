@@ -54,7 +54,7 @@ bool ArrayReverseReferenceRange(
 /// Mark the object as changed (for incremental GC write barrier).
 /// C3 stub: will be wired for incremental GC in later milestones.
 inline void GcEndStubbornChange(const void* /*obj*/) noexcept {
-    // No-op: bdwgc not compiled with MANUAL_VDB.
+    // No-op: CRAG write barrier uses card table.
     // C3+ will implement the actual write-barrier logic here.
 }
 

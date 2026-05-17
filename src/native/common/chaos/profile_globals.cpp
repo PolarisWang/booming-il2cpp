@@ -7,13 +7,15 @@
 
 namespace chaos::il2cpp::common {
 
-// Single-instance globals — defined here, declared extern in profile.h.
-ProfileSlot g_profile_table[kProfileMaxSlots] = {};
-HashEntry   g_profile_hash_table[kProfileHashSize] = {};
-int         g_profile_slot_count = 0;
+// Per-thread profile data — one instance per thread, zero-initialized on first
+// access.  Shared across all translation units (external linkage).
+thread_local ThreadProfileData g_tls_profile;
 
-// Thread-local nesting depth for hierarchical dump.
-thread_local int tls_profile_depth = 0;
+// Global thread registry: fixed-size array indexed by registration_slot.
+// Threads register themselves on first PROFILE_SCOPE use via atomic fetch_add,
+// making enumeration lock-free for ProfileDump/ProfileReset.
+std::atomic<ThreadProfileData*> g_profile_threads[kProfileMaxThreads]{};
+std::atomic<int> g_profile_thread_count{0};
 
 // TSC calibration state (lazily calibrated on first ProfileDump).
 double g_ns_per_cycle  = 0.0;

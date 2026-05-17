@@ -15,8 +15,6 @@
 #include "gc_card_table.h"
 #include "gc_young_collector.h"
 
-#include <gc.h>
-
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
@@ -94,7 +92,6 @@ static void test_forwarding_protocol() {
 static void test_is_in_nursery() {
     TEST("IsInNursery");
 
-    GC_INIT();
     auto& mgr = RegionManager::Instance();
 
     // Set up TLS nursery context.
@@ -124,8 +121,8 @@ static void test_is_in_nursery() {
     PASS();
 
     SUBTEST("pointer in tenured region not in nursery");
-    void* tenured = GC_MALLOC(64);
-    if (tenured == nullptr) { FAIL("GC_MALLOC failed"); return; }
+    void* tenured = calloc(1, 64);
+    if (tenured == nullptr) { FAIL("tenured alloc failed"); return; }
     if (IsInNursery(tenured)) { FAIL("tenured ptr should not be in nursery"); return; }
     PASS();
 }
@@ -137,7 +134,6 @@ static void test_is_in_nursery() {
 static void test_scavenge_object() {
     TEST("GcScavengeObject");
 
-    GC_INIT();
     auto& mgr = RegionManager::Instance();
 
     Region* nursery = mgr.AllocateNursery();
@@ -151,8 +147,8 @@ static void test_scavenge_object() {
     PASS();
 
     SUBTEST("tenured input returns same pointer");
-    void* tenured = GC_MALLOC(64);
-    if (tenured == nullptr) { FAIL("GC_MALLOC failed"); return; }
+    void* tenured = calloc(1, 64);
+    if (tenured == nullptr) { FAIL("tenured alloc failed"); return; }
     result = GcScavengeObject(tenured);
     if (result != tenured) { FAIL("scavenge(tenured) should return same ptr"); return; }
     PASS();
@@ -188,7 +184,7 @@ static void test_scavenge_object() {
         FAIL("promoted first word mismatch"); return;
     }
     // C2 uses EstimateObjectSize which returns at most 32 bytes.
-    // Bytes within the copied range match; beyond that, GC_MALLOC
+    // Bytes within the copied range match; beyond that, calloc
     // returns zeroed memory regardless of what the nursery had.
     PASS();
 
@@ -215,7 +211,6 @@ static void test_scavenge_object() {
 static void test_young_collection() {
     TEST("GcYoungCollection empty nursery");
 
-    GC_INIT();
     auto& mgr = RegionManager::Instance();
 
     Region* nursery = mgr.AllocateNursery();
@@ -266,7 +261,6 @@ static void test_young_collection() {
 static void test_collection_with_dirty_card() {
     TEST("GcYoungCollection with dirty old->nursery refs");
 
-    GC_INIT();
     auto& mgr = RegionManager::Instance();
 
     Region* nursery = mgr.AllocateNursery();
@@ -293,9 +287,8 @@ static void test_collection_with_dirty_card() {
     uintptr_t old_block_offset = (nursery_idx + 1) * kCardSize;
     uintptr_t old_block_addr = base_aligned + old_block_offset;
 
-    // Use GC_MALLOC_ATOMIC to get real memory (BDWGC won't scan it for
-    // pointers) — we'll manually manage the content.
-    // However, GC_MALLOC_ATOMIC may not return memory at old_block_addr.
+    // Use calloc to get real memory (not scanned for pointers).
+    // However, calloc may not return memory at old_block_addr.
     // Instead, allocate real memory and copy its address to the card slot.
     // This tests the card scanning logic without requiring vaddr control.
     //
@@ -304,7 +297,7 @@ static void test_collection_with_dirty_card() {
     // write a nursery pointer into a known slot on a dirty card.
 
     // Allocate some real memory for the simulated old-gen block.
-    void* old_block = GC_MALLOC_ATOMIC(kCardSize + 64);
+    void* old_block = calloc(1, kCardSize + 64);
     if (old_block == nullptr) { FAIL("old_block alloc failed"); return; }
 
     // Allocate a "nursery object" that the old-gen block will reference.
@@ -323,7 +316,7 @@ static void test_collection_with_dirty_card() {
     // Only run if old_block's card overlaps the nursery's card range.
     if (old_card_idx > nursery_last_idx) {
         // The old block is outside the nursery's scan range.
-        // This is expected when GC_MALLOC places it far from nursery.
+        // This is expected when calloc places it far from nursery.
         // We'll fall back to testing via the conservative sweep (Phase 2)
         // which doesn't need card table alignment.
         printf("SKIP (no address overlap — testing via conservative sweep) ... ");
@@ -425,8 +418,6 @@ static void test_collection_with_dirty_card() {
 int main() {
     puts("CRAG C2 tests (young collector):");
     puts("════════════════════════════════\n");
-
-    GC_INIT();
 
     test_forwarding_protocol();
     test_is_in_nursery();

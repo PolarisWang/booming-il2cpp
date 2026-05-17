@@ -354,36 +354,35 @@ static inline size_t LcgSize(int thread_index, int iter,
 
 static int64_t g_last_pattern_failures = 0;
 
+// Lock-free per-thread progress tracking (no I/O contention).
+// 0=unstarted 1=registered 2=nursery_OK 3=first_alloc_done 4=completed
+static std::atomic<int> g_thread_progress[1024];
+
 // ════════════════════════════════════════════════════════════════════════════
 // Scenario A: Baseline concurrent
 // ════════════════════════════════════════════════════════════════════════════
 
 static void worker_a(int thread_index, WorkerResult* result) {
     RegisterWorker();
+    g_thread_progress[thread_index].store(1, std::memory_order_release);
     if (!SetupTlsNursery()) {
         std::snprintf(result->error_message, sizeof(result->error_message),
                       "AllocateNursery failed for thread %d", thread_index);
         UnregisterWorker();
         return;
     }
+    g_thread_progress[thread_index].store(2, std::memory_order_release);
 
     for (int i = 0; i < kAllocationsPerThread; ++i) {
         result->allocations_attempted++;
         size_t size = LcgSize(thread_index, i, kMinAllocSize, kMaxAllocSize);
         size = (size + 7) & ~static_cast<size_t>(7);
 
-        // Phase 1: safety net — if stuck here for 30s, something is wrong in
-        // NurseryAllocate itself (fast path should be ~100ns).
         void* p = NurseryAllocate(size);
         if (!p) continue;
         result->allocations_succeeded++;
-        if (i == 0) {
-            // Use WriteFile directly to avoid CRT fprintf lock contention.
-            char buf[64];
-            int n = std::snprintf(buf, sizeof(buf), "[ALLOC_OK] thread=%d\n", thread_index);
-            DWORD written;
-            WriteFile(GetStdHandle(STD_ERROR_HANDLE), buf, static_cast<DWORD>(n), &written, nullptr);
-        }
+        if (i == 0)
+            g_thread_progress[thread_index].store(3, std::memory_order_release);
 
         WritePattern(p, size, thread_index, i);
 
@@ -414,7 +413,32 @@ static bool RunScenarioA(GcStatsSnapshot* stats_out) {
         workers.emplace_back(worker_a, i, &results[i]);
     auto t1 = std::chrono::steady_clock::now();
 
+    // Background monitor thread: dumps progress every 5s while workers run.
+    std::atomic<bool> monitor_done{false};
+    std::thread monitor([&]() {
+        HANDLE err = GetStdHandle(STD_ERROR_HANDLE);
+        char buf[256];
+        for (int iter = 0; !monitor_done.load(std::memory_order_acquire); ++iter) {
+            int phase1 = 0, phase2 = 0, phase3 = 0;
+            for (int j = 0; j < kNumWorkerThreads; ++j) {
+                int p = g_thread_progress[j].load(std::memory_order_acquire);
+                if (p >= 1) phase1++;
+                if (p >= 2) phase2++;
+                if (p >= 3) phase3++;
+            }
+            int n = std::snprintf(buf, sizeof(buf), "[MONITOR] iter=%d reg=%d nursery=%d alloc=%d\n",
+                iter, phase1, phase2, phase3);
+            DWORD written;
+            WriteFile(err, buf, static_cast<DWORD>(n), &written, nullptr);
+            // Poll interval: 5 seconds
+            for (int s = 0; s < 50 && !monitor_done.load(std::memory_order_acquire); ++s)
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+    });
+
     for (auto& w : workers) { if (w.joinable()) w.join(); }
+    monitor_done.store(true, std::memory_order_release);
+    if (monitor.joinable()) monitor.join();
     auto t2 = std::chrono::steady_clock::now();
 
     uint64_t create_us = static_cast<uint64_t>(
