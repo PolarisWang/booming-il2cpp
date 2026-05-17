@@ -40,6 +40,11 @@ struct TypeVTable {
     /// and where their methods live in the flat vtable_array.
     const void* iface_map;            ///< Pointer to array of InterfaceMapEntry (optional)
     CHAOS_IL2CPP_UINT32 iface_count;  ///< Number of entries in iface_map (0 = none)
+    /// Optional runtime-only interface map: hot-update additions via
+    /// ChaosTypeAddInterface / RegisterTypeVTableRuntimeInterface.
+    /// Heap-allocated, grown by RegisterTypeVTableRuntimeInterface.
+    const void* runtime_iface_map;            ///< Pointer to array of InterfaceMapEntry
+    CHAOS_IL2CPP_UINT32 runtime_iface_count;  ///< Number of entries (0 = none)
 };
 
 // ── Registration ─────────────────────────────────────────────────────────
@@ -64,6 +69,25 @@ void RegisterVTableArray(CHAOS_IL2CPP_UINT64 stable_id,
                          CHAOS_IL2CPP_UINT32 length) noexcept;
 
 // ── Lookup ───────────────────────────────────────────────────────────────
+
+/// Register a runtime-added interface on a type's vtable.
+/// Appends to the type's runtime_iface_map (heap-reallocated).
+/// The type's vtable must already be registered.
+/// Idempotent: re-adding the same iface_stable_id is a no-op.
+/// @return true on success, false if type_token not found or allocation fails.
+bool RegisterTypeVTableRuntimeInterface(
+    CHAOS_IL2CPP_UINT32       type_token,
+    CHAOS_IL2CPP_UINT64       iface_stable_id,
+    CHAOS_IL2CPP_UINT32       vtable_offset,
+    CHAOS_IL2CPP_UINT32       method_count) noexcept;
+
+/// Find the vtable_offset for a given interface on a given type's vtable.
+/// Searches both AOT iface_map and runtime_iface_map.
+/// Uses the IOC (Interface Offset Cache) internally for repeated lookups.
+/// @return vtable_offset, or UINT32_MAX if the interface is not found.
+CHAOS_IL2CPP_UINT32 chaos_find_interface_offset(
+    CHAOS_IL2CPP_UINT32       type_token,
+    CHAOS_IL2CPP_UINT64       iface_stable_id) noexcept;
 
 /// Resolve a virtual method pointer by walking the inheritance chain.
 /// Uses secondary token→stable_id index, then walks by base_stable_id.

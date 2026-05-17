@@ -852,6 +852,19 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                                     }
                                 }
                             }
+                            // Also check runtime_iface_map (hot-update interface additions).
+                            if (!compatible && scan_vtable->runtime_iface_map != nullptr &&
+                                scan_vtable->runtime_iface_count > 0u) {
+                                const auto* runtime_entries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(scan_vtable->runtime_iface_map);
+                                for (CHAOS_IL2CPP_UINT32 ifi = 0u; ifi < scan_vtable->runtime_iface_count; ++ifi) {
+                                    const auto* target_vt2 = chaos::il2cpp::vtable_registry::TryGetTypeVTable(target_type_token);
+                                    if (target_vt2 != nullptr &&
+                                        runtime_entries[ifi].iface_stable_id == target_vt2->stable_id) {
+                                        compatible = true;
+                                        break;
+                                    }
+                                }
+                            }
                             scan_token = scan_vtable->base_token;
                         }
                     }

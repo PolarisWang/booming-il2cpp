@@ -75,6 +75,39 @@ static std::atomic<CHAOS_IL2CPP_UINT32> g_vtable_epoch{1u};
 // populates the cache correctly).
 static thread_local TcvcState tls_tcvc{};
 
+// ── IOC: Interface Offset Cache (Phase 9b+) ───────────────────────────
+//
+// Caches (type_token, iface_stable_id) -> vtable_offset lookups to avoid
+// linear scanning iface_map entries on repeated interface dispatch.
+//
+// Separate from TCVC because IOC caches the intermediate interface-offset
+// mapping, while TCVC caches the final method_pointer.  IOC entries use
+// g_iface_epoch which is bumped only by interface additions (not by
+// regular slot updates), so a runtime_iface_map append invalidates IOC
+// without invalidating the TCVC for non-interface methods.
+
+static constexpr CHAOS_IL2CPP_UINT32 kIocSize = 32;
+
+struct IocEntry {
+    CHAOS_IL2CPP_UINT64 key;       // (type_token << 32) | (iface_stable_id & 0xFFFFFFFF)
+    CHAOS_IL2CPP_UINT32 vtable_offset;
+    CHAOS_IL2CPP_UINT32 method_count;
+    CHAOS_IL2CPP_UINT32 epoch;     // g_iface_epoch at insertion time
+};
+
+struct IocState {
+    IocEntry entries[kIocSize];
+    CHAOS_IL2CPP_UINT32 next_index;  // ring buffer insertion point
+};
+
+// Global epoch counter for interface-only changes.  Bumped (with release
+// ordering) after every successful RegisterTypeVTableRuntimeInterface call.
+// Initialized to 1 so zero-initialized cache entries never match.
+static std::atomic<CHAOS_IL2CPP_UINT32> g_iface_epoch{1u};
+
+// Per-thread IOC state.  Zero-initialized on first access.
+static thread_local IocState tls_ioc{};
+
 }  // namespace
 
 bool RegisterTypeVTable(const TypeVTable* vtable) {
@@ -140,6 +173,8 @@ void RegisterCodegenVTable(const void* desc) noexcept {
     tv->_pad[0] = tv->_pad[1] = tv->_pad[2] = 0;
     tv->iface_map      = vtd->iface_map;
     tv->iface_count    = vtd->iface_count;
+    tv->runtime_iface_map  = nullptr;
+    tv->runtime_iface_count = 0u;
 
     // RegisterTypeVTable now also populates flat_vtables when vtable_array is set.
     RegisterTypeVTable(tv);
@@ -241,6 +276,8 @@ bool RegisterHotUpdateVTable(
     tv->_pad[0] = tv->_pad[1] = tv->_pad[2] = 0;
     tv->iface_map      = nullptr;
     tv->iface_count    = 0u;
+    tv->runtime_iface_map  = nullptr;
+    tv->runtime_iface_count = 0u;
 
     state.by_type_token[type_token] = tv;
     if (stable_id != 0u) {
@@ -250,6 +287,92 @@ bool RegisterHotUpdateVTable(
         state.flat_vtables[stable_id] = vtable_array;
         state.flat_lengths[stable_id] = vtable_length;
     }
+    return true;
+}
+
+// ── ScanIfaceMapForMethod: Shared helper for iface_map/runtime_iface_map scan ──
+// Returns the method_pointer if declared_method_token falls within any
+// interface's method range, or nullptr if not found.
+static void* ScanIfaceMapForMethod(
+    const void* iface_map_raw,
+    CHAOS_IL2CPP_UINT32 iface_count,
+    const void* const* vtable_array,
+    CHAOS_IL2CPP_UINT32 vtable_length,
+    CHAOS_IL2CPP_UINT32 declared_method_token) noexcept
+{
+    if (iface_map_raw == nullptr || iface_count == 0u || vtable_array == nullptr)
+        return nullptr;
+    const auto* entries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(iface_map_raw);
+    for (CHAOS_IL2CPP_UINT32 ifi = 0u; ifi < iface_count; ++ifi) {
+        if (declared_method_token < entries[ifi].method_count) {
+            CHAOS_IL2CPP_UINT32 slot = entries[ifi].vtable_offset + declared_method_token;
+            if (slot < vtable_length)
+                return const_cast<void*>(vtable_array[slot]);
+        }
+    }
+    return nullptr;
+}
+
+// ── RegisterTypeVTableRuntimeInterface ─────────────────────────────────
+// Appends an interface mapping to a TypeVTable's runtime_iface_map.
+// Heap-reallocates the map and bumps g_iface_epoch on success.
+bool RegisterTypeVTableRuntimeInterface(
+    CHAOS_IL2CPP_UINT32       type_token,
+    CHAOS_IL2CPP_UINT64       iface_stable_id,
+    CHAOS_IL2CPP_UINT32       vtable_offset,
+    CHAOS_IL2CPP_UINT32       method_count) noexcept
+{
+    if (type_token == 0u || iface_stable_id == 0u) return false;
+
+    auto& state = GetState();
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
+
+    auto it = state.by_type_token.find(type_token);
+    if (it == state.by_type_token.end()) return false;
+
+    auto* tv = const_cast<TypeVTable*>(it->second);
+
+    // Check for duplicates in existing runtime map.
+    if (tv->runtime_iface_map != nullptr) {
+        const auto* existing = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(tv->runtime_iface_map);
+        for (CHAOS_IL2CPP_UINT32 i = 0u; i < tv->runtime_iface_count; ++i) {
+            if (existing[i].iface_stable_id == iface_stable_id) {
+                return true;  // already present, idempotent
+            }
+        }
+    }
+
+    // Realloc the runtime_iface_map (one past current count).
+    CHAOS_IL2CPP_UINT32 new_count = tv->runtime_iface_count + 1u;
+    auto* new_map = static_cast<chaos::il2cpp::common::InterfaceMapEntry*>(
+        CHAOS_IL2CPP_MALLOC(new_count * sizeof(chaos::il2cpp::common::InterfaceMapEntry)));
+    if (new_map == nullptr) return false;
+
+    // Copy existing entries.
+    if (tv->runtime_iface_map != nullptr && tv->runtime_iface_count > 0u) {
+        CHAOS_IL2CPP_MEMCPY(new_map, tv->runtime_iface_map,
+                            tv->runtime_iface_count * sizeof(chaos::il2cpp::common::InterfaceMapEntry));
+    }
+
+    // Append new entry.
+    new_map[tv->runtime_iface_count].iface_stable_id = iface_stable_id;
+    new_map[tv->runtime_iface_count].vtable_offset   = vtable_offset;
+    new_map[tv->runtime_iface_count].method_count    = method_count;
+
+    // Free old map (if any) and install new one.
+    if (tv->runtime_iface_map != nullptr) {
+        CHAOS_IL2CPP_FREE(const_cast<void*>(tv->runtime_iface_map));
+    }
+    tv->runtime_iface_map  = new_map;
+    tv->runtime_iface_count = new_count;
+
+    // Bump iface epoch to invalidate per-thread IOC entries.
+    g_iface_epoch.fetch_add(1u, std::memory_order_release);
+
+    // Also bump vtable epoch so that TCVC entries for this type are
+    // invalidated (the previously cached nullptr must be re-resolved).
+    g_vtable_epoch.fetch_add(1u, std::memory_order_release);
+
     return true;
 }
 
@@ -339,6 +462,7 @@ void UnregisterTypeVTable(CHAOS_IL2CPP_UINT32 type_token) noexcept {
     // Free heap-allocated memory.
     if (tv->slots != nullptr) CHAOS_IL2CPP_FREE(const_cast<VTableSlot*>(tv->slots));
     if (tv->vtable_array != nullptr) CHAOS_IL2CPP_FREE(const_cast<void**>(tv->vtable_array));
+    if (tv->runtime_iface_map != nullptr) CHAOS_IL2CPP_FREE(const_cast<void*>(tv->runtime_iface_map));
     CHAOS_IL2CPP_FREE(const_cast<TypeVTable*>(tv));
 }
 
@@ -360,6 +484,7 @@ void UnregisterTypeVTableByStableId(CHAOS_IL2CPP_UINT64 stable_id) noexcept {
 
     if (tv->slots != nullptr) CHAOS_IL2CPP_FREE(const_cast<VTableSlot*>(tv->slots));
     if (tv->vtable_array != nullptr) CHAOS_IL2CPP_FREE(const_cast<void**>(tv->vtable_array));
+    if (tv->runtime_iface_map != nullptr) CHAOS_IL2CPP_FREE(const_cast<void*>(tv->runtime_iface_map));
     CHAOS_IL2CPP_FREE(const_cast<TypeVTable*>(tv));
 }
 
@@ -540,25 +665,33 @@ void* ResolveVirtualMethodPointer(
         }
     }
 
-    // Base chain walk failed (or skipped) -- try interface vtable map.
+    // Base chain walk failed (or skipped) -- try interface vtable map
+    // with IOC (Interface Offset Cache) for repeated lookups.
     {
         auto it = state.by_type_token.find(instance_type_token);
         if (it != state.by_type_token.end()) {
             const TypeVTable* vtable = it->second;
-            if (vtable->iface_map != nullptr && vtable->iface_count > 0u &&
-                vtable->vtable_array != nullptr) {
-                const auto* iface_entries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(vtable->iface_map);
-                for (CHAOS_IL2CPP_UINT32 ifi = 0u; ifi < vtable->iface_count; ++ifi) {
-                    if (declared_method_token < iface_entries[ifi].method_count) {
-                        CHAOS_IL2CPP_UINT32 vtable_slot =
-                            iface_entries[ifi].vtable_offset + declared_method_token;
-                        if (vtable_slot < vtable->vtable_length) {
-                            result = const_cast<void*>(vtable->vtable_array[vtable_slot]);
-                            goto cache_and_return;
-                        }
-                    }
-                }
-            }
+            if (vtable->vtable_array == nullptr) goto cache_and_return;
+
+            // ── IOC: Try interface offset cache (lock-free) ────────
+            // For interface dispatch we don't have the iface_stable_id here,
+            // but we can still benefit from direct iface_map + runtime_iface_map
+            // scanning via the ScanIfaceMapForMethod helper.
+            // (IOC is used by chaos_find_interface_offset for codegen paths.)
+
+            // ── Try AOT iface_map ──
+            result = ScanIfaceMapForMethod(
+                vtable->iface_map, vtable->iface_count,
+                vtable->vtable_array, vtable->vtable_length,
+                declared_method_token);
+            if (result != nullptr) goto cache_and_return;
+
+            // ── Try runtime_iface_map (hot-update additions) ──
+            result = ScanIfaceMapForMethod(
+                vtable->runtime_iface_map, vtable->runtime_iface_count,
+                vtable->vtable_array, vtable->vtable_length,
+                declared_method_token);
+            if (result != nullptr) goto cache_and_return;
         }
     }
 
@@ -585,6 +718,75 @@ void* ResolveVirtualMethodPointerByHandle(
     return ResolveVirtualMethodPointer(desc->metadata_token, declared_method_token);
 }
 
+CHAOS_IL2CPP_UINT32 chaos_find_interface_offset(
+    CHAOS_IL2CPP_UINT32       type_token,
+    CHAOS_IL2CPP_UINT64       iface_stable_id) noexcept
+{
+    if (type_token == 0u || iface_stable_id == 0u)
+        return CHAOS_IL2CPP_UINT32_MAX;
+
+    // ── IOC: Try thread-local cache (lock-free) ──────────────────────
+    const CHAOS_IL2CPP_UINT32 iface_epoch = g_iface_epoch.load(std::memory_order_acquire);
+    const CHAOS_IL2CPP_UINT64 ioc_key = (static_cast<CHAOS_IL2CPP_UINT64>(type_token) << 32u)
+                                       | (static_cast<CHAOS_IL2CPP_UINT32>(iface_stable_id & 0xFFFFFFFF));
+
+    for (CHAOS_IL2CPP_UINT32 i = 0u; i < kIocSize; ++i) {
+        const auto& entry = tls_ioc.entries[i];
+        if (entry.key == ioc_key && entry.epoch == iface_epoch) {
+            // Double-check epoch.
+            if (g_iface_epoch.load(std::memory_order_acquire) == iface_epoch) {
+                return entry.vtable_offset;
+            }
+            break;
+        }
+    }
+
+    // ── Cache miss: full lookup under shared lock ────────────────────
+    auto& state = GetState();
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
+
+    auto it = state.by_type_token.find(type_token);
+    if (it == state.by_type_token.end())
+        return CHAOS_IL2CPP_UINT32_MAX;
+
+    const TypeVTable* tv = it->second;
+
+    // Check AOT iface_map.
+    if (tv->iface_map != nullptr) {
+        const auto* entries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(tv->iface_map);
+        for (CHAOS_IL2CPP_UINT32 i = 0u; i < tv->iface_count; ++i) {
+            if (entries[i].iface_stable_id == iface_stable_id) {
+                // IOC write-back.
+                CHAOS_IL2CPP_UINT32 idx = tls_ioc.next_index;
+                tls_ioc.entries[idx].key = ioc_key;
+                tls_ioc.entries[idx].vtable_offset = entries[i].vtable_offset;
+                tls_ioc.entries[idx].method_count = entries[i].method_count;
+                tls_ioc.entries[idx].epoch = iface_epoch;
+                tls_ioc.next_index = (idx + 1u) % kIocSize;
+                return entries[i].vtable_offset;
+            }
+        }
+    }
+
+    // Check runtime_iface_map.
+    if (tv->runtime_iface_map != nullptr) {
+        const auto* entries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(tv->runtime_iface_map);
+        for (CHAOS_IL2CPP_UINT32 i = 0u; i < tv->runtime_iface_count; ++i) {
+            if (entries[i].iface_stable_id == iface_stable_id) {
+                CHAOS_IL2CPP_UINT32 idx = tls_ioc.next_index;
+                tls_ioc.entries[idx].key = ioc_key;
+                tls_ioc.entries[idx].vtable_offset = entries[i].vtable_offset;
+                tls_ioc.entries[idx].method_count = entries[i].method_count;
+                tls_ioc.entries[idx].epoch = iface_epoch;
+                tls_ioc.next_index = (idx + 1u) % kIocSize;
+                return entries[i].vtable_offset;
+            }
+        }
+    }
+
+    return CHAOS_IL2CPP_UINT32_MAX;
+}
+
 CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount() {
     auto& state = GetState();
     CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
@@ -609,6 +811,11 @@ void ClearDomainPointers(CHAOS_IL2CPP_UINT32 domain_id) {
             mgr.IsInDomain(domain_id, vtable->iface_map)) {
             const_cast<TypeVTable*>(vtable)->iface_map = nullptr;
             const_cast<TypeVTable*>(vtable)->iface_count = 0u;
+        }
+        if (vtable->runtime_iface_map != nullptr &&
+            mgr.IsInDomain(domain_id, vtable->runtime_iface_map)) {
+            const_cast<TypeVTable*>(vtable)->runtime_iface_map = nullptr;
+            const_cast<TypeVTable*>(vtable)->runtime_iface_count = 0u;
         }
         if (vtable->vtable_array != nullptr &&
             mgr.IsInDomain(domain_id, vtable->vtable_array)) {
