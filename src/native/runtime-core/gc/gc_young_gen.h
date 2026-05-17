@@ -95,7 +95,7 @@ TLAB TlabClaimFromYoungGen() noexcept;
 
 /// Flush the TLS allocation counter to the scheduler.
 inline void FlushTlsAllocCounter() noexcept {
-    extern CHAOS_IL2CPP_SIZE tls_alloc_since_last_gc;
+    extern thread_local CHAOS_IL2CPP_SIZE tls_alloc_since_last_gc;
     extern GcScheduler g_gc_scheduler;
     if (tls_alloc_since_last_gc > 0) {
         g_gc_scheduler.RecordAllocation(tls_alloc_since_last_gc);

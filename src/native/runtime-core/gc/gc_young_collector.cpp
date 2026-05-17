@@ -207,12 +207,17 @@ YoungCollectionResult GcYoungCollection() {
     auto pause_start = std::chrono::steady_clock::now();
 
     uintptr_t nursery_begin = reinterpret_cast<uintptr_t>(nursery->begin);
-    uintptr_t nursery_used  = reinterpret_cast<uintptr_t>(nursery->current);
+    // With shared young gen + TLABs, TlabClaimFromYoungGen() updates
+    // g_young_gen.bump, NOT nursery->current.  Read the actual allocation
+    // frontier from the shared bump pointer so the nursery scan covers
+    // all objects in all TLABs.
+    uintptr_t nursery_used  = reinterpret_cast<uintptr_t>(
+        g_young_gen.bump.load(std::memory_order_acquire));
 
     CHAOS_IL2CPP_LOG_INFO_M("CRAG", "young_collection nursery=[{0}, {1}) usage={2}",
         static_cast<void*>(nursery->begin),
         static_cast<void*>(nursery->end),
-        static_cast<unsigned long long>(nursery->current - nursery->begin));
+        static_cast<unsigned long long>(nursery_used - nursery_begin));
 
     GcFireEvent(GcEvent::GC_YOUNG_START);
 
@@ -242,6 +247,30 @@ YoungCollectionResult GcYoungCollection() {
         CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase2_NurseryScan");
         uintptr_t scan_ptr = nursery_begin;
         auto& layout_registry = GcLayoutRegistry::Instance();
+
+        // Fast skip: sample the first 64 pointer-sized slots.  If none
+        // contain a valid TypeInfo pointer, the nursery holds only raw
+        // (untyped) memory — skip the full 16MB linear scan.
+        // This is common in stress-test scenarios with malloc-like
+        // allocations; production code always has valid TypeInfo.
+        {
+            CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase2_FastSkipCheck");
+            uintptr_t check_limit = nursery_begin + static_cast<uintptr_t>(
+                std::min<CHAOS_IL2CPP_SIZE>(
+                    nursery_used - nursery_begin, 64 * sizeof(void*)));
+            bool found_type = false;
+            for (uintptr_t c = nursery_begin; c < check_limit; c += sizeof(void*)) {
+                const void* fw = *reinterpret_cast<const void* const*>(c);
+                if (fw != nullptr && layout_registry.IsValidTypeInfoPointer(fw)) {
+                    found_type = true;
+                    break;
+                }
+            }
+            if (!found_type) {
+                CHAOS_IL2CPP_LOG_DEBUG("CRAG", "young_collection_skip_phase2 no_typed_objects");
+                goto phase3;  // skip full scan
+            }
+        }
 
         while (scan_ptr < nursery_used) {
             auto* obj = reinterpret_cast<void*>(scan_ptr);
@@ -281,6 +310,7 @@ YoungCollectionResult GcYoungCollection() {
         }
     }
 
+phase3:
     // ── Phase 3: Cheney BFS ──
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("GcYoungCollection::CheneyBfs");

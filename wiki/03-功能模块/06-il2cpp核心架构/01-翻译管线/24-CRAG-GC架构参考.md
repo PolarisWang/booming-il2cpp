@@ -95,16 +95,63 @@
 - **ClearAllCards**：O(allocated_segments) 而非 O(64K)，通过 tracked segment list
 - **ScanDirtyCards**：模板化范围扫描，用于 young GC Phase 1
 
-### 并行标记 (Parallel Mark)
+### 并行标记 (Parallel Mark) — DrainMarkStackParallel
 
 | 参数 | 值 |
 |------|-----|
 | 触发阈值 | page_count >= 64 (4MB+) |
 | Worker 数 | min(pages/32 + 1, hw_concurrency, 8) |
-| 数据结构 | Chunked work-stealing deque |
-| Chunk 粒度 | (page_idx, bitmap_word_mask) |
-| 终止检测 | atomic active_workers 递减 |
+| 数据结构 | `std::vector<MarkChunk>` per-worker + `std::mutex` |
+| Chunk 粒度 | `MarkChunk{int page_idx, uint16_t word_index, uint64_t bitmap}` |
+| 终止检测 | `active_workers` 递减 + `parallel_done` 标志 |
 | PRNG | XorShift32 (thread-local, 替代 rand()) |
+
+**MarkChunk 设计**：每个 Chunk 代表同个 page 上最多 64 个待扫描对象（一个 bitmap word == 64 slots）。`word_index` 标明该 bitmap 覆盖的 64-slot 分组编号（0 = slots 0-63, 1 = slots 64-127, ...），避免 slot ≥ 64 时位图位置与对象索引错位。
+
+**数据结构**：每个 worker 持有 `std::vector<MarkChunk>` 作为本地 deque，配一个 `std::mutex (steal_mutex)`。本地 push/pop 和远程 steal 都锁保护。这不是 lock-free 设计 — 在 MarkChunk (16 字节) 粒度下，mutex 竞争远低于 object 级别的 CAS，实现简单且充分。
+
+**操作**：
+
+| 操作 | 函数 | 说明 |
+|------|------|------|
+| 本地推送 | `PushChunk(worker, chunk)` | `lock_guard(steal_mutex)` + `deque.push_back` |
+| 本地弹出 | `PopChunk(worker, &out)` | `lock_guard(steal_mutex)` + `deque.pop_back` |
+| 远程偷取 | `StealChunk(ctx, thief_idx, &out)` | 随机 3 次 victim 选择 + `lock_guard(victim.steal_mutex)` + `deque.erase(deque.begin())` |
+| 挂起累积 | `FlushPending(worker)` | 将当前 `pending` chunk 写入 deque |
+
+**Pending Chunk Accumulator**：每个 worker 扫描对象时，新标记的子对象先累积到 `pending`（同页同 word 组合并），在页/word 切换时 `FlushPending` 写入 deque。减少 deque 写入次数 ~64x（最坏情况每个对象一个子对象指向新区 = 每 64 个对象一次写入 vs 每个对象一次）。
+
+**ProcessChunk 扫描流程**：
+1. 遍历 chunk.bitmap 中每个 set bit，计算 `slot_idx = word_index * 64 + bit`
+2. 读取 `obj = payload + slot_idx * sizeof(void*)`，验证 TypeInfo* 非空
+3. 查 `GcTypeLayout` 获取对象大小和 pointer 偏移列表
+4. 对每个 pointer slot：读取 ref → `FindPageIndexByAddr` 二分查找 → 原子 `AtomicMarkBit` → 累积到 pending
+
+**终止协议**：
+
+```
+所有 worker 处理循环:
+  while (!parallel_done):
+    1. FlushPending
+    2. local PopChunk → 有 → ProcessChunk，回到 1
+    3. StealChunk → 有 → ProcessChunk，回到 1
+    4. 无工作 → active_workers.fetch_sub(1)
+    5. 如果 prev ≤ 1: parallel_done = true; break  ← 最后离开的 worker
+    6. 非最后 → 内层循环: 定期尝试 pop/steal，
+       找到工作则 re-increment active_workers 回到外层
+```
+
+关键属性：**每个 worker 在无工作时必定 decrement active_workers**（包括从未找到工作的 worker），确保 active_workers 能可靠收敛到 0。`parallel_done` 作为一个方向的信号（设了就不再清除），由最后 idle 的 worker 设置。
+
+**已修复的缺陷**（issue stress test Scenario F, 24-core × 100 线程）：
+
+| 缺陷 | 根因 | 修复 |
+|------|------|------|
+| data race: PushChunk/PopChunk vs StealChunk | PopChunk 修改 deque 不加锁，StealChunk 并发偷取 | PushChunk 和 PopChunk 都加 `steal_mutex` 保护 |
+| worker_idx OOB crash | GcWorkerPool 总是唤醒所有池线程，worker_idx >= ctx->worker_count 时访问越界 | `ParallelMarkWorkerLoop` 顶部 `if (idx >= count) return` |
+| word_index 错误导致 heap corruption | slot ≥ 64 时 `bit = slot % 64` 截断，ProcessChunk 用 `slot_idx = bit` 读到错误对象 | 增加 `MarkChunk::word_index`，`slot_idx = word_index * 64 + bit` |
+| 终止 hang (active_workers 永不归零) | 从未找到工作的 worker 不 decrement，active_workers 卡在 N | 每个 worker 空闲必 decrement，非最后进入内层 wait 循环 |
+| GcWorkerPool::RunWorkers expected_completed_ 溢出 | Initialize 内部 cap 线程数，但 expected_completed_ 用原始 uncapped 值 | 使用 `created_count_`（实际线程数）计算 expected |
 
 ### 后台并发标记 (BGC)
 
@@ -131,23 +178,9 @@
 | `StwCompact` | 需要 STW compact 完成 |
 | `ForceComplete` | 同步等待 BGC 完成 |
 
-**Work-Stealing 并行 Mark**：BGC 的并行标记复用 DrainMarkStackParallel 框架。每个 BGC worker 维护一个本地 deque：
+**并行标记**：BGC 的并行标记复用 `DrainMarkStackParallel()`，使用上述 chunked work-stealing 框架。BGC 的 Drain 通过 `GcWorkerPool::RunWorkers()` 分派，BGC 线程自身作为 worker 0 参与。
 
-```
-Worker 1 deque          Worker 2 deque          Worker N deque
-┌────┬────┬────┐       ┌────┬────┬────┐       ┌────┬────┬────┐
-│top │    │bottom│     │top │    │bottom│     │top │    │bottom│
-└────┴────┴────┘       └────┴────┴────┘       └────┴────┴────┘
-      ▲ steal (pop_top) ▲                          │
-      │                 │                          │
-      └─── XorShift32 ──┘ ← 随机选取 victim worker
-                                           push/pop from bottom
-```
-
-- **本地路径**：PushBottom/PopBottom — lock-free CAS on bottom 指针
-- **偷取路径**：PopTop — mutex-protected，从 victim deque 底部偷取
-- **批量返回**：PopBottom 一次最多返回 kBgcPopBatchSize (32) 个条目
-- **终止条件**：所有 deque 空 + 全局 mark stack 空 + SATB 缓冲区空
+- **终止条件**：所有 deque 空 + 全局 mark stack 空 + SATB 缓冲区空（由 BGC 主循环在并行标记完成后检查）
 
 ### 压缩 (Compaction)
 

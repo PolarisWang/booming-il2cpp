@@ -252,11 +252,12 @@ private:
     std::atomic<uint64_t> last_gc_completion_ns_{0};
 
     /// Minimum interval between GC completions (in nanoseconds).
-    /// 500 µs — enough to let all threads resume and make progress before
-    /// the next safepoint.  Prevents the cascading safepoint-storm pattern
-    /// where thread A's GC completes, thread B immediately starts another
-    /// GC before other threads have resumed, causing all 99 threads to spin.
-    static constexpr uint64_t kMinGcIntervalNs = 500 * 1000;  // 500 µs
+    /// 50 ms — reduces GC frequency from every TLAB-pool exhaustion
+    /// (~500µs under heavy multi-threaded allocation) to at most
+    /// 20 Hz, allowing threads to batch multiple TLAB claims before
+    /// triggering a safepoint.  CoreCLR uses a similar cooldown to
+    /// prevent cascading safepoint storms at high thread counts.
+    static constexpr uint64_t kMinGcIntervalNs = 50 * 1000 * 1000;  // 50 ms
 
     // ── GCCollectionMode / GCLatencyMode state ───────────────────
 

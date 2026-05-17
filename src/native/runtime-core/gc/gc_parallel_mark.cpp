@@ -56,6 +56,7 @@ ParallelMarkContext* InitParallelMarkContext(OldGenPage** pages, int page_count,
     ctx->active_workers.store(0, std::memory_order_relaxed);
     ctx->total_marked.store(0, std::memory_order_relaxed);
     ctx->drain_started.store(false, std::memory_order_relaxed);
+    ctx->parallel_done.store(false, std::memory_order_relaxed);
 
     // Build page_starts array for O(log n) page lookup.
     ctx->page_starts = static_cast<uintptr_t*>(
@@ -130,11 +131,14 @@ void DestroyParallelMarkContext(ParallelMarkContext* ctx) {
 // ======================================================================
 
 void PushChunk(MarkWorkerState* worker, const MarkChunk& chunk) {
-    // Local push: single-producer, no lock needed.
+    // Local push: must guard against concurrent steal.
+    std::lock_guard<std::mutex> lock(worker->steal_mutex);
     worker->deque.push_back(chunk);
 }
 
 bool PopChunk(MarkWorkerState* worker, MarkChunk* out) {
+    // Local pop: must guard against concurrent steal.
+    std::lock_guard<std::mutex> lock(worker->steal_mutex);
     if (worker->deque.empty()) return false;
     *out = worker->deque.back();
     worker->deque.pop_back();
@@ -180,6 +184,7 @@ void FlushPending(MarkWorkerState* worker) {
     worker->has_pending = false;
     worker->pending.bitmap = 0;
     worker->pending.page_idx = 0;
+    worker->pending.word_index = 0;
 }
 
 // ======================================================================
@@ -204,7 +209,11 @@ void ProcessChunk(ParallelMarkContext* ctx, MarkWorkerState* worker,
         int bit = GcCtz64(word);
         word &= word - 1;  // clear lowest set bit
 
-        CHAOS_IL2CPP_SIZE slot_idx = static_cast<CHAOS_IL2CPP_SIZE>(bit);
+        CHAOS_IL2CPP_SIZE slot_idx = static_cast<CHAOS_IL2CPP_SIZE>(
+            static_cast<CHAOS_IL2CPP_SIZE>(chunk.word_index) * 64 + bit);
+        if (slot_idx * sizeof(void*) >= page->payload_size) {
+            continue;
+        }
         void* obj = payload + slot_idx * sizeof(void*);
 
         // Read TypeInfo* from first word.
@@ -258,25 +267,17 @@ void ProcessChunk(ParallelMarkContext* ctx, MarkWorkerState* worker,
 
             // Accumulate into pending chunk.
             uint64_t ref_bitword = static_cast<uint64_t>(1) << ref_bit;
-            if (worker->has_pending && worker->pending.page_idx == ref_page_idx) {
-                // Same page — OR into existing pending bitmap word.
-                // But we only have one bitmap word per chunk, so if the ref
-                // falls in a different word (different 64-slot group), flush.
-                CHAOS_IL2CPP_SIZE pending_word_base = 0;  // always word 0 in chunk
-                CHAOS_IL2CPP_SIZE ref_word = ref_slot / 64;
-                if (ref_word == pending_word_base) {
-                    worker->pending.bitmap |= ref_bitword;
-                } else {
-                    // Different word — flush pending, start new chunk.
-                    FlushPending(worker);
-                    worker->pending.page_idx = ref_page_idx;
-                    worker->pending.bitmap = ref_bitword;
-                    worker->has_pending = true;
-                }
+            CHAOS_IL2CPP_SIZE ref_word = ref_slot / 64;
+            if (worker->has_pending &&
+                worker->pending.page_idx == ref_page_idx &&
+                worker->pending.word_index == ref_word) {
+                // Same page + same 64-slot group — OR into existing bitmap word.
+                worker->pending.bitmap |= ref_bitword;
             } else {
-                // Different page — flush pending, start new chunk.
+                // Different page or word group — flush pending, start new chunk.
                 FlushPending(worker);
                 worker->pending.page_idx = ref_page_idx;
+                worker->pending.word_index = static_cast<uint16_t>(ref_word);
                 worker->pending.bitmap = ref_bitword;
                 worker->has_pending = true;
             }
@@ -291,6 +292,13 @@ void ProcessChunk(ParallelMarkContext* ctx, MarkWorkerState* worker,
 void ParallelMarkWorkerLoop(ParallelMarkContext* ctx, int worker_idx) {
     CHAOS_IL2CPP_PROFILE_SCOPE("ParallelMark::WorkerLoop");
 
+    // GcWorkerPool always wakes ALL pool threads, even when the caller
+    // requested fewer participants.  Workers with idx >= ctx->worker_count
+    // must return immediately — their state slot doesn't exist.
+    if (worker_idx >= ctx->worker_count) {
+        return;
+    }
+
     auto* worker = &ctx->workers[worker_idx];
 
     // Register with the thread system for safepoint compatibility.
@@ -304,8 +312,24 @@ void ParallelMarkWorkerLoop(ParallelMarkContext* ctx, int worker_idx) {
         std::this_thread::yield();
     }
 
-    bool work_found = true;
-    while (true) {
+    // ====================================================================
+    // Termination protocol:
+    //
+    //   active_workers counts how many workers are currently in the
+    //   "processing work" phase (outer loop).  Each worker increments
+    //   on entry and decrements when it runs out of work.  The LAST
+    //   worker to decrement (prev <= 1) sets parallel_done = true.
+    //
+    //   Workers that are NOT the last enter an inner wait loop: they
+    //   try pop/steal again periodically, and if they find work they
+    //   re-increment active_workers and return to the outer loop.
+    //
+    //   This ensures EVERY worker eventually decrements (even those
+    //   that never found work), so active_workers can reach 0.
+    // ====================================================================
+
+    bool work_found = false;
+    while (!ctx->parallel_done.load(std::memory_order_acquire)) {
         // 1. Flush any pending accumulator.
         FlushPending(worker);
 
@@ -324,40 +348,32 @@ void ParallelMarkWorkerLoop(ParallelMarkContext* ctx, int worker_idx) {
             continue;
         }
 
-        // 4. No work found — check termination.
-        if (work_found) {
-            // We just finished a chunk but found nothing more.
-            // Decrement active count and check for termination.
-            work_found = false;
-            int prev = ctx->active_workers.fetch_sub(1, std::memory_order_acq_rel);
-            if (prev <= 1) {
-                // All workers idle — we are the last to decrement.
-                // Do one final check in case new work was added concurrently.
-                // (Simplification: in our model, no new work is added after
-                //  drain starts, so this is safe.)
-                break;
-            }
-        } else {
-            // Already idle — spin/yield and recheck.
-            std::this_thread::yield();
-            // Re-increment active count if we see new work.
-            // Check if any deque has work.
-            bool any_work = false;
-            for (int i = 0; i < ctx->worker_count; i++) {
-                if (!ctx->workers[i].deque.empty()) {
-                    any_work = true;
-                    break;
-                }
-            }
-            if (any_work) {
+        // 4. No work found — decrement active count.
+        work_found = false;
+        int prev = ctx->active_workers.fetch_sub(1, std::memory_order_acq_rel);
+        if (prev <= 1) {
+            // We are the LAST worker to go idle. Signal done.
+            ctx->parallel_done.store(true, std::memory_order_release);
+            break;
+        }
+
+        // 5. Not the last — wait for work or done signal.
+        while (!ctx->parallel_done.load(std::memory_order_acquire)) {
+            // Try to find new work periodically.
+            MarkChunk new_chunk;
+            if (PopChunk(worker, &new_chunk)) {
                 ctx->active_workers.fetch_add(1, std::memory_order_relaxed);
+                ProcessChunk(ctx, worker, new_chunk);
                 work_found = true;
-                continue;
-            }
-            // Check if all workers are truly idle.
-            if (ctx->active_workers.load(std::memory_order_acquire) <= 0) {
                 break;
             }
+            if (StealChunk(ctx, worker_idx, &new_chunk)) {
+                ctx->active_workers.fetch_add(1, std::memory_order_relaxed);
+                ProcessChunk(ctx, worker, new_chunk);
+                work_found = true;
+                break;
+            }
+            std::this_thread::yield();
         }
     }
 }

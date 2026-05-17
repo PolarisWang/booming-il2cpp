@@ -755,21 +755,28 @@ static void worker_d(int thread_index, WorkerResult* result) {
 }
 
 static bool RunScenarioD(GcStatsSnapshot* stats_out) {
+    fprintf(stderr, "[DBG] RunScenarioD start\n");
     printf("\n  ── Scenario D: Extended GC pressure (50×512, verify every alloc) ──\n");
+    fprintf(stderr, "[DBG] RunScenarioD after printf\n");
     GcStatsSnapshot before = SnapshotGcStats();
+    fprintf(stderr, "[DBG] RunScenarioD after SnapshotGcStats\n");
 
     // Reset deferred pointer tracking.
     for (int t = 0; t < kDPressureWorkers; ++t) {
         g_deferred_count[t].store(0, std::memory_order_release);
     }
+    fprintf(stderr, "[DBG] RunScenarioD after deferred reset\n");
 
     std::vector<WorkerResult> results(kDPressureWorkers);
     std::vector<std::thread> workers;
+    fprintf(stderr, "[DBG] RunScenarioD creating %d workers\n", kDPressureWorkers);
 
     for (int i = 0; i < kDPressureWorkers; ++i)
         workers.emplace_back(worker_d, i, &results[i]);
 
+    fprintf(stderr, "[DBG] RunScenarioD waiting for workers to join\n");
     for (auto& w : workers) { if (w.joinable()) w.join(); }
+    fprintf(stderr, "[DBG] RunScenarioD workers done, triggering full GC\n");
 
     g_old_gen.Collect(nullptr, nullptr);
     g_gc_scheduler.RecordFullCollection(0);
@@ -998,6 +1005,7 @@ static void worker_f(int thread_index, WorkerResult* result) {
 }
 
 static bool RunScenarioF(GcStatsSnapshot* stats_out) {
+    fprintf(stderr, "[F0] Scenario F start\n");
     printf("\n  ── Scenario F: Concurrent AddPinnedRoot (%d×%d, mixed old-gen/nursery) ──\n",
            kFWorkers, kFAllocsPerThread);
     GcStatsSnapshot before = SnapshotGcStats();
@@ -1008,12 +1016,18 @@ static bool RunScenarioF(GcStatsSnapshot* stats_out) {
     for (int i = 0; i < kFWorkers; ++i)
         workers.emplace_back(worker_f, i, &results[i]);
 
+    fprintf(stderr, "[F1] workers launched\n");
     for (auto& w : workers) { if (w.joinable()) w.join(); }
+    fprintf(stderr, "[F2] workers joined\n");
 
     // Full GC after all workers complete to exercise pinned-root marking.
+    fprintf(stderr, "[F2a] before RequestGlobalSafepoint\n");
     uint32_t gen = threading::RequestGlobalSafepoint();
+    fprintf(stderr, "[F2b] safepoint=%u, before Collect\n", gen);
     g_old_gen.Collect(nullptr, nullptr);
+    fprintf(stderr, "[F2c] after Collect, before ReleaseGlobalSafepoint\n");
     threading::ReleaseGlobalSafepoint(gen);
+    fprintf(stderr, "[F3] after safepoint release\n");
 
     *stats_out = SnapshotGcStats();
 
@@ -1586,10 +1600,12 @@ static int run_scenarios() {
             failed_count++;
         }
         std::fflush(stdout);
+        fprintf(stderr, "[LOOP] scenario %zu done, flushing profile\n", static_cast<size_t>(s));
 
         // Dump and reset PROFILE_SCOPE accumulators between scenarios.
         CHAOS_IL2CPP_PROFILE_DUMP();
         CHAOS_IL2CPP_PROFILE_RESET();
+        fprintf(stderr, "[LOOP] profile reset done for scenario %zu\n", static_cast<size_t>(s));
 
         // Estimate total bytes for report.
         int64_t total_allocs_est = static_cast<int64_t>(scenarios[s].workers)
@@ -1598,6 +1614,7 @@ static int run_scenarios() {
 
         int64_t total_pat_fail = g_last_pattern_failures;
 
+        fprintf(stderr, "[LOOP] about to WriteScenarioJson for scenario %zu\n", static_cast<size_t>(s));
         WriteScenarioJson(
             scenarios[s].name,
             ok && g_failures == 0,

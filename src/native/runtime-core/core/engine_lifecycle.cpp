@@ -250,6 +250,28 @@ void GcFreeHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept {
     }
 }
 
+void* GcGetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id) noexcept {
+    if (handle_id == 0) return nullptr;
+    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
+    auto it = s_gc_handle_table.find(handle_id);
+    if (it == s_gc_handle_table.end()) return nullptr;
+    return it->second.object_instance;
+}
+
+void GcSetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id, void* new_target) noexcept {
+    if (handle_id == 0) return;
+    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
+    auto it = s_gc_handle_table.find(handle_id);
+    if (it == s_gc_handle_table.end()) return;
+    if (it->second.pinned && it->second.object_instance != nullptr) {
+        GcRemovePinnedObject(it->second.object_instance);
+    }
+    it->second.object_instance = new_target;
+    if (it->second.pinned && new_target != nullptr) {
+        GcAddPinnedObject(new_target);
+    }
+}
+
 // ======================================================================
 // DependentHandle API — for ConditionalWeakTable / Ephemeron semantics
 // ======================================================================

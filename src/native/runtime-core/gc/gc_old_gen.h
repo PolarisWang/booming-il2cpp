@@ -401,6 +401,12 @@ private:
     // Retired page array freed on next RebuildPageArray call.
     PageArray* page_array_retired_ = nullptr;
 
+    // Oversized pages freed by Free() but deferred to safepoint for
+    // VirtualFree.  BgcSweep snapshots page_list_ under mutex_ and may
+    // sweep stale entries — deferring the VirtualFree prevents access
+    // to freed memory in the BgcSweep path.
+    std::vector<OldGenPage*> deferred_free_pages_;
+
     // Per-size-class last-used-page cache (avoids O(n) page_list walk).
     OldGenPage* last_alloc_page_[kOldGenNumSizeClasses]{};
 

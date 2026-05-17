@@ -90,6 +90,12 @@ MarkSweepOldGen::~MarkSweepOldGen() {
     page_list_ = nullptr;
     page_count_ = 0;
 
+    // Free any deferred oversized pages.
+    for (auto* p : deferred_free_pages_) {
+        VirtualFreePage(p, p->page_size);
+    }
+    deferred_free_pages_.clear();
+
     auto* old_array = page_array_.load(std::memory_order_relaxed);
     if (old_array != nullptr) {
         std::free(old_array->pages);
@@ -274,6 +280,10 @@ OldGenPage* MarkSweepOldGen::FindPage(const void* ptr) const {
     while (lo <= hi) {
         int mid = lo + (hi - lo) / 2;
         auto* page = arr->pages[mid];
+        if (page == nullptr) {
+            CHAOS_IL2CPP_LOG_WARN("OldGen", "null_page_in_array");
+            break;
+        }
         uintptr_t start = reinterpret_cast<uintptr_t>(page);
         uintptr_t end = start + page->page_size;
         if (addr < start) {
@@ -308,6 +318,7 @@ bool MarkSweepOldGen::IsInOldGen(const void* ptr) const {
     while (lo <= hi) {
         int mid = lo + (hi - lo) / 2;
         auto* page = arr->pages[mid];
+        if (page == nullptr) break;
         uintptr_t start = reinterpret_cast<uintptr_t>(page->Payload());
         uintptr_t end = start + page->payload_size;
         if (addr < start) {
@@ -512,7 +523,13 @@ void MarkSweepOldGen::Free(void* ptr) {
             }
             pp = &(*pp)->next;
         }
-        VirtualFreePage(page, page->page_size);
+
+        // Mark as not-in-use so BgcSweep's in_use pre-check skips this page.
+        // Defer the actual VirtualFree to the next safepoint (Collect or
+        // BgcSweep Phase 4 free loop) so BgcSweep's page snapshot (taken
+        // under mutex_ before the free loop) does not access freed memory.
+        page->in_use.store(false, std::memory_order_release);
+        deferred_free_pages_.push_back(page);
         RebuildPageArray();
         return;
     }
@@ -689,12 +706,14 @@ static void SeedParallelDeque(ParallelMarkContext* ctx,
                 CHAOS_IL2CPP_SIZE offset = addr - p_start;
                 CHAOS_IL2CPP_SIZE slot = offset / sizeof(void*);
                 uint64_t bit = static_cast<uint64_t>(1) << (slot % 64);
+                uint16_t word = static_cast<uint16_t>(slot / 64);
                 if (w0->has_pending && w0->pending.page_idx == pi &&
-                    (slot / 64) == 0) {  // word 0 only for simplicity
+                    w0->pending.word_index == word) {
                     w0->pending.bitmap |= bit;
                 } else {
                     FlushPending(w0);
                     w0->pending.page_idx = pi;
+                    w0->pending.word_index = word;
                     w0->pending.bitmap = bit;
                     w0->has_pending = true;
                 }
@@ -748,13 +767,16 @@ void MarkSweepOldGen::DrainMarkStackParallel(OldGenPage** pages, int page_count)
         while (PopChunk(&ctx->workers[i], &chunk)) {
             if (chunk.page_idx >= 0 && chunk.page_idx < page_count) {
                 auto* page = pages[chunk.page_idx];
+                if (page == nullptr) continue;
                 char* payload = page->Payload();
                 auto& layout_registry = GcLayoutRegistry::Instance();
                 uint64_t word = chunk.bitmap;
                 while (word != 0) {
                     int bit = GcCtz64(word);
                     word &= word - 1;
-                    void* obj = payload + static_cast<CHAOS_IL2CPP_SIZE>(bit) * sizeof(void*);
+                    CHAOS_IL2CPP_SIZE slot_idx = static_cast<CHAOS_IL2CPP_SIZE>(
+                        static_cast<CHAOS_IL2CPP_SIZE>(chunk.word_index) * 64 + bit);
+                    void* obj = payload + slot_idx * sizeof(void*);
                     const void* type_info_ptr = *static_cast<const void* const*>(obj);
                     if (type_info_ptr == nullptr) continue;
                     if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) continue;
@@ -854,6 +876,16 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::SweepPage(OldGenPage* page, bool clear_bitmap
     while (page->sweep_lock.load(std::memory_order_relaxed) ||
            page->sweep_lock.exchange(true, std::memory_order_acquire)) {
         CHAOS_OLDGEN_SPIN_HINT();
+    }
+
+    // After acquiring sweep_lock, check in_use.  A concurrent Free()
+    // for an oversized page may have set in_use = false and is waiting
+    // for sweep_lock to be released so it can VirtualFree.  If we
+    // detect !in_use here, skip the page — the memory will be freed
+    // as soon as we release the lock.
+    if (!page->in_use.load(std::memory_order_acquire)) {
+        page->sweep_lock.store(false, std::memory_order_release);
+        return 0;
     }
 
     // Oversized pages: single-object.  If nothing is marked, the entire page
@@ -1641,11 +1673,6 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_start page_count={0}", page_count_);
 
-    // Fire GC_FULL_START event.
-    CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_before_fire_gc_full_start");
-    GcFireEvent(GcEvent::GC_FULL_START);
-    CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_after_fire_gc_full_start");
-
     // V4-H3: Snapshot pinned_roots_ under mutex to avoid data race with
     // AddPinnedRoot (which pushes under the same mutex).  Iterating the
     // vector without locking is UB if a concurrent push_back triggers
@@ -1884,7 +1911,15 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 pp = &p->next;
             }
         }
+
+        // Free deferred pages (oversized pages freed by external Free()
+        // but deferred to safepoint to avoid racing with BgcSweep).
+        for (auto* p : deferred_free_pages_) {
+            VirtualFreePage(p, p->page_size);
+        }
+        deferred_free_pages_.clear();
     }
+    RebuildPageArray();
 
     // Fire SWEEP_DONE event.
     GcFireEvent(GcEvent::SWEEP_DONE);
@@ -2224,6 +2259,11 @@ void MarkSweepOldGen::BgcSweep() {
                 int idx = next_page.fetch_add(1, std::memory_order_relaxed);
                 if (idx >= total_pages) break;
                 auto* page = pages[static_cast<size_t>(idx)];
+                // Pre-check in_use before SweepPage.  A concurrent Free()
+                // for an oversized page sets in_use = false before
+                // VirtualFree, so this check catches the common case.
+                // The tiny window between this load and SweepPage's
+                // sweep_lock acquisition is acceptable (~a few cycles).
                 if (!page->in_use.load(std::memory_order_acquire))
                     continue;
                 SweepPage(page, false/*preserve bitmap for BgcCompact*/);
@@ -2233,6 +2273,9 @@ void MarkSweepOldGen::BgcSweep() {
     } else {
         // Single page: sequential (avoids worker pool overhead).
         for (auto* page : pages) {
+            // Pre-check in_use before SweepPage.  Free() for oversized
+            // pages sets in_use = false before VirtualFree, so any page
+            // freed since our snapshot was taken is correctly skipped.
             if (!page->in_use.load(std::memory_order_acquire))
                 continue;
             SweepPage(page, false/*preserve bitmap for BgcCompact*/);
@@ -2259,8 +2302,19 @@ void MarkSweepOldGen::BgcSweep() {
                 pp = &p->next;
             }
         }
+
+        // Free deferred pages (oversized pages freed by external Free()
+        // since the last safepoint).
+        for (auto* p : deferred_free_pages_) {
+            VirtualFreePage(p, p->page_size);
+        }
+        deferred_free_pages_.clear();
+
+        // Rebuild under mutex_ to prevent TOCTOU: mutators (AllocatePage/Free)
+        // can modify page_list_ between count and fill loops inside
+        // RebuildPageArray, causing heap buffer overflow on the new_pages array.
+        RebuildPageArray();
     }
-    RebuildPageArray();
 
     // Reclaim retired GcLayout tables (safe during BGC sweep since the
     // BGC thread is the only concurrent GC activity; mutators are running

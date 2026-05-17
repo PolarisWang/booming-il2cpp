@@ -94,7 +94,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("{");
 		var argNames = new string[methodAbiParameterSlots.Count];
 			for (int i = 0; i < methodAbiParameterSlots.Count; i++)
-				argNames[i] = "chaos_arg_" + i.ToString();
+				argNames[i] = "chaos_fn_arg_" + i.ToString();
 			string text2 = string.Join(", ", argNames);
 		if (method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
 		{
@@ -249,7 +249,7 @@ public sealed partial class NativeAotLoweringPlanner
 		var nativeArgs = new string[methodAbiParameterSlots.Count];
 		for (int i = 0; i < methodAbiParameterSlots.Count; i++)
 		{
-			argNames[i] = "chaos_arg_" + i.ToString();
+			argNames[i] = "chaos_fn_arg_" + i.ToString();
 			if (stringParamSet.Contains(i))
 			{
 				nativeArgs[i] = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_marshal_" + i + ")";

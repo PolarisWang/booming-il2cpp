@@ -904,28 +904,28 @@ public sealed partial class NativeAotLoweringPlanner
 		switch (kind)
 		{
 		case AotCoreIrAbiCarrierKind.Int32:
-			return $"_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>({argName}))";
+			return $"WriteI32(static_cast<CHAOS_IL2CPP_INT32>({argName}))";
 		case AotCoreIrAbiCarrierKind.Int8:
 		case AotCoreIrAbiCarrierKind.UInt8:
 		case AotCoreIrAbiCarrierKind.Int16:
 		case AotCoreIrAbiCarrierKind.UInt16:
-			return $"_d_bw.WriteI32({argName})";
+			return $"WriteI32({argName})";
 		case AotCoreIrAbiCarrierKind.Float32:
-			return $"_d_bw.WriteF32(chaos_load_float32({argName}))";
+			return $"WriteF32(chaos_load_float32({argName}))";
 		case AotCoreIrAbiCarrierKind.Float64:
-			return $"_d_bw.WriteF64(ChaosLoadFloat64({argName}))";
+			return $"WriteF64(ChaosLoadFloat64({argName}))";
 		case AotCoreIrAbiCarrierKind.Int64:
-			return $"_d_bw.WriteI64(ChaosLoadInt64({argName}))";
+			return $"WriteI64(ChaosLoadInt64({argName}))";
 		case AotCoreIrAbiCarrierKind.UInt64:
-			return $"_d_bw.WriteI64(chaos_load_uint64({argName}))";
+			return $"WriteI64(chaos_load_uint64({argName}))";
 		case AotCoreIrAbiCarrierKind.NativeInt:
 		case AotCoreIrAbiCarrierKind.ByRef:
 		case AotCoreIrAbiCarrierKind.MultiReturn:
 		case AotCoreIrAbiCarrierKind.ByRefToValueType:
 		case AotCoreIrAbiCarrierKind.ValueTypeByValue:
-			return $"_d_bw.WritePtr(reinterpret_cast<void*>({argName}))";
+			return $"WritePtr(reinterpret_cast<void*>({argName}))";
 		default:
-			return $"_d_bw.WritePtr(reinterpret_cast<void*>({argName}))";
+			return $"WritePtr(reinterpret_cast<void*>({argName}))";
 		}
 	}
 

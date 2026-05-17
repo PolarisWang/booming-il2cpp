@@ -49,7 +49,7 @@ VTableRegistryState& GetState() {
 // Cache entry layout:
 //   key   = (instance_type_token << 32) | declared_method_token
 //   value = resolved method_pointer
-//   epoch = g_vtable_epoch at time of insertion
+//   epoch = GetVTableEpoch() at time of insertion
 
 static constexpr CHAOS_IL2CPP_UINT32 kTcvcSize = 64;
 
@@ -67,11 +67,16 @@ struct TcvcState {
 // Global epoch counter.  Incremented (with release ordering) after every
 // successful slot update in UpdateVTableSlotByMethodToken.  Initialized
 // to 1 so that zero-initialized cache entries (epoch = 0) never match.
-static std::atomic<CHAOS_IL2CPP_UINT32> g_vtable_epoch{1u};
+// Function-local static to avoid CRT dynamic initializer ordering issues
+// (MSVC 14.42+ C++17: std::atomic ctor is not constexpr for non-zero init).
+static std::atomic<CHAOS_IL2CPP_UINT32>& GetVTableEpoch() noexcept {
+    static std::atomic<CHAOS_IL2CPP_UINT32> epoch{1u};
+    return epoch;
+}
 
 // Per-thread cache state.  Zero-initialized on first access (all entries
 // have key=0, epoch=0 — the first ResolveVirtualMethodPointer call will
-// have a cache miss since g_vtable_epoch starts at 1 != 0, so a miss
+// have a cache miss since GetVTableEpoch() starts at 1 != 0, so a miss
 // populates the cache correctly).
 static thread_local TcvcState tls_tcvc{};
 
@@ -82,7 +87,7 @@ static thread_local TcvcState tls_tcvc{};
 //
 // Separate from TCVC because IOC caches the intermediate interface-offset
 // mapping, while TCVC caches the final method_pointer.  IOC entries use
-// g_iface_epoch which is bumped only by interface additions (not by
+// GetIfaceEpoch() which is bumped only by interface additions (not by
 // regular slot updates), so a runtime_iface_map append invalidates IOC
 // without invalidating the TCVC for non-interface methods.
 
@@ -92,7 +97,7 @@ struct IocEntry {
     CHAOS_IL2CPP_UINT64 key;       // (type_token << 32) | (iface_stable_id & 0xFFFFFFFF)
     CHAOS_IL2CPP_UINT32 vtable_offset;
     CHAOS_IL2CPP_UINT32 method_count;
-    CHAOS_IL2CPP_UINT32 epoch;     // g_iface_epoch at insertion time
+    CHAOS_IL2CPP_UINT32 epoch;     // GetIfaceEpoch() at insertion time
 };
 
 struct IocState {
@@ -103,7 +108,11 @@ struct IocState {
 // Global epoch counter for interface-only changes.  Bumped (with release
 // ordering) after every successful RegisterTypeVTableRuntimeInterface call.
 // Initialized to 1 so zero-initialized cache entries never match.
-static std::atomic<CHAOS_IL2CPP_UINT32> g_iface_epoch{1u};
+// Function-local static to avoid CRT dynamic initializer ordering issues.
+static std::atomic<CHAOS_IL2CPP_UINT32>& GetIfaceEpoch() noexcept {
+    static std::atomic<CHAOS_IL2CPP_UINT32> epoch{1u};
+    return epoch;
+}
 
 // Per-thread IOC state.  Zero-initialized on first access.
 static thread_local IocState tls_ioc{};
@@ -315,7 +324,7 @@ static void* ScanIfaceMapForMethod(
 
 // ── RegisterTypeVTableRuntimeInterface ─────────────────────────────────
 // Appends an interface mapping to a TypeVTable's runtime_iface_map.
-// Heap-reallocates the map and bumps g_iface_epoch on success.
+// Heap-reallocates the map and bumps GetIfaceEpoch() on success.
 bool RegisterTypeVTableRuntimeInterface(
     CHAOS_IL2CPP_UINT32       type_token,
     CHAOS_IL2CPP_UINT64       iface_stable_id,
@@ -367,11 +376,11 @@ bool RegisterTypeVTableRuntimeInterface(
     tv->runtime_iface_count = new_count;
 
     // Bump iface epoch to invalidate per-thread IOC entries.
-    g_iface_epoch.fetch_add(1u, std::memory_order_release);
+    GetIfaceEpoch().fetch_add(1u, std::memory_order_release);
 
     // Also bump vtable epoch so that TCVC entries for this type are
     // invalidated (the previously cached nullptr must be re-resolved).
-    g_vtable_epoch.fetch_add(1u, std::memory_order_release);
+    GetVTableEpoch().fetch_add(1u, std::memory_order_release);
 
     return true;
 }
@@ -411,7 +420,7 @@ CHAOS_IL2CPP_UINT32 UpdateVTableSlotByMethodToken(
     // method_pointer and vtable_array entries) are visible to any thread
     // that acquires the new epoch value in ResolveVirtualMethodPointer.
     if (updated > 0u) {
-        g_vtable_epoch.fetch_add(1u, std::memory_order_release);
+        GetVTableEpoch().fetch_add(1u, std::memory_order_release);
     }
 
     return updated;
@@ -620,15 +629,15 @@ void* ResolveVirtualMethodPointer(
     }
 
     // ── TCVC: Try thread-local cache (lock-free) ──────────────────────
-    const CHAOS_IL2CPP_UINT32 epoch = g_vtable_epoch.load(std::memory_order_acquire);
+    const CHAOS_IL2CPP_UINT32 epoch = GetVTableEpoch().load(std::memory_order_acquire);
     const CHAOS_IL2CPP_UINT64 key = (static_cast<CHAOS_IL2CPP_UINT64>(instance_type_token) << 32u) | declared_method_token;
 
     for (CHAOS_IL2CPP_UINT32 i = 0u; i < kTcvcSize; ++i) {
         const auto& entry = tls_tcvc.entries[i];
         if (entry.key == key && entry.epoch == epoch) {
-            // Double-check epoch: if g_vtable_epoch has changed during our scan,
+            // Double-check epoch: if GetVTableEpoch() has changed during our scan,
             // a concurrent slot update may have made this entry stale.
-            if (g_vtable_epoch.load(std::memory_order_acquire) == epoch) {
+            if (GetVTableEpoch().load(std::memory_order_acquire) == epoch) {
                 return entry.value;
             }
             break;  // epoch changed, cache is invalid -- fall through to full resolve
@@ -726,7 +735,7 @@ CHAOS_IL2CPP_UINT32 chaos_find_interface_offset(
         return CHAOS_IL2CPP_UINT32_MAX;
 
     // ── IOC: Try thread-local cache (lock-free) ──────────────────────
-    const CHAOS_IL2CPP_UINT32 iface_epoch = g_iface_epoch.load(std::memory_order_acquire);
+    const CHAOS_IL2CPP_UINT32 iface_epoch = GetIfaceEpoch().load(std::memory_order_acquire);
     const CHAOS_IL2CPP_UINT64 ioc_key = (static_cast<CHAOS_IL2CPP_UINT64>(type_token) << 32u)
                                        | (static_cast<CHAOS_IL2CPP_UINT32>(iface_stable_id & 0xFFFFFFFF));
 
@@ -734,7 +743,7 @@ CHAOS_IL2CPP_UINT32 chaos_find_interface_offset(
         const auto& entry = tls_ioc.entries[i];
         if (entry.key == ioc_key && entry.epoch == iface_epoch) {
             // Double-check epoch.
-            if (g_iface_epoch.load(std::memory_order_acquire) == iface_epoch) {
+            if (GetIfaceEpoch().load(std::memory_order_acquire) == iface_epoch) {
                 return entry.vtable_offset;
             }
             break;

@@ -18,10 +18,13 @@ target_link_libraries(
         chaos_runtime_core)
 
 add_executable(chaos_interpreter_integration
-    interpreter_integration.cpp)
+    interpreter_integration.cpp
+    method_replacement_test.cpp)
 
 target_compile_features(chaos_interpreter_integration PRIVATE cxx_std_17)
 target_compile_options(chaos_interpreter_integration PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+target_include_directories(chaos_interpreter_integration PRIVATE
+    ${CMAKE_SOURCE_DIR}/src/native/hot-update)
 target_link_libraries(
     chaos_interpreter_integration
     PRIVATE
@@ -29,7 +32,8 @@ target_link_libraries(
         chaos_bootstrap
         chaos_fmt
         chaos_common
-        chaos_support)
+        chaos_support
+        chaos_hot_update)
 
 add_executable(chaos_interpreter_bridge_test
     interpreter_bridge_test.cpp)
