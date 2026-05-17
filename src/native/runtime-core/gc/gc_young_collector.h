@@ -43,11 +43,10 @@ struct YoungCollectionResult {
     int    bfs_worklist_count{0};
 };
 
-/// Perform a young collection (Cheney copy + promote).
+/// Perform a young collection on the shared young generation.
+/// Operates on g_young_gen.region (set before call, reset after).
 /// Called after STW safepoint has been reached.
-/// @param nursery  The nursery region(s) to collect.
-/// @param tenured_target  Optional tenured region to promote into (null = auto-create).
-YoungCollectionResult GcYoungCollection(Region* nursery, Region* tenured_target = nullptr);
+YoungCollectionResult GcYoungCollection();
 
 /// Check whether @a ptr points into any nursery region.
 /// Used by the card table scanner to filter old→nursery references.

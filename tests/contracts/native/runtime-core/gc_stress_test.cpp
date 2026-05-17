@@ -264,11 +264,11 @@ struct WorkerResult {
 };
 
 static bool SetupTlsNursery() {
-    auto& mgr = RegionManager::Instance();
-    Region* nursery = mgr.AllocateNursery();
-    if (!nursery) return false;
-    tls_nursery_ctx.nursery = nursery;
-    tls_nursery_ctx.limit   = nursery->end - kMaxNurseryAlloc;
+    // With shared young gen, no per-thread TLS nursery setup needed.
+    // Ensure the shared young generation is initialized once.
+    if (g_young_gen.region.load(std::memory_order_acquire) == nullptr) {
+        InitYoungGeneration();
+    }
     return true;
 }
 
@@ -278,8 +278,7 @@ static void RegisterWorker() {
 }
 
 static void UnregisterWorker() {
-    // UnregisterThread() internally calls TeardownTlsNursery() — no
-    // separate TeardownTlsNursery() call needed here.
+    // TeardownTlsNursery is a no-op in the shared young gen model.
     threading::UnregisterThread();
 }
 

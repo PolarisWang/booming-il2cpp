@@ -247,7 +247,7 @@ inline bool IsValidManagedObject(const void* obj_addr) {
 /// Only the offsets listed in layout->pointer_offsets are scanned.
 /// Returns the number of scavenged pointers found.
 int ScanObjectPointers(void* obj, const GcTypeLayout* layout,
-                       Region* nursery, YoungCollectionResult* result);
+                       YoungCollectionResult* result);
 
 // ======================================================================
 // Enhanced Cheney BFS — walks promoted objects using precise layouts

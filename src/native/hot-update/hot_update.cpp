@@ -120,7 +120,13 @@ char* DuplicateCString(const CHAOS_IL2CPP_STRING& value) {
 }  // namespace
 
 // ── Module ID allocation for hot-update packages (>0, unique) ──
-static std::atomic<CHAOS_IL2CPP_UINT32> s_next_module_id{1u};
+// Function-local static to avoid CRT dynamic initializer ordering issues
+// (MSVC 14.42+ C++17: std::atomic ctor is not constexpr, so file-scope
+//  static creates a .CRT$XCU entry that may crash during CRT init).
+std::atomic<CHAOS_IL2CPP_UINT32>& GetNextModuleId() {
+    static std::atomic<CHAOS_IL2CPP_UINT32> id{1u};
+    return id;
+}
 
 // ── Hot-update generic registration ───────────────────────────────────────
 
@@ -193,7 +199,7 @@ bool LoadHotUpdatePackage(const char* package_root_utf8, HotUpdatePackageHandle*
     out_handle->package_id = DuplicateCString(package_id);
     out_handle->target_aot_version = DuplicateCString(target_aot_version);
     out_handle->assembly_name = DuplicateCString(assembly_name);
-    out_handle->module_id = s_next_module_id.fetch_add(1u, std::memory_order_acq_rel);
+    out_handle->module_id = GetNextModuleId().fetch_add(1u, std::memory_order_acq_rel);
     out_handle->loaded = true;
 
     // Register a per-package memory domain so marshal allocations during

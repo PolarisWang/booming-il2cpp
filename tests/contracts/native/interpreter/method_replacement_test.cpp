@@ -37,28 +37,30 @@ bool Test_MethodReplacementDispatch()
     constexpr CHAOS_IL2CPP_UINT32 kSlot = 0u;
 
     // ── Step 1: Register a mock hotpatch module ──
-    HotpatchMethodEntryV0 method_entries[] = {
+    // Heap-allocate module data so it survives after this function returns.
+    // The HotpatchNameRegistry stores raw pointers — stack data would dangle.
+    static HotpatchMethodEntryV0 s_method_entries[] = {
         { "MyMethod", kMethodToken, 0u }
     };
-    HotpatchTypeEntryV0 type_entries[] = {
+    static HotpatchTypeEntryV0 s_type_entries[] = {
         { "MyNS", "MyType", 0u, 1u }
     };
-    HotpatchSlotEntryV0 token_slot_entries[] = {
+    static HotpatchSlotEntryV0 s_token_slot_entries[] = {
         { kMethodToken, kSlot }
     };
-    HotpatchEntryV0 entry_table[] = {
+    static HotpatchEntryV0 s_entry_table[] = {
         { kOriginalFn, 0u, 0u }
     };
 
     HotpatchModuleV0 mock_module;
     std::memset(&mock_module, 0, sizeof(mock_module));
-    mock_module.type_entries       = type_entries;
+    mock_module.type_entries       = s_type_entries;
     mock_module.type_entry_count   = 1u;
-    mock_module.method_entries     = method_entries;
+    mock_module.method_entries     = s_method_entries;
     mock_module.method_entry_count = 1u;
-    mock_module.token_slot_entries     = token_slot_entries;
+    mock_module.token_slot_entries     = s_token_slot_entries;
     mock_module.token_slot_entry_count = 1u;
-    mock_module.entry_table        = entry_table;
+    mock_module.entry_table        = s_entry_table;
     mock_module.entry_table_size   = 1u;
 
     RegisterHotpatchModule(&mock_module);

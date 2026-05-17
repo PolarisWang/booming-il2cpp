@@ -7,6 +7,7 @@
 #include "gc_layout.h"
 #include "gc_old_gen.h"
 #include "gc_region.h"
+#include "gc_young_gen.h"
 #include "thread_state.h"
 
 #include <algorithm>
@@ -223,23 +224,17 @@ void BgcController::PopulateRootSet() {
     // For now, pinned roots are handled via TryMarkRoot in the stack
     // scanning path below, which will mark any old-gen object found.
 
-    // Phase 1b: Scan ALL registered threads' TLS nurseries.
-    // For each thread, scan [nursery->begin, nursery->current) for
-    // pointers to old-gen objects.
+        // Phase 1b: Scan the shared young generation for old-gen pointers.
+    // The young region is scanned [begin, current) for any reference
+    // to old-gen objects; those objects are marked and enqueued for
+    // concurrent marking.
     {
-        threading::EnumerateThreads(
-            [](threading::ManagedThread* thread) -> bool {
-                if (thread->nursery_ctx == nullptr) return true;
-                auto* nursery = thread->nursery_ctx->nursery;
-                if (nursery == nullptr) return true;
-
-                // Snapshot nursery range (thread is paused at safepoint).
-                void* begin = nursery->begin;
-                void* cur   = nursery->current;
-                if (cur <= begin) return true;
-
-                // Scan every pointer slot.
-                auto& ctrl = BgcController::Instance();
+        Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
+        if (young_region != nullptr) {
+            auto& ctrl = BgcController::Instance();
+            void* begin = young_region->begin;
+            void* cur   = young_region->current;
+            if (cur > begin) {
                 for (auto* slot = static_cast<void**>(begin);
                      slot < static_cast<void**>(cur);
                      slot++) {
@@ -252,11 +247,11 @@ void BgcController::PopulateRootSet() {
                         }
                     }
                 }
-                return true;
-            });
+            }
+        }
     }
 
-    // Phase 1c: Scan all thread stacks as conservative roots.
+    // Phase 1c:// Phase 1c: Scan all thread stacks as conservative roots.
     // This catches old-gen references that live in thread-local stack
     // slots and are NOT in any TLS nursery.
     {

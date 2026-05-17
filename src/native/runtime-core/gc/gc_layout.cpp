@@ -225,7 +225,7 @@ uint64_t GcLayoutRegistry::RegisterOrGetRawAllocType(uint32_t instance_size) {
 // ======================================================================
 
 int ScanObjectPointers(void* obj, const GcTypeLayout* layout,
-                       Region* nursery, YoungCollectionResult* result) {
+                       YoungCollectionResult* result) {
     if (obj == nullptr || layout == nullptr) return 0;
 
     int found = 0;

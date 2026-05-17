@@ -171,11 +171,11 @@ void ChaosGcCollect(CHAOS_IL2CPP_INT32 generation) noexcept
     // 2. Full old-gen mark-sweep (STW safepoint) when gen >= 1.
     // 3. Run pending finalizers.
 
-    // Step 1: Young collection (gen 0 or full).
-    if (tls_nursery_ctx.nursery != nullptr &&
-        tls_nursery_ctx.nursery->current > tls_nursery_ctx.nursery->begin) {
+    // Step 1: Young collection on the shared young generation (if any).
+    Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
+    if (young_region != nullptr && young_region->current > young_region->begin) {
         uint32_t gen = threading::RequestGlobalSafepoint();
-        GcYoungCollection(tls_nursery_ctx.nursery);
+        GcYoungCollection();
         threading::ReleaseGlobalSafepoint(gen);
     }
 
