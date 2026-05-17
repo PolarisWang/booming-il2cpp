@@ -294,6 +294,14 @@ public sealed record AotCoreIrReferenceArtifact
     /// </summary>
     public string? ComInterfaceGuid { get; init; }
 
+    /// <summary>
+    /// Kind of COM interface type: 0=Unknown (IUnknown-based), 1=Dispatch (IDispatch-based),
+    /// 2=Dual (both). Derived from <see cref="System.Runtime.InteropServices.ComInterfaceTypeAttribute"/>.
+    /// Defaults to 0 (IUnknown) when no attribute is present.
+    /// Used by IDispatch codegen to select vtable layout (3+N vs 7+N slots).
+    /// </summary>
+    public int ComInterfaceTypeKind { get; init; }
+
     public string? BaseTypeSubjectId { get; init; }
 
     public IReadOnlyList<string>? ImplementedInterfaceSubjectIds { get; init; }

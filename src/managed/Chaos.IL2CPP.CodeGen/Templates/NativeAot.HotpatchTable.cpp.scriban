@@ -86,7 +86,76 @@ extern "C" void CcwThunk_{{ ccw.guid_symbol_suffix }}_{{ method.slot_index }}(vo
 
 {{~ end ~}}
 
+{{~ if ccw.is_idispatch ~}}
+// IDispatch vtable: 3 IUnknown + 4 IDispatch + {{ ccw.method_slot_count }} interface method slots
+static void* s_ccw_vtable_{{ ccw.guid_symbol_suffix }}[{{ 7 + ccw.method_slot_count }}] = {
+    reinterpret_cast<void*>(&::chaos::il2cpp::com_ccw::CcwQueryInterface),
+    reinterpret_cast<void*>(&::chaos::il2cpp::com_ccw::CcwAddRef),
+    reinterpret_cast<void*>(&::chaos::il2cpp::com_ccw::CcwRelease),
+    reinterpret_cast<void*>(&::chaos::il2cpp::com_ccw::CcwGetTypeInfoCount),
+    reinterpret_cast<void*>(&::chaos::il2cpp::com_ccw::CcwGetTypeInfo),
+    reinterpret_cast<void*>(&CcwThunk_{{ ccw.guid_symbol_suffix }}_GetIDsOfNames),
+    reinterpret_cast<void*>(&CcwThunk_{{ ccw.guid_symbol_suffix }}_Invoke),
+{{~ for method in ccw.methods ~}}
+    reinterpret_cast<void*>(&CcwThunk_{{ ccw.guid_symbol_suffix }}_{{ method.slot_index }}),
+{{~ end ~}}
+};
+
+// Method names array for GetIDsOfNames
+static constexpr const char* s_ccw_names_{{ ccw.guid_symbol_suffix }}[] = {
+{{~ for name in ccw.method_names ~}}
+    "{{ name }}",
+{{~ end ~}}
+};
+
+// GetIDsOfNames thunk
+extern "C" CHAOS_IL2CPP_INT32 CcwThunk_{{ ccw.guid_symbol_suffix }}_GetIDsOfNames(
+    void* self, const void* riid, void** rgszNames, CHAOS_IL2CPP_UINT32 cNames, CHAOS_IL2CPP_UINT32 lcid, CHAOS_IL2CPP_INT32* rgDispId)
+{
+    if (rgszNames == nullptr || rgDispId == nullptr) return ::chaos::il2cpp::com_ccw::kE_POINTER;
+    if (cNames == 0) return ::chaos::il2cpp::com_ccw::kS_OK;
+    if (cNames > 1) return ::chaos::il2cpp::com_ccw::kE_NOTIMPL;  // V1: single-name only
+
+    auto* name = static_cast<const char16_t*>(rgszNames[0]);
+    // Linear search through method names
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < {{ ccw.method_slot_count }}; i++) {
+        const char* candidate = s_ccw_names_{{ ccw.guid_symbol_suffix }}[i];
+        // Simple ASCII comparison: convert name to char and compare
+        bool match = true;
+        const char* s = candidate;
+        const char16_t* w = name;
+        while (*s && *w) {
+            if (static_cast<char>(*w) != *s) { match = false; break; }
+            s++; w++;
+        }
+        if (match && *s == 0 && *w == 0) {
+            rgDispId[0] = static_cast<CHAOS_IL2CPP_INT32>(i);
+            return ::chaos::il2cpp::com_ccw::kS_OK;
+        }
+    }
+    return ::chaos::il2cpp::com_ccw::kDISP_E_MEMBERNOTFOUND;
+}
+
+// Invoke thunk
+extern "C" CHAOS_IL2CPP_INT32 CcwThunk_{{ ccw.guid_symbol_suffix }}_Invoke(
+    void* self, CHAOS_IL2CPP_INT32 dispIdMember, const void* riid, CHAOS_IL2CPP_UINT32 lcid,
+    CHAOS_IL2CPP_UINT16 wFlags, void* pDispParams, void* pVarResult, void* pExcepInfo, CHAOS_IL2CPP_UINT32* puArgErr)
+{
+    auto* entry_ccw = ::chaos::il2cpp::com_ccw::CcwFromInterface(self);
+    if (entry_ccw == nullptr) return ::chaos::il2cpp::com_ccw::kE_POINTER;
+
+    // DISPID 0..N-1 maps to interface method slots
+    if (dispIdMember < 0 || static_cast<CHAOS_IL2CPP_UINT32>(dispIdMember) >= {{ ccw.method_slot_count }})
+        return ::chaos::il2cpp::com_ccw::kDISP_E_MEMBERNOTFOUND;
+
+    ::chaos::il2cpp::com_ccw::CcwDispatchMethod(
+        entry_ccw, {{ ccw.stable_id }}, static_cast<CHAOS_IL2CPP_UINT32>(dispIdMember));
+
+    return ::chaos::il2cpp::com_ccw::kS_OK;
+}
+
 // Vtable: 3 IUnknown slots + {{ ccw.method_slot_count }} interface method slots
+{{~ else ~}}
 static void* s_ccw_vtable_{{ ccw.guid_symbol_suffix }}[{{ 3 + ccw.method_slot_count }}] = {
     reinterpret_cast<void*>(&::chaos::il2cpp::com_ccw::CcwQueryInterface),
     reinterpret_cast<void*>(&::chaos::il2cpp::com_ccw::CcwAddRef),
@@ -95,6 +164,7 @@ static void* s_ccw_vtable_{{ ccw.guid_symbol_suffix }}[{{ 3 + ccw.method_slot_co
     reinterpret_cast<void*>(&CcwThunk_{{ ccw.guid_symbol_suffix }}_{{ method.slot_index }}),
 {{~ end ~}}
 };
+{{~ end ~}}
 
 // Factory: create CCW and register this interface vtable
 extern "C" CHAOS_IL2CPP_INTPTR CreateCcwFor_{{ ccw.guid_symbol_suffix }}(void* obj, void* state) {

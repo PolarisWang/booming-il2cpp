@@ -2,6 +2,8 @@
 
 #include <chaos/log.h>
 
+#include <cstdio>
+
 #include "gc_bgc.h"
 #include "gc_events.h"
 #include "gc_layout.h"
@@ -81,141 +83,153 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         tls_alloc_since_last_gc = 0;
     }
 
-    // Check scheduler for collection decision.
-    // Returns YOUNG (nursery GC), FULL (STW full GC), FULL_BGC (concurrent mark),
-    // or NONE (no GC needed).
-    auto gc_decision = g_gc_scheduler.DecideCollection();
+    // GC rate limiter: only one thread may proceed with GC decision per 500μs
+    // window.  Threads that fail skip GC entirely and go straight to getting a
+    // fresh nursery — this prevents cascading GC initiations (safepoint storms)
+    // when 100 threads exhaust their nurseries simultaneously.
+    bool claimed_gc_slot = g_gc_scheduler.TryClaimGcSlot();
 
-    if (gc_decision == GcCollectionKind::FULL) {
-        // Scheduler triggered full GC — run STW mark-sweep immediately.
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_gc_via_scheduler_in_nursery_alloc_slow");
-        uint32_t gen = threading::RequestGlobalSafepoint();
-        g_old_gen.Collect(nullptr, nullptr);
-        threading::ReleaseGlobalSafepoint(gen);
+    if (claimed_gc_slot) {
+        // Check scheduler for collection decision.
+        // Returns YOUNG (nursery GC), FULL (STW full GC), FULL_BGC (concurrent mark),
+        // or NONE (no GC needed).
+        auto gc_decision = g_gc_scheduler.DecideCollection();
 
-        // Try bump from existing nursery after full GC freed memory.
-        if (tls_nursery_ctx.nursery != nullptr) {
+        if (gc_decision == GcCollectionKind::FULL) {
+            // Scheduler triggered full GC — run STW mark-sweep immediately.
+            CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_gc_via_scheduler_in_nursery_alloc_slow");
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            g_old_gen.Collect(nullptr, nullptr);
+            threading::ReleaseGlobalSafepoint(gen);
+            g_gc_scheduler.RecordGcCompleted();
+
+            // Try bump from existing nursery after full GC freed memory.
+            if (tls_nursery_ctx.nursery != nullptr) {
+                char* ptr = tls_nursery_ctx.nursery->current;
+                char* next = ptr + size;
+                if (next <= tls_nursery_ctx.nursery->end) {
+                    tls_nursery_ctx.nursery->current = next;
+                    std::memset(ptr, 0, size);
+                    g_gc_scheduler.RecordAllocation(size);
+                    memory_domain::GcTrackDomainAlloc(size);
+                    return ptr;
+                }
+            }
+        } else if (gc_decision == GcCollectionKind::FULL_BGC) {
+            // Scheduler triggered BGC — start concurrent mark cycle (non-blocking).
+            CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_bgc_via_scheduler_in_nursery_alloc_slow");
+            BgcController::Instance().StartBgcCycle();
+            // BGC runs concurrently; continue with normal nursery allocation flow.
+        }
+
+        // Proactive young GC: run when the scheduler budget is exceeded.
+        // Also run when nursery has live objects and we are about to recycle it.
+        // This prevents a safepoint deadlock: without this, thread A (in the slow
+        // path holding the RegionManager mutex) could call RequestGlobalSafepoint,
+        // and thread B (waiting on the same mutex) can't reach SafepointPoll to
+        // confirm, causing the confirmation loop to spin forever.
+        bool do_young_gc = (gc_decision == GcCollectionKind::YOUNG);
+        if (!do_young_gc && tls_nursery_ctx.nursery != nullptr &&
+            tls_nursery_ctx.nursery->current > tls_nursery_ctx.nursery->begin) {
+            do_young_gc = true;
+        }
+
+
+        if (do_young_gc) {
+            // NOTE: no LOG_DEBUG here — must not block on I/O before
+            // RequestGlobalSafepoint.  A blocking fputc (pipe full) while
+            // holding g_log_mutex would prevent GC from starting.
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            GcYoungCollection(tls_nursery_ctx.nursery);
+            threading::ReleaseGlobalSafepoint(gen);
+            g_gc_scheduler.RecordGcCompleted();
+
             char* ptr = tls_nursery_ctx.nursery->current;
             char* next = ptr + size;
             if (next <= tls_nursery_ctx.nursery->end) {
                 tls_nursery_ctx.nursery->current = next;
                 std::memset(ptr, 0, size);
                 g_gc_scheduler.RecordAllocation(size);
-                memory_domain::GcTrackDomainAlloc(size);
                 return ptr;
             }
         }
-    } else if (gc_decision == GcCollectionKind::FULL_BGC) {
-        // Scheduler triggered BGC — start concurrent mark cycle (non-blocking).
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_bgc_via_scheduler_in_nursery_alloc_slow");
-        BgcController::Instance().StartBgcCycle();
-        // BGC runs concurrently; continue with normal nursery allocation flow.
-    }
 
-    // Proactive young GC: run when the scheduler budget is exceeded.
-    // Also run when nursery has live objects and we are about to recycle it,
-    // preventing safepoint deadlock (a thread in the RegionManager mutex blocks
-    // another thread's safepoint from completing, hanging all threads).
-    bool do_young_gc = (gc_decision == GcCollectionKind::YOUNG);
-    if (!do_young_gc && tls_nursery_ctx.nursery != nullptr &&
-        tls_nursery_ctx.nursery->current > tls_nursery_ctx.nursery->begin) {
-        do_young_gc = true;
-    }
+        // Check if BGC concurrent mark has completed and needs STW re-mark.
+        if (BgcController::Instance().IsRemarkNeeded()) {
+            CHAOS_IL2CPP_LOG_DEBUG("CRAG", "bgc_remark_in_nursery_alloc_slow");
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            BgcController::Instance().StwRemark();
+            threading::ReleaseGlobalSafepoint(gen);
 
+            // After re-mark, signal BGC to begin concurrent sweep.
+            BgcController::Instance().StartConcurrentSweep();
 
-    if (do_young_gc) {
-        // NOTE: no LOG_DEBUG here — must not block on I/O before
-        // RequestGlobalSafepoint.  A blocking fputc (pipe full) while
-        // holding g_log_mutex would prevent GC from starting.
-        uint32_t gen = threading::RequestGlobalSafepoint();
-        GcYoungCollection(tls_nursery_ctx.nursery);
-        threading::ReleaseGlobalSafepoint(gen);
-        g_gc_scheduler.RecordGcCompleted();
+            // Record full collection (BGC cycle conserves old-gen memory).
+            g_gc_scheduler.RecordFullCollection(g_old_gen.TotalAllocated());
 
-        char* ptr = tls_nursery_ctx.nursery->current;
-        char* next = ptr + size;
-        if (next <= tls_nursery_ctx.nursery->end) {
-            tls_nursery_ctx.nursery->current = next;
-            std::memset(ptr, 0, size);
-            g_gc_scheduler.RecordAllocation(size);
-            return ptr;
-        }
-    }
-
-    // Check if BGC concurrent mark has completed and needs STW re-mark.
-    if (BgcController::Instance().IsRemarkNeeded()) {
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "bgc_remark_in_nursery_alloc_slow");
-        uint32_t gen = threading::RequestGlobalSafepoint();
-        BgcController::Instance().StwRemark();
-        threading::ReleaseGlobalSafepoint(gen);
-
-        // After re-mark, signal BGC to begin concurrent sweep.
-        BgcController::Instance().StartConcurrentSweep();
-
-        // Record full collection (BGC cycle conserves old-gen memory).
-        g_gc_scheduler.RecordFullCollection(g_old_gen.TotalAllocated());
-
-        // Try bump from the existing nursery again.
-        if (tls_nursery_ctx.nursery != nullptr) {
-            char* ptr = tls_nursery_ctx.nursery->current;
-            char* next = ptr + size;
-            if (next <= tls_nursery_ctx.nursery->end) {
-                tls_nursery_ctx.nursery->current = next;
-                std::memset(ptr, 0, size);
-                g_gc_scheduler.RecordAllocation(size);
-                memory_domain::GcTrackDomainAlloc(size);
-                return ptr;
+            // Try bump from the existing nursery again.
+            if (tls_nursery_ctx.nursery != nullptr) {
+                char* ptr = tls_nursery_ctx.nursery->current;
+                char* next = ptr + size;
+                if (next <= tls_nursery_ctx.nursery->end) {
+                    tls_nursery_ctx.nursery->current = next;
+                    std::memset(ptr, 0, size);
+                    g_gc_scheduler.RecordAllocation(size);
+                    memory_domain::GcTrackDomainAlloc(size);
+                    return ptr;
+                }
             }
         }
-    }
 
-    // Check if BGC concurrent sweep has completed and needs STW compaction.
-    if (BgcController::Instance().IsCompactNeeded()) {
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "bgc_compact_in_nursery_alloc_slow");
-        uint32_t gen = threading::RequestGlobalSafepoint();
-        BgcController::Instance().StwCompact();
-        threading::ReleaseGlobalSafepoint(gen);
-        g_gc_scheduler.RecordFullCollection(g_old_gen.TotalAllocated());
+        // Check if BGC concurrent sweep has completed and needs STW compaction.
+        if (BgcController::Instance().IsCompactNeeded()) {
+            CHAOS_IL2CPP_LOG_DEBUG("CRAG", "bgc_compact_in_nursery_alloc_slow");
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            BgcController::Instance().StwCompact();
+            threading::ReleaseGlobalSafepoint(gen);
+            g_gc_scheduler.RecordFullCollection(g_old_gen.TotalAllocated());
 
-        if (tls_nursery_ctx.nursery != nullptr) {
-            char* ptr = tls_nursery_ctx.nursery->current;
-            char* next = ptr + size;
-            if (next <= tls_nursery_ctx.nursery->end) {
-                tls_nursery_ctx.nursery->current = next;
-                std::memset(ptr, 0, size);
-                g_gc_scheduler.RecordAllocation(size);
-                memory_domain::GcTrackDomainAlloc(size);
-                return ptr;
+            if (tls_nursery_ctx.nursery != nullptr) {
+                char* ptr = tls_nursery_ctx.nursery->current;
+                char* next = ptr + size;
+                if (next <= tls_nursery_ctx.nursery->end) {
+                    tls_nursery_ctx.nursery->current = next;
+                    std::memset(ptr, 0, size);
+                    g_gc_scheduler.RecordAllocation(size);
+                    memory_domain::GcTrackDomainAlloc(size);
+                    return ptr;
+                }
             }
         }
-    }
 
-    // Check if a full GC has been requested by the scheduler.
-    if (g_gc_scheduler.IsFullGcRequested()) {
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_gc_in_nursery_alloc_slow");
-        // Full GC with STW safepoint: Collect() calls GcScanAllThreadRoots
-        // internally for thread stack scanning, which requires the generation
-        // to be odd so that other threads stop in SafepointPoll.
-        uint32_t gen = threading::RequestGlobalSafepoint();
-        g_old_gen.Collect(nullptr, nullptr);
-        threading::ReleaseGlobalSafepoint(gen);
-        // RecordFullCollection is handled inside OldGen::Collect().
+        // Check if a full GC has been requested by the scheduler.
+        if (g_gc_scheduler.IsFullGcRequested()) {
+            CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_gc_in_nursery_alloc_slow");
+            // Full GC with STW safepoint: Collect() calls GcScanAllThreadRoots
+            // internally for thread stack scanning, which requires the generation
+            // to be odd so that other threads stop in SafepointPoll.
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            g_old_gen.Collect(nullptr, nullptr);
+            threading::ReleaseGlobalSafepoint(gen);
+            g_gc_scheduler.RecordGcCompleted();
+            // RecordFullCollection is handled inside OldGen::Collect().
 
-        // After full GC, try bump from the existing nursery again.
-        if (tls_nursery_ctx.nursery != nullptr) {
-            char* ptr = tls_nursery_ctx.nursery->current;
-            char* next = ptr + size;
-            if (next <= tls_nursery_ctx.nursery->end) {
-                tls_nursery_ctx.nursery->current = next;
-                std::memset(ptr, 0, size);
-                g_gc_scheduler.RecordAllocation(size);
-                memory_domain::GcTrackDomainAlloc(size);
-                return ptr;
+            // After full GC, try bump from the existing nursery again.
+            if (tls_nursery_ctx.nursery != nullptr) {
+                char* ptr = tls_nursery_ctx.nursery->current;
+                char* next = ptr + size;
+                if (next <= tls_nursery_ctx.nursery->end) {
+                    tls_nursery_ctx.nursery->current = next;
+                    std::memset(ptr, 0, size);
+                    g_gc_scheduler.RecordAllocation(size);
+                    memory_domain::GcTrackDomainAlloc(size);
+                    return ptr;
+                }
             }
         }
-    }
+    }  // if (claimed_gc_slot) — end of GC decision block
 
-    // Current nursery exhausted (or GC didn't free enough) — get a fresh one
+    // Current nursery exhausted (or GC skipped due to rate limiting, or
     // from the manager, using the scheduler's recommended size.
     // CRITICAL: Clear TLS nursery pointer BEFORE FreeRegion, because another
     // thread's concurrent GcYoungCollection may scan this thread's stack via
@@ -281,119 +295,130 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
         tls_alloc_since_last_gc = 0;
     }
 
-    // Same as NurseryAllocateSlow but passes scanning_required=false for
-    // old-gen fallback.  The nursery bump path is identical.
-    auto gc_decision = g_gc_scheduler.DecideCollection();
+    // GC rate limiter (same design as NurseryAllocateSlow): only one thread
+    // may proceed with GC decision per 500μs window.
+    bool claimed_gc_slot = g_gc_scheduler.TryClaimGcSlot();
 
-    if (gc_decision == GcCollectionKind::FULL) {
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_gc_via_scheduler_in_nursery_alloc_atomic_slow");
-        uint32_t gen = threading::RequestGlobalSafepoint();
-        g_old_gen.Collect(nullptr, nullptr);
-        threading::ReleaseGlobalSafepoint(gen);
+    if (claimed_gc_slot) {
+        // Same as NurseryAllocateSlow but passes scanning_required=false for
+        // old-gen fallback.  The nursery bump path is identical.
+        auto gc_decision = g_gc_scheduler.DecideCollection();
 
-        if (tls_nursery_ctx.nursery != nullptr) {
+        if (gc_decision == GcCollectionKind::FULL) {
+            CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_gc_via_scheduler_in_nursery_alloc_atomic_slow");
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            g_old_gen.Collect(nullptr, nullptr);
+            threading::ReleaseGlobalSafepoint(gen);
+            g_gc_scheduler.RecordGcCompleted();
+
+            if (tls_nursery_ctx.nursery != nullptr) {
+                char* ptr = tls_nursery_ctx.nursery->current;
+                char* next = ptr + size;
+                if (next <= tls_nursery_ctx.nursery->end) {
+                    tls_nursery_ctx.nursery->current = next;
+                    std::memset(ptr, 0, size);
+                    g_gc_scheduler.RecordAllocation(size);
+                    memory_domain::GcTrackDomainAlloc(size);
+                    return ptr;
+                }
+            }
+        } else if (gc_decision == GcCollectionKind::FULL_BGC) {
+            CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_bgc_via_scheduler_in_nursery_alloc_atomic_slow");
+            BgcController::Instance().StartBgcCycle();
+        }
+
+        // Proactive young GC: run when the scheduler budget is exceeded or the
+        // nursery has live objects (prevents safepoint deadlock — see rationale
+        // in NurseryAllocateSlow).
+        bool do_young_gc = (gc_decision == GcCollectionKind::YOUNG);
+        if (!do_young_gc && tls_nursery_ctx.nursery != nullptr &&
+            tls_nursery_ctx.nursery->current > tls_nursery_ctx.nursery->begin) {
+            do_young_gc = true;
+        }
+
+
+        if (do_young_gc) {
+            // NOTE: no LOG_DEBUG — see rationale in NurseryAllocateSlow.
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            GcYoungCollection(tls_nursery_ctx.nursery);
+            threading::ReleaseGlobalSafepoint(gen);
+            g_gc_scheduler.RecordGcCompleted();
+
             char* ptr = tls_nursery_ctx.nursery->current;
             char* next = ptr + size;
             if (next <= tls_nursery_ctx.nursery->end) {
                 tls_nursery_ctx.nursery->current = next;
                 std::memset(ptr, 0, size);
                 g_gc_scheduler.RecordAllocation(size);
-                memory_domain::GcTrackDomainAlloc(size);
                 return ptr;
             }
         }
-    } else if (gc_decision == GcCollectionKind::FULL_BGC) {
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_bgc_via_scheduler_in_nursery_alloc_atomic_slow");
-        BgcController::Instance().StartBgcCycle();
-    }
 
-    bool do_young_gc = (gc_decision == GcCollectionKind::YOUNG);
-    if (!do_young_gc && tls_nursery_ctx.nursery != nullptr &&
-        tls_nursery_ctx.nursery->current > tls_nursery_ctx.nursery->begin) {
-        do_young_gc = true;
-    }
+        // Check if BGC concurrent mark has completed and needs STW re-mark.
+        if (BgcController::Instance().IsRemarkNeeded()) {
+            CHAOS_IL2CPP_LOG_DEBUG("CRAG", "bgc_remark_in_nursery_alloc_atomic_slow");
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            BgcController::Instance().StwRemark();
+            threading::ReleaseGlobalSafepoint(gen);
+            BgcController::Instance().StartConcurrentSweep();
+            g_gc_scheduler.RecordFullCollection(g_old_gen.TotalAllocated());
 
-
-    if (do_young_gc) {
-        // NOTE: no LOG_DEBUG — see rationale in NurseryAllocateSlow.
-        uint32_t gen = threading::RequestGlobalSafepoint();
-        GcYoungCollection(tls_nursery_ctx.nursery);
-        threading::ReleaseGlobalSafepoint(gen);
-        g_gc_scheduler.RecordGcCompleted();
-
-        char* ptr = tls_nursery_ctx.nursery->current;
-        char* next = ptr + size;
-        if (next <= tls_nursery_ctx.nursery->end) {
-            tls_nursery_ctx.nursery->current = next;
-            std::memset(ptr, 0, size);
-            g_gc_scheduler.RecordAllocation(size);
-            return ptr;
-        }
-    }
-
-    // Check if BGC concurrent mark has completed and needs STW re-mark.
-    if (BgcController::Instance().IsRemarkNeeded()) {
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "bgc_remark_in_nursery_alloc_atomic_slow");
-        uint32_t gen = threading::RequestGlobalSafepoint();
-        BgcController::Instance().StwRemark();
-        threading::ReleaseGlobalSafepoint(gen);
-        BgcController::Instance().StartConcurrentSweep();
-        g_gc_scheduler.RecordFullCollection(g_old_gen.TotalAllocated());
-
-        if (tls_nursery_ctx.nursery != nullptr) {
-            char* ptr = tls_nursery_ctx.nursery->current;
-            char* next = ptr + size;
-            if (next <= tls_nursery_ctx.nursery->end) {
-                tls_nursery_ctx.nursery->current = next;
-                std::memset(ptr, 0, size);
-                g_gc_scheduler.RecordAllocation(size);
-                memory_domain::GcTrackDomainAlloc(size);
-                return ptr;
+            if (tls_nursery_ctx.nursery != nullptr) {
+                char* ptr = tls_nursery_ctx.nursery->current;
+                char* next = ptr + size;
+                if (next <= tls_nursery_ctx.nursery->end) {
+                    tls_nursery_ctx.nursery->current = next;
+                    std::memset(ptr, 0, size);
+                    g_gc_scheduler.RecordAllocation(size);
+                    memory_domain::GcTrackDomainAlloc(size);
+                    return ptr;
+                }
             }
         }
-    }
 
-    // Check if BGC concurrent sweep has completed and needs STW compaction.
-    if (BgcController::Instance().IsCompactNeeded()) {
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "bgc_compact_in_nursery_alloc_atomic_slow");
-        uint32_t gen = threading::RequestGlobalSafepoint();
-        BgcController::Instance().StwCompact();
-        threading::ReleaseGlobalSafepoint(gen);
-        g_gc_scheduler.RecordFullCollection(g_old_gen.TotalAllocated());
+        // Check if BGC concurrent sweep has completed and needs STW compaction.
+        if (BgcController::Instance().IsCompactNeeded()) {
+            CHAOS_IL2CPP_LOG_DEBUG("CRAG", "bgc_compact_in_nursery_alloc_atomic_slow");
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            BgcController::Instance().StwCompact();
+            threading::ReleaseGlobalSafepoint(gen);
+            g_gc_scheduler.RecordFullCollection(g_old_gen.TotalAllocated());
 
-        if (tls_nursery_ctx.nursery != nullptr) {
-            char* ptr = tls_nursery_ctx.nursery->current;
-            char* next = ptr + size;
-            if (next <= tls_nursery_ctx.nursery->end) {
-                tls_nursery_ctx.nursery->current = next;
-                std::memset(ptr, 0, size);
-                g_gc_scheduler.RecordAllocation(size);
-                memory_domain::GcTrackDomainAlloc(size);
-                return ptr;
+            if (tls_nursery_ctx.nursery != nullptr) {
+                char* ptr = tls_nursery_ctx.nursery->current;
+                char* next = ptr + size;
+                if (next <= tls_nursery_ctx.nursery->end) {
+                    tls_nursery_ctx.nursery->current = next;
+                    std::memset(ptr, 0, size);
+                    g_gc_scheduler.RecordAllocation(size);
+                    memory_domain::GcTrackDomainAlloc(size);
+                    return ptr;
+                }
             }
         }
-    }
 
-    // Check if a full GC has been requested by the scheduler.
-    if (g_gc_scheduler.IsFullGcRequested()) {
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_gc_in_nursery_alloc_atomic_slow");
-        uint32_t gen = threading::RequestGlobalSafepoint();
-        g_old_gen.Collect(nullptr, nullptr);
-        threading::ReleaseGlobalSafepoint(gen);
-        // RecordFullCollection is handled inside OldGen::Collect().
+        // Check if a full GC has been requested by the scheduler.
+        if (g_gc_scheduler.IsFullGcRequested()) {
+            CHAOS_IL2CPP_LOG_DEBUG("CRAG", "full_gc_in_nursery_alloc_atomic_slow");
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            g_old_gen.Collect(nullptr, nullptr);
+            threading::ReleaseGlobalSafepoint(gen);
+            g_gc_scheduler.RecordGcCompleted();
+            // RecordFullCollection is handled inside OldGen::Collect().
 
-        if (tls_nursery_ctx.nursery != nullptr) {
-            char* ptr = tls_nursery_ctx.nursery->current;
-            char* next = ptr + size;
-            if (next <= tls_nursery_ctx.nursery->end) {
-                tls_nursery_ctx.nursery->current = next;
-                std::memset(ptr, 0, size);
-                g_gc_scheduler.RecordAllocation(size);
-                memory_domain::GcTrackDomainAlloc(size);
-                return ptr;
+            if (tls_nursery_ctx.nursery != nullptr) {
+                char* ptr = tls_nursery_ctx.nursery->current;
+                char* next = ptr + size;
+                if (next <= tls_nursery_ctx.nursery->end) {
+                    tls_nursery_ctx.nursery->current = next;
+                    std::memset(ptr, 0, size);
+                    g_gc_scheduler.RecordAllocation(size);
+                    memory_domain::GcTrackDomainAlloc(size);
+                    return ptr;
+                }
             }
         }
-    }
+    }  // if (claimed_gc_slot) — end of GC decision block
 
     // CRITICAL: Clear TLS nursery pointer BEFORE FreeRegion (same rationale as
     // NurseryAllocateSlow — concurrent GcYoungCollection may scan this thread's

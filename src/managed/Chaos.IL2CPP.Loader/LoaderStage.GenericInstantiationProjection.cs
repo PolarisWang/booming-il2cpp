@@ -77,6 +77,7 @@ public sealed partial class LoaderStage
                 IsSealed = definitionType.IsSealed,
                 IsComImport = definitionType.IsComImport,
                 ComInterfaceGuid = definitionType.ComInterfaceGuid,
+                ComInterfaceTypeKind = definitionType.ComInterfaceTypeKind,
                 BaseTypeSubjectId = definitionType.BaseTypeSubjectId is null
                     ? null
                     : ProjectInstantiationText(

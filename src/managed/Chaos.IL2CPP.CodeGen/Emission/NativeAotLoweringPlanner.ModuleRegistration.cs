@@ -265,6 +265,8 @@ public sealed partial class NativeAotLoweringPlanner
                             });
                         }
 
+                        var methodNames = vtableInfo.Methods.Select(m => m.MethodName).ToArray();
+
                         ccwInterfaceModels.Add(new ScriptObject
                         {
                             ["guid_bytes"] = string.Join(", ", guidBytes.Select(b => $"0x{b:X2}u")),
@@ -274,6 +276,8 @@ public sealed partial class NativeAotLoweringPlanner
                             ["method_slot_count"] = vtableInfo.Methods.Length,
                             ["methods"] = methodModels,
                             ["stable_id"] = "CHAOS_IL2CPP_UINT64_C(0x" + vtableInfo.StableId.ToString("X16") + ")",
+                            ["is_idispatch"] = vtableInfo.IsDispatch,
+                            ["method_names"] = methodNames,
                         });
                     }
                 }
