@@ -163,6 +163,21 @@ public sealed record ManagedImportModel
     /// (mask 0x0006: Ansi=0x0002, Unicode=0x0004, Auto=0x0006).
     /// </summary>
     public int CharSet { get; init; }
+
+    /// <summary>
+    /// True when <see cref="System.Reflection.MethodImportAttributes.SetLastError"/>
+    /// is set. The P/Invoke stub saves <c>GetLastError()</c> after the native call
+    /// so that <c>Marshal.GetLastPInvokeError()</c> can retrieve it.
+    /// </summary>
+    public bool SetLastError { get; init; }
+
+    /// <summary>
+    /// True when the P/Invoke method is annotated with
+    /// <see cref="System.Runtime.InteropServices.SuppressGCTransitionAttribute"/>.
+    /// When set, the generated wrapper skips the GC_TRANSITION_TO_PREEMPTIVE /
+    /// GC_TRANSITION_TO_COOPERATIVE pair around the native call.
+    /// </summary>
+    public bool IsSuppressGCTransition { get; init; }
 }
 
 public sealed record ManagedParameterModel

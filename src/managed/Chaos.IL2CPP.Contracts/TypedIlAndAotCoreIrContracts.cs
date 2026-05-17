@@ -448,6 +448,30 @@ public sealed record AotCoreIrMethodArtifact
     /// </summary>
     public int ImportCharSet { get; init; }
 
+    /// <summary>
+    /// For P/Invoke methods: when true, the native call is preceded by
+    /// <c>SetLastError(0)</c> and followed by <c>GetLastError()</c> stored
+    /// to thread-local storage so <c>Marshal.GetLastPInvokeError()</c> can
+    /// retrieve the per-call error code.
+    /// </summary>
+    public bool ImportSetLastError { get; init; }
+
+    /// <summary>
+    /// For P/Invoke methods: when true, the module name is "__Internal",
+    /// meaning the native function is linked statically at compile time
+    /// (no LoadLibrary/GetProcAddress needed). The codegen emits a direct
+    /// <c>extern "C"</c> function declaration instead.
+    /// </summary>
+    public bool IsInternalLink { get; init; }
+
+    /// <summary>
+    /// For P/Invoke methods: when true, the method is annotated with
+    /// <see cref="System.Runtime.InteropServices.SuppressGCTransitionAttribute"/>.
+    /// The generated wrapper skips the GC_TRANSITION_TO_PREEMPTIVE /
+    /// GC_TRANSITION_TO_COOPERATIVE pair around the native call.
+    /// </summary>
+    public bool IsSuppressGCTransition { get; init; }
+
     /// For P/Invoke methods: indices of parameters whose managed type is
     /// System.String and therefore need UTF-8 marshalling.
     public IReadOnlyList<int>? StringParameterIndices { get; init; }

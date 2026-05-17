@@ -168,8 +168,11 @@ public sealed partial class NativeAotLoweringPlanner
                     continue;
                 }
 
-                // Instantiation stub → has a definition, no table needed
-                if (TryGetInstantiationStubSymbol(instruction.TargetReference?.InstantiationStubId) != null)
+                // Instantiation stub → has a definition, no table needed (same-assembly only).
+                // Cross-assembly generic methods don't have stub definitions in this compilation unit
+                // and must be dispatched through the external runtime table.
+                if (TryGetInstantiationStubSymbol(instruction.TargetReference?.InstantiationStubId) != null &&
+                    _methodsBySubjectId.ContainsKey(callee))
                     continue;
 
                 // This callee would fall through to chaos_external_runtime_* stub generation.

@@ -54,7 +54,7 @@ inline void BgcSatbPreWriteBarrier(void** slot) noexcept {
     int pool_idx = tls_satb_buffer_index;
     if (pool_idx < 0) [[unlikely]] {
         pool_idx = BgcController::Instance().AllocateSatbBuffer();
-        if (pool_idx < 0) return;  // OOM — skip barrier (rare, safe with SATB).
+        if (pool_idx < 0) return;  // Pool exhausted — AllocateSatbBuffer requested emergency full GC; skip barrier (dirty cards catch remaining old→young refs in STW re-mark).
         tls_satb_buffer_index = pool_idx;
     }
     auto& buf = BgcController::Instance().GetSatbBuffer(pool_idx);

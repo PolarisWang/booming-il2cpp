@@ -148,7 +148,16 @@ public sealed partial class LoaderStage
         var moduleName = metadataReader.GetString(moduleReference.Name);
         var entryPointName = metadataReader.GetString(import.Name);
 
+        // __Internal: the symbol is expected to be linked statically at compile time,
+        // so no LoadLibrary/GetProcAddress is needed at runtime. Signal this to the
+        // codegen layer by clearing the module name.
+        if (string.Equals(moduleName, "__Internal", StringComparison.Ordinal))
+        {
+            moduleName = "";
+        }
+
         var attributes = (int)import.Attributes;
+        var isSuppressGCTransition = HasSuppressGCTransitionAttribute(metadataReader, methodDefinition);
 
         return new ManagedImportModel
         {
@@ -156,7 +165,32 @@ public sealed partial class LoaderStage
             EntryPointName = entryPointName,
             CallingConvention = attributes & (int)MethodImportAttributes.CallingConventionMask,
             CharSet = attributes & (int)MethodImportAttributes.CharSetMask,
+            SetLastError = import.Attributes.HasFlag(MethodImportAttributes.SetLastError),
+            IsSuppressGCTransition = isSuppressGCTransition,
         };
+    }
+
+    /// <summary>
+    /// Checks whether the given method is annotated with
+    /// <see cref="System.Runtime.InteropServices.SuppressGCTransitionAttribute"/>.
+    /// </summary>
+    private static bool HasSuppressGCTransitionAttribute(
+        MetadataReader metadataReader,
+        MethodDefinition methodDefinition)
+    {
+        const string suppressGCTransitionAttributeFullName =
+            "System.Runtime.InteropServices.SuppressGCTransitionAttribute";
+
+        foreach (var attributeHandle in methodDefinition.GetCustomAttributes())
+        {
+            if (TryGetAttributeTypeName(metadataReader, attributeHandle, out var namespaceName, out var typeName) &&
+                string.Equals($"{namespaceName}.{typeName}", suppressGCTransitionAttributeFullName, StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static MethodReferenceSummary DescribeMemberReferenceMethod(

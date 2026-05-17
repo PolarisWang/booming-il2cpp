@@ -234,12 +234,6 @@ void SafepointPoll() noexcept {
     // switch per iteration.  The GC duration is ~400µs — busy-waiting
     // with pause is vastly cheaper than yielding (which deschedules the
     // thread, incurring a full OS quantum delay on wakeup).
-#if defined(_MSC_VER)
-    constexpr int kPauseAfter = 10000;
-#else
-    constexpr int kPauseAfter = 10000;
-#endif
-    int spins = 0;
     while ((s_generation.load(std::memory_order_acquire) & kGcGenerationMask) != 0u) {
 #if defined(_MSC_VER)
         _mm_pause();

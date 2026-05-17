@@ -278,41 +278,31 @@ void ClearDomainPointers(CHAOS_IL2CPP_UINT32 domain_id) {
 
     auto& mgr = chaos::il2cpp::runtime_core::RegionManager::Instance();
 
-    // Scan by_stable_id — null iface_map / vtable_array if they point
-    // into the domain being unloaded.
+    // Scan all vtable entries — null iface_map / vtable_array if they point
+    // into the domain being unloaded.  Both by_stable_id and by_type_token
+    // may contain the same vtable, so we de-dup via a small set to avoid
+    // redundant work when a vtable is reachable through both indexes.
+    auto clear_vtable = [&](const TypeVTable* vtable) {
+        if (vtable == nullptr) return;
+        if (vtable->iface_map != nullptr &&
+            mgr.IsInDomain(domain_id, vtable->iface_map)) {
+            const_cast<TypeVTable*>(vtable)->iface_map = nullptr;
+            const_cast<TypeVTable*>(vtable)->iface_count = 0u;
+        }
+        if (vtable->vtable_array != nullptr &&
+            mgr.IsInDomain(domain_id, vtable->vtable_array)) {
+            const_cast<TypeVTable*>(vtable)->vtable_array = nullptr;
+            const_cast<TypeVTable*>(vtable)->vtable_length = 0u;
+        }
+    };
+
     for (auto& [stable_id, vtable] : state.by_stable_id) {
         (void)stable_id;
-        if (vtable == nullptr) continue;
-
-        if (vtable->iface_map != nullptr &&
-            mgr.IsInDomain(domain_id, vtable->iface_map)) {
-            const_cast<TypeVTable*>(vtable)->iface_map = nullptr;
-            const_cast<TypeVTable*>(vtable)->iface_count = 0u;
-        }
-
-        if (vtable->vtable_array != nullptr &&
-            mgr.IsInDomain(domain_id, vtable->vtable_array)) {
-            const_cast<TypeVTable*>(vtable)->vtable_array = nullptr;
-            const_cast<TypeVTable*>(vtable)->vtable_length = 0u;
-        }
+        clear_vtable(vtable);
     }
-
-    // Also check by_type_token — entries may only be in this index.
     for (auto& [token, vtable] : state.by_type_token) {
         (void)token;
-        if (vtable == nullptr) continue;
-
-        if (vtable->iface_map != nullptr &&
-            mgr.IsInDomain(domain_id, vtable->iface_map)) {
-            const_cast<TypeVTable*>(vtable)->iface_map = nullptr;
-            const_cast<TypeVTable*>(vtable)->iface_count = 0u;
-        }
-
-        if (vtable->vtable_array != nullptr &&
-            mgr.IsInDomain(domain_id, vtable->vtable_array)) {
-            const_cast<TypeVTable*>(vtable)->vtable_array = nullptr;
-            const_cast<TypeVTable*>(vtable)->vtable_length = 0u;
-        }
+        clear_vtable(vtable);
     }
 }
 

@@ -1791,6 +1791,10 @@ bool MarkSweepOldGen::TryMarkRoot(void* addr) {
     if (addr == nullptr) return false;
     auto val = *reinterpret_cast<void**>(addr);
     if (val == nullptr) return false;
+    // Verify the candidate looks like a valid managed object before marking —
+    // eliminates false positive roots from random stack values that happen
+    // to fall in old-gen range.
+    if (!IsValidManagedObject(val)) return false;
     auto* page = FindPage(val);
     if (page != nullptr && page->in_use.load(std::memory_order_acquire)) {
         if (MarkObject(val)) {
@@ -1811,6 +1815,10 @@ void MarkSweepOldGen::ScanRangeForRoots(void* range_begin, void* range_end) {
     for (uintptr_t slot = begin; slot + sizeof(void*) <= end; slot += sizeof(void*)) {
         auto val = *reinterpret_cast<void**>(slot);
         if (val == nullptr) continue;
+        // Verify the candidate looks like a valid managed object before
+        // marking — eliminates false positive roots from random values
+        // that happen to fall in old-gen range.
+        if (!IsValidManagedObject(val)) continue;
         auto* page = FindPage(val);
         if (page != nullptr && page->in_use.load(std::memory_order_acquire)) {
             if (MarkObject(val)) {

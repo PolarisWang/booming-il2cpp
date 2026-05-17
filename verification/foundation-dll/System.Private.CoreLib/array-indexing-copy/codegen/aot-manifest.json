@@ -129,9 +129,15 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Comparer\u003CSystem.Byte\u003E::get_Default:System.Collections.Generic.Comparer\u003CSystem.Byte\u003E()",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array,System.Collections.IComparer)",
+      "subjectId": "System.Private.CoreLib/System.Array::Sort\u003CSystem.Byte\u003E:System.Void(System.Byte[],System.Collections.Generic.IComparer\u003CSystem.Byte\u003E)",
       "reason": "external-call"
     },
     {

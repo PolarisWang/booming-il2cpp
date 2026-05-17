@@ -211,6 +211,7 @@ public sealed partial class NativeAotLoweringPlanner
 		bool hasSimpleNonBlittableStructParams = method.SimpleNonBlittableStructParameterIndices is { Count: > 0 };
 		bool hasComplexStructParams = method.ComplexStructParameterIndices is { Count: > 0 };
 		bool hasSafeHandleParams = method.SafeHandleParameterIndices is { Count: > 0 };
+t	bool hasSetLastError = method.ImportSetLastError;
 		bool needsMarshalling = hasStringParams || hasStringReturn || hasBlittableStructParams || hasSimpleNonBlittableStructParams || hasComplexStructParams || hasSafeHandleParams;
 		var stringParamSet = hasStringParams
 			? new HashSet<int>(method.StringParameterIndices!)
@@ -438,7 +439,13 @@ public sealed partial class NativeAotLoweringPlanner
 		//   3. Blittable struct on void return: call, cleanup, fall through.
 		//   4. Non-blittable (string): existing string marshal paths.
 		builder.AppendLine();
-		if (!hasStringParams && !hasStringReturn && !hasBlittableStructParams && !hasSimpleNonBlittableStructParams && !hasComplexStructParams && !hasSafeHandleParams)
+		// SetLastError: clear OS error before the native call.
+		if (hasSetLastError)
+		{
+			builder.AppendLine("    ::chaos::il2cpp::runtime_core::ClearOsLastError();");
+		}
+
+		if (!hasStringParams && !hasStringReturn && !hasBlittableStructParams && !hasSimpleNonBlittableStructParams && !hasComplexStructParams && !hasSafeHandleParams && !hasSetLastError)
 		{
 			// Path 1: pure blittable — return directly.
 			bool isVoidLocal = method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void;
@@ -452,6 +459,7 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine($"    return s_pinvoke_fn_({nativeArgList});");
 			builder.AppendLine("}");
 			return;
+
 		}
 
 		// Paths 2-4: capture result if non-void.
@@ -464,6 +472,14 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine($"    s_pinvoke_fn_({nativeArgList});");
 		}
+		// SetLastError: capture OS error after the native call.
+		if (hasSetLastError)
+		{
+			builder.AppendLine("    ::chaos::il2cpp::runtime_core::SetLastPInvokeError(");
+			builder.AppendLine("        ::chaos::il2cpp::runtime_core::GetCurrentThreadState(),");
+			builder.AppendLine("        ::chaos::il2cpp::runtime_core::GetOsLastError());");
+		}
+
 
 		// Post-call: cleanup.
 		builder.AppendLine();

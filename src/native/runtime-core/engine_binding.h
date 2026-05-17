@@ -144,6 +144,44 @@ CHAOS_IL2CPP_INT32 MarshalSizeOf(
     ThreadState* thread_state,
     const TypeInfoHot* type_info);
 
+/// Store the P/Invoke last-error value into thread-local storage.
+/// Called by codegen P/Invoke stubs after native calls that have SetLastError=true.
+void SetLastPInvokeError(ThreadState* thread_state, CHAOS_IL2CPP_INT32 error) noexcept;
+
+/// Retrieve the per-call P/Invoke last-error value from thread-local storage.
+/// Called by Marshal.GetLastPInvokeError() ICALL and Marshal.GetLastWin32Error() ICALL.
+CHAOS_IL2CPP_INT32 GetLastPInvokeError(ThreadState* thread_state) noexcept;
+CHAOS_IL2CPP_INT32 GetLastPInvokeErrorIcall() noexcept;
+
+/// Clear the OS-level last-error before a P/Invoke call (SetLastError(0) on Win32).
+/// No-op on non-Windows platforms.
+void ClearOsLastError() noexcept;
+
+/// Capture the OS-level last-error after a P/Invoke call (GetLastError() on Win32).
+/// Returns 0 on non-Windows platforms.
+CHAOS_IL2CPP_INT32 GetOsLastError() noexcept;
+
+/// Runtime helper for Marshal.DestroyStructure(IntPtr, Type) — non-generic overload.
+/// Extracts TypeInfoHot* from the managed Type object, resolves the struct
+/// descriptor, and frees non-blittable fields (CoTaskMem strings, etc.).
+/// Defined in marshal_api.cpp.
+CHAOS_IL2CPP_INTPTR ChaosDestroyStructureByType(CHAOS_IL2CPP_INTPTR struct_ptr, CHAOS_IL2CPP_INTPTR type_obj) noexcept;
+
+/// ICALL: Marshal.StringToBSTR(string) → IntPtr
+CHAOS_IL2CPP_INTPTR MarshalStringToBSTR(void* managed_string) noexcept;
+
+/// ICALL: Marshal.PtrToStringBSTR(IntPtr) → String
+void* MarshalPtrToStringBSTR(CHAOS_IL2CPP_INTPTR bstr_ptr) noexcept;
+
+/// ICALL: Marshal.FreeBSTR(IntPtr) → void
+void MarshalFreeBSTR(CHAOS_IL2CPP_INTPTR bstr_ptr) noexcept;
+
+/// ICALL: Marshal.GetObjectForNativeVariant(IntPtr) → Object (V1 stub)
+void* ChaosGetObjectForNativeVariant(CHAOS_IL2CPP_INTPTR variant_ptr) noexcept;
+
+/// ICALL: Marshal.GetNativeVariantForObject(Object, IntPtr, IntPtr) → void (V1 stub)
+void ChaosGetNativeVariantForObject(void* obj, CHAOS_IL2CPP_INTPTR variant_ptr, CHAOS_IL2CPP_INTPTR destroy_old) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_ENGINE_BINDING_H_

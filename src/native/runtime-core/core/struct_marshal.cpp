@@ -294,7 +294,7 @@ void MarshalStructNativeToManaged(
 void DestroyMarshalledStruct(
     const StructMarshallingDescriptorV1* desc,
     unsigned char* native_ptr,
-    RuntimeState* runtime) {
+    RuntimeState* runtime) noexcept {
     if (desc == nullptr || native_ptr == nullptr) return;
 
     if (runtime == nullptr) {

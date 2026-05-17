@@ -11,12 +11,16 @@
       "path": "verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/subjects/build-output/ArrayIndexingCopySubjects.dll"
     },
     {
+      "assemblyName": "System.Collections",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Collections.dll"
+    },
+    {
       "assemblyName": "System.Private.CoreLib",
       "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Private.CoreLib.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "ccd91b70-7c59-4182-8a84-386408b3c786",
+  "inputModuleVersionId": "a1142b58-f22a-4e11-81b0-aea58ee5dc00",
   "artifacts": [
     {
       "kind": "typedIlIr",

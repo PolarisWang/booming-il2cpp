@@ -1364,6 +1364,27 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 });
                 }));
 
+            // === Marshal.SizeOf<T> — return marshalled struct size via descriptor ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "SizeOf",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    if (typeArgs.Count == 0) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var structDescSymbol = NativeAotLoweringPlanner.GetNativeStructMarshallingDescriptorSymbol(typeArgs[0]);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, "", [
+                        $"    const auto* chaos_desc = {structDescSymbol};",
+                        "    return chaos_desc != nullptr",
+                        "        ? static_cast<CHAOS_IL2CPP_INT32>(chaos_desc->total_size)",
+                        "        : 0;",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>([]),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int>());
+                }));
+
             // === Marshal.Copy (element type and direction extracted from parameter types) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
@@ -1539,12 +1560,14 @@ public sealed partial class NativeAotLoweringPlanner
                             CreateVoidAbiSlot(),
                             new HashSet<int> { 0 });
                     }
-                    // Non-generic overload: V1 no-op stub — runtime-reflection descriptor not yet available.
+                    // Non-generic overload: Marshal.DestroyStructure(IntPtr, Type)
+                    // Extracts TypeInfoHot* from the managed Type object via runtime helper.
                     var nonGenericSymbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var nonGenericSrc = RenderSimpleExternalRuntimeHelper("void", nonGenericSymbol,
+                    var nonGenericSrc = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", nonGenericSymbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
-                        "    (void)chaos_arg_0; (void)chaos_arg_1;",
+                        "    return ::chaos::il2cpp::runtime_core::ChaosDestroyStructureByType(",
+                        "        chaos_arg_0, chaos_arg_1);",
                     ]);
                     return new GenericShapeResolution(nonGenericSrc, nonGenericSymbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]

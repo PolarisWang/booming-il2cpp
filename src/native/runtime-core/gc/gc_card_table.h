@@ -90,7 +90,12 @@ inline void DirtyCard(const void* obj) noexcept {
     uintptr_t card_idx = idx % kCardsPerSegment;
     auto* seg = g_card_l1[seg_idx].load(std::memory_order_relaxed);
     if (seg != nullptr) [[likely]] {
-        seg->cards[card_idx] = 0xFF;
+        // DC optimization: skip the store if the card is already dirty.
+        // On multiprocessor systems this avoids cache-line invalidation
+        // traffic for repeated writes to the same 512-byte card.
+        if (seg->cards[card_idx] != 0xFF) {
+            seg->cards[card_idx] = 0xFF;
+        }
     }
 }
 

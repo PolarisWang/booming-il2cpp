@@ -644,7 +644,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[21] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[23] = {
 	"System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)",
 	"StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
 	"System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)",
@@ -654,6 +654,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[21] = {
 	"System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)",
 	"System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)",
 	"System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+	"System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
 	"System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])",
 	"System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)",
 	"System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
@@ -662,13 +663,14 @@ extern "C" const char* kChaosExternalRuntimeSubjects[21] = {
 	"System.Private.CoreLib/System.String::ToUpper:System.String()",
 	"System.Private.CoreLib/System.String::ToLower:System.String()",
 	"System.Private.CoreLib/System.String::Trim:System.String()",
+	"System.Private.CoreLib/System.Array::Empty<System.String>:System.String[]()",
 	"System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])",
 	"System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)",
 	"System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)",
 	"System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[21] = {
+extern "C" void* kChaosExternalRuntimeFnTable[23] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__IndexOf_System_Int32_System_String_),
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__IndexOf_System_Int32_System_Char_),
@@ -678,6 +680,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[21] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__Compare_System_Int32_System_String_System_String_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__Compare_System_Int32_System_String_System_Int32_System_String_System_Int32_System_Int32_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__Concat_System_String_System_String_System_String_),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__Format_System_String_System_String_System_Object___),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__StartsWith_System_Boolean_System_String_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__Contains_System_Boolean_System_String_),
@@ -686,13 +689,14 @@ extern "C" void* kChaosExternalRuntimeFnTable[21] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__ToUpper_System_String__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__ToLower_System_String__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__Trim_System_String__),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__Join_System_String_System_String_System_String___),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Char__IsDigit_System_Boolean_System_Char_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Char__IsLetter_System_Boolean_System_Char_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Char__IsWhiteSpace_System_Boolean_System_Char_),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 21;
+extern "C" int32_t kChaosExternalRuntimeCount = 23;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -1629,7 +1633,7 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_8(
 		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
 	}}
 	{
-		const auto chaos_result = chaos_stub_definition_System_Private_CoreLib_System_Array__Empty___0_____type____method__System_Object();
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -1651,7 +1655,7 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_8(
 		_s1 = CHAOS_IL2CPP_STRING_ID("hello");
 	}}
 	{
-		const auto chaos_result = chaos_stub_definition_System_Private_CoreLib_System_Array__Empty___0_____type____method__System_Object();
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -2301,7 +2305,7 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_16
 		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
 	}}
 	{
-		const auto chaos_result = chaos_stub_definition_System_Private_CoreLib_System_Array__Empty___0_____type____method__System_String();
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[18])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -2323,7 +2327,7 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_16
 		_s1 = CHAOS_IL2CPP_STRING_ID("hello");
 	}}
 	{
-		const auto chaos_result = chaos_stub_definition_System_Private_CoreLib_System_Array__Empty___0_____type____method__System_String();
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[18])();
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
