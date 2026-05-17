@@ -156,7 +156,11 @@ static void Handle_LdArg(FastFrame& frame, const interpreter::IRInstruction& ins
     const auto* arg_base = static_cast<const uint64_t*>(frame.args);
     uint32_t idx = static_cast<uint32_t>(instr.operand_index);
     frame.stack[frame.sp] = arg_base[idx];
-    frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
+    // Use cached arg type tags when available (set by SetupFastFrame from PatchMethod::cached_arg_types).
+    // Falls back to ObjectRef when no type info is available (legacy behavior).
+    frame.stack_tags[frame.sp] = (frame.arg_type_tags != nullptr && idx < frame.arg_count)
+        ? frame.arg_type_tags[idx]
+        : static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
     ++frame.sp;
     ++frame.pc;
 }
@@ -362,9 +366,25 @@ static void Handle_BltUn(FastFrame& frame, const interpreter::IRInstruction& ins
     }
 }
 
+// ── Tag validation helper (CHECK builds only — verifies stack tags match
+// expected integer type.  Catches IR-to-FastExecute tag mismatches early
+// with a hard assertion instead of silent data corruption).
+// No-op in SHIP/PROFILE builds (CHAOS_IL2CPP_ASSERT compiled out).
+static void AssertInt32Tag(const FastFrame& frame, uint32_t stack_idx) noexcept {
+    CHAOS_IL2CPP_ASSERT(stack_idx < FastFrame::kMaxStack);
+    CHAOS_IL2CPP_ASSERT(
+        frame.stack_tags[stack_idx] == static_cast<uint8_t>(interpreter::ValueTag::Int32) ||
+        frame.stack_tags[stack_idx] == static_cast<uint8_t>(interpreter::ValueTag::Int64) ||
+        frame.stack_tags[stack_idx] == static_cast<uint8_t>(interpreter::ValueTag::ObjectRef) ||
+        frame.stack_tags[stack_idx] == static_cast<uint8_t>(interpreter::ValueTag::Null)
+        && "Handle_Add/Sub/Mul/etc: expected Int32/Int64 tag, got Float32/Float64");
+}
+
 static void Handle_Add(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Add");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(l + r);
@@ -374,6 +394,8 @@ static void Handle_Add(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_Sub(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Sub");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(l - r);
@@ -383,6 +405,8 @@ static void Handle_Sub(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_Mul(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Mul");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(l * r);
@@ -392,6 +416,8 @@ static void Handle_Mul(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_Div(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Div");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(l / r);
@@ -401,6 +427,8 @@ static void Handle_Div(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_Rem(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Rem");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(l % r);
@@ -410,6 +438,7 @@ static void Handle_Rem(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_Neg(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Neg");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
+        AssertInt32Tag(frame, frame.sp - 1);
     int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(-v);
     ++frame.pc;
@@ -418,6 +447,8 @@ static void Handle_Neg(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_And(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_And");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(l & r);
@@ -427,6 +458,8 @@ static void Handle_And(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_Or(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Or");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(l | r);
@@ -436,6 +469,8 @@ static void Handle_Or(FastFrame& frame, const interpreter::IRInstruction&) noexc
 static void Handle_Xor(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Xor");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(l ^ r);
@@ -445,6 +480,7 @@ static void Handle_Xor(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_Not(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Not");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
+        AssertInt32Tag(frame, frame.sp - 1);
     int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(~v);
     ++frame.pc;
@@ -453,6 +489,8 @@ static void Handle_Not(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_Shl(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Shl");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+        AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t a = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(v << (a & 0x1F));
@@ -462,6 +500,8 @@ static void Handle_Shl(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_Shr(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Shr");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+        AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t a = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(v >> (a & 0x1F));
@@ -471,6 +511,8 @@ static void Handle_Shr(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_ShrUn(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_ShrUn");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+        AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t a = static_cast<int32_t>(frame.stack[--frame.sp]);
     uint32_t v = static_cast<uint32_t>(frame.stack[--frame.sp]);
     frame.PushI32(static_cast<int32_t>(v >> (a & 0x1F)));
@@ -480,6 +522,8 @@ static void Handle_ShrUn(FastFrame& frame, const interpreter::IRInstruction&) no
 static void Handle_Ceq(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Ceq");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+        AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     uint64_t r = frame.stack[--frame.sp];
     uint64_t l = frame.stack[--frame.sp];
     frame.PushI32(l == r ? 1 : 0);
@@ -489,6 +533,8 @@ static void Handle_Ceq(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_Clt(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Clt");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(l < r ? 1 : 0);
@@ -498,6 +544,8 @@ static void Handle_Clt(FastFrame& frame, const interpreter::IRInstruction&) noex
 static void Handle_Cgt(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Cgt");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
     frame.PushI32(l > r ? 1 : 0);
@@ -700,6 +748,8 @@ static void Handle_Call_DoAotDirect(FastFrame& frame,
     uint64_t result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
 
     // Read ret_tag from CachedCallInfo.
+    // Default Int32 is safe: codegen emits correct Ret-type opcodes so the
+    // tag is only used for FastFrame type tracking, not data interpretation.
     uint8_t ret_tag = static_cast<uint8_t>(interpreter::ValueTag::Int32);
     if (frame.call_cache != nullptr && frame.pc < frame.call_count) {
         const auto* cc = static_cast<const ri::CachedCallInfo*>(frame.call_cache);
@@ -778,6 +828,52 @@ static void Handle_Call_DoRaw(FastFrame& frame,
     ++frame.pc;
 }
 
+// ── PopCallArgs: RAII helper for popping call arguments from FastFrame ──
+// Shared by Handle_Call and Handle_CallVirt to eliminate duplicated
+// small-buffer / malloc arg-pop logic.
+struct PopCallArgs {
+    uint64_t* args;
+    uint8_t*  tags;
+    uint32_t  count;
+    bool      heap_allocated;
+
+    PopCallArgs(FastFrame& frame, uint32_t ac) noexcept
+        : count(ac), heap_allocated(ac > 8) {
+        if (ac <= 8) {
+            args = stack_buf;
+            tags = tags_buf;
+        } else {
+            args = static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
+            tags = static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
+        }
+        if (args == nullptr || tags == nullptr) {
+            if (heap_allocated) { CHAOS_IL2CPP_FREE(args); CHAOS_IL2CPP_FREE(tags); }
+            args = nullptr;
+            tags = nullptr;
+            return;
+        }
+        for (uint32_t i = ac; i > 0; --i) {
+            --frame.sp;
+            args[i - 1] = frame.stack[frame.sp];
+            tags[i - 1] = frame.stack_tags[frame.sp];
+        }
+    }
+
+    ~PopCallArgs() noexcept {
+        if (heap_allocated) {
+            CHAOS_IL2CPP_FREE(args);
+            CHAOS_IL2CPP_FREE(tags);
+        }
+    }
+
+    PopCallArgs(const PopCallArgs&) = delete;
+    PopCallArgs& operator=(const PopCallArgs&) = delete;
+
+private:
+    uint64_t stack_buf[8];
+    uint8_t  tags_buf[8];
+};
+
 static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Call");
     if (frame.sp < instr.arg_count) {
@@ -808,31 +904,17 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
         return;
     }
 
-    // ── Common arg pop (ac > 0) ────────────────────────────────────
-    uint64_t raw_args_stack[8];
-    uint8_t  raw_tags_stack[8];
-    auto* raw_args = (ac <= 8) ? raw_args_stack
-        : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
-    auto* raw_tags = (ac <= 8) ? raw_tags_stack
-        : static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
-
-    if (raw_args == nullptr || raw_tags == nullptr) {
-        if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+    // ── Common arg pop via RAII ─────────────────────────────────────
+    PopCallArgs pa(frame, ac);
+    if (pa.args == nullptr || pa.tags == nullptr) {
         frame.threw_exception = true; frame.pc = 9999; return;
-    }
-
-    for (uint32_t i = ac; i > 0; --i) {
-        --frame.sp;
-        raw_args[i - 1] = frame.stack[frame.sp];
-        raw_tags[i - 1] = frame.stack_tags[frame.sp];
     }
 
     // ── Route to path-specific handler ──────────────────────────────
     // AotDirectDispatch takes priority: direct_fn is a pre-resolved
     // chaos_external_runtime_* function pointer that always works.
     if (instr.direct_fn != nullptr) {
-        Handle_Call_DoAotDirect(frame, instr, raw_args, raw_tags, ac);
-        if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+        Handle_Call_DoAotDirect(frame, instr, pa.args, pa.tags, ac);
         return;
     }
 
@@ -853,14 +935,12 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
     if (cache_info != nullptr &&
         cache_info->direct_ptr != nullptr &&
         !cache_info->is_patched) {
-        Handle_Call_DoMIC(frame, instr, raw_args, raw_tags, ac, cache_info);
-        if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+        Handle_Call_DoMIC(frame, instr, pa.args, pa.tags, ac, cache_info);
         return;
     }
 
     // Raw dispatch fallback.
-    Handle_Call_DoRaw(frame, instr, raw_args, raw_tags, ac, cache_info);
-    if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+    Handle_Call_DoRaw(frame, instr, pa.args, pa.tags, ac, cache_info);
 }
 
 static void Handle_Ret(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
@@ -936,27 +1016,14 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
 
     uint32_t ac = static_cast<uint32_t>(instr.arg_count);
 
-    // ── Common arg pop (shared with Handle_Call pattern) ──────────────
-    uint64_t raw_args_stack[8];
-    uint8_t  raw_tags_stack[8];
-    auto* raw_args = (ac <= 8) ? raw_args_stack
-        : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
-    auto* raw_tags = (ac <= 8) ? raw_tags_stack
-        : static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
-
-    if (raw_args == nullptr || raw_tags == nullptr) {
-        if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+    // ── Common arg pop via RAII (shared with Handle_Call pattern) ───
+    PopCallArgs pa(frame, ac);
+    if (pa.args == nullptr || pa.tags == nullptr) {
         frame.threw_exception = true; frame.pc = 9999; return;
     }
 
-    for (uint32_t i = ac; i > 0; --i) {
-        --frame.sp;
-        raw_args[i - 1] = frame.stack[frame.sp];
-        raw_tags[i - 1] = frame.stack_tags[frame.sp];
-    }
-
     // ── MIC fast path: cached vtable entry ─────────────────────────────
-    if (ac > 0 && raw_args[0] != 0 &&
+    if (ac > 0 && pa.args[0] != 0 &&
         frame.call_cache != nullptr && frame.pc < frame.call_count) {
         auto* cc = static_cast<ri::CachedCallInfo*>(const_cast<void*>(frame.call_cache));
         auto& mic = cc[frame.pc];
@@ -964,7 +1031,7 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
         if (mic.ret_tag != 0xFF &&
             mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Struct)) {
             uint32_t receiver_token = static_cast<interpreter::InterpreterObject*>(
-                reinterpret_cast<void*>(raw_args[0]))->type_token;
+                reinterpret_cast<void*>(pa.args[0]))->type_token;
 
             // MIC read: relaxed load (benign race — all racers compute same value).
             if (mic.mic_type_token.load(std::memory_order_relaxed) == receiver_token &&
@@ -973,14 +1040,14 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
                     g_patch_generation.load(std::memory_order_relaxed)) {
                 // MIC hit — call cached vtable entry directly.
                 uint64_t result = CallDirectVoidPtr(
-                    mic.mic_dispatch_ptr.load(std::memory_order_relaxed), raw_args, ac);
+                    mic.mic_dispatch_ptr.load(std::memory_order_relaxed), pa.args, ac);
 
                 if (mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
                     frame.stack[frame.sp] = result;
                     frame.stack_tags[frame.sp] = mic.ret_tag;
                     ++frame.sp;
                 }
-                if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+
                 ++frame.pc;
                 return;
             }
@@ -998,14 +1065,14 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
                         g_patch_generation.load(std::memory_order_relaxed),
                         std::memory_order_relaxed);
 
-                    uint64_t result = CallDirectVoidPtr(resolved, raw_args, ac);
+                    uint64_t result = CallDirectVoidPtr(resolved, pa.args, ac);
 
                     if (mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
                         frame.stack[frame.sp] = result;
                         frame.stack_tags[frame.sp] = mic.ret_tag;
                         ++frame.sp;
                     }
-                    if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+    
                     ++frame.pc;
                     return;
                 }
@@ -1022,8 +1089,8 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
         if (cc[frame.pc].ret_tag != 0xFF) cache_info = &cc[frame.pc];
     }
 
-    Handle_Call_DoRaw(frame, instr, raw_args, raw_tags, ac, cache_info);
-    if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+    Handle_Call_DoRaw(frame, instr, pa.args, pa.tags, ac, cache_info);
+
 }
 
 static void Handle_CallBridge(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept { Handle_Call(frame, instr); }
@@ -1068,6 +1135,8 @@ static void Handle_StElem(FastFrame& frame, const interpreter::IRInstruction&) n
 static void Handle_DivUn(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_DivUn");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+        AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     uint32_t r = static_cast<uint32_t>(frame.stack[--frame.sp]);
     uint32_t l = static_cast<uint32_t>(frame.stack[--frame.sp]);
     frame.PushI32(static_cast<int32_t>(l / r));
@@ -1077,6 +1146,8 @@ static void Handle_DivUn(FastFrame& frame, const interpreter::IRInstruction&) no
 static void Handle_RemUn(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_RemUn");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+        AssertInt32Tag(frame, frame.sp - 1);
+    AssertInt32Tag(frame, frame.sp - 2);
     uint32_t r = static_cast<uint32_t>(frame.stack[--frame.sp]);
     uint32_t l = static_cast<uint32_t>(frame.stack[--frame.sp]);
     frame.PushI32(static_cast<int32_t>(l % r));

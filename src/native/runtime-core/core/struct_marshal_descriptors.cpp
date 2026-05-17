@@ -1,16 +1,15 @@
 namespace chaos::il2cpp::runtime_core {
 namespace {
 
-struct MarshallingDescriptorEntry {
-    CHAOS_IL2CPP_UINT64 stable_id;
-    const StructMarshallingDescriptorV1* desc;
-};
+// Dynamic registry for codegen-emitted static StructMarshallingDescriptorV1 entries.
+// Replaces the earlier fixed-size (256) array with no upper limit, supporting
+// 200+ patch modules without silent descriptor loss.
+static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(CHAOS_IL2CPP_UINT64, const StructMarshallingDescriptorV1*)
+    g_static_descriptors;
 
-static constexpr CHAOS_IL2CPP_SIZE kMaxStaticDescriptors = 256;
-static MarshallingDescriptorEntry g_static_descriptors[kMaxStaticDescriptors];
-static CHAOS_IL2CPP_INT32 g_static_descriptor_count = 0;
-
-static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, std::unique_ptr<StructMarshallingDescriptorV1>) g_runtime_descriptor_cache;
+// Runtime-constructed descriptors (reflection fallback), protected by mutex.
+static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, std::unique_ptr<StructMarshallingDescriptorV1>)
+    g_runtime_descriptor_cache;
 static std::mutex g_runtime_descriptor_mutex;
 
 }  // anonymous namespace
@@ -19,32 +18,23 @@ void RegisterStaticMarshallingDescriptor(
     CHAOS_IL2CPP_UINT64 stable_id,
     const StructMarshallingDescriptorV1* desc) noexcept {
     if (desc == nullptr || stable_id == 0) return;
-    if (g_static_descriptor_count >= kMaxStaticDescriptors) return;
 
-    for (CHAOS_IL2CPP_INT32 i = 0; i < g_static_descriptor_count; ++i) {
-        if (g_static_descriptors[i].stable_id == stable_id) return;
-    }
-
-    g_static_descriptors[g_static_descriptor_count].stable_id = stable_id;
-    g_static_descriptors[g_static_descriptor_count].desc = desc;
-    g_static_descriptor_count++;
-}
-
-static const StructMarshallingDescriptorV1* FindStaticDescriptor(CHAOS_IL2CPP_UINT64 stable_id) noexcept {
-    for (CHAOS_IL2CPP_INT32 i = 0; i < g_static_descriptor_count; ++i) {
-        if (g_static_descriptors[i].stable_id == stable_id)
-            return g_static_descriptors[i].desc;
-    }
-    return nullptr;
+    // Insert if absent (deduplication).
+    g_static_descriptors.try_emplace(stable_id, desc);
 }
 
 const StructMarshallingDescriptorV1*
 ResolveStructMarshallingDescriptor(const TypeInfoHot* type) noexcept {
     if (type == nullptr || type->stable_id == 0) return nullptr;
 
-    auto* static_desc = FindStaticDescriptor(type->stable_id);
-    if (static_desc != nullptr) return static_desc;
+    // 1. Try static (codegen-emitted) descriptors — O(1) hash lookup.
+    {
+        auto it = g_static_descriptors.find(type->stable_id);
+        if (it != g_static_descriptors.end())
+            return it->second;
+    }
 
+    // 2. Try runtime-constructed descriptor cache.
     {
         std::lock_guard<std::mutex> lock(g_runtime_descriptor_mutex);
         auto it = g_runtime_descriptor_cache.find(type->stable_id);

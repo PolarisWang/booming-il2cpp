@@ -48,23 +48,30 @@ void SetupFastFrame(FastFrame* ff,
     ff->exception_obj_val = nullptr;
     ff->tracked_cnt = 0;  // CleanupTracked already freed all objects
 
-    // Set arg count and args buffer.
+    // Set arg count, args buffer, and arg type tags.
     auto* pm = static_cast<const PatchMethod*>(patch_method);
     if (pm->cached_sig_valid) {
         ff->arg_count = pm->cached_arg_count;
+        ff->arg_type_tags = pm->cached_arg_types;
     } else {
         ff->arg_count = 0;
+        ff->arg_type_tags = nullptr;
         if (pm->signature_blob != nullptr && pm->signature_len > 1) {
+            // ECMA-335 II.23.2.12: compressed unsigned integer encoding.
+            constexpr uint8_t kSigMaxOneByte  = 0x7F;
+            constexpr uint8_t kSigMaxTwoByte  = 0xBF;
+            constexpr uint8_t kSigTwoByteMask = 0x3F;
+            constexpr uint8_t kSigHasThisFlag = 0x20;
             const uint8_t* sig = pm->signature_blob;
             const uint8_t* sig_data = sig + 1;
             uint8_t count_byte = sig_data[1];
-            if (count_byte <= 0x7F) {
+            if (count_byte <= kSigMaxOneByte) {
                 ff->arg_count = count_byte;
-            } else if (count_byte <= 0xBF) {
+            } else if (count_byte <= kSigMaxTwoByte) {
                 ff->arg_count = static_cast<uint32_t>(
-                    ((count_byte & 0x3F) << 8) | sig_data[2]);
+                    ((count_byte & kSigTwoByteMask) << 8) | sig_data[2]);
             }
-            if ((sig_data[0] & 0x20) == 0x20) {
+            if ((sig_data[0] & kSigHasThisFlag) == kSigHasThisFlag) {
                 ff->arg_count += 1;
             }
         }

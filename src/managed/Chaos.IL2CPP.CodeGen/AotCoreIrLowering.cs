@@ -244,6 +244,9 @@ public sealed class AotCoreIrLowering
             ImportEntryPointName = method.Import?.EntryPointName,
             ImportCallingConvention = method.Import?.CallingConvention ?? 0,
             ImportCharSet = method.Import?.CharSet ?? 0,
+            ImportSetLastError = method.Import?.SetLastError ?? false,
+            IsInternalLink = method.Import is not null && string.IsNullOrEmpty(method.Import.ModuleName),
+            IsSuppressGCTransition = method.Import?.IsSuppressGCTransition ?? false,
             StringParameterIndices = method.Import is not null
                 ? method.Parameters
                     .Select((p, i) => (p.Type, i))

@@ -42,6 +42,11 @@ struct FastFrame {
     const void* args                  = nullptr;
     uint32_t    arg_count             = 0;
 
+    // Optional pointer to per-argument type tags (from PatchMethod::cached_arg_types).
+    // Used by Handle_LdArg to emit the correct ValueTag instead of assuming ObjectRef.
+    // nullptr = all args treated as ObjectRef (legacy behavior).
+    const uint8_t* arg_type_tags       = nullptr;
+
     uint64_t    ret_val               = 0;
     uint8_t     ret_tag               = 0;
     bool        has_ret               = false;
@@ -94,36 +99,48 @@ struct FastFrame {
 
     // ── Push helpers ─────────────────────────────────────────────────
     void PushI32(int32_t v) noexcept {
+        CHAOS_IL2CPP_ASSERT(sp < kMaxStack && "FastFrame stack overflow");
+        if (sp >= kMaxStack) { threw_exception = true; return; }
         stack[sp] = static_cast<uint64_t>(v);
         stack_tags[sp] = static_cast<uint8_t>(interpreter::ValueTag::Int32);
         ++sp;
     }
 
     void PushI64(int64_t v) noexcept {
+        CHAOS_IL2CPP_ASSERT(sp < kMaxStack && "FastFrame stack overflow");
+        if (sp >= kMaxStack) { threw_exception = true; return; }
         stack[sp] = static_cast<uint64_t>(v);
         stack_tags[sp] = static_cast<uint8_t>(interpreter::ValueTag::Int64);
         ++sp;
     }
 
     void PushF32(float v) noexcept {
+        CHAOS_IL2CPP_ASSERT(sp < kMaxStack && "FastFrame stack overflow");
+        if (sp >= kMaxStack) { threw_exception = true; return; }
         std::memcpy(&stack[sp], &v, sizeof(float));
         stack_tags[sp] = static_cast<uint8_t>(interpreter::ValueTag::Float32);
         ++sp;
     }
 
     void PushF64(double v) noexcept {
+        CHAOS_IL2CPP_ASSERT(sp < kMaxStack && "FastFrame stack overflow");
+        if (sp >= kMaxStack) { threw_exception = true; return; }
         std::memcpy(&stack[sp], &v, sizeof(double));
         stack_tags[sp] = static_cast<uint8_t>(interpreter::ValueTag::Float64);
         ++sp;
     }
 
     void PushObj(void* v) noexcept {
+        CHAOS_IL2CPP_ASSERT(sp < kMaxStack && "FastFrame stack overflow");
+        if (sp >= kMaxStack) { threw_exception = true; return; }
         stack[sp] = reinterpret_cast<uint64_t>(v);
         stack_tags[sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
         ++sp;
     }
 
     void PushNull() noexcept {
+        CHAOS_IL2CPP_ASSERT(sp < kMaxStack && "FastFrame stack overflow");
+        if (sp >= kMaxStack) { threw_exception = true; return; }
         stack[sp] = 0;
         stack_tags[sp] = static_cast<uint8_t>(interpreter::ValueTag::Null);
         ++sp;

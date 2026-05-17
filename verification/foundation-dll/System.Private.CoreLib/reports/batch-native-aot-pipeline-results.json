@@ -1,62 +1,23 @@
 {
   "assembly": "System.Private.CoreLib",
   "mode": "family-entrypoint",
-  "total": 4,
-  "passed": 0,
-  "failed": 4,
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
   "results": [
     {
       "family": "array-indexing-copy",
       "config_tier": "CHECK",
       "steps": {
-        "build_subjects": "FAILED"
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
       },
-      "success": false,
+      "success": true,
       "methodCount": 13,
-      "error": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\ArrayIndexingCopySubjects.cs(47,40): error CS0308: The non-generic type 'IComparer' cannot be used with type arguments [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\ArrayIndexingCopySubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\ArrayIndexingCopySubjects.cs(89,15): warning CS8602: Dereference of a possibly null reference. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\ArrayIndexingCopySubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\ArrayIndexingCopySubjects.cs(89,59): warning CS8602: Dereference of a possibly null reference. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\ArrayIndexingCopySubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\ArrayIndexingCopySubjects.cs(89,15): warning CS8602: Dereference of a possibly null reference. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\ArrayIndexingCopySubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\ArrayIndexingCopySubjects.cs(89,59): warning CS8602: Dereference of a possibly null reference. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\ArrayIndexingCopySubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\ArrayIndexingCopySubjects.cs(47,40): error CS0308: The non-generic type 'IComparer' cannot be used with type arguments [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\ArrayIndexingCopySubjects.csproj]\n    2 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.77\n"
-    },
-    {
-      "family": "buffer-memory",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "FAILED"
-      },
-      "success": false,
-      "methodCount": 10,
-      "entryPointSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\managed\\subjects\\build-output\\BufferMemorySubjects.dll",
-      "error": "entry.exe build failed"
-    },
-    {
-      "family": "guid-random-hashcode",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "FAILED"
-      },
-      "success": false,
-      "methodCount": 14,
-      "entryPointSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Run:System.Void(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\guid-random-hashcode\\managed\\subjects\\build-output\\GuidRandomHashcodeSubjects.dll",
-      "error": "entry.exe build failed"
-    },
-    {
-      "family": "string-char-text-core",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "FAILED"
-      },
-      "success": false,
-      "methodCount": 20,
-      "entryPointSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Run:System.Void(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\string-char-text-core\\managed\\subjects\\build-output\\StringCharTextCoreSubjects.dll",
-      "error": "entry.exe build failed"
+      "entryPointSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Run:System.Void(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\build-output\\ArrayIndexingCopySubjects.dll"
     }
   ],
-  "timestamp": "2026-05-17T12:24:54"
+  "timestamp": "2026-05-17T12:51:23"
 }

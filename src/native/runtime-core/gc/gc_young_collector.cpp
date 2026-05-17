@@ -58,11 +58,11 @@ bool IsInNursery(const void* ptr) {
 
 /// Estimate the object size from its address and the nursery region bounds.
 /// This is a fallback when TypeInfo doesn't carry instance_size directly.
-/// The cap matches the largest old-gen size class (32768 bytes) so that
-/// promoted objects up to that size are correctly copied regardless of
-/// layout availability.  Objects larger than 32768 bytes go through the
-/// LOH path and are never in the nursery.
-static constexpr CHAOS_IL2CPP_SIZE kMaxEstObjectSize = 32768;
+/// Uses a conservative cap (2048 = largest bump cache size class) so the
+/// Phase 2 precise nursery scan never advances past valid objects even when
+/// a large gap exists between obj and nursery->current.  Objects larger than
+/// 2048 bytes are typically LOH-allocated and never appear in the nursery.
+static constexpr CHAOS_IL2CPP_SIZE kMaxEstObjectSize = 2048;
 
 static CHAOS_IL2CPP_SIZE EstimateObjectSize(const void* obj, const Region* nursery) {
     if (nursery == nullptr) return kMaxEstObjectSize;
@@ -70,7 +70,9 @@ static CHAOS_IL2CPP_SIZE EstimateObjectSize(const void* obj, const Region* nurse
     uintptr_t end   = reinterpret_cast<uintptr_t>(nursery->current);
     if (start >= end) return kMaxEstObjectSize;
     CHAOS_IL2CPP_SIZE remaining = static_cast<CHAOS_IL2CPP_SIZE>(end - start);
-    return remaining < kMaxEstObjectSize ? remaining : kMaxEstObjectSize;
+    // Conservative: never return more than kMaxEstObjectSize to avoid
+    // skipping over valid objects in the Phase 2 nursery scan.
+    return (remaining < kMaxEstObjectSize) ? remaining : kMaxEstObjectSize;
 }
 
 /// Try to determine object size from its TypeInfo/GcLayout.

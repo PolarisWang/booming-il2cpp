@@ -398,22 +398,28 @@ void InterpreterEntryDirect(
         type_aware_args = true;
     } else {
         // Fallback: legacy signature parsing (arg_count only).
+        // ECMA-335 II.23.2.12: compressed unsigned integer encoding.
+        constexpr uint8_t kSigMaxOneByte  = 0x7F;   // max 1-byte encoded count
+        constexpr uint8_t kSigMaxTwoByte  = 0xBF;   // max first-byte for 2-byte encoding
+        constexpr uint8_t kSigTwoByteMask = 0x3F;   // payload mask for 2-byte encoding
+        constexpr uint8_t kSigHasThisFlag = 0x20;   // HASTHIS calling convention flag
+        constexpr uint8_t kSigMinBlobLen  = 2;      // minimum valid blob: flags + count
         if (patch_method->signature_blob != nullptr &&
             patch_method->signature_len > 1) {
             const uint8_t* sig = patch_method->signature_blob;
-            if (patch_method->signature_blob[0] >= 2) {
+            if (patch_method->signature_blob[0] >= kSigMinBlobLen) {
                 const uint8_t* sig_data = patch_method->signature_blob + 1;
                 uint8_t cc = sig_data[0];
                 uint8_t count_byte = sig_data[1];
 
-                if (count_byte <= 0x7F) {
+                if (count_byte <= kSigMaxOneByte) {
                     arg_count = count_byte;
-                } else if (count_byte <= 0xBF) {
+                } else if (count_byte <= kSigMaxTwoByte) {
                     arg_count = static_cast<CHAOS_IL2CPP_UINT32>(
-                        ((count_byte & 0x3F) << 8) | sig_data[2]);
+                        ((count_byte & kSigTwoByteMask) << 8) | sig_data[2]);
                 }
 
-                if ((cc & 0x20) == 0x20) {
+                if ((cc & kSigHasThisFlag) == kSigHasThisFlag) {
                     arg_count += 1;
                 }
             }

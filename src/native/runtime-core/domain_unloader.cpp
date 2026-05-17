@@ -72,7 +72,7 @@ static CHAOS_IL2CPP_SIZE ScanAndClearCrossDomainRefs(CHAOS_IL2CPP_UINT32 domain_
 
     // Walk the two-level card table: L1 segments (64K entries, lazily
     // allocated) × L2 cards (128 cards per segment, 512B each).
-    uintptr_t l1_max = static_cast<uintptr_t>(kCardL1Entries);
+    uintptr_t l1_max = g_card_l1_size.load(std::memory_order_acquire);
     for (uintptr_t seg_idx = 0; seg_idx < l1_max; seg_idx++) {
         auto* seg = g_card_l1[seg_idx].load(std::memory_order_acquire);
         if (seg == nullptr) continue;  // no segment allocated

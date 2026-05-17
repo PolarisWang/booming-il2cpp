@@ -1,5 +1,4 @@
 namespace chaos::il2cpp::runtime_core {
-namespace {
 
 CHAOS_IL2CPP_INT32 InteropKernel32GetLastError() {
 #if defined(_WIN32)
@@ -183,5 +182,4 @@ ValueTypeKernelBackendKind GetBitArithmeticKernelBackend() { return kBitArithmet
 ValueTypeKernelBackendKind GetTickArithmeticKernelBackend() { return kTickArithmeticKernelBackend; }
 VectorKernelBackendKind GetVectorKernelBackend() { return kVectorKernelBackend; }
 
-}  // anonymous namespace
 }  // namespace chaos::il2cpp::runtime_core

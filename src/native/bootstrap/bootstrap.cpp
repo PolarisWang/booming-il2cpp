@@ -44,6 +44,20 @@ constexpr const char* kDelegateCombineIcallSignature =
     "System.Delegate::Combine(System.Delegate,System.Delegate)";
 constexpr const char* kDelegateRemoveIcallSignature =
     "System.Delegate::Remove(System.Delegate,System.Delegate)";
+constexpr const char* kGetLastPInvokeErrorIcallSignature =
+    "System.Runtime.InteropServices.Marshal::GetLastPInvokeError()";
+constexpr const char* kGetLastWin32ErrorIcallSignature =
+    "System.Runtime.InteropServices.Marshal::GetLastWin32Error()";
+constexpr const char* kStringToBSTRIcallSignature =
+    "System.Runtime.InteropServices.Marshal::StringToBSTR(";
+constexpr const char* kPtrToStringBSTRICallSignature =
+    "System.Runtime.InteropServices.Marshal::PtrToStringBSTR(";
+constexpr const char* kFreeBSTRICallSignature =
+    "System.Runtime.InteropServices.Marshal::FreeBSTR(";
+constexpr const char* kGetObjectForNativeVariantIcallSignature =
+    "System.Runtime.InteropServices.Marshal::GetObjectForNativeVariant(";
+constexpr const char* kGetNativeVariantForObjectIcallSignature =
+    "System.Runtime.InteropServices.Marshal::GetNativeVariantForObject(";
 
 struct UnresolvedVirtualCallEntry {
     CHAOS_IL2CPP_UINT32 instance_type_token;
@@ -822,6 +836,34 @@ void* CHAOS_RUNTIME_ABI_CALL ResolveIcall(const char* icall_name_utf8) {
 
     if (std::strstr(icall_name_utf8, kDelegateRemoveIcallSignature) != nullptr) {
         return reinterpret_cast<void*>(&RemoveDelegate);
+    }
+
+    if (std::strstr(icall_name_utf8, kGetLastPInvokeErrorIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::GetLastPInvokeErrorIcall);
+    }
+
+    if (std::strstr(icall_name_utf8, kGetLastWin32ErrorIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::GetLastPInvokeErrorIcall);
+    }
+
+    if (std::strstr(icall_name_utf8, kStringToBSTRIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalStringToBSTR);
+    }
+
+    if (std::strstr(icall_name_utf8, kPtrToStringBSTRICallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalPtrToStringBSTR);
+    }
+
+    if (std::strstr(icall_name_utf8, kFreeBSTRICallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalFreeBSTR);
+    }
+
+    if (std::strstr(icall_name_utf8, kGetObjectForNativeVariantIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::ChaosGetObjectForNativeVariant);
+    }
+
+    if (std::strstr(icall_name_utf8, kGetNativeVariantForObjectIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::ChaosGetNativeVariantForObject);
     }
 
     return nullptr;

@@ -71,9 +71,10 @@ void BgcController::RegisterThreadSatbBuffer(SatbThreadBuffer* buf) {
 int BgcController::AllocateSatbBuffer() {
     int idx = satb_pool_alloc_.fetch_add(1, std::memory_order_relaxed);
     if (idx >= kMaxSatbPool) {
-        // Pool exhausted — reset alloc and fall back.
+        // Pool exhausted — reset alloc and trigger emergency full GC fallback.
         satb_pool_alloc_.fetch_sub(1, std::memory_order_relaxed);
-        CHAOS_IL2CPP_LOG_ERROR("BGC", "satb_pool_exhausted");
+        CHAOS_IL2CPP_LOG_ERROR("BGC", "satb_pool_exhausted — requesting emergency full GC");
+        g_gc_scheduler.RequestFullGc();
         return -1;
     }
     return idx;
@@ -248,6 +249,10 @@ void BgcController::PopulateRootSet() {
                 auto* slot = static_cast<void**>(root_addr);
                 void* ref = *slot;
                 if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
+                    // Verify the candidate looks like a valid managed object
+                    // before marking — eliminates false positive roots from
+                    // random stack values that happen to fall in old-gen range.
+                    if (!IsValidManagedObject(ref)) return;
                     if (g_old_gen.BgcTryMark(ref)) {
                         std::lock_guard<std::mutex> lock(
                             BgcController::Instance().bgc_workers_[0].steal_mutex);

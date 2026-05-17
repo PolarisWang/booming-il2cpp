@@ -589,7 +589,7 @@ static HotpatchEntryV0 s_hotpatch_entries[15] = {
 	{ reinterpret_cast<void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GuidRandomHashcodeSubjects::Subject_8
 	{ reinterpret_cast<void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GuidRandomHashcodeSubjects::Subject_9
 	{ reinterpret_cast<void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GuidRandomHashcodeSubjects::Subject_10
-	{ reinterpret_cast<void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // GuidRandomHashcodeSubjects::Subject_11
+	{ reinterpret_cast<void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GuidRandomHashcodeSubjects::Subject_11
 	{ reinterpret_cast<void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GuidRandomHashcodeSubjects::Subject_12
 	{ reinterpret_cast<void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GuidRandomHashcodeSubjects::Subject_13
 	{ reinterpret_cast<void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // GuidRandomHashcodeSubjects::Run
@@ -614,7 +614,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[18] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[19] = {
 	"System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)",
 	"System.Private.CoreLib/System.Guid::NewGuid:System.Guid()",
 	"System.Private.CoreLib/System.Guid::GetHashCode:System.Int32()",
@@ -631,11 +631,12 @@ extern "C" const char* kChaosExternalRuntimeSubjects[18] = {
 	"System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
 	"System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])",
 	"System.Private.CoreLib/System.HashCode",
+	"System.Private.CoreLib/System.HashCode::Add<System.Int32>:System.Void(System.Int32)",
 	"System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()",
 	"System.Private.CoreLib/System.HashCode::Combine<System.Int32,System.Int32>:System.Int32(System.Int32,System.Int32)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[18] = {
+extern "C" void* kChaosExternalRuntimeFnTable[19] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Guid___ctor_System_Void_System_String_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Guid__NewGuid_System_Guid__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Guid__GetHashCode_System_Int32__),
@@ -652,11 +653,12 @@ extern "C" void* kChaosExternalRuntimeFnTable[18] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Random__NextBytes_System_Void_System_Byte___),
 	nullptr,
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_HashCode__ToHashCode_System_Int32__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_HashCode__Combine_System_Int32_System_Int32__System_Int32_System_Int32_System_Int32_),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 18;
+extern "C" int32_t kChaosExternalRuntimeCount = 19;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -1511,7 +1513,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11
 	{
 		const auto chaos_raw_arg_0 = _s1;
 		const auto chaos_arg_0 = chaos_raw_arg_0;
-		chaos_stub_definition_System_Private_CoreLib_System_HashCode__Add_System_Void___0__type____method__System_Int32(chaos_arg_0);
+		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[16])(chaos_arg_0);
 	}
 	return;
 }

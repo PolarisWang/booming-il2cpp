@@ -1,5 +1,6 @@
 namespace chaos::il2cpp::runtime_core {
-namespace {
+// NOTE: no anonymous namespace — functions are declared in engine_binding.h
+// and called from bootstrap.cpp, struct_marshal.cpp, and other TUs.
 
 CHAOS_IL2CPP_INTPTR MarshalAllocHGlobal(RuntimeState* runtime_state, CHAOS_IL2CPP_INTPTR size) {
     return runtime_state == nullptr || size < 0 ? 0 : AllocateMarshalBlock(runtime_state, static_cast<CHAOS_IL2CPP_SIZE>(size), MarshalAllocationKind::HGlobal);
@@ -166,8 +167,8 @@ CHAOS_IL2CPP_INTPTR MarshalSafeHandleGetHandle(
     //   16 for ThinLockable (flags & 0x03 == 0x01)
     // SafeHandle/CriticalHandle has 'handle' (IntPtr) as the first instance field,
     // which immediately follows the header.
-    using chaos::il2cpp::common::kTypeInfoHeaderKindMask;
-    using chaos::il2cpp::common::kTypeInfoHeaderKindPure;
+    using ::chaos::il2cpp::common::kTypeInfoHeaderKindMask;
+    using ::chaos::il2cpp::common::kTypeInfoHeaderKindPure;
     const auto* ti = *static_cast<const TypeInfoHot* const*>(safe_handle_obj);
     const CHAOS_IL2CPP_SIZE header_size = (ti->flags & kTypeInfoHeaderKindMask) == kTypeInfoHeaderKindPure ? 8u : 16u;
 
@@ -196,5 +197,171 @@ CHAOS_IL2CPP_INT32 MarshalSizeOf(
     return 0;
 }
 
-}  // anonymous namespace
+// ── P/Invoke SetLastError support ──────────────────────────────────
+
+void SetLastPInvokeError(ThreadState* ts, CHAOS_IL2CPP_INT32 error) noexcept {
+    if (ts != nullptr && ts->internal_state != nullptr) {
+        ts->internal_state->last_pinvoke_error = error;
+    }
+}
+
+CHAOS_IL2CPP_INT32 GetLastPInvokeError(ThreadState* ts) noexcept {
+    if (ts != nullptr && ts->internal_state != nullptr) {
+        return ts->internal_state->last_pinvoke_error;
+    }
+    return 0;
+}
+
+void ClearOsLastError() noexcept {
+#if defined(_WIN32)
+    ::SetLastError(0);
+#endif
+}
+
+CHAOS_IL2CPP_INT32 GetOsLastError() noexcept {
+#if defined(_WIN32)
+    return static_cast<CHAOS_IL2CPP_INT32>(::GetLastError());
+#else
+    return 0;
+#endif
+}
+
+// ICALL helper: Marshal.GetLastPInvokeError() / Marshal.GetLastWin32Error()
+// Takes no managed args; retrieves ThreadState from TLS internally.
+CHAOS_IL2CPP_INT32 GetLastPInvokeErrorIcall() noexcept {
+    auto* ts = GetCurrentThreadState();
+    return GetLastPInvokeError(ts);
+}
+
+// ── DestroyStructure non-generic ──────────────────────────────────
+// Forward declarations (struct_marshal.cpp is unity-included after marshal_api.cpp
+// in runtime_core.cpp, so these aren't visible yet at parse time).
+// Close runtime_core and open the actual struct_marshal peer namespace.
+} // close chaos::il2cpp::runtime_core
+namespace chaos::il2cpp::struct_marshal {
+void DestroyMarshalledStruct(
+    const ::chaos::il2cpp::marshal_abi::StructMarshallingDescriptorV1* desc,
+    unsigned char* native_ptr,
+    RuntimeState* runtime) noexcept;
+}
+namespace chaos::il2cpp::runtime_core { // reopen
+
+CHAOS_IL2CPP_INTPTR ChaosDestroyStructureByType(CHAOS_IL2CPP_INTPTR struct_ptr, CHAOS_IL2CPP_INTPTR type_obj) noexcept {
+    if (struct_ptr == 0 || type_obj == 0) return 0;
+
+    // Extract RuntimeTypeHandle from the managed Type object.
+    // Managed Type layout: [object_header(8|16B)][m_handle IntPtr(8B)].
+    using ::chaos::il2cpp::common::kTypeInfoHeaderKindMask;
+    using ::chaos::il2cpp::common::kTypeInfoHeaderKindPure;
+    const auto* ti = *static_cast<const TypeInfoHot* const*>(reinterpret_cast<void*>(type_obj));
+    const CHAOS_IL2CPP_SIZE header_size = (ti->flags & kTypeInfoHeaderKindMask) == kTypeInfoHeaderKindPure ? 8u : 16u;
+    const CHAOS_IL2CPP_INTPTR type_handle = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
+        static_cast<const uint8_t*>(reinterpret_cast<const void*>(type_obj)) + header_size);
+    if (type_handle == 0) return 0;
+
+    const auto* type_info = reinterpret_cast<const TypeInfoHot*>(type_handle);
+    auto* desc = ResolveStructMarshallingDescriptor(type_info);
+    if (desc == nullptr) return 0;
+
+    auto* runtime = GetCurrentRuntimeState();
+    if (runtime == nullptr) return 0;
+
+    chaos::il2cpp::struct_marshal::DestroyMarshalledStruct(desc, reinterpret_cast<unsigned char*>(struct_ptr), runtime);
+    return 0;
+}
+
+// ── BStr helper (P/Invoke — oleaut32.dll on Win32) ──────────────
+
+#if defined(_WIN32)
+// Resolve SysAllocString/SysFreeString/SysStringLen from oleaut32 at runtime
+// to avoid link-time dependency on oleaut32.lib.
+static void* ResolveOleAut32Proc(const char* name) noexcept {
+    static volatile HMODULE s_oleaut32 = nullptr;
+    if (s_oleaut32 == nullptr) {
+        s_oleaut32 = ::LoadLibraryA("oleaut32.dll");
+    }
+    if (s_oleaut32 == nullptr) return nullptr;
+    return reinterpret_cast<void*>(::GetProcAddress(s_oleaut32, name));
+}
+
+static CHAOS_IL2CPP_INTPTR SysAllocStringThunk(const CHAOS_IL2CPP_UINT16* str) noexcept {
+    using FuncPtr = CHAOS_IL2CPP_INTPTR(__stdcall*)(const CHAOS_IL2CPP_UINT16*);
+    static FuncPtr s_fn = reinterpret_cast<FuncPtr>(ResolveOleAut32Proc("SysAllocString"));
+    return s_fn ? s_fn(str) : 0;
+}
+
+static CHAOS_IL2CPP_INT32 SysStringLenThunk(CHAOS_IL2CPP_INTPTR bstr) noexcept {
+    using FuncPtr = CHAOS_IL2CPP_INT32(__stdcall*)(CHAOS_IL2CPP_INTPTR);
+    static FuncPtr s_fn = reinterpret_cast<FuncPtr>(ResolveOleAut32Proc("SysStringLen"));
+    return s_fn ? s_fn(bstr) : 0;
+}
+
+static void SysFreeStringThunk(CHAOS_IL2CPP_INTPTR bstr) noexcept {
+    using FuncPtr = void(__stdcall*)(CHAOS_IL2CPP_INTPTR);
+    static FuncPtr s_fn = reinterpret_cast<FuncPtr>(ResolveOleAut32Proc("SysFreeString"));
+    if (s_fn) s_fn(bstr);
+}
+#endif
+
+// ICALL: Marshal.StringToBSTR(string) → IntPtr
+CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL MarshalStringToBSTR(void* managed_string) noexcept {
+    if (managed_string == nullptr) return 0;
+#if defined(_WIN32)
+    auto* string_header = static_cast<StringObjectHeader*>(managed_string);
+    const auto byte_count = static_cast<int>(string_header->byte_count);
+    // Convert managed UTF-8 string to UTF-16 for SysAllocString.
+    const auto* utf8_data = reinterpret_cast<const char*>(string_header + 1);
+    int wide_needed = ::MultiByteToWideChar(CP_UTF8, 0, utf8_data, byte_count, nullptr, 0);
+    if (wide_needed <= 0) return 0;
+    auto* wide_buf = static_cast<CHAOS_IL2CPP_UINT16*>(std::malloc(static_cast<CHAOS_IL2CPP_SIZE>(wide_needed + 1) * sizeof(CHAOS_IL2CPP_UINT16)));
+    ::MultiByteToWideChar(CP_UTF8, 0, utf8_data, byte_count, reinterpret_cast<wchar_t*>(wide_buf), wide_needed);
+    wide_buf[wide_needed] = 0;
+    auto result = SysAllocStringThunk(wide_buf);
+    std::free(wide_buf);
+    return result;
+#else
+    (void)managed_string;
+    return 0;
+#endif
+}
+
+// ICALL: Marshal.PtrToStringBSTR(IntPtr) → String
+void* CHAOS_RUNTIME_ABI_CALL MarshalPtrToStringBSTR(CHAOS_IL2CPP_INTPTR bstr_ptr) noexcept {
+    if (bstr_ptr == 0) return nullptr;
+#if defined(_WIN32)
+    auto length_chars = SysStringLenThunk(bstr_ptr);
+    if (length_chars <= 0) return nullptr;
+    auto* wide_chars = reinterpret_cast<const CHAOS_IL2CPP_UINT16*>(bstr_ptr);
+    auto* ts = GetCurrentThreadState();
+    auto* rs = ts ? ts->runtime_state : nullptr;
+    if (rs == nullptr) return nullptr;
+    return MarshalWideToString(rs, ts, wide_chars, length_chars);
+#else
+    return nullptr;
+#endif
+}
+
+// ICALL: Marshal.FreeBSTR(IntPtr) → void
+void CHAOS_RUNTIME_ABI_CALL MarshalFreeBSTR(CHAOS_IL2CPP_INTPTR bstr_ptr) noexcept {
+    if (bstr_ptr == 0) return;
+#if defined(_WIN32)
+    SysFreeStringThunk(bstr_ptr);
+#else
+    (void)bstr_ptr;
+#endif
+}
+
+// ── Variant stubs (V1: no-op — game engine scenario has minimal Variant use) ──
+
+// ICALL: Marshal.GetObjectForNativeVariant(IntPtr) → Object
+void* CHAOS_RUNTIME_ABI_CALL ChaosGetObjectForNativeVariant(CHAOS_IL2CPP_INTPTR /*variant_ptr*/) noexcept {
+    return nullptr;  // V1: return null
+}
+
+// ICALL: Marshal.GetNativeVariantForObject(Object, IntPtr, IntPtr) → void
+void CHAOS_RUNTIME_ABI_CALL ChaosGetNativeVariantForObject(
+    void* /*obj*/, CHAOS_IL2CPP_INTPTR /*variant_ptr*/, CHAOS_IL2CPP_INTPTR /*destroy_old*/) noexcept {
+    // V1: no-op
+}
+
 }  // namespace chaos::il2cpp::runtime_core

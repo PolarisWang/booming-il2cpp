@@ -347,17 +347,19 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[2] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[3] = {
+	"System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()",
 	"System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
 	"BufferMemorySubjects/BufferMemorySubjects::_exitCode",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[2] = {
+extern "C" void* kChaosExternalRuntimeFnTable[3] = {
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Buffer__ByteLength_System_Int32_System_Array_),
 	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 2;
+extern "C" int32_t kChaosExternalRuntimeCount = 3;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -625,7 +627,7 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_2(void)
 
 
 	{
-		const auto chaos_result = chaos_stub_definition_System_Private_CoreLib_System_Array__Empty___0_____type____method__System_Byte();
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[0])();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -634,7 +636,7 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_2(void)
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = chaos_stub_definition_System_Private_CoreLib_System_Array__Empty___0_____type____method__System_Byte();
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[0])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
