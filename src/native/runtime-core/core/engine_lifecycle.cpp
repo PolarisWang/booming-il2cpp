@@ -286,6 +286,91 @@ int GcProcessDependentHandlesAfterFullGC() noexcept {
     return total_kept;
 }
 
+// ── BGC weak handle processing ───────────────────────────────────
+// These functions are called from BgcThreadMain.  The mark bitmap is
+// only valid DURING BgcSweep (before StwCompact clears it), so we
+// collect dead weak-handle entries at that point and null them later,
+// after finalization (for WeakTrackResurrection semantics).
+
+void GcCollectDeadWeakHandles(
+    std::vector<std::pair<uint64_t, void*>>& out_dead) noexcept {
+    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
+    for (auto& kv : s_gc_handle_table) {
+        if (!kv.second.weak) continue;
+        void* obj = kv.second.object_instance;
+        if (obj == nullptr) continue;
+
+        if (!g_old_gen.IsInOldGen(obj) && !g_loh.IsInLOH(obj)) continue;
+
+        bool is_marked = false;
+        if (g_old_gen.IsInOldGen(obj)) {
+            is_marked = g_old_gen.IsMarked(obj);
+        } else if (g_loh.IsInLOH(obj)) {
+            is_marked = g_loh.IsMarked(obj);
+        }
+
+        if (!is_marked) {
+            out_dead.emplace_back(kv.first, obj);
+        }
+    }
+}
+
+void GcProcessCollectedWeakHandles(
+    const std::vector<std::pair<uint64_t, void*>>& dead_handles) noexcept {
+    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
+    for (auto& entry : dead_handles) {
+        auto it = s_gc_handle_table.find(entry.first);
+        if (it == s_gc_handle_table.end()) continue;
+
+        if (it->second.object_instance == entry.second) {
+            CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "null_weak_handle id={0} obj={1}",
+                static_cast<unsigned long long>(entry.first), entry.second);
+            it->second.object_instance = nullptr;
+        }
+    }
+}
+
+int GcProcessDependentHandlesAfterBgc() noexcept {
+    std::lock_guard<std::mutex> lock(s_dep_handle_mutex);
+    int total_kept = 0;
+
+    constexpr int kMaxFixedPointRounds = 3;
+    for (int round = 0; round < kMaxFixedPointRounds; round++) {
+        int kept_this_round = 0;
+
+        for (auto& kv : s_dep_handle_table) {
+            void* primary = kv.second.primary;
+            void* secondary = kv.second.secondary;
+            if (primary == nullptr || secondary == nullptr) continue;
+
+            bool primary_alive = false;
+            if (g_old_gen.IsInOldGen(primary) && g_old_gen.IsMarked(primary)) {
+                primary_alive = true;
+            } else if (g_loh.IsInLOH(primary) && g_loh.IsMarked(primary)) {
+                primary_alive = true;
+            }
+
+            if (primary_alive) {
+                if (g_old_gen.IsInOldGen(secondary)) {
+                    if (g_old_gen.MarkObject(secondary)) {
+                        g_old_gen.AddToMarkStack(secondary);
+                        kept_this_round++;
+                    }
+                } else if (g_loh.IsInLOH(secondary)) {
+                    if (g_loh.MarkObject(secondary)) {
+                        kept_this_round++;
+                    }
+                }
+            }
+        }
+
+        total_kept += kept_this_round;
+        if (kept_this_round == 0) break;
+    }
+
+    return total_kept;
+}
+
 // ── Pinned object set ─────────────────────────────────────────────
 
 void GcAddPinnedObject(void* obj) noexcept {

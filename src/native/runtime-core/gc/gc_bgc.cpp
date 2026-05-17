@@ -39,14 +39,19 @@ void BgcController::Stop() {
     if (!bgc_running_.exchange(false, std::memory_order_acq_rel))
         return;
     bgc_start_requested_.store(true, std::memory_order_release);
+    NotifyBgc();
     if (bgc_thread_.joinable())
         bgc_thread_.join();
 }
 
 void BgcController::FlushSatbBuffer(const SatbEntry* entries, uint32_t count) {
     if (count == 0) return;
-    std::lock_guard<std::mutex> lock(global_satb_mutex_);
-    global_satb_.insert(global_satb_.end(), entries, entries + count);
+    {
+        std::lock_guard<std::mutex> lock(global_satb_mutex_);
+        global_satb_.insert(global_satb_.end(), entries, entries + count);
+    }
+    // New SATB entries mean new work for concurrent mark phase.
+    NotifyBgc();
 }
 
 void BgcController::RegisterThreadSatbBuffer(SatbThreadBuffer* buf) {
@@ -89,6 +94,7 @@ void BgcController::StartBgcCycle() {
     g_bgc_is_marking.store(true, std::memory_order_release);
     cycle_complete_.store(false, std::memory_order_release);
     bgc_start_requested_.store(true, std::memory_order_release);
+    NotifyBgc();
 
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_mark_started");
 }
@@ -141,6 +147,7 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
 void BgcController::StartConcurrentSweep() {
     phase_.store(BgcPhase::CONCURRENT_SWEEP, std::memory_order_release);
     bgc_start_requested_.store(true, std::memory_order_release);
+    NotifyBgc();
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_sweep_started");
 }
 
@@ -154,14 +161,14 @@ void BgcController::StwCompact() {
 
     // Transition to FINISHED, signaling BGC thread to reset to IDLE.
     phase_.store(BgcPhase::FINISHED, std::memory_order_release);
+    NotifyBgc();
 
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "stw_compact_done");
 }
 
 void BgcController::WaitForCycleComplete() {
-    while (!cycle_complete_.load(std::memory_order_acquire)) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
-    }
+    std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
+    bgc_cv_.wait(lock, [this]() { return cycle_complete_.load(std::memory_order_acquire); });
     cycle_complete_.store(false, std::memory_order_release);
 }
 
@@ -180,6 +187,7 @@ void BgcController::ForceComplete() {
     g_bgc_is_marking.store(false, std::memory_order_release);
     bgc_start_requested_.store(false, std::memory_order_release);
     cycle_complete_.store(true, std::memory_order_release);
+    NotifyBgc();
 
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "force_complete");
 }
@@ -370,9 +378,13 @@ void BgcController::BgcThreadMain() {
         // BGC thread waits while STW re-mark happens (executed by the
         // requesting thread under safepoint).  The phase will be set to
         // CONCURRENT_SWEEP or FINISHED by the scheduler after re-mark.
-        while (phase_.load(std::memory_order_acquire) == BgcPhase::REMARK_NEEDED &&
-               bgc_running_.load(std::memory_order_acquire)) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        {
+            std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
+            bgc_cv_.wait_for(lock, std::chrono::milliseconds(100), [this]() {
+                auto p = phase_.load(std::memory_order_acquire);
+                return p != BgcPhase::REMARK_NEEDED ||
+                       !bgc_running_.load(std::memory_order_acquire);
+            });
         }
 
         // ── Phase 3: Concurrent Sweep ─────────────────────────────
@@ -383,6 +395,32 @@ void BgcController::BgcThreadMain() {
             // Each page is swept under the old-gen mutex, with yields between
             // pages so that mutator allocations are not starved.
             g_old_gen.BgcSweep();
+
+            // Collect dead finalizable objects using the mark bitmap
+            // (still valid because BgcSweep preserves it via clear_bitmap=false).
+            // The bitmap will be cleared by StwCompact() later, so we must
+            // capture the list now.
+            bgc_dead_finalizables_ = g_old_gen.CollectDeadFinalizables();
+            if (!bgc_dead_finalizables_.empty()) {
+                CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "dead_finalizables count={0}",
+                    static_cast<unsigned long long>(bgc_dead_finalizables_.size()));
+            }
+
+            // Collect dead weak handles while the mark bitmap is still valid.
+            // These will be nulled after finalization so that WeakTrackResurrection
+            // semantics are preserved (resurrected objects keep their handles).
+            bgc_dead_weak_handles_.clear();
+            {
+                std::vector<std::pair<uint64_t, void*>> flat;
+                GcCollectDeadWeakHandles(flat);
+                for (auto& f : flat) {
+                    bgc_dead_weak_handles_.push_back({f.first, f.second});
+                }
+            }
+            if (!bgc_dead_weak_handles_.empty()) {
+                CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "dead_weak_handles count={0}",
+                    static_cast<unsigned long long>(bgc_dead_weak_handles_.size()));
+            }
 
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_sweep_complete");
         }
@@ -400,9 +438,13 @@ void BgcController::BgcThreadMain() {
         // BGC thread waits while STW compaction happens (executed by the
         // requesting mutator under safepoint).  The phase will be set to
         // FINISHED by StwCompact() after compaction completes.
-        while (phase_.load(std::memory_order_acquire) == BgcPhase::COMPACT_NEEDED &&
-               bgc_running_.load(std::memory_order_acquire)) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        {
+            std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
+            bgc_cv_.wait_for(lock, std::chrono::milliseconds(100), [this]() {
+                auto p = phase_.load(std::memory_order_acquire);
+                return p != BgcPhase::COMPACT_NEEDED ||
+                       !bgc_running_.load(std::memory_order_acquire);
+            });
         }
 
         // ── Finish ────────────────────────────────────────────────
@@ -414,9 +456,53 @@ void BgcController::BgcThreadMain() {
         if (phase_.load(std::memory_order_acquire) == BgcPhase::FINISHED) {
             g_bgc_is_marking.store(false, std::memory_order_release);
             bgc_start_requested_.store(false, std::memory_order_release);
-            cycle_complete_.store(true, std::memory_order_release);
             phase_.store(BgcPhase::IDLE, std::memory_order_release);
+            cycle_complete_.store(true, std::memory_order_release);
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "cycle_finished");
+        }
+
+        // ── Async finalization ─────────────────────────────────────
+        // Execute finalizers for objects identified as dead by BGC marking.
+        // This runs on the BGC thread (background, non-safepoint), matching
+        // CoreCLR's dedicated finalizer thread behavior.  Finalizers run
+        // before weak handle processing so that WeakTrackResurrection
+        // semantics are preserved (resurrected objects keep their handles).
+        if (!bgc_dead_finalizables_.empty()) {
+            CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "running {0} finalizers",
+                static_cast<unsigned long long>(bgc_dead_finalizables_.size()));
+            for (auto& entry : bgc_dead_finalizables_) {
+                if (entry.finalizer != nullptr) {
+                    CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "finalizer obj={0}", entry.obj);
+                    entry.finalizer(entry.obj);
+                }
+            }
+            bgc_dead_finalizables_.clear();
+            CHAOS_IL2CPP_LOG_DEBUG("BGC", "finalization_complete");
+        }
+
+        // ── BGC weak handle processing ─────────────────────────────
+        // After finalization, null weak handles pointing to objects that
+        // are still dead (not resurrected).  This happens after finalization
+        // to preserve WeakTrackResurrection semantics.
+        if (!bgc_dead_weak_handles_.empty()) {
+            std::vector<std::pair<uint64_t, void*>> flat;
+            flat.reserve(bgc_dead_weak_handles_.size());
+            for (auto& dwh : bgc_dead_weak_handles_) {
+                flat.emplace_back(dwh.handle_id, dwh.old_object);
+            }
+            GcProcessCollectedWeakHandles(flat);
+            bgc_dead_weak_handles_.clear();
+            CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "weak_handles_processed count={0}",
+                static_cast<unsigned long long>(flat.size()));
+        }
+
+        // ── BGC dependent handle processing ─────────────────────────
+        {
+            int kept = GcProcessDependentHandlesAfterBgc();
+            if (kept > 0) {
+                CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "dep_handles_kept={0}",
+                    static_cast<unsigned>(kept));
+            }
         }
     }
 

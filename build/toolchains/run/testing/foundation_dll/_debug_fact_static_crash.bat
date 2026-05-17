@@ -6,7 +6,7 @@ set REPO=D:\agent\booming-il2cpp
 set FAMILY=convert-char
 set BUILD_DIR=%REPO%\verification\foundation-dll\System.Private.CoreLib\%FAMILY%\native_test\fact-verify\build
 
-set INC=-I"%REPO%\src\native\common" -I"%REPO%\src\native\common\chaos" -I"%REPO%\contracts\native\v0" -I"%REPO%\src\native\runtime-core" -I"%REPO%\src\native\bootstrap" -I"%REPO%\src\native\interpreter" -I"%REPO%\third_party\fmt\include" -I"%REPO%\third_party\bdwgc\include" -I"%REPO%\src\native\verification-host"
+set INC=-I"%REPO%\src\native\common" -I"%REPO%\src\native\common\chaos" -I"%REPO%\contracts\native\v0" -I"%REPO%\src\native\runtime-core" -I"%REPO%\src\native\bootstrap" -I"%REPO%\src\native\interpreter" -I"%REPO%\third_party\fmt\include" -I"%REPO%\src\native\verification-host"
 set DEFS=-DCHAOS_IL2CPP_CHECK -DCHAOS_IL2CPP_VERIFY_MODE -DGC_NOT_DLL -DCHAOS_RUNTIME_ABI_STATIC
 
 set L=%REPO%\build\native
@@ -16,8 +16,7 @@ set LIBS=%L%\src\native\runtime-core\RelWithDebInfo\chaos_runtime_core.lib ^
     %L%\src\native\common\RelWithDebInfo\chaos_common.lib ^
     %L%\src\native\support\RelWithDebInfo\chaos_support.lib ^
     %L%\src\native\hot-update\RelWithDebInfo\chaos_hot_update.lib ^
-    %L%\fmt_build\RelWithDebInfo\chaos_fmt.lib ^
-    %L%\bdwgc_build\RelWithDebInfo\chaos_bdwgc.lib
+    %L%\fmt_build\RelWithDebInfo\chaos_fmt.lib
 
 set GEN_CPP=%REPO%\verification\foundation-dll\System.Private.CoreLib\%FAMILY%\il2cpp_dist\genuine\ConvertCharNativeEntry\generated\native-aot.generated.cpp
 

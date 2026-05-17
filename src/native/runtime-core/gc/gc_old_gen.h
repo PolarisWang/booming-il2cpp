@@ -84,6 +84,12 @@ struct OldGenPage {
     }
 };
 
+// Finalizer table entry: maps object -> finalizer callback.
+struct FinalizerEntry {
+    void* obj;
+    void (*finalizer)(void*);
+};
+
 // Mark-sweep collector state.
 class MarkSweepOldGen {
 public:
@@ -195,6 +201,14 @@ public:
     /// Run all pending finalizers for unreachable objects.
     /// Returns the number of finalizers run.
     CHAOS_IL2CPP_SIZE RunFinalizers();
+
+    /// Collect dead finalizable entries using the current mark bitmap.
+    /// Used by BGC after concurrent sweep to identify objects that became
+    /// unreachable during the BGC cycle.  The mark bitmap is still valid
+    /// because BgcSweep preserves it (clear_bitmap=false).
+    /// Returns entries whose finalizers should be invoked, with the
+    /// finalizer_ list atomically cleared.
+    std::vector<FinalizerEntry> CollectDeadFinalizables();
 
     // ── Diagnostics ─────────────────────────────────────────────
 
@@ -386,10 +400,7 @@ private:
     std::vector<PinnedRoot> pinned_roots_;
 
     // Finalizer table: maps object → finalizer callback.
-    struct FinalizerEntry {
-        void* obj;
-        void (*finalizer)(void*);
-    };
+    // Uses namespace-level FinalizerEntry (defined above).
     std::vector<FinalizerEntry> finalizers_;
 };
 
