@@ -37,7 +37,10 @@
 #include <vector>
 
 #if defined(_WIN32) || defined(_WIN64)
+#define NOMINMAX
 #include <windows.h>
+#include <dbghelp.h>
+#pragma comment(lib, "dbghelp.lib")
 #endif
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -1606,6 +1609,38 @@ static int run_scenarios() {
 // Main
 // ════════════════════════════════════════════════════════════════════════════
 
+static LONG WINAPI CrashHandler(EXCEPTION_POINTERS* ep) {
+    fprintf(stderr, "\n*** CRASH: Exception code=0x%08lX at address=%p ***\n",
+            ep->ExceptionRecord->ExceptionCode,
+            ep->ExceptionRecord->ExceptionAddress);
+
+    // Write minidump.
+    char dump_path[MAX_PATH];
+    std::snprintf(dump_path, sizeof(dump_path),
+        "D:/agent/booming-il2cpp/artifacts/native-runtime-core-test/stress_crash_%p.dmp",
+        ep->ExceptionRecord->ExceptionAddress);
+
+    HANDLE hFile = CreateFileA(dump_path, GENERIC_WRITE, 0, nullptr,
+                                CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (hFile != INVALID_HANDLE_VALUE) {
+        MINIDUMP_EXCEPTION_INFORMATION mei{GetCurrentThreadId(), ep, FALSE};
+        MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hFile,
+                          MiniDumpWithDataSegs, &mei, nullptr, nullptr);
+        CloseHandle(hFile);
+        fprintf(stderr, "*** Minidump written to: %s ***\n", dump_path);
+    }
+
+    // Print stack trace.
+    void* stack[128];
+    WORD frames = CaptureStackBackTrace(0, 128, stack, nullptr);
+    fprintf(stderr, "*** Stack trace (%d frames): ***\n", frames);
+    for (WORD i = 0; i < frames; i++) {
+        fprintf(stderr, "  [%02d] %p\n", i, stack[i]);
+    }
+
+    return EXCEPTION_CONTINUE_SEARCH;  // Let the OS handle it (crash dump etc)
+}
+
 int main() {
     // Use fully-buffered stdout with 64KB buffer to avoid pipe blocking.
     // _IONBF causes every log line to issue WriteFile, which blocks when the
@@ -1617,6 +1652,8 @@ int main() {
     // Unbuffered stderr for debug output during hangs.
     setvbuf(stderr, nullptr, _IONBF, 0);
     fprintf(stderr, "[DBG] main started\n");
+
+    SetUnhandledExceptionFilter(CrashHandler);
 
     int failures = run_scenarios();
 

@@ -1986,16 +1986,18 @@ bool MarkSweepOldGen::TryMarkRoot(void* addr) {
     if (addr == nullptr) return false;
     auto val = *reinterpret_cast<void**>(addr);
     if (val == nullptr) return false;
-    // Verify the candidate looks like a valid managed object before marking —
-    // eliminates false positive roots from random stack values that happen
-    // to fall in old-gen range.
-    if (!IsValidManagedObject(val)) return false;
+
+    // FindPage before IsValidManagedObject: FindPage is safe for arbitrary
+    // values (numeric range comparison only, no pointer dereference).
     auto* page = FindPage(val);
-    if (page != nullptr && page->in_use.load(std::memory_order_acquire)) {
-        if (MarkObject(val)) {
-            mark_stack_.push_back(val);
-            return true;
-        }
+    if (page == nullptr || !page->in_use.load(std::memory_order_acquire)) return false;
+
+    // Now safe to read the first word (memory is within a valid heap page).
+    if (!IsValidManagedObject(val)) return false;
+
+    if (MarkObject(val)) {
+        mark_stack_.push_back(val);
+        return true;
     }
     return false;
 }
@@ -2010,15 +2012,19 @@ void MarkSweepOldGen::ScanRangeForRoots(void* range_begin, void* range_end) {
     for (uintptr_t slot = begin; slot + sizeof(void*) <= end; slot += sizeof(void*)) {
         auto val = *reinterpret_cast<void**>(slot);
         if (val == nullptr) continue;
-        // Verify the candidate looks like a valid managed object before
-        // marking — eliminates false positive roots from random values
-        // that happen to fall in old-gen range.
-        if (!IsValidManagedObject(val)) continue;
+
+        // FindPage before IsValidManagedObject: FindPage only does numeric
+        // range comparison (no pointer dereference) so it is safe for
+        // arbitrary stack values including kernel-space addresses like
+        // 0xBAD0DEAD... (from test pattern magic words).
         auto* page = FindPage(val);
-        if (page != nullptr && page->in_use.load(std::memory_order_acquire)) {
-            if (MarkObject(val)) {
-                mark_stack_.push_back(val);
-            }
+        if (page == nullptr || !page->in_use.load(std::memory_order_acquire)) continue;
+
+        // Now safe to read the first word (memory is within a valid heap page).
+        if (!IsValidManagedObject(val)) continue;
+
+        if (MarkObject(val)) {
+            mark_stack_.push_back(val);
         }
     }
     DrainMarkStack();

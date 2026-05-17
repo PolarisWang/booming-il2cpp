@@ -330,13 +330,28 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
     // ── SEH helper lambdas (capture locals by reference) ──────────────────
 
     // Phase 1: find the innermost catch/filter handler covering ip.
-    auto findCatchHandler = [&](CHAOS_IL2CPP_SIZE ip) -> int {
+    // If exc_val is provided and is a ThreadAbort/ThreadInterrupt sentinel
+    // (ObjectRef with obj < 0), typed catch clauses are skipped — sentinels
+    // must propagate to the managed exception dispatch layer.
+    auto findCatchHandler = [&](CHAOS_IL2CPP_SIZE ip,
+                                const InterpreterValue* exc_val = nullptr) -> int {
         for (int i = static_cast<int>(method.seh_clauses.size()) - 1; i >= 0; --i) {
             const auto& clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(i)];
             if (ip >= clause.try_start_idx && ip < clause.try_end_idx) {
                 const auto flags = static_cast<uint32_t>(clause.flags);
                 if (flags == static_cast<uint32_t>(SEHFlags::Exception) ||
                     flags == static_cast<uint32_t>(SEHFlags::Filter)) {
+                    // Phase 5: sentinel exception check.
+                    // ThreadAbort (-1) / ThreadInterrupt (-2) sentinels have a
+                    // non-null ObjectRef whose pointer value encodes the sentinel.
+                    // Typed catch clauses cannot handle sentinels — skip them.
+                    if (exc_val != nullptr && exc_val->tag == ValueTag::ObjectRef) {
+                        const auto ptr_as_int = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(exc_val->obj);
+                        if (ptr_as_int < 0 && ptr_as_int >= -2) {
+                            const bool is_typed = (flags & static_cast<uint32_t>(SEHFlags::Typed)) != 0;
+                            if (is_typed) continue;  // Skip typed catch for sentinels.
+                        }
+                    }
                     return i;
                 }
             }
@@ -376,7 +391,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
     auto handleDispatchResult = [&](const DispatchResult& dret) -> DispatchAction {
         if (dret.threw_exception) {
             exception_obj = dret.exception_value;
-            const int catch_idx = findCatchHandler(instruction_index);
+            const int catch_idx = findCatchHandler(instruction_index, &exception_obj);
             if (catch_idx >= 0) {
                 const auto& catch_clause = method.seh_clauses[
                     static_cast<CHAOS_IL2CPP_SIZE>(catch_idx)];
@@ -1136,7 +1151,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 exception_obj = Pop(&frame->stack);
 
                 // Phase 1: Search for a matching catch handler (innermost first).
-                const int catch_idx = findCatchHandler(instruction_index);
+                const int catch_idx = findCatchHandler(instruction_index, &exception_obj);
 
                 if (catch_idx >= 0) {
                     // Found a catch handler.  Build the unwind list.

@@ -56,6 +56,7 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 HybridDispatchKind.Virtual => ResolveVirtualDispatchTargets(instruction),
                 HybridDispatchKind.ExternalRuntime => ResolveExternalRuntimeReachableMethods(instruction),
+                HybridDispatchKind.ComVtable => [],  // COM vtable dispatch: no static C++ symbol
                 _ => ResolveDirectReachableMethods(instruction),
             };
         }

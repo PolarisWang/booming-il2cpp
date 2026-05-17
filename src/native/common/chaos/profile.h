@@ -109,6 +109,16 @@ extern std::atomic<ThreadProfileData*> g_profile_threads[kProfileMaxThreads];
 extern std::atomic<int> g_profile_thread_count;
 
 // Thread registration — called once per thread on first PROFILE_SCOPE use.
+//
+// Thread unregistration — clears the global registry entry so that ProfileDump
+// does not dereference dangling pointers to freed thread_local storage.
+inline void UnregisterThread(ThreadProfileData& data) noexcept {
+    int slot = data.registration_slot;
+    if (slot >= 0 && slot < kProfileMaxThreads) {
+        g_profile_threads[slot].store(nullptr, std::memory_order_release);
+        data.registration_slot = -1;
+    }
+}
 inline void RegisterThread(ThreadProfileData& data) noexcept {
     int idx = g_profile_thread_count.fetch_add(1, std::memory_order_relaxed);
     if (idx < kProfileMaxThreads) {

@@ -24,6 +24,7 @@ ENUM_MAP = {
     "family/System.Private.CoreLib/attributes/custom-metadata": "SystemPrivateCoreLib_AttributesCustomMetadata",
     "family/System.Private.CoreLib/threading/monitor-interlocked": "SystemPrivateCoreLib_ThreadingMonitorInterlocked",
     "family/System.Private.CoreLib/threading/tasks-primitives": "SystemPrivateCoreLib_ThreadingTasksPrimitives",
+    "family/System.Private.CoreLib/threading/thread-basics": "SystemPrivateCoreLib_ThreadingThreadBasics",
     "family/System.Private.CoreLib/time/date-time-timespan": "SystemPrivateCoreLib_TimeDateTimeTimespan",
     "family/System.Private.CoreLib/guid/random/hashcode": "SystemPrivateCoreLib_GuidRandomHashcode",
     "family/System.Private.CoreLib/math/numerics": "SystemPrivateCoreLib_MathNumerics",

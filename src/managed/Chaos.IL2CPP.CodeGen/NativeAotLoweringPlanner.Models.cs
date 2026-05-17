@@ -132,7 +132,8 @@ public sealed partial class NativeAotLoweringPlanner
 
     private sealed record FinallyHandlerEmissionPlan(
         FinallyHandlerGuardShape? Guard,
-        IReadOnlyList<AotCoreIrInstructionArtifact> BodyInstructions);
+        IReadOnlyList<AotCoreIrInstructionArtifact> BodyInstructions,
+        bool GuardTargetsEndFinally = true);
 
     private sealed record FilterAndFinallyExceptionMethodShape(
         AotCoreIrExceptionRegionArtifact FilterRegion,

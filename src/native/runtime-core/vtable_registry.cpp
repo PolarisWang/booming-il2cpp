@@ -81,26 +81,28 @@ void RegisterCodegenVTable(const void* desc) noexcept {
         return;
     }
 
-    // Build a TypeVTable around the codegen-emitted data (no heap allocation —
-    // the VTableSlot and vtable_array live in .rodata).
-    TypeVTable tv;
-    tv.type           = 0;   // Filled later via type_token → TypeInfoHandle mapping
-    tv.stable_id      = vtd->stable_id;
-    tv.type_token     = vtd->type_token;
-    tv.base_type      = 0;   // Filled later
-    tv.base_stable_id = 0;
-    tv.base_token     = vtd->base_token;
-    tv.slot_count     = vtd->slot_count;
-    tv.slots          = static_cast<const VTableSlot*>(vtd->slots);
-    tv.vtable_array   = vtd->vtable_array;
-    tv.vtable_length  = vtd->vtable_length;
-    tv.type_shape     = vtd->type_shape;
-    tv._pad[0] = tv._pad[1] = tv._pad[2] = 0;
-    tv.iface_map      = vtd->iface_map;
-    tv.iface_count    = vtd->iface_count;
+    // Heap-allocate a TypeVTable that lives for the process lifetime.
+    // The VTableSlot and vtable_array data itself lives in .rodata (codegen-emitted)
+    // or the caller's managed memory, so we only need to copy the TypeVTable struct.
+    auto* tv = static_cast<TypeVTable*>(CHAOS_IL2CPP_MALLOC(sizeof(TypeVTable)));
+    if (tv == nullptr) return;
+    tv->type           = 0;   // Filled later via type_token → TypeInfoHandle mapping
+    tv->stable_id      = vtd->stable_id;
+    tv->type_token     = vtd->type_token;
+    tv->base_type      = 0;   // Filled later
+    tv->base_stable_id = 0;
+    tv->base_token     = vtd->base_token;
+    tv->slot_count     = vtd->slot_count;
+    tv->slots          = static_cast<const VTableSlot*>(vtd->slots);
+    tv->vtable_array   = vtd->vtable_array;
+    tv->vtable_length  = vtd->vtable_length;
+    tv->type_shape     = vtd->type_shape;
+    tv->_pad[0] = tv->_pad[1] = tv->_pad[2] = 0;
+    tv->iface_map      = vtd->iface_map;
+    tv->iface_count    = vtd->iface_count;
 
     // RegisterTypeVTable now also populates flat_vtables when vtable_array is set.
-    RegisterTypeVTable(&tv);
+    RegisterTypeVTable(tv);
 }
 
 bool RegisterRuntimeVTable(

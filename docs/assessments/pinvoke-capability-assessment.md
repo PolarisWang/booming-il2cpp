@@ -57,7 +57,8 @@ LoaderStage                   AotCoreIrLowering                native_library.cp
 | **__Internal 静态链接** | **支持** | codegen 检测 `__Internal` → 跳过 LoadLibrary，直接 extern 声明 + 函数指针 |
 | **SuppressGCTransition** | **支持** | codegen 检测 `[SuppressGCTransition]` → 跳过 GC_TRANSITION 宏 |
 | **CharSet.Auto 平台感知** | **支持** | `IsWindowsTarget` 常量 + `IsUnicodeCharSet()` 按平台映射 |
-| **P/Invoke override (DllImportResolver)** | **部分支持** | codegen + native 层完成；managed 回调注册待补 |
+| **P/Invoke override (DllImportResolver)** | **支持** | managed `PInvokeResolverRegistry` + native callback bridge 全链路 |
+| **COM Interop (RCW/CCW IUnknown)** | **V1 支持** | ComVtable dispatch (codegen) + RCW (runtime-core) + ComInteropLite smoke test |
 
 ---
 
@@ -81,7 +82,7 @@ LoaderStage                   AotCoreIrLowering                native_library.cp
 | **varargs** | 不支持 | 有限支持 | 支持 |
 | **best-fit mapping** | 不支持 | 支持 | 支持 |
 | **callback/delegate 参数** | 支持 | 支持 | 支持 |
-| **COM interop** | 不支持 | 有限支持 | 支持 |
+| **COM interop** | **V1 支持** | 有限支持 | 支持 |
 | **WinRT interop** | 不支持 | 支持 | 不支持 |
 | **Marshal.GetFunctionPointerForDelegate** | 支持 | 支持 | 支持 |
 
@@ -140,15 +141,15 @@ result = s_fn(args);
 | 1 | **P/Invoke codegen 未插入 GC 模式切换** | **已修复** | `NativeAotLoweringPlanner.MethodEmission.cs` 四条路径增加 `GC_TRANSITION_TO_PREEMPTIVE/COOPERATIVE` |
 | 2 | **缺少 __Internal 支持** | **已修复** | `NativeAotLoweringPlanner.MethodEmission.cs` 增加 __Internal 检测 + extern 声明路径 |
 
-### P1 — 功能完整性（部分修复）
+### P1 — 功能完整性（全部修复）
 
 | # | 问题 | 状态 | 说明 |
 |---|------|------|------|
 | 3 | **缺少 `[SuppressGCTransition]` 支持** | **已修复** | `NativeAotLoweringPlanner.MethodEmission.cs` 检测属性后跳过 GC_TRANSITION |
 | 4 | **部分 CharSet 行为未实现** | **已修复** | `IsWindowsTarget` 常量 + `IsUnicodeCharSet()` 按平台映射 CharSet.Auto |
-| 5 | **无 P/Invoke override 机制** | **部分完成** | codegen + native `TryResolveDllImport` 完成；managed 回调注册待实现 |
+| 5 | **无 P/Invoke override 机制** | **已修复** | `PInvokeResolverRegistry` managed 回调 + native callback bridge 全链路完成 |
 
-### P2 — 工程化提升（部分完成）
+### P2 — 工程化提升（全部完成）
 
 | # | 问题 | 状态 | 说明 |
 |---|------|------|------|
@@ -185,13 +186,17 @@ result = s_fn(args);
 
 ### 5.1 P/Invoke Override 最后一公里
 
-当前状态：codegen 层在 `NativeLibraryLoad` 前插入 `TryResolveDllImport` 检查；native 层 `native_library.cpp` 实现了函数指针回调机制。**缺少** managed 端：
+✅ 已完成 — managed `PInvokeResolverRegistry` + `[UnmanagedCallersOnly]` 回调 + native `RegisterPInvokeResolverCallback` 全链路贯通。
 
-1. `PInvokeResolverRegistry` — 管理 `Assembly → DllImportResolver` 映射的静态类
-2. `[UnmanagedCallersOnly]` 回调 — native 代码可调用的 resolver 入口
-3. 初始化注册 — 将 managed 回调注册到 `RegisterPInvokeResolverCallback`
+### 5.2 COM Interop V2
 
-### 5.2 验证方案（当前状态）
+当前状态：COM Interop V1 (RCW/CCW IUnknown-only, ComVtable dispatch) 已完成。V1 限制：
+- CCW 仅支持 `IID_IUnknown` QueryInterface
+- `[PreserveSig]` metadata 解析已完成（默认 true，与 .NET 5+ 一致）
+- COM Apartment 类型未建模
+- 无 COM+ / 事件 / 连接点支持
+
+### 5.3 验证方案（当前状态）
 
 | 场景 | 验证方式 | 状态 |
 |------|----------|------|
@@ -207,13 +212,14 @@ result = s_fn(args);
 
 ## 6. 总结
 
-**核心结论**：Chaos IL2CPP P/Invoke 管线在架构上完整（metadata → codegen → runtime 三阶段齐备），**全部 P0 问题已修复**：
+**核心结论**：Chaos IL2CPP P/Invoke 管线在架构上完整（metadata → codegen → runtime 三阶段齐备），**全部 P0/P1/P2 问题已修复**：
 
 1. **GC 模式切换**（原 P0）— 已修复，四条 codegen 路径均插入 `GC_TRANSITION_TO_PREEMPTIVE/COOPERATIVE`
 2. **__Internal**（原 P0）— 已修复，codegen 检测 `__Internal` 后跳过 LoadLibrary
 3. **SuppressGCTransition**（原 P1）— 已修复，受属性控制可跳过 GC 切换
 4. **CharSet.Auto**（原 P1）— 已修复，`IsWindowsTarget` 常量驱动映射
-5. **DllImportResolver**（原 P1）— 部分完成，codegen + native 层就绪，managed 回调待补
+5. **DllImportResolver**（原 P1）— 已修复，managed 回调注册 + native bridge 全链路完成
 6. **Benchmark + 测试覆盖**（原 P2）— 已补全
+7. **COM Interop V1** — RCW/CCW IUnknown + ComVtable dispatch + PreserveSig metadata + smoke test
 
-当前唯一剩余缺口是 **P/Invoke Override managed 回调注册**（DllImportResolver 最后一公里）。
+**下一个关注方向**：COM Interop V2 (CCW 多接口、COM apartment 类型)。

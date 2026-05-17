@@ -195,6 +195,77 @@ static double run_enum_bench(int iterations) {
     return total_ms / kSamples;
 }
 
+// ── Benchmark 5: Thread state get ───────────────────────────────────
+
+static double run_state_get_bench(int iterations) {
+    threading::RegisterThread(threading::kMainThreadId, nullptr);
+    auto* self = threading::GetCurrentThread();
+
+    // Warmup
+    for (int i = 0; i < 100; ++i) {
+        volatile auto s = self->managed_state;
+        (void)s;
+    }
+
+    constexpr int kSamples = 3;
+    double total_ms = 0;
+    uint64_t cs = 0;
+
+    for (int s = 0; s < kSamples; ++s) {
+        auto t0 = Clock::now();
+        for (int i = 0; i < iterations; ++i) {
+            cs += static_cast<uint64_t>(static_cast<int>(self->managed_state));
+        }
+        auto t1 = Clock::now();
+        total_ms += std::chrono::duration<double, std::milli>(t1 - t0).count();
+    }
+
+    threading::UnregisterThread();
+    (void)cs;
+    return total_ms / kSamples;
+}
+
+// ── Benchmark 6: Thread priority get/set ─────────────────────────────
+
+static std::atomic<int> s_pri_checksum{0};
+static double run_priority_get_set_bench(int iterations) {
+    threading::RegisterThread(threading::kMainThreadId, nullptr);
+    auto* self = threading::GetCurrentThread();
+
+    // Warmup
+    for (int i = 0; i < 100; ++i) {
+        self->priority = threading::ManagedThreadPriority::Normal;
+        volatile auto p = self->priority;
+        (void)p;
+    }
+
+    constexpr int kSamples = 3;
+    double total_ms = 0;
+    int cs = 0;
+
+    threading::ManagedThreadPriority levels[] = {
+        threading::ManagedThreadPriority::Lowest,
+        threading::ManagedThreadPriority::BelowNormal,
+        threading::ManagedThreadPriority::Normal,
+        threading::ManagedThreadPriority::AboveNormal,
+        threading::ManagedThreadPriority::Highest,
+    };
+
+    for (int s = 0; s < kSamples; ++s) {
+        auto t0 = Clock::now();
+        for (int i = 0; i < iterations; ++i) {
+            self->priority = levels[i % 5];
+            cs += static_cast<int>(self->priority);
+        }
+        auto t1 = Clock::now();
+        total_ms += std::chrono::duration<double, std::milli>(t1 - t0).count();
+    }
+
+    threading::UnregisterThread();
+    s_pri_checksum.store(cs, std::memory_order_relaxed);
+    return total_ms / kSamples;
+}
+
 // ── main ─────────────────────────────────────────────────────────────────
 
 int main() {
@@ -209,7 +280,7 @@ int main() {
         double      mean_ms;
         int         iterations;
         const char* note;
-    } results[5];
+    } results[7];
     int ri = 0;
 
     // 1) Thin lock — 10000 iters (matches managed monitor-locking-bench)
@@ -247,6 +318,20 @@ int main() {
     results[ri].mean_ms    = run_enum_bench(500);
     results[ri].iterations = 500;
     results[ri].note       = "EnumerateThreads (lock-free list walk)";
+    ri++;
+
+    // 6) Thread state get — 5000 iterations
+    results[ri].name       = "thread-state-get";
+    results[ri].mean_ms    = run_state_get_bench(5000);
+    results[ri].iterations = 5000;
+    results[ri].note       = "ManagedThreadState field read";
+    ri++;
+
+    // 7) Thread priority get/set — 5000 iterations
+    results[ri].name       = "thread-priority-get-set";
+    results[ri].mean_ms    = run_priority_get_set_bench(5000);
+    results[ri].iterations = 5000;
+    results[ri].note       = "ManagedThreadPriority field write+read";
     ri++;
 
     // ── Print results ──

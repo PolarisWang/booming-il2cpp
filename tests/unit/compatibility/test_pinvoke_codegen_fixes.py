@@ -34,6 +34,22 @@ METADATA_RESOLUTION_PATH = (
     / "Chaos.IL2CPP.Loader"
     / "LoaderStage.MetadataResolution.cs"
 )
+EXCEPTION_EMISSION_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Emission"
+    / "NativeAotLoweringPlanner.ExceptionEmission.cs"
+)
+INVOCATION_PLANNING_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Planning"
+    / "NativeAotLoweringPlanner.InvocationPlanning.cs"
+)
 LOWERING_PATH = (
     REPO_ROOT
     / "src"
@@ -158,6 +174,21 @@ class PInvokeCodegenFixTests(unittest.TestCase):
         self.assertIn("SetDllImportResolver", source)
         self.assertIn("UnmanagedCallersOnly", source)
         self.assertIn("TryResolveCallback", source)
+
+
+    # ── COM Interop (P2) tests ─────────────────────────────────────────
+
+    def test_artifact_exposes_ispreservesig(self) -> None:
+        source = ARTIFACT_CONTRACTS_PATH.read_text(encoding="utf-8")
+        self.assertIn("IsPreserveSig", source)
+
+    def test_codegen_com_vtable_dispatch_in_emission(self) -> None:
+        source = EXCEPTION_EMISSION_PATH.read_text(encoding="utf-8")
+        self.assertIn("HybridDispatchKind.ComVtable", source)
+
+    def test_codegen_com_vtable_planning_layer(self) -> None:
+        source = INVOCATION_PLANNING_PATH.read_text(encoding="utf-8")
+        self.assertIn("HybridDispatchKind.ComVtable", source)
 
 
 if __name__ == "__main__":

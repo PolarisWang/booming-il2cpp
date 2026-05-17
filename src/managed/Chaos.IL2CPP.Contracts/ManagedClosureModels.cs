@@ -135,6 +135,13 @@ public sealed record ManagedMethodModel
 
     public bool IsUnmanagedCallersOnly { get; init; }
 
+    /// <summary>
+    /// True when the method is annotated with
+    /// <see cref="System.Runtime.InteropServices.PreserveSigAttribute"/>.
+    /// COM interface methods default to PreserveSig=true (.NET 5+).
+    /// </summary>
+    public bool IsPreserveSig { get; init; }
+
     public required int MetadataToken { get; init; }
 
     public required IReadOnlyList<ManagedParameterModel> Parameters { get; init; }

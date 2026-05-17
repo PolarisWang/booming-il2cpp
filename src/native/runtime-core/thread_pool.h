@@ -32,6 +32,9 @@ struct HillClimbingController {
     int32_t OnGateTick(int32_t completed_count, int32_t current_threads) noexcept;
     void Reset() noexcept;
 
+    /// Current hill-climbing state (public for ETW diagnostics).
+    HillClimbState GetState() const noexcept { return state_; }
+
 private:
     int32_t samples_[kHillClimbingSampleWindow]{};
     uint32_t sample_index_{0};

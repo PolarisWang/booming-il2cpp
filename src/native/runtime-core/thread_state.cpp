@@ -134,6 +134,11 @@ void UnregisterThread() noexcept {
     // (lives for process lifetime like most runtime-instantiated metadata).
     tls_this_thread    = nullptr;
     tls_this_thread_id = 0;
+
+    // Unregister from the profile system so ProfileDump does not read freed
+    // thread_local storage (g_tls_profile is destroyed after this function
+    // returns).
+    chaos::il2cpp::common::UnregisterThread(g_tls_profile);
 }
 
 int32_t AllocateThreadId() noexcept {

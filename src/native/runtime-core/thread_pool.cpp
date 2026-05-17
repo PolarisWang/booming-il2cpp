@@ -3,6 +3,7 @@
 #include "thread_state.h"
 #include "execution_context.h"
 #include "gc_transition.h"
+#include "runtime_stubs/threadpool_events.h"
 
 #include <atomic>
 #include <chrono>
@@ -116,6 +117,9 @@ void WorkerLoop() noexcept {
         mt->is_threadpool = true;
     }
 
+    // ETW: worker created.
+    ThreadPoolEventEmitWorkerCreate(tid);
+
     // Assign local queue and register it globally.
     auto* local_q = CreateWorkerQueue();
     tls_worker_queue = local_q;
@@ -153,6 +157,7 @@ void WorkerLoop() noexcept {
 
         // 3) Try global queue.
         if (TryPopGlobal(item)) {
+            ThreadPoolEventEmitWorkItemDequeue(reinterpret_cast<int64_t>(item.context));
             last_work_time = std::chrono::steady_clock::now();
             has_ever_done_work = true;
             goto execute;
@@ -193,6 +198,7 @@ void WorkerLoop() noexcept {
                 item = s_global_queue.front();
                 s_global_queue.pop();
                 s_queue_depth.fetch_sub(1, std::memory_order_relaxed);
+                ThreadPoolEventEmitWorkItemDequeue(reinterpret_cast<int64_t>(item.context));
                 has_ever_done_work = true;
                 last_work_time = std::chrono::steady_clock::now();
                 goto execute;
@@ -218,6 +224,10 @@ void WorkerLoop() noexcept {
 
     DestroyWorkerQueue(local_q);
     tls_worker_queue = nullptr;
+
+    // ETW: worker destroyed.
+    ThreadPoolEventEmitWorkerDestroy(tid);
+
     UnregisterThread();
 }
 
@@ -247,6 +257,8 @@ void IOCPWorkerLoop() noexcept {
             auto* callback = reinterpret_cast<void(*)(void*)>(completion_key);
             callback(overlapped);
             s_iocp_completions.fetch_add(1, std::memory_order_relaxed);
+            // ETW: I/O completion.
+            ThreadPoolEventEmitIOCompletion(bytes_transferred);
         }
     }
 
@@ -421,9 +433,14 @@ void ThreadPoolInitialize() noexcept {
 #endif
 
     s_gate_thread = std::thread(GateThreadLoop);
+
+    // Initialize ETW event provider for diagnostics.
+    ThreadPoolEventProviderInitialize();
 }
 
 void ThreadPoolShutdown() noexcept {
+    ThreadPoolEventProviderShutdown();
+
     s_shutdown.store(true, std::memory_order_release);
     s_work_available.notify_all();
 
@@ -473,6 +490,9 @@ void ThreadPoolQueueUserWorkItemUnsafe(void (*callback)(void*), void* context) n
         s_queue_depth.fetch_add(1, std::memory_order_relaxed);
     }
 
+    // ETW: work item queued.
+    ThreadPoolEventEmitWorkItemQueue(reinterpret_cast<int64_t>(context));
+
     s_work_available.notify_one();
 
     // Grow workers if queue depth exceeds active worker capacity.
@@ -500,6 +520,21 @@ void ThreadPoolGateTick() noexcept {
     target = (std::min)(target, kThreadPoolMaxWorkerCount);
 
     s_desired_workers.store(target, std::memory_order_relaxed);
+
+    // ETW: emit worker adjust event if target changed.
+    if (target != current) {
+        // Map hill-climbing state to reason code.
+        int32_t reason = 3;  // Default: Steady.
+        switch (s_hill_climbing.GetState()) {
+            case HillClimbState::Warmup:        reason = 0; break;
+            case HillClimbState::ClimbExplore:  reason = 1; break;
+            case HillClimbState::Climbing:      reason = 2; break;
+            case HillClimbState::Stabilizing:   reason = 3; break;
+            case HillClimbState::Steady:        reason = 4; break;
+        }
+        ThreadPoolEventEmitWorkerAdjust(current, target, reason);
+    }
+
     EnsureWorkerCount(target);
 }
 

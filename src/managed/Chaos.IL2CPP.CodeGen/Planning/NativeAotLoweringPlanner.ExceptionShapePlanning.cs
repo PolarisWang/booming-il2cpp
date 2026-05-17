@@ -624,8 +624,21 @@ public sealed partial class NativeAotLoweringPlanner
             return false;
 
         var (guardInst, guardIdx) = guards[0];
-        if (GetRequiredIntOperand(guardInst) != GetRequiredIlOffset(instructions[instructions.Count - 1]))
-            return false;
+        int guardTarget = GetRequiredIntOperand(guardInst);
+        int endFinallyOffset = GetRequiredIlOffset(instructions[instructions.Count - 1]);
+        bool guardTargetsEndFinally = guardTarget == endFinallyOffset;
+
+        if (!guardTargetsEndFinally)
+        {
+            // Accept forward-branch guards (brtrue/brfalse targeting an offset within the
+            // handler body rather than endfinally). This handles the common lock-expansion
+            // pattern: finally { if (obj != null) Monitor.Exit(obj); }
+            //   → ldloc obj; brfalse.s skip; ldloc obj; call Monitor.Exit; skip: endfinally
+            // Verify that the guard targets a forward offset AFTER the guard instruction.
+            int guardInstrOffset = GetRequiredIlOffset(instructions[guardIdx]);
+            if (guardTarget <= guardInstrOffset || guardTarget >= endFinallyOffset)
+                return false;
+        }
 
         var condInstructions = body.Take(guardIdx).ToArray();
         var bodyInstructions = body.Skip(guardIdx + 1).ToArray();
@@ -634,7 +647,8 @@ public sealed partial class NativeAotLoweringPlanner
 
         emissionPlan = new FinallyHandlerEmissionPlan(
             new FinallyHandlerGuardShape(condInstructions, string.Equals(guardInst.Op, "brtrue", StringComparison.Ordinal)),
-            bodyInstructions);
+            bodyInstructions,
+            guardTargetsEndFinally);
         return true;
     }
 }
