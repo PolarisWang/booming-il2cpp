@@ -173,6 +173,7 @@ YoungCollectionResult GcYoungCollection(Region* nursery, Region* tenured_target)
     GcFireEvent(GcEvent::GC_YOUNG_START);
 
     // ── Phase 1: Scan dirty cards for old→nursery cross-gen references ──
+    CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase1_DirtyCards");
     // Scan dirty cards ACROSS ALL old-gen pages, not the nursery range.
     // Dirty cards are written by the write barrier when a managed object
     // field is updated — this only happens in old-gen (or tenured) memory,

@@ -865,11 +865,16 @@ public sealed partial class NativeAotLoweringPlanner
         if (sw.DefaultBody != null)
         {
             builder.AppendLine(caseIndent + "default:");
-            builder.AppendLine(caseIndent + "{");
+            bool isSimpleTerminator = IsControlFlowTerminator(sw.DefaultBody);
+            if (!isSimpleTerminator)
+                builder.AppendLine(caseIndent + "{");
             EmitStructuredIRNode(builder, sw.DefaultBody, method, bodyIndent);
-            if (!IsControlFlowTerminator(sw.DefaultBody))
-                builder.AppendLine(caseIndent + "    break;");
-            builder.AppendLine(caseIndent + "}");
+            if (!isSimpleTerminator)
+            {
+                if (!IsControlFlowTerminator(sw.DefaultBody))
+                    builder.AppendLine(caseIndent + "    break;");
+                builder.AppendLine(caseIndent + "}");
+            }
         }
 
         builder.AppendLine(inner + "}");

@@ -65,6 +65,9 @@ public:
     /// Thread-safe (atomic counter).
     void RecordAllocation(CHAOS_IL2CPP_SIZE bytes) noexcept;
 
+    /// Record that a GC just completed (sets cooldown counter).
+    void RecordGcCompleted() noexcept;
+
     // ── Collection recording ─────────────────────────────────────
 
     /// Record a young collection result. Updates EMA survival rate.
@@ -90,8 +93,6 @@ public:
     /// finishes so the next GC can proceed.
     bool TryClaimGcSlot() noexcept;
 
-    /// Record that a GC just completed (sets the rate-limiter timestamp).
-    void RecordGcCompleted() noexcept;
 
     // ── Collection decision ──────────────────────────────────────
 
@@ -120,15 +121,29 @@ public:
 
     // ── Diagnostics ──────────────────────────────────────────────
 
-    /// Quick check: has allocation since last GC exceeded the young threshold?
+    /// Quick check: has allocation since last GC exceeded the young threshold
+    /// AND is the cooldown counter exhausted?
     /// Non-binding hint — actual decision is made in DecideCollection().
     /// Called from NurseryAllocate fast path to proactively trigger GC before
     /// any thread exhausts its TLS nursery.
+    /// The cooldown prevents GC storms by skipping checks for ~N allocations
+    /// after each GC completion.  With 100 threads, the global allocation
+    /// counter exceeds the 512KB threshold after ~3 allocs/thread.  Without the
+    /// cooldown, EVERY subsequent fast-path allocation would route to the slow
+    /// path, creating a GC storm.
     bool ShouldTriggerGc() const noexcept {
         auto nursery_size = last_nursery_used_.load(std::memory_order_relaxed);
         auto threshold = static_cast<CHAOS_IL2CPP_SIZE>(
             kYoungTriggerMultiplier * nursery_size);
-        return alloc_since_last_gc_.load(std::memory_order_relaxed) >= threshold;
+        // Cap threshold to prevent tail-phase starvation: with large nurseries
+        // and few remaining threads, the global allocation counter takes too long
+        // to reach the nursery-size-based threshold.
+        constexpr CHAOS_IL2CPP_SIZE kMaxTriggerBytes = 48 * 1024;
+        if (threshold > kMaxTriggerBytes) threshold = kMaxTriggerBytes;
+        if (alloc_since_last_gc_.load(std::memory_order_relaxed) < threshold)
+            return false;
+        // Cooldown: skip triggering if the cooldown counter is above zero.
+        return gc_cooldown_skips_.load(std::memory_order_acquire) == 0;
     }
 
     double SurvivalRate() const noexcept {
@@ -150,7 +165,7 @@ private:
     // cycles and less overhead from BFS worklist / nursery scanning.
     // Trade-off: longer per-GC pauses (more objects to scan), but net
     // throughput is higher with reduced safepoint serialization.
-    static constexpr float kYoungTriggerMultiplier = 2.0f;
+    static constexpr float kYoungTriggerMultiplier = 1.0f;
 
     // Full GC trigger: allocation since last full GC exceeds this
     // multiplier × estimated heap size.
@@ -178,6 +193,16 @@ private:
 
     // Estimated heap size (updated after full GC).
     std::atomic<CHAOS_IL2CPP_SIZE> estimated_heap_size_{0};
+
+    // Cooldown: skip during N RecordAllocation calls after each GC.
+    // Set to kCooldownAllocations by RecordGcCompleted(); decremented
+    // by RecordAllocation().  ShouldTriggerGc returns false while >0.
+    // With kCooldownAllocations=256 and ~2KB avg allocation, the 512KB
+    // threshold takes 256 allocs.  The cooldown of 256 allocs means
+    // ShouldTriggerGc re-activates just as the counter re-crosses the
+    // threshold, creating a natural ~1 GC per nursery-cycle cadence.
+    static constexpr int kCooldownAllocations = 256;
+    std::atomic<int> gc_cooldown_skips_{0};
 
     // GC rate limiter: timestamp (steady_clock ns) of the last GC completion.
     // Threads check this before initiating a new GC; if the last GC was too

@@ -11,7 +11,7 @@ struct chaos_type_System_Private_CoreLib_System_Delegate
 
 chaos_type_System_Private_CoreLib_System_Delegate* chaos_require_delegate(CHAOS_IL2CPP_INTPTR chaos_delegate_value)
 {
-    if (chaos_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    if (chaos_delegate_value == 0)
     {
         CHAOS_IL2CPP_FAIL();
     }
@@ -23,8 +23,8 @@ const chaos_delegate_invocation_list* chaos_try_get_delegate_invocation_list(
     const chaos_type_System_Private_CoreLib_System_Delegate* chaos_delegate) noexcept
 {
     if (chaos_delegate == nullptr ||
-        chaos_delegate->chaos_delegate_invocation_list == static_cast<CHAOS_IL2CPP_INTPTR>(0) ||
-        chaos_delegate->chaos_delegate_invocation_count <= static_cast<CHAOS_IL2CPP_INTPTR>(0))
+        chaos_delegate->chaos_delegate_invocation_list == 0 ||
+        chaos_delegate->chaos_delegate_invocation_count <= 0)
     {
         return nullptr;
     }
@@ -39,8 +39,8 @@ bool chaos_delegate_single_entry_equals(CHAOS_IL2CPP_INTPTR chaos_left_value, CH
         return true;
     }
 
-    if (chaos_left_value == static_cast<CHAOS_IL2CPP_INTPTR>(0) ||
-        chaos_right_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    if (chaos_left_value == 0 ||
+        chaos_right_value == 0)
     {
         return false;
     }
@@ -56,7 +56,7 @@ void chaos_delegate_append_flattened_entries(
     chaos_delegate_invocation_list& chaos_entries,
     CHAOS_IL2CPP_INTPTR chaos_delegate_value)
 {
-    if (chaos_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    if (chaos_delegate_value == 0)
     {
         return;
     }
@@ -65,7 +65,7 @@ void chaos_delegate_append_flattened_entries(
     const auto* chaos_invocation_list = chaos_try_get_delegate_invocation_list(chaos_delegate);
     if (chaos_invocation_list == nullptr)
     {
-        if (chaos_delegate->chaos_delegate_method_ptr == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+        if (chaos_delegate->chaos_delegate_method_ptr == 0)
         {
             CHAOS_IL2CPP_FAIL();
         }
@@ -126,7 +126,7 @@ CHAOS_IL2CPP_INTPTR chaos_delegate_create_multicast_like(
 {
     if (chaos_entries.empty())
     {
-        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+        return 0;
     }
 
     if (chaos_entries.size() == 1)
@@ -138,8 +138,8 @@ CHAOS_IL2CPP_INTPTR chaos_delegate_create_multicast_like(
     const auto chaos_delegate_value = chaos_delegate_allocate_with_type_info(chaos_template_delegate->header.type_info);
     auto* chaos_delegate = chaos_require_delegate(chaos_delegate_value);
     auto* chaos_invocation_list = CHAOS_IL2CPP_NEW_GC(chaos_delegate_invocation_list, (chaos_entries));
-    chaos_delegate->chaos_delegate_target = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-    chaos_delegate->chaos_delegate_method_ptr = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    chaos_delegate->chaos_delegate_target = 0;
+    chaos_delegate->chaos_delegate_method_ptr = 0;
     chaos_delegate->chaos_delegate_invocation_list = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list);
     chaos_delegate->chaos_delegate_invocation_count = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size());
     return chaos_delegate_value;
@@ -147,12 +147,12 @@ CHAOS_IL2CPP_INTPTR chaos_delegate_create_multicast_like(
 
 CHAOS_IL2CPP_INTPTR chaos_delegate_combine(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value)
 {
-    if (chaos_left_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    if (chaos_left_value == 0)
     {
         return chaos_right_value;
     }
 
-    if (chaos_right_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    if (chaos_right_value == 0)
     {
         return chaos_left_value;
     }
@@ -166,12 +166,12 @@ CHAOS_IL2CPP_INTPTR chaos_delegate_combine(CHAOS_IL2CPP_INTPTR chaos_left_value,
 
 CHAOS_IL2CPP_INTPTR chaos_delegate_remove(CHAOS_IL2CPP_INTPTR chaos_source_value, CHAOS_IL2CPP_INTPTR chaos_value_to_remove)
 {
-    if (chaos_source_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    if (chaos_source_value == 0)
     {
-        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+        return 0;
     }
 
-    if (chaos_value_to_remove == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    if (chaos_value_to_remove == 0)
     {
         return chaos_source_value;
     }
@@ -186,7 +186,7 @@ CHAOS_IL2CPP_INTPTR chaos_delegate_remove(CHAOS_IL2CPP_INTPTR chaos_source_value
     }
 
     for (CHAOS_IL2CPP_INTPTR chaos_start = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_source_entries.size() - chaos_remove_entries.size());
-         chaos_start >= static_cast<CHAOS_IL2CPP_INTPTR>(0);
+         chaos_start >= 0;
          --chaos_start)
     {
         bool chaos_matches = true;
@@ -207,7 +207,7 @@ CHAOS_IL2CPP_INTPTR chaos_delegate_remove(CHAOS_IL2CPP_INTPTR chaos_source_value
         chaos_source_entries.erase(chaos_source_entries.begin() + static_cast<CHAOS_IL2CPP_SIZE>(chaos_start), chaos_source_entries.begin() + static_cast<CHAOS_IL2CPP_SIZE>(chaos_start) + chaos_remove_entries.size());
         if (chaos_source_entries.empty())
         {
-            return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+            return 0;
         }
 
         if (chaos_source_entries.size() == 1)
