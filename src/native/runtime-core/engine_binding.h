@@ -3,6 +3,7 @@
 
 #include <chaos/native_types.h>
 #include <runtime_abi.h>
+#include "marshal_abi.h"
 #include "runtime_capability.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -129,6 +130,35 @@ void* MarshalWideToString(RuntimeState* runtime_state, ThreadState* thread_state
 /// Returns a managed String object.
 void* MarshalAnsiToString(RuntimeState* runtime_state, ThreadState* thread_state, const char* ansi_buf, CHAOS_IL2CPP_INT32 byte_len);
 
+// ── String marshalling helpers (HGlobal variants) ─────────────────────
+/// Convert a managed UTF-8 string to an HGlobal ANSI (CP_ACP) buffer.
+/// Returns pointer to the HGlobal-allocated buffer, or 0.
+/// Win32: UTF-8 → UTF-16 → CP_ACP. Non-Win32: UTF-8 pass-through (ACP == UTF-8 assumption).
+CHAOS_IL2CPP_INTPTR MarshalStringToHGlobalAnsi(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    void* managed_string);
+
+/// Convert a managed UTF-8 string to an HGlobal UTF-16 buffer.
+/// Returns pointer to the HGlobal-allocated buffer, or 0.
+CHAOS_IL2CPP_INTPTR MarshalStringToHGlobalUni(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    void* managed_string);
+
+/// Convert a native ANSI buffer to a managed String (ICALL entry point).
+/// Wraps MarshalAnsiToString for callers that don't have RuntimeState/ThreadState.
+void* MarshalPtrToStringAnsiIcall(
+    CHAOS_IL2CPP_INTPTR ansi_buffer,
+    CHAOS_IL2CPP_INT32 length) noexcept;
+
+/// Return a pinned pointer to the element at the given index inside a managed array.
+/// The caller is responsible for pinning the array before calling this.
+/// Returns 0 if array is null or index is out of bounds.
+CHAOS_IL2CPP_INTPTR MarshalUnsafeAddrOfPinnedArrayElement(
+    void* managed_array,
+    CHAOS_IL2CPP_INT32 index) noexcept;
+
 /// Extract the inner handle value from a SafeHandle (or CriticalHandle) object.
 /// Returns the raw IntPtr handle value, or 0 if the object is nullptr.
 CHAOS_IL2CPP_INTPTR MarshalSafeHandleGetHandle(
@@ -143,6 +173,27 @@ CHAOS_IL2CPP_INT32 MarshalSizeOf(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
     const TypeInfoHot* type_info);
+
+/// Look up a struct field offset by name using a StructMarshallingDescriptorV1
+/// and its associated parallel field-names array (emitted as static constexpr
+/// const char*[] by the struct marshalling descriptors template).
+/// field_name_obj is a managed System.String whose UTF-8 payload is extracted
+/// internally. Returns the field's byte offset within the struct, or -1 if
+/// not found (caller should throw ArgumentException). Thread-safe.
+CHAOS_IL2CPP_INT32 MarshalOffsetOf(
+    const marshal_abi::StructMarshallingDescriptorV1* desc,
+    const char* const* field_names,
+    CHAOS_IL2CPP_INTPTR field_name_obj) noexcept;
+
+/// Non-generic Marshal.OffsetOf(Type, string) ICALL.
+/// Resolves TypeInfoHandle internally; requires a registered descriptor and
+/// registered field-names array (see RegisterStaticMarshallingFieldNames).
+/// Returns the field's byte offset, or -1 if the type or field is unknown.
+CHAOS_IL2CPP_INT32 MarshalOffsetOfByType(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    TypeInfoHandle type_handle,
+    CHAOS_IL2CPP_INTPTR field_name_obj) noexcept;
 
 /// Store the P/Invoke last-error value into thread-local storage.
 /// Called by codegen P/Invoke stubs after native calls that have SetLastError=true.
@@ -160,6 +211,21 @@ void ClearOsLastError() noexcept;
 /// Capture the OS-level last-error after a P/Invoke call (GetLastError() on Win32).
 /// Returns 0 on non-Windows platforms.
 CHAOS_IL2CPP_INT32 GetOsLastError() noexcept;
+
+/// Try to resolve a P/Invoke library through a registered DllImportResolver.
+/// Returns the native library handle, or nullptr if no resolver is registered
+/// or the resolver returned nullptr.
+/// Thread-safe.
+/// \param assembly_name_utf8  The declaring assembly name of the P/Invoke method.
+/// \param library_name_utf8   The module name from [DllImport].
+void* TryResolveDllImport(const char* assembly_name_utf8, const char* library_name_utf8) noexcept;
+
+/// Register a reverse P/Invoke callback that implements DllImportResolver dispatch.
+/// Called once during runtime initialization.
+/// \param callback  Function pointer with signature
+///   IntPtr(const char* assemblyName, const char* libraryName)
+///   Returns a native library handle or 0.
+void RegisterPInvokeResolverCallback(void* callback) noexcept;
 
 /// Runtime helper for Marshal.DestroyStructure(IntPtr, Type) — non-generic overload.
 /// Extracts TypeInfoHot* from the managed Type object, resolves the struct
@@ -181,6 +247,73 @@ void* ChaosGetObjectForNativeVariant(CHAOS_IL2CPP_INTPTR variant_ptr) noexcept;
 
 /// ICALL: Marshal.GetNativeVariantForObject(Object, IntPtr, IntPtr) → void (V1 stub)
 void ChaosGetNativeVariantForObject(void* obj, CHAOS_IL2CPP_INTPTR variant_ptr, CHAOS_IL2CPP_INTPTR destroy_old) noexcept;
+
+// ── COM apartment management ────────────────────────────────────────
+/// Initialize COM apartment for the current thread (CoInitializeEx wrapper).
+/// apartment_type: COINIT_APARTMENTTHREADED=2, COINIT_MULTITHREADED=0, etc.
+/// Returns S_OK (0) on success, or a COM HRESULT error code.
+/// Defined in engine_lifecycle.cpp.
+CHAOS_IL2CPP_INT32 CoInitializeApartment(CHAOS_IL2CPP_INT32 apartment_type) noexcept;
+
+/// Uninitialize COM for the current thread (CoUninitialize wrapper).
+/// Defined in engine_lifecycle.cpp.
+void CoUninitializeApartment() noexcept;
+
+// ── COM object creation ────────────────────────────────────────────
+/// CoCreateInstance wrapper: creates a COM object from CLSID.
+/// clsid_bytes: 16-byte GUID. iid_bytes: 16-byte IID.
+/// Returns the IUnknown* as IntPtr, or 0 on failure.
+/// Defined in marshal_api.cpp.
+CHAOS_IL2CPP_INTPTR CoCreateComInstance(
+    const CHAOS_IL2CPP_UINT8* clsid_bytes,
+    const CHAOS_IL2CPP_UINT8* iid_bytes) noexcept;
+
+// ── RCW (Runtime Callable Wrapper) ─────────────────────────────────
+/// Wrap a raw IUnknown* COM pointer in an RCW.
+/// Returns an IntPtr pointing to the ComRcwNative.
+/// Defined in marshal_api.cpp.
+CHAOS_IL2CPP_INTPTR MarshalCreateRcw(CHAOS_IL2CPP_INTPTR unknown_ptr) noexcept;
+
+/// Release a managed wrapper's reference on an RCW.
+/// Defined in marshal_api.cpp.
+void MarshalReleaseRcw(CHAOS_IL2CPP_INTPTR rcw_native_ptr) noexcept;
+
+/// Get the raw IUnknown* from an RCW (for vtable dispatch).
+/// Defined in marshal_api.cpp.
+CHAOS_IL2CPP_INTPTR MarshalGetRcwUnknown(CHAOS_IL2CPP_INTPTR rcw_native_ptr) noexcept;
+
+/// QueryInterface on an RCW, returns raw interface pointer.
+/// Defined in marshal_api.cpp.
+CHAOS_IL2CPP_INTPTR MarshalRcwQueryInterface(
+    CHAOS_IL2CPP_INTPTR rcw_native_ptr,
+    const CHAOS_IL2CPP_UINT8* iid_bytes) noexcept;
+
+/// Check whether an IntPtr is an RCW handle (by magic value).
+bool MarshalIsRcwHandle(CHAOS_IL2CPP_INTPTR ptr) noexcept;
+
+/// Throw a managed COMException for a failed HRESULT.
+void ChaosThrowComExceptionForHR(CHAOS_IL2CPP_INT32 hr) noexcept;
+
+// ── CCW (COM Callable Wrapper) ─────────────────────────────────────
+/// Create a CCW that exposes a managed object as a COM IUnknown.
+/// Returns the CCW pointer (IUnknown*) as IntPtr, or 0 on failure.
+/// Defined in com_ccw.cpp.
+CHAOS_IL2CPP_INTPTR MarshalCreateCcw(
+    CHAOS_IL2CPP_INTPTR managed_object,
+    CHAOS_IL2CPP_INTPTR runtime_state) noexcept;
+
+// ── ICustomMarshaler (V1 stubs) ──────────────────────────────────────────
+/// ICALL stub: resolve and invoke ICustomMarshaler.MarshalNativeToManaged.
+/// V1: logs a warning and returns nullptr (caller should pass through).
+CHAOS_IL2CPP_INTPTR CustomMarshalerNativeToManaged(
+    const char* cookie_utf8,
+    CHAOS_IL2CPP_INTPTR native_ptr) noexcept;
+
+/// ICALL stub: resolve and invoke ICustomMarshaler.MarshalManagedToNative.
+/// V1: logs a warning and returns native_ptr unchanged (pass-through).
+CHAOS_IL2CPP_INTPTR CustomMarshalerManagedToNative(
+    const char* cookie_utf8,
+    CHAOS_IL2CPP_INTPTR managed_obj) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

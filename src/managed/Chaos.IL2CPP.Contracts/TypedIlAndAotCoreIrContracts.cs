@@ -341,6 +341,14 @@ public sealed record StructFieldDescriptorArtifact
     /// its own StructMarshallingDescriptorArtifact for recursive emission.
     /// </summary>
     public string? NestedTypeSubjectId { get; init; }
+
+    /// <summary>
+    /// The managed field name. Populated from <c>ManagedFieldModel.Name</c>
+    /// during <c>AotCoreIrLowering.BuildStructMarshallingDescriptor</c>.
+    /// Used by <c>Marshal.OffsetOf&lt;T&gt;(string)</c> codegen shapes to emit
+    /// parallel field-name arrays for field-name-to-offset resolution.
+    /// </summary>
+    public string? Name { get; init; }
 }
 
 /// <summary>
@@ -511,6 +519,12 @@ public sealed record AotCoreIrMethodArtifact
     /// Parallel to <see cref="ComplexStructParameterIndices"/> (same order and count).
     /// </summary>
     public IReadOnlyList<string>? ComplexStructParameterTypeSubjectIds { get; init; }
+
+    /// <summary>
+    /// For P/Invoke methods: the assembly name that declares this method.
+    /// Used by the DllImportResolver lookup to find the per-assembly resolver callback.
+    /// </summary>
+    public string? DeclaringAssemblyName { get; init; }
 }
 
 public sealed record AotCoreIrExceptionRegionArtifact
@@ -572,6 +586,14 @@ public sealed record AotCoreIrInstructionArtifact
     /// slot 3+ are interface-specific methods in declaration order.
     /// </summary>
     public int? ComVtableSlot { get; init; }
+
+    /// <summary>
+    /// For ComVtable dispatch: whether the method has [PreserveSig].
+    /// If false (COM default), the HRESULT return is checked and
+    /// COMException is thrown on failure; void-return methods suppress
+    /// the eval-stack push.
+    /// </summary>
+    public bool IsPreserveSig { get; init; }
 }
 
 public sealed record TypedIlMethodArtifact

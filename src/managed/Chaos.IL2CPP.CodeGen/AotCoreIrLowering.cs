@@ -180,6 +180,7 @@ public sealed class AotCoreIrLowering
                     TargetReturnType = directCallTarget.TargetReturnType,
                     DispatchKindCode = dispatchKind,
                     ComVtableSlot = comVtableSlot,
+                    IsPreserveSig = true,  // V1 default: no HRESULT wrapping
                     ConstrainedTypeSubjectId = typedInstruction.ConstrainedTypeSubjectId,
                 });
             }
@@ -268,6 +269,7 @@ public sealed class AotCoreIrLowering
                 && IsBlittableStructType(method.ReturnType, managedTypes, managedFields),
             ComplexStructParameterIndices = complexParamIndices,
             ComplexStructParameterTypeSubjectIds = complexParamTypeIds,
+            DeclaringAssemblyName = method.AssemblyName,
         };
 
         // Simple non-blittable struct detection needs separate computation
@@ -1596,6 +1598,7 @@ public sealed class AotCoreIrLowering
                 ArrayCount = arrayCount,
                 ElementType = elementType,
                 NestedTypeSubjectId = nestedTypeId,
+                Name = field.Name,
             });
 
             currentOffset += ptrSize; // managed offset stride

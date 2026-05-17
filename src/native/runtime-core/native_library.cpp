@@ -155,4 +155,29 @@ bool NativeLibraryFree(void* handle) {
     return false;  // handle not found
 }
 
+
+// ── DllImportResolver (P/Invoke Override) ──────────────────────────
+
+// Global function pointer set by managed runtime via RegisterPInvokeResolverCallback.
+// Signature: void* callback(const char* assemblyName, const char* libraryName)
+static void* s_pinvoke_resolver_callback = nullptr;
+
+void RegisterPInvokeResolverCallback(void* callback) noexcept {
+    s_pinvoke_resolver_callback = callback;
+}
+
+void* TryResolveDllImport(const char* assembly_name_utf8, const char* library_name_utf8) noexcept {
+    if (s_pinvoke_resolver_callback == nullptr) return nullptr;
+
+    using ResolverFn = CHAOS_IL2CPP_INTPTR (*)(const char*, const char*);
+    auto fn = reinterpret_cast<ResolverFn>(s_pinvoke_resolver_callback);
+    auto handle = fn(assembly_name_utf8, library_name_utf8);
+    return reinterpret_cast<void*>(handle);
+}
 }  // namespace chaos::il2cpp::runtime_core
+
+// ABI export: P/Invoke resolver callback registration, callable from managed
+// code via __Internal DllImport.  Dispatches to the namespaced C++ function.
+extern "C" void RegisterPInvokeResolverCallback(void* callback) noexcept {
+    chaos::il2cpp::runtime_core::RegisterPInvokeResolverCallback(callback);
+}

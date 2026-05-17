@@ -131,6 +131,21 @@ PUBLIC_TEST_SPECS = [
             "guards=invalid-detach:True|double-start:True|unattached-entry:True",
         ],
     ),
+    _public_smoke_suite(
+        suite="native-interop-marshalling",
+        project_name="PInvokeMarshalling",
+        primary_module_id="interop",
+        module_ids=["interop"],
+        subsystem_ids=["native-bridge"],
+        expected_patterns=[
+            "struct=page_size:",
+            "last-error=roundtrip:12345",
+            "ansi=handle:0x",
+            "unicode=handle:0x",
+            "override=page_size:",
+            "All marshalling tests passed.",
+        ],
+    ),
     _suite_spec(
         suite_id="contract/analysis-schema",
         family="contract",
