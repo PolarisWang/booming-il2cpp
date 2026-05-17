@@ -117,6 +117,15 @@ def _find_genuine_cpp(family_slug: str) -> Path | None:
     if direct.exists():
         return direct
 
+    # Fallback: variant subfolder (codegen/<SubjectName>/generated/native-aot.generated.cpp)
+    codegen_dir = _VERIFICATION / family_slug / "codegen"
+    if codegen_dir.is_dir():
+        for sub in sorted(codegen_dir.iterdir()):
+            if sub.is_dir() and sub.name != "generated":
+                candidate = sub / "generated" / "native-aot.generated.cpp"
+                if candidate.exists():
+                    return candidate
+
     # Fallback for backward compatibility with old paths
     genuine_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine"
     if genuine_dir.is_dir():
@@ -127,6 +136,11 @@ def _find_genuine_cpp(family_slug: str) -> Path | None:
                     return candidate
 
     direct = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    if direct.exists():
+        return direct
+
+    # Fallback: file directly in genuine/ (not in generated/ subdirectory)
+    direct = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "native-aot.generated.cpp"
     if direct.exists():
         return direct
 
@@ -584,7 +598,9 @@ def _emit_header(
         "#include <cstdio>",
         "#include <cstdint>",
         "#include <cstring>",
+        "#include <cstdlib>",
         "#include <excpt.h>",
+        '#include <patch_data.h>',
         "",
     ])
 
@@ -640,6 +656,68 @@ def _emit_namespace_block(
     ])
 
 
+def _emit_fix_method_names_fn(lines: list[str]) -> None:
+    """Emit FixMethodNamesInPatchData as a file-scope static function.
+
+    Renames MethodN -> Subject_N in the patch data string heap to bridge
+    the naming gap between patch DLL (MethodN convention) and AOT codegen
+    (Subject_N convention).
+    """
+    lines.extend([
+        "",
+        "// In-place patch data fixer: renames MethodN -> Subject_N in the string heap.",
+        "// The patch DLL and AOT codegen use different naming conventions",
+        "// (Method0..MethodN vs Subject_0..Subject_N). This fixer bridges the gap",
+        "// so ApplyPatchFromMemory can resolve all methods via HotpatchNameRegistry.",
+        "// Returns a heap-allocated buffer (caller must free via std::free).",
+        "static uint8_t* FixMethodNamesInPatchData(const uint8_t* data, size_t size, size_t& out_size) {",
+        "    auto* hdr = reinterpret_cast<const PatchDataHeader*>(data);",
+        "    if (hdr == nullptr || hdr->method_def_offset == 0) { out_size = size; return nullptr; }",
+        "",
+        "    // Allocate new buffer (extra 256 bytes for longer \"Subject_N\" names).",
+        "    out_size = size + 256;",
+        "    auto* buf = static_cast<uint8_t*>(std::malloc(out_size));",
+        "    std::memcpy(buf, data, size);",
+        "",
+        "    auto* new_hdr = reinterpret_cast<PatchDataHeader*>(buf);",
+        "    auto* methods = reinterpret_cast<PatchMethodDefEntry*>(buf + new_hdr->method_def_offset);",
+        "    const char* old_string_base = reinterpret_cast<const char*>(data) + new_hdr->string_heap_offset;",
+        "",
+        "    uint32_t write_off = static_cast<uint32_t>(size);",
+        "    uint32_t count = new_hdr->method_def_count;",
+        "",
+        "    for (uint32_t i = 0; i < count; i++) {",
+        "        if (methods[i].name_offset == 0) continue;",
+        "        const char* name = old_string_base + methods[i].name_offset;",
+        "",
+        "        const char* digits = nullptr;",
+        "        if (std::strncmp(name, \"Method\", 6) == 0) {",
+        "            digits = name + 6;",
+        "            if (*digits >= '0' && *digits <= '9') {",
+        "                while (digits[1] >= '0' && digits[1] <= '9') digits++;",
+        "            } else {",
+        "                digits = nullptr;",
+        "            }",
+        "        }",
+        "",
+        "        if (digits != nullptr) {",
+        "            char new_name[64];",
+        "            int len = std::snprintf(new_name, sizeof(new_name), \"Subject_%s\", name + 6);",
+        "            if (len < 0) continue;",
+        "",
+        "            size_t name_bytes = static_cast<size_t>(len) + 1;",
+        "            std::memcpy(buf + write_off, new_name, name_bytes);",
+        "            methods[i].name_offset = write_off - new_hdr->string_heap_offset;",
+        "            write_off += static_cast<uint32_t>(name_bytes);",
+        "        }",
+        "    }",
+        "",
+        "    out_size = write_off;",
+        "    return buf;",
+        "}",
+    ])
+
+
 def _emit_main_function(lines: list[str], method_count: int, family_id: str,
                          has_patch_data: bool,
                          host_class_name: str,
@@ -666,6 +744,11 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
             "",
             "static bool IsAbortingMethod(uint32_t) { return false; }",
         ])
+
+    # Emit FixMethodNamesInPatchData helper (rename MethodN -> Subject_N).
+    # This bridges the naming gap between patch DLL and AOT codegen.
+    if has_patch_data:
+        _emit_fix_method_names_fn(lines)
 
     # Now the main function
     lines.extend([
@@ -781,10 +864,17 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
     if has_patch_data:
         lines.extend([
             "",
+            "    // ── Fix patch data method names (MethodN → Subject_N) ────────",
+            "    size_t fixed_size = 0;",
+            "    uint8_t* fixed_patch = FixMethodNamesInPatchData(kPatchData, kPatchDataSize, fixed_size);",
+            "    const uint8_t* patch_data = (fixed_patch != nullptr) ? fixed_patch : kPatchData;",
+            "    size_t patch_size = (fixed_patch != nullptr) ? fixed_size : kPatchDataSize;",
+            "",
             "    // ── Hotpatch dispatch via ApplyPatchFromMemory ────────────────",
-            f'    PatchContext* patch_ctx = ApplyPatchFromMemory(kPatchData, kPatchDataSize, "{host_class_name}");',
+            f'    PatchContext* patch_ctx = ApplyPatchFromMemory(patch_data, patch_size, "{host_class_name}");',
             "    if (patch_ctx == nullptr) {",
             '        std::fprintf(stderr, "FATAL: ApplyPatchFromMemory failed\\n");',
+            "        std::free(fixed_patch);",
             "        return 1;",
             "    }",
             "    uint32_t d3_patched_count = patch_ctx->method_count;",
@@ -799,6 +889,7 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
             "    // ── Hotpatch dispatch disabled (no .patchdata) ──────────────",
             "    uint32_t d3_patched_count = 0u;",
             "    PatchContext* patch_ctx = nullptr;",
+            "    uint8_t* fixed_patch = nullptr;",
             "",
         ])
 
@@ -907,6 +998,7 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
             "    if (patch_ctx != nullptr) {",
             "        if (!Unpatch(patch_ctx)) {",
             '            std::fprintf(stderr, "FATAL: Unpatch failed\\n");',
+            "            std::free(fixed_patch);",
             "            return 1;",
             "        }",
             "",
@@ -998,6 +1090,7 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         '    std::printf("}\\n");',
     ])
     lines.extend([
+        "    if (fixed_patch != nullptr) std::free(fixed_patch);",
         "    return (failed_count == 0u) ? 0 : 1;",
         "}",
     ])
