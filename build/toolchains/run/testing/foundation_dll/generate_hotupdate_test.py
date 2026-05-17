@@ -102,7 +102,31 @@ def _ns_slug_from_family_id(family_id: str) -> str:
 
 
 def _class_name(family_slug: str, variant: str) -> str:
-    """Derive C++ class name from family slug and variant (host or patch)."""
+    """Derive C++ class name from family slug and variant (host or patch).
+
+    First tries to detect the actual codegen subject folder name from
+    codegen/<SubjectFolder>/. Skips non-subject dirs (bloat-reports, etc.).
+    Falls back to capitalizing the slug.
+    """
+    # Scan codegen directory for the actual subject folder name.
+    # Subject folders typically contain "Subjects" or start with uppercase letter.
+    skip_dirs = {"generated", "hot-update", "bloat-reports"}
+    codegen_dir = _VERIFICATION / family_slug / "codegen"
+    if codegen_dir.is_dir():
+        candidates = []
+        for sub in codegen_dir.iterdir():
+            if not sub.is_dir() or sub.name in skip_dirs:
+                continue
+            candidates.append(sub.name)
+        # Pick the subject folder: prefer one ending in "Subjects", else the
+        # first that starts with an uppercase letter.
+        for c in sorted(candidates):
+            if c.endswith("Subjects"):
+                return c
+        # Fallback: gsubfolder that starts with uppercase
+        for c in sorted(candidates):
+            if c[0].isupper():
+                return c
     base = "".join(part.capitalize() for part in family_slug.split("-"))
     return f"{base}NativeEntry" if variant == "host" else f"{base}PatchEntry"
 
@@ -221,14 +245,24 @@ def _discover_host_symbols(family_slug: str) -> list[str]:
 
 
 def _extract_method_symbols(cpp_path: Path) -> list[str]:
-    """Extract extern C method declarations (Method0..MethodN) from generated C++."""
+    """Extract extern C method declarations (Method0..MethodN or Subject_N) from generated C++."""
     if not cpp_path.exists():
         return []
 
     symbols: list[str] = []
     content = cpp_path.read_text(encoding="utf-8")
     for line in content.splitlines():
-        # New format: extern "C" void Namespace_Namespace_MethodN(void)
+        # Pattern 1: extern "C" void Namespace_Namespace_Subject_N(void)
+        m = re.match(
+            r'extern\s+"C"\s+void\s+(\w+_Subject_\d+)\(void\)',
+            line.strip(),
+        )
+        if m:
+            sym = m.group(1)
+            if sym not in symbols:
+                symbols.append(sym)
+            continue
+        # Pattern 2: extern "C" void Namespace_Namespace_MethodN(void)
         m = re.match(
             r'extern\s+"C"\s+void\s+(\w+_Method\d+)\(void\)',
             line.strip(),
@@ -238,7 +272,7 @@ def _extract_method_symbols(cpp_path: Path) -> list[str]:
             if sym not in symbols:
                 symbols.append(sym)
             continue
-        # Old format: extern "C" CHAOS_IL2CPP_INT32 Name_MethodN(void)
+        # Pattern 3: extern "C" CHAOS_IL2CPP_INT32 Name_MethodN(void)
         m = re.match(
             r'extern\s+"C"\s+CHAOS_IL2CPP_INT32\s+(\w+_Method\d+)\(void\)',
             line.strip(),
@@ -760,6 +794,12 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         "    using chaos::il2cpp::runtime_core::HotpatchLookupBySlot;",
         "    using chaos::il2cpp::runtime_core::PatchContext;",
         "    using chaos::il2cpp::runtime_core::InterpreterEntryDirect;",
+        "    using chaos::il2cpp::runtime_core::threading::RegisterThread;",
+        "    using chaos::il2cpp::runtime_core::threading::EnterCooperativeMode;",
+        "    using chaos::il2cpp::runtime_core::threading::kMainThreadId;",
+        "",
+        "    RegisterThread(kMainThreadId, nullptr);",
+        "    EnterCooperativeMode();",
         "",
         "    // Build synthetic method pointer table with host methods.",
         "    MethodPointerEntry entries[kMethodCount];",
