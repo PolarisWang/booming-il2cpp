@@ -67,7 +67,8 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrInstructionArtifact> SwitchInstructions,
         IReadOnlyDictionary<int, StructuredIRNode> CaseBodies,
         StructuredIRNode? DefaultBody,
-        int ExitOffset
+        int ExitOffset,
+        IReadOnlySet<int> FallthroughCaseValues
     ) : StructuredIRNode;
 
     // 鈹€鈹€ Leaf control-flow nodes 鈹€鈹€
@@ -349,7 +350,8 @@ public sealed partial class NativeAotLoweringPlanner
                         pair => pair.Key,
                         pair => StripExceptionPartitionExitTerminators(pair.Value)),
                     sw.DefaultBody is null ? null : StripExceptionPartitionExitTerminators(sw.DefaultBody),
-                    sw.ExitOffset),
+                    sw.ExitOffset,
+                    sw.FallthroughCaseValues),
             IRExceptionRegion er
                 => new IRExceptionRegion(
                     er.Kind,
@@ -863,11 +865,14 @@ public sealed partial class NativeAotLoweringPlanner
         {
             var body = sw.CaseBodies[caseValue];
             builder.AppendLine(caseIndent + "case " + caseValue + ":");
-            builder.AppendLine(caseIndent + "{");
+            bool isEmptyFallthrough = sw.FallthroughCaseValues.Contains(caseValue);
+            if (!isEmptyFallthrough)
+                builder.AppendLine(caseIndent + "{");
             EmitStructuredIRNode(builder, body, method, bodyIndent);
-            if (!IsControlFlowTerminator(body))
+            if (!IsControlFlowTerminator(body) && !isEmptyFallthrough)
                 builder.AppendLine(caseIndent + "    break;");
-            builder.AppendLine(caseIndent + "}");
+            if (!isEmptyFallthrough)
+                builder.AppendLine(caseIndent + "}");
         }
 
         if (sw.DefaultBody != null)
@@ -1598,12 +1603,16 @@ public sealed partial class NativeAotLoweringPlanner
             bool result = TryBuildStructuredExceptionMethodBody(method, instructions, offsets, out body, out maxDepth);
             if (!result || body is IRFlatRegion)
             {
-                if (body is IRFlatRegion)
-                    Interlocked.Increment(ref s_flatRegionCount);
+                Interlocked.Increment(ref s_flatRegionCount);
                 LogIrreducibleMethod(method, isException: true,
                     reason: body is IRFlatRegion ? "exception-shape-unhandled" : "exception-shape-failed",
                     instructions.Count, 0, 0, 0);
-                return false; // IRFlatRegion → caller must allocate eval stack
+                // Fall back to flat-goto for the entire method body instead of
+                // returning false (which produces an empty function body).
+                // The IRFlatRegion path in EmitViaStructuredIR calls EmitFlatGotoBody.
+                body = new IRFlatRegion(instructions, offsets);
+                maxDepth = ComputeMaxEvalStackDepth(instructions);
+                return true;
             }
             else
             {

@@ -257,6 +257,7 @@ public enum CapabilityFamilyId : ushort
     SystemPrivateCoreLib_ReflectionActivation = 32,
     SystemPrivateCoreLib_ReflectionFieldProperty = 33,
     SystemPrivateCoreLib_GarbageCollection = 34,
+    SystemPrivateCoreLib_CodegenEdgeCases = 35,
 }
 
 /// <summary>

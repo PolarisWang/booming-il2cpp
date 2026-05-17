@@ -623,7 +623,7 @@ public sealed partial class NativeAotLoweringPlanner
                 bool changed = sw.DefaultBody is null != (defaultBody is null) ||
                     sw.CaseBodies.Keys.Any(k => !ReferenceEquals(caseBodies[k], sw.CaseBodies[k]));
                 if (changed || !ReferenceEquals(defaultBody, sw.DefaultBody))
-                    return new IRSwitch(sw.SwitchInstructions, caseBodies, defaultBody, sw.ExitOffset);
+                    return new IRSwitch(sw.SwitchInstructions, caseBodies, defaultBody, sw.ExitOffset, sw.FallthroughCaseValues);
                 return sw;
             }
 
@@ -775,9 +775,6 @@ public sealed partial class NativeAotLoweringPlanner
                 var loop = BuildLoop(cfg, idx, endIndex, currentLoop, loopHeaderOffset, loopExitOffset);
                 seqNodes.Add(loop);
 
-                int maxLatch = currentLoop.LatchIndices.Max();
-                int bodyEnd = maxLatch <= endIndex ? maxLatch : endIndex;
-
                 // Emit any exit blocks that sit between the loop header and
                 // the first body block (e.g. early-return before the latch).
                 var afterHeaderBody = currentLoop.BodyIndices.Where(i => i > idx).ToList();
@@ -785,7 +782,12 @@ public sealed partial class NativeAotLoweringPlanner
                 for (int e = idx + 1; e < firstBodyIdx && e <= endIndex; e++)
                     seqNodes.Add(new IRBlock(cfg.Blocks[e].BodyInstructions, cfg.Blocks[e].Terminator));
 
-                idx = bodyEnd + 1;
+                // Use BodyIndices.Max() instead of maxLatch so ALL loop body blocks
+                // are consumed — not just those up to the max latch.  A body block
+                // can exist after the max latch when a conditional latch falls through
+                // to non-latch body code.
+                int loopBodyMax = currentLoop.BodyIndices.Max();
+                idx = loopBodyMax + 1 > endIndex ? endIndex + 1 : loopBodyMax + 1;
             }
             else if (block.ConditionalTarget.HasValue && IsConditionalBranchOpcode(block.Terminator?.Op ?? ""))
             {
@@ -881,7 +883,10 @@ public sealed partial class NativeAotLoweringPlanner
         int bodyStart = bodyIndicesAfterHeader.Count > 0 ? bodyIndicesAfterHeader.Min() : headerIndex + 1;
 
         int maxLatchIdx = loopInfo.LatchIndices.Max();
-        int bodyEnd = maxLatchIdx;
+        // bodyEnd must cover all body blocks, not just up to maxLatchIdx.
+        // A body block after the max latch occurs when a conditional latch
+        // falls through to non-latch code that is still within the loop body.
+        int bodyEnd = Math.Max(maxLatchIdx, loopInfo.BodyIndices.Max());
         if (bodyEnd > endIndex) bodyEnd = endIndex;
 
         int exitIdx = bodyEnd + 1;
@@ -1102,13 +1107,18 @@ public sealed partial class NativeAotLoweringPlanner
         // because mergeIdx may have advanced due to redirect-stub inlining
         // but the case body ranges must not include post-switch blocks.
         var caseBodies = new Dictionary<int, StructuredIRNode>();
-        foreach (var kvp in caseMap)
+        var fallthroughCaseValues = new HashSet<int>();
+        var sortedCaseKeys = caseMap.Keys.OrderBy(k => k).ToList();
+        for (int ci = 0; ci < sortedCaseKeys.Count; ci++)
         {
-            int nextCaseStart = caseMap.Keys.Where(k => k > kvp.Key).DefaultIfEmpty(endIdx + 1).Min();
+            int caseBlockIdx = sortedCaseKeys[ci];
+            int nextCaseStart = (ci < sortedCaseKeys.Count - 1)
+                ? sortedCaseKeys[ci + 1]
+                : endIdx + 1;
             int bodyEnd = Math.Min(nextCaseStart - 1, maxTargetIdx);
             StructuredIRNode body;
-            if (kvp.Key <= bodyEnd)
-                body = RecoverStructure(cfg, kvp.Key, bodyEnd, loopHeaderOffset, loopExitOffset);
+            if (caseBlockIdx <= bodyEnd)
+                body = RecoverStructure(cfg, caseBlockIdx, bodyEnd, loopHeaderOffset, loopExitOffset);
             else
                 body = new IRSequence(Array.Empty<StructuredIRNode>());
 
@@ -1116,12 +1126,20 @@ public sealed partial class NativeAotLoweringPlanner
             if (switchMergeOffset.HasValue)
                 body = RemoveTrailingBranch(body, switchMergeOffset.Value);
 
-            foreach (var caseValue in kvp.Value)
+            // Detect fallthrough: a case body that has no control flow terminator
+            // (empty body or falls through to the next case).
+            if (!IsControlFlowTerminator(body) && ci < sortedCaseKeys.Count - 1)
+            {
+                foreach (var caseValue in caseMap[caseBlockIdx])
+                    fallthroughCaseValues.Add(caseValue);
+            }
+
+            foreach (var caseValue in caseMap[caseBlockIdx])
                 caseBodies[caseValue] = body;
         }
 
         int exitOffset = mergeIdx <= endIdx ? cfg.Blocks[mergeIdx].StartOffset : -1;
-        return new IRSwitch(swBlock.BodyInstructions, caseBodies, defaultBody, exitOffset);
+        return new IRSwitch(swBlock.BodyInstructions, caseBodies, defaultBody, exitOffset, fallthroughCaseValues);
     }
 
     // ────────────────────────────────────────────────────────────────────────────

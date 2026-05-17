@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
+using System.Text;
 using Chaos.IL2CPP.Contracts;
 
 namespace Chaos.IL2CPP.Loader;
@@ -510,6 +511,94 @@ public sealed partial class LoaderStage
                 typeName = string.Empty;
                 return false;
         }
+    }
+
+    /// <summary>
+    /// Extracts the GUID string from a type's <see cref="System.Runtime.InteropServices.GuidAttribute"/>,
+    /// if present. Returns the GUID string (e.g., "ABCDEF01-2345-6789-ABCD-EF0123456789") or null.
+    /// </summary>
+    internal static string? TryGetComInterfaceGuid(
+        MetadataReader metadataReader,
+        TypeDefinitionHandle typeHandle)
+    {
+        const string guidAttributeFullName = "System.Runtime.InteropServices.GuidAttribute";
+        var typeDefinition = metadataReader.GetTypeDefinition(typeHandle);
+
+        foreach (var attributeHandle in typeDefinition.GetCustomAttributes())
+        {
+            if (TryGetAttributeTypeName(metadataReader, attributeHandle, out var ns, out var name) &&
+                string.Equals($"{ns}.{name}", guidAttributeFullName, StringComparison.Ordinal))
+            {
+                // Decode the single string constructor argument from the CA blob.
+                var attribute = metadataReader.GetCustomAttribute(attributeHandle);
+                var blob = metadataReader.GetBlobBytes(attribute.Value);
+                return DecodeGuidAttributeString(blob);
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Decodes a GuidAttribute custom attribute blob and returns the GUID string.
+    /// Blob format: 2-byte prolog (0x0001) + SerString (length-prefixed UTF8).
+    /// </summary>
+    private static string? DecodeGuidAttributeString(byte[] blob)
+    {
+        if (blob.Length < 3) return null;          // prolog + at least 1 byte of string header
+
+        // Skip 2-byte prolog (always 0x01 0x00 for standard attributes).
+        int pos = 2;
+
+        // SerString: 0xFF is null; otherwise a packed unsigned length + UTF8.
+        if (blob[pos] == 0xFF) return null;
+
+        // Decode packed unsigned length (ECMA 335 II.23.2: compressed unsigned int).
+        if (!TryDecodeCompressedUInt32(blob, ref pos, out uint length))
+            return null;
+
+        if (length == 0 || pos + length > blob.Length)
+            return null;
+
+        return System.Text.Encoding.UTF8.GetString(blob, pos, (int)length);
+    }
+
+    /// <summary>
+    /// Decodes an ECMA 335 compressed unsigned integer at position pos.
+    /// Advances pos past the encoded bytes.
+    /// </summary>
+    private static bool TryDecodeCompressedUInt32(byte[] blob, ref int pos, out uint value)
+    {
+        value = 0;
+        if (pos >= blob.Length) return false;
+
+        byte first = blob[pos];
+        if ((first & 0x80) == 0)
+        {
+            // 1-byte encoding: 0xxx xxxx (7 bits)
+            value = first;
+            pos += 1;
+            return true;
+        }
+        else if ((first & 0xC0) == 0x80)
+        {
+            // 2-byte encoding: 10xx xxxx xxxx xxxx (14 bits)
+            if (pos + 2 > blob.Length) return false;
+            value = (uint)((first & 0x3F) << 8) | blob[pos + 1];
+            pos += 2;
+            return true;
+        }
+        else if ((first & 0xE0) == 0xC0)
+        {
+            // 4-byte encoding: 110x xxxx xxxx xxxx xxxx xxxx xxxx xxxx (29 bits)
+            if (pos + 4 > blob.Length) return false;
+            value = (uint)((first & 0x1F) << 24) | (uint)(blob[pos + 1] << 16)
+                  | (uint)(blob[pos + 2] << 8) | blob[pos + 3];
+            pos += 4;
+            return true;
+        }
+
+        return false;
     }
 
 }

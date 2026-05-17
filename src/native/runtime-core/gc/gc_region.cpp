@@ -773,6 +773,18 @@ bool RegionManager::IsNurseryPointer(const void* ptr) const {
     if (ptr == nullptr) return false;
     uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
 
+    // Phase 1A: O(1) global bounds check.  If the pointer is outside the
+    // conservative global nursery range, it cannot be in any nursery.
+    // The global bounds monotonically expand on AddNurseryRange and never
+    // shrink, so this is always a conservative (safe) filter.
+    uintptr_t global_begin = nursery_global_begin_.load(std::memory_order_acquire);
+    uintptr_t global_end   = nursery_global_end_.load(std::memory_order_acquire);
+    if (global_begin < global_end) {
+        if (addr < global_begin || addr >= global_end) {
+            return false;  // Definitely not in any nursery.
+        }
+    }
+
     // Lock-free fast path: iterate the nursery range array with atomic loads.
     // No mutex needed — each slot is published with release ordering and never
     // modified after publication (removal zeros begin so the range is invalid).
@@ -787,6 +799,27 @@ bool RegionManager::IsNurseryPointer(const void* ptr) const {
 
 void RegionManager::AddNurseryRange(uintptr_t begin, uintptr_t end) {
     if (begin >= end) return;
+
+    // Expand global nursery bounds (monotonic: only ever expands outward).
+    // CAS loop ensures correctness under concurrent AddNurseryRange calls.
+    {
+        uintptr_t expected = nursery_global_begin_.load(std::memory_order_relaxed);
+        while (begin < expected) {
+            if (nursery_global_begin_.compare_exchange_weak(expected, begin,
+                    std::memory_order_release, std::memory_order_relaxed)) {
+                break;
+            }
+        }
+    }
+    {
+        uintptr_t expected = nursery_global_end_.load(std::memory_order_relaxed);
+        while (end > expected) {
+            if (nursery_global_end_.compare_exchange_weak(expected, end,
+                    std::memory_order_release, std::memory_order_relaxed)) {
+                break;
+            }
+        }
+    }
 
     // Try to reuse a previously-freed slot (begin == 0) first.
     int count = nursery_slot_count_.load(std::memory_order_acquire);

@@ -66,4 +66,12 @@ static const CHAOS_IL2CPP_UINT32 s_reverse_pinvoke_registered = []()
     return 1u;
 }();
 {{~ end ~}}
+
+{{~ if ccw_interface_count > 0 ~}}
+// ── CCW interface vtable data (V1: GUID constants + placeholder vtables) ──
+{{~ for ccw in ccw_interfaces ~}}
+// {{ ccw.type_namespace }}.{{ ccw.type_name }}
+static constexpr CHAOS_IL2CPP_UINT8 s_ccw_guid_{{ ccw.guid_symbol_suffix }}[16] = { {{ ccw.guid_bytes }} };
+{{~ end ~}}
+{{~ end ~}}
 {{~ end ~}}

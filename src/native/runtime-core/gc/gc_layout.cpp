@@ -239,7 +239,7 @@ int ScanObjectPointers(void* obj, const GcTypeLayout* layout,
         if (val == nullptr) continue;
 
         if (IsInNursery(val)) {
-            void* tenured = GcScavengeObject(val, result);
+            void* tenured = GcScavengeObjectKnownNursery(val, result);
             if (tenured != nullptr && tenured != val) {
                 *slot = tenured;
             }

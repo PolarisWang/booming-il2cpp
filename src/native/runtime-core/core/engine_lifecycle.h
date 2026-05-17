@@ -39,6 +39,23 @@ extern CHAOS_IL2CPP_MUTEX s_gc_handle_mutex;
 extern CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_UINT64) s_next_gc_handle;
 extern CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, GcHandleEntry) s_gc_handle_table;
 
+// ── Internal handle API (no RuntimeState required, for tests / internal use) ──
+
+/// Create a strong handle (object will be kept alive by GC).
+/// Returns a nonzero handle ID on success, 0 on failure.
+CHAOS_IL2CPP_UINT64 GcCreateStrongHandle(void* object_instance) noexcept;
+
+/// Create a weak handle (object can be collected; handle nulled when dead).
+/// Returns a nonzero handle ID on success, 0 on failure.
+CHAOS_IL2CPP_UINT64 GcCreateWeakHandle(void* object_instance) noexcept;
+
+/// Create a pinned handle (object will not be moved by young GC).
+/// Returns a nonzero handle ID on success, 0 on failure.
+CHAOS_IL2CPP_UINT64 GcCreatePinnedHandle(void* object_instance) noexcept;
+
+/// Free a handle created by any of the above.
+void GcFreeHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_ENGINE_LIFECYCLE_H_
