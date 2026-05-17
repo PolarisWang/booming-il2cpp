@@ -31,6 +31,7 @@
 /// - BGC mark stack: mutex-protected (BGC thread + STW re-mark both access)
 
 #include <atomic>
+#include <condition_variable>
 #include <cstddef>
 #include <cstdint>
 #include <mutex>
@@ -38,6 +39,8 @@
 #include <vector>
 
 #include <chaos/native_types.h>
+
+#include "gc_old_gen.h"
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -231,6 +234,14 @@ private:
     std::atomic<bool> bgc_running_{false};
     std::atomic<bool> bgc_start_requested_{false};
 
+    // Condition variable for event-driven BGC thread wake-up.
+    // Replaces sleep_for polling in BgcThreadMain.
+    std::condition_variable bgc_cv_;
+    std::mutex bgc_cv_mutex_;
+
+    /// Wake the BGC thread (or parallel workers) from sleep.
+    void NotifyBgc() { bgc_cv_.notify_all(); }
+
     // BGC mark stack (concurrent mark uses its own stack, not g_old_gen's).
     std::vector<void*> mark_stack_;
     std::mutex mark_stack_mutex_;
@@ -273,6 +284,23 @@ private:
 
     /// Worker threads spawned during concurrent mark.
     std::vector<std::thread> bgc_parallel_workers_;
+
+    // ── BGC finalization support ──────────────────────────────────
+
+    /// Dead finalizable entries collected during BgcSweep.
+    /// Uses namespace-level FinalizerEntry (defined in gc_old_gen.h).
+    std::vector<FinalizerEntry> bgc_dead_finalizables_;
+
+    // ── BGC weak handle support ───────────────────────────────────
+
+    /// Handle ID + original object for weak handles that need nulling.
+    /// Collected during BgcSweep (mark bitmap still valid), nulled after
+    /// finalization (respecting WeakTrackResurrection semantics).
+    struct DeadWeakHandle {
+        uint64_t handle_id;
+        void*    old_object;  // for debugging / resurrection check
+    };
+    std::vector<DeadWeakHandle> bgc_dead_weak_handles_;
 };
 
 // ======================================================================

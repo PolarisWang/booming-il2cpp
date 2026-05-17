@@ -108,6 +108,26 @@ void GcProcessDependentHandlesAfterYoungGC() noexcept;
 /// Process dependent handles after a full GC (fixed-point iteration up to 3 rounds).
 int GcProcessDependentHandlesAfterFullGC() noexcept;
 
+/// Collect weak handle entries whose objects died during BGC marking.
+/// Must be called during/after BgcSweep while the mark bitmap is still
+/// valid (before StwCompact clears it).  Returns handle IDs that need
+/// nulling.  The actual nulling happens after finalization so that
+/// WeakTrackResurrection semantics are preserved.
+/// @param out_dead  Output vector receiving (handle_id, old_object) pairs.
+void GcCollectDeadWeakHandles(
+    std::vector<std::pair<uint64_t, void*>>& out_dead) noexcept;
+
+/// Null weak handles from a list collected by GcCollectDeadWeakHandles.
+/// Checks that the handle still points to the original dead object
+/// (respecting resurrection via WeakTrackResurrection).
+/// @param dead_handles  List of (handle_id, old_object) from collection.
+void GcProcessCollectedWeakHandles(
+    const std::vector<std::pair<uint64_t, void*>>& dead_handles) noexcept;
+
+/// Process dependent handles after a BGC cycle (fixed-point iteration).
+/// Called after GcProcessWeakHandlesAfterBgc().
+int GcProcessDependentHandlesAfterBgc() noexcept;
+
 // ── Pinned object set (for GCHandleType.Pinned / POH) ──────────────────
 
 /// Register a pinned object (prevented from being moved by young GC).

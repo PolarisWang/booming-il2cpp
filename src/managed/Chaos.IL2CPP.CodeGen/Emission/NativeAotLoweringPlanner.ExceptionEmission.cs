@@ -84,10 +84,32 @@ public sealed partial class NativeAotLoweringPlanner
 		=> "chaos_" + prefix + "_" + (_linearScratchCounter++).ToString(CultureInfo.InvariantCulture);
 
 
+	private static IReadOnlyList<AotCoreIrInstructionArtifact> FilterRedundantStoreReloadPairs(
+		IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+	{
+		var result = new List<AotCoreIrInstructionArtifact>(instructions.Count);
+		int i = 0;
+		while (i < instructions.Count)
+		{
+			if (i + 1 < instructions.Count &&
+				instructions[i].Op is "stloc" &&
+				instructions[i + 1].Op is "ldloc" &&
+				GetRequiredIntOperand(instructions[i]) == GetRequiredIntOperand(instructions[i + 1]))
+			{
+				i += 2;
+				continue;
+			}
+			result.Add(instructions[i]);
+			i++;
+		}
+		return result;
+	}
+
 	private void EmitInstructionSequence(StringBuilder builder, IReadOnlyList<AotCoreIrInstructionArtifact> instructions, string indentation)
 	{
 			ResetArrayCheckCache();
-		foreach (AotCoreIrInstructionArtifact instruction in instructions)
+		var filtered = FilterRedundantStoreReloadPairs(instructions);
+		foreach (AotCoreIrInstructionArtifact instruction in filtered)
 		{
 			EmitInstruction(builder, instruction, indentation);
 		}
@@ -1862,6 +1884,10 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			EmitHotpatchResolvedInvocation(builder, slotIndex, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation);
 		}
+		else if (TryResolveModuleLocalCall(instruction, invocationTarget, out string localSymbol))
+		{
+			EmitLinearResolvedInvocation(builder, localSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck: false);
+		}
 		else if (invocationTarget.ExternalRuntimeTableIndex >= 0 || invocationTarget.DirectNativeSymbol != null)
 		{
 			EmitExternalRuntimeTableDispatch(builder, invocationTarget, indentation);
@@ -1949,7 +1975,11 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				EmitHotpatchResolvedInvocation(builder, slotIndex, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation);
 			}
-			else if (invocationTarget.ExternalRuntimeTableIndex >= 0)
+			else if (TryResolveModuleLocalCall(instruction, invocationTarget, out string localSymbol))
+		{
+			EmitLinearResolvedInvocation(builder, localSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck: true);
+		}
+		else if (invocationTarget.ExternalRuntimeTableIndex >= 0)
 			{
 				EmitExternalRuntimeTableDispatch(builder, invocationTarget, indentation);
 			}
@@ -2412,9 +2442,6 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitHotpatchResolvedInvocation(StringBuilder builder, int dispatchSlotIndex, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, string indentation)
 	{
 		string returnType = MapAbiSlotReturnType(returnAbi);
-		int argBufferSize = CalculateArgBufferSize(parameterAbis);
-		// Minimum 1 byte to avoid zero-length array error in C++
-		if (argBufferSize < 1) argBufferSize = 1;
 		bool hasReturn = !string.Equals(returnType, "void", StringComparison.Ordinal);
 		builder.AppendLine($"{indentation}{{");
 		for (int i = parameterAbis.Count - 1; i >= 0; i--)
@@ -2434,21 +2461,25 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}    if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d{dispatchSlotIndex})");
 			builder.AppendLine($"{indentation}        && !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d{dispatchSlotIndex}))");
 		builder.AppendLine($"{indentation}    {{");
-		builder.AppendLine($"{indentation}        alignas(16) uint8_t _d_ab[{argBufferSize}];");
-		builder.AppendLine($"{indentation}        ArgBuffer _d_bw(_d_ab);");
-		for (int i = 0; i < parameterAbis.Count; i++)
+		if (parameterAbis.Count > 0)
 		{
-			builder.AppendLine($"{indentation}        _d_bw.{GetArgBufferWriteCall(parameterAbis[i].CarrierKindCode, $"chaos_arg_{i}")};");
+			int argBufferSize = CalculateArgBufferSize(parameterAbis);
+			builder.AppendLine($"{indentation}        alignas(16) uint8_t _d_ab[{argBufferSize}];");
+			builder.AppendLine($"{indentation}        ArgBuffer _d_bw(_d_ab);");
+			for (int i = 0; i < parameterAbis.Count; i++)
+			{
+				builder.AppendLine($"{indentation}        _d_bw.{GetArgBufferWriteCall(parameterAbis[i].CarrierKindCode, $"chaos_arg_{i}")};");
+			}
 		}
 		if (hasReturn)
 		{
 			builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::InterpreterEntryDirect(");
-			builder.AppendLine($"{indentation}            _d{dispatchSlotIndex}.method_key, _d_ab, &_d_hpresult);");
+			builder.AppendLine($"{indentation}            _d{dispatchSlotIndex}.method_key, {(parameterAbis.Count > 0 ? "_d_ab" : "nullptr")}, &_d_hpresult);");
 		}
 		else
 		{
 			builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::InterpreterEntryDirect(");
-			builder.AppendLine($"{indentation}            _d{dispatchSlotIndex}.method_key, _d_ab, nullptr);");
+			builder.AppendLine($"{indentation}            _d{dispatchSlotIndex}.method_key, {(parameterAbis.Count > 0 ? "_d_ab" : "nullptr")}, nullptr);");
 		}
 		builder.AppendLine($"{indentation}    }}");
 		builder.AppendLine($"{indentation}    else");

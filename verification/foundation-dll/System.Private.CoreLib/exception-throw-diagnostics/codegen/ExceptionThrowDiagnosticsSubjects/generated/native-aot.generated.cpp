@@ -52,7 +52,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -198,7 +198,7 @@ struct chaos_type_System_Private_CoreLib_System_String
 
 const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_value) noexcept
 {
-	if (chaos_string_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_string_value == 0)
 	{
 		return nullptr;
 	}
@@ -217,9 +217,9 @@ const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_va
 
 CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
-		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		return 0;
 	}
 
 	if (!chaos_is_string_id(chaos_value))
@@ -302,7 +302,7 @@ static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_
 
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
-	if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_arg_0 == 0)
 	{
 		CHAOS_IL2CPP_FAIL();
 	}
@@ -636,7 +636,7 @@ static void (*kBenchmarkWrappers[15])() = {
 	[]() {kAotMethods[11]();},
 	[]() {kAotMethods[12]();},
 	[]() {kAotMethods[13]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[14])(static_cast<CHAOS_IL2CPP_INTPTR>(0));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[14])(0);},
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -856,8 +856,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
 	}}
 	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
+		const auto chaos_arg_1 = _s0;
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
 		chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
@@ -879,7 +878,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	{{
 		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
 	}}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s1 = 0;
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
@@ -912,9 +911,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -922,9 +920,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -937,9 +934,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -947,9 +943,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1006,15 +1001,13 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Exception__get_InnerException_System_Exception__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1027,15 +1020,13 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s1;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Exception__get_InnerException_System_Exception__(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1100,8 +1091,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Exception__get_HResult_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1111,8 +1101,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s1;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Exception__get_HResult_System_Int32__(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1166,9 +1155,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1176,9 +1164,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1191,9 +1178,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1201,9 +1187,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1260,9 +1245,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1270,9 +1254,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1285,9 +1268,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1295,9 +1277,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1407,8 +1388,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
 	}}
 	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
+		const auto chaos_arg_1 = _s0;
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_InvalidOperationException, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_InvalidOperationException.hot;
 		chaos_external_runtime_System_Private_CoreLib_System_InvalidOperationException___ctor_System_Void_System_String_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
@@ -1483,10 +1463,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d0.method_key, _d_ab, nullptr);
+							_d0.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1502,10 +1480,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d1.method_key, _d_ab, nullptr);
+							_d1.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1521,10 +1497,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d2.method_key, _d_ab, nullptr);
+							_d2.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1540,10 +1514,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d3.method_key, _d_ab, nullptr);
+							_d3.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1559,10 +1531,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d4.method_key, _d_ab, nullptr);
+							_d4.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1578,10 +1548,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d5.method_key, _d_ab, nullptr);
+							_d5.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1597,10 +1565,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d6.method_key, _d_ab, nullptr);
+							_d6.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1616,10 +1582,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d7.method_key, _d_ab, nullptr);
+							_d7.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1635,10 +1599,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d8.method_key, _d_ab, nullptr);
+							_d8.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1654,10 +1616,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d9.method_key, _d_ab, nullptr);
+							_d9.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1673,10 +1633,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d10.method_key, _d_ab, nullptr);
+							_d10.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1692,10 +1650,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d11.method_key, _d_ab, nullptr);
+							_d11.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1711,10 +1667,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d12.method_key, _d_ab, nullptr);
+							_d12.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1730,10 +1684,8 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d13.method_key, _d_ab, nullptr);
+							_d13.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -1743,9 +1695,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 				break;
 			}
 			default:
-			{
 				return;
-			}
 		}
 	}
 	return;

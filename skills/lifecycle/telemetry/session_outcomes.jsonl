@@ -481,3 +481,6 @@
 {"timestamp": "2026-05-17T01:28:14.619822+00:00", "skill_path": null, "completed": true, "signals": {"has_recent_commit": true, "has_skill_edit": false}, "event": "session_outcome"}
 {"timestamp": "2026-05-17T01:28:35.578567+00:00", "skill_path": null, "completed": true, "signals": {"has_recent_commit": true, "has_skill_edit": false}, "event": "session_outcome"}
 {"timestamp": "2026-05-17T01:31:39.341872+00:00", "skill_path": null, "completed": true, "signals": {"has_recent_commit": true, "has_skill_edit": false}, "event": "session_outcome"}
+{"timestamp": "2026-05-17T03:08:28.781792+00:00", "skill_path": null, "completed": false, "signals": {"has_recent_commit": false, "has_skill_edit": false}, "event": "session_outcome"}
+{"timestamp": "2026-05-17T03:18:46.244278+00:00", "skill_path": null, "completed": false, "signals": {"has_recent_commit": false, "has_skill_edit": false}, "event": "session_outcome"}
+{"timestamp": "2026-05-17T03:22:48.398463+00:00", "skill_path": null, "completed": false, "signals": {"has_recent_commit": false, "has_skill_edit": false}, "event": "session_outcome"}

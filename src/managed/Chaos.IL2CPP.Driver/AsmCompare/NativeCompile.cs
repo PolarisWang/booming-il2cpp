@@ -235,7 +235,6 @@ internal static class NativeCompile
         Path.Combine(repoRoot, "src", "native"),
         Path.Combine(repoRoot, "contracts", "native", "v0"),
         Path.Combine(repoRoot, "third_party", "fmt", "include"),
-        Path.Combine(repoRoot, "third_party", "bdwgc", "include"),
     };
 
     private static (int exitCode, string stdout, string stderr) RunProcess(

@@ -1890,6 +1890,41 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::RunFinalizers() {
     return ran;
 }
 
+std::vector<FinalizerEntry> MarkSweepOldGen::CollectDeadFinalizables() {
+    std::vector<FinalizerEntry> dead_entries;
+    std::vector<FinalizerEntry> live_entries;
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        for (auto& entry : finalizers_) {
+            if (entry.finalizer == nullptr) continue;
+            bool unreachable = true;
+            auto* page = FindPage(entry.obj);
+            if (page != nullptr && !page->is_oversized) {
+                uintptr_t obj_addr = reinterpret_cast<uintptr_t>(entry.obj);
+                uintptr_t payload_start = reinterpret_cast<uintptr_t>(page->Payload());
+                if (obj_addr >= payload_start) {
+                    CHAOS_IL2CPP_SIZE offset = obj_addr - payload_start;
+                    CHAOS_IL2CPP_SIZE slot_idx = offset / sizeof(void*);
+                    CHAOS_IL2CPP_SIZE byte_idx = slot_idx / 8;
+                    int bit_idx = static_cast<int>(slot_idx % 8);
+                    auto* bitmap = page->MarkBitmap();
+                    if (bitmap[byte_idx] & (static_cast<unsigned char>(1u << bit_idx))) {
+                        unreachable = false;
+                    }
+                }
+            } else if (g_loh.IsInLOH(entry.obj)) {
+                if (g_loh.IsMarked(entry.obj)) {
+                    unreachable = false;
+                }
+            }
+            if (unreachable) dead_entries.push_back(entry);
+            else live_entries.push_back(entry);
+        }
+        finalizers_.swap(live_entries);
+    }
+    return dead_entries;
+}
+
 // ── BGC concurrent-safe mark ─────────────────────────────────────
 
 bool MarkSweepOldGen::BgcTryMark(void* obj) {

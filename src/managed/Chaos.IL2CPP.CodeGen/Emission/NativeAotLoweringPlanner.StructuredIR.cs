@@ -442,7 +442,8 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method,
         string indentation)
     {
-        foreach (var instr in block.BodyInstructions)
+        var filtered = FilterRedundantStoreReloadPairs(block.BodyInstructions);
+        foreach (var instr in filtered)
         {
             EmitInstruction(builder, instr, indentation);
         }

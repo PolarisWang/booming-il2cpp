@@ -198,6 +198,16 @@ public sealed partial class NativeAotLoweringPlanner
     private Dictionary<string, int>? _nativeSymbolToDispatchSlot;
 
     /// <summary>
+    /// Module-local symbol table: subjectId → nativeSymbol for all methods in the
+    /// current codegen output.  Enables <see cref="EmitLinearCall"/> to detect
+    /// same-module callees and emit direct C++ calls instead of going through the
+    /// extern runtime dispatch table.
+    /// Populated from <see cref="_methodsBySubjectId"/> during Create.
+    /// </summary>
+    private Dictionary<string, string> _moduleSymbolTable =
+        new(StringComparer.Ordinal);
+
+    /// <summary>
     /// Maps unresolvable cross-assembly subjectId → index in kChaosExternalRuntimeFnTable.
     /// Populated by <see cref="PrebuildExternalRuntimeDispatchTable"/> before method body emission.
     /// </summary>
@@ -233,6 +243,15 @@ public sealed partial class NativeAotLoweringPlanner
 
         _methodsBySubjectId = aotCoreIr.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
         _assemblyName = loweringPlan.AssemblyName;
+
+        // Build module-local symbol table: all methods in this codegen output
+        // that belong to the current assembly get a subjectId → nativeSymbol
+        // entry so EmitLinearCall can detect same-module callees and emit
+        // direct C++ calls instead of routing through the extern table.
+        _moduleSymbolTable = _methodsBySubjectId
+            .Where(kvp => IsSameModuleMethod(kvp.Key))
+            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value.NativeSymbol, StringComparer.Ordinal);
+
         _attributeStorageFieldIndex = BuildAttributeStorageFieldIndex(_methodsBySubjectId);
         _referenceTypeBaseSubjectIds = CollectReferenceTypeBaseSubjectIds(aotCoreIr);
         _referenceTypeImplementedInterfaceSubjectIds = CollectReferenceTypeImplementedInterfaceSubjectIds(aotCoreIr);
@@ -870,6 +889,47 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// Returns true if the given subjectId belongs to the current AOT module,
+    /// based on the "AssemblyName/..." prefix convention.
+    /// </summary>
+    private bool IsSameModuleMethod(string subjectId)
+    {
+        int slashIndex = subjectId.IndexOf('/');
+        if (slashIndex < 0)
+            return false;
+        string subjectAssembly = subjectId.Substring(0, slashIndex);
+        return string.Equals(subjectAssembly, _assemblyName, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// Attempts to resolve a call target as a module-local direct symbol.
+    /// Returns true when the callee subjectId is in <see cref="_moduleSymbolTable"/>,
+    /// meaning it belongs to the current codegen output and can be called as a
+    /// direct C++ function (skipping the extern runtime dispatch table).
+    ///
+    /// This is a defense-in-depth check: even if <see cref="ResolveDirectInvocationTarget"/>
+    /// returns an InvocationTarget with ExternalRuntimeTableIndex set (due to a future
+    /// code path), this check ensures same-module calls always use direct symbols.
+    /// </summary>
+    private bool TryResolveModuleLocalCall(
+        AotCoreIrInstructionArtifact instruction,
+        InvocationTarget invocationTarget,
+        out string nativeSymbol)
+    {
+        string? callee = instruction.Callee ?? instruction.TargetReference?.SubjectId;
+        if (callee != null && _moduleSymbolTable.TryGetValue(callee, out nativeSymbol))
+        {
+            // Only use the local symbol when the invocation target doesn't already
+            // have a DirectNativeSymbol (which is already optimized) and isn't
+            // going through the hotpatch path (handled earlier).
+            if (invocationTarget.DirectNativeSymbol == null)
+                return true;
+        }
+        nativeSymbol = null!;
+        return false;
     }
 
     /// <summary>
