@@ -8,6 +8,7 @@
 #include "runtime_core.h"
 #include "runtime_vtable.h"
 #include "type_registry.h"
+#include <vtable_registry.h>
 #include "module_registry.h"
 #include "memory_domain.h"
 #include "reflection_query_model.h"
@@ -162,6 +163,17 @@ bool ChaosTypeAddInterface(
 
     mt->runtime_iface_map  = newMap;
     mt->runtime_iface_count = newCount;
+
+    // Sync with vtable_registry so that ResolveVirtualMethodPointer and
+    // chaos_find_interface_offset can dispatch through this interface.
+    if (mt->stable_id != 0u) {
+        const auto* tv = chaos::il2cpp::vtable_registry::TryGetTypeVTableByStableId(mt->stable_id);
+        if (tv != nullptr && tv->type_token != 0u) {
+            chaos::il2cpp::vtable_registry::RegisterTypeVTableRuntimeInterface(
+                tv->type_token, iface_stable_id, vtable_offset, method_count);
+        }
+    }
+
     return true;
 }
 

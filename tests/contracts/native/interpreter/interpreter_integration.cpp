@@ -11,8 +11,6 @@
 #include "token_resolver.h"
 
 #include <chaos/common.h>
-#include <chaos/config.h>
-#include <chaos/profile.h>
 #include <chaos/type_info.h>
 #include <codegen_bridge.h>
 
@@ -126,6 +124,10 @@ static bool Test_CodegenVTableInterfaceDispatch();
 // ── Hot-update VTable resolution test (RegisterHotUpdateVTable path) ─
 static bool Test_HotUpdateVTableResolution();
 
+// ── Phase 9b+: Interface offset cache + runtime_iface_map tests ──────
+static bool Test_ChaosFindInterfaceOffset();
+static bool Test_HotUpdateVTableInterfaceResolution();
+
 // ════════════════════════════════════════════════════════════════════════════
 // Test runner
 // ════════════════════════════════════════════════════════════════════════════
@@ -186,6 +188,10 @@ int main()
     // Hot-update VTable path test (RegisterHotUpdateVTable)
     TEST(Test_HotUpdateVTableResolution);
 
+    // Phase 9b+: Interface offset cache + runtime_iface_map tests
+    TEST(Test_ChaosFindInterfaceOffset);
+    TEST(Test_HotUpdateVTableInterfaceResolution);
+
     // SEH exception handling tests
     TEST(TestThrowUnhandled);
     TEST(TestThrowCatch);
@@ -217,9 +223,6 @@ int main()
     TEST(TestInterfaceCastClass);
     TEST(TestInterfaceIsInst);
     TEST(TestInterfaceVtableDispatch);
-
-    CHAOS_IL2CPP_PROFILE_DUMP();
-    CHAOS_IL2CPP_PROFILE_RESET();
 
     std::cout << "interpreter-integration=failures=" << failures << std::endl;
 
@@ -2038,6 +2041,189 @@ bool Test_HotUpdateVTableResolution()
     // ────────────────────────────────────────────────────────────────────────
     if (RegisterHotUpdateVTable(0x10000012ULL, 0u, 0u, nullptr, 0u, 1u))
         return false;  // type_token == 0 must fail
+
+    return true;
+}
+
+// ── Phase 9b+: Test chaos_find_interface_offset with AOT and runtime iface_map ──
+//
+// Setup:
+//   1. Register a base type via RegisterCodegenVTable with an interface map
+//   2. Verify chaos_find_interface_offset returns correct offsets
+//   3. Register a hot-update derived type (no iface_map)
+//   4. Add a runtime interface via RegisterTypeVTableRuntimeInterface
+//   5. Verify chaos_find_interface_offset can find the runtime-added interface
+//
+bool Test_ChaosFindInterfaceOffset() {
+    using namespace chaos::il2cpp::vtable_registry;
+    using chaos::il2cpp::common::InterfaceMapEntry;
+
+    // ── Stub function pointers ──
+    static void* kBaseFn   = reinterpret_cast<void*>(0xBADF00D1);
+    static void* kBaseFn2  = reinterpret_cast<void*>(0xBADF00D2);
+    static void* kIfaceFn1 = reinterpret_cast<void*>(0xBADF00D3);
+    static void* kIfaceFn2 = reinterpret_cast<void*>(0xBADF00D4);
+
+    // AOT interface map: iface_stable_id=0x1001, 2 methods starting at vtable slot 2
+    static const InterfaceMapEntry s_iface_map[] = {
+        { /*iface_stable_id=*/0x1001ULL, /*vtable_offset=*/2u, /*method_count=*/2u }
+    };
+    static const void* s_vtable_array[] = {
+        kBaseFn, kBaseFn2, kIfaceFn1, kIfaceFn2
+    };
+    static const VTableSlot s_slots[] = {
+        { 0x300u, kBaseFn },
+        { 0x301u, kBaseFn2 },
+    };
+
+    const VTableDescriptorV0 base_desc = {
+        /*stable_id=*/     0x20000001ULL,
+        /*type_token=*/    0x640u,
+        /*base_token=*/    0u,
+        /*slot_count=*/    2u,
+        /*slots=*/         s_slots,
+        /*vtable_array=*/  s_vtable_array,
+        /*vtable_length=*/ 4u,
+        /*type_shape=*/    1u,
+        /*_pad=*/          {0,0,0},
+        /*iface_map=*/     s_iface_map,
+        /*iface_count=*/   1u,
+    };
+
+    // Clean up any stale state from other tests.
+    UnregisterTypeVTable(0x640u);
+    UnregisterTypeVTable(0x641u);
+
+    RegisterCodegenVTable(&base_desc);
+
+    // ── Test 1: chaos_find_interface_offset on AOT iface_map ──
+    CHAOS_IL2CPP_UINT32 offset = chaos_find_interface_offset(0x640u, 0x1001ULL);
+    if (offset != 2u) return false;  // Should find vtable_offset=2
+
+    // ── Test 2: Unknown iface_stable_id returns UINT32_MAX ──
+    offset = chaos_find_interface_offset(0x640u, 0xDEADULL);
+    if (offset != CHAOS_IL2CPP_UINT32_MAX) return false;
+
+    // ── Test 3: Unknown type_token returns UINT32_MAX ──
+    offset = chaos_find_interface_offset(0x999u, 0x1001ULL);
+    if (offset != CHAOS_IL2CPP_UINT32_MAX) return false;
+
+    // ── Test 4: Zero type_token returns UINT32_MAX ──
+    offset = chaos_find_interface_offset(0u, 0x1001ULL);
+    if (offset != CHAOS_IL2CPP_UINT32_MAX) return false;
+
+    // ── Test 5: Register hot-update type and add runtime interface ──
+    static const VTableSlot hot_slots[] = {
+        { 0x300u, kBaseFn },
+        { 0x301u, kBaseFn2 },
+    };
+    if (!RegisterHotUpdateVTable(
+            0x20000002ULL, 0x641u, 0x640u,
+            hot_slots, 2u, 1u))
+        return false;
+
+    // Before runtime interface registration — should NOT find it.
+    offset = chaos_find_interface_offset(0x641u, 0x1002ULL);
+    if (offset != CHAOS_IL2CPP_UINT32_MAX) return false;
+
+    // Add runtime interface: iface_stable_id=0x1002, 1 method at vtable slot 3
+    if (!RegisterTypeVTableRuntimeInterface(0x641u, 0x1002ULL, 3u, 1u))
+        return false;
+
+    // After registration — should find vtable_offset=3.
+    offset = chaos_find_interface_offset(0x641u, 0x1002ULL);
+    if (offset != 3u) return false;
+
+    // ── Test 6: Idempotent re-registration of runtime interface ──
+    if (!RegisterTypeVTableRuntimeInterface(0x641u, 0x1002ULL, 3u, 1u))
+        return false;
+    offset = chaos_find_interface_offset(0x641u, 0x1002ULL);
+    if (offset != 3u) return false;
+
+    return true;
+}
+
+// ── Phase 9b+: Test ResolveVirtualMethodPointer through runtime_iface_map ──
+//
+// Setup:
+//   1. Register a base type via RegisterCodegenVTable (interface I1 at slot 2)
+//   2. Register a hot-update derived type (no iface_map)
+//   3. Add runtime interface mapping for the derived type
+//   4. Verify ResolveVirtualMethodPointer dispatches through runtime_iface_map
+//
+bool Test_HotUpdateVTableInterfaceResolution() {
+    using namespace chaos::il2cpp::vtable_registry;
+    using chaos::il2cpp::common::InterfaceMapEntry;
+
+    // ── Stub function pointers ──
+    static void* kBaseFn   = reinterpret_cast<void*>(0xCAFEBAB1);
+    static void* kBaseFn2  = reinterpret_cast<void*>(0xCAFEBAB2);
+    static void* kIfaceFn1 = reinterpret_cast<void*>(0xCAFEBAB3);
+    static void* kIfaceFn2 = reinterpret_cast<void*>(0xCAFEBAB4);
+
+    static const InterfaceMapEntry s_iface_map[] = {
+        { 0x3001ULL, 2u, 2u }
+    };
+    static const void* s_vtable_array[] = {
+        kBaseFn, kBaseFn2, kIfaceFn1, kIfaceFn2
+    };
+    static const VTableSlot s_slots[] = {
+        { 0x400u, kBaseFn },
+        { 0x401u, kBaseFn2 },
+    };
+
+    const VTableDescriptorV0 base_desc = {
+        /*stable_id=*/     0x30000001ULL,
+        /*type_token=*/    0x650u,
+        /*base_token=*/    0u,
+        /*slot_count=*/    2u,
+        /*slots=*/         s_slots,
+        /*vtable_array=*/  s_vtable_array,
+        /*vtable_length=*/ 4u,
+        /*type_shape=*/    1u,
+        /*_pad=*/          {0,0,0},
+        /*iface_map=*/     s_iface_map,
+        /*iface_count=*/   1u,
+    };
+
+    UnregisterTypeVTable(0x650u);
+    UnregisterTypeVTable(0x651u);
+
+    RegisterCodegenVTable(&base_desc);
+
+    // Register hot-update derived type.
+    static const VTableSlot hot_slots[] = {
+        { 0x400u, kBaseFn },
+        { 0x401u, kBaseFn2 },
+    };
+    if (!RegisterHotUpdateVTable(
+            0x30000002ULL, 0x651u, 0x650u,
+            hot_slots, 2u, 1u))
+        return false;
+
+    // Before runtime interface — method 0 should fail (interface dispatch unknown).
+    void* resolved = ResolveVirtualMethodPointer(0x651u, 0u);
+    if (resolved != nullptr) return false;  // No interface should match slot 0
+
+    // Add runtime interface: iface_stable_id=0x3001, offset=2, 2 methods
+    if (!RegisterTypeVTableRuntimeInterface(0x651u, 0x3001ULL, 2u, 2u))
+        return false;
+
+    // After runtime interface — method 0 should resolve to kIfaceFn1 (slot 2+0).
+    resolved = ResolveVirtualMethodPointer(0x651u, 0u);
+    if (resolved != kIfaceFn1) return false;
+
+    // Method 1 should resolve to kIfaceFn2 (slot 2+1).
+    resolved = ResolveVirtualMethodPointer(0x651u, 1u);
+    if (resolved != kIfaceFn2) return false;
+
+    // Method 2 should be out of range (only 2 methods in interface).
+    resolved = ResolveVirtualMethodPointer(0x651u, 2u);
+    if (resolved != nullptr) return false;
+
+    // Base type still resolves through AOT iface_map.
+    resolved = ResolveVirtualMethodPointer(0x650u, 0u);
+    if (resolved != kIfaceFn1) return false;
 
     return true;
 }
