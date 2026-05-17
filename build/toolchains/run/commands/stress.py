@@ -226,12 +226,12 @@ def _record_results(
     run_id_base = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S")
 
     for i, r in enumerate(result_dicts):
-        run_id = f"{run_id_base}-{test_name}-{r.get('scenarioName', str(i))}"
+        run_id = f"{run_id_base}-{test_name}-{r.get('scenario_name', str(i))}"
         record = {
             "schemaVersion": 1,
             "runId": run_id,
             "testName": r.get("test_name", test_name),
-            "scenarioName": r.get("scenarioName"),
+            "scenarioName": r.get("scenario_name"),
             "status": r.get("status", "unknown"),
             "recordedAt": timestamp,
             "gitCommit": git_commit,
@@ -337,6 +337,8 @@ def _handle_status(args: list[str], repo_root: Path) -> int:
         key = ""
         if "patternVerificationFailures" in metrics:
             key = f"pattern_fails={metrics['patternVerificationFailures']}"
+        elif "passCount" in metrics:
+            key = f"{metrics.get('passCount', 0)}/{metrics.get('passCount', 0) + metrics.get('failCount', 0)} passed"
         elif "failures" in metrics:
             key = f"{metrics.get('passed', 0)}/{metrics.get('totalTests', 0)} passed"
         elif "opsPerSecond" in metrics:
