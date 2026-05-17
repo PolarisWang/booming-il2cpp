@@ -211,7 +211,7 @@ public sealed partial class NativeAotLoweringPlanner
 		bool hasSimpleNonBlittableStructParams = method.SimpleNonBlittableStructParameterIndices is { Count: > 0 };
 		bool hasComplexStructParams = method.ComplexStructParameterIndices is { Count: > 0 };
 		bool hasSafeHandleParams = method.SafeHandleParameterIndices is { Count: > 0 };
-t	bool hasSetLastError = method.ImportSetLastError;
+	bool hasSetLastError = method.ImportSetLastError;
 		bool needsMarshalling = hasStringParams || hasStringReturn || hasBlittableStructParams || hasSimpleNonBlittableStructParams || hasComplexStructParams || hasSafeHandleParams;
 		var stringParamSet = hasStringParams
 			? new HashSet<int>(method.StringParameterIndices!)
@@ -296,6 +296,9 @@ t	bool hasSetLastError = method.ImportSetLastError;
 			: $"{returnType}({ccAnnotation}*)({rawParamTypes})";
 
 		bool isUnicodeCharSet = IsUnicodeCharSet(method.ImportCharSet);
+		bool isInternal = method.IsInternalLink;
+		bool needsGcTransition = !method.IsSuppressGCTransition;
+		bool isDeclaringAssemblyKnown = method.DeclaringAssemblyName != null;
 		string marshalStringFn = isUnicodeCharSet ? "MarshalStringToCoTaskMemWide" : "MarshalStringToCoTaskMemUtf8";
 		string marshalPtrToStringFn = isUnicodeCharSet ? "MarshalPtrToStringWide" : "MarshalPtrToStringUtf8";
 
@@ -310,10 +313,21 @@ t	bool hasSetLastError = method.ImportSetLastError;
 						: "blittable";
 
 		builder.AppendLine($"// P/Invoke: {moduleName}!{entryPointName} ({pinvokeTag})");
+		if (isInternal)
+		{
+			builder.AppendLine($"extern \"C\" void {entryPointName}();");
+		}
 		builder.AppendLine($"extern \"C\" {returnType} {method.NativeSymbol}({parameterSignature})");
 		builder.AppendLine("{");
-		builder.AppendLine("    static void* s_pinvoke_lib_ = nullptr;");
-		builder.AppendLine($"    static {fnPtrType} s_pinvoke_fn_ = nullptr;");
+		if (isInternal)
+		{
+			builder.AppendLine($"    static {fnPtrType} s_pinvoke_fn_ = reinterpret_cast<{fnPtrType}>(&{entryPointName});");
+		}
+		else
+		{
+			builder.AppendLine("    static void* s_pinvoke_lib_ = nullptr;");
+			builder.AppendLine($"    static {fnPtrType} s_pinvoke_fn_ = nullptr;");
+		}
 
 		// Marshalling local variables for string parameters.
 		if (hasStringParams)
@@ -358,14 +372,27 @@ t	bool hasSetLastError = method.ImportSetLastError;
 			}
 		}
 
-		builder.AppendLine("    if (s_pinvoke_fn_ == nullptr)");
-		builder.AppendLine("    {");
-		builder.AppendLine($"        s_pinvoke_lib_ = ::chaos::il2cpp::runtime_core::NativeLibraryLoad(\"{moduleName}\");");
-		builder.AppendLine("        if (s_pinvoke_lib_ == nullptr) CHAOS_IL2CPP_FAIL();");
-		builder.AppendLine($"        s_pinvoke_fn_ = reinterpret_cast<{fnPtrType}>(");
-		builder.AppendLine($"            ::chaos::il2cpp::runtime_core::NativeLibraryGetProcAddress(s_pinvoke_lib_, \"{entryPointName}\"));");
-		builder.AppendLine("        if (s_pinvoke_fn_ == nullptr) CHAOS_IL2CPP_FAIL();");
-		builder.AppendLine("    }");
+		if (!isInternal)
+		{
+			builder.AppendLine("    if (s_pinvoke_fn_ == nullptr)");
+			builder.AppendLine("    {");
+			if (isDeclaringAssemblyKnown)
+			{
+				builder.AppendLine($"        s_pinvoke_lib_ = ::chaos::il2cpp::runtime_core::TryResolveDllImport(\"{method.DeclaringAssemblyName}\", \"{moduleName}\");");
+				builder.AppendLine("        if (s_pinvoke_lib_ == nullptr)");
+				builder.AppendLine("        {");
+			}
+			builder.AppendLine($"        s_pinvoke_lib_ = ::chaos::il2cpp::runtime_core::NativeLibraryLoad(\"{moduleName}\");");
+			if (isDeclaringAssemblyKnown)
+			{
+				builder.AppendLine("        }");
+			}
+			builder.AppendLine("        if (s_pinvoke_lib_ == nullptr) CHAOS_IL2CPP_FAIL();");
+			builder.AppendLine($"        s_pinvoke_fn_ = reinterpret_cast<{fnPtrType}>(");
+			builder.AppendLine($"            ::chaos::il2cpp::runtime_core::NativeLibraryGetProcAddress(s_pinvoke_lib_, \"{entryPointName}\"));");
+			builder.AppendLine("        if (s_pinvoke_fn_ == nullptr) CHAOS_IL2CPP_FAIL();");
+			builder.AppendLine("    }");
+		}
 
 		// Pre-call: marshal string parameters to native CoTaskMem buffers (UTF-8 or UTF-16 based on CharSet).
 		if (hasStringParams)
@@ -449,6 +476,10 @@ t	bool hasSetLastError = method.ImportSetLastError;
 		{
 			// Path 1: pure blittable — return directly.
 			bool isVoidLocal = method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void;
+			if (needsGcTransition)
+			{
+				builder.AppendLine("    GC_TRANSITION_TO_PREEMPTIVE();");
+			}
 			if (isVoidLocal && methodAbiParameterSlots.Count == 0)
 				builder.AppendLine("    s_pinvoke_fn_();");
 			else if (isVoidLocal)
@@ -457,6 +488,10 @@ t	bool hasSetLastError = method.ImportSetLastError;
 				builder.AppendLine("    return s_pinvoke_fn_();");
 			else
 				builder.AppendLine($"    return s_pinvoke_fn_({nativeArgList});");
+			if (needsGcTransition)
+			{
+				builder.AppendLine("    GC_TRANSITION_TO_COOPERATIVE();");
+			}
 			builder.AppendLine("}");
 			return;
 
@@ -464,6 +499,10 @@ t	bool hasSetLastError = method.ImportSetLastError;
 
 		// Paths 2-4: capture result if non-void.
 		bool isNonVoid = method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void;
+		if (needsGcTransition)
+		{
+			builder.AppendLine("    GC_TRANSITION_TO_PREEMPTIVE();");
+		}
 		if (isNonVoid)
 		{
 			builder.AppendLine($"    {returnType} chaos_ret_ = s_pinvoke_fn_({nativeArgList});");
@@ -471,6 +510,10 @@ t	bool hasSetLastError = method.ImportSetLastError;
 		else
 		{
 			builder.AppendLine($"    s_pinvoke_fn_({nativeArgList});");
+		}
+		if (needsGcTransition)
+		{
+			builder.AppendLine("    GC_TRANSITION_TO_COOPERATIVE();");
 		}
 		// SetLastError: capture OS error after the native call.
 		if (hasSetLastError)
@@ -640,8 +683,12 @@ t	bool hasSetLastError = method.ImportSetLastError;
 	/// CharSet values: Ansi=0x0002, Unicode=0x0004, Auto=0x0006.
 	/// Auto is treated as Unicode (Windows default).
 	/// </summary>
+	private const bool IsWindowsTarget = true;
+
 	private static bool IsUnicodeCharSet(int importCharSet)
 	{
+		if (!IsWindowsTarget && importCharSet == 0x0006)
+			return false;
 		// Mask 0x0006: 0x0004 = Unicode, 0x0006 = Auto (Unicode on Windows)
 		return importCharSet is 0x0004 or 0x0006;
 	}
