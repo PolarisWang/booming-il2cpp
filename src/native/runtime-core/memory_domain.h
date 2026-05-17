@@ -83,6 +83,10 @@ struct MemoryDomain {
     CHAOS_IL2CPP_INT64  peak_usage;
     CHAOS_IL2CPP_INT64  usage_limit;       ///< 0 = unlimited
 
+    /// GC allocation tracking (bytes allocated in the managed heap by this domain).
+    /// Updated from NurseryAllocateSlow / OldGen::Allocate when a domain is active.
+    CHAOS_IL2CPP_INT64  gc_allocated_bytes;  ///< Cumulative GC allocations
+
     bool          is_unloaded;       ///< Set to true when UnregisterMemoryDomain is called.
 };
 
@@ -110,6 +114,17 @@ inline bool IDomainHeap::TrackAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 inline void IDomainHeap::TrackFree(CHAOS_IL2CPP_SIZE size) noexcept {
     if (owner_ == nullptr) return;
     owner_->current_usage -= static_cast<CHAOS_IL2CPP_INT64>(size);
+}
+
+/// Record a GC allocation (managed heap bytes) against the current domain.
+/// Called from NurseryAllocateSlow and OldGen::Allocate (not from bump fast path).
+/// Thread-safe: uses only thread-local domain stack lookups.
+MemoryDomain* CurrentDomain();
+inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
+    auto* domain = CurrentDomain();
+    if (domain != nullptr) {
+        domain->gc_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
+    }
 }
 
 // -----------------------------------------------------------------------

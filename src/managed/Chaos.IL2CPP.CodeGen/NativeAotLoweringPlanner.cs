@@ -96,19 +96,16 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlySet<string>? _sealedTypeSubjectIds;
     private HashSet<string> _typesWithInstanceMethods = new(StringComparer.Ordinal);
 
-    // ── COM interface GUIDs for CCW vtable registration ──
-    // Populated from ManagedTypeModel data before module emission.
-    // Key: type subject ID, Value: 36-char GUID string (e.g. "ABCDEF01-2345-6789-ABCD-EF0123456789").
-    private Dictionary<string, string> _comInterfaceGuids = new(StringComparer.Ordinal);
+    // ── COM interface vtable data for CCW registration ──
+    // Collected from AotCoreIrReferenceArtifact.ComInterfaceGuid during Create().
+    // Key: type subject ID, Value: COM interface vtable info with GUID and method count.
+    private Dictionary<string, ComInterfaceVtableInfo> _comInterfaceVtableData = new(StringComparer.Ordinal);
 
-    /// Populate COM interface GUIDs from loaded type models.
-    /// Called before module emission to make GUID data available for the
-    /// hotpatch table template (which emits GUID byte-array constants
-    /// and placeholder vtables).
-    internal void SetComInterfaceGuids(IReadOnlyDictionary<string, string> typeSubjectIdToGuid)
-    {
-        _comInterfaceGuids = new Dictionary<string, string>(typeSubjectIdToGuid, StringComparer.Ordinal);
-    }
+    internal sealed record ComInterfaceMethodSlot(uint Token, string NativeSymbol);
+    internal sealed record ComInterfaceVtableInfo(
+        string Guid,
+        ulong StableId,
+        ComInterfaceMethodSlot[] Methods);
 
     // ── VTable descriptor data for BootstrapRuntime registration ──
     private sealed record VTableSlotEntry(uint MethodToken, string NativeSymbol);
@@ -304,6 +301,7 @@ public sealed partial class NativeAotLoweringPlanner
         _referenceTypeImplementedInterfaceSubjectIds = CollectReferenceTypeImplementedInterfaceSubjectIds(aotCoreIr);
         _valueTypeSubjectIds = CollectValueTypeSubjectIds(aotCoreIr);
         _sealedTypeSubjectIds = CollectSealedTypeSubjectIds(aotCoreIr);
+        _comInterfaceVtableData = CollectComInterfaceVtableData(aotCoreIr, _methodsBySubjectId, metadataRegistration);
 
         // Build generic sharing canonical map: group generic methods by open
         // definition and determine which reference-type instantiations can share
@@ -534,6 +532,7 @@ public sealed partial class NativeAotLoweringPlanner
             [
                 "<chaos/common.h>",
                 "<chaos/type_info.h>",
+                "<chaos/com_ccw.h>",
                 "\"runtime_core.h\"",
                 "\"codegen_bridge.h\"",
                 "\"module_registry.h\"",
@@ -558,6 +557,7 @@ public sealed partial class NativeAotLoweringPlanner
                     .ToArray()
             ],
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
+            TypeDeclarationsCode = BuildTypeDeclarationsCode(),
             GenericRegistrationCode = genericRegistrationHelperCode,
             MethodDeclarations = methodDeclarations,
             Methods = methods,
@@ -583,6 +583,37 @@ public sealed partial class NativeAotLoweringPlanner
         {
             sb.Append(char.IsLetterOrDigit(c) ? c : '_');
         }
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Builds C++ extern declarations for all TypeInfoV0 symbols emitted in the
+    /// object model section. These are placed in the shared header when TU paging
+    /// is active, so each translation unit can reference types from other pages.
+    /// </summary>
+    private string BuildTypeDeclarationsCode()
+    {
+        if (_allEmittedTypeSubjectIds is not { Count: > 0 })
+            return string.Empty;
+
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine("// Auto-generated extern TypeInfoV0 declarations (TU paging)");
+        sb.AppendLine("#pragma once");
+        sb.AppendLine();
+        sb.AppendLine("#include <chaos/native_types.h>");
+        sb.AppendLine();
+        sb.AppendLine("struct TypeInfoV0;");
+        sb.AppendLine();
+
+        foreach (var typeId in _allEmittedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+        {
+            var symbol = GetNativeMethodTableSymbol(typeId);
+            sb.Append("extern TypeInfoV0 ");
+            sb.Append(symbol);
+            sb.AppendLine(";");
+        }
+
+        sb.AppendLine();
         return sb.ToString();
     }
 
@@ -2665,6 +2696,14 @@ public sealed record NativeAotTemplateModel
     public required string EntryBridgeArguments { get; init; }
 
     public required string ShapeDispatchHeaderContent { get; init; }
+
+    /// <summary>
+    /// C++ extern declarations for TypeInfoV0 symbols used across translation units.
+    /// Emitted in the shared header when TU paging is active, so non-page-0 TUs
+    /// can reference types defined in page 0 without ODR violations.
+    /// Empty string when no types are emitted or paging is not active.
+    /// </summary>
+    public string TypeDeclarationsCode { get; init; } = "";
 
     public required string WorkloadAbi { get; init; }
 

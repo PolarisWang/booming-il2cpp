@@ -88,6 +88,7 @@ struct chaos_managed_exception
 constexpr CHAOS_IL2CPP_INTPTR kManagedExceptionNormal          = 0;   // normal managed exception
 constexpr CHAOS_IL2CPP_INTPTR kManagedExceptionThreadAbort     = -1;  // Thread.Abort
 constexpr CHAOS_IL2CPP_INTPTR kManagedExceptionThreadInterrupt = -2;  // Thread.Interrupt
+constexpr CHAOS_IL2CPP_INTPTR kManagedExceptionComFailure      = -3;  // COMException (HRESULT via TLS g_com_failure_hr)
 
 #define CHAOS_IL2CPP_STRING_TYPE chaos_managed_string
 

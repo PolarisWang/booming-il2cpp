@@ -11,6 +11,8 @@
 #include "token_resolver.h"
 
 #include <chaos/common.h>
+#include <chaos/config.h>
+#include <chaos/profile.h>
 #include <chaos/type_info.h>
 #include <codegen_bridge.h>
 
@@ -121,6 +123,9 @@ static bool Test_CodegenVTableDirect();
 static bool Test_CodegenVTableInheritance();
 static bool Test_CodegenVTableInterfaceDispatch();
 
+// ── Hot-update VTable resolution test (RegisterHotUpdateVTable path) ─
+static bool Test_HotUpdateVTableResolution();
+
 // ════════════════════════════════════════════════════════════════════════════
 // Test runner
 // ════════════════════════════════════════════════════════════════════════════
@@ -178,6 +183,9 @@ int main()
     TEST(Test_CodegenVTableInheritance);
     TEST(Test_CodegenVTableInterfaceDispatch);
 
+    // Hot-update VTable path test (RegisterHotUpdateVTable)
+    TEST(Test_HotUpdateVTableResolution);
+
     // SEH exception handling tests
     TEST(TestThrowUnhandled);
     TEST(TestThrowCatch);
@@ -209,6 +217,9 @@ int main()
     TEST(TestInterfaceCastClass);
     TEST(TestInterfaceIsInst);
     TEST(TestInterfaceVtableDispatch);
+
+    CHAOS_IL2CPP_PROFILE_DUMP();
+    CHAOS_IL2CPP_PROFILE_RESET();
 
     std::cout << "interpreter-integration=failures=" << failures << std::endl;
 
@@ -1726,7 +1737,8 @@ bool Test_CodegenVTableDirect()
 {
     using namespace chaos::il2cpp::vtable_registry;
 
-    // Simulate codegen-emitted data: VTableSlot[] + flat vtable_array + VTableDescriptorV0
+    // Use a unique type_token (0x600) to avoid conflict with existing tests'
+    // dangling stack-local TypeVTable registrations (which use 0x100-0x101).
     VTableSlot slots[] = {
         { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) }
     };
@@ -1735,7 +1747,7 @@ bool Test_CodegenVTableDirect()
     VTableDescriptorV0 desc;
     std::memset(&desc, 0, sizeof(desc));
     desc.stable_id      = 0x10000001ULL;
-    desc.type_token     = 0x100u;
+    desc.type_token     = 0x600u;
     desc.base_token     = 0u;
     desc.slot_count     = 1u;
     desc.slots          = slots;
@@ -1743,7 +1755,6 @@ bool Test_CodegenVTableDirect()
     desc.vtable_length  = 1u;
     desc.type_shape     = 1;
 
-    // Register as BootstrapRuntime would
     RegisterCodegenVTable(&desc);
 
     // Build IR: ldarg.0 → callvirt method_token=0x200
@@ -1756,7 +1767,7 @@ bool Test_CodegenVTableDirect()
     method.instructions.push_back(callvirt);
 
     auto* obj = new InterpreterObject();
-    obj->type_token = 0x100u;
+    obj->type_token = 0x600u;
     obj->fields.resize(1u);
 
     ExecutionFrame frame;
@@ -1773,7 +1784,8 @@ bool Test_CodegenVTableInheritance()
 {
     using namespace chaos::il2cpp::vtable_registry;
 
-    // Base type: type_token=0x100, method 0x200 → 0xBEEF
+    // Base type: type_token=0x610, method 0x200 → 0xBEEF (unique token avoids
+    // dangling-pointer conflict with existing tests using 0x100-0x101)
     VTableSlot base_slots[] = {
         { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) }
     };
@@ -1782,7 +1794,7 @@ bool Test_CodegenVTableInheritance()
     VTableDescriptorV0 base_desc;
     std::memset(&base_desc, 0, sizeof(base_desc));
     base_desc.stable_id      = 0x10000001ULL;
-    base_desc.type_token     = 0x100u;
+    base_desc.type_token     = 0x610u;
     base_desc.base_token     = 0u;
     base_desc.slot_count     = 1u;
     base_desc.slots          = base_slots;
@@ -1791,7 +1803,7 @@ bool Test_CodegenVTableInheritance()
     base_desc.type_shape     = 1;
     RegisterCodegenVTable(&base_desc);
 
-    // Derived type: type_token=0x101, base_token=0x100, method 0x200 → 0xCAFE (override)
+    // Derived type: type_token=0x611, base_token=0x610, method 0x200 → 0xCAFE
     VTableSlot derived_slots[] = {
         { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xCAFEu)) }
     };
@@ -1800,8 +1812,8 @@ bool Test_CodegenVTableInheritance()
     VTableDescriptorV0 derived_desc;
     std::memset(&derived_desc, 0, sizeof(derived_desc));
     derived_desc.stable_id      = 0x10000002ULL;
-    derived_desc.type_token     = 0x101u;
-    derived_desc.base_token     = 0x100u;
+    derived_desc.type_token     = 0x611u;
+    derived_desc.base_token     = 0x610u;
     derived_desc.slot_count     = 1u;
     derived_desc.slots          = derived_slots;
     derived_desc.vtable_array   = derived_vtable_array;
@@ -1819,7 +1831,7 @@ bool Test_CodegenVTableInheritance()
     method.instructions.push_back(callvirt);
 
     auto* obj = new InterpreterObject();
-    obj->type_token = 0x101u;
+    obj->type_token = 0x611u;
     obj->fields.resize(1u);
 
     ExecutionFrame frame;
@@ -1862,7 +1874,7 @@ bool Test_CodegenVTableInterfaceDispatch()
     VTableDescriptorV0 obj_desc;
     std::memset(&obj_desc, 0, sizeof(obj_desc));
     obj_desc.stable_id      = 0x20000001ULL;
-    obj_desc.type_token     = 0x200u;
+    obj_desc.type_token     = 0x620u;
     obj_desc.base_token     = 0u;
     obj_desc.slot_count     = 1u;
     obj_desc.slots          = obj_slots;
@@ -1883,7 +1895,7 @@ bool Test_CodegenVTableInterfaceDispatch()
     method.instructions.push_back(callvirt);
 
     auto* obj = new InterpreterObject();
-    obj->type_token = 0x200u;
+    obj->type_token = 0x620u;
 
     ExecutionFrame frame;
     frame.arguments.push_back(InterpreterValue::from_obj(obj));
@@ -1894,4 +1906,138 @@ bool Test_CodegenVTableInterfaceDispatch()
     // Interface slot 0 → vtable_offset(1) + slot_index(0) = vtable_array[1] = &s_method1
     return result.needs_external_dispatch &&
            result.call_target == reinterpret_cast<void*>(&s_method1);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Hot-update VTable path test (RegisterHotUpdateVTable + ResolveVirtualMethodPointer)
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Validates the full chain:
+//   1. Register base type via RegisterCodegenVTable (as AOT codegen would)
+//   2. Register derived type via RegisterHotUpdateVTable (as hot-update loader would)
+//   3. Call ResolveVirtualMethodPointer directly (as the interpreter slow path does)
+//   4. Verify override slots shadow base slots
+//
+// Uses unique type tokens (0x630-0x632) to avoid conflict with existing tests.
+
+bool Test_HotUpdateVTableResolution()
+{
+    using namespace chaos::il2cpp::vtable_registry;
+
+    // ── Sentinel pointer values for assertion ──
+    void* const kBaseFn     = reinterpret_cast<void*>(
+        static_cast<CHAOS_IL2CPP_UINTPTR>(0xAAALL));
+    void* const kOverrideFn = reinterpret_cast<void*>(
+        static_cast<CHAOS_IL2CPP_UINTPTR>(0xBBBLL));
+    void* const kBaseFn2    = reinterpret_cast<void*>(
+        static_cast<CHAOS_IL2CPP_UINTPTR>(0xCCCLL));
+
+    // ────────────────────────────────────────────────────────────────────────
+    // Step 1: Register base type via RegisterCodegenVTable
+    //   type_token   = 0x630
+    //   slot_count   = 2
+    //   slots[0]     = { method_token=0x300, method_pointer=kBaseFn   }
+    //   slots[1]     = { method_token=0x301, method_pointer=kBaseFn2  }
+    //   vtable_array = { kBaseFn, kBaseFn2 }
+    // ────────────────────────────────────────────────────────────────────────
+    {
+        VTableSlot base_slots[] = {
+            { 0x300u, kBaseFn },
+            { 0x301u, kBaseFn2 }
+        };
+        const void* base_vtable_array[] = { kBaseFn, kBaseFn2 };
+
+        VTableDescriptorV0 base_desc;
+        std::memset(&base_desc, 0, sizeof(base_desc));
+        base_desc.stable_id      = 0x10000010ULL;
+        base_desc.type_token     = 0x630u;
+        base_desc.base_token     = 0u;
+        base_desc.slot_count     = 2u;
+        base_desc.slots          = base_slots;
+        base_desc.vtable_array   = base_vtable_array;
+        base_desc.vtable_length  = 2u;
+        base_desc.type_shape     = 1;   // reference type
+
+        RegisterCodegenVTable(&base_desc);
+    }
+
+    // ────────────────────────────────────────────────────────────────────────
+    // Step 2: Register derived type via RegisterHotUpdateVTable
+    //   type_token     = 0x631
+    //   parent_token   = 0x630
+    //   override_slots = { method_token=0x300, method_pointer=kOverrideFn }
+    //   The derived type should inherit method_token=0x301 → kBaseFn2
+    //   but override method_token=0x300 → kOverrideFn
+    // ────────────────────────────────────────────────────────────────────────
+    {
+        VTableSlot override_slots[] = {
+            { 0x300u, kOverrideFn }
+        };
+
+        bool registered = RegisterHotUpdateVTable(
+            /* stable_id       */ 0x10000011ULL,
+            /* type_token      */ 0x631u,
+            /* parent_token    */ 0x630u,
+            /* override_slots  */ override_slots,
+            /* override_count  */ 1u,
+            /* type_shape      */ 1u    // reference type
+        );
+
+        if (!registered) return false;
+    }
+
+    // ────────────────────────────────────────────────────────────────────────
+    // Step 3: Verify resolution chain via ResolveVirtualMethodPointer
+    // ────────────────────────────────────────────────────────────────────────
+
+    // 3a: Base type resolves to kBaseFn (no override)
+    if (ResolveVirtualMethodPointer(0x630u, 0x300u) != kBaseFn)
+        return false;
+
+    // 3b: Derived type resolves to kOverrideFn (override shadows base)
+    if (ResolveVirtualMethodPointer(0x631u, 0x300u) != kOverrideFn)
+        return false;
+
+    // 3c: Derived type inherits non-overridden slot → kBaseFn2
+    if (ResolveVirtualMethodPointer(0x631u, 0x301u) != kBaseFn2)
+        return false;
+
+    // 3d: Unregistered type returns nullptr
+    if (ResolveVirtualMethodPointer(0x999u, 0x300u) != nullptr)
+        return false;
+
+    // 3e: Unknown method token on valid type returns nullptr
+    if (ResolveVirtualMethodPointer(0x631u, 0x999u) != nullptr)
+        return false;
+
+    // ────────────────────────────────────────────────────────────────────────
+    // Step 4: Idempotency — re-registration is silently ignored
+    // ────────────────────────────────────────────────────────────────────────
+    {
+        VTableSlot override_slots[] = {
+            { 0x300u, kOverrideFn }
+        };
+
+        bool registered = RegisterHotUpdateVTable(
+            /* stable_id       */ 0x10000011ULL,
+            /* type_token      */ 0x631u,
+            /* parent_token    */ 0x630u,
+            /* override_slots  */ override_slots,
+            /* override_count  */ 1u,
+            /* type_shape      */ 1u
+        );
+        if (!registered) return false;  // Must return true (idempotent)
+
+        // Resolution still returns kOverrideFn after re-registration
+        if (ResolveVirtualMethodPointer(0x631u, 0x300u) != kOverrideFn)
+            return false;
+    }
+
+    // ────────────────────────────────────────────────────────────────────────
+    // Step 5: Verify null/zero edge cases
+    // ────────────────────────────────────────────────────────────────────────
+    if (RegisterHotUpdateVTable(0x10000012ULL, 0u, 0u, nullptr, 0u, 1u))
+        return false;  // type_token == 0 must fail
+
+    return true;
 }

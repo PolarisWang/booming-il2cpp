@@ -5,13 +5,13 @@ set(CMAKE_CXX_STANDARD 20)
 # Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions
 # thrown by generated code (throw chaos_managed_exception from unresolved calls).
 add_compile_options(/utf-8 /GS-)
-add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
-add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
+add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
+add_compile_definitions(CHAOS_IL2CPP_PROFILE_ENABLED=1)
 
 # Paths
 set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/convert-char/codegen")
-set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/build/native")
+set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/artifacts/presets/profile")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
 file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*/generated/native-aot.generated.cpp")
@@ -40,13 +40,13 @@ set(CHAOS_ENTRY_INCLUDES
 
 # Library link directories
 set(CHAOS_LIB_DIRS
-    "${CHAOS_NATIVE_BUILD}/src/native/runtime-core/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/src/native/bootstrap/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/src/native/common/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/src/native/interpreter/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/src/native/support/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/src/native/hot-update/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/fmt_build/RelWithDebInfo"
+    "${CHAOS_NATIVE_BUILD}/src/native/runtime-core/Release"
+    "${CHAOS_NATIVE_BUILD}/src/native/bootstrap/Release"
+    "${CHAOS_NATIVE_BUILD}/src/native/common/Release"
+    "${CHAOS_NATIVE_BUILD}/src/native/interpreter/Release"
+    "${CHAOS_NATIVE_BUILD}/src/native/support/Release"
+    "${CHAOS_NATIVE_BUILD}/src/native/hot-update/Release"
+    "${CHAOS_NATIVE_BUILD}/fmt_build/Release"
 )
 
 # Runtime libs to link
@@ -64,5 +64,5 @@ add_executable(entry ${CHAOS_ENTRY_SOURCES})
 target_include_directories(entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_link_directories(entry PRIVATE ${CHAOS_LIB_DIRS})
 target_compile_options(entry PRIVATE /EHa)
-target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_CHECK)  # chaos-il2cpp config tier
+target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_PROFILE)  # chaos-il2cpp config tier
 target_link_libraries(entry PRIVATE ${CHAOS_RUNTIME_LIBS})

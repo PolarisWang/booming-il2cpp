@@ -5,6 +5,11 @@
 #include <mutex>
 #include <chaos/unordered_dense.h>
 
+// Forward declaration: vtable_registry APIs used for VTable slot sync.
+// Defined in runtime-core/vtable_registry.h.  We include the header here
+// to call UpdateVTableSlotByMethodToken and FindMethodPointerByMethodToken.
+#include <vtable_registry.h>
+
 namespace chaos::il2cpp::method_replacement {
 
 namespace {
@@ -24,16 +29,49 @@ bool Register(CHAOS_IL2CPP_UINT32 method_token, void* thunk) {
     entry.method_token = method_token;
     entry.replacement_thunk = thunk;
     entry.active = true;
+
+    // Capture the original pointer on first registration so Revert() can restore it.
+    if (entry.original_pointer == nullptr) {
+        entry.original_pointer =
+            chaos::il2cpp::vtable_registry::FindMethodPointerByMethodToken(method_token);
+    }
+
+    // Sync VTable slots: update all TypeVTables that reference this method_token.
+    lock.unlock();
+    chaos::il2cpp::vtable_registry::UpdateVTableSlotByMethodToken(method_token, thunk);
+
     return true;
 }
 
 bool Revert(CHAOS_IL2CPP_UINT32 method_token) {
     CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(g_method_replacement_mutex);
-    return g_method_replacements.erase(method_token) > 0u;
+
+    auto it = g_method_replacements.find(method_token);
+    if (it == g_method_replacements.end()) return false;
+
+    // Restore original pointer in all VTable slots before erasing the entry.
+    void* original = it->second.original_pointer;
+    if (original != nullptr) {
+        lock.unlock();
+        chaos::il2cpp::vtable_registry::UpdateVTableSlotByMethodToken(method_token, original);
+        lock.lock();
+    }
+
+    g_method_replacements.erase(it);
+    return true;
 }
 
 void RevertAll() {
     CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(g_method_replacement_mutex);
+    // Restore all original pointers before clearing.
+    for (auto& [method_token, entry] : g_method_replacements) {
+        if (entry.original_pointer != nullptr) {
+            lock.unlock();
+            chaos::il2cpp::vtable_registry::UpdateVTableSlotByMethodToken(
+                method_token, entry.original_pointer);
+            lock.lock();
+        }
+    }
     g_method_replacements.clear();
 }
 

@@ -25,6 +25,7 @@
 // ── Type-only sub-headers (each declares types in its own namespace) ──
 #include "marshal_abi.h"
 #include "com_abi.h"
+#include "com_ccw.h"
 #include "runtime_capability.h"
 #include "convert.h"
 #include "numerics_carriers.h"

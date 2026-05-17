@@ -6,6 +6,7 @@ namespace Chaos.IL2CPP.CodeGen;
 public sealed class CodeGenStage
 {
     private const int AuditTranslationUnitPageSize = 1024;
+    private const int NativeAotPageSize = 512;
 
     public string Name => "CodeGen";
 
@@ -670,6 +671,18 @@ private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAss
                 ?.Symbol
             : $"{linkedWorld.Assembly.Name}_synthetic_entry";
 
+        // Enable TU paging when method count exceeds the NativeAotPageSize threshold.
+        // This splits the generated C++ code across multiple .cpp files, each including
+        // the shared header for type declarations. Page 0 contains TypeInfoV0 inline
+        // definitions; subsequent pages reference them via extern declarations.
+        var methodSubjectIds = linkedWorld.Methods
+            .Select(m => m.SubjectId)
+            .ToArray();
+        int? pageSize = methodSubjectIds.Length > NativeAotPageSize ? NativeAotPageSize : null;
+        IReadOnlyList<AuditTranslationUnitPageArtifact>? pages = pageSize.HasValue
+            ? BuildAuditTranslationUnitPages(methodSubjectIds, "generated/native-aot")
+            : null;
+
         return new NativeAotLoweringPlanArtifact
         {
             PlanKind = "full-assembly-entry",
@@ -679,6 +692,9 @@ private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAss
             EntrySymbol = firstMethodSymbol ?? "",
             EntryMethodToken = "0u",
             WorkloadAbi = "full-assembly",
+            TranslationUnitPageSize = pageSize,
+            TranslationUnitPageCount = pages?.Count,
+            TranslationUnitPages = pages,
         };
     }
 

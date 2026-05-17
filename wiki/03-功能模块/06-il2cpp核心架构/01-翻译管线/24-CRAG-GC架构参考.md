@@ -169,9 +169,11 @@ Worker 1 deque          Worker 2 deque          Worker N deque
 
 | CompactMode | 说明 |
 |-------------|------|
-| NONE | 不压缩 (默认) — mark-sweep only |
+| NONE | 不压缩 — mark-sweep only |
 | ON_REQUEST | 仅显式请求时压缩 (GC.Collect 带 compaction mode) |
-| AUTOMATIC | 碎片率 > 25% 时自动触发压缩 |
+| AUTOMATIC | 碎片率 > 25% 时自动触发压缩（**默认**） |
+
+> **默认值变更**：AUTOMATIC 已从 NONE 改为默认模式。这意味着 LOH 在碎片率超过 25% 时会自动触发压缩，无需显式调用。
 
 **5 阶段压缩算法** (`LargeObjectHeap::Compact`)：
 
@@ -191,6 +193,21 @@ Worker 1 deque          Worker 2 deque          Worker N deque
 - 域卸载时：safepoint → 扫描跨域引用 → 释放所有 domain regions
 - 跨域引用通过 card table 扫描检测
 - 域内存不参与 GC 复制 (无 forwarding pointer)
+- **每域 GC 分配追踪**：`MemoryDomain::gc_allocated_bytes` 字段由 `GcTrackDomainAlloc()` 在 NurseryAllocateSlow 和 OldGen::Allocate 的慢路径中累加，用于按模块统计 GC 分配量
+
+### 每域 GC 分配追踪
+
+```cpp
+// memory_domain.h — inline, 在 GC 分配慢路径中调用
+inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
+    auto* domain = CurrentDomain();
+    if (domain != nullptr) {
+        domain->gc_allocated_bytes += static_cast<int64_t>(size);
+    }
+}
+```
+
+调用点分布在 `gc_region.cpp` 的 `NurseryAllocateSlow` 和 `gc_old_gen.cpp` 的 `MarkSweepOldGen::Allocate` 中，覆盖 nursery bump、old gen freelist、oversized page、LOH 全部分配路径。
 
 ## 文件清单
 
@@ -281,6 +298,12 @@ Worker 1 deque          Worker 2 deque          Worker N deque
 1. **三代分代**：CoreCLR 的 gen0/gen1 过渡代可减少 promotion 波动
 2. **Region 框架 O(R) 扫描**：FreeRegion 和 IsInDomain 线性扫描 region 表，200+ DLL 时 region 数 ≤ 数千，仍可接受
 3. **并发 BGC Sweep**：当前 BGC sweep 阶段仍串行执行，后续可并行化
+4. **值类型嵌套引用写屏障**：codegen stfld 值类型路径缺少 DirtyCard，需 runtime GC-heap-pointer 检测函数
+5. **完整 GCMemoryInfo 结构体**：BCL 侧缺少 GCMemoryInfo 类型，当前仅通过 chaos_gc_get_heap_size() 提供部分信息
+
+## 文档更新
+
+- `2026-05-17`：新增 GCCollectionMode/GCLatencyMode、per-domain GC 分配追踪、Handle table 世代感知遍历、值类型写屏障审计、LOH CompactMode 默认 AUTOMATIC；更新完成度矩阵
 
 ## 关键数据流
 
@@ -370,11 +393,77 @@ OldGen::Collect(domain_id, reason)
 | 事件 ring buffer | 64 条 | 最后 64 次 GC 事件 |
 | BGC pop batch size | 32 | PopBottom 一次最多返回条目数 |
 | BGC steal PRNG | XorShift32 | thread-local, per-worker 随机 steal 目标 |
-| LOH compact mode | NONE | NONE / ON_REQUEST / AUTOMATIC |
+| LOH compact mode | AUTOMATIC | AUTOMATIC / ON_REQUEST / NONE |
 | LOH compact threshold | 25% | AUTOMATIC 模式触发碎片率 |
 | LOH compact budget | 4MB | 单次 cycle 最大压缩量 |
 | Cross-page compact budget | max(512KB, min(total×10%, 4MB)) | 动态 evacuation 预算 |
 | Parallel compact workers | min(pages, hw_concurrency, 8) | 受 hw_concurrency 限制 |
+
+## 托管 GC API
+
+### GCCollectionMode / GCLatencyMode
+
+Native 层支持托管侧的 GCCollectionMode 和 GCLatencyMode 控制，通过 `GcScheduler` 的原子字段管理：
+
+| API | 实现 | 说明 |
+|-----|------|------|
+| `GC.Collect(int generation, GCCollectionMode mode)` | `chaos_gc_collect_with_mode` | Forced/Aggressive → STW full GC; Optimized → BGC; Default → 调度器决策 |
+| `GCSettings.LatencyMode` getter | `chaos_gc_get_latency_mode` | 返回当前 latency mode (0=Batch, 1=Interactive[默认], 2=LowLatency, 3=SustainedLowLatency, 4=NoGCRegion) |
+| `GCSettings.LatencyMode` setter | `chaos_gc_set_latency_mode` | 设置 latency mode; 退出 NoGCRegion 时触发 deferred GC |
+
+**LatencyMode 语义**：
+
+| Mode | 值 | 对 GC 的影响 |
+|------|-----|-------------|
+| Batch | 0 | 偏向吞吐量，允许更长暂停 |
+| Interactive | 1 (默认) | 平衡延迟与吞吐量 |
+| LowLatency | 2 | 抑制 BGC，仅分配 nursery |
+| SustainedLowLatency | 3 | 类似 LowLatency 但允许少数 full GC |
+| NoGCRegion | 4 | 禁止所有 GC（必须通过 setter 退出） |
+
+### GC.GetGCMemoryInfo
+
+Native 层提供 `chaos_gc_get_heap_size()` 返回当前堆总大小 (old gen + LOH，排除 nursery)，作为 `GCMemoryInfo.HeapSizeBytes` 的替代。完整的 GCMemoryInfo 结构体注册需要 BCL 侧增加对应类型。
+
+### GcMemoryInfo 结构
+
+```cpp
+struct GcMemoryInfoNative {
+    int64_t high_memory_load_threshold_bytes;
+    int64_t memory_load_bytes;
+    int64_t total_available_memory_bytes;
+    int64_t heap_size_bytes;
+    int64_t fragmented_bytes;
+    int64_t total_committed_bytes;
+    int64_t promoted_bytes;
+    int32_t generation;
+    int32_t finalization_pending_count;
+    int32_t compacted;      // 布尔值：是否压缩
+    int32_t concurrent;     // 布尔值：是否并发
+};
+```
+
+## Handle Table 世代感知遍历
+
+GCHandle 表迭代器针对不同 GC 阶段做了世代感知优化，减少扫描范围：
+
+| 迭代器 | 用途 | 过滤逻辑 |
+|--------|------|---------|
+| `GcIterateTenuredHandles` | BGC 根集扫描 | 跳过 nursery 指针 (仅扫描 old gen + LOH) |
+| `GcIterateNurseryHandles` | young GC 后处理 | 仅指针在 nursery 中的 handle |
+| `GcIterateStrongHandles` | full GC mark 根集 | 仅强引用 (非 weak, 非 pinned) |
+| `GcIterateWeakHandles` | weak handle nulling | 仅弱引用 |
+| `GcIteratePinnedHandles` | POH / pin-set | 仅 pinned 句柄 |
+
+BGC 的根集扫描从 `GcIterateHandleTable` 迁移到 `GcIterateTenuredHandles`，在 BGC 根固定（young allocation 可能在 concurrent mark 期间被提升）的前提下正确跳过 nursery 指针，减少扫描量。Full GC mark 根集仍使用未过滤的 `GcIterateHandleTable` 以保证正确性（full GC safepoint 与分配路径之间的竞态）。
+
+## 值类型嵌套引用字段写屏障审计
+
+**审计结论**：codegen 的 `stfld` 翻译路径在修改值类型内部的托管引用字段时，未发出 DirtyCard 写屏障。
+
+**风险等级**：中。如果该值类型实例嵌在 GC 堆对象中（例如 `class Foo { ValueType Bar; }` 且 `Bar` 内部有托管引用字段），写入 `Bar.managed_ref = new_obj` 后卡表未标记脏卡，young GC 可能漏扫该引用，导致悬挂指针。
+
+**修复方向**：写屏障需在运行时检测目标对象的 GC 堆归属。当前 codegen 路径缺少这个「内嵌值类型写托管引用 → DirtyCard」的判断。修复需要 runtime 层提供一个 GC-heap-pointer 检测函数，并在 codegen 的值类型 `stfld` 路径中插入该检测后的 barrier。
 
 ---
 
@@ -416,6 +505,12 @@ OldGen::Collect(domain_id, reason)
 | MD/IL/PDB MemoryDomain | 完成 | 100% | 所有 metadata 分配走 domain heap |
 | InterfaceMap RCU | 完成 | 100% | STW safepoint-based ClearDomainPointers |
 | SATB GC-heap 迁移 | 完成 | 100% | TLS index + 全局缓冲池 (iOS 安全) |
+| GCCollectionMode / GCLatencyMode | 完成 | 100% | Native API + codegen 注册 + 调度器 mode 字段 |
+| GC.GetGCMemoryInfo | 完成 | 90% | native GcMemoryInfo 结构 + chaos_gc_get_heap_size；完整结构需 BCL GCMemoryInfo 类型 |
+| Per-domain GC 分配追踪 | 完成 | 100% | gc_allocated_bytes 字段 + GcTrackDomainAlloc 分布在 NurseryAllocateSlow/OldGen::Allocate |
+| Handle table 世代感知遍历 | 完成 | 100% | GcIterateTenuredHandles/NurseryHandles/Strong/Weak/Pinned |
+| LOH 默认 AUTOMATIC 压缩 | 完成 | 100% | CompactMode 默认从 NONE 改为 AUTOMATIC |
+| 值类型嵌套引用写屏障审计 | 完成 | 100% | 审计完成，发现 stfld 值类型缺失 DirtyCard；修复需 runtime GC-heap-pointer 检测函数 |
 
 ### 横向对比总表
 

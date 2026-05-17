@@ -230,9 +230,9 @@ public sealed partial class NativeAotLoweringPlanner
 
         // ── CCW interface vtable data ─────────────────────────────────
         // Collect unique declaring type subject IDs that have a COM interface GUID.
-        // V1 emits: GUID byte-array constant + placeholder vtable struct.
+        // V2 emits: GUID byte-array constant + vtable array + factory function.
         var ccwInterfaceModels = new List<ScriptObject>();
-        if (_comInterfaceGuids.Count > 0)
+        if (_comInterfaceVtableData.Count > 0)
         {
             var seenTypes = new HashSet<string>(StringComparer.Ordinal);
             foreach (var method in reachableMethods)
@@ -243,10 +243,10 @@ public sealed partial class NativeAotLoweringPlanner
 
                 if (!seenTypes.Add(declaringTypeSubjectId)) continue;
 
-                if (_comInterfaceGuids.TryGetValue(declaringTypeSubjectId, out var guid))
+                if (_comInterfaceVtableData.TryGetValue(declaringTypeSubjectId, out var vtableInfo))
                 {
                     // Convert "ABCDEF01-2345-6789-ABCD-EF0123456789" → GUID bytes.
-                    var guidBytes = ParseGuidStringToBytes(guid);
+                    var guidBytes = ParseGuidStringToBytes(vtableInfo.Guid);
                     if (guidBytes != null)
                     {
                         string typeName = GetTypeDisplayName(declaringTypeSubjectId);
@@ -254,12 +254,26 @@ public sealed partial class NativeAotLoweringPlanner
                         string safeName = SanitizeCppIdentifier(typeName) + "_" +
                             SanitizeCppIdentifier(typeNamespace);
 
+                        var methodModels = new List<ScriptObject>();
+                        for (int mi = 0; mi < vtableInfo.Methods.Length; mi++)
+                        {
+                            var slot = vtableInfo.Methods[mi];
+                            methodModels.Add(new ScriptObject
+                            {
+                                ["native_symbol"] = slot.NativeSymbol,
+                                ["slot_index"] = mi,
+                            });
+                        }
+
                         ccwInterfaceModels.Add(new ScriptObject
                         {
                             ["guid_bytes"] = string.Join(", ", guidBytes.Select(b => $"0x{b:X2}u")),
                             ["guid_symbol_suffix"] = safeName,
                             ["type_name"] = typeName,
                             ["type_namespace"] = typeNamespace,
+                            ["method_slot_count"] = vtableInfo.Methods.Length,
+                            ["methods"] = methodModels,
+                            ["stable_id"] = "CHAOS_IL2CPP_UINT64_C(0x" + vtableInfo.StableId.ToString("X16") + ")",
                         });
                     }
                 }

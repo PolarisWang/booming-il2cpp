@@ -88,4 +88,83 @@ void CHAOS_RUNTIME_ABI_CALL chaos_gc_remove_memory_pressure(
     g_external_memory_pressure.fetch_sub(bytes, std::memory_order_relaxed);
 }
 
+// ======================================================================
+// chaos_gc_collect_with_mode
+// ======================================================================
+
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_collect_with_mode(
+    CHAOS_IL2CPP_INT32 generation, CHAOS_IL2CPP_INT32 mode) noexcept
+{
+    CHAOS_IL2CPP_LOG_DEBUG("GC_API",
+        "collect_with_mode gen=%d mode=%d", (int)generation, (int)mode);
+
+    // Map mode to scheduler state.
+    auto gc_mode = static_cast<GcCollectionMode>(mode);
+    g_gc_scheduler.SetCollectionMode(gc_mode);
+
+    // Map .NET semantics:
+    //   Forced (1) / Aggressive (3) → immediate blocking collect
+    //   Optimized (2) → let scheduler decide (BGC preference)
+    //   Default (0) → same as Forced for GC.Collect(int)
+    if (gc_mode == GcCollectionMode::OPTIMIZED) {
+        // Optimized: trigger via scheduler (may defer to BGC).
+        g_gc_scheduler.RequestFullGc();
+        CHAOS_IL2CPP_LOG_DEBUG("GC_API", "collect_with_mode optimized (request deferred)");
+    } else {
+        // Forced / Aggressive / Default: immediate blocking collect.
+        // CRAG has 2 generations: gen-0 (young) and gen-1 (old).
+        chaos_gc_collect();
+    }
+}
+
+// ======================================================================
+// chaos_gc_get_latency_mode
+// ======================================================================
+
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_latency_mode() noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INT32>(g_gc_scheduler.GetLatencyMode());
+}
+
+// ======================================================================
+// chaos_gc_set_latency_mode
+// ======================================================================
+
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_set_latency_mode(
+    CHAOS_IL2CPP_INT32 mode) noexcept
+{
+    auto lm = static_cast<GcLatencyMode>(mode);
+    CHAOS_IL2CPP_LOG_DEBUG("GC_API", "set_latency_mode mode=%d", (int)lm);
+
+    // Validate mode range.
+    if (lm < GcLatencyMode::BATCH || lm > GcLatencyMode::NO_GC_REGION) {
+        CHAOS_IL2CPP_LOG_WARN("GC_API", "set_latency_mode invalid_mode=%d", (int)mode);
+        return;
+    }
+
+    g_gc_scheduler.SetLatencyMode(lm);
+
+    // If switching away from NO_GC_REGION, trigger any deferred GC.
+    if (lm != GcLatencyMode::NO_GC_REGION) {
+        auto kind = g_gc_scheduler.DecideCollection();
+        if (kind != GcCollectionKind::NONE) {
+            g_gc_scheduler.RequestFullGc();
+        }
+    }
+}
+
+// ======================================================================
+// chaos_gc_get_heap_size
+// ======================================================================
+
+extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_heap_size() noexcept
+{
+    // Return total allocated bytes in old gen + LOH.
+    auto old_gen_bytes = static_cast<CHAOS_IL2CPP_INT64>(
+        g_old_gen.TotalAllocated());
+    auto loh_bytes = static_cast<CHAOS_IL2CPP_INT64>(
+        g_loh.TotalAllocated());
+    return old_gen_bytes + loh_bytes;
+}
+
 }  // namespace chaos::il2cpp::runtime_core

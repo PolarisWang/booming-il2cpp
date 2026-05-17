@@ -18,6 +18,7 @@
 #include "exception_helpers.h"
 #include "patch_loader.h"
 #include "hotpatch_table.h"
+#include "chaos/config.h"
 #include "chaos/profile.h"
 
 // SetExceptionFallback is declared at global scope in exception_helpers.h.
@@ -134,11 +135,14 @@ int main(int argc, char** argv) {
         int result = 0;
         if (setjmp(s_verify_buf) == 0) {
             try {
+                CHAOS_IL2CPP_PROFILE_SCOPE("RunNativeAotAll");
                 result = RunNativeAotAll();
             } catch (...) {
                 longjmp(s_verify_buf, 1);
             }
         }
+        CHAOS_IL2CPP_PROFILE_DUMP();
+        CHAOS_IL2CPP_PROFILE_RESET();
         int failed_count = 0;
         int tmp = result;
         while (tmp) { failed_count += tmp & 1; tmp >>= 1; }

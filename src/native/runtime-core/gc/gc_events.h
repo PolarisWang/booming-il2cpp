@@ -81,6 +81,28 @@ inline void GcFireEvent(GcEvent event) noexcept {
 void GcIterateHandleTable(void (*callback)(void* object, void* user_data),
                            void* user_data) noexcept;
 
+/// Iterate only handles pointing to tenured (old-gen / LOH) objects.
+/// Skips nursery pointers for full GC mark-phase efficiency.
+void GcIterateTenuredHandles(void (*callback)(void* object, void* user_data),
+                              void* user_data) noexcept;
+
+/// Iterate only handles pointing to nursery objects.
+/// Useful for young GC post-processing (e.g., weak handle nulling).
+void GcIterateNurseryHandles(void (*callback)(void* object, void* user_data),
+                              void* user_data) noexcept;
+
+/// Iterate only strong (non-weak, non-pinned) handles.
+void GcIterateStrongHandles(void (*callback)(void* object, void* user_data),
+                             void* user_data) noexcept;
+
+/// Iterate only weak handles.
+void GcIterateWeakHandles(void (*callback)(void* object, void* user_data),
+                           void* user_data) noexcept;
+
+/// Iterate only pinned handles.
+void GcIteratePinnedHandles(void (*callback)(void* object, void* user_data),
+                             void* user_data) noexcept;
+
 /// Process weak GCHandles after a young GC:
 ///   - Nursery objects that were promoted → update handle to forwarding address
 ///   - Nursery objects that were NOT promoted → null the handle

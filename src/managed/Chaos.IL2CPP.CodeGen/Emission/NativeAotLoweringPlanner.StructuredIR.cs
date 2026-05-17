@@ -916,7 +916,7 @@ public sealed partial class NativeAotLoweringPlanner
                 builder.AppendLine(indentation + "}");
                 builder.AppendLine(indentation + "catch (const chaos_managed_exception& chaos_exception)");
                 builder.AppendLine(indentation + "{");
-                // Phase 5: ThreadAbort/ThreadInterrupt sentinel guard.
+                // Phase 5: ThreadAbort/ThreadInterrupt/COMException sentinel guard.
                 // Sentinel values (object_value < 0) are not valid managed object
                 // pointers — they must propagate to the managed exception dispatch
                 // layer rather than being reinterpret_cast and type-checked.

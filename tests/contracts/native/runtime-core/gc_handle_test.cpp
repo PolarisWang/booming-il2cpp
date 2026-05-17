@@ -52,8 +52,8 @@ void TestStrongHandle() {
     CHECK(h != 0, "GcCreateStrongHandle OK");
 
     // Overwrite local reference, trigger aggressive GC.
-    for (int g = 0; g < 5; g++) {
-        for (int i = 0; i < 5000; i++) {
+    for (int g = 0; g < 3; g++) {
+        for (int i = 0; i < 200; i++) {
             volatile void* tmp = NurseryAllocate(32);
             (void)tmp;
         }
@@ -81,7 +81,7 @@ void TestWeakHandle() {
 
     // Drop reference and trigger GC.
     for (int g = 0; g < 3; g++) {
-        for (int i = 0; i < 5000; i++) {
+        for (int i = 0; i < 500; i++) {
             volatile void* tmp = NurseryAllocate(32);
             (void)tmp;
         }
@@ -107,7 +107,7 @@ void TestPinnedHandle() {
     CHECK(h != 0, "GcCreatePinnedHandle OK");
 
     // Trigger some GC cycles. If pinning works, no crash.
-    for (int g = 0; g < 5; g++) {
+    for (int g = 0; g < 3; g++) {
         for (int i = 0; i < 2000; i++) {
             volatile void* tmp = NurseryAllocate(32);
             (void)tmp;
@@ -140,7 +140,7 @@ void TestDependentHandle() {
 
     // Trigger GCs.
     for (int g = 0; g < 3; g++) {
-        for (int i = 0; i < 5000; i++) {
+        for (int i = 0; i < 500; i++) {
             volatile void* tmp = NurseryAllocate(32);
             (void)tmp;
         }

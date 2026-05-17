@@ -68,10 +68,47 @@ static const CHAOS_IL2CPP_UINT32 s_reverse_pinvoke_registered = []()
 {{~ end ~}}
 
 {{~ if ccw_interface_count > 0 ~}}
-// ── CCW interface vtable data (V1: GUID constants + placeholder vtables) ──
+// ── CCW interface vtable + forwarding thunks (V3) ────────
 {{~ for ccw in ccw_interfaces ~}}
 // {{ ccw.type_namespace }}.{{ ccw.type_name }}
 static constexpr CHAOS_IL2CPP_UINT8 s_ccw_guid_{{ ccw.guid_symbol_suffix }}[16] = { {{ ccw.guid_bytes }} };
+
+// Per-method forwarding thunks: dispatch through CcwDispatchMethod using the
+// managed object's type info to find the interface implementation at runtime.
+// This handles any implementing class (not known at compile time).
+{{~ for method in ccw.methods ~}}
+extern "C" void CcwThunk_{{ ccw.guid_symbol_suffix }}_{{ method.slot_index }}(void* self) {
+    auto* entry_ccw = ::chaos::il2cpp::com_ccw::CcwFromInterface(self);
+    if (entry_ccw == nullptr) return;
+    ::chaos::il2cpp::com_ccw::CcwDispatchMethod(
+        entry_ccw, {{ ccw.stable_id }}, {{ method.slot_index }}u);
+}
+
+{{~ end ~}}
+
+// Vtable: 3 IUnknown slots + {{ ccw.method_slot_count }} interface method slots
+static void* s_ccw_vtable_{{ ccw.guid_symbol_suffix }}[{{ 3 + ccw.method_slot_count }}] = {
+    reinterpret_cast<void*>(&::chaos::il2cpp::com_ccw::CcwQueryInterface),
+    reinterpret_cast<void*>(&::chaos::il2cpp::com_ccw::CcwAddRef),
+    reinterpret_cast<void*>(&::chaos::il2cpp::com_ccw::CcwRelease),
+{{~ for method in ccw.methods ~}}
+    reinterpret_cast<void*>(&CcwThunk_{{ ccw.guid_symbol_suffix }}_{{ method.slot_index }}),
+{{~ end ~}}
+};
+
+// Factory: create CCW and register this interface vtable
+extern "C" CHAOS_IL2CPP_INTPTR CreateCcwFor_{{ ccw.guid_symbol_suffix }}(void* obj, void* state) {
+    auto* ccw = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+        ::chaos::il2cpp::com_ccw::CreateCcw(obj, state));
+    if (ccw) {
+        ::chaos::il2cpp::com_ccw::RegisterCcwInterface(
+            reinterpret_cast<void*>(ccw),
+            s_ccw_guid_{{ ccw.guid_symbol_suffix }},
+            const_cast<void**>(s_ccw_vtable_{{ ccw.guid_symbol_suffix }}));
+    }
+    return ccw;
+}
+
 {{~ end ~}}
 {{~ end ~}}
 {{~ end ~}}

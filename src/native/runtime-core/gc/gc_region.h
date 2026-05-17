@@ -96,6 +96,13 @@ static constexpr CHAOS_IL2CPP_SIZE kPohRegionSize = 64 * 1024;   // 64 KB
 
 extern thread_local NurseryContext tls_nursery_ctx;
 
+/// Per-thread allocation counter (replaces per-allocation global atomic).
+/// Accumulated in the fast path (TLS-local bump), flushed to the global
+/// scheduler counter in the slow path (NurseryAllocateSlow) before any
+/// GC decision is made.  Eliminates cross-core cache line bouncing from
+/// 25,600+ atomic RMWs per stress test run.
+extern thread_local CHAOS_IL2CPP_SIZE tls_alloc_since_last_gc;
+
 /// Slow path for NurseryAllocate — acquires a new nursery region or
 /// falls back to old-gen allocation when the request exceeds capacity.
 void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size);
@@ -145,9 +152,14 @@ inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
     if (ptr != nullptr && next <= ctx->nursery->end) [[likely]] {
         ctx->nursery->current = next;
         std::memset(ptr, 0, size);
-        g_gc_scheduler.RecordAllocation(size);
-        // Safepoint poll: check if a GC safepoint is active and confirm it.
-        threading::SafepointPoll();
+        tls_alloc_since_last_gc += size;
+        // Lightweight safepoint generation check (single atomic load).
+        // When no GC is active (99.99%+ of allocations), this returns
+        // immediately.  The full SafepointPoll (pending_abort, spin-loop)
+        // runs only when a GC safepoint is actually active.
+        if (threading::SafepointRequested()) [[unlikely]] {
+            threading::SafepointPoll();
+        }
         return ptr;
     }
     // The slow path is never inlined — it's a full function call.
@@ -170,9 +182,10 @@ inline void* NurseryAllocateAtomic(CHAOS_IL2CPP_SIZE size) noexcept {
     if (ptr != nullptr && next <= ctx->nursery->end) [[likely]] {
         ctx->nursery->current = next;
         std::memset(ptr, 0, size);
-        g_gc_scheduler.RecordAllocation(size);
-        // Safepoint poll for the atomic variant — same rationale as NurseryAllocate.
-        threading::SafepointPoll();
+        tls_alloc_since_last_gc += size;
+        if (threading::SafepointRequested()) [[unlikely]] {
+            threading::SafepointPoll();
+        }
         return ptr;
     }
     return NurseryAllocateAtomicSlow(size);

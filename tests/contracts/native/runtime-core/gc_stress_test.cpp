@@ -384,6 +384,7 @@ static std::atomic<int> g_thread_progress[1024];
 
 static void worker_a(int thread_index, WorkerResult* result) {
     RegisterWorker();
+    threading::EnterCooperativeMode();
     g_thread_progress[thread_index].store(1, std::memory_order_release);
     if (!SetupTlsNursery()) {
         std::snprintf(result->error_message, sizeof(result->error_message),
@@ -504,6 +505,7 @@ static bool RunScenarioA(GcStatsSnapshot* stats_out) {
 
 static void worker_b(int thread_index, WorkerResult* result) {
     RegisterWorker();
+    threading::EnterCooperativeMode();
     if (!SetupTlsNursery()) {
         std::snprintf(result->error_message, sizeof(result->error_message),
                       "AllocateNursery failed for thread %d", thread_index);
@@ -594,6 +596,7 @@ static bool RunScenarioB(GcStatsSnapshot* stats_out) {
 
 static void worker_c(int thread_index, WorkerResult* result) {
     RegisterWorker();
+    threading::EnterCooperativeMode();
     if (!SetupTlsNursery()) {
         std::snprintf(result->error_message, sizeof(result->error_message),
                       "AllocateNursery failed for thread %d", thread_index);
@@ -704,6 +707,7 @@ static std::atomic<int> g_deferred_count[kDPressureWorkers];
 
 static void worker_d(int thread_index, WorkerResult* result) {
     RegisterWorker();
+    threading::EnterCooperativeMode();
     if (!SetupTlsNursery()) {
         std::snprintf(result->error_message, sizeof(result->error_message),
                       "AllocateNursery failed for thread %d", thread_index);
@@ -936,6 +940,7 @@ static thread_local int tls_pinned_root_count = 0;
 
 static void worker_f(int thread_index, WorkerResult* result) {
     RegisterWorker();
+    threading::EnterCooperativeMode();
     if (!SetupTlsNursery()) {
         std::snprintf(result->error_message, sizeof(result->error_message),
                       "AllocateNursery failed for thread %d", thread_index);
@@ -1041,6 +1046,7 @@ static constexpr int kGAllocsPerThread = 16;
 
 static void worker_g(int thread_index, WorkerResult* result) {
     RegisterWorker();
+    threading::EnterCooperativeMode();
     if (!SetupTlsNursery()) {
         std::snprintf(result->error_message, sizeof(result->error_message),
                       "AllocateNursery failed for thread %d", thread_index);
@@ -1088,6 +1094,7 @@ static bool RunScenarioG(GcStatsSnapshot* stats_out) {
     std::atomic<bool> gc_done{false};
     std::thread gc_thread([&]() {
         RegisterWorker();
+        threading::EnterCooperativeMode();
         SetupTlsNursery();
         for (int i = 0; i < 3; i++) {
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -1318,6 +1325,7 @@ static thread_local int tls_pinned_slot_count = 0;
 
 static void worker_j(int thread_index, WorkerResult* result) {
     RegisterWorker();
+    threading::EnterCooperativeMode();
     if (!SetupTlsNursery()) {
         std::snprintf(result->error_message, sizeof(result->error_message),
                       "AllocateNursery failed for thread %d", thread_index);
@@ -1438,6 +1446,7 @@ static thread_local int tls_loh_keep_count = 0;
 
 static void worker_k(int thread_index, WorkerResult* result) {
     RegisterWorker();
+    threading::EnterCooperativeMode();
     if (!SetupTlsNursery()) {
         std::snprintf(result->error_message, sizeof(result->error_message),
                       "AllocateNursery failed for thread %d", thread_index);

@@ -275,11 +275,21 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		case "cgt.un":
 		{
-			builder.AppendLine($"{indentation}{{");
-			builder.AppendLine($"{indentation}    const auto chaos_right = static_cast<CHAOS_IL2CPP_UINTPTR>({ConsumeEvalStackValueExpression()});");
-			builder.AppendLine($"{indentation}    const auto chaos_left = static_cast<CHAOS_IL2CPP_UINTPTR>({ConsumeEvalStackValueExpression()});");
-			EmitEvalStackPush(builder, indentation + "    ", "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left > chaos_right ? 1 : 0)");
-			builder.AppendLine($"{indentation}}}");
+			string _rExpr = ConsumeEvalStackValueExpression();
+			string _lExpr = ConsumeEvalStackValueExpression();
+			if (_activeStructuredSlotContext is not null)
+			{
+				EmitEvalStackPush(builder, indentation,
+				    $"static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>({_lExpr}) > static_cast<CHAOS_IL2CPP_UINTPTR>({_rExpr}) ? 1 : 0)");
+			}
+			else
+			{
+				builder.AppendLine($"{indentation}{{");
+				builder.AppendLine($"{indentation}    const auto chaos_right = static_cast<CHAOS_IL2CPP_UINTPTR>({_rExpr});");
+				builder.AppendLine($"{indentation}    const auto chaos_left = static_cast<CHAOS_IL2CPP_UINTPTR>({_lExpr});");
+				EmitEvalStackPush(builder, indentation + "    ", "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left > chaos_right ? 1 : 0)");
+				builder.AppendLine($"{indentation}}}");
+			}
 			break;
 		}
 		case "ceq":
@@ -302,11 +312,19 @@ public sealed partial class NativeAotLoweringPlanner
 				SlotType.Float64 => $"ChaosLoadFloat64({_lExpr})",
 				_ => $"static_cast<CHAOS_IL2CPP_INTPTR>({_lExpr})",
 			};
-			builder.AppendLine($"{indentation}{{");
-			builder.AppendLine($"{indentation}    const auto chaos_right = {_rLoad};");
-			builder.AppendLine($"{indentation}    const auto chaos_left = {_lLoad};");
-			EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0)");
-			builder.AppendLine($"{indentation}}}");
+			if (_activeStructuredSlotContext is not null)
+			{
+				EmitEvalStackPush(builder, indentation,
+				    $"static_cast<CHAOS_IL2CPP_INTPTR>({_lLoad} == {_rLoad} ? 1 : 0)");
+			}
+			else
+			{
+				builder.AppendLine($"{indentation}{{");
+				builder.AppendLine($"{indentation}    const auto chaos_right = {_rLoad};");
+				builder.AppendLine($"{indentation}    const auto chaos_left = {_lLoad};");
+				EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0)");
+				builder.AppendLine($"{indentation}}}");
+			}
 			PushSlotType(SlotType.NativeInt);
 			break;
 		}
@@ -330,11 +348,19 @@ public sealed partial class NativeAotLoweringPlanner
 				SlotType.Float64 => $"ChaosLoadFloat64({_lExpr})",
 				_ => $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})",
 			};
-			builder.AppendLine($"{indentation}{{");
-			builder.AppendLine($"{indentation}    const auto chaos_right = {_rLoad};");
-			builder.AppendLine($"{indentation}    const auto chaos_left = {_lLoad};");
-			EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left > chaos_right ? 1 : 0)");
-			builder.AppendLine($"{indentation}}}");
+			if (_activeStructuredSlotContext is not null)
+			{
+				EmitEvalStackPush(builder, indentation,
+				    $"static_cast<CHAOS_IL2CPP_INTPTR>({_lLoad} > {_rLoad} ? 1 : 0)");
+			}
+			else
+			{
+				builder.AppendLine($"{indentation}{{");
+				builder.AppendLine($"{indentation}    const auto chaos_right = {_rLoad};");
+				builder.AppendLine($"{indentation}    const auto chaos_left = {_lLoad};");
+				EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left > chaos_right ? 1 : 0)");
+				builder.AppendLine($"{indentation}}}");
+			}
 			PushSlotType(SlotType.NativeInt);
 			break;
 		}
@@ -359,11 +385,19 @@ public sealed partial class NativeAotLoweringPlanner
 				SlotType.Float64 => $"ChaosLoadFloat64({_lExpr})",
 				_ => $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})",
 			};
-			builder.AppendLine($"{indentation}{{");
-			builder.AppendLine($"{indentation}    const auto chaos_right = {_rLoad};");
-			builder.AppendLine($"{indentation}    const auto chaos_left = {_lLoad};");
-			EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left < chaos_right ? 1 : 0)");
-			builder.AppendLine($"{indentation}}}");
+			if (_activeStructuredSlotContext is not null)
+			{
+				EmitEvalStackPush(builder, indentation,
+				    $"static_cast<CHAOS_IL2CPP_INTPTR>({_lLoad} < {_rLoad} ? 1 : 0)");
+			}
+			else
+			{
+				builder.AppendLine($"{indentation}{{");
+				builder.AppendLine($"{indentation}    const auto chaos_right = {_rLoad};");
+				builder.AppendLine($"{indentation}    const auto chaos_left = {_lLoad};");
+				EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left < chaos_right ? 1 : 0)");
+				builder.AppendLine($"{indentation}}}");
+			}
 			PushSlotType(SlotType.NativeInt);
 			break;
 		}
@@ -579,7 +613,9 @@ public sealed partial class NativeAotLoweringPlanner
 			// narrowing on 32-bit platforms where INTPTR is 32-bit.
 			builder.AppendLine($"{indentation}{{");
 			builder.AppendLine($"{indentation}    const auto chaos_val = static_cast<CHAOS_IL2CPP_INT64>({_loadExpr});");
+			builder.AppendLine($"{indentation}#if CHAOS_IL2CPP_SIZEOF_VOID_P == 4");
 			builder.AppendLine($"{indentation}    if (static_cast<CHAOS_IL2CPP_INT64>(chaos_val) < static_cast<CHAOS_IL2CPP_INT64>(CHAOS_IL2CPP_INT64_MIN) || static_cast<CHAOS_IL2CPP_INT64>(chaos_val) > static_cast<CHAOS_IL2CPP_INT64>(CHAOS_IL2CPP_INT64_MAX)) {{ CHAOS_IL2CPP_FAIL(); }}");
+			builder.AppendLine($"{indentation}#endif");
 			builder.AppendLine($"{indentation}    {AccessEvalStackTopExpression()} = ChaosStoreInt64(chaos_val);");
 			builder.AppendLine($"{indentation}}}");
 			break;
@@ -589,8 +625,10 @@ public sealed partial class NativeAotLoweringPlanner
 			string _loadExpr = PrepareConvOvfValue();
 			builder.AppendLine($"{indentation}{{");
 			builder.AppendLine($"{indentation}    const auto chaos_val = static_cast<CHAOS_IL2CPP_UINT64>({_loadExpr});");
+			builder.AppendLine($"{indentation}#if CHAOS_IL2CPP_SIZEOF_VOID_P == 4");
 			// UINT64 range check catches narrowing on 32-bit platforms.
 			builder.AppendLine($"{indentation}    if (chaos_val > static_cast<CHAOS_IL2CPP_UINT64>(CHAOS_IL2CPP_UINT64_MAX)) {{ CHAOS_IL2CPP_FAIL(); }}");
+			builder.AppendLine($"{indentation}#endif");
 			builder.AppendLine($"{indentation}    {AccessEvalStackTopExpression()} = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(chaos_val));");
 			builder.AppendLine($"{indentation}}}");
 			break;
@@ -2102,11 +2140,23 @@ public sealed partial class NativeAotLoweringPlanner
 			for (int num2 = constructorTarget.ParameterAbis.Count - 1; num2 >= 1; num2--)
 			{
 				string rawExpr = ConsumeEvalStackValueExpression();
-				if (!constructorTarget.RawArgumentIndices.Contains(num2))
-				    builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{num2} = {rawExpr};");
-				builder.AppendLine(constructorTarget.RawArgumentIndices.Contains(num2)
-					? $"{indentation}    const auto chaos_arg_{num2} = {rawExpr};"
-					: $"{indentation}    const auto chaos_arg_{num2} = {FormatInboundAbiArgumentExpression(constructorTarget.ParameterAbis[num2], $"chaos_raw_arg_{num2}")};");
+				if (constructorTarget.RawArgumentIndices.Contains(num2))
+				{
+					builder.AppendLine($"{indentation}    const auto chaos_arg_{num2} = {rawExpr};");
+				}
+				else
+				{
+					string abiExpr = FormatInboundAbiArgumentExpression(constructorTarget.ParameterAbis[num2], rawExpr);
+					if (abiExpr == rawExpr)
+					{
+						builder.AppendLine($"{indentation}    const auto chaos_arg_{num2} = {rawExpr};");
+					}
+					else
+					{
+						builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{num2} = {rawExpr};");
+						builder.AppendLine($"{indentation}    const auto chaos_arg_{num2} = {abiExpr};");
+					}
+				}
 			}
 			builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
 			builder.AppendLine($"{indentation}    chaos_object->header.type_info = &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
@@ -2146,9 +2196,23 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			string rawExpr = ConsumeEvalStackValueExpression();
 			bool isRawArg = rawArgumentIndices.Contains(num);
-			if (!isRawArg)
-			    builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{num} = {rawExpr};");
-			builder.AppendLine(isRawArg ? $"{indentation}    const auto chaos_arg_{num} = {rawExpr};" : $"{indentation}    const auto chaos_arg_{num} = {FormatInboundAbiArgumentExpression(parameterAbis[num], $"chaos_raw_arg_{num}")};");
+			if (isRawArg)
+			{
+				builder.AppendLine($"{indentation}    const auto chaos_arg_{num} = {rawExpr};");
+			}
+			else
+			{
+				string abiExpr = FormatInboundAbiArgumentExpression(parameterAbis[num], rawExpr);
+				if (abiExpr == rawExpr)
+				{
+					builder.AppendLine($"{indentation}    const auto chaos_arg_{num} = {rawExpr};");
+				}
+				else
+				{
+					builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{num} = {rawExpr};");
+					builder.AppendLine($"{indentation}    const auto chaos_arg_{num} = {abiExpr};");
+				}
+			}
 		}
 		if (enforceInstanceNullCheck && parameterAbis.Count > 0)
 		{
@@ -2234,11 +2298,23 @@ public sealed partial class NativeAotLoweringPlanner
 		for (int i = invocationTarget.ParameterAbis.Count - 1; i >= 0; i--)
 		{
 			string rawExpr = ConsumeEvalStackValueExpression();
-			if (!invocationTarget.RawArgumentIndices.Contains(i))
-			    builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {rawExpr};");
-			builder.AppendLine(invocationTarget.RawArgumentIndices.Contains(i)
-				? $"{indentation}    const auto chaos_arg_{i} = {rawExpr};"
-				: $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[i], $"chaos_raw_arg_{i}")};");
+			if (invocationTarget.RawArgumentIndices.Contains(i))
+			{
+				builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {rawExpr};");
+			}
+			else
+			{
+				string abiExpr = FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[i], rawExpr);
+				if (abiExpr == rawExpr)
+				{
+					builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {rawExpr};");
+				}
+				else
+				{
+					builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {rawExpr};");
+					builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {abiExpr};");
+				}
+			}
 		}
 		string args = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
 		if (string.Equals(returnType, "void", StringComparison.Ordinal))
@@ -2318,11 +2394,23 @@ public sealed partial class NativeAotLoweringPlanner
 		for (int i = parameterAbis.Count - 1; i >= 0; i--)
 		{
 			string rawExpr = ConsumeEvalStackValueExpression();
-			if (!rawArgumentIndices.Contains(i))
-			    builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {rawExpr};");
-			builder.AppendLine(rawArgumentIndices.Contains(i)
-				? $"{indentation}    const auto chaos_arg_{i} = {rawExpr};"
-				: $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(parameterAbis[i], $"chaos_raw_arg_{i}")};");
+			if (rawArgumentIndices.Contains(i))
+			{
+				builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {rawExpr};");
+			}
+			else
+			{
+				string abiExpr = FormatInboundAbiArgumentExpression(parameterAbis[i], rawExpr);
+				if (abiExpr == rawExpr)
+				{
+					builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {rawExpr};");
+				}
+				else
+				{
+					builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {rawExpr};");
+					builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {abiExpr};");
+				}
+			}
 		}
 		builder.AppendLine($"{indentation}    auto& _d{dispatchSlotIndex} = s_hotpatch_entries[{dispatchSlotIndex}];");
 		if (hasReturn)
@@ -2382,11 +2470,19 @@ public sealed partial class NativeAotLoweringPlanner
 		ConsumeSlotType();
 		string _rLoad = (_rType is SlotType.Float32 or SlotType.Float64) ? $"ChaosLoadFloat64({_rExpr})" : $"static_cast<CHAOS_IL2CPP_INT32>({_rExpr})";
 		string _lLoad = (_lType is SlotType.Float32 or SlotType.Float64) ? $"ChaosLoadFloat64({_lExpr})" : $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})";
-		builder.AppendLine($"{indentation}{{");
-		builder.AppendLine($"{indentation}    const auto chaos_right = {_rLoad};");
-		builder.AppendLine($"{indentation}    const auto chaos_left = {_lLoad};");
-		EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}(chaos_left, chaos_right))");
-		builder.AppendLine($"{indentation}}}");
+		if (_activeStructuredSlotContext is not null)
+		{
+			EmitEvalStackPush(builder, indentation,
+			    $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}({_lLoad}, {_rLoad}))");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}{{");
+			builder.AppendLine($"{indentation}    const auto chaos_right = {_rLoad};");
+			builder.AppendLine($"{indentation}    const auto chaos_left = {_lLoad};");
+			EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}(chaos_left, chaos_right))");
+			builder.AppendLine($"{indentation}}}");
+		}
 		PushSlotType(SlotType.NativeInt);
 	}
 
@@ -2396,11 +2492,19 @@ public sealed partial class NativeAotLoweringPlanner
 		string _rExpr = ConsumeEvalStackValueExpression();
 		ConsumeSlotType();
 		string _lExpr = ConsumeEvalStackValueExpression();
-		builder.AppendLine($"{indentation}{{");
-		builder.AppendLine($"{indentation}    const auto chaos_right = chaos_load_uint64({_rExpr});");
-		builder.AppendLine($"{indentation}    const auto chaos_left = chaos_load_uint64({_lExpr});");
-		EmitEvalStackPush(builder, indentation + "    ", $"chaos_store_uint64(chaos_left {operation} chaos_right)");
-		builder.AppendLine($"{indentation}}}");
+		if (_activeStructuredSlotContext is not null)
+		{
+			EmitEvalStackPush(builder, indentation,
+			    $"chaos_store_uint64(chaos_load_uint64({_lExpr}) {operation} chaos_load_uint64({_rExpr}))");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}{{");
+			builder.AppendLine($"{indentation}    const auto chaos_right = chaos_load_uint64({_rExpr});");
+			builder.AppendLine($"{indentation}    const auto chaos_left = chaos_load_uint64({_lExpr});");
+			EmitEvalStackPush(builder, indentation + "    ", $"chaos_store_uint64(chaos_left {operation} chaos_right)");
+			builder.AppendLine($"{indentation}}}");
+		}
 		PushSlotType(SlotType.NativeInt);
 	}
 

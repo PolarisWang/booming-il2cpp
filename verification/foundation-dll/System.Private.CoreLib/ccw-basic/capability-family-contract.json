@@ -1,0 +1,20 @@
+{
+    "schemaVersion": 1,
+    "assemblyName": "System.Private.CoreLib",
+    "ownerSubjectId": "SolutionCorePack",
+    "familyId": "family/System.Private.CoreLib/ccw/basic",
+    "displayName": "CCW Basic",
+    "methodSubjectIds": [
+        "CcwBasicNativeEntry/CcwBasicNativeEntry::Run:System.Int32(System.Int32)",
+        "CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathAdd:System.Int32()",
+        "CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathMul:System.Int32()",
+        "CcwBasicNativeEntry/CcwBasicNativeEntry::TestConstantValue:System.Int32()",
+        "CcwBasicNativeEntry/CcwBasicNativeEntry::TestDualInterface:System.Int32()"
+    ],
+    "methodSubjectCount": 5,
+    "functionalObligation": { "required": true },
+    "performanceObligation": { "required": false },
+    "hotupdateFunctionalObligation": { "required": false },
+    "hotupdatePerformanceObligation": { "required": false },
+    "reviewBundleRequired": false
+}

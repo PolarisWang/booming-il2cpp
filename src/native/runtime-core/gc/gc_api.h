@@ -24,6 +24,26 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_add_memory_pressure(
 extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_remove_memory_pressure(
     CHAOS_IL2CPP_INT64 bytes) noexcept;
 
+/// Trigger GC.Collect with generation and mode.
+/// @param generation  Max generation to collect (0=young, 1=full, 2=all).
+/// @param mode        GCCollectionMode: 0=Default, 1=Forced, 2=Optimized, 3=Aggressive.
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_collect_with_mode(
+    CHAOS_IL2CPP_INT32 generation, CHAOS_IL2CPP_INT32 mode) noexcept;
+
+/// Get the current GCLatencyMode.
+/// Returns: 0=Batch, 1=Interactive, 2=LowLatency, 3=SustainedLowLatency, 4=NoGCRegion.
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_latency_mode() noexcept;
+
+/// Set the GCLatencyMode.
+/// @param mode  GCLatencyMode: 0=Batch, 1=Interactive, 2=LowLatency, 3=SustainedLowLatency.
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_set_latency_mode(
+    CHAOS_IL2CPP_INT32 mode) noexcept;
+
+/// Get GC memory info snapshot (for GC.GetGCMemoryInfo()).
+/// Returns heap size bytes (total allocated in old gen + LOH).
+/// The full GcMemoryInfoNative struct is obtainable via chaos_gc_get_memory_info_ptr().
+extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_heap_size() noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_API_H_
