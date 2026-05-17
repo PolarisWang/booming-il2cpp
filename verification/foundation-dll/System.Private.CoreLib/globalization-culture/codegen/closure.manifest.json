@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "GlobalizationCultureSubjects",
   "entrySubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Run:System.Void(System.Int32)",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/globalization-culture/managed/subjects/build-output/GlobalizationCultureSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/globalization-culture/managed/subjects/build-output/GlobalizationCultureSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "GlobalizationCultureSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/globalization-culture/managed/subjects/build-output/GlobalizationCultureSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/globalization-culture/managed/subjects/build-output/GlobalizationCultureSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "29d1996c-053b-4d19-9e9f-8c2cad7cd661",
+  "inputModuleVersionId": "1668a6af-8327-47d8-adee-f618d3068f59",
   "artifacts": [
     {
       "kind": "typedIlIr",

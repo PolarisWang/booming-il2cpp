@@ -1,3 +1,6 @@
+#include <mutex>
+#include <shared_mutex>
+
 namespace chaos::il2cpp::runtime_core {
 namespace {
 
@@ -10,6 +13,7 @@ struct DelegateThunkEntry {
 
 // P0.3: Dynamic vector — no fixed cap.
 static std::vector<DelegateThunkEntry> g_delegate_thunks;
+static std::shared_mutex g_delegate_thunks_mutex;
 
 // ── Native function dispatch thunks for GetDelegateForFunctionPointer ──
 //
@@ -81,25 +85,26 @@ struct NativeFunctionDelegate {
 // ── Exported functions (declared in runtime_core.h) ──
 
 void RegisterDelegateThunk(const char* type_id, void* thunk_fn,
-                           CHAOS_IL2CPP_INTPTR* target_slot) {
+                           CHAOS_IL2CPP_INTPTR* target_slot,
+                           uint8_t param_count) {
     if (type_id == nullptr || thunk_fn == nullptr || target_slot == nullptr) return;
 
-    // Check if entry already exists (update param_count to 0 since codegen
-    // doesn't emit param_count yet — will be populated in P1.3).
+    std::unique_lock lock(g_delegate_thunks_mutex);
     for (size_t i = 0; i < g_delegate_thunks.size(); i++) {
         if (std::strcmp(g_delegate_thunks[i].type_id, type_id) == 0) {
             g_delegate_thunks[i].thunk_fn = thunk_fn;
             g_delegate_thunks[i].target_slot = target_slot;
-            g_delegate_thunks[i].param_count = 0;
+            g_delegate_thunks[i].param_count = param_count;
             return;
         }
     }
 
-    g_delegate_thunks.push_back({type_id, thunk_fn, target_slot, 0});
+    g_delegate_thunks.push_back({type_id, thunk_fn, target_slot, param_count});
 }
 
 void* FindDelegateThunk(const char* type_id) {
     if (type_id == nullptr) return nullptr;
+    std::shared_lock lock(g_delegate_thunks_mutex);
     for (size_t i = 0; i < g_delegate_thunks.size(); i++) {
         if (std::strcmp(g_delegate_thunks[i].type_id, type_id) == 0)
             return g_delegate_thunks[i].thunk_fn;
@@ -114,6 +119,7 @@ void* MarshalGetFunctionPointerForDelegateImpl(
     if (runtime_state == nullptr || delegate_obj == static_cast<CHAOS_IL2CPP_INTPTR>(0) || delegate_type_id == nullptr)
         return nullptr;
 
+    std::shared_lock lock(g_delegate_thunks_mutex);
     for (size_t i = 0; i < g_delegate_thunks.size(); i++) {
         if (std::strcmp(g_delegate_thunks[i].type_id, delegate_type_id) == 0) {
             if (g_delegate_thunks[i].target_slot != nullptr)
@@ -133,16 +139,20 @@ void* MarshalGetDelegateForFunctionPointerImpl(
 
     // Look up the delegate thunk by type_id.
     size_t thunk_idx = ~size_t(0);
-    for (size_t i = 0; i < g_delegate_thunks.size(); i++) {
-        if (std::strcmp(g_delegate_thunks[i].type_id, delegate_type_id) == 0) {
-            thunk_idx = i;
-            break;
+    uint8_t param_count = 0;
+    {
+        std::shared_lock lock(g_delegate_thunks_mutex);
+        for (size_t i = 0; i < g_delegate_thunks.size(); i++) {
+            if (std::strcmp(g_delegate_thunks[i].type_id, delegate_type_id) == 0) {
+                thunk_idx = i;
+                param_count = g_delegate_thunks[i].param_count;
+                break;
+            }
         }
     }
     if (thunk_idx == ~size_t(0))
         return nullptr;  // Unknown delegate type
 
-    uint8_t param_count = g_delegate_thunks[thunk_idx].param_count;
     if (param_count > 4) param_count = 4;  // Cap at arity 4 (DelegateInvoke limit)
 
     void* dispatch_thunk = kNativeDfnThunks[param_count];

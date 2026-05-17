@@ -3,6 +3,301 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
+      "methodId": "garbage-collection-subjects.garbage-collection-subjects.run",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
+      "signature": "System.Void GarbageCollectionSubjects::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "GarbageCollectionSubjects",
+        "declaringTypeSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
+        "definitionSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
+        "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
+        "methodId": "garbage-collection-subjects.garbage-collection-subjects.run",
+        "signature": "System.Void GarbageCollectionSubjects::Run(System.Int32)"
+      },
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Run",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            37,
+            45,
+            53,
+            61,
+            69,
+            77
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 85,
+          "ilOffset": 35,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 37,
+          "resultType": "System.Void",
+          "callee": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
+          "reference": {
+            "assemblyName": "GarbageCollectionSubjects",
+            "subjectKind": "method",
+            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GarbageCollectionSubjects",
+            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 85,
+          "ilOffset": 43,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "callee": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()",
+          "reference": {
+            "assemblyName": "GarbageCollectionSubjects",
+            "subjectKind": "method",
+            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GarbageCollectionSubjects",
+            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 85,
+          "ilOffset": 51,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "callee": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()",
+          "reference": {
+            "assemblyName": "GarbageCollectionSubjects",
+            "subjectKind": "method",
+            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GarbageCollectionSubjects",
+            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 85,
+          "ilOffset": 59,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 61,
+          "resultType": "System.Void",
+          "callee": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()",
+          "reference": {
+            "assemblyName": "GarbageCollectionSubjects",
+            "subjectKind": "method",
+            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GarbageCollectionSubjects",
+            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 85,
+          "ilOffset": 67,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 69,
+          "resultType": "System.Void",
+          "callee": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
+          "reference": {
+            "assemblyName": "GarbageCollectionSubjects",
+            "subjectKind": "method",
+            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GarbageCollectionSubjects",
+            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 85,
+          "ilOffset": 75,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 77,
+          "resultType": "System.Void",
+          "callee": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()",
+          "reference": {
+            "assemblyName": "GarbageCollectionSubjects",
+            "subjectKind": "method",
+            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GarbageCollectionSubjects",
+            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 85,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 85
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "hasBlittableStructReturn": false
+    },
+    {
       "methodId": "garbage-collection-subjects.garbage-collection-subjects.subject-0",
       "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
       "signature": "System.Void GarbageCollectionSubjects::Subject_0()",
@@ -30,7 +325,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 0,
+          "ilOffset": 1,
           "resultType": "System.Void",
           "callee": "System.Private.CoreLib/System.GC::Collect:System.Void()",
           "reference": {
@@ -53,11 +348,14 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 5
+          "ilOffset": 7
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -88,7 +386,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 0,
+          "ilOffset": 1,
           "resultType": "System.Void",
           "callee": "System.Private.CoreLib/System.GC::WaitForPendingFinalizers:System.Void()",
           "reference": {
@@ -111,11 +409,14 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 5
+          "ilOffset": 7
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -147,14 +448,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
-          "ilOffset": 0,
+          "ilOffset": 1,
           "resultType": "System.Int32"
         },
         {
           "op": "box",
           "opCode": 35,
           "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 2,
+          "ilOffset": 3,
           "resultType": "System.Object",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -176,7 +477,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 7,
+          "ilOffset": 8,
           "resultType": "System.Void",
           "callee": "System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)",
           "reference": {
@@ -199,11 +500,14 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 12
+          "ilOffset": 14
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -227,7 +531,7 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 0,
       "exceptionRegions": [],
       "instructions": [
@@ -235,14 +539,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
-          "ilOffset": 0,
+          "ilOffset": 1,
           "resultType": "System.Int32"
         },
         {
           "op": "box",
           "opCode": 35,
           "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 2,
+          "ilOffset": 3,
           "resultType": "System.Object",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -264,7 +568,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 7,
+          "ilOffset": 8,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)",
           "reference": {
@@ -288,14 +592,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
-          "ilOffset": 12,
+          "ilOffset": 13,
           "resultType": "System.Int32"
         },
         {
           "op": "box",
           "opCode": 35,
           "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 14,
+          "ilOffset": 15,
           "resultType": "System.Object",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -317,7 +621,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 19,
+          "ilOffset": 20,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)",
           "reference": {
@@ -338,24 +642,56 @@
           "dispatchKindCode": 4
         },
         {
-          "op": "beq",
-          "opCode": 20,
-          "operand": 32,
-          "ilOffset": 24,
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 27,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 28,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 31
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 40,
+          "ilOffset": 32,
           "resultType": "System.Void"
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 26,
+          "ilOffset": 34,
           "resultType": "System.Int32"
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "GarbageCollectionSubjects/GarbageCollectionSubjects::_exitCode",
-          "ilOffset": 27,
+          "ilOffset": 35,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GarbageCollectionSubjects",
@@ -379,11 +715,14 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 32
+          "ilOffset": 40
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -407,7 +746,7 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 0,
       "exceptionRegions": [],
       "instructions": [
@@ -415,7 +754,7 @@
           "op": "ldtoken",
           "opCode": 70,
           "operand": "System.Private.CoreLib/System.Byte",
-          "ilOffset": 0,
+          "ilOffset": 1,
           "resultType": "System.RuntimeTypeHandle",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -436,7 +775,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 5,
+          "ilOffset": 6,
           "resultType": "System.Type",
           "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
           "reference": {
@@ -460,13 +799,13 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
-          "ilOffset": 10,
+          "ilOffset": 11,
           "resultType": "System.Int32"
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 12,
+          "ilOffset": 13,
           "resultType": "System.Array",
           "callee": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
           "reference": {
@@ -489,7 +828,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 17,
+          "ilOffset": 18,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
           "reference": {
@@ -513,7 +852,7 @@
           "op": "ldtoken",
           "opCode": 70,
           "operand": "System.Private.CoreLib/System.Byte",
-          "ilOffset": 22,
+          "ilOffset": 23,
           "resultType": "System.RuntimeTypeHandle",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -534,7 +873,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 27,
+          "ilOffset": 28,
           "resultType": "System.Type",
           "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
           "reference": {
@@ -558,13 +897,13 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
-          "ilOffset": 32,
+          "ilOffset": 33,
           "resultType": "System.Int32"
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 34,
+          "ilOffset": 35,
           "resultType": "System.Array",
           "callee": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
           "reference": {
@@ -587,7 +926,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 39,
+          "ilOffset": 40,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
           "reference": {
@@ -608,24 +947,56 @@
           "dispatchKindCode": 4
         },
         {
-          "op": "beq",
-          "opCode": 20,
-          "operand": 52,
-          "ilOffset": 44,
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 45,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 47,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 48,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 50,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 51
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 60,
+          "ilOffset": 52,
           "resultType": "System.Void"
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 46,
+          "ilOffset": 54,
           "resultType": "System.Int32"
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "GarbageCollectionSubjects/GarbageCollectionSubjects::_exitCode",
-          "ilOffset": 47,
+          "ilOffset": 55,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GarbageCollectionSubjects",
@@ -649,11 +1020,14 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 52
+          "ilOffset": 60
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -677,7 +1051,7 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 0,
       "exceptionRegions": [],
       "instructions": [
@@ -685,13 +1059,13 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 0,
+          "ilOffset": 1,
           "resultType": "System.Int32"
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int64",
           "callee": "System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)",
           "reference": {
@@ -714,20 +1088,20 @@
         {
           "op": "conv.i4",
           "opCode": 39,
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Int32"
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 7,
+          "ilOffset": 8,
           "resultType": "System.Int32"
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 8,
+          "ilOffset": 9,
           "resultType": "System.Int64",
           "callee": "System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)",
           "reference": {
@@ -750,28 +1124,60 @@
         {
           "op": "conv.i4",
           "opCode": 39,
-          "ilOffset": 13,
+          "ilOffset": 14,
           "resultType": "System.Int32"
         },
         {
-          "op": "beq",
-          "opCode": 20,
-          "operand": 22,
-          "ilOffset": 14,
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 18,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 20,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 21
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 30,
+          "ilOffset": 22,
           "resultType": "System.Void"
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 16,
+          "ilOffset": 24,
           "resultType": "System.Int32"
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "GarbageCollectionSubjects/GarbageCollectionSubjects::_exitCode",
-          "ilOffset": 17,
+          "ilOffset": 25,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GarbageCollectionSubjects",
@@ -795,258 +1201,14 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 22
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
-    },
-    {
-      "methodId": "garbage-collection-subjects.garbage-collection-subjects.run",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
-      "signature": "System.Void GarbageCollectionSubjects::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "GarbageCollectionSubjects",
-        "declaringTypeSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
-        "definitionSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
-        "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
-        "methodId": "garbage-collection-subjects.garbage-collection-subjects.run",
-        "signature": "System.Void GarbageCollectionSubjects::Run(System.Int32)"
-      },
-      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Run",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 0,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            31,
-            37,
-            43,
-            49,
-            55,
-            61
-          ],
-          "ilOffset": 1,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
           "ilOffset": 30
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 31,
-          "resultType": "System.Void",
-          "callee": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
-          "reference": {
-            "assemblyName": "GarbageCollectionSubjects",
-            "subjectKind": "method",
-            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GarbageCollectionSubjects",
-            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 36
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 37,
-          "resultType": "System.Void",
-          "callee": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()",
-          "reference": {
-            "assemblyName": "GarbageCollectionSubjects",
-            "subjectKind": "method",
-            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GarbageCollectionSubjects",
-            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 42
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 43,
-          "resultType": "System.Void",
-          "callee": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()",
-          "reference": {
-            "assemblyName": "GarbageCollectionSubjects",
-            "subjectKind": "method",
-            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GarbageCollectionSubjects",
-            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 48
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 49,
-          "resultType": "System.Void",
-          "callee": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()",
-          "reference": {
-            "assemblyName": "GarbageCollectionSubjects",
-            "subjectKind": "method",
-            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GarbageCollectionSubjects",
-            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 54
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 55,
-          "resultType": "System.Void",
-          "callee": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
-          "reference": {
-            "assemblyName": "GarbageCollectionSubjects",
-            "subjectKind": "method",
-            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GarbageCollectionSubjects",
-            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 60
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 61,
-          "resultType": "System.Void",
-          "callee": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()",
-          "reference": {
-            "assemblyName": "GarbageCollectionSubjects",
-            "subjectKind": "method",
-            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GarbageCollectionSubjects",
-            "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 66
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     }
   ]

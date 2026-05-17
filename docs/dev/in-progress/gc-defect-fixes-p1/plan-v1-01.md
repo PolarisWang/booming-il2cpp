@@ -4,6 +4,14 @@
 
 **目标：** 修复 GC 子系统 4 项 P1（严重性能）缺陷：BGC parallel workers 无 work-stealing、保守栈扫描误根、Parallel compact 单线程、BGC 10ms 忙等
 
+**实现状态：**
+| P1 # | 缺陷 | 状态 | 说明 |
+|------|------|------|------|
+| P1-1 | BGC 无 work-stealing | ✅ 已实现 | `gc_bgc.cpp` BgcWorkerMain 有 per-worker deque + random steal |
+| P1-2 | 保守栈扫描误根 | ✅ 已实现 | `GcScanConservativeFrame` + `GcScanAllThreadRoots` 增加 g_heap_base 范围过滤，消除非堆指针误根 |
+| P1-3 | Parallel compact 单线程 | ✅ 已实现 | `ParallelCompactPages()` 使用 GcWorkerPool 并行化；CrossPageCompact Phase 4/5 也并行化 |
+| P1-4 | BGC 10ms 忙等 | ✅ 已实现 | 三个 `wait_for(100ms)` 改为纯 `wait()`，BGC 线程事件驱动阻塞；所有信号路径（FlushSatbBuffer/Start/Stop/StwCompact/ForceComplete）调用 NotifyBgc() |
+
 **架构：** 这些修复集中在 BGC 并行标记机制升级和 GC 线程同步机制优化两个领域
 
 **技术栈：** C++17, atomic operations, thread synchronization (condition_variable)

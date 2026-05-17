@@ -85,6 +85,10 @@ static CHAOS_IL2CPP_INTPTR ReallocateMarshalBlock(RuntimeState* runtime_state, C
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new_header) + sizeof(MarshalAllocationHeader);
     }
 
+    // Raw realloc without header: we don't know the old allocation size.
+    // Copy only up to the new size; the old allocation was at least large
+    // enough for the original request, so the copy is truncated on shrink
+    // and zero-extended on growth (new buffer is zero-initialized).
     void* old_storage = GetMarshalAllocationStorage(memory);
     auto* resized = static_cast<unsigned char*>(AllocateBytes(runtime_state->config, safe_size));
     if (resized == nullptr) {

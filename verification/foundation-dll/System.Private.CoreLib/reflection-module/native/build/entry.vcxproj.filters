@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-module\native\runtime-entry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-module\native\runtime-patchdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-module\codegen\ReflectionModuleSubjects\generated\native-aot.generated.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-module\native\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{03815A1D-EA36-348A-BEB5-FE69B689CF53}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

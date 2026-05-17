@@ -25,6 +25,17 @@
 
 **收尾约束：** 执行完成后必须进入"结构告警与架构审视 → 测试通过 → 归档 completed → 合并&提交"固定链路。
 
+**实现状态：**
+| P2 # | 缺陷 | 状态 | 说明 |
+|------|------|------|------|
+| P2-1 | Managed GC API 缺失 | ✅ 已实现 | `gc_helpers.h` extern "C" 声明，`gc_region.cpp` 实现（old gen + LOH + nursery 求和），`runtime_abi.h` ABI 入口 |
+| P2-2 | LOH 无 compaction | ✅ 已实现 | `gc_loh.h/cpp` CompactMode (None/OnRequest/Automatic) + Compact() 实现；`gc_old_gen.cpp` Collect() 中 LOH sweep 后调用 + 引用修复（GlobalRelocate 风格）|
+| P2-3 | GcSlotMap O(n) 注册 | ✅ 已实现 | 使用 `unordered_dense_map`（swisstable）O(1) 插入，见 `gc_root_scanner.cpp:27` |
+| P2-4 | 写屏障无脏卡检测 | ✅ 已实现 | `DirtyCard()` 中 `seg->cards[card_idx] != 0xFF` 检测，见 `gc_card_table.h:93-98` |
+| P2-5 | Cross-page budget 128KB | ✅ 已实现 | 动态 budget: max(512KB, min(total_heap * 10%, 4MB))，见 `gc_old_gen.cpp` CrossPageCompact() |
+| P2-6 | Interpreter 内存泄漏 | ✅ 已实现 | `frame.Track()` + `CleanupTracked()` 机制，见 `fast_dispatch.cpp:600/647/664` |
+| P2-7 | Thread registry 不可回收 | ✅ 已实现 | `UnregisterThread()` 标记 `is_running=false`，`EnumerateThreads()` 跳过非运行条目；lock-free 链表移除需 RCU，当前设计为正确最终方案 |
+
 ---
 
 ## P2-1: Managed GC API 缺失
@@ -146,18 +157,17 @@ Card write barrier 在每次托管字段写入时都执行完整的两级定位 
 
 ## P2-6: Interpreter 内存泄漏
 
-### 问题
+**状态：✅ 2026-05-17 验证已修复。** `fast_dispatch.cpp` 中 Handle_Box/NewObj/NewArr 的全部三个 call site 通过 `frame.Track()` + `CleanupTracked()` (CHAOS_IL2CPP_FREE) 机制在 Frame 析构时自动释放。详见 `fast_dispatch.h:69-98`，该机制于 2026-05-16 restructuring commit 中加入。
+
+### ~~问题~~（已修复）
 Interpreter `fast_dispatch.cpp` 中 `Handle_Box`、`Handle_NewObj`、`Handle_NewArr` 三个 call site 使用 `operator new`，不使用 CHAOS_IL2CPP_NEW_GC 宏，绕过 GC。
 
-### 文件修改
-
-| 文件 | 改动 |
-|------|------|
-| `src/native/interpreter/fast_dispatch.cpp` | 三个 call site 的 `new T{}` 替换为 `CHAOS_IL2CPP_NEW_GC(T, {})` 或 `GcAllocate()` |
-
-### 验证
-- Interpreter 路径执行 box/newobj/newarr 后，确认对象被 GC 跟踪
-- stress test 包含 interpreter 场景验证无泄漏
+### 当前实现
+- `Handle_Box`: line 600 — `frame.Track(boxed, frame.Dtor<interpreter::InterpreterObject>)`
+- `Handle_NewObj`: line 647 — `frame.Track(storage, frame.Dtor<interpreter::InterpreterObject>)`
+- `Handle_NewArr`: line 664 — `frame.Track(arr, frame.Dtor<interpreter::ArrayStorage>)`
+- `CleanupTracked()` at `fast_dispatch.h:92-98`: 调用 dtor + CHAOS_IL2CPP_FREE
+- 所有分配使用 `CHAOS_IL2CPP_MALLOC` + placement new，确保 Frame 析构时释放
 
 ---
 

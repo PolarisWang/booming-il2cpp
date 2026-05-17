@@ -17,6 +17,8 @@
 #include "gc_young_collector.h"
 #include "gc_stats.h"
 #include "gc_events.h"
+#include "gc_layout.h"
+#include "type_registry.h"
 #include "reflection_query_model.h"
 #include "generic_context.h"
 #include "vtable_registry.h"
@@ -25,8 +27,11 @@
 #include "instantiation_engine.h"
 #include "reflection_query_model.h"
 #include "module_registry.h"
+#include "com_rcw.h"
+#include "com_ccw.h"
 
 #include <cmath>
+#include <cstdio>
 #include <atomic>
 #include <limits>
 #include <cstdlib>
@@ -69,6 +74,7 @@ using namespace chaos::il2cpp::marshal_abi;
 //   6. Hash utilities, value type kernels, numerics vectors
 //   7. Delegate thunks, struct marshal descriptors, ABI export
 #include "core/header_layouts.cpp"
+#include "core/gc_alloc_stubs.cpp"
 #include "core/engine_lifecycle.cpp"
 #include "core/state_tls.cpp"
 #include "core/config_normalize.cpp"

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "StringCharTextCoreSubjects",
   "entrySubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Run:System.Void(System.Int32)",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/managed/subjects/build-output/StringCharTextCoreSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/string-char-text-core/managed/subjects/build-output/StringCharTextCoreSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "StringCharTextCoreSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/managed/subjects/build-output/StringCharTextCoreSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/string-char-text-core/managed/subjects/build-output/StringCharTextCoreSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "f61636ac-3790-48b1-850f-c1065990e069",
+  "inputModuleVersionId": "59f034aa-48cb-4bd6-8381-390d2f158154",
   "artifacts": [
     {
       "kind": "typedIlIr",

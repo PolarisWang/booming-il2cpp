@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ReflectionGenericsSubjects",
   "entrySubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Run:System.Void(System.Int32)",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-generics/managed/subjects/build-output/ReflectionGenericsSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-generics/managed/subjects/build-output/ReflectionGenericsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ReflectionGenericsSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-generics/managed/subjects/build-output/ReflectionGenericsSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-generics/managed/subjects/build-output/ReflectionGenericsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "18cc29ff-bfc8-4941-9389-ec7d3de37426",
+  "inputModuleVersionId": "eb5ce3ce-58fe-41af-a284-87c94619f5a6",
   "artifacts": [
     {
       "kind": "typedIlIr",

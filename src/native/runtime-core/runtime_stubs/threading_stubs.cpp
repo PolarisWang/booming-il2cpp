@@ -129,6 +129,21 @@ void chaos_thread_abort(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
     });
 }
 
+CHAOS_IL2CPP_INT32 chaos_thread_reset_abort(void) noexcept
+{
+    using chaos::il2cpp::runtime_core::threading::tls_this_thread;
+
+    auto* thread = tls_this_thread;
+    if (thread == nullptr) return 0;
+
+    bool was_pending = thread->pending_abort.load(std::memory_order_acquire);
+    if (was_pending) {
+        thread->pending_abort.store(false, std::memory_order_release);
+        return 1;
+    }
+    return 0;
+}
+
 CHAOS_IL2CPP_INT32 chaos_thread_yield(void) noexcept
 {
     std::this_thread::yield();

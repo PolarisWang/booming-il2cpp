@@ -15,11 +15,7 @@ public sealed partial class NativeReferenceProofEmitter
                !subjectId.Contains("NFloat", StringComparison.Ordinal) &&
                !subjectId.Contains("NativeMemory", StringComparison.Ordinal) &&
                !subjectId.Contains("ComAwareEventInfo", StringComparison.Ordinal) &&
-               !subjectId.Contains("ComMemberType", StringComparison.Ordinal) &&
-               !subjectId.Contains("ComInterfaceType", StringComparison.Ordinal) &&
                !subjectId.Contains("ImportedFromTypeLib", StringComparison.Ordinal) &&
-               !subjectId.Contains("ClassInterfaceType", StringComparison.Ordinal) &&
-               !subjectId.Contains("ClassInterfaceAttribute", StringComparison.Ordinal) &&
                !subjectId.Contains("DefaultDllImportSearchPaths", StringComparison.Ordinal) &&
                !subjectId.Contains("DefaultParameterValue", StringComparison.Ordinal) &&
                !subjectId.Contains("DefaultCharSet", StringComparison.Ordinal) &&
@@ -28,11 +24,6 @@ public sealed partial class NativeReferenceProofEmitter
                !subjectId.Contains("BestFitMapping", StringComparison.Ordinal) &&
                !subjectId.Contains("LCIDConversion", StringComparison.Ordinal) &&
                !subjectId.Contains("ComSourceInterfaces", StringComparison.Ordinal) &&
-               !subjectId.Contains("ComVisible", StringComparison.Ordinal) &&
-               !subjectId.Contains("CoClass", StringComparison.Ordinal) &&
-               !subjectId.Contains("GuidAttribute", StringComparison.Ordinal) &&
-               !subjectId.Contains("InterfaceType", StringComparison.Ordinal) &&
-               !subjectId.Contains("PreserveSig", StringComparison.Ordinal) &&
                !subjectId.Contains("PrimaryInteropAssembly", StringComparison.Ordinal) &&
                !subjectId.Contains("TypeIdentifier", StringComparison.Ordinal) &&
                !subjectId.Contains("AutomationProxy", StringComparison.Ordinal) &&
@@ -43,12 +34,9 @@ public sealed partial class NativeReferenceProofEmitter
                !subjectId.Contains("IDispatch", StringComparison.Ordinal) &&
                !subjectId.Contains("ComTypes", StringComparison.Ordinal) &&
                !subjectId.Contains("ComWrappers", StringComparison.Ordinal) &&
-               !subjectId.Contains("BStrWrapper", StringComparison.Ordinal) &&
                !subjectId.Contains("ErrorWrapper", StringComparison.Ordinal) &&
                !subjectId.Contains("CurrencyWrapper", StringComparison.Ordinal) &&
-               !subjectId.Contains("UnknownWrapper", StringComparison.Ordinal) &&
                !subjectId.Contains("DispatchWrapper", StringComparison.Ordinal) &&
-               !subjectId.Contains("VariantWrapper", StringComparison.Ordinal) &&
                !subjectId.Contains("ObjectHandle", StringComparison.Ordinal) &&
                !subjectId.Contains("HandleRef", StringComparison.Ordinal) &&
                !subjectId.Contains("ArrayWithOffset", StringComparison.Ordinal) &&

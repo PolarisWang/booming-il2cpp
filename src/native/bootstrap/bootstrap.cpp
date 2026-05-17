@@ -58,6 +58,42 @@ constexpr const char* kGetObjectForNativeVariantIcallSignature =
     "System.Runtime.InteropServices.Marshal::GetObjectForNativeVariant(";
 constexpr const char* kGetNativeVariantForObjectIcallSignature =
     "System.Runtime.InteropServices.Marshal::GetNativeVariantForObject(";
+constexpr const char* kStringToHGlobalAnsiIcallSignature =
+    "System.Runtime.InteropServices.Marshal::StringToHGlobalAnsi(";
+constexpr const char* kStringToHGlobalUniIcallSignature =
+    "System.Runtime.InteropServices.Marshal::StringToHGlobalUni(";
+constexpr const char* kPtrToStringAnsiIcallSignature =
+    "System.Runtime.InteropServices.Marshal::PtrToStringAnsi(";
+constexpr const char* kUnsafeAddrOfPinnedArrayElementIcallSignature =
+    "System.Runtime.InteropServices.Marshal::UnsafeAddrOfPinnedArrayElement(";
+constexpr const char* kOffsetOfByTypeIcallSignature =
+    "System.Runtime.InteropServices.Marshal::OffsetOf(";
+constexpr const char* kThrowExceptionForHRIcallSignature =
+    "System.Runtime.InteropServices.Marshal::ThrowExceptionForHR(";
+constexpr const char* kGetExceptionForHRIcallSignature =
+    "System.Runtime.InteropServices.Marshal::GetExceptionForHR(";
+constexpr const char* kGetHRForExceptionIcallSignature =
+    "System.Runtime.InteropServices.Marshal::GetHRForException(";
+constexpr const char* kCoInitializeIcallSignature =
+    "System.Runtime.InteropServices.Marshal::CoInitializeEx(";
+constexpr const char* kCoUninitializeIcallSignature =
+    "System.Runtime.InteropServices.Marshal::CoUninitialize()";
+constexpr const char* kCoCreateInstanceIcallSignature =
+    "System.Runtime.InteropServices.Marshal::CoCreateInstance(";
+constexpr const char* kCreateRcwIcallSignature =
+    "System.Runtime.InteropServices.Marshal::CreateRcw(";
+constexpr const char* kReleaseRcwIcallSignature =
+    "System.Runtime.InteropServices.Marshal::ReleaseRcw(";
+constexpr const char* kGetRcwUnknownIcallSignature =
+    "System.Runtime.InteropServices.Marshal::GetRcwUnknown(";
+constexpr const char* kRcwQueryInterfaceIcallSignature =
+    "System.Runtime.InteropServices.Marshal::RcwQueryInterface(";
+constexpr const char* kCreateCcwIcallSignature =
+    "System.Runtime.InteropServices.Marshal::CreateCcw(";
+constexpr const char* kCustomMarshalerNativeToManagedIcallSignature =
+    "System.Runtime.InteropServices.Marshal::CustomMarshalerNativeToManaged(";
+constexpr const char* kCustomMarshalerManagedToNativeIcallSignature =
+    "System.Runtime.InteropServices.Marshal::CustomMarshalerManagedToNative(";
 
 struct UnresolvedVirtualCallEntry {
     CHAOS_IL2CPP_UINT32 instance_type_token;
@@ -319,6 +355,19 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
     // just been populated with all registered modules' dispatch tables.
     // Must happen AFTER RegisterHotpatchModule, BEFORE is_bootstrapped = true.
     ChaosResolveExternalRuntimeFnTable();
+
+    // ── Register AOT VTable descriptors ─────────────────────────────
+    // Populates both TypeVTable indexes (by_type_token, by_stable_id)
+    // and flat_vtable arrays so that ResolveVirtualMethodPointer works
+    // for AOT types (not just interface dispatch).  Must happen after
+    // hotpatch registration so that tokens can be resolved.
+    if (g_bootstrap_state.code_registration->vtable_descriptors != nullptr &&
+        g_bootstrap_state.code_registration->vtable_descriptor_count > 0u) {
+        for (uint32_t i = 0u; i < g_bootstrap_state.code_registration->vtable_descriptor_count; ++i) {
+            vtable_registry::RegisterCodegenVTable(
+                &g_bootstrap_state.code_registration->vtable_descriptors[i]);
+        }
+    }
 
     // The AOT module registers its string table via a static initializer in the
     // generated translation unit.  Nothing to do here — g_aot_entries defaults
@@ -864,6 +913,81 @@ void* CHAOS_RUNTIME_ABI_CALL ResolveIcall(const char* icall_name_utf8) {
 
     if (std::strstr(icall_name_utf8, kGetNativeVariantForObjectIcallSignature) != nullptr) {
         return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::ChaosGetNativeVariantForObject);
+    }
+
+    if (std::strstr(icall_name_utf8, kStringToHGlobalAnsiIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalStringToHGlobalAnsi);
+    }
+
+    if (std::strstr(icall_name_utf8, kStringToHGlobalUniIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalStringToHGlobalUni);
+    }
+
+    if (std::strstr(icall_name_utf8, kPtrToStringAnsiIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalPtrToStringAnsiIcall);
+    }
+
+    if (std::strstr(icall_name_utf8, kUnsafeAddrOfPinnedArrayElementIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalUnsafeAddrOfPinnedArrayElement);
+    }
+
+    if (std::strstr(icall_name_utf8, kOffsetOfByTypeIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalOffsetOfByType);
+    }
+
+    // ── HRESULT exception helpers ─────────────────────────────────────
+    if (std::strstr(icall_name_utf8, kThrowExceptionForHRIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalThrowExceptionForHR);
+    }
+    if (std::strstr(icall_name_utf8, kGetExceptionForHRIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalGetExceptionForHR);
+    }
+    if (std::strstr(icall_name_utf8, kGetHRForExceptionIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalGetHRForException);
+    }
+
+    // ── COM interop icalls ──────────────────────────────────────────
+    if (std::strstr(icall_name_utf8, kCoInitializeIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::CoInitializeApartment);
+    }
+
+    if (std::strstr(icall_name_utf8, kCoUninitializeIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::CoUninitializeApartment);
+    }
+
+    if (std::strstr(icall_name_utf8, kCoCreateInstanceIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::CoCreateComInstance);
+    }
+
+    // ── RCW icalls ──────────────────────────────────────────────────
+    if (std::strstr(icall_name_utf8, kCreateRcwIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalCreateRcw);
+    }
+
+    if (std::strstr(icall_name_utf8, kReleaseRcwIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalReleaseRcw);
+    }
+
+    if (std::strstr(icall_name_utf8, kGetRcwUnknownIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalGetRcwUnknown);
+    }
+
+    if (std::strstr(icall_name_utf8, kRcwQueryInterfaceIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalRcwQueryInterface);
+    }
+
+    // ── CCW icalls ───────────────────────────────────────────────────
+    if (std::strstr(icall_name_utf8, kCreateCcwIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalCreateCcw);
+    }
+
+    // ── ICustomMarshaler icalls ──────────────────────────────────────
+    if (std::strstr(icall_name_utf8, kCustomMarshalerNativeToManagedIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::CustomMarshalerNativeToManaged);
+    }
+
+    if (std::strstr(icall_name_utf8, kCustomMarshalerManagedToNativeIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::CustomMarshalerManagedToNative);
     }
 
     return nullptr;

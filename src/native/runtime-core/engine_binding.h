@@ -315,6 +315,29 @@ CHAOS_IL2CPP_INTPTR CustomMarshalerManagedToNative(
     const char* cookie_utf8,
     CHAOS_IL2CPP_INTPTR managed_obj) noexcept;
 
+// ── HRESULT exception helpers ───────────────────────────────────────────
+/// ICALL: Marshal.ThrowExceptionForHR(Int32) — throws if errorCode < 0.
+/// V1: raises a generic System.Exception with HRESULT code in the message.
+void MarshalThrowExceptionForHR(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    CHAOS_IL2CPP_INT32 error_code) noexcept;
+
+/// ICALL: Marshal.GetExceptionForHR(Int32) → Exception — creates exception.
+/// V1: creates a System.Exception with HRESULT code in the message.
+/// Returns the exception object or null.
+void* MarshalGetExceptionForHR(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    CHAOS_IL2CPP_INT32 error_code) noexcept;
+
+/// ICALL: Marshal.GetHRForException(Exception) → Int32.
+/// Reads the _HResult field from the managed exception object.
+CHAOS_IL2CPP_INT32 MarshalGetHRForException(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    void* exception_obj) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_ENGINE_BINDING_H_

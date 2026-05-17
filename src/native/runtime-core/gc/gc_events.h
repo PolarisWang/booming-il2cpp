@@ -6,6 +6,8 @@
 #include <atomic>
 #include <cstdint>
 #include <cstring>
+#include <utility>
+#include <vector>
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -127,6 +129,12 @@ void GcProcessCollectedWeakHandles(
 /// Process dependent handles after a BGC cycle (fixed-point iteration).
 /// Called after GcProcessWeakHandlesAfterBgc().
 int GcProcessDependentHandlesAfterBgc() noexcept;
+
+/// Relocate GCHandles that point to moved objects (LOH compaction).
+/// Walks the handle table and updates any entry whose object_instance
+/// matches old_addr → new_addr in @a relocations.
+void GcRelocateHandles(
+    const std::vector<std::pair<void*, void*>>& relocations) noexcept;
 
 // ── Pinned object set (for GCHandleType.Pinned / POH) ──────────────────
 

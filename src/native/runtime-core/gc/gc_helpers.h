@@ -72,6 +72,11 @@ extern "C" void chaos_gc_collect() noexcept;
 /// Wait for pending finalizers (System.GC.WaitForPendingFinalizers()).
 extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept;
 
+/// Get the total allocated managed memory (System.GC.GetTotalMemory()).
+/// Register external memory pressure (System.GC.AddMemoryPressure()).
+/// Unregister external memory pressure (System.GC.RemoveMemoryPressure()).
+// All three are now declared in gc_api.h with CHAOS_RUNTIME_ABI_CALL.
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_HELPERS_H_

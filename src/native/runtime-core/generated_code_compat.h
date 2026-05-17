@@ -82,6 +82,13 @@ struct chaos_managed_exception
     CHAOS_IL2CPP_INTPTR object_value = 0;
 };
 
+// Sentinel values for chaos_managed_exception::object_value.
+// These indicate special system exception kinds when thrown directly from
+// native safepoint code (no managed exception object available).
+constexpr CHAOS_IL2CPP_INTPTR kManagedExceptionNormal          = 0;   // normal managed exception
+constexpr CHAOS_IL2CPP_INTPTR kManagedExceptionThreadAbort     = -1;  // Thread.Abort
+constexpr CHAOS_IL2CPP_INTPTR kManagedExceptionThreadInterrupt = -2;  // Thread.Interrupt
+
 #define CHAOS_IL2CPP_STRING_TYPE chaos_managed_string
 
 // ── Exception metadata functions (extern C declarations) ──

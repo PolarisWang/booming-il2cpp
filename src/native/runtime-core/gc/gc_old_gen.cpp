@@ -1261,7 +1261,139 @@ void MarkSweepOldGen::CompactPage(OldGenPage* page, const CompactPlan& plan) {
 }
 
 // ======================================================================
-// Cross-page compaction
+// Parallel compaction (Phase 4 — GcWorkerPool)
+// ======================================================================
+
+CHAOS_IL2CPP_SIZE MarkSweepOldGen::ParallelCompactPages() {
+    // Phase 0: Collect fragmented pages (sequential, under mutex).
+    struct PagePlan { OldGenPage* page; CompactPlan plan; };
+    std::vector<PagePlan> page_plans;
+    CHAOS_IL2CPP_SIZE total_live = 0;
+    CHAOS_IL2CPP_SIZE total_payload = 0;
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        auto* p = page_list_;
+        while (p != nullptr) {
+            if (p->in_use.load(std::memory_order_acquire) && !p->is_oversized) {
+                if (PageFragmentation(p) > 0.30f) {
+                    page_plans.push_back({p, CompactPlan()});
+                    total_payload += p->payload_size;
+                }
+            }
+            p = p->next;
+        }
+    }
+    int total_compact = static_cast<int>(page_plans.size());
+    if (total_compact == 0) return 0;
+    if (total_compact == 1) {
+        // Single page: use sequential path (avoids worker pool overhead).
+        auto& pp = page_plans[0];
+        CHAOS_IL2CPP_SIZE saved = PlanPageCompaction(pp.page, pp.plan);
+        RelocatePage(pp.page, pp.plan);
+        CompactPage(pp.page, pp.plan);
+        return saved;
+    }
+
+    // Cap workers.
+    int hw_conc = static_cast<int>(std::thread::hardware_concurrency());
+    int max_workers = std::min(hw_conc, total_compact);
+    if (max_workers > GcWorkerPool::kMaxWorkers) max_workers = GcWorkerPool::kMaxWorkers;
+    if (max_workers < 2) max_workers = 2;
+
+    // Phase 1: Plan all pages in parallel (page-local reads only).
+    {
+        std::atomic<int> plan_idx{0};
+        GcWorkerPool::Instance().RunWorkers(max_workers, [&](int) {
+            while (true) {
+                int idx = plan_idx.fetch_add(1, std::memory_order_relaxed);
+                if (idx >= total_compact) break;
+                PlanPageCompaction(page_plans[static_cast<size_t>(idx)].page,
+                                    page_plans[static_cast<size_t>(idx)].plan);
+            }
+        });
+    }
+
+    // Phase 2: Compact all pages in parallel (page-local memmove + free list rebuild).
+    {
+        std::atomic<int> compact_idx{0};
+        GcWorkerPool::Instance().RunWorkers(max_workers, [&](int) {
+            while (true) {
+                int idx = compact_idx.fetch_add(1, std::memory_order_relaxed);
+                if (idx >= total_compact) break;
+                CompactPage(page_plans[static_cast<size_t>(idx)].page,
+                            page_plans[static_cast<size_t>(idx)].plan);
+            }
+        });
+    }
+
+    // Phase 3: Build global old→new address map from all plans.
+    struct AddrPair { uintptr_t old_addr; uintptr_t new_addr; };
+    std::vector<AddrPair> addr_map;
+    {
+        CHAOS_IL2CPP_SIZE total_entries = 0;
+        for (auto& pp : page_plans) total_entries += pp.plan.entries.size();
+        if (total_entries == 0) return 0;
+        addr_map.reserve(total_entries);
+        for (auto& pp : page_plans) {
+            total_live += pp.plan.live_bytes;
+            for (auto& e : pp.plan.entries) {
+                addr_map.push_back({
+                    reinterpret_cast<uintptr_t>(e.old_addr),
+                    reinterpret_cast<uintptr_t>(e.new_addr)
+                });
+            }
+        }
+    }
+    // Sort for binary search used in relocation.
+    std::sort(addr_map.begin(), addr_map.end(),
+        [](const AddrPair& a, const AddrPair& b) { return a.old_addr < b.old_addr; });
+
+    // Phase 4: Build page array once, relocate all pages' slots in parallel.
+    std::vector<OldGenPage*> all_pages;
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        all_pages.reserve(static_cast<size_t>(page_count_));
+        for (auto* p = page_list_; p != nullptr; p = p->next) {
+            all_pages.push_back(p);
+        }
+    }
+    int total_pages = static_cast<int>(all_pages.size());
+
+    {
+        std::atomic<int> page_idx{0};
+        GcWorkerPool::Instance().RunWorkers(max_workers, [&](int) {
+            while (true) {
+                int idx = page_idx.fetch_add(1, std::memory_order_relaxed);
+                if (idx >= total_pages) break;
+                auto* src = all_pages[static_cast<size_t>(idx)];
+                if (!src->in_use.load(std::memory_order_acquire)) continue;
+
+                char* src_payload = src->Payload();
+                CHAOS_IL2CPP_SIZE src_slots = src->payload_size / sizeof(void*);
+
+                for (CHAOS_IL2CPP_SIZE s = 0; s < src_slots; s++) {
+                    auto* slot_ptr = reinterpret_cast<void**>(src_payload + s * sizeof(void*));
+                    void* val = *slot_ptr;
+                    if (val == nullptr) continue;
+                    uintptr_t val_addr = reinterpret_cast<uintptr_t>(val);
+
+                    auto it = std::lower_bound(addr_map.begin(), addr_map.end(), val_addr,
+                        [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
+                    if (it != addr_map.end() && it->old_addr == val_addr) {
+                        *slot_ptr = reinterpret_cast<void*>(it->new_addr);
+                    }
+                }
+            }
+        });
+    }
+
+    CHAOS_IL2CPP_LOG_INFO_M("OldGen", "parallel_compact_done pages={0} objects={1} saved={2}",
+        total_compact,
+        static_cast<unsigned long long>(addr_map.size()),
+        static_cast<unsigned long long>(total_payload > total_live ? total_payload - total_live : 0));
+
+    return total_payload > total_live ? total_payload - total_live : 0;
+}
 // ======================================================================
 
 void MarkSweepOldGen::PlanPageEvacuation(OldGenPage* page, CompactPlan& out_plan) {
@@ -1374,6 +1506,16 @@ void MarkSweepOldGen::CrossPageCompact() {
     std::sort(candidates.begin(), candidates.end(),
         [](const PageScore& a, const PageScore& b) { return a.frag > b.frag; });
 
+    // Dynamic evacuation budget: at least 512KB, at most 10% of total
+    // old-gen allocation or 4MB max.  Scales with heap size so large
+    // heaps compact more per cycle without excessive STW pause.
+    CHAOS_IL2CPP_SIZE total_heap = TotalAllocated();
+    CHAOS_IL2CPP_SIZE evacuation_budget = std::max<CHAOS_IL2CPP_SIZE>(
+        512 * 1024,
+        std::min<CHAOS_IL2CPP_SIZE>(
+            static_cast<CHAOS_IL2CPP_SIZE>(total_heap * 0.1f),
+            4 * 1024 * 1024));
+
     // Select source pages up to budget.
     std::vector<OldGenPage*> source_pages;
     CHAOS_IL2CPP_SIZE total_evacuate = 0;
@@ -1386,7 +1528,7 @@ void MarkSweepOldGen::CrossPageCompact() {
             marked_slots += static_cast<CHAOS_IL2CPP_SIZE>(GcPopCount64(bitmap[w]));
         }
         total_evacuate += marked_slots * sizeof(void*);
-        if (total_evacuate >= kMaxCrossPageCompactBytes) break;
+        if (total_evacuate >= evacuation_budget) break;
     }
 
     // Phase 2: Build evacuation plan.
@@ -1404,38 +1546,62 @@ void MarkSweepOldGen::CrossPageCompact() {
     // Phase 3: Global relocation.
     GlobalRelocate(global_plan.entries, page_list_);
 
-    // Phase 4: Copy objects from source pages to new addresses.
-    for (auto& e : global_plan.entries) {
-        if (e.new_addr != e.old_addr) {
-            std::memcpy(e.new_addr, e.old_addr, e.size);
-            std::memset(e.old_addr, 0, e.size);
-        }
+    // Phase 4: Copy objects from source pages in parallel.
+    {
+        int hw = static_cast<int>(std::thread::hardware_concurrency());
+        int n_workers = std::min(hw, GcWorkerPool::kMaxWorkers);
+        if (n_workers < 2) n_workers = 2;
+        std::atomic<int> copy_idx{0};
+        int total_copy = static_cast<int>(global_plan.entries.size());
+        GcWorkerPool::Instance().RunWorkers(n_workers, [&](int) {
+            while (true) {
+                int idx = copy_idx.fetch_add(1, std::memory_order_relaxed);
+                if (idx >= total_copy) break;
+                auto& e = global_plan.entries[static_cast<size_t>(idx)];
+                if (e.new_addr != e.old_addr) {
+                    std::memcpy(e.new_addr, e.old_addr, e.size);
+                    std::memset(e.old_addr, 0, e.size);
+                }
+            }
+        });
     }
 
-    // Phase 5: Sweep evacuated source pages.
-    for (auto* src : source_pages) {
-        std::memset(src->MarkBitmap(), 0, src->bitmap_bytes);
-        for (int i = 0; i < kOldGenNumSizeClasses; i++) {
-            src->free_lists[i] = nullptr;
-        }
-        char* payload = src->Payload();
-        CHAOS_IL2CPP_SIZE remaining = src->payload_size;
-        char* cursor = payload;
-        while (remaining > 0) {
-            int sc_idx = SizeClassIndex(remaining);
-            if (sc_idx < 0) sc_idx = kOldGenNumSizeClasses - 1;
-            CHAOS_IL2CPP_SIZE sc_size = kOldGenSizeClasses[sc_idx];
-            if (sc_size > remaining) {
-                sc_size = sizeof(void*);
-                sc_idx = SizeClassIndex(sc_size);
-                if (sc_idx < 0) break;
+    // Phase 5: Sweep evacuated source pages in parallel.
+    {
+        int hw = static_cast<int>(std::thread::hardware_concurrency());
+        int n_workers = std::min(hw, GcWorkerPool::kMaxWorkers);
+        if (n_workers < 2) n_workers = 2;
+        std::atomic<int> sweep_idx{0};
+        int total_pages = static_cast<int>(source_pages.size());
+        GcWorkerPool::Instance().RunWorkers(n_workers, [&](int) {
+            while (true) {
+                int idx = sweep_idx.fetch_add(1, std::memory_order_relaxed);
+                if (idx >= total_pages) break;
+                auto* src = source_pages[static_cast<size_t>(idx)];
+                std::memset(src->MarkBitmap(), 0, src->bitmap_bytes);
+                for (int i = 0; i < kOldGenNumSizeClasses; i++) {
+                    src->free_lists[i] = nullptr;
+                }
+                char* payload = src->Payload();
+                CHAOS_IL2CPP_SIZE remaining = src->payload_size;
+                char* cursor = payload;
+                while (remaining > 0) {
+                    int sc_idx = SizeClassIndex(remaining);
+                    if (sc_idx < 0) sc_idx = kOldGenNumSizeClasses - 1;
+                    CHAOS_IL2CPP_SIZE sc_size = kOldGenSizeClasses[sc_idx];
+                    if (sc_size > remaining) {
+                        sc_size = sizeof(void*);
+                        sc_idx = SizeClassIndex(sc_size);
+                        if (sc_idx < 0) break;
+                    }
+                    auto* block = reinterpret_cast<OldGenFreeBlock*>(cursor);
+                    block->next = src->free_lists[sc_idx];
+                    src->free_lists[sc_idx] = block;
+                    cursor += sc_size;
+                    remaining -= sc_size;
+                }
             }
-            auto* block = reinterpret_cast<OldGenFreeBlock*>(cursor);
-            block->next = src->free_lists[sc_idx];
-            src->free_lists[sc_idx] = block;
-            cursor += sc_size;
-            remaining -= sc_size;
-        }
+        });
     }
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen",
@@ -1688,6 +1854,51 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     }
     total_reclaimed += loh_reclaimed;
 
+    // LOH compaction (opt-in, controlled by CompactMode).
+    // Relocates live LOH segments to reduce fragmentation.
+    {
+        std::vector<std::pair<void*, void*>> loh_relocs;
+        if (g_loh.Compact(loh_relocs) > 0) {
+            CHAOS_IL2CPP_LOG_INFO_M("OldGen", "loh_compact relocations={0}",
+                static_cast<unsigned long>(loh_relocs.size()));
+
+            // Build sorted old→new address map for reference fix-up.
+            struct LohAddrPair { uintptr_t old_addr; uintptr_t new_addr; };
+            std::vector<LohAddrPair> addr_map;
+            addr_map.reserve(loh_relocs.size());
+            for (auto& r : loh_relocs) {
+                addr_map.push_back({
+                    reinterpret_cast<uintptr_t>(r.first),
+                    reinterpret_cast<uintptr_t>(r.second)});
+            }
+            std::sort(addr_map.begin(), addr_map.end(),
+                [](const LohAddrPair& a, const LohAddrPair& b) {
+                    return a.old_addr < b.old_addr;
+                });
+
+            // Fix up old-gen page references.
+            for (auto* p = page_list_; p != nullptr; p = p->next) {
+                if (!p->in_use.load(std::memory_order_acquire)) continue;
+                char* payload = p->Payload();
+                CHAOS_IL2CPP_SIZE num_slots = p->payload_size / sizeof(void*);
+                for (CHAOS_IL2CPP_SIZE s = 0; s < num_slots; s++) {
+                    auto* slot = reinterpret_cast<void**>(payload + s * sizeof(void*));
+                    void* val = *slot;
+                    if (val == nullptr) continue;
+                    uintptr_t val_addr = reinterpret_cast<uintptr_t>(val);
+                    auto it = std::lower_bound(addr_map.begin(), addr_map.end(), val_addr,
+                        [](const LohAddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
+                    if (it != addr_map.end() && it->old_addr == val_addr) {
+                        *slot = reinterpret_cast<void*>(it->new_addr);
+                    }
+                }
+            }
+
+            // Fix up GCHandles.
+            GcRelocateHandles(loh_relocs);
+        }
+    }
+
     // Phase 4b: Compaction (when fragmentation exceeds threshold).
     CompactMode compact_mode = DecideCompactMode();
 
@@ -1697,23 +1908,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         GcFireEvent(GcEvent::COMPACT_DONE);
     } else if (compact_mode == CompactMode::COMPACT) {
         CHAOS_IL2CPP_LOG_INFO_M("OldGen", "compact_mode_enabled");
-        CHAOS_IL2CPP_SIZE total_saved = 0;
-        std::lock_guard<std::mutex> lock(mutex_);
-        auto* p = page_list_;
-        while (p != nullptr) {
-            if (p->in_use.load(std::memory_order_acquire) && !p->is_oversized) {
-                float frag = PageFragmentation(p);
-                if (frag > 0.30f) {
-                    // Plan → Relocate → Compact for this page.
-                    CompactPlan plan;
-                    CHAOS_IL2CPP_SIZE saved = PlanPageCompaction(p, plan);
-                    RelocatePage(p, plan);
-                    CompactPage(p, plan);
-                    total_saved += saved;
-                }
-            }
-            p = p->next;
-        }
+        CHAOS_IL2CPP_SIZE total_saved = ParallelCompactPages();
         CHAOS_IL2CPP_LOG_INFO_M("OldGen", "compact_done saved_bytes={0}",
             static_cast<unsigned long long>(total_saved));
         GcFireEvent(GcEvent::COMPACT_DONE);
@@ -2023,24 +2218,7 @@ void MarkSweepOldGen::BgcCompact() {
         GcFireEvent(GcEvent::COMPACT_DONE);
     } else if (compact_mode == CompactMode::COMPACT) {
         CHAOS_IL2CPP_LOG_INFO("BGC", "compact_mode_enabled");
-        CHAOS_IL2CPP_SIZE total_saved = 0;
-        {
-            std::lock_guard<std::mutex> lock(mutex_);
-            auto* p = page_list_;
-            while (p != nullptr) {
-                if (p->in_use.load(std::memory_order_acquire) && !p->is_oversized) {
-                    float frag = PageFragmentation(p);
-                    if (frag > 0.30f) {
-                        CompactPlan plan;
-                        CHAOS_IL2CPP_SIZE saved = PlanPageCompaction(p, plan);
-                        RelocatePage(p, plan);
-                        CompactPage(p, plan);
-                        total_saved += saved;
-                    }
-                }
-                p = p->next;
-            }
-        }
+        CHAOS_IL2CPP_SIZE total_saved = ParallelCompactPages();
         CHAOS_IL2CPP_LOG_INFO_M("BGC", "compact_done saved_bytes={0}",
             static_cast<unsigned long long>(total_saved));
         GcFireEvent(GcEvent::COMPACT_DONE);

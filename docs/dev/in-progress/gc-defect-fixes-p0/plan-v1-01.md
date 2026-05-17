@@ -1,31 +1,36 @@
 # P0 GC 正确性缺陷修复计划
 
-> **面向执行 Agent：** 本计划覆盖 4 个 P0（正确性风险）缺陷，必须按 P0-1 → P0-2 → P0-3 → P0-4 顺序执行。每个子任务独立可验证。
+> **状态：全部已实现。** 2026-05-16/17 的 CRAG GC 改进提交已包含全部 4 项 fix。此文档从"执行计划"转为"验证追踪"。
 
-**目标：** 修复 GC 子系统 4 项 P0 正确性风险：BGC finalization 缺失、BGC weak handle 不更新、卡表 4GB 硬限制、GcLayout 4096 槽位上限
+**目标：** ~~修复 GC 子系统 4 项 P0 正确性风险~~ → **确认 4 项 P0 fix 均已实现并验证。**
 
-**架构：** 这些修复分布在 BGC 生命周期管理、卡表动态扩展、GcLayout 哈希表升级三个独立领域
+## 实现验证表
 
-**技术栈：** C++17, atomic operations, VirtualAlloc, unordered_dense
+| P0 # | 缺陷 | 实现状态 | 代码位置 |
+|------|------|----------|----------|
+| P0-1 | BGC finalization 缺失 | **✅ 已实现** | `gc_bgc.cpp:497-516` — BgcThreadMain 在 FINISHED→IDLE 后异步执行 `bgc_dead_finalizables_` |
+| P0-2 | BGC weak handle 不更新 | **✅ 已实现** | `gc_bgc.cpp:518-531` — BgcThreadMain 中 finalization 后调用 `GcProcessCollectedWeakHandles()` |
+| P0-3 | 卡表 4GB 硬限制 | **✅ 已实现** | `gc_card_table.cpp:42-102` — L1 动态双向扩容，`g_card_l1` 为 unique_ptr 可 grow，无 4GB 上限 |
+| P0-4 | GcLayout 4096 槽位上限 | **✅ 已实现** | `gc_layout.h:91-97` — 4096 仅为 `kGcLayoutMinCapacity`，`GcLayoutTable` 在 load factor >75% 时自动 GrowTable |
 
-**架构审核模式：** critical（命中 runtime-core GC 主线）
+### 基础设施函数确认
 
-**结构告警重点：** 
-- gc_bgc.cpp 目前 finalization/weak handle 逻辑分散在 gc_old_gen.cpp 和 engine_lifecycle.cpp，注意不要引入职责混杂
-- gc_card_table.h 的两级结构需要保持，扩展方案不应破坏现有 inline barrier 性能
-- gc_layout.h 的哈希表升级要考虑向后兼容
+| 函数 | 位置 | 状态 |
+|------|------|------|
+| `g_old_gen.CollectDeadFinalizables()` | `gc_old_gen.cpp:2017` | **已实现** — 遍历 finalizers_ 列表收集死亡对象 |
+| `GcCollectDeadWeakHandles()` | `engine_lifecycle.cpp:299` | **已实现** — 遍历 handle table 收集死亡 weak handle |
+| `GcProcessCollectedWeakHandles()` | `engine_lifecycle.cpp:322` | **已实现** — null 处理已收集的 weak handle |
+| `GcProcessDependentHandlesAfterBgc()` | `engine_lifecycle.cpp:337` | **已实现** — dependent handle 后处理 |
 
-**设计文档：** `docs/discuss/20260516-memory-gc-comprehensive-evaluation.md`
+### 未验证项（待补充测试）
 
-**问题清零来源：** direct user confirmation（用户要求的综合评估产出）
+- `gc_bgc_smoke.cpp`: 尚无 BGC finalization 专用测试用例
+- `gc_stress_test.cpp`: 压力场景中未包含 finalizer 对象
+- `gc_layout_test.cpp`: 不存在独立文件（GcLayout 测试集成在其他测试中）
 
-**计划来源：** direct-plan
+## 原始计划备份
 
-**预期知识沉淀：** wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/24-CRAG-GC架构参考.md
-
-**收尾约束：** 执行完成后必须进入"结构告警与架构审视 → 测试通过 → 归档 completed → 合并&提交"固定链路。
-
----
+以下为原始计划内容（保留以供参考，实现已验证）：
 
 ## P0-1: BGC finalization 缺失
 

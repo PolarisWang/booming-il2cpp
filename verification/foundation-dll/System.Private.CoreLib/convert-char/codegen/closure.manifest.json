@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ConvertCharSubjects",
   "entrySubjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ConvertCharSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "7620a595-de1c-4bc1-91ba-a471127b3a42",
+  "inputModuleVersionId": "13081649-c41d-4881-a2ff-e3f1e63d38ce",
   "artifacts": [
     {
       "kind": "typedIlIr",

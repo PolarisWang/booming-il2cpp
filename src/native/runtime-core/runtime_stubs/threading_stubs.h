@@ -20,6 +20,11 @@ void chaos_thread_interrupt(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;
 // at the next safepoint poll.
 void chaos_thread_abort(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;
 
+// Thread.ResetAbort: cancel a pending Thread.Abort for the calling thread.
+// Returns nonzero if an abort was pending and was cancelled, 0 if no abort
+// was pending (no-op).
+CHAOS_IL2CPP_INT32 chaos_thread_reset_abort(void) noexcept;
+
 // Thread.Yield: yield the current thread's time slice.
 // Returns nonzero (true) on success to match .NET bool return.
 CHAOS_IL2CPP_INT32 chaos_thread_yield(void) noexcept;

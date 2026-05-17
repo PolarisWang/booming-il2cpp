@@ -94,6 +94,7 @@ void* CHAOS_RUNTIME_ABI_CALL ArrayNew(
     CHAOS_IL2CPP_PROFILE_SCOPE("ArrayNew");
     if (!IsAttached(runtime_state, thread_state) || element_type == 0) return nullptr;
 
+    if (length > (static_cast<CHAOS_IL2CPP_SIZE>(-1) - sizeof(ArrayHeader)) / sizeof(void*)) return nullptr;
     const CHAOS_IL2CPP_SIZE allocation_size =
         sizeof(ArrayHeader) + (static_cast<CHAOS_IL2CPP_SIZE>(length) * sizeof(void*));
     unsigned char* storage = static_cast<unsigned char*>(AllocateBytes(runtime_state->config, allocation_size));
@@ -120,8 +121,9 @@ void* CHAOS_RUNTIME_ABI_CALL StringNewUtf8(
     if (!IsAttached(runtime_state, thread_state)) return nullptr;
     if (utf8_bytes == nullptr && byte_count != 0u) return nullptr;
 
+    if (byte_count > static_cast<CHAOS_IL2CPP_SIZE>(-1) - sizeof(StringObjectHeader) - 1u) return nullptr;
     const CHAOS_IL2CPP_SIZE allocation_size = sizeof(StringObjectHeader) + static_cast<CHAOS_IL2CPP_SIZE>(byte_count) + 1u;
-    unsigned char* storage = static_cast<unsigned char*>(AllocateBytesAtomic(allocation_size));
+    unsigned char* storage = static_cast<unsigned char*>(GcAllocateAtomic(allocation_size));
     if (storage == nullptr) return nullptr;
 
     auto* header = reinterpret_cast<StringObjectHeader*>(storage);

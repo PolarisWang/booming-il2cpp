@@ -73,14 +73,16 @@ struct StringObjectHeader {
     CHAOS_IL2CPP_UINTPTR byte_count;
 };
 
-struct ArrayHeader {
-    TypeInfoHandle element_type;
-    CHAOS_IL2CPP_UINTPTR length;
-};
-
 struct BoxedValueHeader {
     TypeInfoHandle type;
     CHAOS_IL2CPP_UINTPTR byte_count;
+};
+
+}  // anonymous namespace
+
+struct ArrayHeader {
+    TypeInfoHandle element_type;
+    CHAOS_IL2CPP_UINTPTR length;
 };
 
 struct UInt128Layout {
@@ -133,37 +135,6 @@ constexpr ValueTypeKernelBackendKind kFloatingClassificationKernelBackend = Dete
 constexpr ValueTypeKernelBackendKind kBitArithmeticKernelBackend = DetectBitArithmeticKernelBackend();
 constexpr ValueTypeKernelBackendKind kTickArithmeticKernelBackend = DetectTickArithmeticKernelBackend();
 constexpr VectorKernelBackendKind kVectorKernelBackend = DetectVectorKernelBackend();
-
-// Allocate memory that contains no pointers (e.g., string bytes, boxed value data).
-static void* AllocateBytesAtomic(CHAOS_IL2CPP_SIZE size) {
-    return NurseryAllocateAtomic(size);
-}
-
-}  // anonymous namespace
-
-void* CHAOS_RUNTIME_ABI_CALL DefaultAllocate(CHAOS_IL2CPP_SIZE size, void* user_data) {
-    (void)user_data;
-    return NurseryAllocate(size);
-}
-
-void CHAOS_RUNTIME_ABI_CALL DefaultDeallocate(void* ptr, void* user_data) {
-    (void)user_data;
-    (void)ptr;
-}
-
-void* GcAllocate(CHAOS_IL2CPP_SIZE size) {
-    CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocate");
-    void* ptr = NurseryAllocate(size);
-    if (ptr) GcRecordAlloc(size, size > kMaxNurseryAlloc);
-    return ptr;
-}
-
-void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) {
-    CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateAtomic");
-    void* ptr = NurseryAllocateAtomic(size);
-    if (ptr) GcRecordAlloc(size, size > kMaxNurseryAlloc);
-    return ptr;
-}
 
 char* DomainStrDup(const char* src) {
     if (src == nullptr) return nullptr;

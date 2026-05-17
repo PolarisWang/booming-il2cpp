@@ -18,7 +18,11 @@ namespace {
     }
     inline uint64_t AtomicLoadAcquire(const uint64_t* p) noexcept {
         uint64_t v = *const_cast<volatile uint64_t*>(p);
+        #if defined(_M_ARM64)
+        __dmb(0xB);  // full memory barrier for ARM64 acquire semantics
+        #else
         _ReadWriteBarrier();
+        #endif
         return v;
     }
     inline void AtomicStoreRelease(uint64_t* p, uint64_t val) noexcept {
@@ -94,7 +98,7 @@ inline uint32_t SyncBlockStripeIndex(void* obj) noexcept {
     return (reinterpret_cast<uintptr_t>(obj) >> 3) % kSyncBlockStripes;
 }
 
-static bool InflateAndEnter(void* obj, uint64_t current_sync) noexcept {
+static bool InflateAndEnter(void* obj) noexcept {
     const uint32_t stripe_idx = SyncBlockStripeIndex(obj);
     auto& stripe = g_sync_block_stripes[stripe_idx];
 
@@ -103,16 +107,13 @@ static bool InflateAndEnter(void* obj, uint64_t current_sync) noexcept {
     auto* sync_ptr = GetSyncStatePtr(obj);
     uint64_t sync = *sync_ptr;
     if ((sync & kSyncInflatedBit) != 0) {
-        const auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-    if (sb != nullptr) {
-        // O(1) lookup via unordered_map::find instead of O(n) linear scan.
+        // Another thread already inflated — find the existing SyncBlock.
         auto it = stripe.entries.find(obj);
         if (it != stripe.entries.end() && it->second != nullptr) {
             it->second->mutex.lock();
             return true;
         }
         return false;
-    }
     }
 
     auto* sb = AllocateSyncBlockFromPool();

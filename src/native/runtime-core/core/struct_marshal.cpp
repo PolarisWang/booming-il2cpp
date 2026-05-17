@@ -37,6 +37,20 @@ static void DestroyMarshalledFields(
     unsigned char* native_ptr,
     RuntimeState* runtime);
 
+// ── Element-size helper for array marshalling ──────────────────────────
+
+static uint32_t NativeElementSize(NativeElementType type) {
+    switch (type) {
+    case NativeElementType::U1: case NativeElementType::I1: return 1u;
+    case NativeElementType::U2: case NativeElementType::I2: return 2u;
+    case NativeElementType::U4: case NativeElementType::I4: return 4u;
+    case NativeElementType::U8: case NativeElementType::I8: return 8u;
+    case NativeElementType::R4: return 4u;
+    case NativeElementType::R8: return 8u;
+    default: return 0u;  // Struct or None — variable or unknown
+    }
+}
+
 // ── Field-level helpers ─────────────────────────────────────────────
 
 static void MarshalFieldManagedToNative(
@@ -87,9 +101,21 @@ static void MarshalFieldManagedToNative(
         break;
 
     case StructFieldKind::ByValArray:
-        // V1: only handle blittable element types via memcpy.
-        if (field.element_type != NativeElementType::None && field.size > 0) {
+        if (field.size == 0 || field.array_count == 0) break;
+
+        if (field.element_type != NativeElementType::Struct || field.nested == nullptr) {
+            // Blittable or unknown element type: direct memcpy.
             CHAOS_IL2CPP_MEMCPY(native_ptr + field.offset, managed_ptr + field.offset, field.size);
+        } else {
+            // Non-blittable struct elements: iterate each with nested descriptor.
+            const uint32_t elem_stride = field.size / field.array_count;
+            for (uint16_t i = 0; i < field.array_count; ++i) {
+                MarshalFieldsManagedToNative(
+                    field.nested,
+                    native_ptr + field.offset + i * elem_stride,
+                    managed_ptr + field.offset + i * elem_stride,
+                    runtime);
+            }
         }
         break;
 
@@ -104,17 +130,69 @@ static void MarshalFieldManagedToNative(
         break;
 
     case StructFieldKind::ObjectField:
-        // V1: store managed object pointer as IntPtr (simplified).
+        // Use GCHandle to keep the object rooted across the native call.
         {
             const void* obj = *reinterpret_cast<const void* const*>(managed_ptr + field.offset);
-            *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset) =
-                reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<void*>(obj));
+            if (obj != nullptr) {
+                auto* abi = runtime_core::GetRuntimeAbiV0();
+                if (abi != nullptr && abi->gc_handle_new != nullptr) {
+                    const GCHandle handle = abi->gc_handle_new(runtime, const_cast<void*>(obj), true);
+                    *reinterpret_cast<GCHandle*>(native_ptr + field.offset) = handle;
+                } else {
+                    *reinterpret_cast<CHAOS_IL2CPP_UINT64*>(native_ptr + field.offset) = 0;
+                }
+            } else {
+                *reinterpret_cast<CHAOS_IL2CPP_UINT64*>(native_ptr + field.offset) = 0;
+            }
         }
         break;
 
-    case StructFieldKind::LPArray:
-        // V1: no-op stub — pointer-to-array marshalling deferred.
+    case StructFieldKind::LPArray: {
+        // Managed array -> CoTaskMem pointer.
+        const void* managed_arr = *reinterpret_cast<const void* const*>(managed_ptr + field.offset);
+        if (managed_arr == nullptr) {
+            *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset) = 0;
+            break;
+        }
+        // Access array length via known offset: sizeof(TypeInfoHandle) = 8 bytes.
+        const auto* arr_bytes = static_cast<const unsigned char*>(managed_arr);
+        const auto elem_count = static_cast<uint32_t>(
+            *reinterpret_cast<const CHAOS_IL2CPP_UINTPTR*>(arr_bytes + sizeof(CHAOS_IL2CPP_UINT64)));
+
+        uint32_t elem_size = NativeElementSize(field.element_type);
+        if (elem_size == 0 && field.nested != nullptr) {
+            elem_size = field.nested->total_size;
+        }
+        if (elem_size == 0) {
+            *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset) = 0;
+            break;
+        }
+
+        const auto total_size = static_cast<CHAOS_IL2CPP_SIZE>(elem_count) * elem_size;
+        const auto mem = runtime_core::MarshalAllocCoTaskMem(
+            runtime, static_cast<CHAOS_IL2CPP_INT32>(total_size));
+        if (mem == 0) {
+            *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset) = 0;
+            break;
+        }
+
+        auto* native_buf = reinterpret_cast<unsigned char*>(mem);
+        const auto* managed_data = arr_bytes + sizeof(CHAOS_IL2CPP_UINT64) + sizeof(CHAOS_IL2CPP_UINTPTR);
+
+        if (field.element_type == NativeElementType::Struct && field.nested != nullptr) {
+            for (uint32_t i = 0; i < elem_count; ++i) {
+                MarshalFieldsManagedToNative(
+                    field.nested,
+                    native_buf + i * elem_size,
+                    managed_data + i * elem_size,
+                    runtime);
+            }
+        } else {
+            CHAOS_IL2CPP_MEMCPY(native_buf, managed_data, total_size);
+        }
+        *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset) = mem;
         break;
+    }
     }
 }
 
@@ -165,8 +243,19 @@ static void MarshalFieldNativeToManaged(
         break;
 
     case StructFieldKind::ByValArray:
-        if (field.element_type != NativeElementType::None && field.size > 0) {
+        if (field.size == 0 || field.array_count == 0) break;
+
+        if (field.element_type != NativeElementType::Struct || field.nested == nullptr) {
             CHAOS_IL2CPP_MEMCPY(managed_ptr + field.offset, native_ptr + field.offset, field.size);
+        } else {
+            const uint32_t elem_stride = field.size / field.array_count;
+            for (uint16_t i = 0; i < field.array_count; ++i) {
+                MarshalFieldsNativeToManaged(
+                    field.nested,
+                    managed_ptr + field.offset + i * elem_stride,
+                    native_ptr + field.offset + i * elem_stride,
+                    runtime);
+            }
         }
         break;
 
@@ -180,12 +269,24 @@ static void MarshalFieldNativeToManaged(
 
     case StructFieldKind::ObjectField:
         {
-            const CHAOS_IL2CPP_INTPTR raw = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset);
-            *reinterpret_cast<void**>(managed_ptr + field.offset) = reinterpret_cast<void*>(raw);
+            const GCHandle handle = *reinterpret_cast<const GCHandle*>(native_ptr + field.offset);
+            if (handle != 0) {
+                auto* abi = runtime_core::GetRuntimeAbiV0();
+                if (abi != nullptr && abi->gc_handle_get != nullptr) {
+                    void* obj = abi->gc_handle_get(runtime, handle);
+                    *reinterpret_cast<void**>(managed_ptr + field.offset) = obj;
+                } else {
+                    *reinterpret_cast<void**>(managed_ptr + field.offset) = nullptr;
+                }
+            } else {
+                *reinterpret_cast<void**>(managed_ptr + field.offset) = nullptr;
+            }
         }
         break;
 
     case StructFieldKind::LPArray:
+        // V1: LPArray reverse marshalling requires managed array creation,
+        // which is not yet wired from struct_marshal. Stub for now.
         break;
     }
 }
@@ -205,6 +306,19 @@ static void DestroyFieldNative(
         }
         break;
 
+    case StructFieldKind::ObjectField:
+        {
+            const GCHandle handle = *reinterpret_cast<const GCHandle*>(native_ptr + field.offset);
+            if (handle != 0) {
+                auto* abi = runtime_core::GetRuntimeAbiV0();
+                if (abi != nullptr && abi->gc_handle_free != nullptr) {
+                    abi->gc_handle_free(runtime, handle);
+                }
+                *reinterpret_cast<GCHandle*>(native_ptr + field.offset) = 0;
+            }
+        }
+        break;
+
     case StructFieldKind::NestedStruct:
         if (field.nested != nullptr) {
             DestroyMarshalledFields(field.nested, native_ptr + field.offset, runtime);
@@ -212,12 +326,25 @@ static void DestroyFieldNative(
         break;
 
     case StructFieldKind::ByValArray:
-        // V1: no per-element destruction (blittable-only assumption).
+        if (field.element_type == NativeElementType::Struct && field.nested != nullptr && field.array_count > 0) {
+            const uint32_t elem_stride = field.size / field.array_count;
+            for (uint16_t i = 0; i < field.array_count; ++i) {
+                DestroyMarshalledFields(
+                    field.nested,
+                    native_ptr + field.offset + i * elem_stride,
+                    runtime);
+            }
+        }
         break;
 
-    case StructFieldKind::LPArray:
-        // V1: no-op.
+    case StructFieldKind::LPArray: {
+        const CHAOS_IL2CPP_INTPTR buf = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset);
+        if (buf != 0) {
+            runtime_core::MarshalFreeCoTaskMem(runtime, buf);
+            *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset) = 0;
+        }
         break;
+    }
 
     default:
         break;

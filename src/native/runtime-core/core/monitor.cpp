@@ -9,6 +9,7 @@ bool MonitorEnter(void* monitor_target) {
     if (monitor_target == nullptr) return false;
 
     auto* sync_ptr = GetSyncStatePtr(monitor_target);
+    if (sync_ptr == nullptr) return false;
     const int32_t tid = threading::GetCurrentThreadId();
     if (tid == 0) return false;
 
@@ -81,7 +82,7 @@ bool MonitorEnter(void* monitor_target) {
         }
 
         // Phase 3: Inflate immediately — no more wasteful spinning.
-        return InflateAndEnter(monitor_target, sync);
+        return InflateAndEnter(monitor_target);
     }
 }
 
@@ -89,6 +90,7 @@ bool MonitorExit(void* monitor_target) {
     if (monitor_target == nullptr) return false;
 
     auto* sync_ptr = GetSyncStatePtr(monitor_target);
+    if (sync_ptr == nullptr) return false;
     const int32_t tid = threading::GetCurrentThreadId();
 
     uint64_t sync = *sync_ptr;
@@ -119,6 +121,7 @@ bool MonitorExit(void* monitor_target) {
 bool MonitorTryEnter(void* monitor_target) {
     if (monitor_target == nullptr) return false;
     auto* sync_ptr = GetSyncStatePtr(monitor_target);
+    if (sync_ptr == nullptr) return false;
     const int32_t tid = threading::GetCurrentThreadId();
     if (tid == 0) return false;
     uint64_t sync = *sync_ptr;
@@ -141,10 +144,17 @@ bool MonitorTryEnter(void* monitor_target) {
 bool MonitorIsEntered(void* monitor_target) {
     if (monitor_target == nullptr) return false;
     auto* sync_ptr = GetSyncStatePtr(monitor_target);
+    if (sync_ptr == nullptr) return false;
     const int32_t tid = threading::GetCurrentThreadId();
     if (tid == 0) return false;
     uint64_t sync = *sync_ptr;
-    if ((sync & kSyncInflatedBit) != 0) return sync != 0;
+    if ((sync & kSyncInflatedBit) != 0) {
+        auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+        if (sb == nullptr) return false;
+        bool owned = sb->mutex.try_lock();
+        if (owned) sb->mutex.unlock();
+        return owned;
+    }
     if ((sync & kSyncLockedBit) != 0) {
         const uint64_t stored_tid = (sync >> kSyncThreadShift) & 0x3FFFFFFF;
         return stored_tid == static_cast<uint64_t>(tid);
@@ -155,10 +165,8 @@ bool MonitorIsEntered(void* monitor_target) {
 bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
     if (monitor_target == nullptr) return false;
 
-    // Set WaitSleepJoin before entering the wait.
-    auto* thread = threading::GetCurrentThread();
-    if (thread) thread->managed_state = threading::ManagedThreadState::WaitSleepJoin;
     auto* sync_ptr = GetSyncStatePtr(monitor_target);
+    if (sync_ptr == nullptr) return false;
     uint64_t sync = *sync_ptr;
     SyncBlock* sb = nullptr;
     if ((sync & kSyncInflatedBit) != 0) {
@@ -177,14 +185,31 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
     }
     if (sb == nullptr) return false;
 
+    // Set WaitSleepJoin after confirming sb is valid.
+    auto* thread = threading::GetCurrentThread();
+    if (thread) thread->managed_state = threading::ManagedThreadState::WaitSleepJoin;
+
+    // Release the monitor before wait (Monitor.Wait semantics).
+    if ((sync & kSyncInflatedBit) != 0) {
+        // Inflated path: thread holds sb->mutex from MonitorEnter. Release it.
+        sb->mutex.unlock();
+    }
+    // Thin-lock path: sync was just inflated; no sb->mutex held.
+
+    // Lock condition mutex and wait (cond.wait atomically unlocks during sleep).
+    std::unique_lock<CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX> wait_lock(sb->mutex);
     bool result;
     if (timeout_ms < 0) {
-        sb->cond.wait(sb->mutex);
+        sb->cond.wait(wait_lock);
         result = true;
     } else {
-        result = sb->cond.wait_for(sb->mutex,
+        result = sb->cond.wait_for(wait_lock,
             std::chrono::milliseconds(timeout_ms)) == std::cv_status::no_timeout;
     }
+    wait_lock.unlock();
+
+    // Re-acquire the monitor after wait completes.
+    sb->mutex.lock();
 
     // Restore Running state after wait completes.
     if (thread) thread->managed_state = threading::ManagedThreadState::Running;
@@ -194,6 +219,7 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
 bool MonitorPulse(void* monitor_target) {
     if (monitor_target == nullptr) return false;
     auto* sync_ptr = GetSyncStatePtr(monitor_target);
+    if (sync_ptr == nullptr) return false;
     uint64_t sync = *sync_ptr;
     if ((sync & kSyncInflatedBit) != 0) {
         auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
@@ -205,6 +231,7 @@ bool MonitorPulse(void* monitor_target) {
 bool MonitorPulseAll(void* monitor_target) {
     if (monitor_target == nullptr) return false;
     auto* sync_ptr = GetSyncStatePtr(monitor_target);
+    if (sync_ptr == nullptr) return false;
     uint64_t sync = *sync_ptr;
     if ((sync & kSyncInflatedBit) != 0) {
         auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
@@ -234,6 +261,7 @@ bool ThreadSleep(int32_t timeout_ms) {
 bool SpinLockExit(void* spinlock_target) {
     if (spinlock_target == nullptr) return false;
     auto* sync_ptr = GetSyncStatePtr(spinlock_target);
+    if (sync_ptr == nullptr) return false;
     const int32_t tid = threading::GetCurrentThreadId();
     uint64_t sync = *sync_ptr;
     if ((sync & kSyncLockedBit) == 0) return false;
@@ -245,7 +273,9 @@ bool SpinLockExit(void* spinlock_target) {
 
 bool SpinLockIsHeld(void* spinlock_target) {
     if (spinlock_target == nullptr) return false;
-    return (*GetSyncStatePtr(spinlock_target) & kSyncLockedBit) != 0;
+    auto* sync_ptr = GetSyncStatePtr(spinlock_target);
+    if (sync_ptr == nullptr) return false;
+    return (*sync_ptr & kSyncLockedBit) != 0;
 }
 
 bool LockEnter(void* lock_target) { return MonitorEnter(lock_target); }

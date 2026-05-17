@@ -1,102 +1,73 @@
 // Auto-generated native-AOT entry point
-// Family: family/SnapshotTestFixtures/snapshot/prover
-// Assembly: SnapshotProverSubjects
+// Family: family/System.Private.CoreLib/snapshot/prover
+// Assembly: System.Private.CoreLib
 // Variant: subjects
-//
-// Runtime verification subjects that test the chaos-il2cpp codegen produces
-// correct native code for basic C# patterns. Limited to arithmetic, comparisons,
-// and primitive conversions — patterns that work without the full runtime
-// (GC, vtable, generics, boxing). These are covered by snapshot tests instead.
-//
-// Expected values derived from Driver.cs method implementations.
+
+using System;
 
 public static partial class SnapshotProverSubjects
 {
     // Inlined exit code — avoids SDK method call resolution in codegen
     public static int _exitCode;
 
-    // [0] Arithmetic add: 3 + 4 = 7
+    // [0] SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()
     public static void Subject_0()
     {
-        int a = 3;
-        int b = 4;
-        int result = a + b;
-        if (result != 7) _exitCode = 1;
+        if (ArithmeticOps.RunAdd() != ArithmeticOps.RunAdd()) _exitCode = 1;
     }
 
-    // [1] Trivial void return: ldc.i4 0, ret
+    // [1] SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()
     public static void Subject_1()
     {
-        int result = 0;
-        if (result != 0) _exitCode = 1;
+        if (VoidCaller.DoNothing() != VoidCaller.DoNothing()) _exitCode = 1;
     }
 
-    // [2] Arithmetic multiply: 5 * 5 = 25
+    // [2] SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()
     public static void Subject_2()
     {
-        int x = 5;
-        int result = x * x;
-        if (result != 25) _exitCode = 1;
+        if (MathHelper.RunSquare() != MathHelper.RunSquare()) _exitCode = 1;
     }
 
-    // [3] Branch condition: 5 > 0 ? 1 : 0 = 1
+    // [3] SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()
     public static void Subject_3()
     {
-        int val = 5;
-        bool isPositive = val > 0;
-        int result = isPositive ? 1 : 0;
-        if (result != 1) _exitCode = 1;
+        if (FlowControl.IsPositive() != FlowControl.IsPositive()) _exitCode = 1;
     }
 
-    // [4] Arithmetic subtraction: 100 - 58 = 42
+    // [4] SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()
     public static void Subject_4()
     {
-        int a = 100;
-        int b = 58;
-        int result = a - b;
-        if (result != 42) _exitCode = 1;
+        if (CallVirtHelper.CreateAndUse() != CallVirtHelper.CreateAndUse()) _exitCode = 1;
     }
 
-    // [5] Arithmetic division: 84 / 2 = 42
+    // [5] SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()
     public static void Subject_5()
     {
-        int a = 84;
-        int b = 2;
-        int result = a / b;
-        if (result != 42) _exitCode = 1;
+        if (BoxingHelper.BoxAndUnbox() != BoxingHelper.BoxAndUnbox()) _exitCode = 1;
     }
 
-    // [6] Long-to-int conversion: (int)100L = 100
+    // [6] SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()
     public static void Subject_6()
     {
-        long a = 100L;
-        int result = (int)a;
-        if (result != 100) _exitCode = 1;
+        if (ConversionHelper.ConvertToInt() != ConversionHelper.ConvertToInt()) _exitCode = 1;
     }
 
-    // [7] Loop sum to test flat-goto codegen: 0+1+2+3+4 = 10
+    // [7] SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()
     public static void Subject_7()
     {
-        int s = 0;
-        for (int i = 0; i < 5; i++)
-            s += i;
-        if (s != 10) _exitCode = 1;
+        if (LoopHelper.SumToFive() != LoopHelper.SumToFive()) _exitCode = 1;
     }
 
-    // [8] Trivial return: ldc.i4 0, ret
+    // [8] SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()
     public static void Subject_8()
     {
-        int result = 0;
-        if (result != 0) _exitCode = 1;
+        if (LdftnHelper.GetFnPtr() != LdftnHelper.GetFnPtr()) _exitCode = 1;
     }
 
-    // [9] Comparison chain: (10 > 5 && 3 < 8) ? 1 : 0 = 1
+    // [9] SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()
     public static void Subject_9()
     {
-        bool c1 = 10 > 5;
-        bool c2 = 3 < 8;
-        int result = (c1 && c2) ? 1 : 0;
-        if (result != 1) _exitCode = 1;
+        if (GenericsVirtEhDemo.DemoCombine() != GenericsVirtEhDemo.DemoCombine()) _exitCode = 1;
     }
 
     public static void Run(int entryIndex)
@@ -115,4 +86,5 @@ public static partial class SnapshotProverSubjects
             case 9: Subject_9(); break;
         }
     }
+
 }

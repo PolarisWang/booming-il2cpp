@@ -85,6 +85,10 @@
 // Codegen emits FAIL for null-checks / expected failures so verification
 // mode can override FAIL without disabling ABORT for real crashes.
 #define CHAOS_IL2CPP_FAIL()        CHAOS_IL2CPP_ABORT()
+// HRESULT-style failure check: true when the high bit is set (negative).
+// Defined here for cross-platform use in native-aot codegen output.
+#define CHAOS_IL2CPP_FAILED(hr)    ((hr) < 0)
+#define CHAOS_IL2CPP_SUCCEEDED(hr) ((hr) >= 0)
 #define CHAOS_IL2CPP_MEMCPY(d,s,n) std::memcpy(d, s, n)
 #define CHAOS_IL2CPP_MEMCMP(a,b,n) std::memcmp(a, b, n)
 #define CHAOS_IL2CPP_MEMSET(d,c,n) std::memset(d, c, n)

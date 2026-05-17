@@ -254,6 +254,16 @@ typedef struct RuntimeAbiV0 {
         RuntimeState* runtime_state,
         GCHandle gc_handle,
         void* object_instance);
+
+    /* GC memory introspection (added in ABI v3). */
+    int64_t (CHAOS_RUNTIME_ABI_CALL* gc_get_total_memory)(
+        RuntimeState* runtime_state);
+    void (CHAOS_RUNTIME_ABI_CALL* gc_add_memory_pressure)(
+        RuntimeState* runtime_state,
+        int64_t bytes);
+    void (CHAOS_RUNTIME_ABI_CALL* gc_remove_memory_pressure)(
+        RuntimeState* runtime_state,
+        int64_t bytes);
 } RuntimeAbiV0;
 
 /* Returns the process-wide v0 table or null when the ABI is unavailable. */

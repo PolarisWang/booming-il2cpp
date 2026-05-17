@@ -1,11 +1,17 @@
 namespace chaos::il2cpp::runtime_core {
-namespace {
+
+// MSVC 14.44 cannot see anonymous-namespace symbols from other unity files.
+// Close the anonymous namespace early — all shared symbols below are at
+// runtime_core namespace scope for visibility across the unity build TU.
+
+// ── ABI capability descriptors and engine-global state ──
+// (runtime_core namespace scope for visibility across unity build TU)
 
 using namespace chaos::il2cpp::runtime_capability;
 using namespace chaos::il2cpp::marshal_abi;
 
-constexpr CHAOS_IL2CPP_UINT32 kMarshalPlatformAbiVersion = 1u;
-constexpr CHAOS_IL2CPP_UINT32 kTaskRuntimeKernelAbiVersion = 1u;
+static constexpr CHAOS_IL2CPP_UINT32 kMarshalPlatformAbiVersion = 1u;
+static constexpr CHAOS_IL2CPP_UINT32 kTaskRuntimeKernelAbiVersion = 1u;
 
 const MarshalMemoryBlockAbiV1 kMarshalMemoryBlockAbiV1 = {
     sizeof(MarshalMemoryBlockAbiV1),
@@ -64,13 +70,7 @@ const TaskRuntimeKernelV1 kTaskRuntimeKernelV1 = {
     TaskRuntimeKernelCapabilityIntrospection,
 };
 
-struct EngineLifecycleRegistration {
-    CHAOS_IL2CPP_STRING phase;
-    EngineLifecycleCallback callback;
-    void* user_data;
-};
-
-constexpr const char* kEngineObservePrefix = "CHAOS_ENGINE_OBSERVE ";
+const char* kEngineObservePrefix = "CHAOS_ENGINE_OBSERVE ";
 
 CHAOS_IL2CPP_MUTEX g_engine_binding_mutex;
 CHAOS_IL2CPP_UINTPTR g_next_engine_handle = 1u;
@@ -81,14 +81,10 @@ CHAOS_IL2CPP_ATOMIC(RuntimeMode) g_runtime_mode = RuntimeMode::Aot;
 CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_INT32) g_next_task_id{1};
 
 // GC handle table: maps handle IDs to object instances.
-struct GcHandleEntry {
-    void* object_instance;
-    bool pinned;
-    bool weak;
-};
-static CHAOS_IL2CPP_MUTEX s_gc_handle_mutex;
-static CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_UINT64) s_next_gc_handle{1};
-static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, GcHandleEntry) s_gc_handle_table;
+// GcHandleEntry struct is defined in engine_lifecycle.h.
+CHAOS_IL2CPP_MUTEX s_gc_handle_mutex;
+CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_UINT64) s_next_gc_handle{1};
+CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, GcHandleEntry) s_gc_handle_table;
 
 // Dependent handle table: (primary, secondary) pairs for ConditionalWeakTable.
 // Semantics: if primary is alive during GC, secondary is kept alive.
@@ -109,11 +105,8 @@ static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, DependentHandleNode
 static CHAOS_IL2CPP_MUTEX s_pin_set_mutex;
 static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(void*, bool) s_pin_set;
 
-}  // anonymous namespace
-
-// These functions are defined OUTSIDE the anonymous namespace so they have
-// external linkage and can be called from other translation units (gc_old_gen,
-// gc_young_collector) that link against chaos_runtime_core.lib.
+// These functions are defined here for external linkage (called from
+// gc_old_gen, gc_young_collector that link against chaos_runtime_core.lib).
 
 void GcIterateHandleTable(void (*callback)(void* object, void* user_data),
                            void* user_data) noexcept {
@@ -371,6 +364,21 @@ int GcProcessDependentHandlesAfterBgc() noexcept {
     return total_kept;
 }
 
+void GcRelocateHandles(
+    const std::vector<std::pair<void*, void*>>& relocations) noexcept {
+    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
+    for (auto& kv : s_gc_handle_table) {
+        void* obj = kv.second.object_instance;
+        if (obj == nullptr) continue;
+        for (auto& r : relocations) {
+            if (r.first == obj) {
+                kv.second.object_instance = r.second;
+                break;
+            }
+        }
+    }
+}
+
 // ── Pinned object set ─────────────────────────────────────────────
 
 void GcAddPinnedObject(void* obj) noexcept {
@@ -405,6 +413,26 @@ void* GcAllocatePinned(CHAOS_IL2CPP_SIZE size) noexcept {
 
 bool GcIsPohPointer(const void* ptr) noexcept {
     return IsPohPointer(ptr);
+}
+
+// ── COM apartment management ──────────────────────────────────────────
+// CoInitializeEx/CoUninitialize are declared in combaseapi.h, included
+// via Windows.h (already in scope from runtime_core.cpp unity build).
+
+CHAOS_IL2CPP_INT32 CoInitializeApartment(CHAOS_IL2CPP_INT32 apartment_type) noexcept {
+#if defined(_WIN32)
+    HRESULT hr = ::CoInitializeEx(nullptr, static_cast<DWORD>(apartment_type));
+    return static_cast<CHAOS_IL2CPP_INT32>(hr);
+#else
+    (void)apartment_type;
+    return 0;  // S_OK on non-Windows (no-op)
+#endif
+}
+
+void CoUninitializeApartment() noexcept {
+#if defined(_WIN32)
+    ::CoUninitialize();
+#endif
 }
 
 }  // namespace chaos::il2cpp::runtime_core

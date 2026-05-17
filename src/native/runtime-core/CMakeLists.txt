@@ -115,6 +115,12 @@ add_library(chaos_runtime_core STATIC
     gc/gc_bgc.h
     gc/gc_bgc.cpp
     gc/gc_bgc_inline.h
+    gc/gc_api.h
+    gc/gc_api.cpp
+    com_rcw.h
+    com_rcw.cpp
+    com_ccw.h
+    com_ccw.cpp
     domain_unloader.h
     domain_unloader.cpp
     native_library.h

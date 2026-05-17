@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "TimeDateTimeTimespanSubjects",
   "entrySubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Run:System.Void(System.Int32)",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

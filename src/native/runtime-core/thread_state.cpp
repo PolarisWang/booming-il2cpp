@@ -5,6 +5,7 @@
 
 #include "gc_region.h"
 #include "gc_root_scanner.h"
+#include "gc_card_table.h"
 #include "generated_code_compat.h"  // chaos_managed_exception for Thread.Abort throw
 
 #include <atomic>
@@ -203,15 +204,7 @@ void SafepointPoll() noexcept {
             // Implementation detail: this longjmps through the interpreter
             // frame chain; generated AOT code catches via the normal
             // chaos_managed_exception mechanism.
-            throw chaos_managed_exception{0};
-        }
-        // ── pending_interrupt check (unlikely branch) ──────────────
-        // Thread.Interrupt integration: check the per-thread interrupt
-        // flag.  If set, throw ThreadInterruptedException at the next
-        // catch boundary (same mechanism as Thread.Abort).
-        if (thread != nullptr && thread->pending_interrupt.load(std::memory_order_acquire)) {
-            thread->pending_interrupt.store(false, std::memory_order_release);
-            throw chaos_managed_exception{0};
+            throw chaos_managed_exception{kManagedExceptionThreadAbort};
         }
         return;  // fast path: no GC pending, single load + branch
     }
@@ -390,7 +383,15 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
             & ~static_cast<uintptr_t>(sizeof(void*) - 1);
 
         for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
-            s_callback(reinterpret_cast<void*>(slot), /*is_interior=*/false, s_user_data);
+            // Pre-filter: skip slots whose VALUE doesn't point into the
+            // managed heap range.  This eliminates false-positive roots
+            // from integers, code pointers, and OS handles that happen to
+            // be pointer-aligned on the stack.
+            auto* val_ptr = reinterpret_cast<void**>(slot);
+            if (*val_ptr != nullptr &&
+                reinterpret_cast<uintptr_t>(*val_ptr) >= g_heap_base) {
+                s_callback(reinterpret_cast<void*>(slot), /*is_interior=*/false, s_user_data);
+            }
         }
 
         return true;  // continue enumeration

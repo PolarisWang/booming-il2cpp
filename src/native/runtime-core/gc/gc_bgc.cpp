@@ -297,7 +297,7 @@ void BgcController::BgcThreadMain() {
         // wake-up (P1-4: replaces sleep_for polling).
         {
             std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
-            bgc_cv_.wait_for(lock, std::chrono::milliseconds(100), [this]() {
+            bgc_cv_.wait(lock, [this]() {
                 return bgc_start_requested_.load(std::memory_order_acquire) ||
                        !bgc_running_.load(std::memory_order_acquire);
             });
@@ -414,7 +414,7 @@ void BgcController::BgcThreadMain() {
         // CONCURRENT_SWEEP or FINISHED by the scheduler after re-mark.
         {
             std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
-            bgc_cv_.wait_for(lock, std::chrono::milliseconds(100), [this]() {
+            bgc_cv_.wait(lock, [this]() {
                 auto p = phase_.load(std::memory_order_acquire);
                 return p != BgcPhase::REMARK_NEEDED ||
                        !bgc_running_.load(std::memory_order_acquire);
@@ -474,7 +474,7 @@ void BgcController::BgcThreadMain() {
         // FINISHED by StwCompact() after compaction completes.
         {
             std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
-            bgc_cv_.wait_for(lock, std::chrono::milliseconds(100), [this]() {
+            bgc_cv_.wait(lock, [this]() {
                 auto p = phase_.load(std::memory_order_acquire);
                 return p != BgcPhase::COMPACT_NEEDED ||
                        !bgc_running_.load(std::memory_order_acquire);

@@ -92,6 +92,10 @@ public sealed partial class NativeAotLoweringPlanner
         ["System.Int32"] = "CHAOS_IL2CPP_INT32",
         ["System.Int64"] = "CHAOS_IL2CPP_INT64",
         ["System.IntPtr"] = "CHAOS_IL2CPP_INTPTR",
+        ["System.Single"] = "CHAOS_IL2CPP_FLOAT32",
+        ["System.Double"] = "CHAOS_IL2CPP_FLOAT64",
+        ["System.Boolean"] = "CHAOS_IL2CPP_UINT8",
+        ["System.Char"] = "CHAOS_IL2CPP_UINT16",
     };
 
 }

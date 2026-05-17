@@ -3,6 +3,369 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
+      "methodId": "reflection-activation-subjects.reflection-activation-subjects.run",
+      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Run:System.Void(System.Int32)",
+      "signature": "System.Void ReflectionActivationSubjects::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ReflectionActivationSubjects",
+        "declaringTypeSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+        "definitionSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Run:System.Void(System.Int32)",
+        "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Run:System.Void(System.Int32)",
+        "methodId": "reflection-activation-subjects.reflection-activation-subjects.run",
+        "signature": "System.Void ReflectionActivationSubjects::Run(System.Int32)"
+      },
+      "nativeSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Run",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            45,
+            53,
+            61,
+            69,
+            77,
+            85,
+            93,
+            101
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 109,
+          "ilOffset": 43,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 109,
+          "ilOffset": 51,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_1:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_1:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_1:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 109,
+          "ilOffset": 59,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 61,
+          "resultType": "System.Void",
+          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_2:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_2:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_2:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 109,
+          "ilOffset": 67,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 69,
+          "resultType": "System.Void",
+          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_3:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_3:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_3:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 109,
+          "ilOffset": 75,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 77,
+          "resultType": "System.Void",
+          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_4:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_4:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_4:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 109,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 85,
+          "resultType": "System.Void",
+          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_5:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_5:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_5:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 109,
+          "ilOffset": 91,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 93,
+          "resultType": "System.Void",
+          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_6:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_6:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_6:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 109,
+          "ilOffset": 99,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 101,
+          "resultType": "System.Void",
+          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()",
+          "reference": {
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationSubjects",
+            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 109,
+          "ilOffset": 107,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 109
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "hasBlittableStructReturn": false
+    },
+    {
       "methodId": "reflection-activation-subjects.reflection-activation-subjects.subject-0",
       "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
       "signature": "System.Void ReflectionActivationSubjects::Subject_0()",
@@ -288,6 +651,9 @@
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -700,6 +1066,9 @@
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -735,6 +1104,9 @@
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -1185,6 +1557,9 @@
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -1487,6 +1862,9 @@
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -1803,6 +2181,9 @@
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -2215,6 +2596,9 @@
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -2250,366 +2634,9 @@
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
-    },
-    {
-      "methodId": "reflection-activation-subjects.reflection-activation-subjects.run",
-      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Run:System.Void(System.Int32)",
-      "signature": "System.Void ReflectionActivationSubjects::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "ReflectionActivationSubjects",
-        "declaringTypeSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
-        "definitionSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Run:System.Void(System.Int32)",
-        "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Run:System.Void(System.Int32)",
-        "methodId": "reflection-activation-subjects.reflection-activation-subjects.run",
-        "signature": "System.Void ReflectionActivationSubjects::Run(System.Int32)"
-      },
-      "nativeSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Run",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 1,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 2,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 3
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 4,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 5
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            45,
-            53,
-            61,
-            69,
-            77,
-            85,
-            93,
-            101
-          ],
-          "ilOffset": 6,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 109,
-          "ilOffset": 43,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 45,
-          "resultType": "System.Void",
-          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
-          "reference": {
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectKind": "method",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 109,
-          "ilOffset": 51,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 53,
-          "resultType": "System.Void",
-          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_1:System.Void()",
-          "reference": {
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectKind": "method",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_1:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_1:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 109,
-          "ilOffset": 59,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 61,
-          "resultType": "System.Void",
-          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_2:System.Void()",
-          "reference": {
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectKind": "method",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_2:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_2:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 109,
-          "ilOffset": 67,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 69,
-          "resultType": "System.Void",
-          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_3:System.Void()",
-          "reference": {
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectKind": "method",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_3:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_3:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 109,
-          "ilOffset": 75,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 77,
-          "resultType": "System.Void",
-          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_4:System.Void()",
-          "reference": {
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectKind": "method",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_4:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_4:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 109,
-          "ilOffset": 83,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 85,
-          "resultType": "System.Void",
-          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_5:System.Void()",
-          "reference": {
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectKind": "method",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_5:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_5:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 109,
-          "ilOffset": 91,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 93,
-          "resultType": "System.Void",
-          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_6:System.Void()",
-          "reference": {
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectKind": "method",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_6:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_6:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 109,
-          "ilOffset": 99,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 101,
-          "resultType": "System.Void",
-          "callee": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()",
-          "reference": {
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectKind": "method",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionActivationSubjects",
-            "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_7",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 109,
-          "ilOffset": 107,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 109
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     }
   ]

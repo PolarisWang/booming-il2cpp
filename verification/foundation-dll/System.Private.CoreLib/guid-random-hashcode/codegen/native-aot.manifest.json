@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "GuidRandomHashcodeSubjects",
   "entrySubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Run:System.Void(System.Int32)",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/guid-random-hashcode/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/guid-random-hashcode/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {
