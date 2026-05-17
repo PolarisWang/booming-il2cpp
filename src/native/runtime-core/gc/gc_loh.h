@@ -119,7 +119,7 @@ private:
     LohSegment* free_segment_list_ = nullptr; ///< Free segments for reuse
     int segment_count_ = 0;
     std::atomic<CHAOS_IL2CPP_SIZE> total_allocated_{0};
-    CompactMode compact_mode_{CompactMode::NONE}; ///< Default: no compaction
+    CompactMode compact_mode_{CompactMode::AUTOMATIC}; ///< Default: AUTOMATIC compaction
     mutable std::mutex mutex_;
 };
 

@@ -1,8 +1,53 @@
 {
-  "total": 31,
-  "passed": 1,
+  "total": 32,
+  "passed": 32,
   "failed": 0,
   "results": [
+    {
+      "family": "array-indexing-copy",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 13
+    },
+    {
+      "family": "buffer-memory",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 10
+    },
+    {
+      "family": "collections-generic-core",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 16
+    },
     {
       "family": "convert-char",
       "variants": {
@@ -17,7 +62,427 @@
       },
       "success": true,
       "methodCount": 18
+    },
+    {
+      "family": "enum-parsing",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 12
+    },
+    {
+      "family": "generic-nullable-value",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 10
+    },
+    {
+      "family": "guid-random-hashcode",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 14
+    },
+    {
+      "family": "math-numerics",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 18
+    },
+    {
+      "family": "object-equality-identity",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 7
+    },
+    {
+      "family": "primitive-numeric-conversions",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 15
+    },
+    {
+      "family": "string-char-text-core",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 20
+    },
+    {
+      "family": "time-date-time-timespan",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 16
+    },
+    {
+      "family": "threading-monitor-interlocked",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 14
+    },
+    {
+      "family": "threading-thread-basics",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 11
+    },
+    {
+      "family": "attributes-custom-metadata",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 9
+    },
+    {
+      "family": "boxing-unboxing-casts",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 11
+    },
+    {
+      "family": "delegate-core-invocation",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 10
+    },
+    {
+      "family": "exception-throw-diagnostics",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 14
+    },
+    {
+      "family": "globalization-culture",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 13
+    },
+    {
+      "family": "io-streams-basics",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 18
+    },
+    {
+      "family": "reflection-member-basics",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 14
+    },
+    {
+      "family": "runtime-compiler-services",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 10
+    },
+    {
+      "family": "span-memory-buffers",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 14
+    },
+    {
+      "family": "type-runtime-handles",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 13
+    },
+    {
+      "family": "reflection-type",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 43
+    },
+    {
+      "family": "reflection-assembly",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 22
+    },
+    {
+      "family": "reflection-member-complete",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 22
+    },
+    {
+      "family": "reflection-generics",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 12
+    },
+    {
+      "family": "reflection-parameters",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 10
+    },
+    {
+      "family": "reflection-module",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 6
+    },
+    {
+      "family": "reflection-binding",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 12
+    },
+    {
+      "family": "reflection-activation",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 8
     }
   ],
-  "timestamp": "2026-05-10T16:03:28"
+  "timestamp": "2026-05-17T15:06:13"
 }

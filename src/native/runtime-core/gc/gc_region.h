@@ -306,6 +306,12 @@ private:
     mutable NurseryRangeSlot nursery_slots_[kMaxNurserySlots]{};
     mutable std::atomic<int> nursery_slot_count_{0};
 
+    // O(1) global nursery bounds for fast-path IsNurseryPointer.
+    // Monotonic: only ever expands outward (min begin, max end).
+    // Never shrinks, even on RemoveNurseryRange.
+    mutable std::atomic<uintptr_t> nursery_global_begin_{0};
+    mutable std::atomic<uintptr_t> nursery_global_end_{0};
+
     // Lock-free POH range slot (same design as nursery_slots_).
     struct PohRangeSlot {
         std::atomic<uintptr_t> begin{0};

@@ -104,6 +104,14 @@ int32_t GetThreadCount() noexcept;
 
 // ── Hybrid GC safepoint ───────────────────────────────────────────────
 
+// GC mode constants for ManagedThread::gc_mode.
+// COOPERATIVE: thread may access managed heap at any time; must spin-wait
+//              at safepoint until GC completes.
+// PREEMPTIVE:  thread is in native code and will not access managed heap;
+//              confirms safepoint and returns immediately.
+constexpr uint32_t kGcModeCooperative = 0;
+constexpr uint32_t kGcModePreemptive  = 1;
+
 /// Called at GC safe points (loop back-edges, method calls).
 /// If a GC safepoint is active, the thread acknowledges and spins until
 /// released.  Threads that are inside native AOT frames (which lack
@@ -119,6 +127,21 @@ int32_t GetThreadCount() noexcept;
     /// released.  Threads that are inside native AOT frames (which lack
     /// explicit polls) are handled by CRAG conservative stack scanning.
     void SafepointPoll() noexcept;
+
+/// Switch the calling thread to cooperative GC mode.
+/// In cooperative mode, the thread may access managed heap objects.  At a
+/// safepoint, the thread spins until GC completes.
+/// Must be called before entering managed code or accessing managed objects.
+void EnterCooperativeMode() noexcept;
+
+/// Switch the calling thread to preemptive GC mode.
+/// In preemptive mode, the thread will NOT access managed heap objects.
+/// At a safepoint, the thread confirms the safepoint (sets last_seen_gen)
+/// and returns immediately without spinning.  The GC will not wait for this
+/// thread.
+/// Must be called before entering native code that may block or run for
+/// extended periods without safepoint polls.
+void EnterPreemptiveMode() noexcept;
 
 /// Request all managed threads to reach a safepoint.
 /// @returns the safepoint generation to pass to ReleaseGlobalSafepoint.

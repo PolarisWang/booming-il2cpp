@@ -228,6 +228,44 @@ public sealed partial class NativeAotLoweringPlanner
             };
         }
 
+        // ── CCW interface vtable data ─────────────────────────────────
+        // Collect unique declaring type subject IDs that have a COM interface GUID.
+        // V1 emits: GUID byte-array constant + placeholder vtable struct.
+        var ccwInterfaceModels = new List<ScriptObject>();
+        if (_comInterfaceGuids.Count > 0)
+        {
+            var seenTypes = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var method in reachableMethods)
+            {
+                string declaringTypeSubjectId;
+                try { declaringTypeSubjectId = GetMethodDeclaringTypeSubjectId(method.SubjectId); }
+                catch { continue; }
+
+                if (!seenTypes.Add(declaringTypeSubjectId)) continue;
+
+                if (_comInterfaceGuids.TryGetValue(declaringTypeSubjectId, out var guid))
+                {
+                    // Convert "ABCDEF01-2345-6789-ABCD-EF0123456789" → GUID bytes.
+                    var guidBytes = ParseGuidStringToBytes(guid);
+                    if (guidBytes != null)
+                    {
+                        string typeName = GetTypeDisplayName(declaringTypeSubjectId);
+                        string typeNamespace = GetTypeNamespace(declaringTypeSubjectId);
+                        string safeName = SanitizeCppIdentifier(typeName) + "_" +
+                            SanitizeCppIdentifier(typeNamespace);
+
+                        ccwInterfaceModels.Add(new ScriptObject
+                        {
+                            ["guid_bytes"] = string.Join(", ", guidBytes.Select(b => $"0x{b:X2}u")),
+                            ["guid_symbol_suffix"] = safeName,
+                            ["type_name"] = typeName,
+                            ["type_namespace"] = typeNamespace,
+                        });
+                    }
+                }
+            }
+        }
+
         var model = new ScriptObject
         {
             ["is_empty"] = false,
@@ -240,6 +278,8 @@ public sealed partial class NativeAotLoweringPlanner
             ["slot_count"] = tokenSlotList.Count,
             ["reverse_pinvoke_count"] = _reversePInvokeEntries.Count,
             ["reverse_pinvoke_entries"] = reversePInvokeModels,
+            ["ccw_interface_count"] = ccwInterfaceModels.Count,
+            ["ccw_interfaces"] = ccwInterfaceModels,
         };
 
         return ScribanTemplateRenderer.RenderTemplate(
@@ -826,4 +866,52 @@ public sealed partial class NativeAotLoweringPlanner
 
         return hash;
     }
+
+    /// <summary>
+    /// Converts a standard GUID string (e.g., "ABCDEF01-2345-6789-ABCD-EF0123456789")
+    /// to a 16-byte array. Returns null if the input is not a valid 36-char GUID.
+    /// Handles both with and without braces.
+    /// </summary>
+    private static byte[]? ParseGuidStringToBytes(string guid)
+    {
+        // Strip optional braces.
+        if (guid.StartsWith('{') && guid.EndsWith('}'))
+            guid = guid.Substring(1, guid.Length - 2);
+
+        if (guid.Length != 36) return null;
+        if (guid[8] != '-' || guid[13] != '-' || guid[18] != '-' || guid[23] != '-')
+            return null;
+
+        try
+        {
+            var bytes = new byte[16];
+            // GUID bytes are stored in a specific order in the binary representation:
+            // Bytes 0-3: first group (little-endian uint32)
+            // Bytes 4-5: second group (little-endian uint16)
+            // Bytes 6-7: third group (little-endian uint16)
+            // Bytes 8-15: remaining groups (big-endian)
+            bytes[0] = Convert.ToByte(guid.Substring(0, 2), 16);
+            bytes[1] = Convert.ToByte(guid.Substring(2, 2), 16);
+            bytes[2] = Convert.ToByte(guid.Substring(4, 2), 16);
+            bytes[3] = Convert.ToByte(guid.Substring(6, 2), 16);
+            bytes[4] = Convert.ToByte(guid.Substring(9, 2), 16);
+            bytes[5] = Convert.ToByte(guid.Substring(11, 2), 16);
+            bytes[6] = Convert.ToByte(guid.Substring(14, 2), 16);
+            bytes[7] = Convert.ToByte(guid.Substring(16, 2), 16);
+            bytes[8] = Convert.ToByte(guid.Substring(19, 2), 16);
+            bytes[9] = Convert.ToByte(guid.Substring(21, 2), 16);
+            bytes[10] = Convert.ToByte(guid.Substring(24, 2), 16);
+            bytes[11] = Convert.ToByte(guid.Substring(26, 2), 16);
+            bytes[12] = Convert.ToByte(guid.Substring(28, 2), 16);
+            bytes[13] = Convert.ToByte(guid.Substring(30, 2), 16);
+            bytes[14] = Convert.ToByte(guid.Substring(32, 2), 16);
+            bytes[15] = Convert.ToByte(guid.Substring(34, 2), 16);
+            return bytes;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
 }

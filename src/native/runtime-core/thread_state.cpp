@@ -223,24 +223,51 @@ void SafepointPoll() noexcept {
     thread->at_safepoint = true;
     thread->last_seen_gen = gen;
 
-    // Spin with yield until generation flips (even = released).
-    // V4-M2: No hard timeout — silently breaking out of the safepoint
-    // while GC is in progress would corrupt the heap.  If a thread is
-    // in a deep native frame that never polls, it won't reach this
-    // code path at all (conservative stack scanning handles that case).
-    // NOTE: Uses CPU pause instead of yield() to avoid a 30ms context
-    // switch per iteration.  The GC duration is ~400µs — busy-waiting
-    // with pause is vastly cheaper than yielding (which deschedules the
-    // thread, incurring a full OS quantum delay on wakeup).
+    // Phase 2: Preemptive mode — confirm and return immediately.
+    // The thread is in native code and will not access managed heap.
+    if (thread->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive) {
+        return;
+    }
+
+    // Adaptive spin with yield fallback.  Use pause initially, then fall
+    // back to OS yield after ~10000 iterations (~300us at 3GHz) to avoid
+    // starving other threads during long GC pauses.
+    constexpr int kAdaptiveSpinLimit = 10000;
+    int spin_count = 0;
     while ((s_generation.load(std::memory_order_acquire) & kGcGenerationMask) != 0u) {
-#if defined(_MSC_VER)
-        _mm_pause();
+        if (++spin_count > kAdaptiveSpinLimit) [[unlikely]] {
+#if defined(_WIN32) || defined(_WIN64)
+            Sleep(0);
 #else
-        __builtin_ia32_pause();
+            std::this_thread::yield();
 #endif
+            spin_count = 0;
+        } else {
+#if defined(_MSC_VER)
+            _mm_pause();
+#else
+            __builtin_ia32_pause();
+#endif
+        }
     }
 
     thread->at_safepoint = false;
+}
+
+void EnterCooperativeMode() noexcept {
+    auto* thread = tls_this_thread;
+    if (thread == nullptr) return;
+    thread->gc_mode.store(kGcModeCooperative, std::memory_order_release);
+    // After switching to cooperative, check if a safepoint is already active.
+    // If so, this thread must participate in the safepoint.
+    SafepointPoll();
+}
+
+void EnterPreemptiveMode() noexcept {
+    auto* thread = tls_this_thread;
+    if (thread == nullptr) return;
+    // Mark as preemptive BEFORE any subsequent SafepointPoll sees the flag.
+    thread->gc_mode.store(kGcModePreemptive, std::memory_order_release);
 }
 
 uint32_t RequestGlobalSafepoint() noexcept {
@@ -299,6 +326,12 @@ uint32_t RequestGlobalSafepoint() noexcept {
         s_confirm_out = &confirm_spins;
         EnumerateThreads([](ManagedThread* t) -> bool {
             if (t == s_confirm_self) return true;
+            // Phase 2: Preemptive threads are not required to confirm.
+            // They set last_seen_gen in SafepointPoll and return immediately,
+            // but may not have reached SafepointPoll yet if they are deep
+            // in native code (no polls).  The GC conservatively scans their
+            // stacks instead.
+            if (t->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive) return true;
             if (t->last_seen_gen == s_confirm_desired) return true;
             (*s_confirm_out)++;
             return true;
@@ -310,6 +343,8 @@ uint32_t RequestGlobalSafepoint() noexcept {
                 s_confirm_out = &remaining;
                 EnumerateThreads([](ManagedThread* t) -> bool {
                     if (t == s_confirm_self) return true;
+                    // Phase 2: Skip preemptive threads.
+                    if (t->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive) return true;
                     if (t->last_seen_gen != s_confirm_desired) (*s_confirm_out)++;
                     return true;
                 });

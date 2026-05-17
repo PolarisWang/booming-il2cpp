@@ -96,6 +96,20 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlySet<string>? _sealedTypeSubjectIds;
     private HashSet<string> _typesWithInstanceMethods = new(StringComparer.Ordinal);
 
+    // ── COM interface GUIDs for CCW vtable registration ──
+    // Populated from ManagedTypeModel data before module emission.
+    // Key: type subject ID, Value: 36-char GUID string (e.g. "ABCDEF01-2345-6789-ABCD-EF0123456789").
+    private Dictionary<string, string> _comInterfaceGuids = new(StringComparer.Ordinal);
+
+    /// Populate COM interface GUIDs from loaded type models.
+    /// Called before module emission to make GUID data available for the
+    /// hotpatch table template (which emits GUID byte-array constants
+    /// and placeholder vtables).
+    internal void SetComInterfaceGuids(IReadOnlyDictionary<string, string> typeSubjectIdToGuid)
+    {
+        _comInterfaceGuids = new Dictionary<string, string>(typeSubjectIdToGuid, StringComparer.Ordinal);
+    }
+
     // ── VTable descriptor data for BootstrapRuntime registration ──
     private sealed record VTableSlotEntry(uint MethodToken, string NativeSymbol);
     private sealed record VTableDescriptorData(

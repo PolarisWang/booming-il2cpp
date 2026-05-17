@@ -150,6 +150,42 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
     return tenured;
 }
 
+void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
+    if (obj == nullptr) return nullptr;
+    // Caller already verified obj is in nursery — skip IsInNursery check.
+    if (IsForwarded(obj)) {
+        return GetForwardingAddress(obj);
+    }
+
+    CHAOS_IL2CPP_SIZE obj_size = PreciseObjectSize(obj);
+    if (obj_size == 0) {
+        if (tls_nursery_ctx.nursery != nullptr &&
+            reinterpret_cast<uintptr_t>(obj) >= reinterpret_cast<uintptr_t>(tls_nursery_ctx.nursery->begin) &&
+            reinterpret_cast<uintptr_t>(obj) < reinterpret_cast<uintptr_t>(tls_nursery_ctx.nursery->current)) {
+            obj_size = EstimateObjectSize(obj, tls_nursery_ctx.nursery);
+        } else {
+            obj_size = kMaxEstObjectSize;
+        }
+    }
+
+    void* tenured = g_old_gen.Allocate(obj_size, true);
+    if (tenured == nullptr) return nullptr;
+
+    std::memcpy(tenured, obj, obj_size);
+    SetForwardingAddress(obj, tenured);
+
+    if (result) {
+        result->objects_promoted++;
+        result->bytes_promoted += obj_size;
+        if (result->bfs_worklist && result->bfs_worklist_count < result->bfs_worklist_capacity) {
+            result->bfs_worklist[result->bfs_worklist_count++] = tenured;
+        }
+    }
+
+    CHAOS_IL2CPP_LOG_DEBUG("CRAG", "scavenge_object_known_nursery");
+    return tenured;
+}
+
 // ======================================================================
 // Young collection
 // ======================================================================
@@ -198,7 +234,7 @@ YoungCollectionResult GcYoungCollection(Region* nursery, Region* tenured_target)
                 if (val != nullptr && IsInNursery(val)) {
                     // This old→nursery reference is a root for young GC.
                     // Scavenge the target object.
-                    void* tenured = GcScavengeObject(val, &result);
+                    void* tenured = GcScavengeObjectKnownNursery(val, &result);
                     if (tenured != nullptr) {
                         *ptr_slot = tenured;  // Update the reference.
                     }
@@ -275,7 +311,7 @@ YoungCollectionResult GcYoungCollection(Region* nursery, Region* tenured_target)
             if (val == nullptr) continue;
 
             if (IsInNursery(val)) {
-                void* tenured = GcScavengeObject(val, &result);
+                void* tenured = GcScavengeObjectKnownNursery(val, &result);
                 if (tenured != nullptr && tenured != val) {
                     *slot = tenured;
                 }

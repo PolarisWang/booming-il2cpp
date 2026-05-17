@@ -41,6 +41,15 @@ struct alignas(8) MethodTableOrigin {
 
     MethodTableOrigin() noexcept : module_id(0), manifest_method_index(0) {}
     MethodTableOrigin(uint32_t mid, uint32_t idx) noexcept : module_id(mid), manifest_method_index(idx) {}
+
+    // std::atomic deletes implicit copy/move assignment, so provide explicit one.
+    MethodTableOrigin& operator=(const MethodTableOrigin& other) noexcept {
+        if (this != &other) {
+            module_id.store(other.module_id.load(std::memory_order_relaxed), std::memory_order_relaxed);
+            manifest_method_index = other.manifest_method_index;
+        }
+        return *this;
+    }
 };
 
 // ── Global table declarations ──────────────────────────────────────────

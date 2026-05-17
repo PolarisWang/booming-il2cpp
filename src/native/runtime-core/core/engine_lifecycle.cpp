@@ -144,6 +144,47 @@ void GcProcessWeakHandlesAfterYoungGC() noexcept {
 }
 
 // ======================================================================
+// Internal handle API (no RuntimeState required)
+// ======================================================================
+
+CHAOS_IL2CPP_UINT64 GcCreateStrongHandle(void* object_instance) noexcept {
+    if (object_instance == nullptr) return 0;
+    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
+    CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
+    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, false, false };
+    return handle;
+}
+
+CHAOS_IL2CPP_UINT64 GcCreateWeakHandle(void* object_instance) noexcept {
+    if (object_instance == nullptr) return 0;
+    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
+    CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
+    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, false, true };
+    return handle;
+}
+
+CHAOS_IL2CPP_UINT64 GcCreatePinnedHandle(void* object_instance) noexcept {
+    if (object_instance == nullptr) return 0;
+    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
+    CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
+    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, true, false };
+    GcAddPinnedObject(object_instance);
+    return handle;
+}
+
+void GcFreeHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept {
+    if (handle_id == 0) return;
+    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
+    auto it = s_gc_handle_table.find(handle_id);
+    if (it != s_gc_handle_table.end()) {
+        if (it->second.pinned) {
+            GcRemovePinnedObject(it->second.object_instance);
+        }
+        s_gc_handle_table.erase(it);
+    }
+}
+
+// ======================================================================
 // DependentHandle API — for ConditionalWeakTable / Ephemeron semantics
 // ======================================================================
 
@@ -218,7 +259,7 @@ void GcProcessDependentHandlesAfterYoungGC() noexcept {
             if (secondary != nullptr &&
                 RegionManager::Instance().IsNurseryPointer(secondary)) {
                 // Promote secondary: scavenge it to old gen.
-                GcScavengeObject(secondary, nullptr);
+                GcScavengeObjectKnownNursery(secondary, nullptr);
             }
         } else {
             // Primary was not promoted — clear both.

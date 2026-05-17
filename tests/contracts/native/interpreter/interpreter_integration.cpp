@@ -12,10 +12,19 @@
 
 #include <chaos/common.h>
 #include <chaos/type_info.h>
+#include <codegen_bridge.h>
 
 #include <iostream>
 #include <cstring>
 #include <cstdint>
+
+// ── Stubs for symbols normally emitted by codegen ───────────────────────
+// These are referenced by bootstrap/interpreter libs but not provided
+// when the test is built without the full codegen pipeline.
+extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module = nullptr;
+extern "C" const char* kChaosExternalRuntimeSubjects[1] = { nullptr };
+extern "C" void* kChaosExternalRuntimeFnTable[1] = { nullptr };
+extern "C" int32_t kChaosExternalRuntimeCount = 0;
 
 // ── Namespace aliases ───────────────────────────────────────────────────
 using chaos::il2cpp::interpreter::ExecutionFrame;
@@ -107,6 +116,11 @@ static bool TestInterfaceCastClass();
 static bool TestInterfaceIsInst();
 static bool TestInterfaceVtableDispatch();
 
+// ── Codegen VTable dispatch tests (RegisterCodegenVTable path) ─────────
+static bool Test_CodegenVTableDirect();
+static bool Test_CodegenVTableInheritance();
+static bool Test_CodegenVTableInterfaceDispatch();
+
 // ════════════════════════════════════════════════════════════════════════════
 // Test runner
 // ════════════════════════════════════════════════════════════════════════════
@@ -158,6 +172,11 @@ int main()
     // CallVirt / VTable dispatch tests
     TEST(TestCallVirtDirectResolution);
     TEST(TestCallVirtInheritanceChain);
+
+    // Codegen VTable path tests (using RegisterCodegenVTable)
+    TEST(Test_CodegenVTableDirect);
+    TEST(Test_CodegenVTableInheritance);
+    TEST(Test_CodegenVTableInterfaceDispatch);
 
     // SEH exception handling tests
     TEST(TestThrowUnhandled);
@@ -1692,4 +1711,187 @@ bool TestInterfaceVtableDispatch()
     // Must resolve through interface vtable → slot[2] → 0xBABE
     return result3.needs_external_dispatch &&
            result3.call_target == reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBABEu));
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// Codegen VTable path tests (RegisterCodegenVTable + InterpreterVM)
+// ══════════════════════════════════════════════════════════════════════════
+//
+// These tests simulate the codegen→BootstrapRuntime path: a VTableDescriptorV0
+// is constructed (as codegen would emit it), registered via RegisterCodegenVTable
+// (as BootstrapRuntime would do), and then CallVirt dispatch is exercised through
+// the InterpreterVM.
+
+bool Test_CodegenVTableDirect()
+{
+    using namespace chaos::il2cpp::vtable_registry;
+
+    // Simulate codegen-emitted data: VTableSlot[] + flat vtable_array + VTableDescriptorV0
+    VTableSlot slots[] = {
+        { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) }
+    };
+    const void* vtable_array[] = { reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) };
+
+    VTableDescriptorV0 desc;
+    std::memset(&desc, 0, sizeof(desc));
+    desc.stable_id      = 0x10000001ULL;
+    desc.type_token     = 0x100u;
+    desc.base_token     = 0u;
+    desc.slot_count     = 1u;
+    desc.slots          = slots;
+    desc.vtable_array   = vtable_array;
+    desc.vtable_length  = 1u;
+    desc.type_shape     = 1;
+
+    // Register as BootstrapRuntime would
+    RegisterCodegenVTable(&desc);
+
+    // Build IR: ldarg.0 → callvirt method_token=0x200
+    IRMethod method;
+    IRInstruction ldarg; ldarg.op_code = IROpCode::LdArg; ldarg.operand_index = 0; method.instructions.push_back(ldarg);
+    IRInstruction callvirt;
+    callvirt.op_code = IROpCode::CallVirt;
+    callvirt.secondary_index = static_cast<CHAOS_IL2CPP_SIZE>(0x200u);
+    callvirt.arg_count = 1u;
+    method.instructions.push_back(callvirt);
+
+    auto* obj = new InterpreterObject();
+    obj->type_token = 0x100u;
+    obj->fields.resize(1u);
+
+    ExecutionFrame frame;
+    frame.arguments.push_back(InterpreterValue::from_obj(obj));
+
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+
+    return result.needs_external_dispatch &&
+           result.call_target == reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu));
+}
+
+bool Test_CodegenVTableInheritance()
+{
+    using namespace chaos::il2cpp::vtable_registry;
+
+    // Base type: type_token=0x100, method 0x200 → 0xBEEF
+    VTableSlot base_slots[] = {
+        { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) }
+    };
+    const void* base_vtable_array[] = { reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) };
+
+    VTableDescriptorV0 base_desc;
+    std::memset(&base_desc, 0, sizeof(base_desc));
+    base_desc.stable_id      = 0x10000001ULL;
+    base_desc.type_token     = 0x100u;
+    base_desc.base_token     = 0u;
+    base_desc.slot_count     = 1u;
+    base_desc.slots          = base_slots;
+    base_desc.vtable_array   = base_vtable_array;
+    base_desc.vtable_length  = 1u;
+    base_desc.type_shape     = 1;
+    RegisterCodegenVTable(&base_desc);
+
+    // Derived type: type_token=0x101, base_token=0x100, method 0x200 → 0xCAFE (override)
+    VTableSlot derived_slots[] = {
+        { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xCAFEu)) }
+    };
+    const void* derived_vtable_array[] = { reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xCAFEu)) };
+
+    VTableDescriptorV0 derived_desc;
+    std::memset(&derived_desc, 0, sizeof(derived_desc));
+    derived_desc.stable_id      = 0x10000002ULL;
+    derived_desc.type_token     = 0x101u;
+    derived_desc.base_token     = 0x100u;
+    derived_desc.slot_count     = 1u;
+    derived_desc.slots          = derived_slots;
+    derived_desc.vtable_array   = derived_vtable_array;
+    derived_desc.vtable_length  = 1u;
+    derived_desc.type_shape     = 1;
+    RegisterCodegenVTable(&derived_desc);
+
+    // Build IR: ldarg.0 → callvirt method_token=0x200
+    IRMethod method;
+    IRInstruction ldarg; ldarg.op_code = IROpCode::LdArg; ldarg.operand_index = 0; method.instructions.push_back(ldarg);
+    IRInstruction callvirt;
+    callvirt.op_code = IROpCode::CallVirt;
+    callvirt.secondary_index = static_cast<CHAOS_IL2CPP_SIZE>(0x200u);
+    callvirt.arg_count = 1u;
+    method.instructions.push_back(callvirt);
+
+    auto* obj = new InterpreterObject();
+    obj->type_token = 0x101u;
+    obj->fields.resize(1u);
+
+    ExecutionFrame frame;
+    frame.arguments.push_back(InterpreterValue::from_obj(obj));
+
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+
+    // Must resolve to DERIVED override (0xCAFE), not base (0xBEEF)
+    return result.needs_external_dispatch &&
+           result.call_target == reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xCAFEu));
+}
+
+bool Test_CodegenVTableInterfaceDispatch()
+{
+    using namespace chaos::il2cpp::vtable_registry;
+
+    const CHAOS_IL2CPP_UINT64 kIfaceStable = 0xABCD0001ULL;
+
+    // Interface map: interface's 2 methods (slot 0 & 1) map to vtable offset 1
+    chaos::il2cpp::common::InterfaceMapEntry iface_entries[] = {
+        { kIfaceStable, 1u, 2u }
+    };
+
+    // Flat vtable array: index 0 = g_method0, index 1 = g_method1, index 2 = g_method2
+    alignas(64) static char s_method0[64];
+    alignas(64) static char s_method1[64];
+    alignas(64) static char s_method2[64];
+    const void* vtable_array[] = {
+        reinterpret_cast<void*>(&s_method0),
+        reinterpret_cast<void*>(&s_method1),
+        reinterpret_cast<void*>(&s_method2),
+    };
+
+    // VTableSlot array: type defines its own slot at method_token=0x20000001
+    VTableSlot obj_slots[] = {
+        { 0x20000001u, reinterpret_cast<void*>(&s_method0) }
+    };
+
+    VTableDescriptorV0 obj_desc;
+    std::memset(&obj_desc, 0, sizeof(obj_desc));
+    obj_desc.stable_id      = 0x20000001ULL;
+    obj_desc.type_token     = 0x200u;
+    obj_desc.base_token     = 0u;
+    obj_desc.slot_count     = 1u;
+    obj_desc.slots          = obj_slots;
+    obj_desc.vtable_array   = vtable_array;
+    obj_desc.vtable_length  = 3u;
+    obj_desc.type_shape     = 1;
+    obj_desc.iface_map      = iface_entries;
+    obj_desc.iface_count    = 1u;
+    RegisterCodegenVTable(&obj_desc);
+
+    // Build IR: ldarg.0 → callvirt method_token=0 (= interface slot 0)
+    IRMethod method;
+    IRInstruction ldarg; ldarg.op_code = IROpCode::LdArg; ldarg.operand_index = 0; method.instructions.push_back(ldarg);
+    IRInstruction callvirt;
+    callvirt.op_code = IROpCode::CallVirt;
+    callvirt.secondary_index = static_cast<CHAOS_IL2CPP_SIZE>(0u);
+    callvirt.arg_count = 1u;
+    method.instructions.push_back(callvirt);
+
+    auto* obj = new InterpreterObject();
+    obj->type_token = 0x200u;
+
+    ExecutionFrame frame;
+    frame.arguments.push_back(InterpreterValue::from_obj(obj));
+
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+
+    // Interface slot 0 → vtable_offset(1) + slot_index(0) = vtable_array[1] = &s_method1
+    return result.needs_external_dispatch &&
+           result.call_target == reinterpret_cast<void*>(&s_method1);
 }
