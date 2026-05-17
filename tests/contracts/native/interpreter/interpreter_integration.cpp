@@ -18,6 +18,9 @@
 #include <cstring>
 #include <cstdint>
 
+#include "hotpatch_table.h"
+#include "method_replacement.h"
+
 // ── Stubs for symbols normally emitted by codegen ───────────────────────
 // These are referenced by bootstrap/interpreter libs but not provided
 // when the test is built without the full codegen pipeline.
@@ -127,6 +130,7 @@ static bool Test_HotUpdateVTableResolution();
 // ── Phase 9b+: Interface offset cache + runtime_iface_map tests ──────
 static bool Test_ChaosFindInterfaceOffset();
 static bool Test_HotUpdateVTableInterfaceResolution();
+bool Test_MethodReplacementDispatch();
 
 // ════════════════════════════════════════════════════════════════════════════
 // Test runner
@@ -223,6 +227,7 @@ int main()
     TEST(TestInterfaceCastClass);
     TEST(TestInterfaceIsInst);
     TEST(TestInterfaceVtableDispatch);
+    TEST(Test_MethodReplacementDispatch);
 
     std::cout << "interpreter-integration=failures=" << failures << std::endl;
 
@@ -1532,8 +1537,8 @@ bool TestLdLocA_RefSemantics()
     IRInstruction push; push.op_code = IROpCode::LdcI4; push.immediate_i4 = 10; method.instructions.push_back(push);
     IRInstruction stloc; stloc.op_code = IROpCode::StLoc; stloc.operand_index = 0; method.instructions.push_back(stloc);
     // ldc.i4 20 → ldloca 0 → stobj  (write 20 through managed ptr to local[0])
-    IRInstruction push2; push2.op_code = IROpCode::LdcI4; push2.immediate_i4 = 20; method.instructions.push_back(push2);
     IRInstruction ldloca; ldloca.op_code = IROpCode::LdLocA; ldloca.operand_index = 0; method.instructions.push_back(ldloca);
+    IRInstruction push2; push2.op_code = IROpCode::LdcI4; push2.immediate_i4 = 20; method.instructions.push_back(push2);
     IRInstruction stobj; stobj.op_code = IROpCode::StObj; method.instructions.push_back(stobj);
     // ldloc 0 → ret  (should read 20, written via StObj through the managed ptr)
     IRInstruction ldloc; ldloc.op_code = IROpCode::LdLoc; ldloc.operand_index = 0; method.instructions.push_back(ldloc);

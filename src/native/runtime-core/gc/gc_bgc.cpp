@@ -95,8 +95,16 @@ void BgcController::StartBgcCycle() {
         return;
     }
 
+    // Acquire safepoint before PopulateRootSet.  Root scanning
+    // (GcScanAllThreadRoots + TLS nursery enumeration) reads thread
+    // stacks and nursery regions — doing this while threads are
+    // actively modifying them yields an inconsistent root set that
+    // can cause the concurrent mark loop to chase garbage pointers
+    // indefinitely (the "BGC hang").
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "start_cycle");
+    uint32_t bgc_gen = threading::RequestGlobalSafepoint();
     PopulateRootSet();
+    threading::ReleaseGlobalSafepoint(bgc_gen);
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "root_set_populated");
 
     // Transition to concurrent mark phase.
@@ -387,6 +395,17 @@ void BgcController::BgcThreadMain() {
                         std::this_thread::sleep_for(std::chrono::microseconds(100));
                     } else {
                         std::this_thread::yield();
+                    }
+
+                    // Convergence safety valve: after ~10 consecutive seconds
+                    // of idle rounds with no completion, exit the concurrent
+                    // mark loop and let the STW re-mark handle remaining work.
+                    // This prevents infinite hangs when garbage roots from
+                    // an inconsistent root set (e.g., scanned without safepoint)
+                    // generate unbounded work in the concurrent mark loop.
+                    if (idle_rounds > 100000) {
+                        CHAOS_IL2CPP_LOG_WARN("BGC", "concurrent_mark_convergence_timeout");
+                        break;
                     }
                 }
 

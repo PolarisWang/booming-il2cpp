@@ -1,6 +1,6 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
-#include <chaos/com_ccw.h>
+#include "com_ccw.h"
 #include "runtime_core.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -1236,7 +1236,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBox
 		}
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 		GC_END_STUBBORN_CHANGE(chaos_array);
-		chaos::il2cpp::runtime_core::DirtyCard(chaos_array);
+		chaos_gc_dirty_card(chaos_array);
 	}
 	_s0 = chaos_locals[0];
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);

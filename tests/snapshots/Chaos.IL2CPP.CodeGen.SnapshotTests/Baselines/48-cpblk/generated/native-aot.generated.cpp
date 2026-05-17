@@ -1,6 +1,6 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
-#include <chaos/com_ccw.h>
+#include "com_ccw.h"
 #include "runtime_core.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"

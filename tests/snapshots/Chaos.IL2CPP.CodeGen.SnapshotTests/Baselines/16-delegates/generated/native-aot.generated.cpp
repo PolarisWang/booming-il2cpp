@@ -1,6 +1,6 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
-#include <chaos/com_ccw.h>
+#include "com_ccw.h"
 #include "runtime_core.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -1217,7 +1217,22 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_DelegateHelper_RunDelegate(vo
 
 
 	_s0 = 0;
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&SnapshotTestFixtures_Helper_GetValue);
+	{
+		// Hotpatch-aware ldftn wrapper (slot 1)
+		static auto* chaos_ftn_thunk = +[](void) -> CHAOS_IL2CPP_INT32 {
+			auto& _d_entry = s_hotpatch_entries[1];
+			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+			{
+				CHAOS_IL2CPP_INT32 _d_ret{};
+				::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+					_d_entry.method_key, nullptr, &_d_ret);
+				return _d_ret;
+			}
+			return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(_d_entry.direct_ptr)();
+		};
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+	}
 	{
 		const auto chaos_method_ptr = _s1;
 		const auto chaos_target = _s0;

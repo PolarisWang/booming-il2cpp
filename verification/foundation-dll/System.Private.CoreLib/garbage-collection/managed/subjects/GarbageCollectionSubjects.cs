@@ -5,10 +5,34 @@
 
 using System;
 
+// GCMemoryInfoData struct — Sequential layout matching native GcMemoryInfoNative.
+// Used by Subject_6 to verify chaos_gc_get_memory_info produces valid data.
+[System.Runtime.InteropServices.StructLayout(
+    System.Runtime.InteropServices.LayoutKind.Sequential)]
+public struct GCMemoryInfoData
+{
+    public long highMemoryLoadThresholdBytes;
+    public long memoryLoadBytes;
+    public long totalAvailableMemoryBytes;
+    public long heapSizeBytes;
+    public long fragmentedBytes;
+    public long totalCommittedBytes;
+    public long promotedBytes;
+    public int generation;
+    public int finalizationPendingCount;
+    public int compacted;
+    public int concurrent;
+}
+
 public static partial class GarbageCollectionSubjects
 {
     // Inlined exit code — avoids SDK method call resolution in codegen
     public static int _exitCode;
+
+    // P/Invoke to native chaos_gc_get_memory_info
+    [System.Runtime.InteropServices.DllImport("__Internal",
+        EntryPoint = "chaos_gc_get_memory_info")]
+    static extern void GetNativeMemoryInfo(out GCMemoryInfoData info);
 
     // [0] System.Private.CoreLib/System.GC::Collect:System.Void()
     public static void Subject_0()
@@ -46,6 +70,18 @@ public static partial class GarbageCollectionSubjects
         if ((int)(GC.GetTotalMemory(true)) != (int)(GC.GetTotalMemory(true))) _exitCode = 1;
     }
 
+    // [6] System.Private.CoreLib/System.GC::GetMemoryInfo → chaos_gc_get_memory_info
+    public static void Subject_6()
+    {
+        GetNativeMemoryInfo(out var info);
+
+        // Verify basic properties are populated.
+        if (info.heapSizeBytes <= 0) _exitCode = 1;
+        if (info.memoryLoadBytes <= 0) _exitCode = 2;
+        if (info.totalAvailableMemoryBytes <= 0) _exitCode = 3;
+        if (info.generation < 0) _exitCode = 4;
+    }
+
     public static void Run(int entryIndex)
     {
         switch (entryIndex)
@@ -56,6 +92,7 @@ public static partial class GarbageCollectionSubjects
             case 3: Subject_3(); break;
             case 4: Subject_4(); break;
             case 5: Subject_5(); break;
+            case 6: Subject_6(); break;
         }
     }
 

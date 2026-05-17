@@ -77,6 +77,10 @@ extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept;
 /// Unregister external memory pressure (System.GC.RemoveMemoryPressure()).
 // All three are now declared in gc_api.h with CHAOS_RUNTIME_ABI_CALL.
 
+/// Write barrier: dirty the card table for @a obj (for generational GC).
+/// Used by codegen stfld/stelem.ref/stobj to keep the card table consistent.
+extern "C" void chaos_gc_dirty_card(const void* obj) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_HELPERS_H_

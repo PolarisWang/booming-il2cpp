@@ -153,6 +153,27 @@ uint32_t HotpatchNameRegistry::TokenToSlot(uint32_t module_id, uint32_t token) c
     return (entry != nullptr) ? entry->slot : ~0u;
 }
 
+uint64_t HotpatchNameRegistry::FindToken(uint32_t method_token) const noexcept {
+    if (method_token == 0) return 0;
+
+    for (size_t mi = 0; mi < modules_.size(); ++mi) {
+        const auto* mod = modules_[mi];
+        if (mod == nullptr) continue;
+        if (mod->token_slot_entries == nullptr || mod->token_slot_entry_count == 0) continue;
+
+        const auto* entry = static_cast<const HotpatchSlotEntryV0*>(
+            std::bsearch(&method_token,
+                         mod->token_slot_entries,
+                         mod->token_slot_entry_count,
+                         sizeof(HotpatchSlotEntryV0),
+                         CompareTokenSlot));
+        if (entry != nullptr)
+            return (static_cast<uint64_t>(mi) << 32) | method_token;
+    }
+
+    return 0;
+}
+
 // ── Dispatch entry access ─────────────────────────────────────────────
 
 HotpatchEntryV0* HotpatchNameRegistry::GetDispatchEntry(uint32_t module_id, uint32_t token) const noexcept {

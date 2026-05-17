@@ -503,7 +503,26 @@ public sealed partial class NativeAotLoweringPlanner
                             sealedImpl.Identity.DeclaringTypeSubjectId);
                     }
                 }
-                else
+                else if (_interfaceTypeSubjectIds != null &&
+                    _interfaceTypeSubjectIds.Contains(slotDeclaringTypeSubjectId))
+                {
+                    // Interface dispatch: devirtualize only with guard check
+                    var ifaceUniqueImpls = routes
+                        .Select(r => r.ImplementationMethod.SubjectId)
+                        .Distinct(StringComparer.Ordinal)
+                        .ToArray();
+                    if (ifaceUniqueImpls.Length == 1)
+                    {
+                        // Single implementation — guard on first receiver type
+                        _devirtualizationHints[key] = new DevirtualizationHint(
+                            true,
+                            routes[0].ImplementationMethod.SubjectId,
+                            routes[0].ImplementationMethod.Identity.DeclaringTypeSubjectId,
+                            guardTypeSubjectId: routes[0].ReceiverTypeSubjectId);
+                    }
+                    // Multiple implementations: skip devirtualization, fall through to vtable
+                }
+               else
                 {
                     // (b) Guard-based: exactly 2 implementations, one from declaring type itself
                     var uniqueImpls = routes

@@ -6,6 +6,9 @@
 #include "gc_loh.h"
 #include "gc_old_gen.h"
 #include "gc_scheduler.h"
+#include "gc_stats.h"
+
+#include <windows.h>
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -89,6 +92,14 @@ void CHAOS_RUNTIME_ABI_CALL chaos_gc_remove_memory_pressure(
 }
 
 // ======================================================================
+// chaos_gc_dirty_card — write barrier for generational GC
+// ======================================================================
+
+extern "C" void chaos_gc_dirty_card(const void* obj) noexcept {
+    DirtyCard(obj);
+}
+
+// ======================================================================
 // chaos_gc_collect_with_mode
 // ======================================================================
 
@@ -165,6 +176,41 @@ extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_heap_size() no
     auto loh_bytes = static_cast<CHAOS_IL2CPP_INT64>(
         g_loh.TotalAllocated());
     return old_gen_bytes + loh_bytes;
+}
+
+// ======================================================================
+// chaos_gc_get_memory_info
+// ======================================================================
+
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(void* out) noexcept
+{
+    auto* info = static_cast<GcMemoryInfoNative*>(out);
+    auto snap = GcGetSnapshot();
+    auto heap_size = static_cast<CHAOS_IL2CPP_INT64>(
+        g_old_gen.TotalAllocated() + g_loh.TotalAllocated());
+    auto promoted = static_cast<CHAOS_IL2CPP_INT64>(snap.young_bytes_promoted);
+    auto fragmented = static_cast<CHAOS_IL2CPP_INT64>(
+        snap.young_bytes_reclaimed + snap.full_bytes_reclaimed);
+
+    MEMORYSTATUSEX mem_status;
+    mem_status.dwLength = sizeof(mem_status);
+    GlobalMemoryStatusEx(&mem_status);
+
+    info->high_memory_load_threshold_bytes =
+        static_cast<int64_t>(mem_status.ullTotalPhys) / 2;
+    info->memory_load_bytes =
+        static_cast<int64_t>(mem_status.ullTotalPhys)
+        - static_cast<int64_t>(mem_status.ullAvailPhys);
+    info->total_available_memory_bytes =
+        static_cast<int64_t>(mem_status.ullTotalPhys);
+    info->heap_size_bytes = heap_size;
+    info->fragmented_bytes = fragmented;
+    info->total_committed_bytes = heap_size;
+    info->promoted_bytes = promoted;
+    info->generation = 1;
+    info->finalization_pending_count = static_cast<int32_t>(snap.full_finalizers_run);
+    info->compacted = 0;
+    info->concurrent = 0;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

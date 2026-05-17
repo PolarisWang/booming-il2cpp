@@ -68,6 +68,10 @@ FAMILIES = [
     "reflection-module",
     "reflection-binding",
     "reflection-activation",
+    # COM interop families
+    "ccw-basic",
+    "rcw-basic",
+    "dispatch-basic",
 ]
 
 
