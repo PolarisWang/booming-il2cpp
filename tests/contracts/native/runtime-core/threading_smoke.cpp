@@ -8,6 +8,14 @@
 #include <thread>
 #include <vector>
 
+// Extern "C" declarations for threading stubs (defined in threading_stubs.cpp,
+// linked via chaos_runtime_core.lib).
+extern "C" {
+CHAOS_IL2CPP_INT32 chaos_thread_reset_abort(void) noexcept;
+CHAOS_IL2CPP_INT32 chaos_thread_yield(void) noexcept;
+void chaos_thread_sleep(CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
+}
+
 namespace threading = chaos::il2cpp::runtime_core::threading;
 
 // ── Helpers ───────────────────────────────────────────────────────────
@@ -176,6 +184,194 @@ static bool test_thread_pool_scaling() {
     return true;
 }
 
+// ── P2 thread capability tests ───────────────────────────────────────
+
+/// ThreadState: verify state field transitions.
+static bool test_thread_state() {
+    auto* self = threading::GetCurrentThread();
+    if (self == nullptr) {
+        std::fprintf(stderr, "FAIL: no current thread\n");
+        return false;
+    }
+
+    // Default after RegisterThread is Running.
+    if (self->managed_state != threading::ManagedThreadState::Running) {
+        std::fprintf(stderr, "FAIL: initial state = %d, expected %d (Running)\n",
+                     static_cast<int>(self->managed_state),
+                     static_cast<int>(threading::ManagedThreadState::Running));
+        return false;
+    }
+
+    // Set to Stopped and verify.
+    self->managed_state = threading::ManagedThreadState::Stopped;
+    if (self->managed_state != threading::ManagedThreadState::Stopped) {
+        std::fprintf(stderr, "FAIL: state after set = %d, expected %d (Stopped)\n",
+                     static_cast<int>(self->managed_state),
+                     static_cast<int>(threading::ManagedThreadState::Stopped));
+        return false;
+    }
+
+    // Restore.
+    self->managed_state = threading::ManagedThreadState::Running;
+    return true;
+}
+
+/// ThreadPriority: set each level and verify readback.
+static bool test_thread_priority() {
+    auto* self = threading::GetCurrentThread();
+    if (self == nullptr) return false;
+
+    // Default is Normal.
+    if (self->priority != threading::ManagedThreadPriority::Normal) {
+        std::fprintf(stderr, "FAIL: default priority = %d, expected %d (Normal)\n",
+                     static_cast<int>(self->priority),
+                     static_cast<int>(threading::ManagedThreadPriority::Normal));
+        return false;
+    }
+
+    // Cycle through all levels.
+    struct { threading::ManagedThreadPriority pri; const char* name; } levels[] = {
+        { threading::ManagedThreadPriority::Lowest,      "Lowest" },
+        { threading::ManagedThreadPriority::BelowNormal,  "BelowNormal" },
+        { threading::ManagedThreadPriority::Normal,       "Normal" },
+        { threading::ManagedThreadPriority::AboveNormal,  "AboveNormal" },
+        { threading::ManagedThreadPriority::Highest,      "Highest" },
+    };
+
+    for (auto& l : levels) {
+        self->priority = l.pri;
+        if (self->priority != l.pri) {
+            std::fprintf(stderr, "FAIL: priority after set(%s) = %d\n",
+                         l.name, static_cast<int>(self->priority));
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/// IsThreadPoolThread: verify flag read/write for non-pool thread.
+static bool test_thread_is_threadpool() {
+    auto* self = threading::GetCurrentThread();
+    if (self == nullptr) return false;
+
+    // Main thread should not be a threadpool thread.
+    if (self->is_threadpool) {
+        std::fprintf(stderr, "FAIL: main thread should not be threadpool\n");
+        return false;
+    }
+
+    // Toggle and verify.
+    self->is_threadpool = true;
+    if (!self->is_threadpool) {
+        std::fprintf(stderr, "FAIL: is_threadpool should be true after set\n");
+        return false;
+    }
+
+    self->is_threadpool = false;
+    return true;
+}
+
+/// Abort flag: set pending_abort and verify through chaos_thread_reset_abort.
+static bool test_thread_abort_flag() {
+    auto* self = threading::GetCurrentThread();
+    if (self == nullptr) return false;
+
+    // Initially no abort pending.
+    self->pending_abort.store(false, std::memory_order_release);
+
+    CHAOS_IL2CPP_INT32 r = chaos_thread_reset_abort();
+    if (r != 0) {
+        std::fprintf(stderr, "FAIL: reset_abort on clean thread = %d, expected 0\n", r);
+        return false;
+    }
+
+    // Set abort flag.
+    self->pending_abort.store(true, std::memory_order_release);
+    if (!self->pending_abort.load(std::memory_order_acquire)) {
+        std::fprintf(stderr, "FAIL: pending_abort should be true after set\n");
+        return false;
+    }
+
+    // Reset abort flag via the public stub.
+    r = chaos_thread_reset_abort();
+    if (r != 1) {
+        std::fprintf(stderr, "FAIL: reset_abort on pending thread = %d, expected 1\n", r);
+        return false;
+    }
+
+    // Verify flag was cleared.
+    if (self->pending_abort.load(std::memory_order_acquire)) {
+        std::fprintf(stderr, "FAIL: pending_abort should be false after reset\n");
+        return false;
+    }
+
+    return true;
+}
+
+/// Interrupt flag: set pending_interrupt and verify via direct access.
+static bool test_thread_interrupt_flag() {
+    auto* self = threading::GetCurrentThread();
+    if (self == nullptr) return false;
+
+    self->pending_interrupt.store(false, std::memory_order_release);
+
+    // Set flag.
+    self->pending_interrupt.store(true, std::memory_order_release);
+    if (!self->pending_interrupt.load(std::memory_order_acquire)) {
+        std::fprintf(stderr, "FAIL: pending_interrupt should be true after set\n");
+        return false;
+    }
+
+    // Clear (as SafepointPoll does on throw).
+    self->pending_interrupt.store(false, std::memory_order_release);
+    if (self->pending_interrupt.load(std::memory_order_acquire)) {
+        std::fprintf(stderr, "FAIL: pending_interrupt should be false after clear\n");
+        return false;
+    }
+
+    return true;
+}
+
+/// Thread.Yield: verify the stub returns nonzero.
+static bool test_thread_yield() {
+    CHAOS_IL2CPP_INT32 r = chaos_thread_yield();
+    if (r == 0) {
+        std::fprintf(stderr, "FAIL: yield returned 0, expected nonzero\n");
+        return false;
+    }
+    return true;
+}
+
+/// Thread.Sleep: verify the stub does not crash.
+static bool test_thread_sleep() {
+    chaos_thread_sleep(10);  // 10 ms — should not crash or block forever
+    return true;
+}
+
+/// Background flag: verify is_background field read/write.
+static bool test_thread_background() {
+    auto* self = threading::GetCurrentThread();
+    if (self == nullptr) return false;
+
+    // Initially false.
+    if (self->is_background) {
+        std::fprintf(stderr, "FAIL: main thread should not be background by default\n");
+        return false;
+    }
+
+    // Toggle on.
+    self->is_background = true;
+    if (!self->is_background) {
+        std::fprintf(stderr, "FAIL: is_background should be true after set\n");
+        return false;
+    }
+
+    // Toggle off.
+    self->is_background = false;
+    return true;
+}
+
 // ── Main ──────────────────────────────────────────────────────────────
 
 int main() {
@@ -204,6 +400,20 @@ int main() {
 
     run("thread_pool_basic",    test_thread_pool_basic());
     run("thread_pool_scaling",  test_thread_pool_scaling());
+
+    threading::UnregisterThread();
+
+    // ── P2 thread capability tests ──────────────────────────────────
+    threading::RegisterThread(threading::kMainThreadId, nullptr);
+
+    run("thread_state",          test_thread_state());
+    run("thread_priority",       test_thread_priority());
+    run("thread_is_threadpool",  test_thread_is_threadpool());
+    run("thread_abort_flag",     test_thread_abort_flag());
+    run("thread_interrupt_flag", test_thread_interrupt_flag());
+    run("thread_yield",          test_thread_yield());
+    run("thread_sleep",          test_thread_sleep());
+    run("thread_background",     test_thread_background());
 
     threading::UnregisterThread();
 
