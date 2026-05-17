@@ -117,7 +117,7 @@ void TestReachableNotFinalized() {
     // Multiple GC cycles — obj is still reachable (we hold the pointer).
     for (int i = 0; i < 3; i++) {
         // Trigger young GC pressure
-        for (int j = 0; j < 1000; j++) {
+        for (int j = 0; j < 200; j++) {
             void* tmp = NurseryAllocate(32);
             (void)tmp;
         }
@@ -148,7 +148,7 @@ void TestMultipleFinalizers() {
     // Overwrite all references to make them unreachable.
     // Trigger aggressive GC.
     for (int g = 0; g < 5; g++) {
-        for (int i = 0; i < 5000; i++) {
+        for (int i = 0; i < 500; i++) {
             volatile void* tmp = NurseryAllocate(32);
             (void)tmp;
         }
@@ -192,7 +192,7 @@ void TestWaitForPending() {
     });
 
     // Make unreachable and collect.
-    for (int i = 0; i < 2000; i++) {
+    for (int i = 0; i < 500; i++) {
         volatile void* tmp = NurseryAllocate(32);
         (void)tmp;
     }

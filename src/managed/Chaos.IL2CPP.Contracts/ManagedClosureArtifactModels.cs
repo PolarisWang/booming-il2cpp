@@ -277,6 +277,7 @@ public static class NativeAotArtifactNames
 {
     public const string GeneratedDirectory = "generated";
     public const string GeneratedTranslationUnit = "generated/native-aot.generated.cpp";
+    public const string GeneratedHeader = "generated/native-aot.generated.header.h";
     public const string AuditSummaryTranslationUnit = "generated/audit/native-aot.audit.generated.cpp";
     public const string ShapeDispatchHeader = "generated/runtime_helper_shapes.h";
     public const string ModuleRegistration = "generated/module-registration.inc";

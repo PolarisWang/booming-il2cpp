@@ -556,14 +556,14 @@ bool MarshalIsRcwHandle(CHAOS_IL2CPP_INTPTR ptr) noexcept {
 }
 
 void ChaosThrowComExceptionForHR(CHAOS_IL2CPP_INT32 hr) noexcept {
-    // V1: log the HRESULT. Full COMException throw requires managed
-    // object creation infrastructure that is not yet wired for codegen
-    // output. This placeholder ensures the codegen path compiles.
-    // Future: create COMException managed object and throw via
-    // the existing managed exception carrier.
-    CHAOS_IL2CPP_LOG_WARN_M("COM", "ChaosThrowComExceptionForHR called with HRESULT 0x{0:x8} (V1: no-op, would throw COMException)",
+    // Sentinel-based COMException delivery.  The kManagedExceptionComFailure
+    // sentinel propagates through generated AOT catch blocks (which re-throw
+    // sentinels) and the interpreter SEH layer up to the managed exception
+    // dispatch, which creates a managed COMException from the HRESULT.
+    CHAOS_IL2CPP_LOG_WARN_M("COM", "ChaosThrowComExceptionForHR HRESULT 0x{0:x8} — throwing COMException sentinel",
                              static_cast<unsigned int>(hr));
     (void)hr;
+    throw chaos_managed_exception{kManagedExceptionComFailure};
 }
 
 // ── CCW (COM Callable Wrapper) ─────────────────────────────────────

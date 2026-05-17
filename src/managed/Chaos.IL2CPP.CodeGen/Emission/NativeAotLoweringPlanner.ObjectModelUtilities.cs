@@ -798,4 +798,58 @@ public sealed partial class NativeAotLoweringPlanner
 		return "[" + string.Join(", ", arguments) + "]";
 	}
 
+	/// <summary>
+	/// Collect COM interface vtable data from AotCoreIr references.
+	/// Scans all instructions for type references with ComInterfaceGuid set,
+	/// then counts the methods declared on each such COM interface type.
+	/// </summary>
+	internal static Dictionary<string, NativeAotLoweringPlanner.ComInterfaceVtableInfo> CollectComInterfaceVtableData(
+			AotCoreIrArtifact aotCoreIr,
+			IReadOnlyDictionary<string, AotCoreIrMethodArtifact> methodsBySubjectId,
+			MetadataRegistrationArtifact metadataRegistration)
+	{
+		// Phase 1: Find all COM interface types (type references with ComInterfaceGuid)
+		var comInterfaceGuidMap = new Dictionary<string, string>(StringComparer.Ordinal);
+		foreach (var method in aotCoreIr.Methods)
+		{
+			foreach (var instruction in method.Instructions)
+			{
+				var targetRef = instruction.TargetReference;
+				if (targetRef?.Kind == AotCoreIrReferenceKind.Type &&
+					targetRef.ComInterfaceGuid is { Length: > 0 } guid)
+				{
+					comInterfaceGuidMap[targetRef.SubjectId] = guid;
+				}
+			}
+		}
+
+		if (comInterfaceGuidMap.Count == 0)
+			return new Dictionary<string, NativeAotLoweringPlanner.ComInterfaceVtableInfo>(StringComparer.Ordinal);
+
+		// Phase 2: For each COM interface, collect declared methods sorted by metadata token.
+		var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);
+		var result = new Dictionary<string, NativeAotLoweringPlanner.ComInterfaceVtableInfo>(StringComparer.Ordinal);
+		foreach (var kvp in comInterfaceGuidMap)
+		{
+			var methods = methodsBySubjectId.Values
+				.Where(m => string.Equals(m.Identity.DeclaringTypeSubjectId, kvp.Key, StringComparison.Ordinal))
+				.ToList();
+
+			// Sort by metadata token for stable vtable slot ordering.
+			methods.Sort((a, b) =>
+			{
+				uint ta = tokenLookup.TryGetMethodToken(a.SubjectId);
+				uint tb = tokenLookup.TryGetMethodToken(b.SubjectId);
+				return ta.CompareTo(tb);
+			});
+
+			var slots = methods.Select(m => new NativeAotLoweringPlanner.ComInterfaceMethodSlot(
+				tokenLookup.TryGetMethodToken(m.SubjectId), m.NativeSymbol)).ToArray();
+
+			result[kvp.Key] = new NativeAotLoweringPlanner.ComInterfaceVtableInfo(
+				kvp.Value, ComputeStableTypeId(kvp.Key), slots);
+		}
+
+		return result;
+	}
 }

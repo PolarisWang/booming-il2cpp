@@ -27,6 +27,9 @@ namespace chaos::il2cpp::runtime_core {
 // ── TLS nursery context ────────────────────────────────────────
 thread_local NurseryContext tls_nursery_ctx{nullptr, nullptr};
 
+// Per-thread allocation counter (TLS-local, flushed to scheduler in slow path).
+thread_local CHAOS_IL2CPP_SIZE tls_alloc_since_last_gc = 0;
+
 // ── TLS POH context ────────────────────────────────────────────
 // Each thread has a fast bump-pointer path for POH allocation.
 // POH regions are shared across threads (mutex-protected for allocation).
@@ -68,6 +71,16 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         }
     }
 
+    // Flush TLS allocation counter to scheduler before making any GC decision.
+    // All fast-path allocations since the last slow path are accumulated in
+    // tls_alloc_since_last_gc (thread-local, no cross-core atomics).  Flushing
+    // here gives DecideCollection accurate allocation volume without cache-line
+    // bouncing on every allocation.
+    if (tls_alloc_since_last_gc > 0) {
+        g_gc_scheduler.RecordAllocation(tls_alloc_since_last_gc);
+        tls_alloc_since_last_gc = 0;
+    }
+
     // Check scheduler for collection decision.
     // Returns YOUNG (nursery GC), FULL (STW full GC), FULL_BGC (concurrent mark),
     // or NONE (no GC needed).
@@ -88,6 +101,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
                 tls_nursery_ctx.nursery->current = next;
                 std::memset(ptr, 0, size);
                 g_gc_scheduler.RecordAllocation(size);
+                memory_domain::GcTrackDomainAlloc(size);
                 return ptr;
             }
         }
@@ -149,6 +163,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
                 tls_nursery_ctx.nursery->current = next;
                 std::memset(ptr, 0, size);
                 g_gc_scheduler.RecordAllocation(size);
+                memory_domain::GcTrackDomainAlloc(size);
                 return ptr;
             }
         }
@@ -169,6 +184,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
                 tls_nursery_ctx.nursery->current = next;
                 std::memset(ptr, 0, size);
                 g_gc_scheduler.RecordAllocation(size);
+                memory_domain::GcTrackDomainAlloc(size);
                 return ptr;
             }
         }
@@ -193,6 +209,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
                 tls_nursery_ctx.nursery->current = next;
                 std::memset(ptr, 0, size);
                 g_gc_scheduler.RecordAllocation(size);
+                memory_domain::GcTrackDomainAlloc(size);
                 return ptr;
             }
         }
@@ -257,6 +274,13 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
         }
     }
 
+    // Flush TLS allocation counter to scheduler (same rationale as
+    // NurseryAllocateSlow).
+    if (tls_alloc_since_last_gc > 0) {
+        g_gc_scheduler.RecordAllocation(tls_alloc_since_last_gc);
+        tls_alloc_since_last_gc = 0;
+    }
+
     // Same as NurseryAllocateSlow but passes scanning_required=false for
     // old-gen fallback.  The nursery bump path is identical.
     auto gc_decision = g_gc_scheduler.DecideCollection();
@@ -274,6 +298,7 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
                 tls_nursery_ctx.nursery->current = next;
                 std::memset(ptr, 0, size);
                 g_gc_scheduler.RecordAllocation(size);
+                memory_domain::GcTrackDomainAlloc(size);
                 return ptr;
             }
         }
@@ -322,6 +347,7 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
                 tls_nursery_ctx.nursery->current = next;
                 std::memset(ptr, 0, size);
                 g_gc_scheduler.RecordAllocation(size);
+                memory_domain::GcTrackDomainAlloc(size);
                 return ptr;
             }
         }
@@ -342,6 +368,7 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
                 tls_nursery_ctx.nursery->current = next;
                 std::memset(ptr, 0, size);
                 g_gc_scheduler.RecordAllocation(size);
+                memory_domain::GcTrackDomainAlloc(size);
                 return ptr;
             }
         }
@@ -362,6 +389,7 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
                 tls_nursery_ctx.nursery->current = next;
                 std::memset(ptr, 0, size);
                 g_gc_scheduler.RecordAllocation(size);
+                memory_domain::GcTrackDomainAlloc(size);
                 return ptr;
             }
         }

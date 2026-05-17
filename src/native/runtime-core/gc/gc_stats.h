@@ -134,6 +134,25 @@ struct GcSnapshot {
 /// Take an atomic snapshot of all GC counters.
 GcSnapshot GcGetSnapshot() noexcept;
 
+// ── GCMemoryInfo snapshot (managed GC.GetGCMemoryInfo() data) ──
+
+/// Mirrors the key fields of System.GC.GCMemoryInfo (readonly struct).
+/// Populated by chaos_gc_get_memory_info().  Not ABI-safe for direct return;
+/// the codegen layer translates the fields into the managed struct layout.
+struct GcMemoryInfoNative {
+    int64_t high_memory_load_threshold_bytes;  ///< Threshold before GC considers memory high
+    int64_t memory_load_bytes;                 ///< Current estimated memory load
+    int64_t total_available_memory_bytes;      ///< Total available to the GC
+    int64_t heap_size_bytes;                   ///< Current total managed heap size
+    int64_t fragmented_bytes;                  ///< Memory lost to fragmentation
+    int64_t total_committed_bytes;             ///< Total committed (not just heap)
+    int64_t promoted_bytes;                    ///< Bytes promoted in last GC
+    int32_t generation;                        ///< 0=young, 1=old, 2=LOH
+    int32_t finalization_pending_count;        ///< Objects awaiting finalization
+    int32_t compacted;                         ///< 1 if last GC was compacting
+    int32_t concurrent;                        ///< 1 if last GC was concurrent (BGC)
+};
+
 // ── Inline record helpers (hot-path, header for max inlining) ─────
 
 inline void GcRecordYoungCollection(

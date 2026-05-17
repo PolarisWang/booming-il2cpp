@@ -342,12 +342,12 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 if (flags == static_cast<uint32_t>(SEHFlags::Exception) ||
                     flags == static_cast<uint32_t>(SEHFlags::Filter)) {
                     // Phase 5: sentinel exception check.
-                    // ThreadAbort (-1) / ThreadInterrupt (-2) sentinels have a
+                    // ThreadAbort (-1) / ThreadInterrupt (-2) / COMException (-3) sentinels
                     // non-null ObjectRef whose pointer value encodes the sentinel.
                     // Typed catch clauses cannot handle sentinels — skip them.
                     if (exc_val != nullptr && exc_val->tag == ValueTag::ObjectRef) {
                         const auto ptr_as_int = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(exc_val->obj);
-                        if (ptr_as_int < 0 && ptr_as_int >= -2) {
+                        if (ptr_as_int < 0 && ptr_as_int >= kManagedExceptionComFailure) {
                             const bool is_typed = (flags & static_cast<uint32_t>(SEHFlags::Typed)) != 0;
                             if (is_typed) continue;  // Skip typed catch for sentinels.
                         }

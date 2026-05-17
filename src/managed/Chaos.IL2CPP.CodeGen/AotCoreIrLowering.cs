@@ -996,6 +996,7 @@ public sealed class AotCoreIrLowering
             TypeShape = ResolveTypeShape(managedType, subjectId),
             IsSealed = managedType?.IsSealed ?? false,
             IsComImport = managedType?.IsComImport ?? false,
+            ComInterfaceGuid = managedType?.ComInterfaceGuid,
             ArrayElementSubjectId = ResolveArrayElementSubjectId(subjectId),
             ArrayElementTypeShape = ResolveArrayElementTypeShape(managedTypes, ResolveArrayElementSubjectId(subjectId)),
             ArrayElementBaseTypeSubjectId = arrayElementType?.BaseTypeSubjectId,

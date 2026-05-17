@@ -1,0 +1,7 @@
+
+=== PROFILE DUMP ===
+PROFILE|CALIBRATION|ns_per_cycle=0.227305
+PROFILE|RunNativeAotAll|avg=150172|avg_ns=34135|min=150172|max=150172|count=1|total_ns=34135
+=== PROFILE END ===
+Passed: 19/19
+GC|region|active=0|total_allocated=0

@@ -286,6 +286,14 @@ public sealed record AotCoreIrReferenceArtifact
     /// </summary>
     public bool IsComImport { get; init; }
 
+    /// <summary>
+    /// 16-byte COM interface GUID from <see cref="System.Runtime.InteropServices.GuidAttribute"/>,
+    /// formatted as a standard 36-character string (e.g., "ABCDEF01-2345-6789-ABCD-EF0123456789").
+    /// Null if the type has no GuidAttribute. Used by CCW codegen to emit GUID constants
+    /// and RegisterCcwInterface calls for multi-interface QI support.
+    /// </summary>
+    public string? ComInterfaceGuid { get; init; }
+
     public string? BaseTypeSubjectId { get; init; }
 
     public IReadOnlyList<string>? ImplementedInterfaceSubjectIds { get; init; }

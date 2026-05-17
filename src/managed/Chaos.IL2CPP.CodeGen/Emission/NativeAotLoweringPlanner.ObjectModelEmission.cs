@@ -353,6 +353,20 @@ public sealed partial class NativeAotLoweringPlanner
 		TrackReferenceType("System.Private.CoreLib/System.Reflection.FieldInfo", null);
 		TrackReferenceType("System.Private.CoreLib/System.Reflection.Assembly", null);
 		TrackReferenceType("System.Private.CoreLib/System.Reflection.AssemblyName", null);
+		// Ensure closed generic reference types with virtual methods are tracked
+		// for vtable emission. These types may not appear in instruction scanning
+		// but still need VTableSlot[] + VTableDescriptorV0 emission.
+		foreach (var method in _methodsBySubjectId.Values)
+		{
+			if (method.IsStatic) continue;
+			var dt = method.Identity.DeclaringTypeSubjectId;
+			if (string.IsNullOrEmpty(dt)) continue;
+			if (referenceTypeSubjectIds.Contains(dt)) continue;
+			if (valueTypeSubjectIds.Contains(dt)) continue;
+			if (interfaceTypeSubjectIds.Contains(dt)) continue;
+			if (!dt.Contains("[[")) continue;
+			TrackReferenceType(dt, null);
+		}
 		// ── VTable slot allocation (must precede iface_map emission)
 			var vtableLengths = new Dictionary<string, int>(StringComparer.Ordinal);
 			var slotMap = new Dictionary<string, int>(StringComparer.Ordinal);

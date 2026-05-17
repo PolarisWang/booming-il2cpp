@@ -186,7 +186,7 @@ public sealed class NativeAotEmitter
 
     private static string BuildGeneratedTranslationUnit(NativeAotTemplateModel templateModel)
     {
-        return BuildGeneratedPage(templateModel, templateModel.Methods, includeRegistration: true);
+        return BuildGeneratedPage(templateModel, templateModel.Methods, includeRegistration: true, includeObjectModel: true);
     }
 
     /// <summary>
@@ -196,19 +196,34 @@ public sealed class NativeAotEmitter
     /// <param name="pageMethods">Methods to include in this page.</param>
     /// <param name="includeRegistration">True to include module/generic registration code
     /// (only in the first page, to avoid duplicate symbol definitions).</param>
+    /// <param name="includeObjectModel">True to include TypeInfoV0 inline definitions
+    /// (only in the first page, to avoid duplicate definitions; other pages reference
+    /// the shared header for extern declarations).</param>
     private static string BuildGeneratedPage(
         NativeAotTemplateModel templateModel,
         IReadOnlyList<NativeAotMethodTemplateModel> pageMethods,
-        bool includeRegistration)
+        bool includeRegistration,
+        bool includeObjectModel)
     {
         var objectModelSection = BuildObjectModelSection(templateModel);
         var methodSections = pageMethods
             .Select(BuildMethodSection)
             .ToArray();
+
+        // When TypeInfoV0 inline definitions are excluded from this page, add
+        // the shared header include so extern declarations are available.
+        IReadOnlyList<string> includes = templateModel.Includes;
+        if (!includeObjectModel && !string.IsNullOrEmpty(templateModel.TypeDeclarationsCode))
+        {
+            var extended = new List<string>(includes);
+            extended.Add("\"generated/native-aot.generated.header.h\"");
+            includes = extended;
+        }
+
         var model = new ScriptObject
         {
-            ["includes"] = templateModel.Includes,
-            ["object_model_section"] = objectModelSection,
+            ["includes"] = includes,
+            ["object_model_section"] = includeObjectModel ? objectModelSection : "",
             ["method_declarations"] = templateModel.MethodDeclarations,
             ["method_sections"] = methodSections,
             ["entry_subject_id"] = templateModel.EntrySubjectId,
@@ -236,6 +251,16 @@ public sealed class NativeAotEmitter
             ["object_model_code"] = ScribanTemplateRenderer.NormalizeIndentation(templateModel.ObjectModelCode),
         };
         return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetObjectModelTemplate(), model);
+    }
+
+    /// <summary>
+    /// Builds the shared header content emitted as native-aot.generated.header.h.
+    /// Contains extern TypeInfoV0 declarations so every translation unit page has
+    /// access to all type symbols without ODR violations from duplicate inline defs.
+    /// </summary>
+    private static string BuildSharedHeader(NativeAotTemplateModel templateModel)
+    {
+        return templateModel.TypeDeclarationsCode;
     }
 
     /// <summary>
@@ -268,6 +293,23 @@ public sealed class NativeAotEmitter
             int pageSize = loweringPlan.TranslationUnitPageSize!.Value;
             var allMethods = templateModel.Methods;
 
+            // Emit shared header with extern TypeInfoV0 declarations + shape dispatch header
+            bool hasTypeDeclarations = !string.IsNullOrEmpty(templateModel.TypeDeclarationsCode);
+            if (hasTypeDeclarations)
+            {
+                string headerContent = BuildSharedHeader(templateModel);
+                sources.Add(new NativeAotGeneratedSource
+                {
+                    RelativePath = NativeAotArtifactNames.GeneratedHeader,
+                    Contents = headerContent,
+                });
+                artifacts.Add(new NativeAotGeneratedArtifactRef
+                {
+                    Kind = "generatedHeader",
+                    Path = NativeAotArtifactNames.GeneratedHeader,
+                });
+            }
+
             for (int i = 0; i < pages.Count; i++)
             {
                 var page = pages[i];
@@ -278,7 +320,8 @@ public sealed class NativeAotEmitter
 
                 string content = BuildGeneratedPage(
                     templateModel, pageMethods,
-                    includeRegistration: i == 0);
+                    includeRegistration: i == 0,
+                    includeObjectModel: i == 0 || !hasTypeDeclarations);
 
                 sources.Add(new NativeAotGeneratedSource
                 {

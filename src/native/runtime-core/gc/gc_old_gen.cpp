@@ -14,6 +14,7 @@
 #include "gc_stats.h"
 #include "gc_worker_pool.h"
 #include "thread_pool.h"
+#include "memory_domain.h"
 #include "thread_state.h"
 
 #include <algorithm>
@@ -413,6 +414,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
             void* loh_ptr = g_loh.Allocate(size);
             if (loh_ptr != nullptr) {
                 GcRecordAlloc(size, true);
+                memory_domain::GcTrackDomainAlloc(size);
             }
             return loh_ptr;
         }
@@ -439,6 +441,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
         auto* result = page->Payload();
         std::memset(result, 0, size);
         GcRecordAlloc(size, true);
+        memory_domain::GcTrackDomainAlloc(size);
         return result;
     }
 
@@ -456,6 +459,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
             // Still no match (shouldn't happen for aligned < 32KB).
             auto* result = page->Payload();
             GcRecordAlloc(size, false);
+            memory_domain::GcTrackDomainAlloc(size);
             return result;
         }
     }
@@ -464,6 +468,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     auto* ptr = TryAllocateFromFreeLists(size, sc_idx);
     if (ptr != nullptr) {
         GcRecordAlloc(size, false);
+        memory_domain::GcTrackDomainAlloc(size);
         return ptr;
     }
 
@@ -475,6 +480,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     ptr = TryAllocateFromFreeLists(size, sc_idx);
     if (ptr != nullptr) {
         GcRecordAlloc(size, false);
+        memory_domain::GcTrackDomainAlloc(size);
     }
     return ptr;
 }

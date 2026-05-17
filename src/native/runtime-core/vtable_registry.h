@@ -101,6 +101,42 @@ void* ResolveVirtualMethodPointerByHandle(
 /// @param desc  Pointer to a VTableDescriptorV0 (defined in codegen_bridge.h).
 void RegisterCodegenVTable(const void* desc) noexcept;
 
+/// Register a vtable for a hot-update type. Copies the parent's flat vtable
+/// array, applies override slots, and registers a heap-allocated TypeVTable.
+/// @param stable_id       Stable ID of the new type
+/// @param type_token      Metadata token of the new type
+/// @param parent_token    Token of the parent type (0 = no parent)
+/// @param override_slots  Slot overrides for methods this type overrides
+/// @param override_count  Number of override entries
+/// @param type_shape      Type shape (1=reference, 2=value, 3=interface)
+/// @return true on success
+bool RegisterHotUpdateVTable(
+    CHAOS_IL2CPP_UINT64        stable_id,
+    CHAOS_IL2CPP_UINT32        type_token,
+    CHAOS_IL2CPP_UINT32        parent_token,
+    const VTableSlot*          override_slots,
+    CHAOS_IL2CPP_UINT32        override_count,
+    CHAOS_IL2CPP_UINT8         type_shape) noexcept;
+
+/// Update all slots matching a method_token across all registered TypeVTables.
+/// Also updates the corresponding entries in flat vtable arrays.
+/// Used by method_replacement to keep VTable in sync with method patches.
+/// @return number of slots updated
+CHAOS_IL2CPP_UINT32 UpdateVTableSlotByMethodToken(
+    CHAOS_IL2CPP_UINT32       method_token,
+    void*                     new_method) noexcept;
+
+/// Scan all registered TypeVTables and return the first method_pointer
+/// matching the given method_token.  Used by method_replacement to capture
+/// the original pointer before applying a replacement thunk.
+/// @return method_pointer, or nullptr if not found in any VTable.
+void* FindMethodPointerByMethodToken(
+    CHAOS_IL2CPP_UINT32       method_token) noexcept;
+
+/// Remove a TypeVTable from the registry and free allocated memory.
+void UnregisterTypeVTable(CHAOS_IL2CPP_UINT32 type_token) noexcept;
+void UnregisterTypeVTableByStableId(CHAOS_IL2CPP_UINT64 stable_id) noexcept;
+
 /// Returns the number of registered vtables (for diagnostics).
 CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount();
 

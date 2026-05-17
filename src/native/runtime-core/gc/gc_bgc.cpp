@@ -263,20 +263,15 @@ void BgcController::PopulateRootSet() {
             nullptr);
     }
 
-    // Phase 1d: Scan GCHandle table.
+    // Phase 1d: Scan GCHandle table (tenured handles only — nursery
+    // objects are handled by the young collector).
     {
-        GcIterateHandleTable(
+        GcIterateTenuredHandles(
             [](void* object, void* /*user_data*/) {
-                if (object == nullptr) return;
-                // GCHandles may point to nursery or old-gen objects.
-                // Only mark old-gen objects here; nursery objects are
-                // handled by the young collector.
-                if (g_old_gen.IsInOldGen(object)) {
-                    if (g_old_gen.BgcTryMark(object)) {
-                        std::lock_guard<std::mutex> lock(
-                            BgcController::Instance().bgc_workers_[0].steal_mutex);
-                        BgcController::Instance().bgc_workers_[0].deque.push_back(object);
-                    }
+                if (g_old_gen.BgcTryMark(object)) {
+                    std::lock_guard<std::mutex> lock(
+                        BgcController::Instance().bgc_workers_[0].steal_mutex);
+                    BgcController::Instance().bgc_workers_[0].deque.push_back(object);
                 }
             },
             nullptr);

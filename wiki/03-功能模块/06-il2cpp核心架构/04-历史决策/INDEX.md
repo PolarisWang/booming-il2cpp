@@ -26,3 +26,5 @@
 | [`18-HotUpdateDispatchHotpatch-决策.md`](./18-HotUpdateDispatchHotpatch-%E5%86%B3%E7%AD%96.md) | HotUpdate Hotpatch 双层分派架构：静态 Dispatch Table + 模式感知分支 + 构建期 .patchdata 提取 + PatchMetadataCache 本地自洽 |
 | [`19-A4-Dual+V2-ObjectHeader优化决策.md`](./19-A4-Dual%2BV2-ObjectHeader%E4%BC%98%E5%8C%96%E5%86%B3%E7%AD%96.md) | A4-Dual+V2 ObjectHeader 优化：PureType(8B)/ThinLockable(8B)/Fat(16B) 分型 header + V2 inline vtable + 2-bit Magic 判别 + CoreCLR 风格薄锁，ObjectHeader 56B→~9.6B |
 | [`20-工程规范统一决策.md`](./20-%E5%B7%A5%E7%A8%8B%E8%A7%84%E8%8C%83%E7%BB%9F%E4%B8%80%E5%86%B3%E7%AD%96.md) | 命名空间统一(ChaosIl2cpp::Common→chaos::il2cpp::common)、Include风格统一(<chaos/>)、clang-format配置、extern "C"文档化 |
+| [`21-MarshalABI平台能力决策.md`](./21-MarshalABI%E5%B9%B3%E5%8F%B0%E8%83%BD%E5%8A%9B%E5%86%B3%E7%AD%96.md) | GenericShapeDescriptor 注册优先、Descriptor-Driven 结构体、分配器选择、委托 Thunk、COM VTable dispatch、ObjectField GC Safety |
+| [`22-结构化恢复度量与FlatFallback消除决策.md`](./22-%E7%BB%93%E6%9E%84%E5%8C%96%E6%81%A2%E5%A4%8D%E5%BA%A6%E9%87%8F%E4%B8%8EFlatFallback%E6%B6%88%E9%99%A4%E5%86%B3%E7%AD%96.md) | 100% StructuredRecoveryRate 硬契约、度量驱动消除、IRFlatRegion 降级、不新增转换阶段 |

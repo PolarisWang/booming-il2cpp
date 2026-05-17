@@ -807,6 +807,31 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
 
+            // === GC.Collect(int, GCCollectionMode) — overload with mode ===
+            registry.Register("System.GC", "Collect", ["System.Int32", "System.GCCollectionMode"],
+                ShapeKind.SimpleForward, "chaos_gc_collect_with_mode",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateInt32AbiSlot(),  // generation
+                    CreateInt32AbiSlot(),  // mode
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            // === GCLatencyMode property getter/setter ===
+            registry.Register("System.GC", "get_LatencyMode", [],
+                ShapeKind.SimpleForward, "chaos_gc_get_latency_mode",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateInt32AbiSlot(),
+                EmptyRawArgumentIndices);
+
+            registry.Register("System.GC", "set_LatencyMode", ["System.GCLatencyMode"],
+                ShapeKind.SimpleForward, "chaos_gc_set_latency_mode",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
             // === Delegate ===
             registry.Register("System.Delegate", "Combine", ["System.Delegate", "System.Delegate"],
                 ShapeKind.SimpleForward, "chaos_delegate_combine",

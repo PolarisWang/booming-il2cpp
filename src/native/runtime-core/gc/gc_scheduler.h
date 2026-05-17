@@ -21,6 +21,29 @@ inline double BitsToDouble(uint64_t bits) noexcept {
 }
 
 // ======================================================================
+// GCCollectionMode — controls how GC.Collect(int, GCCollectionMode) behaves
+// ======================================================================
+
+enum class GcCollectionMode : uint8_t {
+    DEFAULT   = 0,  ///< Same as Forced for GC.Collect()
+    FORCED    = 1,  ///< Immediate blocking collection (default)
+    OPTIMIZED = 2,  ///< Let BGC decide; may defer or use concurrent mark
+    AGGRESSIVE = 3, ///< Immediate blocking + compact (highest memory pressure)
+};
+
+// ======================================================================
+// GCLatencyMode — controls GC responsiveness/pause trade-off
+// ======================================================================
+
+enum class GcLatencyMode : uint8_t {
+    BATCH                = 0,  ///< Maximize throughput; longest pauses
+    INTERACTIVE          = 1,  ///< Balanced pauses (default for desktop)
+    LOW_LATENCY          = 2,  ///< Short pauses; GC avoids full blocking
+    SUSTAINED_LOW_LATENCY= 3,  ///< Sustained low-latency mode
+    NO_GC_REGION         = 4,  ///< No GC allowed temporarily (app-managed)
+};
+
+// ======================================================================
 // GcScheduler — adaptive GC scheduling with EMA survival-rate tracking
 //
 // Decides WHEN to run young vs full collections and HOW LARGE the next
@@ -107,6 +130,28 @@ public:
 
     /// Request a full GC from any thread (sets a flag polled at safepoints).
     void RequestFullGc() noexcept;
+
+    // ── GCCollectionMode / GCLatencyMode ─────────────────────────
+
+    /// Set the collection mode for the next explicit GC.Collect() call.
+    void SetCollectionMode(GcCollectionMode mode) noexcept {
+        collection_mode_.store(mode, std::memory_order_release);
+    }
+
+    /// Get the current collection mode.
+    GcCollectionMode GetCollectionMode() const noexcept {
+        return collection_mode_.load(std::memory_order_acquire);
+    }
+
+    /// Set the GC latency mode (controls pause vs throughput trade-off).
+    void SetLatencyMode(GcLatencyMode mode) noexcept {
+        latency_mode_.store(mode, std::memory_order_release);
+    }
+
+    /// Get the current GC latency mode.
+    GcLatencyMode GetLatencyMode() const noexcept {
+        return latency_mode_.load(std::memory_order_acquire);
+    }
 
     // ── Nursery sizing ───────────────────────────────────────────
 
@@ -212,6 +257,14 @@ private:
     /// where thread A's GC completes, thread B immediately starts another
     /// GC before other threads have resumed, causing all 99 threads to spin.
     static constexpr uint64_t kMinGcIntervalNs = 500 * 1000;  // 500 µs
+
+    // ── GCCollectionMode / GCLatencyMode state ───────────────────
+
+    /// Collection mode for the next explicit GC.Collect() call.
+    std::atomic<GcCollectionMode> collection_mode_{GcCollectionMode::DEFAULT};
+
+    /// Latency mode (controls GC responsiveness).
+    std::atomic<GcLatencyMode> latency_mode_{GcLatencyMode::INTERACTIVE};
 };
 
 /// Process-wide GC scheduler instance.

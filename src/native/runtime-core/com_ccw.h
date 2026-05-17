@@ -17,9 +17,12 @@ constexpr CHAOS_IL2CPP_SIZE kMaxCcwInterfaces = 4;
 // ── Data structures ───────────────────────────────────────────────────
 
 /// A single registered COM interface on a CCW: GUID + vtable pointer.
+/// identity: QI returns &entry->vtable (the address of the vtable field).
+/// Thunks recover the owning ComCcw via entry->ccw_ptr.
 struct ComCcwInterfaceEntry {
     const CHAOS_IL2CPP_UINT8* guid;   // 16-byte interface GUID
     void* vtable;                       // Interface-specific vtable (IUnknown-compatible layout)
+    void* ccw_ptr;                      // Back-pointer to owning ComCcw
 };
 
 /// CCW vtable — IUnknown only for V1.
@@ -44,6 +47,12 @@ struct ComCcw {
     ComCcwInterfaceEntry interfaces[kMaxCcwInterfaces]; // GUID→vtable map (entry 0 = IUnknown)
 };
 
+// ── IUnknown vtable function declarations (external linkage for generated code) ──
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwQueryInterface(
+    void* self, const void* iid, void** ppv) noexcept;
+CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwAddRef(void* self) noexcept;
+CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwRelease(void* self) noexcept;
+
 // ── CCW lifecycle ──────────────────────────────────────────────────
 
 /// Create a CCW for a managed object.
@@ -58,6 +67,24 @@ CHAOS_IL2CPP_INTPTR CreateCcw(void* managed_object, void* runtime_state) noexcep
 /// @param vtable       Interface vtable pointer (must be a static vtable).
 /// @return true if registered, false if the interface table is full or ccw_ptr is null.
 bool RegisterCcwInterface(void* ccw_ptr, const CHAOS_IL2CPP_UINT8* guid, void* vtable) noexcept;
+
+/// Recover the ComCcw pointer from an interface pointer returned by QI.
+/// The interface pointer is the address of ComCcwInterfaceEntry::vtable.
+/// Uses the ccw_ptr back-pointer stored at registration time.
+inline ComCcw* CcwFromInterface(void* iface_ptr) noexcept {
+    if (iface_ptr == nullptr) return nullptr;
+    auto* entry = reinterpret_cast<ComCcwInterfaceEntry*>(
+        static_cast<char*>(iface_ptr) - offsetof(ComCcwInterfaceEntry, vtable));
+    return static_cast<ComCcw*>(entry->ccw_ptr);
+}
+
+/// Dispatch a COM interface method call on a CCW's managed object.
+/// Uses the managed object's type info to find the interface implementation
+/// via the iface_map in TypeInfoWarm.
+/// @param ccw_ptr           The CCW pointer.
+/// @param iface_stable_id   Stable ID (FNV-1a hash) of the COM interface.
+/// @param method_index      Index of the interface method (0 = first after IUnknown).
+void CcwDispatchMethod(void* ccw_ptr, CHAOS_IL2CPP_UINT64 iface_stable_id, CHAOS_IL2CPP_UINT32 method_index) noexcept;
 
 }  // namespace chaos::il2cpp::com_ccw
 
