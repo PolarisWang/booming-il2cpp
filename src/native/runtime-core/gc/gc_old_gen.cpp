@@ -1641,7 +1641,9 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_start page_count={0}", page_count_);
 
     // Fire GC_FULL_START event.
+    CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_before_fire_gc_full_start");
     GcFireEvent(GcEvent::GC_FULL_START);
+    CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_after_fire_gc_full_start");
 
     // V4-H3: Snapshot pinned_roots_ under mutex to avoid data race with
     // AddPinnedRoot (which pushes under the same mutex).  Iterating the
@@ -1674,12 +1676,15 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         }
     }
 
+    CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_after_pinned_snapshot has_roots={0}", has_roots);
+
     // Scan ALL registered threads' TLS nurseries as root sets.
     // This ensures full GC sees nursery roots from every worker thread,
     // not just the calling thread.  Previously, only the calling thread's
     // TLS nursery was scanned, which could miss live references from
     // worker threads to old-gen objects, causing premature collection.
     {
+        CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_before_enumerate_threads");
         size_t before_roots = mark_stack_.size();
 
         // EnumerateThreads takes a C function pointer — use a static
