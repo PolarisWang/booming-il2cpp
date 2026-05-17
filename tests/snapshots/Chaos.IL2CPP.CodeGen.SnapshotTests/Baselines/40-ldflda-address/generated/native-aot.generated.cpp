@@ -53,7 +53,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -945,8 +945,8 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // Startup-time-resolved function pointers for cross-assembly calls.
 
 extern "C" const char* kChaosExternalRuntimeSubjects[2] = {
-	"SnapshotTestFixtures/HasFields::instanceVal",
 	"SnapshotTestFixtures/HasFields::staticVal",
+	"SnapshotTestFixtures/HasFields::instanceVal",
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[2] = {
@@ -1181,7 +1181,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_AddressHelper_RunAddress(void
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_SnapshotTestFixtures_HasFields, {});
 		chaos_object->header.type_info = &chaos_mt_SnapshotTestFixtures_HasFields.hot;
-		chaos_object->header.vtable = chaos_vtable_SnapshotTestFixtures_HasFields;
 		SnapshotTestFixtures_HasFields__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}

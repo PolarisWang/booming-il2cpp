@@ -78,6 +78,10 @@ public sealed partial class NativeAotLoweringPlanner
 			return;
 		}
 
+		// For shared generic instantiations, the stub forwards to the canonical
+		// method's body instead of the per-instantiation body.
+		string targetSymbol = ResolveStubTargetNativeSymbol(method);
+
 		IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
 		builder.AppendLine();
 		builder.AppendLine("// Generic instantiation stub: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
@@ -94,11 +98,11 @@ public sealed partial class NativeAotLoweringPlanner
 			string text2 = string.Join(", ", argNames);
 		if (method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
 		{
-			builder.AppendLine(methodAbiParameterSlots.Count == 0 ? $"    {method.NativeSymbol}();" : $"    {method.NativeSymbol}({text2});");
+			builder.AppendLine(methodAbiParameterSlots.Count == 0 ? $"    {targetSymbol}();" : $"    {targetSymbol}({text2});");
 		}
 		else
 		{
-			builder.AppendLine(methodAbiParameterSlots.Count == 0 ? $"    return {method.NativeSymbol}();" : $"    return {method.NativeSymbol}({text2});");
+			builder.AppendLine(methodAbiParameterSlots.Count == 0 ? $"    return {targetSymbol}();" : $"    return {targetSymbol}({text2});");
 		}
 		builder.AppendLine("}");
 	}
@@ -206,7 +210,8 @@ public sealed partial class NativeAotLoweringPlanner
 		bool hasBlittableStructParams = method.BlittableStructParameterIndices is { Count: > 0 };
 		bool hasSimpleNonBlittableStructParams = method.SimpleNonBlittableStructParameterIndices is { Count: > 0 };
 		bool hasComplexStructParams = method.ComplexStructParameterIndices is { Count: > 0 };
-		bool needsMarshalling = hasStringParams || hasStringReturn || hasBlittableStructParams || hasSimpleNonBlittableStructParams || hasComplexStructParams;
+		bool hasSafeHandleParams = method.SafeHandleParameterIndices is { Count: > 0 };
+		bool needsMarshalling = hasStringParams || hasStringReturn || hasBlittableStructParams || hasSimpleNonBlittableStructParams || hasComplexStructParams || hasSafeHandleParams;
 		var stringParamSet = hasStringParams
 			? new HashSet<int>(method.StringParameterIndices!)
 			: new HashSet<int>();
@@ -218,6 +223,9 @@ public sealed partial class NativeAotLoweringPlanner
 			: new HashSet<int>();
 		var complexStructSet = hasComplexStructParams
 			? new HashSet<int>(method.ComplexStructParameterIndices!)
+			: new HashSet<int>();
+		var safeHandleParamSet = hasSafeHandleParams
+			? new HashSet<int>(method.SafeHandleParameterIndices!)
 			: new HashSet<int>();
 		Dictionary<int, string>? complexStructDescriptorSymbols = null;
 		if (hasComplexStructParams && method.ComplexStructParameterTypeSubjectIds != null)
@@ -244,6 +252,10 @@ public sealed partial class NativeAotLoweringPlanner
 			if (stringParamSet.Contains(i))
 			{
 				nativeArgs[i] = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_marshal_" + i + ")";
+			}
+			else if (safeHandleParamSet.Contains(i))
+			{
+				nativeArgs[i] = "chaos_handle_" + i;
 			}
 			else if (complexStructSet.Contains(i))
 			{
@@ -272,17 +284,22 @@ public sealed partial class NativeAotLoweringPlanner
 		var fnParamTypes = new string[methodAbiParameterSlots.Count];
 		for (int i = 0; i < methodAbiParameterSlots.Count; i++)
 		{
-			fnParamTypes[i] = blittableStructParamSet.Contains(i) || simpleNonBlittableSet.Contains(i) || complexStructSet.Contains(i) || complexStructSet.Contains(i)
+			fnParamTypes[i] = blittableStructParamSet.Contains(i) || simpleNonBlittableSet.Contains(i) || complexStructSet.Contains(i)
 				? "CHAOS_IL2CPP_INTPTR"
 				: MapAbiSlotReturnType(methodAbiParameterSlots[i]);
 		}
 		string rawParamTypes = string.Join(", ", fnParamTypes);
+		string ccAnnotation = GetCallingConventionAnnotation(method.ImportCallingConvention);
 		string fnPtrType = string.IsNullOrEmpty(rawParamTypes)
-			? $"{returnType}(*)()"
-			: $"{returnType}(*)({rawParamTypes})";
+			? $"{returnType}({ccAnnotation}*)()"
+			: $"{returnType}({ccAnnotation}*)({rawParamTypes})";
+
+		bool isUnicodeCharSet = IsUnicodeCharSet(method.ImportCharSet);
+		string marshalStringFn = isUnicodeCharSet ? "MarshalStringToCoTaskMemWide" : "MarshalStringToCoTaskMemUtf8";
+		string marshalPtrToStringFn = isUnicodeCharSet ? "MarshalPtrToStringWide" : "MarshalPtrToStringUtf8";
 
 		string pinvokeTag = hasStringParams || hasStringReturn
-			? "simple non-blittable"
+			? (isUnicodeCharSet ? "simple non-blittable (unicode)" : "simple non-blittable")
 			: hasComplexStructParams
 				? "complex non-blittable struct"
 				: hasSimpleNonBlittableStructParams
@@ -303,6 +320,15 @@ public sealed partial class NativeAotLoweringPlanner
 			foreach (int idx in method.StringParameterIndices!)
 			{
 				builder.AppendLine($"    void* chaos_marshal_{idx} = nullptr;");
+			}
+		}
+
+		// Local variables for SafeHandle handle extraction.
+		if (hasSafeHandleParams)
+		{
+			foreach (int idx in method.SafeHandleParameterIndices!)
+			{
+				builder.AppendLine($"    CHAOS_IL2CPP_INTPTR chaos_handle_{idx} = 0;");
 			}
 		}
 
@@ -340,7 +366,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        if (s_pinvoke_fn_ == nullptr) CHAOS_IL2CPP_FAIL();");
 		builder.AppendLine("    }");
 
-		// Pre-call: marshal string parameters to native UTF-8 CoTaskMem buffers.
+		// Pre-call: marshal string parameters to native CoTaskMem buffers (UTF-8 or UTF-16 based on CharSet).
 		if (hasStringParams)
 		{
 			builder.AppendLine();
@@ -349,13 +375,13 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine($"    if (chaos_arg_{idx} != 0)");
 				builder.AppendLine("    {");
 				builder.AppendLine($"        chaos_marshal_{idx} = reinterpret_cast<void*>(");
-				builder.AppendLine($"            ::chaos::il2cpp::runtime_core::MarshalStringToCoTaskMemUtf8(");
+				builder.AppendLine($"            ::chaos::il2cpp::runtime_core::{marshalStringFn}(");
 				builder.AppendLine($"                chaos_rs_, chaos_ts_, reinterpret_cast<void*>(chaos_arg_{idx})));");
 				builder.AppendLine("    }");
 			}
 		}
 
-		// Pre-call: marshal string fields in non-blittable struct copies to native UTF-8.
+		// Pre-call: marshal string fields in non-blittable struct copies (UTF-8 or UTF-16 based on CharSet).
 		if (hasSimpleNonBlittableStructParams)
 		{
 			int fieldGroupIdx = 0;
@@ -367,7 +393,7 @@ public sealed partial class NativeAotLoweringPlanner
 					string fieldMember = GetNativeFieldMemberName(fieldSubjectId);
 					builder.AppendLine($"    if (chaos_struct_copy_{paramIdx}.{fieldMember} != 0)");
 					builder.AppendLine("    {");
-					builder.AppendLine($"        auto* chaos_marshal_str_ = ::chaos::il2cpp::runtime_core::MarshalStringToCoTaskMemUtf8(");
+					builder.AppendLine($"        auto* chaos_marshal_str_ = ::chaos::il2cpp::runtime_core::{marshalStringFn}(");
 					builder.AppendLine($"            chaos_rs_, chaos_ts_, reinterpret_cast<void*>(chaos_struct_copy_{paramIdx}.{fieldMember}));");
 					builder.AppendLine($"        chaos_struct_copy_{paramIdx}.{fieldMember} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_marshal_str_);");
 					builder.AppendLine("    }");
@@ -392,13 +418,27 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 		}
 
+		// Pre-call: extract handle values from SafeHandle parameters.
+		if (hasSafeHandleParams)
+		{
+			builder.AppendLine();
+			foreach (int idx in method.SafeHandleParameterIndices!)
+			{
+				builder.AppendLine($"    if (chaos_arg_{idx} != 0)");
+				builder.AppendLine("    {");
+				builder.AppendLine($"        chaos_handle_{idx} = ::chaos::il2cpp::runtime_core::MarshalSafeHandleGetHandle(");
+				builder.AppendLine($"            chaos_rs_, chaos_ts_, reinterpret_cast<void*>(chaos_arg_{idx}));");
+				builder.AppendLine("    }");
+			}
+		}
+
 		// Native call — four code paths:
 		//   1. Pure blittable (no marshalling): direct call-and-return, early exit.
 		//   2. Blittable struct on non-void return: capture result, cleanup, return.
 		//   3. Blittable struct on void return: call, cleanup, fall through.
 		//   4. Non-blittable (string): existing string marshal paths.
 		builder.AppendLine();
-		if (!hasStringParams && !hasStringReturn && !hasBlittableStructParams && !hasSimpleNonBlittableStructParams && !hasComplexStructParams)
+		if (!hasStringParams && !hasStringReturn && !hasBlittableStructParams && !hasSimpleNonBlittableStructParams && !hasComplexStructParams && !hasSafeHandleParams)
 		{
 			// Path 1: pure blittable — return directly.
 			bool isVoidLocal = method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void;
@@ -477,16 +517,30 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 		}
 
-		// String return: convert native char* to managed string.
+		// String return: convert native char* (UTF-8) or WCHAR* (UTF-16) to managed string.
 		if (hasStringReturn)
 		{
-			builder.AppendLine("    if (chaos_ret_ != 0)");
-			builder.AppendLine("    {");
-			builder.AppendLine("        auto* chaos_managed_str_ = ::chaos::il2cpp::runtime_core::MarshalPtrToStringUtf8(");
-			builder.AppendLine("            chaos_rs_, chaos_ts_, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ret_), -1, false);");
-			builder.AppendLine("        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_managed_str_);");
-			builder.AppendLine("    }");
-			builder.AppendLine("    return 0;");
+			if (isUnicodeCharSet)
+			{
+				// Unicode: cast return to WCHAR*, use wcslen + MarshalWideToString.
+				builder.AppendLine("    if (chaos_ret_ != 0)");
+				builder.AppendLine("    {");
+				builder.AppendLine("        auto* chaos_managed_str_ = ::chaos::il2cpp::runtime_core::MarshalPtrToStringWide(");
+				builder.AppendLine("            chaos_rs_, chaos_ts_, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ret_), -1, false);");
+				builder.AppendLine("        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_managed_str_);");
+				builder.AppendLine("    }");
+				builder.AppendLine("    return 0;");
+			}
+			else
+			{
+				builder.AppendLine("    if (chaos_ret_ != 0)");
+				builder.AppendLine("    {");
+				builder.AppendLine("        auto* chaos_managed_str_ = ::chaos::il2cpp::runtime_core::MarshalPtrToStringUtf8(");
+				builder.AppendLine("            chaos_rs_, chaos_ts_, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ret_), -1, false);");
+				builder.AppendLine("        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_managed_str_);");
+				builder.AppendLine("    }");
+				builder.AppendLine("    return 0;");
+			}
 		}
 		else if (isNonVoid)
 		{
@@ -528,9 +582,6 @@ public sealed partial class NativeAotLoweringPlanner
 			throw new InvalidOperationException("native-aot method '" + method.SubjectId + "' is missing native symbol metadata");
 		}
 		MapAbiSlotReturnType(method.ReturnAbi);
-		// Exception region shape validation is deferred to TryBuildStructuredMethodBody
-		// which handles all shapes gracefully (falling back to IRFlatRegion / empty body
-		// for unsupported shapes).  Redundant checks here would crash before the fallback.
 	}
 
 	private static void ValidateInstructions(AotCoreIrMethodArtifact entryMethod, IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
@@ -550,8 +601,34 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 	}
 
+	/// <summary>
+	/// Maps <see cref="System.Reflection.MethodImportAttributes"/> calling-convention bits
+	/// to a C++ calling-convention annotation string for the function pointer type.
+	/// On x64 Windows all conventions converge; these annotations matter for x86 correctness.
+	/// </summary>
+	private static string GetCallingConventionAnnotation(int importCallingConvention)
+	{
+		return importCallingConvention switch
+		{
+			0x0100 => "",         // WinApi (platform default)
+			0x0200 => "__cdecl ",
+			0x0300 => "__stdcall ",
+			0x0400 => "__thiscall ",
+			0x0500 => "__fastcall ",
+			_ => "",              // Unknown/default — no annotation
+		};
+	}
 
-
+	/// <summary>
+	/// Returns true when the MethodImportAttributes CharSet bits indicate Unicode.
+	/// CharSet values: Ansi=0x0002, Unicode=0x0004, Auto=0x0006.
+	/// Auto is treated as Unicode (Windows default).
+	/// </summary>
+	private static bool IsUnicodeCharSet(int importCharSet)
+	{
+		// Mask 0x0006: 0x0004 = Unicode, 0x0006 = Auto (Unicode on Windows)
+		return importCharSet is 0x0004 or 0x0006;
+	}
 
     private IReadOnlyList<AotCoreIrAbiSlotArtifact> ResolveComMethodParameterAbis(AotCoreIrInstructionArtifact instruction)
     {

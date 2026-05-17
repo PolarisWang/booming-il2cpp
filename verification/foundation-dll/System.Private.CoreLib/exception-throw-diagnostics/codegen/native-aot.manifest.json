@@ -7,12 +7,12 @@
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {
-      "kind": "generatedTranslationUnit",
-      "path": "generated/native-aot.generated.cpp"
-    },
-    {
       "kind": "shapeDispatchHeader",
       "path": "generated/runtime_helper_shapes.h"
+    },
+    {
+      "kind": "generatedTranslationUnit",
+      "path": "generated/native-aot.generated.cpp"
     },
     {
       "kind": "codegenMetrics",

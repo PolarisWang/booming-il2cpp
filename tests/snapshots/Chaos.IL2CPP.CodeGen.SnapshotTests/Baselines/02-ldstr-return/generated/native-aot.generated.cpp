@@ -44,7 +44,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -122,7 +122,7 @@ struct chaos_type_System_Private_CoreLib_System_String
 
 const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_value) noexcept
 {
-	if (chaos_string_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_string_value == 0)
 	{
 		return nullptr;
 	}
@@ -141,9 +141,9 @@ const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_va
 
 CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
-		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		return 0;
 	}
 
 	if (!chaos_is_string_id(chaos_value))
@@ -1005,7 +1005,7 @@ static void (*kAotMethods[2])() = {
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
 static void (*kBenchmarkWrappers[2])() = {
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[0])(static_cast<CHAOS_IL2CPP_INTPTR>(0));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[0])(0);},
 	[]() {kAotMethods[1]();},
 };
 

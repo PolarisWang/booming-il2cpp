@@ -44,7 +44,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -1124,10 +1124,10 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SimpleGapsHelper_RunLdnull(vo
 	CHAOS_IL2CPP_INTPTR _s3{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = 0;
 	chaos_locals[0] = _s0;
 	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s1 = 0;
 	{
 		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
 		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);

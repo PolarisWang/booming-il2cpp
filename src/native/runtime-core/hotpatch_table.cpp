@@ -208,11 +208,23 @@ void RegisterHotpatchModule(const HotpatchModuleV0* module) noexcept {
     GetHotpatchNameRegistry().RegisterModule(module);
 }
 
+// P0.1: Reverse P/Invoke wrapper registry.
+// Stores wrapper function pointers emitted by codegen for
+// [UnmanagedCallersOnly] methods and native-callable delegates.
+// Supports patch unload: wrappers from a specific module can be
+// bulk-removed by tracking module_id boundaries.
+static std::vector<void*> g_reverse_pinvoke_wrappers;
+
 void RegisterReversePInvokeWrappers(void* const* wrappers, uint32_t count) noexcept {
-    // Stub: codegen templates reference this for reverse P/Invoke wrapper registration.
-    // Implementation deferred until the wrapper format and lifecycle are determined.
-    (void)wrappers;
-    (void)count;
+    if (wrappers == nullptr || count == 0) return;
+
+    // Acquire a start index for potential unload tracking.
+    size_t start = g_reverse_pinvoke_wrappers.size();
+    g_reverse_pinvoke_wrappers.reserve(start + count);
+    for (uint32_t i = 0; i < count; ++i) {
+        g_reverse_pinvoke_wrappers.push_back(wrappers[i]);
+    }
+    (void)start;  // Available for future unload tracking (store module→range mapping).
 }
 
 }  // namespace chaos::il2cpp::runtime_core

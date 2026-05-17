@@ -62,6 +62,18 @@ public sealed record MetadataRegistrationEntry
     public string? ImportModuleName { get; init; }
 
     public string? ImportEntryPointName { get; init; }
+
+    /// <summary>
+    /// Raw <see cref="System.Reflection.MethodImportAttributes"/> calling-convention bits
+    /// (mask 0x0700), carried through metadata registration for DllImport materialization.
+    /// </summary>
+    public int? ImportCallingConvention { get; init; }
+
+    /// <summary>
+    /// Raw <see cref="System.Reflection.MethodImportAttributes"/> CharSet bits
+    /// (mask 0x0006), carried through metadata registration for DllImport materialization.
+    /// </summary>
+    public int? ImportCharSet { get; init; }
 }
 
 public sealed record SupplementalMetadataTemplateArtifact
@@ -294,6 +306,27 @@ public sealed record NativeCodegenMetricsArtifact
     public int GeneratedSymbolCount { get; init; }
 
     public long PeakWorkingSetBytes { get; init; }
+
+    /// <summary>Number of methods emitted via structured IR (non-EH).</summary>
+    public int StructuredMethodCount { get; init; }
+
+    /// <summary>Number of methods with EH bodies emitted via structured IR.</summary>
+    public int StructuredExceptionBodyCount { get; init; }
+
+    /// <summary>Number of methods that fell back to flat goto.</summary>
+    public int FlatFallbackCount { get; init; }
+
+    /// <summary>Total number of methods processed.</summary>
+    public int TotalMethodCount { get; init; }
+
+    /// <summary>Structured recovery success rate (0.0–1.0).</summary>
+    public double StructuredRecoveryRate { get; init; }
+
+    /// <summary>Number of methods reachable from entry point via AOT call graph.</summary>
+    public int AotReachableMethodCount { get; init; }
+
+    /// <summary>Number of methods not reachable from entry point.</summary>
+    public int AotUnreachableMethodCount { get; init; }
 }
 
 public sealed record NativeReferenceGeneratedArtifactRef

@@ -148,10 +148,14 @@ public sealed partial class LoaderStage
         var moduleName = metadataReader.GetString(moduleReference.Name);
         var entryPointName = metadataReader.GetString(import.Name);
 
+        var attributes = (int)import.Attributes;
+
         return new ManagedImportModel
         {
             ModuleName = moduleName,
             EntryPointName = entryPointName,
+            CallingConvention = attributes & (int)MethodImportAttributes.CallingConventionMask,
+            CharSet = attributes & (int)MethodImportAttributes.CharSetMask,
         };
     }
 

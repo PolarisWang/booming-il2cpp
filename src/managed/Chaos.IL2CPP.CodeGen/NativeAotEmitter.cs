@@ -17,125 +17,37 @@ public sealed class NativeAotEmitter
         var managedClosureRoot = Path.GetFullPath(request.ManagedClosureRootPath);
         var loweringPlanPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.NativeAotLoweringPlan);
         var loweringPlan = LoadRequiredJson<NativeAotLoweringPlanArtifact>(loweringPlanPath);
-        IReadOnlyList<NativeAotGeneratedSource> generatedSources;
-        IReadOnlyList<NativeAotGeneratedArtifactRef> generatedArtifacts;
+        NativeAotLoweringPlanner? planner = null;
 
-        if (string.Equals(loweringPlan.PlanKind, "full-assembly-entry", StringComparison.Ordinal))
-        {
-            var aotCoreIrPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.AotCoreIr);
-            var closureManifestPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.ClosureManifest);
-            var metadataRegistrationPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.MetadataRegistration);
-            var supplementalMetadataTemplatePath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.SupplementalMetadataTemplate);
+        var (aotCoreIr, closureManifest, metadataRegistration, supplementalMetadataTemplate) =
+            LoadClosureArtifacts(managedClosureRoot);
+        ValidateLoweringPlan(loweringPlan, closureManifest);
+        var entryMethod = LoadEntryMethod(aotCoreIr, loweringPlan.EntrySubjectId);
 
-            AotCoreIrArtifact? aotCoreIr = null;
-            ManagedClosureManifestArtifact? closureManifest = null;
-            MetadataRegistrationArtifact? metadataRegistration = null;
-            SupplementalMetadataTemplateArtifact? supplementalMetadataTemplate = null;
-            Exception? loadException = null;
-            var loadLock = new object();
+        bool isFullAssembly = string.Equals(loweringPlan.PlanKind, "full-assembly-entry", StringComparison.Ordinal);
+        planner = new();
+        var templateModel = planner.Create(
+            loweringPlan,
+            aotCoreIr,
+            entryMethod,
+            closureManifest,
+            metadataRegistration,
+            supplementalMetadataTemplate,
+            fullAssemblyMode: isFullAssembly);
 
-            System.Threading.Tasks.Parallel.Invoke(
-                () => { try { aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
-                () => { try { closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
-                () => { try { metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
-                () => { try { supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } });
-
-            if (loadException is not null)
-            {
-                throw new InvalidOperationException("failed to load one or more required closure artifacts", loadException);
-            }
-
-            ValidateLoweringPlan(loweringPlan, closureManifest!);
-            var entryMethod = LoadEntryMethod(aotCoreIr!, loweringPlan.EntrySubjectId);
-            var templateModel = new NativeAotLoweringPlanner().Create(
-                loweringPlan,
-                aotCoreIr!,
-                entryMethod,
-                closureManifest!,
-                metadataRegistration!,
-                supplementalMetadataTemplate!,
-                fullAssemblyMode: true);
-            generatedSources =
-            [
-                new NativeAotGeneratedSource
-                {
-                    RelativePath = NativeAotArtifactNames.GeneratedTranslationUnit,
-                    Contents = BuildGeneratedTranslationUnit(templateModel),
-                },
-                new NativeAotGeneratedSource
-                {
-                    RelativePath = NativeAotArtifactNames.ShapeDispatchHeader,
-                    Contents = templateModel.ShapeDispatchHeaderContent,
-                },
-            ];
-            generatedArtifacts = generatedSources
-                .Select(generatedSource => new NativeAotGeneratedArtifactRef
-                {
-                    Kind = generatedSource.RelativePath.EndsWith(".h", StringComparison.Ordinal) ? "shapeDispatchHeader" : "generatedTranslationUnit",
-                    Path = generatedSource.RelativePath,
-                })
-                .ToList();
-        }
-        else
-        {
-            var aotCoreIrPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.AotCoreIr);
-            var closureManifestPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.ClosureManifest);
-            var metadataRegistrationPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.MetadataRegistration);
-            var supplementalMetadataTemplatePath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.SupplementalMetadataTemplate);
-
-            AotCoreIrArtifact? aotCoreIr = null;
-            ManagedClosureManifestArtifact? closureManifest = null;
-            MetadataRegistrationArtifact? metadataRegistration = null;
-            SupplementalMetadataTemplateArtifact? supplementalMetadataTemplate = null;
-            Exception? loadException = null;
-            var loadLock = new object();
-
-            System.Threading.Tasks.Parallel.Invoke(
-                () => { try { aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
-                () => { try { closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
-                () => { try { metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
-                () => { try { supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } });
-
-            if (loadException is not null)
-            {
-                throw new InvalidOperationException("failed to load one or more required closure artifacts", loadException);
-            }
-
-            ValidateLoweringPlan(loweringPlan, closureManifest!);
-            var entryMethod = LoadEntryMethod(aotCoreIr!, loweringPlan.EntrySubjectId);
-            var templateModel = new NativeAotLoweringPlanner().Create(
-                loweringPlan,
-                aotCoreIr!,
-                entryMethod,
-                closureManifest!,
-                metadataRegistration!,
-                supplementalMetadataTemplate!);
-            generatedSources =
-            [
-                new NativeAotGeneratedSource
-                {
-                    RelativePath = NativeAotArtifactNames.GeneratedTranslationUnit,
-                    Contents = BuildGeneratedTranslationUnit(templateModel),
-                },
-                new NativeAotGeneratedSource
-                {
-                    RelativePath = NativeAotArtifactNames.ShapeDispatchHeader,
-                    Contents = templateModel.ShapeDispatchHeaderContent,
-                },
-            ];
-            generatedArtifacts = generatedSources
-                .Select(generatedSource => new NativeAotGeneratedArtifactRef
-                {
-                    Kind = generatedSource.RelativePath.EndsWith(".h", StringComparison.Ordinal) ? "shapeDispatchHeader" : "generatedTranslationUnit",
-                    Path = generatedSource.RelativePath,
-                })
-                .ToList();
-        }
+        var (generatedSources, generatedArtifacts) = BuildGeneratedSources(
+            templateModel, loweringPlan);
 
         var codegenMetrics = NativeCodegenMetricsBuilder.Build(
             "native-aot",
             loweringPlan.PlanKind,
-            generatedSources.Select(generatedSource => (generatedSource.RelativePath, generatedSource.Contents)));
+            generatedSources.Select(generatedSource => (generatedSource.RelativePath, generatedSource.Contents)),
+            planner.StructuredMethodCount,
+            planner.StructuredExceptionBodyCount,
+            planner.FlatFallbackCount,
+            planner.TotalMethodCount,
+            planner.AotReachableMethodCount,
+            planner?.AotUnreachableMethodCount ?? 0);
 
         // Validate generated C++ code against project coding conventions.
         var validator = new Validation.NativeCodegenValidator();
@@ -242,10 +154,55 @@ public sealed class NativeAotEmitter
         return entryMethod;
     }
 
+    private static (AotCoreIrArtifact AotCoreIr, ManagedClosureManifestArtifact ClosureManifest,
+        MetadataRegistrationArtifact MetadataRegistration, SupplementalMetadataTemplateArtifact SupplementalMetadataTemplate)
+        LoadClosureArtifacts(string managedClosureRoot)
+    {
+        var aotCoreIrPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.AotCoreIr);
+        var closureManifestPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.ClosureManifest);
+        var metadataRegistrationPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.MetadataRegistration);
+        var supplementalMetadataTemplatePath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.SupplementalMetadataTemplate);
+
+        AotCoreIrArtifact? aotCoreIr = null;
+        ManagedClosureManifestArtifact? closureManifest = null;
+        MetadataRegistrationArtifact? metadataRegistration = null;
+        SupplementalMetadataTemplateArtifact? supplementalMetadataTemplate = null;
+        Exception? loadException = null;
+        var loadLock = new object();
+
+        System.Threading.Tasks.Parallel.Invoke(
+            () => { try { aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
+            () => { try { closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
+            () => { try { metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
+            () => { try { supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } });
+
+        if (loadException is not null)
+        {
+            throw new InvalidOperationException("failed to load one or more required closure artifacts", loadException);
+        }
+
+        return (aotCoreIr!, closureManifest!, metadataRegistration!, supplementalMetadataTemplate!);
+    }
+
     private static string BuildGeneratedTranslationUnit(NativeAotTemplateModel templateModel)
     {
+        return BuildGeneratedPage(templateModel, templateModel.Methods, includeRegistration: true);
+    }
+
+    /// <summary>
+    /// Builds content for a single translation unit page containing a subset of methods.
+    /// </summary>
+    /// <param name="templateModel">Full template model from the planner.</param>
+    /// <param name="pageMethods">Methods to include in this page.</param>
+    /// <param name="includeRegistration">True to include module/generic registration code
+    /// (only in the first page, to avoid duplicate symbol definitions).</param>
+    private static string BuildGeneratedPage(
+        NativeAotTemplateModel templateModel,
+        IReadOnlyList<NativeAotMethodTemplateModel> pageMethods,
+        bool includeRegistration)
+    {
         var objectModelSection = BuildObjectModelSection(templateModel);
-        var methodSections = templateModel.Methods
+        var methodSections = pageMethods
             .Select(BuildMethodSection)
             .ToArray();
         var model = new ScriptObject
@@ -259,8 +216,12 @@ public sealed class NativeAotEmitter
             ["entry_native_symbol"] = templateModel.EntryNativeSymbol,
             ["native_entry_function_name"] = templateModel.NativeEntryFunctionName,
             ["entry_bridge_arguments"] = templateModel.EntryBridgeArguments,
-            ["generic_registration_code"] = ScribanTemplateRenderer.NormalizeIndentation(templateModel.GenericRegistrationCode),
-            ["module_registration_code"] = ScribanTemplateRenderer.NormalizeIndentation(templateModel.ModuleRegistrationCode),
+            ["generic_registration_code"] = includeRegistration
+                ? ScribanTemplateRenderer.NormalizeIndentation(templateModel.GenericRegistrationCode)
+                : "",
+            ["module_registration_code"] = includeRegistration
+                ? ScribanTemplateRenderer.NormalizeIndentation(templateModel.ModuleRegistrationCode)
+                : "",
             [NativeAotTemplateCatalog.TranslationUnitNamespaceProperty] = templateModel.CodegenNamespace,
             ["global_declarations"] = templateModel.GlobalDeclarations,
             ["workload_abi"] = templateModel.WorkloadAbi,
@@ -275,6 +236,79 @@ public sealed class NativeAotEmitter
             ["object_model_code"] = ScribanTemplateRenderer.NormalizeIndentation(templateModel.ObjectModelCode),
         };
         return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetObjectModelTemplate(), model);
+    }
+
+    /// <summary>
+    /// Builds the generated sources list. If the lowering plan has page information,
+    /// splits the methods across multiple translation unit pages. Otherwise produces
+    /// a single translation unit (traditional behavior).
+    /// </summary>
+    private static (IReadOnlyList<NativeAotGeneratedSource> Sources, IReadOnlyList<NativeAotGeneratedArtifactRef> Artifacts)
+        BuildGeneratedSources(NativeAotTemplateModel templateModel, NativeAotLoweringPlanArtifact loweringPlan)
+    {
+        var sources = new List<NativeAotGeneratedSource>();
+        var artifacts = new List<NativeAotGeneratedArtifactRef>();
+
+        // Always include the shape dispatch header
+        sources.Add(new NativeAotGeneratedSource
+        {
+            RelativePath = NativeAotArtifactNames.ShapeDispatchHeader,
+            Contents = templateModel.ShapeDispatchHeaderContent,
+        });
+        artifacts.Add(new NativeAotGeneratedArtifactRef
+        {
+            Kind = "shapeDispatchHeader",
+            Path = NativeAotArtifactNames.ShapeDispatchHeader,
+        });
+
+        var pages = loweringPlan.TranslationUnitPages;
+        if (pages is { Count: > 0 } && loweringPlan.TranslationUnitPageSize is > 0)
+        {
+            // Paged output: split methods across multiple translation units
+            int pageSize = loweringPlan.TranslationUnitPageSize!.Value;
+            var allMethods = templateModel.Methods;
+
+            for (int i = 0; i < pages.Count; i++)
+            {
+                var page = pages[i];
+                var pageMethods = allMethods
+                    .Skip(i * pageSize)
+                    .Take(pageSize)
+                    .ToArray();
+
+                string content = BuildGeneratedPage(
+                    templateModel, pageMethods,
+                    includeRegistration: i == 0);
+
+                sources.Add(new NativeAotGeneratedSource
+                {
+                    RelativePath = page.Path,
+                    Contents = content,
+                });
+                artifacts.Add(new NativeAotGeneratedArtifactRef
+                {
+                    Kind = "generatedTranslationUnit",
+                    Path = page.Path,
+                });
+            }
+        }
+        else
+        {
+            // Single translation unit (traditional behavior)
+            string content = BuildGeneratedTranslationUnit(templateModel);
+            sources.Add(new NativeAotGeneratedSource
+            {
+                RelativePath = NativeAotArtifactNames.GeneratedTranslationUnit,
+                Contents = content,
+            });
+            artifacts.Add(new NativeAotGeneratedArtifactRef
+            {
+                Kind = "generatedTranslationUnit",
+                Path = NativeAotArtifactNames.GeneratedTranslationUnit,
+            });
+        }
+
+        return (sources, artifacts);
     }
 
     private static string BuildMethodSection(NativeAotMethodTemplateModel methodModel)
@@ -314,7 +348,7 @@ public sealed class NativeAotEmitter
 
     private static string ToCppStringLiteral(string value)
     {
-        var builder = new StringBuilder(value.Length + 2);
+        var builder = new StringBuilder(Math.Max(value.Length * 2 + 2, 256));
         builder.Append('"');
 
         foreach (var current in value)

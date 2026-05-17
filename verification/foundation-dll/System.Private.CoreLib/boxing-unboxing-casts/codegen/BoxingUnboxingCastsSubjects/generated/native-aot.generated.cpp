@@ -49,7 +49,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -167,13 +167,11 @@ struct chaos_boxed_type_System_Private_CoreLib_System_Int32
 			return true;
 		}
 		
-		if (chaos_left_value == static_cast<CHAOS_IL2CPP_INTPTR>(0) || chaos_right_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		if (chaos_left_value == 0 || chaos_right_value == 0)
 		{
 			return false;
 		}
 		
-		auto* chaos_left_header = reinterpret_cast<ThinLockableHeader*>(chaos_left_value);
-		auto* chaos_right_header = reinterpret_cast<ThinLockableHeader*>(chaos_right_value);
 		const auto* chaos_left_ti = chaos_object_get_type_info(reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_left_value)));
 		const auto* chaos_right_ti = chaos_object_get_type_info(reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_right_value)));
 		if (chaos_left_ti != chaos_right_ti
@@ -209,7 +207,7 @@ struct chaos_boxed_type_System_Private_CoreLib_System_Int32
 
 const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_value) noexcept
 {
-	if (chaos_string_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_string_value == 0)
 	{
 		return nullptr;
 	}
@@ -229,7 +227,7 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_utf8_copy(const char* chaos_u
 {
 	if (chaos_utf8_data == nullptr)
 	{
-		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		return 0;
 	}
 
 	const auto chaos_id = chaos::il2cpp::string_table::Intern(
@@ -240,14 +238,14 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_utf8_copy(const char* chaos_u
 CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(CHAOS_IL2CPP_INTPTR chaos_left_string_value, CHAOS_IL2CPP_INTPTR chaos_right_string_value)
 {
 	const auto chaos_left_length =
-		chaos_left_string_value == static_cast<CHAOS_IL2CPP_INTPTR>(0)
+		chaos_left_string_value == 0
 			? static_cast<CHAOS_IL2CPP_SIZE>(0)
 			: chaos_is_string_id(chaos_left_string_value)
 				? static_cast<CHAOS_IL2CPP_SIZE>(chaos::il2cpp::string_table::Resolve(
 					chaos_extract_string_id(chaos_left_string_value)).byte_count)
 				: static_cast<CHAOS_IL2CPP_SIZE>(reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_left_string_value)->length);
 	const auto chaos_right_length =
-		chaos_right_string_value == static_cast<CHAOS_IL2CPP_INTPTR>(0)
+		chaos_right_string_value == 0
 			? static_cast<CHAOS_IL2CPP_SIZE>(0)
 			: chaos_is_string_id(chaos_right_string_value)
 				? static_cast<CHAOS_IL2CPP_SIZE>(chaos::il2cpp::string_table::Resolve(
@@ -255,8 +253,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(CHAOS_IL2CPP_INTPTR ch
 				: static_cast<CHAOS_IL2CPP_SIZE>(reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_right_string_value)->length);
 	const char* chaos_left_utf8 = chaos_reflection_get_string_utf8(chaos_left_string_value);
 	const char* chaos_right_utf8 = chaos_reflection_get_string_utf8(chaos_right_string_value);
-	if ((chaos_left_string_value != static_cast<CHAOS_IL2CPP_INTPTR>(0) && chaos_left_utf8 == nullptr && chaos_left_length != 0) ||
-		(chaos_right_string_value != static_cast<CHAOS_IL2CPP_INTPTR>(0) && chaos_right_utf8 == nullptr && chaos_right_length != 0))
+	if ((chaos_left_string_value != 0 && chaos_left_utf8 == nullptr && chaos_left_length != 0) ||
+		(chaos_right_string_value != 0 && chaos_right_utf8 == nullptr && chaos_right_length != 0))
 	{
 		CHAOS_IL2CPP_FAIL();
 	}
@@ -281,7 +279,7 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_literal(const char* chaos_utf
 {
 	if (chaos_utf8_data == nullptr)
 	{
-		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		return 0;
 	}
 
 	return chaos_reflection_create_string_utf8_copy(chaos_utf8_data, CHAOS_IL2CPP_STRLEN(chaos_utf8_data));
@@ -303,7 +301,7 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_name_value_from_handle(CHAOS_IL2CP
 	switch (chaos_type_handle)
 	{
 		default:
-			return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			return 0;
 	}
 }
 
@@ -331,7 +329,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod_name_value_from_handle(CHAOS_IL2CPP
 	switch (chaos_method_handle)
 	{
 		default:
-			return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			return 0;
 	}
 }
 
@@ -349,7 +347,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetDeclaringType_handle_from_type_handle(CHAO
 	switch (chaos_type_handle)
 	{
 		default:
-			return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			return 0;
 	}
 }
 
@@ -366,16 +364,16 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeHandle(CHAOS_IL2CPP_INTPTR chaos_type_
 
 CHAOS_IL2CPP_INTPTR chaos_reflection_get_object_type(CHAOS_IL2CPP_INTPTR chaos_object_value)
 {
-	if (chaos_object_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_object_value == 0)
 	{
-		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		return 0;
 	}
 	
 	const auto* chaos_ti = chaos_object_get_type_info(reinterpret_cast<const void*>(chaos_object_value));
 	switch (chaos_ti->stable_id)
 	{
 		default:
-			return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			return 0;
 	}
 }
 
@@ -384,13 +382,13 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_create_instance(CHAOS_IL2CPP_INTPTR chaos_t
 	auto* chaos_type = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Type*>(chaos_type_value);
 	if (chaos_type == nullptr)
 	{
-		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		return 0;
 	}
 	
 	switch (chaos_type->runtime_type_handle)
 	{
 		default:
-			return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			return 0;
 	}
 }
 
@@ -398,7 +396,7 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle(CHAOS_IL2CPP_INTPTR c
 {
 	if (chaos_method_name == nullptr)
 	{
-		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		return 0;
 	}
 
 	switch (chaos_type_handle)
@@ -469,7 +467,7 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle(CHAOS_IL2CPP_INTPTR c
 			break;
 	}
 
-	return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	return 0;
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(CHAOS_IL2CPP_INTPTR chaos_type_value, CHAOS_IL2CPP_INTPTR chaos_name_value, CHAOS_IL2CPP_INT32 chaos_binding_flags = CHAOS_IL2CPP_INT32(0))
@@ -478,9 +476,9 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(CHAOS_IL2CPP_INTPTR chaos_type_valu
 	auto* chaos_type = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Type*>(chaos_type_value);
 	const auto* chaos_method_name = chaos_reflection_get_string_utf8(chaos_name_value);
 	const auto chaos_method_handle = chaos_reflection_resolve_method_handle(chaos_type->runtime_type_handle, chaos_method_name);
-	if (chaos_method_handle == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_method_handle == 0)
 	{
-		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		return 0;
 	}
 
 	auto* chaos_method = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo);
@@ -517,36 +515,36 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_create_closed_generic_method_handle(CHAOS_I
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(CHAOS_IL2CPP_INTPTR chaos_method_value, CHAOS_IL2CPP_INTPTR chaos_type_array_value)
 {
-	if (chaos_method_value == static_cast<CHAOS_IL2CPP_INTPTR>(0) || chaos_type_array_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_method_value == 0 || chaos_type_array_value == 0)
 	{
-		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		return 0;
 	}
 
 	auto* chaos_method = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo*>(chaos_method_value);
 	auto* chaos_type_array = reinterpret_cast<chaos_managed_array*>(chaos_type_array_value);
-	if (chaos_type_array->length <= static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_type_array->length <= 0)
 	{
-		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		return 0;
 	}
 
 	const auto chaos_type_argument_value = chaos_type_array->elements[0];
-	if (chaos_type_argument_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_type_argument_value == 0)
 	{
-		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		return 0;
 	}
 
 	auto* chaos_type_argument = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Type*>(chaos_type_argument_value);
 	auto* chaos_closed_method = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo);
 	chaos_closed_method->header.type_info = &chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo.hot;
 	chaos_closed_method->declaring_type_handle = chaos_method->declaring_type_handle;
-	chaos_closed_method->generic_definition_method_handle = chaos_method->generic_definition_method_handle != static_cast<CHAOS_IL2CPP_INTPTR>(0)
+	chaos_closed_method->generic_definition_method_handle = chaos_method->generic_definition_method_handle != 0
 		? chaos_method->generic_definition_method_handle
 		: chaos_method->runtime_method_handle;
 	chaos_closed_method->generic_argument_type_handle = chaos_type_argument->runtime_type_handle;
 	chaos_closed_method->runtime_method_handle = chaos_reflection_create_closed_generic_method_handle(
 		chaos_closed_method->generic_definition_method_handle,
 		chaos_closed_method->generic_argument_type_handle);
-	chaos_closed_method->runtime_name_value = chaos_method->runtime_name_value == static_cast<CHAOS_IL2CPP_INTPTR>(0)
+	chaos_closed_method->runtime_name_value = chaos_method->runtime_name_value == 0
 		? ChaosReflectionGetMethod_name_value_from_handle(chaos_closed_method->generic_definition_method_handle)
 		: chaos_method->runtime_name_value;
 	chaos_closed_method->runtime_metadata_token_value = chaos_method->runtime_metadata_token_value != 0
@@ -563,15 +561,15 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod_handle(CHAOS_IL2CPP_INTPTR chaos_me
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(CHAOS_IL2CPP_INTPTR chaos_method_value, CHAOS_IL2CPP_INTPTR chaos_target_value, CHAOS_IL2CPP_INTPTR chaos_args_array_value)
 {
-	if (chaos_method_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_method_value == 0)
 	{
-		return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		return 0;
 	}
 
 	auto* chaos_method = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo*>(chaos_method_value);
 	auto* chaos_args = reinterpret_cast<chaos_managed_array*>(chaos_args_array_value);
 
-	return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	return 0;
 }
 
 CHAOS_IL2CPP_INT32 chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = 0;
@@ -584,18 +582,23 @@ static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1;
-	return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	return 0;
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;
-	return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	return 0;
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
 	return chaos_object_equals(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	return ChaosObjectGetHashCode(chaos_fn_arg_0);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -849,39 +852,39 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // Startup-time-resolved function pointers for cross-assembly calls.
 
 extern "C" const char* kChaosExternalRuntimeSubjects[15] = {
-	"BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::_exitCode",
-	"System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
-	"System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)",
-	"System.Private.CoreLib/System.Byte",
-	"System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type)",
-	"System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)",
 	"System.Private.CoreLib/System.Int32",
-	"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
-	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-	"System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)",
+	"System.Private.CoreLib/System.Byte",
 	"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+	"System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type)",
+	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+	"BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::_exitCode",
+	"System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)",
 	"System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)",
-	"System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)",
 	"System.Private.CoreLib/System.Type::IsInstanceOfType:System.Boolean(System.Object)",
 	"System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)",
+	"System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)",
+	"System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)",
+	"System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
+	"System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)",
+	"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[15] = {
 	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
 	nullptr,
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_),
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableFrom_System_Boolean_System_Type_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Type__IsInstanceOfType_System_Boolean_System_Object_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Type__IsSubclassOf_System_Boolean_System_Type_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
+	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 15;
@@ -918,7 +921,7 @@ static void (*kBenchmarkWrappers[12])() = {
 	[]() {kAotMethods[8]();},
 	[]() {kAotMethods[9]();},
 	[]() {kAotMethods[10]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[11])(static_cast<CHAOS_IL2CPP_INTPTR>(0));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[11])(0);},
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -1155,68 +1158,67 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s1;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[4])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_1{};
 	{
-		const auto chaos_value = _s2;
+		const auto chaos_value = _s1;
 		chaos_box_storage_1.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
 		chaos_box_storage_1.value = chaos_value;
 	}
-	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s3;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s2;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_raw_arg_1 = _s3;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s2;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_(chaos_arg_0, chaos_arg_1);
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[4])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_arg_0 = _s1;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_(chaos_arg_0, chaos_arg_1);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s2;
-	_s2 = chaos_locals[0];
-	{
-		if (_s2 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
+			CHAOS_IL2CPP_FAIL();
 		}
-		else
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	{
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1266,74 +1268,71 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s1;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = 0;
 	{
-		const auto chaos_raw_arg_2 = _s2;
-		const auto chaos_arg_2 = chaos_raw_arg_2;
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[4])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_1{};
 	{
-		const auto chaos_value = _s2;
+		const auto chaos_value = _s1;
 		chaos_box_storage_1.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
 		chaos_box_storage_1.value = chaos_value;
 	}
-	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s3;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s2;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_raw_arg_2 = _s4;
-		const auto chaos_arg_2 = chaos_raw_arg_2;
-		const auto chaos_raw_arg_1 = _s3;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s2;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
+	_s3 = 0;
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[4])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_arg_2 = _s3;
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_arg_0 = _s1;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s2;
-	_s2 = chaos_locals[0];
-	{
-		if (_s2 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
+			CHAOS_IL2CPP_FAIL();
 		}
-		else
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	{
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1373,24 +1372,20 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s1;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1398,7 +1393,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (_s0 != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 		}
@@ -1408,24 +1403,20 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 		}
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 		{
-			const auto chaos_raw_arg_0 = _s1;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
+			const auto chaos_arg_0 = _s1;
 			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 		{
-			const auto chaos_raw_arg_0 = _s2;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
+			const auto chaos_arg_0 = _s2;
 			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_raw_arg_1 = _s2;
-			const auto chaos_arg_1 = chaos_raw_arg_1;
-			const auto chaos_raw_arg_0 = _s1;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
-			if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+			const auto chaos_arg_1 = _s2;
+			const auto chaos_arg_0 = _s1;
+			if (chaos_arg_0 == 0)
 			{
 				CHAOS_IL2CPP_FAIL();
 			}
@@ -1433,7 +1424,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			if (_s1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+			if (_s1 != 0)
 			{
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			}
@@ -1452,17 +1443,12 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
 			}
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
 			{
-				if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+				if (_s0 != 0)
 				{
-				}
-				else
-				{
-					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 					{
-						auto chaos_value = _s2;
+						auto chaos_value = _s0;
 						chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = chaos_value;
 					}
 				}
@@ -1502,8 +1488,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1516,11 +1501,9 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 	}
 	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
 	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1528,7 +1511,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (_s0 != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 		}
@@ -1538,8 +1521,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 		}
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 		{
-			const auto chaos_raw_arg_0 = _s1;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
+			const auto chaos_arg_0 = _s1;
 			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
@@ -1552,11 +1534,9 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 		}
 		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
 		{
-			const auto chaos_raw_arg_1 = _s2;
-			const auto chaos_arg_1 = chaos_raw_arg_1;
-			const auto chaos_raw_arg_0 = _s1;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
-			if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+			const auto chaos_arg_1 = _s2;
+			const auto chaos_arg_0 = _s1;
+			if (chaos_arg_0 == 0)
 			{
 				CHAOS_IL2CPP_FAIL();
 			}
@@ -1564,7 +1544,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			if (_s1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+			if (_s1 != 0)
 			{
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			}
@@ -1583,17 +1563,12 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
 			}
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
 			{
-				if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+				if (_s0 != 0)
 				{
-				}
-				else
-				{
-					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 					{
-						auto chaos_value = _s2;
+						auto chaos_value = _s0;
 						chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = chaos_value;
 					}
 				}
@@ -1631,24 +1606,20 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s1;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -1656,7 +1627,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (_s0 != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 		}
@@ -1666,24 +1637,20 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 		}
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 		{
-			const auto chaos_raw_arg_0 = _s1;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
+			const auto chaos_arg_0 = _s1;
 			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 		{
-			const auto chaos_raw_arg_0 = _s2;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
+			const auto chaos_arg_0 = _s2;
 			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_raw_arg_1 = _s2;
-			const auto chaos_arg_1 = chaos_raw_arg_1;
-			const auto chaos_raw_arg_0 = _s1;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
-			if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+			const auto chaos_arg_1 = _s2;
+			const auto chaos_arg_0 = _s1;
+			if (chaos_arg_0 == 0)
 			{
 				CHAOS_IL2CPP_FAIL();
 			}
@@ -1691,7 +1658,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			if (_s1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+			if (_s1 != 0)
 			{
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			}
@@ -1710,17 +1677,12 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
 			}
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
 			{
-				if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+				if (_s0 != 0)
 				{
-				}
-				else
-				{
-					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 					{
-						auto chaos_value = _s2;
+						auto chaos_value = _s0;
 						chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = chaos_value;
 					}
 				}
@@ -1758,28 +1720,24 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s1;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (_s0 != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 		}
@@ -1789,28 +1747,24 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 		}
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 		{
-			const auto chaos_raw_arg_0 = _s1;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
+			const auto chaos_arg_0 = _s1;
 			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 		{
-			const auto chaos_raw_arg_0 = _s2;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
+			const auto chaos_arg_0 = _s2;
 			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_raw_arg_1 = _s2;
-			const auto chaos_arg_1 = chaos_raw_arg_1;
-			const auto chaos_raw_arg_0 = _s1;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
+			const auto chaos_arg_1 = _s2;
+			const auto chaos_arg_0 = _s1;
 			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_(chaos_arg_0, chaos_arg_1);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			if (_s1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+			if (_s1 != 0)
 			{
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			}
@@ -1829,17 +1783,12 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
 			}
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
 			{
-				if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+				if (_s0 != 0)
 				{
-				}
-				else
-				{
-					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 					{
-						auto chaos_value = _s2;
+						auto chaos_value = _s0;
 						chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = chaos_value;
 					}
 				}
@@ -1890,51 +1839,54 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 	}
 	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[4])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_1{};
 	{
-		const auto chaos_value = _s2;
+		const auto chaos_value = _s1;
 		chaos_box_storage_1.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
 		chaos_box_storage_1.value = chaos_value;
 	}
-	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
 	{
-		const auto chaos_raw_arg_0 = _s2;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s1;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[4])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s2;
-	_s2 = chaos_locals[0];
-	{
-		if (_s2 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
+			CHAOS_IL2CPP_FAIL();
 		}
-		else
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	{
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1970,62 +1922,61 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[4])();
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+	{
+		const auto chaos_arg_0 = _s1;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
-		const auto chaos_raw_arg_0 = _s2;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_raw_arg_1 = _s3;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s2;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_arg_0 = _s1;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[4])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s2;
-	_s2 = chaos_locals[0];
-	{
-		if (_s2 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
+			CHAOS_IL2CPP_FAIL();
 		}
-		else
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	{
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -2063,8 +2014,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -2077,54 +2027,58 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 		const auto chaos_arg_1 = chaos_raw_arg_1;
 		const auto chaos_raw_arg_0 = _s0;
 		const auto chaos_arg_0 = chaos_raw_arg_0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[41])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[13])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[4])();
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+	{
+		const auto chaos_arg_0 = _s1;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-	{
-		const auto chaos_raw_arg_0 = _s2;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
-		const auto chaos_raw_arg_2 = _s4;
+		const auto chaos_raw_arg_2 = _s3;
 		const auto chaos_arg_2 = chaos_raw_arg_2;
-		const auto chaos_raw_arg_1 = _s3;
+		const auto chaos_raw_arg_1 = _s2;
 		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s2;
+		const auto chaos_raw_arg_0 = _s1;
 		const auto chaos_arg_0 = chaos_raw_arg_0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[41])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[13])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[4])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
-	chaos_locals[0] = _s2;
-	_s2 = chaos_locals[0];
-	{
-		if (_s2 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
+			CHAOS_IL2CPP_FAIL();
 		}
-		else
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
+	}
+	{
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -2183,11 +2137,9 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 	}
 	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
 	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
-		if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
@@ -2195,7 +2147,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (_s0 != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		if (_s0 != 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 		}
@@ -2220,11 +2172,9 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 		}
 		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_3);
 		{
-			const auto chaos_raw_arg_1 = _s2;
-			const auto chaos_arg_1 = chaos_raw_arg_1;
-			const auto chaos_raw_arg_0 = _s1;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
-			if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+			const auto chaos_arg_1 = _s2;
+			const auto chaos_arg_0 = _s1;
+			if (chaos_arg_0 == 0)
 			{
 				CHAOS_IL2CPP_FAIL();
 			}
@@ -2232,7 +2182,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			if (_s1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+			if (_s1 != 0)
 			{
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			}
@@ -2251,17 +2201,12 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
 			}
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
 			{
-				if (_s0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+				if (_s0 != 0)
 				{
-				}
-				else
-				{
-					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 					{
-						auto chaos_value = _s2;
+						auto chaos_value = _s0;
 						chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = chaos_value;
 					}
 				}
@@ -2282,10 +2227,6 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
 	_s0 = chaos_args[0];
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	{
 		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
 		switch (chaos_switch_value)
@@ -2297,10 +2238,8 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d0.method_key, _d_ab, nullptr);
+							_d0.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -2316,10 +2255,8 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d1.method_key, _d_ab, nullptr);
+							_d1.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -2335,10 +2272,8 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d2.method_key, _d_ab, nullptr);
+							_d2.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -2354,10 +2289,8 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d3.method_key, _d_ab, nullptr);
+							_d3.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -2373,10 +2306,8 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d4.method_key, _d_ab, nullptr);
+							_d4.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -2392,10 +2323,8 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d5.method_key, _d_ab, nullptr);
+							_d5.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -2411,10 +2340,8 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d6.method_key, _d_ab, nullptr);
+							_d6.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -2430,10 +2357,8 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d7.method_key, _d_ab, nullptr);
+							_d7.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -2449,10 +2374,8 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d8.method_key, _d_ab, nullptr);
+							_d8.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -2468,10 +2391,8 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d9.method_key, _d_ab, nullptr);
+							_d9.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -2487,10 +2408,8 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
 					{
-						alignas(16) uint8_t _d_ab[1];
-						ArgBuffer _d_bw(_d_ab);
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d10.method_key, _d_ab, nullptr);
+							_d10.method_key, nullptr, nullptr);
 					}
 					else
 					{
@@ -2500,10 +2419,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Run(CHAO
 				break;
 			}
 			default:
-			{
 				return;
-				break;
-			}
 		}
 	}
 	return;

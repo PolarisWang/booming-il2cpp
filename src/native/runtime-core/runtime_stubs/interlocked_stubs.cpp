@@ -14,51 +14,57 @@ void ChaosInterlockedMemoryBarrier(void) noexcept
     std::atomic_thread_fence(std::memory_order_seq_cst);
 }
 
-CHAOS_IL2CPP_INT64 ChaosInterlockedReadInt64(CHAOS_IL2CPP_INT64* location) noexcept
+CHAOS_IL2CPP_INT64 ChaosInterlockedReadInt64(CHAOS_IL2CPP_INTPTR location) noexcept
 {
+    auto* typedLocation = reinterpret_cast<CHAOS_IL2CPP_INT64*>(location);
     return std::atomic_load_explicit(
-        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT64>*>(location),
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT64>*>(typedLocation),
         std::memory_order_seq_cst);
 }
 
-CHAOS_IL2CPP_INT64 ChaosInterlockedIncrementInt64(CHAOS_IL2CPP_INT64* location) noexcept
+CHAOS_IL2CPP_INT64 ChaosInterlockedIncrementInt64(CHAOS_IL2CPP_INTPTR location) noexcept
 {
+    auto* typedLocation = reinterpret_cast<CHAOS_IL2CPP_INT64*>(location);
     return std::atomic_fetch_add_explicit(
-        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT64>*>(location),
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT64>*>(typedLocation),
         CHAOS_IL2CPP_INT64(1),
         std::memory_order_seq_cst) + 1;
 }
 
-CHAOS_IL2CPP_INT64 ChaosInterlockedDecrementInt64(CHAOS_IL2CPP_INT64* location) noexcept
+CHAOS_IL2CPP_INT64 ChaosInterlockedDecrementInt64(CHAOS_IL2CPP_INTPTR location) noexcept
 {
+    auto* typedLocation = reinterpret_cast<CHAOS_IL2CPP_INT64*>(location);
     return std::atomic_fetch_sub_explicit(
-        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT64>*>(location),
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT64>*>(typedLocation),
         CHAOS_IL2CPP_INT64(1),
         std::memory_order_seq_cst) - 1;
 }
 
-CHAOS_IL2CPP_INT64 ChaosInterlockedExchangeInt64(CHAOS_IL2CPP_INT64* location, CHAOS_IL2CPP_INT64 value) noexcept
+CHAOS_IL2CPP_INT64 ChaosInterlockedExchangeInt64(CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INT64 value) noexcept
 {
+    auto* typedLocation = reinterpret_cast<CHAOS_IL2CPP_INT64*>(location);
     return std::atomic_exchange_explicit(
-        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT64>*>(location),
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT64>*>(typedLocation),
         value,
         std::memory_order_seq_cst);
 }
 
-CHAOS_IL2CPP_INT32 ChaosInterlockedCompareExchangeInt32(CHAOS_IL2CPP_INT32* location, CHAOS_IL2CPP_INT32 value, CHAOS_IL2CPP_INT32 comparand) noexcept
+CHAOS_IL2CPP_INT32 ChaosInterlockedCompareExchangeInt32(CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INT32 value, CHAOS_IL2CPP_INT32 comparand) noexcept
 {
+    auto* typedLocation = reinterpret_cast<CHAOS_IL2CPP_INT32*>(location);
     return std::atomic_compare_exchange_strong_explicit(
-        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT32>*>(location),
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT32>*>(typedLocation),
         &comparand,
         value,
         std::memory_order_seq_cst,
         std::memory_order_seq_cst);
 }
 
-CHAOS_IL2CPP_INT64 ChaosInterlockedCompareExchangeInt64(CHAOS_IL2CPP_INT64* location, CHAOS_IL2CPP_INT64 value, CHAOS_IL2CPP_INT64 comparand) noexcept
+CHAOS_IL2CPP_INT64 ChaosInterlockedCompareExchangeInt64(CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INT64 value, CHAOS_IL2CPP_INT64 comparand) noexcept
 {
+    auto* typedLocation = reinterpret_cast<CHAOS_IL2CPP_INT64*>(location);
     std::atomic_compare_exchange_strong_explicit(
-        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT64>*>(location),
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT64>*>(typedLocation),
         &comparand,
         value,
         std::memory_order_seq_cst,
@@ -66,10 +72,11 @@ CHAOS_IL2CPP_INT64 ChaosInterlockedCompareExchangeInt64(CHAOS_IL2CPP_INT64* loca
     return comparand;
 }
 
-void ChaosInterlockedStoreNoBarrier(CHAOS_IL2CPP_INT64* location, CHAOS_IL2CPP_INT64 value) noexcept
+void ChaosInterlockedStoreNoBarrier(CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INT64 value) noexcept
 {
+    auto* typedLocation = reinterpret_cast<CHAOS_IL2CPP_INT64*>(location);
     std::atomic_store_explicit(
-        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT64>*>(location),
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT64>*>(typedLocation),
         value,
         std::memory_order_relaxed);
 }

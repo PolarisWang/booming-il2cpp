@@ -127,6 +127,7 @@ verification/foundation-dll/*/*/native_test/
 
 # Root-level debug scripts and logs (not part of the project)
 /_*.bat
+/_*.cmd
 /_*.ps1
 /_*.py
 /_*.txt

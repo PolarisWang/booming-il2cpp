@@ -242,10 +242,19 @@ public sealed class AotCoreIrLowering
             IsUnmanagedCallersOnly = method.IsUnmanagedCallersOnly,
             ImportModuleName = method.Import?.ModuleName,
             ImportEntryPointName = method.Import?.EntryPointName,
+            ImportCallingConvention = method.Import?.CallingConvention ?? 0,
+            ImportCharSet = method.Import?.CharSet ?? 0,
             StringParameterIndices = method.Import is not null
                 ? method.Parameters
                     .Select((p, i) => (p.Type, i))
                     .Where(x => IsPInvokeStringType(x.Type))
+                    .Select(x => x.i)
+                    .ToArray()
+                : null,
+            SafeHandleParameterIndices = method.Import is not null
+                ? method.Parameters
+                    .Select((p, i) => (p.Type, i))
+                    .Where(x => IsSafeHandleDerivedType(x.Type, managedTypes))
                     .Select(x => x.i)
                     .ToArray()
                 : null,
@@ -1320,6 +1329,32 @@ public sealed class AotCoreIrLowering
     private static bool IsPInvokeStringType(string typeIdentity)
     {
         return string.Equals(typeIdentity, "System.String", StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// Checks if a type derives from <see cref="System.Runtime.InteropServices.SafeHandle"/>
+    /// by walking the <see cref="ManagedTypeModel.BaseTypeSubjectId"/> chain.
+    /// </summary>
+    private static bool IsSafeHandleDerivedType(string typeIdentity, IReadOnlyDictionary<string, ManagedTypeModel> managedTypes)
+    {
+        const string safeHandleSubjectId = "System.Runtime.InteropServices.SafeHandle";
+        if (!managedTypes.TryGetValue(typeIdentity, out var typeModel))
+            return false;
+
+        var current = typeModel;
+        while (current != null)
+        {
+            if (string.Equals(current.SubjectId, safeHandleSubjectId, StringComparison.Ordinal))
+                return true;
+
+            if (current.BaseTypeSubjectId == null)
+                break;
+
+            if (!managedTypes.TryGetValue(current.BaseTypeSubjectId, out current))
+                break;
+        }
+
+        return false;
     }
 
     /// <summary>

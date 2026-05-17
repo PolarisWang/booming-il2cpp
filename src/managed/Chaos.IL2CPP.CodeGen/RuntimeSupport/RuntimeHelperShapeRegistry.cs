@@ -2372,7 +2372,7 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         // Comma operator: throw terminates execution, second operand
                         // provides the result type for the caller's eval stack.
-                        return "(throw chaos_managed_exception{0}, static_cast<CHAOS_IL2CPP_UINT16>(0))";
+                        return "(throw chaos_managed_exception{{{0}}}, static_cast<CHAOS_IL2CPP_UINT16>(0))";
                     }
                     return null;
                 }));
@@ -5510,7 +5510,7 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 });
                 }));
 
-            // === Marshal.GetDelegateForFunctionPointer<T>(IntPtr) — V1: delegates to runtime stub (returns nullptr) ===
+            // === Marshal.GetDelegateForFunctionPointer<T>(IntPtr) — delegates to runtime → native function dispatch thunk ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
                 MethodName: "GetDelegateForFunctionPointer",
@@ -5522,7 +5522,6 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    (void)chaos_arg_0;",
                         "    auto* rs = chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
                         "    auto* ts = chaos::il2cpp::runtime_core::GetCurrentThreadState();",
                         "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(",

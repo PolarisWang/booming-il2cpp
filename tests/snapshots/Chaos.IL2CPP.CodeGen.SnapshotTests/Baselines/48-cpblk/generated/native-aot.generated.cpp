@@ -44,7 +44,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -1183,7 +1183,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CpblkHelper_RunCpblk(void)
 				}
 				return reinterpret_cast<void*>(chaos_address);
 			};
-			if (chaos_source == static_cast<CHAOS_IL2CPP_INTPTR>(0) || chaos_destination == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+			if (chaos_source == 0 || chaos_destination == 0)
 			{
 				CHAOS_IL2CPP_FAIL();
 			}

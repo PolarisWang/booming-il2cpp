@@ -44,7 +44,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -943,7 +943,7 @@ static void (*kAotMethods[2])() = {
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
 static void (*kBenchmarkWrappers[2])() = {
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[0])(static_cast<CHAOS_IL2CPP_INTPTR>(0));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[0])(0);},
 	[]() {kAotMethods[1]();},
 };
 

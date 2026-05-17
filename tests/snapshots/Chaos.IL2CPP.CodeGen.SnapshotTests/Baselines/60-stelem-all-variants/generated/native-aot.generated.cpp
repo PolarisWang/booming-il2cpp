@@ -54,7 +54,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -952,11 +952,11 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // Startup-time-resolved function pointers for cross-assembly calls.
 
 extern "C" const char* kChaosExternalRuntimeSubjects[5] = {
-	"System.Private.CoreLib/System.Double",
+	"System.Private.CoreLib/System.Int8",
 	"System.Private.CoreLib/System.Int16",
 	"System.Private.CoreLib/System.Int64",
-	"System.Private.CoreLib/System.Int8",
 	"System.Private.CoreLib/System.Single",
+	"System.Private.CoreLib/System.Double",
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[5] = {

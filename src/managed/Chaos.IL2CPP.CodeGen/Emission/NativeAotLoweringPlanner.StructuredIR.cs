@@ -419,10 +419,6 @@ public sealed partial class NativeAotLoweringPlanner
                 EmitIRExceptionRegion(builder, er, method, indentation);
                 break;
 
-            case IRFlatRegion fr:
-                EmitStructuredFlatRegion(builder, method, fr, indentation);
-                break;
-
             default:
                 throw new NotSupportedException(
                     "StructuredIR: unknown node type '" + node.GetType().Name + "'");
@@ -442,8 +438,7 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method,
         string indentation)
     {
-        var filtered = FilterRedundantStoreReloadPairs(block.BodyInstructions);
-        foreach (var instr in filtered)
+        foreach (var instr in block.BodyInstructions)
         {
             EmitInstruction(builder, instr, indentation);
         }
@@ -549,7 +544,8 @@ public sealed partial class NativeAotLoweringPlanner
         int preConditionDepth = _activeStructuredSlotContext?.Depth ?? 0;
 
         // Emit condition instructions (push operands onto eval stack)
-        foreach (var instr in ite.ConditionInstructions)
+        var filteredConditions = FilterRedundantStoreReloadPairs(ite.ConditionInstructions);
+        foreach (var instr in filteredConditions)
             EmitInstruction(builder, instr, indentation);
 
         string inner = indentation + "    ";
@@ -558,15 +554,16 @@ public sealed partial class NativeAotLoweringPlanner
         if (terminator.Op == "brtrue" || terminator.Op == "brfalse")
         {
             bool branchOnNonZero = terminator.Op == "brtrue";
-            string _cType = PeekSlotType();
+            SlotType _cType = PeekSlotType();
             string _cSlot = ConsumeEvalStackValueExpression();
+            ConsumeSlotType();
             // Condition operand consumed — depth is back to preConditionDepth
             string _condition = _cType switch
             {
-                "Float32" => branchOnNonZero
+                SlotType.Float32 => branchOnNonZero
                     ? $"chaos_load_float32({_cSlot}) != 0.0f"
                     : $"chaos_load_float32({_cSlot}) == 0.0f",
-                "Float64" => branchOnNonZero
+                SlotType.Float64 => branchOnNonZero
                     ? $"ChaosLoadFloat64({_cSlot}) != 0.0"
                     : $"ChaosLoadFloat64({_cSlot}) == 0.0",
                 _ => branchOnNonZero
@@ -619,22 +616,24 @@ public sealed partial class NativeAotLoweringPlanner
 
             builder.AppendLine(indentation + "{");
 
-            string _cmpRType = PeekSlotType();
+            SlotType _cmpRType = PeekSlotType();
             string _cmpRExpr = ConsumeEvalStackValueExpression();
-            string _cmpLType = PeekSlotType();
+            ConsumeSlotType();
+            SlotType _cmpLType = PeekSlotType();
             string _cmpLExpr = ConsumeEvalStackValueExpression();
+            ConsumeSlotType();
             string _cmpRight = _cmpRType switch
             {
-                "Float32" => $"chaos_load_float32({_cmpRExpr})",
-                "Float64" => $"ChaosLoadFloat64({_cmpRExpr})",
+                SlotType.Float32 => $"chaos_load_float32({_cmpRExpr})",
+                SlotType.Float64 => $"ChaosLoadFloat64({_cmpRExpr})",
                 _ => isUnsigned
                     ? $"static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({_cmpRExpr}))"
                     : $"static_cast<{valueType}>({_cmpRExpr})",
             };
             string _cmpLeft = _cmpLType switch
             {
-                "Float32" => $"chaos_load_float32({_cmpLExpr})",
-                "Float64" => $"ChaosLoadFloat64({_cmpLExpr})",
+                SlotType.Float32 => $"chaos_load_float32({_cmpLExpr})",
+                SlotType.Float64 => $"ChaosLoadFloat64({_cmpLExpr})",
                 _ => isUnsigned
                     ? $"static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({_cmpLExpr}))"
                     : $"static_cast<{valueType}>({_cmpLExpr})",
@@ -678,7 +677,8 @@ public sealed partial class NativeAotLoweringPlanner
         {
             // No condition 鈥?infinite loop (while (true) { ... })
             // Condition instructions might still contain setup code.
-            foreach (var instr in w.ConditionInstructions)
+            var filteredSetup = FilterRedundantStoreReloadPairs(w.ConditionInstructions);
+            foreach (var instr in filteredSetup)
                 EmitInstruction(builder, instr, indentation);
 
             builder.AppendLine(indentation + "while (true)");
@@ -691,20 +691,22 @@ public sealed partial class NativeAotLoweringPlanner
 
         var terminator = w.ConditionTerminator;
 
-        foreach (var instr in w.ConditionInstructions)
+        var filteredConditions = FilterRedundantStoreReloadPairs(w.ConditionInstructions);
+        foreach (var instr in filteredConditions)
             EmitInstruction(builder, instr, indentation);
 
         if (terminator.Op == "brtrue" || terminator.Op == "brfalse")
         {
             bool branchOnNonZero = terminator.Op == "brtrue";
-            string _cType = PeekSlotType();
+            SlotType _cType = PeekSlotType();
             string _cSlot = ConsumeEvalStackValueExpression();
+            ConsumeSlotType();
             string _condition = _cType switch
             {
-                "Float32" => branchOnNonZero
+                SlotType.Float32 => branchOnNonZero
                     ? $"chaos_load_float32({_cSlot}) != 0.0f"
                     : $"chaos_load_float32({_cSlot}) == 0.0f",
-                "Float64" => branchOnNonZero
+                SlotType.Float64 => branchOnNonZero
                     ? $"ChaosLoadFloat64({_cSlot}) != 0.0"
                     : $"ChaosLoadFloat64({_cSlot}) == 0.0",
                 _ => branchOnNonZero
@@ -742,22 +744,24 @@ public sealed partial class NativeAotLoweringPlanner
 
             builder.AppendLine(indentation + "{");
 
-            string _cmpRType = PeekSlotType();
+            SlotType _cmpRType = PeekSlotType();
             string _cmpRExpr = ConsumeEvalStackValueExpression();
-            string _cmpLType = PeekSlotType();
+            ConsumeSlotType();
+            SlotType _cmpLType = PeekSlotType();
             string _cmpLExpr = ConsumeEvalStackValueExpression();
+            ConsumeSlotType();
             string _cmpRight = _cmpRType switch
             {
-                "Float32" => $"chaos_load_float32({_cmpRExpr})",
-                "Float64" => $"ChaosLoadFloat64({_cmpRExpr})",
+                SlotType.Float32 => $"chaos_load_float32({_cmpRExpr})",
+                SlotType.Float64 => $"ChaosLoadFloat64({_cmpRExpr})",
                 _ => isUnsigned
                     ? $"static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({_cmpRExpr}))"
                     : $"static_cast<{valueType}>({_cmpRExpr})",
             };
             string _cmpLeft = _cmpLType switch
             {
-                "Float32" => $"chaos_load_float32({_cmpLExpr})",
-                "Float64" => $"ChaosLoadFloat64({_cmpLExpr})",
+                SlotType.Float32 => $"chaos_load_float32({_cmpLExpr})",
+                SlotType.Float64 => $"ChaosLoadFloat64({_cmpLExpr})",
                 _ => isUnsigned
                     ? $"static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({_cmpLExpr}))"
                     : $"static_cast<{valueType}>({_cmpLExpr})",
@@ -791,7 +795,8 @@ public sealed partial class NativeAotLoweringPlanner
         // Emit latch instructions if present
         if (dw.LatchTerminator != null)
         {
-            foreach (var instr in dw.LatchInstructions)
+            var filteredLatch = FilterRedundantStoreReloadPairs(dw.LatchInstructions);
+            foreach (var instr in filteredLatch)
                 EmitInstruction(builder, instr, bodyIndent);
 
             var terminator = dw.LatchTerminator;
@@ -800,14 +805,15 @@ public sealed partial class NativeAotLoweringPlanner
                 bool branchOnNonZero = terminator.Op == "brtrue";
                 // For do-while, the latch branch is the loop-back branch.
                 // When it's false, we break out (invert the condition).
-                string _cType = PeekSlotType();
+                SlotType _cType = PeekSlotType();
                 string _cSlot = ConsumeEvalStackValueExpression();
+                ConsumeSlotType();
                 string _condition = _cType switch
                 {
-                    "Float32" => branchOnNonZero
+                    SlotType.Float32 => branchOnNonZero
                         ? $"chaos_load_float32({_cSlot}) != 0.0f"
                         : $"chaos_load_float32({_cSlot}) == 0.0f",
-                    "Float64" => branchOnNonZero
+                    SlotType.Float64 => branchOnNonZero
                         ? $"ChaosLoadFloat64({_cSlot}) != 0.0"
                         : $"ChaosLoadFloat64({_cSlot}) == 0.0",
                     _ => branchOnNonZero
@@ -843,7 +849,8 @@ public sealed partial class NativeAotLoweringPlanner
         string caseIndent = inner + "    ";
         string bodyIndent = caseIndent + "    ";
 
-        foreach (var instr in sw.SwitchInstructions)
+        var filteredSwitch = FilterRedundantStoreReloadPairs(sw.SwitchInstructions);
+        foreach (var instr in filteredSwitch)
             EmitInstruction(builder, instr, indentation);
 
         builder.AppendLine(indentation + "{");
@@ -1622,11 +1629,19 @@ public sealed partial class NativeAotLoweringPlanner
         if (body is null)
             return;
 
+        TotalMethodCount++;
+
         if (body is IRFlatRegion flatRegion)
         {
+            FlatFallbackCount++;
             EmitFlatGotoBody(builder, method, flatRegion.Instructions, flatRegion.Offsets);
             return;
         }
+
+        if (method.ExceptionRegionCount > 0)
+            StructuredExceptionBodyCount++;
+        else
+            StructuredMethodCount++;
 
         StructuredSlotEmissionContext? previousSlotContext = _activeStructuredSlotContext;
         _activeStructuredSlotContext = new StructuredSlotEmissionContext();
@@ -1640,16 +1655,6 @@ public sealed partial class NativeAotLoweringPlanner
             _activeStructuredSlotContext = previousSlotContext;
             _structuredSlotTypes.Clear();
         }
-    }
-
-    private void EmitStructuredFlatRegion(
-        StringBuilder builder,
-        AotCoreIrMethodArtifact method,
-        IRFlatRegion fr,
-        string indentation)
-    {
-        throw new NotSupportedException(
-            $"IRFlatRegion should be unreachable — method '{SafeShortName(method)}' has flat goto.");
     }
 
     private bool TryBuildStructuredExceptionMethodBody(

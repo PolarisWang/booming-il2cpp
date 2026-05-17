@@ -92,6 +92,24 @@ extern thread_local int tls_satb_buffer_index;
 extern thread_local bool tls_satb_registered;
 
 // ======================================================================
+// Per-worker state for BGC parallel mark (work-stealing deque).
+//
+// Each parallel mark worker (including the BGC thread as worker 0) has
+// its own deque of grey-object pointers.  Workers push/pop from their
+// own deque (under steal_mutex).  When empty, they steal from a random
+// victim's deque front.  See P1-1 for full design.
+// ======================================================================
+
+/// Batch size for popping grey objects from a worker's deque.
+static constexpr int kBgcPopBatchSize = 32;
+
+/// Per-worker state for BGC parallel mark with steal support.
+struct BgcMarkWorkerState {
+    std::vector<void*> deque;       ///< Local grey-object worklist
+    std::mutex         steal_mutex; ///< Guards deque (push, pop, steal)
+};
+
+// ======================================================================
 // BgcController — singleton managing BGC thread and state
 // ======================================================================
 
@@ -202,18 +220,14 @@ private:
     void BgcThreadMain();
 
     /// Parallel worker entry point for concurrent mark phase.
-    void BgcWorkerMain();
+    void BgcWorkerMain(int worker_idx);
 
     /// Process one grey object: scan its GC layout and mark all references.
+    /// Pushes newly-marked children to worker 0's deque.
     void ProcessGreyObject(void* obj);
 
-    /// Drain the BGC mark stack (process grey → black).
-    /// Returns number of objects processed.
-    /// @param batch_limit  Max objects to process (0 = drain all).
-    CHAOS_IL2CPP_SIZE DrainMarkStack(CHAOS_IL2CPP_SIZE batch_limit = 0);
-
     /// Drain the global SATB queue: for each entry, if the object is in
-    /// old-gen and not yet marked, push to mark stack.
+    /// old-gen and not yet marked, push to worker 0's deque.
     CHAOS_IL2CPP_SIZE DrainGlobalSatbQueue();
 
     /// Drain all thread-local SATB buffers into the global queue.
@@ -242,9 +256,12 @@ private:
     /// Wake the BGC thread (or parallel workers) from sleep.
     void NotifyBgc() { bgc_cv_.notify_all(); }
 
-    // BGC mark stack (concurrent mark uses its own stack, not g_old_gen's).
-    std::vector<void*> mark_stack_;
-    std::mutex mark_stack_mutex_;
+    // Per-worker mark deques (concurrent mark uses per-worker deques
+    // with steal support, not a shared mark stack).
+    // Worker 0 = BGC thread; workers 1..N = parallel mark workers.
+    static constexpr int kMaxBgcWorkers = 8;
+    BgcMarkWorkerState bgc_workers_[kMaxBgcWorkers]{};
+    std::atomic<int> bgc_worker_count_{0};
 
     // Global SATB queue (accumulated from thread-local buffer flushes).
     std::vector<SatbEntry> global_satb_;
@@ -269,18 +286,15 @@ private:
 
     // ── Parallel mark workers ─────────────────────────────────────
 
-    static constexpr int kMaxBgcWorkers = 8;
-
-    /// Batch size for popping grey objects from the shared mark stack.
-    /// Larger batches reduce mutex contention; 32 balances locality vs.
-    /// fair distribution across parallel workers.
-    static constexpr CHAOS_IL2CPP_SIZE kBgcPopBatchSize = 32;
+    /// Drain up to @a batch_limit entries from worker @a idx's deque.
+    /// Processes each entry and pushes newly-marked children to the same deque.
+    /// @param idx        Worker index (0 = BGC thread).
+    /// @param batch_limit  Max entries to process (0 = drain all).
+    /// @returns Number of entries processed.
+    CHAOS_IL2CPP_SIZE DrainWorkerDeque(int idx, CHAOS_IL2CPP_SIZE batch_limit = 0);
 
     /// Flag: set by BGC thread to signal parallel workers to stop.
     std::atomic<bool> bgc_parallel_done_{false};
-
-    /// Active parallel worker count (for diagnostics).
-    std::atomic<int> bgc_parallel_worker_count_{0};
 
     /// Worker threads spawned during concurrent mark.
     std::vector<std::thread> bgc_parallel_workers_;

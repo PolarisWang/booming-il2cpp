@@ -45,7 +45,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -928,8 +928,8 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // Startup-time-resolved function pointers for cross-assembly calls.
 
 extern "C" const char* kChaosExternalRuntimeSubjects[2] = {
-	"SnapshotTestFixtures/MarkedClass",
 	"SnapshotTestFixtures/MarkedClass::.ctor:System.Void(System.Int32)",
+	"SnapshotTestFixtures/MarkedClass",
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[2] = {
@@ -1154,16 +1154,16 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_TypeCheckHelper_CheckAndCast(
 	{
 		const auto chaos_value = _s1;
 		auto chaos_matches = false;
-		if (chaos_value != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
 			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_SnapshotTestFixtures_MarkedClass.hot);
 		}
-		_s1 = chaos_matches ? chaos_value : static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		_s1 = chaos_matches ? chaos_value : 0;
 	}
 	{
 		const auto chaos_value = _s1;
-		if (chaos_value != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_SnapshotTestFixtures_MarkedClass.hot))

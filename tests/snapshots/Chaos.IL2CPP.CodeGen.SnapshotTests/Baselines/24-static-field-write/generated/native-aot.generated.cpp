@@ -45,7 +45,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return false;
 	}
 
-	if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+	if (chaos_value == 0)
 	{
 		return true;
 	}
@@ -931,8 +931,8 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // Startup-time-resolved function pointers for cross-assembly calls.
 
 extern "C" const char* kChaosExternalRuntimeSubjects[2] = {
-	"SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget",
 	"SnapshotTestFixtures/StaticFieldWriteHelper::_writeTarget",
+	"SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget",
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[2] = {
