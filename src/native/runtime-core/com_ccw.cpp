@@ -10,11 +10,6 @@
 namespace chaos::il2cpp::com_ccw {
 namespace {
 
-// Minimal HRESULT constants (Win32 COM ABI).
-constexpr CHAOS_IL2CPP_INT32 kS_OK          = 0;
-constexpr CHAOS_IL2CPP_INT32 kE_NOINTERFACE = static_cast<CHAOS_IL2CPP_INT32>(0x80004002u);
-constexpr CHAOS_IL2CPP_INT32 kE_POINTER     = static_cast<CHAOS_IL2CPP_INT32>(0x80004003u);
-
 // All-zero IUnknown GUID.
 static const CHAOS_IL2CPP_UINT8 kIidIUnknown[16] = {0};
 
@@ -93,6 +88,20 @@ CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwRelease(void* self) noexcept {
         std::free(ccw);
     }
     return remaining;
+}
+
+// ── IDispatch helper implementations ──
+
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwGetTypeInfoCount(void* self, CHAOS_IL2CPP_UINT32* pctinfo) noexcept {
+    if (pctinfo == nullptr) return kE_POINTER;
+    *pctinfo = 0;  // No type info available
+    return kS_OK;
+}
+
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwGetTypeInfo(void* self, CHAOS_IL2CPP_UINT32 iTInfo, CHAOS_IL2CPP_UINT32 lcid, void** ppTInfo) noexcept {
+    if (ppTInfo == nullptr) return kE_POINTER;
+    *ppTInfo = nullptr;
+    return kE_NOTIMPL;
 }
 
 // ── Static vtable ──────────────────────────────────────────────────

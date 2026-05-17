@@ -112,6 +112,13 @@
 // ── Utility ─────────────────────────────────────────────────
 #define CHAOS_IL2CPP_TO_STRING(v)     std::to_string(v)
 
+// CPU pause hint (spinlock hint, yields pipeline slot on x86/x64).
+#if defined(_MSC_VER)
+    #define CHAOS_IL2CPP_PAUSE_HINT   _mm_pause()
+#else
+    #define CHAOS_IL2CPP_PAUSE_HINT   __builtin_ia32_pause()
+#endif
+
 // ── Threading ───────────────────────────────────────────────
 #define CHAOS_IL2CPP_ONCE_FLAG                std::once_flag
 #define CHAOS_IL2CPP_CALL_ONCE(f, init)       std::call_once(f, init)

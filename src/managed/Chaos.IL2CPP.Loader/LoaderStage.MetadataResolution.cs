@@ -564,6 +564,37 @@ public sealed partial class LoaderStage
     }
 
     /// <summary>
+    /// Extracts the COM interface type kind from a type's <see cref="System.Runtime.InteropServices.ComInterfaceTypeAttribute"/>,
+    /// if present. Returns 0 (IUnknown), 1 (IDispatch), 2 (Dual), or 0 if the attribute is absent.
+    /// </summary>
+    internal static int TryGetComInterfaceTypeKind(
+        MetadataReader metadataReader,
+        TypeDefinitionHandle typeHandle)
+    {
+        const string comInterfaceTypeAttrFullName = "System.Runtime.InteropServices.ComInterfaceTypeAttribute";
+        var typeDefinition = metadataReader.GetTypeDefinition(typeHandle);
+
+        foreach (var attributeHandle in typeDefinition.GetCustomAttributes())
+        {
+            if (TryGetAttributeTypeName(metadataReader, attributeHandle, out var ns, out var name) &&
+                string.Equals($"{ns}.{name}", comInterfaceTypeAttrFullName, StringComparison.Ordinal))
+            {
+                // Decode the enum constructor argument from the CA blob.
+                // Fixed arg is serialized as a 4-byte little-endian Int32 (the underlying type of ComInterfaceType).
+                var attribute = metadataReader.GetCustomAttribute(attributeHandle);
+                var blob = metadataReader.GetBlobBytes(attribute.Value);
+                if (blob.Length >= 6)  // 2-byte prolog + 4-byte int32
+                {
+                    return blob[2] | (blob[3] << 8) | (blob[4] << 16) | (blob[5] << 24);
+                }
+                return 0;
+            }
+        }
+
+        return 0;
+    }
+
+    /// <summary>
     /// Decodes an ECMA 335 compressed unsigned integer at position pos.
     /// Advances pos past the encoded bytes.
     /// </summary>

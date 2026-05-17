@@ -101,11 +101,12 @@ public sealed partial class NativeAotLoweringPlanner
     // Key: type subject ID, Value: COM interface vtable info with GUID and method count.
     private Dictionary<string, ComInterfaceVtableInfo> _comInterfaceVtableData = new(StringComparer.Ordinal);
 
-    internal sealed record ComInterfaceMethodSlot(uint Token, string NativeSymbol);
+    internal sealed record ComInterfaceMethodSlot(uint Token, string NativeSymbol, string MethodName);
     internal sealed record ComInterfaceVtableInfo(
         string Guid,
         ulong StableId,
-        ComInterfaceMethodSlot[] Methods);
+        ComInterfaceMethodSlot[] Methods,
+        bool IsDispatch = false);
 
     // ── VTable descriptor data for BootstrapRuntime registration ──
     private sealed record VTableSlotEntry(uint MethodToken, string NativeSymbol);

@@ -798,6 +798,16 @@ public sealed partial class NativeAotLoweringPlanner
 		return "[" + string.Join(", ", arguments) + "]";
 	}
 
+	private static string ExtractComMethodName(string subjectId)
+	{
+		// Format: "Assembly/TypeName::MethodName:Signature"
+		var idx = subjectId.LastIndexOf("::", StringComparison.Ordinal);
+		if (idx < 0) return subjectId;
+		var after = subjectId.Substring(idx + 2);
+		var colonIdx = after.IndexOf(':', StringComparison.Ordinal);
+		return colonIdx >= 0 ? after.Substring(0, colonIdx) : after;
+	}
+
 	/// <summary>
 	/// Collect COM interface vtable data from AotCoreIr references.
 	/// Scans all instructions for type references with ComInterfaceGuid set,
@@ -809,7 +819,7 @@ public sealed partial class NativeAotLoweringPlanner
 			MetadataRegistrationArtifact metadataRegistration)
 	{
 		// Phase 1: Find all COM interface types (type references with ComInterfaceGuid)
-		var comInterfaceGuidMap = new Dictionary<string, string>(StringComparer.Ordinal);
+		var comInterfaceGuidMap = new Dictionary<string, (string Guid, int TypeKind)>(StringComparer.Ordinal);
 		foreach (var method in aotCoreIr.Methods)
 		{
 			foreach (var instruction in method.Instructions)
@@ -818,7 +828,7 @@ public sealed partial class NativeAotLoweringPlanner
 				if (targetRef?.Kind == AotCoreIrReferenceKind.Type &&
 					targetRef.ComInterfaceGuid is { Length: > 0 } guid)
 				{
-					comInterfaceGuidMap[targetRef.SubjectId] = guid;
+					comInterfaceGuidMap[targetRef.SubjectId] = (guid, targetRef.ComInterfaceTypeKind);
 				}
 			}
 		}
@@ -843,11 +853,16 @@ public sealed partial class NativeAotLoweringPlanner
 				return ta.CompareTo(tb);
 			});
 
-			var slots = methods.Select(m => new NativeAotLoweringPlanner.ComInterfaceMethodSlot(
-				tokenLookup.TryGetMethodToken(m.SubjectId), m.NativeSymbol)).ToArray();
+			var slots = methods.Select(m => {
+				var mn = ExtractComMethodName(m.SubjectId);
+				return new NativeAotLoweringPlanner.ComInterfaceMethodSlot(
+					tokenLookup.TryGetMethodToken(m.SubjectId), m.NativeSymbol, mn);
+			}).ToArray();
 
+			var (guid, typeKind) = kvp.Value;
 			result[kvp.Key] = new NativeAotLoweringPlanner.ComInterfaceVtableInfo(
-				kvp.Value, ComputeStableTypeId(kvp.Key), slots);
+				guid, ComputeStableTypeId(kvp.Key), slots,
+				IsDispatch: typeKind == 1 || typeKind == 2);
 		}
 
 		return result;

@@ -3,6 +3,7 @@
 
 #include <chaos/native_types.h>
 #include <chaos/log.h>
+#include <chaos/profile.h>
 #include <chaos/unordered_dense.h>
 
 #include <atomic>
@@ -136,6 +137,7 @@ void TeardownTlsPoh() noexcept;
 /// which acquires the first nursery region.  All subsequent calls hit the
 /// bump path — no null check needed on the hot path.
 inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("NurseryAllocate");
     size = (size + 7) & ~static_cast<CHAOS_IL2CPP_SIZE>(7);  // 8-byte align
 
     // Enforce maximum nursery allocation size.
@@ -170,6 +172,7 @@ inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
 /// Routes to NurseryAllocateAtomicSlow for oversized/old-gen fallback,
 /// so large pointer-free allocations skip bitmap scanning.
 inline void* NurseryAllocateAtomic(CHAOS_IL2CPP_SIZE size) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("NurseryAllocateAtomic");
     size = (size + 7) & ~static_cast<CHAOS_IL2CPP_SIZE>(7);
     if (size > kMaxNurseryAlloc) [[unlikely]] {
         return NurseryAllocateAtomicSlow(size);
@@ -230,7 +233,7 @@ inline void RawFree(void* ptr) {
 
 class RegionManager {
 public:
-    static constexpr CHAOS_IL2CPP_SIZE kDefaultRegionSize = 256 * 1024;   // 256 KB nursery
+    static constexpr CHAOS_IL2CPP_SIZE kDefaultRegionSize = 512 * 1024;   // 512 KB nursery
     static constexpr CHAOS_IL2CPP_SIZE kDomainRegionSize  = 64 * 1024;    // 64 KB domain
     static constexpr CHAOS_IL2CPP_SIZE kTenuredRegionSize = 1024 * 1024;  // 1 MB tenured
 

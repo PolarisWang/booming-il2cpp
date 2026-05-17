@@ -1,6 +1,7 @@
 #include "gc_scheduler.h"
 
 #include <algorithm>
+#include <chrono>
 #include <cmath>
 
 #include "gc_bgc.h"
@@ -28,6 +29,41 @@ void GcScheduler::RecordAllocation(CHAOS_IL2CPP_SIZE bytes) noexcept {
 void GcScheduler::RecordGcCompleted() noexcept {
     // Set cooldown to skip ShouldTriggerGc for the next N allocations.
     gc_cooldown_skips_.store(kCooldownAllocations, std::memory_order_release);
+
+    // Record completion timestamp for TryClaimGcSlot rate limiting.
+    auto now = std::chrono::steady_clock::now();
+    uint64_t now_ns = static_cast<uint64_t>(
+        std::chrono::duration_cast<std::chrono::nanoseconds>(
+            now.time_since_epoch()).count());
+    last_gc_completion_ns_.store(now_ns, std::memory_order_release);
+}
+
+// ── GC rate limiting ─────────────────────────────────────────────
+
+bool GcScheduler::TryClaimGcSlot() noexcept {
+    // Take a timestamp.  Only called from slow paths (NurseryAllocateSlow),
+    // so the cost of steady_clock::now() is negligible here.
+    auto now = std::chrono::steady_clock::now();
+    uint64_t now_ns = static_cast<uint64_t>(
+        std::chrono::duration_cast<std::chrono::nanoseconds>(
+            now.time_since_epoch()).count());
+
+    uint64_t last_ns = last_gc_completion_ns_.load(std::memory_order_acquire);
+
+    // If no GC has ever completed, or enough time has passed since the last one,
+    // try to claim the slot atomically.  Only one thread succeeds.
+    if (last_ns == 0 || (now_ns >= last_ns &&
+        (now_ns - last_ns) >= kMinGcIntervalNs)) {
+        // CAS: claim the slot by writing now_ns.  If last_ns changed between
+        // our load and CAS (another thread claimed), CAS fails gracefully.
+        if (last_gc_completion_ns_.compare_exchange_strong(last_ns, now_ns,
+                std::memory_order_acq_rel, std::memory_order_acquire)) {
+            return true;  // Slot claimed — caller may proceed with GC.
+        }
+        // CAS failed — another thread claimed the slot first.
+    }
+
+    return false;  // Too soon since last GC, or another thread claimed the slot.
 }
 
 // ── Collection recording ─────────────────────────────────────────

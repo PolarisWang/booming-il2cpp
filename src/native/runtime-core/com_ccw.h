@@ -14,6 +14,14 @@ namespace chaos::il2cpp::com_ccw {
 /// (IUnknown + up to 3 additional interfaces for V2).
 constexpr CHAOS_IL2CPP_SIZE kMaxCcwInterfaces = 4;
 
+// HRESULT constants (Win32 COM ABI).
+constexpr CHAOS_IL2CPP_INT32 kS_OK                 = 0;
+constexpr CHAOS_IL2CPP_INT32 kE_NOINTERFACE         = static_cast<CHAOS_IL2CPP_INT32>(0x80004002u);
+constexpr CHAOS_IL2CPP_INT32 kE_NOTIMPL             = static_cast<CHAOS_IL2CPP_INT32>(0x80004001u);
+constexpr CHAOS_IL2CPP_INT32 kE_POINTER             = static_cast<CHAOS_IL2CPP_INT32>(0x80004003u);
+constexpr CHAOS_IL2CPP_INT32 kDISP_E_MEMBERNOTFOUND  = static_cast<CHAOS_IL2CPP_INT32>(0x80020003u);
+constexpr CHAOS_IL2CPP_INT32 kDispIdStart            = 0;
+
 // ── Data structures ───────────────────────────────────────────────────
 
 /// A single registered COM interface on a CCW: GUID + vtable pointer.
@@ -52,6 +60,10 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwQueryInterface(
     void* self, const void* iid, void** ppv) noexcept;
 CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwAddRef(void* self) noexcept;
 CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwRelease(void* self) noexcept;
+
+// ── IDispatch helper declarations (external linkage for generated code) ──
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwGetTypeInfoCount(void* self, CHAOS_IL2CPP_UINT32* pctinfo) noexcept;
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwGetTypeInfo(void* self, CHAOS_IL2CPP_UINT32 iTInfo, CHAOS_IL2CPP_UINT32 lcid, void** ppTInfo) noexcept;
 
 // ── CCW lifecycle ──────────────────────────────────────────────────
 

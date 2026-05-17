@@ -59,6 +59,12 @@ public sealed record ManagedTypeModel
     /// </summary>
     public string? ComInterfaceGuid { get; init; }
 
+    /// <summary>
+    /// Kind of COM interface type: 0=Unknown (IUnknown-based), 1=Dispatch (IDispatch-based),
+    /// 2=Dual (both). Derived from ComInterfaceTypeAttribute.
+    /// </summary>
+    public int ComInterfaceTypeKind { get; init; }
+
     public string? BaseTypeSubjectId { get; init; }
 
     public IReadOnlyList<string>? ImplementedInterfaceSubjectIds { get; init; }

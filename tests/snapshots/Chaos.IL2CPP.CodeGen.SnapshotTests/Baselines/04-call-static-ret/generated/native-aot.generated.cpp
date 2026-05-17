@@ -1,5 +1,6 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
+#include <chaos/com_ccw.h>
 #include "runtime_core.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -176,7 +177,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);
 // ── Module registration ──
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[94] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[98] = {
 		0u,
 		1548u,
 		1548u,
@@ -270,10 +271,14 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		1548u,
 		1548u,
 		1548u,
+		1556u,
+		1556u,
+		1536u,
+		1548u,
 		1548u,
 	};
 
-	static constexpr const char* s_type_names[94] = {
+	static constexpr const char* s_type_names[98] = {
 		"<Module>",
 		"ArithmeticOps",
 		"StringOps",
@@ -367,11 +372,19 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		"BoxInterfaceArrayDemo",
 		"HotUpdateWithTypesDemo",
 		"HotUpdateWithGenericsDemo",
+		"IComInternal",
+		"IComExternal",
+		"ComInternalImpl",
+		"CrossAssemblyComCaller",
 		"<>O",
 	};
 
-	static constexpr const char* s_type_namespaces[94] = {
+	static constexpr const char* s_type_namespaces[98] = {
 		"",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
@@ -467,7 +480,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		"",
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[94] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[98] = {
 		0u,
 		0u,
 		0u,
@@ -562,9 +575,17 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		0u,
 		0u,
 		0u,
+		0u,
+		0u,
+		0u,
+		0u,
 	};
 
-	static const TypeInfoHot* const s_type_info_ptrs[94] = {
+	static const TypeInfoHot* const s_type_info_ptrs[98] = {
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
 		nullptr,
 		nullptr,
 		nullptr,
@@ -662,10 +683,10 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[1] = {
-		33554526u,
+		33554530u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[95] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[99] = {
 		0u,
 		0u,
 		0u,
@@ -681,6 +702,10 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		0u,
 		0u,
 		0u,
+		1u,
+		1u,
+		1u,
+		1u,
 		1u,
 		1u,
 		1u,
@@ -763,7 +788,11 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		1u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[95] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[99] = {
+		0u,
+		0u,
+		0u,
+		0u,
 		0u,
 		0u,
 		0u,
@@ -875,7 +904,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .nested_type_offset = */ s_nested_type_offset,
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
-		/* .type_count        = */ 94u,
+		/* .type_count        = */ 98u,
 	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
@@ -1145,11 +1174,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_Helper_Square(CHAOS_IL2CPP_IN
 
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[0];
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(chaos_left, chaos_right));
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -1165,8 +1190,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_MathHelper_RunSquare(void)
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		auto& _d0 = s_hotpatch_entries[0];
 		CHAOS_IL2CPP_INT32 _d_hpresult{};
 		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)

@@ -83,10 +83,19 @@ int BgcController::AllocateSatbBuffer() {
 // ── BGC cycle control ────────────────────────────────────────────────
 
 void BgcController::StartBgcCycle() {
-    // Under STW safepoint: populate roots, then signal BGC thread.
-    CHAOS_IL2CPP_LOG_DEBUG("BGC", "start_cycle");
+    // Guard against concurrent BGC start attempts.  Without this guard,
+    // multiple threads calling StartBgcCycle simultaneously (e.g., when
+    // 100 threads exhaust their nursery at the same time) will each call
+    // PopulateRootSet() and NotifyBgc(), corrupting the root set and
+    // creating duplicate concurrent mark threads.
+    BgcPhase expected = BgcPhase::IDLE;
+    if (!phase_.compare_exchange_strong(expected, BgcPhase::ROOT_COLLECT,
+            std::memory_order_acq_rel, std::memory_order_acquire)) {
+        CHAOS_IL2CPP_LOG_DEBUG("BGC", "start_cycle_skipped");
+        return;
+    }
 
-    phase_.store(BgcPhase::ROOT_COLLECT, std::memory_order_release);
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "start_cycle");
     PopulateRootSet();
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "root_set_populated");
 

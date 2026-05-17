@@ -9,6 +9,7 @@
 #include "generated_code_compat.h"  // chaos_managed_exception for Thread.Abort throw
 
 #include <atomic>
+#include <cstdio>
 #include <new>
 #include <cstdlib>
 #include <thread>
@@ -338,6 +339,13 @@ uint32_t RequestGlobalSafepoint() noexcept {
         });
         if (confirm_spins > 0) {
             int remaining = 0;
+            // Adaptive confirmation: 32K pause-spin (~1ms at 3GHz) then
+            // yield via SwitchToThread/Sleep(0) to avoid starving the
+            // very threads we're waiting on when the CPU is oversubscribed.
+            // With 100 threads on 24 cores (4.3x oversubscription), pure
+            // pause-spinning burns an entire OS timeslice per iter without
+            // letting the worker threads reach SafepointPoll.
+            constexpr int kSpinYieldThreshold = 32768;
             for (int i = 0; i < kMaxConfirmSpin; i++) {
                 remaining = 0;
                 s_confirm_out = &remaining;
@@ -349,7 +357,18 @@ uint32_t RequestGlobalSafepoint() noexcept {
                     return true;
                 });
                 if (remaining == 0) break;
-                _mm_pause();
+                if (i < kSpinYieldThreshold) {
+                    _mm_pause();
+                } else {
+                    // Yield to let oversubscribed workers reach their
+                    // SafepointPoll.  Sleep(0) on Windows yields the
+                    // remainder of the timeslice to any ready thread.
+#if defined(_WIN32) || defined(_WIN64)
+                    Sleep(0);
+#else
+                    std::this_thread::yield();
+#endif
+                }
             }
         }
         s_confirm_self = nullptr;
