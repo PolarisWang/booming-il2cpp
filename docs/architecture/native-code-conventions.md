@@ -18,14 +18,12 @@ All native C++ code is organized into modules. Each module has a source director
 | `chaos_support` | `src/native/support` | `chaos::il2cpp::support` | internal |
 | `chaos_bootstrap` | `src/native/bootstrap` | `chaos::il2cpp::bootstrap` | internal |
 | `chaos_engine_bridge` | `src/native/engine-bridge` | *(anonymous)* | internal |
-| `chaos_bdwgc` | `third_party/bdwgc` | *(C library)* | public |
 
 ### Dependency Graph
 
 ```
-chaos_bdwgc       (no dependencies)
 chaos_common      (no dependencies)
-  └→ chaos_runtime_core     (depends on: chaos_bdwgc)
+  └→ chaos_runtime_core     (no dependencies)
        ├→ chaos_hot_update  (depends on: chaos_runtime_core)
        ├→ chaos_interpreter (depends on: chaos_runtime_core)
        ├→ chaos_support     (depends on: chaos_runtime_core)
@@ -55,9 +53,6 @@ The `chaos_common` module uses:
 - **Functions**: snake_case — `checked_conv_ovf_i1`, `resolve_native_int_slot`
 - **Constants**: `k_` + snake_case — `k_managed_pointer_local_slot_tag`
 
-### Exception: `chaos_bdwgc`
-
-The vendored BDWGC library is C code; C++ naming conventions do not apply.
 
 ---
 
@@ -74,7 +69,7 @@ chaos_runtime_core:
       - contracts/native/v0/      # any file in this path
     private:
       - src/native/runtime-core/  # own module headers
-      - third_party/bdwgc/        # dependency headers
+      # BDWGC removed — CRAG is built into runtime-core
 ```
 
 ### Forbidden Includes

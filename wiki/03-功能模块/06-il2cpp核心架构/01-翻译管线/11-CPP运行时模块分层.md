@@ -13,14 +13,12 @@
 | `chaos_support` | `src/native/support` | `chaos::il2cpp::support` | internal |
 | `chaos_bootstrap` | `src/native/bootstrap` | `chaos::il2cpp::bootstrap` | internal |
 | `chaos_engine_bridge` | `src/native/engine-bridge` | *(anonymous)* | internal |
-| `chaos_bdwgc` | `third_party/bdwgc` | *(C library)* | public |
 
 ## 依赖 DAG
 
 ```
-chaos_bdwgc       (无依赖)
 chaos_common      (无依赖)
-  └→ chaos_runtime_core     (依赖: chaos_bdwgc)
+  └→ chaos_runtime_core     (无依赖)
        ├→ chaos_hot_update  (依赖: chaos_runtime_core)
        ├→ chaos_interpreter (依赖: chaos_runtime_core)
        ├→ chaos_support     (依赖: chaos_runtime_core)

@@ -186,7 +186,7 @@ int main() {
     puts("CRAG R12/R13 sanity test");
     puts("════════════════════════\n");
 
-    // No GC_INIT needed — CRAG doesn't depend on BDWGC
+    // No GC_INIT needed — CRAG manages its own heap
 
     TestPohAllocate();
     TestPohPinning();

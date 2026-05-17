@@ -14,8 +14,6 @@
 #include "gc_region.h"
 #include "gc_card_table.h"
 
-#include <gc.h>
-
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
@@ -91,7 +89,6 @@ static void test_region_layout() {
 static void test_region_manager() {
     TEST("RegionManager lifecycle");
 
-    GC_INIT();
     auto& mgr = RegionManager::Instance();
 
     SUBTEST("AllocateRegion nursery");
@@ -156,7 +153,6 @@ static void test_region_manager() {
 static void test_nursery_allocate() {
     TEST("NurseryAllocate");
 
-    GC_INIT();
     auto& mgr = RegionManager::Instance();
 
     // Set up TLS nursery context.
@@ -224,8 +220,8 @@ static void test_card_table() {
 
     // The heap base must be set. Use a reasonable fake base for testing.
     // Real value is set at runtime initialization.
-    void* fake_heap = GC_MALLOC(1024 * 1024);
-    if (fake_heap == nullptr) { FAIL("GC_MALLOC failed"); return; }
+    void* fake_heap = calloc(1, 1024 * 1024);
+    if (fake_heap == nullptr) { FAIL("heap alloc failed"); return; }
     GcSetHeapBase(fake_heap);
 
     // Compute a pointer inside the heap for card operations.
@@ -282,9 +278,6 @@ static void test_card_table() {
 int main() {
     puts("CRAG M0 tests (C0.1-C0.3):");
     puts("═══════════════════════════\n");
-
-    // Initialize BDWGC once for the test process.
-    GC_INIT();
 
     test_region_layout();
     test_region_manager();

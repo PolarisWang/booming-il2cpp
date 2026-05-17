@@ -6,6 +6,10 @@
 // Zero per-invocation I/O: accumulates in-memory during hot loops,
 // dumps all results in one shot via stderr on command.
 //
+// Thread-safe: uses per-thread accumulators (thread_local) so the hot path
+// (PROFILE_SCOPE) involves zero shared state.  Dump/Reset aggregate across
+// all registered threads via lock-free thread registry.
+//
 // Compile-time toggle: define CHAOS_IL2CPP_PROFILE_ENABLED=1 to enable.
 // When disabled (default), all macros expand to no-ops.
 //
@@ -22,22 +26,23 @@
 //   CHAOS_IL2CPP_PROFILE_DUMP();
 //
 // Per-invocation cost: ~30 cycles (2× RDTSC + integer add + min/max update).
-// Thread safety: NOT thread-safe (single-threaded benchmark use only).
+// Thread safety: fully thread-safe on the hot path (per-thread data).
+//               Dump/Reset are expected to be called from one thread.
 //
 // Optimizations:
 //   - Slot lookup uses open-addressing hash table (FNV-1a) instead of O(n) scan
 //   - Nested scopes tracked via thread_local depth for hierarchical dump
 //   - RDTSC calibrated to nanoseconds via QueryPerformanceFrequency on first use
+//   - Per-thread data eliminates all cross-thread contention on hot path
 
 #include <cstdint>
 #include <cstring>
 #include <cstdio>
+#include <atomic>
 #include <intrin.h>
 
 #ifdef _MSC_VER
 #pragma intrinsic(__rdtsc)
-// Needed for GetCurrentProcessorNumber() in ProfileScope (cross-core migration
-// detection).  Include is inside the ENABLED guard below, so no impact on SHIP.
 #endif
 
 // Expansion helper: ensures __LINE__ and other special macros expand
@@ -64,11 +69,12 @@
 
 namespace chaos::il2cpp::common {
 
-// ── Config ───────────────────────────────────────────────────────────────
+// ── Config ───────────────────────────────────────────────
 constexpr int kProfileMaxSlots   = 64;
 constexpr int kProfileHashSize   = 128;  // 2× for low collision rate
+constexpr int kProfileMaxThreads = 64;   // max concurrent threads tracked
 
-// ── Per-slot accumulator ─────────────────────────────────────────────────
+// ── Per-slot accumulator ─────────────────────────────────
 struct ProfileSlot {
     const char* name;
     uint64_t    total_cycles;
@@ -77,24 +83,41 @@ struct ProfileSlot {
     uint64_t    max_cycles;
 };
 
-// ── Hash table entry (open addressing) ──────────────────────────────────
+// ── Hash table entry (open addressing) ───────────────────
 struct HashEntry {
     const char* name;     // nullptr = empty slot
     uint32_t    name_hash;
     int         slot_index;
 };
 
-// ── Global tables (single-threaded by design) ────────────────────────────
-// Defined in profile_globals.cpp (single TU) — NOT inline, NOT per-TU copies.
-extern ProfileSlot g_profile_table[kProfileMaxSlots];
-extern HashEntry   g_profile_hash_table[kProfileHashSize];
-extern int         g_profile_slot_count;
+// ── Per-thread profile data ──────────────────────────────
+// Each thread gets its own instance (thread_local).  The hot path
+// (ProfileScope construct/destruct) touches only this struct and never
+// shares state with other threads.
+struct alignas(64) ThreadProfileData {
+    ProfileSlot slots[kProfileMaxSlots];
+    HashEntry   hash_table[kProfileHashSize];
+    int         slot_count{0};
+    int         depth{0};
+    int         registration_slot{-1};  // index in g_profile_threads[], -1 = unregistered
+};
 
-// Thread-local nesting depth for hierarchical dump output.
-// Defined in profile_globals.cpp (one instance per thread).
-extern thread_local int tls_profile_depth;
+// ── Global thread registry (lock-free, write-once per thread) ────
+// Defined in profile_globals.cpp.
+extern thread_local ThreadProfileData g_tls_profile;
+extern std::atomic<ThreadProfileData*> g_profile_threads[kProfileMaxThreads];
+extern std::atomic<int> g_profile_thread_count;
 
-// ── FNV-1a hash ─────────────────────────────────────────────────────────
+// Thread registration — called once per thread on first PROFILE_SCOPE use.
+inline void RegisterThread(ThreadProfileData& data) noexcept {
+    int idx = g_profile_thread_count.fetch_add(1, std::memory_order_relaxed);
+    if (idx < kProfileMaxThreads) {
+        data.registration_slot = idx;
+        g_profile_threads[idx].store(&data, std::memory_order_release);
+    }
+}
+
+// ── FNV-1a hash ─────────────────────────────────────────
 inline uint32_t HashName(const char* name) noexcept {
     uint32_t hash = 2166136261u;
     while (*name) {
@@ -104,24 +127,25 @@ inline uint32_t HashName(const char* name) noexcept {
     return hash;
 }
 
-// ── Find or create slot by name (hash-accelerated) ──────────────────────
-inline int FindOrCreateSlot(const char* name) noexcept {
+// ── Find or create slot by name (hash-accelerated) ──────
+// Operates on per-thread data @a data — no shared state.
+inline int FindOrCreateSlot(const char* name, ThreadProfileData& data) noexcept {
     uint32_t hash = HashName(name);
     int start = static_cast<int>(hash % kProfileHashSize);
 
     for (int i = 0; i < kProfileHashSize; ++i) {
         int idx = (start + i) % kProfileHashSize;
-        auto& entry = g_profile_hash_table[idx];
+        auto& entry = data.hash_table[idx];
 
         if (entry.name == nullptr) {
             // Empty slot — create new entry (single-threaded, no race).
-            int slot_idx = g_profile_slot_count++;
+            int slot_idx = data.slot_count++;
             if (slot_idx < kProfileMaxSlots) {
-                g_profile_table[slot_idx].name        = name;
-                g_profile_table[slot_idx].total_cycles = 0;
-                g_profile_table[slot_idx].call_count   = 0;
-                g_profile_table[slot_idx].min_cycles   = ~0ULL;
-                g_profile_table[slot_idx].max_cycles   = 0;
+                data.slots[slot_idx].name        = name;
+                data.slots[slot_idx].total_cycles = 0;
+                data.slots[slot_idx].call_count   = 0;
+                data.slots[slot_idx].min_cycles   = ~0ULL;
+                data.slots[slot_idx].max_cycles   = 0;
                 entry.name       = name;
                 entry.name_hash  = hash;
                 entry.slot_index = slot_idx;
@@ -138,33 +162,36 @@ inline int FindOrCreateSlot(const char* name) noexcept {
     return 0;  // table full
 }
 
-// ── RDTSC → ns calibration ──────────────────────────────────────────────
-// Calibrated lazily on first ProfileDump() call (not at scope construction,
-// to avoid Sleep(1) latency during hot loops).
+// ── RDTSC → ns calibration ──────────────────────────────
 extern double g_ns_per_cycle;
 extern bool   g_profile_calibrated;
 void CalibrateProfileTsc() noexcept;
 
-// ── RAII scope timer ─────────────────────────────────────────────────────
+// ── RAII scope timer ─────────────────────────────────────
 class ProfileScope {
     int      slot_idx_;
     uint64_t start_;
-    uint32_t core_id_;  // sampled on construction; used to detect migration
+    uint32_t core_id_;
 public:
     explicit ProfileScope(const char* name) noexcept
-        : slot_idx_(FindOrCreateSlot(name)), start_(__rdtsc())
+        : slot_idx_(FindOrCreateSlot(name, g_tls_profile))
+        , start_(__rdtsc())
         , core_id_(CHAOS_IL2CPP_CURRENT_CORE()) {
-        ++tls_profile_depth;
+        // Register this thread in the global registry on first use.
+        if (g_tls_profile.registration_slot < 0) {
+            RegisterThread(g_tls_profile);
+        }
+        ++g_tls_profile.depth;
     }
 
     ~ProfileScope() noexcept {
-        --tls_profile_depth;
+        --g_tls_profile.depth;
         // Discard sample if thread migrated to a different core — RDTSC
         // deltas across cores can be wildly inaccurate (up to ms-level skew).
         if (CHAOS_IL2CPP_CURRENT_CORE() != core_id_) return;
 
         uint64_t elapsed = __rdtsc() - start_;
-        auto& slot = g_profile_table[slot_idx_];
+        auto& slot = g_tls_profile.slots[slot_idx_];
         slot.total_cycles += elapsed;
         ++slot.call_count;
         if (elapsed < slot.min_cycles) slot.min_cycles = elapsed;
@@ -172,7 +199,7 @@ public:
     }
 };
 
-// ── Dump accumulated profile data (hierarchical + ns) ────────────────────
+// ── Dump accumulated profile data (hierarchical + ns) ────
 inline void ProfileDump() noexcept {
     // Lazy TSC calibration on first dump (avoid Sleep(1) in hot path).
     if (!g_profile_calibrated) {
@@ -180,42 +207,98 @@ inline void ProfileDump() noexcept {
     }
 
     std::fprintf(stderr, "\n=== PROFILE DUMP ===\n");
-    // ns/cycle = 1.0 means uncalibrated
     double ns_per = (g_ns_per_cycle > 0.0) ? g_ns_per_cycle : 1.0;
     std::fprintf(stderr, "PROFILE|CALIBRATION|ns_per_cycle=%.6f\n", ns_per);
 
-    for (int i = 0; i < g_profile_slot_count; ++i) {
-        const auto& slot = g_profile_table[i];
-        if (slot.call_count == 0) continue;
-        double avg_cyc = static_cast<double>(slot.total_cycles) / slot.call_count;
+    // Per-thread data, registered via atomic count.
+    // Each thread has its own slot indices; we aggregate by name.
+    int thread_count = g_profile_thread_count.load(std::memory_order_acquire);
+    if (thread_count > kProfileMaxThreads) thread_count = kProfileMaxThreads;
+
+    // Temporary aggregation table (name-keyed, O(n*m) — fine for dump).
+    struct AggSlot { const char* name; uint64_t total; uint64_t count; uint64_t minv; uint64_t maxv; };
+    AggSlot agg[kProfileMaxSlots]{};
+    int agg_count = 0;
+
+    for (int ti = 0; ti < thread_count; ++ti) {
+        auto* data = g_profile_threads[ti].load(std::memory_order_acquire);
+        if (data == nullptr) continue;
+
+        for (int si = 0; si < data->slot_count; ++si) {
+            const auto& src = data->slots[si];
+            if (src.name == nullptr || src.call_count == 0) continue;
+
+            // Find or create in aggregation table.
+            int ai = 0;
+            for (; ai < agg_count; ++ai) {
+                if (agg[ai].name == src.name ||
+                    std::strcmp(agg[ai].name, src.name) == 0) break;
+            }
+            if (ai == agg_count) {
+                if (ai >= kProfileMaxSlots) break;  // aggregation full
+                agg[ai].name  = src.name;
+                agg[ai].total = 0;
+                agg[ai].count = 0;
+                agg[ai].minv  = ~0ULL;
+                agg[ai].maxv  = 0;
+                ++agg_count;
+            }
+            agg[ai].total += src.total_cycles;
+            agg[ai].count += src.call_count;
+            if (src.min_cycles < agg[ai].minv) agg[ai].minv = src.min_cycles;
+            if (src.max_cycles > agg[ai].maxv) agg[ai].maxv = src.max_cycles;
+        }
+    }
+
+    for (int i = 0; i < agg_count; ++i) {
+        const auto& s = agg[i];
+        if (s.count == 0) continue;
+        double avg_cyc = static_cast<double>(s.total) / s.count;
         double avg_ns  = avg_cyc * ns_per;
-        double total_ns = static_cast<double>(slot.total_cycles) * ns_per;
+        double total_ns = static_cast<double>(s.total) * ns_per;
         std::fprintf(stderr,
             "PROFILE|%s|avg=%.0f|avg_ns=%.0f|min=%llu|max=%llu|count=%llu|total_ns=%.0f\n",
-            slot.name, avg_cyc, avg_ns,
-            static_cast<unsigned long long>(slot.min_cycles),
-            static_cast<unsigned long long>(slot.max_cycles),
-            static_cast<unsigned long long>(slot.call_count),
+            s.name, avg_cyc, avg_ns,
+            static_cast<unsigned long long>(s.minv),
+            static_cast<unsigned long long>(s.maxv),
+            static_cast<unsigned long long>(s.count),
             total_ns);
     }
     std::fprintf(stderr, "=== PROFILE END ===\n");
     std::fflush(stderr);
 }
 
-// ── Reset all accumulators ──────────────────────────────────────────────
+// ── Reset all accumulators across all threads ────────────
 inline void ProfileReset() noexcept {
-    g_profile_slot_count = 0;
-    for (int i = 0; i < kProfileMaxSlots; ++i) {
-        g_profile_table[i].name = nullptr;
-        g_profile_table[i].total_cycles = 0;
-        g_profile_table[i].call_count   = 0;
-        g_profile_table[i].min_cycles   = 0;
-        g_profile_table[i].max_cycles   = 0;
+    int thread_count = g_profile_thread_count.load(std::memory_order_acquire);
+    if (thread_count > kProfileMaxThreads) thread_count = kProfileMaxThreads;
+
+    for (int ti = 0; ti < thread_count; ++ti) {
+        auto* data = g_profile_threads[ti].load(std::memory_order_acquire);
+        if (data == nullptr) continue;
+
+        // Clear slots but keep registration_slot intact so the thread
+        // doesn't need to re-register on the next scope.
+        data->slot_count = 0;
+        data->depth      = 0;
+        for (int i = 0; i < kProfileMaxSlots; ++i) {
+            data->slots[i].name        = nullptr;
+            data->slots[i].total_cycles = 0;
+            data->slots[i].call_count   = 0;
+            data->slots[i].min_cycles   = 0;
+            data->slots[i].max_cycles   = 0;
+        }
+        for (int i = 0; i < kProfileHashSize; ++i) {
+            data->hash_table[i].name       = nullptr;
+            data->hash_table[i].name_hash  = 0;
+            data->hash_table[i].slot_index = -1;
+        }
     }
-    for (int i = 0; i < kProfileHashSize; ++i) {
-        g_profile_hash_table[i].name       = nullptr;
-        g_profile_hash_table[i].name_hash  = 0;
-        g_profile_hash_table[i].slot_index = -1;
+
+    // Reset registry — threads will re-register on next use.
+    g_profile_thread_count.store(0, std::memory_order_release);
+    for (int ti = 0; ti < kProfileMaxThreads; ++ti) {
+        g_profile_threads[ti].store(nullptr, std::memory_order_release);
     }
 }
 

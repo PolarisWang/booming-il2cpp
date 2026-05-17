@@ -9,7 +9,7 @@
 // GC safepoints by checking the generation counter.
 //
 // Native code (P/Invoke, blocking calls) runs in PREEMPTIVE mode:
-// the thread is exempt from safepoint cooperation—bdwgc conservative
+// the thread is exempt from safepoint cooperation—CRAG conservative
 // stack scanning handles root discovery.
 //
 // Usage in bridge stubs:

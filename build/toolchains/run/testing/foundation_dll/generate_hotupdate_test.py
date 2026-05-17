@@ -1051,7 +1051,6 @@ def _generate_hotupdate_cmake_full(family_slug: str) -> str:
         "    ${REPO_ROOT}/src/native/interpreter\n"
         "    ${REPO_ROOT}/src/native/interpreter/generated\n"
         "    ${REPO_ROOT}/src/native\n"
-        "    ${REPO_ROOT}/third_party/bdwgc/include\n"
         "    ${REPO_ROOT}/third_party/fmt/include\n"
         "    ${REPO_ROOT}/verification/foundation-dll/System.Private.CoreLib\n"
         ")\n"
@@ -1073,7 +1072,6 @@ def _generate_hotupdate_cmake_full(family_slug: str) -> str:
         '    "${NATIVE_LIB_DIR}/src/native/interpreter/RelWithDebInfo/chaos_interpreter.lib"\n'
         '    "${NATIVE_LIB_DIR}/src/native/common/RelWithDebInfo/chaos_common.lib"\n'
         '    "${NATIVE_LIB_DIR}/src/native/support/RelWithDebInfo/chaos_support.lib"\n'
-        '    "${NATIVE_LIB_DIR}/bdwgc_build/RelWithDebInfo/chaos_bdwgc.lib"\n'
         '    "${NATIVE_LIB_DIR}/fmt_build/RelWithDebInfo/chaos_fmt.lib"\n'
         ")\n"
         "endif()\n"

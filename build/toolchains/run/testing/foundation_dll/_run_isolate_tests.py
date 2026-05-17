@@ -14,11 +14,10 @@ INCL = (
     f'-I{REPO / "src" / "native" / "runtime-core"} '
     f'-I{REPO / "src" / "native" / "interpreter"} '
     f'-I{REPO / "src" / "native" / "bootstrap"} '
-    f'-I{REPO / "third_party" / "bdwgc" / "include"} '
     f'-I{REPO / "third_party" / "fmt" / "include"} '
     f'-I{BD}'
 )
-DEFS = "-DCHAOS_IL2CPP_CONFIG_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED -DCHAOS_IL2CPP_VERIFY_MODE -DGC_NOT_DLL"
+DEFS = "-DCHAOS_IL2CPP_CONFIG_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED -DCHAOS_IL2CPP_VERIFY_MODE"
 CFLAGS = "/nologo /std:c++20 /c /EHsc /utf-8 /Od /MD"
 
 

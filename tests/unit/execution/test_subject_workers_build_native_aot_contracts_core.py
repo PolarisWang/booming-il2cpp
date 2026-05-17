@@ -211,7 +211,7 @@ class TestSubjectWorkersBuildNativeAotContractsCore(SubjectWorkersTestSupport):
             cmake_source_root = expected_cmake_source_root
             workspace_cmakelists = (cmake_source_root / "CMakeLists.txt").read_text(encoding="utf-8")
             benchmark_cmakelists = (cmake_source_root / "benchmark" / "CMakeLists.txt").read_text(encoding="utf-8")
-            self.assertIn("third_party/bdwgc", workspace_cmakelists)
+            self.assertNotIn("third_party/bdwgc", workspace_cmakelists)
             self.assertIn("src/native/hot-update", workspace_cmakelists)
             self.assertIn("chaos_hot_update", benchmark_cmakelists)
 

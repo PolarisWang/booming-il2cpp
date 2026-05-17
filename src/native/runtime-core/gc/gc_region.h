@@ -146,10 +146,6 @@ inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
         ctx->nursery->current = next;
         std::memset(ptr, 0, size);
         g_gc_scheduler.RecordAllocation(size);
-        // Proactive GC trigger with rate limiting.
-        if (g_gc_scheduler.ShouldTriggerGc()) [[unlikely]] {
-            return NurseryAllocateSlow(size);
-        }
         // Safepoint poll: check if a GC safepoint is active and confirm it.
         threading::SafepointPoll();
         return ptr;

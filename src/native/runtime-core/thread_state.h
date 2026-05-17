@@ -117,7 +117,7 @@ int32_t GetThreadCount() noexcept;
     /// Called at GC safe points (loop back-edges, method calls).
     /// If a GC safepoint is active, the thread acknowledges and spins until
     /// released.  Threads that are inside native AOT frames (which lack
-    /// explicit polls) are handled by bdwgc conservative stack scanning.
+    /// explicit polls) are handled by CRAG conservative stack scanning.
     void SafepointPoll() noexcept;
 
 /// Request all managed threads to reach a safepoint.

@@ -10,8 +10,6 @@
 
 #include "gc_bump_cache.h"
 
-#include <gc.h>
-
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
@@ -211,8 +209,6 @@ static void TestDumpCounters() {
 // ════════════════════════════════════════════════════════════════════════════
 
 int main() {
-    GC_INIT();
-
     puts("=== GcBumpCache Tests ===");
     puts("");
 

@@ -207,7 +207,7 @@ chaos_monitor_enter (ABI stub) → MonitorEnter (thin lock/inflate)
 |------|------|------|
 | TLS 初始化 | `InterpreterEntryDirect` 入口断言 `tls_this_thread != nullptr` | `entry_direct.cpp` |
 | gc_mode 正确 | `SetupFrame()` 确认 `gc_mode == kGcModeCooperative` | `fast_dispatch.cpp` |
-| 线程注册 | bdwgc `GC_register_my_thread` (POSIX) | `thread_state.cpp` |
+| 线程注册 | CRAG `RegisterThreadStack` | `runtime_init.cpp` |
 | 无 JIT 依赖 | 所有 codegen 是 AOT 编译产物，热更走 interpreter | — |
 | W^X 兼容 | dispatch table flag 切换，不修改代码页 | `hotpatch_table.h` |
 
