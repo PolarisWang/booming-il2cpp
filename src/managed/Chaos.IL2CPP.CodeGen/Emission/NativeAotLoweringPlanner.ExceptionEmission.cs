@@ -2172,9 +2172,11 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine(indentation + "{");
 			for (int num = invocationTarget.ParameterAbis.Count - 1; num >= 1; num--)
 			{
-				builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{num} = {ConsumeEvalStackValueExpression()};");
+				string rawExpr = ConsumeEvalStackValueExpression();
+				if (!invocationTarget.RawArgumentIndices.Contains(num))
+				    builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{num} = {rawExpr};");
 				builder.AppendLine(invocationTarget.RawArgumentIndices.Contains(num)
-					? $"{indentation}    const auto chaos_arg_{num} = chaos_raw_arg_{num};"
+					? $"{indentation}    const auto chaos_arg_{num} = {rawExpr};"
 					: $"{indentation}    const auto chaos_arg_{num} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[num], $"chaos_raw_arg_{num}")};");
 			}
 			builder.AppendLine(indentation + "    CHAOS_IL2CPP_INTPTR chaos_value = 0;");
@@ -2199,9 +2201,11 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine(indentation + "{");
 			for (int num2 = constructorTarget.ParameterAbis.Count - 1; num2 >= 1; num2--)
 			{
-				builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{num2} = {ConsumeEvalStackValueExpression()};");
+				string rawExpr = ConsumeEvalStackValueExpression();
+				if (!constructorTarget.RawArgumentIndices.Contains(num2))
+				    builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{num2} = {rawExpr};");
 				builder.AppendLine(constructorTarget.RawArgumentIndices.Contains(num2)
-					? $"{indentation}    const auto chaos_arg_{num2} = chaos_raw_arg_{num2};"
+					? $"{indentation}    const auto chaos_arg_{num2} = {rawExpr};"
 					: $"{indentation}    const auto chaos_arg_{num2} = {FormatInboundAbiArgumentExpression(constructorTarget.ParameterAbis[num2], $"chaos_raw_arg_{num2}")};");
 			}
 			builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
@@ -2240,8 +2244,10 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder2.AppendLine(ref handler);
 		for (int num = parameterAbis.Count - 1; num >= 0; num--)
 		{
-			builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{num} = {ConsumeEvalStackValueExpression()};");
-			builder.AppendLine(rawArgumentIndices.Contains(num) ? $"{indentation}    const auto chaos_arg_{num} = chaos_raw_arg_{num};" : $"{indentation}    const auto chaos_arg_{num} = {FormatInboundAbiArgumentExpression(parameterAbis[num], $"chaos_raw_arg_{num}")};");
+			string rawExpr = ConsumeEvalStackValueExpression();
+			if (!rawArgumentIndices.Contains(num))
+			    builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{num} = {rawExpr};");
+			builder.AppendLine(rawArgumentIndices.Contains(num) ? $"{indentation}    const auto chaos_arg_{num} = {rawExpr};" : $"{indentation}    const auto chaos_arg_{num} = {FormatInboundAbiArgumentExpression(parameterAbis[num], $"chaos_raw_arg_{num}")};");
 		}
 		if (enforceInstanceNullCheck && parameterAbis.Count > 0)
 		{
@@ -2297,9 +2303,11 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine($"{indentation}{{");
 			for (int i = invocationTarget.ParameterAbis.Count - 1; i >= 0; i--)
 			{
-				builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {ConsumeEvalStackValueExpression()};");
+				string rawExpr = ConsumeEvalStackValueExpression();
+				if (!invocationTarget.RawArgumentIndices.Contains(i))
+				    builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {rawExpr};");
 				builder.AppendLine(invocationTarget.RawArgumentIndices.Contains(i)
-					? $"{indentation}    const auto chaos_arg_{i} = chaos_raw_arg_{i};"
+					? $"{indentation}    const auto chaos_arg_{i} = {rawExpr};"
 					: $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[i], $"chaos_raw_arg_{i}")};");
 			}
 			string directNativeArgs = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
@@ -2324,9 +2332,11 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}{{");
 		for (int i = invocationTarget.ParameterAbis.Count - 1; i >= 0; i--)
 		{
-			builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {ConsumeEvalStackValueExpression()};");
+			string rawExpr = ConsumeEvalStackValueExpression();
+			if (!invocationTarget.RawArgumentIndices.Contains(i))
+			    builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {rawExpr};");
 			builder.AppendLine(invocationTarget.RawArgumentIndices.Contains(i)
-				? $"{indentation}    const auto chaos_arg_{i} = chaos_raw_arg_{i};"
+				? $"{indentation}    const auto chaos_arg_{i} = {rawExpr};"
 				: $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[i], $"chaos_raw_arg_{i}")};");
 		}
 		string args = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
@@ -2409,9 +2419,11 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}{{");
 		for (int i = parameterAbis.Count - 1; i >= 0; i--)
 		{
-			builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {ConsumeEvalStackValueExpression()};");
+			string rawExpr = ConsumeEvalStackValueExpression();
+			if (!rawArgumentIndices.Contains(i))
+			    builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {rawExpr};");
 			builder.AppendLine(rawArgumentIndices.Contains(i)
-				? $"{indentation}    const auto chaos_arg_{i} = chaos_raw_arg_{i};"
+				? $"{indentation}    const auto chaos_arg_{i} = {rawExpr};"
 				: $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(parameterAbis[i], $"chaos_raw_arg_{i}")};");
 		}
 		builder.AppendLine($"{indentation}    auto& _d{dispatchSlotIndex} = s_hotpatch_entries[{dispatchSlotIndex}];");

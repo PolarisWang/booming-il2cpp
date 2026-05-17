@@ -40,6 +40,11 @@
 // detection).  Include is inside the ENABLED guard below, so no impact on SHIP.
 #endif
 
+// Expansion helper: ensures __LINE__ and other special macros expand
+// before token pasting.  Without this, MSVC leaves __LINE__ unexpanded
+// inside a ## helper, producing duplicate identifiers like
+// __profile_scope___LINE__ instead of __profile_scope_156.
+#define CHAOS_IL2CPP_PROFILE_JOIN_EXPAND(a, b) CHAOS_IL2CPP_PROFILE_JOIN(a, b)
 #define CHAOS_IL2CPP_PROFILE_JOIN(a, b) a ## b
 
 // ── Compile-time toggle ──────────────────────────────────────────────────
@@ -218,7 +223,7 @@ inline void ProfileReset() noexcept {
 
 #define CHAOS_IL2CPP_PROFILE_SCOPE(name)                                  \
     ::chaos::il2cpp::common::ProfileScope                                   \
-        CHAOS_IL2CPP_PROFILE_JOIN(__profile_scope_, __LINE__)(name)
+        CHAOS_IL2CPP_PROFILE_JOIN_EXPAND(__profile_scope_, __LINE__)(name)
 
 #define CHAOS_IL2CPP_PROFILE_DUMP()                                       \
     ::chaos::il2cpp::common::ProfileDump()
@@ -244,7 +249,7 @@ struct NullProfileScope {
 
 #define CHAOS_IL2CPP_PROFILE_SCOPE(name)                                  \
     ::chaos::il2cpp::common::NullProfileScope                               \
-        CHAOS_IL2CPP_PROFILE_JOIN(__prof_noop_, __LINE__)(name)
+        CHAOS_IL2CPP_PROFILE_JOIN_EXPAND(__prof_noop_, __LINE__)(name)
 
 #define CHAOS_IL2CPP_PROFILE_DUMP()                                       \
     ((void)0)

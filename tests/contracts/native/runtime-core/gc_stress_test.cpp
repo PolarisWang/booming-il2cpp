@@ -35,6 +35,10 @@
 #include <thread>
 #include <vector>
 
+#if defined(_WIN32) || defined(_WIN64)
+#include <windows.h>
+#endif
+
 // ════════════════════════════════════════════════════════════════════════════
 // Test helpers (ad-hoc, no framework dependency)
 // ════════════════════════════════════════════════════════════════════════════
@@ -368,9 +372,18 @@ static void worker_a(int thread_index, WorkerResult* result) {
         size_t size = LcgSize(thread_index, i, kMinAllocSize, kMaxAllocSize);
         size = (size + 7) & ~static_cast<size_t>(7);
 
+        // Phase 1: safety net — if stuck here for 30s, something is wrong in
+        // NurseryAllocate itself (fast path should be ~100ns).
         void* p = NurseryAllocate(size);
         if (!p) continue;
         result->allocations_succeeded++;
+        if (i == 0) {
+            // Use WriteFile directly to avoid CRT fprintf lock contention.
+            char buf[64];
+            int n = std::snprintf(buf, sizeof(buf), "[ALLOC_OK] thread=%d\n", thread_index);
+            DWORD written;
+            WriteFile(GetStdHandle(STD_ERROR_HANDLE), buf, static_cast<DWORD>(n), &written, nullptr);
+        }
 
         WritePattern(p, size, thread_index, i);
 
@@ -1516,6 +1529,7 @@ static int run_scenarios() {
             printf("  >>> SCENARIO FAILED (%d sub-test failures) <<<\n", g_failures);
             failed_count++;
         }
+        std::fflush(stdout);
 
         // Dump and reset PROFILE_SCOPE accumulators between scenarios.
         CHAOS_IL2CPP_PROFILE_DUMP();
@@ -1552,11 +1566,20 @@ static int run_scenarios() {
 // ════════════════════════════════════════════════════════════════════════════
 
 int main() {
-    setvbuf(stdout, nullptr, _IONBF, 0);
-    puts("CRAG T.3 stress test suite (11 scenarios):");
-    puts("══════════════════════════════════════════\n");
+    // Use fully-buffered stdout with 64KB buffer to avoid pipe blocking.
+    // _IONBF causes every log line to issue WriteFile, which blocks when the
+    // pipe buffer is full.  _IOFBF with a large buffer means far fewer WriteFile
+    // calls, and GC progress is never blocked on I/O.
+    static char stdout_buf[65536];
+    setvbuf(stdout, stdout_buf, _IOFBF, sizeof(stdout_buf));
+
+    // Unbuffered stderr for debug output during hangs.
+    setvbuf(stderr, nullptr, _IONBF, 0);
+    fprintf(stderr, "[DBG] main started\n");
 
     int failures = run_scenarios();
+
+    fprintf(stderr, "[DBG] run_scenarios returned %d\n", failures);
 
     return failures > 0 ? 1 : 0;
 }

@@ -97,23 +97,25 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         // BGC runs concurrently; continue with normal nursery allocation flow.
     }
 
-    // Proactive young GC: run when the scheduler budget is exceeded or the
-    // nursery has live objects that would be discarded when we free it below.
-    bool do_young_gc = false;
-    if (tls_nursery_ctx.nursery != nullptr) {
-        if (gc_decision == GcCollectionKind::YOUNG) {
-            do_young_gc = true;
-        } else if (tls_nursery_ctx.nursery->current > tls_nursery_ctx.nursery->begin) {
-            // Scheduler didn't trigger, but nursery has live objects and we're
-            // about to discard it — run young GC proactively to promote survivors.
-            do_young_gc = true;
-        }
+    // Proactive young GC: run when the scheduler budget is exceeded.
+    // Also run when nursery has live objects and we are about to recycle it,
+    // preventing safepoint deadlock (a thread in the RegionManager mutex blocks
+    // another thread's safepoint from completing, hanging all threads).
+    bool do_young_gc = (gc_decision == GcCollectionKind::YOUNG);
+    if (!do_young_gc && tls_nursery_ctx.nursery != nullptr &&
+        tls_nursery_ctx.nursery->current > tls_nursery_ctx.nursery->begin) {
+        do_young_gc = true;
     }
+
+
     if (do_young_gc) {
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "young_gc_in_nursery_alloc_slow");
+        // NOTE: no LOG_DEBUG here — must not block on I/O before
+        // RequestGlobalSafepoint.  A blocking fputc (pipe full) while
+        // holding g_log_mutex would prevent GC from starting.
         uint32_t gen = threading::RequestGlobalSafepoint();
         GcYoungCollection(tls_nursery_ctx.nursery);
         threading::ReleaseGlobalSafepoint(gen);
+        g_gc_scheduler.RecordGcCompleted();
 
         char* ptr = tls_nursery_ctx.nursery->current;
         char* next = ptr + size;
@@ -279,19 +281,19 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
         BgcController::Instance().StartBgcCycle();
     }
 
-    bool do_young_gc = false;
-    if (tls_nursery_ctx.nursery != nullptr) {
-        if (gc_decision == GcCollectionKind::YOUNG) {
-            do_young_gc = true;
-        } else if (tls_nursery_ctx.nursery->current > tls_nursery_ctx.nursery->begin) {
-            do_young_gc = true;
-        }
+    bool do_young_gc = (gc_decision == GcCollectionKind::YOUNG);
+    if (!do_young_gc && tls_nursery_ctx.nursery != nullptr &&
+        tls_nursery_ctx.nursery->current > tls_nursery_ctx.nursery->begin) {
+        do_young_gc = true;
     }
+
+
     if (do_young_gc) {
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "young_gc_in_nursery_alloc_slow");
+        // NOTE: no LOG_DEBUG — see rationale in NurseryAllocateSlow.
         uint32_t gen = threading::RequestGlobalSafepoint();
         GcYoungCollection(tls_nursery_ctx.nursery);
         threading::ReleaseGlobalSafepoint(gen);
+        g_gc_scheduler.RecordGcCompleted();
 
         char* ptr = tls_nursery_ctx.nursery->current;
         char* next = ptr + size;

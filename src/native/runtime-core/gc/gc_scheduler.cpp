@@ -15,6 +15,19 @@ GcScheduler g_gc_scheduler;
 void GcScheduler::RecordAllocation(CHAOS_IL2CPP_SIZE bytes) noexcept {
     alloc_since_last_gc_.fetch_add(bytes, std::memory_order_relaxed);
     alloc_since_last_full_gc_.fetch_add(bytes, std::memory_order_relaxed);
+    // Decrement cooldown skip counter (saturating at 0).
+    auto skips = gc_cooldown_skips_.load(std::memory_order_relaxed);
+    while (skips > 0) {
+        if (gc_cooldown_skips_.compare_exchange_weak(skips, skips - 1,
+                std::memory_order_release, std::memory_order_relaxed)) {
+            break;
+        }
+    }
+}
+
+void GcScheduler::RecordGcCompleted() noexcept {
+    // Set cooldown to skip ShouldTriggerGc for the next N allocations.
+    gc_cooldown_skips_.store(kCooldownAllocations, std::memory_order_release);
 }
 
 // ── Collection recording ─────────────────────────────────────────
@@ -131,7 +144,7 @@ CHAOS_IL2CPP_SIZE GcScheduler::RecommendedNurserySize() const noexcept {
         // Survival rate near zero → prefer max nursery for fewer GC cycles.
         // The default size (256 KB) causes excessive safepoint overhead in
         // high-throughput scenarios like the 100-thread stress test.
-        target = static_cast<double>(kMaxNurserySize);
+        target = static_cast<double>(kDefaultNurserySize);
     }
 
     CHAOS_IL2CPP_SIZE size = static_cast<CHAOS_IL2CPP_SIZE>(target);

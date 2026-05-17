@@ -296,7 +296,7 @@ uint32_t RequestGlobalSafepoint() noexcept {
     // pointers, so we use file-static helper variables (same pattern as
     // GcScanAllThreadRoots) — safe since only one GC thread runs at a time.
     {
-        constexpr int kMaxConfirmSpin = 1 << 20;  // ~10ms at 3GHz
+        constexpr int kMaxConfirmSpin = 1 << 16;  // ~65K iters ≈ 2ms at 3GHz
         static ManagedThread* s_confirm_self = nullptr;
         static uint32_t s_confirm_desired = 0;
         static int* s_confirm_out = nullptr;
