@@ -20,8 +20,15 @@ namespace chaos::il2cpp::method_replacement {
 
 namespace {
 
-CHAOS_IL2CPP_SHARED_MUTEX g_method_replacement_mutex;
-CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT32, MethodReplacementEntry) g_method_replacements;
+auto& GetMutex() {
+    static CHAOS_IL2CPP_SHARED_MUTEX mutex;
+    return mutex;
+}
+
+auto& GetReplacements() {
+    static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT32, MethodReplacementEntry) replacements;
+    return replacements;
+}
 
 }  // namespace
 
@@ -30,8 +37,8 @@ bool Register(CHAOS_IL2CPP_UINT32 method_token, void* thunk) {
         return false;
     }
 
-    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(g_method_replacement_mutex);
-    auto& entry = g_method_replacements[method_token];
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(GetMutex());
+    auto& entry = GetReplacements()[method_token];
     entry.method_token = method_token;
     entry.replacement_thunk = thunk;
     entry.active = true;
@@ -65,10 +72,10 @@ bool Register(CHAOS_IL2CPP_UINT32 method_token, void* thunk) {
 }
 
 bool Revert(CHAOS_IL2CPP_UINT32 method_token) {
-    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(g_method_replacement_mutex);
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(GetMutex());
 
-    auto it = g_method_replacements.find(method_token);
-    if (it == g_method_replacements.end()) return false;
+    auto it = GetReplacements().find(method_token);
+    if (it == GetReplacements().end()) return false;
 
     // Restore original pointer in all VTable slots before erasing the entry.
     void* original = it->second.original_pointer;
@@ -92,14 +99,14 @@ bool Revert(CHAOS_IL2CPP_UINT32 method_token) {
         }
     }
 
-    g_method_replacements.erase(it);
+    GetReplacements().erase(it);
     return true;
 }
 
 void RevertAll() {
-    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(g_method_replacement_mutex);
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(GetMutex());
     // Restore all original pointers before clearing.
-    for (auto& [method_token, entry] : g_method_replacements) {
+    for (auto& [method_token, entry] : GetReplacements()) {
         if (entry.original_pointer != nullptr) {
             lock.unlock();
             chaos::il2cpp::vtable_registry::UpdateVTableSlotByMethodToken(
@@ -120,13 +127,13 @@ void RevertAll() {
             }
         }
     }
-    g_method_replacements.clear();
+    GetReplacements().clear();
 }
 
 void* Resolve(CHAOS_IL2CPP_UINT32 method_token) {
-    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(g_method_replacement_mutex);
-    const auto it = g_method_replacements.find(method_token);
-    if (it == g_method_replacements.end() || !it->second.active) {
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(GetMutex());
+    const auto it = GetReplacements().find(method_token);
+    if (it == GetReplacements().end() || !it->second.active) {
         return nullptr;
     }
 
@@ -134,8 +141,8 @@ void* Resolve(CHAOS_IL2CPP_UINT32 method_token) {
 }
 
 CHAOS_IL2CPP_UINT32 ActiveCount() {
-    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(g_method_replacement_mutex);
-    return static_cast<CHAOS_IL2CPP_UINT32>(g_method_replacements.size());
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(GetMutex());
+    return static_cast<CHAOS_IL2CPP_UINT32>(GetReplacements().size());
 }
 
 }  // namespace chaos::il2cpp::method_replacement

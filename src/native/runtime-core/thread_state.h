@@ -5,10 +5,6 @@
 #include <chaos/type_info.h>
 #include <atomic>
 
-namespace chaos::il2cpp::runtime_core {
-struct NurseryContext;
-}
-
 namespace chaos::il2cpp::runtime_core::threading {
 
 constexpr int32_t kMainThreadId = 1;
@@ -58,9 +54,10 @@ struct ManagedThread {
     ManagedThreadPriority    priority{ManagedThreadPriority::Normal};       // ThreadPriority
     bool                     at_safepoint{false}; // Currently paused at safepoint (legacy, kept for compat)
     uint32_t                 safepoint_generation{0}; // Last completed GC generation (legacy)
-    /// TLS nursery context (for cross-thread nursery scanning in full GC).
-    /// Set in NurseryAllocateSlow, cleared in TeardownTlsNursery.
-    chaos::il2cpp::runtime_core::NurseryContext* nursery_ctx{nullptr};
+    /// TLAB range for young GC scanning (Phase 2).
+    /// Set in NurseryAllocateSlow before GcYoungCollection, cleared after.
+    char* tlab_start{nullptr};
+    char* tlab_current{nullptr};
     /// Stack bounds for conservative root scanning during full GC.
     /// Populated in RegisterThread, read-only after that.
     void* stack_base{nullptr};   // High address of the thread's stack

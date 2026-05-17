@@ -13,6 +13,7 @@
 #include <mutex>
 
 #include "gc_scheduler.h"
+#include "gc_young_gen.h"
 #include "thread_state.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -82,20 +83,10 @@ class RegionManager;
 // is a pointer bump + zero-init, ~10 native instructions.
 // ======================================================================
 
-// TLS nursery context — set up when a thread enters cooperative mode.
-struct NurseryContext {
-    Region* nursery;        // current nursery region (nullptr = none)
-    char*   limit;          // nursery->end - kMaxNurseryAlloc, cached for fast check
-};
-
-// Maximum single allocation that can be serviced from the nursery.
-// Larger allocations go directly to the old gen or FOH.
-static constexpr CHAOS_IL2CPP_SIZE kMaxNurseryAlloc = 32 * 1024;  // 32 KB
-
 // POH region size (per pinned-object heap segment).
 static constexpr CHAOS_IL2CPP_SIZE kPohRegionSize = 64 * 1024;   // 64 KB
 
-extern thread_local NurseryContext tls_nursery_ctx;
+extern thread_local TLAB tls_tlab;
 
 /// Per-thread allocation counter (replaces per-allocation global atomic).
 /// Accumulated in the fast path (TLS-local bump), flushed to the global
@@ -122,9 +113,8 @@ void* PohAllocate(CHAOS_IL2CPP_SIZE size) noexcept;
 /// Check if @a ptr falls within any REGION_POH region.
 bool IsPohPointer(const void* ptr) noexcept;
 
-/// Release the current TLS nursery back to the region manager's free pool.
-/// Called when a thread exits cooperative GC mode.
-void TeardownTlsNursery();
+/// Release the current TLS nursery (now a no-op with shared young gen).
+inline void TeardownTlsNursery() noexcept {}
 
 /// Release the current TLS POH bump context (called on thread detach).
 void TeardownTlsPoh() noexcept;
@@ -138,33 +128,27 @@ void TeardownTlsPoh() noexcept;
 /// bump path — no null check needed on the hot path.
 inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("NurseryAllocate");
-    size = (size + 7) & ~static_cast<CHAOS_IL2CPP_SIZE>(7);  // 8-byte align
+    size = (size + 7) & ~static_cast<CHAOS_IL2CPP_SIZE>(7);
 
-    // Enforce maximum nursery allocation size.
-    // Objects larger than kMaxNurseryAlloc must go through the slow path,
-    // which routes them to the old generation (size-class or oversized).
-    if (size > kMaxNurseryAlloc) [[unlikely]] {
+    // Objects larger than kMaxTlabAlloc bypass TLAB and go directly to old gen.
+    if (size > kMaxTlabAlloc) [[unlikely]] {
         return NurseryAllocateSlow(size);
     }
 
-    auto* ctx = &tls_nursery_ctx;
-    char* ptr = ctx->nursery ? ctx->nursery->current : nullptr;
+    // TLAB bump-pointer fast path.
+    auto* tlab = &tls_tlab;
+    char* ptr = tlab->current;
     char* next = ptr + size;
 
-    if (ptr != nullptr && next <= ctx->nursery->end) [[likely]] {
-        ctx->nursery->current = next;
+    if (ptr != nullptr && next <= tlab->end) [[likely]] {
+        tlab->current = next;
         std::memset(ptr, 0, size);
         tls_alloc_since_last_gc += size;
-        // Lightweight safepoint generation check (single atomic load).
-        // When no GC is active (99.99%+ of allocations), this returns
-        // immediately.  The full SafepointPoll (pending_abort, spin-loop)
-        // runs only when a GC safepoint is actually active.
         if (threading::SafepointRequested()) [[unlikely]] {
             threading::SafepointPoll();
         }
         return ptr;
     }
-    // The slow path is never inlined — it's a full function call.
     return NurseryAllocateSlow(size);
 }
 
@@ -174,16 +158,16 @@ inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
 inline void* NurseryAllocateAtomic(CHAOS_IL2CPP_SIZE size) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("NurseryAllocateAtomic");
     size = (size + 7) & ~static_cast<CHAOS_IL2CPP_SIZE>(7);
-    if (size > kMaxNurseryAlloc) [[unlikely]] {
+    if (size > kMaxTlabAlloc) [[unlikely]] {
         return NurseryAllocateAtomicSlow(size);
     }
 
-    auto* ctx = &tls_nursery_ctx;
-    char* ptr = ctx->nursery ? ctx->nursery->current : nullptr;
+    auto* tlab = &tls_tlab;
+    char* ptr = tlab->current;
     char* next = ptr + size;
 
-    if (ptr != nullptr && next <= ctx->nursery->end) [[likely]] {
-        ctx->nursery->current = next;
+    if (ptr != nullptr && next <= tlab->end) [[likely]] {
+        tlab->current = next;
         std::memset(ptr, 0, size);
         tls_alloc_since_last_gc += size;
         if (threading::SafepointRequested()) [[unlikely]] {
@@ -260,6 +244,10 @@ public:
     /// Return the first region of kind REGION_POH (for PohAllocate fallback).
     /// Returns nullptr if no POH region exists yet.
     Region* GetFirstPohRegion() const;
+
+    /// Return the next POH region after @a current in the region table.
+    /// Returns nullptr if @a current is the last POH region.
+    Region* GetNextPohRegion(const Region* current) const;
 
     /// Return the total number of POH regions (for sweep iteration).
     int GetPohRegionCount() const;

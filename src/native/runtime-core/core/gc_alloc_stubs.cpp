@@ -25,14 +25,14 @@ void CHAOS_RUNTIME_ABI_CALL DefaultDeallocate(void* ptr, void* user_data) {
 void* GcAllocate(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocate");
     void* ptr = NurseryAllocate(size);
-    if (ptr) GcRecordAlloc(size, size > kMaxNurseryAlloc);
+    if (ptr) GcRecordAlloc(size, size > kMaxTlabAlloc);
     return ptr;
 }
 
 void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateAtomic");
     void* ptr = NurseryAllocateAtomic(size);
-    if (ptr) GcRecordAlloc(size, size > kMaxNurseryAlloc);
+    if (ptr) GcRecordAlloc(size, size > kMaxTlabAlloc);
     return ptr;
 }
 

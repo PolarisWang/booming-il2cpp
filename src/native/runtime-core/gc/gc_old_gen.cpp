@@ -10,6 +10,7 @@
 #include "gc_loh.h"
 #include "gc_parallel_mark.h"
 #include "gc_region.h"
+#include "gc_young_gen.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
 #include "gc_worker_pool.h"
@@ -1687,30 +1688,19 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_before_enumerate_threads");
         size_t before_roots = mark_stack_.size();
 
-        // EnumerateThreads takes a C function pointer — use a static
-        // helper since g_old_gen is a process-wide global.
+                // EnumerateThreads lambda — scan shared young generation TLAB pointers.
         threading::EnumerateThreads(
             [](threading::ManagedThread* thread) -> bool {
-                if (thread->nursery_ctx == nullptr) return true;
-                auto* nursery = thread->nursery_ctx->nursery;
-                if (nursery == nullptr) return true;
-
-                // V4-M3: Snapshot nursery range under safepoint, then use it.
-                // The thread whose nursery we're scanning is paused at
-                // SafepointPoll, so TeardownTlsNursery cannot run concurrently.
-                // But capture begin/cur to a local struct anyway so we don't
-                // read nursery fields after a potential context switch.
-                struct { void* begin; void* cur; } snap = {
-                    nursery->begin,
-                    nursery->current
-                };
-                if (snap.cur > snap.begin) {
-                    g_old_gen.ScanRangeForRoots(snap.begin, snap.cur);
+                // Scan the shared young generation region directly.
+                // All threads share one young region; scan [begin, current).
+                Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
+                if (young_region == nullptr) return true;
+                if (young_region->current > young_region->begin) {
+                    g_old_gen.ScanRangeForRoots(
+                        young_region->begin, young_region->current);
                 }
-                return true;  // continue enumeration
-            });
-
-        if (mark_stack_.size() > before_roots) {
+                return true;
+            });if (mark_stack_.size() > before_roots) {
             has_roots = true;
         }
         CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_scanned_nurseries");
@@ -1732,6 +1722,27 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
             has_roots = true;
         }
         CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_scanned_thread_stacks");
+    }
+
+    // Scan POH regions as conservative roots.
+    // POH objects bypass young GC (never copied), so they must be
+    // preserved during full GC mark.
+    {
+        auto& rm = RegionManager::Instance();
+        int poh_count = rm.GetPohRegionCount();
+        if (poh_count > 0) {
+            CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_scanning_poh regions={0}", poh_count);
+            size_t before_roots = mark_stack_.size();
+            for (Region* r = rm.GetFirstPohRegion(); r != nullptr;
+                 r = rm.GetNextPohRegion(r)) {
+                if (r->current > r->begin) {
+                    ScanRangeForRoots(r->begin, r->current);
+                }
+            }
+            if (mark_stack_.size() > before_roots) {
+                has_roots = true;
+            }
+        }
     }
 
     // Phase 2: Mark transitive closure.

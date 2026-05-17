@@ -173,7 +173,6 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
             }
             dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
             has_dst = true; has_src1 = true;
-            ri.imm.field_offset = static_cast<uint32_t>(ir.field_offset);
             break;
         }
 
@@ -188,7 +187,6 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
                 has_src2 = true;
             }
             has_src1 = true;
-            ri.imm.field_offset = static_cast<uint32_t>(ir.field_offset);
             break;
         }
 
@@ -485,6 +483,11 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // operand_index written last (before per-opcode field_offset fixup)
         // because operand_index and field_offset share the same union slot.
         ri.imm.operand_index = static_cast<uint32_t>(ir.operand_index);
+        // LdFld/StFld: override union slot with field_offset (after operand_index)
+        if (ir.op_code == IROpCode::LdFld || ir.op_code == IROpCode::StFld) {
+            ri.imm.field_offset = static_cast<uint32_t>(ir.field_offset);
+        }
+
 
         // Branch target
         if (ir.op_code == IROpCode::Br || ir.op_code == IROpCode::BrTrue ||
