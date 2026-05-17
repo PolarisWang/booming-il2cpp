@@ -39,8 +39,9 @@ static constexpr int kMaxParallelMarkWorkers = 8;
 
 /// Chunk representing up to 64 objects on the same page.
 struct MarkChunk {
-    int     page_idx;   ///< Index into the page array
-    uint64_t bitmap;    ///< Bitmap word: each set bit = one object to process
+    int      page_idx;    ///< Index into the page array
+    uint16_t word_index;  ///< Which 64-slot group this bitmap covers (0 = slots 0-63)
+    uint64_t bitmap;      ///< Bitmap word: each set bit = one object to process
 };
 
 /// Per-worker state for parallel mark.
@@ -88,6 +89,9 @@ struct ParallelMarkContext {
 
     /// Set to true when root marking is done and parallel drain should start.
     std::atomic<bool> drain_started{false};
+
+    /// Set to true when parallel mark is complete (termination signal).
+    std::atomic<bool> parallel_done{false};
 };
 
 /// Initialize parallel mark context with a snapshot of pages.

@@ -148,44 +148,45 @@ static int failures = 0;
 
 int main()
 {
-    TEST(TestLdcI4_0);
-    TEST(TestLdcI4_S);
-    TEST(TestLdcI4_2_3_Add);
-    TEST(TestLdArgAdd);
-    TEST(TestStLocLdLoc);
-    TEST(TestBrTrue_Taken);
-    TEST(TestBrTrue_NotTaken);
-    TEST(TestBeq_Equal);
-    TEST(TestBeq_NotEqual);
-    TEST(TestSub);
-    TEST(TestMul);
-    TEST(TestLdNull);
+    std::cout << "main entered" << std::endl;
+    std::cout << "t1" << std::endl; TEST(TestLdcI4_0);
+    std::cout << "t2" << std::endl; TEST(TestLdcI4_S);
+    std::cout << "t3" << std::endl; TEST(TestLdcI4_2_3_Add);
+    std::cout << "t4" << std::endl; TEST(TestLdArgAdd);
+    std::cout << "t5" << std::endl; TEST(TestStLocLdLoc);
+    std::cout << "t6" << std::endl; TEST(TestBrTrue_Taken);
+    std::cout << "t7" << std::endl; TEST(TestBrTrue_NotTaken);
+    std::cout << "t8" << std::endl; TEST(TestBeq_Equal);
+    std::cout << "t9" << std::endl; TEST(TestBeq_NotEqual);
+    std::cout << "t10" << std::endl; TEST(TestSub);
+    std::cout << "t11" << std::endl; TEST(TestMul);
+    std::cout << "t12" << std::endl; TEST(TestLdNull);
 
     // Phase A new opcode tests
-    TEST(TestDup);
-    TEST(TestDivUn);
-    TEST(TestRemUn);
-    TEST(TestBitwiseAnd);
-    TEST(TestBitwiseOr);
-    TEST(TestBitwiseXor);
-    TEST(TestBitwiseNot);
-    TEST(TestShiftLeft);
-    TEST(TestShiftRightArith);
-    TEST(TestShiftRightLogical);
-    TEST(TestConvRUn);
-    TEST(TestConvI);
-    TEST(TestConvU);
-    TEST(TestSizeOf);
-    TEST(TestExtendedLdFtn);
-    TEST(TestExtendedLdArg);
-    TEST(TestExtendedLdLoc);
+    std::cout << "t13" << std::endl; TEST(TestDup);
+    std::cout << "t14" << std::endl; TEST(TestDivUn);
+    std::cout << "t15" << std::endl; TEST(TestRemUn);
+    std::cout << "t16" << std::endl; TEST(TestBitwiseAnd);
+    std::cout << "t17" << std::endl; TEST(TestBitwiseOr);
+    std::cout << "t18" << std::endl; TEST(TestBitwiseXor);
+    std::cout << "t19" << std::endl; TEST(TestBitwiseNot);
+    std::cout << "t20" << std::endl; TEST(TestShiftLeft);
+    std::cout << "t21" << std::endl; TEST(TestShiftRightArith);
+    std::cout << "t22" << std::endl; TEST(TestShiftRightLogical);
+    std::cout << "t23" << std::endl; TEST(TestConvRUn);
+    std::cout << "t24" << std::endl; TEST(TestConvI);
+    std::cout << "t25" << std::endl; TEST(TestConvU);
+    std::cout << "t26" << std::endl; TEST(TestSizeOf);
+    std::cout << "t27" << std::endl; TEST(TestExtendedLdFtn);
+    std::cout << "t28" << std::endl; TEST(TestExtendedLdArg);
+    std::cout << "t29" << std::endl; TEST(TestExtendedLdLoc);
 
     // CallVirt / VTable dispatch tests
-    TEST(TestCallVirtDirectResolution);
-    TEST(TestCallVirtInheritanceChain);
+    std::cout << "t30" << std::endl; TEST(TestCallVirtDirectResolution);
+    std::cout << "t31" << std::endl; TEST(TestCallVirtInheritanceChain);
 
     // Codegen VTable path tests (using RegisterCodegenVTable)
-    TEST(Test_CodegenVTableDirect);
+    std::cout << "t32" << std::endl; TEST(Test_CodegenVTableDirect);
     TEST(Test_CodegenVTableInheritance);
     TEST(Test_CodegenVTableInterfaceDispatch);
 
@@ -262,8 +263,13 @@ bool TestLdcI4_0()
     ExecutionFrame frame = {};
     const InterpreterVM vm = {};
     IRMethod method = MakeSimpleMethod(IROpCode::LdcI4, 0);
+    std::cout << "  EXECUTING..." << std::endl;
     ExecutionResult result = vm.Execute(method, &frame);
-    return result.has_return_value && result.int32_value == 0;
+    std::cout << "  DONE, has_return=" << result.has_return_value
+              << " int32=" << result.int32_value << std::endl;
+    bool ok = result.has_return_value && result.int32_value == 0;
+    std::cout << "  CHECK=" << ok << std::endl;
+    return ok;
 }
 
 bool TestLdcI4_S()
@@ -712,6 +718,7 @@ bool TestExtendedLdLoc()
 bool TestCallVirtDirectResolution()
 {
     using namespace chaos::il2cpp::vtable_registry;
+    std::cout << "  t30a" << std::endl;
 
     // Register base class vtable: type_token=0x100, method_token=0x200 → 0xBEEF
     VTableSlot base_slots[] = {
@@ -722,7 +729,9 @@ bool TestCallVirtDirectResolution()
     base_vtable.base_token = 0u;
     base_vtable.slot_count = 1u;
     base_vtable.slots = base_slots;
+    std::cout << "  t30b" << std::endl;
     RegisterTypeVTable(&base_vtable);
+    std::cout << "  t30c" << std::endl;
 
     // Build IRMethod manually: ldarg.0 (this) → callvirt method_token=0x200
     IRMethod method;
@@ -737,26 +746,32 @@ bool TestCallVirtDirectResolution()
     callvirt.secondary_index = static_cast<CHAOS_IL2CPP_SIZE>(0x200u);  // declared method token
     callvirt.arg_count = 1u;  // just 'this'
     method.instructions.push_back(callvirt);
+    std::cout << "  t30d" << std::endl;
 
     // Create an object whose type token matches the registered vtable.
     auto* storage = new InterpreterObject();
     storage->type_token = 0x100u;
     storage->fields.resize(1u);
+    std::cout << "  t30e" << std::endl;
 
     ExecutionFrame frame;
     frame.arguments.push_back(InterpreterValue::from_obj(storage));
 
     const InterpreterVM vm = {};
+    std::cout << "  t30f" << std::endl;
     ExecutionResult result = vm.Execute(method, &frame);
+    std::cout << "  t30g " << result.needs_external_dispatch << " " << result.call_target << std::endl;
 
-    // Must dispatch externally with the resolved vtable pointer.
-    return result.needs_external_dispatch &&
+    bool ok = result.needs_external_dispatch &&
            result.call_target == reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu));
+    std::cout << "  t30h " << ok << std::endl;
+    return ok;
 }
 
 bool TestCallVirtInheritanceChain()
 {
     using namespace chaos::il2cpp::vtable_registry;
+    std::cout << "  t31a" << std::endl;
 
     // Register base vtable: type_token=0x100, method_token=0x200 → 0xBEEF
     VTableSlot base_slots[] = {
@@ -767,7 +782,9 @@ bool TestCallVirtInheritanceChain()
     base_vtable.base_token = 0u;
     base_vtable.slot_count = 1u;
     base_vtable.slots = base_slots;
+    std::cout << "  t31b" << std::endl;
     RegisterTypeVTable(&base_vtable);
+    std::cout << "  t31c" << std::endl;
 
     // Register derived vtable: type_token=0x101, base_token=0x100, method_token=0x200 → 0xCAFE
     VTableSlot derived_slots[] = {
@@ -778,7 +795,9 @@ bool TestCallVirtInheritanceChain()
     derived_vtable.base_token = 0x100u;
     derived_vtable.slot_count = 1u;
     derived_vtable.slots = derived_slots;
+    std::cout << "  t31d" << std::endl;
     RegisterTypeVTable(&derived_vtable);
+    std::cout << "  t31e" << std::endl;
 
     // Build IRMethod: ldarg.0 → callvirt method_token=0x200
     IRMethod method;
@@ -799,15 +818,21 @@ bool TestCallVirtInheritanceChain()
     storage->type_token = 0x101u;
     storage->fields.resize(1u);
 
+    std::cout << "  t31f" << std::endl;
     ExecutionFrame frame;
     frame.arguments.push_back(InterpreterValue::from_obj(storage));
+    std::cout << "  t31g" << std::endl;
 
     const InterpreterVM vm = {};
+    std::cout << "  t31h" << std::endl;
     ExecutionResult result = vm.Execute(method, &frame);
+    std::cout << "  t31i " << result.needs_external_dispatch << " " << result.call_target << std::endl;
 
     // Must resolve to the DERIVED class override (0xCAFE), not base (0xBEEF).
-    return result.needs_external_dispatch &&
+    bool ok = result.needs_external_dispatch &&
            result.call_target == reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xCAFEu));
+    std::cout << "  t31j " << ok << std::endl;
+    return ok;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1744,13 +1769,13 @@ bool TestInterfaceVtableDispatch()
 bool Test_CodegenVTableDirect()
 {
     using namespace chaos::il2cpp::vtable_registry;
+    std::cout << "  t32a" << std::endl;
 
-    // Use a unique type_token (0x600) to avoid conflict with existing tests'
-    // dangling stack-local TypeVTable registrations (which use 0x100-0x101).
     VTableSlot slots[] = {
         { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) }
     };
     const void* vtable_array[] = { reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) };
+    std::cout << "  t32b" << std::endl;
 
     VTableDescriptorV0 desc;
     std::memset(&desc, 0, sizeof(desc));
@@ -1762,8 +1787,10 @@ bool Test_CodegenVTableDirect()
     desc.vtable_array   = vtable_array;
     desc.vtable_length  = 1u;
     desc.type_shape     = 1;
+    std::cout << "  t32c" << std::endl;
 
     RegisterCodegenVTable(&desc);
+    std::cout << "  t32d" << std::endl;
 
     // Build IR: ldarg.0 → callvirt method_token=0x200
     IRMethod method;

@@ -182,6 +182,13 @@ void* GcAllocatePinned(CHAOS_IL2CPP_SIZE size) noexcept;
 /// Check if @a ptr falls within a POH region.
 bool GcIsPohPointer(const void* ptr) noexcept;
 
+/// Read the target object of any GCHandle (strong, weak, pinned).
+/// Returns nullptr if handle_id is invalid or the target was collected.
+void* GcGetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
+
+/// Overwrite the target object of any GCHandle.
+void GcSetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id, void* new_target) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_EVENTS_H_

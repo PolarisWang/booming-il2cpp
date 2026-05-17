@@ -56,6 +56,13 @@ CHAOS_IL2CPP_UINT64 GcCreatePinnedHandle(void* object_instance) noexcept;
 /// Free a handle created by any of the above.
 void GcFreeHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
 
+/// Read the target object of any handle type (strong, weak, pinned).
+/// Returns nullptr if handle_id is invalid or the target was collected.
+void* GcGetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
+
+/// Overwrite the target object of any handle type.
+void GcSetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id, void* new_target) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_ENGINE_LIFECYCLE_H_

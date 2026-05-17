@@ -93,7 +93,13 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     }
 
     // Phase 4: Young region full — fall back to old gen.
-    return g_old_gen.Allocate(size, true);
+    // Switch to preemptive mode so old-gen allocation does not block
+    // safepoint handshake (the old-gen allocator takes mutex_ internally,
+    // which would deadlock against ScanDirtyCardsInPages).
+    threading::EnterPreemptiveMode();
+    void* old_result = g_old_gen.Allocate(size, true);
+    threading::EnterCooperativeMode();  // SafepointPoll re-sync if pending
+    return old_result;
 }
 
 void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
@@ -132,7 +138,10 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     }
 
     // Phase 4: Fall back to old gen (no scanning needed).
-    return g_old_gen.Allocate(size, false);
+    threading::EnterPreemptiveMode();
+    void* old_result = g_old_gen.Allocate(size, false);
+    threading::EnterCooperativeMode();
+    return old_result;
 }
 
 // TeardownTlsNursery is now an inline no-op in gc_region.h
