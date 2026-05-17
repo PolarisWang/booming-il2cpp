@@ -10,6 +10,7 @@
 | [`test-driven-development.md`](./test-driven-development.md) | TDD | 说明功能改动、流程修复和规则调整都要先有失败测试 |
 | [`systematic-debugging.md`](./systematic-debugging.md) | 调试 | 说明根因优先与证据优先 |
 | [`verification-before-completion.md`](./verification-before-completion.md) | 验证 | 说明完成前必须有自动化或命令级证据 |
+| [`pressure-test-management-system.md`](./pressure-test-management-system.md) | 压力测试 | 统一 CLI 入口（`run stress`），覆盖 GC/capacity/threading stress 测试，JSONL 记录与回归检测 |
 
 ## 本层规则
 
@@ -22,6 +23,7 @@
 
 ## 最近更新
 
+- `2026-05-17`：新增 `pressure-test-management-system` 文档，覆盖 `run stress` 统一 CLI、JSONL 记录、基线备份与回归检测。
 - `2026-04-17`：把测试阶段 `dotnet` 编译崩溃处理提升为质量保障层共识规则，绑定到调试、TDD、完成前验证和测试治理。
 - `2026-04-17`：新增 `project-test-governance`，把统一测试主线和 Scriban/codegen 规则正式纳入质量保障层。
 - `2026-04-18`：补充 obligation-driven AOT completion gate，明确 `verification-before-completion` 负责 formal object 选择，`test-driven-development` 只负责 TDD 纪律。
