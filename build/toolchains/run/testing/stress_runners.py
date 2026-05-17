@@ -247,10 +247,12 @@ def run_threading_stress(
     # Locate entry.exe for the threading-monitor-interlocked family
     entry_candidates = [
         repo_root / "verification" / "foundation-dll" / "System.Private.CoreLib"
-        / "threading-monitor-interlocked" / "il2cpp_dist" / "entry.exe",
+        / "threading-monitor-interlocked" / "native" / "entry.exe",
     ]
     # Also check common build output locations
     for p in (repo_root / "artifacts").rglob("entry.exe"):
+        entry_candidates.append(p)
+    for p in (repo_root / "verification").rglob("entry.exe"):
         entry_candidates.append(p)
 
     entry_exe: Path | None = None
@@ -279,9 +281,13 @@ def run_threading_stress(
 
     result = _run([str(entry_exe), "--stress", str(workers), str(duration_ms)], timeout=duration_ms + 30000)
 
-    # Parse output for ops/sec
+    # Parse output for ops/sec and passed/failed counts
     ops_match = re.search(r"([\d.]+)\s*ops/sec", result.stdout, re.IGNORECASE)
     ops_per_sec = float(ops_match.group(1)) if ops_match else 0.0
+
+    passed_match = re.search(r"Passed:\s*(\d+)/(\d+)", result.stdout)
+    passed_tests = int(passed_match.group(1)) if passed_match else 0
+    total_tests = int(passed_match.group(2)) if passed_match else 0
 
     status = "passed"
     errors: list[str] = []
@@ -295,6 +301,9 @@ def run_threading_stress(
         metrics={
             "workers": workers,
             "durationMs": duration_ms,
+            "passed": passed_tests,
+            "failures": total_tests - passed_tests,
+            "totalTests": total_tests,
             "opsPerSecond": ops_per_sec,
         },
         output={"stdout": result.stdout[:2000], "stderr": result.stderr[:2000]},
@@ -387,6 +396,9 @@ def run_gc_stress_mode(
     if pass_count > 0 or fail_count > 0:
         metrics["passCount"] = pass_count
         metrics["failCount"] = fail_count
+        metrics["passed"] = pass_count
+        metrics["failures"] = fail_count
+        metrics["totalTests"] = pass_count + fail_count
 
     # Check for assertion failure output.
     if "assert" in result.stdout.lower() or "assert" in result.stderr.lower():
