@@ -96,6 +96,21 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlySet<string>? _sealedTypeSubjectIds;
     private HashSet<string> _typesWithInstanceMethods = new(StringComparer.Ordinal);
 
+    // ── VTable descriptor data for BootstrapRuntime registration ──
+    private sealed record VTableSlotEntry(uint MethodToken, string NativeSymbol);
+    private sealed record VTableDescriptorData(
+        ulong StableId,
+        string TypeTokenLiteral,
+        string BaseTokenLiteral,
+        VTableSlotEntry[] Slots,
+        string VTableArraySymbol,
+        int VTableLength,
+        byte TypeShape,
+        string? IfaceMapSymbol,
+        int IfaceCount,
+        string SanitizedId);
+    private List<VTableDescriptorData>? _vtableDescriptors;
+
     // ── A4-Dual+V2 Header kind / vtable variant decision engine ──
     /// <summary>
     /// Determines the ObjectHeader kind for a given type. PureType = no sync (value types,
@@ -363,7 +378,7 @@ public sealed partial class NativeAotLoweringPlanner
         CollectExternalRuntimeDispatchEntries(methodsForLowering);
         var objectModelBuilder = new StringBuilder(65536);
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
-        EmitObjectModelDeclarations(objectModelBuilder, methodsForLowering, externalRuntimeHelpers);
+        EmitObjectModelDeclarations(objectModelBuilder, methodsForLowering, externalRuntimeHelpers, metadataRegistration);
         // Phase 0: Collect ModuleRegistry Tier 0 type data from PE metadata
         CollectModuleTypeData(closureManifest.InputAssemblyPath);
         // Phase 1 string-id table via Scriban
@@ -2515,6 +2530,33 @@ public sealed partial class NativeAotLoweringPlanner
             : Array.Empty<ScriptObject>(),
         ["assembly_name"] = EscapeCppStringLiteral(_assemblyName),
     };
+
+    // ── VTable descriptors for BootstrapRuntime TypeVTable registration ──
+    // Always set (even when empty) to avoid Scriban "function not found" error.
+    if (_vtableDescriptors is { Count: > 0 })
+    {
+        model["vtable_descriptors"] = _vtableDescriptors
+            .Select(d => new ScriptObject
+            {
+                ["stable_id"] = "CHAOS_IL2CPP_UINT64_C(0x" + d.StableId.ToString("X16") + ")",
+                ["type_token_literal"] = d.TypeTokenLiteral,
+                ["base_token_literal"] = d.BaseTokenLiteral,
+                ["slot_count"] = d.Slots.Length,
+                ["slots_symbol"] = "kSlots_" + d.SanitizedId,
+                ["vtable_array_symbol"] = d.VTableArraySymbol,
+                ["vtable_length"] = d.VTableLength,
+                ["type_shape"] = d.TypeShape,
+                ["iface_map_symbol"] = d.IfaceMapSymbol ?? "nullptr",
+                ["iface_count"] = d.IfaceCount,
+            })
+            .ToArray();
+        model["vtable_descriptor_count"] = _vtableDescriptors.Count;
+    }
+    else
+    {
+        model["vtable_descriptors"] = Array.Empty<ScriptObject>();
+        model["vtable_descriptor_count"] = 0;
+    }
 
     return ScribanTemplateRenderer.RenderTemplate(
         NativeAotTemplateCatalog.GetCodeRegistrationTemplate(), model);

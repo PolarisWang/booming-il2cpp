@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "StringCharTextCoreSubjects",
   "entrySubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Run:System.Void(System.Int32)",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/string-char-text-core/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

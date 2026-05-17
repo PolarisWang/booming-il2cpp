@@ -3,16 +3,16 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "IoStreamsBasicsSubjects",
   "entrySubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Run:System.Void(System.Int32)",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/io-streams-basics/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/io-streams-basics/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {
-      "kind": "generatedTranslationUnit",
-      "path": "generated/native-aot.generated.cpp"
-    },
-    {
       "kind": "shapeDispatchHeader",
       "path": "generated/runtime_helper_shapes.h"
+    },
+    {
+      "kind": "generatedTranslationUnit",
+      "path": "generated/native-aot.generated.cpp"
     },
     {
       "kind": "codegenMetrics",

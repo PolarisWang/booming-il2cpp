@@ -26,6 +26,7 @@
 #include "thread_state.h"
 
 #include <atomic>
+#include <algorithm>
 #include <chrono>
 #include <cstdint>
 #include <cstdio>
@@ -63,8 +64,8 @@ using namespace chaos::il2cpp::memory_domain;
 // Constants
 // ════════════════════════════════════════════════════════════════════════════
 
-static constexpr int    kNumWorkerThreads       = 100;
-static constexpr int    kAllocationsPerThread   = 256;
+static int    kNumWorkerThreads       = 100;
+static int    kAllocationsPerThread   = 256;
 static constexpr int    kVerifyStep             = 16;
 static constexpr int    kFullGcIntervalMs       = 200;
 static constexpr int    kWorkerTimeoutMs        = 120000;
@@ -72,6 +73,22 @@ static constexpr size_t kMaxAllocSize           = 4096;     // baseline
 static constexpr size_t kMinAllocSize           = 16;
 
 // ════════════════════════════════════════════════════════════════════════════
+
+// ── Stress scale factor ───────────────────────────────────────────────
+// Reads CHAOS_IL2CPP_STRESS_SCALE env var (default: 100).
+// Scales thread count and allocation count by factor/100.
+// Called at the top of main() to override the defaults above.
+static void ApplyStressScale() {
+    const char* env = std::getenv("CHAOS_IL2CPP_STRESS_SCALE");
+    if (env == nullptr) return;
+    char* end = nullptr;
+    long val = std::strtol(env, &end, 10);
+    if (end == env || val <= 0 || val > 1000) return;
+    kNumWorkerThreads = std::max(1, kNumWorkerThreads * static_cast<int>(val) / 100);
+    kAllocationsPerThread = std::max(1, kAllocationsPerThread * static_cast<int>(val) / 100);
+    printf("[STRESS_SCALE=%ld] workers=%d allocs_per_thread=%d\n",
+           val, kNumWorkerThreads, kAllocationsPerThread);
+}
 // Per-scenario result (serialized to JSON)
 // ════════════════════════════════════════════════════════════════════════════
 

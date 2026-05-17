@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ObjectEqualityIdentitySubjects",
   "entrySubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Run:System.Void(System.Int32)",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/object-equality-identity/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/object-equality-identity/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

@@ -41,6 +41,11 @@
 // entries.  Include the declaration here so it is visible to all generated
 // code that includes runtime_core.h.
 #include "interpreter_entry.h"
+
+// Engine lifecycle declarations (extern globals, handle table, GC handle state)
+// Must precede core/*.cpp inclusion so all unity sub-files see the symbols.
+#include "core/engine_lifecycle.h"
+
 namespace chaos::il2cpp::runtime_core {
 
 // Bring types from other namespaces into runtime_core for convenient use.
@@ -77,7 +82,6 @@ void CHAOS_RUNTIME_ABI_CALL ThreadDetach(
     ThreadState* thread_state);
 
 
-using EngineLifecycleCallback = void (*)(const char* phase_utf8, void* user_data);
 using FinalizerCallback = void (*)(void* object_instance);
 
 enum class RuntimeMode {
@@ -93,7 +97,9 @@ const TaskRuntimeKernelV1* GetTaskRuntimeKernelV1();
 /// Called at startup (from generated code) to register a pre-compiled
 /// native thunk function for a delegate type.  target_slot is a module-level
 /// static variable that the thunk reads to get the current delegate instance.
-void RegisterDelegateThunk(const char* type_id, void* thunk_fn, CHAOS_IL2CPP_INTPTR* target_slot);
+/// param_count is the arity of the delegate's Invoke method (0-4).
+void RegisterDelegateThunk(const char* type_id, void* thunk_fn,
+    CHAOS_IL2CPP_INTPTR* target_slot, uint8_t param_count = 0);
 
 /// Look up a thunk function pointer by delegate type ID.
 /// Returns nullptr if the type was not registered at startup.
@@ -125,6 +131,18 @@ void* MarshalGetDelegateForFunctionPointerImpl(
 void RegisterStaticMarshallingDescriptor(
     CHAOS_IL2CPP_UINT64 stable_id,
     const marshal_abi::StructMarshallingDescriptorV1* desc) noexcept;
+
+/// Register the field-names array for a type identified by its stable_id.
+/// Called at startup alongside RegisterStaticMarshallingDescriptor.
+/// field_names must be a static constexpr const char*[] in the same order
+/// as the descriptor's fields[] array.
+void RegisterStaticMarshallingFieldNames(
+    CHAOS_IL2CPP_UINT64 stable_id,
+    const char* const* field_names) noexcept;
+
+/// Look up field names by stable_id.  Returns nullptr if not registered.
+const char* const* ResolveStaticMarshallingFieldNames(
+    CHAOS_IL2CPP_UINT64 stable_id) noexcept;
 
 /// Look up a struct marshalling descriptor by TypeInfo*.
 /// Priority: 1) static registry (codegen) → 2) runtime reflection build (cached).

@@ -1,6 +1,11 @@
 namespace chaos::il2cpp::runtime_core {
 namespace {
 
+// Forward declarations — DefaultAllocate/DefaultDeallocate are defined
+// in gc_alloc_stubs.cpp (included later in the unity build).
+void* CHAOS_RUNTIME_ABI_CALL DefaultAllocate(CHAOS_IL2CPP_SIZE size, void* user_data);
+void CHAOS_RUNTIME_ABI_CALL DefaultDeallocate(void* ptr, void* user_data);
+
 bool TryNormalizeConfig(const RuntimeConfig* config, RuntimeConfig* out_config) {
     if (out_config == nullptr) {
         return false;

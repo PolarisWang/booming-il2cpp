@@ -26,6 +26,26 @@ enum {
     CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED = 9
 };
 
+/* ── VTable descriptor (codegen-emitted, registered during BootstrapRuntime) ──
+ *
+ * One per reference/interface type with virtual methods.  The slots array
+ * contains only the method slots that THIS type declares or overrides;
+ * the inheritance walk in ResolveVirtualMethodPointer handles the rest.
+ * vtable_array points to the flat const void*[] emitted alongside.          */
+typedef struct VTableDescriptorV0 {
+    uint64_t stable_id;
+    uint32_t type_token;
+    uint32_t base_token;       /* 0 = no base (System.Object)    */
+    uint32_t slot_count;
+    const void*          slots;            /* -> const VTableSlot[]          */
+    const void**         vtable_array;     /* -> const void*[] (flat ptrs)   */
+    uint32_t vtable_length;
+    uint8_t  type_shape;       /* 1=ref, 2=value, 3=interface    */
+    uint8_t             _pad[3];
+    const void*          iface_map;        /* -> const InterfaceMapEntry[]   */
+    uint32_t iface_count;
+} VTableDescriptorV0;
+
 typedef struct CodeRegistrationV0 {
     uint32_t struct_size;
     const void* method_pointers;
@@ -38,6 +58,8 @@ typedef struct CodeRegistrationV0 {
     uint32_t unresolved_virtual_call_count;
     const RuntimeTypeCapabilityEntryV0* type_capabilities;
     uint32_t type_capability_count;
+    const VTableDescriptorV0* vtable_descriptors;
+    uint32_t       vtable_descriptor_count;
 } CodeRegistrationV0;
 
 /*

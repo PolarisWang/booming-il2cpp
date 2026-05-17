@@ -4,6 +4,7 @@
 #include "runtime_core.h"
 #include "type_registry.h"
 
+#include <codegen_bridge.h>      // VTableDescriptorV0
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
 #include <chaos/profile.h>
@@ -52,6 +53,13 @@ bool RegisterTypeVTable(const TypeVTable* vtable) {
     state.by_type_token[vtable->type_token] = vtable;
     if (vtable->stable_id != 0u) {
         state.by_stable_id[vtable->stable_id] = vtable;
+
+        // Also register the flat vtable array so that FindVTable() and
+        // TypeInfoHot::vtable_array lookups work for codegen-emitted types.
+        if (vtable->vtable_array != nullptr && vtable->vtable_length > 0u) {
+            state.flat_vtables[vtable->stable_id] = vtable->vtable_array;
+            state.flat_lengths[vtable->stable_id] = vtable->vtable_length;
+        }
     }
     return true;
 }
@@ -64,6 +72,35 @@ void RegisterVTableArray(CHAOS_IL2CPP_UINT64 stable_id,
     CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
     state.flat_vtables[stable_id] = vtable;
     state.flat_lengths[stable_id] = length;
+}
+
+void RegisterCodegenVTable(const void* desc) noexcept {
+    if (desc == nullptr) return;
+    const auto* vtd = static_cast<const VTableDescriptorV0*>(desc);
+    if (vtd->type_token == 0u || vtd->slots == nullptr || vtd->slot_count == 0u) {
+        return;
+    }
+
+    // Build a TypeVTable around the codegen-emitted data (no heap allocation —
+    // the VTableSlot and vtable_array live in .rodata).
+    TypeVTable tv;
+    tv.type           = 0;   // Filled later via type_token → TypeInfoHandle mapping
+    tv.stable_id      = vtd->stable_id;
+    tv.type_token     = vtd->type_token;
+    tv.base_type      = 0;   // Filled later
+    tv.base_stable_id = 0;
+    tv.base_token     = vtd->base_token;
+    tv.slot_count     = vtd->slot_count;
+    tv.slots          = static_cast<const VTableSlot*>(vtd->slots);
+    tv.vtable_array   = vtd->vtable_array;
+    tv.vtable_length  = vtd->vtable_length;
+    tv.type_shape     = vtd->type_shape;
+    tv._pad[0] = tv._pad[1] = tv._pad[2] = 0;
+    tv.iface_map      = vtd->iface_map;
+    tv.iface_count    = vtd->iface_count;
+
+    // RegisterTypeVTable now also populates flat_vtables when vtable_array is set.
+    RegisterTypeVTable(&tv);
 }
 
 bool RegisterRuntimeVTable(

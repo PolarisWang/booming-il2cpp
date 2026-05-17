@@ -44,7 +44,10 @@ const void* chaos_vtable_SnapshotTestFixtures_Wrapper_System_Int32_[] =
 {
 	reinterpret_cast<void*>(SnapshotTestFixtures_Wrapper_System_Int32__ctor),
 };
-static const int s_vtreg_SnapshotTestFixtures_Wrapper_System_Int32_ = (::chaos::il2cpp::runtime_vtable::RegisterVTable(CHAOS_IL2CPP_UINT64_C(1845517801504066080), chaos_vtable_SnapshotTestFixtures_Wrapper_System_Int32_, 1u), 0);
+static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_Wrapper_System_Int32_[] =
+{
+	{ 0x00000007u, reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper_System_Int32__ctor) },
+};
 
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -1038,6 +1041,22 @@ static void* const kMethodPointers[2] = {
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
+// ── VTable descriptors (for BootstrapRuntime TypeVTable registration) ──
+static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
+	{
+		CHAOS_IL2CPP_UINT64_C(0x199C98A9994F4A20),
+		0x00000004u,
+		0u,
+		1u,
+		reinterpret_cast<const void*>(kSlots_SnapshotTestFixtures_Wrapper_System_Int32_),
+		reinterpret_cast<const void**>(chaos_vtable_SnapshotTestFixtures_Wrapper_System_Int32_),
+		1u,
+		1,
+		{0, 0, 0},
+		nullptr,
+		0u,
+	},
+};
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
@@ -1051,6 +1070,8 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.unresolved_virtual_call_count = 0u,
 	.type_capabilities       = nullptr,
 	.type_capability_count   = 0u,
+	.vtable_descriptors = kChaosVTableDescriptors,
+	.vtable_descriptor_count = 1u,
 };
 
 // MetadataRegistrationV0

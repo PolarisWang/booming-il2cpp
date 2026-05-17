@@ -6,6 +6,7 @@
 #include "gc_events.h"
 #include "gc_layout.h"
 #include "gc_old_gen.h"
+#include "gc_loh.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
 #include "gc_young_collector.h"
@@ -960,5 +961,9 @@ extern "C" void* chaos_gc_allocate_pinned(CHAOS_IL2CPP_SIZE size) noexcept {
         static_cast<unsigned long long>(size));
     return GcAllocatePinned(size);
 }
+
+// chaos_gc_get_total_memory, chaos_gc_add_memory_pressure, and
+// chaos_gc_remove_memory_pressure are now defined in gc_api.cpp
+// (declared in gc_api.h).
 
 }  // namespace chaos::il2cpp::runtime_core

@@ -94,6 +94,13 @@ void* ResolveVirtualMethodPointerByHandle(
     TypeInfoHandle               instance_type,
     CHAOS_IL2CPP_UINT32         declared_method_token);
 
+/// Register a codegen-emitted vtable descriptor during BootstrapRuntime.
+/// Populates both the TypeVTable index (by_type_token/by_stable_id) and
+/// the flat vtable array.  Called once per type during single-threaded
+/// bootstrap; no locking required.
+/// @param desc  Pointer to a VTableDescriptorV0 (defined in codegen_bridge.h).
+void RegisterCodegenVTable(const void* desc) noexcept;
+
 /// Returns the number of registered vtables (for diagnostics).
 CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount();
 

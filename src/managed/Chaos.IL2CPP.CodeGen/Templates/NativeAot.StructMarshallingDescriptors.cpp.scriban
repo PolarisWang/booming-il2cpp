@@ -9,6 +9,14 @@ static constexpr StructFieldDescriptorV1 {{ desc.field_array_symbol }}[] =
 {{~ end ~}}
 };
 
+// Field name table for Marshal.OffsetOf — same order as field descriptors above
+static constexpr const char* {{ desc.field_names_symbol }}[] =
+{
+{{~ for field in desc.fields ~}}
+    "{{ field.field_name }}"{{~ if !for.last ~}},{{~ end ~}}
+{{~ end ~}}
+};
+
 constinit StructMarshallingDescriptorV1 {{ desc.symbol }} =
 {
     {{ desc.total_size }},
@@ -18,5 +26,9 @@ constinit StructMarshallingDescriptorV1 {{ desc.symbol }} =
 
 static const int s_ms_reg_{{ desc.safe_name }} = (::chaos::il2cpp::runtime_core::RegisterStaticMarshallingDescriptor(
     CHAOS_IL2CPP_UINT64_C({{ desc.stable_id }}), &{{ desc.symbol }}), 0);
+
+// Register parallel field-names array for Marshal.OffsetOf non-generic.
+static const int s_ms_rfn_{{ desc.safe_name }} = (::chaos::il2cpp::runtime_core::RegisterStaticMarshallingFieldNames(
+    CHAOS_IL2CPP_UINT64_C({{ desc.stable_id }}), {{ desc.field_names_symbol }}), 0);
 
 {{~ end ~}}

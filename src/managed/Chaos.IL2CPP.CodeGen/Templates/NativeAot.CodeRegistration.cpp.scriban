@@ -7,7 +7,7 @@ static void* const kMethodPointers[{{ methods_count }}] = {
 };
 
 {{~ if reverse_pinvoke_count > 0 ~}}
-static constexpr void* const kReversePInvokeWrappers[{{ reverse_pinvoke_count }}] = {
+static void* const kReversePInvokeWrappers[{{ reverse_pinvoke_count }}] = {
 {{~ for entry in reverse_pinvoke_entries ~}}
     reinterpret_cast<void*>(&{{ entry.native_symbol }}),
 {{~ end ~}}
@@ -15,6 +15,26 @@ static constexpr void* const kReversePInvokeWrappers[{{ reverse_pinvoke_count }}
 
 {{~ end ~}}
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
+{{~ if vtable_descriptor_count > 0 ~}}
+// ── VTable descriptors (for BootstrapRuntime TypeVTable registration) ──
+static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
+{{~ for desc in vtable_descriptors ~}}
+    {
+        {{ desc.stable_id }},
+        {{ desc.type_token_literal }},
+        {{ desc.base_token_literal }},
+        {{ desc.slot_count }}u,
+        reinterpret_cast<const void*>({{ desc.slots_symbol }}),
+        reinterpret_cast<const void**>({{ desc.vtable_array_symbol }}),
+        {{ desc.vtable_length }}u,
+        {{ desc.type_shape }},
+        {0, 0, 0},
+        {{ desc.iface_map_symbol }},
+        {{ desc.iface_count }}u,
+    },
+{{~ end ~}}
+};
+{{~ end ~}}
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
     = {
     .struct_size               = sizeof(CodeRegistrationV0),
@@ -33,6 +53,8 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
     .unresolved_virtual_call_count = 0u,
     .type_capabilities       = nullptr,
     .type_capability_count   = 0u,
+    .vtable_descriptors = {{ if vtable_descriptor_count > 0 }}kChaosVTableDescriptors{{ else }}nullptr{{ end }},
+    .vtable_descriptor_count = {{ if vtable_descriptor_count > 0 }}{{ vtable_descriptor_count }}{{ else }}0{{ end }}u,
 };
 
 // MetadataRegistrationV0

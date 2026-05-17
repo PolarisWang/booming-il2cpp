@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "MathNumericsSubjects",
   "entrySubjectId": "MathNumericsSubjects/MathNumericsSubjects::Run:System.Void(System.Int32)",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/math-numerics/managed/subjects/build-output/MathNumericsSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/math-numerics/managed/subjects/build-output/MathNumericsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "MathNumericsSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/math-numerics/managed/subjects/build-output/MathNumericsSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/math-numerics/managed/subjects/build-output/MathNumericsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "b745eb47-4e42-47a2-b259-84e66d1ef63b",
+  "inputModuleVersionId": "98b2e6d7-701e-4621-ae47-6c99e5d1bee6",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -11,12 +11,12 @@
   "generatedCppTotalBytes": 113132,
   "largestGeneratedCppBytes": 71962,
   "generatedSymbolCount": 18,
-  "peakWorkingSetBytes": 507109376,
+  "peakWorkingSetBytes": 506998784,
   "structuredMethodCount": 13,
   "structuredExceptionBodyCount": 0,
   "flatFallbackCount": 0,
   "totalMethodCount": 13,
   "structuredRecoveryRate": 1,
   "aotReachableMethodCount": 16,
-  "aotUnreachableMethodCount": -3
+  "aotUnreachableMethodCount": 0
 }

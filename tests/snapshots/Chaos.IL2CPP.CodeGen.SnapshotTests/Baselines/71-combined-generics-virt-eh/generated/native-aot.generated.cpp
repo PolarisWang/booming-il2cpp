@@ -1051,6 +1051,8 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.unresolved_virtual_call_count = 0u,
 	.type_capabilities       = nullptr,
 	.type_capability_count   = 0u,
+	.vtable_descriptors = nullptr,
+	.vtable_descriptor_count = 0u,
 };
 
 // MetadataRegistrationV0

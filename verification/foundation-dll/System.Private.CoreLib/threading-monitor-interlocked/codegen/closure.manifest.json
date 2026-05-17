@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ThreadingMonitorInterlockedSubjects",
   "entrySubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Run:System.Void(System.Int32)",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/managed/subjects/build-output/ThreadingMonitorInterlockedSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/managed/subjects/build-output/ThreadingMonitorInterlockedSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -16,11 +16,11 @@
     },
     {
       "assemblyName": "ThreadingMonitorInterlockedSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/managed/subjects/build-output/ThreadingMonitorInterlockedSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/managed/subjects/build-output/ThreadingMonitorInterlockedSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "c828bab1-8ff0-4298-9496-13b3047c6cba",
+  "inputModuleVersionId": "614fba58-6f66-4a1d-96e3-be2d24ed9a44",
   "artifacts": [
     {
       "kind": "typedIlIr",

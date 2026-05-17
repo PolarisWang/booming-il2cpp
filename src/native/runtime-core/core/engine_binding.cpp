@@ -1,5 +1,8 @@
 namespace chaos::il2cpp::runtime_core {
-namespace {
+// NOTE: no anonymous namespace — functions declared in engine_binding.h have
+// external linkage. MSVC 14.44 cannot see anonymous-namespace variables from
+// engine_lifecycle.cpp across anonymous namespace boundaries within the same
+// TU, so all code here is at direct runtime_core namespace scope.
 
 CHAOS_IL2CPP_INT32 EngineLogWrite(
     const char* category_utf8,
@@ -45,21 +48,29 @@ bool RegisterEngineLifecycleCallback(
 bool DispatchEngineLifecycleCallbacks(const char* phase_utf8) {
     if (phase_utf8 == nullptr) return false;
 
-    CHAOS_IL2CPP_VECTOR(EngineLifecycleRegistration) callbacks = {};
+    // Fixed-size callback buffer avoids std::vector template issues with
+    // MSVC 14.44 when referencing types from a sibling anonymous namespace.
+    static constexpr size_t kMaxCallbacks = 64;
+    EngineLifecycleCallback cb_buffer[kMaxCallbacks];
+    const void* ud_buffer[kMaxCallbacks];
+    size_t count = 0;
+
     {
         CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_engine_binding_mutex);
         for (const auto& registration : g_engine_lifecycle_registrations) {
-            if (registration.phase == phase_utf8) {
-                callbacks.push_back(registration);
+            if (registration.phase == phase_utf8 && count < kMaxCallbacks) {
+                cb_buffer[count] = registration.callback;
+                ud_buffer[count] = registration.user_data;
+                count++;
             }
         }
     }
 
-    for (const auto& registration : callbacks) {
-        registration.callback(phase_utf8, registration.user_data);
+    for (size_t i = 0; i < count; i++) {
+        cb_buffer[i](phase_utf8, const_cast<void*>(ud_buffer[i]));
     }
 
-    return !callbacks.empty();
+    return count > 0;
 }
 
 bool IsMainThreadLane() {
@@ -85,5 +96,4 @@ bool ThreadStaticInt32Add(
     return true;
 }
 
-}  // anonymous namespace
 }  // namespace chaos::il2cpp::runtime_core

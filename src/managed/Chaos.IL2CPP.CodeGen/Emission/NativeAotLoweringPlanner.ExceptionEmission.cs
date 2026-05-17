@@ -1835,6 +1835,7 @@ public sealed partial class NativeAotLoweringPlanner
 				if (instruction.ComVtableSlot == null)
 					throw new NotSupportedException("native-aot structured EH ComVtable dispatch requires ComVtableSlot.");
 				int comSlot = instruction.ComVtableSlot.Value;
+				bool isPreserveSig = instruction.IsPreserveSig;
 
 				// Resolve method metadata for ABI info.
 				var comParams = ResolveComMethodParameterAbis(instruction);
@@ -1854,25 +1855,58 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"{indentation}    {{");
 					builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL();");
 					builder.AppendLine($"{indentation}    }}");
-					// Read COM vtable from object pointer.
-					builder.AppendLine($"{indentation}    auto* chaos_com_obj = reinterpret_cast<void*>(chaos_arg_0);");
+					// RCW-aware COM object pointer extraction.
+					// If chaos_arg_0 is an RCW handle, extract the identity_unknown.
+					// Otherwise treat it as a raw COM object pointer.
+					builder.AppendLine($"{indentation}    void* chaos_com_obj = nullptr;");
+					builder.AppendLine($"{indentation}    if (::chaos::il2cpp::runtime_core::MarshalIsRcwHandle(chaos_arg_0))");
+					builder.AppendLine($"{indentation}    {{");
+					builder.AppendLine($"{indentation}        auto chaos_rcw_ptr = ::chaos::il2cpp::runtime_core::MarshalGetRcwUnknown(chaos_arg_0);");
+					builder.AppendLine($"{indentation}        chaos_com_obj = reinterpret_cast<void*>(chaos_rcw_ptr);");
+					builder.AppendLine($"{indentation}    }}");
+					builder.AppendLine($"{indentation}    else");
+					builder.AppendLine($"{indentation}    {{");
+					builder.AppendLine($"{indentation}        chaos_com_obj = reinterpret_cast<void*>(chaos_arg_0);");
+					builder.AppendLine($"{indentation}    }}");
 					builder.AppendLine($"{indentation}    auto** chaos_vtable = *reinterpret_cast<void***>(chaos_com_obj);");
 				}
 				// Build function pointer type from ABI.
 				string comSig = FormatAbiSlotParameterSignature(comParams);
+				// Non-PreserveSig: the COM method always returns HRESULT (int32_t).
+				string comFnRetType = isPreserveSig ? comRetType : "CHAOS_IL2CPP_INT32";
 				string comFnType = string.IsNullOrEmpty(comSig)
-					? $"{comRetType}(*)()"
-					: $"{comRetType}(*)({comSig})";
+					? $"{comFnRetType}(*)()"
+					: $"{comFnRetType}(*)({comSig})";
 				string comArgs = FormatAbiInvocationArgumentList(comParams);
 				builder.AppendLine($"{indentation}    auto chaos_com_fn = reinterpret_cast<{comFnType}>(chaos_vtable[{comSlot}]);");
-				if (string.Equals(comRetType, "void", StringComparison.Ordinal))
+
+				if (isPreserveSig)
 				{
-					builder.AppendLine($"{indentation}    chaos_com_fn({comArgs});");
+					// PreserveSig=true: return the raw HRESULT as the declared return type.
+					if (string.Equals(comRetType, "void", StringComparison.Ordinal))
+					{
+						builder.AppendLine($"{indentation}    chaos_com_fn({comArgs});");
+					}
+					else
+					{
+						builder.AppendLine($"{indentation}    auto chaos_com_result = chaos_com_fn({comArgs});");
+						EmitAbiReturnPush(builder, comRetAbi, "chaos_com_result", $"{indentation}    ");
+					}
 				}
 				else
 				{
-					builder.AppendLine($"{indentation}    auto chaos_com_result = chaos_com_fn({comArgs});");
-					EmitAbiReturnPush(builder, comRetAbi, "chaos_com_result", $"{indentation}    ");
+					// PreserveSig=false (COM default): capture HRESULT, check, throw on failure.
+					builder.AppendLine($"{indentation}    auto chaos_hr = chaos_com_fn({comArgs});");
+					builder.AppendLine($"{indentation}    if (CHAOS_IL2CPP_FAILED(chaos_hr))");
+					builder.AppendLine($"{indentation}    {{");
+					builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::ChaosThrowComExceptionForHR(chaos_hr);");
+					builder.AppendLine($"{indentation}    }}");
+					if (!string.Equals(comRetType, "void", StringComparison.Ordinal))
+					{
+						// V1: push the raw HRESULT as the return value.
+						// Full .NET semantics extract the [out] retval parameter.
+						EmitAbiReturnPush(builder, comRetAbi, "chaos_hr", $"{indentation}    ");
+					}
 				}
 				builder.AppendLine($"{indentation}}}");
 				return;

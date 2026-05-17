@@ -7,6 +7,11 @@ namespace {
 static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(CHAOS_IL2CPP_UINT64, const StructMarshallingDescriptorV1*)
     g_static_descriptors;
 
+// Parallel registry for codegen-emitted field-name arrays.
+// Keyed by stable_id, same set as g_static_descriptors.
+static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(CHAOS_IL2CPP_UINT64, const char* const*)
+    g_static_field_names;
+
 // Runtime-constructed descriptors (reflection fallback), protected by mutex.
 static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, std::unique_ptr<StructMarshallingDescriptorV1>)
     g_runtime_descriptor_cache;
@@ -43,6 +48,19 @@ ResolveStructMarshallingDescriptor(const TypeInfoHot* type) noexcept {
     }
 
     return nullptr;
+}
+
+void RegisterStaticMarshallingFieldNames(
+    CHAOS_IL2CPP_UINT64 stable_id,
+    const char* const* field_names) noexcept {
+    if (field_names == nullptr || stable_id == 0) return;
+    g_static_field_names.try_emplace(stable_id, field_names);
+}
+
+const char* const* ResolveStaticMarshallingFieldNames(
+    CHAOS_IL2CPP_UINT64 stable_id) noexcept {
+    auto it = g_static_field_names.find(stable_id);
+    return it != g_static_field_names.end() ? it->second : nullptr;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

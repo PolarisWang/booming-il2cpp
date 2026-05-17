@@ -1792,12 +1792,12 @@ def _rename_and_fix_patch_file(src: Path, dst: Path, ns_slug: str, suffix: str =
 
     # Format-agnostic fixes (apply to both old and new formats)
 
-    # Fix `ThinLockableHeader header{}``/`FatHeader header{}` missing trailing semicolon.
+    # Fix `ThinLockableHeader header{}` missing trailing semicolon.
     # The codegen emits them with semicolons, but some injection steps or source
     # copies may strip them. MSVC rejects `header{}` without `;` in struct body.
     content = re.sub(
-        r'(FatHeader|ThinLockableHeader)\s+header\{\}(?!\s*;)',
-        r'\1 header{};',
+        r'ThinLockableHeader\s+header\{\}(?!\s*;)',
+        r'ThinLockableHeader header{};',
         content,
     )
 

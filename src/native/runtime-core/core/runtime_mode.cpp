@@ -28,7 +28,7 @@ void* BoxValueObject(
     }
 
     const CHAOS_IL2CPP_SIZE allocation_size = sizeof(BoxedValueHeader) + value_size;
-    unsigned char* storage = static_cast<unsigned char*>(AllocateBytesAtomic(allocation_size));
+    unsigned char* storage = static_cast<unsigned char*>(GcAllocateAtomic(allocation_size));
     if (storage == nullptr) return nullptr;
 
     auto* header = reinterpret_cast<BoxedValueHeader*>(storage);

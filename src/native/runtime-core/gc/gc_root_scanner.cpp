@@ -1,39 +1,38 @@
 #include "gc_root_scanner.h"
 
 #include <chaos/log.h>
+#include <chaos/unordered_dense.h>
+
+#include "gc_card_table.h"
 
 #include <cstdint>
 #include <cstring>
 #include <mutex>
-#include <unordered_map>
 
 namespace chaos::il2cpp::runtime_core {
 
 // ======================================================================
 // GcSlotMap registry — maps code address → GcSlotMapV0
 //
-// Uses a simple sorted-array approach (populated at module registration).
-// Lookup is binary search.  For the M0/C1 effort this is adequate; a
-// fancier trie or paging structure can be added later if the registry
-// grows beyond ~100k entries.
+// Uses unordered_dense_map (swisstable) for O(1) insertion and lookup,
+// replacing the previous sorted-array approach that had O(n) insertion
+// via linear scan + memmove (O(n²) total at startup for large registries).
+//
+// Key is the method start address (pointer → identity hash, no wyhash).
 // ======================================================================
 
 namespace {
 
-struct SlotMapEntry {
-    const void*     code_start;   // Method start address (PC range begin)
-    const GcSlotMapV0* slot_map;  // Associated GcSlotMap
-};
+// Key: method code address.  Value: GcSlotMapV0 pointer.
+// Identity hash (no wyhash) since the key is already a uniformly
+// distributed pointer value from module layout.
+using SlotMap = CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(
+    const void*, const GcSlotMapV0*);
 
 // Lock for thread-safe registration during module load.
-// Lookup is read-only after startup and does not need the lock.
 std::mutex s_registry_mutex;
 
-// Flat array of registered mappings.  Sorted by code_start for binary search.
-// Grows only during module registration (not on the GC path).
-SlotMapEntry* s_entries = nullptr;
-uint32_t      s_entry_count = 0;
-uint32_t      s_entry_capacity = 0;
+SlotMap s_slot_map;
 
 }  // anonymous namespace
 
@@ -41,60 +40,16 @@ void GcRegisterSlotMap(const void* code_address, const GcSlotMapV0* slot_map) {
     if (code_address == nullptr || slot_map == nullptr) return;
 
     std::lock_guard<std::mutex> lock(s_registry_mutex);
-
-    // Grow the array if needed.
-    if (s_entry_count >= s_entry_capacity) {
-        uint32_t new_cap = s_entry_capacity == 0 ? 256 : s_entry_capacity * 2;
-        auto* new_entries = static_cast<SlotMapEntry*>(
-            std::realloc(s_entries, new_cap * sizeof(SlotMapEntry)));
-        if (new_entries == nullptr) {
-            CHAOS_IL2CPP_LOG_ERROR("CRAG", "OOM growing SlotMap registry");
-            return;
-        }
-        s_entries = new_entries;
-        s_entry_capacity = new_cap;
-    }
-
-    // Insert sorted by code_address.
-    // This is O(n) per insert; total O(n^2) at startup.  Acceptable for
-    // tens of thousands of methods (<< 1s).  Can switch to batch-sort later.
-    uint32_t pos = 0;
-    while (pos < s_entry_count && s_entries[pos].code_start < code_address) {
-        pos++;
-    }
-
-    // Shift existing entries right.
-    if (pos < s_entry_count) {
-        std::memmove(&s_entries[pos + 1], &s_entries[pos],
-                     (s_entry_count - pos) * sizeof(SlotMapEntry));
-    }
-
-    s_entries[pos] = { code_address, slot_map };
-    s_entry_count++;
+    s_slot_map[code_address] = slot_map;
 }
 
 const GcSlotMapV0* GcLookupSlotMap(const void* code_address) {
-    if (code_address == nullptr || s_entry_count == 0) return nullptr;
+    if (code_address == nullptr) return nullptr;
 
-    // Binary search for the matching entry.
-    int lo = 0;
-    int hi = static_cast<int>(s_entry_count) - 1;
-
-    while (lo <= hi) {
-        int mid = lo + (hi - lo) / 2;
-        const void* addr = s_entries[mid].code_start;
-
-        if (addr == code_address) {
-            return s_entries[mid].slot_map;
-        }
-        if (addr < code_address) {
-            lo = mid + 1;
-        } else {
-            hi = mid - 1;
-        }
-    }
-
-    return nullptr;
+    // Lock-free read: the map is only mutated during module registration
+    // (before GC starts), not during concurrent GC cycles.
+    auto it = s_slot_map.find(code_address);
+    return (it != s_slot_map.end()) ? it->second : nullptr;
 }
 
 void GcRegisterSlotMapsFromSection(const GcSlotMapV0* begin, const GcSlotMapV0* end) {
@@ -148,11 +103,13 @@ void GcScanConservativeFrame(
         auto* slot = reinterpret_cast<void**>(frame_base + i * sizeof(void*));
         void* candidate = *slot;
 
-        // Only report non-null, reasonably aligned candidates.
-        // BDWGC's own conservative scanner applies more sophisticated
-        // heuristics; this is a minimal filter.
+        // Only report candidates that are non-null, pointer-aligned, and
+        // within the managed heap range.  Values below g_heap_base are
+        // definitely not managed object pointers (e.g., small integers,
+        // string literals, code addresses, OS handles).
         uintptr_t val = reinterpret_cast<uintptr_t>(candidate);
-        if (val != 0 && (val & (sizeof(void*) - 1)) == 0) {
+        if (val != 0 && (val & (sizeof(void*) - 1)) == 0 &&
+            val >= g_heap_base) {
             callback(candidate, user_data);
         }
     }

@@ -8,6 +8,8 @@
 #include <cstdint>
 #include <cstring>
 #include <mutex>
+#include <utility>
+#include <vector>
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -36,7 +38,11 @@ struct LohSegment {
     std::atomic<bool> marked;                ///< true = object in this segment is marked live
 };
 
-/// Large Object Heap — mark-sweep without compaction.
+/// Large Object Heap — mark-sweep with optional compaction.
+///
+/// Compaction mode controls when LOH objects are relocated to reduce
+/// fragmentation.  Default is NONE (no compaction) since large objects
+/// are expensive to move (≥85 KB memcpy per object).
 class LargeObjectHeap {
 public:
     LargeObjectHeap() = default;
@@ -78,6 +84,27 @@ public:
         return total_allocated_.load(std::memory_order_relaxed);
     }
 
+    /// LOH compaction mode (default: NONE — no compaction).
+    enum class CompactMode : uint8_t {
+        NONE = 0,       ///< No compaction (default, safe).
+        ON_REQUEST = 1, ///< Compact only when explicitly requested.
+        AUTOMATIC = 2,  ///< Compact when fragmentation exceeds threshold.
+    };
+
+    /// Set the compaction mode.
+    void SetCompactMode(CompactMode mode) { compact_mode_ = mode; }
+
+    /// Get the current compaction mode.
+    CompactMode GetCompactMode() const { return compact_mode_; }
+
+    /// Compact the LOH: relocate live objects from fragmented segments
+    /// to reduce free-segment interleaving.  Returns total bytes relocated,
+    /// or 0 if no compaction was needed/performed.
+    /// Only effective when compact_mode_ != NONE.
+    /// Populates @a out_relocations with old→new address mappings so the
+    /// caller can fix up references (e.g., via GlobalRelocate-style walk).
+    CHAOS_IL2CPP_SIZE Compact(std::vector<std::pair<void*, void*>>& out_relocations);
+
 private:
     /// Allocate a new segment from the OS.
     LohSegment* AllocateSegment(CHAOS_IL2CPP_SIZE min_size);
@@ -92,6 +119,7 @@ private:
     LohSegment* free_segment_list_ = nullptr; ///< Free segments for reuse
     int segment_count_ = 0;
     std::atomic<CHAOS_IL2CPP_SIZE> total_allocated_{0};
+    CompactMode compact_mode_{CompactMode::NONE}; ///< Default: no compaction
     mutable std::mutex mutex_;
 };
 

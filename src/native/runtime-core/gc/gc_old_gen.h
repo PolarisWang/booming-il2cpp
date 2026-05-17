@@ -313,6 +313,14 @@ private:
         CHAOS_IL2CPP_SIZE saved_bytes{0};
     };
 
+    /// Compact fragmented pages in parallel using GcWorkerPool.
+    /// Three-phase approach:
+    ///   Phase 1 (parallel): Plan page compaction for each fragmented page.
+    ///   Phase 2 (parallel): Compact each planned page (memmove + free list rebuild).
+    ///   Phase 3 (parallel): Walk all pages' slots and relocate pointers.
+    /// Must be called at safepoint (no concurrent mutators).
+    CHAOS_IL2CPP_SIZE ParallelCompactPages();
+
     /// Plan compaction for a single page: compute new addresses.
     /// Fills @a out_plan with entries mapping old_addr → new_addr for each
     /// marked object.  @return Number of bytes that would be saved.
@@ -332,7 +340,10 @@ private:
     // ── Cross-page compaction (Phase 4b) ──────────────────────────
 
     static constexpr float kCrossPageFragThreshold = 0.40f;     // min frag to evacuate
-    static constexpr CHAOS_IL2CPP_SIZE kMaxCrossPageCompactBytes = 128 * 1024;  // per cycle
+    /// Floor for dynamic evacuation budget: minimum 512 KB per cycle.
+    /// Actual budget = max(512KB, min(total_heap * 10%, 4MB)).
+    /// Scaled with heap size so large heaps compact more per cycle.
+    static constexpr CHAOS_IL2CPP_SIZE kMaxCrossPageCompactBytes = 512 * 1024;
 
     /// Run cross-page compaction: evacuate fragmented pages by moving
     /// live objects to free space on other pages, then freeing source pages.

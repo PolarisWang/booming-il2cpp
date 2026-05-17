@@ -48,7 +48,8 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitObjectModelDeclarations(
 		StringBuilder builder,
 		IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
-		IReadOnlyList<ExternalRuntimeHelperDefinition> externalRuntimeHelpers)
+		IReadOnlyList<ExternalRuntimeHelperDefinition> externalRuntimeHelpers,
+		MetadataRegistrationArtifact metadataRegistration)
 	{
 		HashSet<string> referenceTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
 		Dictionary<string, string?> referenceTypeBaseSubjectIds = new Dictionary<string, string?>(StringComparer.Ordinal);
@@ -687,20 +688,111 @@ public sealed partial class NativeAotLoweringPlanner
 					}
 				}
 				builder.AppendLine("};");
-				ulong stableId = ComputeStableTypeId(typeId);
-				builder.Append("static const int s_vtreg_");
-				builder.Append(GetNativeSymbol("", typeId));
-				builder.Append(" = (::chaos::il2cpp::runtime_vtable::RegisterVTable(CHAOS_IL2CPP_UINT64_C(");
-				builder.Append(stableId.ToString());
-				builder.Append("), ");
-				builder.Append(GetNativeVTableSymbol(typeId));
-				builder.Append(", ");
-				builder.Append(vtLen.ToString());
-				builder.AppendLine("u), 0);");
-				builder.AppendLine();
+
 			}
 		}
-		builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept");
+					// ---- VTableSlot arrays (for BootstrapRuntime TypeVTable registration) ----
+			var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);
+			var vtableDescriptors = new List<VTableDescriptorData>();
+			foreach (string typeId in sortedReferenceTypes)
+			{
+				if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
+				var entries = new AotCoreIrMethodArtifact?[vtLen];
+				string? current = typeId;
+				while (current != null && referenceTypeSubjectIds.Contains(current))
+				{
+					if (methodsByDeclaringTypeVT.TryGetValue(current, out var typeMethods))
+					{
+						foreach (var method in typeMethods)
+						{
+							if (method.IsStatic || !CanEmitMethodBody(method)) continue;
+							var sig = GetMethodSignatureSuffix(method.SubjectId);
+							if (_vtableSlotMap.TryGetValue(sig, out int slot) && slot < vtLen && entries[slot] == null)
+							{
+								entries[slot] = method;
+							}
+						}
+					}
+					referenceTypeBaseSubjectIds.TryGetValue(current, out string? nextCurrent);
+					current = nextCurrent;
+				}
+				// Build VTableSlot entries
+				var slotEntries = new List<VTableSlotEntry>();
+				for (int i = 0; i < vtLen; i++)
+				{
+					var entry = entries[i];
+					if (entry != null)
+					{
+						uint methodToken = tokenLookup.TryGetMethodToken(entry.SubjectId);
+						if (methodToken == 0 && entry.Identity != null)
+						{
+							var fakeToken = (uint)(0x06000000u | (uint)(entry.SubjectId.GetHashCode() & 0x00FFFFFF));
+							methodToken = fakeToken;
+						}
+						string nativeSym = TryGetInstantiationStubSymbol(entry) ?? entry.NativeSymbol;
+						slotEntries.Add(new VTableSlotEntry(methodToken, nativeSym));
+					}
+					else
+					{
+						slotEntries.Add(new VTableSlotEntry(0, string.Empty));
+					}
+				}
+				// Emit const VTableSlot[] array
+				string slotsSym = GetNativeSymbol("kSlots_", typeId);
+				builder.Append("static const ::chaos::il2cpp::vtable_registry::VTableSlot ");
+				builder.Append(slotsSym);
+				builder.AppendLine("[] =");
+				builder.AppendLine("{");
+				foreach (var se in slotEntries)
+				{
+					if (se.MethodToken != 0)
+					{
+						builder.Append("    { 0x");
+						builder.Append(se.MethodToken.ToString("X8"));
+						builder.Append("u, reinterpret_cast<void*>(&");
+						builder.Append(se.NativeSymbol);
+						builder.AppendLine(") },");
+					}
+					else
+					{
+						builder.AppendLine("    { 0u, nullptr },");
+					}
+				}
+				builder.AppendLine("};");
+				builder.AppendLine();
+				// Build VTableDescriptorData for later emission
+				ulong stableId = ComputeStableTypeId(typeId);
+				uint typeToken = tokenLookup.TryGetTypeToken(typeId);
+				string typeTokenLit = typeToken != 0
+					? string.Format("0x{0:X8}u", typeToken)
+					: string.Format("0x{0:X8}u", 0x02000000u | ((uint)typeId.GetHashCode() & 0x00FFFFFFu));
+				string baseTokenLit = "0u";
+				if (referenceTypeBaseSubjectIds.TryGetValue(typeId, out string? baseId) && baseId != null)
+				{
+					uint baseToken = tokenLookup.TryGetTypeToken(baseId);
+					baseTokenLit = baseToken != 0
+						? string.Format("0x{0:X8}u", baseToken)
+						: "0u";
+				}
+				string ifaceMapSym = null;
+				int ifaceCount = 0;
+				if (referenceTypeImplementedInterfaceSubjectIds.TryGetValue(typeId, out var ifaces) && ifaces.Count > 0)
+				{
+					ifaceMapSym = GetNativeSymbol("", typeId) + "_ifaces";
+					ifaceCount = ifaces.Count;
+				}
+				byte typeShape = (byte)(interfaceTypeSubjectIds.Contains(typeId) ? 3 : 1);
+				vtableDescriptors.Add(new VTableDescriptorData(
+					stableId, typeTokenLit, baseTokenLit,
+					slotEntries.ToArray(),
+					GetNativeVTableSymbol(typeId),
+					vtLen, typeShape,
+					ifaceMapSym, ifaceCount,
+					SanitizeSubjectId(typeId)));
+			}
+			_vtableDescriptors = vtableDescriptors;
+			
+builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept");
 		builder.AppendLine("{");
 		builder.AppendLine("    if (chaos_array == nullptr)");
 		builder.AppendLine("    {");
@@ -1171,6 +1263,7 @@ public sealed partial class NativeAotLoweringPlanner
 						["array_count"] = f.ArrayCount,
 						["element_type_value"] = GetNativeElementTypeValue(f.ElementType),
 						["nested_ptr_expr"] = nestedPtrExpr,
+						["field_name"] = f.Name ?? "",
 					};
 				}).ToArray();
 
@@ -1180,6 +1273,7 @@ public sealed partial class NativeAotLoweringPlanner
 					["safe_name"] = safeName,
 					["symbol"] = descSymbol,
 					["field_array_symbol"] = fieldArraySymbol,
+					["field_names_symbol"] = GetNativeStructFieldNamesSymbol(desc.TypeSubjectId),
 					["total_size"] = desc.TotalSize,
 					["field_count"] = desc.Fields.Count,
 					["stable_id"] = stableId.ToString(),

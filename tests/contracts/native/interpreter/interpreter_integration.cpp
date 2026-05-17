@@ -10,6 +10,7 @@
 #include "vtable_registry.h"
 #include "token_resolver.h"
 
+#include <chaos/common.h>
 #include <chaos/type_info.h>
 
 #include <iostream>

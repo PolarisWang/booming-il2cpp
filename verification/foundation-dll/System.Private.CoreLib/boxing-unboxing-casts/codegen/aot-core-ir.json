@@ -464,6 +464,7 @@
       "isUnmanagedCallersOnly": false,
       "importCallingConvention": 0,
       "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -814,6 +815,7 @@
       "isUnmanagedCallersOnly": false,
       "importCallingConvention": 0,
       "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -1176,6 +1178,7 @@
       "isUnmanagedCallersOnly": false,
       "importCallingConvention": 0,
       "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -1566,6 +1569,7 @@
       "isUnmanagedCallersOnly": false,
       "importCallingConvention": 0,
       "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -1926,6 +1930,7 @@
       "isUnmanagedCallersOnly": false,
       "importCallingConvention": 0,
       "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -2316,6 +2321,7 @@
       "isUnmanagedCallersOnly": false,
       "importCallingConvention": 0,
       "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -2706,6 +2712,7 @@
       "isUnmanagedCallersOnly": false,
       "importCallingConvention": 0,
       "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -2743,6 +2750,7 @@
       "isUnmanagedCallersOnly": false,
       "importCallingConvention": 0,
       "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -3003,6 +3011,7 @@
       "isUnmanagedCallersOnly": false,
       "importCallingConvention": 0,
       "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -3307,6 +3316,7 @@
       "isUnmanagedCallersOnly": false,
       "importCallingConvention": 0,
       "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -3625,6 +3635,7 @@
       "isUnmanagedCallersOnly": false,
       "importCallingConvention": 0,
       "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     },
     {
@@ -3955,6 +3966,7 @@
       "isUnmanagedCallersOnly": false,
       "importCallingConvention": 0,
       "importCharSet": 0,
+      "importSetLastError": false,
       "hasBlittableStructReturn": false
     }
   ]
