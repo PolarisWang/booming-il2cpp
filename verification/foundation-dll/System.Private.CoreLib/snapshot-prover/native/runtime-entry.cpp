@@ -1,4 +1,4 @@
-// Auto-generated runtime entry point for chaos-il2cpp AOT output.
+// Auto-generated runtime entry point for chaos-il2cpp full-assembly AOT output.
 // Supports six modes:
 //   (no args)                        - Fact mode: run all methods, print Passed N/M
 //   N                                - Legacy single-entry mode (backward compat)

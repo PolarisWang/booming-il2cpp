@@ -1,7 +1,7 @@
 {
   "family": "delegate-core-invocation",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T00:49:46.623801",
+  "generated_at": "2026-05-19T01:09:25.695036",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",

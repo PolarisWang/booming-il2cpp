@@ -1438,6 +1438,14 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
             }
         }
         if (has_graph_coloring_) {
+            // Print final coloring after filter for diagnostics
+            std::printf("    [GC] %u GPR callee colors (%u instrs):", num_cache_regs_, n_instrs);
+            for (uint32_t dv = 0; dv < kGprCount; ++dv) {
+                if (gcr_.gpr_color[dv] != 0xFF)
+                    std::printf(" r%u→x%u", dv, gcr_.gpr_color[dv]);
+            }
+            std::printf(" | filtered_mask=0x%llx\n", (unsigned long long)filtered_vreg_mask_);
+
             // Filter: only callee-saved x64 registers survive.  Caller-saved
             // registers (R8-R11) get clobbered by runtime helper calls, so
             // clear their color assignment to force stack spill/reload.

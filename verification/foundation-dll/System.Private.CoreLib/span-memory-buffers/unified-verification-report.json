@@ -2,9 +2,9 @@
   "family": "span-memory-buffers",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T00:53:36",
-  "duration_ms": 14408,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T01:05:24",
+  "duration_ms": 17204,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -21,31 +21,28 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "entry.exe build failed",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "OK",
-          "convert_to_cpp": "OK",
-          "build_entry_exe": "FAILED"
-        }
+        "methodCount": 14,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\subjects\\build-output\\SpanMemoryBuffersSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 14292
+      "duration_ms": 16687
     },
     "fact": {
       "stage": "fact",
       "status": "passed",
-      "summary": "Fact verify=passed (15/15)",
+      "summary": "Fact verify=passed (14/14)",
       "details": {
         "fact": {
           "status": "passed",
-          "passed": 15,
-          "total": 15
+          "passed": 14,
+          "total": 14
         }
       },
       "errors": [],
-      "duration_ms": 25
+      "duration_ms": 391
     },
     "audit": {
       "stage": "audit",
@@ -59,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 89
+      "duration_ms": 124
     }
   },
   "coverage": {

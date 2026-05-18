@@ -1602,6 +1602,8 @@ static bool Test_Fuzz() {
     uint32_t mismatch_total_instrs = 0;
     uint32_t mismatch_runs_seen = 0;
 
+        bool has_init_debug_lines = false;
+        uint32_t first_t4_eligible_run = UINT32_MAX;
     for (uint32_t run = 0; run < kNumFuzzRuns; run++) {
         uint32_t len = 8 + (rng() % 24);  // 8-31 instructions
         uint8_t max_reg = 2 + (rng() % 6);  // 2-7 registers

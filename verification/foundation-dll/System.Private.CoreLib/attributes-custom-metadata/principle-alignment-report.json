@@ -1,7 +1,7 @@
 {
   "family": "attributes-custom-metadata",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T00:48:37.031409",
+  "generated_at": "2026-05-19T01:08:07.551457",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",

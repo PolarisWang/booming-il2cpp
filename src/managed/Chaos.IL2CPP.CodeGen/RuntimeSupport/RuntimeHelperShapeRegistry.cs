@@ -2568,7 +2568,14 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         // Comma operator: throw terminates execution, second operand
                         // provides the result type for the caller's eval stack.
-                        return "(throw chaos_managed_exception{{{0}}}, static_cast<CHAOS_IL2CPP_UINT16>(0))";
+                        // The raw argument value ({0}) is NOT a valid managed object pointer —
+                        // e.g., true → 1, DateTime → 64-bit ticks. Passing it as the exception
+                        // object causes the catch handler to crash when it tries to dereference
+                        // the "header" at that invalid address to check the exception type.
+                        // Use nullptr instead: the catch handler skips type checking when the
+                        // header is null, which is correct because this inline only applies to
+                        // methods that always throw InvalidCastException.
+                        return "(throw chaos_managed_exception{{reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)}}, static_cast<CHAOS_IL2CPP_UINT16>(0))";
                     }
                     return null;
                 }));

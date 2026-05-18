@@ -378,10 +378,15 @@ public sealed partial class NativeAotLoweringPlanner
         // In full-assembly mode (no entry point), all methods are AOT-reachable
         // since any method may be invoked via the RunNativeAot dispatch table
         // by the runtime harness (entry.exe loop over kAotMethodCount).
+        // Skip abstract/interface methods with 0 instructions — they have no
+        // IL body to translate and get unreachable stubs instead.
         if (fullAssemblyMode)
         {
             foreach (var m in methodsForLowering)
-                aotReachableSubjectIds.Add(m.SubjectId);
+            {
+                if (m.Instructions.Count > 0)
+                    aotReachableSubjectIds.Add(m.SubjectId);
+            }
         }
 
         // Methods of types that implement COM interfaces are referenced by vtable
@@ -1257,7 +1262,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         var returnAbi = method.ReturnAbi;
         var returnType = MapAbiSlotReturnType(returnAbi);
-        var paramAbis = method.ParameterAbis;
+        var paramAbis = GetMethodAbiParameterSlots(method);
         var paramList = FormatAbiSlotParameterSignature(paramAbis);
         var symbol = method.NativeSymbol;
 

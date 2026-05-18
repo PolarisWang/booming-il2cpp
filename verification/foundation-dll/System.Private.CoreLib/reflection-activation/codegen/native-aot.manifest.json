@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ReflectionActivationSubjects",
   "entrySubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-activation/codegen",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/reflection-activation/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

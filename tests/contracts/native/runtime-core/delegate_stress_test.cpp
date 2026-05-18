@@ -836,10 +836,15 @@ static void ScenarioE1() {
 // ════════════════════════════════════════════════════════════════════════════
 
 static void ScenarioE3() {
+    fprintf(stderr, "E3_ENTER\n"); fflush(stderr);
     TEST("E3: Vector pointer compaction survival");
+    fprintf(stderr, "E3_TEST_DONE\n"); fflush(stderr);
     RegisterWorker();
+    fprintf(stderr, "E3_REG_DONE\n"); fflush(stderr);
     threading::EnterCooperativeMode();
+    fprintf(stderr, "E3_COOP_DONE\n"); fflush(stderr);
     SetupTlsNursery();
+    fprintf(stderr, "E3_TLS_DONE\n"); fflush(stderr);
 
     int64_t failures = 0;
     int chain_n = std::min(1000, kChainSize / 10);

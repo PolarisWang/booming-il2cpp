@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\threading-monitor-interlocked\native\build\CMakeFiles\37ec149062e890ba8cd8cd2caaf710f0\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{9C00BEA5-D7A5-3605-9259-938F87A7525B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,7 +1,7 @@
 {
   "family": "boxing-unboxing-casts",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T00:48:54.147836",
+  "generated_at": "2026-05-19T01:08:35.466325",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
