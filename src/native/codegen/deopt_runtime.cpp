@@ -1,4 +1,5 @@
 #include "deopt_runtime.h"
+#include "codegen_helpers.h"  // for t_deopt_state
 #include "native_method.h"
 #include "../interpreter/ir_reg_alloc.h"
 #include "../interpreter/osr_state.h"
@@ -46,7 +47,8 @@ void DeoptRuntime::ReconstructRegisterFile(
     double*   fpr_file,
     const NativeContext& ctx,
     const DeoptEntry& entry,
-    const DeoptValue* values) noexcept {
+    const DeoptValue* values,
+    uint64_t  codegen_rsp) noexcept {
 
     if (gpr_file == nullptr || fpr_file == nullptr || values == nullptr) return;
 
@@ -54,28 +56,19 @@ void DeoptRuntime::ReconstructRegisterFile(
         const auto& v = values[i];
         if (v.reg_index < 64) {
             // GPR value
-            if (v.is_spilled) {
-                // All values are spilled to the stack frame in Phase 3c.
-                // The NativeContext captures only the 16 architectural GPRs,
-                // not the 64 virtual register stack slots.  For the initial
-                // implementation, we read from the saved context registers
-                // where possible, and leave others as zero (they will be
-                // reconstructed by RegisterExecute from the RegisterMethod).
-                if (v.reg_index < 16) {
-                    gpr_file[v.reg_index] = ctx.gpr[v.reg_index];
-                }
-                // Virtual registers >= 16 must be recovered from the stack
-                // frame.  Phase 3c+ will add a full stack snapshot.
-            } else {
-                // Value is in a register — read directly from context.
-                if (v.reg_index < 16) {
-                    gpr_file[v.reg_index] = ctx.gpr[v.reg_index];
-                }
+            if (v.is_spilled && v.spill_offset != 0) {
+                gpr_file[v.reg_index] =
+                    *reinterpret_cast<const uint64_t*>(codegen_rsp + v.spill_offset);
+            } else if (v.reg_index < 16) {
+                gpr_file[v.reg_index] = ctx.gpr[v.reg_index];
             }
         } else {
             // FPR value
             uint32_t fpr_idx = v.reg_index - 64;
-            if (fpr_idx < 16) {
+            if (v.is_spilled && v.spill_offset != 0) {
+                fpr_file[fpr_idx] =
+                    *reinterpret_cast<const double*>(codegen_rsp + v.spill_offset);
+            } else if (fpr_idx < 16) {
                 fpr_file[fpr_idx] = ctx.fpr[fpr_idx];
             }
         }
@@ -85,7 +78,8 @@ void DeoptRuntime::ReconstructRegisterFile(
 void DeoptRuntime::DeoptTrap(
     NativeMethod* nm,
     uint32_t      return_address,
-    NativeContext ctx) noexcept {
+    NativeContext ctx,
+    uint64_t      codegen_rsp) noexcept {
 
     CHAOS_IL2CPP_LOG_DEBUG_M("deopt", "DeoptTrap entered: nm=%p, ret_addr=0x%x",
                               static_cast<void*>(nm), return_address);
@@ -99,33 +93,21 @@ void DeoptRuntime::DeoptTrap(
         return;
     }
 
-    // 2. Reconstruct the register file from the saved context.
+    // 2. Reconstruct the register file from the saved context and stack frame.
     uint64_t gpr_file[64] = {};
     double   fpr_file[32] = {};
     ReconstructRegisterFile(gpr_file, fpr_file, ctx, *entry,
-                            nm->deopt_values);
+                            nm->deopt_values, codegen_rsp);
+
+    // 3. Publish reconstructed state to TLS for InterpreterEntryDirect.
+    t_deopt_state.instr_pc = entry->instr_pc;
+    std::memcpy(t_deopt_state.gpr_file, gpr_file, sizeof(gpr_file));
+    std::memcpy(t_deopt_state.fpr_file, fpr_file, sizeof(fpr_file));
+    t_deopt_state.deopt_happened = true;
 
     CHAOS_IL2CPP_LOG_DEBUG_M("deopt",
-        "DeoptTrap: reconstructed register file at pc=%d, %u values",
+        "DeoptTrap: deoptimized at pc=%d, %u values restored",
         entry->instr_pc, entry->num_values);
-
-    // 3. Phase 3c simplified deoptimization:
-    //    We do not perform full OsrState reconstruction here because that
-    //    requires RegStackMap data (from the RegisterMethod) and a target
-    //    frame format.  Instead, the native code caller (InterpreterEntryDirect)
-    //    detects that native execution failed and falls back to RegisterExecute
-    //    from the beginning (pc=0).
-    //
-    //    Future phases will implement OSR-based deoptimization:
-    //    a) Capture full virtual register file from the stack frame
-    //    b) Use RegStackMap to map register values to evaluation stack
-    //    c) Restore OsrState into RegisterFrame at the exact pc
-    //    d) Resume RegisterExecute from the deopt point
-    //
-    //    For now, DeoptTrap serves as a hook for debugging and logging.
-    CHAOS_IL2CPP_LOG_DEBUG_M("deopt",
-        "DeoptTrap: deoptimization at pc=%d complete, returning to interpreter",
-        entry->instr_pc);
 }
 
 }  // namespace chaos::il2cpp::codegen

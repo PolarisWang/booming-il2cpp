@@ -12,6 +12,7 @@
 
 #include <algorithm>
 #include <chrono>
+#include <cstdio>
 #include <thread>
 
 namespace chaos::il2cpp::runtime_core {
@@ -120,6 +121,16 @@ void BgcController::StartBgcCycle() {
     PopulateRootSet();
     threading::ReleaseGlobalSafepoint(bgc_gen);
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "root_set_populated");
+
+    // DIAG: check 0xFF bytes immediately after safepoint release.
+    {
+        uint64_t ff_post_sp = g_old_gen.DiagCountOxFFBytes();
+        if (ff_post_sp > 0) {
+            CHAOS_IL2CPP_LOG_ERROR("BGC",
+                "DIAG: 0xFF bytes = %llu immediately after safepoint release!",
+                static_cast<unsigned long long>(ff_post_sp));
+        }
+    }
 
     // Transition to concurrent mark phase.
     phase_.store(BgcPhase::CONCURRENT_MARK, std::memory_order_release);
@@ -262,6 +273,9 @@ void BgcController::ForceComplete() {
 // ── Root set population (under safepoint) ────────────────────────────
 
 void BgcController::PopulateRootSet() {
+    // DIAG: check 0xFF bytes before any Phase 1 work.
+    uint64_t ff_before = g_old_gen.DiagCountOxFFBytes();
+
     // Phase 1a: Mark pinned roots from MarkSweepOldGen.
     // Pinned roots are registered via g_old_gen.AddPinnedRoot().
     // They are stored in MarkSweepOldGen::pinned_roots_ (private),
@@ -341,6 +355,92 @@ void BgcController::PopulateRootSet() {
     // Phase 1e: Process initial mark stack to build transitive root closure.
     // This runs under safepoint, so it's fast (no concurrent interference).
     DrainWorkerDeque(0, 0);
+
+    // DIAG Phase 1f: Verify all marked objects have valid GcLayout lookups.
+    // Reads type_info from each marked object and checks if the layout lookup
+    // succeeds.  A failed lookup means ScanObjectChildren would skip that
+    // object's children, causing them to remain unmarked and be freed by sweep.
+    {
+        auto& layout_registry = GcLayoutRegistry::Instance();
+        auto* arr = g_old_gen.GetPageArray();
+        printf("  DIAG Phase1f: arr=%p arr_count=%d\n",
+               (void*)arr, arr ? arr->count : -1);
+        if (arr != nullptr) {
+            int total_marked = 0, total_lookup_miss = 0;
+            for (int pi = 0; pi < arr->count; pi++) {
+                auto* page = arr->pages[pi];
+                if (page == nullptr || !page->in_use.load(std::memory_order_acquire))
+                    continue;
+                if (page->is_oversized) continue;
+
+                auto bm9 = GcMarkBitmap(page->MarkBitmap(), page->bitmap_bytes);
+                auto* bitmap = bm9.Words();
+                char* payload = page->Payload();
+                CHAOS_IL2CPP_SIZE num_words = bm9.WordCount();
+                CHAOS_IL2CPP_SIZE slot = 0;
+
+                for (CHAOS_IL2CPP_SIZE w = 0; w < num_words; w++) {
+                    uint64_t word = bitmap[w];
+                    if (word == 0) { slot += 64; continue; }
+
+                    for (int b = 0; b < 64; b++) {
+                        if (word & (static_cast<uint64_t>(1) << b)) {
+                            total_marked++;
+                            CHAOS_IL2CPP_SIZE obj_slot = slot + b;
+                            CHAOS_IL2CPP_SIZE obj_offset = obj_slot * sizeof(void*);
+                            void* obj = payload + obj_offset;
+
+                            const void* type_info_ptr = *static_cast<const void* const*>(obj);
+                            if (type_info_ptr == nullptr) continue;
+                            if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) continue;
+
+                            auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
+                            uint64_t stable_id = hot->stable_id;
+                            const auto* layout = layout_registry.Lookup(stable_id);
+                            if (layout == nullptr) {
+                                total_lookup_miss++;
+                                CHAOS_IL2CPP_LOG_ERROR("BGC",
+                                    "DIAG: layout_lookup_miss page=%p offset=%zu obj=%p "
+                                    "type_info=%p stable_id=0x%016llx",
+                                    static_cast<void*>(page),
+                                    static_cast<size_t>(obj_offset),
+                                    static_cast<void*>(obj),
+                                    static_cast<const void*>(type_info_ptr),
+                                    static_cast<unsigned long long>(stable_id));
+                            }
+                        }
+                    }
+                    slot += 64;
+                }
+            }
+            if (total_lookup_miss > 0) {
+                CHAOS_IL2CPP_LOG_ERROR("BGC",
+                    "DIAG: Phase1f layout lookup misses=%d (marked=%d) — "
+                    "these objects' children will NOT be traced by BGC!",
+                    total_lookup_miss, total_marked);
+            } else {
+                CHAOS_IL2CPP_LOG_DEBUG_M("BGC",
+                    "DIAG: Phase1f all {0} marked objects have valid layout lookups",
+                    total_marked);
+            }
+            printf("  DIAG Phase1f: total_marked=%d misses=%d\n", total_marked, total_lookup_miss);
+        } else {
+            printf("  DIAG Phase1f: arr is null — can't check marked objects\n");
+        }
+    }
+
+    // DIAG: check 0xFF bytes after all Phase 1 work.
+    uint64_t ff_after = g_old_gen.DiagCountOxFFBytes();
+    if (ff_after > ff_before) {
+        CHAOS_IL2CPP_LOG_ERROR("BGC",
+            "DIAG: 0xFF bytes increased from %llu to %llu during PopulateRootSet!",
+            static_cast<unsigned long long>(ff_before),
+            static_cast<unsigned long long>(ff_after));
+    }
+    CHAOS_IL2CPP_LOG_DEBUG_M("BGC",
+        "DIAG: 0xFF bytes before={0} after={1}",
+        static_cast<unsigned long long>(ff_before),
+        static_cast<unsigned long long>(ff_after));
 }
 
 // ── BGC thread main ──────────────────────────────────────────────────
@@ -377,6 +477,16 @@ void BgcController::BgcThreadMain() {
 
         if (phase_.load(std::memory_order_acquire) == BgcPhase::CONCURRENT_MARK) {
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_mark_begin");
+
+            // DIAG: how many 0xFF bytes before concurrent mark processing?
+            uint64_t ff_at_start = g_old_gen.DiagCountOxFFBytes();
+            if (ff_at_start > 0) {
+                CHAOS_IL2CPP_LOG_ERROR("BGC",
+                    "DIAG: 0xFF bytes = %llu at concurrent_mark_begin (already corrupted!)",
+                    static_cast<unsigned long long>(ff_at_start));
+            } else {
+                CHAOS_IL2CPP_LOG_DEBUG("BGC", "DIAG: 0xFF bytes = 0 at concurrent_mark_begin (clean)");
+            }
 
             // Spawn parallel workers for mark stack processing.
             // Uses per-worker deques with work-stealing (P1-1):
@@ -772,7 +882,36 @@ namespace {
         auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
         uint64_t stable_id = hot->stable_id;
         const auto* layout = layout_registry.Lookup(stable_id);
-        if (layout == nullptr || layout->pointer_count == 0) return;
+
+        if (layout == nullptr) {
+            // Conservative fallback: type_info was recognized (valid pointer)
+            // but no GcLayout is registered for this stable_id.  Scan all
+            // pointer-aligned slots in the object and mark any old-gen refs.
+            // This matches the same conservative path in DrainMarkStack.
+            auto* page = g_old_gen.FindPage(obj);
+            if (page == nullptr) return;
+            auto obj_addr = reinterpret_cast<uintptr_t>(obj);
+            auto payload_start = reinterpret_cast<uintptr_t>(page->Payload());
+            CHAOS_IL2CPP_SIZE offset = static_cast<CHAOS_IL2CPP_SIZE>(obj_addr - payload_start);
+            CHAOS_IL2CPP_SIZE payload_remaining = page->payload_size - offset;
+            CHAOS_IL2CPP_SIZE max_size = kOldGenSizeClasses[kOldGenNumSizeClasses - 1];
+            if (payload_remaining < max_size) max_size = payload_remaining;
+
+            for (CHAOS_IL2CPP_SIZE slot_off = 0;
+                 slot_off + sizeof(void*) <= max_size;
+                 slot_off += sizeof(void*)) {
+                auto* slot = reinterpret_cast<void**>(static_cast<char*>(obj) + slot_off);
+                void* ref = *slot;
+                if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
+                    if (g_old_gen.BgcTryMark(ref)) {
+                        out_children.push_back(ref);
+                    }
+                }
+            }
+            return;
+        }
+
+        if (layout->pointer_count == 0) return;
 
         uintptr_t obj_base = reinterpret_cast<uintptr_t>(obj);
         for (uint16_t i = 0; i < layout->pointer_count; i++) {
