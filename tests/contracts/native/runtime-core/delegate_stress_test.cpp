@@ -848,8 +848,10 @@ static void ScenarioE3() {
 
     int64_t failures = 0;
     int chain_n = std::min(1000, kChainSize / 10);
+    fprintf(stderr, "E3_CHAIN_N=%d\n", chain_n); fflush(stderr);
 
     GcStatsSnapshot before = SnapshotGcStats();
+    fprintf(stderr, "E3_SNAPSHOT_DONE\n"); fflush(stderr);
 
     // Build multicast chain
     std::vector<CHAOS_IL2CPP_INTPTR> entries;
