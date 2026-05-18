@@ -37,33 +37,38 @@
           "opCode": 6,
           "operand": 0,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 2,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 3
+          "ilOffset": 3,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 4,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 5
+          "ilOffset": 5,
+          "isPreserveSig": false
         },
         {
           "op": "switch",
@@ -80,14 +85,16 @@
             113
           ],
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 121,
           "ilOffset": 47,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -108,19 +115,22 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0",
           "targetParameterCount": 0,
           "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 121,
           "ilOffset": 55,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -141,19 +151,22 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1",
           "targetParameterCount": 0,
           "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 121,
           "ilOffset": 63,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -174,19 +187,22 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2",
           "targetParameterCount": 0,
           "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 121,
           "ilOffset": 71,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -207,19 +223,22 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3",
           "targetParameterCount": 0,
           "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 121,
           "ilOffset": 79,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -240,19 +259,22 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4",
           "targetParameterCount": 0,
           "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 121,
           "ilOffset": 87,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -273,19 +295,22 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5",
           "targetParameterCount": 0,
           "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 121,
           "ilOffset": 95,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -306,19 +331,22 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6",
           "targetParameterCount": 0,
           "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 121,
           "ilOffset": 103,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -339,19 +367,22 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7",
           "targetParameterCount": 0,
           "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 121,
           "ilOffset": 111,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -372,29 +403,39 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8",
           "targetParameterCount": 0,
           "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 121,
           "ilOffset": 119,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 121
+          "ilOffset": 121,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-subjects.subject-0",
@@ -426,7 +467,8 @@
           "opCode": 0,
           "operand": 42,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -447,19 +489,22 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run",
           "targetParameterCount": 1,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
           "ilOffset": 8,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -480,58 +525,67 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run",
           "targetParameterCount": 1,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 15,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 17,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 18,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 20,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 21
+          "ilOffset": 21,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 30,
           "ilOffset": 22,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 24,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -552,21 +606,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 30
+          "ilOffset": 30,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-subjects.subject-1",
@@ -612,12 +675,14 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -638,58 +703,67 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 11,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 13,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 14,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 16,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 26,
           "ilOffset": 18,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 20,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -710,21 +784,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26
+          "ilOffset": 26,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-subjects.subject-2",
@@ -770,12 +853,14 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -796,58 +881,67 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 11,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 13,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 14,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 16,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 26,
           "ilOffset": 18,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 20,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -868,21 +962,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26
+          "ilOffset": 26,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-subjects.subject-3",
@@ -928,12 +1031,14 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -954,58 +1059,67 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 11,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 13,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 14,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 16,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 26,
           "ilOffset": 18,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 20,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -1026,21 +1140,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26
+          "ilOffset": 26,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-subjects.subject-4",
@@ -1086,12 +1209,14 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1112,58 +1237,67 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 11,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 13,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 14,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 16,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 26,
           "ilOffset": 18,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 20,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -1184,21 +1318,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26
+          "ilOffset": 26,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-subjects.subject-5",
@@ -1244,12 +1387,14 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1270,58 +1415,67 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 11,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 13,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 14,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 16,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 26,
           "ilOffset": 18,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 20,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -1342,21 +1496,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26
+          "ilOffset": 26,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-subjects.subject-6",
@@ -1402,12 +1565,14 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1428,58 +1593,67 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 11,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 13,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 14,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 16,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 26,
           "ilOffset": 18,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 20,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -1500,21 +1674,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26
+          "ilOffset": 26,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-subjects.subject-7",
@@ -1560,12 +1743,14 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1586,58 +1771,67 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 11,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 13,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 14,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 16,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 26,
           "ilOffset": 18,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 20,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -1658,21 +1852,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26
+          "ilOffset": 26,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-subjects.subject-8",
@@ -1718,12 +1921,14 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1744,58 +1949,67 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 11,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 13,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 14,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 16,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 26,
           "ilOffset": 18,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 20,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -1816,21 +2030,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26
+          "ilOffset": 26,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.i-simple.get-value",
@@ -1859,7 +2082,13 @@
       "instructions": [],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.i-with-default.get-value",
@@ -1891,17 +2120,25 @@
           "opCode": 0,
           "operand": 0,
           "ilOffset": 0,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.i-calculator.add",
@@ -1939,7 +2176,13 @@
       "instructions": [],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.i-calculator.multiply",
@@ -1977,7 +2220,13 @@
       "instructions": [],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.i-base.base-method",
@@ -2006,7 +2255,13 @@
       "instructions": [],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.i-derived.derived-method",
@@ -2035,7 +2290,13 @@
       "instructions": [],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.impl-simple.get-value",
@@ -2067,17 +2328,25 @@
           "opCode": 0,
           "operand": 42,
           "ilOffset": 0,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 2
+          "ilOffset": 2,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.impl-simple.ctor",
@@ -2109,7 +2378,8 @@
           "opCode": 6,
           "operand": 0,
           "ilOffset": 0,
-          "resultType": "InterfaceDispatchSubjects/ImplSimple"
+          "resultType": "InterfaceDispatchSubjects/ImplSimple",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2130,19 +2400,28 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.impl-with-default.ctor",
@@ -2174,7 +2453,8 @@
           "opCode": 6,
           "operand": 0,
           "ilOffset": 0,
-          "resultType": "InterfaceDispatchSubjects/ImplWithDefault"
+          "resultType": "InterfaceDispatchSubjects/ImplWithDefault",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2195,19 +2475,28 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.calc-add.add",
@@ -2248,30 +2537,40 @@
           "opCode": 6,
           "operand": 1,
           "ilOffset": 0,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldarg",
           "opCode": 6,
           "operand": 2,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "add",
           "opCode": 25,
           "ilOffset": 2,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 3
+          "ilOffset": 3,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.calc-add.multiply",
@@ -2312,30 +2611,40 @@
           "opCode": 6,
           "operand": 1,
           "ilOffset": 0,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldarg",
           "opCode": 6,
           "operand": 2,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "mul",
           "opCode": 27,
           "ilOffset": 2,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 3
+          "ilOffset": 3,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.calc-add.ctor",
@@ -2367,7 +2676,8 @@
           "opCode": 6,
           "operand": 0,
           "ilOffset": 0,
-          "resultType": "InterfaceDispatchSubjects/CalcAdd"
+          "resultType": "InterfaceDispatchSubjects/CalcAdd",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2388,19 +2698,28 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.calc-mul.add",
@@ -2441,43 +2760,55 @@
           "opCode": 6,
           "operand": 1,
           "ilOffset": 0,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldarg",
           "opCode": 6,
           "operand": 2,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "add",
           "opCode": 25,
           "ilOffset": 2,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 3,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "add",
           "opCode": 25,
           "ilOffset": 4,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 5
+          "ilOffset": 5,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.calc-mul.multiply",
@@ -2518,43 +2849,55 @@
           "opCode": 6,
           "operand": 1,
           "ilOffset": 0,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldarg",
           "opCode": 6,
           "operand": 2,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "mul",
           "opCode": 27,
           "ilOffset": 2,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 2,
           "ilOffset": 3,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "mul",
           "opCode": 27,
           "ilOffset": 4,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 5
+          "ilOffset": 5,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.calc-mul.ctor",
@@ -2586,7 +2929,8 @@
           "opCode": 6,
           "operand": 0,
           "ilOffset": 0,
-          "resultType": "InterfaceDispatchSubjects/CalcMul"
+          "resultType": "InterfaceDispatchSubjects/CalcMul",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2607,19 +2951,28 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.impl-diamond.base-method",
@@ -2651,17 +3004,25 @@
           "opCode": 0,
           "operand": 100,
           "ilOffset": 0,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 2
+          "ilOffset": 2,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.impl-diamond.derived-method",
@@ -2693,17 +3054,25 @@
           "opCode": 0,
           "operand": 200,
           "ilOffset": 0,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 5
+          "ilOffset": 5,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.impl-diamond.ctor",
@@ -2735,7 +3104,8 @@
           "opCode": 6,
           "operand": 0,
           "ilOffset": 0,
-          "resultType": "InterfaceDispatchSubjects/ImplDiamond"
+          "resultType": "InterfaceDispatchSubjects/ImplDiamond",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2756,19 +3126,28 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.impl-diamond2.base-method",
@@ -2800,17 +3179,25 @@
           "opCode": 0,
           "operand": 300,
           "ilOffset": 0,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 5
+          "ilOffset": 5,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.impl-diamond2.derived-method",
@@ -2842,17 +3229,25 @@
           "opCode": 0,
           "operand": 400,
           "ilOffset": 0,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 5
+          "ilOffset": 5,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.impl-diamond2.ctor",
@@ -2884,7 +3279,8 @@
           "opCode": 6,
           "operand": 0,
           "ilOffset": 0,
-          "resultType": "InterfaceDispatchSubjects/ImplDiamond2"
+          "resultType": "InterfaceDispatchSubjects/ImplDiamond2",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2905,19 +3301,28 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-native-entry.run",
@@ -2954,33 +3359,38 @@
           "opCode": 6,
           "operand": 0,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 2,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 3
+          "ilOffset": 3,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 4,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 5
+          "ilOffset": 5,
+          "isPreserveSig": false
         },
         {
           "op": "switch",
@@ -2996,14 +3406,16 @@
             101
           ],
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 109,
           "ilOffset": 43,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -3024,26 +3436,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 50,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 113,
           "ilOffset": 51,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -3064,26 +3480,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 58,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 113,
           "ilOffset": 59,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -3104,26 +3524,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 66,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 113,
           "ilOffset": 67,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -3144,26 +3568,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 74,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 113,
           "ilOffset": 75,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -3184,26 +3612,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 82,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 113,
           "ilOffset": 83,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -3224,26 +3656,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 90,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 113,
           "ilOffset": 91,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -3264,26 +3700,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 98,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 113,
           "ilOffset": 99,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -3304,63 +3744,78 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 106,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 113,
           "ilOffset": 107,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": -1,
           "ilOffset": 109,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 110,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 113,
           "ilOffset": 111,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
-          "ilOffset": 113
+          "ilOffset": 113,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 114
+          "ilOffset": 114,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-native-entry.test-single-impl-simple",
@@ -3406,26 +3861,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
             "implementedInterfaceSubjectIds": [
               "InterfaceDispatchSubjects/ISimple"
             ],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -3446,42 +3905,54 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_ISimple_GetValue",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 2
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 13,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 16,
           "ilOffset": 14,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 16
+          "ilOffset": 16,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-native-entry.test-single-impl-default",
@@ -3527,26 +3998,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
             "implementedInterfaceSubjectIds": [
               "InterfaceDispatchSubjects/IWithDefault"
             ],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -3567,42 +4042,54 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_IWithDefault_GetValue",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 2
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 13,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 16,
           "ilOffset": 14,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 16
+          "ilOffset": 16,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-native-entry.test-multi-impl-calc",
@@ -3648,20 +4135,23 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
             "implementedInterfaceSubjectIds": [
               "InterfaceDispatchSubjects/ICalculator"
             ],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "newobj",
@@ -3682,40 +4172,46 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
             "implementedInterfaceSubjectIds": [
               "InterfaceDispatchSubjects/ICalculator"
             ],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 12,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 13
+          "ilOffset": 13,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 10,
           "ilOffset": 14,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 5,
           "ilOffset": 16,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -3736,32 +4232,37 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_ICalculator_Add",
           "targetParameterCount": 2,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 2
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 22
+          "ilOffset": 22,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 3,
           "ilOffset": 23,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 4,
           "ilOffset": 24,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -3782,48 +4283,61 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_ICalculator_Multiply",
           "targetParameterCount": 2,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 2
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
         },
         {
           "op": "add",
           "opCode": 25,
           "ilOffset": 30,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 31,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 34,
           "ilOffset": 32,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
-          "ilOffset": 34
+          "ilOffset": 34,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 35
+          "ilOffset": 35,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-native-entry.test-is-check",
@@ -3869,20 +4383,23 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
             "implementedInterfaceSubjectIds": [
               "InterfaceDispatchSubjects/ISimple"
             ],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "newobj",
@@ -3903,40 +4420,46 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
             "implementedInterfaceSubjectIds": [
               "InterfaceDispatchSubjects/ICalculator"
             ],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 12,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 13,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 14,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 15
+          "ilOffset": 15,
+          "isPreserveSig": false
         },
         {
           "op": "isinst",
@@ -3957,74 +4480,86 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "implementedInterfaceSubjectIds": [],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 8
+          "runtimeServiceKind": 8,
+          "isPreserveSig": false
         },
         {
           "op": "ldnull",
           "opCode": 5,
           "ilOffset": 21,
-          "resultType": "System.Object"
+          "resultType": "System.Object",
+          "isPreserveSig": false
         },
         {
           "op": "cgt.un",
           "opCode": 33,
           "ilOffset": 22,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 3,
           "ilOffset": 24,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 3,
-          "ilOffset": 25
+          "ilOffset": 25,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 33,
           "ilOffset": 26,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
-          "ilOffset": 28
+          "ilOffset": 28,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 10,
           "ilOffset": 29,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "add",
           "opCode": 25,
           "ilOffset": 31,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 32,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 33
+          "ilOffset": 33,
+          "isPreserveSig": false
         },
         {
           "op": "isinst",
@@ -4045,74 +4580,86 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "implementedInterfaceSubjectIds": [],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 8
+          "runtimeServiceKind": 8,
+          "isPreserveSig": false
         },
         {
           "op": "ldnull",
           "opCode": 5,
           "ilOffset": 39,
-          "resultType": "System.Object"
+          "resultType": "System.Object",
+          "isPreserveSig": false
         },
         {
           "op": "cgt.un",
           "opCode": 33,
           "ilOffset": 40,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 4,
           "ilOffset": 42,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 4,
-          "ilOffset": 44
+          "ilOffset": 44,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 53,
           "ilOffset": 46,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
-          "ilOffset": 48
+          "ilOffset": 48,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 100,
           "ilOffset": 49,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "add",
           "opCode": 25,
           "ilOffset": 51,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 52,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 53
+          "ilOffset": 53,
+          "isPreserveSig": false
         },
         {
           "op": "isinst",
@@ -4133,104 +4680,126 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "implementedInterfaceSubjectIds": [],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 8
+          "runtimeServiceKind": 8,
+          "isPreserveSig": false
         },
         {
           "op": "ldnull",
           "opCode": 5,
           "ilOffset": 59,
-          "resultType": "System.Object"
+          "resultType": "System.Object",
+          "isPreserveSig": false
         },
         {
           "op": "cgt.un",
           "opCode": 33,
           "ilOffset": 60,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 5,
           "ilOffset": 62,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 5,
-          "ilOffset": 64
+          "ilOffset": 64,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 76,
           "ilOffset": 66,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
-          "ilOffset": 68
+          "ilOffset": 68,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1000,
           "ilOffset": 69,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "add",
           "opCode": 25,
           "ilOffset": 74,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 75,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
-          "ilOffset": 76
+          "ilOffset": 76,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 6,
           "ilOffset": 77,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 81,
           "ilOffset": 79,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 6,
-          "ilOffset": 81
+          "ilOffset": 81,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 83
+          "ilOffset": 83,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-native-entry.test-as-check",
@@ -4276,26 +4845,30 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
             "implementedInterfaceSubjectIds": [
               "InterfaceDispatchSubjects/ISimple"
             ],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         },
         {
           "op": "isinst",
@@ -4316,50 +4889,58 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "implementedInterfaceSubjectIds": [],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 8
+          "runtimeServiceKind": 8,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 13,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 14
+          "ilOffset": 14,
+          "isPreserveSig": false
         },
         {
           "op": "brtrue",
           "opCode": 18,
           "operand": 20,
           "ilOffset": 15,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": -1,
           "ilOffset": 17,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 26,
           "ilOffset": 18,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 20
+          "ilOffset": 20,
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -4380,42 +4961,54 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_ISimple_GetValue",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 2
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 26,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 29,
           "ilOffset": 27,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
-          "ilOffset": 29
+          "ilOffset": 29,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 30
+          "ilOffset": 30,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-native-entry.test-diamond-base",
@@ -4461,6 +5054,7 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
             "implementedInterfaceSubjectIds": [
               "InterfaceDispatchSubjects/IBase",
@@ -4468,20 +5062,23 @@
             ],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -4502,42 +5099,54 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_IBase_BaseMethod",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 2
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 13,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 16,
           "ilOffset": 14,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 16
+          "ilOffset": 16,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-native-entry.test-diamond-derived",
@@ -4583,6 +5192,7 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
             "implementedInterfaceSubjectIds": [
               "InterfaceDispatchSubjects/IBase",
@@ -4590,20 +5200,23 @@
             ],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -4624,42 +5237,54 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_IDerived_DerivedMethod",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 2
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 13,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 16,
           "ilOffset": 14,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 16
+          "ilOffset": 16,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
       "methodId": "interface-dispatch-subjects.interface-dispatch-native-entry.test-diamond-multi",
@@ -4705,6 +5330,7 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
             "implementedInterfaceSubjectIds": [
               "InterfaceDispatchSubjects/IBase",
@@ -4712,14 +5338,16 @@
             ],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "newobj",
@@ -4740,6 +5368,7 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
             "implementedInterfaceSubjectIds": [
               "InterfaceDispatchSubjects/IBase",
@@ -4747,20 +5376,23 @@
             ],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 12,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 13
+          "ilOffset": 13,
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -4781,18 +5413,21 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_IBase_BaseMethod",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 2
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 19
+          "ilOffset": 19,
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -4813,24 +5448,28 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_IDerived_DerivedMethod",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 2
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
         },
         {
           "op": "add",
           "opCode": 25,
           "ilOffset": 25,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 26
+          "ilOffset": 26,
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -4851,24 +5490,28 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_IBase_BaseMethod",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 2
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
         },
         {
           "op": "add",
           "opCode": 25,
           "ilOffset": 32,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 33
+          "ilOffset": 33,
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -4889,48 +5532,61 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "targetSymbol": "InterfaceDispatchSubjects_IDerived_DerivedMethod",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
-          "dispatchKindCode": 2
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
         },
         {
           "op": "add",
           "opCode": 25,
           "ilOffset": 39,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 40,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 43,
           "ilOffset": 41,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
-          "ilOffset": 43
+          "ilOffset": 43,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 44
+          "ilOffset": 44,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
       "isUnmanagedCallersOnly": false,
-      "hasBlittableStructReturn": false
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
     }
   ]
 }

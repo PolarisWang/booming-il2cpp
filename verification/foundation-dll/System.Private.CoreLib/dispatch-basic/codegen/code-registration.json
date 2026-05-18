@@ -1,0 +1,150 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "DispatchBasicSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "DispatchBasicSubjects_DispatchBasicSubjects_Run",
+          "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Run:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "DispatchBasicSubjects_DispatchBasicSubjects_Subject_0",
+          "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "DispatchBasicSubjects_DispatchBasicSubjects_Subject_1",
+          "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "DispatchBasicSubjects_DispatchBasicSubjects_Subject_2",
+          "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "DispatchBasicSubjects_DispatchBasicSubjects_Subject_3",
+          "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "DispatchBasicSubjects_DispatchBasicSubjects_Subject_4",
+          "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "DispatchBasicSubjects_ICalculator_Add",
+          "subjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "DispatchBasicSubjects_ICalculator_Subtract",
+          "subjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "DispatchBasicSubjects_IStatusProvider_GetStatusCode",
+          "subjectId": "DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "DispatchBasicSubjects_IBasicOp_GetValue",
+          "subjectId": "DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "DispatchBasicSubjects_Calculator_Add",
+          "subjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "DispatchBasicSubjects_Calculator_Subtract",
+          "subjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "DispatchBasicSubjects_Calculator__ctor",
+          "subjectId": "DispatchBasicSubjects/Calculator::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "DispatchBasicSubjects_StatusProvider_GetStatusCode",
+          "subjectId": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "DispatchBasicSubjects_StatusProvider__ctor",
+          "subjectId": "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "DispatchBasicSubjects_BasicImpl_GetValue",
+          "subjectId": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "DispatchBasicSubjects_BasicImpl__ctor",
+          "subjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_Run",
+          "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd",
+          "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub",
+          "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus",
+          "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue",
+          "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor",
+          "subjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

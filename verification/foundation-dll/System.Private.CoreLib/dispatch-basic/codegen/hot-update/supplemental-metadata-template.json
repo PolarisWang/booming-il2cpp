@@ -1,0 +1,251 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/ICalculator",
+      "definitionSubjectId": "DispatchBasicSubjects/ICalculator",
+      "metadataToken": 33554435
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/IStatusProvider",
+      "definitionSubjectId": "DispatchBasicSubjects/IStatusProvider",
+      "metadataToken": 33554436
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/IBasicOp",
+      "definitionSubjectId": "DispatchBasicSubjects/IBasicOp",
+      "metadataToken": 33554437
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/Calculator",
+      "definitionSubjectId": "DispatchBasicSubjects/Calculator",
+      "metadataToken": 33554438
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/StatusProvider",
+      "definitionSubjectId": "DispatchBasicSubjects/StatusProvider",
+      "metadataToken": 33554439
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/BasicImpl",
+      "definitionSubjectId": "DispatchBasicSubjects/BasicImpl",
+      "metadataToken": 33554440
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
+      "metadataToken": 33554441
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute",
+      "definitionSubjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute",
+      "metadataToken": 33554442
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/ICalculator",
+      "metadataToken": 100663303,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/ICalculator",
+      "metadataToken": 100663304,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()",
+      "definitionSubjectId": "DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/IStatusProvider",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()",
+      "definitionSubjectId": "DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/IBasicOp",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/Calculator",
+      "metadataToken": 100663307,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/Calculator",
+      "metadataToken": 100663308,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/Calculator::.ctor:System.Void()",
+      "definitionSubjectId": "DispatchBasicSubjects/Calculator::.ctor:System.Void()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/Calculator",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()",
+      "definitionSubjectId": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/StatusProvider",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()",
+      "definitionSubjectId": "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/StatusProvider",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()",
+      "definitionSubjectId": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/BasicImpl",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()",
+      "definitionSubjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/BasicImpl",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
+      "metadataToken": 100663314,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DispatchBasicSubjects",
+      "subjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)",
+      "definitionSubjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)",
+      "declaringTypeSubjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute",
+      "metadataToken": 100663319,
+      "parameterCount": 1
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

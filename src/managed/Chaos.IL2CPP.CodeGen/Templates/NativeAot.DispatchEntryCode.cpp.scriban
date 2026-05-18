@@ -47,7 +47,8 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
             chaos::il2cpp::runtime_core::InterpreterEntryDirect(
                 entry.method_key, __chaos_args, __chaos_ret);
         } else {
-            reinterpret_cast<void(*)()>(entry.direct_ptr)();
+            // Use kBenchmarkWrappers which supply correct default argument values
+            kBenchmarkWrappers[i]();
         }
     }
     return result;

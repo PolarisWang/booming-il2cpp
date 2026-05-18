@@ -792,7 +792,7 @@ public sealed partial class NativeAotLoweringPlanner
 				int ifaceCount = 0;
 				if (referenceTypeImplementedInterfaceSubjectIds.TryGetValue(typeId, out var ifaces) && ifaces.Count > 0)
 				{
-					ifaceMapSym = GetNativeSymbol("", typeId) + "_ifaces";
+					ifaceMapSym = GetNativeIfaceMapSymbol(typeId);
 					ifaceCount = ifaces.Count;
 				}
 				byte typeShape = (byte)(interfaceTypeSubjectIds.Contains(typeId) ? 3 : 1);

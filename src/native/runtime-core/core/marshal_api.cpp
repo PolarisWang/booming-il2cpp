@@ -8,6 +8,10 @@ namespace chaos::il2cpp::runtime_core {
 // NOTE: no anonymous namespace — functions are declared in engine_binding.h
 // and called from bootstrap.cpp, struct_marshal.cpp, and other TUs.
 
+// TLS: HRESULT stored by ChaosThrowComExceptionForHR so the managed-side
+// COMException constructor can retrieve it via ChaosGetComFailureHR().
+thread_local CHAOS_IL2CPP_INT32 tls_com_failure_hr = 0;
+
 // Forward declaration: g_next_task_id is defined in engine_lifecycle.cpp's
 // anonymous namespace (same TU via unity build).
 extern CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_INT32) g_next_task_id;
@@ -555,15 +559,68 @@ bool MarshalIsRcwHandle(CHAOS_IL2CPP_INTPTR ptr) noexcept {
     return com_rcw::IsComRcwHandle(ptr);
 }
 
+// ── ComVtable dispatch helpers (test/verification) ──────────────────
+// These mirror the codegen's RCW-handle-aware vtable dispatch logic.
+// They are used by P/Invoke test helpers in per-family verification builds.
+
+/// RCW-aware ComVtable dispatch: if ptr is an RCW handle, extract
+/// identity_unknown; then call vtable[slot](com_ptr, a, b).
+/// Returns the int32 result from the COM method.
+CHAOS_IL2CPP_INT32 MarshalCallComMethod(
+    CHAOS_IL2CPP_INTPTR ptr,
+    CHAOS_IL2CPP_INT32 slot,
+    CHAOS_IL2CPP_INT32 a,
+    CHAOS_IL2CPP_INT32 b) noexcept
+{
+    if (ptr == 0) return 0;
+    void* com_ptr = reinterpret_cast<void*>(ptr);
+
+    // If ptr is an RCW handle, extract the identity IUnknown*.
+    if (com_rcw::IsComRcwHandle(ptr)) {
+        auto* rcw = static_cast<com_rcw::ComRcwNative*>(com_ptr);
+        com_ptr = rcw->identity_unknown;
+        if (com_ptr == nullptr) return 0;
+    }
+
+    // COM vtable dispatch: first read the vtable pointer, then call slot.
+    using ComMethod = CHAOS_IL2CPP_INT32 (*)(void*, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32);
+    void** vtable = *static_cast<void***>(com_ptr);
+    auto method = reinterpret_cast<ComMethod>(vtable[slot]);
+    return method(com_ptr, a, b);
+}
+
+/// Direct ComVtable dispatch (no RCW check): treat ptr as raw COM pointer
+/// and call vtable[slot](com_ptr, a, b).
+CHAOS_IL2CPP_INT32 MarshalCallDirectComMethod(
+    CHAOS_IL2CPP_INTPTR com_ptr,
+    CHAOS_IL2CPP_INT32 slot,
+    CHAOS_IL2CPP_INT32 a,
+    CHAOS_IL2CPP_INT32 b) noexcept
+{
+    if (com_ptr == 0) return 0;
+    void* ptr = reinterpret_cast<void*>(com_ptr);
+
+    using ComMethod = CHAOS_IL2CPP_INT32 (*)(void*, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32);
+    void** vtable = *static_cast<void***>(ptr);
+    auto method = reinterpret_cast<ComMethod>(vtable[slot]);
+    return method(ptr, a, b);
+}
+
 void ChaosThrowComExceptionForHR(CHAOS_IL2CPP_INT32 hr) noexcept {
     // Sentinel-based COMException delivery.  The kManagedExceptionComFailure
     // sentinel propagates through generated AOT catch blocks (which re-throw
     // sentinels) and the interpreter SEH layer up to the managed exception
     // dispatch, which creates a managed COMException from the HRESULT.
+    // Store the HR in TLS so the managed-side COMException constructor can
+    // retrieve it via ChaosGetComFailureHR().
     CHAOS_IL2CPP_LOG_WARN_M("COM", "ChaosThrowComExceptionForHR HRESULT 0x{0:x8} — throwing COMException sentinel",
                              static_cast<unsigned int>(hr));
-    (void)hr;
+    tls_com_failure_hr = hr;
     throw chaos_managed_exception{kManagedExceptionComFailure};
+}
+
+CHAOS_IL2CPP_INT32 ChaosGetComFailureHR() noexcept {
+    return tls_com_failure_hr;
 }
 
 // ── CCW (COM Callable Wrapper) ─────────────────────────────────────

@@ -962,7 +962,10 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				builder.AppendLine($"{indentation}    auto* chaos_value_owner = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(declaringTypeSubjectId)}>({ConsumeEvalStackValueExpression()});");
 				builder.AppendLine($"{indentation}    chaos_value_owner->{GetNativeFieldMemberName(targetRef.SubjectId)} = chaos_value;");
-				builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_value_owner);");
+				builder.AppendLine($"{indentation}    if (chaos_is_gc_pointer(chaos_value_owner))");
+				builder.AppendLine($"{indentation}    {{");
+				builder.AppendLine($"{indentation}        chaos_gc_dirty_card(chaos_value_owner);");
+				builder.AppendLine($"{indentation}    }}");
 			}
 			else
 			{
@@ -1785,14 +1788,19 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine($"{indentation}    }}");
 			builder.AppendLine($"{indentation}    *chaos_destination = *chaos_source;");
 
-			builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_destination);");		}
+			builder.AppendLine($"{indentation}    if (chaos_is_gc_pointer(chaos_destination))");
+			builder.AppendLine($"{indentation}    {{");
+			builder.AppendLine($"{indentation}        chaos_gc_dirty_card(chaos_destination);");
+			builder.AppendLine($"{indentation}    }}");
+		}
 		else
 		{
 			builder.AppendLine($"{indentation}    const auto chaos_value = {ConsumeEvalStackValueExpression()};");
 			builder.AppendLine($"{indentation}    auto* chaos_destination = chaos_resolve_managed_value_pointer<CHAOS_IL2CPP_INTPTR>({ConsumeEvalStackValueExpression()});");
 			builder.AppendLine($"{indentation}    *chaos_destination = chaos_value;");
 
-			builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_destination);");		}
+			builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_destination);");
+		}
 		builder.AppendLine($"{indentation}}}");
 	}
 
@@ -2767,21 +2775,37 @@ public sealed partial class NativeAotLoweringPlanner
 		string _shiftExpr = ConsumeEvalStackValueExpression();
 		ConsumeSlotType();
 		string _valueExpr = ConsumeEvalStackValueExpression();
-		builder.AppendLine($"{indentation}{{");
-		builder.AppendLine($"{indentation}    const auto chaos_shift = static_cast<CHAOS_IL2CPP_INT32>({_shiftExpr});");
-		builder.AppendLine($"{indentation}    const auto chaos_value = static_cast<CHAOS_IL2CPP_INT32>({_valueExpr});");
-		EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}(chaos_value, chaos_shift))");
-		builder.AppendLine($"{indentation}}}");
+		if (_activeStructuredSlotContext is not null)
+		{
+			EmitEvalStackPush(builder, indentation,
+			    $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}(static_cast<CHAOS_IL2CPP_INT32>({_valueExpr}), static_cast<CHAOS_IL2CPP_INT32>({_shiftExpr})))");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}{{");
+			builder.AppendLine($"{indentation}    const auto chaos_shift = static_cast<CHAOS_IL2CPP_INT32>({_shiftExpr});");
+			builder.AppendLine($"{indentation}    const auto chaos_value = static_cast<CHAOS_IL2CPP_INT32>({_valueExpr});");
+			EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}(chaos_value, chaos_shift))");
+			builder.AppendLine($"{indentation}}}");
+		}
 		PushSlotType(SlotType.NativeInt);
 	}
 
 	private void EmitLinearBitwiseNot(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
 		RequireInt32IntegralResultType(instruction);
-		builder.AppendLine($"{indentation}{{");
-		builder.AppendLine($"{indentation}    const auto chaos_value = static_cast<CHAOS_IL2CPP_INT32>({AccessEvalStackTopExpression()});");
-		builder.AppendLine($"{indentation}    {AccessEvalStackTopExpression()} = static_cast<CHAOS_IL2CPP_INTPTR>(~chaos_value);");
-		builder.AppendLine($"{indentation}}}");
+		if (_activeStructuredSlotContext is not null)
+		{
+			string expr = AccessEvalStackTopExpression();
+			builder.AppendLine($"{indentation}{expr} = static_cast<CHAOS_IL2CPP_INTPTR>(~static_cast<CHAOS_IL2CPP_INT32>({expr}));");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}{{");
+			builder.AppendLine($"{indentation}    const auto chaos_value = static_cast<CHAOS_IL2CPP_INT32>({AccessEvalStackTopExpression()});");
+			builder.AppendLine($"{indentation}    {AccessEvalStackTopExpression()} = static_cast<CHAOS_IL2CPP_INTPTR>(~chaos_value);");
+			builder.AppendLine($"{indentation}}}");
+		}
 	}
 
 	private void EmitLinearComparisonResult(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation, string operandType, string comparisonOperator)

@@ -10,5 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="InterfaceDispatchSubjects.cs" />
+    <Compile Include="InterfaceDispatchNativeEntry.cs" />
   </ItemGroup>
 </Project>

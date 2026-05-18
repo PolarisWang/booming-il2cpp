@@ -56,7 +56,7 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 HybridDispatchKind.Virtual => ResolveVirtualDispatchTargets(instruction),
                 HybridDispatchKind.ExternalRuntime => ResolveExternalRuntimeReachableMethods(instruction),
-                HybridDispatchKind.ComVtable => [],  // COM vtable dispatch: no static C++ symbol
+                HybridDispatchKind.ComVtable => ResolveComVtableReachableMethods(instruction),
                 _ => ResolveDirectReachableMethods(instruction),
             };
         }
@@ -81,6 +81,32 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
     private IReadOnlyList<AotCoreIrMethodArtifact> ResolveExternalRuntimeReachableMethods(
+        AotCoreIrInstructionArtifact instruction)
+    {
+        var reachableMethods = new List<AotCoreIrMethodArtifact>();
+        var seenSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+
+        void AddRange(IReadOnlyList<AotCoreIrMethodArtifact> methods)
+        {
+            foreach (var method in methods)
+            {
+                if (seenSubjectIds.Add(method.SubjectId))
+                {
+                    reachableMethods.Add(method);
+                }
+            }
+        }
+
+        AddRange(ResolveDirectReachableMethods(instruction));
+        if (!string.IsNullOrEmpty(instruction.Callee))
+        {
+            AddRange(ResolveInterfaceDispatchTargets(instruction.Callee));
+        }
+
+        return reachableMethods;
+    }
+
+    private IReadOnlyList<AotCoreIrMethodArtifact> ResolveComVtableReachableMethods(
         AotCoreIrInstructionArtifact instruction)
     {
         var reachableMethods = new List<AotCoreIrMethodArtifact>();
