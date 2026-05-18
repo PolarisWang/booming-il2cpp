@@ -1231,6 +1231,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayRefHelper_RunArrayRef(vo
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
+		BgcSatbPreWriteBarrier(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]);
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 		GC_END_STUBBORN_CHANGE(chaos_array);
 		chaos_gc_dirty_card(chaos_array);

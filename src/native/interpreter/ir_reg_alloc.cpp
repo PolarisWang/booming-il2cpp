@@ -1694,8 +1694,17 @@ static void Reg_CallVirtConstrained(RegisterFrame& frame, const RegisterInstruct
     Reg_Call(frame, instr);
 }
 
+// ── Calli: indirect call through function pointer — delegate to Reg_Call
+// The register allocator fills imm.ptr with ir.call_target, and src1_reg
+// points to consecutive arg registers.  Reg_Call already handles this via
+// InterpreterDispatchRaw.
+static void Reg_Calli(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    Reg_Call(frame, instr);
+}
+
 // ── Cpblk / InitBlk: memory block operations ────────────────────────────
 static void Reg_Cpblk(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    // TODO V2: implement native memcpy
     Reg_Unsupported(frame, instr);
 }
 
@@ -1732,7 +1741,7 @@ static void Reg_Break(RegisterFrame& frame, const RegisterInstruction& instr) no
 #define R(name) Reg_##name
 #define UNSUP Reg_Unsupported
 
-static constexpr RegOpHandler kRegHandlers[99] = {
+static constexpr RegOpHandler kRegHandlers[100] = {
     /*  0 */ R(LdcI4),         /*  1 */ R(LdcI8),         /*  2 */ R(LdcR4),
     /*  3 */ R(LdcR8),         /*  4 */ R(LdStr),          /*  5 */ R(LdNull),
     /*  6 */ R(LdArg),         /*  7 */ R(LdLoc),          /*  8 */ R(StLoc),
@@ -1766,6 +1775,7 @@ static constexpr RegOpHandler kRegHandlers[99] = {
     /* 90 */ R(ConvOvfU),      /* 91 */ R(ConvOvfU4),      /* 92 */ R(ConvOvfU8),
     /* 93 */ R(LdObj),         /* 94 */ R(StObj),          /* 95 */ R(LdElem),      // LdElemA maps to LdElem (same element load)
     /* 96 */ R(Cpblk),         /* 97 */ R(InitBlk),        /* 98 */ R(CallVirtConstrained),
+    /* 99 */ R(Calli),
 };
 
 #undef R
@@ -1781,7 +1791,7 @@ bool RegisterExecute(RegisterFrame& frame,
     while (frame.pc < instr_count) {
         CHAOS_IL2CPP_PROFILE_SCOPE("RegisterExecute");
         uint32_t op_val = static_cast<uint32_t>(instrs[frame.pc].op_code());
-        if (op_val >= 99) {
+        if (op_val >= 100) {
             frame.threw_exception = true;
             return false;
         }

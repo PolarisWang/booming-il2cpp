@@ -61,6 +61,7 @@ struct OldGenPage {
     CHAOS_IL2CPP_SIZE bitmap_bytes;   // mark bitmap size in bytes (aligned)
     bool            scanning;         // true = scanned (contains pointers)
     bool            is_oversized;     // true = single-object oversized page
+    int8_t          preferred_sc_idx; // size class index for most blocks on this page (-1 = mixed)
     std::atomic<bool> in_use;         // true = actively used for allocation
     std::atomic<bool> sweep_lock{false}; // spinlock for concurrent sweep
 
@@ -238,7 +239,9 @@ private:
     // ── Page management ─────────────────────────────────────────
 
     /// Allocate a new page from the OS.
-    OldGenPage* AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning);
+    /// @param preferred_sc_idx  If >= 0, carve most of the page for this size class.
+    OldGenPage* AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
+                             int preferred_sc_idx = -1);
 
     /// Return a page to the OS.
     void FreePage(OldGenPage* page);
@@ -425,6 +428,12 @@ public:
         CHAOS_IL2CPP_SIZE size;
     };
     std::vector<PinnedRoot> pinned_roots_;
+
+    // Pinned roots snapshot for compaction — set at start of Collect(),
+    // cleared after compaction.  Pages containing pinned objects are
+    // excluded from per-page compaction; pinned objects are excluded
+    // from cross-page evacuation.
+    std::vector<PinnedRoot> pinned_compact_skip_;
 
     // Finalizer table: maps object → finalizer callback.
     // Uses namespace-level FinalizerEntry (defined above).

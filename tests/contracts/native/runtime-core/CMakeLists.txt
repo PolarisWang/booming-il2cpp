@@ -17,7 +17,8 @@ link_directories(
     "${REPO_ROOT}/artifacts/presets/debug/src/native/common/Debug"
     "${REPO_ROOT}/artifacts/presets/debug/src/native/hot-update/Debug"
     "${REPO_ROOT}/artifacts/presets/debug/src/native/support/Debug"
-    "${REPO_ROOT}/artifacts/presets/debug/src/native/codegen/Debug")
+    "${REPO_ROOT}/artifacts/presets/debug/src/native/codegen/Debug"
+    "${REPO_ROOT}/artifacts/presets/debug/src/native/codegen/Release")
 
 # Stub symbols for codegen-emitted globals; required by targets linking
 # chaos_bootstrap or chaos_interpreter (which reference these symbols).
@@ -47,7 +48,7 @@ target_link_libraries(
 # contains instantiation_engine.obj which references InterpreterValue symbols,
 # and chaos_bootstrap.lib references ChaosResolveExternalRuntimeFnTable
 # (defined in hotpatch_resolve.cpp, part of chaos_interpreter).
-set(CHAOS_GC_COMMON_LIBS chaos_runtime_core chaos_bootstrap chaos_interpreter chaos_fmt chaos_common chaos_support chaos_hot_update)
+set(CHAOS_GC_COMMON_LIBS chaos_runtime_core chaos_bootstrap chaos_interpreter chaos_fmt chaos_common chaos_support chaos_hot_update chaos_codegen)
 
 # gc_bump_cache_test — GcBumpCache size-class allocator unit tests
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
@@ -479,6 +480,28 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bgc_smoke.cpp")
             "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_gc_bgc_smoke
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_bgc_stress_test — BGC concurrent mark/sweep/compact stress test (multi-threaded)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bgc_stress_test.cpp")
+    add_executable(chaos_gc_bgc_stress_test gc_bgc_stress_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_bgc_stress_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_bgc_stress_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_bgc_stress_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_bgc_stress_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_bgc_stress_test
         PRIVATE
             ${CHAOS_GC_COMMON_LIBS})
 endif()

@@ -1,5 +1,5 @@
 // Auto-generated native-AOT entry point
-// Family: family/System.Private.CoreLib/codegen/codegen-edge-cases
+// Family: family/System.Private.CoreLib/codegen/edge/cases
 // Assembly: System.Private.CoreLib
 // Variant: patch
 
@@ -42,4 +42,5 @@ public static partial class CodegenEdgeCasesPatchEntry
             case 3: Method3(); break;
         }
     }
+
 }

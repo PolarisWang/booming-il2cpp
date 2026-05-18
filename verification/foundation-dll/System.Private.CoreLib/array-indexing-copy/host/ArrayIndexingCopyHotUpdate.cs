@@ -41,7 +41,7 @@ public static class ArrayIndexingCopyHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Array::Sort:System.Void(System.Array,System.Collections.IComparer)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ArrayIndexingCopy)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Array_Sort_System_Void_System_Array_System_Collections_IComparer() { System.Array.Sort(new byte[1], (System.Collections.IComparer)null); }
+    public static void HotUpdate_System_Private_CoreLib_System_Array_Sort_System_Void_System_Array_System_Collections_IComparer() { Array.Sort(new byte[1], System.Collections.Generic.Comparer<byte>.Default); }
     // Verify Array.BinarySearch after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ArrayIndexingCopy)]

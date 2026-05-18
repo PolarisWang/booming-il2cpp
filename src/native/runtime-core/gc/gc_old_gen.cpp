@@ -158,6 +158,11 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
     // Mark oversized pages so sweep handles them differently.
     mem->is_oversized = (payload_size > kOldGenMaxInline);
 
+    // Store preferred size class so MarkObject can mark all slots of each object
+    // (the bitmap is 1 bit per 8-byte slot; multi-slot objects need multiple bits).
+    mem->preferred_sc_idx = (preferred_sc_idx >= 0 && preferred_sc_idx < kOldGenNumSizeClasses)
+        ? static_cast<int8_t>(preferred_sc_idx) : static_cast<int8_t>(-1);
+
     // Initialize free lists.
     for (int i = 0; i < kOldGenNumSizeClasses; i++) {
         mem->free_lists[i] = nullptr;
@@ -589,6 +594,67 @@ void* MarkSweepOldGen::Reallocate(void* ptr, CHAOS_IL2CPP_SIZE new_size) {
 // GC Collection — Mark phase
 // ======================================================================
 
+/// Compute the size of the size-class block at a given payload offset within a page.
+/// Simulates the deterministic carve from AllocatePage. Returns the block size in bytes,
+/// or 0 if the offset is invalid. Uses the page's preferred_sc_idx for O(1) fast path
+/// in the preferred-class region.
+static CHAOS_IL2CPP_SIZE BlockSizeAtPayloadOffset(const OldGenPage* page,
+                                                   CHAOS_IL2CPP_SIZE offset) {
+    if (offset >= page->payload_size) return 0;
+    if (page->is_oversized) return page->payload_size;
+
+    int pref_sc = page->preferred_sc_idx;
+    if (pref_sc >= 0 && pref_sc < kOldGenNumSizeClasses) {
+        CHAOS_IL2CPP_SIZE pref_size = kOldGenSizeClasses[pref_sc];
+        CHAOS_IL2CPP_SIZE pref_region = ((page->payload_size * 8) / 10) / pref_size * pref_size;
+        if (offset < pref_region) return pref_size;
+    }
+
+    // Round-robin region: simulate the carve from the end of the preferred region.
+    CHAOS_IL2CPP_SIZE cursor = 0;
+    if (pref_sc >= 0 && pref_sc < kOldGenNumSizeClasses) {
+        CHAOS_IL2CPP_SIZE pref_size = kOldGenSizeClasses[pref_sc];
+        CHAOS_IL2CPP_SIZE pref_region = ((page->payload_size * 8) / 10) / pref_size * pref_size;
+        cursor = pref_region;
+    }
+
+    int sc = 0;
+    while (cursor + kOldGenSizeClasses[0] <= page->payload_size) {
+        CHAOS_IL2CPP_SIZE sc_size = kOldGenSizeClasses[sc];
+        if (cursor + sc_size <= page->payload_size) {
+            if (offset < cursor + sc_size) return sc_size;
+            cursor += sc_size;
+        }
+        sc = (sc + 1) % kOldGenNumSizeClasses;
+    }
+    return 0;
+}
+
+/// Atomically set a range of consecutive bits in the mark bitmap.
+/// @return  True if at least one bit in the range was newly set.
+static bool AtomicMarkRange(unsigned char* bitmap,
+                             CHAOS_IL2CPP_SIZE start_slot, CHAOS_IL2CPP_SIZE num_slots) {
+    if (num_slots == 0) return false;
+    bool newly_set = false;
+    CHAOS_IL2CPP_SIZE end_slot = start_slot + num_slots;
+    for (CHAOS_IL2CPP_SIZE s = start_slot; s < end_slot; ) {
+        CHAOS_IL2CPP_SIZE byte_idx = s / 8;
+        int bit_off = static_cast<int>(s % 8);
+        int bits_here = std::min(8 - bit_off, static_cast<int>(end_slot - s));
+        unsigned char mask = static_cast<unsigned char>(((1u << bits_here) - 1) << bit_off);
+#if defined(_MSC_VER) && !defined(__clang__)
+        auto prev = _InterlockedOr8(reinterpret_cast<volatile char*>(&bitmap[byte_idx]),
+                                     static_cast<char>(mask));
+        if ((static_cast<unsigned char>(prev) & mask) != mask) newly_set = true;
+#else
+        auto prev = __atomic_fetch_or(&bitmap[byte_idx], mask, __ATOMIC_RELAXED);
+        if ((prev & mask) != mask) newly_set = true;
+#endif
+        s += bits_here;
+    }
+    return newly_set;
+}
+
 bool MarkSweepOldGen::MarkObject(void* obj) {
     if (obj == nullptr) return false;
 
@@ -600,30 +666,21 @@ bool MarkSweepOldGen::MarkObject(void* obj) {
     if (obj_addr < payload_start) return false;
 
     CHAOS_IL2CPP_SIZE offset = obj_addr - payload_start;
+
+    // Determine how many 8-byte slots this object occupies.
+    CHAOS_IL2CPP_SIZE block_size = BlockSizeAtPayloadOffset(page, offset);
+    if (block_size == 0) return false;
+    CHAOS_IL2CPP_SIZE num_slots = block_size / sizeof(void*);
+    if (num_slots < 1) num_slots = 1;
+
     CHAOS_IL2CPP_SIZE slot_idx = offset / sizeof(void*);
-    CHAOS_IL2CPP_SIZE byte_idx = slot_idx / 8;
-    int bit_idx = static_cast<int>(slot_idx % 8);
-
     auto* bitmap = page->MarkBitmap();
-    unsigned char mask = static_cast<unsigned char>(1u << bit_idx);
 
-    // Atomic mark: safe for concurrent access from parallel mark workers.
-    // Returns true if the bit was newly set (was 0, now 1).
-#if defined(_MSC_VER) && !defined(__clang__)
-    auto prev = _InterlockedOr8(reinterpret_cast<volatile char*>(&bitmap[byte_idx]),
-                                 static_cast<char>(mask));
-    if ((static_cast<unsigned char>(prev) & mask) != 0) {
-        return false;  // already marked
+    bool newly_set = AtomicMarkRange(bitmap, slot_idx, num_slots);
+    if (newly_set) {
+        marked_count_.fetch_add(1, std::memory_order_relaxed);
     }
-#else
-    auto prev = __atomic_fetch_or(&bitmap[byte_idx], mask, __ATOMIC_RELAXED);
-    if ((prev & mask) != 0) {
-        return false;  // already marked
-    }
-#endif
-
-    marked_count_.fetch_add(1, std::memory_order_relaxed);
-    return true;  // newly marked (was white, now grey)
+    return newly_set;
 }
 
 void MarkSweepOldGen::DrainMarkStack() {
@@ -1218,6 +1275,24 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::PlanPageCompaction(OldGenPage* page,
 
     if (marked.empty()) return 0;
 
+    // Skip pages containing pinned objects — pinned objects must never
+    // be relocated, and mixing pinned + non-pinned on the same page
+    // breaks the linear compaction cursor assumption.
+    if (!pinned_compact_skip_.empty()) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "PlanPageCompaction pin_check marked_count={0} pinned_count={1}",
+            static_cast<unsigned long long>(marked.size()),
+            static_cast<unsigned long long>(pinned_compact_skip_.size()));
+        for (auto& mo : marked) {
+            for (auto& pr : pinned_compact_skip_) {
+                if (pr.addr == mo.addr) {
+                    CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "PlanPageCompaction skip_page pinned_addr={0}",
+                        reinterpret_cast<uintptr_t>(pr.addr));
+                    return 0;  // skip this page entirely
+                }
+            }
+        }
+    }
+
     // Plan: compact objects to start of page payload, preserving order.
     out_plan.entries.reserve(marked.size());
     char* cursor = payload;
@@ -1498,6 +1573,15 @@ void MarkSweepOldGen::PlanPageEvacuation(OldGenPage* page, CompactPlan& out_plan
                         obj_size = layout->instance_size;
                     }
                 }
+            }
+
+            // Skip pinned objects — must not be relocated.
+            if (!pinned_compact_skip_.empty()) {
+                bool is_pinned = false;
+                for (auto& pr : pinned_compact_skip_) {
+                    if (pr.addr == obj) { is_pinned = true; break; }
+                }
+                if (is_pinned) continue;
             }
 
             // Allocate target space in old-gen (under STW, no concurrent frees).
@@ -1988,6 +2072,9 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     }
 
     // Phase 4b: Compaction (when fragmentation exceeds threshold).
+    // Transfer pinned snapshot to compaction skip list so PlanPageCompaction
+    // and PlanPageEvacuation can exclude pinned objects from relocation.
+    pinned_compact_skip_ = pinned_snapshot;
     CompactMode compact_mode = DecideCompactMode();
 
     if (compact_mode == CompactMode::CROSS_PAGE) {
@@ -2001,6 +2088,10 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
             static_cast<unsigned long long>(total_saved));
         GcFireEvent(GcEvent::COMPACT_DONE);
     }
+
+    // Clear compaction pin skip list — no longer needed and the
+    // snapshot reference would be dangling next cycle.
+    pinned_compact_skip_.clear();
 
     // Phase 5: Record results.
     auto pause_end = std::chrono::steady_clock::now();

@@ -34,7 +34,6 @@ extern "C" void* chaos_il2cpp_aot_hotpatch_module = nullptr;
 using chaos::il2cpp::runtime_core::EncodeReflectionQueryMethodHandle;
 using chaos::il2cpp::runtime_core::ReflectionQueryMethodDescriptor;
 using chaos::il2cpp::runtime_core::ReflectionQueryParameterDescriptor;
-using chaos_managed_exception;
 using chaos::il2cpp::runtime_instantiation::RuntimeInstantiatedMethod;
 using chaos::il2cpp::interpreter::InterpreterValue;
 using chaos::il2cpp::interpreter::ValueTag;

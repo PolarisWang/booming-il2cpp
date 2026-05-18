@@ -106,7 +106,7 @@ public partial class ArrayIndexingCopyTests
     public void _System_Private_CoreLib_System_Array_Sort_System_Void_System_Array_System_Collections_IComparer()
     {
         // Purpose: Smoke — Array.Sort with complex param(s)
-            System.Array.Sort(new byte[1], (System.Collections.IComparer)null);
+            Array.Sort(new byte[1], System.Collections.Generic.Comparer<byte>.Default);
     }
 
     // === needs-manual (operator/protected/etc) ===

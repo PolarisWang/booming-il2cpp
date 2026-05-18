@@ -1261,6 +1261,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_InstanceFieldHelper_CreateAnd
 	{
 		auto chaos_value = _s2;
 		auto* chaos_object = reinterpret_cast<chaos_type_SnapshotTestFixtures_HasInstanceFields*>(_s1);
+		BgcSatbPreWriteBarrier(&chaos_object->field_SnapshotTestFixtures_HasInstanceFields__Value);
 		chaos_object->field_SnapshotTestFixtures_HasInstanceFields__Value = chaos_value;
 		chaos_gc_dirty_card(chaos_object);
 	}
