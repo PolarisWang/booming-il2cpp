@@ -60,10 +60,23 @@ struct PatchMethod {
     uint32_t        cached_arg_capacity = 8;            // allocated capacity
     bool            cached_sig_valid        = false;   // true when cache is populated
 
-    // ── Per-instruction call-site metadata cache ──────────────────────────
+    // ── Call cache for per-instruction call metadata ────────────────────
     // Populated in PatchMethodLowerIR after IR deserialization.
     // Points to heap-allocated CachedCallInfo[instr_count], or nullptr.
     void*           call_cache          = nullptr;   // CachedCallInfo[]
+
+    // ── PGO call-site profiles (T2 collection tier) ────────────────────
+    // Populated during T2 execution. Freed after T3 PIC generation.
+    void*           call_site_profiles          = nullptr;   // heap-allocated profile data
+    uint32_t        call_site_profile_count     = 0;         // number of profile entries
+
+    // ── PIC dispatch data (T3 optimized tier) ──────────────────────────
+    // Generated from call_site_profiles during T2→T3 promotion.
+    void*           pic_dispatch_data           = nullptr;   // heap-allocated PIC chains
+
+    // ── Cached optimized RegisterMethod reference (T3 tier) ────────────
+    // Set during T3 promotion. Used by RebuildCallCacheForT3.
+    void*           cached_optimized_reg_method = nullptr;   // RegisterMethod*
 
     // ── Call count for hot path detection (A2.3) ────────────────────────
     // Atomically incremented on each call to InterpreterEntryDirect.
@@ -76,6 +89,26 @@ struct PatchMethod {
     // 0=uninitialized, 1=lowering-in-progress, 2=done.
     // CAS-based to avoid global mutex contention across threads.
     mutable std::atomic<uint32_t> ir_state{0};
+
+    // ── Tiered compilation state (Phase 1+) ──────────────────────────────
+    // Tier state machine: 0=T1_cold, 1=T2_lowering, 2=T2_ready,
+    //                     3=T3_lowering, 4=T3_ready, 5=T5_unloaded.
+    // CAS-based transition, atomic with acquire/release ordering.
+    mutable std::atomic<uint32_t> tier_state{0};
+    static constexpr uint32_t kT1Cold        = 0;
+    static constexpr uint32_t kT2Lowering    = 1;
+    static constexpr uint32_t kT2Ready       = 2;
+    static constexpr uint32_t kT3Lowering    = 3;
+    static constexpr uint32_t kT3Ready       = 4;
+    static constexpr uint32_t kT5Unloaded    = 5;
+    static constexpr uint32_t kT4Ready       = 6;
+
+    // Tier 1→2 transition threshold (matches kHotCallThreshold).
+    static constexpr uint32_t kT1HotThreshold = 100;
+    // Tier 2→3 transition threshold (requires profile data).
+    static constexpr uint32_t kT2HotThreshold = 500;
+    // Tier 3→4 transition threshold (hot → very hot, native codegen).
+    static constexpr uint32_t kT3NativeThreshold = 2000;
 };
 
 // ── PatchMetadataCache ───────────────────────────────────────────────────
@@ -204,8 +237,12 @@ extern std::atomic<uint64_t> g_patch_generation;
 // patch DLL's type name when looking up methods in HotpatchNameRegistry.
 // This handles the case where the patch DLL has different type names
 // than the AOT host code (e.g. "PatchEntry" vs "NativeEntry").
+// If host_method_names is provided (non-null), it maps MethodDef indices
+// to AOT registry method names.  Must be >= MethodCount() entries; unused
+// entries set to nullptr use the default MethodDef name.
 PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
-                                    const char* host_type_name = nullptr) noexcept;
+                                    const char* host_type_name = nullptr,
+                                    const char* const* host_method_names = nullptr) noexcept;
 
 // Revert all patched methods in the given context.
 // Clears kHotpatchActive flags on all affected dispatch table entries,

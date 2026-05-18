@@ -17,7 +17,12 @@ DEFAULT_THRESHOLDS: dict[str, float] = {
     # Capacity stress metrics
     "failures": 0.0,                           # Any failure is regression
     # Threading stress metrics
-    "opsPerSecond": -0.15,                     # >15% decrease is regression (negative = lower is worse)
+    "opsPerSecond": -0.15,                     # >15% decrease is regression
+    # Delegate stress metrics
+    "allocCount": 0.0,                         # Allocations tracking
+    "combineCount": 0.0,                       # Combine ops tracking
+    "removeCount": 0.0,                        # Remove ops tracking
+    "invokeCount": 0.0,                        # Invoke ops tracking
 }
 
 

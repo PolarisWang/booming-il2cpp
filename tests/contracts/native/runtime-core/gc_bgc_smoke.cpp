@@ -147,6 +147,7 @@ void TestBgcWithAllocation() {
     // While BGC is marking, allocate heavily on another thread.
     std::atomic<bool> alloc_done{false};
     std::thread alloc_thread([&alloc_done]() {
+        threading::RegisterThread(threading::AllocateThreadId(), nullptr);
         for (int i = 0; i < 5000; i++) {
             void* p = NurseryAllocate(64);
             if (p) std::memset(p, 0xBB, 64);
@@ -159,6 +160,7 @@ void TestBgcWithAllocation() {
             if (BgcController::Instance().Phase() == BgcPhase::REMARK_NEEDED)
                 break;
         }
+        threading::UnregisterThread();
         alloc_done = true;
     });
 
@@ -255,6 +257,9 @@ int main() {
     void* warmup = NurseryAllocate(64);
     (void)warmup;
 
+    // Register this thread as a ManagedThread so it participates in safepoint protocol.
+    threading::RegisterThread(threading::AllocateThreadId(), nullptr);
+
     // Start the BGC background thread.
     BgcController::Instance().Start();
 
@@ -267,6 +272,8 @@ int main() {
 
     // Clean shutdown.
     BgcController::Instance().Stop();
+
+    threading::UnregisterThread();
 
     printf("\n══ Results: 3 tests, %d failures ══\n", g_failures);
 

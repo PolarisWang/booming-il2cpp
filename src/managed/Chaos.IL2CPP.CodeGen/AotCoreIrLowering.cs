@@ -590,6 +590,7 @@ public sealed class AotCoreIrLowering
             "brfalse" => InstructionOpCode.BrFalse,
             "brtrue" => InstructionOpCode.BrTrue,
             "call" => InstructionOpCode.Call,
+            "calli" => InstructionOpCode.Calli,
             "callvirt" => InstructionOpCode.CallVirt,
             "castclass" => InstructionOpCode.CastClass,
             "ceq" => InstructionOpCode.Ceq,

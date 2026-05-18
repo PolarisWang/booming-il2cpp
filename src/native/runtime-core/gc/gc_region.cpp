@@ -773,6 +773,14 @@ extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept {
     g_old_gen.RunFinalizers();
 }
 
+/// GC.KeepAlive — prevents the GC from collecting the object before
+/// this call (extern "C" for codegen direct call).  In CRAG, no-op,
+/// but the call site in generated code provides the observable
+/// side-effect boundary that keeps the argument alive.
+extern "C" void chaos_gc_keepalive(CHAOS_IL2CPP_INTPTR obj) noexcept {
+    (void)obj;
+}
+
 /// Allocate memory in the Pinned Object Heap (POH).
 /// POH objects never participate in young GC copying and are suitable
 /// for callers that know the allocation will be pinned (e.g., fixed

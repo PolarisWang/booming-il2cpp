@@ -646,12 +646,12 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
         _write_sentinel_patchdata(v / family_slug)
         print(f"    [build_entry] sentinel runtime-patchdata.cpp generated")
 
-    # Ensure runtime-entry.cpp exists in native/
-    enhanced_runtime_entry = _HERE / "runtime-entry.cpp"
+    # Ensure runtime-entry.cpp exists in native/ — use codegen-generated version
+    codegen_runtime_entry = v / family_slug / "codegen" / "runtime-entry.cpp"
     native_runtime_entry = native_dir / "runtime-entry.cpp"
-    if not native_runtime_entry.exists() and enhanced_runtime_entry.exists():
-        native_runtime_entry.write_text(enhanced_runtime_entry.read_text(encoding="utf-8"), encoding="utf-8")
-        print(f"    [build_entry] copied runtime-entry.cpp to native/")
+    if codegen_runtime_entry.exists():
+        native_runtime_entry.write_text(codegen_runtime_entry.read_text(encoding="utf-8"), encoding="utf-8")
+        print(f"    [build_entry] copied runtime-entry.cpp from codegen/ to native/")
 
     # Ensure CMakeLists.txt exists — auto-generate from template if missing
     # (families deleted and regenerated from scratch won't have native/CMakeLists.txt)

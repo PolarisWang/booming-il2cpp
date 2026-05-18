@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "GarbageCollectionSubjects",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
-      "metadataToken": 100663303,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "GarbageCollectionSubjects",
       "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
@@ -65,6 +57,14 @@
       "declaringTypeSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
       "metadataToken": 100663302,
       "parameterCount": 0
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 1
     }
   ],
   "reservedSlots": {

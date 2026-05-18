@@ -1,3 +1,6 @@
+// entry_direct.cpp — InterpreterEntryDirect hot path
+#include <tier_manager.h>
+
 namespace chaos::il2cpp::runtime_core {
 
 // ── Tier hit counters (profile instrumentation) ─────────────────────────
@@ -24,12 +27,33 @@ static interpreter::InterpreterValue ReadTypedArg(
 static void WriteTypedRet(void* ret_buf, const interpreter::ExecutionResult& result,
                            interpreter::ValueTag ret_tag) noexcept;
 
+// Forward declarations for tier optimization functions.
+// These are defined in ir_optimizer.cpp and pic_generator.cpp (separate TUs).
+void OptimizeToTier2(PatchMethod* pm) noexcept;
+bool EnsureCallSiteProfiles(PatchMethod* pm) noexcept;
+void PromoteToTier3(PatchMethod* pm) noexcept;
+void RebuildCallCacheForT3(PatchMethod* pm) noexcept;
+
+// T3 promotion callback — lazily registered on first InterpreterEntryDirect call.
+// Uses std::call_once to avoid static init ordering issues.
+static std::once_flag g_tier3_cb_once;
+static void RegisterTier3CallbackFn() noexcept {
+    SetTier3PromotionCallback(
+        [](PatchMethod* pm) noexcept {
+            PromoteToTier3(pm);
+            RebuildCallCacheForT3(pm);
+        });
+}
+
 void InterpreterEntryDirect(
     uintptr_t method_key,
     void*     args_buf,
     void*     ret_buf) noexcept {
 
     CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect");
+
+    // Lazy register T3 promotion callback (avoids static init ordering issues).
+    std::call_once(g_tier3_cb_once, RegisterTier3CallbackFn);
 
     if (method_key == 0) return;
 
@@ -337,6 +361,49 @@ void InterpreterEntryDirect(
         rf.dispatch_ctx = &reg_dispatch_ctx;
         rf.call_cache   = patch_method->call_cache;
         rf.call_count   = static_cast<uint32_t>(instr_count);
+
+        // ── Tiered compilation: increment call_count and check tier transitions ──
+        auto call_count = patch_method->call_count.fetch_add(1, std::memory_order_relaxed) + 1;
+        auto tier = patch_method->tier_state.load(std::memory_order_acquire);
+
+        // Choose the best available RegisterMethod for this tier.
+        const interpreter::RegisterInstruction* exec_instrs = reg_method->instructions.data();
+        uint32_t exec_instr_count = static_cast<uint32_t>(reg_method->instructions.size());
+
+        if (tier == PatchMethod::kT1Cold && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {
+            // Attempt T1→T2 promotion (CAS — only one thread wins).
+            uint32_t expected = PatchMethod::kT1Cold;
+            if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kT2Lowering,
+                    std::memory_order_acq_rel)) {
+                CHAOS_IL2CPP_LOG_DEBUG_M("dispatch", "T1->T2 promotion: method_key=0x{:x}, count={}",
+                    method_key, call_count);
+                OptimizeToTier2(patch_method);
+                patch_method->tier_state.store(PatchMethod::kT2Ready, std::memory_order_release);
+            }
+        } else if (tier == PatchMethod::kT2Ready) {
+            // Use optimized RegisterMethod if available.
+            if (patch_method->cached_optimized_reg_method != nullptr) {
+                auto* opt = static_cast<interpreter::RegisterMethod*>(
+                    patch_method->cached_optimized_reg_method);
+                exec_instrs = opt->instructions.data();
+                exec_instr_count = static_cast<uint32_t>(opt->instructions.size());
+                rf.call_cache = patch_method->call_cache;
+            }
+        }
+
+        // Re-read tier after potential T1→T2 promotion.
+        tier = patch_method->tier_state.load(std::memory_order_acquire);
+
+        if (tier == PatchMethod::kT2Ready && call_count >= TierManager::Get().GetAdaptiveT2Threshold()) {
+            // Attempt T2→T3 promotion (background — non-blocking).
+            uint32_t expected = PatchMethod::kT2Ready;
+            if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kT3Lowering,
+                    std::memory_order_acq_rel)) {
+                CHAOS_IL2CPP_LOG_DEBUG_M("dispatch", "T2->T3 enqueue: method_key=0x{:x}, count={}",
+                    method_key, call_count);
+                TierManager::Get().EnqueueOptimization(patch_method);
+            }
+        }
 
         bool ok = interpreter::RegisterExecute(
             rf,

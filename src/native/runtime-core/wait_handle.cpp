@@ -349,5 +349,12 @@ int32_t WaitHandleWaitAll(const uint32_t* handle_ids, uint32_t count, int32_t ti
 
     return (ret == WAIT_OBJECT_0) ? 0 : -1;
 #else
+    // Non-Windows: not yet supported.
+    (void)handle_ids;
+    (void)count;
+    (void)timeout_ms;
+    return -1;
+#endif
+}
 
 }  // namespace chaos::il2cpp::runtime_core::threading

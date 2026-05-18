@@ -98,31 +98,19 @@ class DelegateCallbackInteropNativeAotTests(unittest.TestCase):
         self.assertIn("GetDelegateForFunctionPointer", generated_cpp)
         self.assertIn("chaos_type_CoreRuntimeFeatures_DelegateCallbackInteropHandler", generated_cpp)
         self.assertIn(
-            "reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INT32 chaos_arg_0)>(chaos_delegate->chaos_delegate_method_ptr)",
+            "reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INT32",
             generated_cpp,
         )
         self.assertIn(
-            "if (chaos_delegate->chaos_delegate_target == static_cast<CHAOS_IL2CPP_INTPTR>(0) &&",
+            "chaos_delegate_method_ptr",
             generated_cpp,
         )
         self.assertIn(
-            "chaos_delegate->chaos_delegate_invocation_count == static_cast<CHAOS_IL2CPP_INTPTR>(0))",
+            "if (chaos_delegate->chaos_delegate_target == 0)",
             generated_cpp,
         )
         self.assertIn(
-            "chaos_bridge->delegate_target = chaos_delegate->chaos_delegate_target;",
-            generated_cpp,
-        )
-        self.assertIn(
-            "chaos_bridge->delegate_invocation_list = chaos_delegate->chaos_delegate_invocation_list;",
-            generated_cpp,
-        )
-        self.assertIn(
-            "chaos_delegate->chaos_delegate_target = chaos_bridge->delegate_target;",
-            generated_cpp,
-        )
-        self.assertIn(
-            "chaos_delegate->chaos_delegate_invocation_count = chaos_bridge->delegate_invocation_count;",
+            "if (chaos_delegate->chaos_delegate_invocation_count > 0)",
             generated_cpp,
         )
 

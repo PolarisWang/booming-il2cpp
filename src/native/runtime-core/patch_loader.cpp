@@ -392,7 +392,8 @@ static void DestroyPatchContext(PatchContext* ctx) {
 // ── Public API ──────────────────────────────────────────────────────────
 
 PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
-                                    const char* host_type_name) noexcept {
+                                    const char* host_type_name,
+                                    const char* const* host_method_names) noexcept {
     if (data == nullptr || size < sizeof(PatchDataHeader)) return nullptr;
 
     auto* header = static_cast<const PatchDataHeader*>(data);
@@ -443,6 +444,12 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         // Use host_type_name override if provided (handles PatchEntry vs
         // NativeEntry naming mismatch between patch DLL and AOT code).
         const char* lookup_type = (host_type_name != nullptr) ? host_type_name : type_name;
+
+        // Use host_method_names override if provided (handles MethodDef
+        // name vs AOT registry method name mismatch).
+        if (host_method_names != nullptr && host_method_names[i] != nullptr) {
+            method_name = host_method_names[i];
+        }
 
         // Look up the method in the HotpatchNameRegistry (namespace+typename composite key).
         uint64_t lookup = registry.LookupMethod(type_ns, lookup_type, method_name);

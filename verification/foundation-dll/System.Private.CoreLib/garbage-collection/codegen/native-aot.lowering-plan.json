@@ -1,11 +1,11 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
-  "planKind": "generic-managed-entry",
+  "planKind": "full-assembly-entry",
   "assemblyName": "GarbageCollectionSubjects",
   "entrySubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
-  "nativeEntryFunctionName": "RunNativeAot",
+  "nativeEntryFunctionName": "",
   "entrySymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Run",
   "entryMethodToken": "0u",
-  "workloadAbi": "void(int32)"
+  "workloadAbi": "full-assembly"
 }

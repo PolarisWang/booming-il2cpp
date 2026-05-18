@@ -139,6 +139,8 @@ int main(int argc, char** argv) {
                 longjmp(s_verify_buf, 1);
             }
         }
+        CHAOS_IL2CPP_PROFILE_DUMP();
+        CHAOS_IL2CPP_PROFILE_RESET();
         int failed_count = 0;
         int tmp = result;
         while (tmp) { failed_count += tmp & 1; tmp >>= 1; }
@@ -176,6 +178,8 @@ int main(int argc, char** argv) {
                 longjmp(s_verify_buf, 1);
             }
         }
+        CHAOS_IL2CPP_PROFILE_DUMP();
+        CHAOS_IL2CPP_PROFILE_RESET();
         int failed_count = 0;
         int tmp2 = result;
         while (tmp2) { failed_count += tmp2 & 1; tmp2 >>= 1; }

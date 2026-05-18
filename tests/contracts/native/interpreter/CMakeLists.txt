@@ -76,3 +76,19 @@ target_link_libraries(
         chaos_fmt
         chaos_common
         chaos_support)
+
+add_executable(chaos_tiering_benchmark
+    tiering_benchmark.cpp)
+
+target_compile_features(chaos_tiering_benchmark PRIVATE cxx_std_17)
+target_include_directories(chaos_tiering_benchmark PRIVATE
+    ${CMAKE_SOURCE_DIR}/src/native/interpreter/generated)
+target_link_libraries(
+    chaos_tiering_benchmark
+    PRIVATE
+        chaos_runtime_core
+        chaos_interpreter
+        chaos_bootstrap
+        chaos_fmt
+        chaos_common
+        chaos_support)

@@ -52,6 +52,7 @@ set(CHAOS_LIB_DIRS
     "${CHAOS_NATIVE_BUILD}/src/native/interpreter/RelWithDebInfo"
     "${CHAOS_NATIVE_BUILD}/src/native/support/RelWithDebInfo"
     "${CHAOS_NATIVE_BUILD}/src/native/hot-update/RelWithDebInfo"
+    "${CHAOS_NATIVE_BUILD}/src/native/codegen/RelWithDebInfo"
     "${CHAOS_NATIVE_BUILD}/fmt_build/RelWithDebInfo"
 )
 
@@ -63,6 +64,7 @@ set(CHAOS_RUNTIME_LIBS
     chaos_interpreter
     chaos_support
     chaos_hot_update
+    chaos_codegen
     chaos_fmt
 )
 

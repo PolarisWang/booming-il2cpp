@@ -8,6 +8,12 @@
 #include <cstring>
 #include <cstdint>
 
+// AOT symbol stubs (required by chaos_interpreter library linkage)
+extern "C" const char* kChaosExternalRuntimeSubjects[] = { nullptr };
+extern "C" void* kChaosExternalRuntimeFnTable[] = { nullptr };
+extern "C" int kChaosExternalRuntimeCount = 0;
+extern "C" void* chaos_il2cpp_aot_hotpatch_module = nullptr;
+
 using chaos::il2cpp::interpreter::ExecutionFrame;
 using chaos::il2cpp::interpreter::ExecutionResult;
 using chaos::il2cpp::interpreter::IRInstruction;

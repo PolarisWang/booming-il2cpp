@@ -721,3 +721,10 @@ opcodes:
     has_src: true
     operands: [call_target, arg_count, is_instance_call]
     description: Constrained virtual call
+
+  - name: Calli
+    value: 99
+    has_dst: true
+    has_src: true
+    operands: [call_target, arg_count, is_instance_call]
+    description: Indirect call (calli) — reads fnptr + args from src regs, writes return to dst

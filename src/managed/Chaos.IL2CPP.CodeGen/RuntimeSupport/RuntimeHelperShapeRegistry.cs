@@ -5716,6 +5716,10 @@ public sealed partial class NativeAotLoweringPlanner
                     if (typeArgs.Count != 1) return null;
                     var delegateTypeId = typeArgs[0];
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    // Extract param_count from Func/Action generic type args at codegen time.
+                    // This lets the native helper select the correct arity dispatch thunk
+                    // without needing RegisterDelegateThunk to be called first.
+                    int paramCount = ExtractDelegateArity(delegateTypeId);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
@@ -5723,7 +5727,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "    auto* ts = chaos::il2cpp::runtime_core::GetCurrentThreadState();",
                         "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(",
                         "        chaos::il2cpp::runtime_core::MarshalGetDelegateForFunctionPointerImpl(",
-                        "            rs, ts, chaos_arg_0, \"" + delegateTypeId + "\"));",
+                        "            rs, ts, chaos_arg_0, \"" + delegateTypeId + "\", " + paramCount + "));",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -6165,6 +6169,48 @@ public sealed partial class NativeAotLoweringPlanner
 
             typeArgs = args;
             return args.Count > 0;
+        }
+
+        /// <summary>
+        /// Extract the delegate Invoke parameter count from the delegate type's subjectId.
+        /// For Func`N types: N-1 parameters (one type arg is return type).
+        /// For Action`N types: N parameters.
+        /// For other delegate types: returns 0 (caller must handle).
+        /// </summary>
+        private static int ExtractDelegateArity(string delegateTypeSubjectId)
+        {
+            // SubjectId format: "Assembly/TypeName`N[[...]]"
+            var slash = delegateTypeSubjectId.IndexOf('/');
+            if (slash < 0) return 0;
+            var typeName = delegateTypeSubjectId.Substring(slash + 1);
+
+            // Check for backtick-arity suffix: TypeName`N
+            var backtick = typeName.IndexOf('`');
+            if (backtick < 0) return 0;
+
+            var arityStr = string.Empty;
+            for (int i = backtick + 1; i < typeName.Length; i++)
+            {
+                if (char.IsDigit(typeName[i]))
+                    arityStr += typeName[i];
+                else
+                    break;
+            }
+            if (string.IsNullOrEmpty(arityStr) || !int.TryParse(arityStr, out int arity))
+                return 0;
+
+            // Extract display name before backtick for Func/Action detection.
+            var baseName = typeName.Substring(0, backtick);
+            // Get the segment after the last '.' for short name.
+            var lastDot = baseName.LastIndexOf('.');
+            var shortName = lastDot >= 0 ? baseName.Substring(lastDot + 1) : baseName;
+
+            return shortName switch
+            {
+                "Func" when arity >= 1 => arity - 1,  // One type arg is return type
+                "Action" => arity,                     // All type args are parameters
+                _ => 0,  // Custom delegate type — arity unknown from name alone
+            };
         }
     }
 }

@@ -18,6 +18,9 @@ internal static class Program
             CreateMethod("AutoBridgeProof/Aot::Mutate(System.Int32&)", "Mutate", "System.Void", "System.Int32&"),
             CreateMethod("AutoBridgeProof/Aot::Load(System.Int32*)", "Load", "System.Int32", "System.Int32*"),
             CreateMethod("AutoBridgeProof/Aot::Sum(System.ReadOnlySpan<System.Int32>)", "Sum", "System.Int32", "System.ReadOnlySpan<System.Int32>"),
+            CreateMethod("AutoBridgeProof/Aot::Increment(System.Int64)", "Increment", "System.Int64", "System.Int64"),
+            CreateMethod("AutoBridgeProof/Aot::Scale(System.Single)", "Scale", "System.Single", "System.Single"),
+            CreateMethod("AutoBridgeProof/Aot::Halve(System.Double)", "Halve", "System.Double", "System.Double"),
         };
         var hotUpdateMethods = new[]
         {
@@ -29,6 +32,9 @@ internal static class Program
             CreateMethod("AutoBridgeProof/Hot::Mutate(System.Int32&)", "Mutate", "System.Void", "System.Int32&"),
             CreateMethod("AutoBridgeProof/Hot::Load(System.Int32*)", "Load", "System.Int32", "System.Int32*"),
             CreateMethod("AutoBridgeProof/Hot::Sum(System.ReadOnlySpan<System.Int32>)", "Sum", "System.Int32", "System.ReadOnlySpan<System.Int32>"),
+            CreateMethod("AutoBridgeProof/Hot::Increment(System.Int64)", "Increment", "System.Int64", "System.Int64"),
+            CreateMethod("AutoBridgeProof/Hot::Scale(System.Single)", "Scale", "System.Single", "System.Single"),
+            CreateMethod("AutoBridgeProof/Hot::Halve(System.Double)", "Halve", "System.Double", "System.Double"),
         };
 
         var generator = new AutoBridgeGenerator();
@@ -53,6 +59,9 @@ internal static class Program
         dispatcher.RegisterByRefInt32Target(targetIdentities[5], static (ref int value) => value += 1);
         dispatcher.RegisterPointerInt32Target(targetIdentities[6], static address => Marshal.ReadInt32(address));
         dispatcher.RegisterReadOnlySpanInt32Target(targetIdentities[7], static values => values[0] + values[1] + values[2]);
+        dispatcher.RegisterManagedTarget(targetIdentities[8], args => Convert.ToInt64(args[0]) + 1);
+        dispatcher.RegisterManagedTarget(targetIdentities[9], args => (float)Convert.ToDouble(args[0]) * 2.0f);
+        dispatcher.RegisterManagedTarget(targetIdentities[10], args => Convert.ToDouble(args[0]) / 2.0);
 
         _ = dispatcher.Dispatch(hotUpdateMethods[0].SubjectId, Array.Empty<object?>());
         Console.WriteLine($"auto-bridge-void={(voidInvoked ? "ok" : "unexpected")}");
@@ -70,6 +79,10 @@ internal static class Program
 
         var spanCarrier = new HotUpdateReadOnlySpanInt32Carrier([10, 12, 20], 0, 3);
         Console.WriteLine($"auto-bridge-ref-struct={dispatcher.Dispatch(hotUpdateMethods[7].SubjectId, [spanCarrier])}");
+
+        Console.WriteLine($"auto-bridge-int64-unary={dispatcher.Dispatch(hotUpdateMethods[8].SubjectId, [41L])}");
+        Console.WriteLine($"auto-bridge-float-unary={dispatcher.Dispatch(hotUpdateMethods[9].SubjectId, [2.5f])}");
+        Console.WriteLine($"auto-bridge-double-unary={dispatcher.Dispatch(hotUpdateMethods[10].SubjectId, [10.0])}");
 
         try
         {

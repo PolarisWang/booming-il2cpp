@@ -36,6 +36,7 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_subdirectory(src/native/runtime-core)
     add_subdirectory(src/native/hot-update)
     add_subdirectory(src/native/interpreter)
+    add_subdirectory(src/native/codegen)
     add_subdirectory(src/native/engine-bridge)
     add_subdirectory(src/native/support)
     add_subdirectory(src/native/bootstrap)
@@ -63,6 +64,7 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
             chaos_runtime_core
             chaos_hot_update
             chaos_interpreter
+            chaos_codegen
             chaos_support
             chaos_bootstrap
             chaos_engine_bridge

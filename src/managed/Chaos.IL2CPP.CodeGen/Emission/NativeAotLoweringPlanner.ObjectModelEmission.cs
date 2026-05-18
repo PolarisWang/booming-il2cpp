@@ -917,6 +917,8 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 				builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;");
 				builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;");
 				builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;");
+				builder.AppendLine("    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;");
+				builder.AppendLine("    CHAOS_IL2CPP_UINT32 _pad = 0;");
 			}
 			if (flag4)
 			{
