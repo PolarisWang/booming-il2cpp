@@ -6,7 +6,7 @@
   "entrySubjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
   "includeHeader": "codegen_bridge.h",
   "nativeEntryFunctionName": "RunNativeReference",
-  "entrySymbol": "ConvertCharSubjects_ConvertCharSubjects_Run",
+  "entrySymbol": "ConvertCharSubjects_ConvertCharSubjects_Run_System_Int32",
   "referenceTypeToken": "0u",
   "capturedFieldToken": "0u",
   "entryMethodToken": "0u",

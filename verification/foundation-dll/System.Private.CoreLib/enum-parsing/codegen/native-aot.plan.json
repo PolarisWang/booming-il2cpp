@@ -1,11 +1,11 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
-  "planKind": "generic-managed-entry",
+  "planKind": "full-assembly-entry",
   "assemblyName": "EnumParsingSubjects",
   "entrySubjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
-  "nativeEntryFunctionName": "RunNativeAot",
-  "entrySymbol": "EnumParsingSubjects_EnumParsingSubjects_Run",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "EnumParsingSubjects_EnumParsingSubjects_Run_System_Int32",
   "entryMethodToken": "0u",
-  "workloadAbi": "void(int32)"
+  "workloadAbi": "full-assembly"
 }

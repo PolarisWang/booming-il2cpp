@@ -247,7 +247,7 @@ def _generate_entrypoint_source(
     # No Action[] MethodTable — avoids delegate lowering issues in codegen.
     # Instead generates a Run(int entryIndex) switch dispatcher for runtime-entry.cpp
     # to call via --benchmark N or --hotupdate.
-    method_prefix = "Subject_" if variant == "subjects" else "Method"
+    method_prefix = "Subject_" if variant in ("subjects", "patch") else "Method"
     custom_prefix = "CustomEntrySubject_" if variant == "subjects" else "CustomEntryMethod"
 
     for idx, subject_id in enumerate(method_subject_ids):
@@ -481,6 +481,7 @@ def _generate_csproj(
             f"    <AssemblyName>{class_name}</AssemblyName>\n"
             f"    {namespace_part}\n"
             "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
+            "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
             "  </PropertyGroup>\n"
             "  <ItemGroup>\n"
             f'    <Compile Include="{cs_file_name}" />\n'

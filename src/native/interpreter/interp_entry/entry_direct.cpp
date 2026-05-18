@@ -4,6 +4,7 @@
 #include "vtable_registry.h"
 
 #include <code_generator.h>
+#include <codegen_helpers.h>
 #include <native_method.h>
 
 #include <chaos/log.h>
@@ -716,7 +717,21 @@ void InterpreterEntryDirect(
                 using NativeEntry = void (*)(void*, void*);
                 auto native_entry = reinterpret_cast<NativeEntry>(nm->code);
                 native_entry(args_buf, ret_buf);
-                return;
+
+                // Check for deoptimization signal (overflow, PIC miss).
+                // When kDeoptMagic is detected, fall through to interpreter
+                // paths instead of returning normally.
+                bool deopt_detected = false;
+                if (*(uint64_t*)ret_buf == codegen::kDeoptMagic) {
+                    auto& deopt = codegen::t_deopt_state;
+                    if (deopt.deopt_happened) {
+                        deopt.deopt_happened = false;
+                        deopt_detected = true;
+                    }
+                }
+                if (!deopt_detected) {
+                    return;  // Normal return — result is in ret_buf.
+                }
             }
         }
     }
@@ -816,6 +831,7 @@ void InterpreterEntryDirect(
                         cfg.enable_safepoint_polls = true;
                         cfg.safepoint_fn = reinterpret_cast<void*>(
                             &chaos::il2cpp::runtime_core::threading::SafepointPoll);
+                        cfg.pic_dispatch_data = patch_method->pic_dispatch_data;
                         auto* nm = codegen::GenerateNativeCode(*reg_m, cfg);
                         patch_method->cached_native_method = nm;
                         if (nm == nullptr) {
@@ -918,31 +934,28 @@ void InterpreterEntryDirect(
                 switch (ret_tag) {
                 case interpreter::ValueTag::Int32:
                     ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val));
-                    if (using_pool) tls_frame_pool.Release(ff);
-                    return;
+                    break;
                 case interpreter::ValueTag::Int64:
                     ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val));
-                    if (using_pool) tls_frame_pool.Release(ff);
-                    return;
+                    break;
                 case interpreter::ValueTag::Float32: {
                     float v;
                     std::memcpy(&v, &ff->ret_val, sizeof(float));
                     ret_writer.WriteF32(v);
-                    if (using_pool) tls_frame_pool.Release(ff);
-                    return;
+                    break;
                 }
                 case interpreter::ValueTag::Float64: {
                     double v;
                     std::memcpy(&v, &ff->ret_val, sizeof(double));
                     ret_writer.WriteF64(v);
-                    if (using_pool) tls_frame_pool.Release(ff);
-                    return;
+                    break;
                 }
                 default:
                     ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val));
-                    if (using_pool) tls_frame_pool.Release(ff);
-                    return;
+                    break;
                 }
+                if (using_pool) tls_frame_pool.Release(ff);
+                return;
             }
             if (using_pool) tls_frame_pool.Release(ff);
             return;

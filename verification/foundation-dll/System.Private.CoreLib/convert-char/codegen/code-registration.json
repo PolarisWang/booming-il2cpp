@@ -8,7 +8,7 @@
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Run",
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Run_System_Int32",
           "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)"
         },
         {

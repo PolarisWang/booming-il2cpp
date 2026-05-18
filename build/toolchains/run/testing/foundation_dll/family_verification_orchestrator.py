@@ -493,6 +493,34 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
                 return '_ = System.Threading.Tasks.Task.FromResult(42)', False
             return '', False
 
+        # ── System.Enum methods ─────────────────────────────────────────
+        if declaring_type == 'System.Enum':
+            if method_name == 'Format' and param_types == ['System.Type', 'System.Object', 'System.String']:
+                return 'System.Enum.Format(typeof(System.StringComparison), System.StringComparison.Ordinal, "G")', False
+            elif method_name == 'GetName' and param_types == ['System.RuntimeType', 'System.UInt64']:
+                return 'System.Enum.GetName(typeof(System.StringComparison), System.StringComparison.Ordinal)', False
+            elif method_name == 'GetName' and param_types == ['System.Type', 'System.Object']:
+                return 'System.Enum.GetName(typeof(System.StringComparison), System.StringComparison.Ordinal)', False
+            elif method_name == 'GetNames' and param_types == ['System.Type']:
+                return '_ = System.Enum.GetNames(typeof(System.StringComparison))', False
+            elif method_name == 'GetValues' and param_types == ['System.Type']:
+                return '_ = System.Enum.GetValues(typeof(System.StringComparison))', False
+            elif method_name == 'IsDefined' and param_types == ['System.Type', 'System.Object']:
+                return 'System.Enum.IsDefined(typeof(System.StringComparison), System.StringComparison.Ordinal)', False
+            elif method_name == 'Parse' and param_types == ['System.Type', 'System.String']:
+                return 'System.Enum.Parse(typeof(System.StringComparison), "Ordinal")', False
+            elif method_name == 'Parse' and param_types == ['System.Type', 'System.String', 'System.Boolean']:
+                return 'System.Enum.Parse(typeof(System.StringComparison), "Ordinal", true)', False
+            elif method_name == 'ToString' and len(param_types) == 0:
+                return 'System.StringComparison.Ordinal.ToString()', False
+            elif method_name == 'ToString' and param_types == ['System.String']:
+                return 'System.StringComparison.Ordinal.ToString("G")', False
+            elif method_name == 'TryParse' and param_types == ['System.Type', 'System.String', 'System.Boolean', 'System.Object&']:
+                return 'System.Enum.TryParse(typeof(System.StringComparison), "Ordinal", true, out _)', False
+            elif method_name == 'TryParse' and param_types == ['System.Type', 'System.String', 'System.Object&']:
+                return 'System.Enum.TryParse(typeof(System.StringComparison), "Ordinal", out _)', False
+            return '', False
+
         return '', False
 
     def _return_type_from_mid(mid: str) -> str:

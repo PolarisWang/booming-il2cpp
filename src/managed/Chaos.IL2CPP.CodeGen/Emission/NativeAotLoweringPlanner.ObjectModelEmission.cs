@@ -210,6 +210,10 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					hashSet2[targetReference.SubjectId] = targetReference.FieldTypeSubjectId;
 				}
+				else
+				{
+					hashSet[targetReference.SubjectId] = null;
+				}
 				continue;
 				IL_06ac:
 				if (flag)

@@ -506,7 +506,7 @@ static bool bench_callvirt_pic() {
     // ── Create receiver object ──
     // Use static storage so it outlives the benchmark.
     static InterpreterObject s_obj;
-    s_obj = InterpreterObject();  // reset
+    ::new (&s_obj) InterpreterObject();  // reset via placement new
     s_obj.type_token = kRecvToken;
 
     // ── PIC path measurement ──

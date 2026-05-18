@@ -2,14 +2,21 @@
   "formatVersion": "v0",
   "artifactKind": "nativeCodegenMetrics",
   "codegenKind": "native-aot",
-  "planKind": "full-assembly-entry",
+  "planKind": "generic-managed-entry",
   "generatedSourcePaths": [
-    "generated/native-aot.generated.cpp",
-    "generated/runtime_helper_shapes.h"
+    "generated/runtime_helper_shapes.h",
+    "generated/native-aot.generated.cpp"
   ],
   "generatedCppFileCount": 2,
-  "generatedCppTotalBytes": 114645,
-  "largestGeneratedCppBytes": 67466,
-  "generatedSymbolCount": 16,
-  "peakWorkingSetBytes": 499154944
+  "generatedCppTotalBytes": 186004,
+  "largestGeneratedCppBytes": 110231,
+  "generatedSymbolCount": 34,
+  "peakWorkingSetBytes": 523292672,
+  "structuredMethodCount": 27,
+  "structuredExceptionBodyCount": 1,
+  "flatFallbackCount": 1,
+  "totalMethodCount": 29,
+  "structuredRecoveryRate": 0.9655172413793104,
+  "aotReachableMethodCount": 36,
+  "aotUnreachableMethodCount": 0
 }

@@ -14,7 +14,7 @@
         "methodId": "convert-char-subjects.convert-char-subjects.run",
         "signature": "System.Void ConvertCharSubjects::Run(System.Int32)"
       },
-      "nativeSymbol": "ConvertCharSubjects_ConvertCharSubjects_Run",
+      "nativeSymbol": "ConvertCharSubjects_ConvertCharSubjects_Run_System_Int32",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {

@@ -42,7 +42,8 @@ target_link_libraries(
     PRIVATE
         chaos_runtime_core
         chaos_bootstrap
-        chaos_interpreter)
+        chaos_interpreter
+        chaos_codegen)
 
 # All GC test targets need chaos_interpreter because chaos_runtime_core.lib
 # contains instantiation_engine.obj which references InterpreterValue symbols,
@@ -314,6 +315,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
                 chaos_runtime_core
                 chaos_bootstrap
                 chaos_interpreter
+                chaos_codegen
                 chaos_fmt
                 chaos_common
                 chaos_support
@@ -487,7 +489,9 @@ endif()
 
 # gc_bgc_stress_test — BGC concurrent mark/sweep/compact stress test (multi-threaded)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bgc_stress_test.cpp")
-    add_executable(chaos_gc_bgc_stress_test gc_bgc_stress_test.cpp ${CHAOS_GC_TEST_STUBS})
+    add_executable(chaos_gc_bgc_stress_test
+        gc_bgc_stress_test.cpp
+        ${CHAOS_GC_TEST_STUBS})
     target_compile_features(chaos_gc_bgc_stress_test PRIVATE cxx_std_17)
     target_compile_definitions(chaos_gc_bgc_stress_test PRIVATE
         _CRT_SECURE_NO_WARNINGS)
@@ -526,6 +530,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/exception_sentinel_test.cpp")
             chaos_runtime_core
             chaos_bootstrap
             chaos_interpreter
+            chaos_codegen
             chaos_fmt
             chaos_common
             chaos_support
@@ -555,6 +560,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
             chaos_runtime_core
             chaos_bootstrap
             chaos_interpreter
+            chaos_codegen
             chaos_fmt)
 endif()
 

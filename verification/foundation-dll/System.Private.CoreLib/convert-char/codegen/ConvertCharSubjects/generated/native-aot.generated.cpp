@@ -11,6 +11,8 @@
 #include "reflection_query_model.h"
 #include "load_store_chaos_bridge.h"
 #include "interpreter_entry.h"
+#include <gc/gc_bgc_inline.h>
+#include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "convert.h"
 
@@ -330,7 +332,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_14(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_15(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_16(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -398,7 +400,7 @@ static constexpr struct {
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_15
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_16
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_17
-		{ 0u, 1u },  // ConvertCharSubjects_ConvertCharSubjects_Run
+		{ 0u, 1u },  // ConvertCharSubjects_ConvertCharSubjects_Run_System_Int32
 	},
 	{
 		1u,
@@ -541,7 +543,7 @@ static HotpatchEntryV0 s_hotpatch_entries[19] = {
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_15
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_16
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_17
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ConvertCharSubjects::Run
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Run_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ConvertCharSubjects::Run
 };
 
 // Module hotpatch bundle
@@ -634,7 +636,7 @@ static void (*kAotMethods[19])() = {
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Run),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Run_System_Int32),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
@@ -676,7 +678,8 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 			entry.method_key, __chaos_args, __chaos_ret);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		// Use kBenchmarkWrappers which supply correct default argument values
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -714,7 +717,8 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
 			entry.method_key);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		// Use kBenchmarkWrappers which supply correct default argument values
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -753,7 +757,7 @@ static void* const kMethodPointers[19] = {
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Run),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Run_System_Int32),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -1078,8 +1082,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_4(void)
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_inline_result = (throw chaos_managed_exception{{_s0}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_convert_tochar_decimal(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
@@ -1090,8 +1095,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_4(void)
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
-		const auto chaos_inline_result = (throw chaos_managed_exception{{_s1}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+		const auto chaos_arg_0 = _s1;
+		const auto chaos_result = chaos_convert_tochar_decimal(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1127,13 +1133,15 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_5(void)
 
 	_s0 = ChaosStoreFloat64(42);
 	{
-		const auto chaos_inline_result = (throw chaos_managed_exception{{_s0}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_convert_tochar_double(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = ChaosStoreFloat64(42);
 	{
-		const auto chaos_inline_result = (throw chaos_managed_exception{{_s1}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+		const auto chaos_arg_0 = _s1;
+		const auto chaos_result = chaos_convert_tochar_double(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1453,13 +1461,15 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_12(void)
 
 	_s0 = ChaosStoreFloat32(42.0f);
 	{
-		const auto chaos_inline_result = (throw chaos_managed_exception{{_s0}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_convert_tochar_single(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = ChaosStoreFloat32(42.0f);
 	{
-		const auto chaos_inline_result = (throw chaos_managed_exception{{_s1}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+		const auto chaos_arg_0 = _s1;
+		const auto chaos_result = chaos_convert_tochar_single(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_load_float32(_s0) == chaos_load_float32(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1712,7 +1722,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void)
 }
 
 // Managed method: ConvertCharSubjects/ConvertCharSubjects::Run(System.Int32)
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};

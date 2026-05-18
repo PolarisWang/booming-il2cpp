@@ -172,7 +172,7 @@ STATIC_METHODS_BY_TYPE: dict[str, frozenset[str]] = {
     }),
     "Object": frozenset({"Equals", "ReferenceEquals"}),
     "Type": frozenset({"GetType", "GetTypeFromHandle"}),
-    "Thread": frozenset({"Sleep", "get_CurrentThread"}),
+    "Thread": frozenset({"Sleep", "get_CurrentThread", "ResetAbort", "Yield"}),
     "CultureInfo": frozenset({"GetCultureInfo", "get_CurrentCulture", "get_InvariantCulture", "get_CurrentUICulture"}),
     "MulticastDelegate": frozenset({"Combine", "Remove", "RemoveAll", "CreateDelegate"}),
     "Guid": frozenset({"NewGuid", "Parse", "TryParse", "ParseExact", "TryParseExact", "Empty"}),
@@ -293,19 +293,15 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("MulticastDelegate", "GetInvocationList", 0): "skip",
     ("Delegate", "op_Equality", 2): "skip",
     ("Delegate", "op_Inequality", 2): "skip",
-    # Enum with non-enum type
-    ("Enum", "Parse", 2): "skip",
-    ("Enum", "Parse", 3): "skip",
-    ("Enum", "IsDefined", 2): "skip",
-    ("Enum", "GetValues", 1): "skip",
-    ("Enum", "GetNames", 1): "skip",
-    ("Enum", "GetName", 2): "skip",
-    ("Enum", "GetName", 2): "skip",
-    ("Enum", "Format", 3): "skip",
+    # Enum with non-enum type — auto-generatable for subjects variant
+    # Note: For benchmark variant, these have explicit patterns in family_verification_orchestrator.py
+    # Override: GetName with UInt64 param triggers boxed_type codegen bug for System.UInt64
+    ("Enum", "GetName", 2): "Enum.GetName(typeof(DayOfWeek), (object)1)",
+    # Skip: ToString with format param triggers boxed_type codegen bug for System.DayOfWeek
     ("Enum", "ToString", 1): "skip",
-    # Enum.TryParse has 'out' parameters (codegen uses 'ref', fails CS1620)
-    ("Enum", "TryParse", 3): "skip",    # (Type, string, out object)
-    ("Enum", "TryParse", 4): "skip",    # (Type, string, bool, out object)
+    # Enum.TryParse has 'out' parameters (codegen uses 'ref', fails CS1620 at call site)
+    ("Enum", "TryParse", 3): "skip",
+    ("Enum", "TryParse", 4): "skip",
     # Type.GetType with unresolvable name
     ("Type", "GetType", 1): "skip",
     ("Type", "GetType", 2): "skip",
@@ -354,6 +350,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Task", "get_IsCompleted", 0): "skip",
     ("Task", "get_Status", 0): "skip",
     ("Thread", "Sleep", 1): "skip",
+    ("Thread", "ResetAbort", 0): "skip",
     ("Thread", "get_ManagedThreadId", 0): "skip",
     # Type.ContainsGenericParameters is a property, not a method — calling it with () fails
     ("Type", "ContainsGenericParameters", 0): "typeof(byte).ContainsGenericParameters",
@@ -476,9 +473,11 @@ TYPE_DEFAULT_MAP: dict[str, str] = {
     "System.Collections.Generic.Dictionary`2": "new Dictionary<string, int>()",
     "System.IO.SeekOrigin": "System.IO.SeekOrigin.Begin",
     "System.Globalization.CompareOptions": "System.Globalization.CompareOptions.None",
+    "System.RuntimeType": "typeof(byte).GetType()!",
     "System.RuntimeTypeHandle": "default(System.RuntimeTypeHandle)",
     "System.RuntimeFieldHandle": "default(System.RuntimeFieldHandle)",
     "System.IFormatProvider": "null",
+    "System.Threading.ThreadPriority": "System.Threading.ThreadPriority.Normal",
 }
 
 TYPE_ALTERNATIVE_MAP: dict[str, str] = {

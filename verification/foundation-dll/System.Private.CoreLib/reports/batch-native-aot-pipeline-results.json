@@ -6,7 +6,7 @@
   "failed": 0,
   "results": [
     {
-      "family": "codegen-edge-cases",
+      "family": "enum-parsing",
       "config_tier": "CHECK",
       "steps": {
         "build_subjects": "OK",
@@ -14,10 +14,10 @@
         "build_entry_exe": "OK"
       },
       "success": true,
-      "methodCount": 4,
-      "entryPointSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Run:System.Void(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\build-output\\CodegenEdgeCasesSubjects.dll"
+      "methodCount": 12,
+      "entryPointSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-18T18:31:15"
+  "timestamp": "2026-05-18T20:13:30"
 }

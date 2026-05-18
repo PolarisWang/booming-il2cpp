@@ -21,6 +21,7 @@
 #include "patch_loader.h"
 #include "hotpatch_table.h"
 #include "chaos/profile.h"
+#include "runtime_stubs/misc_stubs.h"
 #include "gc/gc_bgc_inline.h"
 
 // kChaosExternalRuntimeFnTable is defined in native-aot.generated.cpp.
@@ -83,11 +84,11 @@ static void FillExternalRuntimeStubs() {
 
         // Known managed GC methods — wire real runtime implementations.
         if (std::strstr(sub, "System.GC::Collect:")) {
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){ ChaosGcCollect(-1); });
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){ chaos_gc_collect(); });
             continue;
         }
         if (std::strstr(sub, "System.GC::WaitForPendingFinalizers:")) {
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){ ChaosGcCollect(-1); });
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){ chaos_gc_wait_for_pending_finalizers(); });
             continue;
         }
         if (std::strstr(sub, "System.GC::GetGeneration:")) {
@@ -122,19 +123,23 @@ int main(int argc, char** argv) {
         &chaos_codegen_options);
     bridge->bootstrap_runtime();
 
-    // ── Register current thread so threading externals work ─────────────
-    // bootstrap_runtime() does NOT create a ManagedThread, so
-    // chaos_thread_get_current() returns null when generated code calls
-    // get_CurrentThread().  Register the current thread with a dummy
-    // managed_object so the null check in Subject_0 passes.
-    // The sentinel RuntimeState/ThreadState values are kept for the
-    // exception handling path (RaiseManagedException guard).
+    // Register current thread so generated code that calls get_CurrentThread()
+    // (e.g. threading externals) gets a non-null return from
+    // chaos_thread_get_current().  This creates a ManagedThread in TLS with a
+    // dummy managed_object.  Families that don't use threading pay a small heap
+    // allocation once during startup — acceptable for verification.
     // NOTE: We do NOT call runtime_init/thread_attach via ABI because
-    // RuntimeInit() calls setvbuf(stdout, nullptr, _IOLBF, 0) which
-    // crashes on Windows CRT with FAST_FAIL_INVALID_ARG.
+    // RuntimeInit() calls setvbuf(stdout, nullptr, _IOLBF, 0) which crashes
+    // on Windows CRT with FAST_FAIL_INVALID_ARG.
     chaos::il2cpp::runtime_core::threading::RegisterThread(
         chaos::il2cpp::runtime_core::threading::kMainThreadId,
         reinterpret_cast<void*>(static_cast<uintptr_t>(0x42)));
+
+    // Set TLS to non-null sentinels so RaiseManagedException gets past its
+    // first guard (runtime == nullptr / thread == nullptr check).
+    // RuntimeState and ThreadState are opaque types (only forward-declared
+    // in runtime_abi.h), so sentinels are safe — the exception path never
+    // dereferences these pointers when type resolution fails.
     chaos::il2cpp::runtime_core::SetCurrentRuntimeState(
         reinterpret_cast<RuntimeState*>(static_cast<uintptr_t>(1)));
     chaos::il2cpp::runtime_core::SetCurrentThreadState(
@@ -216,6 +221,7 @@ int main(int argc, char** argv) {
         return 0;
     }
     case RunMode::HotUpdate: {
+        auto* patch_ctx = ApplyHotpatchIfAvailable();
         int result = 0;
         for (int i = 0; i < kAotMethodCount; i++) {
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };

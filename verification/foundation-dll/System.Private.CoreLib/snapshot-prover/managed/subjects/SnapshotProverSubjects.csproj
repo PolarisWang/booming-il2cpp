@@ -7,8 +7,10 @@
     <AssemblyName>SnapshotProverSubjects</AssemblyName>
     <RootNamespace>SnapshotProverSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="SnapshotProverSubjects.cs" />
+    <Compile Include="SnapshotTestFixtures.cs" />
   </ItemGroup>
 </Project>

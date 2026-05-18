@@ -608,6 +608,10 @@ public sealed partial class NativeAotLoweringPlanner
                 "\"load_store_chaos_bridge.h\"",
                 // Interpreter dispatch for hotpatch-kept-native & flat-goto fallback
                 "\"interpreter_entry.h\"",
+                // GC write barrier (SATB pre-write barrier for reference-type field stores).
+                "<gc/gc_bgc_inline.h>",
+                // GC card table (post-write dirty card marking for generational GC).
+                "<gc/gc_card_table.h>",
                 // Common generated runtime prelude (shared header, ~200 lines
                 // of helper functions previously emitted inline in every file).
                 "<ChaosGeneratedRuntimePrelude.h>",

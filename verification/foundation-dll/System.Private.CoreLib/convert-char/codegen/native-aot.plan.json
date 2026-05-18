@@ -5,7 +5,7 @@
   "assemblyName": "ConvertCharSubjects",
   "entrySubjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "RunNativeAot",
-  "entrySymbol": "ConvertCharSubjects_ConvertCharSubjects_Run",
+  "entrySymbol": "ConvertCharSubjects_ConvertCharSubjects_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "void(int32)"
 }

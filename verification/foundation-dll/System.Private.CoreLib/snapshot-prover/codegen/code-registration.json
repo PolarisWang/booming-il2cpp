@@ -8,68 +8,956 @@
         {
           "registrationKind": "methodPointer",
           "slot": 0,
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Run_System_Int32",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
           "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_0",
           "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 1,
+          "slot": 2,
           "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_1",
           "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 2,
+          "slot": 3,
           "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_2",
           "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 3,
+          "slot": 4,
           "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_3",
           "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 4,
+          "slot": 5,
           "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_4",
           "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 5,
+          "slot": 6,
           "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_5",
           "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 6,
+          "slot": 7,
           "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_6",
           "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 7,
+          "slot": 8,
           "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_7",
           "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 8,
+          "slot": 9,
           "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_8",
           "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 9,
+          "slot": 10,
           "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
           "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 10,
-          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Run",
-          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)"
+          "slot": 11,
+          "symbol": "SnapshotProverSubjects_ArithmeticOps_RunAdd",
+          "subjectId": "SnapshotProverSubjects/ArithmeticOps::RunAdd:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "SnapshotProverSubjects_StringOps_UseString",
+          "subjectId": "SnapshotProverSubjects/StringOps::UseString:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "SnapshotProverSubjects_VoidCaller_DoNothing",
+          "subjectId": "SnapshotProverSubjects/VoidCaller::DoNothing:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "SnapshotProverSubjects_MathHelper_RunSquare",
+          "subjectId": "SnapshotProverSubjects/MathHelper::RunSquare:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "SnapshotProverSubjects_FlowControl_IsPositive",
+          "subjectId": "SnapshotProverSubjects/FlowControl::IsPositive:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "SnapshotProverSubjects_InstanceHelper__ctor_System_Int32",
+          "subjectId": "SnapshotProverSubjects/InstanceHelper::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "SnapshotProverSubjects_InstanceHelper_GetValue",
+          "subjectId": "SnapshotProverSubjects/InstanceHelper::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "SnapshotProverSubjects_CallVirtHelper_CreateAndUse",
+          "subjectId": "SnapshotProverSubjects/CallVirtHelper::CreateAndUse:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "SnapshotProverSubjects_BoxingHelper_BoxAndUnbox",
+          "subjectId": "SnapshotProverSubjects/BoxingHelper::BoxAndUnbox:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "SnapshotProverSubjects_FieldHelper_GetAndIncrement",
+          "subjectId": "SnapshotProverSubjects/FieldHelper::GetAndIncrement:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "SnapshotProverSubjects_LoopHelper_SumToFive",
+          "subjectId": "SnapshotProverSubjects/LoopHelper::SumToFive:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "SnapshotProverSubjects_ConversionHelper_ConvertToInt",
+          "subjectId": "SnapshotProverSubjects/ConversionHelper::ConvertToInt:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "SnapshotProverSubjects_Helper_Nop",
+          "subjectId": "SnapshotProverSubjects/Helper::Nop:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "SnapshotProverSubjects_Helper_Square_System_Int32",
+          "subjectId": "SnapshotProverSubjects/Helper::Square:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "SnapshotProverSubjects_Helper_ConsumeString_System_String",
+          "subjectId": "SnapshotProverSubjects/Helper::ConsumeString:System.Void(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "SnapshotProverSubjects_Helper_GetValue",
+          "subjectId": "SnapshotProverSubjects/Helper::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "SnapshotProverSubjects_SwitchHelper_Classify",
+          "subjectId": "SnapshotProverSubjects/SwitchHelper::Classify:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "SnapshotProverSubjects_LdftnHelper_GetFnPtr",
+          "subjectId": "SnapshotProverSubjects/LdftnHelper::GetFnPtr:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "SnapshotProverSubjects_TargetHelper_GetValue",
+          "subjectId": "SnapshotProverSubjects/TargetHelper::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "SnapshotProverSubjects_ArrayHelper_MakeAndFill",
+          "subjectId": "SnapshotProverSubjects/ArrayHelper::MakeAndFill:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "SnapshotProverSubjects_EhHelper_SafeDivide",
+          "subjectId": "SnapshotProverSubjects/EhHelper::SafeDivide:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "SnapshotProverSubjects_GenericHelper_UseGeneric",
+          "subjectId": "SnapshotProverSubjects/GenericHelper::UseGeneric:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "SnapshotProverSubjects_Wrapper_1__ctor_0",
+          "subjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "SnapshotProverSubjects_Wrapper_1_GetValue",
+          "subjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "SnapshotProverSubjects_DelegateHelper_RunDelegate",
+          "subjectId": "SnapshotProverSubjects/DelegateHelper::RunDelegate:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "SnapshotProverSubjects_BaseClass_Compute",
+          "subjectId": "SnapshotProverSubjects/BaseClass::Compute:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "SnapshotProverSubjects_BaseClass__ctor",
+          "subjectId": "SnapshotProverSubjects/BaseClass::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "SnapshotProverSubjects_DerivedClass_Compute",
+          "subjectId": "SnapshotProverSubjects/DerivedClass::Compute:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "SnapshotProverSubjects_DerivedClass__ctor",
+          "subjectId": "SnapshotProverSubjects/DerivedClass::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "SnapshotProverSubjects_VirtualHelper_UseVirtual",
+          "subjectId": "SnapshotProverSubjects/VirtualHelper::UseVirtual:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "SnapshotProverSubjects_MarkedClass__ctor",
+          "subjectId": "SnapshotProverSubjects/MarkedClass::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "SnapshotProverSubjects_TypeCheckHelper_CheckAndCast",
+          "subjectId": "SnapshotProverSubjects/TypeCheckHelper::CheckAndCast:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "SnapshotProverSubjects_SizeOfHelper_GetSize",
+          "subjectId": "SnapshotProverSubjects/SizeOfHelper::GetSize:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 44,
+          "symbol": "SnapshotProverSubjects_IndirectHelper_ReadWriteRef",
+          "subjectId": "SnapshotProverSubjects/IndirectHelper::ReadWriteRef:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 45,
+          "symbol": "SnapshotProverSubjects_ArithmeticCompareHelper_RunCompare",
+          "subjectId": "SnapshotProverSubjects/ArithmeticCompareHelper::RunCompare:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 46,
+          "symbol": "SnapshotProverSubjects_BranchDupHelper_RunBranchDup",
+          "subjectId": "SnapshotProverSubjects/BranchDupHelper::RunBranchDup:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 47,
+          "symbol": "SnapshotProverSubjects_HasInstanceFields__ctor_System_Int32",
+          "subjectId": "SnapshotProverSubjects/HasInstanceFields::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 48,
+          "symbol": "SnapshotProverSubjects_InstanceFieldHelper_CreateAndUseFields",
+          "subjectId": "SnapshotProverSubjects/InstanceFieldHelper::CreateAndUseFields:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 49,
+          "symbol": "SnapshotProverSubjects_StaticFieldWriteHelper_WriteAndRead",
+          "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::WriteAndRead:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 50,
+          "symbol": "SnapshotProverSubjects_VirtualDispatchHelper_UseVirtualDispatch",
+          "subjectId": "SnapshotProverSubjects/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 51,
+          "symbol": "SnapshotProverSubjects_BitwiseHelper_RunBitwise",
+          "subjectId": "SnapshotProverSubjects/BitwiseHelper::RunBitwise:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 52,
+          "symbol": "SnapshotProverSubjects_ShiftHelper_RunShift",
+          "subjectId": "SnapshotProverSubjects/ShiftHelper::RunShift:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 53,
+          "symbol": "SnapshotProverSubjects_ArrayLengthHelper_RunLength",
+          "subjectId": "SnapshotProverSubjects/ArrayLengthHelper::RunLength:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 54,
+          "symbol": "SnapshotProverSubjects_ValueTypeHelper_RunValueType",
+          "subjectId": "SnapshotProverSubjects/ValueTypeHelper::RunValueType:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 55,
+          "symbol": "SnapshotProverSubjects_LocalAllocHelper_RunAlloc",
+          "subjectId": "SnapshotProverSubjects/LocalAllocHelper::RunAlloc:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 56,
+          "symbol": "SnapshotProverSubjects_MulDivHelper_RunMulDiv",
+          "subjectId": "SnapshotProverSubjects/MulDivHelper::RunMulDiv:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 57,
+          "symbol": "SnapshotProverSubjects_BranchCompareHelper_RunBranchCompare",
+          "subjectId": "SnapshotProverSubjects/BranchCompareHelper::RunBranchCompare:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 58,
+          "symbol": "SnapshotProverSubjects_FloatOpsHelper_RunFloatOps",
+          "subjectId": "SnapshotProverSubjects/FloatOpsHelper::RunFloatOps:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 59,
+          "symbol": "SnapshotProverSubjects_ConvWideHelper_RunConvWide",
+          "subjectId": "SnapshotProverSubjects/ConvWideHelper::RunConvWide:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 60,
+          "symbol": "SnapshotProverSubjects_NegShiftHelper_RunNegShift",
+          "subjectId": "SnapshotProverSubjects/NegShiftHelper::RunNegShift:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 61,
+          "symbol": "SnapshotProverSubjects_LdcI8Helper_RunLdcI8",
+          "subjectId": "SnapshotProverSubjects/LdcI8Helper::RunLdcI8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 62,
+          "symbol": "SnapshotProverSubjects_ConvSmallIntHelper_RunConvSmall",
+          "subjectId": "SnapshotProverSubjects/ConvSmallIntHelper::RunConvSmall:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 63,
+          "symbol": "SnapshotProverSubjects_LdindI1Helper_RunLdindI1",
+          "subjectId": "SnapshotProverSubjects/LdindI1Helper::RunLdindI1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 64,
+          "symbol": "SnapshotProverSubjects_BranchCompareBHelper_RunBranchCompareB",
+          "subjectId": "SnapshotProverSubjects/BranchCompareBHelper::RunBranchCompareB:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 65,
+          "symbol": "SnapshotProverSubjects_HasFields__ctor",
+          "subjectId": "SnapshotProverSubjects/HasFields::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 66,
+          "symbol": "SnapshotProverSubjects_AddressHelper_RunAddress",
+          "subjectId": "SnapshotProverSubjects/AddressHelper::RunAddress:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 67,
+          "symbol": "SnapshotProverSubjects_LdtokenHelper_RunLdtoken",
+          "subjectId": "SnapshotProverSubjects/LdtokenHelper::RunLdtoken:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 68,
+          "symbol": "SnapshotProverSubjects_LdelemaHelper_RunLdelema",
+          "subjectId": "SnapshotProverSubjects/LdelemaHelper::RunLdelema:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 69,
+          "symbol": "SnapshotProverSubjects_LdargaHelper_RunLdarga_System_Int32",
+          "subjectId": "SnapshotProverSubjects/LdargaHelper::RunLdarga:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 70,
+          "symbol": "SnapshotProverSubjects_CpobjHelper_RunCpobj",
+          "subjectId": "SnapshotProverSubjects/CpobjHelper::RunCpobj:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 71,
+          "symbol": "SnapshotProverSubjects_StindNarrowHelper_RunStindNarrow",
+          "subjectId": "SnapshotProverSubjects/StindNarrowHelper::RunStindNarrow:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 72,
+          "symbol": "SnapshotProverSubjects_CallvirtHelper_RunCallvirt",
+          "subjectId": "SnapshotProverSubjects/CallvirtHelper::RunCallvirt:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 73,
+          "symbol": "SnapshotProverSubjects_UnboxHelper_RunUnbox",
+          "subjectId": "SnapshotProverSubjects/UnboxHelper::RunUnbox:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 74,
+          "symbol": "SnapshotProverSubjects_CpblkHelper_RunCpblk",
+          "subjectId": "SnapshotProverSubjects/CpblkHelper::RunCpblk:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 75,
+          "symbol": "SnapshotProverSubjects_LdindUnsignedHelper_RunLdindUnsigned",
+          "subjectId": "SnapshotProverSubjects/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 76,
+          "symbol": "SnapshotProverSubjects_LdindI8Helper_RunLdindI8",
+          "subjectId": "SnapshotProverSubjects/LdindI8Helper::RunLdindI8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 77,
+          "symbol": "SnapshotProverSubjects_LdindWideHelper_RunLdindWide",
+          "subjectId": "SnapshotProverSubjects/LdindWideHelper::RunLdindWide:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 78,
+          "symbol": "SnapshotProverSubjects_StindWideHelper_RunStindWide",
+          "subjectId": "SnapshotProverSubjects/StindWideHelper::RunStindWide:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 79,
+          "symbol": "SnapshotProverSubjects_ArrayRefHelper_RunArrayRef",
+          "subjectId": "SnapshotProverSubjects/ArrayRefHelper::RunArrayRef:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 80,
+          "symbol": "SnapshotProverSubjects_ThrowHelper_CheckPositive_System_Int32",
+          "subjectId": "SnapshotProverSubjects/ThrowHelper::CheckPositive:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 81,
+          "symbol": "SnapshotProverSubjects_OverflowHelper_RunOverflowAdd",
+          "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowAdd:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 82,
+          "symbol": "SnapshotProverSubjects_OverflowHelper_RunOverflowSub",
+          "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowSub:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 83,
+          "symbol": "SnapshotProverSubjects_OverflowHelper_RunOverflowMul",
+          "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowMul:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 84,
+          "symbol": "SnapshotProverSubjects_OverflowConvHelper_ConvOvfI4",
+          "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 85,
+          "symbol": "SnapshotProverSubjects_OverflowConvHelper_ConvOvfU1_System_Int32",
+          "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 86,
+          "symbol": "SnapshotProverSubjects_OverflowConvHelper_ConvOvfI2_System_Int32",
+          "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 87,
+          "symbol": "SnapshotProverSubjects_OverflowConvHelper_ConvOvfU2_System_Int32",
+          "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 88,
+          "symbol": "SnapshotProverSubjects_OverflowConvHelper_ConvOvfU4_System_Int64",
+          "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 89,
+          "symbol": "SnapshotProverSubjects_OverflowConvHelper_ConvOvfI8_System_Single",
+          "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 90,
+          "symbol": "SnapshotProverSubjects_OverflowConvHelper_ConvOvfU8_System_Double",
+          "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 91,
+          "symbol": "SnapshotProverSubjects_CalliHelper_RunCalli_System_Int32",
+          "subjectId": "SnapshotProverSubjects/CalliHelper::RunCalli:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 92,
+          "symbol": "SnapshotProverSubjects_MyClass__ctor_System_Int32",
+          "subjectId": "SnapshotProverSubjects/MyClass::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 93,
+          "symbol": "SnapshotProverSubjects_MyClass_GetValue",
+          "subjectId": "SnapshotProverSubjects/MyClass::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 94,
+          "symbol": "SnapshotProverSubjects_LdVirtftnHelper_RunLdVirtftn",
+          "subjectId": "SnapshotProverSubjects/LdVirtftnHelper::RunLdVirtftn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 95,
+          "symbol": "SnapshotProverSubjects_LdelemAllHelper_TestAllElems",
+          "subjectId": "SnapshotProverSubjects/LdelemAllHelper::TestAllElems:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 96,
+          "symbol": "SnapshotProverSubjects_StelemAllHelper_TestAllElems",
+          "subjectId": "SnapshotProverSubjects/StelemAllHelper::TestAllElems:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 97,
+          "symbol": "SnapshotProverSubjects_UnsignedOpsHelper_TestCltUn",
+          "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCltUn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 98,
+          "symbol": "SnapshotProverSubjects_UnsignedOpsHelper_TestDivUn",
+          "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestDivUn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 99,
+          "symbol": "SnapshotProverSubjects_UnsignedOpsHelper_TestRemUn",
+          "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestRemUn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 100,
+          "symbol": "SnapshotProverSubjects_UnsignedOpsHelper_TestCkfinite_System_Double",
+          "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 101,
+          "symbol": "SnapshotProverSubjects_RareOpsHelper_TestInitBlk_System_Int32",
+          "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 102,
+          "symbol": "SnapshotProverSubjects_RareOpsHelper_TestStarg_System_Int32",
+          "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestStarg:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 103,
+          "symbol": "SnapshotProverSubjects_RareOpsHelper_TestConvRUn_System_Single",
+          "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestConvRUn:System.Int32(System.Single)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 104,
+          "symbol": "SnapshotProverSubjects_StringFormatHelper_TestFormatOne",
+          "subjectId": "SnapshotProverSubjects/StringFormatHelper::TestFormatOne:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 105,
+          "symbol": "SnapshotProverSubjects_BranchUnsignedHelper_RunBranchUnsigned",
+          "subjectId": "SnapshotProverSubjects/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 106,
+          "symbol": "SnapshotProverSubjects_BranchUnsignedBHelper_RunBranchUnsignedB",
+          "subjectId": "SnapshotProverSubjects/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 107,
+          "symbol": "SnapshotProverSubjects_RethrowHelper_RunRethrow",
+          "subjectId": "SnapshotProverSubjects/RethrowHelper::RunRethrow:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 108,
+          "symbol": "SnapshotProverSubjects_OverflowUnHelper_RunOverflowAddUn",
+          "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowAddUn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 109,
+          "symbol": "SnapshotProverSubjects_OverflowUnHelper_RunOverflowSubUn",
+          "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowSubUn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 110,
+          "symbol": "SnapshotProverSubjects_OverflowUnHelper_RunOverflowMulUn",
+          "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowMulUn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 111,
+          "symbol": "SnapshotProverSubjects_MoreRareOpsHelper_RunArglist",
+          "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunArglist:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 112,
+          "symbol": "SnapshotProverSubjects_MoreRareOpsHelper_RunMkrefany",
+          "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunMkrefany:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 113,
+          "symbol": "SnapshotProverSubjects_MoreRareOpsHelper_RunRefanyval",
+          "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanyval:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 114,
+          "symbol": "SnapshotProverSubjects_MoreRareOpsHelper_RunRefanytype",
+          "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanytype:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 115,
+          "symbol": "SnapshotProverSubjects_MoreRareOpsHelper_RunJmp",
+          "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunJmp:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 116,
+          "symbol": "SnapshotProverSubjects_OverflowConvExtHelper_ConvOvfI1_System_Int32",
+          "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 117,
+          "symbol": "SnapshotProverSubjects_OverflowConvExtHelper_ConvOvfI1Un_System_Int32",
+          "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 118,
+          "symbol": "SnapshotProverSubjects_OverflowConvExtHelper_ConvOvfU1Un_System_Int32",
+          "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 119,
+          "symbol": "SnapshotProverSubjects_OverflowConvExtHelper_ConvOvfI2Un_System_Int32",
+          "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 120,
+          "symbol": "SnapshotProverSubjects_OverflowConvExtHelper_ConvOvfU2Un_System_Int32",
+          "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 121,
+          "symbol": "SnapshotProverSubjects_OverflowConvExtHelper_ConvOvfI4Un_System_Int64",
+          "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 122,
+          "symbol": "SnapshotProverSubjects_OverflowConvExtHelper_ConvOvfU4Un_System_Int64",
+          "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 123,
+          "symbol": "SnapshotProverSubjects_OverflowConvExtHelper_ConvOvfI8Un_System_Single",
+          "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 124,
+          "symbol": "SnapshotProverSubjects_OverflowConvExtHelper_ConvOvfU8Un_System_Double",
+          "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 125,
+          "symbol": "SnapshotProverSubjects_OverflowConvExtHelper_ConvOvfIUn_System_Int32",
+          "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 126,
+          "symbol": "SnapshotProverSubjects_OverflowConvExtHelper_ConvOvfUUn_System_Int32",
+          "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 127,
+          "symbol": "SnapshotProverSubjects_SimpleGapsHelper_RunLdnull",
+          "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunLdnull:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 128,
+          "symbol": "SnapshotProverSubjects_SimpleGapsHelper_RunConvU4",
+          "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvU4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 129,
+          "symbol": "SnapshotProverSubjects_SimpleGapsHelper_RunConvI",
+          "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvI:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 130,
+          "symbol": "SnapshotProverSubjects_SimpleGapsHelper_RunConvOvfI_System_Int32",
+          "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 131,
+          "symbol": "SnapshotProverSubjects_SimpleGapsHelper_RunConvOvfU_System_Int32",
+          "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 132,
+          "symbol": "SnapshotProverSubjects_SimpleGapsHelper_RunConvOvfIUn_System_Int32",
+          "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 133,
+          "symbol": "SnapshotProverSubjects_SimpleGapsHelper_RunConvOvfUUn_System_Int32",
+          "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 134,
+          "symbol": "SnapshotProverSubjects_LdindStindGapsHelper_RunLdindI4",
+          "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 135,
+          "symbol": "SnapshotProverSubjects_LdindStindGapsHelper_RunLdindI",
+          "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 136,
+          "symbol": "SnapshotProverSubjects_LdindStindGapsHelper_RunStindI",
+          "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunStindI:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 137,
+          "symbol": "SnapshotProverSubjects_CollectionsHelper_TestList",
+          "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestList:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 138,
+          "symbol": "SnapshotProverSubjects_CollectionsHelper_TestDict",
+          "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestDict:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 139,
+          "symbol": "SnapshotProverSubjects_CollectionsHelper_TestSet",
+          "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestSet:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 140,
+          "symbol": "SnapshotProverSubjects_ExternalCaller_CallExternal",
+          "subjectId": "SnapshotProverSubjects/ExternalCaller::CallExternal:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 141,
+          "symbol": "SnapshotProverSubjects_MultiDispatcher_DispatchBoth",
+          "subjectId": "SnapshotProverSubjects/MultiDispatcher::DispatchBoth:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 142,
+          "symbol": "SnapshotProverSubjects_InternalHelper_Double_System_Int32",
+          "subjectId": "SnapshotProverSubjects/InternalHelper::Double:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 143,
+          "symbol": "SnapshotProverSubjects_StringConcatHelper_TestConcat",
+          "subjectId": "SnapshotProverSubjects/StringConcatHelper::TestConcat:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 144,
+          "symbol": "SnapshotProverSubjects_GenericsVirtEhDemo_DemoCombine",
+          "subjectId": "SnapshotProverSubjects/GenericsVirtEhDemo::DemoCombine:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 145,
+          "symbol": "SnapshotProverSubjects_BoxInterfaceArrayDemo_DemoBoxStore",
+          "subjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 146,
+          "symbol": "SnapshotProverSubjects_HotUpdateWithTypesDemo_Run",
+          "subjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo::Run:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 147,
+          "symbol": "SnapshotProverSubjects_HotUpdateWithGenericsDemo_Run",
+          "subjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo::Run:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 148,
+          "symbol": "SnapshotProverSubjects_SealedHelper__ctor_System_Int32",
+          "subjectId": "SnapshotProverSubjects/SealedHelper::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 149,
+          "symbol": "SnapshotProverSubjects_SealedHelper_GetValueVirtual",
+          "subjectId": "SnapshotProverSubjects/SealedHelper::GetValueVirtual:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 150,
+          "symbol": "SnapshotProverSubjects_SealedClassVirtualHelper_RunSealedVirtual",
+          "subjectId": "SnapshotProverSubjects/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 151,
+          "symbol": "SnapshotProverSubjects_IMyInterface_GetValue",
+          "subjectId": "SnapshotProverSubjects/IMyInterface::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 152,
+          "symbol": "SnapshotProverSubjects_ImplHelper__ctor_System_Int32",
+          "subjectId": "SnapshotProverSubjects/ImplHelper::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 153,
+          "symbol": "SnapshotProverSubjects_ImplHelper_GetValue",
+          "subjectId": "SnapshotProverSubjects/ImplHelper::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 154,
+          "symbol": "SnapshotProverSubjects_InterfaceDevirtHelper_RunInterfaceTest",
+          "subjectId": "SnapshotProverSubjects/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 155,
+          "symbol": "SnapshotProverSubjects_Wrapper_System_Int32__ctor_System_Int32",
+          "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 156,
+          "symbol": "SnapshotProverSubjects_Wrapper_System_Int32_GetValue",
+          "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 157,
+          "symbol": "SnapshotProverSubjects_Wrapper__0__ctor_0",
+          "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 158,
+          "symbol": "SnapshotProverSubjects_Wrapper__0_GetValue",
+          "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::GetValue:!0()"
         }
       ]
     }

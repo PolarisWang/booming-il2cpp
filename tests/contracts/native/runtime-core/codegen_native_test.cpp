@@ -319,15 +319,16 @@ static bool Test_BranchNotTaken() {
 // Test: CanGenerateNativeCode_ReturnsTrueForAllOpcodesWithDeopt
 // ═══════════════════════════════════════════════════════════════════════
 // CanGenerateNativeCode should reject methods with unsupported opcodes.
+// Use an opcode that is genuinely unsupported (e.g., Box has no T4 handler).
 static bool Test_CanGenerate_Unsupported() {
     RegisterMethod rm;
     RegisterInstruction ri;
-    ri.header = MakeHeader(IROpCode::CallVirt, 0, 0, 0, kRegHasDst | kRegHasImm);
+    ri.header = MakeHeader(IROpCode::Break, 0, 0, 0, kRegHasDst | kRegHasImm);
     ri.imm.field_offset = 0;
     rm.instructions = { ri, InstrRet(0) };
     rm.max_regs = 1;
 
-    // CallVirt is not yet supported in T4 codegen.
+    // Break is not supported in T4 codegen.
     return !CanGenerateNativeCode(rm);
 }
 
@@ -463,14 +464,92 @@ static bool Test_DeoptEntry_Registration() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+// Test: TLAB_Inline_Box — TLAB inline path generates cmp/ja bump code
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_TLAB_Inline_Box() {
+    std::printf("  Test_TLAB_Inline_Box...\n");
+
+    // Set up a dummy TLAB with enough room.
+    alignas(64) uint8_t tlab_buf[128];
+    char* dummy_current = reinterpret_cast<char*>(tlab_buf);
+    char* dummy_end     = dummy_current + sizeof(tlab_buf);
+    char* dummy_current_ptr = dummy_current;  // storage for &tls_tlab.current
+    char* dummy_end_ptr     = dummy_end;      // storage for &tls_tlab.end
+
+    RegisterMethod rm;
+    // Box with explicit immediate for type_token.
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::Box, 0, 0, 0, kRegHasDst | kRegHasSrc1 | kRegHasImm);
+    ri.imm.i4 = 42;  // type_token
+    // Need a Ret to store result to ret_buf.
+    RegisterInstruction ri_ret = InstrRet(0);
+    rm.instructions = { ri, ri_ret };
+    rm.max_regs = 1;
+
+    CodeGenConfig cfg;
+    cfg.enable_safepoint_polls = false;
+    cfg.enable_register_caching = false;
+    cfg.enable_deopt = false;
+    cfg.tlab_current_loc = &dummy_current_ptr;  // address of char* pointer
+    cfg.tlab_end_loc     = &dummy_end_ptr;
+
+    if (!CanGenerateNativeCode(rm)) {
+        std::printf("    FAIL: CanGenerateNativeCode returned false (Box)\n");
+        return false;
+    }
+
+    auto* nm = GenerateNativeCode(rm, cfg);
+    if (nm == nullptr) {
+        std::printf("    FAIL: GenerateNativeCode returned null\n");
+        return false;
+    }
+
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) {
+        std::printf("    FAIL: entry is null\n");
+        return false;
+    }
+
+    DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size);
+
+    // Verify the emitted code contains a cmp instruction for TLAB bound check.
+    // cmp rdx, r8 encodes as 49 3B D0 (REX.WB + 3B + ModRM(3,2,0)).
+    bool has_cmp = false;
+    for (uint32_t i = 0; i + 2 < nm->code_size; i++) {
+        auto* code = static_cast<const uint8_t*>(nm->code);
+        if (code[i] == 0x49 && code[i+1] == 0x3B && code[i+2] == 0xD0) {
+            has_cmp = true;
+            break;
+        }
+        // Also check: cmp rdx, r8 via 4D 39 C2 (another valid encoding)
+        if (code[i] == 0x4D && code[i+1] == 0x39 && code[i+2] == 0xC2) {
+            has_cmp = true;
+            break;
+        }
+    }
+    std::printf("    TLAB cmp check: %s\n", has_cmp ? "FOUND" : "NOT FOUND");
+
+    // Execute the native code (TLAB fast path should succeed).
+    dummy_current_ptr = dummy_current;  // reset bump pointer for fresh allocation
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=0x%llx (non-null TLAB-allocated pointer expected)\n",
+                (unsigned long long)result);
+
+    // Box returns a pointer into the dummy TLAB buffer on success.
+    bool is_valid_ptr = (result >= reinterpret_cast<uint64_t>(tlab_buf) &&
+                         result < reinterpret_cast<uint64_t>(tlab_buf + sizeof(tlab_buf)));
+    return has_cmp && is_valid_ptr;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 // Main
 // ═══════════════════════════════════════════════════════════════════════
 int main() {
     // Unbuffered stdout for crash tracing
     std::setvbuf(stdout, nullptr, _IONBF, 0);
     std::printf("Starting codegen test...\n");
-    std::printf("Native codegen integration tests (Phase 3d)\n");
-    std::printf("==========================================\n");
+    std::printf("Native codegen integration tests (Phase 3d + V3.5)\n");
+    std::printf("==================================================\n");
 
     TEST(LdcI4_Ret);
     TEST(Add_Ret);
@@ -482,6 +561,7 @@ int main() {
     TEST(DeoptMetadata_Call);
     TEST(DeoptSequence_Generated);
     TEST(DeoptEntry_Registration);
+    TEST(TLAB_Inline_Box);
 
     std::printf("\nResults: %d passed, %d failed out of %d\n",
                 g_tests_passed, g_tests_failed,

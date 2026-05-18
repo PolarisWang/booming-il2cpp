@@ -16,8 +16,808 @@
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects"
     },
     {
-      "registrationKind": "field",
+      "registrationKind": "type",
       "slot": 2,
+      "subjectId": "SnapshotProverSubjects/ArithmeticOps",
+      "name": "ArithmeticOps",
+      "displayName": "ArithmeticOps",
+      "definitionSubjectId": "SnapshotProverSubjects/ArithmeticOps"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 3,
+      "subjectId": "SnapshotProverSubjects/StringOps",
+      "name": "StringOps",
+      "displayName": "StringOps",
+      "definitionSubjectId": "SnapshotProverSubjects/StringOps"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 4,
+      "subjectId": "SnapshotProverSubjects/VoidCaller",
+      "name": "VoidCaller",
+      "displayName": "VoidCaller",
+      "definitionSubjectId": "SnapshotProverSubjects/VoidCaller"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 5,
+      "subjectId": "SnapshotProverSubjects/MathHelper",
+      "name": "MathHelper",
+      "displayName": "MathHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/MathHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 6,
+      "subjectId": "SnapshotProverSubjects/FlowControl",
+      "name": "FlowControl",
+      "displayName": "FlowControl",
+      "definitionSubjectId": "SnapshotProverSubjects/FlowControl"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 7,
+      "subjectId": "SnapshotProverSubjects/InstanceHelper",
+      "name": "InstanceHelper",
+      "displayName": "InstanceHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/InstanceHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 8,
+      "subjectId": "SnapshotProverSubjects/CallVirtHelper",
+      "name": "CallVirtHelper",
+      "displayName": "CallVirtHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/CallVirtHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 9,
+      "subjectId": "SnapshotProverSubjects/BoxingHelper",
+      "name": "BoxingHelper",
+      "displayName": "BoxingHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BoxingHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 10,
+      "subjectId": "SnapshotProverSubjects/FieldHelper",
+      "name": "FieldHelper",
+      "displayName": "FieldHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/FieldHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 11,
+      "subjectId": "SnapshotProverSubjects/LoopHelper",
+      "name": "LoopHelper",
+      "displayName": "LoopHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LoopHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 12,
+      "subjectId": "SnapshotProverSubjects/ConversionHelper",
+      "name": "ConversionHelper",
+      "displayName": "ConversionHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ConversionHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 13,
+      "subjectId": "SnapshotProverSubjects/Helper",
+      "name": "Helper",
+      "displayName": "Helper",
+      "definitionSubjectId": "SnapshotProverSubjects/Helper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 14,
+      "subjectId": "SnapshotProverSubjects/SwitchHelper",
+      "name": "SwitchHelper",
+      "displayName": "SwitchHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/SwitchHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 15,
+      "subjectId": "SnapshotProverSubjects/LdftnHelper",
+      "name": "LdftnHelper",
+      "displayName": "LdftnHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdftnHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 16,
+      "subjectId": "SnapshotProverSubjects/TargetHelper",
+      "name": "TargetHelper",
+      "displayName": "TargetHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/TargetHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 17,
+      "subjectId": "SnapshotProverSubjects/ArrayHelper",
+      "name": "ArrayHelper",
+      "displayName": "ArrayHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ArrayHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 18,
+      "subjectId": "SnapshotProverSubjects/EhHelper",
+      "name": "EhHelper",
+      "displayName": "EhHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/EhHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 19,
+      "subjectId": "SnapshotProverSubjects/GenericHelper",
+      "name": "GenericHelper",
+      "displayName": "GenericHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/GenericHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 20,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "name": "Wrapper\u00601",
+      "displayName": "Wrapper\u00601",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 21,
+      "subjectId": "SnapshotProverSubjects/DelegateHelper",
+      "name": "DelegateHelper",
+      "displayName": "DelegateHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/DelegateHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 22,
+      "subjectId": "SnapshotProverSubjects/BaseClass",
+      "name": "BaseClass",
+      "displayName": "BaseClass",
+      "definitionSubjectId": "SnapshotProverSubjects/BaseClass"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 23,
+      "subjectId": "SnapshotProverSubjects/DerivedClass",
+      "name": "DerivedClass",
+      "displayName": "DerivedClass",
+      "definitionSubjectId": "SnapshotProverSubjects/DerivedClass"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 24,
+      "subjectId": "SnapshotProverSubjects/VirtualHelper",
+      "name": "VirtualHelper",
+      "displayName": "VirtualHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/VirtualHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 25,
+      "subjectId": "SnapshotProverSubjects/MarkedClass",
+      "name": "MarkedClass",
+      "displayName": "MarkedClass",
+      "definitionSubjectId": "SnapshotProverSubjects/MarkedClass"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 26,
+      "subjectId": "SnapshotProverSubjects/TypeCheckHelper",
+      "name": "TypeCheckHelper",
+      "displayName": "TypeCheckHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/TypeCheckHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 27,
+      "subjectId": "SnapshotProverSubjects/SizeOfHelper",
+      "name": "SizeOfHelper",
+      "displayName": "SizeOfHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/SizeOfHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 28,
+      "subjectId": "SnapshotProverSubjects/IndirectHelper",
+      "name": "IndirectHelper",
+      "displayName": "IndirectHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/IndirectHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 29,
+      "subjectId": "SnapshotProverSubjects/ArithmeticCompareHelper",
+      "name": "ArithmeticCompareHelper",
+      "displayName": "ArithmeticCompareHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ArithmeticCompareHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 30,
+      "subjectId": "SnapshotProverSubjects/BranchDupHelper",
+      "name": "BranchDupHelper",
+      "displayName": "BranchDupHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchDupHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 31,
+      "subjectId": "SnapshotProverSubjects/HasInstanceFields",
+      "name": "HasInstanceFields",
+      "displayName": "HasInstanceFields",
+      "definitionSubjectId": "SnapshotProverSubjects/HasInstanceFields"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 32,
+      "subjectId": "SnapshotProverSubjects/InstanceFieldHelper",
+      "name": "InstanceFieldHelper",
+      "displayName": "InstanceFieldHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/InstanceFieldHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 33,
+      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper",
+      "name": "StaticFieldWriteHelper",
+      "displayName": "StaticFieldWriteHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/StaticFieldWriteHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 34,
+      "subjectId": "SnapshotProverSubjects/VirtualDispatchHelper",
+      "name": "VirtualDispatchHelper",
+      "displayName": "VirtualDispatchHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/VirtualDispatchHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 35,
+      "subjectId": "SnapshotProverSubjects/BitwiseHelper",
+      "name": "BitwiseHelper",
+      "displayName": "BitwiseHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BitwiseHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 36,
+      "subjectId": "SnapshotProverSubjects/ShiftHelper",
+      "name": "ShiftHelper",
+      "displayName": "ShiftHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ShiftHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 37,
+      "subjectId": "SnapshotProverSubjects/ArrayLengthHelper",
+      "name": "ArrayLengthHelper",
+      "displayName": "ArrayLengthHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ArrayLengthHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 38,
+      "subjectId": "SnapshotProverSubjects/ValueTypeHelper",
+      "name": "ValueTypeHelper",
+      "displayName": "ValueTypeHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ValueTypeHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 39,
+      "subjectId": "SnapshotProverSubjects/LocalAllocHelper",
+      "name": "LocalAllocHelper",
+      "displayName": "LocalAllocHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LocalAllocHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 40,
+      "subjectId": "SnapshotProverSubjects/MulDivHelper",
+      "name": "MulDivHelper",
+      "displayName": "MulDivHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/MulDivHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 41,
+      "subjectId": "SnapshotProverSubjects/BranchCompareHelper",
+      "name": "BranchCompareHelper",
+      "displayName": "BranchCompareHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchCompareHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 42,
+      "subjectId": "SnapshotProverSubjects/FloatOpsHelper",
+      "name": "FloatOpsHelper",
+      "displayName": "FloatOpsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/FloatOpsHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 43,
+      "subjectId": "SnapshotProverSubjects/ConvWideHelper",
+      "name": "ConvWideHelper",
+      "displayName": "ConvWideHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ConvWideHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 44,
+      "subjectId": "SnapshotProverSubjects/NegShiftHelper",
+      "name": "NegShiftHelper",
+      "displayName": "NegShiftHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/NegShiftHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 45,
+      "subjectId": "SnapshotProverSubjects/LdcI8Helper",
+      "name": "LdcI8Helper",
+      "displayName": "LdcI8Helper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdcI8Helper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 46,
+      "subjectId": "SnapshotProverSubjects/ConvSmallIntHelper",
+      "name": "ConvSmallIntHelper",
+      "displayName": "ConvSmallIntHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ConvSmallIntHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 47,
+      "subjectId": "SnapshotProverSubjects/LdindI1Helper",
+      "name": "LdindI1Helper",
+      "displayName": "LdindI1Helper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindI1Helper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 48,
+      "subjectId": "SnapshotProverSubjects/BranchCompareBHelper",
+      "name": "BranchCompareBHelper",
+      "displayName": "BranchCompareBHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchCompareBHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 49,
+      "subjectId": "SnapshotProverSubjects/HasFields",
+      "name": "HasFields",
+      "displayName": "HasFields",
+      "definitionSubjectId": "SnapshotProverSubjects/HasFields"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 50,
+      "subjectId": "SnapshotProverSubjects/AddressHelper",
+      "name": "AddressHelper",
+      "displayName": "AddressHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/AddressHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 51,
+      "subjectId": "SnapshotProverSubjects/LdtokenHelper",
+      "name": "LdtokenHelper",
+      "displayName": "LdtokenHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdtokenHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 52,
+      "subjectId": "SnapshotProverSubjects/LdelemaHelper",
+      "name": "LdelemaHelper",
+      "displayName": "LdelemaHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdelemaHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 53,
+      "subjectId": "SnapshotProverSubjects/LdargaHelper",
+      "name": "LdargaHelper",
+      "displayName": "LdargaHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdargaHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 54,
+      "subjectId": "SnapshotProverSubjects/CpobjHelper",
+      "name": "CpobjHelper",
+      "displayName": "CpobjHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/CpobjHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 55,
+      "subjectId": "SnapshotProverSubjects/StindNarrowHelper",
+      "name": "StindNarrowHelper",
+      "displayName": "StindNarrowHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/StindNarrowHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 56,
+      "subjectId": "SnapshotProverSubjects/CallvirtHelper",
+      "name": "CallvirtHelper",
+      "displayName": "CallvirtHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/CallvirtHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 57,
+      "subjectId": "SnapshotProverSubjects/UnboxHelper",
+      "name": "UnboxHelper",
+      "displayName": "UnboxHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/UnboxHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 58,
+      "subjectId": "SnapshotProverSubjects/CpblkHelper",
+      "name": "CpblkHelper",
+      "displayName": "CpblkHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/CpblkHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 59,
+      "subjectId": "SnapshotProverSubjects/LdindUnsignedHelper",
+      "name": "LdindUnsignedHelper",
+      "displayName": "LdindUnsignedHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindUnsignedHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 60,
+      "subjectId": "SnapshotProverSubjects/LdindI8Helper",
+      "name": "LdindI8Helper",
+      "displayName": "LdindI8Helper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindI8Helper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 61,
+      "subjectId": "SnapshotProverSubjects/LdindWideHelper",
+      "name": "LdindWideHelper",
+      "displayName": "LdindWideHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindWideHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 62,
+      "subjectId": "SnapshotProverSubjects/StindWideHelper",
+      "name": "StindWideHelper",
+      "displayName": "StindWideHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/StindWideHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 63,
+      "subjectId": "SnapshotProverSubjects/ArrayRefHelper",
+      "name": "ArrayRefHelper",
+      "displayName": "ArrayRefHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ArrayRefHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 64,
+      "subjectId": "SnapshotProverSubjects/ThrowHelper",
+      "name": "ThrowHelper",
+      "displayName": "ThrowHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ThrowHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 65,
+      "subjectId": "SnapshotProverSubjects/OverflowHelper",
+      "name": "OverflowHelper",
+      "displayName": "OverflowHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 66,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "name": "OverflowConvHelper",
+      "displayName": "OverflowConvHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 67,
+      "subjectId": "SnapshotProverSubjects/CalliHelper",
+      "name": "CalliHelper",
+      "displayName": "CalliHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/CalliHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 68,
+      "subjectId": "SnapshotProverSubjects/MyClass",
+      "name": "MyClass",
+      "displayName": "MyClass",
+      "definitionSubjectId": "SnapshotProverSubjects/MyClass"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 69,
+      "subjectId": "SnapshotProverSubjects/LdVirtftnHelper",
+      "name": "LdVirtftnHelper",
+      "displayName": "LdVirtftnHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdVirtftnHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 70,
+      "subjectId": "SnapshotProverSubjects/LdelemAllHelper",
+      "name": "LdelemAllHelper",
+      "displayName": "LdelemAllHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdelemAllHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 71,
+      "subjectId": "SnapshotProverSubjects/StelemAllHelper",
+      "name": "StelemAllHelper",
+      "displayName": "StelemAllHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/StelemAllHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 72,
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper",
+      "name": "UnsignedOpsHelper",
+      "displayName": "UnsignedOpsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 73,
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper",
+      "name": "RareOpsHelper",
+      "displayName": "RareOpsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/RareOpsHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 74,
+      "subjectId": "SnapshotProverSubjects/StringFormatHelper",
+      "name": "StringFormatHelper",
+      "displayName": "StringFormatHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/StringFormatHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 75,
+      "subjectId": "SnapshotProverSubjects/BranchUnsignedHelper",
+      "name": "BranchUnsignedHelper",
+      "displayName": "BranchUnsignedHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchUnsignedHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 76,
+      "subjectId": "SnapshotProverSubjects/BranchUnsignedBHelper",
+      "name": "BranchUnsignedBHelper",
+      "displayName": "BranchUnsignedBHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchUnsignedBHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 77,
+      "subjectId": "SnapshotProverSubjects/RethrowHelper",
+      "name": "RethrowHelper",
+      "displayName": "RethrowHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/RethrowHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 78,
+      "subjectId": "SnapshotProverSubjects/OverflowUnHelper",
+      "name": "OverflowUnHelper",
+      "displayName": "OverflowUnHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowUnHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 79,
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "name": "MoreRareOpsHelper",
+      "displayName": "MoreRareOpsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 80,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "name": "OverflowConvExtHelper",
+      "displayName": "OverflowConvExtHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 81,
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "name": "SimpleGapsHelper",
+      "displayName": "SimpleGapsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 82,
+      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper",
+      "name": "LdindStindGapsHelper",
+      "displayName": "LdindStindGapsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 83,
+      "subjectId": "SnapshotProverSubjects/CollectionsHelper",
+      "name": "CollectionsHelper",
+      "displayName": "CollectionsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/CollectionsHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 84,
+      "subjectId": "SnapshotProverSubjects/ExternalCaller",
+      "name": "ExternalCaller",
+      "displayName": "ExternalCaller",
+      "definitionSubjectId": "SnapshotProverSubjects/ExternalCaller"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 85,
+      "subjectId": "SnapshotProverSubjects/MultiDispatcher",
+      "name": "MultiDispatcher",
+      "displayName": "MultiDispatcher",
+      "definitionSubjectId": "SnapshotProverSubjects/MultiDispatcher"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 86,
+      "subjectId": "SnapshotProverSubjects/InternalHelper",
+      "name": "InternalHelper",
+      "displayName": "InternalHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/InternalHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 87,
+      "subjectId": "SnapshotProverSubjects/StringConcatHelper",
+      "name": "StringConcatHelper",
+      "displayName": "StringConcatHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/StringConcatHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 88,
+      "subjectId": "SnapshotProverSubjects/GenericsVirtEhDemo",
+      "name": "GenericsVirtEhDemo",
+      "displayName": "GenericsVirtEhDemo",
+      "definitionSubjectId": "SnapshotProverSubjects/GenericsVirtEhDemo"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 89,
+      "subjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo",
+      "name": "BoxInterfaceArrayDemo",
+      "displayName": "BoxInterfaceArrayDemo",
+      "definitionSubjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 90,
+      "subjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo",
+      "name": "HotUpdateWithTypesDemo",
+      "displayName": "HotUpdateWithTypesDemo",
+      "definitionSubjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 91,
+      "subjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo",
+      "name": "HotUpdateWithGenericsDemo",
+      "displayName": "HotUpdateWithGenericsDemo",
+      "definitionSubjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 92,
+      "subjectId": "SnapshotProverSubjects/SealedHelper",
+      "name": "SealedHelper",
+      "displayName": "SealedHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/SealedHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 93,
+      "subjectId": "SnapshotProverSubjects/SealedClassVirtualHelper",
+      "name": "SealedClassVirtualHelper",
+      "displayName": "SealedClassVirtualHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/SealedClassVirtualHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 94,
+      "subjectId": "SnapshotProverSubjects/IMyInterface",
+      "name": "IMyInterface",
+      "displayName": "IMyInterface",
+      "definitionSubjectId": "SnapshotProverSubjects/IMyInterface"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 95,
+      "subjectId": "SnapshotProverSubjects/ImplHelper",
+      "name": "ImplHelper",
+      "displayName": "ImplHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ImplHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 96,
+      "subjectId": "SnapshotProverSubjects/InterfaceDevirtHelper",
+      "name": "InterfaceDevirtHelper",
+      "displayName": "InterfaceDevirtHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/InterfaceDevirtHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 97,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E",
+      "name": "Wrapper\u003CSystem.Int32\u003E",
+      "displayName": "Wrapper\u003CSystem.Int32\u003E",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 98,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E",
+      "name": "Wrapper\u003C!0\u003E",
+      "displayName": "Wrapper\u003C!0\u003E",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 99,
+      "subjectId": "SnapshotProverSubjects/IMarker",
+      "name": "IMarker",
+      "displayName": "IMarker",
+      "definitionSubjectId": "SnapshotProverSubjects/IMarker"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 100,
+      "subjectId": "SnapshotProverSubjects/SmallStruct",
+      "name": "SmallStruct",
+      "displayName": "SmallStruct",
+      "definitionSubjectId": "SnapshotProverSubjects/SmallStruct"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 101,
+      "subjectId": "SnapshotProverSubjects/LdftnHelper\u002B\u003C\u003EO",
+      "name": "\u003C\u003EO",
+      "displayName": "LdftnHelper\u002B\u003C\u003EO",
+      "definitionSubjectId": "SnapshotProverSubjects/LdftnHelper\u002B\u003C\u003EO"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 102,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
       "name": "_exitCode",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
@@ -25,8 +825,172 @@
       "memberType": "System.Int32"
     },
     {
+      "registrationKind": "field",
+      "slot": 103,
+      "subjectId": "SnapshotProverSubjects/InstanceHelper::_val",
+      "name": "_val",
+      "definitionSubjectId": "SnapshotProverSubjects/InstanceHelper::_val",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/InstanceHelper",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 104,
+      "subjectId": "SnapshotProverSubjects/FieldHelper::_counter",
+      "name": "_counter",
+      "definitionSubjectId": "SnapshotProverSubjects/FieldHelper::_counter",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/FieldHelper",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 105,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u00601::_val",
+      "name": "_val",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::_val",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "memberType": "!0"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 106,
+      "subjectId": "SnapshotProverSubjects/MarkedClass::Value",
+      "name": "Value",
+      "definitionSubjectId": "SnapshotProverSubjects/MarkedClass::Value",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MarkedClass",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 107,
+      "subjectId": "SnapshotProverSubjects/SmallStruct::X",
+      "name": "X",
+      "definitionSubjectId": "SnapshotProverSubjects/SmallStruct::X",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SmallStruct",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 108,
+      "subjectId": "SnapshotProverSubjects/SmallStruct::Y",
+      "name": "Y",
+      "definitionSubjectId": "SnapshotProverSubjects/SmallStruct::Y",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SmallStruct",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 109,
+      "subjectId": "SnapshotProverSubjects/HasInstanceFields::Value",
+      "name": "Value",
+      "definitionSubjectId": "SnapshotProverSubjects/HasInstanceFields::Value",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/HasInstanceFields",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 110,
+      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::_writeTarget",
+      "name": "_writeTarget",
+      "definitionSubjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::_writeTarget",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StaticFieldWriteHelper",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 111,
+      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::_readTarget",
+      "name": "_readTarget",
+      "definitionSubjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::_readTarget",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StaticFieldWriteHelper",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 112,
+      "subjectId": "SnapshotProverSubjects/HasFields::instanceVal",
+      "name": "instanceVal",
+      "definitionSubjectId": "SnapshotProverSubjects/HasFields::instanceVal",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/HasFields",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 113,
+      "subjectId": "SnapshotProverSubjects/HasFields::staticVal",
+      "name": "staticVal",
+      "definitionSubjectId": "SnapshotProverSubjects/HasFields::staticVal",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/HasFields",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 114,
+      "subjectId": "SnapshotProverSubjects/MyClass::_val",
+      "name": "_val",
+      "definitionSubjectId": "SnapshotProverSubjects/MyClass::_val",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MyClass",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 115,
+      "subjectId": "SnapshotProverSubjects/SealedHelper::_val",
+      "name": "_val",
+      "definitionSubjectId": "SnapshotProverSubjects/SealedHelper::_val",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SealedHelper",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 116,
+      "subjectId": "SnapshotProverSubjects/ImplHelper::_val",
+      "name": "_val",
+      "definitionSubjectId": "SnapshotProverSubjects/ImplHelper::_val",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ImplHelper",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 117,
+      "subjectId": "SnapshotProverSubjects/LdftnHelper\u002B\u003C\u003EO::\u003C0\u003E__GetValue",
+      "name": "\u003C0\u003E__GetValue",
+      "definitionSubjectId": "SnapshotProverSubjects/LdftnHelper\u002B\u003C\u003EO::\u003C0\u003E__GetValue",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdftnHelper\u002B\u003C\u003EO",
+      "memberType": "System.Func\u003CSystem.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 118,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::_val",
+      "name": "_val",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::_val",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 119,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::_val",
+      "name": "_val",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::_val",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E",
+      "memberType": "!0"
+    },
+    {
       "registrationKind": "method",
-      "slot": 3,
+      "slot": 120,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 121,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
@@ -37,7 +1001,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 4,
+      "slot": 122,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
@@ -48,7 +1012,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 5,
+      "slot": 123,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
@@ -59,7 +1023,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 6,
+      "slot": 124,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
@@ -70,7 +1034,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 7,
+      "slot": 125,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
@@ -81,7 +1045,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 8,
+      "slot": 126,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
@@ -92,7 +1056,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 9,
+      "slot": 127,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
@@ -103,7 +1067,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 10,
+      "slot": 128,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
@@ -114,7 +1078,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 11,
+      "slot": 129,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
       "name": "Subject_8",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
@@ -125,7 +1089,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 12,
+      "slot": 130,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
@@ -136,22 +1100,1990 @@
     },
     {
       "registrationKind": "method",
-      "slot": 13,
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
-      "name": "Run",
-      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "slot": 131,
+      "subjectId": "SnapshotProverSubjects/ArithmeticOps::RunAdd:System.Int32()",
+      "name": "RunAdd",
+      "definitionSubjectId": "SnapshotProverSubjects/ArithmeticOps::RunAdd:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ArithmeticOps",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 132,
+      "subjectId": "SnapshotProverSubjects/StringOps::UseString:System.Int32()",
+      "name": "UseString",
+      "definitionSubjectId": "SnapshotProverSubjects/StringOps::UseString:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StringOps",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 133,
+      "subjectId": "SnapshotProverSubjects/VoidCaller::DoNothing:System.Int32()",
+      "name": "DoNothing",
+      "definitionSubjectId": "SnapshotProverSubjects/VoidCaller::DoNothing:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/VoidCaller",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 134,
+      "subjectId": "SnapshotProverSubjects/MathHelper::RunSquare:System.Int32()",
+      "name": "RunSquare",
+      "definitionSubjectId": "SnapshotProverSubjects/MathHelper::RunSquare:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MathHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 135,
+      "subjectId": "SnapshotProverSubjects/FlowControl::IsPositive:System.Int32()",
+      "name": "IsPositive",
+      "definitionSubjectId": "SnapshotProverSubjects/FlowControl::IsPositive:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/FlowControl",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 136,
+      "subjectId": "SnapshotProverSubjects/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotProverSubjects/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/InstanceHelper",
       "memberType": "System.Void",
       "parameterCount": 1,
       "isImported": false
     },
     {
+      "registrationKind": "method",
+      "slot": 137,
+      "subjectId": "SnapshotProverSubjects/InstanceHelper::GetValue:System.Int32()",
+      "name": "GetValue",
+      "definitionSubjectId": "SnapshotProverSubjects/InstanceHelper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/InstanceHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 138,
+      "subjectId": "SnapshotProverSubjects/CallVirtHelper::CreateAndUse:System.Int32()",
+      "name": "CreateAndUse",
+      "definitionSubjectId": "SnapshotProverSubjects/CallVirtHelper::CreateAndUse:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CallVirtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 139,
+      "subjectId": "SnapshotProverSubjects/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "name": "BoxAndUnbox",
+      "definitionSubjectId": "SnapshotProverSubjects/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BoxingHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 140,
+      "subjectId": "SnapshotProverSubjects/FieldHelper::GetAndIncrement:System.Int32()",
+      "name": "GetAndIncrement",
+      "definitionSubjectId": "SnapshotProverSubjects/FieldHelper::GetAndIncrement:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/FieldHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 141,
+      "subjectId": "SnapshotProverSubjects/LoopHelper::SumToFive:System.Int32()",
+      "name": "SumToFive",
+      "definitionSubjectId": "SnapshotProverSubjects/LoopHelper::SumToFive:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LoopHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 142,
+      "subjectId": "SnapshotProverSubjects/ConversionHelper::ConvertToInt:System.Int32()",
+      "name": "ConvertToInt",
+      "definitionSubjectId": "SnapshotProverSubjects/ConversionHelper::ConvertToInt:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ConversionHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 143,
+      "subjectId": "SnapshotProverSubjects/Helper::Nop:System.Void()",
+      "name": "Nop",
+      "definitionSubjectId": "SnapshotProverSubjects/Helper::Nop:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Helper",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 144,
+      "subjectId": "SnapshotProverSubjects/Helper::Square:System.Int32(System.Int32)",
+      "name": "Square",
+      "definitionSubjectId": "SnapshotProverSubjects/Helper::Square:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Helper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 145,
+      "subjectId": "SnapshotProverSubjects/Helper::ConsumeString:System.Void(System.String)",
+      "name": "ConsumeString",
+      "definitionSubjectId": "SnapshotProverSubjects/Helper::ConsumeString:System.Void(System.String)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Helper",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 146,
+      "subjectId": "SnapshotProverSubjects/Helper::GetValue:System.Int32()",
+      "name": "GetValue",
+      "definitionSubjectId": "SnapshotProverSubjects/Helper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Helper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 147,
+      "subjectId": "SnapshotProverSubjects/SwitchHelper::Classify:System.Int32()",
+      "name": "Classify",
+      "definitionSubjectId": "SnapshotProverSubjects/SwitchHelper::Classify:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SwitchHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 148,
+      "subjectId": "SnapshotProverSubjects/LdftnHelper::GetFnPtr:System.Int32()",
+      "name": "GetFnPtr",
+      "definitionSubjectId": "SnapshotProverSubjects/LdftnHelper::GetFnPtr:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdftnHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 149,
+      "subjectId": "SnapshotProverSubjects/TargetHelper::GetValue:System.Int32()",
+      "name": "GetValue",
+      "definitionSubjectId": "SnapshotProverSubjects/TargetHelper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/TargetHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 150,
+      "subjectId": "SnapshotProverSubjects/ArrayHelper::MakeAndFill:System.Int32()",
+      "name": "MakeAndFill",
+      "definitionSubjectId": "SnapshotProverSubjects/ArrayHelper::MakeAndFill:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ArrayHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 151,
+      "subjectId": "SnapshotProverSubjects/EhHelper::SafeDivide:System.Int32()",
+      "name": "SafeDivide",
+      "definitionSubjectId": "SnapshotProverSubjects/EhHelper::SafeDivide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/EhHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 152,
+      "subjectId": "SnapshotProverSubjects/GenericHelper::UseGeneric:System.Int32()",
+      "name": "UseGeneric",
+      "definitionSubjectId": "SnapshotProverSubjects/GenericHelper::UseGeneric:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/GenericHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 153,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 154,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+      "name": "GetValue",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "memberType": "!0",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 155,
+      "subjectId": "SnapshotProverSubjects/DelegateHelper::RunDelegate:System.Int32()",
+      "name": "RunDelegate",
+      "definitionSubjectId": "SnapshotProverSubjects/DelegateHelper::RunDelegate:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/DelegateHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 156,
+      "subjectId": "SnapshotProverSubjects/BaseClass::Compute:System.Int32()",
+      "name": "Compute",
+      "definitionSubjectId": "SnapshotProverSubjects/BaseClass::Compute:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BaseClass",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 157,
+      "subjectId": "SnapshotProverSubjects/BaseClass::.ctor:System.Void()",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotProverSubjects/BaseClass::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BaseClass",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 158,
+      "subjectId": "SnapshotProverSubjects/DerivedClass::Compute:System.Int32()",
+      "name": "Compute",
+      "definitionSubjectId": "SnapshotProverSubjects/DerivedClass::Compute:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/DerivedClass",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 159,
+      "subjectId": "SnapshotProverSubjects/DerivedClass::.ctor:System.Void()",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotProverSubjects/DerivedClass::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/DerivedClass",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 160,
+      "subjectId": "SnapshotProverSubjects/VirtualHelper::UseVirtual:System.Int32()",
+      "name": "UseVirtual",
+      "definitionSubjectId": "SnapshotProverSubjects/VirtualHelper::UseVirtual:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/VirtualHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 161,
+      "subjectId": "SnapshotProverSubjects/MarkedClass::.ctor:System.Void()",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotProverSubjects/MarkedClass::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MarkedClass",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 162,
+      "subjectId": "SnapshotProverSubjects/TypeCheckHelper::CheckAndCast:System.Int32()",
+      "name": "CheckAndCast",
+      "definitionSubjectId": "SnapshotProverSubjects/TypeCheckHelper::CheckAndCast:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/TypeCheckHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 163,
+      "subjectId": "SnapshotProverSubjects/SizeOfHelper::GetSize:System.Int32()",
+      "name": "GetSize",
+      "definitionSubjectId": "SnapshotProverSubjects/SizeOfHelper::GetSize:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SizeOfHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 164,
+      "subjectId": "SnapshotProverSubjects/IndirectHelper::ReadWriteRef:System.Int32()",
+      "name": "ReadWriteRef",
+      "definitionSubjectId": "SnapshotProverSubjects/IndirectHelper::ReadWriteRef:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/IndirectHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 165,
+      "subjectId": "SnapshotProverSubjects/ArithmeticCompareHelper::RunCompare:System.Int32()",
+      "name": "RunCompare",
+      "definitionSubjectId": "SnapshotProverSubjects/ArithmeticCompareHelper::RunCompare:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ArithmeticCompareHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 166,
+      "subjectId": "SnapshotProverSubjects/BranchDupHelper::RunBranchDup:System.Int32()",
+      "name": "RunBranchDup",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchDupHelper::RunBranchDup:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BranchDupHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 167,
+      "subjectId": "SnapshotProverSubjects/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotProverSubjects/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/HasInstanceFields",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 168,
+      "subjectId": "SnapshotProverSubjects/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+      "name": "CreateAndUseFields",
+      "definitionSubjectId": "SnapshotProverSubjects/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/InstanceFieldHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 169,
+      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+      "name": "WriteAndRead",
+      "definitionSubjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StaticFieldWriteHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 170,
+      "subjectId": "SnapshotProverSubjects/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
+      "name": "UseVirtualDispatch",
+      "definitionSubjectId": "SnapshotProverSubjects/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/VirtualDispatchHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 171,
+      "subjectId": "SnapshotProverSubjects/BitwiseHelper::RunBitwise:System.Int32()",
+      "name": "RunBitwise",
+      "definitionSubjectId": "SnapshotProverSubjects/BitwiseHelper::RunBitwise:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BitwiseHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 172,
+      "subjectId": "SnapshotProverSubjects/ShiftHelper::RunShift:System.Int32()",
+      "name": "RunShift",
+      "definitionSubjectId": "SnapshotProverSubjects/ShiftHelper::RunShift:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ShiftHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 173,
+      "subjectId": "SnapshotProverSubjects/ArrayLengthHelper::RunLength:System.Int32()",
+      "name": "RunLength",
+      "definitionSubjectId": "SnapshotProverSubjects/ArrayLengthHelper::RunLength:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ArrayLengthHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 174,
+      "subjectId": "SnapshotProverSubjects/ValueTypeHelper::RunValueType:System.Int32()",
+      "name": "RunValueType",
+      "definitionSubjectId": "SnapshotProverSubjects/ValueTypeHelper::RunValueType:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ValueTypeHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 175,
+      "subjectId": "SnapshotProverSubjects/LocalAllocHelper::RunAlloc:System.Int32()",
+      "name": "RunAlloc",
+      "definitionSubjectId": "SnapshotProverSubjects/LocalAllocHelper::RunAlloc:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LocalAllocHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 176,
+      "subjectId": "SnapshotProverSubjects/MulDivHelper::RunMulDiv:System.Int32()",
+      "name": "RunMulDiv",
+      "definitionSubjectId": "SnapshotProverSubjects/MulDivHelper::RunMulDiv:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MulDivHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 177,
+      "subjectId": "SnapshotProverSubjects/BranchCompareHelper::RunBranchCompare:System.Int32()",
+      "name": "RunBranchCompare",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchCompareHelper::RunBranchCompare:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BranchCompareHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 178,
+      "subjectId": "SnapshotProverSubjects/FloatOpsHelper::RunFloatOps:System.Int32()",
+      "name": "RunFloatOps",
+      "definitionSubjectId": "SnapshotProverSubjects/FloatOpsHelper::RunFloatOps:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/FloatOpsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 179,
+      "subjectId": "SnapshotProverSubjects/ConvWideHelper::RunConvWide:System.Int32()",
+      "name": "RunConvWide",
+      "definitionSubjectId": "SnapshotProverSubjects/ConvWideHelper::RunConvWide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ConvWideHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 180,
+      "subjectId": "SnapshotProverSubjects/NegShiftHelper::RunNegShift:System.Int32()",
+      "name": "RunNegShift",
+      "definitionSubjectId": "SnapshotProverSubjects/NegShiftHelper::RunNegShift:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/NegShiftHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 181,
+      "subjectId": "SnapshotProverSubjects/LdcI8Helper::RunLdcI8:System.Int32()",
+      "name": "RunLdcI8",
+      "definitionSubjectId": "SnapshotProverSubjects/LdcI8Helper::RunLdcI8:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdcI8Helper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 182,
+      "subjectId": "SnapshotProverSubjects/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+      "name": "RunConvSmall",
+      "definitionSubjectId": "SnapshotProverSubjects/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ConvSmallIntHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 183,
+      "subjectId": "SnapshotProverSubjects/LdindI1Helper::RunLdindI1:System.Int32()",
+      "name": "RunLdindI1",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindI1Helper::RunLdindI1:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindI1Helper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 184,
+      "subjectId": "SnapshotProverSubjects/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
+      "name": "RunBranchCompareB",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BranchCompareBHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 185,
+      "subjectId": "SnapshotProverSubjects/HasFields::.ctor:System.Void()",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotProverSubjects/HasFields::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/HasFields",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 186,
+      "subjectId": "SnapshotProverSubjects/AddressHelper::RunAddress:System.Int32()",
+      "name": "RunAddress",
+      "definitionSubjectId": "SnapshotProverSubjects/AddressHelper::RunAddress:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/AddressHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 187,
+      "subjectId": "SnapshotProverSubjects/LdtokenHelper::RunLdtoken:System.Int32()",
+      "name": "RunLdtoken",
+      "definitionSubjectId": "SnapshotProverSubjects/LdtokenHelper::RunLdtoken:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdtokenHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 188,
+      "subjectId": "SnapshotProverSubjects/LdelemaHelper::RunLdelema:System.Int32()",
+      "name": "RunLdelema",
+      "definitionSubjectId": "SnapshotProverSubjects/LdelemaHelper::RunLdelema:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdelemaHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 189,
+      "subjectId": "SnapshotProverSubjects/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+      "name": "RunLdarga",
+      "definitionSubjectId": "SnapshotProverSubjects/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdargaHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 190,
+      "subjectId": "SnapshotProverSubjects/CpobjHelper::RunCpobj:System.Int32()",
+      "name": "RunCpobj",
+      "definitionSubjectId": "SnapshotProverSubjects/CpobjHelper::RunCpobj:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CpobjHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 191,
+      "subjectId": "SnapshotProverSubjects/StindNarrowHelper::RunStindNarrow:System.Int32()",
+      "name": "RunStindNarrow",
+      "definitionSubjectId": "SnapshotProverSubjects/StindNarrowHelper::RunStindNarrow:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StindNarrowHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 192,
+      "subjectId": "SnapshotProverSubjects/CallvirtHelper::RunCallvirt:System.Int32()",
+      "name": "RunCallvirt",
+      "definitionSubjectId": "SnapshotProverSubjects/CallvirtHelper::RunCallvirt:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CallvirtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 193,
+      "subjectId": "SnapshotProverSubjects/UnboxHelper::RunUnbox:System.Int32()",
+      "name": "RunUnbox",
+      "definitionSubjectId": "SnapshotProverSubjects/UnboxHelper::RunUnbox:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/UnboxHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 194,
+      "subjectId": "SnapshotProverSubjects/CpblkHelper::RunCpblk:System.Int32()",
+      "name": "RunCpblk",
+      "definitionSubjectId": "SnapshotProverSubjects/CpblkHelper::RunCpblk:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CpblkHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 195,
+      "subjectId": "SnapshotProverSubjects/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
+      "name": "RunLdindUnsigned",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindUnsignedHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 196,
+      "subjectId": "SnapshotProverSubjects/LdindI8Helper::RunLdindI8:System.Int32()",
+      "name": "RunLdindI8",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindI8Helper::RunLdindI8:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindI8Helper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 197,
+      "subjectId": "SnapshotProverSubjects/LdindWideHelper::RunLdindWide:System.Int32()",
+      "name": "RunLdindWide",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindWideHelper::RunLdindWide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindWideHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 198,
+      "subjectId": "SnapshotProverSubjects/StindWideHelper::RunStindWide:System.Int32()",
+      "name": "RunStindWide",
+      "definitionSubjectId": "SnapshotProverSubjects/StindWideHelper::RunStindWide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StindWideHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 199,
+      "subjectId": "SnapshotProverSubjects/ArrayRefHelper::RunArrayRef:System.Int32()",
+      "name": "RunArrayRef",
+      "definitionSubjectId": "SnapshotProverSubjects/ArrayRefHelper::RunArrayRef:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ArrayRefHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 200,
+      "subjectId": "SnapshotProverSubjects/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+      "name": "CheckPositive",
+      "definitionSubjectId": "SnapshotProverSubjects/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ThrowHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 201,
+      "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowAdd:System.Int32()",
+      "name": "RunOverflowAdd",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowAdd:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 202,
+      "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowSub:System.Int32()",
+      "name": "RunOverflowSub",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowSub:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 203,
+      "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowMul:System.Int32()",
+      "name": "RunOverflowMul",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowMul:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 204,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI4:System.Int32()",
+      "name": "ConvOvfI4",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI4:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 205,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
+      "name": "ConvOvfU1",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 206,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
+      "name": "ConvOvfI2",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 207,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
+      "name": "ConvOvfU2",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 208,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
+      "name": "ConvOvfU4",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 209,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+      "name": "ConvOvfI8",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "memberType": "System.Int64",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 210,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
+      "name": "ConvOvfU8",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "memberType": "System.Int64",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 211,
+      "subjectId": "SnapshotProverSubjects/CalliHelper::RunCalli:System.Int32(System.Int32)",
+      "name": "RunCalli",
+      "definitionSubjectId": "SnapshotProverSubjects/CalliHelper::RunCalli:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CalliHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 212,
+      "subjectId": "SnapshotProverSubjects/MyClass::.ctor:System.Void(System.Int32)",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotProverSubjects/MyClass::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MyClass",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 213,
+      "subjectId": "SnapshotProverSubjects/MyClass::GetValue:System.Int32()",
+      "name": "GetValue",
+      "definitionSubjectId": "SnapshotProverSubjects/MyClass::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MyClass",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 214,
+      "subjectId": "SnapshotProverSubjects/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
+      "name": "RunLdVirtftn",
+      "definitionSubjectId": "SnapshotProverSubjects/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdVirtftnHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 215,
+      "subjectId": "SnapshotProverSubjects/LdelemAllHelper::TestAllElems:System.Int32()",
+      "name": "TestAllElems",
+      "definitionSubjectId": "SnapshotProverSubjects/LdelemAllHelper::TestAllElems:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdelemAllHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 216,
+      "subjectId": "SnapshotProverSubjects/StelemAllHelper::TestAllElems:System.Int32()",
+      "name": "TestAllElems",
+      "definitionSubjectId": "SnapshotProverSubjects/StelemAllHelper::TestAllElems:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StelemAllHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 217,
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCltUn:System.Int32()",
+      "name": "TestCltUn",
+      "definitionSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCltUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 218,
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestDivUn:System.Int32()",
+      "name": "TestDivUn",
+      "definitionSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestDivUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 219,
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestRemUn:System.Int32()",
+      "name": "TestRemUn",
+      "definitionSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestRemUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 220,
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+      "name": "TestCkfinite",
+      "definitionSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper",
+      "memberType": "System.Double",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 221,
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
+      "name": "TestInitBlk",
+      "definitionSubjectId": "SnapshotProverSubjects/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/RareOpsHelper",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 222,
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+      "name": "TestStarg",
+      "definitionSubjectId": "SnapshotProverSubjects/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/RareOpsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 223,
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+      "name": "TestConvRUn",
+      "definitionSubjectId": "SnapshotProverSubjects/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/RareOpsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 224,
+      "subjectId": "SnapshotProverSubjects/StringFormatHelper::TestFormatOne:System.Int32()",
+      "name": "TestFormatOne",
+      "definitionSubjectId": "SnapshotProverSubjects/StringFormatHelper::TestFormatOne:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StringFormatHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 225,
+      "subjectId": "SnapshotProverSubjects/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
+      "name": "RunBranchUnsigned",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BranchUnsignedHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 226,
+      "subjectId": "SnapshotProverSubjects/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
+      "name": "RunBranchUnsignedB",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BranchUnsignedBHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 227,
+      "subjectId": "SnapshotProverSubjects/RethrowHelper::RunRethrow:System.Int32()",
+      "name": "RunRethrow",
+      "definitionSubjectId": "SnapshotProverSubjects/RethrowHelper::RunRethrow:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/RethrowHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 228,
+      "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
+      "name": "RunOverflowAddUn",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowUnHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 229,
+      "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
+      "name": "RunOverflowSubUn",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowUnHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 230,
+      "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
+      "name": "RunOverflowMulUn",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowUnHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 231,
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunArglist:System.Int32()",
+      "name": "RunArglist",
+      "definitionSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunArglist:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 232,
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunMkrefany:System.Int32()",
+      "name": "RunMkrefany",
+      "definitionSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunMkrefany:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 233,
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanyval:System.Int32()",
+      "name": "RunRefanyval",
+      "definitionSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanyval:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 234,
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanytype:System.Int32()",
+      "name": "RunRefanytype",
+      "definitionSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanytype:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 235,
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunJmp:System.Int32()",
+      "name": "RunJmp",
+      "definitionSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunJmp:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 236,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
+      "name": "ConvOvfI1",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 237,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
+      "name": "ConvOvfI1Un",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 238,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
+      "name": "ConvOvfU1Un",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 239,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
+      "name": "ConvOvfI2Un",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 240,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
+      "name": "ConvOvfU2Un",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 241,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
+      "name": "ConvOvfI4Un",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 242,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
+      "name": "ConvOvfU4Un",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 243,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
+      "name": "ConvOvfI8Un",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "memberType": "System.Int64",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 244,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
+      "name": "ConvOvfU8Un",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "memberType": "System.Int64",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 245,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
+      "name": "ConvOvfIUn",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 246,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
+      "name": "ConvOvfUUn",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 247,
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunLdnull:System.Int32()",
+      "name": "RunLdnull",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunLdnull:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 248,
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvU4:System.Int32()",
+      "name": "RunConvU4",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvU4:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 249,
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvI:System.Int32()",
+      "name": "RunConvI",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvI:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 250,
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+      "name": "RunConvOvfI",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 251,
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+      "name": "RunConvOvfU",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 252,
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+      "name": "RunConvOvfIUn",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 253,
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+      "name": "RunConvOvfUUn",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 254,
+      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI4:System.Int32()",
+      "name": "RunLdindI4",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI4:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 255,
+      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI:System.Int32()",
+      "name": "RunLdindI",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 256,
+      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunStindI:System.Int32()",
+      "name": "RunStindI",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunStindI:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 257,
+      "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestList:System.Int32()",
+      "name": "TestList",
+      "definitionSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestList:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CollectionsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 258,
+      "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestDict:System.Int32()",
+      "name": "TestDict",
+      "definitionSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestDict:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CollectionsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 259,
+      "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestSet:System.Int32()",
+      "name": "TestSet",
+      "definitionSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestSet:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CollectionsHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 260,
+      "subjectId": "SnapshotProverSubjects/ExternalCaller::CallExternal:System.Int32()",
+      "name": "CallExternal",
+      "definitionSubjectId": "SnapshotProverSubjects/ExternalCaller::CallExternal:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ExternalCaller",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 261,
+      "subjectId": "SnapshotProverSubjects/MultiDispatcher::DispatchBoth:System.Int32()",
+      "name": "DispatchBoth",
+      "definitionSubjectId": "SnapshotProverSubjects/MultiDispatcher::DispatchBoth:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MultiDispatcher",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 262,
+      "subjectId": "SnapshotProverSubjects/InternalHelper::Double:System.Int32(System.Int32)",
+      "name": "Double",
+      "definitionSubjectId": "SnapshotProverSubjects/InternalHelper::Double:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/InternalHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 263,
+      "subjectId": "SnapshotProverSubjects/StringConcatHelper::TestConcat:System.Int32()",
+      "name": "TestConcat",
+      "definitionSubjectId": "SnapshotProverSubjects/StringConcatHelper::TestConcat:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StringConcatHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 264,
+      "subjectId": "SnapshotProverSubjects/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "name": "DemoCombine",
+      "definitionSubjectId": "SnapshotProverSubjects/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/GenericsVirtEhDemo",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 265,
+      "subjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
+      "name": "DemoBoxStore",
+      "definitionSubjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 266,
+      "subjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo::Run:System.Int32()",
+      "name": "Run",
+      "definitionSubjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo::Run:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 267,
+      "subjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo::Run:System.Int32()",
+      "name": "Run",
+      "definitionSubjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo::Run:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 268,
+      "subjectId": "SnapshotProverSubjects/SealedHelper::.ctor:System.Void(System.Int32)",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotProverSubjects/SealedHelper::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SealedHelper",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 269,
+      "subjectId": "SnapshotProverSubjects/SealedHelper::GetValueVirtual:System.Int32()",
+      "name": "GetValueVirtual",
+      "definitionSubjectId": "SnapshotProverSubjects/SealedHelper::GetValueVirtual:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SealedHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 270,
+      "subjectId": "SnapshotProverSubjects/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
+      "name": "RunSealedVirtual",
+      "definitionSubjectId": "SnapshotProverSubjects/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SealedClassVirtualHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 271,
+      "subjectId": "SnapshotProverSubjects/IMyInterface::GetValue:System.Int32()",
+      "name": "GetValue",
+      "definitionSubjectId": "SnapshotProverSubjects/IMyInterface::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/IMyInterface",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 272,
+      "subjectId": "SnapshotProverSubjects/ImplHelper::.ctor:System.Void(System.Int32)",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotProverSubjects/ImplHelper::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ImplHelper",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 273,
+      "subjectId": "SnapshotProverSubjects/ImplHelper::GetValue:System.Int32()",
+      "name": "GetValue",
+      "definitionSubjectId": "SnapshotProverSubjects/ImplHelper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ImplHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 274,
+      "subjectId": "SnapshotProverSubjects/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
+      "name": "RunInterfaceTest",
+      "definitionSubjectId": "SnapshotProverSubjects/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/InterfaceDevirtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 275,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 276,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
+      "name": "GetValue",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 277,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 278,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::GetValue:!0()",
+      "name": "GetValue",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E",
+      "memberType": "!0",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
       "registrationKind": "parameter",
-      "slot": 14,
+      "slot": 279,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
       "name": "entryIndex",
       "declaringMethodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
       "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 280,
+      "subjectId": "SnapshotProverSubjects/InstanceHelper::.ctor:System.Void(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 281,
+      "subjectId": "SnapshotProverSubjects/Helper::Square:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/Helper::Square:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 282,
+      "subjectId": "SnapshotProverSubjects/Helper::ConsumeString:System.Void(System.String)::parameter[0]:s",
+      "name": "s",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/Helper::ConsumeString:System.Void(System.String)",
+      "memberType": "System.String",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 283,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+      "memberType": "!0",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 284,
+      "subjectId": "SnapshotProverSubjects/HasInstanceFields::.ctor:System.Void(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 285,
+      "subjectId": "SnapshotProverSubjects/LdargaHelper::RunLdarga:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 286,
+      "subjectId": "SnapshotProverSubjects/ThrowHelper::CheckPositive:System.Int32(System.Int32)::parameter[0]:arg",
+      "name": "arg",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 287,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 288,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 289,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 290,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
+      "memberType": "System.Int64",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 291,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+      "memberType": "System.Single",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 292,
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
+      "memberType": "System.Double",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 293,
+      "subjectId": "SnapshotProverSubjects/CalliHelper::RunCalli:System.Int32(System.Int32)::parameter[0]:arg",
+      "name": "arg",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/CalliHelper::RunCalli:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 294,
+      "subjectId": "SnapshotProverSubjects/MyClass::.ctor:System.Void(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/MyClass::.ctor:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 295,
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+      "memberType": "System.Double",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 296,
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)::parameter[0]:addr",
+      "name": "addr",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
+      "memberType": "System.Int32\u0026",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 297,
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestStarg:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 298,
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestConvRUn:System.Int32(System.Single)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+      "memberType": "System.Single",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 299,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 300,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 301,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 302,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 303,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 304,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
+      "memberType": "System.Int64",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 305,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
+      "memberType": "System.Int64",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 306,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
+      "memberType": "System.Single",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 307,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
+      "memberType": "System.Double",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 308,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 309,
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 310,
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 311,
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 312,
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 313,
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 314,
+      "subjectId": "SnapshotProverSubjects/InternalHelper::Double:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/InternalHelper::Double:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 315,
+      "subjectId": "SnapshotProverSubjects/SealedHelper::.ctor:System.Void(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/SealedHelper::.ctor:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 316,
+      "subjectId": "SnapshotProverSubjects/ImplHelper::.ctor:System.Void(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/ImplHelper::.ctor:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 317,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 318,
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)::parameter[0]:val",
+      "name": "val",
+      "declaringMethodSubjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
+      "memberType": "!0",
       "parameterIndex": 0
     }
   ]
