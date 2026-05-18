@@ -8,6 +8,9 @@
 #include "gc_card_table.h"
 #include "generated_code_compat.h"  // chaos_managed_exception for Thread.Abort throw
 
+#include "../codegen/t4_seh_handler.h"    // FindT4CodeByAddress for hybrid GC scanning
+#include "../codegen/native_method.h"     // NativeMethod (slot_map_data for GcSlotMapV0)
+
 #include <atomic>
 #include <cstdio>
 #include <new>
@@ -24,6 +27,16 @@
 #endif
 
 namespace chaos::il2cpp::runtime_core::threading {
+
+// ── T4 frame layout constant (mirrors code_generator.cpp kFrameSize) ─
+// The T4 native prologue establishes:
+//   push rbp; mov rbp, rsp; push rbx; push rsi; sub rsp, <frame_size>
+// where frame_size = 864 (32 shadow + 512 GPR file + 256 FPR file + 64 CallVirtArgs).
+// RSP after prologue = entry_rsp - 32 - 864.
+// RBP = entry_rsp - 16.
+// For GC scanning: frame_ptr (base of GcSlotMap offsets) = RSP = RBP - 880.
+static constexpr uint32_t kT4FrameSize = 864;
+static constexpr uint32_t kT4RbpToFramePtr = 16 + 32 + kT4FrameSize;  // 880
 
 // ── TLS definitions ──────────────────────────────────────────────────
 
@@ -516,16 +529,45 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
         uintptr_t end_aligned = reinterpret_cast<uintptr_t>(scan_end)
             & ~static_cast<uintptr_t>(sizeof(void*) - 1);
 
+        // ── Phase 1: Full-stack conservative scan ─────────────────
         for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
-            // Pre-filter: skip slots whose VALUE doesn't point into the
-            // managed heap range.  This eliminates false-positive roots
-            // from integers, code pointers, and OS handles that happen to
-            // be pointer-aligned on the stack.
             auto* val_ptr = reinterpret_cast<void**>(slot);
             if (*val_ptr != nullptr &&
                 reinterpret_cast<uintptr_t>(*val_ptr) >= g_heap_base) {
                 s_callback(reinterpret_cast<void*>(slot), /*is_interior=*/false, s_user_data);
             }
+        }
+
+        // ── Phase 2: Precise T4 frame scanning ───────────────────
+        // Scan for return addresses that fall within registered T4 code
+        // ranges. Each T4 frame has a known stack layout:
+        //   [rbp + 8] = return address    (slot we're scanning)
+        //   [rbp + 0] = saved old RBP     (must be a stack address)
+        //   frame_ptr = RSP = rbp - 880   (base for GcSlotMap offsets)
+        for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
+            void* val = *reinterpret_cast<void**>(slot);
+            const auto* nm = chaos::il2cpp::codegen::FindT4CodeByAddress(val);
+            if (nm == nullptr) continue;
+            if (nm->slot_map_data == nullptr) continue;
+
+            if (slot < start_aligned + sizeof(void*)) continue;
+            uintptr_t saved_rbp = *reinterpret_cast<uintptr_t*>(slot - sizeof(void*));
+            if (saved_rbp < reinterpret_cast<uintptr_t>(scan_start) ||
+                saved_rbp > reinterpret_cast<uintptr_t>(scan_end)) continue;
+
+            uintptr_t t4_rbp = slot - sizeof(void*);
+            // Use per-method RBP-to-RSP offset (register caching changes the
+            // distance between RBP and the stack frame base).
+            uint32_t rbpoff = nm->rbp_to_rsp_offset;
+            if (rbpoff == 0) rbpoff = kT4RbpToFramePtr;  // legacy fallback
+            void* frame_ptr = reinterpret_cast<uint8_t*>(t4_rbp) - rbpoff;
+            auto* sm = static_cast<const GcSlotMapV0*>(nm->slot_map_data);
+
+            ManagedFrameInfo info;
+            info.frame_ptr = frame_ptr;
+            info.frame_size = sm->frame_size;
+            info.return_address = val;
+            GcScanPreciseFrame(info, *sm, s_callback, s_user_data);
         }
 
         return true;  // continue enumeration

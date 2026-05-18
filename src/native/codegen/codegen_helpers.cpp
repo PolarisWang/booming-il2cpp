@@ -132,8 +132,7 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
     // The call site (code_generator) checks ret_buf[0] and jumps to
     // deopt_return, which unwinds the frame back to entry_direct.
     if (args->ret_buf != nullptr) {
-        using codegen::t_deopt_state;
-        using codegen::kDeoptMagic;
+        using namespace chaos::il2cpp::codegen;
 
         // Copy all 64 GPR values from the register file directly.
         std::memcpy(t_deopt_state.gpr_file, gpr_base,
@@ -143,7 +142,37 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
         std::memcpy(t_deopt_state.fpr_file, gpr_base + 64,
                     32 * sizeof(double));
 
+        // Extract type tags from the DeoptEntry for this call site.
+        // The return address points to the instruction after the call to
+        // CodegenCallVirt in the generated code.  Use it to find the
+        // NativeMethod and its DeoptEntry, then copy per-register tags.
+        void* ret_addr = _ReturnAddress();
+        const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+        if (nm != nullptr && nm->deopt_values != nullptr) {
+            uint64_t code_base = reinterpret_cast<uint64_t>(nm->code);
+            uint32_t native_off = static_cast<uint32_t>(
+                reinterpret_cast<uint64_t>(ret_addr) - code_base);
+            const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_off);
+            if (entry != nullptr) {
+                // Initialize all GPR tags to Int64, then overwrite with
+                // actual tags from the DeoptValue entries.
+                std::memset(t_deopt_state.gpr_tags,
+                    static_cast<int>(ValueTag::Int64), 64);
+                std::memset(t_deopt_state.fpr_tags,
+                    static_cast<int>(ValueTag::Float64), 32);
+                for (uint32_t i = 0; i < entry->num_values; ++i) {
+                    const auto& dv = nm->deopt_values[entry->values_offset + i];
+                    if (dv.reg_index < 64) {
+                        t_deopt_state.gpr_tags[dv.reg_index] = dv.value_tag;
+                    } else {
+                        t_deopt_state.fpr_tags[dv.reg_index - 64] = dv.value_tag;
+                    }
+                }
+            }
+        }
+
         // Signal deoptimization to the caller.
+        t_deopt_state.instr_pc = args->instruction_idx;
         t_deopt_state.deopt_happened = true;
         *static_cast<uint64_t*>(args->ret_buf) = kDeoptMagic;
     }
@@ -396,6 +425,61 @@ extern "C" void* CodegenLocAlloc(uint32_t size) noexcept {
     return mem;
 }
 
+// ── Inline deoptimization state saver for EmitDeoptSequence ─────────────────────
+
+extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
+    using namespace chaos::il2cpp::codegen;
+    using namespace chaos::il2cpp::interpreter;
+
+    if (codegen_rsp == 0) return;
+
+    // Get the return address — points to the instruction after the CALL
+    // to DeoptSaveFrameState in the generated code.
+    void* ret_addr = _ReturnAddress();
+
+    // Find the NativeMethod covering this code address.
+    const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+    if (nm == nullptr) return;
+
+    uint64_t code_base = reinterpret_cast<uint64_t>(nm->code);
+    uint32_t native_off = static_cast<uint32_t>(
+        reinterpret_cast<uint64_t>(ret_addr) - code_base);
+
+    // Batch-copy all 64 GPR values from stack frame spill slots.
+    // GPR file starts at codegen_rsp + kGprFileOff (= codegen_rsp + 32).
+    for (uint32_t vr = 0; vr < 64; ++vr) {
+        t_deopt_state.gpr_file[vr] = *reinterpret_cast<const uint64_t*>(
+            codegen_rsp + 32 + vr * 8);
+    }
+
+    // Batch-copy all 32 FPR values from stack frame spill slots.
+    // FPR file starts at codegen_rsp + kFprFileOff (= codegen_rsp + 544).
+    for (uint32_t vr = 0; vr < 32; ++vr) {
+        t_deopt_state.fpr_file[vr] = *reinterpret_cast<const double*>(
+            codegen_rsp + 544 + vr * 8);
+    }
+
+    // Look up type tags from the DeoptEntry for this native offset.
+    const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_off);
+    if (entry != nullptr && nm->deopt_values != nullptr) {
+        std::memset(t_deopt_state.gpr_tags,
+            static_cast<int>(ValueTag::Int64), 64);
+        std::memset(t_deopt_state.fpr_tags,
+            static_cast<int>(ValueTag::Float64), 32);
+        for (uint32_t i = 0; i < entry->num_values; ++i) {
+            const auto& dv = nm->deopt_values[entry->values_offset + i];
+            if (dv.reg_index < 64) {
+                t_deopt_state.gpr_tags[dv.reg_index] = dv.value_tag;
+            } else {
+                t_deopt_state.fpr_tags[dv.reg_index - 64] = dv.value_tag;
+            }
+        }
+        t_deopt_state.instr_pc = entry->instr_pc;
+    }
+
+    t_deopt_state.deopt_happened = true;
+}
+
 // ── Deoptimization trampoline entry point ─────────────────────────────────────
 
 extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
@@ -426,7 +510,9 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
         *nctx,
         codegen_rsp,
         t_deopt_state.gpr_file,
-        t_deopt_state.fpr_file);
+        t_deopt_state.fpr_file,
+        t_deopt_state.gpr_tags,
+        t_deopt_state.fpr_tags);
 
     // 5. Find the DeoptEntry to get the instruction pc.
     const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_offset);

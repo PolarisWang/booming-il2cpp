@@ -45,6 +45,16 @@ struct CodeGenConfig {
     // Set by the caller (entry_direct.cpp) before calling GenerateNativeCode.
     // When non-null, EmitSafepointPoll emits a call through this pointer.
     void* safepoint_fn = nullptr;
+
+    // PIC dispatch data from PatchMethod (for CallVirt fast path in T4 code).
+    // Set by entry_direct.cpp before GenerateNativeCode.  When non-null,
+    // CallVirt instructions use PIC chain lookup for direct dispatch.
+    const void* pic_dispatch_data = nullptr;
+
+    // Dispatch context pointer for InterpreterDispatchRaw fallback from
+    // CodegenCallVirt.  Points to InterpreterDispatchContext on the caller's
+    // stack, valid for the lifetime of the current RegisterExecute session.
+    void* dispatch_ctx = nullptr;
 };
 
 /// Generate native x64 code from a RegisterMethod.

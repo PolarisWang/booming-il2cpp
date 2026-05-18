@@ -17,6 +17,8 @@
 #include "support.h"
 #include "vtable_registry.h"
 
+#include "t4_seh_handler.h"
+
 #include "gc/gc_old_gen.h"
 
 #include <cstdint>
@@ -260,6 +262,9 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
     if (chaos::il2cpp::runtime_core::GetRuntimeAbiV0() == nullptr) {
         return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
     }
+
+    // Register T4 SEH vectored exception handler for native code exception dispatch.
+    chaos::il2cpp::codegen::RegisterT4SehHandler();
 
     // ── Register AOT generic type instantiations and method contexts ──
     //

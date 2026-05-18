@@ -25,6 +25,8 @@ static constexpr uint64_t kDeoptMagic = 0xDE0D7FA57A11ULL;
 struct DeoptTlsState {
     uint64_t gpr_file[64] = {};   // Reconstructed GPR register file
     double   fpr_file[32] = {};   // Reconstructed FPR register file
+    uint8_t  gpr_tags[64] = {};   // Per-register ValueTag for GPRs
+    uint8_t  fpr_tags[32] = {};   // Per-register ValueTag for FPRs
     uint32_t instr_pc     = 0;    // RegisterInstruction pc to resume at
     bool     deopt_happened = false; // Set to true when deopt trampoline fires
 };
@@ -139,5 +141,13 @@ extern "C" void* CodegenLocAlloc(uint32_t size) noexcept;
 // the register file from the stack frame spill slots, sets t_deopt_state, and
 // the trampoline then writes kDeoptMagic to ret_buf[0] and returns.
 extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept;
+
+// ── Inline deoptimization state saver ─────────────────────────────────────────
+// Called directly from EmitDeoptSequence in generated T4 native code.
+// codegen_rsp is the RSP value after prologue (sub rsp, kFrameSize).
+// Uses _ReturnAddress() to find the NativeMethod and DeoptEntry, then
+// batch-copies all 64 GPRs + 32 FPRs from stack frame spill slots to
+// t_deopt_state along with their type tags.
+extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept;
 
 #endif  // CHAOS_IL2CPP_CODEGEN_HELPERS_H_
