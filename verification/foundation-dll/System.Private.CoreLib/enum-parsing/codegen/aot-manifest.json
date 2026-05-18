@@ -76,12 +76,6 @@
     },
     {
       "assemblyName": "EnumParsingSubjects",
-      "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "EnumParsingSubjects",
       "subjectKind": "field",
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::_exitCode",
       "reason": "instance-field-state"
@@ -112,12 +106,6 @@
     },
     {
       "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "type",
       "subjectId": "System.Private.CoreLib/System.DayOfWeek",
       "reason": "external-call"
@@ -131,6 +119,12 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)",
       "reason": "external-call"
     },
@@ -138,12 +132,6 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {

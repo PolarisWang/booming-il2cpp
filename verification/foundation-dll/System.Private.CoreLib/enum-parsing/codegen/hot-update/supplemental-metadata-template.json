@@ -105,14 +105,6 @@
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663308,
       "parameterCount": 0
-    },
-    {
-      "assemblyName": "EnumParsingSubjects",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
-      "metadataToken": 100663309,
-      "parameterCount": 1
     }
   ],
   "reservedSlots": {

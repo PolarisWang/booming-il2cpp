@@ -155,26 +155,6 @@
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
-    },
-    {
-      "registrationKind": "method",
-      "slot": 15,
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
-      "name": "Run",
-      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
-      "memberType": "System.Void",
-      "parameterCount": 1,
-      "isImported": false
-    },
-    {
-      "registrationKind": "parameter",
-      "slot": 16,
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
-      "name": "entryIndex",
-      "declaringMethodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
-      "memberType": "System.Int32",
-      "parameterIndex": 0
     }
   ]
 }

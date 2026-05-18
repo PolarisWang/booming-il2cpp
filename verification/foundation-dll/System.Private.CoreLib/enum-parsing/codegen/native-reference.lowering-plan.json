@@ -10,7 +10,6 @@
   "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
   "translationUnitMode": "runtime-skeleton",
   "translationUnitMethodSubjectIds": [
-    "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
     "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()",
     "EnumParsingSubjects/EnumParsingSubjects::Subject_10:System.Void()",
     "EnumParsingSubjects/EnumParsingSubjects::Subject_11:System.Void()",
@@ -24,15 +23,15 @@
     "EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()",
     "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()"
   ],
-  "translationUnitMethodCount": 13,
+  "translationUnitMethodCount": 12,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 13,
+      "methodCount": 12,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
-      "firstMethodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
+      "firstMethodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()",
       "lastMethodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()"
     }
   ],

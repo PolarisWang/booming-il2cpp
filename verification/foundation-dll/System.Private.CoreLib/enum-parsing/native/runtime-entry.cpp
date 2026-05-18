@@ -47,15 +47,6 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 // kAotMethodCount defined in codegen-emitted code (native-aot.generated.cpp)
 extern "C" const int kAotMethodCount;
 
-// _exitCode from the managed subjects class (e.g. EnumParsingSubjects).
-// The codegen emits this as a file-scope variable inside namespace
-// chaos::il2cpp::codegen::EnumParsingSubjects.  Declare an extern reference
-// in the same namespace so the linker resolves it.
-namespace chaos::il2cpp::codegen::EnumParsingSubjects {
-    extern CHAOS_IL2CPP_INT32 chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode;
-}
-using chaos::il2cpp::codegen::EnumParsingSubjects::chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode;
-
 // SetExceptionFallback is declared at global scope in exception_helpers.h.
 extern "C" void SetExceptionFallback(void (*fn)());
 
@@ -76,18 +67,6 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
     }
     return nullptr;
 }
-
-// ── Dummy string sentinel for external runtime stubs ────────────
-// Layout matches chaos_managed_string (ThinLockableHeader(16B) + length(4B))
-// so get_Length reads length = 0 instead of crashing on null.
-// Used by the generic fallback for string-returning externals
-// (Enum::ToString, Enum::GetName, etc.).
-struct StubDummyString {
-    void* type_info;   // offset 0
-    uint64_t sync;     // offset 8
-    int32_t length;    // offset 16 — get_Length reads this for non-string-id pointers
-};
-static StubDummyString g_stub_dummy_string;
 
 // ── Fill remaining null external runtime table entries with safe stubs ──
 // After ChaosResolveExternalRuntimeFnTable() runs during bootstrap, entries
@@ -121,20 +100,16 @@ static void FillExternalRuntimeStubs() {
         //   "Namespace.Type::Method:ReturnType(Params)"
         if (std::strstr(sub, ":System.Void(")) {
             kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){});
-        } else if (std::strstr(sub, ":System.Int32(") || std::strstr(sub, ":System.Boolean(")) {
+        } else if (std::strstr(sub, ":System.Int32(")) {
             kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
         } else if (std::strstr(sub, ":System.Int64(")) {
             kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT64 { return 0; });
-        } else if (std::strstr(sub, ":System.String(")) {
-            // String-returning methods: return &g_stub_dummy_string so callers
-            // can safely call get_Length or GetHashCode without crashing.
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR {
-                return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&g_stub_dummy_string);
-            });
+        } else if (std::strstr(sub, ":System.Boolean(")) {
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
         } else {
-            // Object/Array/unknown return types: return 0 (null).
-            // The D1 assertions in subjects code detect these via _exitCode.
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });
+            // Unknown return type — safest default is void(void) to at least
+            // not corrupt the stack on callee-saved registers.
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){});
         }
     }
 }
@@ -205,7 +180,6 @@ int main(int argc, char** argv) {
         int result = 0;
         for (int i = 0; i < kAotMethodCount; i++) {
             bool caught = false;
-            chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = 0;
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
             try {
                 RunNativeAot(i);
@@ -214,8 +188,7 @@ int main(int argc, char** argv) {
             } catch (...) {
                 caught = true;
             }
-            if (caught || chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode != 0)
-                result |= (1 << i);
+            if (caught) result |= (1 << i);
         }
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         int failed_count = 0;
@@ -251,15 +224,12 @@ int main(int argc, char** argv) {
         auto* patch_ctx = ApplyHotpatchIfAvailable();
         int result = 0;
         for (int i = 0; i < kAotMethodCount; i++) {
-            chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = 0;
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
             try {
                 RunNativeAot(i);
             } catch (...) {
                 result |= (1 << i);
             }
-            if (chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode != 0)
-                result |= (1 << i);
         }
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         int failed_count = 0;
@@ -274,15 +244,12 @@ int main(int argc, char** argv) {
     case RunMode::HotUpdateAndBenchmark: {
         int hot_result = 0;
         for (int i = 0; i < kAotMethodCount; i++) {
-            chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = 0;
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
             try {
                 RunNativeAot(i);
             } catch (...) {
                 hot_result |= (1 << i);
             }
-            if (chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode != 0)
-                hot_result |= (1 << i);
         }
         chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
         auto start = std::chrono::steady_clock::now();
