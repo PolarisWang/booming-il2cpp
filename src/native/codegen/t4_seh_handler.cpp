@@ -132,6 +132,13 @@ static uint32_t FindSehHandlerForOffset(const NativeMethod* nm,
 
 #if defined(_WIN32) || defined(_WIN64)
 
+/// Managed exception code used by CodegenThrow/CodegenRethrow.
+static constexpr uint32_t kManagedSehExceptionCode = 0xE0000001;
+
+/// Exception object pointer for the current thread (set by CodegenThrow,
+/// read by the VEH handler to restore the exception object for catch blocks).
+extern thread_local void* g_t4_exception_obj;
+
 static LONG WINAPI T4VectoredExceptionHandler(EXCEPTION_POINTERS* ep) noexcept {
     if (ep == nullptr || ep->ExceptionRecord == nullptr || ep->ContextRecord == nullptr) {
         return EXCEPTION_CONTINUE_SEARCH;
@@ -165,13 +172,19 @@ static LONG WINAPI T4VectoredExceptionHandler(EXCEPTION_POINTERS* ep) noexcept {
         return EXCEPTION_CONTINUE_SEARCH;
     }
 
+    // Store exception object pointer in RCX so the catch handler can
+    // access it (Win64 first-arg register convention).
+    ULONG_PTR ex_obj = reinterpret_cast<ULONG_PTR>(g_t4_exception_obj);
+    ep->ContextRecord->Rcx = ex_obj;
+
     // Redirect RIP to the handler code in the T4 generated method
     void* handler_addr = static_cast<uint8_t*>(nm->code) + handler_offset;
     ep->ContextRecord->Rip = reinterpret_cast<ULONG_PTR>(handler_addr);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-        "T4 VEH: exception at {} (offset={}) -> handler at {} (offset={})",
-        exception_addr, code_offset, handler_addr, handler_offset);
+        "T4 VEH: exception at {} (offset={}) -> handler at {} (offset={}), ex_obj={}",
+        exception_addr, code_offset, handler_addr, handler_offset,
+        reinterpret_cast<void*>(ex_obj));
 
     return EXCEPTION_CONTINUE_EXECUTION;
 }

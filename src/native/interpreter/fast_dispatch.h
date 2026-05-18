@@ -198,17 +198,6 @@ struct FastFrame {
     interpreter::InterpreterValue PopIV() noexcept;
 };
 
-// ── OpHandler ──────────────────────────────────────────────────────────
-// Each handler processes one IR instruction on FastFrame.
-// Handler must advance frame.pc (typically ++frame.pc, or set to target).
-using OpHandler = void (*)(FastFrame& frame,
-                           const interpreter::IRInstruction& instr) noexcept;
-
-// ── Dispatch table ─────────────────────────────────────────────────────
-// Indexed by IROpCode value (0..98). One handler per opcode.
-// Unimplemented opcodes point to HandleUnsupported (triggers fallback).
-extern const OpHandler kHandlers[99];
-
 // ── FastExecute ────────────────────────────────────────────────────────
 // Execute a method's IR using function-pointer dispatch + FastFrame.
 // Returns true if execution completed normally, false if an unsupported

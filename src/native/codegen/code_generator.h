@@ -45,6 +45,27 @@ struct CodeGenConfig {
     // Set by the caller (entry_direct.cpp) before calling GenerateNativeCode.
     // When non-null, EmitSafepointPoll emits a call through this pointer.
     void* safepoint_fn = nullptr;
+
+    // Absolute address of the current thread's suspend_seq field (atomic<uint32_t>).
+    // When non-null, EmitSafepointPoll emits an inline check before the full call:
+    //   cmp dword [ptr], 0  → je .skip  (fast path, ~3 cycles)
+    // Set by entry_direct.cpp during T3→T4 promotion.
+    void* thread_suspend_seq_ptr = nullptr;
+
+    // PIC dispatch data (PatchMethod::pic_dispatch_data) for CallVirt.
+    // Set by entry_direct.cpp during T3→T4 promotion.
+    void* pic_dispatch_data = nullptr;
+
+    // ── TLAB inline allocation (V3.5) ────────────────────────────────────
+
+    // Absolute address of the thread-local tls_tlab.current (char* bump pointer).
+    // Set by entry_direct.cpp before calling GenerateNativeCode.
+    // When both tlab_current_loc and tlab_end_loc are non-null, NewObj/Box
+    // emit an inline TLAB bump fast path instead of calling GcAllocate.
+    void* tlab_current_loc = nullptr;
+
+    // Absolute address of the thread-local tls_tlab.end (char* end bound).
+    void* tlab_end_loc = nullptr;
 };
 
 /// Generate native x64 code from a RegisterMethod.

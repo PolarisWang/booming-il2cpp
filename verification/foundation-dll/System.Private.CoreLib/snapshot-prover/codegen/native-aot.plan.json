@@ -1,11 +1,11 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
-  "planKind": "full-assembly-entry",
+  "planKind": "generic-managed-entry",
   "assemblyName": "SnapshotProverSubjects",
   "entrySubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
-  "nativeEntryFunctionName": "",
-  "entrySymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Run",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Run_System_Int32",
   "entryMethodToken": "0u",
-  "workloadAbi": "full-assembly"
+  "workloadAbi": "void(int32)"
 }

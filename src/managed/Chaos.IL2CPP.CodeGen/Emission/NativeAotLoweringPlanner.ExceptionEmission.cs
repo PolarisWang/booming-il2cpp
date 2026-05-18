@@ -87,7 +87,8 @@ public sealed partial class NativeAotLoweringPlanner
 
 
 	private static IReadOnlyList<AotCoreIrInstructionArtifact> FilterRedundantStoreReloadPairs(
-		IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+		IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
+		IReadOnlySet<int>? branchTargetOffsets = null)
 	{
 		var result = new List<AotCoreIrInstructionArtifact>(instructions.Count);
 		int i = 0;
@@ -98,6 +99,14 @@ public sealed partial class NativeAotLoweringPlanner
 				instructions[i + 1].Op is "ldloc" &&
 				GetRequiredIntOperand(instructions[i]) == GetRequiredIntOperand(instructions[i + 1]))
 			{
+				// Don't skip the ldloc if it's a branch target — the label must be preserved.
+				if (branchTargetOffsets is not null &&
+					branchTargetOffsets.Contains(GetRequiredIlOffset(instructions[i + 1])))
+				{
+					result.Add(instructions[i]);
+					i++;
+					continue;
+				}
 				i += 2;
 				continue;
 			}
@@ -970,7 +979,7 @@ public sealed partial class NativeAotLoweringPlanner
 			else
 			{
 				builder.AppendLine($"{indentation}    auto* chaos_object = reinterpret_cast<{GetNativeTypeSymbol(declaringTypeSubjectId)}*>({ConsumeEvalStackValueExpression()});");
-				builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(&chaos_object->{GetNativeFieldMemberName(targetRef.SubjectId)});");
+				builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->{GetNativeFieldMemberName(targetRef.SubjectId)}));");
 				builder.AppendLine($"{indentation}    chaos_object->{GetNativeFieldMemberName(targetRef.SubjectId)} = chaos_value;");
 				builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_object);");
 			}
@@ -1491,7 +1500,7 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		if (isReferenceElement)
 		{
-			builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]);");
+			builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]));");
 		}
 		builder.AppendLine($"{indentation}    chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;");
 		if (isReferenceElement)
@@ -2973,7 +2982,7 @@ public sealed partial class NativeAotLoweringPlanner
 			IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
 			IReadOnlySet<int> branchTargetOffsets)
 		{
-			var filtered = FilterRedundantStoreReloadPairs(instructions);
+			var filtered = FilterRedundantStoreReloadPairs(instructions, branchTargetOffsets);
 			foreach (var instruction in filtered)
 			{
 				int offset = GetRequiredIlOffset(instruction);

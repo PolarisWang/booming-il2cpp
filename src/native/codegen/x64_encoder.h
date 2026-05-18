@@ -146,10 +146,28 @@ inline void EmitMovMR(CodeBuffer& buf, uint8_t base, int32_t disp, uint8_t src) 
     EmitMR(buf, src, base, disp);
 }
 
+/// mov dword [base+disp], imm32  (32-bit immediate-to-memory store)
+inline void EmitMovMI32(CodeBuffer& buf, uint8_t base, int32_t disp, uint32_t imm) noexcept {
+    // C7 /0 id: C7 + ModRM(reg=0, rm=base) + disp + imm32
+    // No REX.W = 32-bit operand; REX.B for extended base regs.
+    uint8_t rex = REX(false, 0, 0, base);
+    if (rex != 0x40) buf.EmitByte(rex);  // REX.B if base > 7
+    buf.EmitByte(0xC7);
+    EmitMR(buf, 0, base, disp);
+    buf.Emit32(imm);
+}
+
 /// mov r64, r/m64  ──── mov reg, [mem]
 inline void EmitMovRM(CodeBuffer& buf, uint8_t dst, uint8_t base, int32_t disp) noexcept {
     EmitREX(buf, true, dst, base);
     buf.EmitByte(0x8B);
+    EmitMR(buf, dst, base, disp);
+}
+
+/// lea r64, [base + disp]  ──── load effective address
+inline void EmitLeaRM(CodeBuffer& buf, uint8_t dst, uint8_t base, int32_t disp) noexcept {
+    EmitREX(buf, true, dst, base);
+    buf.EmitByte(0x8D);
     EmitMR(buf, dst, base, disp);
 }
 

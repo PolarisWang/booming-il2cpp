@@ -530,6 +530,7 @@ int main(int argc, char** argv) {{
         return 0;
     }}
     case RunMode::HotUpdate: {{
+        auto* patch_ctx = ApplyHotpatchIfAvailable();
         int result = 0;
         for (int i = 0; i < kAotMethodCount; i++) {{
             chaos::il2cpp::common::g_chaos_fail_hook = []() {{ throw chaos_managed_exception{{}}; }};

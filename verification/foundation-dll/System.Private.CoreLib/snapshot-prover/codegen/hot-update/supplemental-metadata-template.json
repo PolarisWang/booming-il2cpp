@@ -7,9 +7,681 @@
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ArithmeticOps",
+      "definitionSubjectId": "SnapshotProverSubjects/ArithmeticOps",
+      "metadataToken": 33554435
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StringOps",
+      "definitionSubjectId": "SnapshotProverSubjects/StringOps",
+      "metadataToken": 33554436
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/VoidCaller",
+      "definitionSubjectId": "SnapshotProverSubjects/VoidCaller",
+      "metadataToken": 33554437
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MathHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/MathHelper",
+      "metadataToken": 33554438
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/FlowControl",
+      "definitionSubjectId": "SnapshotProverSubjects/FlowControl",
+      "metadataToken": 33554439
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/InstanceHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/InstanceHelper",
+      "metadataToken": 33554440
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CallVirtHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/CallVirtHelper",
+      "metadataToken": 33554441
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BoxingHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BoxingHelper",
+      "metadataToken": 33554442
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/FieldHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/FieldHelper",
+      "metadataToken": 33554443
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LoopHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LoopHelper",
+      "metadataToken": 33554444
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ConversionHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ConversionHelper",
+      "metadataToken": 33554445
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Helper",
+      "definitionSubjectId": "SnapshotProverSubjects/Helper",
+      "metadataToken": 33554446
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SwitchHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/SwitchHelper",
+      "metadataToken": 33554447
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdftnHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdftnHelper",
+      "metadataToken": 33554448
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/TargetHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/TargetHelper",
+      "metadataToken": 33554449
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ArrayHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ArrayHelper",
+      "metadataToken": 33554450
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/EhHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/EhHelper",
+      "metadataToken": 33554451
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/GenericHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/GenericHelper",
+      "metadataToken": 33554452
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "metadataToken": 33554453
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/DelegateHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/DelegateHelper",
+      "metadataToken": 33554454
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BaseClass",
+      "definitionSubjectId": "SnapshotProverSubjects/BaseClass",
+      "metadataToken": 33554455
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/DerivedClass",
+      "definitionSubjectId": "SnapshotProverSubjects/DerivedClass",
+      "metadataToken": 33554456
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/VirtualHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/VirtualHelper",
+      "metadataToken": 33554457
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MarkedClass",
+      "definitionSubjectId": "SnapshotProverSubjects/MarkedClass",
+      "metadataToken": 33554459
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/TypeCheckHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/TypeCheckHelper",
+      "metadataToken": 33554460
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SizeOfHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/SizeOfHelper",
+      "metadataToken": 33554462
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/IndirectHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/IndirectHelper",
+      "metadataToken": 33554463
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ArithmeticCompareHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ArithmeticCompareHelper",
+      "metadataToken": 33554464
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BranchDupHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchDupHelper",
+      "metadataToken": 33554465
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/HasInstanceFields",
+      "definitionSubjectId": "SnapshotProverSubjects/HasInstanceFields",
+      "metadataToken": 33554466
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/InstanceFieldHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/InstanceFieldHelper",
+      "metadataToken": 33554467
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/StaticFieldWriteHelper",
+      "metadataToken": 33554468
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/VirtualDispatchHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/VirtualDispatchHelper",
+      "metadataToken": 33554469
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BitwiseHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BitwiseHelper",
+      "metadataToken": 33554470
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ShiftHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ShiftHelper",
+      "metadataToken": 33554471
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ArrayLengthHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ArrayLengthHelper",
+      "metadataToken": 33554472
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ValueTypeHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ValueTypeHelper",
+      "metadataToken": 33554473
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LocalAllocHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LocalAllocHelper",
+      "metadataToken": 33554474
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MulDivHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/MulDivHelper",
+      "metadataToken": 33554475
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BranchCompareHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchCompareHelper",
+      "metadataToken": 33554476
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/FloatOpsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/FloatOpsHelper",
+      "metadataToken": 33554477
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ConvWideHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ConvWideHelper",
+      "metadataToken": 33554478
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/NegShiftHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/NegShiftHelper",
+      "metadataToken": 33554479
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdcI8Helper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdcI8Helper",
+      "metadataToken": 33554480
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ConvSmallIntHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ConvSmallIntHelper",
+      "metadataToken": 33554481
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdindI1Helper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindI1Helper",
+      "metadataToken": 33554482
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BranchCompareBHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchCompareBHelper",
+      "metadataToken": 33554483
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/HasFields",
+      "definitionSubjectId": "SnapshotProverSubjects/HasFields",
+      "metadataToken": 33554484
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/AddressHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/AddressHelper",
+      "metadataToken": 33554485
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdtokenHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdtokenHelper",
+      "metadataToken": 33554486
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdelemaHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdelemaHelper",
+      "metadataToken": 33554487
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdargaHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdargaHelper",
+      "metadataToken": 33554488
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CpobjHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/CpobjHelper",
+      "metadataToken": 33554489
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StindNarrowHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/StindNarrowHelper",
+      "metadataToken": 33554490
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CallvirtHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/CallvirtHelper",
+      "metadataToken": 33554491
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/UnboxHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/UnboxHelper",
+      "metadataToken": 33554492
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CpblkHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/CpblkHelper",
+      "metadataToken": 33554493
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdindUnsignedHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindUnsignedHelper",
+      "metadataToken": 33554494
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdindI8Helper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindI8Helper",
+      "metadataToken": 33554495
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdindWideHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindWideHelper",
+      "metadataToken": 33554496
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StindWideHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/StindWideHelper",
+      "metadataToken": 33554497
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ArrayRefHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ArrayRefHelper",
+      "metadataToken": 33554498
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ThrowHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ThrowHelper",
+      "metadataToken": 33554499
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowHelper",
+      "metadataToken": 33554500
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "metadataToken": 33554501
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CalliHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/CalliHelper",
+      "metadataToken": 33554502
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MyClass",
+      "definitionSubjectId": "SnapshotProverSubjects/MyClass",
+      "metadataToken": 33554503
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdVirtftnHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdVirtftnHelper",
+      "metadataToken": 33554504
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdelemAllHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdelemAllHelper",
+      "metadataToken": 33554505
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StelemAllHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/StelemAllHelper",
+      "metadataToken": 33554506
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper",
+      "metadataToken": 33554507
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/RareOpsHelper",
+      "metadataToken": 33554508
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StringFormatHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/StringFormatHelper",
+      "metadataToken": 33554509
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BranchUnsignedHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchUnsignedHelper",
+      "metadataToken": 33554510
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BranchUnsignedBHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchUnsignedBHelper",
+      "metadataToken": 33554511
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/RethrowHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/RethrowHelper",
+      "metadataToken": 33554512
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowUnHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowUnHelper",
+      "metadataToken": 33554513
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "metadataToken": 33554514
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "metadataToken": 33554515
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "metadataToken": 33554516
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper",
+      "metadataToken": 33554517
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CollectionsHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/CollectionsHelper",
+      "metadataToken": 33554518
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ExternalCaller",
+      "definitionSubjectId": "SnapshotProverSubjects/ExternalCaller",
+      "metadataToken": 33554519
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MultiDispatcher",
+      "definitionSubjectId": "SnapshotProverSubjects/MultiDispatcher",
+      "metadataToken": 33554520
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/InternalHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/InternalHelper",
+      "metadataToken": 33554521
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StringConcatHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/StringConcatHelper",
+      "metadataToken": 33554522
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/GenericsVirtEhDemo",
+      "definitionSubjectId": "SnapshotProverSubjects/GenericsVirtEhDemo",
+      "metadataToken": 33554523
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo",
+      "definitionSubjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo",
+      "metadataToken": 33554524
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo",
+      "definitionSubjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo",
+      "metadataToken": 33554525
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo",
+      "definitionSubjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo",
+      "metadataToken": 33554526
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SealedHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/SealedHelper",
+      "metadataToken": 33554527
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SealedClassVirtualHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/SealedClassVirtualHelper",
+      "metadataToken": 33554528
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/IMyInterface",
+      "definitionSubjectId": "SnapshotProverSubjects/IMyInterface",
+      "metadataToken": 33554529
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ImplHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/ImplHelper",
+      "metadataToken": 33554530
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/InterfaceDevirtHelper",
+      "definitionSubjectId": "SnapshotProverSubjects/InterfaceDevirtHelper",
+      "metadataToken": 33554531
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=SnapshotProverSubjects/Wrapper\u00601;type=[System.Int32];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=SnapshotProverSubjects/Wrapper\u00601;type=[System.Int32];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 2,
+        "statusReasonCode": "loader-demand:typeSpec"
+      },
+      "genericDiagnostic": {
+        "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E",
+        "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+        "displaySubjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        }
+      },
+      "metadataToken": 452984834
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=SnapshotProverSubjects/Wrapper\u00601;type=[!0];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=SnapshotProverSubjects/Wrapper\u00601;type=[!0];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 2,
+        "statusReasonCode": "loader-demand:typeSpec"
+      },
+      "genericDiagnostic": {
+        "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E",
+        "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+        "displaySubjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "metadataToken": 452984835
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/IMarker",
+      "definitionSubjectId": "SnapshotProverSubjects/IMarker",
+      "metadataToken": 33554458
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SmallStruct",
+      "definitionSubjectId": "SnapshotProverSubjects/SmallStruct",
+      "metadataToken": 33554461
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdftnHelper\u002B\u003C\u003EO",
+      "definitionSubjectId": "SnapshotProverSubjects/LdftnHelper\u002B\u003C\u003EO",
+      "metadataToken": 33554532
     }
   ],
   "registeredMethods": [
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "metadataToken": 100663307,
+      "parameterCount": 1
+    },
     {
       "assemblyName": "SnapshotProverSubjects",
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
@@ -92,11 +764,1277 @@
     },
     {
       "assemblyName": "SnapshotProverSubjects",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
-      "metadataToken": 100663307,
+      "subjectId": "SnapshotProverSubjects/ArithmeticOps::RunAdd:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/ArithmeticOps::RunAdd:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ArithmeticOps",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StringOps::UseString:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/StringOps::UseString:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StringOps",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/VoidCaller::DoNothing:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/VoidCaller::DoNothing:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/VoidCaller",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MathHelper::RunSquare:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/MathHelper::RunSquare:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MathHelper",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/FlowControl::IsPositive:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/FlowControl::IsPositive:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/FlowControl",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/InstanceHelper",
+      "metadataToken": 100663313,
       "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/InstanceHelper::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/InstanceHelper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/InstanceHelper",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CallVirtHelper::CreateAndUse:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/CallVirtHelper::CreateAndUse:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CallVirtHelper",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BoxingHelper",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/FieldHelper::GetAndIncrement:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/FieldHelper::GetAndIncrement:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/FieldHelper",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LoopHelper::SumToFive:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LoopHelper::SumToFive:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LoopHelper",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ConversionHelper::ConvertToInt:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/ConversionHelper::ConvertToInt:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ConversionHelper",
+      "metadataToken": 100663319,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Helper::Nop:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/Helper::Nop:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Helper",
+      "metadataToken": 100663320,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Helper::Square:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/Helper::Square:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Helper",
+      "metadataToken": 100663321,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Helper::ConsumeString:System.Void(System.String)",
+      "definitionSubjectId": "SnapshotProverSubjects/Helper::ConsumeString:System.Void(System.String)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Helper",
+      "metadataToken": 100663322,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Helper::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/Helper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Helper",
+      "metadataToken": 100663323,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SwitchHelper::Classify:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/SwitchHelper::Classify:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SwitchHelper",
+      "metadataToken": 100663324,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdftnHelper::GetFnPtr:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdftnHelper::GetFnPtr:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdftnHelper",
+      "metadataToken": 100663325,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/TargetHelper::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/TargetHelper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/TargetHelper",
+      "metadataToken": 100663326,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ArrayHelper::MakeAndFill:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/ArrayHelper::MakeAndFill:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ArrayHelper",
+      "metadataToken": 100663327,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/EhHelper::SafeDivide:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/EhHelper::SafeDivide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/EhHelper",
+      "metadataToken": 100663328,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/GenericHelper::UseGeneric:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/GenericHelper::UseGeneric:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/GenericHelper",
+      "metadataToken": 100663329,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "metadataToken": 100663330,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "metadataToken": 100663331,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/DelegateHelper::RunDelegate:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/DelegateHelper::RunDelegate:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/DelegateHelper",
+      "metadataToken": 100663332,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BaseClass::Compute:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/BaseClass::Compute:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BaseClass",
+      "metadataToken": 100663333,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BaseClass::.ctor:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/BaseClass::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BaseClass",
+      "metadataToken": 100663334,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/DerivedClass::Compute:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/DerivedClass::Compute:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/DerivedClass",
+      "metadataToken": 100663335,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/DerivedClass::.ctor:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/DerivedClass::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/DerivedClass",
+      "metadataToken": 100663336,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/VirtualHelper::UseVirtual:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/VirtualHelper::UseVirtual:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/VirtualHelper",
+      "metadataToken": 100663337,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MarkedClass::.ctor:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/MarkedClass::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MarkedClass",
+      "metadataToken": 100663338,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/TypeCheckHelper::CheckAndCast:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/TypeCheckHelper::CheckAndCast:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/TypeCheckHelper",
+      "metadataToken": 100663339,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SizeOfHelper::GetSize:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/SizeOfHelper::GetSize:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SizeOfHelper",
+      "metadataToken": 100663340,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/IndirectHelper::ReadWriteRef:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/IndirectHelper::ReadWriteRef:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/IndirectHelper",
+      "metadataToken": 100663341,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ArithmeticCompareHelper::RunCompare:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/ArithmeticCompareHelper::RunCompare:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ArithmeticCompareHelper",
+      "metadataToken": 100663342,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BranchDupHelper::RunBranchDup:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchDupHelper::RunBranchDup:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BranchDupHelper",
+      "metadataToken": 100663343,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/HasInstanceFields",
+      "metadataToken": 100663344,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/InstanceFieldHelper",
+      "metadataToken": 100663345,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StaticFieldWriteHelper",
+      "metadataToken": 100663346,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/VirtualDispatchHelper",
+      "metadataToken": 100663347,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BitwiseHelper::RunBitwise:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/BitwiseHelper::RunBitwise:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BitwiseHelper",
+      "metadataToken": 100663348,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ShiftHelper::RunShift:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/ShiftHelper::RunShift:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ShiftHelper",
+      "metadataToken": 100663349,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ArrayLengthHelper::RunLength:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/ArrayLengthHelper::RunLength:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ArrayLengthHelper",
+      "metadataToken": 100663350,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ValueTypeHelper::RunValueType:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/ValueTypeHelper::RunValueType:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ValueTypeHelper",
+      "metadataToken": 100663351,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LocalAllocHelper::RunAlloc:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LocalAllocHelper::RunAlloc:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LocalAllocHelper",
+      "metadataToken": 100663352,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MulDivHelper::RunMulDiv:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/MulDivHelper::RunMulDiv:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MulDivHelper",
+      "metadataToken": 100663353,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BranchCompareHelper::RunBranchCompare:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchCompareHelper::RunBranchCompare:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BranchCompareHelper",
+      "metadataToken": 100663354,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/FloatOpsHelper::RunFloatOps:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/FloatOpsHelper::RunFloatOps:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/FloatOpsHelper",
+      "metadataToken": 100663355,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ConvWideHelper::RunConvWide:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/ConvWideHelper::RunConvWide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ConvWideHelper",
+      "metadataToken": 100663356,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/NegShiftHelper::RunNegShift:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/NegShiftHelper::RunNegShift:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/NegShiftHelper",
+      "metadataToken": 100663357,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdcI8Helper::RunLdcI8:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdcI8Helper::RunLdcI8:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdcI8Helper",
+      "metadataToken": 100663358,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ConvSmallIntHelper",
+      "metadataToken": 100663359,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdindI1Helper::RunLdindI1:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindI1Helper::RunLdindI1:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindI1Helper",
+      "metadataToken": 100663360,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BranchCompareBHelper",
+      "metadataToken": 100663361,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/HasFields::.ctor:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/HasFields::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/HasFields",
+      "metadataToken": 100663362,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/AddressHelper::RunAddress:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/AddressHelper::RunAddress:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/AddressHelper",
+      "metadataToken": 100663363,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdtokenHelper::RunLdtoken:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdtokenHelper::RunLdtoken:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdtokenHelper",
+      "metadataToken": 100663364,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdelemaHelper::RunLdelema:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdelemaHelper::RunLdelema:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdelemaHelper",
+      "metadataToken": 100663365,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdargaHelper",
+      "metadataToken": 100663366,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CpobjHelper::RunCpobj:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/CpobjHelper::RunCpobj:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CpobjHelper",
+      "metadataToken": 100663367,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StindNarrowHelper::RunStindNarrow:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/StindNarrowHelper::RunStindNarrow:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StindNarrowHelper",
+      "metadataToken": 100663368,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CallvirtHelper::RunCallvirt:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/CallvirtHelper::RunCallvirt:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CallvirtHelper",
+      "metadataToken": 100663369,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/UnboxHelper::RunUnbox:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/UnboxHelper::RunUnbox:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/UnboxHelper",
+      "metadataToken": 100663370,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CpblkHelper::RunCpblk:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/CpblkHelper::RunCpblk:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CpblkHelper",
+      "metadataToken": 100663371,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindUnsignedHelper",
+      "metadataToken": 100663372,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdindI8Helper::RunLdindI8:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindI8Helper::RunLdindI8:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindI8Helper",
+      "metadataToken": 100663373,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdindWideHelper::RunLdindWide:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindWideHelper::RunLdindWide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindWideHelper",
+      "metadataToken": 100663374,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StindWideHelper::RunStindWide:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/StindWideHelper::RunStindWide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StindWideHelper",
+      "metadataToken": 100663375,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ArrayRefHelper::RunArrayRef:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/ArrayRefHelper::RunArrayRef:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ArrayRefHelper",
+      "metadataToken": 100663376,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ThrowHelper",
+      "metadataToken": 100663377,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowAdd:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowAdd:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowHelper",
+      "metadataToken": 100663378,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowSub:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowSub:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowHelper",
+      "metadataToken": 100663379,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowMul:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowMul:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowHelper",
+      "metadataToken": 100663380,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI4:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI4:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "metadataToken": 100663381,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "metadataToken": 100663382,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "metadataToken": 100663383,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "metadataToken": 100663384,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "metadataToken": 100663385,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "metadataToken": 100663386,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "metadataToken": 100663387,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CalliHelper::RunCalli:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/CalliHelper::RunCalli:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CalliHelper",
+      "metadataToken": 100663388,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MyClass::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/MyClass::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MyClass",
+      "metadataToken": 100663389,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MyClass::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/MyClass::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MyClass",
+      "metadataToken": 100663390,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdVirtftnHelper",
+      "metadataToken": 100663391,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdelemAllHelper::TestAllElems:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdelemAllHelper::TestAllElems:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdelemAllHelper",
+      "metadataToken": 100663392,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StelemAllHelper::TestAllElems:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/StelemAllHelper::TestAllElems:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StelemAllHelper",
+      "metadataToken": 100663393,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCltUn:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCltUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper",
+      "metadataToken": 100663394,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestDivUn:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestDivUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper",
+      "metadataToken": 100663395,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestRemUn:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestRemUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper",
+      "metadataToken": 100663396,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+      "definitionSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/UnsignedOpsHelper",
+      "metadataToken": 100663397,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
+      "definitionSubjectId": "SnapshotProverSubjects/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/RareOpsHelper",
+      "metadataToken": 100663398,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/RareOpsHelper",
+      "metadataToken": 100663399,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+      "definitionSubjectId": "SnapshotProverSubjects/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/RareOpsHelper",
+      "metadataToken": 100663400,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StringFormatHelper::TestFormatOne:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/StringFormatHelper::TestFormatOne:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StringFormatHelper",
+      "metadataToken": 100663401,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BranchUnsignedHelper",
+      "metadataToken": 100663402,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BranchUnsignedBHelper",
+      "metadataToken": 100663403,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/RethrowHelper::RunRethrow:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/RethrowHelper::RunRethrow:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/RethrowHelper",
+      "metadataToken": 100663404,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowUnHelper",
+      "metadataToken": 100663405,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowUnHelper",
+      "metadataToken": 100663406,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowUnHelper",
+      "metadataToken": 100663407,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunArglist:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunArglist:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "metadataToken": 100663408,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunMkrefany:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunMkrefany:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "metadataToken": 100663409,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanyval:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanyval:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "metadataToken": 100663410,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanytype:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanytype:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "metadataToken": 100663411,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunJmp:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunJmp:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "metadataToken": 100663412,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "metadataToken": 100663413,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "metadataToken": 100663414,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "metadataToken": 100663415,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "metadataToken": 100663416,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "metadataToken": 100663417,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "metadataToken": 100663418,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "metadataToken": 100663419,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "metadataToken": 100663420,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "metadataToken": 100663421,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "metadataToken": 100663422,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "metadataToken": 100663423,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunLdnull:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunLdnull:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "metadataToken": 100663424,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvU4:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvU4:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "metadataToken": 100663425,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvI:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvI:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "metadataToken": 100663426,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "metadataToken": 100663427,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "metadataToken": 100663428,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "metadataToken": 100663429,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "metadataToken": 100663430,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI4:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI4:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper",
+      "metadataToken": 100663431,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper",
+      "metadataToken": 100663432,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunStindI:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunStindI:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/LdindStindGapsHelper",
+      "metadataToken": 100663433,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestList:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestList:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CollectionsHelper",
+      "metadataToken": 100663434,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestDict:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestDict:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CollectionsHelper",
+      "metadataToken": 100663435,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestSet:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestSet:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/CollectionsHelper",
+      "metadataToken": 100663436,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ExternalCaller::CallExternal:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/ExternalCaller::CallExternal:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ExternalCaller",
+      "metadataToken": 100663437,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/MultiDispatcher::DispatchBoth:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/MultiDispatcher::DispatchBoth:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/MultiDispatcher",
+      "metadataToken": 100663438,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/InternalHelper::Double:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/InternalHelper::Double:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/InternalHelper",
+      "metadataToken": 100663439,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/StringConcatHelper::TestConcat:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/StringConcatHelper::TestConcat:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/StringConcatHelper",
+      "metadataToken": 100663440,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/GenericsVirtEhDemo",
+      "metadataToken": 100663441,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo",
+      "metadataToken": 100663442,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo::Run:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo::Run:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo",
+      "metadataToken": 100663443,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo::Run:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo::Run:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo",
+      "metadataToken": 100663444,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SealedHelper::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/SealedHelper::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SealedHelper",
+      "metadataToken": 100663445,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SealedHelper::GetValueVirtual:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/SealedHelper::GetValueVirtual:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SealedHelper",
+      "metadataToken": 100663446,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SealedClassVirtualHelper",
+      "metadataToken": 100663447,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/IMyInterface::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/IMyInterface::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/IMyInterface",
+      "metadataToken": 100663448,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ImplHelper::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/ImplHelper::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ImplHelper",
+      "metadataToken": 100663449,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/ImplHelper::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/ImplHelper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/ImplHelper",
+      "metadataToken": 100663450,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/InterfaceDevirtHelper",
+      "metadataToken": 100663451,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 2,
+        "statusReasonCode": "loader-demand:memberReference"
+      },
+      "genericDiagnostic": {
+        "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+        "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+        "displaySubjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::.ctor(System.Int32)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E",
+      "metadataToken": 1912602624,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=SnapshotProverSubjects/Wrapper\u00601::GetValue:!0();type=[System.Int32];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=SnapshotProverSubjects/Wrapper\u00601::GetValue:!0();type=[System.Int32];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 2,
+        "statusReasonCode": "loader-demand:memberReference"
+      },
+      "genericDiagnostic": {
+        "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
+        "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+        "displaySubjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::GetValue()",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E",
+      "metadataToken": 1912602625,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+      "genericDiagnostic": {
+        "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
+        "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+        "displaySubjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::.ctor(!0)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E",
+      "metadataToken": 1912602626,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::GetValue:!0()",
+      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+      "genericDiagnostic": {
+        "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::GetValue:!0()",
+        "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+        "displaySubjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::GetValue()",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E",
+      "metadataToken": 1912602627,
+      "parameterCount": 0
     }
   ],
   "reservedSlots": {

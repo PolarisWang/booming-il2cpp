@@ -5,6 +5,12 @@
     {
       "assemblyName": "SnapshotProverSubjects",
       "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
@@ -65,7 +71,889 @@
     {
       "assemblyName": "SnapshotProverSubjects",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
+      "subjectId": "SnapshotProverSubjects/ArithmeticOps::RunAdd:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/StringOps::UseString:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/VoidCaller::DoNothing:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/MathHelper::RunSquare:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/FlowControl::IsPositive:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/InstanceHelper::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/CallVirtHelper::CreateAndUse:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/FieldHelper::GetAndIncrement:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LoopHelper::SumToFive:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ConversionHelper::ConvertToInt:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/Helper::Nop:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/Helper::Square:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/Helper::ConsumeString:System.Void(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/Helper::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SwitchHelper::Classify:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdftnHelper::GetFnPtr:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/TargetHelper::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ArrayHelper::MakeAndFill:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/EhHelper::SafeDivide:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/GenericHelper::UseGeneric:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/DelegateHelper::RunDelegate:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/BaseClass::Compute:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/BaseClass::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/DerivedClass::Compute:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/DerivedClass::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/VirtualHelper::UseVirtual:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/MarkedClass::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/TypeCheckHelper::CheckAndCast:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SizeOfHelper::GetSize:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/IndirectHelper::ReadWriteRef:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ArithmeticCompareHelper::RunCompare:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/BranchDupHelper::RunBranchDup:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/BitwiseHelper::RunBitwise:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ShiftHelper::RunShift:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ArrayLengthHelper::RunLength:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ValueTypeHelper::RunValueType:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LocalAllocHelper::RunAlloc:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/MulDivHelper::RunMulDiv:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/BranchCompareHelper::RunBranchCompare:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/FloatOpsHelper::RunFloatOps:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ConvWideHelper::RunConvWide:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/NegShiftHelper::RunNegShift:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdcI8Helper::RunLdcI8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdindI1Helper::RunLdindI1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/HasFields::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/AddressHelper::RunAddress:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdtokenHelper::RunLdtoken:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdelemaHelper::RunLdelema:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/CpobjHelper::RunCpobj:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/StindNarrowHelper::RunStindNarrow:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/CallvirtHelper::RunCallvirt:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/UnboxHelper::RunUnbox:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/CpblkHelper::RunCpblk:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdindI8Helper::RunLdindI8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdindWideHelper::RunLdindWide:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/StindWideHelper::RunStindWide:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ArrayRefHelper::RunArrayRef:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowAdd:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowSub:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowMul:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/CalliHelper::RunCalli:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/MyClass::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/MyClass::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdelemAllHelper::TestAllElems:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/StelemAllHelper::TestAllElems:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCltUn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestDivUn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestRemUn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/StringFormatHelper::TestFormatOne:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/RethrowHelper::RunRethrow:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunArglist:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunMkrefany:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanyval:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanytype:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunJmp:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunLdnull:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvU4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvI:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunStindI:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestList:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestDict:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestSet:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ExternalCaller::CallExternal:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/MultiDispatcher::DispatchBoth:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/InternalHelper::Double:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/StringConcatHelper::TestConcat:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo::Run:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo::Run:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SealedHelper::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SealedHelper::GetValueVirtual:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/IMyInterface::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ImplHelper::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/ImplHelper::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::GetValue:!0()",
       "reason": "generated-direct-call"
     },
     {
@@ -73,6 +961,210 @@
       "subjectKind": "field",
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
       "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/InstanceHelper::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/FieldHelper::_counter",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u00601::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/MarkedClass::Value",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/SmallStruct::X",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/SmallStruct::Y",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/HasInstanceFields::Value",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::_writeTarget",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::_readTarget",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/HasFields::instanceVal",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/HasFields::staticVal",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/MyClass::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/SealedHelper::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/ImplHelper::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/LdftnHelper\u002B\u003C\u003EO::\u003C0\u003E__GetValue",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::Invoke:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::Add:System.Void(System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::ContainsKey:System.Boolean(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::Remove:System.Boolean(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Add:System.Boolean(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Remove:System.Boolean(System.Int32)",
+      "reason": "external-call"
     }
   ]
 }

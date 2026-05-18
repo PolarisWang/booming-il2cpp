@@ -255,6 +255,7 @@ void ProcessChunk(ParallelMarkContext* ctx, MarkWorkerState* worker,
             CHAOS_IL2CPP_SIZE ref_offset = reinterpret_cast<uintptr_t>(ref) - rp_payload;
             CHAOS_IL2CPP_SIZE ref_slot = ref_offset / sizeof(void*);
             CHAOS_IL2CPP_SIZE ref_byte = ref_slot / 8;
+            if (ref_byte >= rp->bitmap_bytes) continue;
             int ref_bit = static_cast<int>(ref_slot % 8);
             unsigned char ref_mask = static_cast<unsigned char>(1u << ref_bit);
 

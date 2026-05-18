@@ -13,49 +13,49 @@ public static partial class EnumParsingSubjects
     // [0] System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)
     public static void Subject_0()
     {
-        // TODO: System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String) could not be auto-generated
+        if (((Enum.Format(typeof(byte), 42, "hello")).Length) != ((Enum.Format(typeof(byte), 42, "hello")).Length)) _exitCode = 1;
     }
 
     // [1] System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)
     public static void Subject_1()
     {
-        // TODO: System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64) could not be auto-generated
+        if (((Enum.GetName(typeof(DayOfWeek), (object)1)).Length) != ((Enum.GetName(typeof(DayOfWeek), (object)1)).Length)) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)
     public static void Subject_2()
     {
-        // TODO: System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object) could not be auto-generated
+        if (((Enum.GetName(typeof(DayOfWeek), (object)1)).Length) != ((Enum.GetName(typeof(DayOfWeek), (object)1)).Length)) _exitCode = 1;
     }
 
     // [3] System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)
     public static void Subject_3()
     {
-        // TODO: System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type) could not be auto-generated
+        if (((Enum.GetNames(typeof(byte))).Length) != ((Enum.GetNames(typeof(byte))).Length)) _exitCode = 1;
     }
 
     // [4] System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)
     public static void Subject_4()
     {
-        // TODO: System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type) could not be auto-generated
+        if (((Enum.GetValues(typeof(byte))).GetHashCode()) != ((Enum.GetValues(typeof(byte))).GetHashCode())) _exitCode = 1;
     }
 
     // [5] System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)
     public static void Subject_5()
     {
-        // TODO: System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object) could not be auto-generated
+        if (((Enum.IsDefined(typeof(byte), 42)) ? 1 : 0) != ((Enum.IsDefined(typeof(byte), 42)) ? 1 : 0)) _exitCode = 1;
     }
 
     // [6] System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)
     public static void Subject_6()
     {
-        // TODO: System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String) could not be auto-generated
+        if (((Enum.Parse(typeof(byte), "hello")).GetHashCode()) != ((Enum.Parse(typeof(byte), "hello")).GetHashCode())) _exitCode = 1;
     }
 
     // [7] System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)
     public static void Subject_7()
     {
-        // TODO: System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean) could not be auto-generated
+        if (((Enum.Parse(typeof(byte), "hello", true)).GetHashCode()) != ((Enum.Parse(typeof(byte), "hello", true)).GetHashCode())) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.Enum::ToString:System.String()

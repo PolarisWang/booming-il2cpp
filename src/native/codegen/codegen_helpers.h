@@ -140,4 +140,25 @@ extern "C" void* CodegenLocAlloc(uint32_t size) noexcept;
 // the trampoline then writes kDeoptMagic to ret_buf[0] and returns.
 extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept;
 
+// ── T4 SEH runtime helpers ─────────────────────────────────────────────────
+// Called by T4-generated native code for structured exception handling.
+// These helpers use TLS to pass the exception object and RaiseException to
+// trigger the VEH handler which dispatches through the SEH clause table.
+
+/// Throw a managed exception from T4-generated code.
+/// Stores the exception object in TLS and raises a software exception
+/// that the T4 VEH handler dispatches through the SEH clause table.
+/// Never returns (ud2 is emitted after the call in generated code).
+extern "C" void CodegenThrow(void* exception_obj) noexcept;
+
+/// Rethrow the current managed exception from T4-generated code.
+/// Reads the exception object from TLS and re-raises.
+/// Never returns (ud2 is emitted after the call).
+extern "C" void CodegenRethrow() noexcept;
+
+/// EndFinally marker for T4-generated code.
+/// For V1, this is a no-op that returns to the caller. In a full
+/// implementation it would manage finally unwinding state.
+extern "C" void CodegenEndFinally() noexcept;
+
 #endif  // CHAOS_IL2CPP_CODEGEN_HELPERS_H_

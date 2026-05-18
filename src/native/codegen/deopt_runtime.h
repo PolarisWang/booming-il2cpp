@@ -39,14 +39,16 @@ public:
         uint32_t native_offset) noexcept;
 
     /// Reconstruct the register file from a NativeContext + DeoptEntry.
-    /// Reads values from the context's GPR/FPR arrays and writes to gpr_file[64]
+    /// Reads values from the context's GPR/FPR arrays and from the stack
+    /// frame spill slots (via codegen_rsp) and writes to gpr_file[64]
     /// and fpr_file[32] according to the DeoptValue descriptors.
     static void ReconstructRegisterFile(
         uint64_t* gpr_file,          // output[64]
         double*   fpr_file,          // output[32]
         const NativeContext& ctx,
         const DeoptEntry& entry,
-        const DeoptValue* values) noexcept;
+        const DeoptValue* values,
+        uint64_t  codegen_rsp = 0) noexcept;  // stack frame base for vregs >= 16
 
     /// Deoptimization trap: called from generated code when it cannot continue.
     /// Saves all registers and dispatches back through the interpreter.
@@ -55,15 +57,13 @@ public:
     /// Phase 3c simplified strategy:
     ///   1. Capture current register state into NativeContext
     ///   2. Look up DeoptEntry from the return address
-    ///   3. Reconstruct register file values
-    ///   4. Fall through to RegisterExecute for re-execution
-    ///
-    /// Since generated code runs in cooperative GC mode, this function must
-    /// complete quickly and not trigger a GC safepoint.
+    ///   3. Reconstruct register file values into t_deopt_state
+    ///   4. Set deopt_happened flag so entry_direct falls back to interpreter
     static void DeoptTrap(
         NativeMethod* nm,
         uint32_t      return_address,
-        NativeContext ctx) noexcept;
+        NativeContext ctx,
+        uint64_t      codegen_rsp = 0) noexcept;
 };
 
 }  // namespace chaos::il2cpp::codegen

@@ -8,6 +8,8 @@ namespace ri = chaos::il2cpp::runtime_instantiation;
 
 #include <chaos/profile.h>
 
+#include <climits>  // INT32_MIN, INT32_MAX, UINT32_MAX
+
 // Access interpreter global state for static field and object operations.
 namespace chaos::il2cpp::interpreter {
 extern CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
@@ -1322,29 +1324,45 @@ static void Reg_BltUn(RegisterFrame& frame, const RegisterInstruction& instr) no
 // ── Overflow-checked arithmetic ─────────────────────────────────────────
 static void Reg_AddOvf(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_AddOvf");
-    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
-    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    // No portable overflow check on MSVC — just compute and trust caller.
-    // Overflow will throw via the VM fallback path if needed.
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l + r),
+    int64_t r = static_cast<int64_t>(static_cast<int32_t>(frame.regs.reg(instr.src2_reg())));
+    int64_t l = static_cast<int64_t>(static_cast<int32_t>(frame.regs.reg(instr.src1_reg())));
+    int64_t result = l + r;
+    if (result > INT32_MAX || result < INT32_MIN) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<int32_t>(result)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_SubOvf(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_SubOvf");
-    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
-    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l - r),
+    int64_t r = static_cast<int64_t>(static_cast<int32_t>(frame.regs.reg(instr.src2_reg())));
+    int64_t l = static_cast<int64_t>(static_cast<int32_t>(frame.regs.reg(instr.src1_reg())));
+    int64_t result = l - r;
+    if (result > INT32_MAX || result < INT32_MIN) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<int32_t>(result)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_MulOvf(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_MulOvf");
-    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
-    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l * r),
+    int64_t r = static_cast<int64_t>(static_cast<int32_t>(frame.regs.reg(instr.src2_reg())));
+    int64_t l = static_cast<int64_t>(static_cast<int32_t>(frame.regs.reg(instr.src1_reg())));
+    int64_t result = l * r;
+    if (result > INT32_MAX || result < INT32_MIN) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<int32_t>(result)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -1352,22 +1370,33 @@ static void Reg_MulOvf(RegisterFrame& frame, const RegisterInstruction& instr) n
 // ── Overflow-checked conversions ────────────────────────────────────────
 static void Reg_ConvOvfI(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI");
-    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+    int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
+    if (v > INT32_MAX || v < INT32_MIN) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<int32_t>(v)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_ConvOvfI4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI4");
-    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+    int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
+    if (v > INT32_MAX || v < INT32_MIN) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<int32_t>(v)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_ConvOvfI8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI8");
+    // No overflow from narrower integer types — just pass through.
     int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
     frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
                        static_cast<uint8_t>(ValueTag::Int64));
@@ -1376,22 +1405,33 @@ static void Reg_ConvOvfI8(RegisterFrame& frame, const RegisterInstruction& instr
 
 static void Reg_ConvOvfU(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfU");
-    uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+    int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
+    if (v < 0 || v > UINT32_MAX) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_ConvOvfU4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfU4");
-    uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+    int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
+    if (v < 0 || v > UINT32_MAX) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_ConvOvfU8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfU8");
+    // No overflow from narrower integer types — just pass through.
     uint64_t v = frame.regs.reg(instr.src1_reg());
     frame.regs.set_reg(instr.dst_reg(), v,
                        static_cast<uint8_t>(ValueTag::Int64));

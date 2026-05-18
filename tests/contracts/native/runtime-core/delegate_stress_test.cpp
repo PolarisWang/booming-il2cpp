@@ -389,9 +389,12 @@ static void ScenarioA1() {
 // ════════════════════════════════════════════════════════════════════════════
 
 static void ScenarioA2() {
-    TEST("A2: Marshal-style allocation");
+    printf("  TEST: A2: Marshal-style allocation ...\n"); fflush(stdout); ++g_tests; g_sub = 0;
+    printf("  Step 1: RegisterWorker...\n"); fflush(stdout);
     RegisterWorker();
+    printf("  Step 2: EnterCooperativeMode...\n"); fflush(stdout);
     threading::EnterCooperativeMode();
+    printf("  Step 3: SetupTlsNursery...\n"); fflush(stdout);
     SetupTlsNursery();
 
     int64_t total_allocs = 0;
@@ -404,6 +407,7 @@ static void ScenarioA2() {
     // Simulate Marshal.GetDelegateForFunctionPointer pattern:
     // allocate delegate -> use -> release (let GC reclaim)
     for (int i = 0; i < kIterations; i++) {
+        if (i == 0) { printf("  First alloc...\n"); fflush(stdout); }
         auto val = AllocateSingleDelegate(
             &g_delegate_type_b, 0,
             static_cast<CHAOS_IL2CPP_INTPTR>(0xDEADBEEF));
@@ -421,6 +425,7 @@ static void ScenarioA2() {
 
         // Periodically trigger a full GC to stress old-gen sweep
         if (i > 0 && i % 1000 == 0) {
+            printf("  GC at i=%d...\n", i); fflush(stdout);
             uint32_t gen = threading::RequestGlobalSafepoint();
             g_old_gen.Collect(nullptr, nullptr);
             threading::ReleaseGlobalSafepoint(gen);
@@ -701,6 +706,24 @@ static void ScenarioE1() {
     }
     if (failures == 0) PASS(); else FAIL("field corruption before GC");
 
+    // Dump raw memory of first 5 delegates before GC
+    fprintf(stderr, "E1: RAW memory before GC:\n");
+    for (int i = 0; i < 5 && i < kNumDelegates; i++) {
+        auto* obj = reinterpret_cast<LocalDelegate*>(delegates[i]);
+        fprintf(stderr, "E1:  [%d] addr=%p type_info=%p target=0x%llx method_ptr=0x%llx token=0x%x\n",
+            i, (void*)obj, (void*)obj->type_info,
+            (unsigned long long)obj->chaos_delegate_target,
+            (unsigned long long)obj->chaos_delegate_method_ptr,
+            (unsigned int)obj->chaos_delegate_method_token);
+        fprintf(stderr, "E1:  raw8: ");
+        auto* raw = reinterpret_cast<unsigned char*>(obj);
+        for (int b = 0; b < 56; b++) {
+            fprintf(stderr, "%02x", raw[b]);
+            if ((b + 1) % 8 == 0) fprintf(stderr, " ");
+        }
+        fprintf(stderr, "\n");
+    }
+
     // Force full GC — pinned roots keep delegates reachable
     {
         uint32_t gen = threading::RequestGlobalSafepoint();
@@ -708,14 +731,59 @@ static void ScenarioE1() {
         threading::ReleaseGlobalSafepoint(gen);
     }
 
+    // Dump raw memory of first 5 delegates after GC
+    fprintf(stderr, "E1: RAW memory after GC:\n");
+    for (int i = 0; i < 5 && i < kNumDelegates; i++) {
+        auto* obj = reinterpret_cast<LocalDelegate*>(delegates[i]);
+        fprintf(stderr, "E1:  [%d] addr=%p type_info=%p target=0x%llx method_ptr=0x%llx token=0x%x\n",
+            i, (void*)obj, (void*)obj->type_info,
+            (unsigned long long)obj->chaos_delegate_target,
+            (unsigned long long)obj->chaos_delegate_method_ptr,
+            (unsigned int)obj->chaos_delegate_method_token);
+        fprintf(stderr, "E1:  raw8: ");
+        auto* raw = reinterpret_cast<unsigned char*>(obj);
+        for (int b = 0; b < 56; b++) {
+            fprintf(stderr, "%02x", raw[b]);
+            if ((b + 1) % 8 == 0) fprintf(stderr, " ");
+        }
+        fprintf(stderr, "\n");
+    }
+
+    // Check mark status after GC
+    {
+        int n_marked = 0;
+        for (int i = 0; i < kNumDelegates; i++) {
+            if (g_old_gen.IsMarked(reinterpret_cast<void*>(delegates[i]))) n_marked++;
+            else fprintf(stderr, "E1: UNMARKED idx=%d\n", i);
+        }
+        fprintf(stderr, "E1: GC done pin_count=%d marked_postgc=%d/%d\n",
+            kNumDelegates, n_marked, kNumDelegates);
+    }
+
     // Verify all fields survive GC
     SUBTEST("verify fields survive full GC");
     for (int i = 0; i < kNumDelegates; i++) {
         auto* obj = reinterpret_cast<LocalDelegate*>(delegates[i]);
-        if (obj->type_info != &g_delegate_type_a) { failures++; break; }
-        if (obj->chaos_delegate_target != static_cast<CHAOS_IL2CPP_INTPTR>(0x1000 + i)) { failures++; break; }
-        if (obj->chaos_delegate_method_ptr != static_cast<CHAOS_IL2CPP_INTPTR>(0x2000 + i)) { failures++; /* allow */ }
-        if (obj->chaos_delegate_method_token != static_cast<CHAOS_IL2CPP_UINT32>(0x3000 + i)) { failures++; break; }
+        if (obj->type_info != &g_delegate_type_a) {
+            fprintf(stderr, "E1: field corruption type_info idx=%d expected=%p actual=%p\n",
+                i, (void*)&g_delegate_type_a, (void*)obj->type_info);
+            failures++; break;
+        }
+        if (obj->chaos_delegate_target != static_cast<CHAOS_IL2CPP_INTPTR>(0x1000 + i)) {
+            fprintf(stderr, "E1: field corruption target idx=%d expected=0x%llx actual=0x%llx\n",
+                i, (unsigned long long)(0x1000 + i), (unsigned long long)obj->chaos_delegate_target);
+            failures++; break;
+        }
+        if (obj->chaos_delegate_method_ptr != static_cast<CHAOS_IL2CPP_INTPTR>(0x2000 + i)) {
+            fprintf(stderr, "E1: field corruption method_ptr idx=%d expected=0x%llx actual=0x%llx\n",
+                i, (unsigned long long)(0x2000 + i), (unsigned long long)obj->chaos_delegate_method_ptr);
+            failures++; /* allow */
+        }
+        if (obj->chaos_delegate_method_token != static_cast<CHAOS_IL2CPP_UINT32>(0x3000 + i)) {
+            fprintf(stderr, "E1: field corruption token idx=%d expected=0x%x actual=0x%x\n",
+                i, (0x3000 + i), obj->chaos_delegate_method_token);
+            failures++; break;
+        }
     }
     if (failures == 0) PASS(); else FAIL("field corruption after GC");
 
@@ -790,51 +858,19 @@ static void ScenarioE3() {
     g_old_gen.AddPinnedRoot(reinterpret_cast<void*>(chain_value), sizeof(LocalDelegate));
 
     for (int cycle = 0; cycle < kFullGcCycles; cycle++) {
-        fprintf(stderr, "E3: GC cycle %d\n", cycle); fflush(stderr);
         uint32_t gen = threading::RequestGlobalSafepoint();
         g_old_gen.Collect(nullptr, nullptr);
         threading::ReleaseGlobalSafepoint(gen);
-        fprintf(stderr, "E3: GC cycle %d done\n", cycle); fflush(stderr);
     }
 
-    fprintf(stderr, "E3: After GC loop, entries[0]=0x%llx chain_value=0x%llx\n",
-        (unsigned long long)(entries.empty() ? 0 : entries[0]),
-        (unsigned long long)chain_value);
-    fflush(stderr);
-
-    // Re-discover chain_value after potential compaction relocation.
-    // AddPinnedRoot only prevents collection, not compaction relocation,
-    // so the original chain_value pointer may be stale.  Walk the entries
-    // vector looking for the delegate matching chain_value's target/type.
-    // (Since all entries are identical except their target, we use the
-    //  first entry that is still readable.)
-    CHAOS_IL2CPP_INTPTR live_chain = 0;
-    for (int i = 0; i < chain_n; i++) {
-        auto* obj = reinterpret_cast<LocalDelegate*>(entries[i]);
-        // Check if this object is still at a readable address
-        // (it may have been relocated by compaction).
-        volatile auto first_word = *reinterpret_cast<volatile CHAOS_IL2CPP_INTPTR*>(obj);
-        (void)first_word;
-    }
-    // Rebuild chain from entries (which may have outdated pointers due to
-    // compaction relocation, so rebuild from scratch via DelegateCombine).
-    live_chain = 0;
-    for (int i = 0; i < chain_n; i++) {
-        live_chain = chaos::il2cpp::runtime_core::DelegateCombine(live_chain, entries[i]);
-    }
-
-    // Verify invocation list still accessible
+    // Verify invocation list still accessible directly on pinned chain_value.
+    // AddPinnedRoot prevents both collection AND compaction (pages with pinned
+    // objects are excluded from compaction), so chain_value pointer is valid.
     SUBTEST("verify invocation list after compaction");
     auto* obj = reinterpret_cast<LocalDelegate*>(chain_value);
-    fprintf(stderr, "E3: chain_value=%p count=%ld list=0x%llx\n",
-        (void*)chain_value,
-        (long)obj->chaos_delegate_invocation_count,
-        (unsigned long long)obj->chaos_delegate_invocation_list);
     if (obj->chaos_delegate_invocation_count > 0) {
         auto* vec = reinterpret_cast<std::vector<CHAOS_IL2CPP_INTPTR>*>(
             obj->chaos_delegate_invocation_list);
-        fprintf(stderr, "E3: vec=%p size=%zu capacity=%zu\n",
-            (void*)vec, vec->size(), vec->capacity());
         if (vec == nullptr) {
             FAIL("invocation_list null after compaction");
             failures++;

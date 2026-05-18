@@ -2,6 +2,8 @@
 #define CHAOS_IL2CPP_INTERPRETER_VM_H_
 
 #include <chaos/native_types.h>
+#include <cstddef>
+#include <new>
 #include <vector>
 
 #include <ir_opcodes.h>
@@ -156,10 +158,97 @@ struct ExecutionFrame {
     ExecutionFrame& operator=(const ExecutionFrame&) = delete;
 };
 
+// SmallFieldArray — Small buffer optimization for InterpreterObject field storage.
+// Stores up to kInlineCapacity InterpreterValue elements inline; spills to
+// heap-allocated storage for larger sizes.  Interface matches std::vector so
+// all existing call sites (fields.resize, fields[i], fields.clear, etc.)
+// compile without changes.
+struct SmallFieldArray {
+    static constexpr CHAOS_IL2CPP_SIZE kInlineCapacity = 2;
+
+    InterpreterValue*  fields_ptr_;
+    CHAOS_IL2CPP_SIZE  field_count_;
+    CHAOS_IL2CPP_SIZE  field_capacity_;
+    InterpreterValue   inline_[kInlineCapacity];
+
+    SmallFieldArray() noexcept
+        : fields_ptr_(inline_)
+        , field_count_(0)
+        , field_capacity_(kInlineCapacity) {}
+
+    ~SmallFieldArray() { DestroyAll(); }
+
+    SmallFieldArray(const SmallFieldArray&) = delete;
+    SmallFieldArray& operator=(const SmallFieldArray&) = delete;
+
+    InterpreterValue& operator[](CHAOS_IL2CPP_SIZE i) {
+        return fields_ptr_[i];
+    }
+    const InterpreterValue& operator[](CHAOS_IL2CPP_SIZE i) const {
+        return fields_ptr_[i];
+    }
+
+    CHAOS_IL2CPP_SIZE size() const noexcept { return field_count_; }
+    bool empty() const noexcept { return field_count_ == 0; }
+    InterpreterValue* data() noexcept { return fields_ptr_; }
+    const InterpreterValue* data() const noexcept { return fields_ptr_; }
+
+    void clear() noexcept {
+        for (CHAOS_IL2CPP_SIZE i = 0; i < field_count_; ++i) {
+            fields_ptr_[i].~InterpreterValue();
+        }
+        field_count_ = 0;
+    }
+
+    void reserve(CHAOS_IL2CPP_SIZE n) {
+        if (n <= field_capacity_) return;
+        auto* new_storage = static_cast<InterpreterValue*>(
+            CHAOS_IL2CPP_MALLOC(n * sizeof(InterpreterValue)));
+        for (CHAOS_IL2CPP_SIZE i = 0; i < field_count_; ++i) {
+            ::new (&new_storage[i]) InterpreterValue(fields_ptr_[i]);
+            fields_ptr_[i].~InterpreterValue();
+        }
+        if (fields_ptr_ != inline_) {
+            CHAOS_IL2CPP_FREE(fields_ptr_);
+        }
+        fields_ptr_ = new_storage;
+        field_capacity_ = n;
+    }
+
+    void resize(CHAOS_IL2CPP_SIZE n) {
+        if (n <= field_count_) {
+            // Shrink: destroy excess elements.
+            for (CHAOS_IL2CPP_SIZE i = n; i < field_count_; ++i) {
+                fields_ptr_[i].~InterpreterValue();
+            }
+            field_count_ = n;
+            return;
+        }
+        // Grow: need (n - field_count_) new elements.
+        if (n > field_capacity_) {
+            reserve(n);
+        }
+        for (CHAOS_IL2CPP_SIZE i = field_count_; i < n; ++i) {
+            ::new (&fields_ptr_[i]) InterpreterValue();
+        }
+        field_count_ = n;
+    }
+
+private:
+    void DestroyAll() noexcept {
+        for (CHAOS_IL2CPP_SIZE i = 0; i < field_count_; ++i) {
+            fields_ptr_[i].~InterpreterValue();
+        }
+        if (fields_ptr_ != inline_) {
+            CHAOS_IL2CPP_FREE(fields_ptr_);
+        }
+    }
+};
+
 // Lightweight object storage for the interpreter sandbox.
-// Fields are stored as a flat vector; type_token enables virtual dispatch.
+// Fields are stored inline (SmallFieldArray); type_token enables virtual dispatch.
 struct InterpreterObject {
-    CHAOS_IL2CPP_VECTOR(InterpreterValue) fields = {};
+    SmallFieldArray fields;
     CHAOS_IL2CPP_UINT32 type_token = 0u;
 };
 

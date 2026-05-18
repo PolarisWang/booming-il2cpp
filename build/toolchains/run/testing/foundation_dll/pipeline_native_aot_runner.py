@@ -458,7 +458,7 @@ def _generate_patch_data(family_slug: str, *,
     native_dir.mkdir(parents=True, exist_ok=True)
     patchdata_cpp = native_dir / "runtime-patchdata.cpp"
 
-    host_class_name = f"{class_name}"
+    host_class_name = class_name.replace("NativeEntry", "Subjects")
     lines = [
         "// Auto-generated .patchdata for hotpatch dispatch",
         f"// Family: {family_slug}",

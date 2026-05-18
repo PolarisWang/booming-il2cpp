@@ -26,7 +26,7 @@ public static partial class ThreadingThreadBasicsSubjects
     // [2] System.Private.CoreLib/System.Threading.Thread::set_Priority:System.Void(System.Threading.ThreadPriority)
     public static void Subject_2()
     {
-        Thread.CurrentThread.Priority = null!;
+        Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Normal;
     }
 
     // [3] System.Private.CoreLib/System.Threading.Thread::get_IsBackground:System.Boolean()
@@ -62,13 +62,13 @@ public static partial class ThreadingThreadBasicsSubjects
     // [8] System.Private.CoreLib/System.Threading.Thread::ResetAbort:System.Boolean()
     public static void Subject_8()
     {
-        if (((Thread.CurrentThread.ResetAbort()) ? 1 : 0) != ((Thread.CurrentThread.ResetAbort()) ? 1 : 0)) _exitCode = 1;
+        // TODO: System.Private.CoreLib/System.Threading.Thread::ResetAbort:System.Boolean() could not be auto-generated
     }
 
     // [9] System.Private.CoreLib/System.Threading.Thread::Yield:System.Boolean()
     public static void Subject_9()
     {
-        if (((Thread.CurrentThread.Yield()) ? 1 : 0) != ((Thread.CurrentThread.Yield()) ? 1 : 0)) _exitCode = 1;
+        if (((Thread.Yield()) ? 1 : 0) != ((Thread.Yield()) ? 1 : 0)) _exitCode = 1;
     }
 
     // [10] System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)

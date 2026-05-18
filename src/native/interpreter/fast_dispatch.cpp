@@ -35,12 +35,14 @@ static thread_local uint32_t tls_box_pool_count = 0;
 /// Return a boxed InterpreterObject to the TLS pool (or free if pool full).
 static void ReturnBoxToPool(void* p) noexcept {
     auto* obj = static_cast<interpreter::InterpreterObject*>(p);
-    obj->~InterpreterObject();
     if (tls_box_pool_count < kBoxPoolSize) {
-        ::new (obj) interpreter::InterpreterObject();
-        obj->fields.reserve(1);
+        // Keep the inline field storage alive — just clear elements and type_token.
+        // Avoids ~InterpreterObject + placement new + malloc/free cycle.
+        obj->fields.clear();
+        obj->type_token = 0;
         tls_box_pool[tls_box_pool_count++] = obj;
     } else {
+        obj->~InterpreterObject();
         CHAOS_IL2CPP_FREE(obj);
     }
 }
@@ -58,7 +60,6 @@ static interpreter::InterpreterObject* AcquireBoxedObject() noexcept {
         CHAOS_IL2CPP_MALLOC(sizeof(interpreter::InterpreterObject)));
     if (obj == nullptr) return nullptr;
     ::new (obj) interpreter::InterpreterObject();
-    obj->fields.reserve(1);
     return obj;
 }
 
@@ -1529,115 +1530,9 @@ static void Handle_ConvOvfU8(FastFrame& frame, const interpreter::IRInstruction&
     ++frame.pc;
 }
 
-// ── Dispatch table ─────────────────────────────────────────────────────
+// ── Switch dispatch (replaces kHandlers[99] table for better branch prediction) ──
 
-#define HANDLER_ENTRY(name) Handle_##name
-#define UNSUPPORTED Handle_Unsupported
-
-const OpHandler kHandlers[99] = {
-    /*  0 */ HANDLER_ENTRY(LdcI4),
-    /*  1 */ HANDLER_ENTRY(LdcI8),
-    /*  2 */ HANDLER_ENTRY(LdcR4),
-    /*  3 */ HANDLER_ENTRY(LdcR8),
-    /*  4 */ HANDLER_ENTRY(LdStr),
-    /*  5 */ HANDLER_ENTRY(LdNull),
-    /*  6 */ HANDLER_ENTRY(LdArg),
-    /*  7 */ HANDLER_ENTRY(LdLoc),
-    /*  8 */ HANDLER_ENTRY(StLoc),
-    /*  9 */ HANDLER_ENTRY(StArg),
-    /* 10 */ HANDLER_ENTRY(LdFld),
-    /* 11 */ HANDLER_ENTRY(StFld),
-    /* 12 */ HANDLER_ENTRY(LdSFld),
-    /* 13 */ HANDLER_ENTRY(StSFld),
-    /* 14 */ HANDLER_ENTRY(Call),
-    /* 15 */ HANDLER_ENTRY(CallVirt),
-    /* 16 */ HANDLER_ENTRY(CallBridge),
-    /* 17 */ HANDLER_ENTRY(Br),
-    /* 18 */ HANDLER_ENTRY(BrTrue),
-    /* 19 */ HANDLER_ENTRY(BrFalse),
-    /* 20 */ HANDLER_ENTRY(Beq),
-    /* 21 */ HANDLER_ENTRY(Blt),
-    /* 22 */ HANDLER_ENTRY(Bgt),
-    /* 23 */ HANDLER_ENTRY(Ble),
-    /* 24 */ HANDLER_ENTRY(Bge),
-    /* 25 */ HANDLER_ENTRY(Add),
-    /* 26 */ HANDLER_ENTRY(Sub),
-    /* 27 */ HANDLER_ENTRY(Mul),
-    /* 28 */ HANDLER_ENTRY(Div),
-    /* 29 */ HANDLER_ENTRY(Rem),
-    /* 30 */ HANDLER_ENTRY(Neg),
-    /* 31 */ HANDLER_ENTRY(Ceq),
-    /* 32 */ HANDLER_ENTRY(Clt),
-    /* 33 */ HANDLER_ENTRY(Cgt),
-    /* 34 */ HANDLER_ENTRY(NewObj),
-    /* 35 */ HANDLER_ENTRY(Box),
-    /* 36 */ HANDLER_ENTRY(Unbox),
-    /* 37 */ HANDLER_ENTRY(CastClass),   // CastClass — supported (VM fallback via Unsupported)
-    /* 38 */ HANDLER_ENTRY(IsInst),      // IsInst — supported (VM fallback via Unsupported)
-    /* 39 */ HANDLER_ENTRY(Conv_I4),
-    /* 40 */ HANDLER_ENTRY(Conv_I8),
-    /* 41 */ HANDLER_ENTRY(Conv_R4),
-    /* 42 */ HANDLER_ENTRY(Conv_R8),
-    /* 43 */ HANDLER_ENTRY(NewArr),
-    /* 44 */ HANDLER_ENTRY(LdElem),
-    /* 45 */ HANDLER_ENTRY(StElem),
-    /* 46 */ HANDLER_ENTRY(LdLen),
-    /* 47 */ HANDLER_ENTRY(Pop),
-    /* 48 */ HANDLER_ENTRY(Throw),
-    /* 49 */ HANDLER_ENTRY(Rethrow),
-    /* 50 */ HANDLER_ENTRY(Leave),
-    /* 51 */ HANDLER_ENTRY(EndFinally),
-    /* 52 */ HANDLER_ENTRY(EndFilter),
-    /* 53 */ HANDLER_ENTRY(Ret),
-    /* 54 */ HANDLER_ENTRY(Dup),
-    /* 55 */ HANDLER_ENTRY(DivUn),
-    /* 56 */ HANDLER_ENTRY(RemUn),
-    /* 57 */ HANDLER_ENTRY(And),
-    /* 58 */ HANDLER_ENTRY(Or),
-    /* 59 */ HANDLER_ENTRY(Xor),
-    /* 60 */ HANDLER_ENTRY(Not),
-    /* 61 */ HANDLER_ENTRY(Shl),
-    /* 62 */ HANDLER_ENTRY(Shr),
-    /* 63 */ HANDLER_ENTRY(ShrUn),
-    /* 64 */ HANDLER_ENTRY(ConvRUn),
-    /* 65 */ HANDLER_ENTRY(ConvI),
-    /* 66 */ HANDLER_ENTRY(ConvU),
-    /* 67 */ HANDLER_ENTRY(LdInd),
-    /* 68 */ HANDLER_ENTRY(StInd),
-    /* 69 */ HANDLER_ENTRY(Switch),
-    /* 70 */ HANDLER_ENTRY(LdToken),
-    /* 71 */ HANDLER_ENTRY(InitObj),
-    /* 72 */ HANDLER_ENTRY(SizeOf),
-    /* 73 */ HANDLER_ENTRY(LdFtn),
-    /* 74 */ HANDLER_ENTRY(LdVirtFtn),
-    /* 75 */ HANDLER_ENTRY(LdArgA),
-    /* 76 */ HANDLER_ENTRY(LdLocA),
-    /* 77 */ HANDLER_ENTRY(LocAlloc),
-    /* 78 */ HANDLER_ENTRY(Break),
-    /* 79 */ HANDLER_ENTRY(BneUn),
-    /* 80 */ HANDLER_ENTRY(BgeUn),
-    /* 81 */ HANDLER_ENTRY(BgtUn),
-    /* 82 */ HANDLER_ENTRY(BleUn),
-    /* 83 */ HANDLER_ENTRY(BltUn),
-    /* 84 */ HANDLER_ENTRY(AddOvf),  // overflow-checked add, fallback on overflow
-    /* 85 */ HANDLER_ENTRY(SubOvf),  // overflow-checked sub, fallback on overflow
-    /* 86 */ HANDLER_ENTRY(MulOvf),  // overflow-checked mul, fallback on overflow
-    /* 87 */ HANDLER_ENTRY(ConvOvfI),  // range-checked conv to native int
-    /* 88 */ HANDLER_ENTRY(ConvOvfI4), // range-checked conv to int32
-    /* 89 */ HANDLER_ENTRY(ConvOvfI8), // range-checked conv to int64
-    /* 90 */ HANDLER_ENTRY(ConvOvfU),  // range-checked conv to native uint
-    /* 91 */ HANDLER_ENTRY(ConvOvfU4), // range-checked conv to uint32
-    /* 92 */ HANDLER_ENTRY(ConvOvfU8), // range-checked conv to uint64
-    /* 93 */ HANDLER_ENTRY(LdObj),
-    /* 94 */ HANDLER_ENTRY(StObj),
-    /* 95 */ HANDLER_ENTRY(LdElemA),
-    /* 96 */ HANDLER_ENTRY(Cpblk),
-    /* 97 */ HANDLER_ENTRY(InitBlk),
-    /* 98 */ HANDLER_ENTRY(CallVirtConstrained),
-};
-
-#undef HANDLER_ENTRY
-#undef UNSUPPORTED
+#define DISPATCH_CASE(n, name) case n: Handle_##name(frame, instrs[frame.pc]); break
 
 // ── FastExecute ────────────────────────────────────────────────────────
 
@@ -1679,7 +1574,110 @@ bool FastExecute(FastFrame& frame,
         }
         ++g_fast_op_freq[op_val];  // opcode histogram (thread-local, ~1 cycle)
 
-        kHandlers[op_val](frame, instrs[frame.pc]);
+        switch (op_val) {
+            DISPATCH_CASE( 0, LdcI4);
+            DISPATCH_CASE( 1, LdcI8);
+            DISPATCH_CASE( 2, LdcR4);
+            DISPATCH_CASE( 3, LdcR8);
+            DISPATCH_CASE( 4, LdStr);
+            DISPATCH_CASE( 5, LdNull);
+            DISPATCH_CASE( 6, LdArg);
+            DISPATCH_CASE( 7, LdLoc);
+            DISPATCH_CASE( 8, StLoc);
+            DISPATCH_CASE( 9, StArg);
+            DISPATCH_CASE(10, LdFld);
+            DISPATCH_CASE(11, StFld);
+            DISPATCH_CASE(12, LdSFld);
+            DISPATCH_CASE(13, StSFld);
+            DISPATCH_CASE(14, Call);
+            DISPATCH_CASE(15, CallVirt);
+            DISPATCH_CASE(16, CallBridge);
+            DISPATCH_CASE(17, Br);
+            DISPATCH_CASE(18, BrTrue);
+            DISPATCH_CASE(19, BrFalse);
+            DISPATCH_CASE(20, Beq);
+            DISPATCH_CASE(21, Blt);
+            DISPATCH_CASE(22, Bgt);
+            DISPATCH_CASE(23, Ble);
+            DISPATCH_CASE(24, Bge);
+            DISPATCH_CASE(25, Add);
+            DISPATCH_CASE(26, Sub);
+            DISPATCH_CASE(27, Mul);
+            DISPATCH_CASE(28, Div);
+            DISPATCH_CASE(29, Rem);
+            DISPATCH_CASE(30, Neg);
+            DISPATCH_CASE(31, Ceq);
+            DISPATCH_CASE(32, Clt);
+            DISPATCH_CASE(33, Cgt);
+            DISPATCH_CASE(34, NewObj);
+            DISPATCH_CASE(35, Box);
+            DISPATCH_CASE(36, Unbox);
+            DISPATCH_CASE(37, CastClass);
+            DISPATCH_CASE(38, IsInst);
+            DISPATCH_CASE(39, Conv_I4);
+            DISPATCH_CASE(40, Conv_I8);
+            DISPATCH_CASE(41, Conv_R4);
+            DISPATCH_CASE(42, Conv_R8);
+            DISPATCH_CASE(43, NewArr);
+            DISPATCH_CASE(44, LdElem);
+            DISPATCH_CASE(45, StElem);
+            DISPATCH_CASE(46, LdLen);
+            DISPATCH_CASE(47, Pop);
+            DISPATCH_CASE(48, Throw);
+            DISPATCH_CASE(49, Rethrow);
+            DISPATCH_CASE(50, Leave);
+            DISPATCH_CASE(51, EndFinally);
+            DISPATCH_CASE(52, EndFilter);
+            DISPATCH_CASE(53, Ret);
+            DISPATCH_CASE(54, Dup);
+            DISPATCH_CASE(55, DivUn);
+            DISPATCH_CASE(56, RemUn);
+            DISPATCH_CASE(57, And);
+            DISPATCH_CASE(58, Or);
+            DISPATCH_CASE(59, Xor);
+            DISPATCH_CASE(60, Not);
+            DISPATCH_CASE(61, Shl);
+            DISPATCH_CASE(62, Shr);
+            DISPATCH_CASE(63, ShrUn);
+            DISPATCH_CASE(64, ConvRUn);
+            DISPATCH_CASE(65, ConvI);
+            DISPATCH_CASE(66, ConvU);
+            DISPATCH_CASE(67, LdInd);
+            DISPATCH_CASE(68, StInd);
+            DISPATCH_CASE(69, Switch);
+            DISPATCH_CASE(70, LdToken);
+            DISPATCH_CASE(71, InitObj);
+            DISPATCH_CASE(72, SizeOf);
+            DISPATCH_CASE(73, LdFtn);
+            DISPATCH_CASE(74, LdVirtFtn);
+            DISPATCH_CASE(75, LdArgA);
+            DISPATCH_CASE(76, LdLocA);
+            DISPATCH_CASE(77, LocAlloc);
+            DISPATCH_CASE(78, Break);
+            DISPATCH_CASE(79, BneUn);
+            DISPATCH_CASE(80, BgeUn);
+            DISPATCH_CASE(81, BgtUn);
+            DISPATCH_CASE(82, BleUn);
+            DISPATCH_CASE(83, BltUn);
+            DISPATCH_CASE(84, AddOvf);
+            DISPATCH_CASE(85, SubOvf);
+            DISPATCH_CASE(86, MulOvf);
+            DISPATCH_CASE(87, ConvOvfI);
+            DISPATCH_CASE(88, ConvOvfI4);
+            DISPATCH_CASE(89, ConvOvfI8);
+            DISPATCH_CASE(90, ConvOvfU);
+            DISPATCH_CASE(91, ConvOvfU4);
+            DISPATCH_CASE(92, ConvOvfU8);
+            DISPATCH_CASE(93, LdObj);
+            DISPATCH_CASE(94, StObj);
+            DISPATCH_CASE(95, LdElemA);
+            DISPATCH_CASE(96, Cpblk);
+            DISPATCH_CASE(97, InitBlk);
+            DISPATCH_CASE(98, CallVirtConstrained);
+            default:
+                Handle_Unsupported(frame, instrs[frame.pc]);
+                break;
+        }
 
         // Decimated thread abort/interrupt check — every 64 instructions.
         // Uses memory_order_relaxed: these are service-request flags, not

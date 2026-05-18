@@ -12,6 +12,7 @@
 
 #include "gc_card_table.h"
 #include "gc_layout.h"
+#include "gc_mark_bitmap.h"
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -219,9 +220,36 @@ public:
     }
     CHAOS_IL2CPP_SIZE TotalPages() const { return page_count_; }
 
+    // ── Page index (sorted array for O(log n) lookup) ───────────
+
+    /// Sorted page array for O(log n) FindPage/IsInOldGen.
+    /// Rebuilt under mutex_ after each page_list_ mutation.
+    /// Readers: atomic load, then read-only (pages are stable once published).
+    struct PageArray {
+        OldGenPage** pages;  // sorted by page address ascending
+        int count;
+    };
+
+    /// Get the sorted page array for iteration (lock-free).
+    const PageArray* GetPageArray() const {
+        return page_array_.load(std::memory_order_acquire);
+    }
+
+    /// DIAG: count how many bytes in old-gen payloads equal 0xFF.
+    /// Used to detect unexpected writes during BGC root set population.
+    uint64_t DiagCountOxFFBytes() const;
+
     /// Check if @a ptr falls within any old-gen page's payload range.
     /// Used by stress test deferred verification to confirm GC promotion.
     bool IsInOldGen(const void* ptr) const;
+
+    /// DIAG: VirtualProtect all page payloads as PAGE_READONLY.
+    /// Returns the number of ranges protected.  Call DiagUnprotectPayloads() to restore.
+    /// Used to catch unexpected writes during BGC.
+    int DiagProtectPayloads();
+
+    /// DIAG: Restore PAGE_READWRITE on all page payloads.
+    void DiagUnprotectPayloads();
 
     /// Check if an object in old-gen is marked (reachable in current GC cycle).
     /// Returns false if the object is not in old-gen or not marked.
@@ -235,6 +263,9 @@ public:
     /// Used by DependentHandle fixed-point iteration during full GC.
     void AddToMarkStack(void* obj);
 
+    /// Find the page containing @a ptr, or nullptr.
+    OldGenPage* FindPage(const void* ptr) const;
+
 private:
     // ── Page management ─────────────────────────────────────────
 
@@ -245,9 +276,6 @@ private:
 
     /// Return a page to the OS.
     void FreePage(OldGenPage* page);
-
-    /// Find the page containing @a ptr, or nullptr.
-    OldGenPage* FindPage(const void* ptr) const;
 
     /// Rebuild the sorted page index from page_list_.
     /// Caller MUST hold mutex_.
@@ -362,14 +390,6 @@ private:
                                OldGenPage* page_list);
 
     // ── Page index (sorted array for O(log n) lookup) ────────────
-
-    /// Sorted page array for O(log n) FindPage/IsInOldGen.
-    /// Rebuilt under mutex_ after each page_list_ mutation.
-    /// Readers: atomic load, then read-only (pages are stable once published).
-    struct PageArray {
-        OldGenPage** pages;  // sorted by page address ascending
-        int count;
-    };
 
 public:
 

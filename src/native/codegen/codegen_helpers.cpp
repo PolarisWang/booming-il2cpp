@@ -6,8 +6,14 @@
 
 #include <cstdint>
 #include <cstring>
+#include <gc/gc_helpers.h>  // GcAllocate
 
 #include <intrin.h>  // _ReturnAddress()
+
+#if defined(_WIN32) || defined(_WIN64)
+  #define NOMINMAX
+  #include <windows.h>
+#endif
 
 // ── Thread-local deoptimization state ───────────────────────────────────────
 namespace chaos::il2cpp::codegen {
@@ -152,9 +158,11 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
 
 extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) noexcept {
     using namespace chaos::il2cpp::interpreter;
-    auto* boxed = static_cast<BoxedValue*>(CHAOS_IL2CPP_MALLOC(sizeof(BoxedValue)));
-    if (boxed == nullptr) return nullptr;
-    ::new (boxed) BoxedValue();
+    using namespace chaos::il2cpp::runtime_core;
+    // Allocate BoxedValue via GC (V5: GcAllocate instead of CHAOS_IL2CPP_MALLOC).
+    void* mem = GcAllocate(sizeof(BoxedValue));
+    if (mem == nullptr) return nullptr;
+    auto* boxed = ::new (mem) BoxedValue();
     ValueTag vt = static_cast<ValueTag>(tag);
     switch (vt) {
     case ValueTag::Int32:
@@ -177,9 +185,11 @@ extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) no
 
 extern "C" void* CodegenNewObj(uint32_t type_token, uint32_t field_count) noexcept {
     using namespace chaos::il2cpp::interpreter;
-    auto* obj = static_cast<InterpreterObject*>(CHAOS_IL2CPP_MALLOC(sizeof(InterpreterObject)));
-    if (obj == nullptr) return nullptr;
-    ::new (obj) InterpreterObject();
+    using namespace chaos::il2cpp::runtime_core;
+    // V5: Allocate InterpreterObject via GcAllocate.
+    void* mem = GcAllocate(sizeof(InterpreterObject));
+    if (mem == nullptr) return nullptr;
+    auto* obj = ::new (mem) InterpreterObject();
     obj->type_token = type_token;
     if (field_count == 0) field_count = 1;
     obj->fields.resize(field_count);
@@ -419,22 +429,52 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
         reinterpret_cast<uint64_t>(ret_addr) - code_base);
 
     // 4. Deoptimize: reconstruct register file from stack frame spill slots.
+    //    DeoptTrap sets t_deopt_state internally.
     const NativeContext* nctx = static_cast<const NativeContext*>(ctx);
     DeoptRuntime::DeoptTrap(
         const_cast<NativeMethod*>(nm),
         native_offset,
-        *nctx);
+        *nctx,
+        codegen_rsp);
+}
 
-    // 5. Find the DeoptEntry to get the instruction pc.
-    const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_offset);
-    if (entry == nullptr) {
-        // No matching deopt entry — can't reconstruct pc.
+// ── T4 SEH runtime helpers ─────────────────────────────────────────────────
+
+// TLS exception object pointer for T4 SEH dispatch.
+// Set by CodegenThrow/CodegenRethrow, read by the VEH handler.
+namespace chaos::il2cpp::codegen {
+thread_local void* g_t4_exception_obj = nullptr;
+}
+
+// ABI export: required for C-language linkage from generated native code
+extern "C" void CodegenThrow(void* exception_obj) noexcept {
+    using chaos::il2cpp::codegen::g_t4_exception_obj;
+#if defined(_WIN32) || defined(_WIN64)
+    g_t4_exception_obj = exception_obj;
+    // Raise a software exception to trigger the T4 VEH handler.
+    // The VEH handler walks the SEH clause table and redirects RIP
+    // to the matching catch/finally handler.
+    RaiseException(0xE0000001u, 0, 0, nullptr);
+#else
+    (void)exception_obj;
+#endif
+}
+
+// ABI export: required for C-language linkage from generated native code
+extern "C" void CodegenRethrow() noexcept {
+    using chaos::il2cpp::codegen::g_t4_exception_obj;
+#if defined(_WIN32) || defined(_WIN64)
+    void* ex = g_t4_exception_obj;
+    if (ex == nullptr) {
+        __debugbreak();
         return;
     }
+    RaiseException(0xE0000001u, 0, 0, nullptr);
+#endif
+}
 
-    // 6. Set TLS state: the trampoline will write kDeoptMagic to ret_buf[0]
-    //    and return.  InterpreterEntryDirect reads this state to reconstruct
-    //    the RegisterFrame for RegisterExecute.
-    t_deopt_state.instr_pc = entry->instr_pc;
-    t_deopt_state.deopt_happened = true;
+// ABI export: required for C-language linkage from generated native code
+extern "C" void CodegenEndFinally() noexcept {
+    // V1: no-op.  In a full implementation this would manage
+    // finally unwind state (phase 2 unwinding).
 }

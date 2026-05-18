@@ -16,12 +16,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
@@ -89,6 +83,12 @@
     {
       "subjectKind": "method",
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_11:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }
