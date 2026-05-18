@@ -2,8 +2,8 @@
   "family": "primitive-numeric-conversions",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T00:52:53",
-  "duration_ms": 17500,
+  "timestamp": "2026-05-19T01:04:17",
+  "duration_ms": 20997,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -21,31 +21,28 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "entry.exe build failed",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "OK",
-          "convert_to_cpp": "OK",
-          "build_entry_exe": "FAILED"
-        }
+        "methodCount": 15,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions\\managed\\subjects\\build-output\\PrimitiveNumericConversionsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 17366
+      "duration_ms": 20465
     },
     "fact": {
       "stage": "fact",
       "status": "passed",
-      "summary": "Fact verify=passed (16/16)",
+      "summary": "Fact verify=passed (15/15)",
       "details": {
         "fact": {
           "status": "passed",
-          "passed": 16,
-          "total": 16
+          "passed": 15,
+          "total": 15
         }
       },
       "errors": [],
-      "duration_ms": 24
+      "duration_ms": 382
     },
     "audit": {
       "stage": "audit",
@@ -59,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 108
+      "duration_ms": 148
     }
   },
   "coverage": {

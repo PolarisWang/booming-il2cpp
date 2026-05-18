@@ -64,6 +64,17 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_DELEGATE_REMOVE_SYSTEM_DELEGATE_SYSTEM_DELEGATE = 0x36442080u,
     SHAPE_SYSTEM_DOUBLE_PARSE_SYSTEM_STRING = 0x41674909u,
     SHAPE_SYSTEM_DOUBLE_TOSTRING_SYSTEM_STRING = 0x62DBF072u,
+    SHAPE_SYSTEM_ENUM_FORMAT_SYSTEM_TYPE_SYSTEM_OBJECT_SYSTEM_STRING = 0x8E51594Au,
+    SHAPE_SYSTEM_ENUM_GETNAMES_SYSTEM_TYPE = 0x14128551u,
+    SHAPE_SYSTEM_ENUM_GETNAME_SYSTEM_TYPE_SYSTEM_OBJECT = 0x64C0B65Cu,
+    SHAPE_SYSTEM_ENUM_GETVALUES_SYSTEM_TYPE = 0x9C3279F5u,
+    SHAPE_SYSTEM_ENUM_ISDEFINED_SYSTEM_TYPE_SYSTEM_OBJECT = 0xD193427Au,
+    SHAPE_SYSTEM_ENUM_PARSE_SYSTEM_TYPE_SYSTEM_STRING = 0xE1FB1C82u,
+    SHAPE_SYSTEM_ENUM_PARSE_SYSTEM_TYPE_SYSTEM_STRING_SYSTEM_BOOLEAN = 0x33BD95B9u,
+    SHAPE_SYSTEM_ENUM_TOSTRING = 0xD0FDA1F0u,
+    SHAPE_SYSTEM_ENUM_TOSTRING_SYSTEM_STRING = 0x15E58C56u,
+    SHAPE_SYSTEM_ENUM_TRYPARSE_SYSTEM_TYPE_SYSTEM_STRING_SYSTEM_BOOLEAN_SYSTEM_OBJECT_ = 0x82D1F4FEu,
+    SHAPE_SYSTEM_ENUM_TRYPARSE_SYSTEM_TYPE_SYSTEM_STRING_SYSTEM_OBJECT_ = 0x3BD83EA1u,
     SHAPE_SYSTEM_ENVIRONMENT_GET_CURRENTMANAGEDTHREADID = 0xF4DDECAEu,
     SHAPE_SYSTEM_EXCEPTION_GETBASEEXCEPTION = 0xCC106A1Au,
     SHAPE_SYSTEM_EXCEPTION_GET_HRESULT = 0xA24695DCu,
@@ -309,7 +320,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 295u,
+    SHAPE_COUNT = 306u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -438,6 +449,38 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_DOUBLE_TOSTRING_SYSTEM_STRING) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             chaos_format_double_to_string(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_FORMAT_SYSTEM_TYPE_SYSTEM_OBJECT_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumFormat(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_GETNAMES_SYSTEM_TYPE) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumGetNames(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_GETNAME_SYSTEM_TYPE_SYSTEM_OBJECT) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumGetName(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_GETVALUES_SYSTEM_TYPE) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumGetValues(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_PARSE_SYSTEM_TYPE_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumParse(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_PARSE_SYSTEM_TYPE_SYSTEM_STRING_SYSTEM_BOOLEAN) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumParseWithIgnoreCase(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_TOSTRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumToString(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_TOSTRING_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumToStringWithFormat(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_EXCEPTION_GETBASEEXCEPTION) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1288,6 +1331,18 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosDatetimeGetHashCode(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_ISDEFINED_SYSTEM_TYPE_SYSTEM_OBJECT) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosEnumIsDefined(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_TRYPARSE_SYSTEM_TYPE_SYSTEM_STRING_SYSTEM_BOOLEAN_SYSTEM_OBJECT_) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosEnumTryParseWithIgnoreCase(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_TRYPARSE_SYSTEM_TYPE_SYSTEM_STRING_SYSTEM_OBJECT_) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosEnumTryParse(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_ENVIRONMENT_GET_CURRENTMANAGEDTHREADID) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             chaos_current_managed_thread_id(args...));
@@ -1467,7 +1522,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 295u,
+static_assert(SHAPE_COUNT == 306u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

@@ -2,8 +2,8 @@
   "family": "exception-throw-diagnostics",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T00:50:33",
-  "duration_ms": 25503,
+  "timestamp": "2026-05-19T01:01:29",
+  "duration_ms": 18658,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -21,31 +21,28 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "entry.exe build failed",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "OK",
-          "convert_to_cpp": "OK",
-          "build_entry_exe": "FAILED"
-        }
+        "methodCount": 14,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\exception-throw-diagnostics\\managed\\subjects\\build-output\\ExceptionThrowDiagnosticsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 25003
+      "duration_ms": 18252
     },
     "fact": {
       "stage": "fact",
       "status": "failed",
-      "summary": "Fact verify=failed (0/0)",
+      "summary": "Fact verify=failed (12/14)",
       "details": {
         "fact": {
           "status": "failed",
-          "passed": 0,
-          "total": 0
+          "passed": 12,
+          "total": 14
         }
       },
       "errors": [],
-      "duration_ms": 352
+      "duration_ms": 303
     },
     "audit": {
       "stage": "audit",
@@ -59,13 +56,13 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 146
+      "duration_ms": 100
     }
   },
   "coverage": {
-    "methodCoverage": 0.0,
+    "methodCoverage": 85.71,
     "testedRate": 92.86,
-    "overall": 92.86
+    "overall": 89.28
   },
   "dashboard": {
     "interpreter": {},

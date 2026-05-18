@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "DelegateCoreInvocationSubjects",
   "entrySubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/delegate-core-invocation/codegen",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/delegate-core-invocation/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

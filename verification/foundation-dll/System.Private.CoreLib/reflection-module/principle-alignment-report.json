@@ -1,0 +1,103 @@
+{
+  "family": "reflection-module",
+  "assembly": "System.Private.CoreLib",
+  "generated_at": "2026-05-19T01:06:21.892743",
+  "checks": {
+    "p1_lowering": {
+      "check_id": "p1_lowering",
+      "principle": "P1",
+      "status": "ALIGNED",
+      "summary": "chaos_eval_stack present [OK]",
+      "details": [],
+      "evidence": {
+        "has_lowering": true,
+        "stub_count": 0,
+        "simple_forward_count": 0
+      }
+    },
+    "p1_no_redundant_branch": {
+      "check_id": "p1_no_redundant_branch",
+      "principle": "P1",
+      "status": "ALIGNED",
+      "summary": "No runtime dispatch branches in generated code",
+      "details": [],
+      "evidence": {
+        "checked_patterns": [
+          "if\\s*\\(\\s*family\\s*[=!]=",
+          "switch\\s*\\(\\s*methodIndex\\b",
+          "if\\s*\\(\\s*methodIndex\\b",
+          "CHAOS_FAMILY_SPECIFIC",
+          "if\\s*\\(\\s*__family\\b"
+        ]
+      }
+    },
+    "p1_no_unnecessary_indirection": {
+      "check_id": "p1_no_unnecessary_indirection",
+      "principle": "P1",
+      "status": "ALIGNED",
+      "summary": "No unnecessary runtime_stub calls in generated code",
+      "details": [],
+      "evidence": {}
+    },
+    "p1_benchmark": {
+      "check_id": "p1_benchmark",
+      "principle": "P1",
+      "status": "NOT_APPLICABLE",
+      "summary": "No benchmark data available",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_template_hygiene": {
+      "check_id": "p2_template_hygiene",
+      "principle": "P2",
+      "status": "ALIGNED",
+      "summary": "All Scriban templates clean — no semantic decision logic",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_no_bare_new": {
+      "check_id": "p2_no_bare_new",
+      "principle": "P2",
+      "status": "ALIGNED",
+      "summary": "All managed allocations use CHAOS_IL2CPP_NEW_GC or equivalent",
+      "details": [],
+      "evidence": {}
+    },
+    "p3_patch_entry": {
+      "check_id": "p3_patch_entry",
+      "principle": "P3",
+      "status": "ALIGNED",
+      "summary": "Dispatch table: 6 entries, all with interrupt_ptr [OK]",
+      "details": [],
+      "evidence": {
+        "table_size": 6,
+        "entries_with_interrupt_ptr": 6,
+        "has_hotpatch_module": true
+      }
+    },
+    "p3_patchdata": {
+      "check_id": "p3_patchdata",
+      "principle": "P3",
+      "status": "ALIGNED",
+      "summary": "2/2 valid .patchdata files",
+      "details": [],
+      "evidence": {
+        "patchdata_count": 2,
+        "valid_count": 2,
+        "stub_patchdata_count": 0,
+        "files": [
+          "System.Private.CoreLib\\reflection-module\\il2cpp_dist\\patch\\patchdata\\reflection-module.patchdata",
+          "System.Private.CoreLib\\reflection-module\\managed\\patch\\patchdata\\reflection-module.patchdata"
+        ]
+      }
+    }
+  },
+  "summary": {
+    "total": 8,
+    "aligned": 7,
+    "concern": 0,
+    "violation": 0,
+    "not_applicable": 1,
+    "overall": "ALIGNED"
+  }
+}

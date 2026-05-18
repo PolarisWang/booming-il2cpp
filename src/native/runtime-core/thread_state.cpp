@@ -486,7 +486,6 @@ void ReleaseGlobalSafepoint(uint32_t /*epoch*/) noexcept {
 }
 
 void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, void* user_data), void* user_data) noexcept {
-    fprintf(stderr, "DBG: GcScanAllThreadRoots entered\n"); fflush(stderr);
     CHAOS_IL2CPP_PROFILE_SCOPE("GcScanAllThreadRoots");
 
     // Walk all registered threads and conservatively scan their stacks.
@@ -509,29 +508,19 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
     s_user_data = user_data;
 
     EnumerateThreads([](ManagedThread* thread) -> bool {
-        fprintf(stderr, "DBG_GCS: thread=%p running=%d tls=%p\n", (void*)thread, (int)(thread ? thread->is_running : -1), (void*)tls_this_thread); fflush(stderr);
-        if (thread == nullptr || !thread->is_running) { fprintf(stderr, "DBG_GCS: skip !running\n"); fflush(stderr); return true; }
 
         // If the current thread is calling this, skip self.
-        fprintf(stderr, "DBG_GCS: check tls_this_thread thread=%p tls=%p\n", (void*)thread, (void*)tls_this_thread); fflush(stderr);
-        if (thread == tls_this_thread) { fprintf(stderr, "DBG_GCS: skip self\n"); fflush(stderr); return true; }
 
-        fprintf(stderr, "DBG_GCS: scanning stack\n"); fflush(stderr);
 
         // Conservatively scan the full stack range.
         char* scan_start = static_cast<char*>(thread->stack_limit);
         char* scan_end   = static_cast<char*>(thread->stack_base);
 
-        if (scan_start == nullptr || scan_end == nullptr) { fprintf(stderr, "DBG_GCS: null stack bounds\n"); fflush(stderr); return true; }
-        if (scan_start >= scan_end) { fprintf(stderr, "DBG_GCS: empty stack range\n"); fflush(stderr); return true; }
 
         uintptr_t start_aligned = (reinterpret_cast<uintptr_t>(scan_start) + sizeof(void*) - 1)
             & ~static_cast<uintptr_t>(sizeof(void*) - 1);
         uintptr_t end_aligned = reinterpret_cast<uintptr_t>(scan_end)
             & ~static_cast<uintptr_t>(sizeof(void*) - 1);
-
-        fprintf(stderr, "DBG_GCS: stack [%p-%p) aligned [%p-%p)\n",
-            (void*)scan_start, (void*)scan_end, (void*)start_aligned, (void*)end_aligned); fflush(stderr);
 
         // ── Phase 1: Full-stack conservative scan ─────────────────
         for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
@@ -542,7 +531,6 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
             }
         }
 
-        fprintf(stderr, "DBG_GCS: done scanning thread\n"); fflush(stderr);
 
         // Scan for return addresses that fall within registered T4 code
         // ranges. Each T4 frame has a known stack layout:
@@ -577,6 +565,5 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
 
         return true;  // continue enumeration
     });
-    fprintf(stderr, "DBG_GCS: EnumerateThreads done\n"); fflush(stderr);
 }}  // namespace chaos::il2cpp::runtime_core::threading
 

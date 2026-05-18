@@ -11,6 +11,8 @@
 #include "reflection_query_model.h"
 #include "load_store_chaos_bridge.h"
 #include "interpreter_entry.h"
+#include <gc/gc_bgc_inline.h>
+#include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
@@ -69,7 +71,8 @@ inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_InterfaceDispatchSubjects_Imp
 };
 inline TypeInfoV0 chaos_mt_InterfaceDispatchSubjects_ImplWithDefault = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_InterfaceDispatchSubjects_ImplWithDefault, 10131636431187859815ULL, 1u, 32, 1, 1}, {chaos_iface_map_InterfaceDispatchSubjects_ImplWithDefault, nullptr, 1, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_InterfaceDispatchSubjects_ImplWithDefault = static_cast<CHAOS_IL2CPP_INTPTR>(10131636431187859815ULL);inline TypeInfoV0 chaos_mt_InterfaceDispatchSubjects_InterfaceDispatchSubjects = {{nullptr, nullptr, 16224833485471026240ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_InterfaceDispatchSubjects_InterfaceDispatchSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(16224833485471026240ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_InterfaceDispatchSubjects_InterfaceDispatchSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(16224833485471026240ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Exception = {{nullptr, nullptr, 10972282733316558392ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Exception = static_cast<CHAOS_IL2CPP_INTPTR>(10972282733316558392ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -83,22 +86,22 @@ inline TypeInfoV0 chaos_mt_InterfaceDispatchSubjects_IWithDefault = {{nullptr, n
 
 // ── Virtual method table arrays ──
 extern "C" void InterfaceDispatchSubjects_CalcAdd__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Add(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Multiply(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
 const void* chaos_vtable_InterfaceDispatchSubjects_CalcAdd[] =
 {
 	reinterpret_cast<void*>(InterfaceDispatchSubjects_CalcAdd__ctor),
-	reinterpret_cast<void*>(InterfaceDispatchSubjects_CalcAdd_Add),
-	reinterpret_cast<void*>(InterfaceDispatchSubjects_CalcAdd_Multiply),
+	reinterpret_cast<void*>(InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32),
+	reinterpret_cast<void*>(InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32),
 };
 extern "C" void InterfaceDispatchSubjects_CalcMul__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Add(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Multiply(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
 const void* chaos_vtable_InterfaceDispatchSubjects_CalcMul[] =
 {
 	reinterpret_cast<void*>(InterfaceDispatchSubjects_CalcMul__ctor),
-	reinterpret_cast<void*>(InterfaceDispatchSubjects_CalcMul_Add),
-	reinterpret_cast<void*>(InterfaceDispatchSubjects_CalcMul_Multiply),
+	reinterpret_cast<void*>(InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32),
+	reinterpret_cast<void*>(InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32),
 };
 extern "C" void InterfaceDispatchSubjects_ImplDiamond__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
@@ -140,49 +143,49 @@ const void* chaos_vtable_InterfaceDispatchSubjects_ImplWithDefault[] =
 };
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_InterfaceDispatchSubjects_CalcAdd[] =
 {
-	{ 0x00000024u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd__ctor) },
-	{ 0x00000022u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Add) },
-	{ 0x00000023u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Multiply) },
+	{ 0x00000023u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd__ctor) },
+	{ 0x00000021u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32) },
+	{ 0x00000022u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_InterfaceDispatchSubjects_CalcMul[] =
 {
-	{ 0x00000027u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul__ctor) },
-	{ 0x00000025u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Add) },
-	{ 0x00000026u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Multiply) },
+	{ 0x00000026u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul__ctor) },
+	{ 0x00000024u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32) },
+	{ 0x00000025u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_InterfaceDispatchSubjects_ImplDiamond[] =
 {
-	{ 0x0000002Au, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond__ctor) },
+	{ 0x00000029u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond__ctor) },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x00000028u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond_BaseMethod) },
-	{ 0x00000029u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond_DerivedMethod) },
+	{ 0x00000027u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond_BaseMethod) },
+	{ 0x00000028u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond_DerivedMethod) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_InterfaceDispatchSubjects_ImplDiamond2[] =
 {
-	{ 0x0000002Du, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2__ctor) },
+	{ 0x0000002Cu, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2__ctor) },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x0000002Bu, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_BaseMethod) },
-	{ 0x0000002Cu, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod) },
+	{ 0x0000002Au, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_BaseMethod) },
+	{ 0x0000002Bu, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_InterfaceDispatchSubjects_ImplSimple[] =
 {
-	{ 0x00000020u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplSimple__ctor) },
+	{ 0x0000001Fu, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplSimple__ctor) },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x0000001Fu, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplSimple_GetValue) },
+	{ 0x0000001Eu, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplSimple_GetValue) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_InterfaceDispatchSubjects_ImplWithDefault[] =
 {
-	{ 0x00000021u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplWithDefault__ctor) },
+	{ 0x00000020u, reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplWithDefault__ctor) },
 };
 
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
@@ -250,6 +253,15 @@ struct chaos_type_InterfaceDispatchSubjects_ImplWithDefault : public chaos_type_
 struct chaos_type_InterfaceDispatchSubjects_InterfaceDispatchSubjects
 {
 	ThinLockableHeader header{};
+};
+
+struct chaos_type_System_Private_CoreLib_System_Exception
+{
+	ThinLockableHeader header{};
+	CHAOS_IL2CPP_INTPTR _message = 0;
+	CHAOS_IL2CPP_INTPTR _innerException = 0;
+	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
@@ -320,21 +332,6 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
-extern "C" void InterfaceDispatchSubjects_ImplSimple__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple(void);
-extern "C" void InterfaceDispatchSubjects_ImplWithDefault__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault(void);
-extern "C" void InterfaceDispatchSubjects_CalcAdd__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void InterfaceDispatchSubjects_CalcMul__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc(void);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck(void);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck(void);
-extern "C" void InterfaceDispatchSubjects_ImplDiamond__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase(void);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived(void);
-extern "C" void InterfaceDispatchSubjects_ImplDiamond2__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti(void);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0(void);
 extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1(void);
 extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2(void);
@@ -344,16 +341,36 @@ extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5(vo
 extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6(void);
 extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7(void);
 extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8(void);
-extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Add(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Multiply(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Add(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Multiply(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_CalcAdd__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void InterfaceDispatchSubjects_CalcMul__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_IBase_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ICalculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ICalculator_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_IDerived_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_ImplDiamond__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_ImplDiamond2__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_ImplSimple__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplSimple_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_ImplWithDefault__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ISimple_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_IWithDefault_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -367,7 +384,7 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[35] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[40] = {
 	0u,
 	0u,
 	0u,
@@ -379,60 +396,50 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[35] = {
 	0u,
 	0u,
 	0u,
-	0u,
-	0u,
-	0u,
-	0u,
-	1u,
-	1u,
-	1u,
-	1u,
-	1u,
-	1u,
-	1u,
-	1u,
-	1u,
-	1u,
 	2u,
+	4u,
 	4u,
 	6u,
 	8u,
+	8u,
 	10u,
-	10u,
-	10u,
-	10u,
-	10u,
-	10u,
+	12u,
+	12u,
+	12u,
+	12u,
+	12u,
+	12u,
+	12u,
+	12u,
+	12u,
+	12u,
+	12u,
+	13u,
+	13u,
+	13u,
+	13u,
+	13u,
+	13u,
+	13u,
+	13u,
+	13u,
+	13u,
+	13u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[34];
-	CHAOS_IL2CPP_UINT8 params[10];
+	::ChaosAbiMethodEntryV0 entries[39];
+	CHAOS_IL2CPP_UINT8 params[13];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		34u,
-		10u,
-		2394627447u,  // FNV-1a over entries+params
+		39u,
+		13u,
+		2568644681u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
-		{ 0u, 0u },  // InterfaceDispatchSubjects_ImplSimple__ctor
-		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple
-		{ 0u, 0u },  // InterfaceDispatchSubjects_ImplWithDefault__ctor
-		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault
-		{ 0u, 0u },  // InterfaceDispatchSubjects_CalcAdd__ctor
-		{ 0u, 0u },  // InterfaceDispatchSubjects_CalcMul__ctor
-		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc
-		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck
-		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck
-		{ 0u, 0u },  // InterfaceDispatchSubjects_ImplDiamond__ctor
-		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase
-		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived
-		{ 0u, 0u },  // InterfaceDispatchSubjects_ImplDiamond2__ctor
-		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti
-		{ 1u, 1u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run
 		{ 0u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0
 		{ 0u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1
 		{ 0u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2
@@ -442,18 +449,41 @@ static constexpr struct {
 		{ 0u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6
 		{ 0u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7
 		{ 0u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8
-		{ 0u, 1u },  // InterfaceDispatchSubjects_InterfaceDispatchSubjects_Run
-		{ 1u, 2u },  // InterfaceDispatchSubjects_CalcAdd_Add
-		{ 1u, 2u },  // InterfaceDispatchSubjects_CalcAdd_Multiply
-		{ 1u, 2u },  // InterfaceDispatchSubjects_CalcMul_Add
-		{ 1u, 2u },  // InterfaceDispatchSubjects_CalcMul_Multiply
-		{ 1u, 0u },  // InterfaceDispatchSubjects_ImplDiamond2_BaseMethod
-		{ 1u, 0u },  // InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod
+		{ 0u, 0u },  // InterfaceDispatchSubjects_CalcAdd__ctor
+		{ 1u, 2u },  // InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32
+		{ 1u, 2u },  // InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32
+		{ 0u, 0u },  // InterfaceDispatchSubjects_CalcMul__ctor
+		{ 1u, 2u },  // InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32
+		{ 1u, 2u },  // InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32
+		{ 1u, 0u },  // InterfaceDispatchSubjects_IBase_BaseMethod
+		{ 1u, 2u },  // InterfaceDispatchSubjects_ICalculator_Add_System_Int32_System_Int32
+		{ 1u, 2u },  // InterfaceDispatchSubjects_ICalculator_Multiply_System_Int32_System_Int32
+		{ 1u, 0u },  // InterfaceDispatchSubjects_IDerived_DerivedMethod
+		{ 0u, 0u },  // InterfaceDispatchSubjects_ImplDiamond__ctor
 		{ 1u, 0u },  // InterfaceDispatchSubjects_ImplDiamond_BaseMethod
 		{ 1u, 0u },  // InterfaceDispatchSubjects_ImplDiamond_DerivedMethod
+		{ 0u, 0u },  // InterfaceDispatchSubjects_ImplDiamond2__ctor
+		{ 1u, 0u },  // InterfaceDispatchSubjects_ImplDiamond2_BaseMethod
+		{ 1u, 0u },  // InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod
+		{ 0u, 0u },  // InterfaceDispatchSubjects_ImplSimple__ctor
 		{ 1u, 0u },  // InterfaceDispatchSubjects_ImplSimple_GetValue
+		{ 0u, 0u },  // InterfaceDispatchSubjects_ImplWithDefault__ctor
+		{ 1u, 1u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32
+		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck
+		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase
+		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived
+		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti
+		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck
+		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc
+		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault
+		{ 1u, 0u },  // InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple
+		{ 1u, 0u },  // InterfaceDispatchSubjects_ISimple_GetValue
+		{ 1u, 0u },  // InterfaceDispatchSubjects_IWithDefault_GetValue
 	},
 	{
+		1u,
+		1u,
+		1u,
 		1u,
 		1u,
 		1u,
@@ -617,110 +647,110 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("InterfaceDispatchSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[34] = {
-	{ ".ctor", 0x00000024u, 0u },  // CalcAdd
-	{ "Add", 0x00000022u, 2u },  // CalcAdd
-	{ "Multiply", 0x00000023u, 2u },  // CalcAdd
-	{ ".ctor", 0x00000027u, 0u },  // CalcMul
-	{ "Add", 0x00000025u, 2u },  // CalcMul
-	{ "Multiply", 0x00000026u, 2u },  // CalcMul
-	{ ".ctor", 0x0000002Au, 0u },  // ImplDiamond
-	{ "BaseMethod", 0x00000028u, 0u },  // ImplDiamond
-	{ "DerivedMethod", 0x00000029u, 0u },  // ImplDiamond
-	{ ".ctor", 0x0000002Du, 0u },  // ImplDiamond2
-	{ "BaseMethod", 0x0000002Bu, 0u },  // ImplDiamond2
-	{ "DerivedMethod", 0x0000002Cu, 0u },  // ImplDiamond2
-	{ ".ctor", 0x00000020u, 0u },  // ImplSimple
-	{ "GetValue", 0x0000001Fu, 0u },  // ImplSimple
-	{ ".ctor", 0x00000021u, 0u },  // ImplWithDefault
-	{ "TestSingleImplSimple", 0x0000002Fu, 0u },  // InterfaceDispatchNativeEntry
-	{ "TestSingleImplDefault", 0x00000030u, 0u },  // InterfaceDispatchNativeEntry
-	{ "TestMultiImplCalc", 0x00000031u, 0u },  // InterfaceDispatchNativeEntry
-	{ "TestIsCheck", 0x00000032u, 0u },  // InterfaceDispatchNativeEntry
-	{ "TestAsCheck", 0x00000033u, 0u },  // InterfaceDispatchNativeEntry
-	{ "TestDiamondBase", 0x00000034u, 0u },  // InterfaceDispatchNativeEntry
-	{ "TestDiamondDerived", 0x00000035u, 0u },  // InterfaceDispatchNativeEntry
-	{ "TestDiamondMulti", 0x00000036u, 0u },  // InterfaceDispatchNativeEntry
-	{ "Run", 0x0000002Eu, 1u },  // InterfaceDispatchNativeEntry
-	{ "Subject_0", 0x00000010u, 0u },  // InterfaceDispatchSubjects
-	{ "Subject_1", 0x00000011u, 0u },  // InterfaceDispatchSubjects
-	{ "Subject_2", 0x00000012u, 0u },  // InterfaceDispatchSubjects
-	{ "Subject_3", 0x00000013u, 0u },  // InterfaceDispatchSubjects
-	{ "Subject_4", 0x00000014u, 0u },  // InterfaceDispatchSubjects
-	{ "Subject_5", 0x00000015u, 0u },  // InterfaceDispatchSubjects
-	{ "Subject_6", 0x00000016u, 0u },  // InterfaceDispatchSubjects
-	{ "Subject_7", 0x00000017u, 0u },  // InterfaceDispatchSubjects
-	{ "Subject_8", 0x00000018u, 0u },  // InterfaceDispatchSubjects
-	{ "Run", 0x0000000Fu, 1u },  // InterfaceDispatchSubjects
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[39] = {
+	{ ".ctor", 0x00000023u, 0u },  // CalcAdd
+	{ "Add", 0x00000021u, 2u },  // CalcAdd
+	{ "Multiply", 0x00000022u, 2u },  // CalcAdd
+	{ ".ctor", 0x00000026u, 0u },  // CalcMul
+	{ "Add", 0x00000024u, 2u },  // CalcMul
+	{ "Multiply", 0x00000025u, 2u },  // CalcMul
+	{ "BaseMethod", 0x0000001Cu, 0u },  // IBase
+	{ "Add", 0x0000001Au, 2u },  // ICalculator
+	{ "Multiply", 0x0000001Bu, 2u },  // ICalculator
+	{ "DerivedMethod", 0x0000001Du, 0u },  // IDerived
+	{ "GetValue", 0x00000018u, 0u },  // ISimple
+	{ "GetValue", 0x00000019u, 0u },  // IWithDefault
+	{ ".ctor", 0x00000029u, 0u },  // ImplDiamond
+	{ "BaseMethod", 0x00000027u, 0u },  // ImplDiamond
+	{ "DerivedMethod", 0x00000028u, 0u },  // ImplDiamond
+	{ ".ctor", 0x0000002Cu, 0u },  // ImplDiamond2
+	{ "BaseMethod", 0x0000002Au, 0u },  // ImplDiamond2
+	{ "DerivedMethod", 0x0000002Bu, 0u },  // ImplDiamond2
+	{ ".ctor", 0x0000001Fu, 0u },  // ImplSimple
+	{ "GetValue", 0x0000001Eu, 0u },  // ImplSimple
+	{ ".ctor", 0x00000020u, 0u },  // ImplWithDefault
+	{ "Run", 0x0000002Du, 1u },  // InterfaceDispatchNativeEntry
+	{ "TestAsCheck", 0x00000032u, 0u },  // InterfaceDispatchNativeEntry
+	{ "TestDiamondBase", 0x00000033u, 0u },  // InterfaceDispatchNativeEntry
+	{ "TestDiamondDerived", 0x00000034u, 0u },  // InterfaceDispatchNativeEntry
+	{ "TestDiamondMulti", 0x00000035u, 0u },  // InterfaceDispatchNativeEntry
+	{ "TestIsCheck", 0x00000031u, 0u },  // InterfaceDispatchNativeEntry
+	{ "TestMultiImplCalc", 0x00000030u, 0u },  // InterfaceDispatchNativeEntry
+	{ "TestSingleImplDefault", 0x0000002Fu, 0u },  // InterfaceDispatchNativeEntry
+	{ "TestSingleImplSimple", 0x0000002Eu, 0u },  // InterfaceDispatchNativeEntry
+	{ "Subject_0", 0x0000000Fu, 0u },  // InterfaceDispatchSubjects
+	{ "Subject_1", 0x00000010u, 0u },  // InterfaceDispatchSubjects
+	{ "Subject_2", 0x00000011u, 0u },  // InterfaceDispatchSubjects
+	{ "Subject_3", 0x00000012u, 0u },  // InterfaceDispatchSubjects
+	{ "Subject_4", 0x00000013u, 0u },  // InterfaceDispatchSubjects
+	{ "Subject_5", 0x00000014u, 0u },  // InterfaceDispatchSubjects
+	{ "Subject_6", 0x00000015u, 0u },  // InterfaceDispatchSubjects
+	{ "Subject_7", 0x00000016u, 0u },  // InterfaceDispatchSubjects
+	{ "Subject_8", 0x00000017u, 0u },  // InterfaceDispatchSubjects
 };
 
 // Type name index entries (namespace, short_name)
-static constexpr HotpatchTypeEntryV0 s_hotpatch_types[8] = {
+static constexpr HotpatchTypeEntryV0 s_hotpatch_types[13] = {
 	{ "CalcAdd", "", 0u, 3u },
 	{ "CalcMul", "", 3u, 3u },
-	{ "ImplDiamond", "", 6u, 3u },
-	{ "ImplDiamond2", "", 9u, 3u },
-	{ "ImplSimple", "", 12u, 2u },
-	{ "ImplWithDefault", "", 14u, 1u },
-	{ "InterfaceDispatchNativeEntry", "", 15u, 9u },
-	{ "InterfaceDispatchSubjects", "", 24u, 10u },
+	{ "IBase", "", 6u, 1u },
+	{ "ICalculator", "", 7u, 2u },
+	{ "IDerived", "", 9u, 1u },
+	{ "ISimple", "", 10u, 1u },
+	{ "IWithDefault", "", 11u, 1u },
+	{ "ImplDiamond", "", 12u, 3u },
+	{ "ImplDiamond2", "", 15u, 3u },
+	{ "ImplSimple", "", 18u, 2u },
+	{ "ImplWithDefault", "", 20u, 1u },
+	{ "InterfaceDispatchNativeEntry", "", 21u, 9u },
+	{ "InterfaceDispatchSubjects", "", 30u, 9u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[34] = {
-	{ 0x0000000Fu, 24u },
-	{ 0x00000010u, 15u },
-	{ 0x00000011u, 16u },
-	{ 0x00000012u, 17u },
-	{ 0x00000013u, 18u },
-	{ 0x00000014u, 19u },
-	{ 0x00000015u, 20u },
-	{ 0x00000016u, 21u },
-	{ 0x00000017u, 22u },
-	{ 0x00000018u, 23u },
-	{ 0x0000001Fu, 33u },
-	{ 0x00000020u, 0u },
-	{ 0x00000021u, 2u },
-	{ 0x00000022u, 25u },
-	{ 0x00000023u, 26u },
-	{ 0x00000024u, 4u },
-	{ 0x00000025u, 27u },
-	{ 0x00000026u, 28u },
-	{ 0x00000027u, 5u },
-	{ 0x00000028u, 31u },
-	{ 0x00000029u, 32u },
-	{ 0x0000002Au, 9u },
-	{ 0x0000002Bu, 29u },
-	{ 0x0000002Cu, 30u },
-	{ 0x0000002Du, 12u },
-	{ 0x0000002Eu, 14u },
-	{ 0x0000002Fu, 1u },
-	{ 0x00000030u, 3u },
-	{ 0x00000031u, 6u },
-	{ 0x00000032u, 7u },
-	{ 0x00000033u, 8u },
-	{ 0x00000034u, 10u },
-	{ 0x00000035u, 11u },
-	{ 0x00000036u, 13u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[39] = {
+	{ 0x0000000Fu, 0u },
+	{ 0x00000010u, 1u },
+	{ 0x00000011u, 2u },
+	{ 0x00000012u, 3u },
+	{ 0x00000013u, 4u },
+	{ 0x00000014u, 5u },
+	{ 0x00000015u, 6u },
+	{ 0x00000016u, 7u },
+	{ 0x00000017u, 8u },
+	{ 0x00000018u, 37u },
+	{ 0x00000019u, 38u },
+	{ 0x0000001Au, 16u },
+	{ 0x0000001Bu, 17u },
+	{ 0x0000001Cu, 15u },
+	{ 0x0000001Du, 18u },
+	{ 0x0000001Eu, 26u },
+	{ 0x0000001Fu, 25u },
+	{ 0x00000020u, 27u },
+	{ 0x00000021u, 10u },
+	{ 0x00000022u, 11u },
+	{ 0x00000023u, 9u },
+	{ 0x00000024u, 13u },
+	{ 0x00000025u, 14u },
+	{ 0x00000026u, 12u },
+	{ 0x00000027u, 20u },
+	{ 0x00000028u, 21u },
+	{ 0x00000029u, 19u },
+	{ 0x0000002Au, 23u },
+	{ 0x0000002Bu, 24u },
+	{ 0x0000002Cu, 22u },
+	{ 0x0000002Du, 28u },
+	{ 0x0000002Eu, 36u },
+	{ 0x0000002Fu, 35u },
+	{ 0x00000030u, 34u },
+	{ 0x00000031u, 33u },
+	{ 0x00000032u, 29u },
+	{ 0x00000033u, 30u },
+	{ 0x00000034u, 31u },
+	{ 0x00000035u, 32u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[34] = {
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplSimple__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ImplSimple::.ctor
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestSingleImplSimple
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplWithDefault__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ImplWithDefault::.ctor
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestSingleImplDefault
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CalcAdd::.ctor
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CalcMul::.ctor
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestMultiImplCalc
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestIsCheck
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestAsCheck
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ImplDiamond::.ctor
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestDiamondBase
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestDiamondDerived
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ImplDiamond2::.ctor
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestDiamondMulti
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::Run
+static HotpatchEntryV0 s_hotpatch_entries[39] = {
 	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchSubjects::Subject_0
 	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchSubjects::Subject_1
 	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchSubjects::Subject_2
@@ -730,29 +760,49 @@ static HotpatchEntryV0 s_hotpatch_entries[34] = {
 	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchSubjects::Subject_6
 	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchSubjects::Subject_7
 	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchSubjects::Subject_8
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchSubjects::Run
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Add), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CalcAdd::Add
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Multiply), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CalcAdd::Multiply
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Add), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CalcMul::Add
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Multiply), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CalcMul::Multiply
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_BaseMethod), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ImplDiamond2::BaseMethod
-	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ImplDiamond2::DerivedMethod
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CalcAdd::.ctor
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CalcAdd::Add
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CalcAdd::Multiply
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CalcMul::.ctor
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CalcMul::Add
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CalcMul::Multiply
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_IBase_BaseMethod), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IBase::BaseMethod
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ICalculator_Add_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ICalculator::Add
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ICalculator_Multiply_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ICalculator::Multiply
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_IDerived_DerivedMethod), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IDerived::DerivedMethod
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ImplDiamond::.ctor
 	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond_BaseMethod), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ImplDiamond::BaseMethod
 	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond_DerivedMethod), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ImplDiamond::DerivedMethod
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ImplDiamond2::.ctor
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_BaseMethod), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ImplDiamond2::BaseMethod
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ImplDiamond2::DerivedMethod
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplSimple__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ImplSimple::.ctor
 	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplSimple_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ImplSimple::GetValue
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplWithDefault__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ImplWithDefault::.ctor
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::Run
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestAsCheck
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestDiamondBase
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestDiamondDerived
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestDiamondMulti
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestIsCheck
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestMultiImplCalc
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestSingleImplDefault
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDispatchNativeEntry::TestSingleImplSimple
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_ISimple_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ISimple::GetValue
+	{ reinterpret_cast<void*>(&InterfaceDispatchSubjects_IWithDefault_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IWithDefault::GetValue
 };
 
 // Module hotpatch bundle
 static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	"InterfaceDispatchSubjects",
 	s_hotpatch_types,
-	8u,
+	13u,
 	s_hotpatch_methods,
-	34u,
+	39u,
 	s_hotpatch_slots,
-	34u,
+	39u,
 	s_hotpatch_entries,
-	34u,
+	39u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -762,15 +812,15 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // Startup-time-resolved function pointers for cross-assembly calls.
 
 extern "C" const char* kChaosExternalRuntimeSubjects[4] = {
+	"InterfaceDispatchSubjects/InterfaceDispatchSubjects::_exitCode",
 	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
 	"InterfaceDispatchSubjects/ISimple",
 	"InterfaceDispatchSubjects/ICalculator",
-	"InterfaceDispatchSubjects/InterfaceDispatchSubjects::_exitCode",
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[4] = {
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
 	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
 	nullptr,
 	nullptr,
 };
@@ -779,22 +829,7 @@ extern "C" int32_t kChaosExternalRuntimeCount = 4;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[34])() = {
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplSimple__ctor),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplWithDefault__ctor),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_CalcAdd__ctor),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_CalcMul__ctor),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplDiamond__ctor),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplDiamond2__ctor),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run),
+static void (*kAotMethods[39])() = {
 	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2),
@@ -804,22 +839,42 @@ static void (*kAotMethods[34])() = {
 	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6),
 	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7),
 	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Run),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_CalcAdd_Add),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_CalcAdd_Multiply),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_CalcMul_Add),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_CalcMul_Multiply),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplDiamond2_BaseMethod),
-	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_CalcAdd__ctor),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_CalcMul__ctor),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_IBase_BaseMethod),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ICalculator_Add_System_Int32_System_Int32),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ICalculator_Multiply_System_Int32_System_Int32),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_IDerived_DerivedMethod),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplDiamond__ctor),
 	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplDiamond_BaseMethod),
 	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplDiamond_DerivedMethod),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplDiamond2__ctor),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplDiamond2_BaseMethod),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplSimple__ctor),
 	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplSimple_GetValue),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ImplWithDefault__ctor),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_ISimple_GetValue),
+	reinterpret_cast<void(*)()>(&InterfaceDispatchSubjects_IWithDefault_GetValue),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
-static void (*kBenchmarkWrappers[34])() = {
+static void (*kBenchmarkWrappers[39])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -830,30 +885,35 @@ static void (*kBenchmarkWrappers[34])() = {
 	[]() {kAotMethods[7]();},
 	[]() {kAotMethods[8]();},
 	[]() {kAotMethods[9]();},
-	[]() {kAotMethods[10]();},
-	[]() {kAotMethods[11]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[10])(0,0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[11])(0,0);},
 	[]() {kAotMethods[12]();},
-	[]() {kAotMethods[13]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[14])(0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[13])(0,0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[14])(0,0);},
 	[]() {kAotMethods[15]();},
-	[]() {kAotMethods[16]();},
-	[]() {kAotMethods[17]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[16])(0,0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[17])(0,0);},
 	[]() {kAotMethods[18]();},
 	[]() {kAotMethods[19]();},
 	[]() {kAotMethods[20]();},
 	[]() {kAotMethods[21]();},
 	[]() {kAotMethods[22]();},
 	[]() {kAotMethods[23]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[24])(0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[25])(0,0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[26])(0,0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[27])(0,0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[28])(0,0);},
+	[]() {kAotMethods[24]();},
+	[]() {kAotMethods[25]();},
+	[]() {kAotMethods[26]();},
+	[]() {kAotMethods[27]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[28])(0);},
 	[]() {kAotMethods[29]();},
 	[]() {kAotMethods[30]();},
 	[]() {kAotMethods[31]();},
 	[]() {kAotMethods[32]();},
 	[]() {kAotMethods[33]();},
+	[]() {kAotMethods[34]();},
+	[]() {kAotMethods[35]();},
+	[]() {kAotMethods[36]();},
+	[]() {kAotMethods[37]();},
+	[]() {kAotMethods[38]();},
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -870,7 +930,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 			entry.method_key, __chaos_args, __chaos_ret);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -908,7 +968,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
 			entry.method_key);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -928,22 +988,7 @@ extern "C" double BenchmarkMethod(
 }
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[34] = {
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplSimple__ctor),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplWithDefault__ctor),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd__ctor),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul__ctor),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond__ctor),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2__ctor),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run),
+static void* const kMethodPointers[39] = {
 	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0),
 	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1),
 	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2),
@@ -953,16 +998,36 @@ static void* const kMethodPointers[34] = {
 	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6),
 	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7),
 	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Run),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Add),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Multiply),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Add),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Multiply),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_BaseMethod),
-	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd__ctor),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul__ctor),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_IBase_BaseMethod),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ICalculator_Add_System_Int32_System_Int32),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ICalculator_Multiply_System_Int32_System_Int32),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_IDerived_DerivedMethod),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond__ctor),
 	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond_BaseMethod),
 	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond_DerivedMethod),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2__ctor),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_BaseMethod),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplSimple__ctor),
 	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplSimple_GetValue),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplWithDefault__ctor),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_ISimple_GetValue),
+	reinterpret_cast<void*>(&InterfaceDispatchSubjects_IWithDefault_GetValue),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -1051,7 +1116,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 34u,
+	.method_pointer_count      = 39u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -1097,25 +1162,19 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_ImplSimple[2] = {
-	{ 0u, "InterfaceDispatchSubjects/ImplSimple::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/ImplSimple::GetValue:System.Int32()", "GetValue", "System.Void", 0, nullptr, 0u },
+static constexpr ReflectionQueryFieldDescriptor kReflFields_InterfaceDispatchSubjects_InterfaceDispatchSubjects[1] = {
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
 };
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchNativeEntry[9] = {
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()", "TestSingleImplSimple", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()", "TestSingleImplDefault", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()", "TestMultiImplCalc", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestIsCheck:System.Int32()", "TestIsCheck", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()", "TestAsCheck", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()", "TestDiamondBase", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()", "TestDiamondDerived", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()", "TestDiamondMulti", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_ImplWithDefault[1] = {
-	{ 0u, "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchSubjects[9] = {
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_CalcAdd[3] = {
@@ -1130,6 +1189,19 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchS
 	{ 0u, "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)", "Multiply", "System.Void", 0, nullptr, 0u },
 };
 
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_IBase[1] = {
+	{ 0u, "InterfaceDispatchSubjects/IBase::BaseMethod:System.Int32()", "BaseMethod", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_ICalculator[2] = {
+	{ 0u, "InterfaceDispatchSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)", "Add", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/ICalculator::Multiply:System.Int32(System.Int32,System.Int32)", "Multiply", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_IDerived[1] = {
+	{ 0u, "InterfaceDispatchSubjects/IDerived::DerivedMethod:System.Int32()", "DerivedMethod", "System.Void", 0, nullptr, 0u },
+};
+
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_ImplDiamond[3] = {
 	{ 0u, "InterfaceDispatchSubjects/ImplDiamond::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
 	{ 0u, "InterfaceDispatchSubjects/ImplDiamond::BaseMethod:System.Int32()", "BaseMethod", "System.Void", 0, nullptr, 0u },
@@ -1142,39 +1214,65 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchS
 	{ 0u, "InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod:System.Int32()", "DerivedMethod", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchSubjects[10] = {
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_ImplSimple[2] = {
+	{ 0u, "InterfaceDispatchSubjects/ImplSimple::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/ImplSimple::GetValue:System.Int32()", "GetValue", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[8] = {
-	{ 0u, "InterfaceDispatchSubjects/ImplSimple", "InterfaceDispatchSubjects/ImplSimple", "", "ImplSimple", "ImplSimple", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_ImplSimple, 2u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry", "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry", "", "InterfaceDispatchNativeEntry", "InterfaceDispatchNativeEntry", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchNativeEntry, 9u },
-	{ 0u, "InterfaceDispatchSubjects/ImplWithDefault", "InterfaceDispatchSubjects/ImplWithDefault", "", "ImplWithDefault", "ImplWithDefault", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_ImplWithDefault, 1u },
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_ImplWithDefault[1] = {
+	{ 0u, "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchNativeEntry[9] = {
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()", "TestAsCheck", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()", "TestDiamondBase", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()", "TestDiamondDerived", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()", "TestDiamondMulti", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestIsCheck:System.Int32()", "TestIsCheck", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()", "TestMultiImplCalc", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()", "TestSingleImplDefault", "System.Void", 0, nullptr, 0u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()", "TestSingleImplSimple", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_ISimple[1] = {
+	{ 0u, "InterfaceDispatchSubjects/ISimple::GetValue:System.Int32()", "GetValue", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_IWithDefault[1] = {
+	{ 0u, "InterfaceDispatchSubjects/IWithDefault::GetValue:System.Int32()", "GetValue", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryTypeDescriptor kReflTypes[13] = {
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects", "InterfaceDispatchSubjects/InterfaceDispatchSubjects", "", "InterfaceDispatchSubjects", "InterfaceDispatchSubjects", nullptr, kReflFields_InterfaceDispatchSubjects_InterfaceDispatchSubjects, 1u, nullptr, 0u,
+	kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchSubjects, 9u },
 	{ 0u, "InterfaceDispatchSubjects/CalcAdd", "InterfaceDispatchSubjects/CalcAdd", "", "CalcAdd", "CalcAdd", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_InterfaceDispatchSubjects_CalcAdd, 3u },
 	{ 0u, "InterfaceDispatchSubjects/CalcMul", "InterfaceDispatchSubjects/CalcMul", "", "CalcMul", "CalcMul", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_InterfaceDispatchSubjects_CalcMul, 3u },
+	{ 0u, "InterfaceDispatchSubjects/IBase", "InterfaceDispatchSubjects/IBase", "", "IBase", "IBase", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_InterfaceDispatchSubjects_IBase, 1u },
+	{ 0u, "InterfaceDispatchSubjects/ICalculator", "InterfaceDispatchSubjects/ICalculator", "", "ICalculator", "ICalculator", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_InterfaceDispatchSubjects_ICalculator, 2u },
+	{ 0u, "InterfaceDispatchSubjects/IDerived", "InterfaceDispatchSubjects/IDerived", "", "IDerived", "IDerived", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_InterfaceDispatchSubjects_IDerived, 1u },
 	{ 0u, "InterfaceDispatchSubjects/ImplDiamond", "InterfaceDispatchSubjects/ImplDiamond", "", "ImplDiamond", "ImplDiamond", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_InterfaceDispatchSubjects_ImplDiamond, 3u },
 	{ 0u, "InterfaceDispatchSubjects/ImplDiamond2", "InterfaceDispatchSubjects/ImplDiamond2", "", "ImplDiamond2", "ImplDiamond2", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_InterfaceDispatchSubjects_ImplDiamond2, 3u },
-	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects", "InterfaceDispatchSubjects/InterfaceDispatchSubjects", "", "InterfaceDispatchSubjects", "InterfaceDispatchSubjects", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchSubjects, 10u },
+	{ 0u, "InterfaceDispatchSubjects/ImplSimple", "InterfaceDispatchSubjects/ImplSimple", "", "ImplSimple", "ImplSimple", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_InterfaceDispatchSubjects_ImplSimple, 2u },
+	{ 0u, "InterfaceDispatchSubjects/ImplWithDefault", "InterfaceDispatchSubjects/ImplWithDefault", "", "ImplWithDefault", "ImplWithDefault", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_InterfaceDispatchSubjects_ImplWithDefault, 1u },
+	{ 0u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry", "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry", "", "InterfaceDispatchNativeEntry", "InterfaceDispatchNativeEntry", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchNativeEntry, 9u },
+	{ 0u, "InterfaceDispatchSubjects/ISimple", "InterfaceDispatchSubjects/ISimple", "", "ISimple", "ISimple", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_InterfaceDispatchSubjects_ISimple, 1u },
+	{ 0u, "InterfaceDispatchSubjects/IWithDefault", "InterfaceDispatchSubjects/IWithDefault", "", "IWithDefault", "IWithDefault", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_InterfaceDispatchSubjects_IWithDefault, 1u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[8] = {
+static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[13] = {
 	&kReflTypes[0],
 	&kReflTypes[1],
 	&kReflTypes[2],
@@ -1183,9 +1281,14 @@ static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[8] = {
 	&kReflTypes[5],
 	&kReflTypes[6],
 	&kReflTypes[7],
+	&kReflTypes[8],
+	&kReflTypes[9],
+	&kReflTypes[10],
+	&kReflTypes[11],
+	&kReflTypes[12],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "InterfaceDispatchSubjects", kReflTypePtrs, 8u };
+static constexpr ReflectionQueryImageDescriptor kReflImage = { "InterfaceDispatchSubjects", kReflTypePtrs, 13u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1224,6 +1327,1263 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0()
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_1()
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_2()
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_3()
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_4()
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_5()
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_6()
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7()
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8()
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/CalcAdd::.ctor()
+extern "C" void InterfaceDispatchSubjects_CalcAdd__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/CalcAdd::Add(System.Int32,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
+
+	_s0 = chaos_args[1];
+	_s1 = chaos_args[2];
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: InterfaceDispatchSubjects/CalcAdd::Multiply(System.Int32,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
+
+	_s0 = chaos_args[1];
+	_s1 = chaos_args[2];
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: InterfaceDispatchSubjects/CalcMul::.ctor()
+extern "C" void InterfaceDispatchSubjects_CalcMul__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/CalcMul::Add(System.Int32,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
+
+	_s0 = chaos_args[1];
+	_s1 = chaos_args[2];
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: InterfaceDispatchSubjects/CalcMul::Multiply(System.Int32,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
+
+	_s0 = chaos_args[1];
+	_s1 = chaos_args[2];
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// AOT-unreachable stub: InterfaceDispatchSubjects/IBase::BaseMethod:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_IBase_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: InterfaceDispatchSubjects/IBase::BaseMethod:System.Int32()");
+	return {};
+}
+
+// AOT-unreachable stub: InterfaceDispatchSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ICalculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: InterfaceDispatchSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)");
+	return {};
+}
+
+// AOT-unreachable stub: InterfaceDispatchSubjects/ICalculator::Multiply:System.Int32(System.Int32,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ICalculator_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: InterfaceDispatchSubjects/ICalculator::Multiply:System.Int32(System.Int32,System.Int32)");
+	return {};
+}
+
+// AOT-unreachable stub: InterfaceDispatchSubjects/IDerived::DerivedMethod:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_IDerived_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: InterfaceDispatchSubjects/IDerived::DerivedMethod:System.Int32()");
+	return {};
+}
+
+// Managed method: InterfaceDispatchSubjects/ImplDiamond::.ctor()
+extern "C" void InterfaceDispatchSubjects_ImplDiamond__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/ImplDiamond::BaseMethod()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: InterfaceDispatchSubjects/ImplDiamond::DerivedMethod()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(200);
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: InterfaceDispatchSubjects/ImplDiamond2::.ctor()
+extern "C" void InterfaceDispatchSubjects_ImplDiamond2__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: InterfaceDispatchSubjects/ImplDiamond2::BaseMethod()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(300);
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(400);
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
 // Managed method: InterfaceDispatchSubjects/ImplSimple::.ctor()
 extern "C" void InterfaceDispatchSubjects_ImplSimple__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
@@ -1240,38 +2600,15 @@ extern "C" void InterfaceDispatchSubjects_ImplSimple__ctor(CHAOS_IL2CPP_INTPTR c
 	return;
 }
 
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple()
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple(void)
+// Managed method: InterfaceDispatchSubjects/ImplSimple::GetValue()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplSimple_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplSimple, {});
-		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplSimple.hot;
-		InterfaceDispatchSubjects_ImplSimple__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
-		if (chaos_arg_0 == 0)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
-		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 5u)))(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
-	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -1291,75 +2628,8 @@ extern "C" void InterfaceDispatchSubjects_ImplWithDefault__ctor(CHAOS_IL2CPP_INT
 	return;
 }
 
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault()
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplWithDefault, {});
-		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplWithDefault.hot;
-		InterfaceDispatchSubjects_ImplWithDefault__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
-		if (chaos_arg_0 == 0)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
-		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 5u)))(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
-	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: InterfaceDispatchSubjects/CalcAdd::.ctor()
-extern "C" void InterfaceDispatchSubjects_CalcAdd__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: InterfaceDispatchSubjects/CalcMul::.ctor()
-extern "C" void InterfaceDispatchSubjects_CalcMul__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc()
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc(void)
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run(System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
@@ -1375,30 +2645,243 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeE
 	CHAOS_IL2CPP_INTPTR _s9{};
 	CHAOS_IL2CPP_INTPTR _s10{};
 	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		switch (chaos_switch_value)
+		{
+			case 0:
+				{
+					auto& _d29 = s_hotpatch_entries[29];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d29)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d29))
+					{
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d29.method_key, nullptr, &_d_hpresult);
+					}
+					else
+					{
+						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple();
+					}
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				}
+				chaos_locals[2] = _s0;
+			case 1:
+				{
+					auto& _d28 = s_hotpatch_entries[28];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d28)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d28))
+					{
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d28.method_key, nullptr, &_d_hpresult);
+					}
+					else
+					{
+						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault();
+					}
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				}
+				chaos_locals[2] = _s0;
+			case 2:
+				{
+					auto& _d27 = s_hotpatch_entries[27];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d27)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d27))
+					{
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d27.method_key, nullptr, &_d_hpresult);
+					}
+					else
+					{
+						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc();
+					}
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				}
+				chaos_locals[2] = _s0;
+			case 3:
+				{
+					auto& _d26 = s_hotpatch_entries[26];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d26)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d26))
+					{
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d26.method_key, nullptr, &_d_hpresult);
+					}
+					else
+					{
+						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck();
+					}
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				}
+				chaos_locals[2] = _s0;
+			case 4:
+				{
+					auto& _d22 = s_hotpatch_entries[22];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d22)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d22))
+					{
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d22.method_key, nullptr, &_d_hpresult);
+					}
+					else
+					{
+						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck();
+					}
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				}
+				chaos_locals[2] = _s0;
+			case 5:
+				{
+					auto& _d23 = s_hotpatch_entries[23];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d23)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d23))
+					{
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d23.method_key, nullptr, &_d_hpresult);
+					}
+					else
+					{
+						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase();
+					}
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				}
+				chaos_locals[2] = _s0;
+			case 6:
+				{
+					auto& _d24 = s_hotpatch_entries[24];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d24)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d24))
+					{
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d24.method_key, nullptr, &_d_hpresult);
+					}
+					else
+					{
+						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived();
+					}
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				}
+				chaos_locals[2] = _s0;
+			case 7:
+			{
+				{
+					auto& _d25 = s_hotpatch_entries[25];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d25)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d25))
+					{
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d25.method_key, nullptr, &_d_hpresult);
+					}
+					else
+					{
+						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti();
+					}
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				}
+				chaos_locals[2] = _s0;
+				break;
+			}
+			default:
+			{
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
+				chaos_locals[2] = _s0;
+				break;
+			}
+		}
+	}
+	_s0 = chaos_locals[2];
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_CalcAdd, {});
-		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_CalcAdd.hot;
-		InterfaceDispatchSubjects_CalcAdd__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplSimple, {});
+		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplSimple.hot;
+		InterfaceDispatchSubjects_ImplSimple__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		const auto chaos_value = _s0;
+		auto chaos_matches = false;
+		if (chaos_value != 0)
+		{
+			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
+			chaos_matches = chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), &chaos_mt_InterfaceDispatchSubjects_ISimple.hot);
+		}
+		_s0 = chaos_matches ? chaos_value : 0;
+	}
+	{
+		if (_s0 != 0)
+		{
+			_s0 = chaos_locals[1];
+			{
+				const auto chaos_raw_arg_0 = _s0;
+				const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+				if (chaos_arg_0 == 0)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+				chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 5u)))(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+			}
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
+		}
+		chaos_locals[2] = _s0;
+		_s0 = chaos_locals[2];
+		return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	}
+}
+
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+
+
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplDiamond, {});
+		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplDiamond.hot;
+		InterfaceDispatchSubjects_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_CalcMul, {});
-		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_CalcMul.hot;
-		InterfaceDispatchSubjects_CalcMul__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[1] = _s0;
 	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
 	{
-		const auto chaos_raw_arg_2 = _s2;
-		const auto chaos_arg_2 = chaos_raw_arg_2;
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
 		const auto chaos_raw_arg_0 = _s0;
 		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
 		if (chaos_arg_0 == 0)
@@ -1406,17 +2889,98 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeE
 			CHAOS_IL2CPP_FAIL();
 		}
 		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
-		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 1u)))(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
+		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 3u)))(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 	}
-	_s1 = chaos_locals[1];
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+	chaos_locals[1] = _s0;
+	_s0 = chaos_locals[1];
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+
+
 	{
-		const auto chaos_raw_arg_2 = _s3;
-		const auto chaos_arg_2 = chaos_raw_arg_2;
-		const auto chaos_raw_arg_1 = _s2;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplDiamond, {});
+		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplDiamond.hot;
+		InterfaceDispatchSubjects_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		const auto chaos_raw_arg_0 = _s0;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		if (chaos_arg_0 == 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 4u)))(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+	}
+	chaos_locals[1] = _s0;
+	_s0 = chaos_locals[1];
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+
+
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplDiamond, {});
+		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplDiamond.hot;
+		InterfaceDispatchSubjects_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	chaos_locals[0] = _s0;
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplDiamond2, {});
+		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplDiamond2.hot;
+		InterfaceDispatchSubjects_ImplDiamond2__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	chaos_locals[1] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		const auto chaos_raw_arg_0 = _s0;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		if (chaos_arg_0 == 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 3u)))(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+	}
+	_s1 = chaos_locals[0];
+	{
 		const auto chaos_raw_arg_0 = _s1;
 		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
 		if (chaos_arg_0 == 0)
@@ -1424,7 +2988,33 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeE
 			CHAOS_IL2CPP_FAIL();
 		}
 		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
-		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 2u)))(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
+		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 4u)))(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	_s1 = chaos_locals[1];
+	{
+		const auto chaos_raw_arg_0 = _s1;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		if (chaos_arg_0 == 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 3u)))(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	_s1 = chaos_locals[1];
+	{
+		const auto chaos_raw_arg_0 = _s1;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		if (chaos_arg_0 == 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 4u)))(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
@@ -1560,168 +3150,8 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeE
 	}
 }
 
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck()
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplSimple, {});
-		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplSimple.hot;
-		InterfaceDispatchSubjects_ImplSimple__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		const auto chaos_value = _s0;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), &chaos_mt_InterfaceDispatchSubjects_ISimple.hot);
-		}
-		_s0 = chaos_matches ? chaos_value : 0;
-	}
-	{
-		if (_s0 != 0)
-		{
-			_s0 = chaos_locals[1];
-			{
-				const auto chaos_raw_arg_0 = _s0;
-				const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
-				if (chaos_arg_0 == 0)
-				{
-					CHAOS_IL2CPP_FAIL();
-				}
-				CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
-				chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 5u)))(chaos_arg_0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
-			}
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-		}
-		chaos_locals[2] = _s0;
-		_s0 = chaos_locals[2];
-		return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-	}
-}
-
-// Managed method: InterfaceDispatchSubjects/ImplDiamond::.ctor()
-extern "C" void InterfaceDispatchSubjects_ImplDiamond__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase()
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplDiamond, {});
-		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplDiamond.hot;
-		InterfaceDispatchSubjects_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
-		if (chaos_arg_0 == 0)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
-		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 3u)))(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
-	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived()
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplDiamond, {});
-		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplDiamond.hot;
-		InterfaceDispatchSubjects_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
-		if (chaos_arg_0 == 0)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
-		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 4u)))(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
-	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: InterfaceDispatchSubjects/ImplDiamond2::.ctor()
-extern "C" void InterfaceDispatchSubjects_ImplDiamond2__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti()
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti(void)
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
@@ -1737,26 +3167,30 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeE
 	CHAOS_IL2CPP_INTPTR _s9{};
 	CHAOS_IL2CPP_INTPTR _s10{};
 	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
 
 
 	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplDiamond, {});
-		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplDiamond.hot;
-		InterfaceDispatchSubjects_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_CalcAdd, {});
+		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_CalcAdd.hot;
+		InterfaceDispatchSubjects_CalcAdd__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
 	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplDiamond2, {});
-		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplDiamond2.hot;
-		InterfaceDispatchSubjects_ImplDiamond2__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_CalcMul, {});
+		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_CalcMul.hot;
+		InterfaceDispatchSubjects_CalcMul__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[1] = _s0;
 	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
 	{
+		const auto chaos_raw_arg_2 = _s2;
+		const auto chaos_arg_2 = chaos_raw_arg_2;
+		const auto chaos_raw_arg_1 = _s1;
+		const auto chaos_arg_1 = chaos_raw_arg_1;
 		const auto chaos_raw_arg_0 = _s0;
 		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
 		if (chaos_arg_0 == 0)
@@ -1764,24 +3198,17 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeE
 			CHAOS_IL2CPP_FAIL();
 		}
 		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
-		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 3u)))(chaos_arg_0);
+		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 1u)))(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 	}
-	_s1 = chaos_locals[0];
-	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
-		if (chaos_arg_0 == 0)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
-		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 4u)))(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 	_s1 = chaos_locals[1];
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
 	{
+		const auto chaos_raw_arg_2 = _s3;
+		const auto chaos_arg_2 = chaos_raw_arg_2;
+		const auto chaos_raw_arg_1 = _s2;
+		const auto chaos_arg_1 = chaos_raw_arg_1;
 		const auto chaos_raw_arg_0 = _s1;
 		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
 		if (chaos_arg_0 == 0)
@@ -1789,20 +3216,7 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeE
 			CHAOS_IL2CPP_FAIL();
 		}
 		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
-		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 3u)))(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	_s1 = chaos_locals[1];
-	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
-		if (chaos_arg_0 == 0)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
-		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 4u)))(chaos_arg_0);
+		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 2u)))(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
@@ -1811,1022 +3225,92 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeE
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run(System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-		switch (chaos_switch_value)
-		{
-			case 0:
-				{
-					auto& _d15 = s_hotpatch_entries[15];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d15)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d15))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d15.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				chaos_locals[2] = _s0;
-			case 1:
-				{
-					auto& _d16 = s_hotpatch_entries[16];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d16.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				chaos_locals[2] = _s0;
-			case 2:
-				{
-					auto& _d17 = s_hotpatch_entries[17];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d17)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d17))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d17.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				chaos_locals[2] = _s0;
-			case 3:
-				{
-					auto& _d18 = s_hotpatch_entries[18];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d18)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d18))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d18.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				chaos_locals[2] = _s0;
-			case 4:
-				{
-					auto& _d19 = s_hotpatch_entries[19];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d19)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d19))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d19.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				chaos_locals[2] = _s0;
-			case 5:
-				{
-					auto& _d20 = s_hotpatch_entries[20];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d20)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d20))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d20.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				chaos_locals[2] = _s0;
-			case 6:
-				{
-					auto& _d21 = s_hotpatch_entries[21];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d21)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d21))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d21.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				chaos_locals[2] = _s0;
-			case 7:
-			{
-				{
-					auto& _d22 = s_hotpatch_entries[22];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d22)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d22))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d22.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				chaos_locals[2] = _s0;
-				break;
-			}
-			default:
-			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-				chaos_locals[2] = _s0;
-				break;
-			}
-		}
-	}
-	_s0 = chaos_locals[2];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0()
-extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_0 = _s0;
-		auto& _d23 = s_hotpatch_entries[23];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d23)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d23))
-		{
-			alignas(16) uint8_t _d_ab[4];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d23.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_0 = _s1;
-		auto& _d23 = s_hotpatch_entries[23];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d23)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d23))
-		{
-			alignas(16) uint8_t _d_ab[4];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d23.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_1()
-extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d15 = s_hotpatch_entries[15];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d15)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d15))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d15.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		auto& _d15 = s_hotpatch_entries[15];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d15)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d15))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d15.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple();
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_2()
-extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d16 = s_hotpatch_entries[16];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d16.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		auto& _d16 = s_hotpatch_entries[16];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d16.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault();
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_3()
-extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d17 = s_hotpatch_entries[17];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d17)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d17))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d17.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		auto& _d17 = s_hotpatch_entries[17];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d17)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d17))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d17.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc();
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_4()
-extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d18 = s_hotpatch_entries[18];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d18)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d18))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d18.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		auto& _d18 = s_hotpatch_entries[18];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d18)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d18))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d18.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck();
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_5()
-extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d19 = s_hotpatch_entries[19];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d19)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d19))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d19.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		auto& _d19 = s_hotpatch_entries[19];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d19)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d19))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d19.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck();
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_6()
-extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d20 = s_hotpatch_entries[20];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d20)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d20))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d20.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		auto& _d20 = s_hotpatch_entries[20];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d20)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d20))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d20.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase();
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7()
-extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d21 = s_hotpatch_entries[21];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d21)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d21))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d21.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		auto& _d21 = s_hotpatch_entries[21];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d21)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d21))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d21.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived();
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8()
-extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d22 = s_hotpatch_entries[22];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d22)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d22))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d22.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		auto& _d22 = s_hotpatch_entries[22];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d22)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d22))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d22.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti();
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: InterfaceDispatchSubjects/InterfaceDispatchSubjects::Run(System.Int32)
-extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s3{};
 
-	_s0 = chaos_args[0];
+
 	{
-		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-		switch (chaos_switch_value)
-		{
-			case 0:
-				{
-					auto& _d24 = s_hotpatch_entries[24];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d24)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d24))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d24.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0();
-					}
-				}
-			case 1:
-				{
-					auto& _d25 = s_hotpatch_entries[25];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d25)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d25))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d25.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1();
-					}
-				}
-			case 2:
-				{
-					auto& _d26 = s_hotpatch_entries[26];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d26)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d26))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d26.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2();
-					}
-				}
-			case 3:
-				{
-					auto& _d27 = s_hotpatch_entries[27];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d27)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d27))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d27.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3();
-					}
-				}
-			case 4:
-				{
-					auto& _d28 = s_hotpatch_entries[28];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d28)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d28))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d28.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4();
-					}
-				}
-			case 5:
-				{
-					auto& _d29 = s_hotpatch_entries[29];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d29)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d29))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d29.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5();
-					}
-				}
-			case 6:
-				{
-					auto& _d30 = s_hotpatch_entries[30];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d30)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d30))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d30.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6();
-					}
-				}
-			case 7:
-				{
-					auto& _d31 = s_hotpatch_entries[31];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d31)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d31))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d31.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7();
-					}
-				}
-			case 8:
-			{
-				{
-					auto& _d32 = s_hotpatch_entries[32];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d32)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d32))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d32.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8();
-					}
-				}
-				break;
-			}
-			default:
-				return;
-		}
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplWithDefault, {});
+		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplWithDefault.hot;
+		InterfaceDispatchSubjects_ImplWithDefault__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
-	return;
-}
-
-// Managed method: InterfaceDispatchSubjects/CalcAdd::Add(System.Int32,System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Add(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
-	_s0 = chaos_args[1];
-	_s1 = chaos_args[2];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		const auto chaos_raw_arg_0 = _s0;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		if (chaos_arg_0 == 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 5u)))(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+	}
+	chaos_locals[1] = _s0;
+	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: InterfaceDispatchSubjects/CalcAdd::Multiply(System.Int32,System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Multiply(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+// Managed method: InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple(void)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
-	_s0 = chaos_args[1];
-	_s1 = chaos_args[2];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: InterfaceDispatchSubjects/CalcMul::Add(System.Int32,System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Add(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
 
-	_s0 = chaos_args[1];
-	_s1 = chaos_args[2];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchSubjects_ImplSimple, {});
+		chaos_object->header.type_info = &chaos_mt_InterfaceDispatchSubjects_ImplSimple.hot;
+		InterfaceDispatchSubjects_ImplSimple__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		const auto chaos_raw_arg_0 = _s0;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		if (chaos_arg_0 == 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 5u)))(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+	}
+	chaos_locals[1] = _s0;
+	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: InterfaceDispatchSubjects/CalcMul::Multiply(System.Int32,System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Multiply(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+// AOT-unreachable stub: InterfaceDispatchSubjects/ISimple::GetValue:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ISimple_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
-	_s0 = chaos_args[1];
-	_s1 = chaos_args[2];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: InterfaceDispatchSubjects/ISimple::GetValue:System.Int32()");
+	return {};
 }
 
-// Managed method: InterfaceDispatchSubjects/ImplDiamond2::BaseMethod()
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: InterfaceDispatchSubjects/IWithDefault::GetValue()
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_IWithDefault_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(300);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod()
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(400);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: InterfaceDispatchSubjects/ImplDiamond::BaseMethod()
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: InterfaceDispatchSubjects/ImplDiamond::DerivedMethod()
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(200);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: InterfaceDispatchSubjects/ImplSimple::GetValue()
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplSimple_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -2836,4 +3320,4 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplSimple_GetValue(CHAO
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 34;
+extern "C" const int kAotMethodCount = 39;

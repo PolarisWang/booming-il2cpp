@@ -313,13 +313,24 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
         // Without this, the allocator can assign `def[i]` to the same
         // physical register as a live-out vreg — the definition writes to
         // the shared register, clobbering the live value.
+        // Must add edges in BOTH directions: d→live-out (for d's coloring)
+        // AND live-out→d (for live-out vregs' coloring).
         uint64_t dbits = def[i];
         while (dbits) {
             uint32_t d = static_cast<uint32_t>(Ctz64(dbits));
             dbits &= dbits - 1;
-            if (d < interpreter::kGPRegisters) {
+            if (d < interpreter::kGPRegisters && live_out[i] != 0) {
                 adj[d] |= live_out[i];
                 adj[d] &= ~(1ULL << d);
+                // Reverse edges: each live-out vreg interferes with d
+                uint64_t lobits = live_out[i];
+                while (lobits) {
+                    uint32_t lo = static_cast<uint32_t>(Ctz64(lobits));
+                    lobits &= lobits - 1;
+                    if (lo < interpreter::kGPRegisters && lo != d) {
+                        adj[lo] |= (1ULL << d);
+                    }
+                }
             }
         }
     }

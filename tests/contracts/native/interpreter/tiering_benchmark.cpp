@@ -43,6 +43,12 @@ using chaos::il2cpp::interpreter::RegisterMethod;
 using chaos::il2cpp::interpreter::IROpCode;
 using chaos::il2cpp::interpreter::ValueTag;
 using chaos::il2cpp::interpreter::InterpreterObject;
+using chaos::il2cpp::interpreter::kRegHasDst;
+using chaos::il2cpp::interpreter::kRegHasSrc1;
+using chaos::il2cpp::interpreter::kRegHasSrc2;
+using chaos::il2cpp::interpreter::kRegHasSrc3;
+using chaos::il2cpp::interpreter::kRegHasImm;
+using chaos::il2cpp::interpreter::kRegIsBranch;
 using chaos::il2cpp::vtable_registry::RegisterTypeVTable;
 using chaos::il2cpp::vtable_registry::VTableSlot;
 using chaos::il2cpp::vtable_registry::TypeVTable;
@@ -986,6 +992,249 @@ static bool bench_branches_t4() {
 }
 
 
+// ── Local helpers for RegisterInstruction construction ──────────────────
+static uint64_t BM_MakeHeader(IROpCode opc, uint8_t dst, uint8_t src1,
+                              uint8_t src2, uint8_t flags) noexcept {
+    return static_cast<uint64_t>(opc) |
+           (static_cast<uint64_t>(dst)   << 16) |
+           (static_cast<uint64_t>(src1)  << 24) |
+           (static_cast<uint64_t>(src2)  << 32) |
+           (static_cast<uint64_t>(flags) << 40);
+}
+
+static RegisterInstruction BM_I4(int32_t imm, uint8_t dst) noexcept {
+    RegisterInstruction ri;
+    ri.header = BM_MakeHeader(IROpCode::LdcI4, dst, 0, 0, kRegHasDst | kRegHasImm);
+    ri.imm.i4 = imm;
+    return ri;
+}
+
+static RegisterInstruction BM_NewObj(uint8_t dst, uint32_t type_token) noexcept {
+    RegisterInstruction ri;
+    ri.header = BM_MakeHeader(IROpCode::NewObj, dst, 0, 0, kRegHasDst | kRegHasImm);
+    ri.imm.field_offset = type_token;
+    return ri;
+}
+
+static RegisterInstruction BM_StFld(uint8_t obj, uint32_t field_idx, uint8_t src) noexcept {
+    RegisterInstruction ri;
+    ri.header = BM_MakeHeader(IROpCode::StFld, 0, obj, src,
+                              kRegHasSrc1 | kRegHasSrc2 | kRegHasImm);
+    ri.imm.field_offset = field_idx;
+    return ri;
+}
+
+static RegisterInstruction BM_LdFld(uint8_t dst, uint8_t src, uint32_t field_idx) noexcept {
+    RegisterInstruction ri;
+    ri.header = BM_MakeHeader(IROpCode::LdFld, dst, src, 0,
+                              kRegHasDst | kRegHasSrc1 | kRegHasImm);
+    ri.imm.field_offset = field_idx;
+    return ri;
+}
+
+static RegisterInstruction BM_Box(uint8_t dst, uint8_t src, uint32_t type_token) noexcept {
+    RegisterInstruction ri;
+    ri.header = BM_MakeHeader(IROpCode::Box, dst, src, 0,
+                              kRegHasDst | kRegHasSrc1 | kRegHasImm);
+    ri.imm.field_offset = type_token;
+    return ri;
+}
+
+static RegisterInstruction BM_NewArr(uint8_t dst, uint8_t src) noexcept {
+    RegisterInstruction ri;
+    ri.header = BM_MakeHeader(IROpCode::NewArr, dst, src, 0, kRegHasDst | kRegHasSrc1);
+    ri.imm.i4 = 0;
+    return ri;
+}
+
+static RegisterInstruction BM_LdElem(uint8_t dst, uint8_t arr, uint8_t index) noexcept {
+    RegisterInstruction ri;
+    ri.header = BM_MakeHeader(IROpCode::LdElem, dst, arr, index,
+                              kRegHasDst | kRegHasSrc1 | kRegHasSrc2);
+    ri.imm.i4 = 0;
+    return ri;
+}
+
+static RegisterInstruction BM_StElem(uint8_t arr, uint8_t index, uint8_t value) noexcept {
+    RegisterInstruction ri;
+    ri.header = BM_MakeHeader(IROpCode::StElem, 0, arr, index,
+                              kRegHasSrc1 | kRegHasSrc2 | kRegHasSrc3);
+    ri.header |= (static_cast<uint64_t>(value) << 48);
+    ri.imm.i4 = 0;
+    return ri;
+}
+
+static RegisterInstruction BM_Ret(uint8_t src) noexcept {
+    RegisterInstruction ri;
+    ri.header = BM_MakeHeader(IROpCode::Ret, 0, src, 0, kRegHasSrc1);
+    ri.imm.i4 = 0;
+    return ri;
+}
+
+// ── Helper: set up PatchMethod for T4 direct benchmark ──────────────────
+// Constructs a PatchMethod with a manually built RegisterMethod,
+// skips lower tiers by setting call_count past kT3NativeThreshold,
+// and starts at kT3Ready so the first call triggers T4 codegen.
+static void SetupT4DirectBenchmark(PatchMethod* pm, RegisterMethod&& rm) noexcept {
+    pm->aot_core_ir_json = nullptr;
+    pm->aot_core_ir_json_length = 0;
+    pm->signature_blob = nullptr;
+    pm->signature_len = 0;
+    pm->cached_ir = reinterpret_cast<void*>(0x1);  // non-null sentinel
+    auto* rm_ptr = new RegisterMethod(std::move(rm));
+    pm->cached_reg_method = rm_ptr;
+    pm->cached_optimized_reg_method = rm_ptr;
+    pm->metadata_cache = nullptr;
+    pm->call_site_profiles = nullptr;
+    pm->call_site_profile_count = 0;
+    pm->pic_dispatch_data = nullptr;
+    pm->call_count.store(2500, std::memory_order_release);
+    pm->tier_state.store(PatchMethod::kT3Ready, std::memory_order_release);
+}
+
+// ── Scenario 8: Field access benchmark (T4) ─────────────────────────────
+// IL: LdcI4(42) → NewObj → StFld(field=0) → LdFld(field=0) → Ret
+static bool bench_fields_t4() {
+    std::printf("\n--- bench_fields_t4 ---\n");
+    std::fflush(stdout);
+
+    RegisterMethod rm;
+    rm.max_regs = 3;
+    rm.instructions = {
+        BM_I4(42, 0),
+        BM_NewObj(1, 1),
+        BM_StFld(1, 0, 0),
+        BM_LdFld(2, 1, 0),
+        BM_Ret(2),
+    };
+
+    PatchMethod pm_storage;
+    PatchMethod* pm = &pm_storage;
+    SetupT4DirectBenchmark(pm, std::move(rm));
+    constexpr int kTotalCalls = 100;
+    constexpr int32_t kExpectedResult = 42;
+    uint64_t sum_ns = 0;
+
+    for (int i = 0; i < kTotalCalls; ++i) {
+        int64_t ret_val = -1;
+        auto start = Clock::now();
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(pm), nullptr, &ret_val);
+        auto end = Clock::now();
+        sum_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+            std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
+                        (long long)ret_val, kExpectedResult, i);
+            return false;
+        }
+    }
+
+    bool has_native = (pm->cached_native_method != nullptr);
+    double avg_ns = static_cast<double>(sum_ns) / kTotalCalls;
+    std::printf("  T4 (fields): %.0f ns/op, has_native=%d\n", avg_ns, has_native);
+    std::fflush(stdout);
+
+    if (!has_native) {
+        std::fprintf(stderr, "  FAIL: T4 native code was not generated\n");
+        return false;
+    }
+    return true;
+}
+
+// ── Scenario 9: Array access benchmark (T4) ─────────────────────────────
+// IL: NewArr(size=1) → LdcI4(42) → StElem(index=0) → LdElem(index=0) → Ret
+static bool bench_array_t4() {
+    std::printf("\n--- bench_array_t4 ---\n");
+    std::fflush(stdout);
+
+    RegisterMethod rm;
+    rm.max_regs = 4;
+    rm.instructions = {
+        BM_I4(1, 0),           // r0 = 1 (array length)
+        BM_NewArr(1, 0),       // r1 = NewArr(r0)
+        BM_I4(42, 2),          // r2 = 42 (value to store)
+        BM_I4(0, 3),           // r3 = 0 (index)
+        BM_StElem(1, 3, 2),    // StElem(arr=r1, index=r3, value=r2)
+        BM_LdElem(0, 1, 3),    // r0 = LdElem(arr=r1, index=r3)
+        BM_Ret(0),
+    };
+
+    PatchMethod pm_storage2;
+    PatchMethod* pm = &pm_storage2;
+    SetupT4DirectBenchmark(pm, std::move(rm));
+    constexpr int kTotalCalls = 100;
+    constexpr int32_t kExpectedResult = 42;
+    uint64_t sum_ns = 0;
+
+    for (int i = 0; i < kTotalCalls; ++i) {
+        int64_t ret_val = -1;
+        auto start = Clock::now();
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(pm), nullptr, &ret_val);
+        auto end = Clock::now();
+        sum_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+            std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
+                        (long long)ret_val, kExpectedResult, i);
+            return false;
+        }
+    }
+
+    bool has_native = (pm->cached_native_method != nullptr);
+    double avg_ns = static_cast<double>(sum_ns) / kTotalCalls;
+    std::printf("  T4 (array): %.0f ns/op, has_native=%d\n", avg_ns, has_native);
+    std::fflush(stdout);
+
+    if (!has_native) {
+        std::fprintf(stderr, "  FAIL: T4 native code was not generated\n");
+        return false;
+    }
+    return true;
+}
+
+// ── Scenario 10: Boxing benchmark (T4) ──────────────────────────────────
+// IL: LdcI4(7) → Box → Ret (returns non-null boxed object pointer)
+static bool bench_boxing_t4() {
+    std::printf("\n--- bench_boxing_t4 ---\n");
+    std::fflush(stdout);
+
+    RegisterMethod rm;
+    rm.max_regs = 2;
+    rm.instructions = {
+        BM_I4(7, 0),            // r0 = 7
+        BM_Box(1, 0, 42),       // r1 = Box(r0, type_token=42)
+        BM_Ret(1),
+    };
+
+    PatchMethod pm_storage3;
+    PatchMethod* pm = &pm_storage3;
+    SetupT4DirectBenchmark(pm, std::move(rm));
+    constexpr int kTotalCalls = 100;
+    uint64_t sum_ns = 0;
+
+    for (int i = 0; i < kTotalCalls; ++i) {
+        int64_t ret_val = -1;
+        auto start = Clock::now();
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(pm), nullptr, &ret_val);
+        auto end = Clock::now();
+        sum_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        if (ret_val == 0) {
+            std::fprintf(stderr, "  FAIL: null boxed result at iter=%d\n", i);
+            return false;
+        }
+    }
+
+    bool has_native = (pm->cached_native_method != nullptr);
+    double avg_ns = static_cast<double>(sum_ns) / kTotalCalls;
+    std::printf("  T4 (boxing): %.0f ns/op, has_native=%d\n", avg_ns, has_native);
+    std::fflush(stdout);
+
+    if (!has_native) {
+        std::fprintf(stderr, "  FAIL: T4 native code was not generated\n");
+        return false;
+    }
+    return true;
+}
+
+
 // ── Main ──────────────────────────────────────────────────────────────────
 
 int main() {
@@ -1000,6 +1249,9 @@ int main() {
     run_test("bench_multi_alu_t4", bench_multi_alu_t4());
     run_test("bench_loc_storm_t4", bench_loc_storm_t4());
     run_test("bench_branches_t4",  bench_branches_t4());
+    run_test("bench_fields_t4",    bench_fields_t4());
+    run_test("bench_array_t4",     bench_array_t4());
+    run_test("bench_boxing_t4",    bench_boxing_t4());
 
     UnregisterThread();
 

@@ -1,7 +1,7 @@
 {
   "family": "string-char-text-core",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T00:53:51.736153",
+  "generated_at": "2026-05-19T01:05:45.462790",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",

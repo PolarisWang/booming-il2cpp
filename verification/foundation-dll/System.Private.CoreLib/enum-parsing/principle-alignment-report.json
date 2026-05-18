@@ -1,7 +1,7 @@
 {
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T00:50:07.556981",
+  "generated_at": "2026-05-19T01:09:52.442094",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",

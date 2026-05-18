@@ -1,7 +1,7 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T00:57:50.325924",
+  "generated_at": "2026-05-19T01:09:10.604152",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -50,10 +50,10 @@
       "check_id": "p1_benchmark",
       "principle": "P1",
       "status": "CONCERN",
-      "summary": "avg_speedup=37.5% (1 methods where native is slower than managed)",
+      "summary": "avg_speedup=30.06% (1 methods where native is slower than managed)",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 37.5,
+        "average_speedup_percent": 30.06,
         "managed_faster_count": 1,
         "native_faster_count": 10
       }
