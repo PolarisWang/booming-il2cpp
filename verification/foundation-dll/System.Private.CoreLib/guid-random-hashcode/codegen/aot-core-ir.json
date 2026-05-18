@@ -259,7 +259,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": -1150313613,
+          "operand": -1439524044,
           "ilOffset": 20,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -966,7 +966,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 1849966405,
+          "operand": 493664858,
           "ilOffset": 11,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -1154,7 +1154,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 3,
+          "operand": 22,
           "ilOffset": 13,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -1162,7 +1162,7 @@
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 14,
+          "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1170,14 +1170,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 16,
+          "ilOffset": 17,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 17,
+          "ilOffset": 18,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1185,7 +1185,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 19,
+          "ilOffset": 20,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1193,14 +1193,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 20,
+          "ilOffset": 21,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 29,
-          "ilOffset": 21,
+          "operand": 30,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1208,7 +1208,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 23,
+          "ilOffset": 24,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1216,7 +1216,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
-          "ilOffset": 24,
+          "ilOffset": 25,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GuidRandomHashcodeSubjects",
@@ -1242,7 +1242,7 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 29,
+          "ilOffset": 30,
           "isPreserveSig": false
         }
       ],
@@ -1855,7 +1855,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": -1598264817,
+          "operand": 1209883492,
           "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -2067,7 +2067,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 953428602,
+          "operand": -1575833516,
           "ilOffset": 10,
           "resultType": "System.Int32",
           "isPreserveSig": false

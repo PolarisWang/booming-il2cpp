@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "BoxingUnboxingCastsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/boxing-unboxing-casts/managed/subjects/build-output/BoxingUnboxingCastsSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/boxing-unboxing-casts/managed/subjects/build-output/BoxingUnboxingCastsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "BoxingUnboxingCastsSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/boxing-unboxing-casts/managed/subjects/build-output/BoxingUnboxingCastsSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/boxing-unboxing-casts/managed/subjects/build-output/BoxingUnboxingCastsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "f8697a33-1808-4bcc-b6d4-b659d65a9ae9",
+  "inputModuleVersionId": "a560f651-2ada-40ae-8092-c4cd14bd3da0",
   "artifacts": [
     {
       "kind": "typedIlIr",

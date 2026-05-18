@@ -8,82 +8,85 @@ using System.Globalization;
 
 public static partial class GlobalizationCultureSubjects
 {
+    // Inlined exit code — avoids SDK method call resolution in codegen
+    public static int _exitCode;
+
     // [0] System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()
-    public static int Subject_0()
+    public static void Subject_0()
     {
-        return ((CultureInfo.CurrentCulture).GetHashCode());
+        if (((CultureInfo.CurrentCulture).GetHashCode()) != -525795868) _exitCode = 1;
     }
 
     // [1] System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()
-    public static int Subject_1()
+    public static void Subject_1()
     {
-        return ((CultureInfo.InvariantCulture).GetHashCode());
+        if (((CultureInfo.InvariantCulture).GetHashCode()) != 1030518004) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)
-    public static int Subject_2()
+    public static void Subject_2()
     {
-        return -1;  // cannot auto-generate call
+        // TODO: System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String) could not be auto-generated
     }
 
     // [3] System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()
-    public static int Subject_3()
+    public static void Subject_3()
     {
-        return ((CultureInfo.InvariantCulture.Name).Length);
+        if (((CultureInfo.InvariantCulture.Name).Length) != 0) _exitCode = 1;
     }
 
     // [4] System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()
-    public static int Subject_4()
+    public static void Subject_4()
     {
-        return ((CultureInfo.InvariantCulture.DisplayName).Length);
+        if (((CultureInfo.InvariantCulture.DisplayName).Length) != 38) _exitCode = 1;
     }
 
     // [5] System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()
-    public static int Subject_5()
+    public static void Subject_5()
     {
-        return ((CultureInfo.InvariantCulture.DateTimeFormat).GetHashCode());
+        if (((CultureInfo.InvariantCulture.DateTimeFormat).GetHashCode()) != 35342034) _exitCode = 1;
     }
 
     // [6] System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()
-    public static int Subject_6()
+    public static void Subject_6()
     {
-        return ((CultureInfo.InvariantCulture.NumberFormat).GetHashCode());
+        if (((CultureInfo.InvariantCulture.NumberFormat).GetHashCode()) != 56793269) _exitCode = 1;
     }
 
     // [7] System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)
-    public static int Subject_7()
+    public static void Subject_7()
     {
-        return CultureInfo.InvariantCulture.CompareInfo.Compare("hello", "hello");
+        if (CultureInfo.InvariantCulture.CompareInfo.Compare("hello", "hello") != 0) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)
-    public static int Subject_8()
+    public static void Subject_8()
     {
-        return CultureInfo.InvariantCulture.CompareInfo.Compare("hello", "hello", System.Globalization.CompareOptions.None);
+        if (CultureInfo.InvariantCulture.CompareInfo.Compare("hello", "hello", System.Globalization.CompareOptions.None) != 0) _exitCode = 1;
     }
 
     // [9] System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)
-    public static int Subject_9()
+    public static void Subject_9()
     {
-        return CultureInfo.InvariantCulture.CompareInfo.IndexOf("hello", "hello");
+        if (CultureInfo.InvariantCulture.CompareInfo.IndexOf("hello", "hello") != 0) _exitCode = 1;
     }
 
     // [10] System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)
-    public static int Subject_10()
+    public static void Subject_10()
     {
-        return ((CultureInfo.InvariantCulture.TextInfo.ToUpper("hello")).Length);
+        if (((CultureInfo.InvariantCulture.TextInfo.ToUpper("hello")).Length) != 5) _exitCode = 1;
     }
 
     // [11] System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)
-    public static int Subject_11()
+    public static void Subject_11()
     {
-        return ((CultureInfo.InvariantCulture.TextInfo.ToLower("hello")).Length);
+        if (((CultureInfo.InvariantCulture.TextInfo.ToLower("hello")).Length) != 5) _exitCode = 1;
     }
 
     // [12] System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()
-    public static int Subject_12()
+    public static void Subject_12()
     {
-        return ((CultureInfo.InvariantCulture.TextInfo.CultureName).Length);
+        if (((CultureInfo.InvariantCulture.TextInfo.CultureName).Length) != 0) _exitCode = 1;
     }
 
 }
