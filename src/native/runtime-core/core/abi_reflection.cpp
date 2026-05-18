@@ -11,7 +11,7 @@ GCHandle CHAOS_RUNTIME_ABI_CALL GcHandleNew(
 
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(s_gc_handle_mutex);
     CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle++;
-    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, pinned, false /*weak*/ };
+    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, pinned, false /*weak*/, false /*track_resurrection*/ };
 
     if (pinned) {
         GcAddPinnedObject(object_instance);

@@ -172,7 +172,7 @@ CHAOS_IL2CPP_UINT64 GcCreateStrongHandle(void* object_instance) noexcept {
     if (object_instance == nullptr) return 0;
     std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
     CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
-    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, false, false };
+    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, false, false, false };
     return handle;
 }
 
@@ -180,7 +180,15 @@ CHAOS_IL2CPP_UINT64 GcCreateWeakHandle(void* object_instance) noexcept {
     if (object_instance == nullptr) return 0;
     std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
     CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
-    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, false, true };
+    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, false, true, false };
+    return handle;
+}
+
+CHAOS_IL2CPP_UINT64 GcCreateLongWeakHandle(void* object_instance) noexcept {
+    if (object_instance == nullptr) return 0;
+    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
+    CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
+    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, false, true, true };
     return handle;
 }
 
@@ -188,7 +196,7 @@ CHAOS_IL2CPP_UINT64 GcCreatePinnedHandle(void* object_instance) noexcept {
     if (object_instance == nullptr) return 0;
     std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
     CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
-    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, true, false };
+    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, true, false, false };
     GcAddPinnedObject(object_instance);
     return handle;
 }
@@ -398,6 +406,13 @@ void GcProcessCollectedWeakHandles(
     for (auto& entry : dead_handles) {
         auto it = s_gc_handle_table.find(entry.first);
         if (it == s_gc_handle_table.end()) continue;
+
+        // WeakTrackResurrection handles are NOT nullified here.
+        // They survive one extra BGC cycle — if the object was resurrected
+        // by a finalizer, the next cycle's mark phase finds it alive and the
+        // handle survives naturally. If the object stays dead (no resurrection),
+        // the next cycle collects the handle as a regular dead weak handle.
+        if (it->second.track_resurrection) continue;
 
         if (it->second.object_instance == entry.second) {
             CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "null_weak_handle id={0} obj={1}",

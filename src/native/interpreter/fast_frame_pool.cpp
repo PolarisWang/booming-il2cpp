@@ -45,7 +45,7 @@ void SetupFastFrame(FastFrame* ff,
     ff->ret_val = 0;
     ff->ret_tag = 0;
     ff->threw_exception = false;
-    ff->exception_obj_val = nullptr;
+    ff->exception_obj_val = 0;
     ff->tracked_cnt = 0;  // CleanupTracked already freed all objects
 
     // Set arg count, args buffer, and arg type tags.

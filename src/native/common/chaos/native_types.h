@@ -84,7 +84,20 @@
 // CHAOS_IL2CPP_FAIL: non-fatal failure indicator, distinct from ABORT.
 // Codegen emits FAIL for null-checks / expected failures so verification
 // mode can override FAIL without disabling ABORT for real crashes.
-#define CHAOS_IL2CPP_FAIL()        CHAOS_IL2CPP_ABORT()
+// Verification mode (runtime-entry.cpp) sets g_chaos_fail_hook to throw
+// chaos_managed_exception{}, caught by try/catch around each method call.
+// Forward declaration of g_chaos_fail_hook (defined in common.h) for
+// direct-inclusion compilation units.
+namespace chaos { namespace il2cpp { namespace common {
+    extern void (*g_chaos_fail_hook)();
+}}}
+#define CHAOS_IL2CPP_FAIL() \
+    do { \
+        if (::chaos::il2cpp::common::g_chaos_fail_hook) \
+            ::chaos::il2cpp::common::g_chaos_fail_hook(); \
+        else \
+            CHAOS_IL2CPP_ABORT(); \
+    } while(0)
 // HRESULT-style failure check: true when the high bit is set (negative).
 // Defined here for cross-platform use in native-aot codegen output.
 #define CHAOS_IL2CPP_FAILED(hr)    ((hr) < 0)

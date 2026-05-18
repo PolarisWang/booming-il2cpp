@@ -106,15 +106,12 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetExceptionMessage(CHAOS_IL2CPP_INTPTR excep
 //
 // NOTE: Functions already declared in reflection_api.h (included via
 // runtime_core.h) are NOT duplicated here to avoid redefinition errors.
-#include "runtime_stubs/stubs.h"
-
 }  // namespace chaos::il2cpp::runtime_core
 
-// Bring runtime stub declarations to file scope so that generated code
-// (emitted at file scope) can call them without namespace qualification.
-using chaos::il2cpp::runtime_core::ChaosGcCollect;
-using chaos::il2cpp::runtime_core::ChaosGcGetGeneration;
-using chaos::il2cpp::runtime_core::ChaosGcGetMaxGeneration;
+// Move stubs.h include outside the namespace to avoid MSVC extern "C" +
+// namespace ambiguity (C2883 / C2039).  All function declarations in
+// stubs.h are extern "C" and belong at file scope.
+#include "runtime_stubs/stubs.h"
 
 // g_chaos_fail_hook: fail hook for generated code verification (setjmp/longjmp).
 // Declared in chaos::il2cpp::common namespace (thread.cpp), brought to file scope
