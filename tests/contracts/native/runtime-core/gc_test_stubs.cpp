@@ -20,3 +20,43 @@ int32_t     kChaosExternalRuntimeCount = 0;
 // duplicate symbol conflicts when chaos_interpreter is linked.
 
 }  // extern "C"
+
+// ── DeepInlineCallees stub ────────────────────────────────────────────────
+// Required by entry_direct.cpp (included in interpreter_entry.cpp unity build).
+// The real implementation (in ir_optimizer.cpp) is not compiled in this tree.
+namespace chaos::il2cpp::interpreter {
+    struct IRMethod;
+    struct RegisterMethod;
+}
+namespace chaos::il2cpp::runtime_core { struct PatchMethod; }
+namespace chaos::il2cpp::codegen { struct NativeMethod; struct CodeGenConfig; }
+
+namespace chaos::il2cpp::runtime_core {
+bool DeepInlineCallees(
+    interpreter::IRMethod& /*ir*/,
+    PatchMethod& /*patch_method*/,
+    uint32_t /*max_levels*/,
+    uint32_t /*max_instructions*/) noexcept
+{
+    return false;
+}
+}
+
+// ── Native codegen stubs ──────────────────────────────────────────────────
+// Required by interpreter_entry.cpp (tiering: InterpreterEntryDirect calls
+// CanGenerateNativeCode/GenerateNativeCode). GC tests don't use codegen, so
+// these return false/nullptr.
+namespace chaos::il2cpp::codegen {
+bool CanGenerateNativeCode(
+    const interpreter::RegisterMethod& /*rm*/) noexcept
+{
+    return false;
+}
+
+NativeMethod* GenerateNativeCode(
+    const interpreter::RegisterMethod& /*rm*/,
+    const CodeGenConfig& /*config*/) noexcept
+{
+    return nullptr;
+}
+}

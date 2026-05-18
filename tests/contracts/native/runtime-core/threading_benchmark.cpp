@@ -12,6 +12,7 @@
 #include <cstring>
 #include <chrono>
 #include <atomic>
+#include <memory>
 #include <thread>
 #include <vector>
 
@@ -34,6 +35,13 @@ namespace rt = chaos::il2cpp::runtime_core;
 
 using Clock = std::chrono::high_resolution_clock;
 static constexpr size_t kObjectHeaderSize = 56;  // vtable(8)+type_info(8)+sync_state(8)+field_storage(32)
+
+// Force a real memory read — prevents compiler from optimizing away repeated loads
+// in benchmark loops. The returned value is opaque to the optimizer.
+template <typename T>
+inline T VolatileRead(const T& addr) noexcept {
+    return *static_cast<const volatile T*>(&addr);
+}
 
 // ── Benchmark 1: Thin lock uncontended ──────────────────────────────────
 // Matches managed MonitorAndLockingBenchmark: 10000 lock/unlock per sample
@@ -103,7 +111,7 @@ static double run_lock_bench(int iterations) {
     return total_ms / kSamples;
 }
 
-// ── Benchmark 2: ThreadPool queue + execute ────────────────────────────
+// ── Benchmark 2: ThreadPool queue + execute (raw throughput) ────────────
 
 static std::atomic<int> s_pool_count{0};
 static void pool_cb(void*) {
@@ -133,6 +141,90 @@ static double run_pool_bench(int iterations) {
         }
         auto t1 = Clock::now();
         total_ms += std::chrono::duration<double, std::milli>(t1 - t0).count();
+    }
+
+    threading::ThreadPoolShutdown();
+    threading::UnregisterThread();
+    return total_ms / kSamples;
+}
+
+// ── Benchmark 3: ThreadPool continuation model ─────────────────────────
+// Models C# TaskSchedulingBenchmark:
+//   For each of N items:
+//     1. Create TaskCompletionSource (simulated by PoolTask state)
+//     2. Chain continuation: task.ContinueWith(cb)
+//     3. Task.Run(() => tcs.SetResult(i))  — queued to ThreadPool
+//     4. GetAwaiter().GetResult() × 2      — blocks on result + continuation
+// Total ThreadPool ops: 2 × N (result + continuation per item)
+
+struct alignas(64) PoolTask {
+    std::atomic<bool> result_done{false};
+    std::atomic<bool> cont_done{false};
+};
+
+static void pool_cont_cb(void* ctx) {
+    auto* task = static_cast<PoolTask*>(ctx);
+    task->cont_done.store(true, std::memory_order_release);
+}
+
+static void pool_result_cb(void* ctx) {
+    auto* task = static_cast<PoolTask*>(ctx);
+    // SetResult: signal the task completion
+    task->result_done.store(true, std::memory_order_release);
+    // Queue continuation (ContinueWith scheduled by TCS.SetResult)
+    threading::ThreadPoolQueueUserWorkItem(pool_cont_cb, ctx);
+}
+
+static double run_continuation_bench(int iterations) {
+    threading::RegisterThread(threading::kMainThreadId, nullptr);
+    threading::ThreadPoolInitialize();
+
+    auto tasks = std::make_unique<PoolTask[]>(iterations);
+
+    // Warmup
+    for (int i = 0; i < 4; ++i) {
+        tasks[i].result_done.store(false, std::memory_order_relaxed);
+        tasks[i].cont_done.store(false, std::memory_order_relaxed);
+        threading::ThreadPoolQueueUserWorkItem(pool_result_cb, &tasks[i]);
+    }
+    for (int i = 0; i < 4; ++i) {
+        while (!tasks[i].result_done.load(std::memory_order_acquire))
+            std::this_thread::yield();
+        while (!tasks[i].cont_done.load(std::memory_order_acquire))
+            std::this_thread::yield();
+    }
+
+    constexpr int kSamples = 3;
+    double total_ms = 0;
+
+    for (int s = 0; s < kSamples; ++s) {
+        // Reset all tasks
+        for (int i = 0; i < iterations; ++i) {
+            tasks[i].result_done.store(false, std::memory_order_relaxed);
+            tasks[i].cont_done.store(false, std::memory_order_relaxed);
+        }
+
+        auto t0 = Clock::now();
+        // Phase 1: queue all work items (Task.Run equivalent)
+        for (int i = 0; i < iterations; ++i)
+            threading::ThreadPoolQueueUserWorkItem(pool_result_cb, &tasks[i]);
+
+        // Phase 2: wait for each task (GetAwaiter().GetResult() × 2)
+        uint64_t cs = 0;
+        for (int i = 0; i < iterations; ++i) {
+            // First GetResult: wait for Task completion
+            while (!tasks[i].result_done.load(std::memory_order_acquire))
+                std::this_thread::yield();
+            cs += static_cast<uint64_t>(i & 7);
+            // Second GetResult: wait for continuation (should already be
+            // queued by SetResult, may or may not have executed yet)
+            while (!tasks[i].cont_done.load(std::memory_order_acquire))
+                std::this_thread::yield();
+            cs += static_cast<uint64_t>(i & 3);
+        }
+        auto t1 = Clock::now();
+        total_ms += std::chrono::duration<double, std::milli>(t1 - t0).count();
+        (void)cs;
     }
 
     threading::ThreadPoolShutdown();
@@ -201,9 +293,10 @@ static double run_state_get_bench(int iterations) {
     threading::RegisterThread(threading::kMainThreadId, nullptr);
     auto* self = threading::GetCurrentThread();
 
-    // Warmup
+    // Warmup — VolatileRead forces real memory access so compiler cannot
+    // eliminate the loop.
     for (int i = 0; i < 100; ++i) {
-        volatile auto s = self->managed_state;
+        volatile auto s = VolatileRead(self->managed_state);
         (void)s;
     }
 
@@ -214,7 +307,8 @@ static double run_state_get_bench(int iterations) {
     for (int s = 0; s < kSamples; ++s) {
         auto t0 = Clock::now();
         for (int i = 0; i < iterations; ++i) {
-            cs += static_cast<uint64_t>(static_cast<int>(self->managed_state));
+            cs += static_cast<uint64_t>(static_cast<int>(
+                VolatileRead(self->managed_state)));
         }
         auto t1 = Clock::now();
         total_ms += std::chrono::duration<double, std::milli>(t1 - t0).count();
@@ -254,8 +348,8 @@ static double run_priority_get_set_bench(int iterations) {
     for (int s = 0; s < kSamples; ++s) {
         auto t0 = Clock::now();
         for (int i = 0; i < iterations; ++i) {
-            self->priority = levels[i % 5];
-            cs += static_cast<int>(self->priority);
+            *static_cast<volatile threading::ManagedThreadPriority*>(&self->priority) = levels[i % 5];
+            cs += static_cast<int>(VolatileRead(self->priority));
         }
         auto t1 = Clock::now();
         total_ms += std::chrono::duration<double, std::milli>(t1 - t0).count();
@@ -264,6 +358,22 @@ static double run_priority_get_set_bench(int iterations) {
     threading::UnregisterThread();
     s_pri_checksum.store(cs, std::memory_order_relaxed);
     return total_ms / kSamples;
+}
+
+// ── DeepInlineCallees stub ────────────────────────────────────────────────
+// Required by entry_direct.cpp (included in interpreter_entry.cpp unity build).
+// The real implementation (in ir_optimizer.cpp) is not compiled in this tree.
+namespace chaos::il2cpp::interpreter { struct IRMethod; }
+namespace chaos::il2cpp::runtime_core { struct PatchMethod; }
+namespace chaos::il2cpp::runtime_core {
+bool DeepInlineCallees(
+    interpreter::IRMethod& /*ir*/,
+    PatchMethod& /*patch_method*/,
+    uint32_t /*max_levels*/,
+    uint32_t /*max_instructions*/) noexcept
+{
+    return false;
+}
 }
 
 // ── main ─────────────────────────────────────────────────────────────────
@@ -280,7 +390,7 @@ int main() {
         double      mean_ms;
         int         iterations;
         const char* note;
-    } results[7];
+    } results[8];
     int ri = 0;
 
     // 1) Thin lock — 10000 iters (matches managed monitor-locking-bench)
@@ -299,11 +409,11 @@ int main() {
     results[ri].note       = "raw ThreadPoolQueueUserWorkItem + spin";
     ri++;
 
-    // 3) ThreadPool queue — 16 items (closer to TaskSchedulingBenchmark scale)
-    results[ri].name       = "thread-pool-queue-16";
-    results[ri].mean_ms    = run_pool_bench(16);
+    // 3) ThreadPool continuation — 16 items (matches C# TaskSchedulingBenchmark)
+    results[ri].name       = "thread-pool-continuation-16";
+    results[ri].mean_ms    = run_continuation_bench(16);
     results[ri].iterations = 16;
-    results[ri].note       = "16 items to approximate task-scheduling scale";
+    results[ri].note       = "2×queue + 2×block per item (models Task.Run+ContinueWith+GetResult)";
     ri++;
 
     // 4) Thread create/join — 50 threads
@@ -354,6 +464,7 @@ int main() {
     std::printf("\n");
     std::printf("  monitor-locking-bench (managed)\n");
     std::printf("    10000 lock/unlock, mean=0.936 ms, 93.6 ns/op\n");
+    std::printf("    (Source: manual managed run, no committed JSON report)\n");
     std::printf("  thin-lock-uncontended (native)\n");
     std::printf("    10000 lock/unlock, mean=%.3f ms, %.1f ns/op\n",
                 results[0].mean_ms, (results[0].mean_ms * 1e6) / results[0].iterations);
@@ -361,12 +472,14 @@ int main() {
     std::printf("    native speedup: %.1fx over managed\n\n", speedup);
 
     std::printf("  task-scheduling-bench (managed)\n");
-    std::printf("    16 Task.Run+ContinueWith, mean=2.556 ms, 159.8 us/op\n");
+    std::printf("    16 Task.Run+ContinueWith, mean=2.417 ms, 151.1 us/op\n");
+    std::printf("    (Source: nativeization-throughput-benchmark-v1-01.json, 3 samples)\n");
     std::printf("    (Task.Run ~ ThreadPool.QueueUserWorkItem + scheduling overhead)\n");
-    std::printf("  thread-pool-queue-16 (native)\n");
-    std::printf("    16 QueueUserWorkItem+spin, mean=%.3f ms, %.1f us/op\n",
+    std::printf("  thread-pool-continuation-16 (native)\n");
+    std::printf("    16 QueueUserWorkItem+block, mean=%.3f ms, %.1f us/op\n",
                 results[2].mean_ms, (results[2].mean_ms * 1e3) / results[2].iterations);
-    std::printf("    (native = raw queue + consume, managed includes Task pipeline overhead)\n");
+    std::printf("    (native = 2×queue + 2×block per item, managed includes Task object\n");
+    std::printf("     allocation, closure capture, TCS state machine, BDN framework)\n");
 
     std::printf("\ndone.\n");
     return 0;

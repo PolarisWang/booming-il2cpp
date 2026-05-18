@@ -182,6 +182,126 @@
 
 - **终止条件**：所有 deque 空 + 全局 mark stack 空 + SATB 缓冲区空（由 BGC 主循环在并行标记完成后检查）
 
+### 安全点系统 (Per-Thread Handshake)
+
+从全局 generation 翻转迁移到 per-thread handshake + 事件等待，消除确认循环放大、CPU 空转和 BGC 死锁。
+
+```
+改造前 (generation-based)               改造后 (per-thread handshake)
+─────────────────────────               ─────────────────────────
+s_generation 全局位翻转                  ManagedThread::suspend_seq per-thread
+s_safepoint_owner CAS spin              无全局锁，per-thread CAS
+确认循环 EnumerateThreads × 65536       逐个等待 + APC 超时回退
+SafepointPoll 中 spin                   SafepointPoll 中 event wait
+BGC 线程未注册                          BGC 线程注册 + 参与安全点
+SATB while(!empty)                       freeze + final drain 协议
+```
+
+#### Phase 1: Per-Thread Handshake
+
+每个 `ManagedThread` 增加 `suspend_seq` / `suspend_ack` / `suspend_event` 三个字段替代全局 `s_generation`：
+
+```cpp
+struct ManagedThread {
+    // ... existing fields ...
+    std::atomic<uint32_t> suspend_seq{0};     // 非零 = 安全点请求
+    std::atomic<uint32_t> suspend_ack{0};     // 线程确认
+    void* suspend_event{nullptr};             // HANDLE (Windows Event) 或 pthread_cond_t*
+};
+```
+
+**RequestGlobalSafepoint 新协议**：
+1. 增加全局 `safepoint_epoch`（单调递增）
+2. 遍历所有线程，设置 `thread->suspend_seq = epoch`
+3. 逐个等待确认：先 pause-spin ~50μs，超时则发 APC/pthread_kill
+4. 全部确认后返回
+
+**ReleaseGlobalSafepoint**：
+1. 遍历所有线程，`thread->suspend_seq = 0`
+2. SetEvent/pthread_cond_signal 唤醒等待线程
+
+**SafepointPoll**：
+```cpp
+void SafepointPoll() noexcept {
+    uint32_t seq = thread->suspend_seq.load();
+    if (seq == 0) [[likely]] return;  // 快路径 ~0.5ns
+    thread->suspend_ack.store(seq);
+    WaitForSingleObject(thread->suspend_event, INFINITE);  // 事件等待
+}
+```
+
+#### Phase 2: Event-Based Wait
+
+替代 spin-wait，线程确认安全点后在事件上等待：
+
+- **零 CPU 消耗**：等待线程 OS 不调度
+- **瞬时唤醒**：Release 时 SetEvent 同时唤醒所有线程
+- 事件在 `RegisterThread()` 创建，`UnregisterThread()` 关闭
+
+#### Phase 3: BGC 线程一等公民
+
+BGC 线程注册为 ManagedThread（gc_mode = Preemptive），参与安全点协议：
+
+```
+BgcThreadMain():
+  RegisterThread → EnterPreemptiveMode()
+  标记循环中检查 suspend_seq → 确认 → event wait → 恢复
+  UnregisterThread()
+```
+
+**ForceComplete 修复**：先请求 BGC 暂停（suspend_seq）→ 安全 drain deques + SATB → 恢复 BGC 继续标记。
+
+#### Phase 4: SATB Freeze 协议
+
+将"等 SATB 队列空"改为"freeze + final drain"，保证并发标记收敛：
+
+```cpp
+// BGC 标记接近完成时：
+satb_freeze_requested_ = true;
+satb_freeze_remaining_ = thread_count;
+// 等待所有线程确认停止提交
+while (satb_freeze_remaining_ > 0) sleep(10μs);
+// 做最后一轮 drain
+DrainGlobalSatbQueue();
+DrainWorkerDeque(0, 0);
+```
+
+**SATB 写屏障修改**：
+```cpp
+if (g_bgc_is_marking.load()) {
+    if (bgc.satb_freeze_requested_.load()) {
+        // 通知 BGC 本线程已完成最后 flush
+        bgc.satb_freeze_remaining_.fetch_sub(1);
+    }
+    // 正常记录旧值到 TLS buffer
+}
+```
+
+#### Phase 5: APC 信号回退 (Windows)
+
+当线程 50μs spin 后仍未确认安全点，发 APC 强制打断：
+
+```cpp
+static void __stdcall SuspendApf(ULONG_PTR) {
+    auto* self = tls_this_thread;
+    self->suspend_ack.store(self->suspend_seq.load());
+    WaitForSingleObject(self->suspend_event, INFINITE);
+}
+QueueUserAPC(SuspendApf, thread->os_handle, 0);
+```
+
+APC 在目标线程下次进入 alertable wait 时执行。深度 native 代码保守栈扫描兜底。
+
+#### Dedicated Finalizer Thread
+
+Finalizer 执行从 BGC 线程迁移到专用 finalizer 线程，避免 finalizer 阻塞 BGC 进度：
+
+- **BGC 主循环**：`CollectDeadFinalizables()` 后发布到 pending 队列，不等待
+- **ForceComplete**：发布到 finalizer 队列，不在安全点下内联执行
+- **Finalizer 线程**：注册为 ManagedThread（Preemptive 模式），在条件变量上等待工作
+- **WeakTrackResurrection**：weak handle nulling 在 finalizer 线程上执行（finalization 之后）
+- **生命周期**：`BgcController::Start()` 启动，`Stop()` 先停 BGC 再停 finalizer 线程
+
 ### 压缩 (Compaction)
 
 **Page 内压缩 (old-gen)**：
@@ -288,7 +408,7 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 |------|---------|---------|---------|---------------------|
 | 分代 | 2 代 (young + old) | 3 代 (gen0/1/2) | 2 代 (nursery + old) | 无 (保守式) |
 | 并行标记 | 是 (work-stealing) | 是 (BGC 并发) | 是 | 无 |
-| 并发标记 | 否 (计划中) | 是 (BGC) | 否 | 无 |
+| 并发标记 | 是 (BGC 并发, SATB) | 是 (BGC) | 否 | 无 |
 | 压缩 | 是 (page 内) | 是 (gen0/1) | 是 | 无 |
 | 写屏障 | 两层卡表 | 卡表 + card word | 写屏障 | 无 |
 | 精确扫描 | 是 (GcLayout) | 是 | 是 | 否 (保守) |
@@ -324,7 +444,7 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 | R12 | POH 完整实现 (Phase 2) | ✅ 已实现 | REGION_POH kind, bump-pointer, young GC 跳过 |
 | R13 | ThinLock 卸载语义 | ✅ 已实现 | LockDrain Phase 0 in domain_unloader |
 | R14 | GCNotification 回调 | ✅ 已实现 | 8 槽回调表 + 9 种事件 |
-| R15 | GcStressTest 覆盖增强 | ✅ 已实现 | A→K 11 场景 |
+| R15 | GcStressTest 覆盖增强 | ✅ 已实现 | A→N 14 场景 |
 | R16 | MemoryDomain HEAP 线程安全 | ✅ 已实现 | ArenaHeap std::mutex 保护 bump pointer |
 
 **剩余演进方向**（非阻塞）：
@@ -335,8 +455,9 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 
 ## 文档更新
 
-- `2026-05-17`：完成值类型嵌套字段写屏障修复、完整 GCMemoryInfo、BGC 并发 sweep；更新完成度矩阵和演进方向
+- `2026-05-23`：BGC 专用 Finalizer 线程 + Per-thread handshake 安全点系统（5 phases）+ Event-based wait + SATB freeze 协议 + APC 回退 + BGC 线程一等公民；更新对比表 safepoint 行、"并发标记" 状态、完成度矩阵、风险分类、R15→14 场景
 - `2026-05-18`：POH Phase 2 完成（region bump-pointer + GC mark-sweep integration + standalone tests）；GCHandle SetTargetFromNative API + 测试完成；完成度矩阵更新
+- `2026-05-17`：完成值类型嵌套字段写屏障修复、完整 GCMemoryInfo、BGC 并发 sweep；更新完成度矩阵和演进方向
 
 ## 关键数据流
 
@@ -549,6 +670,12 @@ BGC 的根集扫描从 `GcIterateHandleTable` 迁移到 `GcIterateTenuredHandles
 | Handle table 世代感知遍历 | 完成 | 100% | GcIterateTenuredHandles/NurseryHandles/Strong/Weak/Pinned |
 | LOH 默认 AUTOMATIC 压缩 | 完成 | 100% | CompactMode 默认从 NONE 改为 AUTOMATIC |
 | 值类型嵌套引用写屏障审计 | 完成 | 100% | 审计完成，发现 stfld 值类型缺失 DirtyCard；修复需 runtime GC-heap-pointer 检测函数 |
+| Per-thread safepoint handshake | 完成 | 100% | suspend_seq/suspend_ack/suspend_event 替代 s_generation |
+| Event-based safepoint wait | 完成 | 100% | WaitForSingleObject/SetEvent 替代 spin-wait |
+| SATB freeze 协议 | 完成 | 100% | satb_freeze_requested_ + satb_freeze_remaining_ 保证收敛 |
+| APC 信号回退 | 完成 | 100% | QueueUserAPC 用于深度 native 卡住线程 |
+| BGC 线程 ManagedThread 注册 | 完成 | 100% | BGC 线程参与安全点协议 |
+| 专用 Finalizer 线程 | 完成 | 100% | PublishFinalizationWork 模式，不阻塞 BGC |
 
 ### 横向对比总表
 
@@ -581,7 +708,7 @@ BGC 的根集扫描从 `GcIterateHandleTable` 迁移到 `GcIterateTenuredHandles
 | POH | 已实现 (Phase 2) | 完整支持 | POH region + bump-pointer，young GC 不复制 |
 | LOH 压缩 | 已实现 (CompactMode) | 完整支持 (gen2 compact) | CRAG LOH CompactMode 可选 (NONE/ON_REQUEST/AUTOMATIC)，4MB/cycle 预算限制 |
 | Ephemeron | 已实现 | 完整支持 | 通过 DependentHandle 机制默认支持 |
-| Safepoint | generation-based | JIT poll + hijack | CRAG 无 hijack（AOT 无法注入） |
+| Safepoint | per-thread handshake + event wait | JIT poll + hijack | CRAG 无 hijack（AOT 无法注入） |
 
 **结论**：CRAG 与 CoreCLR 功能完备性差距已基本消除（6.5→8.5/10）。BGC 现使用 work-stealing 并行标记 + 事件驱动唤醒，架构与 CoreCLR 对等。核心剩余差距在成熟度（5.0 vs 10.0）而非架构能力。CRAG 的 region 粒度优势对域卸载场景有决定性意义。
 
@@ -668,5 +795,10 @@ BGC 的根集扫描从 `GcIterateHandleTable` 迁移到 `GcIterateTenuredHandles
 | **P2** | POH 未实现 | ✅ 已修复 | REGION_POH region type |
 | **P3** | ThinLock 卸载语义 | ✅ 已修复 | LockDrain Phase 0 |
 | **P3** | GCNotification 回调 | ✅ 已修复 | 8 槽回调表 |
-| **P3** | GcStressTest 覆盖率 | ✅ 已修复 | A→K 11 场景 |
+| **P3** | GcStressTest 覆盖率 | ✅ 已修复 | A→N 14 场景 |
 | **P3** | MemoryDomain HEAP 碎片 | ✅ 已修复 | ArenaHeap mutex |
+| **P2** | 安全点 per-thread handshake | ✅ 已修复 | 消除确认循环放大、CPU 空转 |
+| **P2** | SATB freeze 协议 | ✅ 已修复 | 保证 BGC 并发标记收敛 |
+| **P2** | BGC 线程注册为 ManagedThread | ✅ 已修复 | 参与安全点，消除 BGC 死锁 |
+| **P2** | APC 回退机制 | ✅ 已修复 | 深度 native 卡住线程的强制打断 |
+| **P2** | 专用 Finalizer 线程 | ✅ 已修复 | 不在 BGC 线程执行 finalizer |

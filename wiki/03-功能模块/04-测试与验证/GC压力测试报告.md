@@ -2,7 +2,7 @@
 
 ## 概述
 
-CRAG (Chaos Region-Aware GC) 压力测试套件位于 `tests/contracts/native/runtime-core/gc_stress_test.cpp`，包含 **11 个场景** (A-K)，覆盖并发分配、混合大小、young GC 震荡、延迟验证、域卸载、并发 pinned root、超大对象、域卸载风暴、DependentHandle、混合 pin/unpin、LOH sweep 等路径。输出结构化 JSON 报告到 `artifacts/native-runtime-core-test/reports/gc_stress_report_<ts>.json`。
+CRAG (Chaos Region-Aware GC) 压力测试套件位于 `tests/contracts/native/runtime-core/gc_stress_test.cpp`，包含 **14 个场景** (A-N)，覆盖并发分配、混合大小、young GC 震荡、延迟验证、域卸载、并发 pinned root、超大对象、域卸载风暴、DependentHandle、混合 pin/unpin、LOH sweep、BGC 并发标记、并行标记扩展和 SATB 写屏障压力等路径。输出结构化 JSON 报告到 `artifacts/native-runtime-core-test/reports/gc_stress_report_<ts>.json`。
 
 构建与运行：
 
@@ -26,6 +26,9 @@ cmake --build artifacts/presets/debug --target chaos_gc_stress_test --config Deb
 | I | dependent_handle | 1 | 2000 | DependentHandle lifecycle: key 存活 → value 存活; key dead → value dead; 多轮 GC 正确性 |
 | J | pinned_unpinned_mixed | 20 | 200 | 混合 pinned/unpinned 分配，young GC 后 pin 对象地址不变 |
 | K | loh_sweep_verify | 10 | 50 | 分配释放大量 >85KB 对象，LOH sweep 正确回收，内存不泄漏 |
+| L | bgc_concurrent_mark | 20 | 200 | BGC 并发标记 + mutator 并发分配，验证 SATB 写屏障正确性 |
+| M | parallel_mark_scale | 8 | 500 | 大堆并行标记扩展性，work-stealing 多 worker 协作 |
+| N | satb_barrier_stress | 30 | 100 | SATB 写屏障高强度并发，BGC 冻结协议收敛验证 |
 
 ## Phase 7 最终状态 (2026-05-15)
 
@@ -79,7 +82,7 @@ cmake --build artifacts/presets/debug --target chaos_gc_stress_test --config Deb
 |------|---------|---------|---------|---------------------|
 | 分代 | 2 代 | 3 代 | 2 代 | 无 |
 | 并行标记 | 是 | 是 (BGC 并发) | 是 | 无 |
-| 并发标记 | 否 (计划中) | 是 | 否 | 无 |
+| 并发标记 | 是 (BGC 并发, SATB) | 是 | 否 | 无 |
 | 压缩 | 是 (page 内) | 是 | 是 | 无 |
 | 写屏障 | 两层卡表 | 卡表 + card word | 写屏障 | 无 |
 | 精确扫描 | 是 | 是 | 是 | 否 |
@@ -89,10 +92,57 @@ cmake --build artifacts/presets/debug --target chaos_gc_stress_test --config Deb
 
 ### 已知差距
 
-1. **无并发标记 (BGC)**：Full GC 完全 STW，大堆 (>500MB) 暂停可能超过 500ms
-2. **无三代分代**：CoreCLR 的 gen0/gen1 快速回收 + gen2 完整回收模式更高效
-3. **Region 框架 O(R) 扫描**：FreeRegion 和 IsInDomain 线性扫描 region 表
-4. **FindPage O(N)**：OldGen 的 page 查找是线性扫描
+1. **无三代分代**：CoreCLR 的 gen0/gen1 快速回收 + gen2 完整回收模式更高效
+2. **Region 框架 O(R) 扫描**：FreeRegion 和 IsInDomain 线性扫描 region 表
+3. **FindPage O(N)**：OldGen 的 page 查找是线性扫描
+
+### 已关闭差距
+
+以下差距已在 P0-P3 修复中解决：
+
+| 差距 | 修复内容 | 阶段 |
+|------|---------|------|
+| 无并发标记 (BGC) | BGC 并发标记 + SATB 写屏障 + freeze 协议 | P2 |
+| GC.Collect() 托管接口为 CHAOS_IL2CPP_FAIL | 实现 `chaos_gc_collect` + `WaitForPendingFinalizers` | P0 |
+| 安全点 CPU 空转 | Per-thread handshake + event-based wait | P1 |
+| BGC 线程不参与安全点 | BGC 注册为 ManagedThread | P3 |
+| Finalizer 阻塞 BGC 线程 | 专用 Finalizer 线程 (PublishFinalizationWork) | P2 |
+| 无 STW 超时回退 | APC 信号回退机制 | P1 |
+| 11 场景覆盖不足 | 扩展至 14 场景 (A-N) | P3 |
+
+## P0-P3 修复清单 (2026-05-17/18)
+
+在完成核心 GC 功能后，针对 stress test 暴露的安全点和并发问题进行了系统的 P0-P3 修复：
+
+### P0 (数据损坏 / 崩溃)
+
+| # | 问题 | 修复 | 效果 |
+|---|------|------|------|
+| 1 | GcWorkerPool expected_completed_ 计数不匹配 | 使用实际线程数计算 expected | 修复 worker 同步竞争 |
+| 2 | ForceComplete drain finalizables 遗漏 | 在 BGC 完成时正确 drain | STW 不残留 finalizer |
+
+### P1 (安全点系统重写)
+
+| # | 问题 | 修复 | 效果 |
+|---|------|------|------|
+| 1 | Generation-based 安全点 CPU 空转 | Per-thread handshake + suspend_seq/suspend_ack/suspend_event | 零 CPU 事件等待 |
+| 2 | 安全点确认循环放大 | 逐个等待 + 50μs spin 退避 | 确认延迟 <100μs |
+| 3 | SATB 收敛无保证 | satb_freeze_requested_ + satb_freeze_remaining_ | 保证并发标记收敛 |
+| 4 | 线程卡死无回退 | APC 信号回退 (QueueUserAPC) | 深度 native 安全兜底 |
+
+### P2 (BGC 并发完善)
+
+| # | 问题 | 修复 | 效果 |
+|---|------|------|------|
+| 1 | BGC finalizer 内联执行 | 专用 Finalizer 线程，PublishFinalizationWork 模式 | BGC 不被 finalizer 阻塞 |
+| 2 | BGC 死锁周期 | BGC 注册 ManagedThread + 参与安全点 + Preemptive 模式 | 消除 BGC↔mutator 互相等待 |
+
+### P3 (覆盖与场景扩展)
+
+| # | 问题 | 修复 | 效果 |
+|---|------|------|------|
+| 1 | BGC 线程非一等公民 | RegisterThread + EnterPreemptiveMode | 安全点协议覆盖 BGC |
+| 2 | 场景覆盖 11 → 14 | 增加 L (BGC 并发标记)、M (并行标记扩展)、N (SATB 压力) | 完整覆盖并发路径 |
 
 ## 历史数据
 
