@@ -5,7 +5,8 @@ target_compile_features(chaos_interpreter_smoke PRIVATE cxx_std_17)
 target_link_libraries(
     chaos_interpreter_smoke
     PRIVATE
-        chaos_interpreter)
+        chaos_interpreter
+        chaos_codegen)
 
 add_executable(chaos_interpreter_new_features_test
     interpreter_new_features_test.cpp)
@@ -15,7 +16,8 @@ target_link_libraries(
     chaos_interpreter_new_features_test
     PRIVATE
         chaos_interpreter
-        chaos_runtime_core)
+        chaos_runtime_core
+        chaos_codegen)
 
 add_executable(chaos_interpreter_integration
     interpreter_integration.cpp
@@ -33,7 +35,8 @@ target_link_libraries(
         chaos_fmt
         chaos_common
         chaos_support
-        chaos_hot_update)
+        chaos_hot_update
+        chaos_codegen)
 
 add_executable(chaos_interpreter_bridge_test
     interpreter_bridge_test.cpp)
@@ -43,7 +46,8 @@ target_link_libraries(
     chaos_interpreter_bridge_test
     PRIVATE
         chaos_interpreter
-        chaos_bootstrap)
+        chaos_bootstrap
+        chaos_codegen)
 
 add_executable(chaos_interpreter_entry_test
     interpreter_entry_test.cpp)
@@ -59,7 +63,8 @@ target_link_libraries(
         chaos_bootstrap
         chaos_fmt
         chaos_common
-        chaos_support)
+        chaos_support
+        chaos_codegen)
 
 add_executable(chaos_interpreter_profile_test
     interpreter_profile_test.cpp)
@@ -75,7 +80,8 @@ target_link_libraries(
         chaos_bootstrap
         chaos_fmt
         chaos_common
-        chaos_support)
+        chaos_support
+        chaos_codegen)
 
 add_executable(chaos_tiering_benchmark
     tiering_benchmark.cpp)
@@ -91,4 +97,5 @@ target_link_libraries(
         chaos_bootstrap
         chaos_fmt
         chaos_common
-        chaos_support)
+        chaos_support
+        chaos_codegen)

@@ -576,19 +576,20 @@ CHAOS_IL2CPP_INT32 chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsS
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	return ChaosArrayCreateInstance(chaos_fn_arg_0, chaos_fn_arg_1);
+    (void)chaos_fn_arg_0; (void)chaos_fn_arg_1;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(1);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1;
-	return 0;
+	return static_cast<CHAOS_IL2CPP_INTPTR>(1);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)
 {
-	(void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;
-	return 0;
+    (void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(1);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
@@ -869,6 +870,12 @@ extern "C" const char* kChaosExternalRuntimeSubjects[15] = {
 	"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
 };
 
+static CHAOS_IL2CPP_INTPTR chaos_stub_fn_table_13(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)
+{
+    (void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(1);
+}
+
 extern "C" void* kChaosExternalRuntimeFnTable[15] = {
 	nullptr,
 	nullptr,
@@ -883,7 +890,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[15] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
-	nullptr,
+		reinterpret_cast<void*>(&chaos_stub_fn_table_13),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
 };
 

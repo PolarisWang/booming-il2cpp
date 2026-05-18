@@ -182,6 +182,25 @@ struct RegisterMethod {
     uint32_t                                  max_regs     = 0;  // highest register used
 };
 
+// ── RegStackMapEntry ─────────────────────────────────────────────────────
+// Maps evaluation-stack slots and locals to virtual registers at a given pc.
+// Used by OSR converters (CaptureRegisterFrame, RestoreOsrToRegisterFrame,
+// CaptureNativeFrame) to reconstruct frame state across tier transitions.
+//
+// Filled during AllocateRegisters() for each instruction boundary.
+struct RegStackMapEntry {
+    static constexpr uint32_t kMaxSlots  = 16;  // max eval stack depth
+    static constexpr uint32_t kMaxLocals = 8;   // max local count
+
+    int8_t  slot_regs[kMaxSlots]  = {};  // slot_regs[stack_i] = vreg or -1 if empty
+    int8_t  local_regs[kMaxLocals] = {};   // local_regs[local_i] = vreg or -1 if empty
+    uint8_t stack_depth           = 0;
+};
+
+struct RegStackMap {
+    CHAOS_IL2CPP_VECTOR(RegStackMapEntry) entries;  // indexed by instruction pc
+};
+
 // ── Register allocator ──────────────────────────────────────────────────
 // Converts stack-based IRMethod (IRInstruction[]) to register-based
 // RegisterMethod (RegisterInstruction[]).  Uses a simple linear-scan:

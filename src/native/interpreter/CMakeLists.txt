@@ -28,6 +28,7 @@ target_include_directories(
     chaos_interpreter
     PRIVATE
         "${REPO_ROOT}/src/native"
+        "${REPO_ROOT}/src/native/codegen"
         "${REPO_ROOT}/third_party/fmt/include")
 target_link_libraries(
     chaos_interpreter

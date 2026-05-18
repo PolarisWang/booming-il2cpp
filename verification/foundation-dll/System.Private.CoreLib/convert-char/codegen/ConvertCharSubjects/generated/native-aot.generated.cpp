@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
 #include "abi_manifest.h"
@@ -693,7 +694,8 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
 			chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 				entry.method_key, __chaos_args, __chaos_ret);
 		} else {
-			reinterpret_cast<void(*)()>(entry.direct_ptr)();
+			// Use kBenchmarkWrappers which supply correct default argument values
+			kBenchmarkWrappers[i]();
 		}
 	}
 	return result;
@@ -768,6 +770,8 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.unresolved_virtual_call_count = 0u,
 	.type_capabilities       = nullptr,
 	.type_capability_count   = 0u,
+	.vtable_descriptors = nullptr,
+	.vtable_descriptor_count = 0u,
 };
 
 // MetadataRegistrationV0
@@ -899,17 +903,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_0(void)
 		const auto chaos_inline_result = (throw chaos_managed_exception{{_s1}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -949,17 +945,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_1(void)
 		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -999,17 +987,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_2(void)
 		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1055,17 +1035,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_3(void)
 		const auto chaos_inline_result = (throw chaos_managed_exception{{_s1}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1121,17 +1093,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_4(void)
 		const auto chaos_inline_result = (throw chaos_managed_exception{{_s1}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1171,17 +1135,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_5(void)
 		const auto chaos_inline_result = (throw chaos_managed_exception{{_s1}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = ChaosLoadFloat64(_s1);
-		const auto chaos_left = ChaosLoadFloat64(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1221,17 +1177,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_6(void)
 		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1271,17 +1219,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_7(void)
 		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1327,17 +1267,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_8(void)
 		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1377,17 +1309,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_9(void)
 		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1453,17 +1377,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void)
 		const auto chaos_result = chaos_convert_tochar_object_provider(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1503,17 +1419,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_11(void)
 		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1553,17 +1461,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_12(void)
 		const auto chaos_inline_result = (throw chaos_managed_exception{{_s1}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = chaos_load_float32(_s1);
-		const auto chaos_left = chaos_load_float32(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_load_float32(_s0) == chaos_load_float32(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1609,17 +1509,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_13(void)
 		const auto chaos_result = chaos_convert_tochar_string(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1671,17 +1563,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_14(void)
 		const auto chaos_result = chaos_convert_tochar_string_provider(chaos_arg_0, chaos_arg_1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1721,17 +1605,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_15(void)
 		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1771,17 +1647,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_16(void)
 		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1827,17 +1695,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void)
 		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1867,7 +1727,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 		switch (chaos_switch_value)
 		{
 			case 0:
-			{
 				{
 					auto& _d0 = s_hotpatch_entries[0];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
@@ -1881,10 +1740,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_0();
 					}
 				}
-				break;
-			}
 			case 1:
-			{
 				{
 					auto& _d1 = s_hotpatch_entries[1];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
@@ -1898,10 +1754,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_1();
 					}
 				}
-				break;
-			}
 			case 2:
-			{
 				{
 					auto& _d2 = s_hotpatch_entries[2];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
@@ -1915,10 +1768,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_2();
 					}
 				}
-				break;
-			}
 			case 3:
-			{
 				{
 					auto& _d3 = s_hotpatch_entries[3];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
@@ -1932,10 +1782,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_3();
 					}
 				}
-				break;
-			}
 			case 4:
-			{
 				{
 					auto& _d4 = s_hotpatch_entries[4];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
@@ -1949,10 +1796,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_4();
 					}
 				}
-				break;
-			}
 			case 5:
-			{
 				{
 					auto& _d5 = s_hotpatch_entries[5];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
@@ -1966,10 +1810,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_5();
 					}
 				}
-				break;
-			}
 			case 6:
-			{
 				{
 					auto& _d6 = s_hotpatch_entries[6];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
@@ -1983,10 +1824,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_6();
 					}
 				}
-				break;
-			}
 			case 7:
-			{
 				{
 					auto& _d7 = s_hotpatch_entries[7];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
@@ -2000,10 +1838,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_7();
 					}
 				}
-				break;
-			}
 			case 8:
-			{
 				{
 					auto& _d8 = s_hotpatch_entries[8];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
@@ -2017,10 +1852,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_8();
 					}
 				}
-				break;
-			}
 			case 9:
-			{
 				{
 					auto& _d9 = s_hotpatch_entries[9];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
@@ -2034,10 +1866,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_9();
 					}
 				}
-				break;
-			}
 			case 10:
-			{
 				{
 					auto& _d10 = s_hotpatch_entries[10];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
@@ -2051,10 +1880,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_10();
 					}
 				}
-				break;
-			}
 			case 11:
-			{
 				{
 					auto& _d11 = s_hotpatch_entries[11];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
@@ -2068,10 +1894,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_11();
 					}
 				}
-				break;
-			}
 			case 12:
-			{
 				{
 					auto& _d12 = s_hotpatch_entries[12];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
@@ -2085,10 +1908,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_12();
 					}
 				}
-				break;
-			}
 			case 13:
-			{
 				{
 					auto& _d13 = s_hotpatch_entries[13];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
@@ -2102,10 +1922,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_13();
 					}
 				}
-				break;
-			}
 			case 14:
-			{
 				{
 					auto& _d14 = s_hotpatch_entries[14];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
@@ -2119,10 +1936,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_14();
 					}
 				}
-				break;
-			}
 			case 15:
-			{
 				{
 					auto& _d15 = s_hotpatch_entries[15];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d15)
@@ -2136,10 +1950,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_15();
 					}
 				}
-				break;
-			}
 			case 16:
-			{
 				{
 					auto& _d16 = s_hotpatch_entries[16];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
@@ -2153,8 +1964,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Run(CHAOS_IL2CPP_INT32 c
 						ConvertCharSubjects_ConvertCharSubjects_Subject_16();
 					}
 				}
-				break;
-			}
 			case 17:
 			{
 				{

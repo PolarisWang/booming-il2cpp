@@ -110,4 +110,17 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetExceptionMessage(CHAOS_IL2CPP_INTPTR excep
 
 }  // namespace chaos::il2cpp::runtime_core
 
+// Bring runtime stub declarations to file scope so that generated code
+// (emitted at file scope) can call them without namespace qualification.
+using chaos::il2cpp::runtime_core::ChaosGcCollect;
+using chaos::il2cpp::runtime_core::ChaosGcGetGeneration;
+using chaos::il2cpp::runtime_core::ChaosGcGetMaxGeneration;
+
+// g_chaos_fail_hook: fail hook for generated code verification (setjmp/longjmp).
+// Declared in chaos::il2cpp::common namespace (thread.cpp), brought to file scope
+// here for generated code that references it as chaos::il2cpp::common::g_chaos_fail_hook.
+namespace chaos::il2cpp::common {
+extern void (*g_chaos_fail_hook)();
+}  // namespace chaos::il2cpp::common
+
 #endif // CHAOS_IL2CPP_GENERATED_CODE_COMPAT_H_

@@ -1,0 +1,13 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    { "registrationKind": "assembly", "slot": 0, "subjectId": "SnapshotTestFixtures" },
+    { "registrationKind": "type", "slot": 1, "subjectId": "SnapshotTestFixtures/InterfaceDevirtHelper", "name": "InterfaceDevirtHelper", "displayName": "InterfaceDevirtHelper", "definitionSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper" },
+    { "registrationKind": "method", "slot": 2, "subjectId": "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()", "name": "RunInterfaceTest", "definitionSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false },
+    { "registrationKind": "type", "slot": 3, "subjectId": "SnapshotTestFixtures/IMyInterface", "name": "IMyInterface", "displayName": "IMyInterface", "definitionSubjectId": "SnapshotTestFixtures/IMyInterface" },
+    { "registrationKind": "method", "slot": 4, "subjectId": "SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()", "name": "GetValue", "definitionSubjectId": "SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/IMyInterface", "memberType": "System.Int32", "parameterCount": 0, "isImported": false },
+    { "registrationKind": "type", "slot": 5, "subjectId": "SnapshotTestFixtures/ImplHelper", "name": "ImplHelper", "displayName": "ImplHelper", "definitionSubjectId": "SnapshotTestFixtures/ImplHelper" },
+    { "registrationKind": "method", "slot": 6, "subjectId": "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()", "name": "GetValue", "definitionSubjectId": "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/ImplHelper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false }
+  ]
+}

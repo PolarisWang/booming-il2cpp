@@ -539,7 +539,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
     add_executable(chaos_codegen_native_test codegen_native_test.cpp ${CHAOS_GC_TEST_STUBS})
     target_compile_features(chaos_codegen_native_test PRIVATE cxx_std_20)
     target_compile_definitions(chaos_codegen_native_test PRIVATE
-        _CRT_SECURE_NO_WARNINGS)
+        _CRT_SECURE_NO_WARNINGS
+        CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE)
     target_compile_options(chaos_codegen_native_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
     target_include_directories(
         chaos_codegen_native_test

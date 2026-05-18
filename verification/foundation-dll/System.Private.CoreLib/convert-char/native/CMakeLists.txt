@@ -29,6 +29,7 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
+    "${CHAOS_PROJECT_ROOT}/src/native/codegen"
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/src/native"
@@ -44,6 +45,7 @@ set(CHAOS_LIB_DIRS
     "${CHAOS_NATIVE_BUILD}/src/native/bootstrap/Release"
     "${CHAOS_NATIVE_BUILD}/src/native/common/Release"
     "${CHAOS_NATIVE_BUILD}/src/native/interpreter/Release"
+    "${CHAOS_NATIVE_BUILD}/src/native/codegen/Release"
     "${CHAOS_NATIVE_BUILD}/src/native/support/Release"
     "${CHAOS_NATIVE_BUILD}/src/native/hot-update/Release"
     "${CHAOS_NATIVE_BUILD}/fmt_build/Release"
@@ -55,6 +57,7 @@ set(CHAOS_RUNTIME_LIBS
     chaos_bootstrap
     chaos_common
     chaos_interpreter
+    chaos_codegen
     chaos_support
     chaos_hot_update
     chaos_fmt

@@ -1,0 +1,99 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.sealed-class-virtual-helper.run-sealed-virtual",
+      "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
+      "signature": "System.Int32 SealedClassVirtualHelper::RunSealedVirtual()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
+        "methodId": "snapshot-test-fixtures.sealed-class-virtual-helper.run-sealed-virtual",
+        "signature": "System.Int32 SealedClassVirtualHelper::RunSealedVirtual()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_SealedClassVirtualHelper_RunSealedVirtual",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 42, "ilOffset": 0, "resultType": "System.Int32" },
+        {
+          "op": "newobj",
+          "operand": "System.Void SealedHelper::.ctor(System.Int32)",
+          "ilOffset": 1,
+          "resultType": "System.Object",
+          "callee": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)",
+          "reference": {
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectKind": "method",
+            "subjectId": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/SealedHelper",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0,
+            "isSealed": true
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "callvirt",
+          "operand": "System.Int32 SealedHelper::GetValueVirtual()",
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "callee": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/SealedHelper",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0,
+            "isSealed": true
+          },
+          "dispatchKindCode": 1
+        },
+        { "op": "ret", "ilOffset": 3 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.sealed-helper.get-value-virtual",
+      "subjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
+      "signature": "System.Int32 SealedHelper::GetValueVirtual()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/SealedHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
+        "methodId": "snapshot-test-fixtures.sealed-helper.get-value-virtual",
+        "signature": "System.Int32 SealedHelper::GetValueVirtual()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_SealedHelper_GetValueVirtual",
+      "isStatic": false,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [
+        { "carrierKindCode": 2, "typeShape": 1 }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 42, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 1 }
+      ]
+    }
+  ]
+}

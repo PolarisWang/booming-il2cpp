@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/interface/dispatch",
+  "capturedAt": "2026-05-18T08:03:58",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": "[2026-05-18T08:03:58][DEBUG][CRAG] old_gc_in_nursery_alloc_slow\n[2026-05-18T08:03:58][INFO][OldGen] collect_start mode=old_only page_count=0\n[2026-05-18T08:03:58][INFO][OldGen] collect_done reclaimed=0 pause_ns=10900\nPassed: 35/35\nGC|full|collections=1|pages=0|marked=0|reclaimed=0|finalizers=0|total_pause_ns=10900|avg_pause_ns=10900\nGC|alloc|total=33|bytes=528|oversized=0\nGC|region|active=1|total_allocated=262144\n"
+}

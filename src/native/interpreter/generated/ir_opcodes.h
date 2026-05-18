@@ -106,6 +106,7 @@ enum class IROpCode : std::int32_t {
     Cpblk = 96,
     InitBlk = 97,
     CallVirtConstrained = 98,
+    Calli = 99,
 };
 
 }  // namespace chaos::il2cpp::interpreter

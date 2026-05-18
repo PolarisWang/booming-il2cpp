@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/dispatch/basic",
+  "capturedAt": "2026-05-18T07:57:37",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": "[2026-05-18T07:57:37][WARN][CRAG] young_collection_no_region\n[2026-05-18T07:57:37][INFO][OldGen] init initial_pages=2\n[2026-05-18T07:57:37][INFO][OldGen] init done base=0x2518774317056 pages=2\nPassed: 18/18\nGC|alloc|total=48|bytes=768|oversized=0\nGC|region|active=0|total_allocated=0\n"
+}

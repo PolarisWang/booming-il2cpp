@@ -1,0 +1,10 @@
+
+=== PROFILE DUMP ===
+PROFILE|CALIBRATION|ns_per_cycle=0.227298
+PROFILE|GcAllocate|avg=3389152|avg_ns=770347|min=6820|max=6771484|count=2|total_ns=1540693
+PROFILE|NurseryAllocate|avg=3380198|avg_ns=768311|min=5632|max=6754764|count=2|total_ns=1536623
+PROFILE|NurseryAllocateSlow|avg=3374456|avg_ns=767006|min=4752|max=6744160|count=2|total_ns=1534012
+PROFILE|GcYoungCollection|avg=6472548|avg_ns=1471195|min=6472548|max=6472548|count=1|total_ns=1471195
+PROFILE|OldGen::Allocate|avg=91322|avg_ns=20757|min=572|max=182072|count=2|total_ns=41515
+PROFILE|OldGen::AllocatePage|avg=70686|avg_ns=16067|min=42504|max=98868|count=2|total_ns=32134
+=== PROFILE END ===

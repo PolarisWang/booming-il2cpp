@@ -320,7 +320,6 @@ internal static class ConvertToCppHandler
 #include <cstdio>
 #include <cstring>
 #include <chrono>
-#include <setjmp.h>
 // chaos/log.h must be early (before runtime_core.h) because runtime_core.h
 // → gc_transition.h → thread_state.h uses CHAOS_IL2CPP_LOG_ERROR_M.
 #include <chaos/log.h>
@@ -359,13 +358,6 @@ extern ""C"" const int kAotMethodCount;
 extern ""C"" void SetExceptionFallback(void (*fn)());
 
 enum class RunMode {{ Fact, Benchmark, HotUpdate, HotUpdateAndBenchmark, PatchAndBenchmark }};
-
-// ── Exception fallback for verification mode ─────────────────────────────
-static thread_local jmp_buf s_verify_buf;
-
-static void exception_fallback() {{
-    longjmp(s_verify_buf, 1);
-}}
 
 // ── Shared helper: apply hotpatch and print diagnostic ─────────────────────
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {{
@@ -448,9 +440,6 @@ int main(int argc, char** argv) {{
     chaos::il2cpp::runtime_core::SetCurrentThreadState(
         reinterpret_cast<ThreadState*>(static_cast<uintptr_t>(1)));
 
-    // Install exception fallback: RaiseManagedException → longjmp recovery.
-    SetExceptionFallback(&exception_fallback);
-
     // Fill unresolved external runtime table entries with safe stubs.
     FillExternalRuntimeStubs();
 
@@ -479,10 +468,22 @@ int main(int argc, char** argv) {{
 
     switch (mode) {{
     case RunMode::Fact: {{
+        // NOTE: Uses try/catch instead of setjmp/longjmp because the generated
+        // code throws chaos_managed_exception (C++ exception) for unresolved
+        // external calls. setjmp/longjmp cannot catch C++ exceptions and mixing
+        // both with /EHa corrupts the /GS stack cookie (0xC0000409).
         int result = 0;
-        chaos::il2cpp::common::g_chaos_fail_hook = []() {{ longjmp(s_verify_buf, 1); }};
-        if (setjmp(s_verify_buf) == 0) {{
-            result = RunNativeAotAll();
+        for (int i = 0; i < kAotMethodCount; i++) {{
+            bool caught = false;
+            chaos::il2cpp::common::g_chaos_fail_hook = []() {{ throw chaos_managed_exception{{}}; }};
+            try {{
+                RunNativeAot(i);
+            }} catch (const chaos_managed_exception&) {{
+                caught = true;
+            }} catch (...) {{
+                caught = true;
+            }}
+            if (caught) result |= (1 << i);
         }}
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         int failed_count = 0;
@@ -495,9 +496,11 @@ int main(int argc, char** argv) {{
     }}
     case RunMode::Benchmark: {{
         double elapsed_ms = -1.0;
-        chaos::il2cpp::common::g_chaos_fail_hook = []() {{ longjmp(s_verify_buf, 1); }};
-        if (setjmp(s_verify_buf) == 0) {{
+        chaos::il2cpp::common::g_chaos_fail_hook = []() {{ throw chaos_managed_exception{{}}; }};
+        try {{
             elapsed_ms = BenchmarkMethod(entry_index, iterations);
+        }} catch (...) {{
+            elapsed_ms = -1.0;
         }}
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         if (elapsed_ms < 0.0) {{
@@ -513,11 +516,14 @@ int main(int argc, char** argv) {{
         return 0;
     }}
     case RunMode::HotUpdate: {{
-        ApplyHotpatchIfAvailable();
         int result = 0;
-        chaos::il2cpp::common::g_chaos_fail_hook = []() {{ longjmp(s_verify_buf, 1); }};
-        if (setjmp(s_verify_buf) == 0) {{
-            result = RunNativeAotAll();
+        for (int i = 0; i < kAotMethodCount; i++) {{
+            chaos::il2cpp::common::g_chaos_fail_hook = []() {{ throw chaos_managed_exception{{}}; }};
+            try {{
+                RunNativeAot(i);
+            }} catch (...) {{
+                result |= (1 << i);
+            }}
         }}
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         int failed_count = 0;
@@ -530,18 +536,22 @@ int main(int argc, char** argv) {{
         return result;
     }}
     case RunMode::HotUpdateAndBenchmark: {{
-        ApplyHotpatchIfAvailable();
         int hot_result = 0;
-        chaos::il2cpp::common::g_chaos_fail_hook = []() {{ longjmp(s_verify_buf, 1); }};
-        if (setjmp(s_verify_buf) == 0) {{
-            hot_result = RunNativeAotAll();
+        for (int i = 0; i < kAotMethodCount; i++) {{
+            chaos::il2cpp::common::g_chaos_fail_hook = []() {{ throw chaos_managed_exception{{}}; }};
+            try {{
+                RunNativeAot(i);
+            }} catch (...) {{
+                hot_result |= (1 << i);
+            }}
         }}
-        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
-        chaos::il2cpp::common::g_chaos_fail_hook = []() {{ longjmp(s_verify_buf, 1); }};
+        chaos::il2cpp::common::g_chaos_fail_hook = []() {{ throw chaos_managed_exception{{}}; }};
         auto start = std::chrono::steady_clock::now();
         for (int i = 0; i < iterations; i++) {{
-            if (setjmp(s_verify_buf) == 0) {{
+            try {{
                 RunNativeAot(entry_index);
+            }} catch (...) {{
+                // Skip iteration on exception
             }}
         }}
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
@@ -554,12 +564,13 @@ int main(int argc, char** argv) {{
         return 0;
     }}
     case RunMode::PatchAndBenchmark: {{
-        ApplyHotpatchIfAvailable();
-        chaos::il2cpp::common::g_chaos_fail_hook = []() {{ longjmp(s_verify_buf, 1); }};
+        chaos::il2cpp::common::g_chaos_fail_hook = []() {{ throw chaos_managed_exception{{}}; }};
         auto start = std::chrono::steady_clock::now();
         for (int i = 0; i < iterations; i++) {{
-            if (setjmp(s_verify_buf) == 0) {{
-                RunNativeAotBench(entry_index);
+            try {{
+                RunNativeAot(entry_index);
+            }} catch (...) {{
+                // Skip iteration on exception
             }}
         }}
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
