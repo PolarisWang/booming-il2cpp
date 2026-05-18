@@ -106,6 +106,16 @@ inline bool chaos_is_type_compatible(const TypeInfo* chaos_actual_type_info, con
     return false;
 }
 
+// ── EH catch type check ──────────────────────────────────────────
+// Unified type compatibility check for catch blocks across all EH modes.
+inline bool chaos_eh_match_type(CHAOS_IL2CPP_INTPTR exc_obj, const TypeInfo* expected) noexcept {
+    if (exc_obj < 0) return false;
+    if (expected == nullptr) return true;
+    auto* h = reinterpret_cast<const ThinLockableHeader*>(reinterpret_cast<const void*>(exc_obj));
+    if (h == nullptr) return true;
+    return chaos_is_type_compatible(chaos_object_get_type_info(h), expected);
+}
+
 // ── Interface check (iface_map + runtime_iface_map linear scan via WarmPtr) ──
 inline bool chaos_type_implements_interface(const TypeInfo* chaos_actual_type_info, const TypeInfo* chaos_target_interface_type_info) noexcept
 {

@@ -364,6 +364,15 @@ public sealed partial class NativeAotLoweringPlanner
         var aotReachableSubjectIds = ComputeAotReachableSubjectIds(
             entryMethod?.SubjectId, methodsForLowering);
 
+        // In full-assembly mode (no entry point), all methods are AOT-reachable
+        // since any method may be invoked via the RunNativeAot dispatch table
+        // by the runtime harness (entry.exe loop over kAotMethodCount).
+        if (fullAssemblyMode)
+        {
+            foreach (var m in methodsForLowering)
+                aotReachableSubjectIds.Add(m.SubjectId);
+        }
+
         // Methods of types that implement COM interfaces are referenced by vtable
         // entries and need real bodies even if not statically reachable via call graph.
         if (_referenceTypeImplementedInterfaceSubjectIds?.Count > 0)
