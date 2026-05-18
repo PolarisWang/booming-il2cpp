@@ -142,6 +142,9 @@ struct RegisterFrame {
     const void*   call_cache;
     uint32_t      call_count;
 
+    // PIC dispatch data (PatchMethod* for T3 PIC lookup)
+    void*         patch_method;
+
     // Program counter
     uint32_t      pc;
 

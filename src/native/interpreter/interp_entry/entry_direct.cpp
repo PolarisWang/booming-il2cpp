@@ -1,6 +1,10 @@
 // entry_direct.cpp — InterpreterEntryDirect hot path
 #include <tier_manager.h>
 
+#include "vtable_registry.h"
+
+#include <vector>
+
 namespace chaos::il2cpp::runtime_core {
 
 // ── Tier hit counters (profile instrumentation) ─────────────────────────
@@ -27,12 +31,368 @@ static interpreter::InterpreterValue ReadTypedArg(
 static void WriteTypedRet(void* ret_buf, const interpreter::ExecutionResult& result,
                            interpreter::ValueTag ret_tag) noexcept;
 
-// Forward declarations for tier optimization functions.
-// These are defined in ir_optimizer.cpp and pic_generator.cpp (separate TUs).
-void OptimizeToTier2(PatchMethod* pm) noexcept;
-bool EnsureCallSiteProfiles(PatchMethod* pm) noexcept;
-void PromoteToTier3(PatchMethod* pm) noexcept;
-void RebuildCallCacheForT3(PatchMethod* pm) noexcept;
+// Forward declaration: defined in inlining.cpp (unity-built before this file).
+void InlineLeafCallees(
+    interpreter::IRMethod& ir,
+    PatchMethod& patch_method) noexcept;
+
+// ── Tier 2 IR re-optimization helpers ─────────────────────────────────────
+
+/// Clone an IRMethod for independent optimization.
+static interpreter::IRMethod CloneIRMethod(const interpreter::IRMethod& src) noexcept {
+    interpreter::IRMethod dst;
+    dst.instructions = src.instructions;
+    dst.seh_clauses  = src.seh_clauses;
+    return dst;
+}
+
+struct FusionStats {
+    uint32_t dead_pops_removed    = 0;
+    uint32_t dup_pop_cancelled    = 0;
+    uint32_t redundant_locals     = 0;
+    uint32_t ldnull_stloc_fused   = 0;
+    uint32_t ldc_add_fused        = 0;
+};
+
+static FusionStats FusePass(interpreter::IRMethod& ir) noexcept {
+    FusionStats stats;
+    auto& instrs = ir.instructions;
+    if (instrs.size() < 2) return stats;
+
+    std::vector<interpreter::IRInstruction> fused;
+    fused.reserve(instrs.size());
+
+    for (size_t i = 0; i < instrs.size(); ++i) {
+        const auto& op = instrs[i];
+
+        if (op.op_code == interpreter::IROpCode::Pop) {
+            size_t j = i;
+            while (j < instrs.size() &&
+                   instrs[j].op_code == interpreter::IROpCode::Pop) {
+                ++j;
+            }
+            if (j < instrs.size() &&
+                instrs[j].op_code == interpreter::IROpCode::Ret) {
+                uint32_t skipped = static_cast<uint32_t>(j - i);
+                stats.dead_pops_removed += skipped;
+                i = j - 1;
+                continue;
+            }
+            fused.push_back(op);
+            continue;
+        }
+
+        if (op.op_code == interpreter::IROpCode::Dup &&
+            i + 1 < instrs.size() &&
+            instrs[i + 1].op_code == interpreter::IROpCode::Pop) {
+            ++stats.dup_pop_cancelled;
+            ++i;
+            continue;
+        }
+
+        if (op.op_code == interpreter::IROpCode::LdLoc &&
+            i + 1 < instrs.size() &&
+            instrs[i + 1].op_code == interpreter::IROpCode::StLoc &&
+            op.operand_index == instrs[i + 1].operand_index) {
+            ++stats.redundant_locals;
+            ++i;
+            continue;
+        }
+
+        fused.push_back(op);
+    }
+
+    if (fused.size() < instrs.size()) {
+        instrs.swap(fused);
+    }
+    return stats;
+}
+
+static void FuseInstructions(interpreter::IRMethod& ir) noexcept {
+    FusionStats total;
+    for (int pass = 0; pass < 4; ++pass) {
+        auto stats = FusePass(ir);
+        total.dead_pops_removed  += stats.dead_pops_removed;
+        total.dup_pop_cancelled  += stats.dup_pop_cancelled;
+        total.redundant_locals   += stats.redundant_locals;
+        total.ldnull_stloc_fused += stats.ldnull_stloc_fused;
+        if (stats.dead_pops_removed == 0 &&
+            stats.dup_pop_cancelled == 0 &&
+            stats.redundant_locals == 0 &&
+            stats.ldnull_stloc_fused == 0) break;
+    }
+    CHAOS_IL2CPP_LOG_DEBUG_M("tier", "FuseInstructions: removed {} dead Pops, "
+                           "{} Dup+Pop pairs, {} redundant LdLoc+StLoc",
+                           total.dead_pops_removed,
+                           total.dup_pop_cancelled,
+                           total.redundant_locals);
+}
+
+bool OptimizeToTier2(PatchMethod* pm) noexcept {
+    if (pm == nullptr) return false;
+    auto* orig_ir = static_cast<interpreter::IRMethod*>(pm->cached_ir);
+    if (orig_ir == nullptr) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("tier", "OptimizeToTier2: no cached IR for method_token={}", pm->token);
+        return false;
+    }
+    if (!orig_ir->seh_clauses.empty()) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("tier", "OptimizeToTier2: SEH method, skip (token={})", pm->token);
+        return false;
+    }
+    if (orig_ir->instructions.size() <= 2) return false;
+
+    auto cloned_ir = CloneIRMethod(*orig_ir);
+    InlineLeafCallees(cloned_ir, *pm);
+    FuseInstructions(cloned_ir);
+    auto optimized_rm = interpreter::AllocateRegisters(cloned_ir);
+    if (optimized_rm.instructions.empty()) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("tier", "OptimizeToTier2: empty RegisterMethod (token={})", pm->token);
+        return false;
+    }
+
+    auto* storage = static_cast<interpreter::RegisterMethod*>(
+        CHAOS_IL2CPP_MALLOC(sizeof(interpreter::RegisterMethod)));
+    if (storage == nullptr) return false;
+    ::new (storage) interpreter::RegisterMethod(std::move(optimized_rm));
+    pm->cached_optimized_reg_method = storage;
+
+    CHAOS_IL2CPP_LOG_DEBUG_M("tier", "OptimizeToTier2: token={}, orig_instrs={}, "
+                           "opt_instrs={}, opt_regs={}",
+                           pm->token,
+                           orig_ir->instructions.size(),
+                           cloned_ir.instructions.size(),
+                           storage->max_regs);
+    return true;
+}
+
+// ── PIC profile + generation functions (from pic_generator.cpp) ──────────
+
+static uint32_t CountCallVirtInstructions(const interpreter::RegisterMethod& rm) noexcept {
+    uint32_t count = 0;
+    for (const auto& instr : rm.instructions) {
+        if (instr.op_code() == interpreter::IROpCode::CallVirt ||
+            instr.op_code() == interpreter::IROpCode::CallVirtConstrained) {
+            ++count;
+        }
+    }
+    return count;
+}
+
+bool EnsureCallSiteProfiles(PatchMethod* pm) noexcept {
+    if (pm == nullptr) return false;
+    if (pm->call_site_profiles != nullptr) return true;
+
+    auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
+    if (rm == nullptr) return false;
+
+    uint32_t callvirt_count = CountCallVirtInstructions(*rm);
+    if (callvirt_count == 0) return false;
+
+    auto* profiles = static_cast<CallSiteProfile*>(
+        std::calloc(callvirt_count, sizeof(CallSiteProfile)));
+    if (profiles == nullptr) return false;
+
+    uint32_t prof_idx = 0;
+    for (uint32_t i = 0; i < static_cast<uint32_t>(rm->instructions.size()); ++i) {
+        if (rm->instructions[i].op_code() == interpreter::IROpCode::CallVirt ||
+            rm->instructions[i].op_code() == interpreter::IROpCode::CallVirtConstrained) {
+            if (prof_idx < callvirt_count) {
+                profiles[prof_idx].instruction_idx = i;
+                ++prof_idx;
+            }
+        }
+    }
+
+    pm->call_site_profiles = profiles;
+    pm->call_site_profile_count = callvirt_count;
+    return true;
+}
+
+void SampleCallVirtProfile(PatchMethod* pm, uint32_t instruction_idx, uint64_t receiver_type_token) noexcept {
+    if (pm == nullptr || pm->call_site_profiles == nullptr) return;
+    auto* profiles = static_cast<CallSiteProfile*>(pm->call_site_profiles);
+    uint32_t count = pm->call_site_profile_count;
+
+    for (uint32_t i = 0; i < count; ++i) {
+        if (profiles[i].instruction_idx != instruction_idx) continue;
+        auto& prof = profiles[i];
+        ++prof.sample_count;
+        for (uint32_t j = 0; j < prof.type_count; ++j) {
+            if (prof.type_tokens[j] == receiver_type_token) {
+                ++prof.type_hit_counts[j];
+                return;
+            }
+        }
+        if (prof.type_count < 4) {
+            prof.type_tokens[prof.type_count] = receiver_type_token;
+            prof.type_hit_counts[prof.type_count] = 1;
+            ++prof.type_count;
+        } else {
+            uint32_t min_idx = 0;
+            for (uint32_t j = 1; j < 4; ++j) {
+                if (prof.type_hit_counts[j] < prof.type_hit_counts[min_idx]) min_idx = j;
+            }
+            prof.type_tokens[min_idx] = receiver_type_token;
+            prof.type_hit_counts[min_idx] = 1;
+        }
+        return;
+    }
+}
+
+bool GeneratePICData(PatchMethod* pm) noexcept {
+    if (pm == nullptr || pm->call_site_profiles == nullptr) return false;
+    if (pm->pic_dispatch_data != nullptr) return true;
+
+    auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
+    if (rm == nullptr) return false;
+
+    auto* profiles = static_cast<CallSiteProfile*>(pm->call_site_profiles);
+    uint32_t count = pm->call_site_profile_count;
+    if (count == 0) return false;
+
+    uint8_t* alloc_base = static_cast<uint8_t*>(
+        std::calloc(1, sizeof(uint32_t) + count * sizeof(PicDispatchChain)));
+    if (alloc_base == nullptr) return false;
+    *reinterpret_cast<uint32_t*>(alloc_base) = count;
+    auto* chains = reinterpret_cast<PicDispatchChain*>(alloc_base + sizeof(uint32_t));
+
+    uint32_t instruct_count = static_cast<uint32_t>(rm->instructions.size());
+    CHAOS_IL2CPP_VECTOR(uint32_t) inst_method_tokens(instruct_count, 0);
+    for (uint32_t ii = 0; ii < instruct_count; ++ii) {
+        const auto& ri = rm->instructions[ii];
+        if (ri.op_code() == interpreter::IROpCode::CallVirt ||
+            ri.op_code() == interpreter::IROpCode::CallVirtConstrained) {
+            const auto* desc = TryDecodeReflectionQueryMethodHandle(
+                static_cast<MethodInfoHandle>(reinterpret_cast<uintptr_t>(ri.imm.ptr)));
+            inst_method_tokens[ii] = (desc != nullptr) ? desc->metadata_token : 0;
+        }
+    }
+
+    uint32_t generated_count = 0;
+    uint64_t current_gen = g_patch_generation.load(std::memory_order_relaxed);
+
+    for (uint32_t i = 0; i < count; ++i) {
+        const auto& prof = profiles[i];
+        if (prof.sample_count < 4) continue;
+
+        uint32_t total = 0;
+        for (uint32_t j = 0; j < prof.type_count; ++j) total += prof.type_hit_counts[j];
+        if (total == 0) continue;
+
+        uint64_t sorted_tokens[4] = {};
+        uint32_t sorted_hits[4] = {};
+        for (uint32_t j = 0; j < prof.type_count; ++j) {
+            sorted_tokens[j] = prof.type_tokens[j];
+            sorted_hits[j] = prof.type_hit_counts[j];
+        }
+        for (uint32_t a = 0; a < prof.type_count; ++a)
+            for (uint32_t b = a + 1; b < prof.type_count; ++b)
+                if (sorted_hits[b] > sorted_hits[a]) {
+                    std::swap(sorted_tokens[a], sorted_tokens[b]);
+                    std::swap(sorted_hits[a], sorted_hits[b]);
+                }
+
+        auto& chain = chains[i];
+        chain.generation = static_cast<uint32_t>(current_gen);
+        chain.instruction_idx = prof.instruction_idx;
+        chain.method_token = (prof.instruction_idx < instruct_count)
+            ? inst_method_tokens[prof.instruction_idx] : 0;
+
+        float top1_ratio = static_cast<float>(sorted_hits[0]) / static_cast<float>(total);
+        uint32_t slots_to_fill = 0;
+        if (top1_ratio > 0.90f) {
+            slots_to_fill = 1;
+        } else {
+            uint32_t cumulative = sorted_hits[0];
+            for (uint32_t s = 1; s < prof.type_count && s < 3; ++s) {
+                cumulative += sorted_hits[s];
+                if (static_cast<float>(cumulative) / static_cast<float>(total) > 0.95f) {
+                    slots_to_fill = s + 1;
+                    break;
+                }
+            }
+        }
+
+        for (uint32_t s = 0; s < slots_to_fill && s < 3; ++s) {
+            chain.slots[s].type_token = sorted_tokens[s];
+            if (chain.method_token != 0 && sorted_tokens[s] != 0) {
+                chain.slots[s].direct_fn = vtable_registry::ResolveVirtualMethodPointer(
+                    static_cast<uint32_t>(sorted_tokens[s]),
+                    chain.method_token);
+            }
+        }
+        ++generated_count;
+    }
+
+    if (generated_count == 0) {
+        std::free(alloc_base);
+        return false;
+    }
+    pm->pic_dispatch_data = alloc_base;
+    return true;
+}
+
+void RebuildCallCacheForT3(PatchMethod* pm) noexcept {
+    if (pm == nullptr) return;
+    auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
+    if (rm == nullptr) return;
+
+    uint32_t instr_count = static_cast<uint32_t>(rm->instructions.size());
+    if (instr_count == 0) return;
+
+    auto* cc = static_cast<runtime_instantiation::CachedCallInfo*>(
+        CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(
+            instr_count * sizeof(runtime_instantiation::CachedCallInfo)));
+    if (cc == nullptr) return;
+
+    for (uint32_t i = 0; i < instr_count; ++i) {
+        const auto& ri = rm->instructions[i];
+        auto op = ri.op_code();
+        auto op_int = static_cast<int>(op);
+        switch (op_int) {
+        case static_cast<int>(interpreter::IROpCode::Call):
+        case static_cast<int>(interpreter::IROpCode::Calli):
+        case static_cast<int>(interpreter::IROpCode::CallVirt):
+        case static_cast<int>(interpreter::IROpCode::CallBridge):
+        case static_cast<int>(interpreter::IROpCode::CallVirtConstrained):
+            if (ri.imm.ptr != nullptr) {
+                cc[i] = runtime_instantiation::PrecacheCallTarget(ri.imm.ptr);
+            } else {
+                cc[i].ret_tag = 0xFF;
+            }
+            break;
+        default:
+            cc[i].ret_tag = 0xFF;
+            break;
+        }
+    }
+    pm->call_cache = cc;
+}
+
+static void FreeCallSiteProfiles(PatchMethod* pm) noexcept {
+    if (pm == nullptr) return;
+    std::free(pm->call_site_profiles);
+    pm->call_site_profiles = nullptr;
+    pm->call_site_profile_count = 0;
+}
+
+static void FreePICData(PatchMethod* pm) noexcept {
+    if (pm == nullptr) return;
+    std::free(pm->pic_dispatch_data);
+    pm->pic_dispatch_data = nullptr;
+}
+
+void PromoteToTier3(PatchMethod* pm) noexcept {
+    if (pm == nullptr) return;
+    CHAOS_IL2CPP_LOG_DEBUG_M("tier", "T2->T3 promotion: token={}, profiles={}",
+        pm->token, pm->call_site_profile_count);
+    if (GeneratePICData(pm)) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("tier", "T3: PIC data generated for token={}", pm->token);
+    } else {
+        CHAOS_IL2CPP_LOG_DEBUG_M("tier", "T3: no profitable PIC for token={} (insufficient samples)", pm->token);
+    }
+    FreeCallSiteProfiles(pm);
+}
 
 // T3 promotion callback — lazily registered on first InterpreterEntryDirect call.
 // Uses std::call_once to avoid static init ordering issues.
@@ -649,3 +1009,4 @@ void InterpreterEntryDirectFast(
 }
 
 }  // namespace chaos::il2cpp::runtime_core
+

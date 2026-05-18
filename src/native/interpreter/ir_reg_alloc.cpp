@@ -1,6 +1,8 @@
 // ir_reg_alloc.cpp — Convert stack-based IR to register-based IR + register execution
 #include "ir_reg_alloc.h"
 
+#include "patch_loader.h"  // PatchMethod, PicDispatchChain, g_patch_generation
+
 #include "instantiation_engine.h"  // runtime-core: CachedCallInfo, InterpreterDispatchRaw
 namespace ri = chaos::il2cpp::runtime_instantiation;
 
@@ -1496,6 +1498,84 @@ static void Reg_Call(RegisterFrame& frame, const RegisterInstruction& instr) noe
 }
 
 static void Reg_CallVirt(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    // ── PIC fast path (T3 optimized tier) ──────────────────────────────
+    // Check for pre-resolved PIC chain: walks PicDispatchChain[] indexed by
+    // instruction_idx == frame.pc.  On hit, calls direct_fn directly without
+    // vtable resolution or InterpreterDispatchRaw.
+    if (frame.patch_method != nullptr) {
+        auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
+        if (pm->tier_state.load(std::memory_order_acquire) ==
+                chaos::il2cpp::runtime_core::PatchMethod::kT3Ready &&
+            pm->pic_dispatch_data != nullptr) {
+
+            uint32_t pc = frame.pc;
+            uint32_t ac = instr.call_arg_count();
+            uint32_t base = instr.src1_reg();
+
+            // Extract receiver type_token from first arg (this pointer)
+            uint64_t receiver_val = frame.regs.reg(base);
+            if (receiver_val != 0) {
+                auto* obj = reinterpret_cast<InterpreterObject*>(receiver_val);
+                uint64_t receiver_token = static_cast<uint64_t>(obj->type_token);
+
+                // Parse PIC chain header: [uint32_t count][PicDispatchChain[count]]
+                auto* pic_base = static_cast<const uint8_t*>(pm->pic_dispatch_data);
+                uint32_t chain_count = *reinterpret_cast<const uint32_t*>(pic_base);
+                auto* chains = reinterpret_cast<const chaos::il2cpp::runtime_core::PicDispatchChain*>(
+                    pic_base + sizeof(uint32_t));
+
+                for (uint32_t ci = 0; ci < chain_count; ++ci) {
+                    const auto& chain = chains[ci];
+                    if (chain.instruction_idx != pc) continue;
+                    if (chain.generation != chaos::il2cpp::runtime_core::g_patch_generation.load(
+                            std::memory_order_acquire)) break;
+
+                    // Check PIC slots
+                    for (uint32_t si = 0; si < 3; ++si) {
+                        const auto& slot = chain.slots[si];
+                        if (slot.type_token == 0) break;  // sentinel
+                        if (slot.type_token == receiver_token && slot.direct_fn != nullptr) {
+                            // PIC hit — call direct_fn
+                            uint64_t raw_args_stack[8];
+                            auto* raw_args = (ac <= 8) ? raw_args_stack
+                                : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
+                            if (raw_args == nullptr) break;
+
+                            for (uint32_t ai = 0; ai < ac; ++ai) {
+                                raw_args[ai] = frame.regs.reg(base + ai);
+                            }
+
+                            // Use CallDirectVoidPtr-like direct call
+                            using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
+                                                          uint64_t, uint64_t, uint64_t, uint64_t);
+                            auto fn = reinterpret_cast<DirectFn>(slot.direct_fn);
+                            uint64_t result = fn(
+                                (ac > 0) ? raw_args[0] : 0,
+                                (ac > 1) ? raw_args[1] : 0,
+                                (ac > 2) ? raw_args[2] : 0,
+                                (ac > 3) ? raw_args[3] : 0,
+                                (ac > 4) ? raw_args[4] : 0,
+                                (ac > 5) ? raw_args[5] : 0,
+                                (ac > 6) ? raw_args[6] : 0,
+                                (ac > 7) ? raw_args[7] : 0);
+
+                            if (ac > 8) CHAOS_IL2CPP_FREE(raw_args);
+
+                            if (instr.has_dst()) {
+                                frame.regs.set_reg(instr.dst_reg(), result,
+                                    static_cast<uint8_t>(ValueTag::Int64));
+                            }
+                            ++frame.pc;
+                            return;
+                        }
+                    }
+                    break;  // matched chain but no slot hit → fall through
+                }
+            }
+        }
+    }
+
+    // ── Fall through to Reg_Call (vtable + InterpreterDispatchRaw) ────
     Reg_Call(frame, instr);
 }
 
