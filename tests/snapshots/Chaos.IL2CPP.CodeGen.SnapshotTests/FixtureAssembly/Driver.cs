@@ -767,3 +767,36 @@ public static class HotUpdateWithGenericsDemo
     // Used by fixture 77-hotupdate-with-generics
     public static int Run() => 0;
 }
+
+// --- Fixture 79: sealed class devirtualization ---
+public class SealedHelper
+{
+    private int _val;
+    public SealedHelper(int val) { _val = val; }
+    public virtual int GetValueVirtual() => _val;
+}
+
+public static class SealedClassVirtualHelper
+{
+    // Used by fixture 79-sealed-devirtualized
+    public static int RunSealedVirtual() => new SealedHelper(42).GetValueVirtual();
+}
+
+// --- Fixture 80: interface devirtualization ---
+public interface IMyInterface
+{
+    int GetValue();
+}
+
+public class ImplHelper : IMyInterface
+{
+    private int _val;
+    public ImplHelper(int val) { _val = val; }
+    public int GetValue() => _val;
+}
+
+public static class InterfaceDevirtHelper
+{
+    // Used by fixture 80-interface-devirtualized
+    public static int RunInterfaceTest() => ((IMyInterface)new ImplHelper(42)).GetValue();
+}

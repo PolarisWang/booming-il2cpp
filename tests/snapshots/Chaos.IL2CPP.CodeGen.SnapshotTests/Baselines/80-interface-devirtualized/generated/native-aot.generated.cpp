@@ -1,7 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
-#include "com_ccw.h"
 #include "runtime_core.h"
+#include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
 #include "abi_manifest.h"
@@ -154,9 +154,9 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest(void);
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_IMyInterface_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ImplHelper_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest(void);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -172,8 +172,8 @@ extern "C" const int kAotMethodCount;
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
 static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[4] = {
 	0u,
+	0u,
 	1u,
-	2u,
 	2u,
 };
 
@@ -186,13 +186,13 @@ static constexpr struct {
 		CHAOS_ABI_MANIFEST_VERSION,
 		3u,
 		2u,
-		3070194084u,  // FNV-1a over entries+params
+		1333346284u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
+		{ 1u, 0u },  // SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest
 		{ 1u, 1u },  // SnapshotTestFixtures_IMyInterface_GetValue
 		{ 1u, 1u },  // SnapshotTestFixtures_ImplHelper_GetValue
-		{ 1u, 0u },  // SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest
 	},
 	{
 		2u,
@@ -978,16 +978,16 @@ static constexpr HotpatchTypeEntryV0 s_hotpatch_types[3] = {
 
 // Token→Slot mapping (sorted by token for binary search)
 static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[3] = {
-	{ 0x00000002u, 2u },
-	{ 0x00000004u, 0u },
-	{ 0x00000006u, 1u },
+	{ 0x00000002u, 0u },
+	{ 0x00000004u, 1u },
+	{ 0x00000006u, 2u },
 };
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[3] = {
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // InterfaceDevirtHelper::RunInterfaceTest
 	{ reinterpret_cast<void*>(&SnapshotTestFixtures_IMyInterface_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IMyInterface::GetValue
 	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ImplHelper_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ImplHelper::GetValue
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // InterfaceDevirtHelper::RunInterfaceTest
 };
 
 // Module hotpatch bundle
@@ -1022,9 +1022,9 @@ extern "C" int32_t kChaosExternalRuntimeCount = 1;
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[3])() = {
+	reinterpret_cast<void(*)()>(&SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest),
 	reinterpret_cast<void(*)()>(&SnapshotTestFixtures_IMyInterface_GetValue),
 	reinterpret_cast<void(*)()>(&SnapshotTestFixtures_ImplHelper_GetValue),
-	reinterpret_cast<void(*)()>(&SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
@@ -1068,7 +1068,8 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
 			chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 				entry.method_key, __chaos_args, __chaos_ret);
 		} else {
-			reinterpret_cast<void(*)()>(entry.direct_ptr)();
+			// Use kBenchmarkWrappers which supply correct default argument values
+			kBenchmarkWrappers[i]();
 		}
 	}
 	return result;
@@ -1108,9 +1109,9 @@ extern "C" double BenchmarkMethod(
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[3] = {
+	reinterpret_cast<void*>(&SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest),
 	reinterpret_cast<void*>(&SnapshotTestFixtures_IMyInterface_GetValue),
 	reinterpret_cast<void*>(&SnapshotTestFixtures_ImplHelper_GetValue),
-	reinterpret_cast<void*>(&SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -1180,6 +1181,10 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_InterfaceDevirtHelper[1] = {
+	{ 0u, "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()", "RunInterfaceTest", "System.Void", 0, nullptr, 0u },
+};
+
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_IMyInterface[1] = {
 	{ 0u, "SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()", "GetValue", "System.Void", 0, nullptr, 0u },
 };
@@ -1188,17 +1193,13 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtur
 	{ 0u, "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()", "GetValue", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_InterfaceDevirtHelper[1] = {
-	{ 0u, "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()", "RunInterfaceTest", "System.Void", 0, nullptr, 0u },
-};
-
 static constexpr ReflectionQueryTypeDescriptor kReflTypes[3] = {
+	{ 0u, "SnapshotTestFixtures/InterfaceDevirtHelper", "SnapshotTestFixtures/InterfaceDevirtHelper", "", "InterfaceDevirtHelper", "InterfaceDevirtHelper", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_SnapshotTestFixtures_InterfaceDevirtHelper, 1u },
 	{ 0u, "SnapshotTestFixtures/IMyInterface", "SnapshotTestFixtures/IMyInterface", "", "IMyInterface", "IMyInterface", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_SnapshotTestFixtures_IMyInterface, 1u },
 	{ 0u, "SnapshotTestFixtures/ImplHelper", "SnapshotTestFixtures/ImplHelper", "", "ImplHelper", "ImplHelper", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_SnapshotTestFixtures_ImplHelper, 1u },
-	{ 0u, "SnapshotTestFixtures/InterfaceDevirtHelper", "SnapshotTestFixtures/InterfaceDevirtHelper", "", "InterfaceDevirtHelper", "InterfaceDevirtHelper", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_SnapshotTestFixtures_InterfaceDevirtHelper, 1u },
 };
 
 static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[3] = {
@@ -1246,26 +1247,6 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
-// Managed method: SnapshotTestFixtures/IMyInterface::GetValue()
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_IMyInterface_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// AOT-unreachable stub: SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ImplHelper_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()");
-	return {};
-}
-
 // Managed method: SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest(void)
 {
@@ -1291,18 +1272,36 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_InterfaceDevirtHelper_RunInte
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
-		CHAOS_IL2CPP_INT32 chaos_dt_result{};
-		auto* chaos_dt_ti = chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0));
-		if (chaos_dt_ti->stable_id == chaos_type_id_SnapshotTestFixtures_ImplHelper)
-		{
-			chaos_dt_result = SnapshotTestFixtures_ImplHelper_GetValue(chaos_arg_0, chaos_arg_1);
-		}
-		else
-		{
-			chaos_dt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)>(chaos_vtable_resolve(chaos_dt_ti->vtable_array, 0u)))(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_dt_result);
+		CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 0u)))(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 	}
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: SnapshotTestFixtures/IMyInterface::GetValue()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_IMyInterface_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: SnapshotTestFixtures/ImplHelper::GetValue()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ImplHelper_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 

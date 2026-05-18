@@ -1,7 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
-#include "com_ccw.h"
 #include "runtime_core.h"
+#include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
 #include "abi_manifest.h"
@@ -239,7 +239,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);
 // ── Module registration ──
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[98] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[101] = {
 		0u,
 		1548u,
 		1548u,
@@ -334,13 +334,16 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		1548u,
 		1548u,
 		1556u,
+		1548u,
+		1544u,
+		1548u,
 		1556u,
-		1536u,
+		1544u,
 		1548u,
 		1548u,
 	};
 
-	static constexpr const char* s_type_names[98] = {
+	static constexpr const char* s_type_names[101] = {
 		"<Module>",
 		"ArithmeticOps",
 		"StringOps",
@@ -435,14 +438,20 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		"HotUpdateWithTypesDemo",
 		"HotUpdateWithGenericsDemo",
 		"IComInternal",
-		"IComExternal",
-		"ComInternalImpl",
 		"CrossAssemblyComCaller",
+		"SealedHelper",
+		"SealedClassVirtualHelper",
+		"IMyInterface",
+		"ImplHelper",
+		"InterfaceDevirtHelper",
 		"<>O",
 	};
 
-	static constexpr const char* s_type_namespaces[98] = {
+	static constexpr const char* s_type_namespaces[101] = {
 		"",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
@@ -542,7 +551,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		"",
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[98] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[101] = {
 		0u,
 		0u,
 		0u,
@@ -641,9 +650,15 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		0u,
 		0u,
 		0u,
+		0u,
+		0u,
+		0u,
 	};
 
-	static const TypeInfoHot* const s_type_info_ptrs[98] = {
+	static const TypeInfoHot* const s_type_info_ptrs[101] = {
+		nullptr,
+		nullptr,
+		nullptr,
 		nullptr,
 		nullptr,
 		nullptr,
@@ -745,10 +760,10 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[1] = {
-		33554530u,
+		33554533u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[99] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[102] = {
 		0u,
 		0u,
 		0u,
@@ -764,6 +779,9 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		0u,
 		0u,
 		0u,
+		1u,
+		1u,
+		1u,
 		1u,
 		1u,
 		1u,
@@ -850,7 +868,10 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		1u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[99] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[102] = {
+		0u,
+		0u,
+		0u,
 		0u,
 		0u,
 		0u,
@@ -966,7 +987,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .nested_type_offset = */ s_nested_type_offset,
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
-		/* .type_count        = */ 98u,
+		/* .type_count        = */ 101u,
 	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
@@ -1070,7 +1091,8 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
 			chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 				entry.method_key, __chaos_args, __chaos_ret);
 		} else {
-			reinterpret_cast<void(*)()>(entry.direct_ptr)();
+			// Use kBenchmarkWrappers which supply correct default argument values
+			kBenchmarkWrappers[i]();
 		}
 	}
 	return result;
@@ -1255,7 +1277,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StringOps_UseString(void)
 		{
 			alignas(16) uint8_t _d_ab[8];
 			ArgBuffer _d_bw(_d_ab);
-			_d_bw._d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
+			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 				_d0.method_key, _d_ab, nullptr);
 		}
