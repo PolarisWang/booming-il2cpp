@@ -1,0 +1,564 @@
+{
+  "family": "System.Private.CoreLib/convert-char",
+  "assembly": "System.Private.CoreLib",
+  "total_methods": 0,
+  "audited": 0,
+  "false_passing": 0,
+  "stubs_found": 0,
+  "skips_found": 91,
+  "methods_without_lowering": 0,
+  "methods_without_assert": 0,
+  "passed": true,
+  "method_details": [],
+  "skip_details": [
+    {
+      "type_name": "Span",
+      "method_name": "ToArray",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Attribute",
+      "method_name": "GetCustomAttributes",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Attribute",
+      "method_name": "GetCustomAttributes",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "DateTime",
+      "method_name": "TryParse",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Guid",
+      "method_name": "TryParse",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Array",
+      "method_name": "Resize",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Buffer",
+      "method_name": "BlockCopy",
+      "param_count": 5,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Buffer",
+      "method_name": "BulkMoveWithWriteBarrier",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Buffer",
+      "method_name": "Memmove",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Buffer",
+      "method_name": "GetByte",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Buffer",
+      "method_name": "SetByte",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Span",
+      "method_name": "get_Item",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Span",
+      "method_name": "Slice",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Span",
+      "method_name": "Slice",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ReadOnlySpan",
+      "method_name": "get_Item",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ReadOnlySpan",
+      "method_name": "Slice",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ReadOnlySpan",
+      "method_name": "Slice",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Memory",
+      "method_name": "Slice",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "List",
+      "method_name": "RemoveAt",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Thread",
+      "method_name": "Start",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Monitor",
+      "method_name": "Enter",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Monitor",
+      "method_name": "Exit",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Monitor",
+      "method_name": "Pulse",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Monitor",
+      "method_name": "PulseAll",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Monitor",
+      "method_name": "Wait",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "DynamicInvoke",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "get_Method",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "get_Target",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "CreateDelegate",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "CreateDelegate",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "MulticastDelegate",
+      "method_name": "GetInvocationList",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "op_Equality",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "op_Inequality",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Type",
+      "method_name": "GetType",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Type",
+      "method_name": "GetType",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Type",
+      "method_name": "GetType",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Nullable",
+      "method_name": "get_Value",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "RuntimeHelpers",
+      "method_name": "RunClassConstructor",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "RuntimeHelpers",
+      "method_name": "InitializeArray",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "RuntimeHelpers",
+      "method_name": "GetSubArray",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "BinaryReader",
+      "method_name": "ReadString",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "BinaryReader",
+      "method_name": "ReadInt32",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "BinaryReader",
+      "method_name": "ReadDouble",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "BinaryWriter",
+      "method_name": "Write",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Stream",
+      "method_name": "Read",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Stream",
+      "method_name": "Write",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Stream",
+      "method_name": "CopyTo",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "CultureInfo",
+      "method_name": "GetCultureInfo",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Task",
+      "method_name": "Run",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Task",
+      "method_name": "ContinueWith",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Task",
+      "method_name": "WhenAny",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Task",
+      "method_name": "WhenAll",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Task",
+      "method_name": "FromResult",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Task",
+      "method_name": "Delay",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Task",
+      "method_name": "Wait",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Task",
+      "method_name": "Wait",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Task",
+      "method_name": "get_IsCompleted",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Task",
+      "method_name": "get_Status",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Thread",
+      "method_name": "Sleep",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Thread",
+      "method_name": "ResetAbort",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Thread",
+      "method_name": "get_ManagedThreadId",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Activator",
+      "method_name": "CreateInstance",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Module",
+      "method_name": "GetCustomAttributes",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "MethodBase",
+      "method_name": "Invoke",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "MemberInfo",
+      "method_name": "get_MemberType",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "MethodInfo",
+      "method_name": "GetParameters",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "MethodInfo",
+      "method_name": "get_ReturnType",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ConstructorInfo",
+      "method_name": "Invoke",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "FieldInfo",
+      "method_name": "GetValue",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "FieldInfo",
+      "method_name": "SetValue",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "FieldInfo",
+      "method_name": "get_FieldType",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "PropertyInfo",
+      "method_name": "GetValue",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "PropertyInfo",
+      "method_name": "GetValue",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "PropertyInfo",
+      "method_name": "SetValue",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "PropertyInfo",
+      "method_name": "get_PropertyType",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Exception",
+      "method_name": "get_StackTrace",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "BitConverter",
+      "method_name": "ToDouble",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "BitConverter",
+      "method_name": "ToInt32",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Guid",
+      "method_name": "ctor",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Interlocked",
+      "method_name": "CompareExchange",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Interlocked",
+      "method_name": "Exchange",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Interlocked",
+      "method_name": "Increment",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Interlocked",
+      "method_name": "Decrement",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Interlocked",
+      "method_name": "Add",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Attribute",
+      "method_name": "get_TypeId",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "List",
+      "method_name": "Remove",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Dictionary",
+      "method_name": "ContainsKey",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Dictionary",
+      "method_name": "Remove",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "HashSet",
+      "method_name": "Add",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "HashSet",
+      "method_name": "Contains",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "HashSet",
+      "method_name": "Remove",
+      "param_count": 1,
+      "override_value": "skip"
+    }
+  ],
+  "errors": [
+    "Generated C++ not found"
+  ]
+}
