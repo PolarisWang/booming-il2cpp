@@ -193,8 +193,8 @@ static bool bench_arithmetic() {
 
     // Prepare args (2 int args, but the method only uses them as stack seed)
     uint64_t args_buf[2] = { 10, 20 };
-    int32_t expected = 330;  // sum of (1*3 + 2*3 + ... + 10*3) = 3 * 55 = 165, doubled = 330
-    (void)expected;
+    int32_t expected = 162;  // IL: (LdcI4 X, Add)×10, Ret — first Add reads reg(0)+reg(0)=0,
+                             // then accumulates: 0+6, +9, +12, +15, +18, +21, +24, +27, +30 = 162
 
     // Phase 1: T1 (Cold) — call_count < 100
     // First 50 calls are warmup, next 80 are measured.
@@ -211,7 +211,7 @@ static bool bench_arithmetic() {
                 TierName(tier), pm.call_count.load(std::memory_order_relaxed));
 
     // Measure T1: next 80 calls (stays under 130 total = 50 warmup + 80 measure)
-    double t1_ns = MeasureTier(&pm, 80, args_buf, 2, nullptr);
+    double t1_ns = MeasureTier(&pm, 80, args_buf, 2, &expected);
     tier = pm.tier_state.load(std::memory_order_acquire);
     std::printf("  T1: %.0f ns/op, tier=%s, call_count=%u\n",
                 t1_ns, TierName(tier), pm.call_count.load(std::memory_order_relaxed));
@@ -246,7 +246,7 @@ static bool bench_arithmetic() {
     // Measure T2: 300 calls at T2
     t2_calls_needed = 300 - (pm.call_count.load(std::memory_order_relaxed) % 300);
     // Adding more calls to trigger T2→T3 if threshold is low enough
-    double t2_ns = MeasureTier(&pm, t2_calls_needed, args_buf, 2, nullptr);
+    double t2_ns = MeasureTier(&pm, t2_calls_needed, args_buf, 2, &expected);
     tier = pm.tier_state.load(std::memory_order_acquire);
     std::printf("  T2: %.0f ns/op, tier=%s, call_count=%u\n",
                 t2_ns, TierName(tier),
@@ -275,7 +275,7 @@ static bool bench_arithmetic() {
     }
 
     // Measure T3: 500 calls at T3
-    double t3_ns = MeasureTier(&pm, 500, args_buf, 2, nullptr);
+    double t3_ns = MeasureTier(&pm, 500, args_buf, 2, &expected);
     tier = pm.tier_state.load(std::memory_order_acquire);
     std::printf("  T3: %.0f ns/op, tier=%s, call_count=%u\n",
                 t3_ns, TierName(tier),

@@ -15,7 +15,7 @@ namespace chaos::il2cpp::codegen {
 // Fixed-size array (no heap allocation in exception context).
 // Thread-safe: entries are append-only, never removed.
 
-static constexpr uint32_t kMaxT4CodeEntries = 256;
+static constexpr uint32_t kMaxT4CodeEntries = 2048;
 
 struct T4CodeEntry {
     const void*       code_start = nullptr;   // RX code entry point

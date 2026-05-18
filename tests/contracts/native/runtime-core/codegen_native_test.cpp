@@ -477,6 +477,7 @@ static bool Test_LdFld_StFld() {
     rm.max_regs = 3;
     if (!CanGenerateNativeCode(rm)) return false;
     auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    DumpInstrs(rm.instructions);
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
@@ -497,6 +498,7 @@ static bool Test_Box() {
     rm.max_regs = 2;
     if (!CanGenerateNativeCode(rm)) return false;
     auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    DumpInstrs(rm.instructions);
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected non-null pointer)\n", (unsigned long long)result);
@@ -585,6 +587,7 @@ static bool Test_LdElem_StElem() {
     rm.max_regs = 5;
     if (!CanGenerateNativeCode(rm)) return false;
     auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size);
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);

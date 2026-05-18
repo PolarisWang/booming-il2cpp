@@ -43,8 +43,37 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrArtifact aotCoreIr)
     {
         return aotCoreIr.Methods
-            .OrderBy(m => m.SubjectId, StringComparer.Ordinal)
+            .OrderBy(m => ExtractNumericSortKey(m.SubjectId))
+            .ThenBy(m => m.SubjectId, StringComparer.Ordinal)
             .ToList();
+    }
+
+    /// <summary>
+    /// Extracts a sort key that orders methods by their numeric subject index
+    /// (parsed from a trailing "Subject_N" pattern) for natural slot ordering.
+    /// Methods without a matching numeric suffix sort after all numerically-keyed
+    /// methods, using alphabetical fallback.
+    /// </summary>
+    private static (int NumericKey, string Fallback) ExtractNumericSortKey(string subjectId)
+    {
+        // Match trailing "Subject_NNN" pattern in the method name portion
+        // (after the last "::" separator). The SubjectId format is typically:
+        //   "Assembly/Type::Subject_N:Signature"
+        int methodSep = subjectId.LastIndexOf("::", StringComparison.Ordinal);
+        int searchStart = methodSep >= 0 ? methodSep + 2 : 0;
+
+        // Find "Subject_" prefix
+        int subjectIdx = subjectId.IndexOf("Subject_", searchStart, StringComparison.Ordinal);
+        if (subjectIdx >= 0)
+        {
+            int numStart = subjectIdx + "Subject_".Length;
+            int numEnd = numStart;
+            while (numEnd < subjectId.Length && char.IsDigit(subjectId[numEnd])) numEnd++;
+            if (numEnd > numStart && int.TryParse(subjectId.AsSpan(numStart, numEnd - numStart), out var num))
+                return (num, subjectId);
+        }
+
+        return (int.MaxValue, subjectId);
     }
 
     private IReadOnlyList<AotCoreIrMethodArtifact> ResolveReachableMethods(

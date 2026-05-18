@@ -5,6 +5,7 @@
 
 #include "../interpreter/ir_reg_alloc.h"
 #include "../interpreter/interpreter_vm.h"
+#include "reg_alloc_graph_coloring.h"
 
 #include <codegen_bridge.h>
 #include <chaos/log.h>
@@ -138,8 +139,21 @@ private:
     // Keeps RSP 16-byte aligned per Win64 ABI.
     int32_t frame_align_adj_ = 0;
 
+    // ── Graph-coloring register allocation (V2) ──────────────────────────
+    // Replaces V1 frequency-based caching with Chaitin-Briggs coloring.
+    // Results are mutually exclusive with V1: when active, cached_slots_used_=0.
+    GraphColoringResult gcr_;
+    bool has_graph_coloring_ = false;
+    // Callee-saved x64 GPRs selected by graph coloring (subset of {7,12,13,14,15})
+    uint8_t callee_x64_regs_[5];
+    // x64 reg → vreg (0xFF = not colored); indexed by x64 register number
+    uint8_t x64_to_colored_vreg_[16];
+    // Pointer to current callee-saved register list (callee_x64_regs_ or kCacheableX64Regs)
+    const uint8_t* callee_saved_regs_ = kCacheableX64Regs;
+
     void SelectCacheableRegs() noexcept;
     void SpillCachedRegs() noexcept;
+    void SpillGcRefCachedRegs() noexcept;
     void EmitCallWithSpill(uint8_t reg) noexcept;
 
     void LoadGpr(uint8_t x64_reg, uint32_t vreg) noexcept;
@@ -160,25 +174,45 @@ private:
 
 void NativeCodeGenerator::LoadGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LoadGpr");
-    if (config_.enable_register_caching && vreg < interpreter::kGPRegisters) {
+    if (vreg >= interpreter::kGPRegisters) { EmitMovRM(buf_, x64_reg, kRSP, static_cast<int32_t>(GprOff(vreg))); return; }
+
+    // Graph coloring V2: colored vreg → direct reg-to-reg move
+    if (has_graph_coloring_) {
+        uint8_t colored_x64 = gcr_.gpr_color[vreg];
+        if (colored_x64 != 0xFF) {
+            if (x64_reg != colored_x64) EmitMovRR(buf_, x64_reg, colored_x64);
+            return;
+        }
+    }
+    // V1 cache hit
+    if (config_.enable_register_caching) {
         uint8_t cached = cached_x64_for_vreg_[vreg];
         if (cached != kNotCached) {
-            // Cache hit: reg-to-reg move (or no-op if same reg)
             if (x64_reg != cached) EmitMovRR(buf_, x64_reg, cached);
             return;
         }
     }
-    // Cache miss: load from stack
+    // Load from stack
     EmitMovRM(buf_, x64_reg, kRSP, static_cast<int32_t>(GprOff(vreg)));
 }
 
 void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StoreGpr");
-    if (config_.enable_register_caching && vreg < interpreter::kGPRegisters) {
+    if (vreg >= interpreter::kGPRegisters) { EmitMovMR(buf_, kRSP, static_cast<int32_t>(GprOff(vreg)), x64_reg); return; }
+
+    // Graph coloring V2: colored vreg → direct reg-to-reg move (no stack write)
+    if (has_graph_coloring_) {
+        uint8_t colored_x64 = gcr_.gpr_color[vreg];
+        if (colored_x64 != 0xFF) {
+            if (x64_reg != colored_x64) EmitMovRR(buf_, colored_x64, x64_reg);
+            return;
+        }
+    }
+    // V1 cache
+    if (config_.enable_register_caching) {
         uint8_t cached = cached_x64_for_vreg_[vreg];
         if (cached != kNotCached && num_cache_regs_ > 0) {
             if (cached == x64_reg) {
-                // Same reg — no instruction needed, just track dirty
                 uint32_t slot = 0;
                 for (; slot < kMaxCacheRegs; ++slot) {
                     if (kCacheableX64Regs[slot] == cached) break;
@@ -186,7 +220,6 @@ void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
                 if (slot < kMaxCacheRegs) cached_dirty_mask_ |= (1u << slot);
                 return;
             }
-            // Different reg — update cached reg value
             EmitMovRR(buf_, cached, x64_reg);
             uint32_t slot = 0;
             for (; slot < kMaxCacheRegs; ++slot) {
@@ -196,7 +229,7 @@ void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
             return;
         }
     }
-    // Not cached or caching disabled: write through to stack
+    // Not cached/spilled: write through to stack
     EmitMovMR(buf_, kRSP, static_cast<int32_t>(GprOff(vreg)), x64_reg);
 }
 
@@ -210,8 +243,9 @@ void NativeCodeGenerator::StoreFpr(uint8_t xmm_reg, uint32_t vreg) noexcept {
 
 void NativeCodeGenerator::EmitSafepointPoll() noexcept {
     if (!config_.enable_safepoint_polls || config_.safepoint_fn == nullptr) return;
-    // Spill cached regs BEFORE shadow space adjustment (offsets are relative to frame RSP)
-    if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
+    // Spill only GC-ref cached regs BEFORE shadow space adjustment (offsets relative to frame RSP).
+    // Non-GC ref values stay in registers across safepoints — GC only needs object refs on stack.
+    if (config_.enable_register_caching && cached_slots_used_) SpillGcRefCachedRegs();
     EmitSubRI(buf_, kRSP, 32);
     EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(config_.safepoint_fn));
     uint32_t call_pos = buf_.pos();
@@ -526,6 +560,27 @@ void NativeCodeGenerator::SpillCachedRegs() noexcept {
     cached_dirty_mask_ = 0;
 }
 
+void NativeCodeGenerator::SpillGcRefCachedRegs() noexcept {
+    if (!config_.enable_register_caching || cached_slots_used_ == 0) return;
+    if (cached_dirty_mask_ == 0) return;
+
+    // Only spill cache slots holding GC object references. Non-GC ref values
+    // (int32, int64, float, etc.) stay in registers across safepoints since
+    // the GC only needs to scan object references on the stack.
+    uint32_t dirty = cached_dirty_mask_;
+    for (uint32_t slot = 0; slot < kMaxCacheRegs && dirty; ++slot) {
+        if (!(dirty & (1u << slot))) continue;
+        dirty &= ~(1u << slot);
+        uint8_t x64r = static_cast<uint8_t>(kCacheableX64Regs[slot]);
+        uint32_t vreg = x64_to_cached_vreg_[x64r];
+        if (vreg != kNotCached && vreg < vreg_types_.size() &&
+            vreg_types_[vreg] == kTypeObjectRef) {
+            EmitMovMR(buf_, kRSP, static_cast<int32_t>(GprOff(vreg)), x64r);
+            cached_dirty_mask_ &= ~(1u << slot);
+        }
+    }
+}
+
 void NativeCodeGenerator::EmitCallWithSpill(uint8_t reg) noexcept {
     if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
     EmitCallReg(buf_, reg);
@@ -625,7 +680,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         if (instr.has_src1()) { LoadGpr(kRAX, instr.src1_reg()); EmitMovMR(buf_, kRSI, 0, kRAX); }
         EmitAddRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_));
         for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
-            EmitPop(buf_, kCacheableX64Regs[slot - 1]);
+            EmitPop(buf_, callee_saved_regs_[slot - 1]);
         EmitPop(buf_, kRSI); EmitPop(buf_, kRBX); EmitPop(buf_, kRBP); EmitRet(buf_);
         return true;
     }
@@ -1314,9 +1369,47 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     // Initialize type inference state for all GPR vregs
     vreg_types_.assign(kGprCount, kTypeVoid);
 
-    // Select hot vregs for register caching (V1)
-    SelectCacheableRegs();
+    // ── Register allocation: graph coloring (V2) or frequency cache (V1) ──
+    if (config_.enable_register_caching) {
+        gcr_ = AllocateRegistersGraphColoring(rm_);
+        has_graph_coloring_ = false;
+        std::memset(x64_to_colored_vreg_, 0xFF, sizeof(x64_to_colored_vreg_));
+        for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+            uint8_t x64r = gcr_.gpr_color[vr];
+            if (x64r != 0xFF) {
+                has_graph_coloring_ = true;
+                x64_to_colored_vreg_[x64r] = static_cast<uint8_t>(vr);
+            }
+        }
+        if (has_graph_coloring_) {
+            // TEMP force to V1 fallback for LdFld_StFld debugging
+            has_graph_coloring_ = false;
+            SelectCacheableRegs();
+        } else {
+            cached_slots_used_ = 0;  // V1 cache disabled — colors handle it
+            cached_dirty_mask_ = 0;
+            callee_saved_regs_ = callee_x64_regs_;
+        } else {
+            SelectCacheableRegs();  // V1 fallback
+        }
+    } else {
+        SelectCacheableRegs();
+    }
     frame_align_adj_ = (num_cache_regs_ % 2) * 8;  // 16-byte alignment for Win64 ABI
+
+    if (has_graph_coloring_) {
+        std::printf("    GRAPH COLORING: num_callee=%u callee_regs=", num_cache_regs_);
+        for (uint32_t si = 0; si < num_cache_regs_; ++si) std::printf("%u ", callee_x64_regs_[si]);
+        std::printf("\n");
+        for (uint32_t vr = 0; vr < 8; ++vr) {
+            uint32_t r = gcr_.gpr_color[vr];
+            if (r == 0xFF)
+                std::printf("      vreg[%u] -> SPILLED\n", vr);
+            else
+                std::printf("      vreg[%u] -> x64_reg=%u (%s)\n", vr, r,
+                    (r==7?"RDI":r==12?"R12":r==13?"R13":r==14?"R14":r==15?"R15":r==8?"R8":r==9?"R9":r==10?"R10":r==11?"R11":"?"));
+        }
+    }
 
     // Prologue — push callee-saved regs, establish frame pointer
     EmitPush(buf_, kRBP);
@@ -1324,9 +1417,18 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     EmitPush(buf_, kRBX); EmitPush(buf_, kRSI);
     // Push additional callee-saved regs used for register caching
     for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
-        EmitPush(buf_, kCacheableX64Regs[slot]);
+        EmitPush(buf_, callee_saved_regs_[slot]);
     EmitMovRR(buf_, kRBX, kRCX); EmitMovRR(buf_, kRSI, kRDX);
     EmitSubRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_));
+
+    // Initialize colored callee-saved regs to 0 — the graph coloring may
+    // assign a register to a vreg that is read before its first write (e.g.
+    // LdLoc from a local that was never stored), and callers' register
+    // values would produce wrong results.
+    if (has_graph_coloring_) {
+        for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
+            EmitXorRR(buf_, callee_saved_regs_[slot], callee_saved_regs_[slot]);
+    }
 
     // Emit instructions
     for (uint32_t i = 0; i < n_instrs; ++i) {
@@ -1353,7 +1455,7 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     deopt_return_pos_ = buf_.pos();
     EmitAddRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_));
     for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
-        EmitPop(buf_, kCacheableX64Regs[slot - 1]);
+        EmitPop(buf_, callee_saved_regs_[slot - 1]);
     EmitPop(buf_, kRSI); EmitPop(buf_, kRBX); EmitPop(buf_, kRBP);
     EmitRet(buf_);
 
@@ -1402,9 +1504,9 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
             EmitMovRR(buf_, kRBP, kRSP);  // frame pointer chain
             EmitPush(buf_, kRBX);
             EmitPush(buf_, kRSI);
-            // Push cached regs (matches main prologue layout for correct epilogue)
+            // Push cached/colored regs (matches main prologue layout for correct epilogue)
             for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
-                EmitPush(buf_, kCacheableX64Regs[slot]);
+                EmitPush(buf_, callee_saved_regs_[slot]);
             EmitSubRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_));
             // using rep movsq (RSI=source, RDI=dest, RCX=count)
             EmitLeaRM(buf_, kRDI, kRSP, static_cast<int32_t>(kGprFileOff));
@@ -1418,15 +1520,20 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
             EmitLeaRM(buf_, kRBX, kRSP, static_cast<int32_t>(kGprFileOff));
             EmitMovRR(buf_, kRSI, kRDX);
 
-            // Initialize cached registers from the stack frame so LoadGpr hits
-            // the correct RegisterFile values instead of stale register data.
+            // Initialize cached/colored registers from the stack frame
             if (config_.enable_register_caching) {
                 for (uint32_t slot = 0; slot < num_cache_regs_; ++slot) {
-                    uint8_t x64_reg = kCacheableX64Regs[slot];
-                    uint32_t vreg = x64_to_cached_vreg_[x64_reg];
-                    if (vreg < interpreter::kGPRegisters) {
-                        // RBX already points to the GPR file on stack
-                        EmitMovRM(buf_, x64_reg, kRBX, static_cast<int32_t>(vreg * 8));
+                    uint8_t x64_reg = callee_saved_regs_[slot];
+                    if (has_graph_coloring_) {
+                        uint32_t vreg = x64_to_colored_vreg_[x64_reg];
+                        if (vreg != 0xFF) {
+                            EmitMovRM(buf_, x64_reg, kRBX, static_cast<int32_t>(vreg * 8));
+                        }
+                    } else {
+                        uint32_t vreg = x64_to_cached_vreg_[x64_reg];
+                        if (vreg != kNotCached) {
+                            EmitMovRM(buf_, x64_reg, kRBX, static_cast<int32_t>(vreg * 8));
+                        }
                     }
                 }
                 cached_dirty_mask_ = 0;  // clean after initialization

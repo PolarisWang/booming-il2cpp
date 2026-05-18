@@ -504,15 +504,25 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         ri.header = header;
 
         // ── Copy immediate payload ─────────────────────────────────────
-        // NOTE: imm is a union. Write order matters — we must write
-        // generic fields (i4/i8/r8) BEFORE opcode-specific fields that
-        // use ptr, otherwise ptr gets zeroed.
+        // NOTE: imm is a union (8 bytes). Write order matters:
+        //   - 8-byte fields (i8, r8, ptr) overwrite ALL union bytes.
+        //   - 4-byte fields (i4, arg_count, operand_index, etc.) only
+        //     write bytes 0-3, leaving bytes 4-7 from the last 8-byte write.
+        //
+        // Strategy: write 8-byte fields BEFORE the final 4-byte i4 write,
+        // since i4 is the most commonly read field and must be last.
 
-        // Generic immediate fields (always written, most are 0/default).
-        ri.imm.i4       = ir.immediate_i4;
+        // 8-byte fields first (overwrite everything, typically 0).
         ri.imm.i8       = ir.immediate_i8;
         ri.imm.r8       = ir.immediate_r8;
-        ri.imm.arg_count     = ir.arg_count;
+
+        // 4-byte fields that are typically 0 for most opcodes.
+        // arg_count is also stored in header bits for call opcodes.
+        ri.imm.arg_count = ir.arg_count;
+
+        // i4 last — this 4-byte write is the final value for bytes 0-3.
+        // Used by LdcI4 (constant), token/type info, and many opcodes.
+        ri.imm.i4       = ir.immediate_i4;
 
         // Opcode-specific fields (overwrite union after generic writes).
         if (ir.op_code == IROpCode::Switch) {
@@ -523,8 +533,18 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         } else if (ir.op_code == IROpCode::Calli) {
             ri.imm.ptr          = ir.call_target;
             ri.imm.operand_index = static_cast<uint32_t>(calli_func_ptr_vreg);
-        } else {
-            ri.imm.ptr          = ir.call_target;
+        } else if (ir.op_code == IROpCode::Call || ir.op_code == IROpCode::CallVirt ||
+                   ir.op_code == IROpCode::CallBridge || ir.op_code == IROpCode::CallVirtConstrained) {
+            ri.imm.ptr           = ir.call_target;
+            ri.imm.operand_index  = static_cast<uint32_t>(ir.operand_index);
+        }
+
+        // operand_index for non-call opcodes that need it (arg/local index, field count).
+        // Must NOT overwrite LdcI4's i4, so this is separate from the ptr write above.
+        if (ir.op_code == IROpCode::LdArg || ir.op_code == IROpCode::LdLoc ||
+            ir.op_code == IROpCode::StLoc || ir.op_code == IROpCode::StArg ||
+            ir.op_code == IROpCode::LdArgA || ir.op_code == IROpCode::LdLocA ||
+            ir.op_code == IROpCode::NewObj) {
             ri.imm.operand_index = static_cast<uint32_t>(ir.operand_index);
         }
 

@@ -73,19 +73,19 @@ public static partial class EnumParsingSubjects
     // [9] System.Private.CoreLib/System.Enum::ToString:System.String(System.String)
     public static void Subject_9()
     {
-        // TODO: System.Private.CoreLib/System.Enum::ToString:System.String(System.String) could not be auto-generated
+        if (((42.ToString("X")).Length) != 2) _exitCode = 1;
     }
 
     // [10] System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)
     public static void Subject_10()
     {
-        // TODO: System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&) could not be auto-generated
+        if (((Enum.TryParse(typeof(DayOfWeek), "Monday", true, out object _)) ? 1 : 0) != 1) _exitCode = 1;
     }
 
     // [11] System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)
     public static void Subject_11()
     {
-        // TODO: System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&) could not be auto-generated
+        if (((Enum.TryParse(typeof(DayOfWeek), "Monday", out object _)) ? 1 : 0) != 1) _exitCode = 1;
     }
 
 }

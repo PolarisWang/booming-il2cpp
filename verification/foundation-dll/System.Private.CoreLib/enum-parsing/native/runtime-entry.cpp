@@ -183,20 +183,12 @@ int main(int argc, char** argv) {
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
             try {
                 RunNativeAot(i);
-            } catch (const chaos_managed_exception& e) {
-                std::fprintf(stderr, "DEBUG: method %d chaos_managed_exception obj=0x%llx\n", i, (unsigned long long)e.object_value);
-                caught = true;
-            } catch (const std::exception& e) {
-                std::fprintf(stderr, "DEBUG: method %d std::exception: %s\n", i, e.what());
+            } catch (const chaos_managed_exception&) {
                 caught = true;
             } catch (...) {
-                std::fprintf(stderr, "DEBUG: method %d unknown exception\n", i);
                 caught = true;
             }
-            if (caught) {
-                result |= (1 << i);
-                std::fprintf(stderr, "DEBUG: method %d caught exception\n", i);
-            }
+            if (caught) result |= (1 << i);
         }
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         int failed_count = 0;
