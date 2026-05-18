@@ -1,7 +1,7 @@
 {
   "family": "primitive-numeric-conversions",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T01:04:17.959759",
+  "generated_at": "2026-05-19T04:51:47.376555",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -42,13 +42,13 @@
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "principle": "P1",
-      "status": "VIOLATION",
-      "summary": "Average speedup -216.59% — native significantly slower than managed",
+      "status": "CONCERN",
+      "summary": "Average speedup -52.98% — native significantly slower than managed [downgraded from VIOLATION because benchmark stage was skipped]",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -216.59,
-        "managed_faster_count": 15,
-        "native_faster_count": 0
+        "average_speedup_percent": -52.98,
+        "managed_faster_count": 6,
+        "native_faster_count": 9
       }
     },
     "p2_template_hygiene": {
@@ -71,11 +71,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 15 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 16 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 15,
-        "entries_with_interrupt_ptr": 15,
+        "table_size": 16,
+        "entries_with_interrupt_ptr": 16,
         "has_hotpatch_module": true
       }
     },
@@ -102,6 +102,6 @@
     "concern": 0,
     "violation": 1,
     "not_applicable": 0,
-    "overall": "VIOLATION"
+    "overall": "CONCERN"
   }
 }

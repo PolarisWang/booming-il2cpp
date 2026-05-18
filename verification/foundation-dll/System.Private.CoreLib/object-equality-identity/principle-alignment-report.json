@@ -1,7 +1,7 @@
 {
   "family": "object-equality-identity",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T01:03:56.947651",
+  "generated_at": "2026-05-19T04:51:32.633828",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -34,29 +34,24 @@
     "p1_no_unnecessary_indirection": {
       "check_id": "p1_no_unnecessary_indirection",
       "principle": "P1",
-      "status": "CONCERN",
-      "summary": "2 runtime_stub calls in generated code",
-      "details": [
-        {
-          "function": "ChaosObjectEqualsStatic",
-          "call_count": 1
-        },
-        {
-          "function": "ChaosObjectCtor",
-          "call_count": 1
-        }
-      ],
-      "evidence": {
-        "stub_call_count": 2
-      }
+      "status": "ALIGNED",
+      "summary": "No unnecessary runtime_stub calls in generated code",
+      "details": [],
+      "evidence": {}
     },
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "principle": "P1",
       "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available",
+      "summary": "7/7 methods are stubs — benchmark data not meaningful",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "managed_faster_count": 0,
+        "native_faster_count": 0,
+        "invalid_count": 7,
+        "total_methods": 7
+      }
     },
     "p2_template_hygiene": {
       "check_id": "p2_template_hygiene",
@@ -78,11 +73,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 7 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 8 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 7,
-        "entries_with_interrupt_ptr": 7,
+        "table_size": 8,
+        "entries_with_interrupt_ptr": 8,
         "has_hotpatch_module": true
       }
     },
@@ -105,10 +100,10 @@
   },
   "summary": {
     "total": 8,
-    "aligned": 6,
-    "concern": 1,
+    "aligned": 7,
+    "concern": 0,
     "violation": 0,
     "not_applicable": 1,
-    "overall": "CONCERN"
+    "overall": "ALIGNED"
   }
 }

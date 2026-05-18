@@ -24,23 +24,14 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 49,
-          "handlerOffset": 50,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -48,14 +39,14 @@
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 12,
+          "ilOffset": 11,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)",
           "reference": {
@@ -75,68 +66,20 @@
             "declaringTypeShape": 0
           },
           "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 17,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 22,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 34,
+          "ilOffset": 16,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 35,
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 17,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -144,7 +87,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 37,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -152,14 +95,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 38,
+          "ilOffset": 20,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 47,
-          "ilOffset": 39,
+          "operand": 29,
+          "ilOffset": 21,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -167,7 +110,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 41,
+          "ilOffset": 23,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -175,7 +118,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 42,
+          "ilOffset": 24,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -196,69 +139,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 61,
-          "ilOffset": 48,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 50,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 52,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 53,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 61,
-          "ilOffset": 59,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 61,
+          "ilOffset": 29,
           "isPreserveSig": false
         }
       ],
@@ -294,23 +180,14 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 43,
-          "handlerOffset": 44,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -318,14 +195,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 65,
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 9,
+          "ilOffset": 8,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)",
           "reference": {
@@ -348,50 +225,17 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 14,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 65,
-          "ilOffset": 19,
+          "operand": -1,
+          "ilOffset": 13,
           "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 26,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -399,14 +243,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 28,
+          "ilOffset": 16,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 29,
+          "ilOffset": 17,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -414,7 +258,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 31,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -422,14 +266,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 32,
+          "ilOffset": 20,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 41,
-          "ilOffset": 33,
+          "operand": 29,
+          "ilOffset": 21,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -437,7 +281,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 35,
+          "ilOffset": 23,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -445,7 +289,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 36,
+          "ilOffset": 24,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -466,69 +310,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 55,
-          "ilOffset": 42,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 44,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 46,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 47,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 55,
-          "ilOffset": 53,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 55,
+          "ilOffset": 29,
           "isPreserveSig": false
         }
       ],
@@ -564,23 +351,14 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 51,
-          "handlerOffset": 52,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -588,14 +366,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 7,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 8,
           "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)",
           "reference": {
@@ -620,7 +398,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 13,
+          "ilOffset": 12,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -640,78 +418,20 @@
             "declaringTypeShape": 0
           },
           "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 18,
-          "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 1,
-          "ilOffset": 23,
+          "operand": 4,
+          "ilOffset": 17,
           "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 24,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 29,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 34,
+          "ilOffset": 18,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -719,14 +439,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 36,
+          "ilOffset": 20,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 37,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -734,7 +454,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 39,
+          "ilOffset": 23,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -742,14 +462,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 40,
+          "ilOffset": 24,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 49,
-          "ilOffset": 41,
+          "operand": 33,
+          "ilOffset": 25,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -757,7 +477,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 43,
+          "ilOffset": 27,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -765,7 +485,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 44,
+          "ilOffset": 28,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -786,69 +506,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 63,
-          "ilOffset": 50,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 52,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 54,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 55,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 63,
-          "ilOffset": 61,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 63,
+          "ilOffset": 33,
           "isPreserveSig": false
         }
       ],
@@ -884,23 +547,14 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 53,
-          "handlerOffset": 54,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -908,22 +562,22 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 2,
           "ilOffset": 7,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 2,
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 8,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 9,
           "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)",
           "reference": {
@@ -948,7 +602,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 14,
+          "ilOffset": 13,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -968,86 +622,20 @@
             "declaringTypeShape": 0
           },
           "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 19,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 2,
-          "ilOffset": 25,
+          "ilOffset": 18,
           "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 26,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 31,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 36,
+          "ilOffset": 19,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1055,14 +643,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 38,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 39,
+          "ilOffset": 22,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1070,7 +658,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 41,
+          "ilOffset": 24,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1078,14 +666,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 42,
+          "ilOffset": 25,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 51,
-          "ilOffset": 43,
+          "operand": 34,
+          "ilOffset": 26,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1093,7 +681,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 45,
+          "ilOffset": 28,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1101,7 +689,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 46,
+          "ilOffset": 29,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -1122,69 +710,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 65,
-          "ilOffset": 52,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 54,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 56,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 57,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 65,
-          "ilOffset": 63,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 65,
+          "ilOffset": 34,
           "isPreserveSig": false
         }
       ],
@@ -1220,23 +751,14 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 49,
-          "handlerOffset": 50,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -1244,14 +766,14 @@
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 12,
+          "ilOffset": 11,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)",
           "reference": {
@@ -1271,68 +793,20 @@
             "declaringTypeShape": 0
           },
           "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 17,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 22,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 34,
+          "ilOffset": 16,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 35,
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 17,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1340,7 +814,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 37,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1348,14 +822,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 38,
+          "ilOffset": 20,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 47,
-          "ilOffset": 39,
+          "operand": 29,
+          "ilOffset": 21,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1363,7 +837,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 41,
+          "ilOffset": 23,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1371,7 +845,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 42,
+          "ilOffset": 24,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -1392,69 +866,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 61,
-          "ilOffset": 48,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 50,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 52,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 53,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 61,
-          "ilOffset": 59,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 61,
+          "ilOffset": 29,
           "isPreserveSig": false
         }
       ],
@@ -1490,23 +907,14 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 55,
-          "handlerOffset": 56,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -1514,7 +922,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1522,7 +930,7 @@
           "op": "ldstr",
           "opCode": 4,
           "operand": "world",
-          "ilOffset": 8,
+          "ilOffset": 7,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -1530,23 +938,23 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 3,
           "ilOffset": 13,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 3,
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 14,
           "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 15,
-          "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -1568,74 +976,17 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
           "ilOffset": 20,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 25,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "world",
-          "ilOffset": 26,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 31,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 3,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 33,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 38,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1643,14 +994,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 40,
+          "ilOffset": 22,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 41,
+          "ilOffset": 23,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1658,7 +1009,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 43,
+          "ilOffset": 25,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1666,14 +1017,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 44,
+          "ilOffset": 26,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 53,
-          "ilOffset": 45,
+          "operand": 35,
+          "ilOffset": 27,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1681,7 +1032,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 47,
+          "ilOffset": 29,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1689,7 +1040,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 48,
+          "ilOffset": 30,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -1710,69 +1061,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 67,
-          "ilOffset": 54,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 56,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 58,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 59,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 67,
-          "ilOffset": 65,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 67,
+          "ilOffset": 35,
           "isPreserveSig": false
         }
       ],
@@ -1808,23 +1102,14 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 59,
-          "handlerOffset": 60,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -1832,14 +1117,14 @@
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 12,
+          "ilOffset": 11,
           "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
           "reference": {
@@ -1864,7 +1149,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 17,
+          "ilOffset": 16,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -1887,75 +1172,17 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 22,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 27,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 32,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 37,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 10,
+          "ilOffset": 21,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 42,
+          "ilOffset": 23,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1963,14 +1190,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 44,
+          "ilOffset": 25,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 45,
+          "ilOffset": 26,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1978,7 +1205,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 47,
+          "ilOffset": 28,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1986,14 +1213,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 48,
+          "ilOffset": 29,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 57,
-          "ilOffset": 49,
+          "operand": 38,
+          "ilOffset": 30,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2001,7 +1228,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 51,
+          "ilOffset": 32,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2009,7 +1236,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 52,
+          "ilOffset": 33,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -2030,69 +1257,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 71,
-          "ilOffset": 58,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 60,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 62,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 63,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 71,
-          "ilOffset": 69,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 71,
+          "ilOffset": 38,
           "isPreserveSig": false
         }
       ],
@@ -2128,23 +1298,14 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 69,
-          "handlerOffset": 70,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -2152,15 +1313,15 @@
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
+          "ilOffset": 6,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 7,
           "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 8,
-          "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -2185,15 +1346,15 @@
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 12,
           "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 13,
-          "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -2217,7 +1378,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 22,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -2240,108 +1401,17 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 27,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 32,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 33,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 37,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 38,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 47,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 15,
+          "ilOffset": 26,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 52,
+          "ilOffset": 28,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2349,14 +1419,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 54,
+          "ilOffset": 30,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 55,
+          "ilOffset": 31,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2364,7 +1434,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 57,
+          "ilOffset": 33,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2372,14 +1442,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 58,
+          "ilOffset": 34,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 67,
-          "ilOffset": 59,
+          "operand": 43,
+          "ilOffset": 35,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2387,7 +1457,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 61,
+          "ilOffset": 37,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2395,7 +1465,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 62,
+          "ilOffset": 38,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -2416,69 +1486,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 81,
-          "ilOffset": 68,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 70,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 72,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 73,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 81,
-          "ilOffset": 79,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 81,
+          "ilOffset": 43,
           "isPreserveSig": false
         }
       ],
@@ -2514,30 +1527,21 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 59,
-          "handlerOffset": 60,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.Object[]",
           "callee": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
           "reference": {
@@ -2601,7 +1605,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 12,
+          "ilOffset": 11,
           "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])",
           "reference": {
@@ -2626,7 +1630,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 17,
+          "ilOffset": 16,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -2649,131 +1653,17 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 22,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 27,
-          "resultType": "System.Object[]",
-          "callee": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
-            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
-            "sharedGenericBodyId": {
-              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
-            },
-            "instantiationStubId": {
-              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
-            },
-            "runtimeGenericContext": {
-              "instantiationKey": {
-                "contextKind": 2,
-                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
-                "typeArguments": [],
-                "methodArguments": [
-                  "System.Object"
-                ]
-              },
-              "sharedGenericBodyId": {
-                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
-              },
-              "instantiationStubId": {
-                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
-              },
-              "supportKindCode": 3,
-              "specializationKindCode": 2,
-              "statusReasonCode": "loader-demand:methodSpec"
-            },
-            "genericDiagnostic": {
-              "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
-              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
-              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E()",
-              "instantiationKey": {
-                "contextKind": 2,
-                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
-                "typeArguments": [],
-                "methodArguments": [
-                  "System.Object"
-                ]
-              }
-            },
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 32,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 37,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 21,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 42,
+          "ilOffset": 22,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2781,14 +1671,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 44,
+          "ilOffset": 24,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 45,
+          "ilOffset": 25,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2796,7 +1686,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 47,
+          "ilOffset": 27,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2804,14 +1694,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 48,
+          "ilOffset": 28,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 57,
-          "ilOffset": 49,
+          "operand": 37,
+          "ilOffset": 29,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2819,7 +1709,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 51,
+          "ilOffset": 31,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2827,7 +1717,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 52,
+          "ilOffset": 32,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -2848,69 +1738,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 71,
-          "ilOffset": 58,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 60,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 62,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 63,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 71,
-          "ilOffset": 69,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 71,
+          "ilOffset": 37,
           "isPreserveSig": false
         }
       ],
@@ -2946,23 +1779,14 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 61,
-          "handlerOffset": 62,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -2970,14 +1794,14 @@
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 12,
+          "ilOffset": 11,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)",
           "reference": {
@@ -3002,8 +1826,8 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 22,
-          "ilOffset": 17,
+          "operand": 21,
+          "ilOffset": 16,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3011,16 +1835,24 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 19,
+          "ilOffset": 18,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 23,
-          "ilOffset": 20,
+          "operand": 22,
+          "ilOffset": 19,
           "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
@@ -3032,82 +1864,9 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
+          "op": "ceq",
+          "opCode": 31,
           "ilOffset": 23,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 28,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 33,
-          "resultType": "System.Boolean",
-          "callee": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 43,
-          "ilOffset": 38,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 40,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 44,
-          "ilOffset": 41,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 43,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 44,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3115,14 +1874,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 46,
+          "ilOffset": 25,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 47,
+          "ilOffset": 26,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3130,7 +1889,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 49,
+          "ilOffset": 28,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3138,14 +1897,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 50,
+          "ilOffset": 29,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 59,
-          "ilOffset": 51,
+          "operand": 38,
+          "ilOffset": 30,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3153,7 +1912,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 53,
+          "ilOffset": 32,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3161,7 +1920,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 54,
+          "ilOffset": 33,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -3182,69 +1941,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 73,
-          "ilOffset": 60,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 62,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 64,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 65,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 73,
-          "ilOffset": 71,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 73,
+          "ilOffset": 38,
           "isPreserveSig": false
         }
       ],
@@ -3280,23 +1982,14 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 61,
-          "handlerOffset": 62,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -3304,14 +1997,14 @@
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 12,
+          "ilOffset": 11,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
           "reference": {
@@ -3336,8 +2029,8 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 22,
-          "ilOffset": 17,
+          "operand": 21,
+          "ilOffset": 16,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3345,16 +2038,24 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 19,
+          "ilOffset": 18,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 23,
-          "ilOffset": 20,
+          "operand": 22,
+          "ilOffset": 19,
           "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
@@ -3366,82 +2067,9 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
+          "op": "ceq",
+          "opCode": 31,
           "ilOffset": 23,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 28,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 33,
-          "resultType": "System.Boolean",
-          "callee": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 43,
-          "ilOffset": 38,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 40,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 44,
-          "ilOffset": 41,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 43,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 44,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3449,14 +2077,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 46,
+          "ilOffset": 25,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 47,
+          "ilOffset": 26,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3464,7 +2092,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 49,
+          "ilOffset": 28,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3472,14 +2100,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 50,
+          "ilOffset": 29,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 59,
-          "ilOffset": 51,
+          "operand": 38,
+          "ilOffset": 30,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3487,7 +2115,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 53,
+          "ilOffset": 32,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3495,7 +2123,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 54,
+          "ilOffset": 33,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -3516,69 +2144,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 73,
-          "ilOffset": 60,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 62,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 64,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 65,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 73,
-          "ilOffset": 71,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 73,
+          "ilOffset": 38,
           "isPreserveSig": false
         }
       ],
@@ -3614,23 +2185,14 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 69,
-          "handlerOffset": 70,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -3638,7 +2200,7 @@
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -3646,14 +2208,14 @@
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 12,
+          "ilOffset": 11,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 17,
+          "ilOffset": 16,
           "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)",
           "reference": {
@@ -3678,7 +2240,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 22,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -3701,83 +2263,17 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 27,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 32,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 37,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 42,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 47,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 26,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 52,
+          "ilOffset": 27,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3785,14 +2281,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 54,
+          "ilOffset": 29,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 55,
+          "ilOffset": 30,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3800,7 +2296,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 57,
+          "ilOffset": 32,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3808,14 +2304,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 58,
+          "ilOffset": 33,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 67,
-          "ilOffset": 59,
+          "operand": 42,
+          "ilOffset": 34,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3823,7 +2319,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 61,
+          "ilOffset": 36,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3831,7 +2327,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 62,
+          "ilOffset": 37,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -3852,69 +2348,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 81,
-          "ilOffset": 68,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 70,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 72,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 73,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 81,
-          "ilOffset": 79,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 81,
+          "ilOffset": 42,
           "isPreserveSig": false
         }
       ],
@@ -3950,23 +2389,14 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 49,
-          "handlerOffset": 50,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
@@ -3974,7 +2404,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 65,
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3982,14 +2412,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 9,
+          "ilOffset": 8,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 10,
+          "ilOffset": 9,
           "resultType": "System.String[]",
           "callee": "System.Private.CoreLib/System.String::Split:System.String[](System.Char,System.StringSplitOptions)",
           "reference": {
@@ -4014,30 +2444,29 @@
         {
           "op": "ldlen",
           "opCode": 46,
-          "ilOffset": 15,
+          "ilOffset": 14,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "conv.i4",
           "opCode": 39,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
           "ilOffset": 16,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
+          "op": "ceq",
+          "opCode": 31,
           "ilOffset": 17,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 65,
-          "ilOffset": 22,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4045,68 +2474,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 25,
-          "resultType": "System.String[]",
-          "callee": "System.Private.CoreLib/System.String::Split:System.String[](System.Char,System.StringSplitOptions)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Split:System.String[](System.Char,System.StringSplitOptions)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Split:System.String[](System.Char,System.StringSplitOptions)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldlen",
-          "opCode": 46,
-          "ilOffset": 30,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 31,
+          "ilOffset": 19,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 34,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 35,
+          "ilOffset": 20,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4114,7 +2489,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 37,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4122,14 +2497,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 38,
+          "ilOffset": 23,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 47,
-          "ilOffset": 39,
+          "operand": 32,
+          "ilOffset": 24,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4137,7 +2512,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 41,
+          "ilOffset": 26,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4145,7 +2520,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 42,
+          "ilOffset": 27,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -4166,69 +2541,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 61,
-          "ilOffset": 48,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 50,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 52,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 53,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 61,
-          "ilOffset": 59,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 61,
+          "ilOffset": 32,
           "isPreserveSig": false
         }
       ],
@@ -4264,30 +2582,21 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 49,
-          "handlerOffset": 50,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.String::ToUpper:System.String()",
           "reference": {
@@ -4312,7 +2621,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 12,
+          "ilOffset": 11,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -4335,67 +2644,17 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 17,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 22,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.String::ToUpper:System.String()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::ToUpper:System.String()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::ToUpper:System.String()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 27,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 16,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 32,
+          "ilOffset": 17,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4403,14 +2662,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 34,
+          "ilOffset": 19,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 35,
+          "ilOffset": 20,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4418,7 +2677,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 37,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4426,14 +2685,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 38,
+          "ilOffset": 23,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 47,
-          "ilOffset": 39,
+          "operand": 32,
+          "ilOffset": 24,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4441,7 +2700,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 41,
+          "ilOffset": 26,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4449,7 +2708,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 42,
+          "ilOffset": 27,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -4470,69 +2729,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 61,
-          "ilOffset": 48,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 50,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 52,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 53,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 61,
-          "ilOffset": 59,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 61,
+          "ilOffset": 32,
           "isPreserveSig": false
         }
       ],
@@ -4568,30 +2770,21 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 49,
-          "handlerOffset": 50,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.String::ToLower:System.String()",
           "reference": {
@@ -4616,7 +2809,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 12,
+          "ilOffset": 11,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -4639,67 +2832,17 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 17,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 22,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.String::ToLower:System.String()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::ToLower:System.String()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::ToLower:System.String()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 27,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 16,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 32,
+          "ilOffset": 17,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4707,14 +2850,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 34,
+          "ilOffset": 19,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 35,
+          "ilOffset": 20,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4722,7 +2865,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 37,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4730,14 +2873,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 38,
+          "ilOffset": 23,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 47,
-          "ilOffset": 39,
+          "operand": 32,
+          "ilOffset": 24,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4745,7 +2888,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 41,
+          "ilOffset": 26,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4753,7 +2896,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 42,
+          "ilOffset": 27,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -4774,69 +2917,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 61,
-          "ilOffset": 48,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 50,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 52,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 53,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 61,
-          "ilOffset": 59,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 61,
+          "ilOffset": 32,
           "isPreserveSig": false
         }
       ],
@@ -4872,30 +2958,21 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 49,
-          "handlerOffset": 50,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.String::Trim:System.String()",
           "reference": {
@@ -4920,7 +2997,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 12,
+          "ilOffset": 11,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -4943,67 +3020,17 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 17,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 22,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.String::Trim:System.String()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Trim:System.String()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Trim:System.String()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 27,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 16,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 32,
+          "ilOffset": 17,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5011,14 +3038,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 34,
+          "ilOffset": 19,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 35,
+          "ilOffset": 20,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5026,7 +3053,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 37,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5034,14 +3061,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 38,
+          "ilOffset": 23,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 47,
-          "ilOffset": 39,
+          "operand": 32,
+          "ilOffset": 24,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5049,7 +3076,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 41,
+          "ilOffset": 26,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5057,7 +3084,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 42,
+          "ilOffset": 27,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -5078,69 +3105,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 61,
-          "ilOffset": 48,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 50,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 52,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 53,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 61,
-          "ilOffset": 59,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 61,
+          "ilOffset": 32,
           "isPreserveSig": false
         }
       ],
@@ -5176,30 +3146,21 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 59,
-          "handlerOffset": 60,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.String[]",
           "callee": "System.Private.CoreLib/System.Array::Empty\u003CSystem.String\u003E:System.String[]()",
           "reference": {
@@ -5263,7 +3224,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 12,
+          "ilOffset": 11,
           "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])",
           "reference": {
@@ -5288,7 +3249,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 17,
+          "ilOffset": 16,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -5308,149 +3269,20 @@
             "declaringTypeShape": 0
           },
           "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 22,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 27,
-          "resultType": "System.String[]",
-          "callee": "System.Private.CoreLib/System.Array::Empty\u003CSystem.String\u003E:System.String[]()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.String\u003E:System.String[]()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.String\u003E:System.String[]()",
-            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
-            "sharedGenericBodyId": {
-              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.String]"
-            },
-            "instantiationStubId": {
-              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.String]"
-            },
-            "runtimeGenericContext": {
-              "instantiationKey": {
-                "contextKind": 2,
-                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
-                "typeArguments": [],
-                "methodArguments": [
-                  "System.String"
-                ]
-              },
-              "sharedGenericBodyId": {
-                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.String]"
-              },
-              "instantiationStubId": {
-                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.String]"
-              },
-              "supportKindCode": 3,
-              "specializationKindCode": 2,
-              "statusReasonCode": "loader-demand:methodSpec"
-            },
-            "genericDiagnostic": {
-              "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.String\u003E:System.String[]()",
-              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
-              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.String\u003E()",
-              "instantiationKey": {
-                "contextKind": 2,
-                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
-                "typeArguments": [],
-                "methodArguments": [
-                  "System.String"
-                ]
-              }
-            },
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 32,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 37,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 42,
-          "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 44,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 45,
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 22,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5458,7 +3290,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 47,
+          "ilOffset": 24,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5466,14 +3298,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 48,
+          "ilOffset": 25,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 57,
-          "ilOffset": 49,
+          "operand": 34,
+          "ilOffset": 26,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5481,7 +3313,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 51,
+          "ilOffset": 28,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5489,7 +3321,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 52,
+          "ilOffset": 29,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -5510,69 +3342,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 71,
-          "ilOffset": 58,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 60,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 62,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 63,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 71,
-          "ilOffset": 69,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 71,
+          "ilOffset": 34,
           "isPreserveSig": false
         }
       ],
@@ -5608,30 +3383,21 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 45,
-          "handlerOffset": 46,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 65,
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 4,
+          "ilOffset": 3,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)",
           "reference": {
@@ -5656,8 +3422,8 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 14,
-          "ilOffset": 9,
+          "operand": 13,
+          "ilOffset": 8,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5665,15 +3431,15 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 11,
+          "ilOffset": 10,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 15,
-          "ilOffset": 12,
+          "operand": 14,
+          "ilOffset": 11,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5681,94 +3447,22 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
           "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 65,
+          "op": "cgt.un",
+          "opCode": 33,
           "ilOffset": 15,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 17,
-          "resultType": "System.Boolean",
-          "callee": "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 27,
-          "ilOffset": 22,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 28,
-          "ilOffset": 25,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 28,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 30,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 31,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5776,7 +3470,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 33,
+          "ilOffset": 17,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5784,14 +3478,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 34,
+          "ilOffset": 18,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 43,
-          "ilOffset": 35,
+          "operand": 27,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5799,7 +3493,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 37,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5807,7 +3501,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 38,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -5828,69 +3522,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 57,
-          "ilOffset": 44,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 46,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 48,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 49,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 57,
-          "ilOffset": 55,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 57,
+          "ilOffset": 27,
           "isPreserveSig": false
         }
       ],
@@ -5926,30 +3563,21 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 45,
-          "handlerOffset": 46,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 65,
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 4,
+          "ilOffset": 3,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)",
           "reference": {
@@ -5974,8 +3602,8 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 14,
-          "ilOffset": 9,
+          "operand": 13,
+          "ilOffset": 8,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5983,16 +3611,24 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 11,
+          "ilOffset": 10,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 15,
-          "ilOffset": 12,
+          "operand": 14,
+          "ilOffset": 11,
           "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
@@ -6004,89 +3640,24 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 65,
+          "op": "ceq",
+          "opCode": 31,
           "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "call",
-          "opCode": 14,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
           "ilOffset": 17,
-          "resultType": "System.Boolean",
-          "callee": "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 27,
-          "ilOffset": 22,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 28,
-          "ilOffset": 25,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 27,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 28,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 30,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 31,
+          "ilOffset": 18,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6094,7 +3665,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 33,
+          "ilOffset": 20,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -6102,14 +3673,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 34,
+          "ilOffset": 21,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 43,
-          "ilOffset": 35,
+          "operand": 30,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -6117,7 +3688,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 37,
+          "ilOffset": 24,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6125,7 +3696,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 38,
+          "ilOffset": 25,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -6146,69 +3717,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 57,
-          "ilOffset": 44,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 46,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 48,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 49,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 57,
-          "ilOffset": 55,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 57,
+          "ilOffset": 30,
           "isPreserveSig": false
         }
       ],
@@ -6244,30 +3758,21 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 45,
-          "handlerOffset": 46,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 65,
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 4,
+          "ilOffset": 3,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)",
           "reference": {
@@ -6292,8 +3797,8 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 14,
-          "ilOffset": 9,
+          "operand": 13,
+          "ilOffset": 8,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -6301,15 +3806,15 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 11,
+          "ilOffset": 10,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 15,
-          "ilOffset": 12,
+          "operand": 14,
+          "ilOffset": 11,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -6317,94 +3822,22 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
           "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 65,
+          "op": "cgt.un",
+          "opCode": 33,
           "ilOffset": 15,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 17,
-          "resultType": "System.Boolean",
-          "callee": "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 27,
-          "ilOffset": 22,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 28,
-          "ilOffset": 25,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 28,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 30,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 31,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6412,7 +3845,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 33,
+          "ilOffset": 17,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -6420,14 +3853,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 34,
+          "ilOffset": 18,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 43,
-          "ilOffset": 35,
+          "operand": 27,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -6435,7 +3868,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 37,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6443,7 +3876,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 38,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "StringCharTextCoreSubjects",
@@ -6464,69 +3897,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 57,
-          "ilOffset": 44,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 46,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 48,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-          "ilOffset": 49,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectKind": "field",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "StringCharTextCoreSubjects",
-            "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 57,
-          "ilOffset": 55,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 57,
+          "ilOffset": 27,
           "isPreserveSig": false
         }
       ],

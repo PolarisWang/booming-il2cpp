@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "CollectionsGenericCoreSubjects",
-  "entrySubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
+  "assemblyName": "CollectionsGenericCorePatchEntry",
+  "entrySubjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_0",
+  "entrySymbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

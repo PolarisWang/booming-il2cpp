@@ -1,7 +1,7 @@
 {
   "family": "string-char-text-core",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T01:05:45.462790",
+  "generated_at": "2026-05-19T04:52:45.805184",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -34,36 +34,23 @@
     "p1_no_unnecessary_indirection": {
       "check_id": "p1_no_unnecessary_indirection",
       "principle": "P1",
-      "status": "CONCERN",
-      "summary": "3 runtime_stub calls in generated code",
-      "details": [
-        {
-          "function": "ChaosStringContains",
-          "call_count": 1
-        },
-        {
-          "function": "ChaosStringStartsWith",
-          "call_count": 1
-        },
-        {
-          "function": "ChaosStringJoinSs",
-          "call_count": 1
-        }
-      ],
-      "evidence": {
-        "stub_call_count": 3
-      }
+      "status": "ALIGNED",
+      "summary": "No unnecessary runtime_stub calls in generated code",
+      "details": [],
+      "evidence": {}
     },
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "principle": "P1",
-      "status": "ALIGNED",
-      "summary": "avg_speedup=0.0%",
+      "status": "NOT_APPLICABLE",
+      "summary": "20/20 methods are stubs — benchmark data not meaningful",
       "details": [],
       "evidence": {
         "average_speedup_percent": 0.0,
         "managed_faster_count": 0,
-        "native_faster_count": 0
+        "native_faster_count": 0,
+        "invalid_count": 20,
+        "total_methods": 20
       }
     },
     "p2_template_hygiene": {
@@ -86,11 +73,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 20 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 21 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 20,
-        "entries_with_interrupt_ptr": 20,
+        "table_size": 21,
+        "entries_with_interrupt_ptr": 21,
         "has_hotpatch_module": true
       }
     },
@@ -114,9 +101,9 @@
   "summary": {
     "total": 8,
     "aligned": 7,
-    "concern": 1,
+    "concern": 0,
     "violation": 0,
-    "not_applicable": 0,
-    "overall": "CONCERN"
+    "not_applicable": 1,
+    "overall": "ALIGNED"
   }
 }

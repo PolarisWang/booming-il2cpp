@@ -2,9 +2,9 @@
   "family": "primitive-numeric-conversions",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T01:04:17",
-  "duration_ms": 20997,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T04:51:47",
+  "duration_ms": 14735,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions\\managed\\subjects\\build-output\\PrimitiveNumericConversionsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 20465
+      "duration_ms": 14593
     },
     "fact": {
       "stage": "fact",
@@ -42,21 +42,21 @@
         }
       },
       "errors": [],
-      "duration_ms": 382
+      "duration_ms": 28
     },
     "audit": {
       "stage": "audit",
-      "status": "failed",
-      "summary": "false_passing=0, principle=VIOLATION",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "VIOLATION",
+        "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 148
+      "duration_ms": 113
     }
   },
   "coverage": {
@@ -78,7 +78,7 @@
   },
   "regression": {
     "benchmark": {
-      "status": "regressed",
+      "status": "matched",
       "baselineMetrics": {
         "totalMethods": 15,
         "matchedCount": 15,
@@ -89,14 +89,12 @@
       "currentMetrics": {
         "totalMethods": 15,
         "matchedCount": 15,
-        "nativeFasterCount": 0,
-        "managedFasterCount": 15,
-        "averageSpeedupPercent": -216.59
+        "nativeFasterCount": 9,
+        "managedFasterCount": 6,
+        "averageSpeedupPercent": -52.98
       }
     },
-    "hasRegression": true,
-    "regressions": [
-      "Managed-faster ratio 100% exceeds native-faster ratio 0% (15/15 methods)"
-    ]
+    "hasRegression": false,
+    "regressions": []
   }
 }

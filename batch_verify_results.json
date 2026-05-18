@@ -1,0 +1,236 @@
+{
+  "array-indexing-copy": {
+    "status": "failed",
+    "passed": 12,
+    "total": 13,
+    "exit_code": 4096
+  },
+  "attributes-custom-metadata": {
+    "status": "failed",
+    "passed": 7,
+    "total": 9,
+    "exit_code": 3
+  },
+  "boxing-unboxing-casts": {
+    "status": "failed",
+    "passed": 9,
+    "total": 11,
+    "exit_code": 3
+  },
+  "buffer-memory": {
+    "status": "passed",
+    "passed": 13,
+    "total": 13,
+    "exit_code": 0
+  },
+  "ccw-basic": {
+    "status": "passed",
+    "passed": 20,
+    "total": 20,
+    "exit_code": 0
+  },
+  "collections-generic-core": {
+    "status": "passed",
+    "passed": 16,
+    "total": 16,
+    "exit_code": 0
+  },
+  "convert-char": {
+    "status": "passed",
+    "passed": 18,
+    "total": 18,
+    "exit_code": 0
+  },
+  "delegate-core-invocation": {
+    "status": "passed",
+    "passed": 10,
+    "total": 10,
+    "exit_code": 0
+  },
+  "dispatch-basic": {
+    "status": "failed",
+    "passed": 18,
+    "total": 22,
+    "exit_code": 491520
+  },
+  "enum-parsing": {
+    "status": "passed",
+    "passed": 12,
+    "total": 12,
+    "exit_code": 0
+  },
+  "exception-throw-diagnostics": {
+    "status": "failed",
+    "passed": 13,
+    "total": 14,
+    "exit_code": 4
+  },
+  "garbage-collection": {
+    "status": "passed",
+    "passed": 6,
+    "total": 6,
+    "exit_code": 0
+  },
+  "generic-nullable-value": {
+    "status": "failed",
+    "passed": 9,
+    "total": 10,
+    "exit_code": 8
+  },
+  "globalization-culture": {
+    "status": "failed",
+    "passed": 11,
+    "total": 13,
+    "exit_code": 640
+  },
+  "guid-random-hashcode": {
+    "status": "failed",
+    "passed": 13,
+    "total": 14,
+    "exit_code": 1024
+  },
+  "interface-dispatch": {
+    "status": "failed",
+    "passed": 31,
+    "total": 39,
+    "exit_code": 805797928
+  },
+  "io-streams-basics": {
+    "status": "failed",
+    "passed": 16,
+    "total": 18,
+    "exit_code": 768
+  },
+  "math-numerics": {
+    "status": "passed",
+    "passed": 18,
+    "total": 18,
+    "exit_code": 0
+  },
+  "object-equality-identity": {
+    "status": "passed",
+    "passed": 7,
+    "total": 7,
+    "exit_code": 0
+  },
+  "primitive-numeric-conversions": {
+    "status": "passed",
+    "passed": 15,
+    "total": 15,
+    "exit_code": 0
+  },
+  "rcw-basic": {
+    "status": "failed",
+    "passed": 21,
+    "total": 32,
+    "exit_code": 1048064
+  },
+  "reflection-activation": {
+    "status": "failed",
+    "passed": 5,
+    "total": 8,
+    "exit_code": 11
+  },
+  "reflection-assembly": {
+    "status": "failed",
+    "passed": 4,
+    "total": 22,
+    "exit_code": 2097144
+  },
+  "reflection-binding": {
+    "status": "failed",
+    "passed": 11,
+    "total": 12,
+    "exit_code": 2048
+  },
+  "reflection-generics": {
+    "status": "failed",
+    "passed": 11,
+    "total": 12,
+    "exit_code": 512
+  },
+  "reflection-member-basics": {
+    "status": "failed",
+    "passed": 12,
+    "total": 14,
+    "exit_code": 5
+  },
+  "reflection-member-complete": {
+    "status": "failed",
+    "passed": 4,
+    "total": 22,
+    "exit_code": 4124637
+  },
+  "reflection-module": {
+    "status": "failed",
+    "passed": 1,
+    "total": 6,
+    "exit_code": 31
+  },
+  "reflection-parameters": {
+    "status": "failed",
+    "passed": 0,
+    "total": 10,
+    "exit_code": 1023
+  },
+  "reflection-type": {
+    "status": "failed",
+    "passed": 37,
+    "total": 43,
+    "exit_code": 16778480
+  },
+  "runtime-compiler-services": {
+    "status": "passed",
+    "passed": 10,
+    "total": 10,
+    "exit_code": 0
+  },
+  "snapshot-prover": {
+    "status": "failed",
+    "passed": 145,
+    "total": 158,
+    "exit_code": 1065436960
+  },
+  "span-memory-buffers": {
+    "status": "passed",
+    "passed": 14,
+    "total": 14,
+    "exit_code": 0
+  },
+  "string-char-text-core": {
+    "status": "failed",
+    "passed": 8,
+    "total": 20,
+    "exit_code": 126749
+  },
+  "threading-monitor-interlocked": {
+    "status": "passed",
+    "passed": 14,
+    "total": 14,
+    "exit_code": 0
+  },
+  "threading-tasks-primitives": {
+    "status": "failed",
+    "passed": 20,
+    "total": 23,
+    "exit_code": 598016
+  },
+  "threading-thread-basics": {
+    "status": "passed",
+    "passed": 11,
+    "total": 11,
+    "exit_code": 0
+  },
+  "time-date-time-timespan": {
+    "status": "failed",
+    "passed": 13,
+    "total": 16,
+    "exit_code": 32804
+  },
+  "type-runtime-handles": {
+    "status": "failed",
+    "passed": 10,
+    "total": 13,
+    "exit_code": 1792
+  }
+}

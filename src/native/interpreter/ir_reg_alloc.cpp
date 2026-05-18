@@ -594,7 +594,7 @@ using RegOpHandler = void (*)(RegisterFrame& frame,
 
 static void Reg_LdcI4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdcI4");
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(instr.imm.i4),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(instr.imm.i4)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -682,7 +682,7 @@ static void Reg_Add(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Add");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l + r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l + r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -691,7 +691,7 @@ static void Reg_Sub(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Sub");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l - r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l - r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -700,7 +700,7 @@ static void Reg_Mul(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Mul");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l * r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l * r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -709,7 +709,7 @@ static void Reg_Div(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Div");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l / r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l / r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -718,7 +718,7 @@ static void Reg_Rem(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Rem");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l % r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l % r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -726,7 +726,7 @@ static void Reg_Rem(RegisterFrame& frame, const RegisterInstruction& instr) noex
 static void Reg_Neg(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Neg");
     int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(-v),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(-v)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -735,7 +735,7 @@ static void Reg_And(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_And");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l & r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l & r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -744,7 +744,7 @@ static void Reg_Or(RegisterFrame& frame, const RegisterInstruction& instr) noexc
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Or");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l | r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l | r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -753,7 +753,7 @@ static void Reg_Xor(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Xor");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l ^ r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l ^ r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -761,7 +761,7 @@ static void Reg_Xor(RegisterFrame& frame, const RegisterInstruction& instr) noex
 static void Reg_Not(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Not");
     int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(~v),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(~v)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -770,7 +770,7 @@ static void Reg_Shl(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Shl");
     int32_t a = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v << (a & 0x1F)),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v << (a & 0x1F))),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -779,7 +779,7 @@ static void Reg_Shr(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Shr");
     int32_t a = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v >> (a & 0x1F)),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v >> (a & 0x1F))),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -788,7 +788,7 @@ static void Reg_ShrUn(RegisterFrame& frame, const RegisterInstruction& instr) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ShrUn");
     int32_t a = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v >> (a & 0x1F)),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v >> (a & 0x1F))),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -884,7 +884,7 @@ static void Reg_Bge(RegisterFrame& frame, const RegisterInstruction& instr) noex
 static void Reg_Conv_I4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Conv_I4");
     int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -973,7 +973,7 @@ static void Reg_LdSFld(RegisterFrame& frame, const RegisterInstruction& instr) n
     const auto& iv = sfields[offset];
     switch (iv.tag) {
     case ValueTag::Int32:
-        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i32),
+        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv.i32)),
                            static_cast<uint8_t>(ValueTag::Int32)); break;
     case ValueTag::Int64:
         frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64),
@@ -1047,7 +1047,7 @@ static void Reg_LdElem(RegisterFrame& frame, const RegisterInstruction& instr) n
     const auto& iv = arr->elements[index];
     switch (iv.tag) {
     case ValueTag::Int32:
-        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i32),
+        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv.i32)),
                            static_cast<uint8_t>(ValueTag::Int32)); break;
     case ValueTag::Int64:
         frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64),
@@ -1120,7 +1120,7 @@ static void Reg_DivUn(RegisterFrame& frame, const RegisterInstruction& instr) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_DivUn");
     uint32_t r = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
     uint32_t l = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l / r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l / r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -1129,7 +1129,7 @@ static void Reg_RemUn(RegisterFrame& frame, const RegisterInstruction& instr) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_RemUn");
     uint32_t r = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
     uint32_t l = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l % r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l % r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -1148,7 +1148,7 @@ static void Reg_ConvI(RegisterFrame& frame, const RegisterInstruction& instr) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvI");
     // ConvI: native int — treat as int32 (32-bit host)
     int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -1198,7 +1198,7 @@ static void Reg_LdObj(RegisterFrame& frame, const RegisterInstruction& instr) no
         auto* iv = static_cast<InterpreterValue*>(ptr);
         switch (iv->tag) {
         case ValueTag::Int32:
-            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv->i32),
+            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv->i32)),
                                static_cast<uint8_t>(ValueTag::Int32)); break;
         case ValueTag::Int64:
             frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv->i64),
@@ -1248,7 +1248,7 @@ static void Reg_LdLocA(RegisterFrame& frame, const RegisterInstruction& instr) n
 // ── LdToken: push metadata token as int32 ───────────────────────────────
 static void Reg_LdToken(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdToken");
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(instr.imm.i4),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(instr.imm.i4)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -1266,7 +1266,7 @@ static void Reg_InitObj(RegisterFrame& frame, const RegisterInstruction& instr) 
 // ── SizeOf: push type size from immediate ───────────────────────────────
 static void Reg_SizeOf(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_SizeOf");
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(instr.imm.i4),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(instr.imm.i4)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -1403,7 +1403,7 @@ static void Reg_AddOvf(RegisterFrame& frame, const RegisterInstruction& instr) n
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
     // No portable overflow check on MSVC — just compute and trust caller.
     // Overflow will throw via the VM fallback path if needed.
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l + r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l + r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -1412,7 +1412,7 @@ static void Reg_SubOvf(RegisterFrame& frame, const RegisterInstruction& instr) n
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_SubOvf");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l - r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l - r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -1421,7 +1421,7 @@ static void Reg_MulOvf(RegisterFrame& frame, const RegisterInstruction& instr) n
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_MulOvf");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l * r),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l * r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -1430,7 +1430,7 @@ static void Reg_MulOvf(RegisterFrame& frame, const RegisterInstruction& instr) n
 static void Reg_ConvOvfI(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI");
     int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -1438,7 +1438,7 @@ static void Reg_ConvOvfI(RegisterFrame& frame, const RegisterInstruction& instr)
 static void Reg_ConvOvfI4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI4");
     int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -1741,7 +1741,7 @@ static void Reg_LdFld(RegisterFrame& frame, const RegisterInstruction& instr) no
     const auto& iv = obj->fields[idx];
     switch (iv.tag) {
     case ValueTag::Int32:
-        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i32),
+        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv.i32)),
                            static_cast<uint8_t>(ValueTag::Int32)); break;
     case ValueTag::Int64:
         frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64),

@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "AttributesCustomMetadataSubjects",
-  "entrySubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()",
+  "assemblyName": "AttributesCustomMetadataPatchEntry",
+  "entrySubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Run:System.Void(System.Int32)",
   "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

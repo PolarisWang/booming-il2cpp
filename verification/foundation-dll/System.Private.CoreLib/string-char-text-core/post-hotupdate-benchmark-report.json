@@ -6,8 +6,10 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 2092.3,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 1,
@@ -18,20 +20,26 @@
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)",
-      "status": "failed",
-      "error": "INFO: Applied patches to 21 methods\n"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 1752.8,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 2281.8,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 2014.1,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 5,
@@ -42,38 +50,50 @@
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 54.99,
+      "postPatchNsPerOp": 57.2,
+      "slowdownPercent": 4.02
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 111.32,
+      "postPatchNsPerOp": 113.6,
+      "slowdownPercent": 2.05
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 2236.2,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 2034.7,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 2128.9,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 2232.3,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 12,
@@ -84,26 +104,34 @@
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.String::ToUpper:System.String()",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 2225.1,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 14,
       "methodSubjectId": "System.Private.CoreLib/System.String::ToLower:System.String()",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 2239.1,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 15,
       "methodSubjectId": "System.Private.CoreLib/System.String::Trim:System.String()",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 2370.9,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 16,
       "methodSubjectId": "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])",
-      "status": "failed",
-      "error": "INFO: Applied patches to 21 methods\n"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 1758.9,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 17,
@@ -126,9 +154,9 @@
   ],
   "summary": {
     "totalMethods": 20,
-    "nonStubMethods": 0,
-    "averageSlowdownPercent": 0.0,
-    "slowdownFactor": 1.0,
+    "nonStubMethods": 2,
+    "averageSlowdownPercent": 3.03,
+    "slowdownFactor": 1.0303,
     "slowdownThresholdX": 50.0
   }
 }

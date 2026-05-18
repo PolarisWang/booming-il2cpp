@@ -2,8 +2,8 @@
   "family": "attributes-custom-metadata",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T01:08:07",
-  "duration_ms": 15532,
+  "timestamp": "2026-05-19T04:48:19",
+  "duration_ms": 14836,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\attributes-custom-metadata\\managed\\subjects\\build-output\\AttributesCustomMetadataSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 15096
+      "duration_ms": 14705
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 325
+      "duration_ms": 28
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 109
+      "duration_ms": 101
     }
   },
   "coverage": {
@@ -78,8 +78,21 @@
   },
   "regression": {
     "benchmark": {
-      "status": "skipped",
-      "message": "No benchmark report found"
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 9,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 9,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
     },
     "hasRegression": false,
     "regressions": []

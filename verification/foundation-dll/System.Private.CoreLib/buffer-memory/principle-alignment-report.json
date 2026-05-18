@@ -1,7 +1,7 @@
 {
   "family": "buffer-memory",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T01:08:38.855134",
+  "generated_at": "2026-05-19T04:48:48.955742",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -43,9 +43,15 @@
       "check_id": "p1_benchmark",
       "principle": "P1",
       "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available",
+      "summary": "10/10 methods are stubs — benchmark data not meaningful",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "managed_faster_count": 0,
+        "native_faster_count": 0,
+        "invalid_count": 10,
+        "total_methods": 10
+      }
     },
     "p2_template_hygiene": {
       "check_id": "p2_template_hygiene",

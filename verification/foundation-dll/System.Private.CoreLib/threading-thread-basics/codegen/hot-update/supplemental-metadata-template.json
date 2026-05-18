@@ -3,100 +3,108 @@
   "artifactKind": "supplementalMetadataTemplate",
   "registeredTypes": [
     {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "metadataToken": 33554434
     }
   ],
   "registeredMethods": [
     {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()",
-      "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_0:System.Int32()",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_0:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "metadataToken": 100663297,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_1:System.Void()",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_1:System.Void()",
-      "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_1:System.Int32()",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_1:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "metadataToken": 100663298,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2:System.Void()",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2:System.Void()",
-      "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_2:System.Int32()",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_2:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "metadataToken": 100663299,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_3:System.Void()",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_3:System.Void()",
-      "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_3:System.Int32()",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_3:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "metadataToken": 100663300,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4:System.Void()",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4:System.Void()",
-      "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_4:System.Int32()",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_4:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "metadataToken": 100663301,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_5:System.Void()",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_5:System.Void()",
-      "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_5:System.Int32()",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_5:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "metadataToken": 100663302,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6:System.Void()",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6:System.Void()",
-      "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_6:System.Int32()",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_6:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "metadataToken": 100663303,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7:System.Void()",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7:System.Void()",
-      "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_7:System.Int32()",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_7:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "metadataToken": 100663304,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8:System.Void()",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8:System.Void()",
-      "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_8:System.Int32()",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_8:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "metadataToken": 100663305,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_9:System.Void()",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_9:System.Void()",
-      "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_9:System.Int32()",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_9:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "metadataToken": 100663306,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10:System.Void()",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10:System.Void()",
-      "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_10:System.Int32()",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_10:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "metadataToken": 100663307,
       "parameterCount": 0
+    },
+    {
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 1
     }
   ],
   "reservedSlots": {

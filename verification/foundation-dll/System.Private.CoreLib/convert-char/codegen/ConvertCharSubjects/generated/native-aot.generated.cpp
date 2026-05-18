@@ -906,7 +906,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_0(void)
 	{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				const auto chaos_inline_result = (throw chaos_managed_exception{{reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+				const auto chaos_inline_result = (chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0));
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -933,7 +933,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_0(void)
 	{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				const auto chaos_inline_result = (throw chaos_managed_exception{{reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+				const auto chaos_inline_result = (chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0));
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -971,7 +971,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_0(void)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				const auto chaos_inline_result = (throw chaos_managed_exception{{reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+				const auto chaos_inline_result = (chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0));
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1108,7 +1108,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_3(void)
 				_s0 = ChaosStoreInt64(chaos_result);
 			}
 			{
-				const auto chaos_inline_result = (throw chaos_managed_exception{{reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+				const auto chaos_inline_result = (chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0));
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1138,7 +1138,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_3(void)
 				_s0 = ChaosStoreInt64(chaos_result);
 			}
 			{
-				const auto chaos_inline_result = (throw chaos_managed_exception{{reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+				const auto chaos_inline_result = (chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0));
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1179,7 +1179,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_3(void)
 				_s0 = ChaosStoreInt64(chaos_result);
 			}
 			{
-				const auto chaos_inline_result = (throw chaos_managed_exception{{reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+				const auto chaos_inline_result = (chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0));
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);

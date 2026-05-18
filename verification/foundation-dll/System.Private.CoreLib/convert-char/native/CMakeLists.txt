@@ -7,17 +7,19 @@ set(CMAKE_CXX_STANDARD 20)
 add_compile_options(/utf-8 /GS-)
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
 add_compile_definitions(CHAOS_IL2CPP_PROFILE_ENABLED=1)
+add_compile_definitions(CHAOS_IL2CPP_EH_WIN32_SEH)
 
 # Paths
 set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/convert-char/codegen")
-set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/artifacts/presets/profile")
+set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/build/native")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
-file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*/generated/native-aot.generated.cpp")
+file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp")
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
+    "subject0_safe_wrapper.cpp"
     ${CHAOS_CODEGEN_CPP}
 )
 
@@ -41,14 +43,14 @@ set(CHAOS_ENTRY_INCLUDES
 
 # Library link directories
 set(CHAOS_LIB_DIRS
-    "${CHAOS_NATIVE_BUILD}/src/native/runtime-core/Release"
-    "${CHAOS_NATIVE_BUILD}/src/native/bootstrap/Release"
-    "${CHAOS_NATIVE_BUILD}/src/native/common/Release"
-    "${CHAOS_NATIVE_BUILD}/src/native/interpreter/Release"
-    "${CHAOS_NATIVE_BUILD}/src/native/codegen/Release"
-    "${CHAOS_NATIVE_BUILD}/src/native/support/Release"
-    "${CHAOS_NATIVE_BUILD}/src/native/hot-update/Release"
-    "${CHAOS_NATIVE_BUILD}/fmt_build/Release"
+    "${CHAOS_NATIVE_BUILD}/src/native/runtime-core/RelWithDebInfo"
+    "${CHAOS_NATIVE_BUILD}/src/native/bootstrap/RelWithDebInfo"
+    "${CHAOS_NATIVE_BUILD}/src/native/common/RelWithDebInfo"
+    "${CHAOS_NATIVE_BUILD}/src/native/interpreter/RelWithDebInfo"
+    "${CHAOS_NATIVE_BUILD}/src/native/codegen/RelWithDebInfo"
+    "${CHAOS_NATIVE_BUILD}/src/native/support/RelWithDebInfo"
+    "${CHAOS_NATIVE_BUILD}/src/native/hot-update/RelWithDebInfo"
+    "${CHAOS_NATIVE_BUILD}/fmt_build/RelWithDebInfo"
 )
 
 # Runtime libs to link

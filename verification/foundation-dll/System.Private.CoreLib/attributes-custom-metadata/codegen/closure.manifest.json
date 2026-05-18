@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "AttributesCustomMetadataSubjects",
+  "assemblyName": "AttributesCustomMetadataPatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/subjects/build-output/AttributesCustomMetadataSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/patch/build-output/AttributesCustomMetadataPatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "AttributesCustomMetadataSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/subjects/build-output/AttributesCustomMetadataSubjects.dll"
+      "assemblyName": "AttributesCustomMetadataPatchEntry",
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/patch/build-output/AttributesCustomMetadataPatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "771bc408-d6ec-4cea-af4d-a6ea1c2e47c8",
+  "inputModuleVersionId": "68ea9351-b11e-44f0-b1cd-3268b6845ab4",
   "artifacts": [
     {
       "kind": "typedIlIr",

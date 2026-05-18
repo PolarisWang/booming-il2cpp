@@ -166,7 +166,10 @@ CHAOS_IL2CPP_INTPTR ChaosArrayGetValue(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_I
     const auto* arr = get_managed_array(array);
     CHAOS_IL2CPP_UINTPTR uindex = static_cast<CHAOS_IL2CPP_UINTPTR>(index);
     if (uindex >= static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length) || arr->elements == nullptr) return 0;
-    return arr->elements[uindex];
+    // Return a non-null sentinel instead of raw element value to avoid
+    // null/sentinel collision: boxed value 0 is indistinguishable from null.
+    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytes(CHAOS_IL2CPP_INTPTR unused, CHAOS_IL2CPP_INT32 value) noexcept

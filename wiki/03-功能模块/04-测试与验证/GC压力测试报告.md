@@ -144,6 +144,65 @@ cmake --build artifacts/presets/debug --target chaos_gc_stress_test --config Deb
 | 1 | BGC 线程非一等公民 | RegisterThread + EnterPreemptiveMode | 安全点协议覆盖 BGC |
 | 2 | 场景覆盖 11 → 14 | 增加 L (BGC 并发标记)、M (并行标记扩展)、N (SATB 压力) | 完整覆盖并发路径 |
 
+## Delegate 压力测试 (2026-05-19)
+
+Delegate 子系统 (`DelegateCombine`/`DelegateRemove`/`DelegateInvoke`) 独立压力测试套件位于 `tests/contracts/native/runtime-core/delegate_stress_test.cpp`，覆盖 13 个场景 (A1-F3)。
+
+### 测试场景
+
+| 分类 | 场景 | 名称 | 说明 |
+|------|------|------|------|
+| A | A1 | CreateDelegate-pressure | 50 线程 × 512 次高速创建，120s soak |
+| A | A2 | Marshal-alloc-stress | 100K 委托 + 9 轮 full GC，覆盖 56B 大小类稳定性 |
+| B | B1 | Chain-build-delete-rebuild | 链 N=2→10000，构建→移除一半→验证计数 |
+| B | B2 | Remove-not-found | 100K 链中移除不存在条目，验证快速返回 |
+| C | C2 | Multicast-invoke-iteration | 链 2→10000，验证 vector 遍历正确 |
+| D | D2 | Concurrent-readonly-invoke | 10 线程共享 1000-entry 多播并发 invoke |
+| D | D3 | Thunk-registry-concurrency | 多线程并发 RegisterThunk + lookup |
+| E | E1 | Conservative-scan-survival | 1000 pinned delegates + full GC，验证字段存活 |
+| E | E3 | Compaction-survival | 多播链经历 10+ full GC + compaction，验证地址正确 |
+| E | E5 | Old-gen-exhaustion | 大量分配耗尽 size class，验证 full GC 正确回收 |
+| F | F1 | Hotupdate-resolve-after-patch | 热更新后委托自动路由到替换方法 |
+| F | F2 | Multicast-hotupdate-mixed | 链中部分条目被替换，混合调用正确 |
+| F | F3 | Hotupdate-concurrent-combine | 热更新期间执行 Combine/Remove |
+
+### 修复的 GC Bug
+
+在 delegate 压力测试实施过程中，OldGen 扫描和压缩路径暴露出以下正确性 Bug：
+
+| # | 问题 | 根因 | 修复 |
+|---|------|------|------|
+| 1 | `sizeof(void*)` 作为最小 free block 大小 | OldGenFreeBlock 是 16 字节，sizeof(void*)=8 创建了过小的 free block → free list 损坏 | 全部 6 处改为 `sizeof(OldGenFreeBlock)`：SweepPage、CoalescePage（return 阶段）、CompactPage（2 处 12-space indent）、CrossPageCompact（2 处 24-space indent） |
+| 2 | Bitmap poison guard 越界 | `bitmap_bytes` 包含 16 字节 0xCD poison guard，`WordCount()` 返回 130 而非 128 | 5 处 capped：SweepPage、PageFragmentation、DecideCompactMode、PlanPageCompaction、PlanPageEvacuation、CrossPageCompact |
+
+### 性能优化
+
+| 优化 | 说明 | 效果 |
+|------|------|------|
+| DecideCompactMode 总存活=0 提前返回 | Sweep 清空 bitmap 后，`total_live==0` 时直接返回 `CompactMode::NONE` | 消除全空页面的 CrossPageCompact 空转，节省 ~50μs/GC |
+
+### 性能数据 (Debug 构建, A2 场景)
+
+| 指标 | 值 |
+|------|-----|
+| A2 GC 次数 | 9 次 |
+| A2 page_count 增长 | 31→47 (每次 GC +2) |
+| A2 GC 平均暂停 | ~19.9ms |
+| A2 最小暂停 | ~2.9ms (首次) |
+| A2 最大暂停 | ~23.9ms |
+| E3 暂停 (10 次 GC, page_count=123 稳定) | ~2.5-3.5ms |
+| E5 暂停 (page_count=230) | ~7.5-9.0ms |
+| 3 个 GC 触发的场景累计暂停 | ~224ms (22 次 GC) |
+
+### 构建与运行
+
+```bash
+cmake --build artifacts/presets/debug --target chaos_delegate_stress_test --config Debug
+./artifacts/native-runtime-core-test/Debug/chaos_delegate_stress_test.exe all --test_timeout 300000
+```
+
+报告输出到 `artifacts/native-runtime-core-test/reports/delegate_stress_report_<ts>.json`。
+
 ## 历史数据
 
 ### C3 精确扫描对比 (2026-05-13)

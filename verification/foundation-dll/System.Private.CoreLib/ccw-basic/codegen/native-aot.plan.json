@@ -1,11 +1,11 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
-  "planKind": "generic-managed-entry",
-  "assemblyName": "CcwBasicSubjects",
-  "entrySubjectId": "CcwBasicSubjects/CcwBasicSubjects::Run:System.Void(System.Int32)",
-  "nativeEntryFunctionName": "RunNativeAot",
-  "entrySymbol": "CcwBasicSubjects_CcwBasicSubjects_Run",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "CcwBasicPatchEntry",
+  "entrySubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method0",
   "entryMethodToken": "0u",
-  "workloadAbi": "void(int32)"
+  "workloadAbi": "full-assembly"
 }

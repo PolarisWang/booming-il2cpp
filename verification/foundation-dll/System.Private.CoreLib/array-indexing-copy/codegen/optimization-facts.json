@@ -4,90 +4,94 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_0:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_1:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_1:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_2:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_2:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_3:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_4:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_5:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_5:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_6:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_6:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_7:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_7:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_8:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_9:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_10:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_10:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_11:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_11:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_12:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [
-    {
-      "methodSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    }
-  ],
+  "dispatchFacts": [],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::_exitCode",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Run:System.Void(System.Int32)",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    }
+  ]
 }

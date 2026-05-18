@@ -2,9 +2,9 @@
   "family": "buffer-memory",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T01:08:38",
-  "duration_ms": 3391,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T04:48:48",
+  "duration_ms": 14556,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -21,29 +21,28 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\managed\\subjects\\BufferMemoryNativeEntry.Custom.cs(36,30): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\managed\\subjects\\BufferMemorySubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\managed\\subjects\\BufferMemoryNativeEntry.Custom.cs(36,30): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\managed\\subjects\\BufferMemorySubjects.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.02\n",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "FAILED"
-        }
+        "methodCount": 10,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\managed\\subjects\\build-output\\BufferMemorySubjects.dll"
       },
       "errors": [],
-      "duration_ms": 3237
+      "duration_ms": 14438
     },
     "fact": {
       "stage": "fact",
       "status": "passed",
-      "summary": "Fact verify=passed (11/11)",
+      "summary": "Fact verify=passed (13/13)",
       "details": {
         "fact": {
           "status": "passed",
-          "passed": 11,
-          "total": 11
+          "passed": 13,
+          "total": 13
         }
       },
       "errors": [],
-      "duration_ms": 66
+      "duration_ms": 27
     },
     "audit": {
       "stage": "audit",
@@ -57,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 86
+      "duration_ms": 89
     }
   },
   "coverage": {
@@ -79,8 +78,21 @@
   },
   "regression": {
     "benchmark": {
-      "status": "skipped",
-      "message": "No benchmark report found"
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 10,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 10,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
     },
     "hasRegression": false,
     "regressions": []

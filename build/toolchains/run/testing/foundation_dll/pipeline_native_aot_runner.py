@@ -542,6 +542,46 @@ def _inject_config_tier(cmakelists: Path, config_tier: str) -> None:
     cmakelists.write_text(text, encoding="utf-8")
 
 
+def _inject_seh_define(cmakelists: Path) -> None:
+    """Inject CHAOS_IL2CPP_EH_WIN32_SEH compile definition if not present.
+
+    Windows SEH (__try/__except) avoids MSVC EH table corruption in large
+    translation units where functions contain both throw and catch.
+    Only injected on Windows platforms.
+    """
+    if sys.platform != "win32":
+        return
+    marker = "# chaos-il2cpp SEH (Windows)"
+    text = cmakelists.read_text(encoding="utf-8")
+    if marker in text or "CHAOS_IL2CPP_EH_WIN32_SEH" in text:
+        return  # already injected
+    line = f"add_compile_definitions(CHAOS_IL2CPP_EH_WIN32_SEH)  {marker}"
+    # Insert after the last add_compile_definitions line, or after the compiler options comment
+    text = text.replace(
+        "add_compile_options(/utf-8 /GS-)",
+        f"add_compile_options(/utf-8 /GS-)\n{line}",
+    )
+    cmakelists.write_text(text, encoding="utf-8")
+
+
+def _inject_eha_directive(cmakelists: Path) -> None:
+    """Ensure /EHa is set as compile option for the entry target.
+
+    MSVC needs /EHa (Async EH model) so that C++ throw inside __try
+    is properly unwound. /EHs (Sync) does not handle this case.
+    """
+    text = cmakelists.read_text(encoding="utf-8")
+    if "/EHa" in text and "EHc" not in text:
+        return  # already correct
+    # Ensure the compile options line uses /EHa
+    if "/EHa" not in text:
+        text = text.replace(
+            "target_compile_options(entry PRIVATE",
+            "target_compile_options(entry PRIVATE /EHa",
+        )
+        cmakelists.write_text(text, encoding="utf-8")
+
+
 def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -> None:
     """Auto-generate native/CMakeLists.txt if it doesn't exist.
 
@@ -647,6 +687,9 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     # Inject config tier compile definition into CMakeLists.txt
     _inject_config_tier(cmakelists, config_tier)
 
+    # Inject SEH define (Windows) to avoid MSVC EH table corruption in large TUs
+    _inject_seh_define(cmakelists)
+
     # Ensure runtime-patchdata.cpp exists (sentinel if not generated)
     patchdata_cpp = native_dir / "runtime-patchdata.cpp"
     if not patchdata_cpp.exists():
@@ -665,6 +708,9 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     _ensure_cmakelists(cmakelists, family_slug, v)
 
     build_dir = native_dir / "build"
+    # Remove stale cmake cache to avoid generator/platform mismatch errors
+    if build_dir.exists():
+        shutil.rmtree(build_dir)
     build_dir.mkdir(parents=True, exist_ok=True)
 
     # Step 1: CMake configure

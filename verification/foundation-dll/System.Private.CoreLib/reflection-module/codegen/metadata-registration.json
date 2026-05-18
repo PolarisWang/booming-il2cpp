@@ -5,90 +5,110 @@
     {
       "registrationKind": "assembly",
       "slot": 0,
-      "subjectId": "ReflectionModuleSubjects"
+      "subjectId": "ReflectionModulePatchEntry"
     },
     {
       "registrationKind": "type",
       "slot": 1,
-      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
-      "name": "ReflectionModuleSubjects",
-      "displayName": "ReflectionModuleSubjects",
-      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects"
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "name": "ReflectionModulePatchEntry",
+      "displayName": "ReflectionModulePatchEntry",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry"
     },
     {
       "registrationKind": "field",
       "slot": 2,
-      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::_exitCode",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::_exitCode",
       "name": "_exitCode",
-      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::_exitCode",
-      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::_exitCode",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
       "memberType": "System.Int32"
     },
     {
       "registrationKind": "method",
       "slot": 3,
-      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_0:System.Int32()",
       "name": "Subject_0",
-      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()",
-      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
-      "memberType": "System.Void",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_0:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
       "parameterCount": 0,
       "isImported": false
     },
     {
       "registrationKind": "method",
       "slot": 4,
-      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_1:System.Void()",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_1:System.Int32()",
       "name": "Subject_1",
-      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_1:System.Void()",
-      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
-      "memberType": "System.Void",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_1:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
       "parameterCount": 0,
       "isImported": false
     },
     {
       "registrationKind": "method",
       "slot": 5,
-      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_2:System.Void()",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_2:System.Int32()",
       "name": "Subject_2",
-      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_2:System.Void()",
-      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
-      "memberType": "System.Void",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_2:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
       "parameterCount": 0,
       "isImported": false
     },
     {
       "registrationKind": "method",
       "slot": 6,
-      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_3:System.Void()",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_3:System.Int32()",
       "name": "Subject_3",
-      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_3:System.Void()",
-      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
-      "memberType": "System.Void",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_3:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
       "parameterCount": 0,
       "isImported": false
     },
     {
       "registrationKind": "method",
       "slot": 7,
-      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_4:System.Void()",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_4:System.Int32()",
       "name": "Subject_4",
-      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_4:System.Void()",
-      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
-      "memberType": "System.Void",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_4:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
       "parameterCount": 0,
       "isImported": false
     },
     {
       "registrationKind": "method",
       "slot": 8,
-      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_5:System.Void()",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_5:System.Int32()",
       "name": "Subject_5",
-      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_5:System.Void()",
-      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
-      "memberType": "System.Void",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_5:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
       "parameterCount": 0,
       "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Void(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 10,
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
     }
   ]
 }

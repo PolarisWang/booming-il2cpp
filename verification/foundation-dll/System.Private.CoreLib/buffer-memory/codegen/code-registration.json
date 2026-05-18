@@ -3,73 +3,73 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "BufferMemorySubjects.dll",
+      "moduleName": "BufferMemoryPatchEntry.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "BufferMemorySubjects_BufferMemorySubjects_Run",
-          "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)"
+          "symbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_0",
+          "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_0:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_0",
-          "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()"
+          "symbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_1",
+          "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_1:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_1",
-          "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()"
+          "symbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_2",
+          "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_2:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_2",
-          "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()"
+          "symbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_3",
+          "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_3:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_3",
-          "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()"
+          "symbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_4",
+          "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_4:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_4",
-          "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()"
+          "symbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_5",
+          "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_5:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_5",
-          "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()"
+          "symbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_6",
+          "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_6:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 7,
-          "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_6",
-          "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()"
+          "symbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_7",
+          "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_7:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 8,
-          "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_7",
-          "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()"
+          "symbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_8",
+          "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_8:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 9,
-          "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_8",
-          "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()"
+          "symbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_9",
+          "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_9:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 10,
-          "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_9",
-          "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()"
+          "symbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Run_System_Int32",
+          "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)"
         }
       ]
     }

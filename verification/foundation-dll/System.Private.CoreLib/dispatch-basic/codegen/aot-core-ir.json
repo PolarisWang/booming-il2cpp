@@ -3,252 +3,65 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "dispatch-basic-subjects.dispatch-basic-subjects.subject-0",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()",
-      "signature": "System.Void DispatchBasicSubjects::Subject_0()",
+      "methodId": "dispatch-basic-patch-entry.dispatch-basic-patch-entry.subject-0",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_0:System.Int32()",
+      "signature": "System.Int32 DispatchBasicPatchEntry::Subject_0()",
       "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-        "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()",
-        "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()",
-        "methodId": "dispatch-basic-subjects.dispatch-basic-subjects.subject-0",
-        "signature": "System.Void DispatchBasicSubjects::Subject_0()"
+        "assemblyName": "DispatchBasicPatchEntry",
+        "declaringTypeSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry",
+        "definitionSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_0:System.Int32()",
+        "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_0:System.Int32()",
+        "methodId": "dispatch-basic-patch-entry.dispatch-basic-patch-entry.subject-0",
+        "signature": "System.Int32 DispatchBasicPatchEntry::Subject_0()"
       },
-      "nativeSymbol": "DispatchBasicSubjects_DispatchBasicSubjects_Subject_0",
+      "nativeSymbol": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_0",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 33,
-          "handlerOffset": 34,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 42,
-          "ilOffset": 2,
+          "operand": -1342177280,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 4,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
           "ilOffset": 9,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 11,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 19,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 21,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 22,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 31,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 25,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-          "ilOffset": 26,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 45,
-          "ilOffset": 32,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 34,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 36,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-          "ilOffset": 37,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 45,
-          "ilOffset": 43,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 45,
+          "ilOffset": 10,
           "isPreserveSig": false
         }
       ],
@@ -260,117 +73,38 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
+      "declaringAssemblyName": "DispatchBasicPatchEntry"
     },
     {
-      "methodId": "dispatch-basic-subjects.dispatch-basic-subjects.subject-1",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()",
-      "signature": "System.Void DispatchBasicSubjects::Subject_1()",
+      "methodId": "dispatch-basic-patch-entry.dispatch-basic-patch-entry.subject-1",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_1:System.Int32()",
+      "signature": "System.Int32 DispatchBasicPatchEntry::Subject_1()",
       "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-        "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()",
-        "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()",
-        "methodId": "dispatch-basic-subjects.dispatch-basic-subjects.subject-1",
-        "signature": "System.Void DispatchBasicSubjects::Subject_1()"
+        "assemblyName": "DispatchBasicPatchEntry",
+        "declaringTypeSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry",
+        "definitionSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_1:System.Int32()",
+        "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_1:System.Int32()",
+        "methodId": "dispatch-basic-patch-entry.dispatch-basic-patch-entry.subject-1",
+        "signature": "System.Int32 DispatchBasicPatchEntry::Subject_1()"
       },
-      "nativeSymbol": "DispatchBasicSubjects_DispatchBasicSubjects_Subject_1",
+      "nativeSymbol": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_1",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 29,
-          "handlerOffset": 30,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 2,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 7,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 12,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 0,
-          "ilOffset": 14,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 15,
+          "operand": -1342177279,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -378,7 +112,15 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -386,113 +128,13 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 18,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 27,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-          "ilOffset": 22,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 30,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-          "ilOffset": 33,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 39,
-          "resultType": "System.Void",
+          "ilOffset": 9,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 41,
+          "ilOffset": 10,
           "isPreserveSig": false
         }
       ],
@@ -504,117 +146,38 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
+      "declaringAssemblyName": "DispatchBasicPatchEntry"
     },
     {
-      "methodId": "dispatch-basic-subjects.dispatch-basic-subjects.subject-2",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()",
-      "signature": "System.Void DispatchBasicSubjects::Subject_2()",
+      "methodId": "dispatch-basic-patch-entry.dispatch-basic-patch-entry.subject-2",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_2:System.Int32()",
+      "signature": "System.Int32 DispatchBasicPatchEntry::Subject_2()",
       "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-        "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()",
-        "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()",
-        "methodId": "dispatch-basic-subjects.dispatch-basic-subjects.subject-2",
-        "signature": "System.Void DispatchBasicSubjects::Subject_2()"
+        "assemblyName": "DispatchBasicPatchEntry",
+        "declaringTypeSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry",
+        "definitionSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_2:System.Int32()",
+        "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_2:System.Int32()",
+        "methodId": "dispatch-basic-patch-entry.dispatch-basic-patch-entry.subject-2",
+        "signature": "System.Int32 DispatchBasicPatchEntry::Subject_2()"
       },
-      "nativeSymbol": "DispatchBasicSubjects_DispatchBasicSubjects_Subject_2",
+      "nativeSymbol": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_2",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 29,
-          "handlerOffset": 30,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 2,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 7,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 12,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 0,
-          "ilOffset": 14,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 15,
+          "operand": -1342177278,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -622,7 +185,15 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -630,113 +201,13 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 18,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 27,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-          "ilOffset": 22,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 30,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-          "ilOffset": 33,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 39,
-          "resultType": "System.Void",
+          "ilOffset": 9,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 41,
+          "ilOffset": 10,
           "isPreserveSig": false
         }
       ],
@@ -748,117 +219,38 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
+      "declaringAssemblyName": "DispatchBasicPatchEntry"
     },
     {
-      "methodId": "dispatch-basic-subjects.dispatch-basic-subjects.subject-3",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()",
-      "signature": "System.Void DispatchBasicSubjects::Subject_3()",
+      "methodId": "dispatch-basic-patch-entry.dispatch-basic-patch-entry.subject-3",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_3:System.Int32()",
+      "signature": "System.Int32 DispatchBasicPatchEntry::Subject_3()",
       "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-        "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()",
-        "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()",
-        "methodId": "dispatch-basic-subjects.dispatch-basic-subjects.subject-3",
-        "signature": "System.Void DispatchBasicSubjects::Subject_3()"
+        "assemblyName": "DispatchBasicPatchEntry",
+        "declaringTypeSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry",
+        "definitionSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_3:System.Int32()",
+        "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_3:System.Int32()",
+        "methodId": "dispatch-basic-patch-entry.dispatch-basic-patch-entry.subject-3",
+        "signature": "System.Int32 DispatchBasicPatchEntry::Subject_3()"
       },
-      "nativeSymbol": "DispatchBasicSubjects_DispatchBasicSubjects_Subject_3",
+      "nativeSymbol": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_3",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 29,
-          "handlerOffset": 30,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 2,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 7,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 12,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 0,
-          "ilOffset": 14,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 15,
+          "operand": -1342177277,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -866,7 +258,15 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -874,113 +274,13 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 18,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 27,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-          "ilOffset": 22,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 30,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-          "ilOffset": 33,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 39,
-          "resultType": "System.Void",
+          "ilOffset": 9,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 41,
+          "ilOffset": 10,
           "isPreserveSig": false
         }
       ],
@@ -992,117 +292,38 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
+      "declaringAssemblyName": "DispatchBasicPatchEntry"
     },
     {
-      "methodId": "dispatch-basic-subjects.dispatch-basic-subjects.subject-4",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()",
-      "signature": "System.Void DispatchBasicSubjects::Subject_4()",
+      "methodId": "dispatch-basic-patch-entry.dispatch-basic-patch-entry.subject-4",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_4:System.Int32()",
+      "signature": "System.Int32 DispatchBasicPatchEntry::Subject_4()",
       "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-        "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()",
-        "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()",
-        "methodId": "dispatch-basic-subjects.dispatch-basic-subjects.subject-4",
-        "signature": "System.Void DispatchBasicSubjects::Subject_4()"
+        "assemblyName": "DispatchBasicPatchEntry",
+        "declaringTypeSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry",
+        "definitionSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_4:System.Int32()",
+        "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_4:System.Int32()",
+        "methodId": "dispatch-basic-patch-entry.dispatch-basic-patch-entry.subject-4",
+        "signature": "System.Int32 DispatchBasicPatchEntry::Subject_4()"
       },
-      "nativeSymbol": "DispatchBasicSubjects_DispatchBasicSubjects_Subject_4",
+      "nativeSymbol": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_4",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 29,
-          "handlerOffset": 30,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 2,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 7,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 12,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 0,
-          "ilOffset": 14,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 15,
+          "operand": -1342177276,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1110,7 +331,15 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1118,113 +347,13 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 18,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 27,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-          "ilOffset": 22,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 30,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-          "ilOffset": 33,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 39,
-          "resultType": "System.Void",
+          "ilOffset": 9,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 41,
+          "ilOffset": 10,
           "isPreserveSig": false
         }
       ],
@@ -1236,657 +365,26 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
+      "declaringAssemblyName": "DispatchBasicPatchEntry"
     },
     {
-      "methodId": "dispatch-basic-subjects.i-calculator.add",
-      "subjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
-      "signature": "System.Int32 ICalculator::Add(System.Int32,System.Int32)",
+      "methodId": "dispatch-basic-patch-entry.dispatch-basic-patch-entry.run",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Run:System.Void(System.Int32)",
+      "signature": "System.Void DispatchBasicPatchEntry::Run(System.Int32)",
       "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/ICalculator",
-        "definitionSubjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
-        "subjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
-        "methodId": "dispatch-basic-subjects.i-calculator.add",
-        "signature": "System.Int32 ICalculator::Add(System.Int32,System.Int32)"
+        "assemblyName": "DispatchBasicPatchEntry",
+        "declaringTypeSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry",
+        "definitionSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Run:System.Void(System.Int32)",
+        "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Run:System.Void(System.Int32)",
+        "methodId": "dispatch-basic-patch-entry.dispatch-basic-patch-entry.run",
+        "signature": "System.Void DispatchBasicPatchEntry::Run(System.Int32)"
       },
-      "nativeSymbol": "DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 2,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        },
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.i-calculator.subtract",
-      "subjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)",
-      "signature": "System.Int32 ICalculator::Subtract(System.Int32,System.Int32)",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/ICalculator",
-        "definitionSubjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)",
-        "subjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)",
-        "methodId": "dispatch-basic-subjects.i-calculator.subtract",
-        "signature": "System.Int32 ICalculator::Subtract(System.Int32,System.Int32)"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 2,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        },
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.i-status-provider.get-status-code",
-      "subjectId": "DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()",
-      "signature": "System.Int32 IStatusProvider::GetStatusCode()",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/IStatusProvider",
-        "definitionSubjectId": "DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()",
-        "subjectId": "DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()",
-        "methodId": "dispatch-basic-subjects.i-status-provider.get-status-code",
-        "signature": "System.Int32 IStatusProvider::GetStatusCode()"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_IStatusProvider_GetStatusCode",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.i-basic-op.get-value",
-      "subjectId": "DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()",
-      "signature": "System.Int32 IBasicOp::GetValue()",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/IBasicOp",
-        "definitionSubjectId": "DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()",
-        "subjectId": "DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()",
-        "methodId": "dispatch-basic-subjects.i-basic-op.get-value",
-        "signature": "System.Int32 IBasicOp::GetValue()"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_IBasicOp_GetValue",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.calculator.add",
-      "subjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
-      "signature": "System.Int32 Calculator::Add(System.Int32,System.Int32)",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/Calculator",
-        "definitionSubjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
-        "subjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
-        "methodId": "dispatch-basic-subjects.calculator.add",
-        "signature": "System.Int32 Calculator::Add(System.Int32,System.Int32)"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 2,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        },
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 2,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "add",
-          "opCode": 25,
-          "ilOffset": 2,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 3,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.calculator.subtract",
-      "subjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
-      "signature": "System.Int32 Calculator::Subtract(System.Int32,System.Int32)",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/Calculator",
-        "definitionSubjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
-        "subjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
-        "methodId": "dispatch-basic-subjects.calculator.subtract",
-        "signature": "System.Int32 Calculator::Subtract(System.Int32,System.Int32)"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 2,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        },
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 2,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "sub",
-          "opCode": 26,
-          "ilOffset": 2,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 3,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.calculator.ctor",
-      "subjectId": "DispatchBasicSubjects/Calculator::.ctor:System.Void()",
-      "signature": "System.Void Calculator::.ctor()",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/Calculator",
-        "definitionSubjectId": "DispatchBasicSubjects/Calculator::.ctor:System.Void()",
-        "subjectId": "DispatchBasicSubjects/Calculator::.ctor:System.Void()",
-        "methodId": "dispatch-basic-subjects.calculator.ctor",
-        "signature": "System.Void Calculator::.ctor()"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_Calculator__ctor",
-      "isStatic": false,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 0,
-          "resultType": "DispatchBasicSubjects/Calculator",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 1,
-          "resultType": "System.Void",
-          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 7,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.status-provider.get-status-code",
-      "subjectId": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()",
-      "signature": "System.Int32 StatusProvider::GetStatusCode()",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/StatusProvider",
-        "definitionSubjectId": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()",
-        "subjectId": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()",
-        "methodId": "dispatch-basic-subjects.status-provider.get-status-code",
-        "signature": "System.Int32 StatusProvider::GetStatusCode()"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_StatusProvider_GetStatusCode",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 200,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 5,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.status-provider.ctor",
-      "subjectId": "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()",
-      "signature": "System.Void StatusProvider::.ctor()",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/StatusProvider",
-        "definitionSubjectId": "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()",
-        "subjectId": "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()",
-        "methodId": "dispatch-basic-subjects.status-provider.ctor",
-        "signature": "System.Void StatusProvider::.ctor()"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_StatusProvider__ctor",
-      "isStatic": false,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 0,
-          "resultType": "DispatchBasicSubjects/StatusProvider",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 1,
-          "resultType": "System.Void",
-          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 7,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.basic-impl.get-value",
-      "subjectId": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()",
-      "signature": "System.Int32 BasicImpl::GetValue()",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/BasicImpl",
-        "definitionSubjectId": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()",
-        "subjectId": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()",
-        "methodId": "dispatch-basic-subjects.basic-impl.get-value",
-        "signature": "System.Int32 BasicImpl::GetValue()"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_BasicImpl_GetValue",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 2,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.basic-impl.ctor",
-      "subjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()",
-      "signature": "System.Void BasicImpl::.ctor()",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/BasicImpl",
-        "definitionSubjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()",
-        "subjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()",
-        "methodId": "dispatch-basic-subjects.basic-impl.ctor",
-        "signature": "System.Void BasicImpl::.ctor()"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_BasicImpl__ctor",
-      "isStatic": false,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 0,
-          "resultType": "DispatchBasicSubjects/BasicImpl",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 1,
-          "resultType": "System.Void",
-          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 7,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.dispatch-basic-native-entry.run",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
-      "signature": "System.Int32 DispatchBasicNativeEntry::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
-        "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
-        "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
-        "methodId": "dispatch-basic-subjects.dispatch-basic-native-entry.run",
-        "signature": "System.Int32 DispatchBasicNativeEntry::Run(System.Int32)"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32",
+      "nativeSymbol": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Run_System_Int32",
       "isStatic": true,
-      "returnType": "System.Int32",
+      "returnType": "System.Void",
       "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
+        "carrierKindCode": 0,
+        "typeShape": 1
       },
       "parameterCount": 1,
       "parameterAbis": [
@@ -1895,15 +393,24 @@
           "typeShape": 2
         }
       ],
-      "localCount": 3,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 76,
+          "handlerOffset": 77,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+        }
+      ],
       "instructions": [
         {
           "op": "ldarg",
           "opCode": 6,
           "operand": 0,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1911,7 +418,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
-          "ilOffset": 2,
+          "ilOffset": 3,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1919,14 +426,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 3,
+          "ilOffset": 4,
           "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 4,
+          "ilOffset": 5,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1934,89 +441,46 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 5,
+          "ilOffset": 6,
           "isPreserveSig": false
         },
         {
           "op": "switch",
           "opCode": 69,
           "operand": [
-            29,
-            37,
-            45,
-            53
+            34,
+            42,
+            50,
+            58,
+            66
           ],
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 61,
-          "ilOffset": 27,
+          "operand": 74,
+          "ilOffset": 32,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 29,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 2,
           "ilOffset": 34,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 65,
-          "ilOffset": 35,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 37,
           "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
+          "callee": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_0:System.Int32()",
           "reference": {
-            "assemblyName": "DispatchBasicSubjects",
+            "assemblyName": "DispatchBasicPatchEntry",
             "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()"
+            "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_0:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
+            "assemblyName": "DispatchBasicPatchEntry",
+            "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_0:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -2024,43 +488,41 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub",
+          "targetSymbol": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_0",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 2,
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 39,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 74,
+          "ilOffset": 40,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 42,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 65,
-          "ilOffset": 43,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 45,
           "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
+          "callee": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_1:System.Int32()",
           "reference": {
-            "assemblyName": "DispatchBasicSubjects",
+            "assemblyName": "DispatchBasicPatchEntry",
             "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()"
+            "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_1:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
+            "assemblyName": "DispatchBasicPatchEntry",
+            "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_1:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -2068,43 +530,41 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus",
+          "targetSymbol": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_1",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 2,
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 47,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 74,
+          "ilOffset": 48,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 50,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 65,
-          "ilOffset": 51,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 53,
           "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
+          "callee": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_2:System.Int32()",
           "reference": {
-            "assemblyName": "DispatchBasicSubjects",
+            "assemblyName": "DispatchBasicPatchEntry",
             "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()"
+            "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_2:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
+            "assemblyName": "DispatchBasicPatchEntry",
+            "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_2:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -2112,701 +572,83 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue",
+          "targetSymbol": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_2",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 2,
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 55,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 74,
+          "ilOffset": 56,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 58,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 65,
-          "ilOffset": 59,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1,
-          "ilOffset": 61,
           "resultType": "System.Int32",
+          "callee": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_3:System.Int32()",
+          "reference": {
+            "assemblyName": "DispatchBasicPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DispatchBasicPatchEntry",
+            "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 2,
-          "ilOffset": 62,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 65,
+          "op": "pop",
+          "opCode": 47,
           "ilOffset": 63,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 2,
-          "ilOffset": 65,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 66,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.dispatch-basic-native-entry.test-i-dispatch-add",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
-      "signature": "System.Int32 DispatchBasicNativeEntry::TestIDispatchAdd()",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
-        "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
-        "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
-        "methodId": "dispatch-basic-subjects.dispatch-basic-native-entry.test-i-dispatch-add",
-        "signature": "System.Int32 DispatchBasicNativeEntry::TestIDispatchAdd()"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 1,
-          "resultType": "DispatchBasicSubjects/Calculator",
-          "callee": "DispatchBasicSubjects/Calculator::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/Calculator::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/Calculator",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
-            "implementedInterfaceSubjectIds": [],
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 7,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 20,
-          "ilOffset": 8,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 7,
-          "ilOffset": 10,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 11,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32",
-          "targetParameterCount": 2,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 16,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 19,
-          "ilOffset": 17,
+          "operand": 74,
+          "ilOffset": 64,
           "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 19,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 20,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.dispatch-basic-native-entry.test-i-dispatch-sub",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
-      "signature": "System.Int32 DispatchBasicNativeEntry::TestIDispatchSub()",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
-        "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
-        "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
-        "methodId": "dispatch-basic-subjects.dispatch-basic-native-entry.test-i-dispatch-sub",
-        "signature": "System.Int32 DispatchBasicNativeEntry::TestIDispatchSub()"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 1,
-          "resultType": "DispatchBasicSubjects/Calculator",
-          "callee": "DispatchBasicSubjects/Calculator::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/Calculator::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/Calculator",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
-            "implementedInterfaceSubjectIds": [],
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 7,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 50,
-          "ilOffset": 8,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 8,
-          "ilOffset": 10,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 11,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32",
-          "targetParameterCount": 2,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 16,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 19,
-          "ilOffset": 17,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 19,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 20,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.dispatch-basic-native-entry.test-dual-get-status",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
-      "signature": "System.Int32 DispatchBasicNativeEntry::TestDualGetStatus()",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
-        "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
-        "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
-        "methodId": "dispatch-basic-subjects.dispatch-basic-native-entry.test-dual-get-status",
-        "signature": "System.Int32 DispatchBasicNativeEntry::TestDualGetStatus()"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 1,
-          "resultType": "DispatchBasicSubjects/StatusProvider",
-          "callee": "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/StatusProvider",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
-            "implementedInterfaceSubjectIds": [],
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 7,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 8,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_StatusProvider_GetStatusCode",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 13,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 16,
-          "ilOffset": 14,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 16,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 17,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.dispatch-basic-native-entry.test-i-unknown-get-value",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
-      "signature": "System.Int32 DispatchBasicNativeEntry::TestIUnknownGetValue()",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
-        "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
-        "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
-        "methodId": "dispatch-basic-subjects.dispatch-basic-native-entry.test-i-unknown-get-value",
-        "signature": "System.Int32 DispatchBasicNativeEntry::TestIUnknownGetValue()"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 1,
-          "resultType": "DispatchBasicSubjects/BasicImpl",
-          "callee": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/BasicImpl",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
-            "implementedInterfaceSubjectIds": [],
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 7,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 8,
-          "resultType": "System.Int32",
-          "callee": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()",
-          "reference": {
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "DispatchBasicSubjects",
-            "subjectId": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "DispatchBasicSubjects_BasicImpl_GetValue",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 13,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 16,
-          "ilOffset": 14,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 16,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 17,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
-    },
-    {
-      "methodId": "dispatch-basic-subjects.system-runtime-interop-services-com-interface-type-attribute.ctor",
-      "subjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)",
-      "signature": "System.Void System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor(ComInterfaceType)",
-      "identity": {
-        "assemblyName": "DispatchBasicSubjects",
-        "declaringTypeSubjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute",
-        "definitionSubjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)",
-        "subjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)",
-        "methodId": "dispatch-basic-subjects.system-runtime-interop-services-com-interface-type-attribute.ctor",
-        "signature": "System.Void System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor(ComInterfaceType)"
-      },
-      "nativeSymbol": "DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType",
-      "isStatic": false,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 2,
-          "typeShape": 1
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 0,
-          "resultType": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 1,
-          "resultType": "System.Void",
-          "callee": "System.Private.CoreLib/System.Attribute::.ctor:System.Void()",
+          "ilOffset": 66,
+          "resultType": "System.Int32",
+          "callee": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_4:System.Int32()",
           "reference": {
-            "assemblyName": "System.Private.CoreLib",
+            "assemblyName": "DispatchBasicPatchEntry",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Attribute::.ctor:System.Void()"
+            "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_4:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Attribute::.ctor:System.Void()",
+            "assemblyName": "DispatchBasicPatchEntry",
+            "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_4:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -2814,13 +656,87 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4,
+          "targetSymbol": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 71,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 74,
+          "ilOffset": 72,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 88,
+          "ilOffset": 75,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 77,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 79,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::_exitCode",
+          "ilOffset": 80,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DispatchBasicPatchEntry",
+            "subjectKind": "field",
+            "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DispatchBasicPatchEntry",
+            "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 88,
+          "ilOffset": 86,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 8,
+          "ilOffset": 88,
           "isPreserveSig": false
         }
       ],
@@ -2832,7 +748,7 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "DispatchBasicSubjects"
+      "declaringAssemblyName": "DispatchBasicPatchEntry"
     }
   ]
 }

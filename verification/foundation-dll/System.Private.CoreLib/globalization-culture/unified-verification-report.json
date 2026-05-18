@@ -2,8 +2,8 @@
   "family": "globalization-culture",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T01:10:58",
-  "duration_ms": 27228,
+  "timestamp": "2026-05-19T04:50:34",
+  "duration_ms": 14806,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 0
     },
     "codegen": {
       "stage": "codegen",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\globalization-culture\\managed\\subjects\\build-output\\GlobalizationCultureSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 26755
+      "duration_ms": 14678
     },
     "fact": {
       "stage": "fact",
       "status": "failed",
-      "summary": "Fact verify=failed (11/13)",
+      "summary": "Fact verify=failed (9/13)",
       "details": {
         "fact": {
           "status": "failed",
-          "passed": 11,
+          "passed": 9,
           "total": 13
         }
       },
       "errors": [],
-      "duration_ms": 345
+      "duration_ms": 30
     },
     "audit": {
       "stage": "audit",
@@ -56,13 +56,13 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 125
+      "duration_ms": 96
     }
   },
   "coverage": {
-    "methodCoverage": 84.62,
+    "methodCoverage": 69.23,
     "testedRate": 92.31,
-    "overall": 88.47
+    "overall": 80.77
   },
   "dashboard": {
     "interpreter": {},
@@ -78,8 +78,21 @@
   },
   "regression": {
     "benchmark": {
-      "status": "skipped",
-      "message": "No benchmark report found"
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 13,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 13,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
     },
     "hasRegression": false,
     "regressions": []

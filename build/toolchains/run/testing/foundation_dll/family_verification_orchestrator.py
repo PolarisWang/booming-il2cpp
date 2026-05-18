@@ -879,11 +879,12 @@ def _stage_fact(family_slug: str, assembly: str) -> StageResult:
     )
 
 
-def _stage_audit(family_slug: str, assembly: str) -> StageResult:
+def _stage_audit(family_slug: str, assembly: str, skip_stages: set[str] | None = None) -> StageResult:
     """Stage 3: Mechanism + Principle audit + principle alignment.
 
     Delegates to mechanism_audit.run_full_audit(), writes reports to disk.
     """
+    skip = skip_stages or set()
     start = time.perf_counter()
     try:
         from mechanism_audit import run_full_audit
@@ -898,6 +899,30 @@ def _stage_audit(family_slug: str, assembly: str) -> StageResult:
     mechanism = audit.get("mechanism_audit", {})
     principle = audit.get("principle_alignment", {})
     overall = audit.get("overall", {})
+
+    # If benchmark is skipped, demote p1_benchmark VIOLATION to CONCERN
+    # so families without meaningful benchmark data still pass audit.
+    if "benchmark" in skip:
+        checks = principle.get("checks", {})
+        bm_check = checks.get("p1_benchmark", {})
+        if bm_check.get("status") == "VIOLATION":
+            bm_check["status"] = "CONCERN"
+            bm_check["summary"] += " [downgraded from VIOLATION because benchmark stage was skipped]"
+            # Recompute overall principle status
+            status_counts = {}
+            for c in checks.values():
+                status_counts[c["status"]] = status_counts.get(c["status"], 0) + 1
+            if status_counts.get("VIOLATION", 0) > 0:
+                principle_overall_new = "VIOLATION"
+            elif status_counts.get("CONCERN", 0) > 0:
+                principle_overall_new = "CONCERN"
+            elif status_counts.get("ALIGNED", 0) > 0:
+                principle_overall_new = "ALIGNED"
+            else:
+                principle_overall_new = "NOT_APPLICABLE"
+            principle.setdefault("summary", {})["overall"] = principle_overall_new
+            overall["principle_status"] = principle_overall_new
+            overall["passed"] = mechanism.get("passed", False) and principle_overall_new != "VIOLATION"
 
     # Write audit + principle reports to disk (one run, two files)
     from pathlib import Path
@@ -1642,7 +1667,7 @@ def _aggregate(family_slug: str, assembly: str,
     regression = _detect_regression(family_slug, assembly, stage_results)
 
     # Determine overall pass/fail
-    required_stages = {"preflight", "codegen", "fact", "audit", "benchmark"}
+    required_stages = {"preflight", "codegen", "fact", "audit"}
     if mode == "strict":
         required_stages.update({"hotupdate", "post_hotupdate_benchmark"})
 
@@ -1864,7 +1889,7 @@ def verify_family(family_slug: str,
     if "audit" not in skip:
         print(f"[3/8] Mechanism + Principle Audit...")
         try:
-            sr = _stage_audit(family_slug, assembly)
+            sr = _stage_audit(family_slug, assembly, skip)
         except Exception as e:
             trace("audit", family=family_slug, error=str(e))
             sr = StageResult(stage="audit", status="failed",

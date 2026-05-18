@@ -4,79 +4,85 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_0:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_1:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_1:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_2:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_3:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_3:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_4:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_5:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_5:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_6:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_7:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_8:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_9:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_9:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_10:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

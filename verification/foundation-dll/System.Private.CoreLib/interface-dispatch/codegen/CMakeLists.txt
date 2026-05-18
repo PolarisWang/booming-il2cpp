@@ -32,14 +32,14 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: InterfaceDispatchSubjects
-add_library(chaos_gen_InterfaceDispatchSubjects STATIC
-    ${CHAOS_GEN_DIR}/InterfaceDispatchSubjects/generated/native-aot.generated.cpp
+# Assembly: InterfaceDispatchPatchEntry
+add_library(chaos_gen_InterfaceDispatchPatchEntry STATIC
+    ${CHAOS_GEN_DIR}/InterfaceDispatchPatchEntry/generated/native-aot.generated.cpp
 )
 
-target_include_directories(chaos_gen_InterfaceDispatchSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_InterfaceDispatchSubjects PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_InterfaceDispatchSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_InterfaceDispatchPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_InterfaceDispatchPatchEntry PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_InterfaceDispatchPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -48,7 +48,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_InterfaceDispatchSubjects
+    chaos_gen_InterfaceDispatchPatchEntry
     ${NATIVE_LIBS}
 )
 

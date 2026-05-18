@@ -18,7 +18,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     CHAOS_IL2CPP_LOG_TRACE_INIT();
     CHAOS_IL2CPP_LOG_TRACE("runtime", "RuntimeInit", "");
 
-    std::setvbuf(stdout, nullptr, _IOLBF, 0);
+    std::setvbuf(stdout, nullptr, _IONBF, 0);
 
     if (init_params == nullptr || out_runtime_state == nullptr) {
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;

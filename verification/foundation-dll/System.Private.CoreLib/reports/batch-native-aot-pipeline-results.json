@@ -1,12 +1,12 @@
 {
   "assembly": "System.Private.CoreLib",
   "mode": "family-entrypoint",
-  "total": 3,
-  "passed": 2,
-  "failed": 1,
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
   "results": [
     {
-      "family": "interface-dispatch",
+      "family": "convert-char",
       "config_tier": "CHECK",
       "steps": {
         "build_subjects": "OK",
@@ -14,37 +14,10 @@
         "build_entry_exe": "OK"
       },
       "success": true,
-      "methodCount": 9,
+      "methodCount": 18,
       "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\interface-dispatch\\managed\\subjects\\build-output\\InterfaceDispatchSubjects.dll"
-    },
-    {
-      "family": "rcw-basic",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 7,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\build-output\\RcwBasicSubjects.dll"
-    },
-    {
-      "family": "snapshot-prover",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "FAILED"
-      },
-      "success": false,
-      "methodCount": 10,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\snapshot-prover\\managed\\subjects\\build-output\\SnapshotProverSubjects.dll",
-      "error": "entry.exe build failed"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-19T01:09:20"
+  "timestamp": "2026-05-19T01:24:17"
 }

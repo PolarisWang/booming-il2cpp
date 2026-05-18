@@ -106,10 +106,14 @@ static void FillExternalRuntimeStubs() {
             kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT64 { return 0; });
         } else if (std::strstr(sub, ":System.Boolean(")) {
             kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+        } else if (std::strstr(sub, "Array::Empty<")) {
+            // Array.Empty<T>() — return null (empty array reference). Generated code
+            // uses this in subsequent calls (Buffer.ByteLength, etc.) which handle null.
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INTPTR { static CHAOS_IL2CPP_UINT8 s_sentinel = 0; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel); });
         } else {
-            // Unknown return type — safest default is void(void) to at least
-            // not corrupt the stack on callee-saved registers.
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){});
+            // Unknown return type — non-null sentinel so null-checks pass during fact verification.
+            // The sentinel address is non-null but carries no meaning.
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INTPTR { static CHAOS_IL2CPP_UINT8 s_sentinel = 0; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel); });
         }
     }
 }
@@ -123,27 +127,37 @@ int main(int argc, char** argv) {
         &chaos_codegen_options);
     bridge->bootstrap_runtime();
 
-    // Register current thread so generated code that calls get_CurrentThread()
-    // (e.g. threading externals) gets a non-null return from
-    // chaos_thread_get_current().  This creates a ManagedThread in TLS with a
-    // dummy managed_object.  Families that don't use threading pay a small heap
-    // allocation once during startup — acceptable for verification.
-    // NOTE: We do NOT call runtime_init/thread_attach via ABI because
-    // RuntimeInit() calls setvbuf(stdout, nullptr, _IOLBF, 0) which crashes
-    // on Windows CRT with FAST_FAIL_INVALID_ARG.
-    chaos::il2cpp::runtime_core::threading::RegisterThread(
-        chaos::il2cpp::runtime_core::threading::kMainThreadId,
-        reinterpret_cast<void*>(static_cast<uintptr_t>(0x42)));
+    // Initialize runtime properly so that threading primitives (Thread.Start,
+    // Thread.Sleep, etc.) work correctly.  ThreadAttach internally calls
+    // SetCurrentThreadState, so we don't need sentinel pointers (which crash
+    // when dereferenced by ThreadAttach in child threads).
+    auto* abi = chaos::il2cpp::runtime_core::GetRuntimeAbiV0();
+    if (abi == nullptr) { std::fprintf(stderr, "GetRuntimeAbiV0 failed\n"); return -1; }
 
-    // Set TLS to non-null sentinels so RaiseManagedException gets past its
-    // first guard (runtime == nullptr / thread == nullptr check).
-    // RuntimeState and ThreadState are opaque types (only forward-declared
-    // in runtime_abi.h), so sentinels are safe — the exception path never
-    // dereferences these pointers when type resolution fails.
-    chaos::il2cpp::runtime_core::SetCurrentRuntimeState(
-        reinterpret_cast<RuntimeState*>(static_cast<uintptr_t>(1)));
-    chaos::il2cpp::runtime_core::SetCurrentThreadState(
-        reinterpret_cast<ThreadState*>(static_cast<uintptr_t>(1)));
+    RuntimeInitParams init_params = {};
+    init_params.struct_size = sizeof(init_params);
+    init_params.init_flags = 0;
+    init_params.host_name_utf8 = "runtime-entry";
+
+    RuntimeConfig config = {};
+    config.struct_size = sizeof(config);
+    config.allocator = nullptr;
+    config.deallocator = nullptr;
+
+    RuntimeState* runtime_state = nullptr;
+    RuntimeStatus status = abi->runtime_init(&init_params, &config, &runtime_state);
+    if (status != CHAOS_RUNTIME_STATUS_OK || runtime_state == nullptr) {
+        std::fprintf(stderr, "runtime_init failed (status=%d)\n", static_cast<int>(status));
+        return -1;
+    }
+    chaos::il2cpp::runtime_core::SetCurrentRuntimeState(runtime_state);
+
+    ThreadState* thread_state = nullptr;
+    status = abi->thread_attach(runtime_state, &thread_state);
+    if (status != CHAOS_RUNTIME_STATUS_OK || thread_state == nullptr) {
+        std::fprintf(stderr, "thread_attach failed (status=%d)\n", static_cast<int>(status));
+        return -1;
+    }
 
     // Fill unresolved external runtime table entries with safe stubs.
     FillExternalRuntimeStubs();
@@ -197,6 +211,7 @@ int main(int argc, char** argv) {
         int passed_count = kAotMethodCount - failed_count;
         printf("Passed: %d/%d\n", passed_count, kAotMethodCount);
         std::fflush(stdout);
+        _exit(result);
         return result;
     }
     case RunMode::Benchmark: {
@@ -211,6 +226,7 @@ int main(int argc, char** argv) {
         if (elapsed_ms < 0.0) {
             printf("{\"error\":\"invalid method index %d\"}\n", entry_index);
             std::fflush(stdout);
+            _exit(-1);
             return -1;
         }
         double ops_per_sec = iterations / (elapsed_ms / 1000.0);
@@ -218,6 +234,7 @@ int main(int argc, char** argv) {
                "\"opsPerSecond\":%.1f,\"iterations\":%d,\"methodIndex\":%d}\n",
                elapsed_ms, elapsed_ms, ops_per_sec, iterations, entry_index);
         std::fflush(stdout);
+        _exit(0);
         return 0;
     }
     case RunMode::HotUpdate: {
@@ -239,6 +256,7 @@ int main(int argc, char** argv) {
         printf("{\"passedMethods\":%d,\"failedMethods\":%d,\"totalMethods\":%d}\n",
                passed_count, failed_count, kAotMethodCount);
         std::fflush(stdout);
+        _exit(result);
         return result;
     }
     case RunMode::HotUpdateAndBenchmark: {
@@ -267,6 +285,7 @@ int main(int argc, char** argv) {
         printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d,\"hotResult\":%d}\n",
                ns_per_op, elapsed_ms, iterations, entry_index, hot_result);
         std::fflush(stdout);
+        _exit(0);
         return 0;
     }
     case RunMode::PatchAndBenchmark: {
@@ -286,6 +305,7 @@ int main(int argc, char** argv) {
         printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d}\n",
                ns_per_op, elapsed_ms, iterations, entry_index);
         std::fflush(stdout);
+        _exit(0);
         return 0;
     }
     }

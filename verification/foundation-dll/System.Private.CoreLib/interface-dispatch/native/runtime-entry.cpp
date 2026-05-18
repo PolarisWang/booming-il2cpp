@@ -107,9 +107,9 @@ static void FillExternalRuntimeStubs() {
         } else if (std::strstr(sub, ":System.Boolean(")) {
             kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
         } else {
-            // Unknown return type — safest default is void(void) to at least
-            // not corrupt the stack on callee-saved registers.
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){});
+            // Unknown return type — return IntPtr(0) instead of void() to avoid
+            // garbage in RAX that the caller reads as the return value.
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INTPTR { static CHAOS_IL2CPP_UINT8 s_sentinel = 0; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel); });
         }
     }
 }

@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "BufferMemorySubjects",
-  "entrySubjectId": "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)",
+  "assemblyName": "BufferMemoryPatchEntry",
+  "entrySubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)",
   "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/buffer-memory/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

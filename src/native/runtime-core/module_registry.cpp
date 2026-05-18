@@ -33,7 +33,13 @@ static auto& g_free_list() {
 // Write paths (RegisterModule, MarkModuleTombstone) acquire unique_lock.
 // Must NOT be recursively acquired -- internal callers must not call
 // another locked function while holding the lock.
-static std::shared_mutex g_module_mutex;
+// Function-local static to avoid cross-TU static init ordering fiasco:
+// callers (generated static initializers) may run before file-scope statics
+// in this TU are constructed.
+static std::shared_mutex& g_module_mutex() {
+    static std::shared_mutex mutex;
+    return mutex;
+}
 
 // ── Registry API ───────────────────────────────────────────────────────
 
@@ -42,7 +48,7 @@ uint32_t RegisterModule(const char* name, const ModuleDescriptor* descriptor) {
         return kInvalidModuleId;
     }
 
-    std::unique_lock lock(g_module_mutex);
+    std::unique_lock<std::shared_mutex> lock(g_module_mutex());
 
     uint32_t id = kInvalidModuleId;
 
@@ -80,7 +86,7 @@ uint32_t RegisterModule(const char* name, const ModuleDescriptor* descriptor) {
 }
 
 const ModuleDescriptor* LookupModule(uint32_t module_id) {
-    std::shared_lock lock(g_module_mutex);
+    std::shared_lock<std::shared_mutex> lock(g_module_mutex());
 
     if (module_id >= kMaxModules) {
         return nullptr;
@@ -96,7 +102,7 @@ const ModuleDescriptor* LookupModule(uint32_t module_id) {
 }
 
 const ModuleDescriptor* LookupModuleByName(const char* name) {
-    std::shared_lock lock(g_module_mutex);
+    std::shared_lock<std::shared_mutex> lock(g_module_mutex());
 
     if (name == nullptr) {
         return nullptr;
@@ -122,7 +128,7 @@ const ModuleDescriptor* LookupModuleByName(const char* name) {
 void MarkModuleTombstone(uint32_t module_id) {
     CHAOS_IL2CPP_LOG_TRACE("runtime", "MarkModuleTombstone", "\"module_id\"=%u", module_id);
 
-    std::unique_lock lock(g_module_mutex);
+    std::unique_lock<std::shared_mutex> lock(g_module_mutex());
 
     if (module_id >= kMaxModules) {
         return;
@@ -151,7 +157,7 @@ void MarkModuleTombstone(uint32_t module_id) {
 }
 
 bool IsModuleTombstone(uint32_t module_id) {
-    std::shared_lock lock(g_module_mutex);
+    std::shared_lock<std::shared_mutex> lock(g_module_mutex());
 
     if (module_id >= kMaxModules) {
         return false;
@@ -160,12 +166,12 @@ bool IsModuleTombstone(uint32_t module_id) {
 }
 
 uint32_t GetModuleCount() {
-    std::shared_lock lock(g_module_mutex);
+    std::shared_lock<std::shared_mutex> lock(g_module_mutex());
     return g_module_count;
 }
 
 const ModuleDescriptor* GetModuleByIndex(uint32_t index) {
-    std::shared_lock lock(g_module_mutex);
+    std::shared_lock<std::shared_mutex> lock(g_module_mutex());
 
     if (index >= g_module_count) return nullptr;
     if (g_module_storage[index].tombstone) return nullptr;
@@ -173,7 +179,7 @@ const ModuleDescriptor* GetModuleByIndex(uint32_t index) {
 }
 
 const TypeInfoHot* LookupTypeInfoPtr(uint32_t module_id, uint32_t token) {
-    std::shared_lock lock(g_module_mutex);
+    std::shared_lock<std::shared_mutex> lock(g_module_mutex());
 
     if (module_id >= kMaxModules) return nullptr;
     if (g_module_storage[module_id].name_utf8 == nullptr) return nullptr;

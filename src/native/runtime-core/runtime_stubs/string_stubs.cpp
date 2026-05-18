@@ -7,6 +7,7 @@
 #include "generated_code_compat.h"
 #include "runtime_stubs/stub_common.h"
 #include "gc_helpers.h"
+#include "string_table.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -23,6 +24,43 @@ static CHAOS_IL2CPP_INTPTR alloc_string(CHAOS_IL2CPP_UINTPTR byte_count) noexcep
     result->type = 0;
     result->byte_count = byte_count;
     reinterpret_cast<char*>(result + 1)[byte_count] = '\0';
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result);
+}
+
+/// If `value` is a StringId (tagged hash), resolve it through the AOT string table
+/// and allocate a real StubStringHeader with the resolved UTF-8 data.
+/// If `value` is already a valid StubStringHeader pointer, return it unchanged.
+/// Returns 0 for null or unresolvable input.
+static CHAOS_IL2CPP_INTPTR resolve_string_arg(CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    if (value == 0) return 0;
+
+    if (!chaos_is_string_id(value))
+    {
+        // Already a real pointer (StubStringHeader* or similar).
+        return value;
+    }
+
+    // StringId path: resolve through the AOT string table.
+    auto view = string_table::Resolve(chaos_extract_string_id(value));
+    if (view.utf8_data == nullptr)
+    {
+        // Not found in the string table — unresolvable.
+        return 0;
+    }
+
+    // Allocate a StubStringHeader and copy the data in.
+    // Note: byte_count == 0 is valid (empty string) — we still produce a valid header.
+    auto* result = static_cast<StubStringHeader*>(
+        GcAllocateAtomic(sizeof(StubStringHeader) + view.byte_count + 1));
+    if (result == nullptr) return 0;
+    result->type = 0;
+    result->byte_count = view.byte_count;
+    if (view.byte_count > 0)
+    {
+        std::memcpy(result + 1, view.utf8_data, view.byte_count);
+    }
+    reinterpret_cast<char*>(result + 1)[view.byte_count] = '\0';
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result);
 }
 
@@ -48,6 +86,8 @@ inline static bool is_ascii_whitespace(char c) noexcept {
 
 CHAOS_IL2CPP_INTPTR ChaosStringContains(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR value) noexcept
 {
+    str = resolve_string_arg(str);
+    value = resolve_string_arg(value);
     if (str == 0 || value == 0) return 0;
     auto* sh = reinterpret_cast<const StubStringHeader*>(str);
     auto* vh = reinterpret_cast<const StubStringHeader*>(value);
@@ -64,6 +104,8 @@ CHAOS_IL2CPP_INTPTR ChaosStringContains(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_IN
 
 CHAOS_IL2CPP_INTPTR ChaosStringStartsWith(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR value) noexcept
 {
+    str = resolve_string_arg(str);
+    value = resolve_string_arg(value);
     if (str == 0 || value == 0) return 0;
     auto* sh = reinterpret_cast<const StubStringHeader*>(str);
     auto* vh = reinterpret_cast<const StubStringHeader*>(value);
@@ -75,6 +117,8 @@ CHAOS_IL2CPP_INTPTR ChaosStringStartsWith(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_
 
 CHAOS_IL2CPP_INTPTR ChaosStringEndsWith(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR value) noexcept
 {
+    str = resolve_string_arg(str);
+    value = resolve_string_arg(value);
     if (str == 0 || value == 0) return 0;
     auto* sh = reinterpret_cast<const StubStringHeader*>(str);
     auto* vh = reinterpret_cast<const StubStringHeader*>(value);
@@ -86,6 +130,7 @@ CHAOS_IL2CPP_INTPTR ChaosStringEndsWith(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_IN
 
 CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR separator, CHAOS_IL2CPP_INTPTR value) noexcept
 {
+    separator = resolve_string_arg(separator);
     if (separator == 0 || value == 0) return 0;
     auto* sep_hdr = reinterpret_cast<const StubStringHeader*>(separator);
     auto* arr_hdr = reinterpret_cast<StubArrayHeader*>(value);
@@ -96,7 +141,8 @@ CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR separator, CHAOS_IL2CP
     CHAOS_IL2CPP_UINTPTR total = 0;
     CHAOS_IL2CPP_INTPTR* elements = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<void*>(arr_hdr + 1));
     for (CHAOS_IL2CPP_UINTPTR i = 0; i < count; ++i) {
-        auto* elem = reinterpret_cast<const StubStringHeader*>(elements[i]);
+        auto elem_raw = resolve_string_arg(elements[i]);
+        auto* elem = reinterpret_cast<const StubStringHeader*>(elem_raw);
         if (elem) total += elem->byte_count;
     }
     if (count > 1) total += sep_len * (count - 1);
@@ -113,7 +159,8 @@ CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR separator, CHAOS_IL2CP
             std::memcpy(dest, stub_string_data(reinterpret_cast<const void*>(separator)), sep_len);
             dest += sep_len;
         }
-        auto* elem = reinterpret_cast<const StubStringHeader*>(elements[i]);
+        auto elem_raw = resolve_string_arg(elements[i]);
+        auto* elem = reinterpret_cast<const StubStringHeader*>(elem_raw);
         if (elem && elem->byte_count > 0) {
             std::memcpy(dest, stub_string_data(reinterpret_cast<const void*>(elements[i])), elem->byte_count);
             dest += elem->byte_count;
@@ -128,6 +175,8 @@ CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR separator, CHAOS_IL2CP
 
 CHAOS_IL2CPP_INT32 ChaosStringIndexOf(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR value) noexcept
 {
+    str = resolve_string_arg(str);
+    value = resolve_string_arg(value);
     if (str == 0 || value == 0) return -1;
     const auto* str_hdr = reinterpret_cast<const StubStringHeader*>(str);
     const auto* val_hdr = reinterpret_cast<const StubStringHeader*>(value);
@@ -144,6 +193,8 @@ CHAOS_IL2CPP_INT32 ChaosStringIndexOf(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTP
 
 CHAOS_IL2CPP_INT32 ChaosStringCompare(CHAOS_IL2CPP_INTPTR str_a, CHAOS_IL2CPP_INTPTR str_b) noexcept
 {
+    str_a = resolve_string_arg(str_a);
+    str_b = resolve_string_arg(str_b);
     if (str_a == 0 && str_b == 0) return 0;
     if (str_a == 0) return -1;
     if (str_b == 0) return 1;
@@ -162,6 +213,7 @@ CHAOS_IL2CPP_INT32 ChaosStringCompare(CHAOS_IL2CPP_INTPTR str_a, CHAOS_IL2CPP_IN
 
 CHAOS_IL2CPP_INTPTR ChaosStringSplit(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR separator) noexcept
 {
+    str = resolve_string_arg(str);
     if (str == 0) return 0;
     const auto* hdr = reinterpret_cast<const StubStringHeader*>(str);
     const char* data = stub_string_data(reinterpret_cast<const void*>(str));
@@ -207,6 +259,7 @@ CHAOS_IL2CPP_INTPTR ChaosStringFastAllocate(CHAOS_IL2CPP_INTPTR length) noexcept
 
 CHAOS_IL2CPP_INTPTR ChaosStringSubstring(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR start_index, CHAOS_IL2CPP_INTPTR length) noexcept
 {
+    str = resolve_string_arg(str);
     if (str == 0) return 0;
     auto* hdr = reinterpret_cast<const StubStringHeader*>(str);
     auto si = static_cast<CHAOS_IL2CPP_UINTPTR>(start_index);
@@ -225,6 +278,7 @@ CHAOS_IL2CPP_INTPTR ChaosStringSubstring(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_I
 
 CHAOS_IL2CPP_INTPTR ChaosStringRemove(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR start_index, CHAOS_IL2CPP_INTPTR length) noexcept
 {
+    str = resolve_string_arg(str);
     if (str == 0) return 0;
     auto* hdr = reinterpret_cast<const StubStringHeader*>(str);
     auto si = static_cast<CHAOS_IL2CPP_UINTPTR>(start_index);
@@ -245,6 +299,7 @@ CHAOS_IL2CPP_INTPTR ChaosStringRemove(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTP
 
 CHAOS_IL2CPP_INTPTR ChaosStringToLower(CHAOS_IL2CPP_INTPTR str) noexcept
 {
+    str = resolve_string_arg(str);
     if (str == 0) return 0;
     auto* hdr = reinterpret_cast<const StubStringHeader*>(str);
     auto* result = static_cast<StubStringHeader*>(
@@ -261,6 +316,7 @@ CHAOS_IL2CPP_INTPTR ChaosStringToLower(CHAOS_IL2CPP_INTPTR str) noexcept
 
 CHAOS_IL2CPP_INTPTR ChaosStringToUpper(CHAOS_IL2CPP_INTPTR str) noexcept
 {
+    str = resolve_string_arg(str);
     if (str == 0) return 0;
     auto* hdr = reinterpret_cast<const StubStringHeader*>(str);
     auto* result = static_cast<StubStringHeader*>(
@@ -277,6 +333,7 @@ CHAOS_IL2CPP_INTPTR ChaosStringToUpper(CHAOS_IL2CPP_INTPTR str) noexcept
 
 CHAOS_IL2CPP_INTPTR ChaosStringTrim(CHAOS_IL2CPP_INTPTR str) noexcept
 {
+    str = resolve_string_arg(str);
     if (str == 0) return 0;
     auto* hdr = reinterpret_cast<const StubStringHeader*>(str);
     const char* data = stub_string_data(reinterpret_cast<const void*>(str));
@@ -297,6 +354,9 @@ CHAOS_IL2CPP_INTPTR ChaosStringTrim(CHAOS_IL2CPP_INTPTR str) noexcept
 
 CHAOS_IL2CPP_INTPTR ChaosStringReplace(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR old_value, CHAOS_IL2CPP_INTPTR new_value) noexcept
 {
+    str = resolve_string_arg(str);
+    old_value = resolve_string_arg(old_value);
+    new_value = resolve_string_arg(new_value);
     if (str == 0 || old_value == 0 || new_value == 0) return 0;
     auto* hdr = reinterpret_cast<const StubStringHeader*>(str);
     auto* old_hdr = reinterpret_cast<const StubStringHeader*>(old_value);
@@ -351,6 +411,7 @@ CHAOS_IL2CPP_INTPTR ChaosStringReplace(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT
 
 CHAOS_IL2CPP_INTPTR ChaosStringFormatArray(CHAOS_IL2CPP_INTPTR format_str, CHAOS_IL2CPP_INTPTR args_array) noexcept
 {
+	format_str = resolve_string_arg(format_str);
 	if (format_str == 0) return 0;
 
 	auto* fhdr = reinterpret_cast<const StubStringHeader*>(format_str);
@@ -397,7 +458,8 @@ CHAOS_IL2CPP_INTPTR ChaosStringFormatArray(CHAOS_IL2CPP_INTPTR format_str, CHAOS
 			CHAOS_IL2CPP_UINTPTR end = 0;
 			CHAOS_IL2CPP_UINTPTR idx = parse_placeholder(i, end);
 			if (idx != ~CHAOS_IL2CPP_UINTPTR(0) && idx < arg_count) {
-				auto* elem = reinterpret_cast<const StubStringHeader*>(elements[idx]);
+				auto elem_raw = resolve_string_arg(elements[idx]);
+				auto* elem = reinterpret_cast<const StubStringHeader*>(elem_raw);
 				out_len += (elem != nullptr) ? elem->byte_count : 6;
 				i = end;
 			} else {
@@ -429,7 +491,8 @@ CHAOS_IL2CPP_INTPTR ChaosStringFormatArray(CHAOS_IL2CPP_INTPTR format_str, CHAOS
 			CHAOS_IL2CPP_UINTPTR end = 0;
 			CHAOS_IL2CPP_UINTPTR idx = parse_placeholder(i, end);
 			if (idx != ~CHAOS_IL2CPP_UINTPTR(0) && idx < arg_count) {
-				auto* elem = reinterpret_cast<const StubStringHeader*>(elements[idx]);
+				auto elem_raw = resolve_string_arg(elements[idx]);
+				auto* elem = reinterpret_cast<const StubStringHeader*>(elem_raw);
 				if (elem && elem->byte_count > 0) {
 					std::memcpy(dst, stub_string_data(elem), elem->byte_count);
 					dst += elem->byte_count;
@@ -454,7 +517,9 @@ CHAOS_IL2CPP_INTPTR ChaosStringFormat1(CHAOS_IL2CPP_INTPTR format_str, CHAOS_IL2
 	struct { StubArrayHeader hdr; CHAOS_IL2CPP_INTPTR data[1]; } local;
 	local.hdr.element_type = 0;
 	local.hdr.length = 1;
-	local.data[0] = arg0;
+	format_str = resolve_string_arg(format_str);
+	if (format_str == 0) return 0;
+	local.data[0] = resolve_string_arg(arg0);
 	return ChaosStringFormatArray(format_str,
 		reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&local));
 }
@@ -464,14 +529,18 @@ CHAOS_IL2CPP_INTPTR ChaosStringFormat2(CHAOS_IL2CPP_INTPTR format_str, CHAOS_IL2
 	struct { StubArrayHeader hdr; CHAOS_IL2CPP_INTPTR data[2]; } local;
 	local.hdr.element_type = 0;
 	local.hdr.length = 2;
-	local.data[0] = arg0;
-	local.data[1] = arg1;
+	format_str = resolve_string_arg(format_str);
+	if (format_str == 0) return 0;
+	local.data[0] = resolve_string_arg(arg0);
+	local.data[1] = resolve_string_arg(arg1);
 	return ChaosStringFormatArray(format_str,
 		reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&local));
 }
 
 void ChaosStringAppend(CHAOS_IL2CPP_INTPTR builder, CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR arg) noexcept
 {
+    builder = resolve_string_arg(builder);
+    str = resolve_string_arg(str);
     if (builder == 0 || str == 0) return;
     auto* hdr = reinterpret_cast<const StubStringHeader*>(str);
     auto* buf_hdr = reinterpret_cast<StubStringHeader*>(builder);
@@ -490,7 +559,7 @@ CHAOS_IL2CPP_INTPTR ChaosFormattablestringFactoryCreate(CHAOS_IL2CPP_INTPTR form
 {
     // V1: just return the format string unchanged
     (void)args;
-    return format;
+    return resolve_string_arg(format);
 }
 
 }  // extern "C"

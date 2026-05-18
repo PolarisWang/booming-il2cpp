@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "InterfaceDispatchSubjects",
-  "entrySubjectId": "InterfaceDispatchSubjects/CalcAdd::.ctor:System.Void()",
+  "assemblyName": "InterfaceDispatchPatchEntry",
+  "entrySubjectId": "InterfaceDispatchPatchEntry/InterfaceDispatchPatchEntry::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "InterfaceDispatchSubjects_CalcAdd__ctor",
+  "entrySymbol": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

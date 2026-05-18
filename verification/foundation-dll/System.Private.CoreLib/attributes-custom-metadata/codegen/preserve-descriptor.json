@@ -4,67 +4,73 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::_exitCode",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_0:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_1:System.Void()",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_1:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_2:System.Void()",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_2:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_3:System.Void()",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_3:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_4:System.Void()",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_4:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_5:System.Void()",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_5:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_6:System.Void()",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_6:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_7:System.Void()",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_7:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_8:System.Void()",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_8:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }
