@@ -368,6 +368,8 @@ private:
         int count;
     };
 
+public:
+
     // ── Finalizer suppression support ──────────────────────────
     /// Suppress finalization for @a obj.  Called from GC.SuppressFinalize.
     void SuppressFinalizer(void* obj);

@@ -432,6 +432,18 @@ int main(int argc, char** argv) {{
         &chaos_codegen_options);
     bridge->bootstrap_runtime();
 
+    // Register current thread so generated code that calls get_CurrentThread()
+    // (e.g. threading externals) gets a non-null return from
+    // chaos_thread_get_current().  This creates a ManagedThread in TLS with a
+    // dummy managed_object.  Families that don't use threading pay a small heap
+    // allocation once during startup — acceptable for verification.
+    // NOTE: We do NOT call runtime_init/thread_attach via ABI because
+    // RuntimeInit() calls setvbuf(stdout, nullptr, _IOLBF, 0) which crashes
+    // on Windows CRT with FAST_FAIL_INVALID_ARG.
+    chaos::il2cpp::runtime_core::threading::RegisterThread(
+        chaos::il2cpp::runtime_core::threading::kMainThreadId,
+        reinterpret_cast<void*>(static_cast<uintptr_t>(0x42)));
+
     // Set TLS to non-null sentinels so RaiseManagedException gets past its
     // first guard (runtime == nullptr / thread == nullptr check).
     // RuntimeState and ThreadState are opaque types (only forward-declared
