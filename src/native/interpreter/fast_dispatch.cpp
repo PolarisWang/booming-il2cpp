@@ -24,6 +24,44 @@ extern CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
 
 namespace chaos::il2cpp::runtime_core {
 
+// ── TLS box object pool ──────────────────────────────────────────────
+// Avoids per-call malloc/free for Box/NewObj by reusing InterpreterObjects.
+// Each object's vector is pre-sized with capacity 1 so fields.resize(1)
+// in Handle_Box avoids a second heap allocation.
+static constexpr uint32_t kBoxPoolSize = 8;
+static thread_local interpreter::InterpreterObject* tls_box_pool[kBoxPoolSize] = {};
+static thread_local uint32_t tls_box_pool_count = 0;
+
+/// Return a boxed InterpreterObject to the TLS pool (or free if pool full).
+static void ReturnBoxToPool(void* p) noexcept {
+    auto* obj = static_cast<interpreter::InterpreterObject*>(p);
+    obj->~InterpreterObject();
+    if (tls_box_pool_count < kBoxPoolSize) {
+        ::new (obj) interpreter::InterpreterObject();
+        obj->fields.reserve(1);
+        tls_box_pool[tls_box_pool_count++] = obj;
+    } else {
+        CHAOS_IL2CPP_FREE(obj);
+    }
+}
+
+/// Acquire an InterpreterObject for boxing, from pool or malloc.
+static interpreter::InterpreterObject* AcquireBoxedObject() noexcept {
+    if (tls_box_pool_count > 0) {
+        --tls_box_pool_count;
+        auto* obj = tls_box_pool[tls_box_pool_count];
+        obj->fields.clear();
+        obj->type_token = 0;
+        return obj;
+    }
+    auto* obj = static_cast<interpreter::InterpreterObject*>(
+        CHAOS_IL2CPP_MALLOC(sizeof(interpreter::InterpreterObject)));
+    if (obj == nullptr) return nullptr;
+    ::new (obj) interpreter::InterpreterObject();
+    obj->fields.reserve(1);
+    return obj;
+}
+
 // ── InterpreterValue ↔ FastFrame conversion ────────────────────────────
 
 void FastFrame::PushIV(const interpreter::InterpreterValue& iv) noexcept {
@@ -593,11 +631,10 @@ static void Handle_Box(FastFrame& frame, const interpreter::IRInstruction&) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Box");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     // Box: wrap the top-of-stack value into a heap-allocated InterpreterObject.
-    auto* boxed = static_cast<interpreter::InterpreterObject*>(
-        CHAOS_IL2CPP_MALLOC(sizeof(interpreter::InterpreterObject)));
+    // Uses TLS pool to avoid malloc per call; vector is pre-sized with capacity 1.
+    auto* boxed = AcquireBoxedObject();
     if (boxed == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
-    ::new (boxed) interpreter::InterpreterObject();
-    frame.Track(boxed, frame.Dtor<interpreter::InterpreterObject>);
+    frame.TrackPool(boxed, ReturnBoxToPool);
     boxed->fields.resize(1);
     boxed->fields[0] = frame.PopIV();
     frame.PushObj(boxed);
