@@ -1874,6 +1874,18 @@ public sealed partial class NativeAotLoweringPlanner
 
 		if (_nativeSymbolToDispatchSlot?.TryGetValue(invocationTarget.TargetSymbol, out int slotIndex) == true)
 		{
+			// Self-call detection: the codegen frontend could not lower this
+			// method's IL body and collapsed it to "call self; ret".  Emit
+			// CHAOS_IL2CPP_FAIL instead of a hotpatch dispatch wrapper that
+			// would infinite-recursion at runtime.
+			if (_currentMethodNativeSymbol != null &&
+				invocationTarget.TargetSymbol == _currentMethodNativeSymbol)
+			{
+				builder.AppendLine($"{indentation}{{");
+				builder.AppendLine($"{indentation}    CHAOS_IL2CPP_FAIL(\"Unlowered method body: self-call from {invocationTarget.TargetSymbol}\");");
+				builder.AppendLine($"{indentation}}}");
+				return;
+			}
 			EmitHotpatchResolvedInvocation(builder, slotIndex, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation);
 		}
 		else if (TryResolveModuleLocalCall(instruction, invocationTarget, out string localSymbol))

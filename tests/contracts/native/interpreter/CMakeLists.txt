@@ -46,8 +46,12 @@ target_link_libraries(
     chaos_interpreter_bridge_test
     PRIVATE
         chaos_interpreter
+        chaos_runtime_core
         chaos_bootstrap
-        chaos_codegen)
+        chaos_codegen
+        chaos_common
+        chaos_support
+        chaos_fmt)
 
 add_executable(chaos_interpreter_entry_test
     interpreter_entry_test.cpp)

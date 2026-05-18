@@ -10,5 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CodegenEdgeCasesSubjects.cs" />
+    <Compile Include="CodegenEdgeCasesSubjects.Custom.cs" />
+    <Compile Include="CodegenEdgeCasesSubjects.Custom.cs" />
   </ItemGroup>
 </Project>

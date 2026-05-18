@@ -1185,7 +1185,15 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_IndirectHelper_ReadWriteRef(v
 		auto chaos_value_raw = _s1;
 		const auto chaos_value = static_cast<CHAOS_IL2CPP_INT32>(chaos_value_raw);
 		const auto chaos_address = _s0;
+		if (needsSatbBarrier)
+		{
+			BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_address));
+		}
 		chaos_store_indirect<CHAOS_IL2CPP_INT32>(chaos_address, chaos_value);
+		if (needsSatbBarrier)
+		{
+			chaos_gc_dirty_card(reinterpret_cast<void*>(chaos_address));
+		}
 	}
 	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);

@@ -137,13 +137,20 @@ public static class ManagedNaming
 
     public static string CreateMethodSymbol(ManagedMethodModel method)
     {
-        return string.Join(
+        var baseSymbol = string.Join(
             "_",
             [
                 ToSymbolPart(method.AssemblyName),
                 ToSymbolPart(method.DeclaringTypeDisplayName),
                 ToSymbolPart(method.Name),
             ]);
+
+        if (method.Parameters.Count == 0)
+            return baseSymbol;
+
+        var paramParts = method.Parameters
+            .Select(p => ToSymbolPart(p.Type));
+        return $"{baseSymbol}_{string.Join("_", paramParts)}";
     }
 
     public static string CreateInstantiationStubSymbol(InstantiationStubId instantiationStubId)

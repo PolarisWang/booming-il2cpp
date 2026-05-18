@@ -45,7 +45,7 @@ public static class ArrayIndexingCopyBenchmarks
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ArrayIndexingCopy)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Array_Sort_System_Void_System_Array_System_Collections_IComparer() { System.Array.Sort(new byte[1], (System.Collections.IComparer)null); }
+    public static void Benchmark_System_Private_CoreLib_System_Array_Sort_System_Void_System_Array_System_Collections_IComparer() { Array.Sort(new byte[1], System.Collections.Generic.Comparer<byte>.Default); }
     // Benchmark Array.BinarySearch native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ArrayIndexingCopy)]

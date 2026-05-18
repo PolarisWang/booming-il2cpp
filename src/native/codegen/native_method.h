@@ -77,6 +77,11 @@ struct NativeMethod {
     GcPoint*      gc_points    = nullptr;
     uint32_t      gc_point_count = 0;
 
+    // SEH clause table offset (relative to code start).
+    // The table is appended to the code buffer after Generate() completes.
+    // 0 means no SEH table.
+    uint32_t      seh_table_offset = 0;
+
     // Destructor: frees all allocations.
     ~NativeMethod() noexcept;
 

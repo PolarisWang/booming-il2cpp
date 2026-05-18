@@ -300,17 +300,19 @@ void BgcController::PopulateRootSet() {
     // This catches old-gen references that live in thread-local stack
     // slots and are NOT in any TLS nursery.
     {
+        static int s_gte_heap = 0, s_in_oldgen = 0, s_valid = 0, s_marked = 0;
+        s_gte_heap = s_in_oldgen = s_valid = s_marked = 0;
         threading::GcScanAllThreadRoots(
-            [](void* root_addr, bool /*is_interior*/, void* /*user_data*/) {
-                // Read the pointer at root_addr and try to mark it if in old-gen.
+            [](void* root_addr, bool, void*) {
                 auto* slot = static_cast<void**>(root_addr);
                 void* ref = *slot;
+                s_gte_heap++;
                 if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
-                    // Verify the candidate looks like a valid managed object
-                    // before marking — eliminates false positive roots from
-                    // random stack values that happen to fall in old-gen range.
+                    s_in_oldgen++;
                     if (!IsValidManagedObject(ref)) return;
+                    s_valid++;
                     if (g_old_gen.BgcTryMark(ref)) {
+                        s_marked++;
                         std::lock_guard<std::mutex> lock(
                             BgcController::Instance().bgc_workers_[0].steal_mutex);
                         BgcController::Instance().bgc_workers_[0].deque.push_back(ref);
@@ -318,6 +320,8 @@ void BgcController::PopulateRootSet() {
                 }
             },
             nullptr);
+        CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "root_scan heap={0} oldgen={1} valid={2} marked={3}",
+            s_gte_heap, s_in_oldgen, s_valid, s_marked);
     }
 
     // Phase 1d: Scan GCHandle table (tenured handles only — nursery

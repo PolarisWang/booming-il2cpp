@@ -222,6 +222,14 @@ public sealed partial class NativeAotLoweringPlanner
     private Dictionary<string, int>? _nativeSymbolToDispatchSlot;
 
     /// <summary>
+    /// Native symbol of the method currently being emitted. Set/reset in
+    /// <see cref="EmitManagedMethod"/> to detect self-calls that would cause
+    /// infinite recursion (the codegen may collapse an unloverable IL body to
+    /// a single "call self; ret" sequence).
+    /// </summary>
+    private string? _currentMethodNativeSymbol;
+
+    /// <summary>
     /// Module-local symbol table: subjectId → nativeSymbol for all methods in the
     /// current codegen output.  Enables <see cref="EmitLinearCall"/> to detect
     /// same-module callees and emit direct C++ calls instead of going through the

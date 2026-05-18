@@ -193,7 +193,15 @@ public sealed partial class NativeAotLoweringPlanner
 		EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
 		EmitStaticInitializationPrologue(builder, method);
 		builder.AppendLine();
-		EmitViaStructuredIR(builder, method, instructions, offsets, body);
+		_currentMethodNativeSymbol = method.NativeSymbol;
+		try
+		{
+			EmitViaStructuredIR(builder, method, instructions, offsets, body);
+		}
+		finally
+		{
+			_currentMethodNativeSymbol = null;
+		}
 		builder.AppendLine("}");
 	}
 

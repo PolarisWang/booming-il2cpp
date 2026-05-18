@@ -38,7 +38,7 @@ def main():
     errors = []
 
     # Step 1: Phase 2 — handwritten stubs
-    if not run(["python3", str(PHASE2)], "Phase 2 — handwritten stubs"):
+    if not run(["python", str(PHASE2)], "Phase 2 — handwritten stubs"):
         errors.append("Phase 2 failed")
 
     # Step 3: Build all test projects

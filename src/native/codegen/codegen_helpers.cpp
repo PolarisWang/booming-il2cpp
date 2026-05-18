@@ -132,8 +132,8 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
     // The call site (code_generator) checks ret_buf[0] and jumps to
     // deopt_return, which unwinds the frame back to entry_direct.
     if (args->ret_buf != nullptr) {
-        using codegen::t_deopt_state;
-        using codegen::kDeoptMagic;
+        using chaos::il2cpp::codegen::t_deopt_state;
+        using chaos::il2cpp::codegen::kDeoptMagic;
 
         // Copy all 64 GPR values from the register file directly.
         std::memcpy(t_deopt_state.gpr_file, gpr_base,
@@ -423,10 +423,7 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
     DeoptRuntime::DeoptTrap(
         const_cast<NativeMethod*>(nm),
         native_offset,
-        *nctx,
-        codegen_rsp,
-        t_deopt_state.gpr_file,
-        t_deopt_state.fpr_file);
+        *nctx);
 
     // 5. Find the DeoptEntry to get the instruction pc.
     const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_offset);

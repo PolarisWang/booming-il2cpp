@@ -6,7 +6,7 @@
   "failed": 0,
   "results": [
     {
-      "family": "rcw-basic",
+      "family": "codegen-edge-cases",
       "config_tier": "CHECK",
       "steps": {
         "build_subjects": "OK",
@@ -14,10 +14,10 @@
         "build_entry_exe": "OK"
       },
       "success": true,
-      "methodCount": 7,
-      "entryPointSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Run:System.Void(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\build-output\\RcwBasicSubjects.dll"
+      "methodCount": 4,
+      "entryPointSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Run:System.Void(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\build-output\\CodegenEdgeCasesSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-18T03:02:01"
+  "timestamp": "2026-05-18T18:31:15"
 }

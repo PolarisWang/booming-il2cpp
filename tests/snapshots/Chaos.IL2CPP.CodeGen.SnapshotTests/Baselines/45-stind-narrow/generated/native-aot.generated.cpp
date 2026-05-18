@@ -1188,7 +1188,15 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StindNarrowHelper_RunStindNar
 		auto chaos_value_raw = _s1;
 		const auto chaos_value = static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw);
 		const auto chaos_address = _s0;
+		if (needsSatbBarrier)
+		{
+			BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_address));
+		}
 		chaos_store_indirect<CHAOS_IL2CPP_INT8>(chaos_address, chaos_value);
+		if (needsSatbBarrier)
+		{
+			chaos_gc_dirty_card(reinterpret_cast<void*>(chaos_address));
+		}
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	chaos_locals[1] = _s0;
@@ -1198,7 +1206,15 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StindNarrowHelper_RunStindNar
 		auto chaos_value_raw = _s1;
 		const auto chaos_value = static_cast<CHAOS_IL2CPP_INT16>(chaos_value_raw);
 		const auto chaos_address = _s0;
+		if (needsSatbBarrier)
+		{
+			BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_address));
+		}
 		chaos_store_indirect<CHAOS_IL2CPP_INT16>(chaos_address, chaos_value);
+		if (needsSatbBarrier)
+		{
+			chaos_gc_dirty_card(reinterpret_cast<void*>(chaos_address));
+		}
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);

@@ -73,3 +73,17 @@ NativeMethod* GenerateNativeCode(
 }
 }
 #endif
+
+// ── RegisterT4SehHandler stub ────────────────────────────────────────
+// Required by runtime_init.cpp.  The real implementation is in
+// t4_seh_handler.cpp (not compiled in this test tree).
+// When CHAOS_IL2CPP_HAS_T4_SEH_HANDLER is defined (via chaos_codegen
+// INTERFACE compile definition), the real implementation is linked from
+// chaos_codegen.lib, so skip the stub to avoid duplicate symbols.
+#ifndef CHAOS_IL2CPP_HAS_T4_SEH_HANDLER
+namespace chaos::il2cpp::codegen {
+void RegisterT4SehHandler() noexcept {
+    // No-op stub: VEH handler registration not needed for GC/delegate tests.
+}
+}
+#endif

@@ -15,6 +15,14 @@ endif()
 
 project(roadmap0_preset_router LANGUAGES CXX)
 
+# ── MSVC debug info: Embedded (/Z7) avoids shared .pdb contention ─────
+# The default /ZI (Edit-and-Continue PDB) crashes on systems where
+# mspdbsrv.exe (RPC service) is disabled or blocked.  /Z7 puts debug
+# info in each .obj file — no shared PDB, no RPC dependency.
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "Embedded")
+endif()
+
 set(
     CHAOS_SUBJECT_ANDROID_HOST_ROOT
     "tests/integration/platform-hosts/android-smoke"

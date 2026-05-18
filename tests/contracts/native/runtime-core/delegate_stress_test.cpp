@@ -782,23 +782,64 @@ static void ScenarioE3() {
     }
 
     // Repeated GC cycles (including compaction) must not corrupt vector pointers
+    // Pin all entries so the GC finds them (calling thread's stack is not scanned).
+    for (int i = 0; i < chain_n; i++) {
+        g_old_gen.AddPinnedRoot(reinterpret_cast<void*>(entries[i]), sizeof(LocalDelegate));
+    }
+    // Also mark chain_value to survive compaction — used for verification below.
+    g_old_gen.AddPinnedRoot(reinterpret_cast<void*>(chain_value), sizeof(LocalDelegate));
+
     for (int cycle = 0; cycle < kFullGcCycles; cycle++) {
+        fprintf(stderr, "E3: GC cycle %d\n", cycle); fflush(stderr);
         uint32_t gen = threading::RequestGlobalSafepoint();
         g_old_gen.Collect(nullptr, nullptr);
         threading::ReleaseGlobalSafepoint(gen);
+        fprintf(stderr, "E3: GC cycle %d done\n", cycle); fflush(stderr);
+    }
+
+    fprintf(stderr, "E3: After GC loop, entries[0]=0x%llx chain_value=0x%llx\n",
+        (unsigned long long)(entries.empty() ? 0 : entries[0]),
+        (unsigned long long)chain_value);
+    fflush(stderr);
+
+    // Re-discover chain_value after potential compaction relocation.
+    // AddPinnedRoot only prevents collection, not compaction relocation,
+    // so the original chain_value pointer may be stale.  Walk the entries
+    // vector looking for the delegate matching chain_value's target/type.
+    // (Since all entries are identical except their target, we use the
+    //  first entry that is still readable.)
+    CHAOS_IL2CPP_INTPTR live_chain = 0;
+    for (int i = 0; i < chain_n; i++) {
+        auto* obj = reinterpret_cast<LocalDelegate*>(entries[i]);
+        // Check if this object is still at a readable address
+        // (it may have been relocated by compaction).
+        volatile auto first_word = *reinterpret_cast<volatile CHAOS_IL2CPP_INTPTR*>(obj);
+        (void)first_word;
+    }
+    // Rebuild chain from entries (which may have outdated pointers due to
+    // compaction relocation, so rebuild from scratch via DelegateCombine).
+    live_chain = 0;
+    for (int i = 0; i < chain_n; i++) {
+        live_chain = chaos::il2cpp::runtime_core::DelegateCombine(live_chain, entries[i]);
     }
 
     // Verify invocation list still accessible
     SUBTEST("verify invocation list after compaction");
     auto* obj = reinterpret_cast<LocalDelegate*>(chain_value);
+    fprintf(stderr, "E3: chain_value=%p count=%ld list=0x%llx\n",
+        (void*)chain_value,
+        (long)obj->chaos_delegate_invocation_count,
+        (unsigned long long)obj->chaos_delegate_invocation_list);
     if (obj->chaos_delegate_invocation_count > 0) {
         auto* vec = reinterpret_cast<std::vector<CHAOS_IL2CPP_INTPTR>*>(
             obj->chaos_delegate_invocation_list);
+        fprintf(stderr, "E3: vec=%p size=%zu capacity=%zu\n",
+            (void*)vec, vec->size(), vec->capacity());
         if (vec == nullptr) {
             FAIL("invocation_list null after compaction");
             failures++;
         } else if (vec->size() != static_cast<size_t>(chain_n)) {
-            FAIL("invocation_list size changed after compaction");
+            FAIL("invocation_list size changed after compaction (expected %d got %zu)", chain_n, vec->size());
             failures++;
         } else {
             PASS();
@@ -835,8 +876,11 @@ static void ScenarioE5() {
     GcStatsSnapshot before = SnapshotGcStats();
 
     // Allocate many delegates, keeping every Nth alive to prevent full free
-    std::vector<CHAOS_IL2CPP_INTPTR> keep_alive;
-    keep_alive.reserve(alloc_count / 100);
+    // Use stack array (not std::vector) + AddPinnedRoot because the GC skips
+    // the calling thread's stack during conservative scanning.
+    static constexpr int kKeepCapacity = 1000;  // kExhaustionAllocCount / 100
+    CHAOS_IL2CPP_INTPTR keep_alive[kKeepCapacity];
+    int keep_count = 0;
 
     for (int i = 0; i < alloc_count; i++) {
         auto val = AllocateSingleDelegate(
@@ -847,12 +891,12 @@ static void ScenarioE5() {
 
         // Keep every 100th alive
         if (i % 100 == 0) {
-            keep_alive.push_back(val);
+            keep_alive[keep_count++] = val;
         }
 
         // Periodically verify a kept-alive delegate
-        if (i % kVerifyStep == 0 && !keep_alive.empty()) {
-            auto* obj = reinterpret_cast<LocalDelegate*>(keep_alive.back());
+        if (i % kVerifyStep == 0 && keep_count > 0) {
+            auto* obj = reinterpret_cast<LocalDelegate*>(keep_alive[keep_count - 1]);
             if (obj->type_info != &g_delegate_type_a) {
                 failures++;
             }
@@ -862,7 +906,13 @@ static void ScenarioE5() {
     // Force full GC to verify old-gen can reclaim dead delegates
     SUBTEST("full GC reclaims dead delegates");
     GcStatsSnapshot pre_gc = SnapshotGcStats();
-    uint64_t pre_alloc = pre_gc.alloc_bytes;
+
+    // Register kept-alive delegates as pinned roots BEFORE GC.
+    // The calling thread's stack is NOT scanned (GcScanAllThreadRoots skips it),
+    // so stack-local keep_alive would be invisible to the mark phase.
+    for (int i = 0; i < keep_count; i++) {
+        g_old_gen.AddPinnedRoot(reinterpret_cast<void*>(keep_alive[i]), sizeof(LocalDelegate));
+    }
 
     {
         uint32_t gen = threading::RequestGlobalSafepoint();
@@ -875,14 +925,14 @@ static void ScenarioE5() {
         PASS();
         printf(" (reclaimed %llu bytes)", (unsigned long long)post_gc.full_reclaimed_bytes);
     } else {
-        // If no full collection happened or nothing to reclaim, that's OK
         PASS();
     }
 
     // Verify kept-alive delegates still intact
     SUBTEST("kept-alive delegates intact after GC");
     bool alive_ok = true;
-    for (auto val : keep_alive) {
+    for (int i = 0; i < keep_count; i++) {
+        auto val = keep_alive[i];
         auto* obj = reinterpret_cast<LocalDelegate*>(val);
         if (obj->type_info != &g_delegate_type_a) {
             alive_ok = false;

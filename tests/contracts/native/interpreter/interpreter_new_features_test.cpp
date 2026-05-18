@@ -176,7 +176,7 @@ bool TestInterfaceCastClass()
     const CHAOS_IL2CPP_UINT64 kIfaceStableId = 0xABCD1234ULL;
     CHAOS_IL2CPP_UINT64 obj_stable_id = 0xDEADBEEFULL;
 
-    ChaosIl2cpp::Common::InterfaceMapEntry obj_iface_entries[] = {
+    chaos::il2cpp::common::InterfaceMapEntry obj_iface_entries[] = {
         { kIfaceStableId, 0u, 0u }
     };
     VTableSlot dummy_slot = { 1u, nullptr };
@@ -187,7 +187,7 @@ bool TestInterfaceCastClass()
     obj_vtable.slot_count = 1u;
     obj_vtable.slots = obj_slots;
     obj_vtable.stable_id = obj_stable_id;
-    obj_vtable.type_shape = ChaosIl2cpp::Common::chaos_type_shape_reference;
+    obj_vtable.type_shape = chaos::il2cpp::common::chaos_type_shape_reference;
     obj_vtable.iface_map = obj_iface_entries;
     obj_vtable.iface_count = 1u;
     RegisterTypeVTable(&obj_vtable);
@@ -199,7 +199,7 @@ bool TestInterfaceCastClass()
     iface_vtable.slot_count = 1u;
     iface_vtable.slots = iface_slots;
     iface_vtable.stable_id = kIfaceStableId;
-    iface_vtable.type_shape = ChaosIl2cpp::Common::chaos_type_shape_interface;
+    iface_vtable.type_shape = chaos::il2cpp::common::chaos_type_shape_interface;
     iface_vtable.iface_map = nullptr;
     iface_vtable.iface_count = 0u;
     RegisterTypeVTable(&iface_vtable);
@@ -231,7 +231,7 @@ bool TestInterfaceIsInst()
     obj_vtable2.slot_count = 1u;
     obj_vtable2.slots = obj_slots2;
     obj_vtable2.stable_id = 0xBEEFBEEFULL;
-    obj_vtable2.type_shape = ChaosIl2cpp::Common::chaos_type_shape_reference;
+    obj_vtable2.type_shape = chaos::il2cpp::common::chaos_type_shape_reference;
     obj_vtable2.iface_map = nullptr;
     obj_vtable2.iface_count = 0u;
     RegisterTypeVTable(&obj_vtable2);
@@ -243,7 +243,7 @@ bool TestInterfaceIsInst()
     iface_vtable2.slot_count = 1u;
     iface_vtable2.slots = iface_slots2;
     iface_vtable2.stable_id = 0xCAFE1234ULL;
-    iface_vtable2.type_shape = ChaosIl2cpp::Common::chaos_type_shape_interface;
+    iface_vtable2.type_shape = chaos::il2cpp::common::chaos_type_shape_interface;
     RegisterTypeVTable(&iface_vtable2);
 
     IRMethod method;
@@ -268,7 +268,7 @@ bool TestInterfaceVtableDispatch()
 {
     const CHAOS_IL2CPP_UINT64 kIfaceStable = 0xABCD0001ULL;
 
-    ChaosIl2cpp::Common::InterfaceMapEntry impl_ifaces[] = {
+    chaos::il2cpp::common::InterfaceMapEntry impl_ifaces[] = {
         { kIfaceStable, 2u, 1u }
     };
     void* impl_vtable_array[] = {
@@ -288,7 +288,7 @@ bool TestInterfaceVtableDispatch()
     derived_vtable_iface.stable_id = 0x50000001ULL;
     derived_vtable_iface.vtable_array = const_cast<const void**>(impl_vtable_array);
     derived_vtable_iface.vtable_length = 3u;
-    derived_vtable_iface.type_shape = ChaosIl2cpp::Common::chaos_type_shape_reference;
+    derived_vtable_iface.type_shape = chaos::il2cpp::common::chaos_type_shape_reference;
     derived_vtable_iface.iface_map = impl_ifaces;
     derived_vtable_iface.iface_count = 1u;
     RegisterTypeVTable(&derived_vtable_iface);
@@ -301,7 +301,7 @@ bool TestInterfaceVtableDispatch()
     iface_vtable3.slot_count = 1u;
     iface_vtable3.slots = iface_slots3;
     iface_vtable3.stable_id = kIfaceStable;
-    iface_vtable3.type_shape = ChaosIl2cpp::Common::chaos_type_shape_interface;
+    iface_vtable3.type_shape = chaos::il2cpp::common::chaos_type_shape_interface;
     RegisterTypeVTable(&iface_vtable3);
 
     IRMethod method;
