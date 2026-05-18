@@ -29,6 +29,7 @@
 #include <string>
 #include <vector>
 
+namespace chaos::il2cpp { namespace codegen { struct NativeMethod; } }
 namespace chaos::il2cpp::runtime_core {
 
 // ── PatchMethod ─────────────────────────────────────────────────────────
@@ -77,6 +78,10 @@ struct PatchMethod {
     // ── Cached optimized RegisterMethod reference (T3 tier) ────────────
     // Set during T3 promotion. Used by RebuildCallCacheForT3.
     void*           cached_optimized_reg_method = nullptr;   // RegisterMethod*
+
+    // ── Native code generation (T4 tier, Phase 3c) ───────────────────────
+    // Populated during T3→T4 promotion. Set by GenerateNativeCode().
+    mutable class chaos::il2cpp::codegen::NativeMethod* cached_native_method = nullptr;
 
     // ── Call count for hot path detection (A2.3) ────────────────────────
     // Atomically incremented on each call to InterpreterEntryDirect.

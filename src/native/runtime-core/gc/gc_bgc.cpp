@@ -34,15 +34,28 @@ void BgcController::Start() {
     if (bgc_running_.exchange(true, std::memory_order_acq_rel))
         return;
     bgc_thread_ = std::thread(&BgcController::BgcThreadMain, this);
+
+    // Start dedicated finalizer thread.
+    if (!finalizer_running_.exchange(true, std::memory_order_acq_rel)) {
+        finalizer_thread_ = std::thread(&BgcController::FinalizerThreadMain, this);
+    }
 }
 
 void BgcController::Stop() {
-    if (!bgc_running_.exchange(false, std::memory_order_acq_rel))
-        return;
-    bgc_start_requested_.store(true, std::memory_order_release);
-    NotifyBgc();
-    if (bgc_thread_.joinable())
-        bgc_thread_.join();
+    // Step 1: Stop BGC thread.
+    if (bgc_running_.exchange(false, std::memory_order_acq_rel)) {
+        bgc_start_requested_.store(true, std::memory_order_release);
+        NotifyBgc();
+        if (bgc_thread_.joinable())
+            bgc_thread_.join();
+    }
+
+    // Step 2: Stop finalizer thread (after BGC — any pending work was published).
+    if (finalizer_running_.exchange(false, std::memory_order_acq_rel)) {
+        finalizer_cv_.notify_one();
+        if (finalizer_thread_.joinable())
+            finalizer_thread_.join();
+    }
 }
 
 void BgcController::FlushSatbBuffer(const SatbEntry* entries, uint32_t count) {
@@ -223,28 +236,16 @@ void BgcController::ForceComplete() {
         }
     }
 
-    // Phase 3: Run finalizers inline (under safepoint — finalizers execute
-    // on the GC thread since all mutators are stopped).
-    if (!bgc_dead_finalizables_.empty()) {
-        CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "force_complete_finalizers count={0}",
-            static_cast<unsigned long long>(bgc_dead_finalizables_.size()));
-        for (auto& entry : bgc_dead_finalizables_) {
-            if (entry.finalizer != nullptr) {
-                entry.finalizer(entry.obj);
-            }
-        }
+    // Phase 3+4: Publish dead finalizables + weak handles to the finalizer
+    // thread instead of running them inline.  The finalizer thread processes
+    // finalizers first, then nulls weak handles (preserving WeakTrackResurrection
+    // ordering) after the safepoint is released.
+    if (!bgc_dead_finalizables_.empty() || !bgc_dead_weak_handles_.empty()) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "force_complete_publish finalizers={0} weak={1}",
+            static_cast<unsigned long long>(bgc_dead_finalizables_.size()),
+            static_cast<unsigned long long>(bgc_dead_weak_handles_.size()));
+        PublishFinalizationWork(bgc_dead_finalizables_, bgc_dead_weak_handles_);
         bgc_dead_finalizables_.clear();
-    }
-
-    // Phase 4: Process weak handles (after finalization, respecting
-    // WeakTrackResurrection semantics).
-    if (!bgc_dead_weak_handles_.empty()) {
-        std::vector<std::pair<uint64_t, void*>> flat;
-        flat.reserve(bgc_dead_weak_handles_.size());
-        for (auto& dwh : bgc_dead_weak_handles_) {
-            flat.emplace_back(dwh.handle_id, dwh.old_object);
-        }
-        GcProcessCollectedWeakHandles(flat);
         bgc_dead_weak_handles_.clear();
     }
 
@@ -626,39 +627,18 @@ void BgcController::BgcThreadMain() {
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "cycle_finished");
         }
 
-        // ── Async finalization ─────────────────────────────────────
-        // Execute finalizers for objects identified as dead by BGC marking.
-        // This runs on the BGC thread (background, non-safepoint), matching
-        // CoreCLR's dedicated finalizer thread behavior.  Finalizers run
-        // before weak handle processing so that WeakTrackResurrection
-        // semantics are preserved (resurrected objects keep their handles).
-        if (!bgc_dead_finalizables_.empty()) {
-            CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "running {0} finalizers",
-                static_cast<unsigned long long>(bgc_dead_finalizables_.size()));
-            for (auto& entry : bgc_dead_finalizables_) {
-                if (entry.finalizer != nullptr) {
-                    CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "finalizer obj={0}", entry.obj);
-                    entry.finalizer(entry.obj);
-                }
-            }
+        // ── Publish finalization work to finalizer thread ────────────
+        // Instead of running finalizers on the BGC thread, publish them
+        // (and their corresponding weak handles) to the dedicated finalizer
+        // thread.  The finalizer thread processes finalizers first, then
+        // nulls weak handles — preserving WeakTrackResurrection ordering.
+        if (!bgc_dead_finalizables_.empty() || !bgc_dead_weak_handles_.empty()) {
+            CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "publish_finalization finalizers={0} weak={1}",
+                static_cast<unsigned long long>(bgc_dead_finalizables_.size()),
+                static_cast<unsigned long long>(bgc_dead_weak_handles_.size()));
+            PublishFinalizationWork(bgc_dead_finalizables_, bgc_dead_weak_handles_);
             bgc_dead_finalizables_.clear();
-            CHAOS_IL2CPP_LOG_DEBUG("BGC", "finalization_complete");
-        }
-
-        // ── BGC weak handle processing ─────────────────────────────
-        // After finalization, null weak handles pointing to objects that
-        // are still dead (not resurrected).  This happens after finalization
-        // to preserve WeakTrackResurrection semantics.
-        if (!bgc_dead_weak_handles_.empty()) {
-            std::vector<std::pair<uint64_t, void*>> flat;
-            flat.reserve(bgc_dead_weak_handles_.size());
-            for (auto& dwh : bgc_dead_weak_handles_) {
-                flat.emplace_back(dwh.handle_id, dwh.old_object);
-            }
-            GcProcessCollectedWeakHandles(flat);
             bgc_dead_weak_handles_.clear();
-            CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "weak_handles_processed count={0}",
-                static_cast<unsigned long long>(flat.size()));
         }
 
         // ── BGC dependent handle processing ─────────────────────────
@@ -673,6 +653,72 @@ void BgcController::BgcThreadMain() {
 
     threading::UnregisterThread();
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "thread_stopped");
+}
+
+// ── Dedicated finalizer thread ──────────────────────────────────────
+
+void BgcController::PublishFinalizationWork(
+    std::vector<FinalizerEntry>& finalizers,
+    std::vector<DeadWeakHandle>& weak_handles) noexcept
+{
+    if (finalizers.empty() && weak_handles.empty()) return;
+    {
+        std::lock_guard<std::mutex> lock(finalizer_mutex_);
+        pending_finalizers_.insert(pending_finalizers_.end(),
+            finalizers.begin(), finalizers.end());
+        pending_weak_handles_.insert(pending_weak_handles_.end(),
+            weak_handles.begin(), weak_handles.end());
+        finalizer_work_pending_.store(true, std::memory_order_release);
+    }
+    finalizer_cv_.notify_one();
+}
+
+void BgcController::FinalizerThreadMain() noexcept {
+    int thread_id = threading::AllocateThreadId();
+    threading::RegisterThread(thread_id, nullptr);
+    threading::EnterPreemptiveMode();
+    CHAOS_IL2CPP_LOG_DEBUG("Finalizer", "thread_started id={0}", thread_id);
+
+    while (finalizer_running_.load(std::memory_order_acquire)) {
+        std::vector<FinalizerEntry> queue;
+        std::vector<DeadWeakHandle> weak_handles;
+        {
+            std::unique_lock<std::mutex> lock(finalizer_mutex_);
+            finalizer_cv_.wait(lock, [this]() {
+                return finalizer_work_pending_.load(std::memory_order_acquire) ||
+                       !finalizer_running_.load(std::memory_order_acquire);
+            });
+            if (!finalizer_running_.load(std::memory_order_acquire)) break;
+            queue.swap(pending_finalizers_);
+            weak_handles.swap(pending_weak_handles_);
+            finalizer_work_pending_.store(false, std::memory_order_release);
+        }
+
+        if (!queue.empty()) {
+            CHAOS_IL2CPP_LOG_DEBUG_M("Finalizer", "running {0} finalizers",
+                static_cast<unsigned long long>(queue.size()));
+            for (auto& entry : queue) {
+                if (entry.finalizer != nullptr) {
+                    entry.finalizer(entry.obj);
+                }
+            }
+        }
+
+        // Process weak handles AFTER finalization (WeakTrackResurrection).
+        if (!weak_handles.empty()) {
+            std::vector<std::pair<uint64_t, void*>> flat;
+            flat.reserve(weak_handles.size());
+            for (auto& dwh : weak_handles) {
+                flat.emplace_back(dwh.handle_id, dwh.old_object);
+            }
+            GcProcessCollectedWeakHandles(flat);
+            CHAOS_IL2CPP_LOG_DEBUG_M("Finalizer", "weak_handles_processed count={0}",
+                static_cast<unsigned long long>(flat.size()));
+        }
+    }
+
+    threading::UnregisterThread();
+    CHAOS_IL2CPP_LOG_DEBUG("Finalizer", "thread_stopped");
 }
 
 // ── Parallel mark workers ──────────────────────────────────────────

@@ -336,6 +336,26 @@ private:
         void*    old_object;  // for debugging / resurrection check
     };
     std::vector<DeadWeakHandle> bgc_dead_weak_handles_;
+
+    // ── Dedicated finalizer thread ─────────────────────────────────
+
+    /// Background thread that runs finalizers collected by BGC.
+    /// Runs in preemptive mode so it can allocate without blocking.
+    std::thread finalizer_thread_;
+    std::condition_variable finalizer_cv_;
+    std::mutex finalizer_mutex_;
+    std::vector<FinalizerEntry> pending_finalizers_;
+    std::vector<DeadWeakHandle> pending_weak_handles_;
+    std::atomic<bool> finalizer_work_pending_{false};
+    std::atomic<bool> finalizer_running_{false};
+
+    /// Publish finalization work to the finalizer thread and signal it.
+    void PublishFinalizationWork(
+        std::vector<FinalizerEntry>& finalizers,
+        std::vector<DeadWeakHandle>& weak_handles) noexcept;
+
+    /// Finalizer thread entry point.
+    void FinalizerThreadMain() noexcept;
 };
 
 // ======================================================================

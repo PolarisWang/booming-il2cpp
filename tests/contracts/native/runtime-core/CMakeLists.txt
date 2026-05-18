@@ -361,13 +361,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
         target_link_libraries(
             chaos_threading_benchmark
             PRIVATE
-                chaos_runtime_core
-                chaos_bootstrap
-                chaos_interpreter
-                chaos_fmt
-                chaos_common
-                chaos_support
-                chaos_hot_update)
+                ${CHAOS_GC_COMMON_LIBS})
     endif()
 endif()
 
@@ -393,6 +387,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/delegate_stress_test.cpp")
         PRIVATE
             chaos_runtime_core
             chaos_bootstrap
+            chaos_interpreter
+            chaos_codegen
             chaos_common
             chaos_fmt
             chaos_support

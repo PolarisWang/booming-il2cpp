@@ -344,7 +344,11 @@ uint32_t RequestGlobalSafepoint() noexcept {
         if (!s_safepoint_owner.compare_exchange_strong(expected, self,
                 std::memory_order_acq_rel, std::memory_order_acquire)) {
             // Another thread holds the safepoint — spin-wait with pause.
+            // Must call SafepointPoll() to acknowledge a pending safepoint
+            // from the owner; otherwise this thread and the owner deadlock
+            // (owner waits for our ack, we wait for the owner to release).
             for (;;) {
+                SafepointPoll();
                 _mm_pause();
                 expected = nullptr;
                 if (s_safepoint_owner.compare_exchange_strong(expected, self,
