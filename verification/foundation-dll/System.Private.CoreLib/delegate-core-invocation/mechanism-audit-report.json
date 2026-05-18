@@ -1,0 +1,209 @@
+{
+  "family": "delegate-core-invocation",
+  "assembly": "System.Private.CoreLib",
+  "total_methods": 16,
+  "audited": 16,
+  "false_passing": 0,
+  "stubs_found": 0,
+  "skips_found": 8,
+  "methods_without_lowering": 0,
+  "methods_without_assert": 16,
+  "passed": true,
+  "method_details": [
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAot",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotBench",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BenchmarkMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    }
+  ],
+  "skip_details": [
+    {
+      "type_name": "Delegate",
+      "method_name": "DynamicInvoke",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "get_Method",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "get_Target",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "CreateDelegate",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "CreateDelegate",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "MulticastDelegate",
+      "method_name": "GetInvocationList",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "op_Equality",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "op_Inequality",
+      "param_count": 2,
+      "override_value": "skip"
+    }
+  ],
+  "errors": []
+}

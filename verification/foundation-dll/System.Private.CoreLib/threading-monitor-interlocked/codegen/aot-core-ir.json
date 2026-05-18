@@ -3,573 +3,6 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.run",
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Run:System.Void(System.Int32)",
-      "signature": "System.Void ThreadingMonitorInterlockedSubjects::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedSubjects",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
-        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Run:System.Void(System.Int32)",
-        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Run:System.Void(System.Int32)",
-        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.run",
-        "signature": "System.Void ThreadingMonitorInterlockedSubjects::Run(System.Int32)"
-      },
-      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Run",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 1,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 2,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 3
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 4,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 5
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            69,
-            77,
-            85,
-            93,
-            101,
-            109,
-            117,
-            125,
-            133,
-            141,
-            149,
-            157,
-            165,
-            173
-          ],
-          "ilOffset": 6,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 67,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 69,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 75,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 77,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 83,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 85,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 91,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 93,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 99,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 101,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 107,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 109,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 115,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 117,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 123,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 125,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_7",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 131,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 133,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_8",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 139,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 141,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_9",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 147,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 149,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_10",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 155,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 157,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_11",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 163,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 165,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_12",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 171,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 173,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedSubjects",
-            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_13",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 179,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 181
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "hasBlittableStructReturn": false
-    },
-    {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.subject-2",
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()",
       "signature": "System.Void ThreadingMonitorInterlockedSubjects::Subject_2()",
@@ -599,7 +32,8 @@
           "opCode": 0,
           "operand": 42,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "box",
@@ -620,9 +54,11 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 9
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -643,170 +79,110 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "brtrue",
           "opCode": 18,
           "operand": 18,
           "ilOffset": 13,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 15,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 19,
           "ilOffset": 16,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 18,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 19,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "box",
-          "opCode": 35,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 21,
-          "resultType": "System.Object",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 9
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 26,
-          "resultType": "System.Boolean",
-          "callee": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)",
-          "reference": {
-            "assemblyName": "System.Threading",
-            "subjectKind": "method",
-            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Threading",
-            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 36,
-          "ilOffset": 31,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 33,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 37,
-          "ilOffset": 34,
-          "resultType": "System.Void"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 36,
-          "resultType": "System.Int32"
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 37,
-          "resultType": "System.Int32"
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 39,
-          "resultType": "System.Int32"
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 40,
-          "resultType": "System.Int32"
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 42,
-          "resultType": "System.Void"
+          "ilOffset": 25,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 43
+          "ilOffset": 26,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 52,
-          "ilOffset": 44,
-          "resultType": "System.Void"
+          "operand": 35,
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 46,
-          "resultType": "System.Int32"
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
-          "ilOffset": 47,
+          "ilOffset": 30,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ThreadingMonitorInterlockedSubjects",
@@ -821,16 +197,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 52
+          "ilOffset": 35,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -838,7 +217,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.subject-3",
@@ -870,7 +252,8 @@
           "opCode": 0,
           "operand": 42,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "box",
@@ -891,16 +274,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 9
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
           "ilOffset": 8,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -921,177 +307,110 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "brtrue",
           "opCode": 18,
           "operand": 20,
           "ilOffset": 15,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 17,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
           "operand": 21,
           "ilOffset": 18,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 20,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 21,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "box",
-          "opCode": 35,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 23,
-          "resultType": "System.Object",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 9
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 28,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 30,
-          "resultType": "System.Boolean",
-          "callee": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Threading",
-            "subjectKind": "method",
-            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Threading",
-            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 40,
-          "ilOffset": 35,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 37,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 41,
-          "ilOffset": 38,
-          "resultType": "System.Void"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 40,
-          "resultType": "System.Int32"
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 41,
-          "resultType": "System.Int32"
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 43,
-          "resultType": "System.Int32"
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 44,
-          "resultType": "System.Int32"
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 46,
-          "resultType": "System.Void"
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 47
+          "ilOffset": 28,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 56,
-          "ilOffset": 48,
-          "resultType": "System.Void"
+          "operand": 37,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 50,
-          "resultType": "System.Int32"
+          "ilOffset": 31,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
-          "ilOffset": 51,
+          "ilOffset": 32,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ThreadingMonitorInterlockedSubjects",
@@ -1106,16 +425,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 56
+          "ilOffset": 37,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1123,7 +445,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.subject-12",
@@ -1169,14 +494,17 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1184,7 +512,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.subject-13",
@@ -1216,21 +547,24 @@
           "opCode": 0,
           "operand": 42,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 3,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 0,
           "ilOffset": 4,
-          "resultType": "System.IntPtr"
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1251,91 +585,78 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 0,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
           "ilOffset": 11,
-          "resultType": "System.IntPtr"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 13,
           "resultType": "System.Int32",
-          "callee": "System.Threading/Volatile::Read:System.Int32(System.Int32\u0026)",
-          "reference": {
-            "assemblyName": "System.Threading",
-            "subjectKind": "method",
-            "subjectId": "System.Threading/Volatile::Read:System.Int32(System.Int32\u0026)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Threading",
-            "subjectId": "System.Threading/Volatile::Read:System.Int32(System.Int32\u0026)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 18,
-          "resultType": "System.Int32"
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 20,
-          "resultType": "System.Int32"
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 21,
-          "resultType": "System.Int32"
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
-          "ilOffset": 23,
-          "resultType": "System.Void"
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 24
+          "ilOffset": 19,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 33,
-          "ilOffset": 25,
-          "resultType": "System.Void"
+          "operand": 28,
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 27,
-          "resultType": "System.Int32"
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
-          "ilOffset": 28,
+          "ilOffset": 23,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ThreadingMonitorInterlockedSubjects",
@@ -1350,16 +671,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 33
+          "ilOffset": 28,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1367,7 +691,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-0",
@@ -1413,22 +740,26 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1449,15 +780,18 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 14
+          "ilOffset": 14,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1478,14 +812,17 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 21
+          "ilOffset": 21,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1493,7 +830,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-1",
@@ -1539,22 +879,26 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1575,15 +919,18 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 14
+          "ilOffset": 14,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1604,14 +951,17 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 21
+          "ilOffset": 21,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1619,7 +969,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-4",
@@ -1665,22 +1018,26 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1701,15 +1058,18 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 14
+          "ilOffset": 14,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1730,15 +1090,18 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 21
+          "ilOffset": 21,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1759,14 +1122,17 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 28
+          "ilOffset": 28,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1774,7 +1140,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-5",
@@ -1820,22 +1189,26 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1856,15 +1229,18 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 14
+          "ilOffset": 14,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1885,15 +1261,18 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 21
+          "ilOffset": 21,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1914,14 +1293,17 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 28
+          "ilOffset": 28,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1929,7 +1311,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-6",
@@ -1975,22 +1360,26 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2011,15 +1400,18 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 14
+          "ilOffset": 14,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2040,22 +1432,26 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 21
+          "ilOffset": 21,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 22,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2076,20 +1472,24 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 28
+          "ilOffset": 28,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 29
+          "ilOffset": 29,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2110,14 +1510,17 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 36
+          "ilOffset": 36,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -2125,7 +1528,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-7",
@@ -2157,21 +1563,24 @@
           "opCode": 0,
           "operand": 0,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 2,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 0,
           "ilOffset": 3,
-          "resultType": "System.IntPtr"
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2192,62 +1601,72 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 10,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 11,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 13,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 14,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 16,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 17
+          "ilOffset": 17,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 26,
           "ilOffset": 18,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 20,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -2268,16 +1687,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26
+          "ilOffset": 26,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -2285,7 +1707,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-8",
@@ -2317,21 +1742,24 @@
           "opCode": 0,
           "operand": 1,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 2,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 0,
           "ilOffset": 3,
-          "resultType": "System.IntPtr"
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2352,49 +1780,57 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 10,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "cgt.un",
           "opCode": 33,
           "ilOffset": 11,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 13,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 14
+          "ilOffset": 14,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 23,
           "ilOffset": 15,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 17,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -2415,16 +1851,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 23
+          "ilOffset": 23,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -2432,7 +1871,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-9",
@@ -2464,28 +1906,32 @@
           "opCode": 0,
           "operand": 42,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 3,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 0,
           "ilOffset": 4,
-          "resultType": "System.IntPtr"
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 99,
           "ilOffset": 6,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2506,62 +1952,72 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
           "ilOffset": 13,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 15,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 17,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 18,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 20,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 21
+          "ilOffset": 21,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 30,
           "ilOffset": 22,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 24,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -2582,70 +2038,81 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 30
+          "ilOffset": 30,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 99,
           "ilOffset": 31,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 33,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 35,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 36,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 38,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
-          "ilOffset": 39
+          "ilOffset": 39,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 48,
           "ilOffset": 40,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 42,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -2666,16 +2133,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 48
+          "ilOffset": 48,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -2683,7 +2153,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-10",
@@ -2715,35 +2188,40 @@
           "opCode": 0,
           "operand": 42,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 3,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 0,
           "ilOffset": 4,
-          "resultType": "System.IntPtr"
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 99,
           "ilOffset": 6,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
           "ilOffset": 8,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2764,62 +2242,72 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
           "ilOffset": 15,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 17,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 19,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 20,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 22,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 23
+          "ilOffset": 23,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 32,
           "ilOffset": 24,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 26,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -2840,70 +2328,81 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 32
+          "ilOffset": 32,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 99,
           "ilOffset": 33,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 35,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 37,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 38,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
           "ilOffset": 40,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
-          "ilOffset": 41
+          "ilOffset": 41,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 50,
           "ilOffset": 42,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 44,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -2924,16 +2423,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 50
+          "ilOffset": 50,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -2941,7 +2443,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
       "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-11",
@@ -2973,28 +2478,32 @@
           "opCode": 0,
           "operand": 10,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
           "ilOffset": 3,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 0,
           "ilOffset": 4,
-          "resultType": "System.IntPtr"
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 5,
           "ilOffset": 6,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -3015,62 +2524,72 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 15,
           "ilOffset": 12,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 14,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
           "ilOffset": 16,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
           "ilOffset": 17,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 19,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 20
+          "ilOffset": 20,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
           "operand": 29,
           "ilOffset": 21,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
           "ilOffset": 23,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
@@ -3091,16 +2610,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 29
+          "ilOffset": 29,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -3108,7 +2630,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ReflectionParametersSubjects",
-  "entrySubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Run:System.Void(System.Int32)",
+  "entrySubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-parameters/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

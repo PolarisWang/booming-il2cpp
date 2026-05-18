@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "PrimitiveNumericConversionsSubjects",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
-      "metadataToken": 100663312,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "PrimitiveNumericConversionsSubjects",
       "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",

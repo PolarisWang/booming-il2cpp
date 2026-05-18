@@ -49,11 +49,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Run:System.Void(System.Int32)",
-      "reason": "closed-world-entry"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
@@ -197,5 +192,31 @@
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    }
+  ]
 }

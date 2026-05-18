@@ -7,6 +7,7 @@
     <AssemblyName>CollectionsGenericCoreSubjects</AssemblyName>
     <RootNamespace>CollectionsGenericCoreSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CollectionsGenericCoreSubjects.cs" />

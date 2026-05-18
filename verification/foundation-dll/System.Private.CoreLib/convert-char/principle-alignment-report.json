@@ -1,7 +1,7 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-18T12:19:00.005892",
+  "generated_at": "2026-05-19T00:57:50.325924",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -50,10 +50,10 @@
       "check_id": "p1_benchmark",
       "principle": "P1",
       "status": "CONCERN",
-      "summary": "avg_speedup=37.41% (1 methods where native is slower than managed)",
+      "summary": "avg_speedup=37.5% (1 methods where native is slower than managed)",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 37.41,
+        "average_speedup_percent": 37.5,
         "managed_faster_count": 1,
         "native_faster_count": 10
       }
@@ -78,11 +78,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 19 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 18 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 19,
-        "entries_with_interrupt_ptr": 19,
+        "table_size": 18,
+        "entries_with_interrupt_ptr": 18,
         "has_hotpatch_module": true
       }
     },

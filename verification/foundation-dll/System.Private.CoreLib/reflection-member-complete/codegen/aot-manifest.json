@@ -5,12 +5,6 @@
     {
       "assemblyName": "ReflectionMemberCompleteSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "ReflectionMemberCompleteSubjects",
-      "subjectKind": "method",
       "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
@@ -155,19 +149,7 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {
@@ -192,12 +174,6 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Reflection.MethodBase::get_MethodHandle:System.RuntimeMethodHandle()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.RuntimeMethodHandle::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {
@@ -264,12 +240,6 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldHandle:System.RuntimeFieldHandle()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.RuntimeFieldHandle::GetHashCode:System.Int32()",
       "reason": "external-call"
     }
   ]

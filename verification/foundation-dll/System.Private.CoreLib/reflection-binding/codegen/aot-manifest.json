@@ -5,12 +5,6 @@
     {
       "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "ReflectionBindingSubjects",
-      "subjectKind": "method",
       "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
@@ -102,12 +96,6 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {

@@ -13,36 +13,29 @@ public static partial class CodegenEdgeCasesSubjects
     // [0] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_0:System.Void()
     public static void Subject_0()
     {
-        CodegenEdgeCasesSubjects.Subject_0();
+        try { CodegenEdgeCasesSubjects.Subject_0(); }
+        catch (Exception) { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)
     public static void Subject_1()
     {
-        CodegenEdgeCasesSubjects.Subject_1(42);
+        try { CodegenEdgeCasesSubjects.Subject_1(42); }
+        catch (Exception) { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_2:System.Void()
     public static void Subject_2()
     {
-        CodegenEdgeCasesSubjects.Subject_2();
+        try { CodegenEdgeCasesSubjects.Subject_2(); }
+        catch (Exception) { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)
     public static void Subject_3()
     {
-        if (CodegenEdgeCasesSubjects.Subject_3(42) != CodegenEdgeCasesSubjects.Subject_3(42)) _exitCode = 1;
-    }
-
-    public static void Run(int entryIndex)
-    {
-        switch (entryIndex)
-        {
-            case 0: Subject_0(); break;
-            case 1: Subject_1(); break;
-            case 2: Subject_2(); break;
-            case 3: Subject_3(); break;
-        }
+        try { if (CodegenEdgeCasesSubjects.Subject_3(42) != CodegenEdgeCasesSubjects.Subject_3(42)) _exitCode = 1; }
+        catch (Exception) { _exitCode = 1; }
     }
 
 }

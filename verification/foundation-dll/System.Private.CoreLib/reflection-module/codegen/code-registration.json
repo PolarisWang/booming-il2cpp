@@ -8,42 +8,36 @@
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Run",
-          "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Run:System.Void(System.Int32)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 1,
           "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_0",
           "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 2,
+          "slot": 1,
           "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_1",
           "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_1:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 3,
+          "slot": 2,
           "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_2",
           "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_2:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 4,
+          "slot": 3,
           "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_3",
           "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_3:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 5,
+          "slot": 4,
           "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_4",
           "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_4:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 6,
+          "slot": 5,
           "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_5",
           "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_5:System.Void()"
         }

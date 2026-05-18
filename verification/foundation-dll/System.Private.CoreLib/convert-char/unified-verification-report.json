@@ -2,8 +2,8 @@
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-18T12:19:10",
-  "duration_ms": 21672,
+  "timestamp": "2026-05-19T00:58:14",
+  "duration_ms": 46680,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 11041
+      "duration_ms": 22389
     },
     "fact": {
       "stage": "fact",
       "status": "failed",
-      "summary": "Fact verify=failed (14/19)",
+      "summary": "Fact verify=failed (16/18)",
       "details": {
         "fact": {
           "status": "failed",
-          "passed": 14,
-          "total": 19
+          "passed": 16,
+          "total": 18
         }
       },
       "errors": [],
-      "duration_ms": 37
+      "duration_ms": 337
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 144
+      "duration_ms": 154
     },
     "asm_compare": {
       "stage": "asm_compare",
@@ -87,7 +87,7 @@
         "averageExpansionRatio": 0
       },
       "errors": [],
-      "duration_ms": 2761
+      "duration_ms": 13592
     },
     "microbench": {
       "stage": "microbench",
@@ -97,14 +97,14 @@
         "poolSize": 0
       },
       "errors": [],
-      "duration_ms": 35
+      "duration_ms": 466
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "passed",
-      "summary": "avg_speedup=37.5%, native_faster=10/11, managed_faster=1/11",
+      "summary": "avg_speedup=30.06%, native_faster=10/11, managed_faster=1/11",
       "details": {
-        "averageSpeedupPercent": 37.5,
+        "averageSpeedupPercent": 30.06,
         "nativeFasterCount": 10,
         "managedFasterCount": 1,
         "matchedCount": 11,
@@ -113,21 +113,21 @@
         "benchmarkQuality": "ok"
       },
       "errors": [],
-      "duration_ms": 4717
+      "duration_ms": 8211
     },
     "hotupdate": {
       "stage": "hotupdate",
       "status": "passed",
-      "summary": "14/19 passed, 0 failed (stub=0)",
+      "summary": "16/18 passed, 0 failed (stub=0)",
       "details": {
-        "passedMethods": 14,
+        "passedMethods": 16,
         "failedMethods": 0,
-        "totalMethods": 19,
-        "realMethods": 19,
+        "totalMethods": 18,
+        "realMethods": 18,
         "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 27
+      "duration_ms": 74
     },
     "post_hotupdate_benchmark": {
       "stage": "post_hotupdate_benchmark",
@@ -140,13 +140,13 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 2903
+      "duration_ms": 1448
     }
   },
   "coverage": {
-    "methodCoverage": 73.68,
+    "methodCoverage": 88.89,
     "testedRate": 100.0,
-    "overall": 86.84
+    "overall": 94.44
   },
   "dashboard": {
     "interpreter": {
@@ -172,7 +172,7 @@
       "topInstructionCategories": {}
     },
     "performance": {
-      "averageSpeedupPercent": 37.5,
+      "averageSpeedupPercent": 30.06,
       "nativeFasterCount": 10,
       "managedFasterCount": 1,
       "matchedCount": 11,
@@ -181,9 +181,9 @@
     },
     "hotupdate": {
       "functional": {
-        "passedMethods": 14,
+        "passedMethods": 16,
         "failedMethods": 0,
-        "totalMethods": 19
+        "totalMethods": 18
       },
       "interpreterOverhead": {
         "averageSlowdownPercent": 0.0,
@@ -213,7 +213,7 @@
         "matchedCount": 11,
         "nativeFasterCount": 10,
         "managedFasterCount": 1,
-        "averageSpeedupPercent": 37.5
+        "averageSpeedupPercent": 30.06
       }
     },
     "hasRegression": false,

@@ -1,13 +1,13 @@
 {
   "family": "collections-generic-core",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 23,
-  "audited": 23,
+  "total_methods": 22,
+  "audited": 22,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 7,
   "methods_without_lowering": 0,
-  "methods_without_assert": 23,
+  "methods_without_assert": 22,
   "passed": true,
   "method_details": [
     {
@@ -201,15 +201,6 @@
     },
     {
       "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_15",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Run",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

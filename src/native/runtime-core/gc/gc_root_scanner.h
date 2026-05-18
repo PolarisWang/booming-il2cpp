@@ -56,6 +56,10 @@ struct ManagedFrameInfo {
 /// Called during module registration (generated code startup).
 void GcRegisterSlotMap(const void* code_address, const GcSlotMapV0* slot_map);
 
+/// Unregister a GcSlotMap by code address.
+/// Called during T4 demotion to remove stale slot map entries.
+void GcUnregisterSlotMap(const void* code_address) noexcept;
+
 /// Look up a GcSlotMap for a given code address.
 /// Returns nullptr if no precise map is registered (fall back to conservative).
 const GcSlotMapV0* GcLookupSlotMap(const void* code_address);

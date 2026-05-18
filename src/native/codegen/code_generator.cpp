@@ -151,6 +151,16 @@ private:
     // Pointer to current callee-saved register list (callee_x64_regs_ or kCacheableX64Regs)
     const uint8_t* callee_saved_regs_ = kCacheableX64Regs;
 
+    // ── FPR (XMM) coloring ────────────────────────────────────────────────
+    uint8_t callee_xmm_regs_[10];  // XMM6-XMM15 max
+    uint8_t callee_xmm_fi_[10];    // FPR vreg index (fi) for each callee_xmm_regs_[slot]
+    uint32_t num_fpr_callee_ = 0;
+    int32_t xmm_save_size_ = 0;
+    // Bitmask of vregs colored by allocator but filtered (caller-saved).
+    // These vregs fall through to stack I/O, so the prologue zeros
+    // their stack slots to prevent garbage reads (e.g. Calli func_ptr).
+    uint64_t filtered_vreg_mask_ = 0;
+
     void SelectCacheableRegs() noexcept;
     void SpillCachedRegs() noexcept;
     void SpillGcRefCachedRegs() noexcept;
@@ -234,10 +244,36 @@ void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
 }
 
 void NativeCodeGenerator::LoadFpr(uint8_t xmm_reg, uint32_t vreg) noexcept {
+    // Graph coloring V2: colored FPR → direct reg-to-reg move
+    if (has_graph_coloring_ && vreg >= kGprCount) {
+        uint32_t fi = vreg - kGprCount;
+        if (fi < 32) {
+            uint8_t colored_xmm = gcr_.fpr_color[fi];
+            if (colored_xmm != 0xFF) {
+                if (xmm_reg != colored_xmm)
+                    EmitMovSDRR(buf_, xmm_reg, colored_xmm);
+                return;
+            }
+        }
+    }
+    // Fallback: load from stack
     EmitMovSDRM(buf_, xmm_reg, kRSP, static_cast<int32_t>(FprOff(vreg)));
 }
 
 void NativeCodeGenerator::StoreFpr(uint8_t xmm_reg, uint32_t vreg) noexcept {
+    // Graph coloring V2: colored FPR → direct reg-to-reg move (no stack write)
+    if (has_graph_coloring_ && vreg >= kGprCount) {
+        uint32_t fi = vreg - kGprCount;
+        if (fi < 32) {
+            uint8_t colored_xmm = gcr_.fpr_color[fi];
+            if (colored_xmm != 0xFF) {
+                if (xmm_reg != colored_xmm)
+                    EmitMovSDRR(buf_, colored_xmm, xmm_reg);
+                return;
+            }
+        }
+    }
+    // Fallback: write through to stack
     EmitMovSDMR(buf_, kRSP, static_cast<int32_t>(FprOff(vreg)), xmm_reg);
 }
 
@@ -393,13 +429,28 @@ void NativeCodeGenerator::EmitGprArithmetic(
 
 void NativeCodeGenerator::EmitFprArithmetic(
     IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept {
-    LoadFpr(0, src1);
-    if (src2 != UINT32_MAX && src2 >= kGprCount) LoadFpr(1, src2);
-    if (opc == IROpCode::Add) EmitAddSDRR(buf_, 0, 1);
-    else if (opc == IROpCode::Sub) EmitSubSDRR(buf_, 0, 1);
-    else if (opc == IROpCode::Mul) EmitMulSDRR(buf_, 0, 1);
-    else if (opc == IROpCode::Div) EmitDivSDRR(buf_, 0, 1);
-    StoreFpr(0, dst);
+    // Pick the working XMM register: prefer src1's colored reg, else XMM0.
+    uint8_t op_xmm = 0;
+    if (has_graph_coloring_ && src1 >= kGprCount) {
+        uint32_t fi = src1 - kGprCount;
+        if (fi < 32 && gcr_.fpr_color[fi] != 0xFF)
+            op_xmm = gcr_.fpr_color[fi];
+    }
+    LoadFpr(op_xmm, src1);
+    uint8_t src2_xmm = 1;
+    if (src2 != UINT32_MAX && src2 >= kGprCount) {
+        if (has_graph_coloring_) {
+            uint32_t fi = src2 - kGprCount;
+            if (fi < 32 && gcr_.fpr_color[fi] != 0xFF)
+                src2_xmm = gcr_.fpr_color[fi];
+        }
+        LoadFpr(src2_xmm, src2);
+    }
+    if (opc == IROpCode::Add) EmitAddSDRR(buf_, op_xmm, src2_xmm);
+    else if (opc == IROpCode::Sub) EmitSubSDRR(buf_, op_xmm, src2_xmm);
+    else if (opc == IROpCode::Mul) EmitMulSDRR(buf_, op_xmm, src2_xmm);
+    else if (opc == IROpCode::Div) EmitDivSDRR(buf_, op_xmm, src2_xmm);
+    StoreFpr(op_xmm, dst);
 }
 
 void NativeCodeGenerator::EmitBitwise(
@@ -678,7 +729,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         // Spill cached regs before reading return value
         if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
         if (instr.has_src1()) { LoadGpr(kRAX, instr.src1_reg()); EmitMovMR(buf_, kRSI, 0, kRAX); }
-        EmitAddRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_));
+        // Restore callee-saved XMMs
+        for (uint32_t si = 0; si < num_fpr_callee_; ++si) {
+            int32_t off = static_cast<int32_t>(kFrameSize + frame_align_adj_ + si * 16);
+            EmitMovUPRM(buf_, callee_xmm_regs_[si], kRSP, off);
+        }
+        EmitAddRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_));
         for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
             EmitPop(buf_, callee_saved_regs_[slot - 1]);
         EmitPop(buf_, kRSI); EmitPop(buf_, kRBX); EmitPop(buf_, kRBP); EmitRet(buf_);
@@ -1382,13 +1438,55 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
             }
         }
         if (has_graph_coloring_) {
-            // TEMP force to V1 fallback for LdFld_StFld debugging
-            has_graph_coloring_ = false;
-            SelectCacheableRegs();
-        } else {
-            cached_slots_used_ = 0;  // V1 cache disabled — colors handle it
+            // Filter: only callee-saved x64 registers survive.  Caller-saved
+            // registers (R8-R11) get clobbered by runtime helper calls, so
+            // clear their color assignment to force stack spill/reload.
+            // Track filtered vregs so the prologue can zero their stack slots.
+            bool seen[16] = {};
+            num_cache_regs_ = 0;
+            filtered_vreg_mask_ = 0;
+            for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+                uint8_t x64r = gcr_.gpr_color[vr];
+                if (x64r != 0xFF) {
+                    bool is_callee = (x64r == 7) || (x64r >= 12 && x64r <= 15);
+                    if (is_callee) {
+                        if (!seen[x64r] && num_cache_regs_ < kMaxCacheRegs) {
+                            seen[x64r] = true;
+                            callee_x64_regs_[num_cache_regs_++] = x64r;
+                        }
+                    } else {
+                        gcr_.gpr_color[vr] = 0xFF;  // caller-saved → spill
+                        filtered_vreg_mask_ |= (1ULL << vr);
+                    }
+                }
+            }
+            cached_slots_used_ = 0;
             cached_dirty_mask_ = 0;
+            // Clear V1 cache mappings so spilled vregs fall through to stack
+            std::memset(cached_x64_for_vreg_, 0xFF, sizeof(cached_x64_for_vreg_));
             callee_saved_regs_ = callee_x64_regs_;
+
+            // ── FPR callee-saved filter ────────────────────────────────
+            // Win64: XMM6-XMM15 (indices 6-15) are callee-saved.
+            // XMM0-XMM5 are caller-saved — filter them out (spill to stack).
+            num_fpr_callee_ = 0;
+            bool xmm_seen[16] = {};
+            for (uint32_t fi = 0; fi < 32; ++fi) {
+                uint8_t xmm = gcr_.fpr_color[fi];
+                if (xmm != 0xFF) {
+                    if (xmm >= 6 && xmm <= 15) {  // callee-saved
+                        if (!xmm_seen[xmm] && num_fpr_callee_ < 10) {
+                            xmm_seen[xmm] = true;
+                            callee_xmm_regs_[num_fpr_callee_] = xmm;
+                            callee_xmm_fi_[num_fpr_callee_] = static_cast<uint8_t>(fi);
+                            ++num_fpr_callee_;
+                        }
+                    } else {
+                        gcr_.fpr_color[fi] = 0xFF;  // caller-saved → spill
+                    }
+                }
+            }
+            xmm_save_size_ = static_cast<int32_t>(num_fpr_callee_) * 16;
         } else {
             SelectCacheableRegs();  // V1 fallback
         }
@@ -1396,20 +1494,6 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
         SelectCacheableRegs();
     }
     frame_align_adj_ = (num_cache_regs_ % 2) * 8;  // 16-byte alignment for Win64 ABI
-
-    if (has_graph_coloring_) {
-        std::printf("    GRAPH COLORING: num_callee=%u callee_regs=", num_cache_regs_);
-        for (uint32_t si = 0; si < num_cache_regs_; ++si) std::printf("%u ", callee_x64_regs_[si]);
-        std::printf("\n");
-        for (uint32_t vr = 0; vr < 8; ++vr) {
-            uint32_t r = gcr_.gpr_color[vr];
-            if (r == 0xFF)
-                std::printf("      vreg[%u] -> SPILLED\n", vr);
-            else
-                std::printf("      vreg[%u] -> x64_reg=%u (%s)\n", vr, r,
-                    (r==7?"RDI":r==12?"R12":r==13?"R13":r==14?"R14":r==15?"R15":r==8?"R8":r==9?"R9":r==10?"R10":r==11?"R11":"?"));
-        }
-    }
 
     // Prologue — push callee-saved regs, establish frame pointer
     EmitPush(buf_, kRBP);
@@ -1419,7 +1503,14 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
         EmitPush(buf_, callee_saved_regs_[slot]);
     EmitMovRR(buf_, kRBX, kRCX); EmitMovRR(buf_, kRSI, kRDX);
-    EmitSubRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_));
+    EmitSubRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_));
+
+    // Save callee-saved XMM registers (used by graph coloring)
+    // Stored in the area just below the regular frame (at RSP + kFrameSize + frame_align_adj_).
+    for (uint32_t si = 0; si < num_fpr_callee_; ++si) {
+        int32_t off = static_cast<int32_t>(kFrameSize + frame_align_adj_ + si * 16);
+        EmitMovUPSMR(buf_, kRSP, off, callee_xmm_regs_[si]);
+    }
 
     // Initialize colored callee-saved regs to 0 — the graph coloring may
     // assign a register to a vreg that is read before its first write (e.g.
@@ -1428,6 +1519,17 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     if (has_graph_coloring_) {
         for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
             EmitXorRR(buf_, callee_saved_regs_[slot], callee_saved_regs_[slot]);
+        // Zero-initialize stack slots for vregs that were colored but
+        // filtered (caller-saved). These vregs fall through to stack
+        // I/O, and reading an uninitialized slot produces garbage.
+        uint64_t fmask = filtered_vreg_mask_;
+        while (fmask) {
+            uint32_t vr = static_cast<uint32_t>(detail::Ctz64(fmask));
+            fmask &= fmask - 1;
+            int32_t off = static_cast<int32_t>(GprOff(vr));
+            EmitMovRI32(buf_, kRAX, 0);
+            EmitMovMR(buf_, kRSP, off, kRAX);
+        }
     }
 
     // Emit instructions
@@ -1453,7 +1555,12 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     // jump here.  The epilogue restores the stack frame and returns so that
     // InterpreterEntryDirect can check t_deopt_state.deopt_happened.
     deopt_return_pos_ = buf_.pos();
-    EmitAddRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_));
+    // Restore callee-saved XMMs before deallocating frame
+    for (uint32_t si = 0; si < num_fpr_callee_; ++si) {
+        int32_t off = static_cast<int32_t>(kFrameSize + frame_align_adj_ + si * 16);
+        EmitMovUPRM(buf_, callee_xmm_regs_[si], kRSP, off);
+    }
+    EmitAddRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_));
     for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
         EmitPop(buf_, callee_saved_regs_[slot - 1]);
     EmitPop(buf_, kRSI); EmitPop(buf_, kRBX); EmitPop(buf_, kRBP);
@@ -1507,7 +1614,7 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
             // Push cached/colored regs (matches main prologue layout for correct epilogue)
             for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
                 EmitPush(buf_, callee_saved_regs_[slot]);
-            EmitSubRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_));
+            EmitSubRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_));
             // using rep movsq (RSI=source, RDI=dest, RCX=count)
             EmitLeaRM(buf_, kRDI, kRSP, static_cast<int32_t>(kGprFileOff));
             EmitMovRR(buf_, kRSI, kRCX);
@@ -1537,6 +1644,19 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
                     }
                 }
                 cached_dirty_mask_ = 0;  // clean after initialization
+            }
+
+            // Initialize callee-saved XMM registers from RegisterFile FPR copy.
+            // Must also save to the XMM save area so the epilogue (Ret/deopt_return)
+            // can restore them correctly.
+            for (uint32_t si = 0; si < num_fpr_callee_; ++si) {
+                uint8_t xmm_reg = callee_xmm_regs_[si];
+                uint32_t fi = callee_xmm_fi_[si];
+                int32_t fpr_off = static_cast<int32_t>(kFprFileOff + fi * 8);
+                EmitMovSDRM(buf_, xmm_reg, kRSP, fpr_off);
+                // Duplicate to XMM save area so Ret/deopt_return epilogue can restore
+                int32_t save_off = static_cast<int32_t>(kFrameSize + frame_align_adj_ + si * 16);
+                EmitMovUPSMR(buf_, kRSP, save_off, xmm_reg);
             }
 
             // Jump to instruction 0
@@ -1606,6 +1726,7 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     }
 
     nm->rbp_to_rsp_offset = 16 + num_cache_regs_ * 8 +
+                            static_cast<uint32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_);
                             static_cast<uint32_t>(kFrameSize + frame_align_adj_);
 
     return nm;

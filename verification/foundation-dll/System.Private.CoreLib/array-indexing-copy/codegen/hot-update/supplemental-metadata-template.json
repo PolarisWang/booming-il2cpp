@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "ArrayIndexingCopySubjects",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
-      "metadataToken": 100663310,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "ArrayIndexingCopySubjects",
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",

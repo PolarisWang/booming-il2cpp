@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "CollectionsGenericCoreSubjects",
-      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
-      "metadataToken": 100663313,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "CollectionsGenericCoreSubjects",
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",

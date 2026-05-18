@@ -1,15 +1,15 @@
 {
   "demands": [
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
-      "owningAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
+      "owningAssemblyName": "SnapshotTestFixtures",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
-      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
       "demandSourceKind": "memberReference",
       "instantiationKey": {
         "contextKind": 1,
-        "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+        "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
         "typeArguments": [
           "System.Int32"
         ],
@@ -21,15 +21,15 @@
       "isCrossAssembly": false
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
-      "owningAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
+      "owningAssemblyName": "SnapshotTestFixtures",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
-      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
       "demandSourceKind": "memberReference",
       "instantiationKey": {
         "contextKind": 1,
-        "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+        "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
         "typeArguments": [
           "System.Int32"
         ],
@@ -41,15 +41,15 @@
       "isCrossAssembly": false
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
-      "owningAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
+      "owningAssemblyName": "SnapshotTestFixtures",
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E",
-      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
       "demandSourceKind": "typeSpec",
       "instantiationKey": {
         "contextKind": 1,
-        "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+        "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
         "typeArguments": [
           "!0"
         ],
@@ -61,15 +61,15 @@
       "isCrossAssembly": false
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
-      "owningAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
+      "owningAssemblyName": "SnapshotTestFixtures",
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E",
-      "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
       "demandSourceKind": "typeSpec",
       "instantiationKey": {
         "contextKind": 1,
-        "definitionSubjectId": "SnapshotProverSubjects/Wrapper\u00601",
+        "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
         "typeArguments": [
           "System.Int32"
         ],
@@ -81,7 +81,7 @@
       "isCrossAssembly": false
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void()",
@@ -102,7 +102,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::Add:System.Void(System.Int32,System.Int32)",
@@ -123,7 +123,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::ContainsKey:System.Boolean(System.Int32)",
@@ -144,7 +144,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::Remove:System.Boolean(System.Int32)",
@@ -165,7 +165,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32\u0026)",
@@ -186,7 +186,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::.ctor:System.Void()",
@@ -206,7 +206,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Add:System.Boolean(System.Int32)",
@@ -226,7 +226,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Contains:System.Boolean(System.Int32)",
@@ -246,7 +246,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Remove:System.Boolean(System.Int32)",
@@ -266,7 +266,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()",
@@ -286,7 +286,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
@@ -306,7 +306,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::get_Count:System.Int32()",
@@ -326,7 +326,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
@@ -346,7 +346,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "SnapshotProverSubjects",
+      "requestingAssemblyName": "SnapshotTestFixtures",
       "owningAssemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::Invoke:System.Int32()",

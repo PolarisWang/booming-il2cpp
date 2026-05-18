@@ -49,12 +49,6 @@
       "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
     }
   ]
 }

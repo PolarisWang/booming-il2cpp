@@ -5,12 +5,6 @@
     {
       "assemblyName": "IoStreamsBasicsSubjects",
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "IoStreamsBasicsSubjects",
-      "subjectKind": "method",
       "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

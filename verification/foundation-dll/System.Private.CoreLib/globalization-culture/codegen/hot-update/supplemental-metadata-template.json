@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "GlobalizationCultureSubjects",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
-      "metadataToken": 100663310,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "GlobalizationCultureSubjects",
       "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",

@@ -2,13 +2,13 @@
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
   "assemblyName": "SpanMemoryBuffersSubjects",
-  "entrySubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Run:System.Void(System.Int32)",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/subjects/build-output/SpanMemoryBuffersSubjects.dll",
+  "entrySubjectId": "",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/subjects/build-output/SpanMemoryBuffersSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "SpanMemoryBuffersSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/subjects/build-output/SpanMemoryBuffersSubjects.dll"
+      "path": "verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/subjects/build-output/SpanMemoryBuffersSubjects.dll"
     },
     {
       "assemblyName": "System.Memory",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "7b658aca-3b54-460e-9b23-5f127466e91e",
+  "inputModuleVersionId": "f341e6cf-f8ea-42d3-9d8d-1fa6916c1a76",
   "artifacts": [
     {
       "kind": "typedIlIr",

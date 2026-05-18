@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "IoStreamsBasicsSubjects",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
-      "metadataToken": 100663315,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "IoStreamsBasicsSubjects",
       "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",

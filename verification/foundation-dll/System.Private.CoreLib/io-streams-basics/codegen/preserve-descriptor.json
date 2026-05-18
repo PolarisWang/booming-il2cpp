@@ -16,12 +16,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Run:System.Void(System.Int32)",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"

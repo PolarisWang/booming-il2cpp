@@ -1,7 +1,7 @@
 {
   "family": "exception-throw-diagnostics",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-17T11:31:23.735531",
+  "generated_at": "2026-05-19T00:50:33.048753",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -82,11 +82,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 15 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 14 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 15,
-        "entries_with_interrupt_ptr": 15,
+        "table_size": 14,
+        "entries_with_interrupt_ptr": 14,
         "has_hotpatch_module": true
       }
     },
@@ -94,13 +94,14 @@
       "check_id": "p3_patchdata",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "1/1 valid .patchdata files",
+      "summary": "2/2 valid .patchdata files",
       "details": [],
       "evidence": {
-        "patchdata_count": 1,
-        "valid_count": 1,
+        "patchdata_count": 2,
+        "valid_count": 2,
         "stub_patchdata_count": 0,
         "files": [
+          "System.Private.CoreLib\\exception-throw-diagnostics\\il2cpp_dist\\patch\\patchdata\\exception-throw-diagnostics.patchdata",
           "System.Private.CoreLib\\exception-throw-diagnostics\\managed\\patch\\patchdata\\exception-throw-diagnostics.patchdata"
         ]
       }

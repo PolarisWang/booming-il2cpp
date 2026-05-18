@@ -1,13 +1,13 @@
 {
   "family": "string-char-text-core",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 27,
-  "audited": 27,
+  "total_methods": 26,
+  "audited": 26,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 27,
+  "methods_without_assert": 26,
   "passed": true,
   "method_details": [
     {
@@ -237,15 +237,6 @@
     },
     {
       "method_name": "StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_19",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "StringCharTextCoreSubjects_StringCharTextCoreSubjects_Run",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

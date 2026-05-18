@@ -2,13 +2,13 @@
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
   "assemblyName": "RcwBasicSubjects",
-  "entrySubjectId": "RcwBasicSubjects/RcwBasicSubjects::Run:System.Void(System.Int32)",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/rcw-basic/managed/subjects/build-output/RcwBasicSubjects.dll",
+  "entrySubjectId": "",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/rcw-basic/managed/subjects/build-output/RcwBasicSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "RcwBasicSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/rcw-basic/managed/subjects/build-output/RcwBasicSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/rcw-basic/managed/subjects/build-output/RcwBasicSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "24a99ba8-db78-403b-9602-38c78775a52d",
+  "inputModuleVersionId": "0ab1202c-4fb8-4b07-ac55-5448f2492e32",
   "artifacts": [
     {
       "kind": "typedIlIr",

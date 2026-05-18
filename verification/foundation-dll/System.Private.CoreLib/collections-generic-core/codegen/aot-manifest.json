@@ -5,12 +5,6 @@
     {
       "assemblyName": "CollectionsGenericCoreSubjects",
       "subjectKind": "method",
-      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "CollectionsGenericCoreSubjects",
-      "subjectKind": "method",
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

@@ -40,12 +40,6 @@
           "slot": 5,
           "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
           "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 6,
-          "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Run",
-          "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)"
         }
       ]
     }

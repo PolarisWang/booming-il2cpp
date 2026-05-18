@@ -58,6 +58,18 @@ void RegisterT4Code(void* code_start, uint32_t code_size,
         code_start, code_size, nm->seh_table_offset);
 }
 
+void UnregisterT4Code(void* code_start) noexcept {
+    if (code_start == nullptr) return;
+    LockT4Registry();
+    for (uint32_t i = 0; i < g_t4_code_count; i++) {
+        if (g_t4_code_entries[i].code_start == code_start) {
+            g_t4_code_entries[i].nm = nullptr;
+            break;
+        }
+    }
+    UnlockT4Registry();
+}
+
 /// Find the NativeMethod covering a given code address.
 /// Returns nullptr if not found.
 const NativeMethod* FindT4CodeByAddress(const void* address) noexcept {

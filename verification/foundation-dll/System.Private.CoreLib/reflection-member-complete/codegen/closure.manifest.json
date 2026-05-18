@@ -2,7 +2,7 @@
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ReflectionMemberCompleteSubjects",
-  "entrySubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Run:System.Void(System.Int32)",
+  "entrySubjectId": "",
   "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-member-complete/managed/subjects/build-output/ReflectionMemberCompleteSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "b1f4bd47-3d07-48eb-83a4-d0e5c171d9b5",
+  "inputModuleVersionId": "1c73a245-f03c-48a7-b55b-790cea01d2b8",
   "artifacts": [
     {
       "kind": "typedIlIr",

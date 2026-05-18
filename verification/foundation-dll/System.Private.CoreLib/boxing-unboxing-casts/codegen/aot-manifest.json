@@ -5,12 +5,6 @@
     {
       "assemblyName": "BoxingUnboxingCastsSubjects",
       "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "BoxingUnboxingCastsSubjects",
-      "subjectKind": "method",
       "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

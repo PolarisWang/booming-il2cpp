@@ -18,13 +18,13 @@ public static partial class ThreadingMonitorInterlockedSubjects
     // [2] System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)
     public static void Subject_2()
     {
-        if (((Monitor.TryEnter(42)) ? 1 : 0) != ((Monitor.TryEnter(42)) ? 1 : 0)) _exitCode = 1;
+        if (((Monitor.TryEnter(42)) ? 1 : 0) != 1) _exitCode = 1;
     }
 
     // [3] System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object,System.Int32)
     public static void Subject_3()
     {
-        if (((Monitor.TryEnter(42, 42)) ? 1 : 0) != ((Monitor.TryEnter(42, 42)) ? 1 : 0)) _exitCode = 1;
+        if (((Monitor.TryEnter(42, 42)) ? 1 : 0) != 1) _exitCode = 1;
     }
 
     // [4] System.Private.CoreLib/System.Threading.Monitor::Pulse:System.Void(System.Object)
@@ -53,28 +53,7 @@ public static partial class ThreadingMonitorInterlockedSubjects
     public static void Subject_13()
     {
     var refLocal_0 = 42;
-        if (Volatile.Read(ref refLocal_0) != Volatile.Read(ref refLocal_0)) _exitCode = 1;
-    }
-
-    public static void Run(int entryIndex)
-    {
-        switch (entryIndex)
-        {
-            case 0: CustomEntrySubject_0(); break;
-            case 1: CustomEntrySubject_1(); break;
-            case 2: Subject_2(); break;
-            case 3: Subject_3(); break;
-            case 4: CustomEntrySubject_4(); break;
-            case 5: CustomEntrySubject_5(); break;
-            case 6: CustomEntrySubject_6(); break;
-            case 7: CustomEntrySubject_7(); break;
-            case 8: CustomEntrySubject_8(); break;
-            case 9: CustomEntrySubject_9(); break;
-            case 10: CustomEntrySubject_10(); break;
-            case 11: CustomEntrySubject_11(); break;
-            case 12: Subject_12(); break;
-            case 13: Subject_13(); break;
-        }
+        if (Volatile.Read(ref refLocal_0) != 42) _exitCode = 1;
     }
 
 }

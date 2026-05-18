@@ -67,4 +67,5 @@ target_compile_options(entry PRIVATE /EHa)
 target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
 target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_PROFILE)
 target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_PROFILE_ENABLED=1)
+target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_CHECK)  # chaos-il2cpp config tier
 target_link_libraries(entry PRIVATE ${CHAOS_RUNTIME_LIBS})

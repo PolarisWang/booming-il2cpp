@@ -5,12 +5,6 @@
     {
       "assemblyName": "ReflectionGenericsSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "ReflectionGenericsSubjects",
-      "subjectKind": "method",
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
@@ -107,12 +101,6 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Type\u003E:System.Type[]()",
       "reason": "external-call"
     },
@@ -168,6 +156,12 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Type::MakeArrayType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {

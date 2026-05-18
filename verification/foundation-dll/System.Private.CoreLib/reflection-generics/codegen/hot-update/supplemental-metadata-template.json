@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "ReflectionGenericsSubjects",
-      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
-      "metadataToken": 100663309,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "ReflectionGenericsSubjects",
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",

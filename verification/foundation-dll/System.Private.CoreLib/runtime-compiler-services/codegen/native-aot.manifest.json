@@ -2,8 +2,8 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
   "assemblyName": "RuntimeCompilerServicesSubjects",
-  "entrySubjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Run:System.Void(System.Int32)",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/codegen",
+  "entrySubjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_0:System.Void()",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

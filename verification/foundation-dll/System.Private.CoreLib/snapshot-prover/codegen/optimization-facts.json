@@ -9,512 +9,512 @@
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ArithmeticOps",
+      "subjectId": "SnapshotTestFixtures/ArithmeticOps",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/StringOps",
+      "subjectId": "SnapshotTestFixtures/StringOps",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/VoidCaller",
+      "subjectId": "SnapshotTestFixtures/VoidCaller",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/MathHelper",
+      "subjectId": "SnapshotTestFixtures/MathHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/FlowControl",
+      "subjectId": "SnapshotTestFixtures/FlowControl",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/InstanceHelper",
+      "subjectId": "SnapshotTestFixtures/InstanceHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/CallVirtHelper",
+      "subjectId": "SnapshotTestFixtures/CallVirtHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/BoxingHelper",
+      "subjectId": "SnapshotTestFixtures/BoxingHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/FieldHelper",
+      "subjectId": "SnapshotTestFixtures/FieldHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LoopHelper",
+      "subjectId": "SnapshotTestFixtures/LoopHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ConversionHelper",
+      "subjectId": "SnapshotTestFixtures/ConversionHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/Helper",
+      "subjectId": "SnapshotTestFixtures/Helper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/SwitchHelper",
+      "subjectId": "SnapshotTestFixtures/SwitchHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdftnHelper",
+      "subjectId": "SnapshotTestFixtures/LdftnHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/TargetHelper",
+      "subjectId": "SnapshotTestFixtures/TargetHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ArrayHelper",
+      "subjectId": "SnapshotTestFixtures/ArrayHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/EhHelper",
+      "subjectId": "SnapshotTestFixtures/EhHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/GenericHelper",
+      "subjectId": "SnapshotTestFixtures/GenericHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u00601",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u00601",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/DelegateHelper",
+      "subjectId": "SnapshotTestFixtures/DelegateHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/BaseClass",
+      "subjectId": "SnapshotTestFixtures/BaseClass",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/DerivedClass",
+      "subjectId": "SnapshotTestFixtures/DerivedClass",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/VirtualHelper",
+      "subjectId": "SnapshotTestFixtures/VirtualHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/MarkedClass",
+      "subjectId": "SnapshotTestFixtures/MarkedClass",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/TypeCheckHelper",
+      "subjectId": "SnapshotTestFixtures/TypeCheckHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/SizeOfHelper",
+      "subjectId": "SnapshotTestFixtures/SizeOfHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/IndirectHelper",
+      "subjectId": "SnapshotTestFixtures/IndirectHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ArithmeticCompareHelper",
+      "subjectId": "SnapshotTestFixtures/ArithmeticCompareHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/BranchDupHelper",
+      "subjectId": "SnapshotTestFixtures/BranchDupHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/HasInstanceFields",
+      "subjectId": "SnapshotTestFixtures/HasInstanceFields",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/InstanceFieldHelper",
+      "subjectId": "SnapshotTestFixtures/InstanceFieldHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper",
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/VirtualDispatchHelper",
+      "subjectId": "SnapshotTestFixtures/VirtualDispatchHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/BitwiseHelper",
+      "subjectId": "SnapshotTestFixtures/BitwiseHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ShiftHelper",
+      "subjectId": "SnapshotTestFixtures/ShiftHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ArrayLengthHelper",
+      "subjectId": "SnapshotTestFixtures/ArrayLengthHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ValueTypeHelper",
+      "subjectId": "SnapshotTestFixtures/ValueTypeHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LocalAllocHelper",
+      "subjectId": "SnapshotTestFixtures/LocalAllocHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/MulDivHelper",
+      "subjectId": "SnapshotTestFixtures/MulDivHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/BranchCompareHelper",
+      "subjectId": "SnapshotTestFixtures/BranchCompareHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/FloatOpsHelper",
+      "subjectId": "SnapshotTestFixtures/FloatOpsHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ConvWideHelper",
+      "subjectId": "SnapshotTestFixtures/ConvWideHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/NegShiftHelper",
+      "subjectId": "SnapshotTestFixtures/NegShiftHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdcI8Helper",
+      "subjectId": "SnapshotTestFixtures/LdcI8Helper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ConvSmallIntHelper",
+      "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdindI1Helper",
+      "subjectId": "SnapshotTestFixtures/LdindI1Helper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/BranchCompareBHelper",
+      "subjectId": "SnapshotTestFixtures/BranchCompareBHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/HasFields",
+      "subjectId": "SnapshotTestFixtures/HasFields",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/AddressHelper",
+      "subjectId": "SnapshotTestFixtures/AddressHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdtokenHelper",
+      "subjectId": "SnapshotTestFixtures/LdtokenHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdelemaHelper",
+      "subjectId": "SnapshotTestFixtures/LdelemaHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdargaHelper",
+      "subjectId": "SnapshotTestFixtures/LdargaHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/CpobjHelper",
+      "subjectId": "SnapshotTestFixtures/CpobjHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/StindNarrowHelper",
+      "subjectId": "SnapshotTestFixtures/StindNarrowHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/CallvirtHelper",
+      "subjectId": "SnapshotTestFixtures/CallvirtHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/UnboxHelper",
+      "subjectId": "SnapshotTestFixtures/UnboxHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/CpblkHelper",
+      "subjectId": "SnapshotTestFixtures/CpblkHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdindUnsignedHelper",
+      "subjectId": "SnapshotTestFixtures/LdindUnsignedHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdindI8Helper",
+      "subjectId": "SnapshotTestFixtures/LdindI8Helper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdindWideHelper",
+      "subjectId": "SnapshotTestFixtures/LdindWideHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/StindWideHelper",
+      "subjectId": "SnapshotTestFixtures/StindWideHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ArrayRefHelper",
+      "subjectId": "SnapshotTestFixtures/ArrayRefHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ThrowHelper",
+      "subjectId": "SnapshotTestFixtures/ThrowHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/OverflowHelper",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/OverflowConvHelper",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/CalliHelper",
+      "subjectId": "SnapshotTestFixtures/CalliHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/MyClass",
+      "subjectId": "SnapshotTestFixtures/MyClass",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdVirtftnHelper",
+      "subjectId": "SnapshotTestFixtures/LdVirtftnHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdelemAllHelper",
+      "subjectId": "SnapshotTestFixtures/LdelemAllHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/StelemAllHelper",
+      "subjectId": "SnapshotTestFixtures/StelemAllHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/RareOpsHelper",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/StringFormatHelper",
+      "subjectId": "SnapshotTestFixtures/StringFormatHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/BranchUnsignedHelper",
+      "subjectId": "SnapshotTestFixtures/BranchUnsignedHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/BranchUnsignedBHelper",
+      "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/RethrowHelper",
+      "subjectId": "SnapshotTestFixtures/RethrowHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/OverflowUnHelper",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/CollectionsHelper",
+      "subjectId": "SnapshotTestFixtures/CollectionsHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ExternalCaller",
+      "subjectId": "SnapshotTestFixtures/ExternalCaller",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/MultiDispatcher",
+      "subjectId": "SnapshotTestFixtures/MultiDispatcher",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/InternalHelper",
+      "subjectId": "SnapshotTestFixtures/InternalHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/StringConcatHelper",
+      "subjectId": "SnapshotTestFixtures/StringConcatHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/GenericsVirtEhDemo",
+      "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo",
+      "subjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo",
+      "subjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo",
+      "subjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/SealedHelper",
+      "subjectId": "SnapshotTestFixtures/SealedHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/SealedClassVirtualHelper",
+      "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/IMyInterface",
+      "subjectId": "SnapshotTestFixtures/IMyInterface",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/ImplHelper",
+      "subjectId": "SnapshotTestFixtures/ImplHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/InterfaceDevirtHelper",
+      "subjectId": "SnapshotTestFixtures/InterfaceDevirtHelper",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/IMarker",
+      "subjectId": "SnapshotTestFixtures/IMarker",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/SmallStruct",
+      "subjectId": "SnapshotTestFixtures/SmallStruct",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/LdftnHelper\u002B\u003C\u003EO",
+      "subjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO",
       "reason": "closed-world-type"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Run:System.Void(System.Int32)",
-      "reason": "closed-world-entry"
     },
     {
       "subjectKind": "method",
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
       "reason": "closed-world-method"
     },
     {
@@ -524,7 +524,17 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/StringOps::UseString:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
       "reason": "closed-world-method"
     },
     {
@@ -534,7 +544,17 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
       "reason": "closed-world-method"
     },
     {
@@ -544,7 +564,17 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
       "reason": "closed-world-method"
     },
     {
@@ -554,7 +584,17 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
       "reason": "closed-world-method"
     },
     {
@@ -564,852 +604,807 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ArithmeticOps::RunAdd:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/StringOps::UseString:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/VoidCaller::DoNothing:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/MathHelper::RunSquare:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/FlowControl::IsPositive:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/InstanceHelper::GetValue:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/CallVirtHelper::CreateAndUse:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/SwitchHelper::Classify:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/FieldHelper::GetAndIncrement:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LoopHelper::SumToFive:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ConversionHelper::ConvertToInt:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/Helper::Nop:System.Void()",
+      "subjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/Helper::Square:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/Helper::ConsumeString:System.Void(System.String)",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/Helper::GetValue:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SwitchHelper::Classify:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/BaseClass::Compute:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdftnHelper::GetFnPtr:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/BaseClass::.ctor:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/TargetHelper::GetValue:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/DerivedClass::Compute:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ArrayHelper::MakeAndFill:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/EhHelper::SafeDivide:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/GenericHelper::UseGeneric:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/MarkedClass::.ctor:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u00601::.ctor:System.Void(!0)",
+      "subjectId": "SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u00601::GetValue:!0()",
+      "subjectId": "SnapshotTestFixtures/SizeOfHelper::GetSize:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/DelegateHelper::RunDelegate:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/BaseClass::Compute:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/BaseClass::.ctor:System.Void()",
+      "subjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/DerivedClass::Compute:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/DerivedClass::.ctor:System.Void()",
+      "subjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/VirtualHelper::UseVirtual:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/MarkedClass::.ctor:System.Void()",
+      "subjectId": "SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/TypeCheckHelper::CheckAndCast:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/BitwiseHelper::RunBitwise:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SizeOfHelper::GetSize:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/IndirectHelper::ReadWriteRef:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ArithmeticCompareHelper::RunCompare:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ValueTypeHelper::RunValueType:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/BranchDupHelper::RunBranchDup:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/LocalAllocHelper::RunAlloc:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/MulDivHelper::RunMulDiv:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/BranchCompareHelper::RunBranchCompare:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ConvWideHelper::RunConvWide:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/BitwiseHelper::RunBitwise:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/NegShiftHelper::RunNegShift:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ShiftHelper::RunShift:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ArrayLengthHelper::RunLength:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ValueTypeHelper::RunValueType:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LocalAllocHelper::RunAlloc:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/MulDivHelper::RunMulDiv:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/HasFields::.ctor:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/BranchCompareHelper::RunBranchCompare:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/FloatOpsHelper::RunFloatOps:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ConvWideHelper::RunConvWide:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/LdelemaHelper::RunLdelema:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/NegShiftHelper::RunNegShift:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdcI8Helper::RunLdcI8:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/CpobjHelper::RunCpobj:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/StindNarrowHelper::RunStindNarrow:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdindI1Helper::RunLdindI1:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/HasFields::.ctor:System.Void()",
+      "subjectId": "SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/AddressHelper::RunAddress:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdtokenHelper::RunLdtoken:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdelemaHelper::RunLdelema:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/CpobjHelper::RunCpobj:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/StindNarrowHelper::RunStindNarrow:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/CallvirtHelper::RunCallvirt:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/UnboxHelper::RunUnbox:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/CpblkHelper::RunCpblk:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdindI8Helper::RunLdindI8:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdindWideHelper::RunLdindWide:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/StindWideHelper::RunStindWide:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ArrayRefHelper::RunArrayRef:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowAdd:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowSub:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowHelper::RunOverflowMul:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI4:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/LdelemAllHelper::TestAllElems:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/StelemAllHelper::TestAllElems:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/CalliHelper::RunCalli:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/MyClass::.ctor:System.Void(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/MyClass::GetValue:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdelemAllHelper::TestAllElems:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/StelemAllHelper::TestAllElems:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCltUn:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestDivUn:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestRemUn:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/StringFormatHelper::TestFormatOne:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/RethrowHelper::RunRethrow:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunArglist:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunMkrefany:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanyval:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunRefanytype:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/MoreRareOpsHelper::RunJmp:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunLdnull:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvU4:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvI:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI4:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunLdindI:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/LdindStindGapsHelper::RunStindI:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestList:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestDict:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/CollectionsHelper::TestSet:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ExternalCaller::CallExternal:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/MultiDispatcher::DispatchBoth:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/InternalHelper::Double:System.Int32(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/StringConcatHelper::TestConcat:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/HotUpdateWithTypesDemo::Run:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/HotUpdateWithGenericsDemo::Run:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SealedHelper::.ctor:System.Void(System.Int32)",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SealedHelper::GetValueVirtual:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/IMyInterface::GetValue:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ImplHelper::.ctor:System.Void(System.Int32)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/ImplHelper::GetValue:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::GetValue:!0()",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::GetValue:!0()",
       "reason": "closed-world-method"
     }
   ],
   "dispatchFacts": [
     {
-      "methodSubjectId": "SnapshotProverSubjects/GenericHelper::UseGeneric:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
+      "targetSubjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
       "devirtualized": true
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/DelegateHelper::RunDelegate:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::Invoke:System.Int32()",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/VirtualHelper::UseVirtual:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()",
       "dispatchKind": "callvirt.devirtualized-direct",
-      "targetSubjectId": "SnapshotProverSubjects/DerivedClass::Compute:System.Int32()",
+      "targetSubjectId": "SnapshotTestFixtures/DerivedClass::Compute:System.Int32()",
       "devirtualized": true
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
       "dispatchKind": "callvirt.devirtualized-direct",
-      "targetSubjectId": "SnapshotProverSubjects/DerivedClass::Compute:System.Int32()",
+      "targetSubjectId": "SnapshotTestFixtures/DerivedClass::Compute:System.Int32()",
       "devirtualized": true
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestList:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestList:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::get_Count:System.Int32()",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestDict:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::Add:System.Void(System.Int32,System.Int32)",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestDict:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32\u0026)",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestDict:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::ContainsKey:System.Boolean(System.Int32)",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestDict:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::Remove:System.Boolean(System.Int32)",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestSet:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Add:System.Boolean(System.Int32)",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestSet:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Contains:System.Boolean(System.Int32)",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/CollectionsHelper::TestSet:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Remove:System.Boolean(System.Int32)",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::get_Count:System.Int32()",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "SnapshotProverSubjects/SealedHelper::GetValueVirtual:System.Int32()",
+      "targetSubjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
       "devirtualized": true
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
       "dispatchKind": "callvirt.interface-runtime-helper",
-      "targetSubjectId": "SnapshotProverSubjects/ImplHelper::GetValue:System.Int32()",
+      "targetSubjectId": "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()",
       "devirtualized": true
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/LdftnHelper::GetFnPtr:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
       "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "SnapshotProverSubjects/Helper::GetValue:System.Int32()",
+      "targetSubjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
       "devirtualized": true
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/DelegateHelper::RunDelegate:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
       "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "SnapshotProverSubjects/Helper::GetValue:System.Int32()",
+      "targetSubjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
       "devirtualized": true
     }
   ],
@@ -1422,134 +1417,184 @@
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/InstanceHelper::_val",
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::_val",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/FieldHelper::_counter",
+      "subjectId": "SnapshotTestFixtures/FieldHelper::_counter",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u00601::_val",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u00601::_val",
       "dataKind": "reference",
       "requiresBoxing": false
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/MarkedClass::Value",
+      "subjectId": "SnapshotTestFixtures/MarkedClass::Value",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/SmallStruct::X",
+      "subjectId": "SnapshotTestFixtures/SmallStruct::X",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/SmallStruct::Y",
+      "subjectId": "SnapshotTestFixtures/SmallStruct::Y",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/HasInstanceFields::Value",
+      "subjectId": "SnapshotTestFixtures/HasInstanceFields::Value",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::_writeTarget",
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_writeTarget",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/StaticFieldWriteHelper::_readTarget",
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/HasFields::instanceVal",
+      "subjectId": "SnapshotTestFixtures/HasFields::instanceVal",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/HasFields::staticVal",
+      "subjectId": "SnapshotTestFixtures/HasFields::staticVal",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/MyClass::_val",
+      "subjectId": "SnapshotTestFixtures/MyClass::_val",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/SealedHelper::_val",
+      "subjectId": "SnapshotTestFixtures/SealedHelper::_val",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/ImplHelper::_val",
+      "subjectId": "SnapshotTestFixtures/ImplHelper::_val",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/LdftnHelper\u002B\u003C\u003EO::\u003C0\u003E__GetValue",
+      "subjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO::\u003C0\u003E__GetValue",
       "dataKind": "reference",
       "requiresBoxing": false
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E::_val",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::_val",
       "dataKind": "value",
       "requiresBoxing": true
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E::_val",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::_val",
       "dataKind": "reference",
       "requiresBoxing": false
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003CSystem.Int32\u003E",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
       "dataKind": "closed-generic-instance",
-      "elementType": "SnapshotProverSubjects/Wrapper\u00601",
+      "elementType": "SnapshotTestFixtures/Wrapper\u00601",
       "requiresBoxing": false
     },
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/Wrapper\u003C!0\u003E",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E",
       "dataKind": "closed-generic-instance",
-      "elementType": "SnapshotProverSubjects/Wrapper\u00601",
+      "elementType": "SnapshotTestFixtures/Wrapper\u00601",
       "requiresBoxing": false
     }
   ],
   "exceptionFacts": [
     {
-      "methodSubjectId": "SnapshotProverSubjects/EhHelper::SafeDivide:System.Int32()",
+      "methodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/RethrowHelper::RunRethrow:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
-      "methodSubjectId": "SnapshotProverSubjects/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "methodSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }

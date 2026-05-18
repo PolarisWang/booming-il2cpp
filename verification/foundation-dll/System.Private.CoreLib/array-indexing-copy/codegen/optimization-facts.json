@@ -9,11 +9,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Run:System.Void(System.Int32)",
-      "reason": "closed-world-entry"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
@@ -79,12 +74,6 @@
     }
   ],
   "dispatchFacts": [
-    {
-      "methodSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
     {
       "methodSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
       "dispatchKind": "callvirt",

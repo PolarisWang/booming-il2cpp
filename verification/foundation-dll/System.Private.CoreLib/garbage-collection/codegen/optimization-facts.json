@@ -36,20 +36,9 @@
       "subjectKind": "method",
       "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()",
       "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
-      "reason": "closed-world-method"
     }
   ],
   "dispatchFacts": [
-    {
-      "methodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
     {
       "methodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
       "dispatchKind": "callvirt",

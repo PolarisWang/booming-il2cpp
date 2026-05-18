@@ -5,12 +5,6 @@
     {
       "assemblyName": "GlobalizationCultureSubjects",
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "GlobalizationCultureSubjects",
-      "subjectKind": "method",
       "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

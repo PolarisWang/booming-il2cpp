@@ -9,11 +9,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Run:System.Void(System.Int32)",
-      "reason": "closed-world-entry"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
@@ -117,12 +112,6 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)",
@@ -135,18 +124,6 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()",
@@ -160,30 +137,6 @@
     },
     {
       "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
       "devirtualized": false

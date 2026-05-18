@@ -2,7 +2,7 @@
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
   "assemblyName": "AttributesCustomMetadataSubjects",
-  "entrySubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Run:System.Void(System.Int32)",
+  "entrySubjectId": "",
   "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/subjects/build-output/AttributesCustomMetadataSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "2e1bd6ff-ae62-4ba8-af22-0caf92ce0302",
+  "inputModuleVersionId": "37e88178-259c-4c25-8ee8-62fff815d47f",
   "artifacts": [
     {
       "kind": "typedIlIr",

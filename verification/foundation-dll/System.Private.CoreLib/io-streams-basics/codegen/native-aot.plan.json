@@ -1,11 +1,11 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
-  "planKind": "generic-managed-entry",
+  "planKind": "full-assembly-entry",
   "assemblyName": "IoStreamsBasicsSubjects",
-  "entrySubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Run:System.Void(System.Int32)",
-  "nativeEntryFunctionName": "RunNativeAot",
-  "entrySymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Run",
+  "entrySubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0",
   "entryMethodToken": "0u",
-  "workloadAbi": "void(int32)"
+  "workloadAbi": "full-assembly"
 }

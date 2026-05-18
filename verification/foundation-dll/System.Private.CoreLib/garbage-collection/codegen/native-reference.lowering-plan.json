@@ -10,7 +10,6 @@
   "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
   "translationUnitMode": "runtime-skeleton",
   "translationUnitMethodSubjectIds": [
-    "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
     "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
     "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()",
     "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()",
@@ -18,15 +17,15 @@
     "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
     "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()"
   ],
-  "translationUnitMethodCount": 7,
+  "translationUnitMethodCount": 6,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 7,
+      "methodCount": 6,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
-      "firstMethodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
+      "firstMethodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
       "lastMethodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()"
     }
   ],

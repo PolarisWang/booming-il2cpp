@@ -235,6 +235,11 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
             if (src3 < interpreter::kGPRegisters)
                 use[i] |= (1ULL << src3);
         }
+        // Calli: func_ptr vreg in imm.operand_index is an implicit source
+        if (inst.op_code() == interpreter::IROpCode::Calli &&
+            inst.imm.operand_index < interpreter::kGPRegisters) {
+            use[i] |= (1ULL << inst.imm.operand_index);
+        }
     }
 
     // Pass 2: backward dataflow to fixed point.
@@ -304,12 +309,24 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
                 adj[v] &= ~(1ULL << v);  // no self-loop
             }
         }
+        // A vreg defined at i interferes with all vregs live across i.
+        // Without this, the allocator can assign `def[i]` to the same
+        // physical register as a live-out vreg — the definition writes to
+        // the shared register, clobbering the live value.
+        uint64_t dbits = def[i];
+        while (dbits) {
+            uint32_t d = static_cast<uint32_t>(Ctz64(dbits));
+            dbits &= dbits - 1;
+            if (d < interpreter::kGPRegisters) {
+                adj[d] |= live_out[i];
+                adj[d] &= ~(1ULL << d);
+            }
+        }
     }
 
     // ── Spill cost ─────────────────────────────────────────────────────────
-    // Count uses + defs per vreg; ensure nonzero cost.
+    // Count uses + defs per vreg; unused vregs get cost 0 (not colored).
     uint64_t cost[64] = {};
-    for (uint32_t i = 0; i < 64; ++i) cost[i] = 1;
     for (uint32_t i = 0; i < n_instrs; ++i) {
         const auto& inst = instrs[i];
         if (inst.has_dst()  && inst.dst_reg()  < interpreter::kGPRegisters) cost[inst.dst_reg()]++;
@@ -318,6 +335,11 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
         if ((inst.flags() & interpreter::kRegHasSrc3)) {
             uint8_t src3 = inst.src3_reg();
             if (src3 < interpreter::kGPRegisters) cost[src3]++;
+        }
+        // Calli: func_ptr vreg in imm.operand_index counts as a use
+        if (inst.op_code() == interpreter::IROpCode::Calli &&
+            inst.imm.operand_index < interpreter::kGPRegisters) {
+            cost[inst.imm.operand_index]++;
         }
     }
 
@@ -426,11 +448,32 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
                 fpr_adj[fi] &= ~(1ULL << fi);
             }
         }
+
+        // FPR def → live-out interference (same bug fix as GPR above).
+        // A defined FPR vreg interferes with all FPR vregs that are live across i.
+        const auto& inst = instrs[i];
+        uint32_t fdst = (inst.has_dst() && inst.dst_reg() >= interpreter::kGPRegisters &&
+                         inst.dst_reg() < interpreter::kTotalRegisters)
+                            ? inst.dst_reg() - interpreter::kGPRegisters
+                            : UINT32_MAX;
+        if (fdst < 32) {
+            uint64_t fpr_live_out = 0;
+            uint64_t obits = live_out[i];
+            while (obits) {
+                uint32_t r = static_cast<uint32_t>(Ctz64(obits));
+                obits &= obits - 1;
+                if (r >= interpreter::kGPRegisters && r < interpreter::kTotalRegisters) {
+                    uint32_t fi_lo = r - interpreter::kGPRegisters;
+                    if (fi_lo < 32) fpr_live_out |= (1ULL << fi_lo);
+                }
+            }
+            fpr_adj[fdst] |= fpr_live_out;
+            fpr_adj[fdst] &= ~(1ULL << fdst);
+        }
     }
 
-    // FPR cost.
+    // FPR cost (unused vregs get cost 0 — not colored).
     uint64_t fpr_cost[32] = {};
-    for (uint32_t fi = 0; fi < 32; ++fi) fpr_cost[fi] = 1;
     for (uint32_t i = 0; i < n_instrs; ++i) {
         const auto& inst = instrs[i];
         auto fpr_idx = [](uint32_t r) -> uint32_t {

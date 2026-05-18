@@ -7,8 +7,10 @@
     <AssemblyName>BufferMemorySubjects</AssemblyName>
     <RootNamespace>BufferMemorySubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BufferMemorySubjects.cs" />
+    <Compile Include="BufferMemoryNativeEntry.Custom.cs" />
   </ItemGroup>
 </Project>

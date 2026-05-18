@@ -27,17 +27,6 @@
     {
       "registrationKind": "method",
       "slot": 3,
-      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Run:System.Void(System.Int32)",
-      "name": "Run",
-      "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
-      "memberType": "System.Void",
-      "parameterCount": 1,
-      "isImported": false
-    },
-    {
-      "registrationKind": "method",
-      "slot": 4,
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_0:System.Void()",
@@ -48,7 +37,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 5,
+      "slot": 4,
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_1:System.Void()",
@@ -59,7 +48,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 6,
+      "slot": 5,
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_2:System.Void()",
@@ -70,7 +59,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 7,
+      "slot": 6,
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_3:System.Void()",
@@ -81,7 +70,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 8,
+      "slot": 7,
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_4:System.Void()",
@@ -92,7 +81,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 9,
+      "slot": 8,
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_5:System.Void()",
@@ -103,7 +92,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 10,
+      "slot": 9,
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_6:System.Void()",
@@ -114,7 +103,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 11,
+      "slot": 10,
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_7:System.Void()",
@@ -125,7 +114,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 12,
+      "slot": 11,
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_8:System.Void()",
       "name": "Subject_8",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_8:System.Void()",
@@ -136,7 +125,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 13,
+      "slot": 12,
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_9:System.Void()",
@@ -147,7 +136,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 14,
+      "slot": 13,
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_10:System.Void()",
       "name": "Subject_10",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_10:System.Void()",
@@ -158,7 +147,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 15,
+      "slot": 14,
       "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_11:System.Void()",
       "name": "Subject_11",
       "definitionSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_11:System.Void()",
@@ -166,15 +155,6 @@
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
-    },
-    {
-      "registrationKind": "parameter",
-      "slot": 16,
-      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
-      "name": "entryIndex",
-      "declaringMethodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Run:System.Void(System.Int32)",
-      "memberType": "System.Int32",
-      "parameterIndex": 0
     }
   ]
 }

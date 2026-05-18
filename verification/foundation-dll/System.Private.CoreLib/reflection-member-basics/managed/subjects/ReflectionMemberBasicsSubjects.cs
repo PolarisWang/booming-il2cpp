@@ -14,7 +14,8 @@ public static partial class ReflectionMemberBasicsSubjects
     // [0] System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()
     public static void Subject_0()
     {
-        if (((default(MemberInfo)!.Name).Length) != ((default(MemberInfo)!.Name).Length)) _exitCode = 1;
+        try { _ = default(MemberInfo)!.Name; _exitCode = 1; }
+        catch (NullReferenceException) { }
     }
 
     // [1] System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()
@@ -26,7 +27,8 @@ public static partial class ReflectionMemberBasicsSubjects
     // [2] System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()
     public static void Subject_2()
     {
-        if (((default(MemberInfo)!.DeclaringType).GetHashCode()) != ((default(MemberInfo)!.DeclaringType).GetHashCode())) _exitCode = 1;
+        try { _ = default(MemberInfo)!.DeclaringType; _exitCode = 1; }
+        catch (NullReferenceException) { }
     }
 
     // [3] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
@@ -93,27 +95,6 @@ public static partial class ReflectionMemberBasicsSubjects
     public static void Subject_13()
     {
         // TODO: System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type() could not be auto-generated
-    }
-
-    public static void Run(int entryIndex)
-    {
-        switch (entryIndex)
-        {
-            case 0: Subject_0(); break;
-            case 1: Subject_1(); break;
-            case 2: Subject_2(); break;
-            case 3: Subject_3(); break;
-            case 4: Subject_4(); break;
-            case 5: Subject_5(); break;
-            case 6: Subject_6(); break;
-            case 7: Subject_7(); break;
-            case 8: Subject_8(); break;
-            case 9: Subject_9(); break;
-            case 10: Subject_10(); break;
-            case 11: Subject_11(); break;
-            case 12: Subject_12(); break;
-            case 13: Subject_13(); break;
-        }
     }
 
 }

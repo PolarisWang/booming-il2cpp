@@ -1,13 +1,13 @@
 {
   "family": "threading-monitor-interlocked",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 21,
-  "audited": 21,
+  "total_methods": 20,
+  "audited": 20,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 10,
   "methods_without_lowering": 0,
-  "methods_without_assert": 21,
+  "methods_without_assert": 20,
   "passed": true,
   "method_details": [
     {
@@ -65,7 +65,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_0",
+      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -74,7 +74,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_1",
+      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_1",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -101,7 +101,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_4",
+      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_4",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -110,7 +110,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_5",
+      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_5",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -119,7 +119,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_6",
+      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_6",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -128,7 +128,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_7",
+      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_7",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -137,7 +137,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_8",
+      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -146,7 +146,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_9",
+      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_9",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -155,7 +155,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_10",
+      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_10",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -164,7 +164,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_11",
+      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_11",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -183,15 +183,6 @@
     },
     {
       "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_13",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Run",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

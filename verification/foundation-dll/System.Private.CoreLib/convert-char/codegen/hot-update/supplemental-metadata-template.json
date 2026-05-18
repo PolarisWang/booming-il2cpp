@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "ConvertCharSubjects",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "ConvertCharSubjects/ConvertCharSubjects",
-      "metadataToken": 100663315,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "ConvertCharSubjects",
       "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "ConvertCharSubjects/ConvertCharSubjects",

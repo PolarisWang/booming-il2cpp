@@ -2,8 +2,8 @@
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
   "assemblyName": "TimeDateTimeTimespanSubjects",
-  "entrySubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Run:System.Void(System.Int32)",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/subjects/build-output/TimeDateTimeTimespanSubjects.dll",
+  "entrySubjectId": "",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/subjects/build-output/TimeDateTimeTimespanSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -12,11 +12,11 @@
     },
     {
       "assemblyName": "TimeDateTimeTimespanSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/subjects/build-output/TimeDateTimeTimespanSubjects.dll"
+      "path": "verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/subjects/build-output/TimeDateTimeTimespanSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "b557c92a-949f-4129-a09c-7387fc63e868",
+  "inputModuleVersionId": "010030ec-e07b-45ef-949f-7739a88e4c2f",
   "artifacts": [
     {
       "kind": "typedIlIr",

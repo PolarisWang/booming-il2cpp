@@ -2,8 +2,8 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
   "assemblyName": "GarbageCollectionSubjects",
-  "entrySubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/garbage-collection/codegen",
+  "entrySubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/garbage-collection/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

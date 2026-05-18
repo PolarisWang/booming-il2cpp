@@ -5,12 +5,6 @@
     {
       "assemblyName": "ArrayIndexingCopySubjects",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "ArrayIndexingCopySubjects",
-      "subjectKind": "method",
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

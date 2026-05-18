@@ -5,12 +5,6 @@
     {
       "assemblyName": "AttributesCustomMetadataSubjects",
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "AttributesCustomMetadataSubjects",
-      "subjectKind": "method",
       "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

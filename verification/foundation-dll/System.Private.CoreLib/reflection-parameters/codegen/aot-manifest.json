@@ -5,12 +5,6 @@
     {
       "assemblyName": "ReflectionParametersSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "ReflectionParametersSubjects",
-      "subjectKind": "method",
       "subjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
@@ -83,19 +77,7 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_ParameterType:System.Type()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {

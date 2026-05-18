@@ -9,11 +9,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Run:System.Void(System.Int32)",
-      "reason": "closed-world-entry"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
@@ -131,18 +126,6 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_0:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_1:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_1:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
@@ -150,30 +133,6 @@
     },
     {
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_3:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
@@ -215,42 +174,6 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_4:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_4:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_FullName:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_4:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_5:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_5:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_Location:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_5:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_5:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
@@ -287,24 +210,6 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_6:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_6:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_ImageRuntimeVersion:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_6:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_7:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
@@ -314,30 +219,6 @@
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_7:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_7:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_7:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetExportedTypes:System.Type[]()",
       "devirtualized": false
     },
     {
@@ -365,18 +246,6 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_9:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_9:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetForwardedTypes:System.Type[]()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
@@ -386,30 +255,6 @@
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -425,30 +270,6 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_11:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_11:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_11:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String,System.Boolean)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_11:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_12:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
@@ -458,42 +279,6 @@
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_12:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetModule:System.Reflection.Module(System.String)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_12:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_12:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_12:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetModule:System.Reflection.Module(System.String)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_12:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_13:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_13:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()",
       "devirtualized": false
     },
     {
@@ -521,42 +306,6 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_14:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_14:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_14:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceStream:System.IO.Stream(System.String)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_14:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_15:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_15:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceNames:System.String[]()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_15:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
@@ -581,51 +330,9 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_16:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_16:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_16:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_EntryPoint:System.Reflection.MethodInfo()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_16:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_17:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_Name:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_17:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_17:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_Name:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_17:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
       "devirtualized": false
     },
     {
@@ -635,57 +342,9 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_18:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_18:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_Version:System.Version()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_18:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_19:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_CultureInfo:System.Globalization.CultureInfo()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_19:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_19:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_CultureInfo:System.Globalization.CultureInfo()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_19:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_20:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_20:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -709,5 +368,46 @@
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_11:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.TypeLoadException"
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_12:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_14:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_16:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_17:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_18:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_19:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    }
+  ]
 }

@@ -16,12 +16,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"

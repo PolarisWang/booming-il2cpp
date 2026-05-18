@@ -7,9 +7,11 @@
     <AssemblyName>ThreadingTasksPrimitivesSubjects</AssemblyName>
     <RootNamespace>ThreadingTasksPrimitivesSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ThreadingTasksPrimitivesSubjects.cs" />
+    <Compile Include="ThreadingTasksPrimitivesSubjects.Custom.cs" />
     <Compile Include="ThreadingTasksPrimitivesSubjects.Custom.cs" />
   </ItemGroup>
 </Project>

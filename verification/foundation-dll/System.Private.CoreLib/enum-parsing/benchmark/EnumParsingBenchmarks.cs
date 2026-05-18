@@ -69,7 +69,9 @@ public static class EnumParsingBenchmarks
     // Benchmark Enum.ToString native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::ToString:System.String(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
-    public static void Benchmark_System_Private_CoreLib_System_Enum_ToString_System_String_System_String() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Enum_ToString_System_String_System_String() { _ = 42.ToString("X"); }
     // Benchmark Enum.TryParse native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]

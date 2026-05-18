@@ -476,6 +476,7 @@ def _generate_csproj(
     variant: str = "benchmark",
     has_custom_entry: bool = False,
     output_dir: Path | None = None,
+    extra_refs: list[str] | None = None,
 ) -> str:
     """Generate the .csproj for the synthetic entry point assembly.
 
@@ -495,6 +496,10 @@ def _generate_csproj(
                 if f.suffix == ".cs" and f.name != cs_file_name:
                     extra_cs += f'    <Compile Include="{f.name}" />\n'
         custom_cs = f'    <Compile Include="{class_name}.Custom.cs" />\n' if has_custom_entry else ""
+        extra_refs_xml = "  </ItemGroup>\n"
+        if extra_refs:
+            items = "\n".join(f'    <ProjectReference Include="{r}" />' for r in extra_refs)
+            extra_refs_xml = f"  </ItemGroup>\n  <ItemGroup>\n{items}\n  </ItemGroup>\n"
         return (
             '<Project Sdk="Microsoft.NET.Sdk">\n'
             "  <PropertyGroup>\n"
@@ -511,7 +516,7 @@ def _generate_csproj(
             f'    <Compile Include="{cs_file_name}" />\n'
             f"{extra_cs}"
             f"{custom_cs}"
-            "  </ItemGroup>\n"
+            f"{extra_refs_xml}"
             "</Project>\n"
         )
 
@@ -690,6 +695,7 @@ def generate_and_build(
     class_name: str | None = None,
     namespace_name: str | None = None,
     variant: str = "benchmark",
+    extra_refs: list[str] | None = None,
 ) -> dict[str, Any]:
     """Generate the synthetic entry point and build it into an EXE.
 
@@ -841,6 +847,7 @@ def generate_and_build(
                 variant=variant,
                 has_custom_entry=has_custom_entry,
                 output_dir=output_dir,
+                extra_refs=extra_refs,
             ),
             encoding="utf-8",
         )

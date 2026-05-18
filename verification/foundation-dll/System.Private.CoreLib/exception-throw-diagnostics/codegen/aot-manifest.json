@@ -5,12 +5,6 @@
     {
       "assemblyName": "ExceptionThrowDiagnosticsSubjects",
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-      "subjectKind": "method",
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
@@ -137,12 +131,6 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Exception::get_HResult:System.Int32()",
       "reason": "external-call"
     },
@@ -156,6 +144,12 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {

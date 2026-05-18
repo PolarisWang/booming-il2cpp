@@ -3,367 +3,6 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "rcw-basic-subjects.rcw-basic-subjects.run",
-      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Run:System.Void(System.Int32)",
-      "signature": "System.Void RcwBasicSubjects::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "RcwBasicSubjects",
-        "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
-        "definitionSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Run:System.Void(System.Int32)",
-        "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Run:System.Void(System.Int32)",
-        "methodId": "rcw-basic-subjects.rcw-basic-subjects.run",
-        "signature": "System.Void RcwBasicSubjects::Run(System.Int32)"
-      },
-      "nativeSymbol": "RcwBasicSubjects_RcwBasicSubjects_Run",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 2,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 3,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 4,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            41,
-            49,
-            57,
-            65,
-            73,
-            81,
-            89
-          ],
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 97,
-          "ilOffset": 39,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 41,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 97,
-          "ilOffset": 47,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 49,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicSubjects::Subject_1:System.Void()",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_1:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_1:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 97,
-          "ilOffset": 55,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 57,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicSubjects::Subject_2:System.Void()",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_2:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_2:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 97,
-          "ilOffset": 63,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 65,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicSubjects::Subject_3:System.Void()",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_3:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_3:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 97,
-          "ilOffset": 71,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 73,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicSubjects::Subject_4:System.Void()",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_4:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_4:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 97,
-          "ilOffset": 79,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 81,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicSubjects::Subject_5:System.Void()",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_5:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_5:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 97,
-          "ilOffset": 87,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 89,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicSubjects::Subject_6:System.Void()",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_6:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_6:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 97,
-          "ilOffset": 95,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 97,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "RcwBasicSubjects"
-    },
-    {
       "methodId": "rcw-basic-subjects.rcw-basic-subjects.subject-0",
       "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()",
       "signature": "System.Void RcwBasicSubjects::Subject_0()",
@@ -385,21 +24,30 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 33,
+          "handlerOffset": 34,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+        }
+      ],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 3,
+          "ilOffset": 4,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
           "reference": {
@@ -418,7 +66,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_Run",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_Run_System_Int32",
           "targetParameterCount": 1,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
@@ -428,14 +76,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
-          "ilOffset": 8,
+          "ilOffset": 9,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 10,
+          "ilOffset": 11,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
           "reference": {
@@ -454,7 +102,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_Run",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_Run_System_Int32",
           "targetParameterCount": 1,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
@@ -463,7 +111,7 @@
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 15,
+          "ilOffset": 16,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -471,14 +119,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 18,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 18,
+          "ilOffset": 19,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -486,7 +134,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 20,
+          "ilOffset": 21,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -494,14 +142,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 21,
+          "ilOffset": 22,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 30,
-          "ilOffset": 22,
+          "operand": 31,
+          "ilOffset": 23,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -509,7 +157,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 24,
+          "ilOffset": 25,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -517,7 +165,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
-          "ilOffset": 25,
+          "ilOffset": 26,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "RcwBasicSubjects",
@@ -541,9 +189,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 45,
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 34,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 36,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+          "ilOffset": 37,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "RcwBasicSubjects",
+            "subjectKind": "field",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "RcwBasicSubjects",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 45,
+          "ilOffset": 43,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 30,
+          "ilOffset": 45,
           "isPreserveSig": false
         }
       ],
@@ -579,13 +284,22 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+        }
+      ],
       "instructions": [
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
           "reference": {
@@ -613,7 +327,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
           "reference": {
@@ -641,7 +355,7 @@
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 11,
+          "ilOffset": 12,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -649,14 +363,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 13,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 14,
+          "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -664,7 +378,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 16,
+          "ilOffset": 17,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -672,14 +386,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 18,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 26,
-          "ilOffset": 18,
+          "operand": 27,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -687,7 +401,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 20,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -695,7 +409,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
-          "ilOffset": 21,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "RcwBasicSubjects",
@@ -719,9 +433,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "RcwBasicSubjects",
+            "subjectKind": "field",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "RcwBasicSubjects",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26,
+          "ilOffset": 41,
           "isPreserveSig": false
         }
       ],
@@ -757,13 +528,22 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+        }
+      ],
       "instructions": [
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
           "reference": {
@@ -791,7 +571,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
           "reference": {
@@ -819,7 +599,7 @@
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 11,
+          "ilOffset": 12,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -827,14 +607,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 13,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 14,
+          "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -842,7 +622,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 16,
+          "ilOffset": 17,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -850,14 +630,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 18,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 26,
-          "ilOffset": 18,
+          "operand": 27,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -865,7 +645,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 20,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -873,7 +653,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
-          "ilOffset": 21,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "RcwBasicSubjects",
@@ -897,9 +677,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "RcwBasicSubjects",
+            "subjectKind": "field",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "RcwBasicSubjects",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26,
+          "ilOffset": 41,
           "isPreserveSig": false
         }
       ],
@@ -935,13 +772,22 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+        }
+      ],
       "instructions": [
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
           "reference": {
@@ -969,7 +815,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
           "reference": {
@@ -997,7 +843,7 @@
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 11,
+          "ilOffset": 12,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1005,14 +851,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 13,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 14,
+          "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1020,7 +866,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 16,
+          "ilOffset": 17,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1028,14 +874,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 18,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 26,
-          "ilOffset": 18,
+          "operand": 27,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1043,7 +889,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 20,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1051,7 +897,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
-          "ilOffset": 21,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "RcwBasicSubjects",
@@ -1075,9 +921,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "RcwBasicSubjects",
+            "subjectKind": "field",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "RcwBasicSubjects",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26,
+          "ilOffset": 41,
           "isPreserveSig": false
         }
       ],
@@ -1113,13 +1016,22 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+        }
+      ],
       "instructions": [
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
           "reference": {
@@ -1147,7 +1059,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
           "reference": {
@@ -1175,7 +1087,7 @@
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 11,
+          "ilOffset": 12,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1183,14 +1095,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 13,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 14,
+          "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1198,7 +1110,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 16,
+          "ilOffset": 17,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1206,14 +1118,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 18,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 26,
-          "ilOffset": 18,
+          "operand": 27,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1221,7 +1133,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 20,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1229,7 +1141,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
-          "ilOffset": 21,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "RcwBasicSubjects",
@@ -1253,9 +1165,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "RcwBasicSubjects",
+            "subjectKind": "field",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "RcwBasicSubjects",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26,
+          "ilOffset": 41,
           "isPreserveSig": false
         }
       ],
@@ -1291,13 +1260,22 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+        }
+      ],
       "instructions": [
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
           "reference": {
@@ -1325,7 +1303,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
           "reference": {
@@ -1353,7 +1331,7 @@
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 11,
+          "ilOffset": 12,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1361,14 +1339,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 13,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 14,
+          "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1376,7 +1354,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 16,
+          "ilOffset": 17,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1384,14 +1362,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 18,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 26,
-          "ilOffset": 18,
+          "operand": 27,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1399,7 +1377,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 20,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1407,7 +1385,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
-          "ilOffset": 21,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "RcwBasicSubjects",
@@ -1431,9 +1409,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "RcwBasicSubjects",
+            "subjectKind": "field",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "RcwBasicSubjects",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26,
+          "ilOffset": 41,
           "isPreserveSig": false
         }
       ],
@@ -1469,13 +1504,22 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+        }
+      ],
       "instructions": [
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
           "reference": {
@@ -1503,7 +1547,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
           "reference": {
@@ -1531,7 +1575,7 @@
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 11,
+          "ilOffset": 12,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1539,14 +1583,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 13,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 14,
+          "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1554,7 +1598,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 16,
+          "ilOffset": 17,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1562,14 +1606,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 18,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 26,
-          "ilOffset": 18,
+          "operand": 27,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1577,7 +1621,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 20,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1585,7 +1629,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
-          "ilOffset": 21,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "RcwBasicSubjects",
@@ -1609,9 +1653,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "RcwBasicSubjects",
+            "subjectKind": "field",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "RcwBasicSubjects",
+            "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26,
+          "ilOffset": 41,
           "isPreserveSig": false
         }
       ],
@@ -1637,7 +1738,7 @@
         "methodId": "rcw-basic-subjects.i-simple-math.add",
         "signature": "System.Int32 ISimpleMath::Add(System.Int32,System.Int32)"
       },
-      "nativeSymbol": "RcwBasicSubjects_ISimpleMath_Add",
+      "nativeSymbol": "RcwBasicSubjects_ISimpleMath_Add_System_Int32_System_Int32",
       "isStatic": false,
       "returnType": "System.Int32",
       "returnAbi": {
@@ -1681,7 +1782,7 @@
         "methodId": "rcw-basic-subjects.i-simple-math.multiply",
         "signature": "System.Int32 ISimpleMath::Multiply(System.Int32,System.Int32)"
       },
-      "nativeSymbol": "RcwBasicSubjects_ISimpleMath_Multiply",
+      "nativeSymbol": "RcwBasicSubjects_ISimpleMath_Multiply_System_Int32_System_Int32",
       "isStatic": false,
       "returnType": "System.Int32",
       "returnAbi": {
@@ -1760,7 +1861,7 @@
         "methodId": "rcw-basic-subjects.simple-math.add",
         "signature": "System.Int32 SimpleMath::Add(System.Int32,System.Int32)"
       },
-      "nativeSymbol": "RcwBasicSubjects_SimpleMath_Add",
+      "nativeSymbol": "RcwBasicSubjects_SimpleMath_Add_System_Int32_System_Int32",
       "isStatic": false,
       "returnType": "System.Int32",
       "returnAbi": {
@@ -1834,7 +1935,7 @@
         "methodId": "rcw-basic-subjects.simple-math.multiply",
         "signature": "System.Int32 SimpleMath::Multiply(System.Int32,System.Int32)"
       },
-      "nativeSymbol": "RcwBasicSubjects_SimpleMath_Multiply",
+      "nativeSymbol": "RcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32",
       "isStatic": false,
       "returnType": "System.Int32",
       "returnAbi": {
@@ -2108,7 +2209,7 @@
         "methodId": "rcw-basic-subjects.rcw-basic-native-entry.run",
         "signature": "System.Int32 RcwBasicNativeEntry::Run(System.Int32)"
       },
-      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_Run",
+      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_Run_System_Int32",
       "isStatic": true,
       "returnType": "System.Int32",
       "returnAbi": {
@@ -2676,7 +2777,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -2806,7 +2907,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -2936,7 +3037,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -3149,7 +3250,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.Void",
           "dispatchKindCode": 1,
@@ -3380,7 +3481,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -3510,7 +3611,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -3841,7 +3942,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalRcwQueryInterface",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalRcwQueryInterface_System_IntPtr_System_IntPtr",
           "targetParameterCount": 2,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -4003,7 +4104,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -4114,7 +4215,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.Void",
           "dispatchKindCode": 1,
@@ -4345,7 +4446,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -4475,7 +4576,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -4605,7 +4706,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -4711,7 +4812,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.Void",
           "dispatchKindCode": 1,
@@ -4770,7 +4871,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -4813,7 +4914,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -4915,7 +5016,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.Void",
           "dispatchKindCode": 1,
@@ -4950,7 +5051,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.Void",
           "dispatchKindCode": 1,
@@ -5068,7 +5169,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.Void",
           "dispatchKindCode": 1,
@@ -5103,7 +5204,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.Void",
           "dispatchKindCode": 1,
@@ -5162,7 +5263,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.Void",
           "dispatchKindCode": 1,
@@ -5197,7 +5298,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.Void",
           "dispatchKindCode": 1,
@@ -5428,7 +5529,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -5558,7 +5659,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -5889,7 +5990,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalRcwQueryInterface",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalRcwQueryInterface_System_IntPtr_System_IntPtr",
           "targetParameterCount": 2,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -6042,7 +6143,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.Void",
           "dispatchKindCode": 1,
@@ -6101,7 +6202,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.Void",
           "dispatchKindCode": 1,
@@ -6332,7 +6433,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -6462,7 +6563,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -6616,7 +6717,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallComMethod",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallComMethod_System_IntPtr_System_Int32_System_Int32_System_Int32",
           "targetParameterCount": 4,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
@@ -6743,7 +6844,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.Void",
           "dispatchKindCode": 1,
@@ -6974,7 +7075,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr",
           "targetParameterCount": 1,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -7128,7 +7229,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallDirectComMethod",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallDirectComMethod_System_IntPtr_System_Int32_System_Int32_System_Int32",
           "targetParameterCount": 4,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
@@ -7286,7 +7387,7 @@
         "methodId": "rcw-basic-subjects.rcw-basic-native-entry.create-ccw-for-simple-math",
         "signature": "System.IntPtr RcwBasicNativeEntry::CreateCcwForSimpleMath(System.IntPtr)"
       },
-      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath",
+      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr",
       "isStatic": true,
       "returnType": "System.IntPtr",
       "returnAbi": {
@@ -7441,7 +7542,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateCcw",
+          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateCcw_System_IntPtr_System_IntPtr",
           "targetParameterCount": 2,
           "targetReturnType": "System.IntPtr",
           "dispatchKindCode": 1,
@@ -7692,7 +7793,7 @@
         "methodId": "rcw-basic-subjects.rcw-basic-native-entry.marshal-create-ccw",
         "signature": "System.IntPtr RcwBasicNativeEntry::MarshalCreateCcw(System.IntPtr,System.IntPtr)"
       },
-      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateCcw",
+      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateCcw_System_IntPtr_System_IntPtr",
       "isStatic": true,
       "returnType": "System.IntPtr",
       "returnAbi": {
@@ -7740,7 +7841,7 @@
         "methodId": "rcw-basic-subjects.rcw-basic-native-entry.marshal-create-rcw",
         "signature": "System.IntPtr RcwBasicNativeEntry::MarshalCreateRcw(System.IntPtr)"
       },
-      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw",
+      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr",
       "isStatic": true,
       "returnType": "System.IntPtr",
       "returnAbi": {
@@ -7784,7 +7885,7 @@
         "methodId": "rcw-basic-subjects.rcw-basic-native-entry.marshal-release-rcw",
         "signature": "System.Void RcwBasicNativeEntry::MarshalReleaseRcw(System.IntPtr)"
       },
-      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -7828,7 +7929,7 @@
         "methodId": "rcw-basic-subjects.rcw-basic-native-entry.marshal-get-rcw-unknown",
         "signature": "System.IntPtr RcwBasicNativeEntry::MarshalGetRcwUnknown(System.IntPtr)"
       },
-      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown",
+      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown_System_IntPtr",
       "isStatic": true,
       "returnType": "System.IntPtr",
       "returnAbi": {
@@ -7872,7 +7973,7 @@
         "methodId": "rcw-basic-subjects.rcw-basic-native-entry.marshal-rcw-query-interface",
         "signature": "System.IntPtr RcwBasicNativeEntry::MarshalRcwQueryInterface(System.IntPtr,System.IntPtr)"
       },
-      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalRcwQueryInterface",
+      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalRcwQueryInterface_System_IntPtr_System_IntPtr",
       "isStatic": true,
       "returnType": "System.IntPtr",
       "returnAbi": {
@@ -7920,7 +8021,7 @@
         "methodId": "rcw-basic-subjects.rcw-basic-native-entry.marshal-call-com-method",
         "signature": "System.Int32 RcwBasicNativeEntry::MarshalCallComMethod(System.IntPtr,System.Int32,System.Int32,System.Int32)"
       },
-      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallComMethod",
+      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallComMethod_System_IntPtr_System_Int32_System_Int32_System_Int32",
       "isStatic": true,
       "returnType": "System.Int32",
       "returnAbi": {
@@ -7976,7 +8077,7 @@
         "methodId": "rcw-basic-subjects.rcw-basic-native-entry.marshal-call-direct-com-method",
         "signature": "System.Int32 RcwBasicNativeEntry::MarshalCallDirectComMethod(System.IntPtr,System.Int32,System.Int32,System.Int32)"
       },
-      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallDirectComMethod",
+      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallDirectComMethod_System_IntPtr_System_Int32_System_Int32_System_Int32",
       "isStatic": true,
       "returnType": "System.Int32",
       "returnAbi": {
@@ -8101,7 +8202,7 @@
         "methodId": "rcw-basic-subjects.runtime-state.set",
         "signature": "System.Void RuntimeState::Set(System.IntPtr)"
       },
-      "nativeSymbol": "RcwBasicSubjects_RuntimeState_Set",
+      "nativeSymbol": "RcwBasicSubjects_RuntimeState_Set_System_IntPtr",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {

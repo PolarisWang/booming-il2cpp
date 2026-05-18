@@ -48,14 +48,6 @@
   "registeredMethods": [
     {
       "assemblyName": "CcwBasicSubjects",
-      "subjectId": "CcwBasicSubjects/CcwBasicSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "CcwBasicSubjects/CcwBasicSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicSubjects",
-      "metadataToken": 100663302,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "CcwBasicSubjects",
       "subjectId": "CcwBasicSubjects/CcwBasicSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "CcwBasicSubjects/CcwBasicSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicSubjects",
@@ -99,7 +91,7 @@
       "subjectId": "CcwBasicSubjects/ISimpleMath::Add:System.Int32(System.Int32,System.Int32)",
       "definitionSubjectId": "CcwBasicSubjects/ISimpleMath::Add:System.Int32(System.Int32,System.Int32)",
       "declaringTypeSubjectId": "CcwBasicSubjects/ISimpleMath",
-      "metadataToken": 100663303,
+      "metadataToken": 100663302,
       "parameterCount": 2
     },
     {
@@ -107,7 +99,7 @@
       "subjectId": "CcwBasicSubjects/ISimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
       "definitionSubjectId": "CcwBasicSubjects/ISimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
       "declaringTypeSubjectId": "CcwBasicSubjects/ISimpleMath",
-      "metadataToken": 100663304,
+      "metadataToken": 100663303,
       "parameterCount": 2
     },
     {
@@ -115,7 +107,7 @@
       "subjectId": "CcwBasicSubjects/IConstantValue::GetValue:System.Int32()",
       "definitionSubjectId": "CcwBasicSubjects/IConstantValue::GetValue:System.Int32()",
       "declaringTypeSubjectId": "CcwBasicSubjects/IConstantValue",
-      "metadataToken": 100663305,
+      "metadataToken": 100663304,
       "parameterCount": 0
     },
     {
@@ -123,7 +115,7 @@
       "subjectId": "CcwBasicSubjects/SimpleMath::Add:System.Int32(System.Int32,System.Int32)",
       "definitionSubjectId": "CcwBasicSubjects/SimpleMath::Add:System.Int32(System.Int32,System.Int32)",
       "declaringTypeSubjectId": "CcwBasicSubjects/SimpleMath",
-      "metadataToken": 100663306,
+      "metadataToken": 100663305,
       "parameterCount": 2
     },
     {
@@ -131,7 +123,7 @@
       "subjectId": "CcwBasicSubjects/SimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
       "definitionSubjectId": "CcwBasicSubjects/SimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
       "declaringTypeSubjectId": "CcwBasicSubjects/SimpleMath",
-      "metadataToken": 100663307,
+      "metadataToken": 100663306,
       "parameterCount": 2
     },
     {
@@ -139,7 +131,7 @@
       "subjectId": "CcwBasicSubjects/SimpleMath::.ctor:System.Void()",
       "definitionSubjectId": "CcwBasicSubjects/SimpleMath::.ctor:System.Void()",
       "declaringTypeSubjectId": "CcwBasicSubjects/SimpleMath",
-      "metadataToken": 100663308,
+      "metadataToken": 100663307,
       "parameterCount": 0
     },
     {
@@ -147,7 +139,7 @@
       "subjectId": "CcwBasicSubjects/ConstantFortyTwo::GetValue:System.Int32()",
       "definitionSubjectId": "CcwBasicSubjects/ConstantFortyTwo::GetValue:System.Int32()",
       "declaringTypeSubjectId": "CcwBasicSubjects/ConstantFortyTwo",
-      "metadataToken": 100663309,
+      "metadataToken": 100663308,
       "parameterCount": 0
     },
     {
@@ -155,7 +147,7 @@
       "subjectId": "CcwBasicSubjects/ConstantFortyTwo::.ctor:System.Void()",
       "definitionSubjectId": "CcwBasicSubjects/ConstantFortyTwo::.ctor:System.Void()",
       "declaringTypeSubjectId": "CcwBasicSubjects/ConstantFortyTwo",
-      "metadataToken": 100663310,
+      "metadataToken": 100663309,
       "parameterCount": 0
     },
     {
@@ -163,7 +155,7 @@
       "subjectId": "CcwBasicSubjects/DualInterfaceImpl::Add:System.Int32(System.Int32,System.Int32)",
       "definitionSubjectId": "CcwBasicSubjects/DualInterfaceImpl::Add:System.Int32(System.Int32,System.Int32)",
       "declaringTypeSubjectId": "CcwBasicSubjects/DualInterfaceImpl",
-      "metadataToken": 100663311,
+      "metadataToken": 100663310,
       "parameterCount": 2
     },
     {
@@ -171,7 +163,7 @@
       "subjectId": "CcwBasicSubjects/DualInterfaceImpl::Multiply:System.Int32(System.Int32,System.Int32)",
       "definitionSubjectId": "CcwBasicSubjects/DualInterfaceImpl::Multiply:System.Int32(System.Int32,System.Int32)",
       "declaringTypeSubjectId": "CcwBasicSubjects/DualInterfaceImpl",
-      "metadataToken": 100663312,
+      "metadataToken": 100663311,
       "parameterCount": 2
     },
     {
@@ -179,7 +171,7 @@
       "subjectId": "CcwBasicSubjects/DualInterfaceImpl::GetValue:System.Int32()",
       "definitionSubjectId": "CcwBasicSubjects/DualInterfaceImpl::GetValue:System.Int32()",
       "declaringTypeSubjectId": "CcwBasicSubjects/DualInterfaceImpl",
-      "metadataToken": 100663313,
+      "metadataToken": 100663312,
       "parameterCount": 0
     },
     {
@@ -187,7 +179,7 @@
       "subjectId": "CcwBasicSubjects/DualInterfaceImpl::.ctor:System.Void()",
       "definitionSubjectId": "CcwBasicSubjects/DualInterfaceImpl::.ctor:System.Void()",
       "declaringTypeSubjectId": "CcwBasicSubjects/DualInterfaceImpl",
-      "metadataToken": 100663314,
+      "metadataToken": 100663313,
       "parameterCount": 0
     },
     {
@@ -195,7 +187,7 @@
       "subjectId": "CcwBasicSubjects/CcwBasicNativeEntry::Run:System.Int32(System.Int32)",
       "definitionSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry::Run:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry",
-      "metadataToken": 100663315,
+      "metadataToken": 100663314,
       "parameterCount": 1
     },
     {
@@ -203,7 +195,7 @@
       "subjectId": "CcwBasicSubjects/CcwBasicNativeEntry::TestSimpleMathAdd:System.Int32()",
       "definitionSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry::TestSimpleMathAdd:System.Int32()",
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry",
-      "metadataToken": 100663316,
+      "metadataToken": 100663315,
       "parameterCount": 0
     },
     {
@@ -211,7 +203,7 @@
       "subjectId": "CcwBasicSubjects/CcwBasicNativeEntry::TestSimpleMathMul:System.Int32()",
       "definitionSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry::TestSimpleMathMul:System.Int32()",
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry",
-      "metadataToken": 100663317,
+      "metadataToken": 100663316,
       "parameterCount": 0
     },
     {
@@ -219,7 +211,7 @@
       "subjectId": "CcwBasicSubjects/CcwBasicNativeEntry::TestConstantValue:System.Int32()",
       "definitionSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry::TestConstantValue:System.Int32()",
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry",
-      "metadataToken": 100663318,
+      "metadataToken": 100663317,
       "parameterCount": 0
     },
     {
@@ -227,7 +219,7 @@
       "subjectId": "CcwBasicSubjects/CcwBasicNativeEntry::TestDualInterface:System.Int32()",
       "definitionSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry::TestDualInterface:System.Int32()",
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry",
-      "metadataToken": 100663319,
+      "metadataToken": 100663318,
       "parameterCount": 0
     }
   ],

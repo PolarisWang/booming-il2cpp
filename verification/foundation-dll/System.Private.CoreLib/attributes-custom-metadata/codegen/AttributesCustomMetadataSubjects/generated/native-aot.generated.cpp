@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
 #include "abi_manifest.h"
@@ -10,6 +11,8 @@
 #include "reflection_query_model.h"
 #include "load_store_chaos_bridge.h"
 #include "interpreter_entry.h"
+#include <gc/gc_bgc_inline.h>
+#include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
@@ -415,11 +418,6 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle(CHAOS_IL2CPP_INTPTR c
 	switch (chaos_type_handle)
 	{
 		case static_cast<CHAOS_IL2CPP_INTPTR>(43759058u):
-			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Run") == 0)
-			{
-				return static_cast<CHAOS_IL2CPP_INTPTR>(108604644u);
-			}
-
 			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_0") == 0)
 			{
 				return static_cast<CHAOS_IL2CPP_INTPTR>(102031515u);
@@ -622,7 +620,6 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_6(void);
 extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_7(void);
 extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_8(void);
-extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -636,7 +633,7 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[11] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[10] = {
 	0u,
 	0u,
 	0u,
@@ -647,19 +644,18 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[11] = {
 	0u,
 	0u,
 	0u,
-	1u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[10];
+	::ChaosAbiMethodEntryV0 entries[9];
 	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		10u,
-		1u,
-		4231985401u,  // FNV-1a over entries+params
+		9u,
+		0u,
+		1108452621u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
@@ -672,10 +668,8 @@ static constexpr struct {
 		{ 0u, 0u },  // AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_6
 		{ 0u, 0u },  // AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_7
 		{ 0u, 0u },  // AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_8
-		{ 0u, 1u },  // AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Run
 	},
 	{
-		1u,
 	},
 };
 static const ::ChaosAbiManifestV0* const s_abi_manifest =
@@ -745,40 +739,38 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("AttributesCustomMetadataSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[10] = {
-	{ "Subject_0", 0x00000004u, 0u },  // AttributesCustomMetadataSubjects
-	{ "Subject_1", 0x00000005u, 0u },  // AttributesCustomMetadataSubjects
-	{ "Subject_2", 0x00000006u, 0u },  // AttributesCustomMetadataSubjects
-	{ "Subject_3", 0x00000007u, 0u },  // AttributesCustomMetadataSubjects
-	{ "Subject_4", 0x00000008u, 0u },  // AttributesCustomMetadataSubjects
-	{ "Subject_5", 0x00000009u, 0u },  // AttributesCustomMetadataSubjects
-	{ "Subject_6", 0x0000000Au, 0u },  // AttributesCustomMetadataSubjects
-	{ "Subject_7", 0x0000000Bu, 0u },  // AttributesCustomMetadataSubjects
-	{ "Subject_8", 0x0000000Cu, 0u },  // AttributesCustomMetadataSubjects
-	{ "Run", 0x00000003u, 1u },  // AttributesCustomMetadataSubjects
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[9] = {
+	{ "Subject_0", 0x00000003u, 0u },  // AttributesCustomMetadataSubjects
+	{ "Subject_1", 0x00000004u, 0u },  // AttributesCustomMetadataSubjects
+	{ "Subject_2", 0x00000005u, 0u },  // AttributesCustomMetadataSubjects
+	{ "Subject_3", 0x00000006u, 0u },  // AttributesCustomMetadataSubjects
+	{ "Subject_4", 0x00000007u, 0u },  // AttributesCustomMetadataSubjects
+	{ "Subject_5", 0x00000008u, 0u },  // AttributesCustomMetadataSubjects
+	{ "Subject_6", 0x00000009u, 0u },  // AttributesCustomMetadataSubjects
+	{ "Subject_7", 0x0000000Au, 0u },  // AttributesCustomMetadataSubjects
+	{ "Subject_8", 0x0000000Bu, 0u },  // AttributesCustomMetadataSubjects
 };
 
 // Type name index entries (namespace, short_name)
 static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
-	{ "AttributesCustomMetadataSubjects", "", 0u, 10u },
+	{ "AttributesCustomMetadataSubjects", "", 0u, 9u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[10] = {
-	{ 0x00000003u, 9u },
-	{ 0x00000004u, 0u },
-	{ 0x00000005u, 1u },
-	{ 0x00000006u, 2u },
-	{ 0x00000007u, 3u },
-	{ 0x00000008u, 4u },
-	{ 0x00000009u, 5u },
-	{ 0x0000000Au, 6u },
-	{ 0x0000000Bu, 7u },
-	{ 0x0000000Cu, 8u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[9] = {
+	{ 0x00000003u, 0u },
+	{ 0x00000004u, 1u },
+	{ 0x00000005u, 2u },
+	{ 0x00000006u, 3u },
+	{ 0x00000007u, 4u },
+	{ 0x00000008u, 5u },
+	{ 0x00000009u, 6u },
+	{ 0x0000000Au, 7u },
+	{ 0x0000000Bu, 8u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[10] = {
+static HotpatchEntryV0 s_hotpatch_entries[9] = {
 	{ reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AttributesCustomMetadataSubjects::Subject_0
 	{ reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AttributesCustomMetadataSubjects::Subject_1
 	{ reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AttributesCustomMetadataSubjects::Subject_2
@@ -788,7 +780,6 @@ static HotpatchEntryV0 s_hotpatch_entries[10] = {
 	{ reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AttributesCustomMetadataSubjects::Subject_6
 	{ reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AttributesCustomMetadataSubjects::Subject_7
 	{ reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AttributesCustomMetadataSubjects::Subject_8
-	{ reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AttributesCustomMetadataSubjects::Run
 };
 
 // Module hotpatch bundle
@@ -797,11 +788,11 @@ static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	s_hotpatch_types,
 	1u,
 	s_hotpatch_methods,
-	10u,
+	9u,
 	s_hotpatch_slots,
-	10u,
+	9u,
 	s_hotpatch_entries,
-	10u,
+	9u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -836,7 +827,7 @@ extern "C" int32_t kChaosExternalRuntimeCount = 8;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[10])() = {
+static void (*kAotMethods[9])() = {
 	reinterpret_cast<void(*)()>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_2),
@@ -846,13 +837,12 @@ static void (*kAotMethods[10])() = {
 	reinterpret_cast<void(*)()>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_6),
 	reinterpret_cast<void(*)()>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_7),
 	reinterpret_cast<void(*)()>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_8),
-	reinterpret_cast<void(*)()>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Run),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
-static void (*kBenchmarkWrappers[10])() = {
+static void (*kBenchmarkWrappers[9])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -862,7 +852,6 @@ static void (*kBenchmarkWrappers[10])() = {
 	[]() {kAotMethods[6]();},
 	[]() {kAotMethods[7]();},
 	[]() {kAotMethods[8]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[9])(0);},
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -879,7 +868,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 			entry.method_key, __chaos_args, __chaos_ret);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -897,7 +886,8 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
 			chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 				entry.method_key, __chaos_args, __chaos_ret);
 		} else {
-			reinterpret_cast<void(*)()>(entry.direct_ptr)();
+			// Use kBenchmarkWrappers which supply correct default argument values
+			kBenchmarkWrappers[i]();
 		}
 	}
 	return result;
@@ -916,7 +906,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
 			entry.method_key);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -936,7 +926,7 @@ extern "C" double BenchmarkMethod(
 }
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[10] = {
+static void* const kMethodPointers[9] = {
 	reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_0),
 	reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_1),
 	reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_2),
@@ -946,7 +936,6 @@ static void* const kMethodPointers[10] = {
 	reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_6),
 	reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_7),
 	reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_8),
-	reinterpret_cast<void*>(&AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Run),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -954,7 +943,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 10u,
+	.method_pointer_count      = 9u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -963,6 +952,8 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.unresolved_virtual_call_count = 0u,
 	.type_capabilities       = nullptr,
 	.type_capability_count   = 0u,
+	.vtable_descriptors = nullptr,
+	.vtable_descriptor_count = 0u,
 };
 
 // MetadataRegistrationV0
@@ -998,7 +989,10 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects[10] = {
+static constexpr ReflectionQueryFieldDescriptor kReflFields_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects[1] = {
+	{ 0u, "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+};
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects[9] = {
 	{ 0u, "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
 	{ 0u, "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
 	{ 0u, "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
@@ -1008,12 +1002,11 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_AttributesCustomMe
 	{ 0u, "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
 	{ 0u, "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
 	{ 0u, "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects", "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects", "", "AttributesCustomMetadataSubjects", "AttributesCustomMetadataSubjects", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects, 10u },
+	{ 0u, "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects", "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects", "", "AttributesCustomMetadataSubjects", "AttributesCustomMetadataSubjects", nullptr, kReflFields_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects, 1u, nullptr, 0u,
+	kReflMethods_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects, 9u },
 };
 
 static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
@@ -1077,12 +1070,6 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 	CHAOS_IL2CPP_INTPTR _s10{};
 	CHAOS_IL2CPP_INTPTR _s11{};
 	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
@@ -1121,53 +1108,10 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		if (chaos_arg_0 == 0)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_Assembly_System_Reflection_Assembly__(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42596542u);
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s2;
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_CustomAttributeExtensions__GetCustomAttribute_System_Attribute_System_Reflection_Assembly_System_Type_(chaos_arg_0, chaos_arg_1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		if (chaos_arg_0 == 0)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-853934071);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1199,12 +1143,6 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 	CHAOS_IL2CPP_INTPTR _s10{};
 	CHAOS_IL2CPP_INTPTR _s11{};
 	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
@@ -1243,53 +1181,10 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		if (chaos_arg_0 == 0)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_Assembly_System_Reflection_Assembly__(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42596542u);
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s2;
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_CustomAttributeExtensions__GetCustomAttribute_System_Attribute_System_Reflection_Assembly_System_Type_(chaos_arg_0, chaos_arg_1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		if (chaos_arg_0 == 0)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-853934071);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1362,13 +1257,6 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 	CHAOS_IL2CPP_INTPTR _s11{};
 	CHAOS_IL2CPP_INTPTR _s12{};
 	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
@@ -1407,64 +1295,20 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		{
-			const auto chaos_arg_0 = _s1;
-			if (chaos_arg_0 == 0)
+			if (_s0 != 0)
 			{
-				CHAOS_IL2CPP_FAIL();
-			}
-			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_Assembly_System_Reflection_Assembly__(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42596542u);
-		{
-			const auto chaos_arg_0 = _s2;
-			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		{
-			const auto chaos_arg_1 = _s2;
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_CustomAttributeExtensions__IsDefined_System_Boolean_System_Reflection_Assembly_System_Type_(chaos_arg_0, chaos_arg_1);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		{
-			if (_s1 != 0)
-			{
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			}
-			else
-			{
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			}
-			{
-				const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-				const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			{
-				const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-				const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-			}
-			{
-				if (_s0 != 0)
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 				{
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-					{
-						auto chaos_value = _s0;
-						chaos_static_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects___exitCode = chaos_value;
-					}
+					auto chaos_value = _s0;
+					chaos_static_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects___exitCode = chaos_value;
 				}
-				return;
 			}
+			return;
 		}
 	}
 }
@@ -1488,13 +1332,6 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 	CHAOS_IL2CPP_INTPTR _s11{};
 	CHAOS_IL2CPP_INTPTR _s12{};
 	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
@@ -1533,64 +1370,20 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		{
-			const auto chaos_arg_0 = _s1;
-			if (chaos_arg_0 == 0)
+			if (_s0 != 0)
 			{
-				CHAOS_IL2CPP_FAIL();
-			}
-			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_Assembly_System_Reflection_Assembly__(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42596542u);
-		{
-			const auto chaos_arg_0 = _s2;
-			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		{
-			const auto chaos_arg_1 = _s2;
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_CustomAttributeExtensions__IsDefined_System_Boolean_System_Reflection_Assembly_System_Type_(chaos_arg_0, chaos_arg_1);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		{
-			if (_s1 != 0)
-			{
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			}
-			else
-			{
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			}
-			{
-				const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-				const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			{
-				const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-				const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-			}
-			{
-				if (_s0 != 0)
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 				{
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-					{
-						auto chaos_value = _s0;
-						chaos_static_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects___exitCode = chaos_value;
-					}
+					auto chaos_value = _s0;
+					chaos_static_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects___exitCode = chaos_value;
 				}
-				return;
 			}
+			return;
 		}
 	}
 }
@@ -1605,185 +1398,10 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 	return;
 }
 
-// Managed method: AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Run(System.Int32)
-extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-		switch (chaos_switch_value)
-		{
-			case 0:
-			{
-				{
-					auto& _d0 = s_hotpatch_entries[0];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d0.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_0();
-					}
-				}
-				break;
-			}
-			case 1:
-			{
-				{
-					auto& _d1 = s_hotpatch_entries[1];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d1.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_1();
-					}
-				}
-				break;
-			}
-			case 2:
-			{
-				{
-					auto& _d2 = s_hotpatch_entries[2];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d2.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_2();
-					}
-				}
-				break;
-			}
-			case 3:
-			{
-				{
-					auto& _d3 = s_hotpatch_entries[3];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d3.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_3();
-					}
-				}
-				break;
-			}
-			case 4:
-			{
-				{
-					auto& _d4 = s_hotpatch_entries[4];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d4.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_4();
-					}
-				}
-				break;
-			}
-			case 5:
-			{
-				{
-					auto& _d5 = s_hotpatch_entries[5];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d5.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_5();
-					}
-				}
-				break;
-			}
-			case 6:
-			{
-				{
-					auto& _d6 = s_hotpatch_entries[6];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d6.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_6();
-					}
-				}
-				break;
-			}
-			case 7:
-			{
-				{
-					auto& _d7 = s_hotpatch_entries[7];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d7.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_7();
-					}
-				}
-				break;
-			}
-			case 8:
-			{
-				{
-					auto& _d8 = s_hotpatch_entries[8];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d8.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_8();
-					}
-				}
-				break;
-			}
-			default:
-				return;
-		}
-	}
-	return;
-}
-
 
 
 }  // namespace chaos::il2cpp::codegen::AttributesCustomMetadataSubjects
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 10;
+extern "C" const int kAotMethodCount = 9;

@@ -1,11 +1,11 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
-  "planKind": "generic-managed-entry",
+  "planKind": "full-assembly-entry",
   "assemblyName": "RcwBasicSubjects",
-  "entrySubjectId": "RcwBasicSubjects/RcwBasicSubjects::Run:System.Void(System.Int32)",
-  "nativeEntryFunctionName": "RunNativeAot",
-  "entrySymbol": "RcwBasicSubjects_RcwBasicSubjects_Run",
+  "entrySubjectId": "RcwBasicSubjects/ConstantFortyTwo::.ctor:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "RcwBasicSubjects_ConstantFortyTwo__ctor",
   "entryMethodToken": "0u",
-  "workloadAbi": "void(int32)"
+  "workloadAbi": "full-assembly"
 }

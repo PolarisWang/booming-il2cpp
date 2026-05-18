@@ -1,7 +1,7 @@
 {
   "family": "threading-monitor-interlocked",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-15T19:35:03.776204",
+  "generated_at": "2026-05-19T00:54:06.208589",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -35,15 +35,19 @@
       "check_id": "p1_no_unnecessary_indirection",
       "principle": "P1",
       "status": "CONCERN",
-      "summary": "1 runtime_stub calls in generated code",
+      "summary": "2 runtime_stub calls in generated code",
       "details": [
         {
           "function": "ChaosInterlockedMemoryBarrier",
           "call_count": 1
+        },
+        {
+          "function": "ChaosObjectCtor",
+          "call_count": 1
         }
       ],
       "evidence": {
-        "stub_call_count": 1
+        "stub_call_count": 2
       }
     },
     "p1_benchmark": {
@@ -78,11 +82,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 15 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 14 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 15,
-        "entries_with_interrupt_ptr": 15,
+        "table_size": 14,
+        "entries_with_interrupt_ptr": 14,
         "has_hotpatch_module": true
       }
     },
@@ -90,13 +94,14 @@
       "check_id": "p3_patchdata",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "1/1 valid .patchdata files",
+      "summary": "2/2 valid .patchdata files",
       "details": [],
       "evidence": {
-        "patchdata_count": 1,
-        "valid_count": 1,
+        "patchdata_count": 2,
+        "valid_count": 2,
         "stub_patchdata_count": 0,
         "files": [
+          "System.Private.CoreLib\\threading-monitor-interlocked\\il2cpp_dist\\patch\\patchdata\\threading-monitor-interlocked.patchdata",
           "System.Private.CoreLib\\threading-monitor-interlocked\\managed\\patch\\patchdata\\threading-monitor-interlocked.patchdata"
         ]
       }

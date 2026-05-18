@@ -1,0 +1,43 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceLoweringPlan",
+  "planKind": "assembly-full-closure-runtime-skeleton",
+  "assemblyName": "ThreadingThreadBasicsSubjects",
+  "entrySubjectId": "",
+  "includeHeader": "codegen_bridge.h",
+  "nativeEntryFunctionName": "RunNativeReferenceAssembly",
+  "entrySymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_0",
+  "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "translationUnitMethodSubjectIds": [
+    "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()",
+    "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10:System.Void()",
+    "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_1:System.Void()",
+    "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2:System.Void()",
+    "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_3:System.Void()",
+    "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4:System.Void()",
+    "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_5:System.Void()",
+    "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6:System.Void()",
+    "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7:System.Void()",
+    "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8:System.Void()",
+    "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_9:System.Void()"
+  ],
+  "translationUnitMethodCount": 11,
+  "translationUnitPageSize": 1024,
+  "translationUnitPageCount": 1,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 11,
+      "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+      "firstMethodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()",
+      "lastMethodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_9:System.Void()"
+    }
+  ],
+  "auditStatus": "runtime-skeleton",
+  "auditMessage": "assembly-bound full-closure native-reference runtime skeleton emits covered executable methods only; uncovered methods are reported separately",
+  "referenceTypeToken": "0u",
+  "capturedFieldToken": "0u",
+  "entryMethodToken": "0u",
+  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)"
+}

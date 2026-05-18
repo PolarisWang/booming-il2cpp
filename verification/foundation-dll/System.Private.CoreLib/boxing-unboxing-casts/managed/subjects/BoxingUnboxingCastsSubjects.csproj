@@ -7,6 +7,7 @@
     <AssemblyName>BoxingUnboxingCastsSubjects</AssemblyName>
     <RootNamespace>BoxingUnboxingCastsSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BoxingUnboxingCastsSubjects.cs" />

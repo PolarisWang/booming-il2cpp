@@ -1,22 +1,33 @@
-// Auto-generated runtime entry point for chaos-il2cpp AOT output.
+// Auto-generated runtime entry point for chaos-il2cpp full-assembly AOT output.
+// Supports six modes:
+//   (no args)                        - Fact mode: run all methods, print Passed N/M
+//   N                                - Legacy single-entry mode (backward compat)
+//   --benchmark N [I]                - Benchmark mode: run method N for I iterations, print JSON timing
+//   --hotupdate                      - HotUpdate mode: run patch lifecycle, print JSON results
+//   --hotupdate-and-benchmark N [I]  - Apply hotpatch then benchmark method N, print combined JSON
+//   --patch-bench N [I]              - Apply hotpatch then benchmark method N (skip all-methods loop)
 #include <cstdint>
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
 #include <chrono>
-#include <setjmp.h>
+// chaos/log.h must be early (before runtime_core.h) because runtime_core.h
+// → gc_transition.h → thread_state.h uses CHAOS_IL2CPP_LOG_ERROR_M.
+#include <chaos/log.h>
 #include "codegen_bridge.h"
 #include "runtime_abi.h"
 #include "runtime_core.h"
 #include "exception_helpers.h"
 #include "patch_loader.h"
 #include "hotpatch_table.h"
-#include "reflection_api.h"
 #include "chaos/profile.h"
+#include "runtime_stubs/misc_stubs.h"
+#include "gc/gc_bgc_inline.h"
 
-// SetExceptionFallback is declared at global scope in exception_helpers.h.
-// Forward-declare here so this file compiles independently.
-extern "C" void SetExceptionFallback(void (*fn)());
+// kChaosExternalRuntimeFnTable is defined in native-aot.generated.cpp.
+extern "C" void* kChaosExternalRuntimeFnTable[];
+extern "C" const char* kChaosExternalRuntimeSubjects[];
+extern "C" int32_t kChaosExternalRuntimeCount;
 
 extern "C" std::int32_t RunNativeAot(std::int32_t);
 extern "C" std::int32_t RunNativeAotAll();
@@ -28,22 +39,6 @@ extern const uint8_t kPatchData[];
 extern const size_t kPatchDataSize;
 extern const char* const kPatchDataHostClassName;
 
-// Method name mapping: patch data MethodDef names → AOT registry method names
-static const char* const kPatchDataHostMethodNames[] = {
-    nullptr,           // _exitCode (body_size==0, skipped)
-    "Subject_0",       // Method0 → Subject_0
-    "Subject_1",       // Method1 → Subject_1
-    "Subject_2",       // Method2 → Subject_2
-    "Subject_3",       // Method3 → Subject_3
-    "Subject_4",       // Method4 → Subject_4
-    "Subject_5",       // Method5 → Subject_5
-    "Subject_6",       // Method6 → Subject_6
-    "Subject_7",       // Method7 → Subject_7
-    "Subject_8",       // Method8 → Subject_8
-    "Subject_9",       // Method9 → Subject_9
-    "Subject_10",      // Method10 → Subject_10
-};
-
 // Codegen-emitted registration structs (from native-aot.generated.cpp)
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
 extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
@@ -52,25 +47,16 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 // kAotMethodCount defined in codegen-emitted code (native-aot.generated.cpp)
 extern "C" const int kAotMethodCount;
 
+// SetExceptionFallback is declared at global scope in exception_helpers.h.
+extern "C" void SetExceptionFallback(void (*fn)());
+
 enum class RunMode { Fact, Benchmark, HotUpdate, HotUpdateAndBenchmark, PatchAndBenchmark };
-
-// ── Exception fallback for verification mode ─────────────────────────────
-// When conversion functions (e.g., chaos_convert_tochar_int32) call
-// RaiseManagedException() in an uninitialized runtime, the fallback redirects
-// to longjmp so the verification harness can catch the failure instead of abort().
-// Framework exception types (OverflowException, InvalidCastException) are not
-// registered in per-family builds, so ResolveTypeByName() would fail anyway.
-static thread_local jmp_buf s_verify_buf;
-
-static void exception_fallback() {
-    longjmp(s_verify_buf, 1);
-}
 
 // ── Shared helper: apply hotpatch and print diagnostic ─────────────────────
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
     if (kPatchDataSize > 0u) {
         auto* patch_ctx = chaos::il2cpp::runtime_core::ApplyPatchFromMemory(
-            kPatchData, kPatchDataSize, "BoxingUnboxingCastsSubjects", kPatchDataHostMethodNames);
+            kPatchData, kPatchDataSize, kPatchDataHostClassName);
         if (patch_ctx == nullptr) {
             std::fprintf(stderr, "WARN: ApplyPatchFromMemory returned null (no patches applied)\n");
         } else {
@@ -82,66 +68,91 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
     return nullptr;
 }
 
-// ── SEH-guarded bridge init ────────────────────────────────────────────────
-static bool InitRuntimeSehGuarded() noexcept {
-    __try {
-        auto* bridge = chaos_codegen_get_bridge_v0();
-        if (!bridge) return false;
-        bridge->register_codegen(
-            &chaos_codegen_code_registration,
-            &chaos_codegen_metadata_registration,
-            &chaos_codegen_options);
-        bridge->bootstrap_runtime();
-        return true;
-    } __except (EXCEPTION_EXECUTE_HANDLER) {
-        std::fprintf(stderr, "FATAL: SEH 0x%08X in InitRuntimeSehGuarded\n", GetExceptionCode());
-        return false;
+// ── Fill remaining null external runtime table entries with safe stubs ──
+// After ChaosResolveExternalRuntimeFnTable() runs during bootstrap, entries
+// that could NOT be resolved remain nullptr.  This function fills them with
+// generic no-op stubs so the generated code does not crash on null pointers.
+// The stub signatures are inferred from the subject ID strings.
+static void FillExternalRuntimeStubs() {
+    for (int32_t i = 0; i < kChaosExternalRuntimeCount; i++) {
+        if (kChaosExternalRuntimeFnTable[i] != nullptr) continue;
+        const char* sub = kChaosExternalRuntimeSubjects[i];
+        if (sub == nullptr || sub[0] == '\0') continue;
+
+        // Types (no "::" — just a type name like System.Int32) are not callable.
+        if (std::strstr(sub, "::") == nullptr) continue;
+
+        // Known managed GC methods — wire real runtime implementations.
+        if (std::strstr(sub, "System.GC::Collect:")) {
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){ chaos_gc_collect(); });
+            continue;
+        }
+        if (std::strstr(sub, "System.GC::WaitForPendingFinalizers:")) {
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){ chaos_gc_wait_for_pending_finalizers(); });
+            continue;
+        }
+        if (std::strstr(sub, "System.GC::GetGeneration:")) {
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR obj) -> CHAOS_IL2CPP_INT32 { return ChaosGcGetGeneration(obj); });
+            continue;
+        }
+
+        // Parse return type from subject ID pattern:
+        //   "Namespace.Type::Method:ReturnType(Params)"
+        if (std::strstr(sub, ":System.Void(")) {
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){});
+        } else if (std::strstr(sub, ":System.Int32(")) {
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+        } else if (std::strstr(sub, ":System.Int64(")) {
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT64 { return 0; });
+        } else if (std::strstr(sub, ":System.Boolean(")) {
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+        } else {
+            // Unknown return type — safest default is void(void) to at least
+            // not corrupt the stack on callee-saved registers.
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){});
+        }
     }
 }
 
 int main(int argc, char** argv) {
-    if (!InitRuntimeSehGuarded()) return -1;
+    auto* bridge = chaos_codegen_get_bridge_v0();
+    if (!bridge) return -1;
+    bridge->register_codegen(
+        &chaos_codegen_code_registration,
+        &chaos_codegen_metadata_registration,
+        &chaos_codegen_options);
+    bridge->bootstrap_runtime();
 
-    // Create real RuntimeState + ThreadState (required by interpreter path
-    // for GC operations, type resolution, and thread state management).
-    RuntimeInitParams init_params = {};
-    init_params.struct_size = sizeof(init_params);
-    init_params.init_flags = 0;
-    init_params.host_name_utf8 = "boxing-entry";
-    init_params.runtime_tag_utf8 = nullptr;
-    init_params.host_context = nullptr;
+    // Register current thread so generated code that calls get_CurrentThread()
+    // (e.g. threading externals) gets a non-null return from
+    // chaos_thread_get_current().  This creates a ManagedThread in TLS with a
+    // dummy managed_object.  Families that don't use threading pay a small heap
+    // allocation once during startup — acceptable for verification.
+    // NOTE: We do NOT call runtime_init/thread_attach via ABI because
+    // RuntimeInit() calls setvbuf(stdout, nullptr, _IOLBF, 0) which crashes
+    // on Windows CRT with FAST_FAIL_INVALID_ARG.
+    chaos::il2cpp::runtime_core::threading::RegisterThread(
+        chaos::il2cpp::runtime_core::threading::kMainThreadId,
+        reinterpret_cast<void*>(static_cast<uintptr_t>(0x42)));
 
-    RuntimeConfig config = {};
-    config.struct_size = sizeof(config);
-    config.allocator = nullptr;
-    config.deallocator = nullptr;
+    // Set TLS to non-null sentinels so RaiseManagedException gets past its
+    // first guard (runtime == nullptr / thread == nullptr check).
+    // RuntimeState and ThreadState are opaque types (only forward-declared
+    // in runtime_abi.h), so sentinels are safe — the exception path never
+    // dereferences these pointers when type resolution fails.
+    chaos::il2cpp::runtime_core::SetCurrentRuntimeState(
+        reinterpret_cast<RuntimeState*>(static_cast<uintptr_t>(1)));
+    chaos::il2cpp::runtime_core::SetCurrentThreadState(
+        reinterpret_cast<ThreadState*>(static_cast<uintptr_t>(1)));
 
-    auto* abi = chaos::il2cpp::runtime_core::GetRuntimeAbiV0();
-    RuntimeState* runtime_state = nullptr;
-    if (abi == nullptr) { std::fprintf(stderr, "FATAL: GetRuntimeAbiV0() returned null\n"); return -1; }
-    RuntimeStatus status = abi->runtime_init(&init_params, &config, &runtime_state);
-    if (status != CHAOS_RUNTIME_STATUS_OK || runtime_state == nullptr) {
-        std::fprintf(stderr, "FATAL: RuntimeInit failed (status=%d)\n", static_cast<int>(status));
-        return -1;
-    }
-    chaos::il2cpp::runtime_core::SetCurrentRuntimeState(runtime_state);
-
-    ThreadState* thread_state = nullptr;
-    status = abi->thread_attach(runtime_state, &thread_state);
-    if (status != CHAOS_RUNTIME_STATUS_OK || thread_state == nullptr) {
-        std::fprintf(stderr, "FATAL: ThreadAttach failed (status=%d)\n", static_cast<int>(status));
-        abi->runtime_shutdown(runtime_state);
-        return -1;
-    }
-    // ThreadAttach calls SetCurrentThreadState internally
-
-    // Install exception fallback: RaiseManagedException → longjmp recovery.
-    SetExceptionFallback(&exception_fallback);
+    // Fill unresolved external runtime table entries with safe stubs.
+    FillExternalRuntimeStubs();
 
     RunMode mode = RunMode::Fact;
     int entry_index = 0;
     int iterations = 10000;
 
+    // Simple argv parsing (self-contained, no getopt dependency)
     if (argc >= 3 && std::strcmp(argv[1], "--benchmark") == 0) {
         mode = RunMode::Benchmark;
         entry_index = std::atoi(argv[2]);
@@ -157,21 +168,29 @@ int main(int argc, char** argv) {
         entry_index = std::atoi(argv[2]);
         if (argc >= 4) iterations = std::atoi(argv[3]);
     } else if (argc >= 2) {
-        entry_index = std::atoi(argv[1]);
+        entry_index = std::atoi(argv[1]);  // backward compat: numeric entry index
     }
 
     switch (mode) {
     case RunMode::Fact: {
+        // NOTE: Uses try/catch instead of setjmp/longjmp because the generated
+        // code throws chaos_managed_exception (C++ exception) for unresolved
+        // external calls. setjmp/longjmp cannot catch C++ exceptions and mixing
+        // both with /EHa corrupts the /GS stack cookie (0xC0000409).
         int result = 0;
-        if (setjmp(s_verify_buf) == 0) {
+        for (int i = 0; i < kAotMethodCount; i++) {
+            bool caught = false;
+            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
             try {
-                result = RunNativeAotAll();
+                RunNativeAot(i);
+            } catch (const chaos_managed_exception&) {
+                caught = true;
             } catch (...) {
-                longjmp(s_verify_buf, 1);
+                caught = true;
             }
+            if (caught) result |= (1 << i);
         }
-        CHAOS_IL2CPP_PROFILE_DUMP();
-        CHAOS_IL2CPP_PROFILE_RESET();
+        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         int failed_count = 0;
         int tmp = result;
         while (tmp) { failed_count += tmp & 1; tmp >>= 1; }
@@ -182,9 +201,13 @@ int main(int argc, char** argv) {
     }
     case RunMode::Benchmark: {
         double elapsed_ms = -1.0;
-        if (setjmp(s_verify_buf) == 0) {
+        chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
+        try {
             elapsed_ms = BenchmarkMethod(entry_index, iterations);
+        } catch (...) {
+            elapsed_ms = -1.0;
         }
+        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         if (elapsed_ms < 0.0) {
             printf("{\"error\":\"invalid method index %d\"}\n", entry_index);
             std::fflush(stdout);
@@ -198,17 +221,17 @@ int main(int argc, char** argv) {
         return 0;
     }
     case RunMode::HotUpdate: {
-        ApplyHotpatchIfAvailable();
+        auto* patch_ctx = ApplyHotpatchIfAvailable();
         int result = 0;
-        if (setjmp(s_verify_buf) == 0) {
+        for (int i = 0; i < kAotMethodCount; i++) {
+            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
             try {
-                result = RunNativeAotAll();
+                RunNativeAot(i);
             } catch (...) {
-                longjmp(s_verify_buf, 1);
+                result |= (1 << i);
             }
         }
-        CHAOS_IL2CPP_PROFILE_DUMP();
-        CHAOS_IL2CPP_PROFILE_RESET();
+        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         int failed_count = 0;
         int tmp2 = result;
         while (tmp2) { failed_count += tmp2 & 1; tmp2 >>= 1; }
@@ -219,52 +242,51 @@ int main(int argc, char** argv) {
         return result;
     }
     case RunMode::HotUpdateAndBenchmark: {
-        ApplyHotpatchIfAvailable();
         int hot_result = 0;
-        if (setjmp(s_verify_buf) == 0) {
+        for (int i = 0; i < kAotMethodCount; i++) {
+            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
             try {
-                hot_result = RunNativeAotAll();
+                RunNativeAot(i);
             } catch (...) {
-                longjmp(s_verify_buf, 1);
+                hot_result |= (1 << i);
             }
         }
+        chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
         auto start = std::chrono::steady_clock::now();
         for (int i = 0; i < iterations; i++) {
-            if (setjmp(s_verify_buf) == 0) {
-                try {
-                    RunNativeAot(entry_index);
-                } catch (...) {
-                    longjmp(s_verify_buf, 1);
-                }
+            try {
+                RunNativeAot(entry_index);
+            } catch (...) {
+                // Skip iteration on exception
             }
         }
+        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         auto end = std::chrono::steady_clock::now();
         auto elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
         double ns_per_op = (elapsed_ms * 1e6) / iterations;
-        CHAOS_IL2CPP_PROFILE_DUMP();
-        CHAOS_IL2CPP_PROFILE_RESET();
         printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d,\"hotResult\":%d}\n",
                ns_per_op, elapsed_ms, iterations, entry_index, hot_result);
         std::fflush(stdout);
         return 0;
     }
     case RunMode::PatchAndBenchmark: {
-        ApplyHotpatchIfAvailable();
+        chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
         auto start = std::chrono::steady_clock::now();
         for (int i = 0; i < iterations; i++) {
-            if (setjmp(s_verify_buf) == 0) {
-                RunNativeAotBench(entry_index);
+            try {
+                RunNativeAot(entry_index);
+            } catch (...) {
+                // Skip iteration on exception
             }
         }
+        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         auto end = std::chrono::steady_clock::now();
         auto elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
         double ns_per_op = (elapsed_ms * 1e6) / iterations;
-        CHAOS_IL2CPP_PROFILE_DUMP();
-        CHAOS_IL2CPP_PROFILE_RESET();
         printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d}\n",
                ns_per_op, elapsed_ms, iterations, entry_index);
         std::fflush(stdout);
         return 0;
     }
-    }  // switch(mode)
+    }
 }

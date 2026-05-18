@@ -1,7 +1,7 @@
 {
   "family": "string-char-text-core",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-14T19:52:39.789282",
+  "generated_at": "2026-05-19T00:53:51.736153",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -57,10 +57,14 @@
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "principle": "P1",
-      "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available",
+      "status": "ALIGNED",
+      "summary": "avg_speedup=0.0%",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "managed_faster_count": 0,
+        "native_faster_count": 0
+      }
     },
     "p2_template_hygiene": {
       "check_id": "p2_template_hygiene",
@@ -82,11 +86,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 21 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 20 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 21,
-        "entries_with_interrupt_ptr": 21,
+        "table_size": 20,
+        "entries_with_interrupt_ptr": 20,
         "has_hotpatch_module": true
       }
     },
@@ -94,13 +98,14 @@
       "check_id": "p3_patchdata",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "1/1 valid .patchdata files",
+      "summary": "2/2 valid .patchdata files",
       "details": [],
       "evidence": {
-        "patchdata_count": 1,
-        "valid_count": 1,
+        "patchdata_count": 2,
+        "valid_count": 2,
         "stub_patchdata_count": 0,
         "files": [
+          "System.Private.CoreLib\\string-char-text-core\\il2cpp_dist\\patch\\patchdata\\string-char-text-core.patchdata",
           "System.Private.CoreLib\\string-char-text-core\\managed\\patch\\patchdata\\string-char-text-core.patchdata"
         ]
       }
@@ -108,10 +113,10 @@
   },
   "summary": {
     "total": 8,
-    "aligned": 6,
+    "aligned": 7,
     "concern": 1,
     "violation": 0,
-    "not_applicable": 1,
+    "not_applicable": 0,
     "overall": "CONCERN"
   }
 }

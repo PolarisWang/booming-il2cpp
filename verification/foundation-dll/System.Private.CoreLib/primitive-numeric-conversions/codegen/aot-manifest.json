@@ -5,12 +5,6 @@
     {
       "assemblyName": "PrimitiveNumericConversionsSubjects",
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "PrimitiveNumericConversionsSubjects",
-      "subjectKind": "method",
       "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

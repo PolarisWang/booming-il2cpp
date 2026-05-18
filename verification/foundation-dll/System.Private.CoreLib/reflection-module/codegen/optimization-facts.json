@@ -9,11 +9,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Run:System.Void(System.Int32)",
-      "reason": "closed-world-entry"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
@@ -51,45 +46,9 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_FullyQualifiedName:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_1:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_Name:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_1:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_1:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_Name:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_1:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
       "devirtualized": false
     },
     {
@@ -99,51 +58,9 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_Assembly:System.Reflection.Assembly()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_3:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.Module::GetType:System.Type(System.String)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Module::GetType:System.Type(System.String)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_4:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Module::GetTypes:System.Type[]()",
       "devirtualized": false
     },
     {
@@ -161,5 +78,31 @@
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    }
+  ]
 }

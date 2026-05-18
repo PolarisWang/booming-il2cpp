@@ -40,12 +40,6 @@
     },
     {
       "assemblyName": "GarbageCollectionSubjects",
-      "subjectKind": "method",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "GarbageCollectionSubjects",
       "subjectKind": "field",
       "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::_exitCode",
       "reason": "instance-field-state"

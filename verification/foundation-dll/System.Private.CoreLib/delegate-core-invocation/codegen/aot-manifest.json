@@ -5,12 +5,6 @@
     {
       "assemblyName": "DelegateCoreInvocationSubjects",
       "subjectKind": "method",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "DelegateCoreInvocationSubjects",
-      "subjectKind": "method",
       "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
@@ -78,12 +72,6 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {

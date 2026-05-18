@@ -8,138 +8,132 @@
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Run",
-          "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Run:System.Void(System.Int32)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 1,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_0",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_0:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 2,
+          "slot": 1,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_1",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_1:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 3,
+          "slot": 2,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_2",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_2:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 4,
+          "slot": 3,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_3",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_3:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 5,
+          "slot": 4,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_4",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_4:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 6,
+          "slot": 5,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_5",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_5:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 7,
+          "slot": 6,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_6",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_6:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 8,
+          "slot": 7,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_7",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_7:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 9,
+          "slot": 8,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_8",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_8:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 10,
+          "slot": 9,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_9",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_9:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 11,
+          "slot": 10,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_10",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_10:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 12,
+          "slot": 11,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_11",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_11:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 13,
+          "slot": 12,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_12",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_12:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 14,
+          "slot": 13,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_13",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_13:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 15,
+          "slot": 14,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_14",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_14:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 16,
+          "slot": 15,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_15",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_15:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 17,
+          "slot": 16,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_16",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_16:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 18,
+          "slot": 17,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_17",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_17:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 19,
+          "slot": 18,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_18",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_18:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 20,
+          "slot": 19,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_19",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_19:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 21,
+          "slot": 20,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_20",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_20:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 22,
+          "slot": 21,
           "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_21",
           "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_21:System.Void()"
         }

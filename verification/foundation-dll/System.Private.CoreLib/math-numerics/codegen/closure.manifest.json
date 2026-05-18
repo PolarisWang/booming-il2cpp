@@ -2,7 +2,7 @@
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
   "assemblyName": "MathNumericsSubjects",
-  "entrySubjectId": "MathNumericsSubjects/MathNumericsSubjects::Run:System.Void(System.Int32)",
+  "entrySubjectId": "",
   "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/math-numerics/managed/subjects/build-output/MathNumericsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "c2fc91c7-15ea-420a-96dc-f42fc2e426ef",
+  "inputModuleVersionId": "142f2cc5-3d5c-4c97-961a-4fbc2cb10cdd",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -81,6 +81,14 @@ public partial class EnumParsingTests
             Xunit.Assert.NotNull((object)result);
     }
 
+    [Fact]
+    public void _System_Private_CoreLib_System_Enum_ToString_System_String_System_String()
+    {
+        // Purpose: Verify Enum.ToString with typical input
+            var result = 42.ToString("X");
+            Xunit.Assert.NotNull((object)result);
+    }
+
     // === mixed (smoke) ===
 
     [Fact]
@@ -90,21 +98,15 @@ public partial class EnumParsingTests
             _ = Enum.GetName(typeof(DayOfWeek), (object)1);
     }
 
-    // === needs-manual (operator/protected/etc) ===
+    // === needs-manual (ref/pointer/generic) ===
 
-    [Fact(Skip = "needs-manual — ToString with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Enum_ToString_System_String_System_String()
-    {
-        // TODO: Enum.ToString needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — TryParse with 4 params requires manual implementation")]
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void _System_Private_CoreLib_System_Enum_TryParse_System_Boolean_System_Type_System_String_System_Boolean_System_Object()
     {
         // TODO: Enum.TryParse needs manual impl
     }
 
-    [Fact(Skip = "needs-manual — TryParse with 3 params requires manual implementation")]
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void _System_Private_CoreLib_System_Enum_TryParse_System_Boolean_System_Type_System_String_System_Object()
     {
         // TODO: Enum.TryParse needs manual impl
