@@ -315,8 +315,21 @@ static CHAOS_IL2CPP_INTPTR AllocateSingleDelegate(
 }
 
 // Used as a "type_info" marker for delegate type identity.
-static int g_delegate_type_a = 0;
-static int g_delegate_type_b = 0;
+// Must match TypeInfoHot memory layout so PrecisionMark's MarkObject can read
+// stable_id at offset 16 and look up the GcTypeLayout for instance_size=56.
+struct alignas(8) FakeDelegateTypeInfo {
+    const void* parent;       // [0]
+    const void* vtable_array; // [8]
+    uint64_t    stable_id;    // [16]
+    uint32_t    vtable_length;// [24]
+    uint16_t    warm_delta;   // [28]
+    uint8_t     type_shape;   // [30]
+    uint8_t     flags;        // [31]
+};
+static constexpr uint64_t kDelegateTypeAStableId = 0xDEDE00000000A001ULL;
+static constexpr uint64_t kDelegateTypeBStableId = 0xDEDE00000000B001ULL;
+static FakeDelegateTypeInfo g_delegate_type_a = {nullptr, nullptr, kDelegateTypeAStableId};
+static FakeDelegateTypeInfo g_delegate_type_b = {nullptr, nullptr, kDelegateTypeBStableId};
 
 // ════════════════════════════════════════════════════════════════════════════
 // Scenario A1: CreateDelegate long pressure
@@ -1429,8 +1442,10 @@ int main(int argc, char** argv) {
 
     // Register test pseudo-TypeInfo addresses so the PrecisionMark path
     // in MarkObject accepts them as valid TypeInfo pointers.
-    // g_delegate_type_a and g_delegate_type_b are `static int` variables
-    // used as fake type_info markers for test object identity.
+    // g_delegate_type_a and g_delegate_type_b are FakeDelegateTypeInfo structs
+    // (matching TypeInfoHot layout) used as fake type_info markers for test
+    // object identity.  Register GcTypeLayout entries so PrecisionMark can
+    // look up the correct instance_size (56 = sizeof(DelegateObject)).
     auto& layout_registry = GcLayoutRegistry::Instance();
     layout_registry.RegisterTypeInfoRange(
         reinterpret_cast<uintptr_t>(&g_delegate_type_a),
@@ -1438,6 +1453,8 @@ int main(int argc, char** argv) {
     layout_registry.RegisterTypeInfoRange(
         reinterpret_cast<uintptr_t>(&g_delegate_type_b),
         reinterpret_cast<uintptr_t>(&g_delegate_type_b) + sizeof(g_delegate_type_b));
+    layout_registry.Register(kDelegateTypeAStableId, sizeof(LocalDelegate), nullptr, 0);
+    layout_registry.Register(kDelegateTypeBStableId, sizeof(LocalDelegate), nullptr, 0);
 
     OpenReport();
 
