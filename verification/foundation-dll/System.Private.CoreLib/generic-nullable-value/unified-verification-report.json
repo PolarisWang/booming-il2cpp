@@ -2,8 +2,8 @@
   "family": "generic-nullable-value",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T01:01:45",
-  "duration_ms": 16168,
+  "timestamp": "2026-05-19T01:10:31",
+  "duration_ms": 19889,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\generic-nullable-value\\managed\\subjects\\build-output\\GenericNullableValueSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 15760
+      "duration_ms": 19071
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 306
+      "duration_ms": 648
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 100
+      "duration_ms": 168
     }
   },
   "coverage": {

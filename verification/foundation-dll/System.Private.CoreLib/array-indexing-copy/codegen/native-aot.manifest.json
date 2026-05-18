@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ArrayIndexingCopySubjects",
   "entrySubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

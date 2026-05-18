@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ArrayIndexingCopySubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/subjects/build-output/ArrayIndexingCopySubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/subjects/build-output/ArrayIndexingCopySubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ArrayIndexingCopySubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/subjects/build-output/ArrayIndexingCopySubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/subjects/build-output/ArrayIndexingCopySubjects.dll"
     },
     {
       "assemblyName": "System.Collections",
