@@ -35,6 +35,22 @@ extern const uint8_t kPatchData[];
 extern const size_t kPatchDataSize;
 extern const char* const kPatchDataHostClassName;
 
+// Method name mapping: patch data MethodDef names → AOT registry method names
+static const char* const kPatchDataHostMethodNames[] = {
+    nullptr,           // _exitCode (body_size==0, skipped)
+    "Subject_0",       // Method0 → Subject_0
+    "Subject_1",       // Method1 → Subject_1
+    "Subject_2",       // Method2 → Subject_2
+    "Subject_3",       // Method3 → Subject_3
+    "Subject_4",       // Method4 → Subject_4
+    "Subject_5",       // Method5 → Subject_5
+    "Subject_6",       // Method6 → Subject_6
+    "Subject_7",       // Method7 → Subject_7
+    "Subject_8",       // Method8 → Subject_8
+    "Subject_9",       // Method9 → Subject_9
+    "Subject_10",      // Method10 → Subject_10
+};
+
 // Codegen-emitted registration structs (from native-aot.generated.cpp)
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
 extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
@@ -64,7 +80,7 @@ static void exception_fallback() {
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
     if (kPatchDataSize > 0u) {
         auto* patch_ctx = chaos::il2cpp::runtime_core::ApplyPatchFromMemory(
-            kPatchData, kPatchDataSize, kPatchDataHostClassName);
+            kPatchData, kPatchDataSize, kPatchDataHostClassName, kPatchDataHostMethodNames);
         if (patch_ctx == nullptr) {
             std::fprintf(stderr, "WARN: ApplyPatchFromMemory returned null (no patches applied)\n");
         } else {
@@ -76,14 +92,26 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
     return nullptr;
 }
 
+// ── SEH-guarded bridge init ────────────────────────────────────────────────
+// Bootstraps the runtime inside a SEH guard so we can detect startup AV.
+static bool InitRuntimeSehGuarded() noexcept {
+    __try {
+        auto* bridge = chaos_codegen_get_bridge_v0();
+        if (!bridge) return false;
+        bridge->register_codegen(
+            &chaos_codegen_code_registration,
+            &chaos_codegen_metadata_registration,
+            &chaos_codegen_options);
+        bridge->bootstrap_runtime();
+        return true;
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        std::fprintf(stderr, "FATAL: SEH 0x%08X in InitRuntimeSehGuarded\n", GetExceptionCode());
+        return false;
+    }
+}
+
 int main(int argc, char** argv) {
-    auto* bridge = chaos_codegen_get_bridge_v0();
-    if (!bridge) return -1;
-    bridge->register_codegen(
-        &chaos_codegen_code_registration,
-        &chaos_codegen_metadata_registration,
-        &chaos_codegen_options);
-    bridge->bootstrap_runtime();
+    if (!InitRuntimeSehGuarded()) return -1;
 
     // Set TLS to non-null sentinels so RaiseManagedException gets past its
     // first guard (runtime == nullptr / thread == nullptr check).  No
@@ -139,6 +167,8 @@ int main(int argc, char** argv) {
                 longjmp(s_verify_buf, 1);
             }
         }
+        CHAOS_IL2CPP_PROFILE_DUMP();
+        CHAOS_IL2CPP_PROFILE_RESET();
         int failed_count = 0;
         int tmp = result;
         while (tmp) { failed_count += tmp & 1; tmp >>= 1; }
@@ -176,6 +206,8 @@ int main(int argc, char** argv) {
                 longjmp(s_verify_buf, 1);
             }
         }
+        CHAOS_IL2CPP_PROFILE_DUMP();
+        CHAOS_IL2CPP_PROFILE_RESET();
         int failed_count = 0;
         int tmp2 = result;
         while (tmp2) { failed_count += tmp2 & 1; tmp2 >>= 1; }
@@ -210,6 +242,8 @@ int main(int argc, char** argv) {
         auto end = std::chrono::steady_clock::now();
         auto elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
         double ns_per_op = (elapsed_ms * 1e6) / iterations;
+        CHAOS_IL2CPP_PROFILE_DUMP();
+        CHAOS_IL2CPP_PROFILE_RESET();
         printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d,\"hotResult\":%d}\n",
                ns_per_op, elapsed_ms, iterations, entry_index, hot_result);
         std::fflush(stdout);
@@ -228,10 +262,13 @@ int main(int argc, char** argv) {
         auto end = std::chrono::steady_clock::now();
         auto elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
         double ns_per_op = (elapsed_ms * 1e6) / iterations;
+        CHAOS_IL2CPP_PROFILE_DUMP();
+        CHAOS_IL2CPP_PROFILE_RESET();
         printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d}\n",
                ns_per_op, elapsed_ms, iterations, entry_index);
         std::fflush(stdout);
         return 0;
     }
+    }  // switch(mode)
     }
 }

@@ -367,6 +367,9 @@ class HotUpdateE2ETests(unittest.TestCase):
             "auto-bridge-byref=42",
             "auto-bridge-pointer=42",
             "auto-bridge-ref-struct=42",
+            "auto-bridge-int64-unary=42",
+            "auto-bridge-float-unary=5",
+            "auto-bridge-double-unary=5",
             "auto-bridge-unsupported=unsupported signature",
         ]:
             self.assertIn(required_fragment, auto_bridge_output)

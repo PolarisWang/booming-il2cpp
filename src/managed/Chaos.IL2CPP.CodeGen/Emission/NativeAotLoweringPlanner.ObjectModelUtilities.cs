@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
@@ -177,6 +177,31 @@ public sealed partial class NativeAotLoweringPlanner
 					if (flag && targetReference.DeclaringTypeShape == AotCoreIrTypeShapeKind.InterfaceType && !string.IsNullOrEmpty(targetReference.DeclaringTypeSubjectId))
 					{
 						hashSet.Add(targetReference.DeclaringTypeSubjectId);
+					}
+					// Collect interface SubjectIds from ImplementedInterfaceSubjectIds on Type references.
+					// This is the primary way interface types appear in the AOT IR -- as interfaces
+					// implemented by concrete reference/value types. Without this, the interface
+					// devirtualization branch in InvocationPlanning.cs would be dead code.
+					if (targetReference.Kind == AotCoreIrReferenceKind.Type && targetReference.ImplementedInterfaceSubjectIds is { Count: > 0 })
+					{
+						foreach (string implementedInterfaceSubjectId in targetReference.ImplementedInterfaceSubjectIds)
+						{
+							if (!string.IsNullOrEmpty(implementedInterfaceSubjectId))
+							{
+								hashSet.Add(implementedInterfaceSubjectId);
+							}
+						}
+					}
+					// Also collect from array element ImplementedInterfaceSubjectIds.
+					if (targetReference.ArrayElementImplementedInterfaceSubjectIds is { Count: > 0 })
+					{
+						foreach (string arrayElementImplementedInterfaceSubjectId in targetReference.ArrayElementImplementedInterfaceSubjectIds)
+						{
+							if (!string.IsNullOrEmpty(arrayElementImplementedInterfaceSubjectId))
+							{
+								hashSet.Add(arrayElementImplementedInterfaceSubjectId);
+							}
+						}
 					}
 				}
 			}
@@ -663,10 +688,10 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		return typeShape switch
 		{
-			AotCoreIrTypeShapeKind.ReferenceType => 1, 
-			AotCoreIrTypeShapeKind.ValueType => 2, 
-			AotCoreIrTypeShapeKind.InterfaceType => 3, 
-			_ => 0, 
+			AotCoreIrTypeShapeKind.ReferenceType => 1,
+			AotCoreIrTypeShapeKind.ValueType => 2,
+			AotCoreIrTypeShapeKind.InterfaceType => 3,
+			_ => 0,
 		};
 	}
 
@@ -766,8 +791,8 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		return value.Kind switch
 		{
-			CustomAttributeLiteralKind.Null => "0", 
-			CustomAttributeLiteralKind.Boolean => ((bool)value.Value!) ? "static_cast<CHAOS_IL2CPP_INTPTR>(1)" : "0", 
+			CustomAttributeLiteralKind.Null => "0",
+			CustomAttributeLiteralKind.Boolean => ((bool)value.Value!) ? "static_cast<CHAOS_IL2CPP_INTPTR>(1)" : "0",
 			CustomAttributeLiteralKind.Byte => $"static_cast<CHAOS_IL2CPP_INTPTR>({(byte)value.Value!})",
 			CustomAttributeLiteralKind.SByte => $"static_cast<CHAOS_IL2CPP_INTPTR>({(sbyte)value.Value!})",
 			CustomAttributeLiteralKind.Int16 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(short)value.Value!})",
@@ -781,7 +806,7 @@ public sealed partial class NativeAotLoweringPlanner
 			CustomAttributeLiteralKind.Double => $"ChaosStoreFloat64({(double)value.Value!})",
 			CustomAttributeLiteralKind.String => "chaos_reflection_create_string_literal(" + ToCppStringLiteral((string)value.Value!) + ")",
 			CustomAttributeLiteralKind.Type or CustomAttributeLiteralKind.Enum => "0",
-			_ => throw new NotSupportedException($"unsupported custom attribute literal kind '{value.Kind}'."), 
+			_ => throw new NotSupportedException($"unsupported custom attribute literal kind '{value.Kind}'."),
 		};
 	}
 

@@ -18,6 +18,7 @@ file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*/generated/native-aot.generat
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/interpreter/fast_dispatch.cpp"
     ${CHAOS_CODEGEN_CPP}
 )
 
@@ -45,6 +46,7 @@ set(CHAOS_LIB_DIRS
     "${CHAOS_NATIVE_BUILD}/src/native/interpreter/RelWithDebInfo"
     "${CHAOS_NATIVE_BUILD}/src/native/support/RelWithDebInfo"
     "${CHAOS_NATIVE_BUILD}/src/native/hot-update/RelWithDebInfo"
+    "${CHAOS_NATIVE_BUILD}/src/native/codegen/RelWithDebInfo"
     "${CHAOS_NATIVE_BUILD}/fmt_build/RelWithDebInfo"
 )
 
@@ -64,4 +66,5 @@ target_include_directories(entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_link_directories(entry PRIVATE ${CHAOS_LIB_DIRS})
 target_compile_options(entry PRIVATE /EHa)
 target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_CHECK)  # chaos-il2cpp config tier
+target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_PROFILE_ENABLED=1)
 target_link_libraries(entry PRIVATE ${CHAOS_RUNTIME_LIBS})

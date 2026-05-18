@@ -1335,6 +1335,82 @@ public sealed partial class NativeAotLoweringPlanner
         var result = ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetDelegateRuntimeSupportTemplate(), model);
         builder.AppendLine(result);
+
+        // ── Emit delegate thunk registrations (for Marshal.GetFunctionPointerForDelegate) ──
+        // Build per-delegate-type thunk entries for the DelegateThunks template.
+        var delegateThunkModels = delegateTypeSubjectIds
+            .Select(subjectId =>
+            {
+                // Resolve param_count from the delegate's Invoke method signature when available.
+                int paramCount = 0;
+                if (_methodsByDeclaringType.TryGetValue(subjectId, out var methods))
+                {
+                    var invokeMethod = methods.FirstOrDefault(m =>
+                        string.Equals(GetMethodName(m.SubjectId), "Invoke", StringComparison.Ordinal));
+                    if (invokeMethod != null)
+                    {
+                        paramCount = invokeMethod.ParameterAbis.Count;
+                    }
+                }
+                if (paramCount == 0)
+                {
+                    // Fallback: extract from Func/Action generic type name.
+                    paramCount = ExtractDelegateArityFromSubjectId(subjectId);
+                }
+                if (paramCount > 8) paramCount = 8;
+
+                var thunkModel = new ScriptObject
+                {
+                    ["type_id"] = subjectId,
+                    ["has_custom_thunk"] = false,
+                    ["thunk_symbol"] = "NativeDfnThunkArity" + paramCount,
+                    ["native_type_symbol"] = GetNativeTypeSymbol(subjectId),
+                    ["param_count"] = paramCount,
+                };
+                return thunkModel;
+            })
+            .ToArray();
+
+        if (delegateThunkModels.Length > 0)
+        {
+            var thunkResult = ScribanTemplateRenderer.RenderTemplate(
+                NativeAotTemplateCatalog.GetDelegateThunksTemplate(),
+                new ScriptObject { ["delegate_thunks"] = delegateThunkModels });
+            builder.AppendLine(thunkResult);
+        }
+    }
+
+    private static int ExtractDelegateArityFromSubjectId(string subjectId)
+    {
+        // SubjectId format: "Assembly/TypeName`N[[...]]"
+        var slash = subjectId.IndexOf('/');
+        if (slash < 0) return 0;
+        var typeName = subjectId.Substring(slash + 1);
+
+        var backtick = typeName.IndexOf('`');
+        if (backtick < 0) return 0;
+
+        var arityStr = string.Empty;
+        for (int i = backtick + 1; i < typeName.Length; i++)
+        {
+            if (char.IsDigit(typeName[i]))
+                arityStr += typeName[i];
+            else
+                break;
+        }
+        if (string.IsNullOrEmpty(arityStr) || !int.TryParse(arityStr, out int arity))
+            return 0;
+
+        var baseName = typeName.Substring(0, backtick);
+        var lastDot = baseName.LastIndexOf('.');
+        var shortName = lastDot >= 0 ? baseName.Substring(lastDot + 1) : baseName;
+
+        return shortName switch
+        {
+            "Func" when arity >= 1 => arity - 1,
+            "Action" => arity,
+            _ => 0,
+        };
     }
 
     private IReadOnlyList<string> CollectReachableDelegateTypeSubjectIds(

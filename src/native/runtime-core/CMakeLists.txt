@@ -73,6 +73,8 @@ add_library(chaos_runtime_core STATIC
     generic_method_instantiation.h
     aot_core_ir_reader.cpp
     aot_core_ir_reader.h
+    core/delegate_helpers.cpp
+    core/delegate_helpers.h
     method_table.cpp
     method_table.h
     reflection_api.cpp
@@ -130,6 +132,8 @@ add_library(chaos_runtime_core STATIC
     exception_api.cpp
     exception_helpers.h
     exception_helpers.cpp
+    tier_manager.h
+    tier_manager.cpp
     )
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)

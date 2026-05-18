@@ -14,6 +14,8 @@
 #include "exception_helpers.h"
 #include "thread_state.h"
 
+#include "chaos/profile.h"
+
 #include <cstdio>
 #include <cstdlib>
 #include <cstdint>
@@ -193,57 +195,9 @@ static bool IsAbortingMethod(uint32_t idx) {
     return idx <= 10;
 }
 
-// In-place patch data fixer: renames MethodN -> Subject_N in the string heap.
-// The patch DLL and AOT codegen use different naming conventions
-// (Method0..Method10 vs Subject_0..Subject_10). This fixer bridges the gap
-// so ApplyPatchFromMemory can resolve all methods via HotpatchNameRegistry.
-// Returns a heap-allocated buffer (caller must free via std::free).
-static uint8_t* FixMethodNamesInPatchData(const uint8_t* data, size_t size, size_t& out_size) {
-    auto* hdr = reinterpret_cast<const PatchDataHeader*>(data);
-    if (hdr == nullptr || hdr->method_def_offset == 0) { out_size = size; return nullptr; }
-
-    // Allocate new buffer (extra 256 bytes for longer "Subject_N" names).
-    out_size = size + 256;
-    auto* buf = static_cast<uint8_t*>(std::malloc(out_size));
-    std::memcpy(buf, data, size);
-
-    auto* new_hdr = reinterpret_cast<PatchDataHeader*>(buf);
-    auto* methods = reinterpret_cast<PatchMethodDefEntry*>(buf + new_hdr->method_def_offset);
-    const char* old_string_base = reinterpret_cast<const char*>(data) + new_hdr->string_heap_offset;
-
-    uint32_t write_off = static_cast<uint32_t>(size);  // append new strings after original data
-    uint32_t count = new_hdr->method_def_count;
-
-    for (uint32_t i = 0; i < count; i++) {
-        if (methods[i].name_offset == 0) continue;
-        const char* name = old_string_base + methods[i].name_offset;
-
-        // Match "Method" followed by one or more digits.
-        const char* digits = nullptr;
-        if (std::strncmp(name, "Method", 6) == 0) {
-            digits = name + 6;
-            if (*digits >= '0' && *digits <= '9') {
-                while (digits[1] >= '0' && digits[1] <= '9') digits++;
-            } else {
-                digits = nullptr;
-            }
-        }
-
-        if (digits != nullptr) {
-            char new_name[64];
-            int len = std::snprintf(new_name, sizeof(new_name), "Subject_%s", name + 6);
-            if (len < 0) continue;
-
-            size_t name_bytes = static_cast<size_t>(len) + 1;
-            std::memcpy(buf + write_off, new_name, name_bytes);
-            methods[i].name_offset = write_off - new_hdr->string_heap_offset;
-            write_off += static_cast<uint32_t>(name_bytes);
-        }
-    }
-
-    out_size = write_off;
-    return buf;
-}
+// ---------------------------------------------------------------
+// Forward declarations: host methods (real API calls via CodeGen)
+// ---------------------------------------------------------------
 
 int main() {
     using chaos::il2cpp::bootstrap::PeekBootstrapState;
@@ -308,17 +262,30 @@ int main() {
         }
     }
 
-    // ── Fix patch data method names (MethodN → Subject_N) ────────
-    size_t fixed_size = 0;
-    uint8_t* fixed_patch = FixMethodNamesInPatchData(kPatchData, kPatchDataSize, fixed_size);
-    const uint8_t* patch_data = (fixed_patch != nullptr) ? fixed_patch : kPatchData;
-    size_t patch_size = (fixed_patch != nullptr) ? fixed_size : kPatchDataSize;
+    // ── Method name mapping (patch data MethodDef -> AOT registry name) ──
+    // Patch data MethodDef names (Method0..Method10) don't match AOT
+    // hotpatch registry names (Subject_0..Subject_10).
+    // Index matches MethodDef index; nullptr means skip override (use
+    // the patch data's string heap name).
+    const char* kMethodNameMap[] = {
+        nullptr,           // _exitCode (body_size==0, skipped)
+        "Subject_0",       // Method0 -> Subject_0
+        "Subject_1",       // Method1 -> Subject_1
+        "Subject_2",       // Method2 -> Subject_2
+        "Subject_3",       // Method3 -> Subject_3
+        "Subject_4",       // Method4 -> Subject_4
+        "Subject_5",       // Method5 -> Subject_5
+        "Subject_6",       // Method6 -> Subject_6
+        "Subject_7",       // Method7 -> Subject_7
+        "Subject_8",       // Method8 -> Subject_8
+        "Subject_9",       // Method9 -> Subject_9
+        "Subject_10",      // Method10 -> Subject_10
+    };
 
     // ── Hotpatch dispatch via ApplyPatchFromMemory ────────────────
-    PatchContext* patch_ctx = ApplyPatchFromMemory(patch_data, patch_size, "BoxingUnboxingCastsSubjects");
+    PatchContext* patch_ctx = ApplyPatchFromMemory(kPatchData, kPatchDataSize, "BoxingUnboxingCastsSubjects", kMethodNameMap);
     if (patch_ctx == nullptr) {
         std::fprintf(stderr, "FATAL: ApplyPatchFromMemory failed\n");
-        std::free(fixed_patch);
         return 1;
     }
     uint32_t d3_patched_count = patch_ctx->method_count;
@@ -412,7 +379,6 @@ int main() {
     if (patch_ctx != nullptr) {
         if (!Unpatch(patch_ctx)) {
             std::fprintf(stderr, "FATAL: Unpatch failed\n");
-            std::free(fixed_patch);
             return 1;
         }
 
@@ -440,6 +406,10 @@ int main() {
             }
         }
     }
+
+    // ── Profile dump ──────────────────────────────────────────
+    CHAOS_IL2CPP_PROFILE_DUMP();
+    CHAOS_IL2CPP_PROFILE_RESET();
 
     // ── Emit JSON results ────────────────────────────────────
     std::printf("{\n");
@@ -481,6 +451,5 @@ int main() {
     std::printf("  ]\n");
     std::printf("}\n");
 
-    std::free(fixed_patch);
     return (failed_count == 0u) ? 0 : 1;
 }

@@ -416,3 +416,203 @@ def run_gc_stress_mode(
         errors=errors,
         config={"mode": mode, "subjectBinary": subject_binary},
     )
+
+
+# ---------------------------------------------------------------------------
+# Delegate Stress runner
+# ---------------------------------------------------------------------------
+
+def run_delegate_stress(
+    repo_root: Path,
+    *,
+    build: bool = False,
+    quick: bool = False,
+    scenario: str | None = None,
+) -> list[StressRunResult]:
+    """Run the chaos_delegate_stress_test binary.
+
+    Returns a list of per-scenario StressRunResult (one per scenario),
+    plus an aggregate result as the last entry.
+    """
+    binary = _find_binary(repo_root, "chaos_delegate_stress_test")
+    if binary is None:
+        return [StressRunResult(
+            status="error",
+            test_name="delegate-stress",
+            errors=["chaos_delegate_stress_test binary not found. Build with --build flag first."],
+        )]
+
+    if build:
+        b = _run(["cmake", "--build", str(repo_root / "artifacts" / "presets" / "debug"),
+                   "--target", "chaos_delegate_stress_test", "--config", "Debug"])
+        if b.returncode != 0:
+            return [StressRunResult(
+                status="error",
+                test_name="delegate-stress",
+                errors=[f"Build failed: {b.stderr[:500]}"],
+                output={"stdout": b.stdout[:1000], "stderr": b.stderr[:1000]},
+            )]
+
+    # Assemble the command
+    cmd = [str(binary)]
+    if scenario:
+        cmd.append(scenario)
+
+    env = None
+    if quick:
+        env = {**os.environ, "CHAOS_IL2CPP_STRESS_SCALE": "50"}
+
+    result = _run(cmd, timeout=600, env=env)
+    if result.returncode != 0 and result.returncode != 1:
+        return [StressRunResult(
+            status="error",
+            test_name="delegate-stress",
+            errors=[f"Binary crashed (RC={result.returncode})"],
+            output={"stdout": result.stdout[:2000], "stderr": result.stderr[:2000]},
+        )]
+
+    # Try to parse the structured JSON report
+    report_dir = repo_root / "artifacts" / "native-runtime-core-test" / "reports"
+    report_files = sorted(report_dir.glob("delegate_stress_report_*.json")) if report_dir.exists() else []
+    report_path = report_files[-1] if report_files else None
+
+    if report_path:
+        try:
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+            scenarios = report.get("scenarios", [])
+            results: list[StressRunResult] = []
+            for s in scenarios:
+                config: dict[str, Any] = {}
+                if quick:
+                    config["quick"] = True
+                if scenario:
+                    config["scenario"] = scenario
+                results.append(StressRunResult(
+                    status="passed" if s.get("passed", False) else "failed",
+                    test_name="delegate-stress",
+                    scenario_name=s.get("name", "unknown"),
+                    metrics={
+                        "allocCount": s.get("alloc_count", 0),
+                        "bytesAllocated": s.get("bytes_allocated", 0),
+                        "patternVerificationFailures": s.get("pattern_verification_failures", 0),
+                        "combineCount": s.get("combine_count", 0),
+                        "removeCount": s.get("remove_count", 0),
+                        "invokeCount": s.get("invoke_count", 0),
+                        "youngCollections": s.get("gc_stats", {}).get("young_collections", 0),
+                        "youngAvgPauseNs": s.get("gc_stats", {}).get("young_avg_pause_ns", 0),
+                        "fullCollections": s.get("gc_stats", {}).get("full_collections", 0),
+                        "fullAvgPauseNs": s.get("gc_stats", {}).get("full_avg_pause_ns", 0),
+                        "activeRegionsAfter": s.get("active_regions_after", 0),
+                    },
+                    output={"reportPath": str(report_path)},
+                    config=config,
+                ))
+
+            # Aggregate summary
+            total = len(scenarios)
+            passed = sum(1 for s in scenarios if s.get("passed", False))
+            results.append(StressRunResult(
+                status="passed" if passed == total else "failed",
+                test_name="delegate-stress",
+                scenario_name="__summary__",
+                metrics={"totalScenarios": total, "passed": passed, "failed": total - passed},
+                config={"quick": quick},
+            ))
+            return results
+        except (json.JSONDecodeError, KeyError) as e:
+            pass  # fall through to console parsing
+
+    # Fallback: parse console output
+    return [StressRunResult(
+        status="passed" if result.returncode == 0 else "failed",
+        test_name="delegate-stress",
+        scenario_name="console",
+        output={"stdout": result.stdout[:2000], "stderr": result.stderr[:2000]},
+        config={"quick": quick, "scenario": scenario},
+    )]
+
+
+# ---------------------------------------------------------------------------
+# Delegate Stress GC Mode runner
+# ---------------------------------------------------------------------------
+
+def run_delegate_stress_gc_mode(
+    repo_root: Path,
+    *,
+    mode: int = 1,
+    build: bool = False,
+    quick: bool = False,
+    scenario: str | None = None,
+) -> StressRunResult:
+    """Run delegate stress with CHAOS_GC_STRESS_MODE set.
+
+    GC stress modes:
+      mode=1 — full GC after every allocation
+      mode=2 — heap verification after every safepoint
+      mode=3 — both modes combined
+    """
+    binary = _find_binary(repo_root, "chaos_delegate_stress_test")
+    if binary is None:
+        return StressRunResult(
+            status="error",
+            test_name="delegate-stress-gc-mode",
+            errors=["chaos_delegate_stress_test binary not found."],
+        )
+
+    if build:
+        b = _run(["cmake", "--build", str(repo_root / "artifacts" / "presets" / "debug"),
+                   "--target", "chaos_delegate_stress_test", "--config", "Debug"])
+        if b.returncode != 0:
+            return StressRunResult(
+                status="error", test_name="delegate-stress-gc-mode",
+                errors=[f"Build failed: {b.stderr[:500]}"],
+            )
+
+    mode_names = {1: "alloc-stress", 2: "verify-stress", 3: "combined-stress"}
+    mode_name = mode_names.get(mode, f"mode-{mode}")
+
+    cmd = [str(binary)]
+    if scenario:
+        cmd.append(scenario)
+
+    env = {**os.environ, "CHAOS_GC_STRESS_MODE": str(mode)}
+    if quick:
+        env["CHAOS_IL2CPP_STRESS_SCALE"] = "50"
+
+    result = _run(cmd, timeout=300, env=env)
+
+    status = "passed"
+    errors: list[str] = []
+    metrics: dict[str, Any] = {"mode": mode}
+
+    if result.returncode != 0:
+        if result.returncode == 1:
+            status = "failed"
+            errors.append("Delegate stress reported failures under GC stress mode")
+        elif result.returncode == 3:
+            status = "failed"
+            errors.append("Assertion failure detected under GC stress mode")
+        else:
+            status = "error"
+            errors.append(f"Crashed under GC stress mode (RC={result.returncode})")
+
+    pass_count = len(re.findall(r'\bPASS\b', result.stdout))
+    fail_count = len(re.findall(r'\bFAIL\b', result.stdout))
+    if pass_count > 0 or fail_count > 0:
+        metrics["passCount"] = pass_count
+        metrics["failCount"] = fail_count
+
+    if "assert" in result.stdout.lower() or "assert" in result.stderr.lower():
+        if status == "passed":
+            status = "failed"
+        errors.append("Assertion message detected in output")
+
+    return StressRunResult(
+        status=status,
+        test_name="delegate-stress-gc-mode",
+        scenario_name=mode_name,
+        metrics=metrics,
+        output={"stdout": result.stdout[:2000], "stderr": result.stderr[:2000]},
+        errors=errors,
+        config={"mode": mode, "quick": quick, "scenario": scenario},
+    )

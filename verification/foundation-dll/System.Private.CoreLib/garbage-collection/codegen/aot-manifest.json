@@ -5,12 +5,6 @@
     {
       "assemblyName": "GarbageCollectionSubjects",
       "subjectKind": "method",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "GarbageCollectionSubjects",
-      "subjectKind": "method",
       "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
@@ -42,6 +36,12 @@
       "assemblyName": "GarbageCollectionSubjects",
       "subjectKind": "method",
       "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)",
       "reason": "generated-direct-call"
     },
     {

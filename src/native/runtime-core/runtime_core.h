@@ -155,6 +155,7 @@ ResolveStructMarshallingDescriptor(const TypeInfo* type) noexcept;
 // ── Sub-headers providing additional runtime_core function declarations ──
 // Each opens its own namespace chaos::il2cpp::runtime_core { ... } block.
 #include "gc_helpers.h"
+#include "gc_api.h"
 #include "thread_state.h"
 #include "engine_binding.h"
 #include "char_classification.h"

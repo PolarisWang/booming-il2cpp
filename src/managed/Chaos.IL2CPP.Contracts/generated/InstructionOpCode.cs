@@ -103,6 +103,7 @@ public enum InstructionOpCode : int
     Cpblk = 96,
     InitBlk = 97,
     CallVirtConstrained = 98,
+    Calli = 99,
 }
 #pragma warning restore CS1591
 

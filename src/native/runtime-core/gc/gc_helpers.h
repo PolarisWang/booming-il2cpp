@@ -72,6 +72,13 @@ extern "C" void chaos_gc_collect() noexcept;
 /// Wait for pending finalizers (System.GC.WaitForPendingFinalizers()).
 extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept;
 
+/// GC.KeepAlive — prevents the GC from collecting the object before
+/// this call.  The generated code emits a direct call to this function
+/// from codegen wrappers for System.GC.KeepAlive.  No-op in CRAG (no
+/// precise concurrent GC), but serves as the observable side-effect
+/// boundary that the JIT/GC uses for lifetime extension.
+extern "C" void chaos_gc_keepalive(CHAOS_IL2CPP_INTPTR obj) noexcept;
+
 /// Get the total allocated managed memory (System.GC.GetTotalMemory()).
 /// Register external memory pressure (System.GC.AddMemoryPressure()).
 /// Unregister external memory pressure (System.GC.RemoveMemoryPressure()).

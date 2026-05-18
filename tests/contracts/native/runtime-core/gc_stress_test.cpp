@@ -268,8 +268,17 @@ struct WorkerResult {
 static bool SetupTlsNursery() {
     // With shared young gen, no per-thread TLS nursery setup needed.
     // Ensure the shared young generation is initialized once.
+    // Double-checked locking prevents TOCTOU race (multiple threads racing
+    // to call InitYoungGeneration() simultaneously).
     if (g_young_gen.region.load(std::memory_order_acquire) == nullptr) {
-        InitYoungGeneration();
+        static std::mutex s_init_mutex;
+        std::lock_guard<std::mutex> lock(s_init_mutex);
+        if (g_young_gen.region.load(std::memory_order_acquire) == nullptr) {
+            fprintf(stderr, "[DBG] SetupTlsNursery: first call, calling InitYoungGeneration\n");
+            InitYoungGeneration();
+            fprintf(stderr, "[DBG] SetupTlsNursery: InitYoungGeneration done, region=%p\n",
+                    (void*)g_young_gen.region.load(std::memory_order_relaxed));
+        }
     }
     return true;
 }
@@ -1343,8 +1352,10 @@ static thread_local PinnedVerifySlot tls_pinned_slots[32];
 static thread_local int tls_pinned_slot_count = 0;
 
 static void worker_j(int thread_index, WorkerResult* result) {
+    fprintf(stderr, "[DBG] worker_j(%d) starting\n", thread_index);
     RegisterWorker();
     threading::EnterCooperativeMode();
+    fprintf(stderr, "[DBG] worker_j(%d): registered, before SetupTlsNursery\n", thread_index);
     if (!SetupTlsNursery()) {
         std::snprintf(result->error_message, sizeof(result->error_message),
                       "AllocateNursery failed for thread %d", thread_index);
@@ -1365,7 +1376,9 @@ static void worker_j(int thread_index, WorkerResult* result) {
 
         if (is_pinned) {
             // Pinned allocation — allocate from old-gen directly.
+            if (i == 0 && thread_index == 0) fprintf(stderr, "[DBG] worker_j(%d) first pinned alloc\n", thread_index);
             p = g_old_gen.Allocate(size, true);
+            if (i == 0 && thread_index == 0) fprintf(stderr, "[DBG] worker_j(%d) first pinned done: %p\n", thread_index, p);
             if (p) {
                 g_old_gen.AddPinnedRoot(p, size);
                 if (tls_pinned_slot_count < 32) {
@@ -1374,7 +1387,9 @@ static void worker_j(int thread_index, WorkerResult* result) {
             }
         } else {
             // Normal nursery allocation.
+            if (i == 1 && thread_index == 0) fprintf(stderr, "[DBG] worker_j(%d) first nursery alloc\n", thread_index);
             p = NurseryAllocate(size);
+            if (i == 1 && thread_index == 0) fprintf(stderr, "[DBG] worker_j(%d) first nursery done: %p\n", thread_index, p);
         }
 
         if (!p) continue;
@@ -1385,12 +1400,21 @@ static void worker_j(int thread_index, WorkerResult* result) {
         if ((i % 8) == 7) {
             threading::SafepointPoll();
         }
+
+        // Progress trace every 16 iterations for thread 0.
+        if ((i % 16) == 15 && thread_index == 0) {
+            fprintf(stderr, "[DBG] worker_j(%d) progress: i=%d/%d\n", thread_index, i + 1, kJAllocsPerThread);
+        }
     }
 
     // Full GC to exercise pinned root scanning.
+    fprintf(stderr, "[DBG] worker_j(%d) allocation loop done, before GC collect\n", thread_index);
     uint32_t gen = threading::RequestGlobalSafepoint();
+    fprintf(stderr, "[DBG] worker_j(%d) safepoint acquired\n", thread_index);
     g_old_gen.Collect(nullptr, nullptr);
+    fprintf(stderr, "[DBG] worker_j(%d) GC collect done\n", thread_index);
     threading::ReleaseGlobalSafepoint(gen);
+    fprintf(stderr, "[DBG] worker_j(%d) safepoint released\n", thread_index);
 
     // Verify pinned objects still have correct addresses and patterns.
     for (int s = 0; s < tls_pinned_slot_count; s++) {
@@ -1411,9 +1435,12 @@ static void worker_j(int thread_index, WorkerResult* result) {
 }
 
 static bool RunScenarioJ(GcStatsSnapshot* stats_out) {
+    fprintf(stderr, "[DBG] RunScenarioJ starting\n");
     printf("\n  ── Scenario J: Mixed pinned + unpinned stress (%d×%d) ──\n",
            kJWorkers, kJAllocsPerThread);
+    fprintf(stderr, "[DBG] RunScenarioJ: before SnapshotGcStats\n");
     GcStatsSnapshot before = SnapshotGcStats();
+    fprintf(stderr, "[DBG] RunScenarioJ: after SnapshotGcStats, before worker creation\n");
 
     std::vector<WorkerResult> results(kJWorkers);
     std::vector<std::thread> workers;
@@ -1421,6 +1448,7 @@ static bool RunScenarioJ(GcStatsSnapshot* stats_out) {
     for (int i = 0; i < kJWorkers; ++i)
         workers.emplace_back(worker_j, i, &results[i]);
 
+    fprintf(stderr, "[DBG] RunScenarioJ: workers created, before join\n");
     for (auto& w : workers) { if (w.joinable()) w.join(); }
 
     *stats_out = SnapshotGcStats();
@@ -1822,8 +1850,10 @@ struct ScenarioInfo {
 };
 
 /// Run all scenarios.  If @a start_from is > 0, skips earlier scenarios.
+/// If @a end_at is <= num_scenarios, stops after that scenario (exclusive).
 /// Supports incremental validation without pre-existing scenario hangs.
-static int run_scenarios(int start_from = 0) {
+static int run_scenarios(int start_from = 0, int end_at = 14) {
+    fprintf(stderr, "[DBG] run_scenarios(start_from=%d, end_at=%d)\n", start_from, end_at);
     ScenarioInfo scenarios[] = {
         {"baseline_concurrent",    RunScenarioA, kNumWorkerThreads, kAllocationsPerThread},
         {"mixed_size",             RunScenarioB, kNumWorkerThreads, kAllocationsPerThread},
@@ -1847,7 +1877,8 @@ static int run_scenarios(int start_from = 0) {
 
     OpenReport();
 
-    for (int s = start_from; s < num_scenarios; ++s) {
+    for (int s = start_from; s < end_at; ++s) {
+        fprintf(stderr, "[DBG] Starting scenario %d: %s\n", s, scenarios[s].name);
         printf("\nScenario %d/%d: %s\n", s + 1, num_scenarios, scenarios[s].name);
 
         // Snapshot before.
@@ -1940,13 +1971,17 @@ static LONG WINAPI CrashHandler(EXCEPTION_POINTERS* ep) {
 
 int main(int argc, char** argv) {
     // Optional arguments:
-    //   --new-only   Run only scenarios L, M, N (indices 11-13)
-    //                Useful to avoid pre-existing hangs in A-K.
-    //   --all        Run all 14 scenarios (default).
+    //   --new-only     Run only scenarios L, M, N (indices 11-13)
+    //                  Useful to avoid pre-existing hangs in A-K.
+    //   --scenario N   Run a single scenario by index (0=A, 1=B, ..., 13=N).
+    //   --all          Run all 14 scenarios (default).
     int start_from = 0;
+    int single_scenario = -1;  // -1 = run all (from start_from)
     for (int a = 1; a < argc; a++) {
         if (std::strcmp(argv[a], "--new-only") == 0) {
             start_from = 11;  // Scenario L, M, N only
+        } else if (std::strcmp(argv[a], "--scenario") == 0 && a + 1 < argc) {
+            single_scenario = std::atoi(argv[++a]);
         }
     }
     // Use fully-buffered stdout with 64KB buffer to avoid pipe blocking.
@@ -1964,7 +1999,12 @@ int main(int argc, char** argv) {
 
     ApplyStressScale();
 
-    int failures = run_scenarios(start_from);
+    int failures;
+    if (single_scenario >= 0) {
+        failures = run_scenarios(single_scenario, single_scenario + 1);
+    } else {
+        failures = run_scenarios(start_from);
+    }
 
     fprintf(stderr, "[DBG] run_scenarios returned %d\n", failures);
 

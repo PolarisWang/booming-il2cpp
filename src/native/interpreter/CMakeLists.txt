@@ -12,7 +12,8 @@ add_library(chaos_interpreter STATIC
     token_resolver.cpp
     token_resolver.h
     ir_reg_alloc.cpp
-    ir_reg_alloc.h)
+    ir_reg_alloc.h
+    )
 
 target_compile_features(chaos_interpreter PUBLIC cxx_std_17)
 target_compile_options(chaos_interpreter PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)

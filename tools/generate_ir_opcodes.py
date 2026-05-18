@@ -78,8 +78,8 @@ def generate_cpp_names(opcodes: list[dict]) -> str:
     lines.extend([
         "};",
         "",
-        "static_assert(sizeof(kIROpCodeNames) / sizeof(kIROpCodeNames[0]) == 99,",
-        '              "kIROpCodeNames must cover all 99 opcodes");',
+        "static_assert(sizeof(kIROpCodeNames) / sizeof(kIROpCodeNames[0]) == " + str(len(opcodes)) + ",",
+        '              "kIROpCodeNames must cover all ' + str(len(opcodes)) + ' opcodes");',
         "",
         "}  // namespace chaos::il2cpp::interpreter",
         "",
