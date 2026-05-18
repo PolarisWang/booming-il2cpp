@@ -135,7 +135,7 @@ bool MarkSweepOldGen::Init(uintptr_t heap_hint, int initial_pages) {
 // Page management
 // ======================================================================
 
-OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning) {
+OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning, int preferred_sc_idx) {
     CHAOS_IL2CPP_PROFILE_SCOPE("OldGen::AllocatePage");
 
     // Calculate: header + aligned bitmap + payload.
@@ -167,31 +167,37 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning)
     std::memset(mem->MarkBitmap(), 0, bitmap_bytes);
 
     // Carve payload into size-class blocks.
+    // When a specific allocation triggers this page (preferred_sc_idx >= 0),
+    // 80% of the page goes to that size class so a burst of same-size allocs
+    // doesn't allocate one page per object.
     char* payload = mem->Payload();
     CHAOS_IL2CPP_SIZE remaining = payload_size;
 
-    // Ensure at least 2 blocks per small size class for quick allocation.
-    for (int sc = 0; sc < kOldGenNumSizeClasses && remaining >= kOldGenSizeClasses[sc]; sc++) {
+    if (preferred_sc_idx >= 0 && preferred_sc_idx < kOldGenNumSizeClasses) {
+        CHAOS_IL2CPP_SIZE pref_size = kOldGenSizeClasses[preferred_sc_idx];
+        CHAOS_IL2CPP_SIZE pref_budget = (payload_size * 8) / 10;  // 80%
+        while (remaining >= pref_size && pref_budget >= pref_size) {
+            auto* block = reinterpret_cast<OldGenFreeBlock*>(payload);
+            block->next = mem->free_lists[preferred_sc_idx];
+            mem->free_lists[preferred_sc_idx] = block;
+            payload += pref_size;
+            remaining -= pref_size;
+            pref_budget -= pref_size;
+        }
+    }
+
+    // Fill the rest with round-robin across all size classes.
+    int sc = 0;
+    while (remaining >= kOldGenSizeClasses[0]) {
         CHAOS_IL2CPP_SIZE sc_size = kOldGenSizeClasses[sc];
-        int batch = (sc_size <= 256) ? 4 : 1;
-        for (int i = 0; i < batch && remaining >= sc_size; i++) {
+        if (sc_size <= remaining) {
             auto* block = reinterpret_cast<OldGenFreeBlock*>(payload);
             block->next = mem->free_lists[sc];
             mem->free_lists[sc] = block;
             payload += sc_size;
             remaining -= sc_size;
         }
-    }
-    // Fill remaining with largest fitting size class.
-    while (remaining >= kOldGenSizeClasses[0]) {
-        int sc = kOldGenNumSizeClasses - 1;
-        while (sc >= 0 && kOldGenSizeClasses[sc] > remaining) sc--;
-        if (sc < 0) break;
-        auto* block = reinterpret_cast<OldGenFreeBlock*>(payload);
-        block->next = mem->free_lists[sc];
-        mem->free_lists[sc] = block;
-        payload += kOldGenSizeClasses[sc];
-        remaining -= kOldGenSizeClasses[sc];
+        sc = (sc + 1) % kOldGenNumSizeClasses;
     }
 
     // Link into page list.
@@ -486,8 +492,9 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
         return ptr;
     }
 
-    // Miss: allocate a new page.
-    auto* page = AllocatePage(kOldGenPageSize, scanning_required);
+    // Miss: allocate a new page, hinting the missing size class so the
+    // carve logic fills most of the page with blocks of this size.
+    auto* page = AllocatePage(kOldGenPageSize, scanning_required, sc_idx);
     if (page == nullptr) return nullptr;
 
     // Retry free list (new page was pre-carved with size-class blocks).
@@ -1667,7 +1674,6 @@ void MarkSweepOldGen::CrossPageCompact() {
 }
 
 void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data), void* user_data) {
-    fprintf(stderr, "Collect: entry, page_count=%d\n", page_count_); fflush(stderr);
     CHAOS_IL2CPP_PROFILE_SCOPE("OldGen::Collect");
 
     auto pause_start = std::chrono::steady_clock::now();
@@ -1815,7 +1821,6 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         // Sequential mark for small heaps.
         DrainMarkStack();
     }
-    fprintf(stderr, "Collect: mark done\n"); fflush(stderr);
 
     // Fire MARK_DONE event.
     CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_phase_mark_done_fired");
@@ -1828,7 +1833,6 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // memory is reclaimed (back on free list or VirtualFree'd), and the
     // finalizer would read freed memory (use-after-free).
     CHAOS_IL2CPP_SIZE finalizers_run = RunFinalizers();
-    fprintf(stderr, "Collect: after RunFinalizers, ran=%llu\n", (unsigned long long)finalizers_run); fflush(stderr);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_phase3_finalizers_done ran={0}",
         static_cast<unsigned long long>(finalizers_run));
@@ -1842,7 +1846,6 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // CoreCLR behavior where finalization is treated as a GC root for the
     // subsequent mark pass.
     HandleReMarkPass();
-    fprintf(stderr, "Collect: after HandleReMarkPass\n"); fflush(stderr);
     CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_remark_done");
 
     // Phase 4: Sweep all pages (parallel when beneficial).
@@ -1938,7 +1941,6 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         }
     }
     total_reclaimed += loh_reclaimed;
-    fprintf(stderr, "Collect: after Phase4 sweep, reclaimed=%llu\n", (unsigned long long)total_reclaimed); fflush(stderr);
 
     // LOH compaction (opt-in, controlled by CompactMode).
     // Relocates live LOH segments to reduce fragmentation.
@@ -1984,11 +1986,9 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
             GcRelocateHandles(loh_relocs);
         }
     }
-    fprintf(stderr, "Collect: after LOH\n"); fflush(stderr);
 
     // Phase 4b: Compaction (when fragmentation exceeds threshold).
     CompactMode compact_mode = DecideCompactMode();
-    fprintf(stderr, "Collect: compact_mode=%d\n", (int)compact_mode); fflush(stderr);
 
     if (compact_mode == CompactMode::CROSS_PAGE) {
         CHAOS_IL2CPP_LOG_INFO_M("OldGen", "cross_page_compact_mode_enabled");
@@ -2006,7 +2006,6 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     auto pause_end = std::chrono::steady_clock::now();
     uint64_t pause_ns = static_cast<uint64_t>(
         std::chrono::duration_cast<std::chrono::nanoseconds>(pause_end - pause_start).count());
-    fprintf(stderr, "Collect: pause_ns=%llu\n", (unsigned long long)pause_ns); fflush(stderr);
 
     CHAOS_IL2CPP_SIZE marked_count = static_cast<CHAOS_IL2CPP_SIZE>(
         marked_count_.exchange(0, std::memory_order_relaxed));
@@ -2019,18 +2018,15 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         total_reclaimed,
         finalizers_run,
         pause_ns);
-    fprintf(stderr, "Collect: after GcRecordFullCollection\n"); fflush(stderr);
 
     // Record into scheduler with actual heap size for full GC trigger decisions.
     g_gc_scheduler.RecordFullCollection(total_heap_bytes, pause_ns);
-    fprintf(stderr, "Collect: after scheduler\n"); fflush(stderr);
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_done reclaimed={0} pause_ns={1}",
         static_cast<unsigned long long>(total_reclaimed), pause_ns);
 
     // Fire GC_FULL_DONE event.
     GcFireEvent(GcEvent::GC_FULL_DONE);
-    fprintf(stderr, "Collect: exit OK\n"); fflush(stderr);
 }
 
 bool MarkSweepOldGen::CollectFull() {
@@ -2148,6 +2144,12 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::RunFinalizers() {
     CHAOS_IL2CPP_SIZE ran = 0;
     for (auto& entry : to_run) {
 
+        // Skip suppressed finalizers.
+        if (std::find(suppressed_finalizers_.begin(), suppressed_finalizers_.end(),
+                      entry.obj) != suppressed_finalizers_.end()) {
+            continue;
+        }
+
         // Check if the object is still reachable (marked in bitmap).
         // RunFinalizers is called after DrainMarkStack, so all reachable
         // objects have their mark-bit set.  Skip the finalizer for any
@@ -2201,6 +2203,12 @@ std::vector<FinalizerEntry> MarkSweepOldGen::CollectDeadFinalizables() {
         std::lock_guard<std::mutex> lock(mutex_);
         for (auto& entry : finalizers_) {
             if (entry.finalizer == nullptr) continue;
+            // Skip suppressed finalizers.
+            if (std::find(suppressed_finalizers_.begin(), suppressed_finalizers_.end(),
+                          entry.obj) != suppressed_finalizers_.end()) {
+                live_entries.push_back(entry);  // keep in finalizers_ but don't run
+                continue;
+            }
             bool unreachable = true;
             auto* page = FindPage(entry.obj);
             if (page != nullptr && !page->is_oversized) {
@@ -2228,6 +2236,28 @@ std::vector<FinalizerEntry> MarkSweepOldGen::CollectDeadFinalizables() {
         g_gc_stats.finalization_pending_count.store(finalizers_.size(), std::memory_order_relaxed);
     }
     return dead_entries;
+}
+
+// ── Finalizer suppression support ─────────────────────────
+
+void MarkSweepOldGen::SuppressFinalizer(void* obj) {
+    if (obj == nullptr) return;
+    std::lock_guard<std::mutex> lock(mutex_);
+    // Only add if not already suppressed (linear scan — suppressed set is tiny).
+    if (std::find(suppressed_finalizers_.begin(), suppressed_finalizers_.end(),
+                  obj) == suppressed_finalizers_.end()) {
+        suppressed_finalizers_.push_back(obj);
+    }
+}
+
+void MarkSweepOldGen::ReRegisterFinalizer(void* obj) {
+    if (obj == nullptr) return;
+    std::lock_guard<std::mutex> lock(mutex_);
+    auto it = std::find(suppressed_finalizers_.begin(), suppressed_finalizers_.end(),
+                        obj);
+    if (it != suppressed_finalizers_.end()) {
+        suppressed_finalizers_.erase(it);
+    }
 }
 
 // ── BGC concurrent-safe mark ─────────────────────────────────────
