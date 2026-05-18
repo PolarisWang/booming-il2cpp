@@ -129,6 +129,7 @@ static const char* TierName(uint32_t state) {
         case PatchMethod::kT2Ready:    return "T2_READY";
         case PatchMethod::kT3Lowering: return "T3_LOWERING";
         case PatchMethod::kT3Ready:    return "T3_READY";
+        case PatchMethod::kT4Ready:    return "T4_READY";
         case PatchMethod::kT5Unloaded: return "T5_UNLOADED";
         default:                       return "UNKNOWN";
     }
@@ -613,6 +614,120 @@ static bool bench_callvirt_pic() {
 }
 
 
+// ── Scenario 4: Native code generation benchmark (T4) ─────────────────────
+// Pure arithmetic method that crosses all tier thresholds (T1→T2→T3→T4)
+// and measures native code execution performance.
+// Uses a simple verified IL sequence: ldarg.0 + ldarg.1 + add + ret
+static bool bench_native() {
+    std::printf("\n--- bench_native ---\n");
+    std::fflush(stdout);
+
+    // 4 instructions: ldarg.0 (arg0), ldarg.1 (arg1), add, ret
+    const char* json =
+        R"({"instructions":[)"
+        R"({"opCode":6,"ilOffset":0,"operand":0},)"
+        R"({"opCode":6,"ilOffset":1,"operand":1},)"
+        R"({"opCode":25,"ilOffset":2},)"
+        R"({"opCode":53,"ilOffset":3}])"
+        R"(})";
+
+    uint8_t sig_buf[16];
+    uint8_t param_types[] = { kElemI4, kElemI4 };
+    int sig_len = BuildSignature(sig_buf, 2, kElemI4, param_types);
+
+    PatchMethod pm;
+    SetupPatchMethod(&pm, json, sig_buf, sig_len);
+    std::printf("  SetupPatchMethod done, cached_ir=%p\n", pm.cached_ir);
+    std::fflush(stdout);
+    if (pm.cached_ir == nullptr) {
+        std::fprintf(stderr, "  FAIL: cached_ir null\n");
+        return false;
+    }
+
+    uint64_t args_buf[2] = { 10, 20 };
+    constexpr int32_t kExpectedResult = 30;
+
+    // ── Drive through all tiers up to T4 ──
+    // kT1HotThreshold = 100, kT3NativeThreshold = 2000
+    constexpr int kTotalCalls = 2500;
+
+    // Track cumulative time per tier range (no per-iteration storage needed)
+    uint64_t t1_sum = 0, t2_sum = 0, t3_sum = 0, t4_sum = 0;
+    int t1_count = 0, t2_count = 0, t3_count = 0, t4_count = 0;
+
+    std::printf("  Starting %d iterations...\n", kTotalCalls);
+    std::fflush(stdout);
+
+    // Warmup + drive through tiers
+    for (int i = 0; i < kTotalCalls; ++i) {
+        if (i % 200 == 0 && i > 0) {
+            auto t = pm.tier_state.load(std::memory_order_acquire);
+            std::printf("  iter=%d, tier=%u, call_count=%u\n", i, t,
+                pm.call_count.load(std::memory_order_relaxed));
+            std::fflush(stdout);
+        }
+        int64_t ret_val = -1;
+        auto start = Clock::now();
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        auto end = Clock::now();
+        auto ns = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        // Accumulate timing per tier range
+        if (i >= 50 && i < 130)  { t1_sum += ns; ++t1_count; }
+        if (i >= 200 && i < 500) { t2_sum += ns; ++t2_count; }
+        if (i >= 1500 && i < 1800) { t3_sum += ns; ++t3_count; }
+        if (i >= 2100 && i < 2500) { t4_sum += ns; ++t4_count; }
+        // Verify correctness at every call
+        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+            std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d (tier=%u, count=%u)\n",
+                        (long long)ret_val, kExpectedResult, i,
+                        pm.tier_state.load(std::memory_order_acquire),
+                        pm.call_count.load(std::memory_order_relaxed));
+            return false;
+        }
+    }
+
+    auto final_tier = pm.tier_state.load(std::memory_order_acquire);
+    auto final_count = pm.call_count.load(std::memory_order_relaxed);
+    bool has_native = (pm.cached_native_method != nullptr);
+
+    double t1_ns = (t1_count > 0) ? static_cast<double>(t1_sum) / t1_count : -1.0;
+    double t2_ns = (t2_count > 0) ? static_cast<double>(t2_sum) / t2_count : -1.0;
+    double t3_ns = (t3_count > 0) ? static_cast<double>(t3_sum) / t3_count : -1.0;
+    double t4_ns = (t4_count > 0) ? static_cast<double>(t4_sum) / t4_count : -1.0;
+
+    std::printf("  T1: %.0f ns/op\n", t1_ns);
+    std::printf("  T2: %.0f ns/op\n", t2_ns);
+    std::printf("  T3: %.0f ns/op\n", t3_ns);
+    std::printf("  T4: %.0f ns/op\n", t4_ns);
+    std::printf("  SUMMARY: T1=%.0fns  T2=%.0fns  T3=%.0fns  T4=%.0fns\n",
+                t1_ns, t2_ns, t3_ns, t4_ns);
+    std::printf("  final: tier=%u, call_count=%u, has_native=%d, native_ptr=%p\n",
+                final_tier, final_count, has_native, pm.cached_native_method);
+    std::fflush(stdout);
+
+    // T4 should be enabled (pure arithmetic method with only ldarg/add/ret)
+    if (!has_native) {
+        std::fprintf(stderr, "  FAIL: T4 native code was not generated\n");
+        return false;
+    }
+
+    // Verify value correctness using native code
+    for (int i = 0; i < 10; ++i) {
+        int64_t ret_val = -1;
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+            std::fprintf(stderr, "  FAIL: native result=%lld (expected=%d) at iter=%d\n",
+                        (long long)ret_val, kExpectedResult, i);
+            return false;
+        }
+    }
+    std::printf("  NATIVE VERIFIED: all 10 native calls returned correct result\n");
+    std::fflush(stdout);
+
+    return true;
+}
+
+
 // ── Main ──────────────────────────────────────────────────────────────────
 
 int main() {
@@ -623,6 +738,7 @@ int main() {
     run_test("bench_arithmetic",  bench_arithmetic());
     run_test("bench_register_10", bench_register_10());
     run_test("bench_callvirt_pic", bench_callvirt_pic());
+    run_test("bench_native",      bench_native());
 
     UnregisterThread();
 

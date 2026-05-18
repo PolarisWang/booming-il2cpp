@@ -42,6 +42,7 @@ AVAILABLE_TESTS = {
     "capacity-stress": lambda repo, **kw: [runners_module.run_capacity_stress(repo, **kw)],
     "threading-stress": lambda repo, **kw: [runners_module.run_threading_stress(repo, **kw)],
     "gc-stress-mode": lambda repo, **kw: [runners_module.run_gc_stress_mode(repo, **kw)],
+    "delegate-stress": runners_module.run_delegate_stress,
 }
 
 
@@ -110,6 +111,10 @@ def _run_test(
         kw["build"] = options.get("build", False)
         if options.get("mode"):
             kw["mode"] = int(options["mode"])
+    elif test_name == "delegate-stress":
+        kw["build"] = options.get("build", False)
+        kw["quick"] = options.get("quick", False)
+        kw["scenario"] = options.get("scenario")
 
     print(f"Running {test_name}...")
     results = runner_fn(repo_root, **kw)
@@ -154,6 +159,9 @@ def _handle_run(args: list[str], repo_root: Path) -> int:
             i += 1
         elif rest[i] == "--allocations" and i + 1 < len(rest):
             options["allocations"] = rest[i + 1]
+            i += 1
+        elif rest[i] == "--scenario" and i + 1 < len(rest):
+            options["scenario"] = rest[i + 1]
             i += 1
         i += 1
 

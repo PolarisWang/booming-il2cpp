@@ -44,8 +44,20 @@ bool DeepInlineCallees(
 
 // ── Native codegen stubs ──────────────────────────────────────────────────
 // Required by interpreter_entry.cpp (tiering: InterpreterEntryDirect calls
-// CanGenerateNativeCode/GenerateNativeCode). GC tests don't use codegen, so
-// these return false/nullptr.
+// CanGenerateNativeCode/GenerateNativeCode).  These stubs are only needed
+// when chaos_codegen.lib is NOT linked.  When chaos_codegen.lib IS linked
+// (e.g. in chaos_codegen_native_test), the real implementations take
+// precedence through normal library resolution.
+//
+// The stubs are gated by a weak-linking trick: the duplicate-definition
+// guard below prevents linker errors when chaos_codegen.lib provides the
+// real symbols.  In MSVC, object-file symbols always win over .lib symbols,
+// so these stubs are only active when chaos_codegen.lib is NOT linked.
+//#ifndef CHAOS_IL2CPP_CODEGEN_NATIVE_METHOD_H_
+// (auto-guard not reliable across translation units)
+//
+// Instead, we conditionalize on whether the test needs real codegen:
+#ifndef CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE
 namespace chaos::il2cpp::codegen {
 bool CanGenerateNativeCode(
     const interpreter::RegisterMethod& /*rm*/) noexcept
@@ -60,3 +72,4 @@ NativeMethod* GenerateNativeCode(
     return nullptr;
 }
 }
+#endif

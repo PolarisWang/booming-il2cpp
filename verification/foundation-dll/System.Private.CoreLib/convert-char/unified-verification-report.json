@@ -2,9 +2,9 @@
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-16T12:02:00",
-  "duration_ms": 24451,
-  "overall_status": "passed",
+  "timestamp": "2026-05-18T12:19:10",
+  "duration_ms": 21672,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 12088
+      "duration_ms": 11041
     },
     "fact": {
       "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (19/19)",
+      "status": "failed",
+      "summary": "Fact verify=failed (14/19)",
       "details": {
         "fact": {
-          "status": "passed",
-          "passed": 19,
+          "status": "failed",
+          "passed": 14,
           "total": 19
         }
       },
       "errors": [],
-      "duration_ms": 241
+      "duration_ms": 37
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 254
+      "duration_ms": 144
     },
     "asm_compare": {
       "stage": "asm_compare",
@@ -87,7 +87,7 @@
         "averageExpansionRatio": 0
       },
       "errors": [],
-      "duration_ms": 2710
+      "duration_ms": 2761
     },
     "microbench": {
       "stage": "microbench",
@@ -97,14 +97,14 @@
         "poolSize": 0
       },
       "errors": [],
-      "duration_ms": 25
+      "duration_ms": 35
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "passed",
-      "summary": "avg_speedup=35.57%, native_faster=10/11, managed_faster=1/11",
+      "summary": "avg_speedup=37.5%, native_faster=10/11, managed_faster=1/11",
       "details": {
-        "averageSpeedupPercent": 35.57,
+        "averageSpeedupPercent": 37.5,
         "nativeFasterCount": 10,
         "managedFasterCount": 1,
         "matchedCount": 11,
@@ -113,21 +113,21 @@
         "benchmarkQuality": "ok"
       },
       "errors": [],
-      "duration_ms": 4856
+      "duration_ms": 4717
     },
     "hotupdate": {
       "stage": "hotupdate",
-      "status": "failed",
-      "summary": "HotUpdate returned 0 total — no verification performed",
+      "status": "passed",
+      "summary": "14/19 passed, 0 failed (stub=0)",
       "details": {
-        "passedMethods": 0,
+        "passedMethods": 14,
         "failedMethods": 0,
-        "totalMethods": 0,
-        "realMethods": 0,
+        "totalMethods": 19,
+        "realMethods": 19,
         "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 226
+      "duration_ms": 27
     },
     "post_hotupdate_benchmark": {
       "stage": "post_hotupdate_benchmark",
@@ -140,13 +140,13 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 4044
+      "duration_ms": 2903
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
+    "methodCoverage": 73.68,
     "testedRate": 100.0,
-    "overall": 100.0
+    "overall": 86.84
   },
   "dashboard": {
     "interpreter": {
@@ -172,7 +172,7 @@
       "topInstructionCategories": {}
     },
     "performance": {
-      "averageSpeedupPercent": 35.57,
+      "averageSpeedupPercent": 37.5,
       "nativeFasterCount": 10,
       "managedFasterCount": 1,
       "matchedCount": 11,
@@ -181,9 +181,9 @@
     },
     "hotupdate": {
       "functional": {
-        "passedMethods": 0,
+        "passedMethods": 14,
         "failedMethods": 0,
-        "totalMethods": 0
+        "totalMethods": 19
       },
       "interpreterOverhead": {
         "averageSlowdownPercent": 0.0,
@@ -198,5 +198,25 @@
       "asmPassRate": 0.0
     }
   },
-  "regression": {}
+  "regression": {
+    "benchmark": {
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 18,
+        "matchedCount": 11,
+        "nativeFasterCount": 10,
+        "managedFasterCount": 1,
+        "averageSpeedupPercent": 35.57
+      },
+      "currentMetrics": {
+        "totalMethods": 18,
+        "matchedCount": 11,
+        "nativeFasterCount": 10,
+        "managedFasterCount": 1,
+        "averageSpeedupPercent": 37.5
+      }
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
 }

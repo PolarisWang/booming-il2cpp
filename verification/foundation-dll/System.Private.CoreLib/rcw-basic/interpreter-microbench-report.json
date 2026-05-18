@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/rcw/basic",
+  "capturedAt": "2026-05-18T03:08:51",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": "[2026-05-18T03:08:51][WARN][CRAG] young_collection_no_region\n[2026-05-18T03:08:51][INFO][OldGen] init initial_pages=2\n[2026-05-18T03:08:51][INFO][OldGen] init done base=0x1958447742976 pages=2\nPassed: 25/25\nGC|alloc|total=2|bytes=32|oversized=0\nGC|region|active=0|total_allocated=0\n"
+}

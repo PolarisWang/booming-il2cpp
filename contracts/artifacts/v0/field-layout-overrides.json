@@ -1,0 +1,49 @@
+{
+  "description": "Field layout overrides for struct stubs that codegen cannot resolve.",
+  "formatVersion": "v0",
+  "augment": {
+    "chaos_type_System_Private_CoreLib_System_Object": [
+      "    chaos_object_header header{};"
+    ],
+    "chaos_type_System_Private_CoreLib_System_Delegate": [
+      "    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;",
+      "    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;",
+      "    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;",
+      "    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;"
+    ],
+    "chaos_type_System_Private_CoreLib_System_MulticastDelegate": [
+      "    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;",
+      "    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;",
+      "    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;",
+      "    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;"
+    ],
+    "chaos_type_System_Private_CoreLib_System_Exception": [
+      "    CHAOS_IL2CPP_INTPTR _className = 0;",
+      "    CHAOS_IL2CPP_INTPTR _message = 0;",
+      "    CHAOS_IL2CPP_INTPTR _data = 0;",
+      "    CHAOS_IL2CPP_INTPTR _innerException = 0;",
+      "    CHAOS_IL2CPP_INTPTR _helpURL = 0;",
+      "    CHAOS_IL2CPP_INTPTR _stackTrace = 0;",
+      "    CHAOS_IL2CPP_INTPTR _stackTraceString = 0;",
+      "    CHAOS_IL2CPP_INTPTR _remoteStackTraceString = 0;",
+      "    CHAOS_IL2CPP_INT32 _HResult = 0;",
+      "    CHAOS_IL2CPP_INTPTR _source = 0;",
+      "    CHAOS_IL2CPP_INTPTR _xptrs = 0;",
+      "    CHAOS_IL2CPP_INT32 _xcode = -1;"
+    ],
+    "chaos_type_System_Private_CoreLib_System_SystemException": [
+      "    CHAOS_IL2CPP_INTPTR _className = 0;",
+      "    CHAOS_IL2CPP_INTPTR _message = 0;",
+      "    CHAOS_IL2CPP_INTPTR _data = 0;",
+      "    CHAOS_IL2CPP_INTPTR _innerException = 0;",
+      "    CHAOS_IL2CPP_INTPTR _helpURL = 0;",
+      "    CHAOS_IL2CPP_INTPTR _stackTrace = 0;",
+      "    CHAOS_IL2CPP_INTPTR _stackTraceString = 0;",
+      "    CHAOS_IL2CPP_INTPTR _remoteStackTraceString = 0;",
+      "    CHAOS_IL2CPP_INT32 _HResult = 0;",
+      "    CHAOS_IL2CPP_INTPTR _source = 0;",
+      "    CHAOS_IL2CPP_INTPTR _xptrs = 0;",
+      "    CHAOS_IL2CPP_INT32 _xcode = -1;"
+    ]
+  }
+}

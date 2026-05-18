@@ -3,6 +3,11 @@
 
 #include "vtable_registry.h"
 
+#include <code_generator.h>
+#include <native_method.h>
+
+#include <chaos/log.h>
+
 #include <vector>
 
 namespace chaos::il2cpp::runtime_core {
@@ -15,6 +20,7 @@ struct TierCounters {
     std::atomic<uint64_t> step_reg      = 0;  // RegisterExecute
     std::atomic<uint64_t> step_fast     = 0;  // FastExecute
     std::atomic<uint64_t> step_vm       = 0;  // InterpreterVM
+    std::atomic<uint64_t> step_native   = 0;  // Native code (T4)
 };
 
 static TierCounters& GetTierCounters() {
@@ -692,6 +698,29 @@ void InterpreterEntryDirect(
         }
     }
 
+    // ── Step A: Native code path (T4 — VeryHot) ─────────────────────────
+    // When tier_state reaches kT4Ready and cached_native_method is available,
+    // call the generated native code directly.
+    //
+    // NOTE: The generated native code always writes 8 bytes (full RAX) to
+    // ret_buf via mov [RSI], RAX.  Callers must ensure ret_buf points to
+    // at least 8 bytes of writable space.  Production call sites (e.g.
+    // InterpreterDispatch, FastExecute) use ExecutionResult.i64 (8 bytes),
+    // but test or custom callers passing int32_t will get stack corruption.
+    {
+        auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
+        if (t4_tier >= PatchMethod::kT4Ready) {
+            auto* nm = patch_method->cached_native_method;
+            if (nm != nullptr && nm->code != nullptr) {
+                GetTierCounters().step_native.fetch_add(1, std::memory_order_relaxed);
+                using NativeEntry = void (*)(void*, void*);
+                auto native_entry = reinterpret_cast<NativeEntry>(nm->code);
+                native_entry(args_buf, ret_buf);
+                return;
+            }
+        }
+    }
+
     // ── Step B: RegisterExecute path (Layer R) ──────────────────────
     // For methods WITHOUT SEH, use register-based execution (16-byte instrs,
     // explicit dst/src regs).  Faster than stack-based FastExecute.
@@ -762,6 +791,42 @@ void InterpreterEntryDirect(
                 CHAOS_IL2CPP_LOG_DEBUG_M("dispatch", "T2->T3 enqueue: method_key=0x{:x}, count={}",
                     method_key, call_count);
                 TierManager::Get().EnqueueOptimization(patch_method);
+            }
+        }
+
+        // ── T3→T4 promotion (very hot → native code) ─────────────────
+        // When T3 is ready and call_count exceeds the native threshold,
+        // generate native code synchronously.
+        {
+            auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
+            if (t4_tier >= PatchMethod::kT3Ready && call_count >= PatchMethod::kT3NativeThreshold) {
+                uint32_t t4_expected = PatchMethod::kT3Ready;
+                if (patch_method->tier_state.compare_exchange_strong(t4_expected,
+                        PatchMethod::kT4Ready, std::memory_order_acq_rel)) {
+                    CHAOS_IL2CPP_LOG_DEBUG_M("dispatch", "T3->T4 promotion: method_key=0x{:x}, count={}",
+                        method_key, call_count);
+                    auto* reg_m = static_cast<interpreter::RegisterMethod*>(
+                        patch_method->cached_optimized_reg_method);
+                    if (reg_m == nullptr) {
+                        reg_m = static_cast<interpreter::RegisterMethod*>(
+                            patch_method->cached_reg_method);
+                    }
+                    if (reg_m != nullptr && codegen::CanGenerateNativeCode(*reg_m)) {
+                        codegen::CodeGenConfig cfg;
+                        cfg.enable_safepoint_polls = true;
+                        cfg.safepoint_fn = reinterpret_cast<void*>(
+                            &chaos::il2cpp::runtime_core::threading::SafepointPoll);
+                        auto* nm = codegen::GenerateNativeCode(*reg_m, cfg);
+                        patch_method->cached_native_method = nm;
+                        if (nm == nullptr) {
+                            patch_method->tier_state.store(PatchMethod::kT3Ready,
+                                std::memory_order_release);
+                        }
+                    } else {
+                        patch_method->tier_state.store(PatchMethod::kT3Ready,
+                            std::memory_order_release);
+                    }
+                }
             }
         }
 

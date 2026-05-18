@@ -6,8 +6,13 @@
 #include "string_table.h"
 #include "codegen_bridge.h"
 #include "generated_code_compat.h"
+#include "runtime_core.h"
+#include "runtime_stubs/misc_stubs.h"
+
+#include <chaos/load_store.h>
 
 #include <cstdint>
+#include <cstring>
 #include <limits>
 
 // ── Numeric overloads: checked cast to uint16 ──────────────────────────
@@ -112,20 +117,44 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_datetime(CHAOS_IL2CPP_INTPTR
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_decimal(CHAOS_IL2CPP_INTPTR value)
 {
-    (void)value;
-    chaos::il2cpp::runtime_core::chaos_raise_exception(0);
+    auto* carrier = reinterpret_cast<chaos::il2cpp::runtime_core::DecimalCarrier*>(value);
+    uint32_t scale = (carrier->flags >> 16) & 0xFF;
+    CHAOS_IL2CPP_INT64 intVal = static_cast<CHAOS_IL2CPP_INT64>(carrier->lo64);
+    for (uint32_t i = 0; i < scale; i++) {
+        intVal /= 10;
+    }
+    if (carrier->flags & 0x80000000u) {
+        intVal = -intVal;
+    }
+    if (intVal < 0 || intVal > 0xFFFF)
+    {
+        chaos::il2cpp::runtime_core::chaos_raise_exception(0);
+    }
+    return static_cast<CHAOS_IL2CPP_UINT16>(intVal);
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_double(CHAOS_IL2CPP_INTPTR value)
 {
-    (void)value;
-    chaos::il2cpp::runtime_core::chaos_raise_exception(0);
+    auto d = chaos::il2cpp::common::load_float64(value);
+    auto intVal = static_cast<int>(d);
+    if (intVal < 0 || intVal > 0xFFFF)
+    {
+        chaos::il2cpp::runtime_core::chaos_raise_exception(0);
+    }
+    return static_cast<CHAOS_IL2CPP_UINT16>(intVal);
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_single(CHAOS_IL2CPP_INTPTR value)
 {
-    (void)value;
-    chaos::il2cpp::runtime_core::chaos_raise_exception(0);
+    CHAOS_IL2CPP_INT32 bits = static_cast<CHAOS_IL2CPP_INT32>(static_cast<int32_t>(value));
+    float f;
+    std::memcpy(&f, &bits, sizeof(f));
+    auto intVal = static_cast<int>(f);
+    if (intVal < 0 || intVal > 0xFFFF)
+    {
+        chaos::il2cpp::runtime_core::chaos_raise_exception(0);
+    }
+    return static_cast<CHAOS_IL2CPP_UINT16>(intVal);
 }
 
 // ── Object overloads (unbox then convert) ──────────────────────────────

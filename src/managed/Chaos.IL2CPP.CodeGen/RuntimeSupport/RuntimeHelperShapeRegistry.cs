@@ -2564,8 +2564,7 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     if (paramTypes.Count != 1) return null;
                     var firstParam = paramTypes[0];
-                    if (firstParam is "System.Boolean" or "System.DateTime" or "System.Decimal"
-                        or "System.Double" or "System.Single")
+                    if (firstParam is "System.Boolean" or "System.DateTime")
                     {
                         // Comma operator: throw terminates execution, second operand
                         // provides the result type for the caller's eval stack.
