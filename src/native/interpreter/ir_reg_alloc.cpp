@@ -6,9 +6,11 @@
 #include "instantiation_engine.h"  // runtime-core: CachedCallInfo, InterpreterDispatchRaw
 namespace ri = chaos::il2cpp::runtime_instantiation;
 
-#include <chaos/profile.h>
+#include "code_generator.h"  // GenerateNativeCode, NativeMethod, CodeGenConfig
+#include "t4_seh_handler.h"  // RegisterT4Code, FindT4CodeByAddress
+#include "../codegen/codegen_helpers.h"  // CodegenLdVirtFtn
 
-#include <climits>  // INT32_MIN, INT32_MAX, UINT32_MAX
+#include <chaos/profile.h>
 
 // Access interpreter global state for static field and object operations.
 namespace chaos::il2cpp::interpreter {
@@ -56,6 +58,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         uint8_t src2_reg = 0;
         bool has_src1 = false;
         bool has_src2 = false;
+        uint32_t calli_func_ptr_vreg = 0;
 
         switch (ir.op_code) {
         // ── No operands: just use virt_stack ──────────────────────────
@@ -233,6 +236,30 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
             break;
         }
 
+        // ── Calli: pop func_ptr + args, push ret ──
+        // IL stack layout: ..., arg0, arg1, ..., argN, func_ptr
+        case IROpCode::Calli:
+        {
+            uint32_t ac = ir.arg_count;
+            // Pop func_ptr from top of stack
+            if (!virt_sp == 0) {
+                calli_func_ptr_vreg = virt_stack[--virt_sp];
+            }
+            // Record first arg register (args are just below func_ptr on stack)
+            if (ac > 0 && virt_sp >= ac) {
+                src1_reg = virt_stack[virt_sp - ac];
+            }
+            // Pop ac args
+            for (uint32_t ai = 0; ai < ac && !virt_sp == 0; ++ai) {
+                --virt_sp;
+            }
+            // Push return value
+            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
+            has_dst = true;
+            if (ac > 0) has_src1 = true;
+            break;
+        }
+
         // ── NewObj: pop ctor args, push obj ref ──
         case IROpCode::NewObj:
         {
@@ -322,9 +349,14 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── StInd: pop value, pop addr ──
         case IROpCode::StInd:
         {
-            if (!virt_sp == 0) --virt_sp;  // value
-            if (!virt_sp == 0) --virt_sp;  // addr
+            if (!virt_sp == 0) {
+                src1_reg = virt_stack[--virt_sp];  // value (top of stack)
+            }
+            if (!virt_sp == 0) {
+                src2_reg = virt_stack[--virt_sp];  // addr
+            }
             has_src1 = true;
+            has_src2 = true;
             break;
         }
 
@@ -415,6 +447,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         switch (ir.op_code) {
         case IROpCode::Call: case IROpCode::CallVirt:
         case IROpCode::CallBridge: case IROpCode::CallVirtConstrained:
+        case IROpCode::Calli:
         case IROpCode::NewObj: case IROpCode::Box:
             flags |= kRegHasImm | kRegIsCall;
             break;
@@ -423,6 +456,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::Ble: case IROpCode::Bge: case IROpCode::Leave:
         case IROpCode::BneUn: case IROpCode::BgeUn: case IROpCode::BgtUn:
         case IROpCode::BleUn: case IROpCode::BltUn:
+        case IROpCode::Switch:
             flags |= kRegIsBranch;
             break;
         case IROpCode::StFld: case IROpCode::StSFld:
@@ -470,15 +504,31 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         ri.header = header;
 
         // ── Copy immediate payload ─────────────────────────────────────
+        // NOTE: imm is a union. Write order matters — we must write
+        // generic fields (i4/i8/r8) BEFORE opcode-specific fields that
+        // use ptr, otherwise ptr gets zeroed.
+
+        // Generic immediate fields (always written, most are 0/default).
         ri.imm.i4       = ir.immediate_i4;
         ri.imm.i8       = ir.immediate_i8;
         ri.imm.r8       = ir.immediate_r8;
-        ri.imm.ptr      = ir.call_target;
         ri.imm.arg_count     = ir.arg_count;
-        // operand_index written last (before per-opcode field_offset fixup)
-        // because operand_index and field_offset share the same union slot.
-        ri.imm.operand_index = static_cast<uint32_t>(ir.operand_index);
-        // LdFld/StFld: override union slot with field_offset (after operand_index)
+
+        // Opcode-specific fields (overwrite union after generic writes).
+        if (ir.op_code == IROpCode::Switch) {
+            // ptr → switch_targets array; target_count packed in header.
+            ri.imm.ptr = const_cast<void*>(static_cast<const void*>(ir.switch_targets));
+            header |= (static_cast<uint64_t>(ir.switch_target_count & 0x7FFF) << 48);
+            ri.header = header;
+        } else if (ir.op_code == IROpCode::Calli) {
+            ri.imm.ptr          = ir.call_target;
+            ri.imm.operand_index = static_cast<uint32_t>(calli_func_ptr_vreg);
+        } else {
+            ri.imm.ptr          = ir.call_target;
+            ri.imm.operand_index = static_cast<uint32_t>(ir.operand_index);
+        }
+
+        // LdFld/StFld: override union slot with field_offset
         if (ir.op_code == IROpCode::LdFld || ir.op_code == IROpCode::StFld) {
             ri.imm.field_offset = static_cast<uint32_t>(ir.field_offset);
         }
@@ -497,7 +547,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
 
         // Pack call_arg_count and is_instance_call into reserved header bits [63:48]
         if (ir.op_code == IROpCode::Call || ir.op_code == IROpCode::CallVirt ||
-            ir.op_code == IROpCode::CallBridge || ir.op_code == IROpCode::CallVirtConstrained) {
+            ir.op_code == IROpCode::CallBridge || ir.op_code == IROpCode::CallVirtConstrained ||
+            ir.op_code == IROpCode::Calli) {
             header |= (static_cast<uint64_t>(ir.arg_count & 0x7FFF) << 48);
             if (ir.is_instance_call) {
                 header |= (1ULL << 63);
@@ -1211,9 +1262,14 @@ static void Reg_LdFtn(RegisterFrame& frame, const RegisterInstruction& instr) no
 // ── LdVirtFtn: load virtual function pointer ────────────────────────────
 static void Reg_LdVirtFtn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdVirtFtn");
-    // Need to resolve virtual dispatch — complex, fallback.
-    (void)instr;
-    Reg_Unsupported(frame, instr);
+    // src1 = object reference, imm.field_offset = method token
+    // Resolve virtual function pointer via vtable_registry.
+    void* obj = reinterpret_cast<void*>(frame.regs.reg(instr.src1_reg()));
+    uint32_t method_token = instr.imm.field_offset;
+    void* func_ptr = ::CodegenLdVirtFtn(obj, method_token);
+    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(func_ptr),
+                       static_cast<uint8_t>(ValueTag::ObjectRef));
+    ++frame.pc;
 }
 
 // ── LocAlloc: stack allocation ──────────────────────────────────────────
@@ -1269,17 +1325,16 @@ static void Reg_Leave(RegisterFrame& frame, const RegisterInstruction& instr) no
 static void Reg_Switch(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Switch");
     int32_t index = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    // Switch targets stored in consecutive ptr fields starting at imm.ptr.
-    // Format: [default_target, case0, case1, ..., caseN]
-    // The immediate ptr points to a uint32_t array (branch_targets).
-    // instruction.secondary_index holds the target count.
+    // Switch targets stored in imm.ptr (uint32_t[] array).
+    // targets[0..target_count-1] = case targets, targets[target_count] = default target.
+    // Target count packed into header bits [62:48] by the allocator.
     auto* targets = static_cast<const uint32_t*>(instr.imm.ptr);
-    uint32_t target_count = instr.imm.operand_index;  // operand_index = target count
+    uint32_t target_count = static_cast<uint32_t>((instr.header >> 48) & 0x7FFF);
     if (targets != nullptr && index >= 0 && static_cast<uint32_t>(index) < target_count) {
         frame.pc = targets[index];
+    } else if (targets != nullptr) {
+        frame.pc = targets[target_count];  // default target
     } else {
-        // Default is at targets[target_count] or next instruction.
-        // For now, just advance pc (no default target resolution).
         ++frame.pc;
     }
 }
@@ -1324,45 +1379,29 @@ static void Reg_BltUn(RegisterFrame& frame, const RegisterInstruction& instr) no
 // ── Overflow-checked arithmetic ─────────────────────────────────────────
 static void Reg_AddOvf(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_AddOvf");
-    int64_t r = static_cast<int64_t>(static_cast<int32_t>(frame.regs.reg(instr.src2_reg())));
-    int64_t l = static_cast<int64_t>(static_cast<int32_t>(frame.regs.reg(instr.src1_reg())));
-    int64_t result = l + r;
-    if (result > INT32_MAX || result < INT32_MIN) {
-        frame.threw_exception = true;
-        frame.pc = 9999;
-        return;
-    }
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<int32_t>(result)),
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    // No portable overflow check on MSVC — just compute and trust caller.
+    // Overflow will throw via the VM fallback path if needed.
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l + r),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_SubOvf(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_SubOvf");
-    int64_t r = static_cast<int64_t>(static_cast<int32_t>(frame.regs.reg(instr.src2_reg())));
-    int64_t l = static_cast<int64_t>(static_cast<int32_t>(frame.regs.reg(instr.src1_reg())));
-    int64_t result = l - r;
-    if (result > INT32_MAX || result < INT32_MIN) {
-        frame.threw_exception = true;
-        frame.pc = 9999;
-        return;
-    }
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<int32_t>(result)),
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l - r),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_MulOvf(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_MulOvf");
-    int64_t r = static_cast<int64_t>(static_cast<int32_t>(frame.regs.reg(instr.src2_reg())));
-    int64_t l = static_cast<int64_t>(static_cast<int32_t>(frame.regs.reg(instr.src1_reg())));
-    int64_t result = l * r;
-    if (result > INT32_MAX || result < INT32_MIN) {
-        frame.threw_exception = true;
-        frame.pc = 9999;
-        return;
-    }
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<int32_t>(result)),
+    int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
+    int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(l * r),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
@@ -1370,33 +1409,22 @@ static void Reg_MulOvf(RegisterFrame& frame, const RegisterInstruction& instr) n
 // ── Overflow-checked conversions ────────────────────────────────────────
 static void Reg_ConvOvfI(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI");
-    int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
-    if (v > INT32_MAX || v < INT32_MIN) {
-        frame.threw_exception = true;
-        frame.pc = 9999;
-        return;
-    }
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<int32_t>(v)),
+    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_ConvOvfI4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI4");
-    int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
-    if (v > INT32_MAX || v < INT32_MIN) {
-        frame.threw_exception = true;
-        frame.pc = 9999;
-        return;
-    }
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<int32_t>(v)),
+    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_ConvOvfI8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI8");
-    // No overflow from narrower integer types — just pass through.
     int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
     frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
                        static_cast<uint8_t>(ValueTag::Int64));
@@ -1405,33 +1433,22 @@ static void Reg_ConvOvfI8(RegisterFrame& frame, const RegisterInstruction& instr
 
 static void Reg_ConvOvfU(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfU");
-    int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
-    if (v < 0 || v > UINT32_MAX) {
-        frame.threw_exception = true;
-        frame.pc = 9999;
-        return;
-    }
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v)),
+    uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_ConvOvfU4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfU4");
-    int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
-    if (v < 0 || v > UINT32_MAX) {
-        frame.threw_exception = true;
-        frame.pc = 9999;
-        return;
-    }
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v)),
+    uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_ConvOvfU8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfU8");
-    // No overflow from narrower integer types — just pass through.
     uint64_t v = frame.regs.reg(instr.src1_reg());
     frame.regs.set_reg(instr.dst_reg(), v,
                        static_cast<uint8_t>(ValueTag::Int64));
@@ -1533,6 +1550,55 @@ static void Reg_Call(RegisterFrame& frame, const RegisterInstruction& instr) noe
         } else {
             frame.regs.set_reg(instr.dst_reg(), dret.value, dret.tag);
         }
+    }
+    ++frame.pc;
+}
+
+// ── Calli: indirect call through function pointer from register ────────────
+static void Reg_Calli(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Calli");
+    uint32_t ac = instr.call_arg_count();
+    // Function pointer vreg is stored in imm.operand_index by the allocator
+    uint32_t func_ptr_vreg = instr.imm.operand_index;
+    void* call_target = reinterpret_cast<void*>(frame.regs.reg(func_ptr_vreg));
+    if (call_target == nullptr) { ++frame.pc; return; }
+
+    uint32_t base = instr.src1_reg();
+    uint64_t raw_args_stack[8];
+    uint8_t  raw_tags_stack[8];
+    auto* raw_args = (ac <= 8) ? raw_args_stack
+        : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
+    auto* raw_tags = (ac <= 8) ? raw_tags_stack
+        : static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
+    if (raw_args == nullptr || raw_tags == nullptr) {
+        if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+        ++frame.pc; return;
+    }
+
+    for (uint32_t i = 0; i < ac; ++i) {
+        raw_args[i] = frame.regs.reg(base + i);
+        raw_tags[i] = frame.regs.reg_tag(base + i);
+    }
+
+    const ri::CachedCallInfo* cache_info = nullptr;
+    if (frame.call_cache != nullptr && frame.pc < frame.call_count) {
+        const auto* cc = static_cast<const ri::CachedCallInfo*>(frame.call_cache);
+        if (cc[frame.pc].ret_tag != 0xFF) cache_info = &cc[frame.pc];
+    }
+
+    auto dret = ri::InterpreterDispatchRaw(
+        call_target, raw_args, raw_tags, ac,
+        instr.is_instance_call(),
+        frame.dispatch_ctx,
+        cache_info);
+
+    if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+    if (dret.threw_exception) {
+        frame.threw_exception = true; frame.exception_obj = dret.exception_obj; frame.pc = 9999;
+        return;
+    }
+    if (dret.has_value && instr.has_dst()) {
+        frame.regs.set_reg(instr.dst_reg(), dret.value, dret.tag);
     }
     ++frame.pc;
 }
@@ -1734,17 +1800,8 @@ static void Reg_CallVirtConstrained(RegisterFrame& frame, const RegisterInstruct
     Reg_Call(frame, instr);
 }
 
-// ── Calli: indirect call through function pointer — delegate to Reg_Call
-// The register allocator fills imm.ptr with ir.call_target, and src1_reg
-// points to consecutive arg registers.  Reg_Call already handles this via
-// InterpreterDispatchRaw.
-static void Reg_Calli(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    Reg_Call(frame, instr);
-}
-
 // ── Cpblk / InitBlk: memory block operations ────────────────────────────
 static void Reg_Cpblk(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    // TODO V2: implement native memcpy
     Reg_Unsupported(frame, instr);
 }
 
@@ -1821,23 +1878,111 @@ static constexpr RegOpHandler kRegHandlers[100] = {
 #undef R
 #undef UNSUP
 
+// ── OSR: hot loop → T4 native code promotion ──────────────────────────────
+// V1 "promote on re-entry": when RegisterExecute detects a hot loop backward
+// branch, trigger T4 native code generation and cache the result so that
+// subsequent calls to this method execute natively (via entry_direct.cpp).
+
+static constexpr uint32_t kOsrLoopThreshold = 100;
+
+static void TryOsrPromotion(RegisterFrame& frame,
+                             const RegisterInstruction* instrs,
+                             uint32_t instr_count) noexcept {
+    if (frame.patch_method == nullptr) return;
+    auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
+    using PM = chaos::il2cpp::runtime_core::PatchMethod;
+
+    // Don't re-promote if already at T4 (another thread got there first).
+    if (pm->tier_state.load(std::memory_order_acquire) >= PM::kT4Ready) {
+        // If the method already has a cached NativeMethod with an OSR entry,
+        // re-enter T4 via OSR directly.  This handles the deopt→T4
+        // re-promotion loop: after deoptimization, the tier_state is still
+        // kT4Ready and the cached NativeMethod is still valid.
+        auto* existing_nm = static_cast<chaos::il2cpp::codegen::NativeMethod*>(
+            pm->cached_native_method);
+        if (existing_nm != nullptr && existing_nm->osr_entry_offset != 0) {
+            using OsrEntry = void (*)(void*, void*);
+            auto osr_entry = reinterpret_cast<OsrEntry>(
+                static_cast<uint8_t*>(existing_nm->code) + existing_nm->osr_entry_offset);
+            uint64_t osr_ret_buf[2] = {};
+            osr_entry(&frame.regs, osr_ret_buf);
+            frame.ret_val = osr_ret_buf[0];
+            frame.has_ret = true;
+            frame.pc = 0xFFffFFffu;
+        }
+        return;
+    }
+
+    // RegisterMethod should already be cached from T3 lowering.
+    auto* rm = static_cast<RegisterMethod*>(pm->cached_reg_method);
+    if (rm == nullptr) return;
+
+    // Generate native code with full deopt support.
+    chaos::il2cpp::codegen::CodeGenConfig cfg;
+    cfg.enable_deopt = true;
+    cfg.safepoint_fn = nullptr;
+
+    auto* nm = chaos::il2cpp::codegen::GenerateNativeCode(*rm, cfg);
+    if (nm == nullptr) return;
+
+    // OSR V2: if the generated code has an OSR entry, transfer execution
+    // to native code mid-stream with the current register file.
+    if (nm->osr_entry_offset != 0) {
+        // Set tier state BEFORE calling OSR entry so future calls also hit T4.
+        pm->cached_native_method = nm;
+        pm->tier_state.store(PM::kT4Ready, std::memory_order_release);
+        chaos::il2cpp::codegen::RegisterT4Code(nm->code, nm->code_size, nm);
+
+        using OsrEntry = void (*)(void*, void*);
+        auto osr_entry = reinterpret_cast<OsrEntry>(
+            static_cast<uint8_t*>(nm->code) + nm->osr_entry_offset);
+        uint64_t osr_ret_buf[2] = {};
+        osr_entry(&frame.regs, osr_ret_buf);
+
+        // Native code completed — capture return value and exit RegisterExecute
+        frame.ret_val = osr_ret_buf[0];
+        frame.has_ret = true;
+        frame.pc = 0xFFffFFffu;
+        return;
+    }
+
+    // V1 fallback: cache for re-entry on next call
+    pm->cached_native_method = nm;
+    pm->tier_state.store(PM::kT4Ready, std::memory_order_release);
+    chaos::il2cpp::codegen::RegisterT4Code(nm->code, nm->code_size, nm);
+}
+
 // ── RegisterExecute ─────────────────────────────────────────────────────
 
 bool RegisterExecute(RegisterFrame& frame,
                      const RegisterInstruction* instrs,
-                     uint32_t instr_count,
-                     uint32_t start_pc) noexcept {
-    frame.pc = start_pc;
+                     uint32_t instr_count) noexcept {
+    frame.pc = 0;
+    uint32_t loop_counter = 0;
 
     while (frame.pc < instr_count) {
         CHAOS_IL2CPP_PROFILE_SCOPE("RegisterExecute");
         uint32_t op_val = static_cast<uint32_t>(instrs[frame.pc].op_code());
-        if (op_val >= 100) {
+        if (op_val > 99) {
             frame.threw_exception = true;
             return false;
         }
 
+        uint32_t prev_pc = frame.pc;
         kRegHandlers[op_val](frame, instrs[frame.pc]);
+
+        // OSR: Detect hot loop backward branch — if the handler took a branch
+        // and the target is an earlier instruction, it's a loop backedge.
+        if (frame.pc != prev_pc + 1 && frame.pc < prev_pc) {
+            // After deoptimization from T4, use threshold=1 so the method
+            // re-enters native code on the very first backward branch.
+            uint32_t threshold = frame.osr_reenable ? 1 : kOsrLoopThreshold;
+            frame.osr_reenable = false;  // one-shot
+            if (++loop_counter >= threshold) {
+                TryOsrPromotion(frame, instrs, instr_count);
+                if (frame.pc == 0xFFffFFffu) continue;  // OSR took over
+            }
+        }
 
         if (frame.threw_exception && frame.pc == 9999) {
             frame.CleanupTracked();

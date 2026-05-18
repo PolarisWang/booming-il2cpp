@@ -6,14 +6,8 @@
 
 #include <cstdint>
 #include <cstring>
-#include <gc/gc_helpers.h>  // GcAllocate
 
 #include <intrin.h>  // _ReturnAddress()
-
-#if defined(_WIN32) || defined(_WIN64)
-  #define NOMINMAX
-  #include <windows.h>
-#endif
 
 // ── Thread-local deoptimization state ───────────────────────────────────────
 namespace chaos::il2cpp::codegen {
@@ -30,9 +24,6 @@ thread_local DeoptTlsState t_deopt_state;
 
 // Virtual method resolution for CodegenLdVirtFtn.
 #include <vtable_registry.h>
-
-// SATB pre-write barrier for concurrent BGC marking.
-#include <gc/gc_bgc_inline.h>
 
 extern "C" uint64_t CodegenLdFld(void* obj, uint32_t field_idx) noexcept {
     using namespace chaos::il2cpp::interpreter;
@@ -66,14 +57,11 @@ extern "C" uint64_t CodegenLdFld(void* obj, uint32_t field_idx) noexcept {
 
 extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noexcept {
     using namespace chaos::il2cpp::interpreter;
-    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
     if (obj == nullptr) return;
     auto* io = static_cast<InterpreterObject*>(obj);
     if (field_idx >= io->fields.size()) {
         io->fields.resize(field_idx + 1u);
     }
-    // SATB pre-write barrier: record old obj pointer before overwriting.
-    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&io->fields[field_idx].obj));
     // Store as Int64 (bit-preserving). The call site may have set Int32 or
     // ObjectRef bits, but the uint64_t representation is what T4 tracks.
     io->fields[field_idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
@@ -144,8 +132,7 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
     // The call site (code_generator) checks ret_buf[0] and jumps to
     // deopt_return, which unwinds the frame back to entry_direct.
     if (args->ret_buf != nullptr) {
-        using chaos::il2cpp::codegen::t_deopt_state;
-        using chaos::il2cpp::codegen::kDeoptMagic;
+        using namespace chaos::il2cpp::codegen;
 
         // Copy all 64 GPR values from the register file directly.
         std::memcpy(t_deopt_state.gpr_file, gpr_base,
@@ -155,7 +142,37 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
         std::memcpy(t_deopt_state.fpr_file, gpr_base + 64,
                     32 * sizeof(double));
 
+        // Extract type tags from the DeoptEntry for this call site.
+        // The return address points to the instruction after the call to
+        // CodegenCallVirt in the generated code.  Use it to find the
+        // NativeMethod and its DeoptEntry, then copy per-register tags.
+        void* ret_addr = _ReturnAddress();
+        const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+        if (nm != nullptr && nm->deopt_values != nullptr) {
+            uint64_t code_base = reinterpret_cast<uint64_t>(nm->code);
+            uint32_t native_off = static_cast<uint32_t>(
+                reinterpret_cast<uint64_t>(ret_addr) - code_base);
+            const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_off);
+            if (entry != nullptr) {
+                // Initialize all GPR tags to Int64, then overwrite with
+                // actual tags from the DeoptValue entries.
+                std::memset(t_deopt_state.gpr_tags,
+                    static_cast<int>(ValueTag::Int64), 64);
+                std::memset(t_deopt_state.fpr_tags,
+                    static_cast<int>(ValueTag::Float64), 32);
+                for (uint32_t i = 0; i < entry->num_values; ++i) {
+                    const auto& dv = nm->deopt_values[entry->values_offset + i];
+                    if (dv.reg_index < 64) {
+                        t_deopt_state.gpr_tags[dv.reg_index] = dv.value_tag;
+                    } else {
+                        t_deopt_state.fpr_tags[dv.reg_index - 64] = dv.value_tag;
+                    }
+                }
+            }
+        }
+
         // Signal deoptimization to the caller.
+        t_deopt_state.instr_pc = args->instruction_idx;
         t_deopt_state.deopt_happened = true;
         *static_cast<uint64_t*>(args->ret_buf) = kDeoptMagic;
     }
@@ -164,11 +181,9 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
 
 extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) noexcept {
     using namespace chaos::il2cpp::interpreter;
-    using namespace chaos::il2cpp::runtime_core;
-    // Allocate BoxedValue via GC (V5: GcAllocate instead of CHAOS_IL2CPP_MALLOC).
-    void* mem = GcAllocate(sizeof(BoxedValue));
-    if (mem == nullptr) return nullptr;
-    auto* boxed = ::new (mem) BoxedValue();
+    auto* boxed = static_cast<BoxedValue*>(CHAOS_IL2CPP_MALLOC(sizeof(BoxedValue)));
+    if (boxed == nullptr) return nullptr;
+    ::new (boxed) BoxedValue();
     ValueTag vt = static_cast<ValueTag>(tag);
     switch (vt) {
     case ValueTag::Int32:
@@ -191,11 +206,9 @@ extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) no
 
 extern "C" void* CodegenNewObj(uint32_t type_token, uint32_t field_count) noexcept {
     using namespace chaos::il2cpp::interpreter;
-    using namespace chaos::il2cpp::runtime_core;
-    // V5: Allocate InterpreterObject via GcAllocate.
-    void* mem = GcAllocate(sizeof(InterpreterObject));
-    if (mem == nullptr) return nullptr;
-    auto* obj = ::new (mem) InterpreterObject();
+    auto* obj = static_cast<InterpreterObject*>(CHAOS_IL2CPP_MALLOC(sizeof(InterpreterObject)));
+    if (obj == nullptr) return nullptr;
+    ::new (obj) InterpreterObject();
     obj->type_token = type_token;
     if (field_count == 0) field_count = 1;
     obj->fields.resize(field_count);
@@ -243,12 +256,9 @@ extern "C" uint64_t CodegenLdSFld(uint32_t field_offset) noexcept {
 
 extern "C" void CodegenStSFld(uint32_t field_offset, uint64_t value) noexcept {
     using namespace chaos::il2cpp::interpreter;
-    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
     if (field_offset >= g_static_fields.size()) {
         g_static_fields.resize(field_offset + 1u);
     }
-    // SATB pre-write barrier: record old obj pointer before overwriting.
-    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&g_static_fields[field_offset].obj));
     g_static_fields[field_offset] = InterpreterValue::from_i64(static_cast<int64_t>(value));
 }
 
@@ -291,15 +301,12 @@ extern "C" uint64_t CodegenLdElem(void* arr, int32_t index) noexcept {
 
 extern "C" void CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept {
     using namespace chaos::il2cpp::interpreter;
-    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
     if (arr == nullptr) return;
     auto* as = static_cast<ArrayStorage*>(arr);
     auto idx = static_cast<size_t>(index >= 0 ? index : 0);
     if (idx >= as->elements.size()) {
         as->elements.resize(idx + 1u);
     }
-    // SATB pre-write barrier: record old obj pointer before overwriting.
-    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&as->elements[idx].obj));
     as->elements[idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
 }
 
@@ -364,11 +371,8 @@ extern "C" void CodegenInitObj(void* ptr) noexcept {
 
 extern "C" void CodegenStObj(void* ptr, uint64_t value) noexcept {
     using namespace chaos::il2cpp::interpreter;
-    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
     if (ptr == nullptr) return;
     auto* iv = static_cast<InterpreterValue*>(ptr);
-    // SATB pre-write barrier: record old obj pointer before overwriting.
-    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
     *iv = InterpreterValue::from_i64(static_cast<int64_t>(value));
 }
 
@@ -421,6 +425,61 @@ extern "C" void* CodegenLocAlloc(uint32_t size) noexcept {
     return mem;
 }
 
+// ── Inline deoptimization state saver for EmitDeoptSequence ─────────────────────
+
+extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
+    using namespace chaos::il2cpp::codegen;
+    using namespace chaos::il2cpp::interpreter;
+
+    if (codegen_rsp == 0) return;
+
+    // Get the return address — points to the instruction after the CALL
+    // to DeoptSaveFrameState in the generated code.
+    void* ret_addr = _ReturnAddress();
+
+    // Find the NativeMethod covering this code address.
+    const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+    if (nm == nullptr) return;
+
+    uint64_t code_base = reinterpret_cast<uint64_t>(nm->code);
+    uint32_t native_off = static_cast<uint32_t>(
+        reinterpret_cast<uint64_t>(ret_addr) - code_base);
+
+    // Batch-copy all 64 GPR values from stack frame spill slots.
+    // GPR file starts at codegen_rsp + kGprFileOff (= codegen_rsp + 32).
+    for (uint32_t vr = 0; vr < 64; ++vr) {
+        t_deopt_state.gpr_file[vr] = *reinterpret_cast<const uint64_t*>(
+            codegen_rsp + 32 + vr * 8);
+    }
+
+    // Batch-copy all 32 FPR values from stack frame spill slots.
+    // FPR file starts at codegen_rsp + kFprFileOff (= codegen_rsp + 544).
+    for (uint32_t vr = 0; vr < 32; ++vr) {
+        t_deopt_state.fpr_file[vr] = *reinterpret_cast<const double*>(
+            codegen_rsp + 544 + vr * 8);
+    }
+
+    // Look up type tags from the DeoptEntry for this native offset.
+    const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_off);
+    if (entry != nullptr && nm->deopt_values != nullptr) {
+        std::memset(t_deopt_state.gpr_tags,
+            static_cast<int>(ValueTag::Int64), 64);
+        std::memset(t_deopt_state.fpr_tags,
+            static_cast<int>(ValueTag::Float64), 32);
+        for (uint32_t i = 0; i < entry->num_values; ++i) {
+            const auto& dv = nm->deopt_values[entry->values_offset + i];
+            if (dv.reg_index < 64) {
+                t_deopt_state.gpr_tags[dv.reg_index] = dv.value_tag;
+            } else {
+                t_deopt_state.fpr_tags[dv.reg_index - 64] = dv.value_tag;
+            }
+        }
+        t_deopt_state.instr_pc = entry->instr_pc;
+    }
+
+    t_deopt_state.deopt_happened = true;
+}
+
 // ── Deoptimization trampoline entry point ─────────────────────────────────────
 
 extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
@@ -444,60 +503,27 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
         reinterpret_cast<uint64_t>(ret_addr) - code_base);
 
     // 4. Deoptimize: reconstruct register file from stack frame spill slots.
-    //    DeoptTrap sets t_deopt_state internally.
     const NativeContext* nctx = static_cast<const NativeContext*>(ctx);
     DeoptRuntime::DeoptTrap(
         const_cast<NativeMethod*>(nm),
         native_offset,
         *nctx,
-        codegen_rsp);
-}
+        codegen_rsp,
+        t_deopt_state.gpr_file,
+        t_deopt_state.fpr_file,
+        t_deopt_state.gpr_tags,
+        t_deopt_state.fpr_tags);
 
-// ── T4 SEH runtime helpers ─────────────────────────────────────────────────
-
-// TLS exception object pointer for T4 SEH dispatch.
-// Set by CodegenThrow/CodegenRethrow, read by the VEH handler.
-namespace chaos::il2cpp::codegen {
-thread_local void* g_t4_exception_obj = nullptr;
-}
-
-// ABI export: required for C-language linkage from generated native code
-extern "C" void CodegenThrow(void* exception_obj) noexcept {
-    using chaos::il2cpp::codegen::g_t4_exception_obj;
-#if defined(_WIN32) || defined(_WIN64)
-    g_t4_exception_obj = exception_obj;
-    // Raise a software exception to trigger the T4 VEH handler.
-    // The VEH handler walks the SEH clause table and redirects RIP
-    // to the matching catch/finally handler.
-    RaiseException(0xE0000001u, 0, 0, nullptr);
-#else
-    (void)exception_obj;
-#endif
-}
-
-// ABI export: required for C-language linkage from generated native code
-extern "C" void CodegenRethrow() noexcept {
-    using chaos::il2cpp::codegen::g_t4_exception_obj;
-#if defined(_WIN32) || defined(_WIN64)
-    void* ex = g_t4_exception_obj;
-    if (ex == nullptr) {
-        __debugbreak();
+    // 5. Find the DeoptEntry to get the instruction pc.
+    const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_offset);
+    if (entry == nullptr) {
+        // No matching deopt entry — can't reconstruct pc.
         return;
     }
-    RaiseException(0xE0000001u, 0, 0, nullptr);
-#endif
-}
 
-// ABI export: required for C-language linkage from generated native code
-extern "C" void CodegenEndFinally() noexcept {
-    // V1: no-op.  In a full implementation this would manage
-    // finally unwind state (phase 2 unwinding).
-}
-
-// ── Overflow deoptimization helper ─────────────────────────────────────────
-
-extern "C" void CodegenReportDeopt(uint32_t instr_pc) noexcept {
-    using chaos::il2cpp::codegen::t_deopt_state;
-    t_deopt_state.instr_pc = instr_pc;
+    // 6. Set TLS state: the trampoline will write kDeoptMagic to ret_buf[0]
+    //    and return.  InterpreterEntryDirect reads this state to reconstruct
+    //    the RegisterFrame for RegisterExecute.
+    t_deopt_state.instr_pc = entry->instr_pc;
     t_deopt_state.deopt_happened = true;
 }
