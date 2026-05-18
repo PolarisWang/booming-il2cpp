@@ -25,5 +25,6 @@ extern "C" {
 #include "collection_stubs.h"
 #include "misc_stubs.h"
 #include "mutex_stubs.h"
+#include "enum_stubs.h"
 
 }  // extern "C"
