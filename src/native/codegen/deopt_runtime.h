@@ -31,6 +31,11 @@ struct NativeContext {
 /// and reconstructs interpreter state for re-execution in a lower tier.
 class DeoptRuntime {
 public:
+    /// Read a uint64_t from the codegen stack frame at a given RSP-relative
+    /// spill offset.  'codegen_rsp' is the RSP value at function entry
+    /// (after prologue sub rsp, frame_size).
+    static uint64_t ReadSpillSlot(uint64_t codegen_rsp, int16_t spill_offset) noexcept;
+
     /// Find the DeoptEntry for a given native return address.
     /// Binary search over entries sorted by native_offset.
     /// Returns nullptr if no matching entry is found.
@@ -41,9 +46,12 @@ public:
     /// Reconstruct the register file from a NativeContext + DeoptEntry.
     /// Reads values from the context's GPR/FPR arrays and writes to gpr_file[64]
     /// and fpr_file[32] according to the DeoptValue descriptors.
+    /// Also writes per-register value tags to gpr_tags[64] and fpr_tags[32].
     static void ReconstructRegisterFile(
         uint64_t* gpr_file,          // output[64]
         double*   fpr_file,          // output[32]
+        uint8_t*  gpr_tags,          // output[64] — per-register ValueTag
+        uint8_t*  fpr_tags,          // output[32] — per-register ValueTag
         const NativeContext& ctx,
         const DeoptEntry& entry,
         const DeoptValue* values) noexcept;
@@ -52,18 +60,25 @@ public:
     /// Saves all registers and dispatches back through the interpreter.
     /// This is the entry point that generated code calls via a thunk.
     ///
-    /// Phase 3c simplified strategy:
-    ///   1. Capture current register state into NativeContext
-    ///   2. Look up DeoptEntry from the return address
-    ///   3. Reconstruct register file values
-    ///   4. Fall through to RegisterExecute for re-execution
-    ///
-    /// Since generated code runs in cooperative GC mode, this function must
-    /// complete quickly and not trigger a GC safepoint.
+    /// Parameters:
+    ///   nm            — NativeMethod for the generated code
+    ///   return_address — native offset within the generated code
+    ///   ctx           — saved NativeContext (16 GPRs + 16 FPRs)
+    ///   codegen_rsp   — RSP at function entry (after prologue), or 0 to
+    ///                    use _AddressOfReturnAddress() auto-detection
+    ///   out_gpr_file  — if non-null, batch-copy all 64 GPRs from stack frame
+    ///   out_fpr_file  — if non-null, batch-copy all 32 FPRs from stack frame
+    ///   out_gpr_tags  — if non-null, filled with per-register ValueTag (size 64)
+    ///   out_fpr_tags  — if non-null, filled with per-register ValueTag (size 32)
     static void DeoptTrap(
         NativeMethod* nm,
         uint32_t      return_address,
-        NativeContext ctx) noexcept;
+        NativeContext ctx,
+        uint64_t      codegen_rsp = 0,
+        uint64_t*     out_gpr_file = nullptr,
+        double*       out_fpr_file = nullptr,
+        uint8_t*      out_gpr_tags = nullptr,
+        uint8_t*      out_fpr_tags = nullptr) noexcept;
 };
 
 }  // namespace chaos::il2cpp::codegen

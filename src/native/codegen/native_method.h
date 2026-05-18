@@ -48,7 +48,7 @@ struct DeoptEntry {
     uint32_t   native_offset;       // byte offset from code entry (safepoint)
     uint32_t   instr_pc;            // RegisterInstruction index
     uint32_t   num_values;          // number of active values at this point
-    // values[] not stored inline — store separately in deopt table.
+    uint32_t   values_offset;       // index into DeoptValue[] array for this entry's values
 };
 
 struct DeoptValue {
@@ -76,6 +76,24 @@ struct NativeMethod {
     // GC points (for precise root scanning)
     GcPoint*      gc_points    = nullptr;
     uint32_t      gc_point_count = 0;
+
+    // SEH table offset (byte offset from code start; 0 = no SEH table)
+    uint32_t      seh_table_offset = 0;
+
+    // GcSlotMapV0: precise GC root map for hybrid stack scanning
+    void*         slot_map_data   = nullptr;   // serialized GcSlotMapV0 blob
+    uint32_t      slot_map_size   = 0;
+
+    // OSR entry point: byte offset from code start for the OSR entry stub.
+    // The OSR entry copies a RegisterFile to the stack frame and jumps to
+    // instruction 0, enabling true mid-execution on-stack replacement.
+    // 0 = no OSR entry (no loop headers in this method).
+    uint32_t      osr_entry_offset = 0;
+
+    // Offset from RBP (native frame pointer) to RSP (stack frame base).
+    // Used by GC stack walker to compute frame_ptr from the native RBP
+    // for T4 frames.  Varies per-method with register caching.
+    uint32_t      rbp_to_rsp_offset = 0;
 
     // Destructor: frees all allocations.
     ~NativeMethod() noexcept;

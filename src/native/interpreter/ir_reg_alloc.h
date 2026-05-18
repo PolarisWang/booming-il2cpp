@@ -80,8 +80,14 @@ struct alignas(8) RegisterInstruction {
     // Packed into reserved header bits [63:48]:
     //   bits [62:48] = call_arg_count (0-32767)
     //   bit  63      = is_instance_call
+    //   When kRegHasSrc3 is set (non-Call 3-src opcodes):
+    //     bits [55:48] = src3_reg (0-255)
     inline uint32_t call_arg_count() const noexcept { return static_cast<uint32_t>((header >> 48) & 0x7FFF); }
     inline bool     is_instance_call() const noexcept { return (header >> 63) != 0; }
+    inline uint8_t  src3_reg() const noexcept {
+        if (!(flags() & kRegHasSrc3)) return 0;
+        return static_cast<uint8_t>((header >> 48) & 0xFF);
+    }
 };
 
 static_assert(sizeof(RegisterInstruction) == 16,
@@ -144,6 +150,10 @@ struct RegisterFrame {
 
     // PIC dispatch data (PatchMethod* for T3 PIC lookup)
     void*         patch_method;
+
+    // OSR re-enable flag: set after deoptimization from T4 to trigger
+    // immediate OSR re-promotion on the first backward branch.
+    bool          osr_reenable = false;
 
     // Program counter
     uint32_t      pc;
