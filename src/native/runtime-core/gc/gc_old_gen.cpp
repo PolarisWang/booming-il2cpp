@@ -1,7 +1,5 @@
 #include "gc_old_gen.h"
 
-#include <cstring>
-
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
@@ -1675,28 +1673,14 @@ void MarkSweepOldGen::PlanPageEvacuation(OldGenPage* page, CompactPlan& out_plan
             void* obj = payload + obj_slot * sizeof(void*);
 
             // Determine object size from type info.
-            // Supports two type_info formats:
-            //   TypeInfoHot  — stable_id at offset +16 (real managed code)
-            //   FakeTypeInfo — stable_id at offset  +0 (stress-test objects)
             CHAOS_IL2CPP_SIZE obj_size = sizeof(void*);
             const void* type_info_ptr = *static_cast<const void* const*>(obj);
             if (type_info_ptr != nullptr) {
                 auto& registry = GcLayoutRegistry::Instance();
                 if (registry.IsValidTypeInfoPointer(type_info_ptr)) {
-                    uint64_t stable_id = 0;
-                    const GcTypeLayout* layout = nullptr;
-
-                    // Try TypeInfoHot layout first (stable_id at +16).
-                    std::memcpy(&stable_id,
-                        reinterpret_cast<const char*>(type_info_ptr) + 16, sizeof(stable_id));
-                    layout = registry.Lookup(stable_id);
-
-                    // Fallback: compact/FakeTypeInfo layout (stable_id at +0).
-                    if (layout == nullptr) {
-                        std::memcpy(&stable_id, type_info_ptr, sizeof(stable_id));
-                        layout = registry.Lookup(stable_id);
-                    }
-
+                    auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
+                    uint64_t stable_id = hot->stable_id;
+                    const auto* layout = registry.Lookup(stable_id);
                     if (layout != nullptr && layout->instance_size > 0) {
                         obj_size = layout->instance_size;
                     }
@@ -1803,6 +1787,20 @@ void MarkSweepOldGen::CrossPageCompact() {
     CHAOS_IL2CPP_SIZE total_evacuate = 0;
     int src_idx = 0;
     for (auto& c : candidates) {
+        // Skip pages containing pinned objects.
+        if (!pinned_compact_skip_.empty()) {
+            char* payload = c.page->Payload();
+            char* payload_end = payload + c.page->payload_size;
+            bool has_pinned = false;
+            for (auto& pr : pinned_compact_skip_) {
+                auto* addr = static_cast<char*>(pr.addr);
+                if (addr >= payload && addr < payload_end) {
+                    has_pinned = true;
+                    break;
+                }
+            }
+            if (has_pinned) continue;
+        }
         source_pages.push_back(c.page);
         printf("  COMPACT_DIAG: selecting source %d\n", src_idx++); fflush(stdout);
         auto bm6 = GcMarkBitmap(c.page->MarkBitmap(), c.page->bitmap_bytes);
@@ -1850,6 +1848,7 @@ void MarkSweepOldGen::CrossPageCompact() {
                 if (e.new_addr != e.old_addr) {
                     std::memcpy(e.new_addr, e.old_addr, e.size);
                     std::memset(e.old_addr, 0, e.size);
+                    MarkObject(e.new_addr);
                 }
             }
         });
@@ -2289,6 +2288,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // Phase 4b: Compaction (when fragmentation exceeds threshold).
     // Transfer pinned snapshot to compaction skip list so PlanPageCompaction
     // and PlanPageEvacuation can exclude pinned objects from relocation.
+    pinned_compact_skip_ = pinned_roots_;
     CompactMode compact_mode = DecideCompactMode();
 
     if (compact_mode == CompactMode::CROSS_PAGE) {

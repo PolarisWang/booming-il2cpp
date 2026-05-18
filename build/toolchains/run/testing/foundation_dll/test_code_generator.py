@@ -297,11 +297,12 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     # Note: For benchmark variant, these have explicit patterns in family_verification_orchestrator.py
     # Override: GetName with UInt64 param triggers boxed_type codegen bug for System.UInt64
     ("Enum", "GetName", 2): "Enum.GetName(typeof(DayOfWeek), (object)1)",
-    # Skip: ToString with format param triggers boxed_type codegen bug for System.DayOfWeek
-    ("Enum", "ToString", 1): "skip",
-    # Enum.TryParse has 'out' parameters (codegen uses 'ref', fails CS1620 at call site)
-    ("Enum", "TryParse", 3): "skip",
-    ("Enum", "TryParse", 4): "skip",
+    # Override: ToString with format param triggers boxed_type codegen bug for DayOfWeek
+    # Use primitive int to avoid enum boxing in il2cpp codegen
+    ("Enum", "ToString", 1): "42.ToString(\"X\")",
+    # Enum.TryParse has 'out' parameters — provide override with out var _
+    ("Enum", "TryParse", 3): "Enum.TryParse(typeof(DayOfWeek), \"Monday\", out object _)",
+    ("Enum", "TryParse", 4): "Enum.TryParse(typeof(DayOfWeek), \"Monday\", true, out object _)",
     # Type.GetType with unresolvable name
     ("Type", "GetType", 1): "skip",
     ("Type", "GetType", 2): "skip",
@@ -995,6 +996,13 @@ def _try_property_access(type_name: str, method_name: str, args: str) -> str | N
     return None
 
 
+def _has_non_skip_override(parsed: dict[str, Any]) -> bool:
+    """Check if there's a non-skip override expression for this method."""
+    override = _METHOD_OVERRIDES.get(
+        (parsed["type_name"], parsed["method_name"], len(parsed["param_types"])))
+    return override is not None and override != "skip"
+
+
 def _test_body(parsed: dict[str, Any]) -> str:
     """Generate the body of a test method.
 
@@ -1008,7 +1016,7 @@ def _test_body(parsed: dict[str, Any]) -> str:
             reason,
         )
 
-    if _has_unsafe_param(parsed["param_types"]):
+    if _has_unsafe_param(parsed["param_types"]) and not _has_non_skip_override(parsed):
         return (
             "    // TODO: needs-manual — ref/pointer/unsafe parameter requires unsafe context",
             False,

@@ -323,6 +323,17 @@ public sealed partial class NativeAotLoweringPlanner
             ? CollectAllMethods(aotCoreIr)
             : CollectReachableMethods(aotCoreIr, entryMethod);
 
+        // Ensure consistent ordering by numeric subject suffix where present,
+        // so that RunNativeAot(slot) → Subject_{slot} is correct for all
+        // dispatch paths (native + hotpatch). Without this sort, slot numbers
+        // are assigned in call-graph DFS order (fullAssemblyMode=false) or
+        // alphabetical order (fullAssemblyMode=true), both of which produce
+        // Subject_10 before Subject_1.
+        methodsForLowering = methodsForLowering
+            .OrderBy(m => ExtractNumericSortKey(m.SubjectId))
+            .ThenBy(m => m.SubjectId, StringComparer.Ordinal)
+            .ToList();
+
         // Augment lowering set with methods of types that implement COM interfaces.
         // These concrete implementations are referenced by vtable arrays for CCW dispatch
         // but may not be discovered by static call-graph reachability (interface dispatch).

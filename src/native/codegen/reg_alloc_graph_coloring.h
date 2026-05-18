@@ -229,6 +229,12 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
             use[i] |= (1ULL << inst.src1_reg());
         if (inst.has_src2() && inst.src2_reg() < interpreter::kGPRegisters)
             use[i] |= (1ULL << inst.src2_reg());
+        // Third source operand (StElem, StObj, Cpblk, InitBlk)
+        if (inst.flags() & interpreter::kRegHasSrc3) {
+            uint8_t src3 = inst.src3_reg();
+            if (src3 < interpreter::kGPRegisters)
+                use[i] |= (1ULL << src3);
+        }
     }
 
     // Pass 2: backward dataflow to fixed point.
@@ -309,6 +315,10 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
         if (inst.has_dst()  && inst.dst_reg()  < interpreter::kGPRegisters) cost[inst.dst_reg()]++;
         if (inst.has_src1() && inst.src1_reg()  < interpreter::kGPRegisters) cost[inst.src1_reg()]++;
         if (inst.has_src2() && inst.src2_reg()  < interpreter::kGPRegisters) cost[inst.src2_reg()]++;
+        if ((inst.flags() & interpreter::kRegHasSrc3)) {
+            uint8_t src3 = inst.src3_reg();
+            if (src3 < interpreter::kGPRegisters) cost[src3]++;
+        }
     }
 
     // ── Simplify (Kempe) ───────────────────────────────────────────────────

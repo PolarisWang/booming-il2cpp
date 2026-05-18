@@ -157,6 +157,24 @@
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
       "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Int32::ToString:System.String(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object\u0026)",
+      "reason": "external-call"
     }
   ]
 }
