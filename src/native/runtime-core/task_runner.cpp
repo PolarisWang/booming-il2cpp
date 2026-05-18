@@ -70,4 +70,8 @@ CHAOS_IL2CPP_INTPTR TaskRun(CHAOS_IL2CPP_INTPTR delegate_fn) noexcept {
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task);
 }
 
+void RegisterAsyncTaskRun() noexcept {
+    ::chaos::il2cpp::common::register_async_task_run_fn(TaskRun);
+}
+
 }  // namespace chaos::il2cpp::runtime_core::threading

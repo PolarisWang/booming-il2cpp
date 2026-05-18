@@ -1039,6 +1039,7 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
                 mic.mic_generation.load(std::memory_order_relaxed) ==
                     g_patch_generation.load(std::memory_order_relaxed)) {
                 // MIC hit — call cached vtable entry directly.
+                CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirt_MicHit");
                 uint64_t result = CallDirectVoidPtr(
                     mic.mic_dispatch_ptr.load(std::memory_order_relaxed), pa.args, ac);
 
@@ -1053,6 +1054,7 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
             }
 
             // MIC miss: resolve vtable and cache.
+            CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirt_MicMiss");
             uint32_t declared_method_token = static_cast<uint32_t>(instr.secondary_index);
             if (receiver_token != 0 && declared_method_token != 0) {
                 void* resolved = vr::ResolveVirtualMethodPointer(
@@ -1602,6 +1604,20 @@ const OpHandler kHandlers[99] = {
 
 // ── FastExecute ────────────────────────────────────────────────────────
 
+// Opcode frequency histogram (thread-local, zero-cost when unread).
+// Dump with DumpFastExecuteOpcodeHistogram().
+static thread_local uint64_t g_fast_op_freq[99] = {};
+
+void DumpFastExecuteOpcodeHistogram() noexcept {
+    printf("=== FastExecute opcode frequency ===\n");
+    for (int i = 0; i < 99; ++i) {
+        if (g_fast_op_freq[i] > 0) {
+            printf("  %2d: %llu\n", i,
+                   static_cast<unsigned long long>(g_fast_op_freq[i]));
+        }
+    }
+}
+
 bool FastExecute(FastFrame& frame,
                  const interpreter::IRInstruction* instrs,
                  uint32_t instr_count) noexcept {
@@ -1624,6 +1640,7 @@ bool FastExecute(FastFrame& frame,
             frame.threw_exception = true;
             return false;
         }
+        ++g_fast_op_freq[op_val];  // opcode histogram (thread-local, ~1 cycle)
 
         kHandlers[op_val](frame, instrs[frame.pc]);
 

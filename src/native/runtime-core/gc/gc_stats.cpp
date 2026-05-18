@@ -32,6 +32,8 @@ GcSnapshot GcGetSnapshot() noexcept {
     snap.full_objects_marked    = g_gc_stats.full_objects_marked.load(std::memory_order_acquire);
     snap.full_bytes_reclaimed   = g_gc_stats.full_bytes_reclaimed.load(std::memory_order_acquire);
     snap.full_finalizers_run    = g_gc_stats.full_finalizers_run.load(std::memory_order_acquire);
+    snap.finalization_pending_count = static_cast<int32_t>(
+        g_gc_stats.finalization_pending_count.load(std::memory_order_acquire));
     snap.alloc_total     = g_gc_stats.alloc_total.load(std::memory_order_acquire);
     snap.alloc_bytes     = g_gc_stats.alloc_bytes.load(std::memory_order_acquire);
     snap.alloc_oversized = g_gc_stats.alloc_oversized.load(std::memory_order_acquire);

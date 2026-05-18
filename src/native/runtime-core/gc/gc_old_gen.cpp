@@ -2120,6 +2120,7 @@ void MarkSweepOldGen::RegisterFinalizer(void* obj, void (*finalizer)(void*)) {
 
     std::lock_guard<std::mutex> lock(mutex_);
     finalizers_.push_back({obj, finalizer});
+    g_gc_stats.finalization_pending_count.fetch_add(1, std::memory_order_relaxed);
     CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "register_finalizer obj={0}", obj);
 }
 
@@ -2128,11 +2129,13 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::RunFinalizers() {
     {
         std::lock_guard<std::mutex> lock(mutex_);
         to_run.swap(finalizers_);
+        // Reset pending counter; RegisterFinalizer calls below will
+        // re-add entries for objects that survived (still reachable).
+        g_gc_stats.finalization_pending_count.store(0, std::memory_order_relaxed);
     }
 
     CHAOS_IL2CPP_SIZE ran = 0;
     for (auto& entry : to_run) {
-        if (entry.finalizer == nullptr) continue;
 
         // Check if the object is still reachable (marked in bitmap).
         // RunFinalizers is called after DrainMarkStack, so all reachable
@@ -2211,6 +2214,7 @@ std::vector<FinalizerEntry> MarkSweepOldGen::CollectDeadFinalizables() {
             else live_entries.push_back(entry);
         }
         finalizers_.swap(live_entries);
+        g_gc_stats.finalization_pending_count.store(finalizers_.size(), std::memory_order_relaxed);
     }
     return dead_entries;
 }

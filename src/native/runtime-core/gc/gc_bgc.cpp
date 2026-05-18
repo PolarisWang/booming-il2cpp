@@ -194,14 +194,58 @@ void BgcController::WaitForCycleComplete() {
 
 void BgcController::ForceComplete() {
     // Called under safepoint.  Complete marking and sweep inline.
-    if (phase_.load(std::memory_order_acquire) == BgcPhase::IDLE)
+    auto p = phase_.load(std::memory_order_acquire);
+    if (p == BgcPhase::IDLE)
         return;
 
-    // Drain remaining SATB + all workers' deques.
+    // Phase 1: Drain remaining SATB + all workers' deques.
     DrainAllTlsSatbBuffers();
     DrainGlobalSatbQueue();
     for (int i = 0; i < kMaxBgcWorkers; i++) {
         DrainWorkerDeque(i, 0);
+    }
+
+    // Phase 2: If concurrent sweep hasn't run yet, run it inline so that
+    // dead finalizables and weak handles are properly collected.
+    // Without this, objects that died during the BGC cycle would have their
+    // finalizers skipped (the BGC main loop skips CONCURRENT_SWEEP phase when
+    // ForceComplete jumps straight to FINISHED).
+    if (p == BgcPhase::CONCURRENT_MARK || p == BgcPhase::REMARK_NEEDED) {
+        g_old_gen.BgcSweep();
+        bgc_dead_finalizables_ = g_old_gen.CollectDeadFinalizables();
+        bgc_dead_weak_handles_.clear();
+        {
+            std::vector<std::pair<uint64_t, void*>> flat;
+            GcCollectDeadWeakHandles(flat);
+            for (auto& f : flat) {
+                bgc_dead_weak_handles_.push_back({f.first, f.second});
+            }
+        }
+    }
+
+    // Phase 3: Run finalizers inline (under safepoint — finalizers execute
+    // on the GC thread since all mutators are stopped).
+    if (!bgc_dead_finalizables_.empty()) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "force_complete_finalizers count={0}",
+            static_cast<unsigned long long>(bgc_dead_finalizables_.size()));
+        for (auto& entry : bgc_dead_finalizables_) {
+            if (entry.finalizer != nullptr) {
+                entry.finalizer(entry.obj);
+            }
+        }
+        bgc_dead_finalizables_.clear();
+    }
+
+    // Phase 4: Process weak handles (after finalization, respecting
+    // WeakTrackResurrection semantics).
+    if (!bgc_dead_weak_handles_.empty()) {
+        std::vector<std::pair<uint64_t, void*>> flat;
+        flat.reserve(bgc_dead_weak_handles_.size());
+        for (auto& dwh : bgc_dead_weak_handles_) {
+            flat.emplace_back(dwh.handle_id, dwh.old_object);
+        }
+        GcProcessCollectedWeakHandles(flat);
+        bgc_dead_weak_handles_.clear();
     }
 
     // Notify BGC thread to skip to finish.
@@ -299,6 +343,15 @@ void BgcController::PopulateRootSet() {
 void BgcController::BgcThreadMain() {
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "thread_started");
 
+    // Register as a managed thread in preemptive mode.
+    // This makes the BGC thread visible to EnumerateThreads for diagnostics
+    // and allows the safepoint initiator to wait for BGC to acknowledge
+    // before performing STW work (e.g., ForceComplete drain).
+    // Preemptive mode means BGC won't be blocked spinning during safepoints.
+    int bgc_thread_id = threading::AllocateThreadId();
+    threading::RegisterThread(bgc_thread_id, nullptr);
+    threading::EnterPreemptiveMode();
+
     while (bgc_running_.load(std::memory_order_acquire)) {
         // Wait for a start request.  Uses condition_variable for event-driven
         // wake-up (P1-4: replaces sleep_for polling).
@@ -330,6 +383,7 @@ void BgcController::BgcThreadMain() {
 
             constexpr CHAOS_IL2CPP_SIZE kBatchSize = 64;
             int idle_rounds = 0;
+            bool freeze_initiated = false;
 
             while (true) {
                 bool progressed = false;
@@ -360,12 +414,75 @@ void BgcController::BgcThreadMain() {
 
                 if (progressed) {
                     idle_rounds = 0;
+                    freeze_initiated = false;
                     // Yield to avoid starving mutators.
                     std::this_thread::yield();
                 } else {
                     idle_rounds++;
                     // After several idle rounds with no progress,
-                    // check if we're truly done (all deques + SATB empty).
+                    // initiate SATB freeze protocol (CoreCLR-aligned
+                    // convergence guarantee).  Ask all mutators to flush
+                    // their SATB buffers and stop submitting new entries,
+                    // then do a final drain.  If new work appears after
+                    // the freeze+drain, unfreeze and continue.
+                    if (idle_rounds > 20 && !freeze_initiated) {
+                        freeze_initiated = true;
+                        CHAOS_IL2CPP_LOG_DEBUG("BGC", "satb_freeze_initiating");
+
+                        int n_ack;
+                        {
+                            std::lock_guard<std::mutex> lock(satb_registry_mutex_);
+                            n_ack = registered_satb_count_;
+                        }
+                        satb_freeze_remaining_.store(n_ack, std::memory_order_release);
+                        satb_freeze_requested_.store(true, std::memory_order_release);
+
+                        constexpr int kFreezeSpinLimit = 100000;
+                        for (int f = 0; f < kFreezeSpinLimit; f++) {
+                            if (satb_freeze_remaining_.load(std::memory_order_acquire) <= 0)
+                                break;
+                            if (f < 1024) {
+                                std::this_thread::yield();
+                            } else {
+                                std::this_thread::sleep_for(std::chrono::microseconds(100));
+                            }
+                        }
+
+                        satb_freeze_requested_.store(false, std::memory_order_release);
+
+                        DrainGlobalSatbQueue();
+                        for (int i = 0; i < n_workers; i++) {
+                            DrainWorkerDeque(i, 0);
+                        }
+
+                        bool after_freeze_progress = false;
+                        for (int i = 0; i < n_workers; i++) {
+                            std::lock_guard<std::mutex> lock(bgc_workers_[i].steal_mutex);
+                            if (!bgc_workers_[i].deque.empty()) {
+                                after_freeze_progress = true;
+                                break;
+                            }
+                        }
+                        if (!after_freeze_progress) {
+                            bool satb_empty;
+                            {
+                                std::lock_guard<std::mutex> lock(global_satb_mutex_);
+                                satb_empty = global_satb_.empty();
+                            }
+                            if (satb_empty) {
+                                CHAOS_IL2CPP_LOG_DEBUG("BGC", "satb_freeze_converged");
+                                break;
+                            }
+                        }
+
+                        // New work appeared after freeze — unfreeze and continue.
+                        idle_rounds = 0;
+                        freeze_initiated = false;
+                        CHAOS_IL2CPP_LOG_DEBUG("BGC", "satb_freeze_unfrozen_new_work");
+                        continue;
+                    }
+
+                    // Check if we're truly done (all deques + SATB empty).
                     bool all_done = true;
                     for (int i = 0; i < n_workers; i++) {
                         std::lock_guard<std::mutex> lock(bgc_workers_[i].steal_mutex);
@@ -392,12 +509,7 @@ void BgcController::BgcThreadMain() {
                         std::this_thread::yield();
                     }
 
-                    // Convergence safety valve: after ~10 consecutive seconds
-                    // of idle rounds with no completion, exit the concurrent
-                    // mark loop and let the STW re-mark handle remaining work.
-                    // This prevents infinite hangs when garbage roots from
-                    // an inconsistent root set (e.g., scanned without safepoint)
-                    // generate unbounded work in the concurrent mark loop.
+                    // Safety valve after ~10s idle with no convergence.
                     if (idle_rounds > 100000) {
                         CHAOS_IL2CPP_LOG_WARN("BGC", "concurrent_mark_convergence_timeout");
                         break;
@@ -557,8 +669,9 @@ void BgcController::BgcThreadMain() {
                     static_cast<unsigned>(kept));
             }
         }
-    }
+    }  // end while(bgc_running_)
 
+    threading::UnregisterThread();
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "thread_stopped");
 }
 

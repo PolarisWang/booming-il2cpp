@@ -336,6 +336,7 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 ## 文档更新
 
 - `2026-05-17`：完成值类型嵌套字段写屏障修复、完整 GCMemoryInfo、BGC 并发 sweep；更新完成度矩阵和演进方向
+- `2026-05-18`：POH Phase 2 完成（region bump-pointer + GC mark-sweep integration + standalone tests）；GCHandle SetTargetFromNative API + 测试完成；完成度矩阵更新
 
 ## 关键数据流
 
@@ -504,7 +505,7 @@ BGC 的根集扫描从 `GcIterateHandleTable` 迁移到 `GcIterateTenuredHandles
 
 ## 附录：CRAG 全面评估与横向对比
 
-> 评估日期：2026-05-16 | 对比对象：CoreCLR WKS、Mono SGen、Unity IL2CPP (Boehm)
+> 评估日期：2026-05-18 | 对比对象：CoreCLR WKS、Mono SGen、Unity IL2CPP (Boehm)
 
 ### 完成度矩阵
 
@@ -531,8 +532,8 @@ BGC 的根集扫描从 `GcIterateHandleTable` 迁移到 `GcIterateTenuredHandles
 | Parallel Mark (BGC 也可用) | 完成 | 100% | 8 worker 上限在高端设备可能不足 |
 | GC.Collect() 托管接口 | 完成 | 100% | `chaos_gc_collect` + `WaitForPendingFinalizers` |
 | WeakReference / DependentHandle | 完成 | 95% | 含 ConditionalWeakTable / Ephemeron |
-| GCHandle | 完成 | 90% | 缺乏 SetTargetFromNative 测试 |
-| POH (Pinned Object Heap) | 完成 | 90% | Phase 1 pin-set + Phase 2 region 分配 |
+| GCHandle | 完成 | 100% | SetTargetFromNative API + 测试已完成；含 strong/weak/pinned/dependent 并发覆盖 |
+| POH (Pinned Object Heap) | 完成 | 100% | Phase 2 完整实现：REGION_POH bump-pointer 分配 + young GC 跳过 + GC mark-sweep 保守根扫描 + 7 项 standalone 测试 (0 failures) |
 | GCNotification 回调 | 完成 | 100% | 8 槽回调表 + 9 种事件 |
 | ThinLock 卸载语义 | 完成 | 100% | LockDrain Phase 0 in domain_unloader |
 | 200+ DLL 扩容 | 完成 | 100% | AssemblyManager/ModuleRegistry 动态扩容 |

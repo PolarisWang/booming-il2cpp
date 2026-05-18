@@ -81,6 +81,19 @@ public static partial class GarbageCollectionSubjects
         if (info.totalAvailableMemoryBytes <= 0) _exitCode = 3;
         if (info.generation < 0) _exitCode = 4;
     }
+    // [7] System.Private.CoreLib/System.GC::GetGCMemoryInfo - BCL path
+    public static void Subject_7()
+    {
+        var info = GC.GetGCMemoryInfo();
+    
+        // Verify basic properties via the public BCL API.
+        if (info.HeapSizeBytes <= 0) _exitCode = 1;
+        if (info.MemoryLoadBytes <= 0) _exitCode = 2;
+        if (info.TotalAvailableMemoryBytes <= 0) _exitCode = 3;
+        if (info.Generation < 0) _exitCode = 4;
+        if (info.FinalizationPendingCount < 0) _exitCode = 5;
+    }
+
 
     public static void Run(int entryIndex)
     {
@@ -93,6 +106,7 @@ public static partial class GarbageCollectionSubjects
             case 4: Subject_4(); break;
             case 5: Subject_5(); break;
             case 6: Subject_6(); break;
+            case 7: Subject_7(); break;
         }
     }
 

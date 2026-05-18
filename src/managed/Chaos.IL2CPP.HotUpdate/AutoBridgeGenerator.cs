@@ -111,6 +111,27 @@ public sealed class AutoBridgeGenerator
                 dispatchStyle = BridgeDispatchStyle.ManagedArgs;
                 carrierSchema = CreateSchema(BridgeCarrierKind.Object, [BridgeCarrierKind.Object], "none", "none", "call-bounded");
                 return true;
+            case "System.Int64(System.Int64)":
+                dispatchStyle = BridgeDispatchStyle.ManagedArgs;
+                carrierSchema = CreateSchema(BridgeCarrierKind.Int64, [BridgeCarrierKind.Int64], "none", "none", "call-bounded");
+                return true;
+            case "System.Int64(System.Int64,System.Int64)":
+                dispatchStyle = BridgeDispatchStyle.ManagedArgs;
+                carrierSchema = CreateSchema(
+                    BridgeCarrierKind.Int64,
+                    [BridgeCarrierKind.Int64, BridgeCarrierKind.Int64],
+                    "none",
+                    "none",
+                    "call-bounded");
+                return true;
+            case "System.Single(System.Single)":
+                dispatchStyle = BridgeDispatchStyle.ManagedArgs;
+                carrierSchema = CreateSchema(BridgeCarrierKind.Float, [BridgeCarrierKind.Float], "none", "none", "call-bounded");
+                return true;
+            case "System.Double(System.Double)":
+                dispatchStyle = BridgeDispatchStyle.ManagedArgs;
+                carrierSchema = CreateSchema(BridgeCarrierKind.Double, [BridgeCarrierKind.Double], "none", "none", "call-bounded");
+                return true;
             case "System.Void(System.Int32&)":
                 dispatchStyle = BridgeDispatchStyle.ByRefInt32;
                 carrierSchema = CreateSchema(

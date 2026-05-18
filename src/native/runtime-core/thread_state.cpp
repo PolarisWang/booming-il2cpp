@@ -85,6 +85,25 @@ void RegisterThread(int32_t managed_id, void* managed_obj) noexcept {
 #if defined(_WIN32) || defined(_WIN64)
     // Set default OS thread priority to THREAD_PRIORITY_NORMAL.
     ::SetThreadPriority(::GetCurrentThread(), THREAD_PRIORITY_NORMAL);
+
+    // Create auto-reset event for safepoint wait (initially non-signaled).
+    thread->suspend_event = ::CreateEventA(nullptr, FALSE, FALSE, nullptr);
+
+    // Store OS thread handle for APC-based safepoint fallback.
+    // Duplicate to get a handle with THREAD_SET_CONTEXT access.
+    HANDLE hProcess = ::GetCurrentProcess();
+    HANDLE hThread  = ::GetCurrentThread();
+    ::DuplicateHandle(hProcess, hThread, hProcess, &hThread,
+                      THREAD_SET_CONTEXT, FALSE, 0);
+    thread->os_handle = hThread;
+#else
+    // POSIX: allocate and initialize a condition variable + mutex for safepoint wait.
+    auto* cv = new pthread_cond_t;
+    pthread_cond_init(cv, nullptr);
+    thread->suspend_event = cv;
+    auto* mtx = new pthread_mutex_t;
+    pthread_mutex_init(mtx, nullptr);
+    thread->suspend_mutex = mtx;
 #endif
 
     // Capture stack bounds for conservative root scanning during full GC.
@@ -133,6 +152,32 @@ void UnregisterThread() noexcept {
     // TLS still points to the entry so EnumerateThreads callbacks can
     // safely query the current thread.  The entry is leaked intentionally
     // (lives for process lifetime like most runtime-instantiated metadata).
+
+    // Close the safepoint event handle and the OS thread handle.
+#if defined(_WIN32) || defined(_WIN64)
+    if (thread->suspend_event != nullptr) {
+        ::CloseHandle(thread->suspend_event);
+        thread->suspend_event = nullptr;
+    }
+    if (thread->os_handle != nullptr) {
+        ::CloseHandle(thread->os_handle);
+        thread->os_handle = nullptr;
+    }
+#else
+    if (thread->suspend_event != nullptr) {
+        auto* cv = static_cast<pthread_cond_t*>(thread->suspend_event);
+        pthread_cond_destroy(cv);
+        delete cv;
+        thread->suspend_event = nullptr;
+    }
+    if (thread->suspend_mutex != nullptr) {
+        auto* mtx = static_cast<pthread_mutex_t*>(thread->suspend_mutex);
+        pthread_mutex_destroy(mtx);
+        delete mtx;
+        thread->suspend_mutex = nullptr;
+    }
+#endif
+
     tls_this_thread    = nullptr;
     tls_this_thread_id = 0;
 
@@ -166,93 +211,92 @@ int32_t GetThreadCount() noexcept {
     return count;
 }
 
-// ── Generation-based GC safepoint ───────────────────────────────────
+// ── Per-thread handshake safepoint ───────────────────────────────────
 //
-// Even generation = idle (no GC activity).  Odd generation = GC in progress.
-// Threads check via single atomic load + compare on every SafepointPoll.
+// Each ManagedThread has suspend_seq and suspend_ack fields.
+// RequestGlobalSafepoint sets each thread's suspend_seq to a monotonic
+// epoch, then waits per-thread for suspend_ack.  SafepointPoll checks
+// the thread-local suspend_seq (fast path = 0, ~1 cycle) and if
+// non-zero, sets suspend_ack and waits on suspend_event (zero CPU).
+// ReleaseGlobalSafepoint clears suspend_seq for all threads and signals
+// suspend_event to wake them.
 //
-// Nesting support: a thread that already holds the safepoint can safely
-// re-enter (e.g., young GC inside a full-GC callback).  A depth counter
-// tracks the nesting level; only the outermost ReleaseGlobalSafepoint
-// toggles the generation back to even.  s_safepoint_owner prevents two
-// distinct threads from both holding the safepoint simultaneously.
+// Nesting: thread_local s_safepoint_depth tracks re-entrancy.  Only the
+// outermost Request/Release pair performs the full handshake.
+//
+// Single-owner: s_safepoint_owner CAS prevents two threads from both
+// holding the safepoint.
 
 namespace {
-std::atomic<uint32_t> s_generation{0};
-constexpr uint32_t kGcGenerationMask = 1u;
+std::atomic<ManagedThread*> s_safepoint_owner{nullptr};
 thread_local int s_safepoint_depth = 0;
 
-/// V4-H1: Process-level safepoint owner.
-/// Only the thread whose ManagedThread* is stored here may toggle the
-/// generation or perform GC work.  CAS arbitration prevents two threads
-/// from both holding the safepoint simultaneously.
-std::atomic<ManagedThread*> s_safepoint_owner{nullptr};
+/// Monotonic epoch counter for suspend_seq values.
+/// Threads compare against their stored value, not this counter directly.
+std::atomic<uint32_t> s_safepoint_epoch{1};
 }  // anonymous namespace
-
-bool SafepointRequested() noexcept {
-    uint32_t gen = s_generation.load(std::memory_order_acquire);
-    return (gen & kGcGenerationMask) != 0u;
-}
 
 void SafepointPoll() noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("SafepointPoll");
-    uint32_t gen = s_generation.load(std::memory_order_acquire);
-    if ((gen & kGcGenerationMask) == 0u) {
-        // ── pending_abort check (unlikely branch, ~0.5ns when clear) ─
-        // Thread.Abort integration: check the per-thread abort flag
-        // without disturbing the GC fast path.  This branch is only
-        // reached when no GC is active — the LSB of s_generation is 0.
-        auto* thread = tls_this_thread;
-        if (thread != nullptr && thread->pending_abort.load(std::memory_order_acquire)) {
-            thread->pending_abort.store(false, std::memory_order_release);
-            // Throw at the next catch boundary.  The managed exception
-            // dispatch will unwind managed frames to the nearest catch.
-            // Implementation detail: this longjmps through the interpreter
-            // frame chain; generated AOT code catches via the normal
-            // chaos_managed_exception mechanism.
-            throw chaos_managed_exception{kManagedExceptionThreadAbort};
-        }
-        return;  // fast path: no GC pending, single load + branch
-    }
 
     auto* thread = tls_this_thread;
     if (thread == nullptr) return;
 
-    // Publish confirmation BEFORE entering the spin loop.
-    // This tells the safepoint initiator that this thread has acknowledged
-    // the odd generation and is about to stop for GC.
-    thread->at_safepoint = true;
-    thread->last_seen_gen = gen;
+    // Fast path: single atomic load of suspend_seq.
+    uint32_t seq = thread->suspend_seq.load(std::memory_order_acquire);
+    if (seq == 0) [[likely]] {
+        // pending_abort check (same as before, ~0.5ns when clear).
+        if (thread->pending_abort.load(std::memory_order_acquire)) {
+            thread->pending_abort.store(false, std::memory_order_release);
+            throw chaos_managed_exception{kManagedExceptionThreadAbort};
+        }
+        return;
+    }
 
-    // Phase 2: Preemptive mode — confirm and return immediately.
+    // ── Slow path: safepoint is active ────────────────────────────
+
+    // Acknowledge the safepoint request.
+    thread->suspend_ack.store(seq, std::memory_order_release);
+
+    // Preemptive mode: confirm and return immediately.
     // The thread is in native code and will not access managed heap.
     if (thread->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive) {
         return;
     }
 
-    // Adaptive spin with yield fallback.  Use pause initially, then fall
-    // back to OS yield after ~10000 iterations (~300us at 3GHz) to avoid
-    // starving other threads during long GC pauses.
-    constexpr int kAdaptiveSpinLimit = 10000;
-    int spin_count = 0;
-    while ((s_generation.load(std::memory_order_acquire) & kGcGenerationMask) != 0u) {
-        if (++spin_count > kAdaptiveSpinLimit) [[unlikely]] {
+    // Cooperative mode: wait on event (zero CPU, infinite wait).
+    // ReleaseGlobalSafepoint will set the event when all threads are done.
 #if defined(_WIN32) || defined(_WIN64)
-            Sleep(0);
-#else
-            std::this_thread::yield();
-#endif
-            spin_count = 0;
-        } else {
-#if defined(_MSC_VER)
+    if (thread->suspend_event != nullptr) {
+        ::WaitForSingleObject(thread->suspend_event, INFINITE);
+    } else {
+        // Fallback: spin if event not available.
+        while (thread->suspend_seq.load(std::memory_order_acquire) != 0) {
             _mm_pause();
-#else
-            __builtin_ia32_pause();
-#endif
         }
     }
-
-    thread->at_safepoint = false;
+#else
+    // POSIX: wait on condition variable (zero CPU, woken by ReleaseGlobalSafepoint
+    // which broadcasts on all threads' suspend_event condvars after clearing
+    // suspend_seq).  Without this, the thread would spin-yield and burn CPU
+    // during every GC pause.
+    if (thread->suspend_event != nullptr && thread->suspend_mutex != nullptr) {
+        auto* cv = static_cast<pthread_cond_t*>(thread->suspend_event);
+        auto* mtx = static_cast<pthread_mutex_t*>(thread->suspend_mutex);
+        pthread_mutex_lock(mtx);
+        // Re-check suspend_seq under mutex: ReleaseGlobalSafepoint may have
+        // cleared it and broadcast between the check above and the lock.
+        while (thread->suspend_seq.load(std::memory_order_acquire) != 0) {
+            pthread_cond_wait(cv, mtx);
+        }
+        pthread_mutex_unlock(mtx);
+    } else {
+        // Fallback: spin if event not available.
+        while (thread->suspend_seq.load(std::memory_order_acquire) != 0) {
+            sched_yield();
+        }
+    }
+#endif
 }
 
 void EnterCooperativeMode() noexcept {
@@ -271,18 +315,29 @@ void EnterPreemptiveMode() noexcept {
     thread->gc_mode.store(kGcModePreemptive, std::memory_order_release);
 }
 
+#if defined(_WIN32) || defined(_WIN64)
+/// APC callback: runs in the target thread's context, forcing a suspended
+/// thread to acknowledge the safepoint and wait on suspend_event.
+static void __stdcall SuspendApf(ULONG_PTR param) {
+    auto* thread = tls_this_thread;
+    if (thread == nullptr) return;
+    uint32_t epoch = static_cast<uint32_t>(param);
+    thread->suspend_ack.store(epoch, std::memory_order_release);
+    if (thread->suspend_event != nullptr) {
+        ::WaitForSingleObject(thread->suspend_event, INFINITE);
+    }
+}
+#endif
+
 uint32_t RequestGlobalSafepoint() noexcept {
     // Support nesting: if the calling thread already holds the safepoint,
-    // just bump the depth counter and return the current generation.
-    // This allows safe re-entrancy (e.g., a GC-triggered callback that
-    // itself calls RequestGlobalSafepoint).
+    // just bump the depth counter and return the current epoch.
     if (s_safepoint_depth > 0) {
         s_safepoint_depth++;
-        return s_generation.load(std::memory_order_acquire);
+        return s_safepoint_epoch.load(std::memory_order_acquire);
     }
 
-    // V4-H1: Acquire process-level safepoint ownership via CAS.
-    // Only one thread may hold the safepoint at any time.
+    // Acquire process-level safepoint ownership via CAS.
     auto* self = tls_this_thread;
     if (self != nullptr) {
         ManagedThread* expected = nullptr;
@@ -300,100 +355,116 @@ uint32_t RequestGlobalSafepoint() noexcept {
         }
     }
 
-    // Toggle to odd (GC in progress).
-    uint32_t gen = s_generation.load(std::memory_order_acquire);
-    uint32_t desired = (gen + 1) | kGcGenerationMask;
-    s_generation.store(desired, std::memory_order_release);
+    // Bump the epoch counter.  This becomes the suspend_seq value for
+    // all cooperative threads.
+    uint32_t epoch = s_safepoint_epoch.fetch_add(1, std::memory_order_acq_rel) + 1;
     s_safepoint_depth = 1;
 
-    // V4-H2: Bounded confirmation loop — wait for all managed threads to
-    // acknowledge the odd generation via their last_seen_gen field.
-    // Threads that reach SafepointPoll will set last_seen_gen = odd gen.
-    // Threads in deep native frames that never poll remain unconfirmed
-    // and are handled by conservative stack scanning as fallback.
-    // We spin with pause up to ~10ms to let threads reach a poll point.
-    // NOTE: MSVC does not allow capturing lambdas to decay to C function
-    // pointers, so we use file-static helper variables (same pattern as
-    // GcScanAllThreadRoots) — safe since only one GC thread runs at a time.
+    // Set suspend_seq for every cooperative thread.
+    // Preemptive threads are excluded: they don't access managed heap,
+    // so we don't need to wait for them.
+    // NOTE: EnumerateThreads requires C function pointers, so we use
+    // file-static helper variables (no captures).  Safe because only
+    // one GC thread runs at a time (safepoint owner CAS guarantees this).
     {
-        constexpr int kMaxConfirmSpin = 1 << 16;  // ~65K iters ≈ 2ms at 3GHz
-        static ManagedThread* s_confirm_self = nullptr;
-        static uint32_t s_confirm_desired = 0;
-        static int* s_confirm_out = nullptr;
-        s_confirm_self = self;
-        s_confirm_desired = desired;
-
-        int confirm_spins = 0;
-        s_confirm_out = &confirm_spins;
+        static uint32_t s_set_epoch = 0;
+        s_set_epoch = epoch;
         EnumerateThreads([](ManagedThread* t) -> bool {
-            if (t == s_confirm_self) return true;
-            // Phase 2: Preemptive threads are not required to confirm.
-            // They set last_seen_gen in SafepointPoll and return immediately,
-            // but may not have reached SafepointPoll yet if they are deep
-            // in native code (no polls).  The GC conservatively scans their
-            // stacks instead.
-            if (t->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive) return true;
-            if (t->last_seen_gen == s_confirm_desired) return true;
-            (*s_confirm_out)++;
+            if (t->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive)
+                return true;
+            t->suspend_seq.store(s_set_epoch, std::memory_order_release);
             return true;
         });
-        if (confirm_spins > 0) {
-            int remaining = 0;
-            // Adaptive confirmation: 32K pause-spin (~1ms at 3GHz) then
-            // yield via SwitchToThread/Sleep(0) to avoid starving the
-            // very threads we're waiting on when the CPU is oversubscribed.
-            // With 100 threads on 24 cores (4.3x oversubscription), pure
-            // pause-spinning burns an entire OS timeslice per iter without
-            // letting the worker threads reach SafepointPoll.
-            constexpr int kSpinYieldThreshold = 32768;
-            for (int i = 0; i < kMaxConfirmSpin; i++) {
-                remaining = 0;
-                s_confirm_out = &remaining;
-                EnumerateThreads([](ManagedThread* t) -> bool {
-                    if (t == s_confirm_self) return true;
-                    // Phase 2: Skip preemptive threads.
-                    if (t->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive) return true;
-                    if (t->last_seen_gen != s_confirm_desired) (*s_confirm_out)++;
+    }
+
+    // Wait for each cooperative thread to acknowledge.
+    // Spin with pause for ~1ms, then yield to avoid starving the very
+    // threads we're waiting on (critical for oversubscribed scenarios).
+    constexpr int kSpinYieldThreshold = 32768;
+    {
+        static uint32_t s_confirm_epoch = 0;
+        static int s_remaining = 0;
+        s_confirm_epoch = epoch;
+
+        for (int spin = 0; ; spin++) {
+            s_remaining = 0;
+            EnumerateThreads([](ManagedThread* t) -> bool {
+                if (t->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive)
                     return true;
-                });
-                if (remaining == 0) break;
-                if (i < kSpinYieldThreshold) {
-                    _mm_pause();
-                } else {
-                    // Yield to let oversubscribed workers reach their
-                    // SafepointPoll.  Sleep(0) on Windows yields the
-                    // remainder of the timeslice to any ready thread.
+                if (t == tls_this_thread) return true;
+                if (t->suspend_ack.load(std::memory_order_acquire) != s_confirm_epoch)
+                    ++s_remaining;
+                return true;
+            });
+            if (s_remaining == 0) break;
+
+            if (spin < kSpinYieldThreshold) {
+                _mm_pause();
+            } else {
 #if defined(_WIN32) || defined(_WIN64)
-                    Sleep(0);
+                Sleep(0);
 #else
-                    std::this_thread::yield();
+                std::this_thread::yield();
 #endif
+                // After yielding for ~100ms with no response, try APC fallback.
+                if (spin >= kSpinYieldThreshold + 100000) {
+#if defined(_WIN32) || defined(_WIN64)
+                    EnumerateThreads([](ManagedThread* t) -> bool {
+                        if (t->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive)
+                            return true;
+                        if (t == tls_this_thread) return true;
+                        if (t->suspend_ack.load(std::memory_order_acquire) != s_confirm_epoch) {
+                            ::QueueUserAPC(SuspendApf, t->os_handle, s_confirm_epoch);
+                        }
+                        return true;
+                    });
+#endif
+                    std::this_thread::sleep_for(std::chrono::microseconds(100));
                 }
             }
         }
-        s_confirm_self = nullptr;
-        s_confirm_desired = 0;
-        s_confirm_out = nullptr;
     }
 
-    return desired;
+    return epoch;
 }
 
-void ReleaseGlobalSafepoint(uint32_t /*generation*/) noexcept {
-    // Support nesting: decrement depth counter.  Only toggle the
-    // generation back to even when the outermost release occurs.
+void ReleaseGlobalSafepoint(uint32_t /*epoch*/) noexcept {
+    // Support nesting: decrement depth counter.  Only do the full
+    // release when the outermost release occurs.
     if (s_safepoint_depth > 1) {
         s_safepoint_depth--;
         return;
     }
 
-    // V4-H1: Release safepoint ownership BEFORE toggling generation.
-    // This ensures the safepoint owner is cleared before threads resume.
+    // ── Release all threads from safepoint ────────────────────────────
+    // Order is critical:
+    //   1. Clear suspend_seq so threads stop waiting
+    //   2. Signal events to wake threads
+    //   3. THEN release ownership — releasing ownership before clearing
+    //      suspend_seq creates a window where a new acquirer sets new
+    //      seq values that get cleared by the ongoing iteration, causing
+    //      the next safepoint to spin forever waiting for acks that will
+    //      never come (the threads see suspend_seq=0 and run freely).
+
+    // Clear suspend_seq for all threads and signal their events.
+    EnumerateThreads([](ManagedThread* t) -> bool {
+        t->suspend_seq.store(0, std::memory_order_release);
+#if defined(_WIN32) || defined(_WIN64)
+        if (t->suspend_event != nullptr) {
+            ::SetEvent(t->suspend_event);
+        }
+#else
+        if (t->suspend_event != nullptr && t->suspend_mutex != nullptr) {
+            auto* cv = static_cast<pthread_cond_t*>(t->suspend_event);
+            pthread_cond_broadcast(cv);
+        }
+#endif
+        return true;
+    });
+
+    // Release safepoint ownership AFTER all threads are woken.
     s_safepoint_owner.store(nullptr, std::memory_order_release);
 
-    // Toggle to even (released).
-    uint32_t gen = s_generation.load(std::memory_order_acquire);
-    s_generation.store((gen + 1) & ~kGcGenerationMask, std::memory_order_release);
     s_safepoint_depth = 0;
 }
 
@@ -401,9 +472,9 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
     CHAOS_IL2CPP_PROFILE_SCOPE("GcScanAllThreadRoots");
 
     // Walk all registered threads and conservatively scan their stacks.
-    // Since we hold the global safepoint (generation is odd), all managed
-    // threads are either spinning in SafepointPoll or have yielded —
-    // their stacks are in a consistent state for conservative scanning.
+    // Since we hold the global safepoint (suspend_seq non-zero), all managed
+    // threads are either waiting on suspend_event or have acknowledged the
+    // safepoint — their stacks are in a consistent state for scanning.
     //
     // We scan every pointer-aligned slot in the stack range and report
     // it as a potential root.  The mark phase's caller will check whether

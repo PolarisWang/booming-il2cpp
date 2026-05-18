@@ -135,54 +135,9 @@ void GcIterateTenuredHandles(void (*callback)(void* object, void* user_data),
     }
 }
 
-/// Iterate only handles pointing to nursery objects.
-void GcIterateNurseryHandles(void (*callback)(void* object, void* user_data),
-                              void* user_data) noexcept {
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
-    for (auto& kv : s_gc_handle_table) {
-        void* obj = kv.second.object_instance;
-        if (obj == nullptr) continue;
-        if (RegionManager::Instance().IsNurseryPointer(obj)) {
-            callback(obj, user_data);
-        }
-    }
-}
-
-// ── Type-aware handle iteration ────────────────────────────────────
-
-/// Iterate only strong (non-weak, non-pinned) handles.
-void GcIterateStrongHandles(void (*callback)(void* object, void* user_data),
-                             void* user_data) noexcept {
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
-    for (auto& kv : s_gc_handle_table) {
-        if (!kv.second.weak && !kv.second.pinned &&
-            kv.second.object_instance != nullptr) {
-            callback(kv.second.object_instance, user_data);
-        }
-    }
-}
-
-/// Iterate only weak handles.
-void GcIterateWeakHandles(void (*callback)(void* object, void* user_data),
-                           void* user_data) noexcept {
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
-    for (auto& kv : s_gc_handle_table) {
-        if (kv.second.weak && kv.second.object_instance != nullptr) {
-            callback(kv.second.object_instance, user_data);
-        }
-    }
-}
-
-/// Iterate only pinned handles.
-void GcIteratePinnedHandles(void (*callback)(void* object, void* user_data),
-                             void* user_data) noexcept {
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
-    for (auto& kv : s_gc_handle_table) {
-        if (kv.second.pinned && kv.second.object_instance != nullptr) {
-            callback(kv.second.object_instance, user_data);
-        }
-    }
-}
+// ── Type-aware handle iteration (removed: GcIterateStrongHandles,
+//    GcIterateWeakHandles, GcIteratePinnedHandles, GcIterateNurseryHandles
+//    were defined but never called — dead code eliminated 2026-05-18)
 
 void GcProcessWeakHandlesAfterYoungGC() noexcept {
     std::lock_guard<std::mutex> lock(s_gc_handle_mutex);

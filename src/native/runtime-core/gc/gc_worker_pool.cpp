@@ -42,13 +42,14 @@ void GcWorkerPool::RunWorkers(int count, std::function<void(int)> fn) noexcept {
     work_fn_ = std::move(fn);
     completed_.store(0, std::memory_order_relaxed);
     // Use actual worker count after cap — Initialize() may reduce count
-    // to kMaxWorkers+1.  Using the original count here would cause the
-    // main thread to wait for N completions when only M < N workers
-    // exist, hanging forever (observed with 24-core parallel sweep).
-    expected_completed_ = created_count_;
-    if (count - 1 != expected_completed_) {
-        CHAOS_IL2CPP_LOG_WARN_M("GcPool", "RunWorkers requested={0} actual={1}",
-                              count - 1, expected_completed_);
+    // to kMaxWorkers+1.  Also cap to requested pool size so that calling
+    // RunWorkers(4) after RunWorkers(24) doesn't wait for created_count_=7
+    // completions when only 3 workers participate (infinite hang).
+    int requested_pool = count - 1;
+    expected_completed_ = (std::min)(requested_pool, created_count_);
+    if (requested_pool != expected_completed_) {
+        CHAOS_IL2CPP_LOG_WARN_M("GcPool", "RunWorkers requested={0} pool={1} expected={2}",
+                              requested_pool, created_count_, expected_completed_);
     }
 
     // Bump round to signal workers to start.  acquire-release ensures

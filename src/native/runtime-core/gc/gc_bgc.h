@@ -299,6 +299,27 @@ private:
     /// Worker threads spawned during concurrent mark.
     std::vector<std::thread> bgc_parallel_workers_;
 
+    // ── SATB freeze protocol (CoreCLR-aligned convergence) ─────────
+
+    /// Set by the BGC thread when concurrent mark is near convergence.
+    /// Mutator SATB pre-write barriers check this flag and when set,
+    /// flush their current buffer and decrement satb_freeze_remaining_.
+    /// This ensures no new SATB entries are generated during the final
+    /// drain, guaranteeing convergence.
+public:
+    /// Set by the BGC thread when concurrent mark is near convergence.
+    /// Mutator SATB pre-write barriers check this flag and when set,
+    /// flush their current buffer and decrement satb_freeze_remaining_.
+    /// This ensures no new SATB entries are generated during the final
+    /// drain, guaranteeing convergence.
+    std::atomic<bool> satb_freeze_requested_{false};
+
+    /// Number of mutator threads still needing to acknowledge the freeze.
+    /// Initialized to the count of registered SATB threads when freeze
+    /// is requested.  Each mutator decrements after flushing.
+    std::atomic<int> satb_freeze_remaining_{0};
+
+private:
     // ── BGC finalization support ──────────────────────────────────
 
     /// Dead finalizable entries collected during BgcSweep.

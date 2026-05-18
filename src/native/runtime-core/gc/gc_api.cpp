@@ -8,9 +8,27 @@
 #include "gc_scheduler.h"
 #include "gc_stats.h"
 
+#if defined(_WIN32)
 #include <windows.h>
+#endif
 
 namespace chaos::il2cpp::runtime_core {
+
+// ── Platform memory status ─────────────────────────────────────────
+
+void GetPlatformMemoryStatus(MemoryStatusData& out) noexcept {
+#if defined(_WIN32)
+    MEMORYSTATUSEX ms;
+    ms.dwLength = sizeof(ms);
+    if (GlobalMemoryStatusEx(&ms)) {
+        out.total_phys = static_cast<int64_t>(ms.ullTotalPhys);
+        out.avail_phys = static_cast<int64_t>(ms.ullAvailPhys);
+        return;
+    }
+#endif
+    out.total_phys = 0;
+    out.avail_phys = 0;
+}
 
 // ── External memory pressure tracking ─────────────────────────────
 namespace {
@@ -97,6 +115,17 @@ void CHAOS_RUNTIME_ABI_CALL chaos_gc_remove_memory_pressure(
 
 extern "C" void chaos_gc_dirty_card(const void* obj) noexcept {
     DirtyCard(obj);
+}
+
+// ======================================================================
+// chaos_is_gc_pointer — fast check for GC-heap membership
+// ======================================================================
+
+extern "C" bool CHAOS_RUNTIME_ABI_CALL chaos_is_gc_pointer(const void* ptr) noexcept {
+    // g_heap_base is the lowest address managed by the card table.
+    // Stack-allocated value types live below this address (they are
+    // allocated on the native stack far below the GC heap).
+    return reinterpret_cast<uintptr_t>(ptr) >= g_heap_base;
 }
 
 // ======================================================================
@@ -192,23 +221,21 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(void* out) noexc
     auto fragmented = static_cast<CHAOS_IL2CPP_INT64>(
         snap.young_bytes_reclaimed + snap.full_bytes_reclaimed);
 
-    MEMORYSTATUSEX mem_status;
-    mem_status.dwLength = sizeof(mem_status);
-    GlobalMemoryStatusEx(&mem_status);
+    MemoryStatusData mem;
+    GetPlatformMemoryStatus(mem);
 
     info->high_memory_load_threshold_bytes =
-        static_cast<int64_t>(mem_status.ullTotalPhys) / 2;
+        mem.total_phys / 2;
     info->memory_load_bytes =
-        static_cast<int64_t>(mem_status.ullTotalPhys)
-        - static_cast<int64_t>(mem_status.ullAvailPhys);
+        mem.total_phys - mem.avail_phys;
     info->total_available_memory_bytes =
-        static_cast<int64_t>(mem_status.ullTotalPhys);
+        mem.total_phys;
     info->heap_size_bytes = heap_size;
     info->fragmented_bytes = fragmented;
     info->total_committed_bytes = heap_size;
     info->promoted_bytes = promoted;
     info->generation = 1;
-    info->finalization_pending_count = static_cast<int32_t>(snap.full_finalizers_run);
+    info->finalization_pending_count = snap.finalization_pending_count;
     info->compacted = 0;
     info->concurrent = 0;
 }

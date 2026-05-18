@@ -8,6 +8,20 @@
 
 namespace chaos::il2cpp::common {
 
+// Function pointer type for the async_task_run implementation.
+// runtime_core registers its ThreadPool-backed TaskRun during RuntimeInit.
+// If unregistered (e.g., verification mode), async_task_run returns 0.
+using AsyncTaskRunFn = CHAOS_IL2CPP_INTPTR (*)(CHAOS_IL2CPP_INTPTR);
+
+// Global function pointer; defaults to nullptr (stub behavior).
+// Set by runtime_core::threading::RegisterAsyncTaskRun during runtime init.
+inline AsyncTaskRunFn g_async_task_run_fn = nullptr;
+
+// Called by runtime_core during RuntimeInit to inject the real TaskRun.
+inline void register_async_task_run_fn(AsyncTaskRunFn fn) noexcept {
+    g_async_task_run_fn = fn;
+}
+
 struct AsyncTask
 {
     CHAOS_IL2CPP_INTPTR result = 0;
@@ -103,19 +117,17 @@ inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_result_raw(CHAOS_IL2CPP_INTPTR
 /// Task.Run: queue a delegate for execution on the thread pool.
 /// The task is created, queued, and the task handle is returned.
 /// When the delegate completes, the task is marked as completed.
+///
+/// During normal runtime operation, runtime_core registers its
+/// ThreadPool-backed implementation via register_async_task_run_fn().
+/// In verification/stub mode (no runtime_core loaded), returns 0.
 inline CHAOS_IL2CPP_INTPTR async_task_run(CHAOS_IL2CPP_INTPTR delegate_fn) noexcept
 {
-#if defined(CHAOS_IL2CPP_VERIFY_MODE)
-    // Stub for standalone entry builds (verification pipeline).
-    // Full implementation requires bootstrap/thread_pool services not available here.
+    if (g_async_task_run_fn != nullptr) {
+        return g_async_task_run_fn(delegate_fn);
+    }
     (void)delegate_fn;
     return 0;
-#else
-    // Full implementation requires bootstrap/thread_pool services not available
-    // in chaos_common (dependency-free lib). Stub until ThreadPool is integrated.
-#   pragma message("TODO(" __FILE__ "): implement async_task_run for non-verification builds")
-    return 0;
-#endif
 }
 
 } // namespace chaos::il2cpp::common

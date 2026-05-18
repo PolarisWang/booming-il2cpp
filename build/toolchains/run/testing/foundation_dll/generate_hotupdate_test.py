@@ -2586,61 +2586,24 @@ def _fix_todo_struct_fields(content: str) -> str:
     which fails at compile time.
 
     This function detects the TODO markers and injects appropriate field
-    declarations for known types.
+    declarations for known types, loaded from field-layout-overrides.json.
     """
-    # Known struct layouts keyed by full type name
-    known_todo_layouts = {
-        'chaos_type_System_Private_CoreLib_System_Object': [
-            '    chaos_object_header header{};\n',
-        ],
-        'chaos_type_System_Private_CoreLib_System_Delegate': [
-            '    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;\n',
-        ],
-        'chaos_type_System_Private_CoreLib_System_MulticastDelegate': [
-            '    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;\n',
-        ],
-        'chaos_type_System_Private_CoreLib_System_Exception': [
-            '    CHAOS_IL2CPP_INTPTR _className = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _message = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _data = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _innerException = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _helpURL = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _stackTrace = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _stackTraceString = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _remoteStackTraceString = 0;\n',
-            '    CHAOS_IL2CPP_INT32 _HResult = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _source = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _xptrs = 0;\n',
-            '    CHAOS_IL2CPP_INT32 _xcode = -1;\n',
-        ],
-        'chaos_type_System_Private_CoreLib_System_SystemException': [
-            '    CHAOS_IL2CPP_INTPTR _className = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _message = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _data = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _innerException = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _helpURL = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _stackTrace = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _stackTraceString = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _remoteStackTraceString = 0;\n',
-            '    CHAOS_IL2CPP_INT32 _HResult = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _source = 0;\n',
-            '    CHAOS_IL2CPP_INTPTR _xptrs = 0;\n',
-            '    CHAOS_IL2CPP_INT32 _xcode = -1;\n',
-        ],
-    }
+    # Load field layout overrides from contract definition
+    overrides_path = _REPO_ROOT / "contracts" / "artifacts" / "v0" / "field-layout-overrides.json"
+    try:
+        with open(overrides_path, encoding="utf-8") as f:
+            overrides_data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"Warning: cannot load field-layout-overrides.json: {e}", file=sys.stderr)
+        overrides_data = {"augment": {}}
+    known_todo_layouts = overrides_data.get("augment", {})
 
     def _replace_todo(m: re.Match) -> str:
         struct_name = m.group(1)
         base_clause = m.group(2) or ''
         indent = m.group(3) or '    '
         if struct_name in known_todo_layouts:
-            fields = ''.join(known_todo_layouts[struct_name])
+            fields = ''.join(line if line.endswith('\n') else line + '\n' for line in known_todo_layouts[struct_name])
             # Reconstruct the full struct declaration with body replaced.
             return f'struct {struct_name} {base_clause}\n{{\n{fields}{indent}}};'
         return m.group(0)  # keep unchanged

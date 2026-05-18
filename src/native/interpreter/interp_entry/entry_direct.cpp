@@ -1,5 +1,20 @@
 namespace chaos::il2cpp::runtime_core {
 
+// ── Tier hit counters (profile instrumentation) ─────────────────────────
+// Incremented on each execution path entry in InterpreterEntryDirect.
+// Relaxed ordering: benign races on counters are acceptable.
+struct TierCounters {
+    std::atomic<uint64_t> step_1c       = 0;  // 2-instr fast path
+    std::atomic<uint64_t> step_reg      = 0;  // RegisterExecute
+    std::atomic<uint64_t> step_fast     = 0;  // FastExecute
+    std::atomic<uint64_t> step_vm       = 0;  // InterpreterVM
+};
+
+static TierCounters& GetTierCounters() {
+    static TierCounters counters;
+    return counters;
+}
+
 // ── InterpreterEntryDirect ──────────────────────────────────────────────
 
 // Forward declarations (defined in other sub-files)
@@ -32,9 +47,6 @@ void InterpreterEntryDirect(
 
     auto* patch_method = reinterpret_cast<PatchMethod*>(method_key);
 
-    // A2.3: Increment call count for hot path detection.
-    patch_method->call_count.fetch_add(1, std::memory_order_relaxed);
-
     // Step 1: Lazy AotCoreIr JSON → IR deserialization (see wiki: 翻译管线/IR lowering).
     {
     CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.Step1_LowerIR");
@@ -59,6 +71,7 @@ void InterpreterEntryDirect(
         const auto& op0 = ir->instructions[0];
         const auto& op1 = ir->instructions[1];
         if (op1.op_code == interpreter::IROpCode::Ret) {
+            GetTierCounters().step_1c.fetch_add(1, std::memory_order_relaxed);
             // Cache signature on first call if not already done.
             if (!patch_method->cached_sig_valid) {
                 CacheSignature(patch_method);
@@ -230,6 +243,68 @@ void InterpreterEntryDirect(
                 }
                 return;
             }
+            // LdFld+Ret: read field from `this` object, return it.
+            if (op0.op_code == interpreter::IROpCode::LdFld) {
+                if (ret_buf != nullptr && patch_method->cached_sig_valid) {
+                    ArgBuffer args(args_buf);
+                    auto* obj = static_cast<interpreter::InterpreterObject*>(
+                        args.ReadPtr());
+                    if (obj != nullptr &&
+                        op0.field_offset < obj->fields.size()) {
+                        auto& field = obj->fields[op0.field_offset];
+                        auto ret_tag = static_cast<interpreter::ValueTag>(
+                            patch_method->cached_ret_tag);
+                        ArgBuffer ret(ret_buf);
+                        switch (ret_tag) {
+                        case interpreter::ValueTag::Int32:
+                            ret.WriteI32(field.i32); return;
+                        case interpreter::ValueTag::Int64:
+                            ret.WriteI64(field.i64); return;
+                        case interpreter::ValueTag::Float32:
+                            ret.WriteF32(field.f32); return;
+                        case interpreter::ValueTag::Float64:
+                            ret.WriteF64(field.f64); return;
+                        default:
+                            ret.WritePtr(field.obj); return;
+                        }
+                    }
+                }
+                return;
+            }
+            // LdArgA+Ret: return address of arg0 (by-ref return).
+            if (op0.op_code == interpreter::IROpCode::LdArgA) {
+                if (ret_buf != nullptr && op0.operand_index == 0) {
+                    ArgBuffer ret(ret_buf);
+                    ret.WritePtr(args_buf);
+                }
+                return;
+            }
+            // LdObj+Ret: dereference managed pointer, return value.
+            if (op0.op_code == interpreter::IROpCode::LdObj) {
+                if (ret_buf != nullptr && patch_method->cached_sig_valid) {
+                    ArgBuffer args(args_buf);
+                    void* ptr = args.ReadPtr();
+                    if (ptr != nullptr) {
+                        auto* iv = static_cast<interpreter::InterpreterValue*>(ptr);
+                        auto ret_tag = static_cast<interpreter::ValueTag>(
+                            patch_method->cached_ret_tag);
+                        ArgBuffer ret(ret_buf);
+                        switch (ret_tag) {
+                        case interpreter::ValueTag::Int32:
+                            ret.WriteI32(iv->i32); return;
+                        case interpreter::ValueTag::Int64:
+                            ret.WriteI64(iv->i64); return;
+                        case interpreter::ValueTag::Float32:
+                            ret.WriteF32(iv->f32); return;
+                        case interpreter::ValueTag::Float64:
+                            ret.WriteF64(iv->f64); return;
+                        default:
+                            ret.WritePtr(iv->obj); return;
+                        }
+                    }
+                }
+                return;
+            }
         }
     }
 
@@ -240,6 +315,7 @@ void InterpreterEntryDirect(
         patch_method->cached_reg_method);
     if (reg_method != nullptr && reg_method->seh_clauses.empty() &&
         instr_count > 2 && interpreter::CanRegisterExecute(*reg_method)) {
+        GetTierCounters().step_reg.fetch_add(1, std::memory_order_relaxed);
         CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.RegisterExecute");
 
         if (!patch_method->cached_sig_valid) {
@@ -303,6 +379,7 @@ void InterpreterEntryDirect(
     // ── Step C: FastExecute path (Layer 1+2) ─────────────────────────
     // For methods WITHOUT SEH, use function-pointer dispatch + FastFrame.
     if (ir->seh_clauses.empty() && instr_count > 2) {
+        GetTierCounters().step_fast.fetch_add(1, std::memory_order_relaxed);
         CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.FastExecute");
 
         if (!patch_method->cached_sig_valid) {
@@ -460,6 +537,7 @@ void InterpreterEntryDirect(
     frame.dispatch_context = &dispatch_ctx;
 
     // Step 4: Execute via InterpreterVM.
+    GetTierCounters().step_vm.fetch_add(1, std::memory_order_relaxed);
     interpreter::ExecutionResult result;
     {
         interpreter::InterpreterVM vm;

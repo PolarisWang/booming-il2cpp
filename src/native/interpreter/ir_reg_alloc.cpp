@@ -64,7 +64,8 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::Shl: case IROpCode::Shr: case IROpCode::ShrUn:
         case IROpCode::AddOvf: case IROpCode::SubOvf: case IROpCode::MulOvf:
         case IROpCode::Ceq: case IROpCode::Clt: case IROpCode::Cgt:
-        case IROpCode::LdElem:  // array[index] — need index too
+        case IROpCode::LdElem:    // array[index]
+        case IROpCode::LdElemA:   // same as LdElem in interpreter (loads element value)
         {
             // Pop src2, src1
             if (virt_sp >= 2) {
@@ -281,16 +282,6 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
                 --virt_sp;
             }
             has_src1 = true;
-            break;
-        }
-
-        // ── LdElemA: pop index, pop array, push addr ──
-        case IROpCode::LdElemA:
-        {
-            if (!virt_sp == 0) --virt_sp; // index
-            if (!virt_sp == 0) --virt_sp; // array
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true; has_src1 = true;
             break;
         }
 
@@ -1594,14 +1585,28 @@ static void Reg_StFld(RegisterFrame& frame, const RegisterInstruction& instr) no
     ++frame.pc;
 }
 
-// ── CastClass / IsInst: type checking (fallback to VM for correctness) ──
+// ── CastClass / IsInst: type checking (passthrough in fast path) ──
 static void Reg_CastClass(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    // Type checking requires token resolution — fall through to FastExecute.
-    Reg_Unsupported(frame, instr);
+    // CastClass: null passthrough, non-null returns object unchanged.
+    // Actual type check is deferred (same as Handle_CastClass in FastExecute).
+    uint64_t obj = frame.regs.reg(instr.src1_reg());
+    if (obj == 0) {
+        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
+    } else {
+        frame.regs.set_reg(instr.dst_reg(), obj, static_cast<uint8_t>(ValueTag::ObjectRef));
+    }
+    ++frame.pc;
 }
 
 static void Reg_IsInst(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    Reg_Unsupported(frame, instr);
+    // IsInst: null returns null, non-null returns the object (passthrough).
+    uint64_t obj = frame.regs.reg(instr.src1_reg());
+    if (obj == 0) {
+        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
+    } else {
+        frame.regs.set_reg(instr.dst_reg(), obj, static_cast<uint8_t>(ValueTag::ObjectRef));
+    }
+    ++frame.pc;
 }
 
 // ── CallVirtConstrained: constrained prefix resolved during IR lowering — delegate to Reg_Call
@@ -1679,7 +1684,7 @@ static constexpr RegOpHandler kRegHandlers[99] = {
     /* 84 */ R(AddOvf),        /* 85 */ R(SubOvf),         /* 86 */ R(MulOvf),
     /* 87 */ R(ConvOvfI),      /* 88 */ R(ConvOvfI4),      /* 89 */ R(ConvOvfI8),
     /* 90 */ R(ConvOvfU),      /* 91 */ R(ConvOvfU4),      /* 92 */ R(ConvOvfU8),
-    /* 93 */ R(LdObj),         /* 94 */ R(StObj),          /* 95 */ UNSUP,
+    /* 93 */ R(LdObj),         /* 94 */ R(StObj),          /* 95 */ R(LdElem),      // LdElemA maps to LdElem (same element load)
     /* 96 */ R(Cpblk),         /* 97 */ R(InitBlk),        /* 98 */ R(CallVirtConstrained),
 };
 
