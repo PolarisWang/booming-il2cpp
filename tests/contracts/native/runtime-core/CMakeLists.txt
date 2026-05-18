@@ -289,6 +289,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
             chaos_runtime_core
             chaos_bootstrap
             chaos_interpreter
+            chaos_codegen
             chaos_fmt
             chaos_common
             chaos_support

@@ -17,7 +17,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 PHASE2 = REPO / "build" / "toolchains" / "run" / "testing" / "foundation_dll" / "run_phase2.py"
-REFRESH = ["python", str(REPO / "build" / "toolchains" / "run" / "run.py"), "verify", "verification-v1", "--json"]
+REFRESH = [sys.executable, str(REPO / "build" / "toolchains" / "run" / "run.py"), "verify", "verification-v1", "--json"]
 
 
 def run(cmd, label):
@@ -38,7 +38,7 @@ def main():
     errors = []
 
     # Step 1: Phase 2 — handwritten stubs
-    if not run(["python", str(PHASE2)], "Phase 2 — handwritten stubs"):
+    if not run([sys.executable, str(PHASE2)], "Phase 2 — handwritten stubs"):
         errors.append("Phase 2 failed")
 
     # Step 3: Build all test projects

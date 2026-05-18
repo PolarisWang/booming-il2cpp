@@ -213,6 +213,54 @@ static bool test_thread_state() {
 
     // Restore.
     self->managed_state = threading::ManagedThreadState::Running;
+
+    // Running → WaitSleepJoin → Running round-trip.
+    self->managed_state = threading::ManagedThreadState::WaitSleepJoin;
+    if (self->managed_state != threading::ManagedThreadState::WaitSleepJoin) {
+        std::fprintf(stderr, "FAIL: state after WaitSleepJoin = %d, expected %d\n",
+                     static_cast<int>(self->managed_state),
+                     static_cast<int>(threading::ManagedThreadState::WaitSleepJoin));
+        return false;
+    }
+    self->managed_state = threading::ManagedThreadState::Running;
+    if (self->managed_state != threading::ManagedThreadState::Running) {
+        std::fprintf(stderr, "FAIL: state after restore from WaitSleepJoin = %d, expected %d\n",
+                     static_cast<int>(self->managed_state),
+                     static_cast<int>(threading::ManagedThreadState::Running));
+        return false;
+    }
+
+    // Redundant set: Running → Running should be a no-op (value unchanged).
+    self->managed_state = threading::ManagedThreadState::Running;
+    if (self->managed_state != threading::ManagedThreadState::Running) {
+        std::fprintf(stderr, "FAIL: state after redundant Running set = %d\n",
+                     static_cast<int>(self->managed_state));
+        return false;
+    }
+
+    // Background flag composition: Running | Background.
+    auto bg = static_cast<threading::ManagedThreadState>(
+        static_cast<int>(threading::ManagedThreadState::Running) |
+        static_cast<int>(threading::ManagedThreadState::Background));
+    self->managed_state = bg;
+    if (self->managed_state != bg) {
+        std::fprintf(stderr, "FAIL: state after Running|Background = %d, expected %d\n",
+                     static_cast<int>(self->managed_state),
+                     static_cast<int>(bg));
+        return false;
+    }
+    self->managed_state = threading::ManagedThreadState::Running;
+
+    // Invalid value: write 0xFFFF, verify readback consistency.
+    auto invalid = static_cast<threading::ManagedThreadState>(0xFFFF);
+    self->managed_state = invalid;
+    if (self->managed_state != invalid) {
+        std::fprintf(stderr, "FAIL: state after 0xFFFF = %d, expected 0xFFFF\n",
+                     static_cast<int>(self->managed_state));
+        return false;
+    }
+    self->managed_state = threading::ManagedThreadState::Running;
+
     return true;
 }
 
