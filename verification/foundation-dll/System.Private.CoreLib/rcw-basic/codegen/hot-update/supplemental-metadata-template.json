@@ -60,14 +60,6 @@
   "registeredMethods": [
     {
       "assemblyName": "RcwBasicSubjects",
-      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
-      "metadataToken": 100663304,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "RcwBasicSubjects",
       "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
@@ -127,7 +119,7 @@
       "subjectId": "RcwBasicSubjects/ISimpleMath::Add:System.Int32(System.Int32,System.Int32)",
       "definitionSubjectId": "RcwBasicSubjects/ISimpleMath::Add:System.Int32(System.Int32,System.Int32)",
       "declaringTypeSubjectId": "RcwBasicSubjects/ISimpleMath",
-      "metadataToken": 100663305,
+      "metadataToken": 100663304,
       "parameterCount": 2
     },
     {
@@ -135,7 +127,7 @@
       "subjectId": "RcwBasicSubjects/ISimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
       "definitionSubjectId": "RcwBasicSubjects/ISimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
       "declaringTypeSubjectId": "RcwBasicSubjects/ISimpleMath",
-      "metadataToken": 100663306,
+      "metadataToken": 100663305,
       "parameterCount": 2
     },
     {
@@ -143,7 +135,7 @@
       "subjectId": "RcwBasicSubjects/IConstantValue::GetValue:System.Int32()",
       "definitionSubjectId": "RcwBasicSubjects/IConstantValue::GetValue:System.Int32()",
       "declaringTypeSubjectId": "RcwBasicSubjects/IConstantValue",
-      "metadataToken": 100663307,
+      "metadataToken": 100663306,
       "parameterCount": 0
     },
     {
@@ -151,7 +143,7 @@
       "subjectId": "RcwBasicSubjects/SimpleMath::Add:System.Int32(System.Int32,System.Int32)",
       "definitionSubjectId": "RcwBasicSubjects/SimpleMath::Add:System.Int32(System.Int32,System.Int32)",
       "declaringTypeSubjectId": "RcwBasicSubjects/SimpleMath",
-      "metadataToken": 100663308,
+      "metadataToken": 100663307,
       "parameterCount": 2
     },
     {
@@ -159,7 +151,7 @@
       "subjectId": "RcwBasicSubjects/SimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
       "definitionSubjectId": "RcwBasicSubjects/SimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
       "declaringTypeSubjectId": "RcwBasicSubjects/SimpleMath",
-      "metadataToken": 100663309,
+      "metadataToken": 100663308,
       "parameterCount": 2
     },
     {
@@ -167,7 +159,7 @@
       "subjectId": "RcwBasicSubjects/SimpleMath::.ctor:System.Void()",
       "definitionSubjectId": "RcwBasicSubjects/SimpleMath::.ctor:System.Void()",
       "declaringTypeSubjectId": "RcwBasicSubjects/SimpleMath",
-      "metadataToken": 100663310,
+      "metadataToken": 100663309,
       "parameterCount": 0
     },
     {
@@ -175,7 +167,7 @@
       "subjectId": "RcwBasicSubjects/ConstantFortyTwo::GetValue:System.Int32()",
       "definitionSubjectId": "RcwBasicSubjects/ConstantFortyTwo::GetValue:System.Int32()",
       "declaringTypeSubjectId": "RcwBasicSubjects/ConstantFortyTwo",
-      "metadataToken": 100663311,
+      "metadataToken": 100663310,
       "parameterCount": 0
     },
     {
@@ -183,7 +175,7 @@
       "subjectId": "RcwBasicSubjects/ConstantFortyTwo::.ctor:System.Void()",
       "definitionSubjectId": "RcwBasicSubjects/ConstantFortyTwo::.ctor:System.Void()",
       "declaringTypeSubjectId": "RcwBasicSubjects/ConstantFortyTwo",
-      "metadataToken": 100663312,
+      "metadataToken": 100663311,
       "parameterCount": 0
     },
     {
@@ -191,7 +183,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663313,
+      "metadataToken": 100663312,
       "parameterCount": 1
     },
     {
@@ -199,7 +191,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663314,
+      "metadataToken": 100663313,
       "parameterCount": 0
     },
     {
@@ -207,7 +199,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663315,
+      "metadataToken": 100663314,
       "parameterCount": 0
     },
     {
@@ -215,7 +207,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663316,
+      "metadataToken": 100663315,
       "parameterCount": 0
     },
     {
@@ -223,7 +215,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663317,
+      "metadataToken": 100663316,
       "parameterCount": 0
     },
     {
@@ -231,7 +223,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663318,
+      "metadataToken": 100663317,
       "parameterCount": 0
     },
     {
@@ -239,7 +231,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663319,
+      "metadataToken": 100663318,
       "parameterCount": 0
     },
     {
@@ -247,7 +239,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663320,
+      "metadataToken": 100663319,
       "parameterCount": 1
     },
     {
@@ -255,7 +247,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateCcw:System.IntPtr(System.IntPtr,System.IntPtr)",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateCcw:System.IntPtr(System.IntPtr,System.IntPtr)",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663321,
+      "metadataToken": 100663320,
       "parameterCount": 2
     },
     {
@@ -263,7 +255,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663322,
+      "metadataToken": 100663321,
       "parameterCount": 1
     },
     {
@@ -271,7 +263,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663323,
+      "metadataToken": 100663322,
       "parameterCount": 1
     },
     {
@@ -279,7 +271,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663324,
+      "metadataToken": 100663323,
       "parameterCount": 1
     },
     {
@@ -287,7 +279,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalRcwQueryInterface:System.IntPtr(System.IntPtr,System.IntPtr)",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalRcwQueryInterface:System.IntPtr(System.IntPtr,System.IntPtr)",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663325,
+      "metadataToken": 100663324,
       "parameterCount": 2
     },
     {
@@ -295,7 +287,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663326,
+      "metadataToken": 100663325,
       "parameterCount": 4
     },
     {
@@ -303,7 +295,7 @@
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallDirectComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)",
       "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallDirectComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-      "metadataToken": 100663327,
+      "metadataToken": 100663326,
       "parameterCount": 4
     },
     {
@@ -311,7 +303,7 @@
       "subjectId": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()",
       "definitionSubjectId": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()",
       "declaringTypeSubjectId": "RcwBasicSubjects/RuntimeState",
-      "metadataToken": 100663328,
+      "metadataToken": 100663327,
       "parameterCount": 0
     },
     {
@@ -319,7 +311,7 @@
       "subjectId": "RcwBasicSubjects/RuntimeState::Set:System.Void(System.IntPtr)",
       "definitionSubjectId": "RcwBasicSubjects/RuntimeState::Set:System.Void(System.IntPtr)",
       "declaringTypeSubjectId": "RcwBasicSubjects/RuntimeState",
-      "metadataToken": 100663329,
+      "metadataToken": 100663328,
       "parameterCount": 1
     }
   ],

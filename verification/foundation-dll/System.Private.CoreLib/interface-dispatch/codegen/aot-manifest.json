@@ -5,12 +5,6 @@
     {
       "assemblyName": "InterfaceDispatchSubjects",
       "subjectKind": "method",
-      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "InterfaceDispatchSubjects",
-      "subjectKind": "method",
       "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

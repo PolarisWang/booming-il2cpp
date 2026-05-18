@@ -606,6 +606,22 @@ inline void EmitMovSDRM(CodeBuffer& buf, uint8_t dst, uint8_t base, int32_t disp
     EmitMR(buf, dst, base, disp);
 }
 
+/// movups [mem], xmm (store 16 bytes, unaligned)
+inline void EmitMovUPSMR(CodeBuffer& buf, uint8_t base, int32_t disp, uint8_t src) noexcept {
+    EmitREX(buf, false, src, base);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x11);
+    EmitMR(buf, src, base, disp);
+}
+
+/// movups xmm, [mem] (load 16 bytes, unaligned)
+inline void EmitMovUPRM(CodeBuffer& buf, uint8_t dst, uint8_t base, int32_t disp) noexcept {
+    EmitREX(buf, false, dst, base);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x10);
+    EmitMR(buf, dst, base, disp);
+}
+
 /// movss [mem], xmm (store float to memory)
 inline void EmitMovSSMR(CodeBuffer& buf, uint8_t base, int32_t disp, uint8_t src) noexcept {
     buf.EmitByte(0xF3);

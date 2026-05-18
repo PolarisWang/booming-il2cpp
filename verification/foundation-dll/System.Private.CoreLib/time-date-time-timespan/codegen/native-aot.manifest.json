@@ -2,8 +2,8 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
   "assemblyName": "TimeDateTimeTimespanSubjects",
-  "entrySubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Run:System.Void(System.Int32)",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/codegen",
+  "entrySubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0:System.Void()",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

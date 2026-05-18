@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "ObjectEqualityIdentitySubjects",
-      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
-      "metadataToken": 100663304,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "ObjectEqualityIdentitySubjects",
       "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
       "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",

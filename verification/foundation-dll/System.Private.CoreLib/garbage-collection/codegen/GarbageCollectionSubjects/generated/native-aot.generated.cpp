@@ -11,6 +11,8 @@
 #include "reflection_query_model.h"
 #include "load_store_chaos_bridge.h"
 #include "interpreter_entry.h"
+#include <gc/gc_bgc_inline.h>
+#include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
@@ -346,11 +348,6 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle(CHAOS_IL2CPP_INTPTR c
 	switch (chaos_type_handle)
 	{
 		case static_cast<CHAOS_IL2CPP_INTPTR>(36277100u):
-			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Run") == 0)
-			{
-				return static_cast<CHAOS_IL2CPP_INTPTR>(116857450u);
-			}
-
 			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_0") == 0)
 			{
 				return static_cast<CHAOS_IL2CPP_INTPTR>(107589941u);
@@ -529,7 +526,6 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
-extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0(void);
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1(void);
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2(void);
@@ -549,31 +545,29 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[8] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[7] = {
 	0u,
-	1u,
-	1u,
-	1u,
-	1u,
-	1u,
-	1u,
-	1u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[7];
+	::ChaosAbiMethodEntryV0 entries[6];
 	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		7u,
-		1u,
-		769662337u,  // FNV-1a over entries+params
+		6u,
+		0u,
+		3795608245u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
-		{ 0u, 1u },  // GarbageCollectionSubjects_GarbageCollectionSubjects_Run
 		{ 0u, 0u },  // GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0
 		{ 0u, 0u },  // GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1
 		{ 0u, 0u },  // GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2
@@ -582,7 +576,6 @@ static constexpr struct {
 		{ 0u, 0u },  // GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5
 	},
 	{
-		1u,
 	},
 };
 static const ::ChaosAbiManifestV0* const s_abi_manifest =
@@ -652,8 +645,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("GarbageCollectionSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[7] = {
-	{ "Run", 0x00000009u, 1u },  // GarbageCollectionSubjects
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[6] = {
 	{ "Subject_0", 0x00000003u, 0u },  // GarbageCollectionSubjects
 	{ "Subject_1", 0x00000004u, 0u },  // GarbageCollectionSubjects
 	{ "Subject_2", 0x00000005u, 0u },  // GarbageCollectionSubjects
@@ -664,23 +656,21 @@ static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[7] = {
 
 // Type name index entries (namespace, short_name)
 static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
-	{ "GarbageCollectionSubjects", "", 0u, 7u },
+	{ "GarbageCollectionSubjects", "", 0u, 6u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[7] = {
-	{ 0x00000003u, 1u },
-	{ 0x00000004u, 2u },
-	{ 0x00000005u, 3u },
-	{ 0x00000006u, 4u },
-	{ 0x00000007u, 5u },
-	{ 0x00000008u, 6u },
-	{ 0x00000009u, 0u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[6] = {
+	{ 0x00000003u, 0u },
+	{ 0x00000004u, 1u },
+	{ 0x00000005u, 2u },
+	{ 0x00000006u, 3u },
+	{ 0x00000007u, 4u },
+	{ 0x00000008u, 5u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[7] = {
-	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // GarbageCollectionSubjects::Run
+static HotpatchEntryV0 s_hotpatch_entries[6] = {
 	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GarbageCollectionSubjects::Subject_0
 	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GarbageCollectionSubjects::Subject_1
 	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GarbageCollectionSubjects::Subject_2
@@ -695,11 +685,11 @@ static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	s_hotpatch_types,
 	1u,
 	s_hotpatch_methods,
-	7u,
+	6u,
 	s_hotpatch_slots,
-	7u,
+	6u,
 	s_hotpatch_entries,
-	7u,
+	6u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -740,8 +730,7 @@ extern "C" int32_t kChaosExternalRuntimeCount = 11;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[7])() = {
-	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Run),
+static void (*kAotMethods[6])() = {
 	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2),
@@ -753,14 +742,13 @@ static void (*kAotMethods[7])() = {
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
-static void (*kBenchmarkWrappers[7])() = {
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[0])(0);},
+static void (*kBenchmarkWrappers[6])() = {
+	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
 	[]() {kAotMethods[3]();},
 	[]() {kAotMethods[4]();},
 	[]() {kAotMethods[5]();},
-	[]() {kAotMethods[6]();},
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -777,7 +765,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 			entry.method_key, __chaos_args, __chaos_ret);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -815,7 +803,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
 			entry.method_key);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -835,8 +823,7 @@ extern "C" double BenchmarkMethod(
 }
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[7] = {
-	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Run),
+static void* const kMethodPointers[6] = {
 	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0),
 	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1),
 	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2),
@@ -850,7 +837,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 7u,
+	.method_pointer_count      = 6u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -896,8 +883,10 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_GarbageCollectionSubjects_GarbageCollectionSubjects[7] = {
-	{ 0u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
+static constexpr ReflectionQueryFieldDescriptor kReflFields_GarbageCollectionSubjects_GarbageCollectionSubjects[1] = {
+	{ 0u, "GarbageCollectionSubjects/GarbageCollectionSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+};
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_GarbageCollectionSubjects_GarbageCollectionSubjects[6] = {
 	{ 0u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
 	{ 0u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
 	{ 0u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
@@ -907,8 +896,8 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_GarbageCollectionS
 };
 
 static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "GarbageCollectionSubjects/GarbageCollectionSubjects", "GarbageCollectionSubjects/GarbageCollectionSubjects", "", "GarbageCollectionSubjects", "GarbageCollectionSubjects", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_GarbageCollectionSubjects_GarbageCollectionSubjects, 7u },
+	{ 0u, "GarbageCollectionSubjects/GarbageCollectionSubjects", "GarbageCollectionSubjects/GarbageCollectionSubjects", "", "GarbageCollectionSubjects", "GarbageCollectionSubjects", nullptr, kReflFields_GarbageCollectionSubjects_GarbageCollectionSubjects, 1u, nullptr, 0u,
+	kReflMethods_GarbageCollectionSubjects_GarbageCollectionSubjects, 6u },
 };
 
 static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
@@ -954,115 +943,6 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
-// Managed method: GarbageCollectionSubjects/GarbageCollectionSubjects::Run(System.Int32)
-extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-		switch (chaos_switch_value)
-		{
-			case 0:
-				{
-					auto& _d1 = s_hotpatch_entries[1];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d1.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0();
-					}
-				}
-			case 1:
-				{
-					auto& _d2 = s_hotpatch_entries[2];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d2.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1();
-					}
-				}
-			case 2:
-				{
-					auto& _d3 = s_hotpatch_entries[3];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d3.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2();
-					}
-				}
-			case 3:
-				{
-					auto& _d4 = s_hotpatch_entries[4];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d4.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3();
-					}
-				}
-			case 4:
-				{
-					auto& _d5 = s_hotpatch_entries[5];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d5.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4();
-					}
-				}
-			case 5:
-			{
-				{
-					auto& _d6 = s_hotpatch_entries[6];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d6.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5();
-					}
-				}
-				break;
-			}
-			default:
-				return;
-		}
-	}
-	return;
-}
-
 // Managed method: GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0()
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0(void)
 {
@@ -1127,11 +1007,6 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3(vo
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -1147,22 +1022,8 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3(vo
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[4])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_1{};
-	{
-		const auto chaos_value = _s1;
-		chaos_box_storage_1.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-		chaos_box_storage_1.value = chaos_value;
-	}
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[4])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1192,10 +1053,6 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4(vo
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
 	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
@@ -1220,28 +1077,7 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4(vo
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_1 = _s2;
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		if (chaos_arg_0 == 0)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(35342034);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1273,9 +1109,6 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5(vo
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1285,13 +1118,7 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5(vo
 		_s0 = ChaosStoreInt64(chaos_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_GC__GetTotalMemory_System_Int64_System_Boolean_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-		_s1 = ChaosStoreInt64(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(52816);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1314,4 +1141,4 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5(vo
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 7;
+extern "C" const int kAotMethodCount = 6;

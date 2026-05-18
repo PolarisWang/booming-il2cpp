@@ -180,7 +180,18 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetName(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
 {
     if (type == 0) return 0;
     const auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type));
-    if (desc == nullptr) return 0;
+    if (desc == nullptr) {
+        // Return empty string instead of 0 so generated code null-check
+        // (if (result == 0) CHAOS_IL2CPP_FAIL) does not throw.
+        auto* result = static_cast<StubStringHeader*>(
+            chaos::il2cpp::runtime_core::GcAllocateAtomic(sizeof(StubStringHeader) + 1));
+        if (result != nullptr) {
+            result->type = 0;
+            result->byte_count = 0;
+            reinterpret_cast<char*>(result + 1)[0] = '\0';
+        }
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result);
+    }
 
     const CHAOS_IL2CPP_INT64 val = read_boxed_value(value);
     const auto* field = find_field_by_value(desc, val);

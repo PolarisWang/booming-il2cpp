@@ -2,7 +2,7 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ConvertCharSubjects",
-  "entrySubjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
+  "entrySubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/convert-char/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

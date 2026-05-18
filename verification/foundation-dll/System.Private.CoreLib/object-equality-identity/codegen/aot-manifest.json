@@ -5,12 +5,6 @@
     {
       "assemblyName": "ObjectEqualityIdentitySubjects",
       "subjectKind": "method",
-      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "ObjectEqualityIdentitySubjects",
-      "subjectKind": "method",
       "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

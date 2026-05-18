@@ -2,7 +2,7 @@
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
   "assemblyName": "GuidRandomHashcodeSubjects",
-  "entrySubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Run:System.Void(System.Int32)",
+  "entrySubjectId": "",
   "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/guid-random-hashcode/managed/subjects/build-output/GuidRandomHashcodeSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "30ffbd6b-92ca-4476-9ec6-2b3e4dd949fd",
+  "inputModuleVersionId": "cbe6e1a8-13e6-49d6-8aac-858a183772f1",
   "artifacts": [
     {
       "kind": "typedIlIr",

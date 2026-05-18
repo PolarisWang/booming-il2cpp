@@ -36,6 +36,10 @@ struct NativeMethod;
 void RegisterT4Code(void* code_start, uint32_t code_size,
                     const NativeMethod* nm) noexcept;
 
+/// Unregister a T4 code range.  Called during T4 demotion.
+/// Marks the entry inactive so the VEH handler won't dispatch to it.
+void UnregisterT4Code(void* code_start) noexcept;
+
 /// Register the global VEH handler for T4 SEH dispatch.
 /// Must be called once at startup (from RuntimeInit).
 void RegisterT4SehHandler() noexcept;

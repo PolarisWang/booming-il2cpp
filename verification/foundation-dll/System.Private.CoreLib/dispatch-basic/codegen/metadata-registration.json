@@ -92,17 +92,6 @@
     {
       "registrationKind": "method",
       "slot": 11,
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Run:System.Void(System.Int32)",
-      "name": "Run",
-      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
-      "memberType": "System.Void",
-      "parameterCount": 1,
-      "isImported": false
-    },
-    {
-      "registrationKind": "method",
-      "slot": 12,
       "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()",
@@ -113,7 +102,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 13,
+      "slot": 12,
       "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()",
@@ -124,7 +113,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 14,
+      "slot": 13,
       "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()",
@@ -135,7 +124,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 15,
+      "slot": 14,
       "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()",
@@ -146,7 +135,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 16,
+      "slot": 15,
       "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()",
@@ -157,7 +146,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 17,
+      "slot": 16,
       "subjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
       "name": "Add",
       "definitionSubjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
@@ -168,7 +157,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 18,
+      "slot": 17,
       "subjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)",
       "name": "Subtract",
       "definitionSubjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)",
@@ -179,7 +168,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 19,
+      "slot": 18,
       "subjectId": "DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()",
       "name": "GetStatusCode",
       "definitionSubjectId": "DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()",
@@ -190,7 +179,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 20,
+      "slot": 19,
       "subjectId": "DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()",
@@ -201,7 +190,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 21,
+      "slot": 20,
       "subjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
       "name": "Add",
       "definitionSubjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
@@ -212,7 +201,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 22,
+      "slot": 21,
       "subjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
       "name": "Subtract",
       "definitionSubjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
@@ -223,7 +212,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 23,
+      "slot": 22,
       "subjectId": "DispatchBasicSubjects/Calculator::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "DispatchBasicSubjects/Calculator::.ctor:System.Void()",
@@ -234,7 +223,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 24,
+      "slot": 23,
       "subjectId": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()",
       "name": "GetStatusCode",
       "definitionSubjectId": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()",
@@ -245,7 +234,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 25,
+      "slot": 24,
       "subjectId": "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()",
@@ -256,7 +245,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 26,
+      "slot": 25,
       "subjectId": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()",
@@ -267,7 +256,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 27,
+      "slot": 26,
       "subjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()",
@@ -278,7 +267,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 28,
+      "slot": 27,
       "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
       "name": "Run",
       "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
@@ -289,7 +278,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 29,
+      "slot": 28,
       "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
       "name": "TestIDispatchAdd",
       "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
@@ -300,7 +289,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 30,
+      "slot": 29,
       "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
       "name": "TestIDispatchSub",
       "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
@@ -311,7 +300,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 31,
+      "slot": 30,
       "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
       "name": "TestDualGetStatus",
       "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
@@ -322,7 +311,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 32,
+      "slot": 31,
       "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
       "name": "TestIUnknownGetValue",
       "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
@@ -333,7 +322,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 33,
+      "slot": 32,
       "subjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)",
       "name": ".ctor",
       "definitionSubjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)",
@@ -344,16 +333,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 34,
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
-      "name": "entryIndex",
-      "declaringMethodSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Run:System.Void(System.Int32)",
-      "memberType": "System.Int32",
-      "parameterIndex": 0
-    },
-    {
-      "registrationKind": "parameter",
-      "slot": 35,
+      "slot": 33,
       "subjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)::parameter[0]:a",
       "name": "a",
       "declaringMethodSubjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
@@ -362,7 +342,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 36,
+      "slot": 34,
       "subjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)::parameter[1]:b",
       "name": "b",
       "declaringMethodSubjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
@@ -371,7 +351,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 37,
+      "slot": 35,
       "subjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)::parameter[0]:a",
       "name": "a",
       "declaringMethodSubjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)",
@@ -380,7 +360,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 38,
+      "slot": 36,
       "subjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)::parameter[1]:b",
       "name": "b",
       "declaringMethodSubjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)",
@@ -389,7 +369,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 39,
+      "slot": 37,
       "subjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)::parameter[0]:a",
       "name": "a",
       "declaringMethodSubjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
@@ -398,7 +378,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 40,
+      "slot": 38,
       "subjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)::parameter[1]:b",
       "name": "b",
       "declaringMethodSubjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
@@ -407,7 +387,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 41,
+      "slot": 39,
       "subjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)::parameter[0]:a",
       "name": "a",
       "declaringMethodSubjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
@@ -416,7 +396,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 42,
+      "slot": 40,
       "subjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)::parameter[1]:b",
       "name": "b",
       "declaringMethodSubjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
@@ -425,7 +405,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 43,
+      "slot": 41,
       "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
       "name": "entryIndex",
       "declaringMethodSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
@@ -434,7 +414,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 44,
+      "slot": 42,
       "subjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)::parameter[0]:type",
       "name": "type",
       "declaringMethodSubjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)",

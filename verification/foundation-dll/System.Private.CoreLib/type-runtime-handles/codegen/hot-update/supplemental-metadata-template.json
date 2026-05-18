@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "TypeRuntimeHandlesSubjects",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
-      "metadataToken": 100663310,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "TypeRuntimeHandlesSubjects",
       "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",

@@ -5,12 +5,6 @@
     {
       "assemblyName": "ReflectionAssemblySubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "ReflectionAssemblySubjects",
-      "subjectKind": "method",
       "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

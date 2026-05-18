@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
-      "metadataToken": 100663311,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "SpanMemoryBuffersSubjects",
       "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",

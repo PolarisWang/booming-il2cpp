@@ -7,6 +7,7 @@
     <AssemblyName>ReflectionTypeSubjects</AssemblyName>
     <RootNamespace>ReflectionTypeSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ReflectionTypeSubjects.cs" />

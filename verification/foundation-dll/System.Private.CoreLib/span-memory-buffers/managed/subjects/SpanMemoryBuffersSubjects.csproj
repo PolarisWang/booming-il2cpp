@@ -7,6 +7,7 @@
     <AssemblyName>SpanMemoryBuffersSubjects</AssemblyName>
     <RootNamespace>SpanMemoryBuffersSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="SpanMemoryBuffersSubjects.cs" />

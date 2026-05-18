@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "DelegateCoreInvocationSubjects",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
-      "metadataToken": 100663307,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "DelegateCoreInvocationSubjects",
       "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",

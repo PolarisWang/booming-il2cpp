@@ -5,12 +5,6 @@
     {
       "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "ReflectionTypeSubjects",
-      "subjectKind": "method",
       "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
@@ -286,12 +280,6 @@
     },
     {
       "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "type",
       "subjectId": "System.Private.CoreLib/System.Byte",
       "reason": "external-call"
@@ -432,6 +420,12 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {

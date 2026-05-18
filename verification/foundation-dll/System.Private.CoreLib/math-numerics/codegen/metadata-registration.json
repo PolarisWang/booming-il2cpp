@@ -27,17 +27,6 @@
     {
       "registrationKind": "method",
       "slot": 3,
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Run:System.Void(System.Int32)",
-      "name": "Run",
-      "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-      "memberType": "System.Void",
-      "parameterCount": 1,
-      "isImported": false
-    },
-    {
-      "registrationKind": "method",
-      "slot": 4,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()",
@@ -48,7 +37,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 5,
+      "slot": 4,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_1:System.Void()",
@@ -59,7 +48,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 6,
+      "slot": 5,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_2:System.Void()",
@@ -70,7 +59,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 7,
+      "slot": 6,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_3:System.Void()",
@@ -81,7 +70,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 8,
+      "slot": 7,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_4:System.Void()",
@@ -92,7 +81,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 9,
+      "slot": 8,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_5:System.Void()",
@@ -103,7 +92,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 10,
+      "slot": 9,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_6:System.Void()",
@@ -114,7 +103,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 11,
+      "slot": 10,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_7:System.Void()",
@@ -125,7 +114,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 12,
+      "slot": 11,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_8:System.Void()",
       "name": "Subject_8",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_8:System.Void()",
@@ -136,7 +125,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 13,
+      "slot": 12,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_9:System.Void()",
@@ -147,7 +136,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 14,
+      "slot": 13,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_10:System.Void()",
       "name": "Subject_10",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_10:System.Void()",
@@ -158,7 +147,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 15,
+      "slot": 14,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_11:System.Void()",
       "name": "Subject_11",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_11:System.Void()",
@@ -169,7 +158,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 16,
+      "slot": 15,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_12:System.Void()",
       "name": "Subject_12",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_12:System.Void()",
@@ -180,7 +169,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 17,
+      "slot": 16,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_13:System.Void()",
       "name": "Subject_13",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_13:System.Void()",
@@ -191,7 +180,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 18,
+      "slot": 17,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_14:System.Void()",
       "name": "Subject_14",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_14:System.Void()",
@@ -202,7 +191,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 19,
+      "slot": 18,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_15:System.Void()",
       "name": "Subject_15",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_15:System.Void()",
@@ -213,7 +202,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 20,
+      "slot": 19,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_16:System.Void()",
       "name": "Subject_16",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_16:System.Void()",
@@ -224,7 +213,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 21,
+      "slot": 20,
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_17:System.Void()",
       "name": "Subject_17",
       "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_17:System.Void()",
@@ -232,15 +221,6 @@
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
-    },
-    {
-      "registrationKind": "parameter",
-      "slot": 22,
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
-      "name": "entryIndex",
-      "declaringMethodSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Run:System.Void(System.Int32)",
-      "memberType": "System.Int32",
-      "parameterIndex": 0
     }
   ]
 }

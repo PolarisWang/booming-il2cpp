@@ -1,13 +1,13 @@
 {
   "family": "threading-tasks-primitives",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 22,
-  "audited": 22,
+  "total_methods": 29,
+  "audited": 29,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 13,
+  "skips_found": 14,
   "methods_without_lowering": 0,
-  "methods_without_assert": 22,
+  "methods_without_assert": 29,
   "passed": true,
   "method_details": [
     {
@@ -65,7 +65,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_0",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -74,7 +74,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_1",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__3_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -83,7 +83,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_2",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -92,7 +92,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_3",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__4_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -101,7 +101,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_4",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -110,7 +110,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_5",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -119,7 +119,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_6",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__6_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -128,7 +128,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_7",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -137,7 +137,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_8",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -146,7 +146,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_9",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -155,7 +155,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_10",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -164,7 +164,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_11",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -173,7 +173,61 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_12",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_1_System_Threading_Tasks_Task",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__14_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -191,7 +245,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_14",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -200,7 +254,16 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Run",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_cctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -280,6 +343,12 @@
       "type_name": "Thread",
       "method_name": "Sleep",
       "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Thread",
+      "method_name": "ResetAbort",
+      "param_count": 0,
       "override_value": "skip"
     },
     {

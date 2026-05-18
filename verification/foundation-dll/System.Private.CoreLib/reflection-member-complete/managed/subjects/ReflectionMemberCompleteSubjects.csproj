@@ -7,6 +7,7 @@
     <AssemblyName>ReflectionMemberCompleteSubjects</AssemblyName>
     <RootNamespace>ReflectionMemberCompleteSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ReflectionMemberCompleteSubjects.cs" />

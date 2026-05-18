@@ -2,7 +2,7 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
   "assemblyName": "GenericNullableValueSubjects",
-  "entrySubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Run:System.Void(System.Int32)",
+  "entrySubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/generic-nullable-value/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

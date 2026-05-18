@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "GenericNullableValueSubjects",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
-      "metadataToken": 100663307,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "GenericNullableValueSubjects",
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",

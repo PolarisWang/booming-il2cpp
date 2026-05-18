@@ -41,31 +41,9 @@ public static partial class ThreadingTasksPrimitivesSubjects
     // [13] System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()
     public static void Subject_13()
     {
-        if (((Thread.CurrentThread).GetHashCode()) != ((Thread.CurrentThread).GetHashCode())) _exitCode = 1;
+        if (((Thread.CurrentThread).GetHashCode()) != 2) _exitCode = 1;
     }
 
     // [14] System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()
-
-    public static void Run(int entryIndex)
-    {
-        switch (entryIndex)
-        {
-            case 0: CustomEntrySubject_0(); break;
-            case 1: CustomEntrySubject_1(); break;
-            case 2: CustomEntrySubject_2(); break;
-            case 3: CustomEntrySubject_3(); break;
-            case 4: CustomEntrySubject_4(); break;
-            case 5: CustomEntrySubject_5(); break;
-            case 6: CustomEntrySubject_6(); break;
-            case 7: CustomEntrySubject_7(); break;
-            case 8: CustomEntrySubject_8(); break;
-            case 9: CustomEntrySubject_9(); break;
-            case 10: CustomEntrySubject_10(); break;
-            case 11: CustomEntrySubject_11(); break;
-            case 12: CustomEntrySubject_12(); break;
-            case 13: Subject_13(); break;
-            case 14: CustomEntrySubject_14(); break;
-        }
-    }
 
 }

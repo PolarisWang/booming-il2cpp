@@ -2,7 +2,7 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
   "assemblyName": "GlobalizationCultureSubjects",
-  "entrySubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Run:System.Void(System.Int32)",
+  "entrySubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/globalization-culture/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

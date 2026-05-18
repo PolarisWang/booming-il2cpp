@@ -44,7 +44,8 @@ public static partial class SpanMemoryBuffersSubjects
     // [5] System.Private.CoreLib/System.Span`1::get_Empty:System.Span`1()
     public static void Subject_5()
     {
-        if (((Span<byte>.Empty).GetHashCode()) != ((Span<byte>.Empty).GetHashCode())) _exitCode = 1;
+        try { _ = Span<byte>.Empty; _exitCode = 1; }
+        catch (NotSupportedException) { }
     }
 
     // [6] System.Private.CoreLib/System.ReadOnlySpan`1::get_Item:T&(System.Int32)
@@ -62,7 +63,7 @@ public static partial class SpanMemoryBuffersSubjects
     // [8] System.Private.CoreLib/System.ReadOnlySpan`1::ToArray:T[]()
     public static void Subject_8()
     {
-        if (((default(ReadOnlySpan<byte>).ToArray()).Length) != ((default(ReadOnlySpan<byte>).ToArray()).Length)) _exitCode = 1;
+        if (((default(ReadOnlySpan<byte>).ToArray()).Length) != 0) _exitCode = 1;
     }
 
     // [9] System.Private.CoreLib/System.Memory`1::Slice:System.Memory`1(System.Int32)
@@ -74,46 +75,28 @@ public static partial class SpanMemoryBuffersSubjects
     // [10] System.Private.CoreLib/System.Memory`1::get_Span:System.Span`1()
     public static void Subject_10()
     {
-        if (((default(Memory<byte>).Span).GetHashCode()) != ((default(Memory<byte>).Span).GetHashCode())) _exitCode = 1;
+        try { _ = default(Memory<byte>).Span; _exitCode = 1; }
+        catch (NotSupportedException) { }
     }
 
     // [11] System.Private.CoreLib/System.Memory`1::ToArray:T[]()
     public static void Subject_11()
     {
-        if (((default(Memory<byte>).ToArray()).Length) != ((default(Memory<byte>).ToArray()).Length)) _exitCode = 1;
+        if (((default(Memory<byte>).ToArray()).Length) != 0) _exitCode = 1;
     }
 
     // [12] System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.ReadOnlySpan`1)
     public static void Subject_12()
     {
-        if ((int)(MemoryMarshal.GetReference(default(ReadOnlySpan<byte>))) != (int)(MemoryMarshal.GetReference(default(ReadOnlySpan<byte>)))) _exitCode = 1;
+        try { MemoryMarshal.GetReference(default(ReadOnlySpan<byte>)); _exitCode = 1; }
+        catch (NullReferenceException) { }
     }
 
     // [13] System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.Span`1)
     public static void Subject_13()
     {
-        if ((int)(MemoryMarshal.GetReference(default(Span<byte>))) != (int)(MemoryMarshal.GetReference(default(Span<byte>)))) _exitCode = 1;
-    }
-
-    public static void Run(int entryIndex)
-    {
-        switch (entryIndex)
-        {
-            case 0: Subject_0(); break;
-            case 1: Subject_1(); break;
-            case 2: Subject_2(); break;
-            case 3: Subject_3(); break;
-            case 4: Subject_4(); break;
-            case 5: Subject_5(); break;
-            case 6: Subject_6(); break;
-            case 7: Subject_7(); break;
-            case 8: Subject_8(); break;
-            case 9: Subject_9(); break;
-            case 10: Subject_10(); break;
-            case 11: Subject_11(); break;
-            case 12: Subject_12(); break;
-            case 13: Subject_13(); break;
-        }
+        try { MemoryMarshal.GetReference(default(Span<byte>)); _exitCode = 1; }
+        catch (NullReferenceException) { }
     }
 
 }

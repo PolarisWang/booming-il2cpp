@@ -25,13 +25,14 @@ public static partial class ExceptionThrowDiagnosticsSubjects
     // [2] System.Private.CoreLib/System.Exception::get_Message:System.String()
     public static void Subject_2()
     {
-        if (((new Exception().Message).Length) != ((new Exception().Message).Length)) _exitCode = 1;
+        if (((new Exception().Message).Length) != 48) _exitCode = 1;
     }
 
     // [3] System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()
     public static void Subject_3()
     {
-        if (((new Exception().InnerException).GetHashCode()) != ((new Exception().InnerException).GetHashCode())) _exitCode = 1;
+        try { _ = new Exception().InnerException; _exitCode = 1; }
+        catch (NullReferenceException) { }
     }
 
     // [4] System.Private.CoreLib/System.Exception::get_StackTrace:System.String()
@@ -43,19 +44,19 @@ public static partial class ExceptionThrowDiagnosticsSubjects
     // [5] System.Private.CoreLib/System.Exception::get_HResult:System.Int32()
     public static void Subject_5()
     {
-        if (new Exception().HResult != new Exception().HResult) _exitCode = 1;
+        if (new Exception().HResult != -2146233088) _exitCode = 1;
     }
 
     // [6] System.Private.CoreLib/System.Exception::ToString:System.String()
     public static void Subject_6()
     {
-        if (((new Exception().ToString()).Length) != ((new Exception().ToString()).Length)) _exitCode = 1;
+        if (((new Exception().ToString()).Length) != 66) _exitCode = 1;
     }
 
     // [7] System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()
     public static void Subject_7()
     {
-        if (((new Exception().GetBaseException()).GetHashCode()) != ((new Exception().GetBaseException()).GetHashCode())) _exitCode = 1;
+        if (((new Exception().GetBaseException()).GetHashCode()) != 35342034) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)
@@ -92,27 +93,6 @@ public static partial class ExceptionThrowDiagnosticsSubjects
     public static void Subject_13()
     {
         new NotImplementedException("hello");
-    }
-
-    public static void Run(int entryIndex)
-    {
-        switch (entryIndex)
-        {
-            case 0: Subject_0(); break;
-            case 1: Subject_1(); break;
-            case 2: Subject_2(); break;
-            case 3: Subject_3(); break;
-            case 4: Subject_4(); break;
-            case 5: Subject_5(); break;
-            case 6: Subject_6(); break;
-            case 7: Subject_7(); break;
-            case 8: Subject_8(); break;
-            case 9: Subject_9(); break;
-            case 10: Subject_10(); break;
-            case 11: Subject_11(); break;
-            case 12: Subject_12(); break;
-            case 13: Subject_13(); break;
-        }
     }
 
 }

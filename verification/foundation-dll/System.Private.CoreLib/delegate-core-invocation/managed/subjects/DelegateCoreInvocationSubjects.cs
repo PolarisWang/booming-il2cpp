@@ -14,13 +14,15 @@ public static partial class DelegateCoreInvocationSubjects
     // [0] System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)
     public static void Subject_0()
     {
-        if (((Delegate.Combine(null!, null!)).GetHashCode()) != ((Delegate.Combine(null!, null!)).GetHashCode())) _exitCode = 1;
+        try { Delegate.Combine(null!, null!); _exitCode = 1; }
+        catch (NullReferenceException) { }
     }
 
     // [1] System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)
     public static void Subject_1()
     {
-        if (((Delegate.Remove(null!, null!)).GetHashCode()) != ((Delegate.Remove(null!, null!)).GetHashCode())) _exitCode = 1;
+        try { Delegate.Remove(null!, null!); _exitCode = 1; }
+        catch (NullReferenceException) { }
     }
 
     // [2] System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])
@@ -69,23 +71,6 @@ public static partial class DelegateCoreInvocationSubjects
     public static void Subject_9()
     {
         // TODO: System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate) could not be auto-generated
-    }
-
-    public static void Run(int entryIndex)
-    {
-        switch (entryIndex)
-        {
-            case 0: Subject_0(); break;
-            case 1: Subject_1(); break;
-            case 2: Subject_2(); break;
-            case 3: Subject_3(); break;
-            case 4: Subject_4(); break;
-            case 5: Subject_5(); break;
-            case 6: Subject_6(); break;
-            case 7: Subject_7(); break;
-            case 8: Subject_8(); break;
-            case 9: Subject_9(); break;
-        }
     }
 
 }

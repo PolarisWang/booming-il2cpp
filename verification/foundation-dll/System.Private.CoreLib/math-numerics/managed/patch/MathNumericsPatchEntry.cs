@@ -9,135 +9,142 @@ public static partial class MathNumericsPatchEntry
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)
-    public static int Method0()
+    public static int Subject_0()
     {
         return unchecked((int)(0xB0000000u + 0));
     }
 
     // [1] System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)
-    public static int Method1()
+    public static int Subject_1()
     {
         return unchecked((int)(0xB0000000u + 1));
     }
 
     // [2] System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)
-    public static int Method2()
+    public static int Subject_2()
     {
         return unchecked((int)(0xB0000000u + 2));
     }
 
     // [3] System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)
-    public static int Method3()
+    public static int Subject_3()
     {
         return unchecked((int)(0xB0000000u + 3));
     }
 
     // [4] System.Private.CoreLib/System.Math::Round:System.Double(System.Double)
-    public static int Method4()
+    public static int Subject_4()
     {
         return unchecked((int)(0xB0000000u + 4));
     }
 
     // [5] System.Private.CoreLib/System.Math::Round:System.Double(System.Double,System.Int32)
-    public static int Method5()
+    public static int Subject_5()
     {
         return unchecked((int)(0xB0000000u + 5));
     }
 
     // [6] System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)
-    public static int Method6()
+    public static int Subject_6()
     {
         return unchecked((int)(0xB0000000u + 6));
     }
 
     // [7] System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)
-    public static int Method7()
+    public static int Subject_7()
     {
         return unchecked((int)(0xB0000000u + 7));
     }
 
     // [8] System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)
-    public static int Method8()
+    public static int Subject_8()
     {
         return unchecked((int)(0xB0000000u + 8));
     }
 
     // [9] System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)
-    public static int Method9()
+    public static int Subject_9()
     {
         return unchecked((int)(0xB0000000u + 9));
     }
 
     // [10] System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)
-    public static int Method10()
+    public static int Subject_10()
     {
         return unchecked((int)(0xB0000000u + 10));
     }
 
     // [11] System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)
-    public static int Method11()
+    public static int Subject_11()
     {
         return unchecked((int)(0xB0000000u + 11));
     }
 
     // [12] System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)
-    public static int Method12()
+    public static int Subject_12()
     {
         return unchecked((int)(0xB0000000u + 12));
     }
 
     // [13] System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)
-    public static int Method13()
+    public static int Subject_13()
     {
         return unchecked((int)(0xB0000000u + 13));
     }
 
     // [14] System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)
-    public static int Method14()
+    public static int Subject_14()
     {
         return unchecked((int)(0xB0000000u + 14));
     }
 
     // [15] System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)
-    public static int Method15()
+    public static int Subject_15()
     {
         return unchecked((int)(0xB0000000u + 15));
     }
 
     // [16] System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32)
-    public static int Method16()
+    public static int Subject_16()
     {
         return unchecked((int)(0xB0000000u + 16));
     }
 
     // [17] System.Private.CoreLib/System.BitConverter::ToDouble:System.Double(System.Byte[],System.Int32)
-    public static int Method17()
+    public static int Subject_17()
     {
         return unchecked((int)(0xB0000000u + 17));
     }
 
     public static void Run(int entryIndex)
     {
-        switch (entryIndex)
+        try
         {
-            case 0: Method0(); break;
-            case 1: Method1(); break;
-            case 2: Method2(); break;
-            case 3: Method3(); break;
-            case 4: Method4(); break;
-            case 5: Method5(); break;
-            case 6: Method6(); break;
-            case 7: Method7(); break;
-            case 8: Method8(); break;
-            case 9: Method9(); break;
-            case 10: Method10(); break;
-            case 11: Method11(); break;
-            case 12: Method12(); break;
-            case 13: Method13(); break;
-            case 14: Method14(); break;
-            case 15: Method15(); break;
-            case 16: Method16(); break;
-            case 17: Method17(); break;
+            switch (entryIndex)
+            {
+                case 0: Subject_0(); break;
+                case 1: Subject_1(); break;
+                case 2: Subject_2(); break;
+                case 3: Subject_3(); break;
+                case 4: Subject_4(); break;
+                case 5: Subject_5(); break;
+                case 6: Subject_6(); break;
+                case 7: Subject_7(); break;
+                case 8: Subject_8(); break;
+                case 9: Subject_9(); break;
+                case 10: Subject_10(); break;
+                case 11: Subject_11(); break;
+                case 12: Subject_12(); break;
+                case 13: Subject_13(); break;
+                case 14: Subject_14(); break;
+                case 15: Subject_15(); break;
+                case 16: Subject_16(); break;
+                case 17: Subject_17(); break;
+            }
+        }
+        catch (System.Exception)
+        {
+            _exitCode = 1;
         }
     }
 

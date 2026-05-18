@@ -2,13 +2,13 @@
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
   "assemblyName": "DispatchBasicSubjects",
-  "entrySubjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Run:System.Void(System.Int32)",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/dispatch-basic/managed/subjects/build-output/DispatchBasicSubjects.dll",
+  "entrySubjectId": "",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/dispatch-basic/managed/subjects/build-output/DispatchBasicSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "DispatchBasicSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/dispatch-basic/managed/subjects/build-output/DispatchBasicSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/dispatch-basic/managed/subjects/build-output/DispatchBasicSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "4cbd8c64-da95-4441-81d5-ca34bc120287",
+  "inputModuleVersionId": "00ec79c6-8e9f-4240-814e-5aa902f8fad5",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -5,12 +5,6 @@
     {
       "assemblyName": "StringCharTextCoreSubjects",
       "subjectKind": "method",
-      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "StringCharTextCoreSubjects",
-      "subjectKind": "method",
       "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

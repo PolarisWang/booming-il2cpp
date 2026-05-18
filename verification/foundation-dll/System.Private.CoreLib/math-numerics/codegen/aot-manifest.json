@@ -5,12 +5,6 @@
     {
       "assemblyName": "MathNumericsSubjects",
       "subjectKind": "method",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "MathNumericsSubjects",
-      "subjectKind": "method",
       "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

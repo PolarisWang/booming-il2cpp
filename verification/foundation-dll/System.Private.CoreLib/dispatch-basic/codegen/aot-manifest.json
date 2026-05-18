@@ -5,12 +5,6 @@
     {
       "assemblyName": "DispatchBasicSubjects",
       "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
       "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

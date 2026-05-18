@@ -160,11 +160,17 @@ def _get_verifyable_families(dlls, lookup):
     for dll in dlls:
         aname = dll["assemblyName"]
         disk_slugs = _on_disk_families(aname)
+        prefix = f"family/{aname}/"
         for fam in dll.get("families", []):
             if fam.get("methodCount", 0) <= 0:
                 continue
             fid = fam.get("familyId", "")
-            slug = fid.rsplit("/", 1)[-1] if "/" in fid else fid
+            # Normalize familyId to slug: strip "family/AssemblyName/" prefix,
+            # then replace "/" back to "-" (ledger stores hyphens as "/").
+            if fid.startswith(prefix):
+                slug = fid[len(prefix):].replace("/", "-")
+            else:
+                slug = fid.rsplit("/", 1)[-1] if "/" in fid else fid
             if slug not in disk_slugs:
                 continue
             contract_path = REPO / "verification" / "foundation-dll" / aname / slug / "capability-family-contract.json"

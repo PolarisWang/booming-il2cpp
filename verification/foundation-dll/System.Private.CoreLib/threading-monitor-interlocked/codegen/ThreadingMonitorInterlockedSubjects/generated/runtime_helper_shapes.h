@@ -64,15 +64,33 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_DELEGATE_REMOVE_SYSTEM_DELEGATE_SYSTEM_DELEGATE = 0x36442080u,
     SHAPE_SYSTEM_DOUBLE_PARSE_SYSTEM_STRING = 0x41674909u,
     SHAPE_SYSTEM_DOUBLE_TOSTRING_SYSTEM_STRING = 0x62DBF072u,
+    SHAPE_SYSTEM_ENUM_FORMAT_SYSTEM_TYPE_SYSTEM_OBJECT_SYSTEM_STRING = 0x8E51594Au,
+    SHAPE_SYSTEM_ENUM_GETNAMES_SYSTEM_TYPE = 0x14128551u,
+    SHAPE_SYSTEM_ENUM_GETNAME_SYSTEM_TYPE_SYSTEM_OBJECT = 0x64C0B65Cu,
+    SHAPE_SYSTEM_ENUM_GETVALUES_SYSTEM_TYPE = 0x9C3279F5u,
+    SHAPE_SYSTEM_ENUM_ISDEFINED_SYSTEM_TYPE_SYSTEM_OBJECT = 0xD193427Au,
+    SHAPE_SYSTEM_ENUM_PARSE_SYSTEM_TYPE_SYSTEM_STRING = 0xE1FB1C82u,
+    SHAPE_SYSTEM_ENUM_PARSE_SYSTEM_TYPE_SYSTEM_STRING_SYSTEM_BOOLEAN = 0x33BD95B9u,
+    SHAPE_SYSTEM_ENUM_TOSTRING = 0xD0FDA1F0u,
+    SHAPE_SYSTEM_ENUM_TOSTRING_SYSTEM_STRING = 0x15E58C56u,
+    SHAPE_SYSTEM_ENUM_TRYPARSE_SYSTEM_TYPE_SYSTEM_STRING_SYSTEM_BOOLEAN_SYSTEM_OBJECT_ = 0x82D1F4FEu,
+    SHAPE_SYSTEM_ENUM_TRYPARSE_SYSTEM_TYPE_SYSTEM_STRING_SYSTEM_OBJECT_ = 0x3BD83EA1u,
     SHAPE_SYSTEM_ENVIRONMENT_GET_CURRENTMANAGEDTHREADID = 0xF4DDECAEu,
     SHAPE_SYSTEM_EXCEPTION_GETBASEEXCEPTION = 0xCC106A1Au,
     SHAPE_SYSTEM_EXCEPTION_GET_HRESULT = 0xA24695DCu,
     SHAPE_SYSTEM_EXCEPTION_GET_INNEREXCEPTION = 0xD7B5C090u,
     SHAPE_SYSTEM_EXCEPTION_GET_MESSAGE = 0xA28AE25Eu,
     SHAPE_SYSTEM_EXCEPTION__CTOR_SYSTEM_STRING = 0x1B319934u,
+    SHAPE_SYSTEM_GC_ADDMEMORYPRESSURE_SYSTEM_INT64 = 0x0D6763A0u,
     SHAPE_SYSTEM_GC_COLLECT = 0xBC962311u,
+    SHAPE_SYSTEM_GC_COLLECT_SYSTEM_INT32_SYSTEM_GCCOLLECTIONMODE = 0xF2752978u,
+    SHAPE_SYSTEM_GC_GETMEMORYINFO_SYSTEM_GCMEMORYINFODATA_ = 0xE39AD216u,
+    SHAPE_SYSTEM_GC_GETTOTALMEMORY_SYSTEM_BOOLEAN = 0x6E1AEB6Fu,
+    SHAPE_SYSTEM_GC_GET_LATENCYMODE = 0x1F0DE7D9u,
     SHAPE_SYSTEM_GC_KEEPALIVE_SYSTEM_OBJECT = 0x4546B70Fu,
+    SHAPE_SYSTEM_GC_REMOVEMEMORYPRESSURE_SYSTEM_INT64 = 0xB65DFCB3u,
     SHAPE_SYSTEM_GC_REREGISTERFORFINALIZE_SYSTEM_OBJECT = 0x5CEB5D12u,
+    SHAPE_SYSTEM_GC_SET_LATENCYMODE_SYSTEM_GCLATENCYMODE = 0x194292DDu,
     SHAPE_SYSTEM_GC_SUPPRESSFINALIZE_SYSTEM_OBJECT = 0x69A7EF6Au,
     SHAPE_SYSTEM_GC_WAITFORPENDINGFINALIZERS = 0x7E101281u,
     SHAPE_SYSTEM_GLOBALIZATION_COMPAREINFO_COMPARE_SYSTEM_STRING_SYSTEM_STRING = 0x3F9983A0u,
@@ -206,6 +224,13 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_RUNTIME_COMPILERSERVICES_YIELDAWAITABLE_GETAWAITER = 0xC76A5DEEu,
     SHAPE_SYSTEM_RUNTIME_COMPILERSERVICES_YIELDAWAITABLE_YIELDAWAITER_GETRESULT = 0x03229253u,
     SHAPE_SYSTEM_RUNTIME_COMPILERSERVICES_YIELDAWAITABLE_YIELDAWAITER_GET_ISCOMPLETED = 0x4F469568u,
+    SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CALLCOMMETHOD_SYSTEM_INTPTR_SYSTEM_INT32_SYSTEM_INT32_SYSTEM_INT32 = 0xB30D568Bu,
+    SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CALLDIRECTCOMMETHOD_SYSTEM_INTPTR_SYSTEM_INT32_SYSTEM_INT32_SYSTEM_INT32 = 0xDE30F8FCu,
+    SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CREATECCW_SYSTEM_INTPTR_SYSTEM_INTPTR = 0xFEEE290Fu,
+    SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CREATERCW_SYSTEM_INTPTR = 0x8A241412u,
+    SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_GETRCWUNKNOWN_SYSTEM_INTPTR = 0x5E278808u,
+    SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RCWQUERYINTERFACE_SYSTEM_INTPTR_SYSTEM_INTPTR = 0x75E9F4DBu,
+    SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RELEASERCW_SYSTEM_INTPTR = 0xA53F92ADu,
     SHAPE_SYSTEM_SINGLE_TOSTRING_SYSTEM_STRING = 0x4B5B293Du,
     SHAPE_SYSTEM_STRING_CONCAT_SYSTEM_STRING_SYSTEM_STRING = 0xF6869876u,
     SHAPE_SYSTEM_STRING_CONCAT_SYSTEM_STRING_SYSTEM_STRING_SYSTEM_STRING = 0x08CB997Au,
@@ -295,7 +320,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 281u,
+    SHAPE_COUNT = 306u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -425,6 +450,38 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             chaos_format_double_to_string(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_FORMAT_SYSTEM_TYPE_SYSTEM_OBJECT_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumFormat(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_GETNAMES_SYSTEM_TYPE) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumGetNames(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_GETNAME_SYSTEM_TYPE_SYSTEM_OBJECT) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumGetName(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_GETVALUES_SYSTEM_TYPE) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumGetValues(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_PARSE_SYSTEM_TYPE_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumParse(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_PARSE_SYSTEM_TYPE_SYSTEM_STRING_SYSTEM_BOOLEAN) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumParseWithIgnoreCase(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_TOSTRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumToString(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_TOSTRING_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosEnumToStringWithFormat(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_EXCEPTION_GETBASEEXCEPTION) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosExceptionGetBaseException(args...));
@@ -436,6 +493,10 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_EXCEPTION_GET_MESSAGE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosReflectionGetExceptionMessage(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_GC_GETTOTALMEMORY_SYSTEM_BOOLEAN) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            chaos_gc_get_total_memory(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_GLOBALIZATION_CULTUREINFO_GET_COMPAREINFO) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -801,6 +862,22 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             chaos_async_yield_get_is_completed(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CREATECCW_SYSTEM_INTPTR_SYSTEM_INTPTR) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            MarshalCreateCcw(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CREATERCW_SYSTEM_INTPTR) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            MarshalCreateRcw(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_GETRCWUNKNOWN_SYSTEM_INTPTR) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            MarshalGetRcwUnknown(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RCWQUERYINTERFACE_SYSTEM_INTPTR_SYSTEM_INTPTR) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            MarshalRcwQueryInterface(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_SINGLE_TOSTRING_SYSTEM_STRING) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             chaos_format_single_to_string(args...));
@@ -1081,11 +1158,26 @@ void DispatchVoid(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_EXCEPTION__CTOR_SYSTEM_STRING) {
         ChaosReflectionSetExceptionMetadata(args...);
     }
+    else if constexpr (S == SHAPE_SYSTEM_GC_ADDMEMORYPRESSURE_SYSTEM_INT64) {
+        chaos_gc_add_memory_pressure(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_GC_COLLECT_SYSTEM_INT32_SYSTEM_GCCOLLECTIONMODE) {
+        chaos_gc_collect_with_mode(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_GC_GETMEMORYINFO_SYSTEM_GCMEMORYINFODATA_) {
+        chaos_gc_get_memory_info(args...);
+    }
     else if constexpr (S == SHAPE_SYSTEM_GC_KEEPALIVE_SYSTEM_OBJECT) {
         chaos_gc_keepalive(args...);
     }
+    else if constexpr (S == SHAPE_SYSTEM_GC_REMOVEMEMORYPRESSURE_SYSTEM_INT64) {
+        chaos_gc_remove_memory_pressure(args...);
+    }
     else if constexpr (S == SHAPE_SYSTEM_GC_REREGISTERFORFINALIZE_SYSTEM_OBJECT) {
         chaos_gc_reregister_finalize(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_GC_SET_LATENCYMODE_SYSTEM_GCLATENCYMODE) {
+        chaos_gc_set_latency_mode(args...);
     }
     else if constexpr (S == SHAPE_SYSTEM_GC_SUPPRESSFINALIZE_SYSTEM_OBJECT) {
         chaos_gc_suppress_finalize(args...);
@@ -1149,6 +1241,9 @@ void DispatchVoid(Args... args) {
     }
     else if constexpr (S == SHAPE_SYSTEM_RUNTIME_COMPILERSERVICES_YIELDAWAITABLE_YIELDAWAITER_GETRESULT) {
         chaos_async_yield_get_result(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RELEASERCW_SYSTEM_INTPTR) {
+        MarshalReleaseRcw(args...);
     }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_ABORT_SYSTEM_OBJECT) {
         chaos_thread_abort(args...);
@@ -1236,6 +1331,18 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosDatetimeGetHashCode(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_ISDEFINED_SYSTEM_TYPE_SYSTEM_OBJECT) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosEnumIsDefined(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_TRYPARSE_SYSTEM_TYPE_SYSTEM_STRING_SYSTEM_BOOLEAN_SYSTEM_OBJECT_) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosEnumTryParseWithIgnoreCase(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_ENUM_TRYPARSE_SYSTEM_TYPE_SYSTEM_STRING_SYSTEM_OBJECT_) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosEnumTryParse(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_ENVIRONMENT_GET_CURRENTMANAGEDTHREADID) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             chaos_current_managed_thread_id(args...));
@@ -1243,6 +1350,10 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_EXCEPTION_GET_HRESULT) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosExceptionGetHresult(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_GC_GET_LATENCYMODE) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            chaos_gc_get_latency_mode(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_GLOBALIZATION_COMPAREINFO_COMPARE_SYSTEM_STRING_SYSTEM_STRING) {
         return static_cast<CHAOS_IL2CPP_INT32>(
@@ -1324,6 +1435,14 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosRuntimeHelpersGetHashCode(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CALLCOMMETHOD_SYSTEM_INTPTR_SYSTEM_INT32_SYSTEM_INT32_SYSTEM_INT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            MarshalCallComMethod(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CALLDIRECTCOMMETHOD_SYSTEM_INTPTR_SYSTEM_INT32_SYSTEM_INT32_SYSTEM_INT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            MarshalCallDirectComMethod(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_STRING_GET_LENGTH) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             chaos_string_get_length(args...));
@@ -1403,7 +1522,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 281u,
+static_assert(SHAPE_COUNT == 306u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

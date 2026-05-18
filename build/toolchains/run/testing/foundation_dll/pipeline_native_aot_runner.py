@@ -137,6 +137,9 @@ def _build_subjects_dll(
     subjects_dir = v / family_slug / "managed" / "subjects"
     subjects_dir.mkdir(parents=True, exist_ok=True)
     from family_entrypoint_generator import generate_and_build
+    extra_refs = None
+    if family_slug in ("snapshot-prover",):
+        extra_refs = ["../../../../../../tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj"]
     result = generate_and_build(
         subjects_dir,
         assembly_name=assembly_name,
@@ -144,6 +147,7 @@ def _build_subjects_dll(
         method_subject_ids=method_subject_ids,
         class_name=None,  # auto-derived: e.g. ConvertCharSubjects
         variant="subjects",
+        extra_refs=extra_refs,
     )
     return result
 

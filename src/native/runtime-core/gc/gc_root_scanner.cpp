@@ -43,6 +43,12 @@ void GcRegisterSlotMap(const void* code_address, const GcSlotMapV0* slot_map) {
     s_slot_map[code_address] = slot_map;
 }
 
+void GcUnregisterSlotMap(const void* code_address) noexcept {
+    if (code_address == nullptr) return;
+    std::lock_guard<std::mutex> lock(s_registry_mutex);
+    s_slot_map.erase(code_address);
+}
+
 const GcSlotMapV0* GcLookupSlotMap(const void* code_address) {
     if (code_address == nullptr) return nullptr;
 

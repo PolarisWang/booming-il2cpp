@@ -217,7 +217,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetName(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
 {
     if (type == 0) return 0;
     const auto* desc = resolve_type_arg(type);
-    if (desc == nullptr) return 0;
+    if (desc == nullptr) return enum_alloc_string(0);
 
     const CHAOS_IL2CPP_INT64 val = read_boxed_value(value);
     const auto* field = find_field_by_value(desc, val);

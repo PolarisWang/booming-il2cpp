@@ -7,9 +7,11 @@
     <AssemblyName>ThreadingMonitorInterlockedSubjects</AssemblyName>
     <RootNamespace>ThreadingMonitorInterlockedSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ThreadingMonitorInterlockedSubjects.cs" />
+    <Compile Include="ThreadingMonitorInterlockedSubjects.Custom.cs" />
     <Compile Include="ThreadingMonitorInterlockedSubjects.Custom.cs" />
   </ItemGroup>
 </Project>

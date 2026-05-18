@@ -1,7 +1,7 @@
 {
   "family": "boxing-unboxing-casts",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-16T15:04:42.284484",
+  "generated_at": "2026-05-19T00:48:54.147836",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -71,11 +71,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 12 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 11 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 12,
-        "entries_with_interrupt_ptr": 12,
+        "table_size": 11,
+        "entries_with_interrupt_ptr": 11,
         "has_hotpatch_module": true
       }
     },
@@ -83,13 +83,14 @@
       "check_id": "p3_patchdata",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "1/1 valid .patchdata files",
+      "summary": "2/2 valid .patchdata files",
       "details": [],
       "evidence": {
-        "patchdata_count": 1,
-        "valid_count": 1,
+        "patchdata_count": 2,
+        "valid_count": 2,
         "stub_patchdata_count": 0,
         "files": [
+          "System.Private.CoreLib\\boxing-unboxing-casts\\il2cpp_dist\\patch\\patchdata\\boxing-unboxing-casts.patchdata",
           "System.Private.CoreLib\\boxing-unboxing-casts\\managed\\patch\\patchdata\\boxing-unboxing-casts.patchdata"
         ]
       }

@@ -24,14 +24,6 @@
   "registeredMethods": [
     {
       "assemblyName": "GuidRandomHashcodeSubjects",
-      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",
-      "metadataToken": 100663311,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "GuidRandomHashcodeSubjects",
       "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",

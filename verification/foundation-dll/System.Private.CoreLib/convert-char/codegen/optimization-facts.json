@@ -9,11 +9,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Run:System.Void(System.Int32)",
-      "reason": "closed-world-entry"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
@@ -112,5 +107,41 @@
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidCastException"
+    },
+    {
+      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidCastException"
+    },
+    {
+      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidCastException"
+    },
+    {
+      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidCastException"
+    },
+    {
+      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidCastException"
+    },
+    {
+      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.FormatException"
+    },
+    {
+      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.FormatException"
+    }
+  ]
 }

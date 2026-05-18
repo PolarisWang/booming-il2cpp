@@ -327,7 +327,6 @@ static bool Test_BranchUncond() {
     if (!CanGenerateNativeCode(rm)) return false;
     auto* nm = GenerateNativeCode(rm);
     if (nm == nullptr) return false;
-    DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size);
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     return ExecuteNative(entry) == 42;
 }
@@ -342,7 +341,6 @@ static bool Test_BranchTaken() {
     rm.max_regs = 2;
     if (!CanGenerateNativeCode(rm)) return false;
     auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
-    DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size);
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     return result != UINT64_MAX && result == 42;
@@ -358,7 +356,6 @@ static bool Test_BranchNotTaken() {
     rm.max_regs = 2;
     if (!CanGenerateNativeCode(rm)) return false;
     auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
-    DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size);
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     return result != UINT64_MAX && result == 0;
@@ -406,7 +403,6 @@ static bool Test_DeoptSequence_Generated() {
     auto* nm = GenerateNativeCode(rm, cfg);
     if (nm == nullptr) { std::printf("    FAIL: null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
-    DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size);
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 7)\n", (unsigned long long)result);
     return result == 7;
@@ -587,7 +583,6 @@ static bool Test_LdElem_StElem() {
     rm.max_regs = 5;
     if (!CanGenerateNativeCode(rm)) return false;
     auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
-    DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size);
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
@@ -914,7 +909,6 @@ static bool Test_DeoptOvfArithmetic() {
     auto* nm = GenerateNativeCode(rm, cfg);
     if (nm == nullptr) { std::printf("    FAIL: null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
-    DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size);
     chaos::il2cpp::codegen::RegisterT4Code(entry, nm->code_size, nm);
 
     uint64_t result = ExecuteNative(entry);
@@ -1603,6 +1597,11 @@ static bool Test_Fuzz() {
     };
     // clang-format on
 
+    // Opcode mismatch histogram (all mismatches)
+    uint32_t mismatch_op_counts[256] = {};
+    uint32_t mismatch_total_instrs = 0;
+    uint32_t mismatch_runs_seen = 0;
+
     for (uint32_t run = 0; run < kNumFuzzRuns; run++) {
         uint32_t len = 8 + (rng() % 24);  // 8-31 instructions
         uint8_t max_reg = 2 + (rng() % 6);  // 2-7 registers
@@ -1724,6 +1723,12 @@ static bool Test_Fuzz() {
             } else if ((re_ok && rf.has_ret && t4_ret != rf.ret_val) ||
                 (!re_ok && t4_ret != 0xDEADBEEF)) {
                 mismatches++;
+                mismatch_runs_seen++;
+                for (const auto& mi : instrs) {
+                    uint8_t opc = static_cast<uint8_t>(mi.op_code());
+                    if (opc < 256) mismatch_op_counts[opc]++;
+                    mismatch_total_instrs++;
+                }
                 if (mismatches <= 10) {
                     std::printf("    Fuzz mismatch run=%u\n", run);
                     std::printf("      RegisterExecute: ok=%d has_ret=%d val=0x%llx\n",
@@ -1742,6 +1747,14 @@ static bool Test_Fuzz() {
 
     if (mismatches > 0) {
         std::printf("    FAIL: %u mismatches found\n", mismatches);
+        std::printf("    Mismatch opcode histogram (%u instrs across %u runs):\n",
+                    mismatch_total_instrs, mismatch_runs_seen);
+        for (uint32_t op = 0; op < 256; op++) {
+            if (mismatch_op_counts[op] > 0) {
+                std::printf("      %-12s: %u\n", OpcodeName(static_cast<IROpCode>(op)),
+                            mismatch_op_counts[op]);
+            }
+        }
         return false;
     }
 

@@ -1,7 +1,7 @@
 {
   "family": "threading-tasks-primitives",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-16T10:45:14.086749",
+  "generated_at": "2026-05-19T00:54:20.680793",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -34,10 +34,17 @@
     "p1_no_unnecessary_indirection": {
       "check_id": "p1_no_unnecessary_indirection",
       "principle": "P1",
-      "status": "ALIGNED",
-      "summary": "No unnecessary runtime_stub calls in generated code",
-      "details": [],
-      "evidence": {}
+      "status": "CONCERN",
+      "summary": "1 runtime_stub calls in generated code",
+      "details": [
+        {
+          "function": "ChaosObjectCtor",
+          "call_count": 1
+        }
+      ],
+      "evidence": {
+        "stub_call_count": 1
+      }
     },
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -71,11 +78,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 16 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 23 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 16,
-        "entries_with_interrupt_ptr": 16,
+        "table_size": 23,
+        "entries_with_interrupt_ptr": 23,
         "has_hotpatch_module": true
       }
     },
@@ -97,10 +104,10 @@
   },
   "summary": {
     "total": 8,
-    "aligned": 8,
-    "concern": 0,
+    "aligned": 7,
+    "concern": 1,
     "violation": 0,
     "not_applicable": 0,
-    "overall": "ALIGNED"
+    "overall": "CONCERN"
   }
 }

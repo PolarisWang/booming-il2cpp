@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "RuntimeCompilerServicesSubjects",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects",
-      "metadataToken": 100663307,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "RuntimeCompilerServicesSubjects",
       "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects",

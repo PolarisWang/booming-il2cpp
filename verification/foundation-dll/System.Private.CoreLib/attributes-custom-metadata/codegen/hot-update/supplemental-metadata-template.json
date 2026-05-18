@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "AttributesCustomMetadataSubjects",
-      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
-      "metadataToken": 100663306,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "AttributesCustomMetadataSubjects",
       "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",

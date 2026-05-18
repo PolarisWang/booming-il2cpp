@@ -1,13 +1,13 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 25,
-  "audited": 25,
+  "total_methods": 24,
+  "audited": 24,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 25,
+  "methods_without_assert": 24,
   "passed": true,
   "method_details": [
     {
@@ -219,15 +219,6 @@
     },
     {
       "method_name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharSubjects_ConvertCharSubjects_Run",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

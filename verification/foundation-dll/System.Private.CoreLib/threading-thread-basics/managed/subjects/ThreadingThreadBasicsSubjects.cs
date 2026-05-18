@@ -14,13 +14,13 @@ public static partial class ThreadingThreadBasicsSubjects
     // [0] System.Private.CoreLib/System.Threading.Thread::get_ThreadState:System.Threading.ThreadState()
     public static void Subject_0()
     {
-        if ((int)(Thread.CurrentThread.ThreadState) != (int)(Thread.CurrentThread.ThreadState)) _exitCode = 1;
+        if ((int)(Thread.CurrentThread.ThreadState) != 0) _exitCode = 1;
     }
 
     // [1] System.Private.CoreLib/System.Threading.Thread::get_Priority:System.Threading.ThreadPriority()
     public static void Subject_1()
     {
-        if ((int)(Thread.CurrentThread.Priority) != (int)(Thread.CurrentThread.Priority)) _exitCode = 1;
+        if ((int)(Thread.CurrentThread.Priority) != 2) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Threading.Thread::set_Priority:System.Void(System.Threading.ThreadPriority)
@@ -32,7 +32,7 @@ public static partial class ThreadingThreadBasicsSubjects
     // [3] System.Private.CoreLib/System.Threading.Thread::get_IsBackground:System.Boolean()
     public static void Subject_3()
     {
-        if (((Thread.CurrentThread.IsBackground) ? 1 : 0) != ((Thread.CurrentThread.IsBackground) ? 1 : 0)) _exitCode = 1;
+        if (((Thread.CurrentThread.IsBackground) ? 1 : 0) != 0) _exitCode = 1;
     }
 
     // [4] System.Private.CoreLib/System.Threading.Thread::set_IsBackground:System.Void(System.Boolean)
@@ -44,13 +44,14 @@ public static partial class ThreadingThreadBasicsSubjects
     // [5] System.Private.CoreLib/System.Threading.Thread::get_IsThreadPoolThread:System.Boolean()
     public static void Subject_5()
     {
-        if (((Thread.CurrentThread.IsThreadPoolThread) ? 1 : 0) != ((Thread.CurrentThread.IsThreadPoolThread) ? 1 : 0)) _exitCode = 1;
+        if (((Thread.CurrentThread.IsThreadPoolThread) ? 1 : 0) != 0) _exitCode = 1;
     }
 
     // [6] System.Private.CoreLib/System.Threading.Thread::Abort:System.Void()
     public static void Subject_6()
     {
-        Thread.CurrentThread.Abort();
+        try { Thread.CurrentThread.Abort(); _exitCode = 1; }
+        catch (PlatformNotSupportedException) { }
     }
 
     // [7] System.Private.CoreLib/System.Threading.Thread::Interrupt:System.Void()
@@ -68,31 +69,13 @@ public static partial class ThreadingThreadBasicsSubjects
     // [9] System.Private.CoreLib/System.Threading.Thread::Yield:System.Boolean()
     public static void Subject_9()
     {
-        if (((Thread.Yield()) ? 1 : 0) != ((Thread.Yield()) ? 1 : 0)) _exitCode = 1;
+        if (((Thread.Yield()) ? 1 : 0) != 0) _exitCode = 1;
     }
 
     // [10] System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)
     public static void Subject_10()
     {
         // TODO: System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32) could not be auto-generated
-    }
-
-    public static void Run(int entryIndex)
-    {
-        switch (entryIndex)
-        {
-            case 0: Subject_0(); break;
-            case 1: Subject_1(); break;
-            case 2: Subject_2(); break;
-            case 3: Subject_3(); break;
-            case 4: Subject_4(); break;
-            case 5: Subject_5(); break;
-            case 6: Subject_6(); break;
-            case 7: Subject_7(); break;
-            case 8: Subject_8(); break;
-            case 9: Subject_9(); break;
-            case 10: Subject_10(); break;
-        }
     }
 
 }

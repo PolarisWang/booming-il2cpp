@@ -5,12 +5,6 @@
     {
       "assemblyName": "GenericNullableValueSubjects",
       "subjectKind": "method",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "GenericNullableValueSubjects",
-      "subjectKind": "method",
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

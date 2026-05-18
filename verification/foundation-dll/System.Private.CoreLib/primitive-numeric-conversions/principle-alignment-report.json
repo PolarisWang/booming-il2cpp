@@ -1,7 +1,7 @@
 {
   "family": "primitive-numeric-conversions",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-14T19:53:08.105234",
+  "generated_at": "2026-05-19T00:52:53.260090",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -43,10 +43,10 @@
       "check_id": "p1_benchmark",
       "principle": "P1",
       "status": "VIOLATION",
-      "summary": "Average speedup -227.61% — native significantly slower than managed",
+      "summary": "Average speedup -216.59% — native significantly slower than managed",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -227.61,
+        "average_speedup_percent": -216.59,
         "managed_faster_count": 15,
         "native_faster_count": 0
       }
@@ -71,11 +71,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 16 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 15 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 16,
-        "entries_with_interrupt_ptr": 16,
+        "table_size": 15,
+        "entries_with_interrupt_ptr": 15,
         "has_hotpatch_module": true
       }
     },
@@ -83,13 +83,14 @@
       "check_id": "p3_patchdata",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "1/1 valid .patchdata files",
+      "summary": "2/2 valid .patchdata files",
       "details": [],
       "evidence": {
-        "patchdata_count": 1,
-        "valid_count": 1,
+        "patchdata_count": 2,
+        "valid_count": 2,
         "stub_patchdata_count": 0,
         "files": [
+          "System.Private.CoreLib\\primitive-numeric-conversions\\il2cpp_dist\\patch\\patchdata\\primitive-numeric-conversions.patchdata",
           "System.Private.CoreLib\\primitive-numeric-conversions\\managed\\patch\\patchdata\\primitive-numeric-conversions.patchdata"
         ]
       }

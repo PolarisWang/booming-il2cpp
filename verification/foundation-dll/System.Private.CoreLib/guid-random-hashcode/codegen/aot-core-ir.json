@@ -3,573 +3,6 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.run",
-      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Run:System.Void(System.Int32)",
-      "signature": "System.Void GuidRandomHashcodeSubjects::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "GuidRandomHashcodeSubjects",
-        "declaringTypeSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",
-        "definitionSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Run:System.Void(System.Int32)",
-        "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Run:System.Void(System.Int32)",
-        "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.run",
-        "signature": "System.Void GuidRandomHashcodeSubjects::Run(System.Int32)"
-      },
-      "nativeSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Run",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 1,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 2,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 3
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 4,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 5
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            69,
-            77,
-            85,
-            93,
-            101,
-            109,
-            117,
-            125,
-            133,
-            141,
-            149,
-            157,
-            165,
-            173
-          ],
-          "ilOffset": 6,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 67,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 69,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 75,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 77,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_1:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_1:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_1:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 83,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 85,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_2:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_2:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_2:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 91,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 93,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_3:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_3:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_3:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 99,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 101,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_4:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_4:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_4:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 107,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 109,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_5:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_5:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_5:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 115,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 117,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_6:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_6:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_6:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 123,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 125,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_7:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_7:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_7:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 131,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 133,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_8:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_8:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_8:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 139,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 141,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_9:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_9:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_9:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 147,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 149,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_10:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_10:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_10:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 155,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 157,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_11:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_11:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_11:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 163,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 165,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_12:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_12:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_12:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 171,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 173,
-          "resultType": "System.Void",
-          "callee": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_13:System.Void()",
-          "reference": {
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectKind": "method",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_13:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GuidRandomHashcodeSubjects",
-            "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_13:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 181,
-          "ilOffset": 179,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 181
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "hasBlittableStructReturn": false
-    },
-    {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-0",
       "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()",
       "signature": "System.Void GuidRandomHashcodeSubjects::Subject_0()",
@@ -599,7 +32,8 @@
           "opCode": 4,
           "operand": "00000000-0000-0000-0000-000000000000",
           "ilOffset": 1,
-          "resultType": "System.String"
+          "resultType": "System.String",
+          "isPreserveSig": false
         },
         {
           "op": "newobj",
@@ -620,19 +54,23 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 11
+          "ilOffset": 11,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 12
+          "ilOffset": 12,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -640,7 +78,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-1",
@@ -672,7 +113,8 @@
           "opCode": 4,
           "operand": "00000000-0000-0000-0000-000000000000",
           "ilOffset": 1,
-          "resultType": "System.String"
+          "resultType": "System.String",
+          "isPreserveSig": false
         },
         {
           "op": "newobj",
@@ -693,19 +135,23 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 11
+          "ilOffset": 11,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 12
+          "ilOffset": 12,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -713,7 +159,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-2",
@@ -759,23 +208,27 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
           "ilOffset": 7,
-          "resultType": "System.IntPtr"
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -796,123 +249,79 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.Guid"
+          "constrainedTypeSubjectId": "System.Private.CoreLib/System.Guid",
+          "isPreserveSig": false
         },
         {
-          "op": "call",
-          "opCode": 14,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1068016374,
           "ilOffset": 20,
-          "resultType": "System.Guid",
-          "callee": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 25,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 26,
-          "resultType": "System.IntPtr"
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 34,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.Guid::GetHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.Guid"
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 39,
-          "resultType": "System.Int32"
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 41,
-          "resultType": "System.Int32"
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 42,
-          "resultType": "System.Int32"
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 44,
-          "resultType": "System.Void"
+          "ilOffset": 30,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 45
+          "ilOffset": 31,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 54,
-          "ilOffset": 46,
-          "resultType": "System.Void"
+          "operand": 40,
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 48,
-          "resultType": "System.Int32"
+          "ilOffset": 34,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
-          "ilOffset": 49,
+          "ilOffset": 35,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GuidRandomHashcodeSubjects",
@@ -927,16 +336,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 54
+          "ilOffset": 40,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -944,7 +356,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-3",
@@ -976,7 +391,8 @@
           "opCode": 4,
           "operand": "00000000-0000-0000-0000-000000000000",
           "ilOffset": 1,
-          "resultType": "System.String"
+          "resultType": "System.String",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -997,23 +413,27 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 11,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
           "ilOffset": 12,
-          "resultType": "System.IntPtr"
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -1034,130 +454,64 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.Guid"
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "00000000-0000-0000-0000-000000000000",
-          "ilOffset": 25,
-          "resultType": "System.String"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 30,
-          "resultType": "System.Guid",
-          "callee": "System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 35,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 36,
-          "resultType": "System.IntPtr"
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 44,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.Guid::GetHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.Guid"
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 49,
-          "resultType": "System.Int32"
+          "constrainedTypeSubjectId": "System.Private.CoreLib/System.Guid",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 51,
-          "resultType": "System.Int32"
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 52,
-          "resultType": "System.Int32"
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 54,
-          "resultType": "System.Void"
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 55
+          "ilOffset": 29,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 64,
-          "ilOffset": 56,
-          "resultType": "System.Void"
+          "operand": 38,
+          "ilOffset": 30,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 58,
-          "resultType": "System.Int32"
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
-          "ilOffset": 59,
+          "ilOffset": 33,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GuidRandomHashcodeSubjects",
@@ -1172,16 +526,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 64
+          "ilOffset": 38,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1189,7 +546,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-4",
@@ -1219,7 +579,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1227,7 +588,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-5",
@@ -1273,23 +637,27 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
           "ilOffset": 6,
-          "resultType": "System.Void"
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
           "ilOffset": 7,
-          "resultType": "System.IntPtr"
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -1310,10 +678,12 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
           "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.Guid"
+          "constrainedTypeSubjectId": "System.Private.CoreLib/System.Guid",
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -1334,145 +704,78 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
-          "op": "call",
-          "opCode": 14,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 36,
           "ilOffset": 25,
-          "resultType": "System.Guid",
-          "callee": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 30,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 31,
-          "resultType": "System.IntPtr"
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 39,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.Guid::ToString:System.String()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.Guid"
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 44,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 49,
-          "resultType": "System.Int32"
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 51,
-          "resultType": "System.Int32"
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 52,
-          "resultType": "System.Int32"
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 54,
-          "resultType": "System.Void"
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 55
+          "ilOffset": 33,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 64,
-          "ilOffset": 56,
-          "resultType": "System.Void"
+          "operand": 42,
+          "ilOffset": 34,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 58,
-          "resultType": "System.Int32"
+          "ilOffset": 36,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
-          "ilOffset": 59,
+          "ilOffset": 37,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GuidRandomHashcodeSubjects",
@@ -1487,16 +790,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 64
+          "ilOffset": 42,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1504,7 +810,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-6",
@@ -1550,19 +859,23 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 6
+          "ilOffset": 6,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 7
+          "ilOffset": 7,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1570,7 +883,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-7",
@@ -1616,9 +932,11 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -1639,107 +957,78 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
-          "op": "newobj",
-          "opCode": 34,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 658615702,
           "ilOffset": 11,
-          "resultType": "System.Private.CoreLib/System.Random",
-          "callee": "System.Private.CoreLib/System.Random::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Random::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Random",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 16,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.Random::Next:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Random::Next:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Random::Next:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 21,
-          "resultType": "System.Int32"
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 23,
-          "resultType": "System.Int32"
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 24,
-          "resultType": "System.Int32"
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 26,
-          "resultType": "System.Void"
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 27
+          "ilOffset": 22,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 36,
-          "ilOffset": 28,
-          "resultType": "System.Void"
+          "operand": 31,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 30,
-          "resultType": "System.Int32"
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
-          "ilOffset": 31,
+          "ilOffset": 26,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GuidRandomHashcodeSubjects",
@@ -1754,16 +1043,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 36
+          "ilOffset": 31,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1771,7 +1063,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-8",
@@ -1817,16 +1112,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
           "ilOffset": 6,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -1847,114 +1145,78 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 13,
-          "resultType": "System.Private.CoreLib/System.Random",
-          "callee": "System.Private.CoreLib/System.Random::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Random::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Random",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 42,
-          "ilOffset": 18,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 20,
+          "operand": 30,
+          "ilOffset": 13,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 25,
-          "resultType": "System.Int32"
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 27,
-          "resultType": "System.Int32"
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 28,
-          "resultType": "System.Int32"
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 30,
-          "resultType": "System.Void"
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 31
+          "ilOffset": 21,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 40,
-          "ilOffset": 32,
-          "resultType": "System.Void"
+          "operand": 30,
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 34,
-          "resultType": "System.Int32"
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
-          "ilOffset": 35,
+          "ilOffset": 25,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GuidRandomHashcodeSubjects",
@@ -1969,16 +1231,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 40
+          "ilOffset": 30,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1986,7 +1251,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-9",
@@ -2032,9 +1300,11 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -2055,119 +1325,70 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "conv.i4",
           "opCode": 39,
           "ilOffset": 11,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 12,
-          "resultType": "System.Private.CoreLib/System.Random",
-          "callee": "System.Private.CoreLib/System.Random::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Random::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Random",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 17,
-          "resultType": "System.Double",
-          "callee": "System.Private.CoreLib/System.Random::NextDouble:System.Double()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Random::NextDouble:System.Double()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Random::NextDouble:System.Double()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 22,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 23,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 25,
-          "resultType": "System.Int32"
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 26,
-          "resultType": "System.Int32"
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 28,
-          "resultType": "System.Void"
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 29
+          "ilOffset": 16,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 38,
-          "ilOffset": 30,
-          "resultType": "System.Void"
+          "operand": 25,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 32,
-          "resultType": "System.Int32"
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
-          "ilOffset": 33,
+          "ilOffset": 20,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GuidRandomHashcodeSubjects",
@@ -2182,16 +1403,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 38
+          "ilOffset": 25,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -2199,7 +1423,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-10",
@@ -2245,16 +1472,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 3,
           "ilOffset": 6,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "newarr",
@@ -2275,14 +1505,17 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 6
+          "runtimeServiceKind": 6,
+          "isPreserveSig": false
         },
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 12
+          "ilOffset": 12,
+          "isPreserveSig": false
         },
         {
           "op": "ldtoken",
@@ -2303,10 +1536,12 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "GuidRandomHashcodeSubjects/\u003CPrivateImplementationDetails\u003E",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=3"
-          }
+          },
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2327,9 +1562,11 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "callvirt",
@@ -2350,14 +1587,17 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 29
+          "ilOffset": 29,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -2365,7 +1605,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-11",
@@ -2397,12 +1640,14 @@
           "opCode": 76,
           "operand": 0,
           "ilOffset": 1,
-          "resultType": "System.IntPtr"
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
         },
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 3
+          "ilOffset": 3,
+          "isPreserveSig": false
         },
         {
           "op": "initobj",
@@ -2423,16 +1668,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 14
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
           "ilOffset": 10,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2492,14 +1740,17 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 18
+          "ilOffset": 18,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -2507,7 +1758,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-12",
@@ -2539,12 +1793,14 @@
           "opCode": 76,
           "operand": 1,
           "ilOffset": 1,
-          "resultType": "System.IntPtr"
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
         },
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 3
+          "ilOffset": 3,
+          "isPreserveSig": false
         },
         {
           "op": "initobj",
@@ -2565,9 +1821,11 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 14
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2588,119 +1846,78 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1092505357,
           "ilOffset": 15,
-          "resultType": "System.IntPtr"
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 17
-        },
-        {
-          "op": "initobj",
-          "opCode": 71,
-          "operand": "System.Private.CoreLib/System.HashCode",
-          "ilOffset": 18,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.HashCode"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.HashCode",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 14
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 24,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 29,
-          "resultType": "System.Int32"
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 31,
-          "resultType": "System.Int32"
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 32,
-          "resultType": "System.Int32"
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 34,
-          "resultType": "System.Void"
+          "ilOffset": 25,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 35
+          "ilOffset": 26,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 44,
-          "ilOffset": 36,
-          "resultType": "System.Void"
+          "operand": 35,
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 38,
-          "resultType": "System.Int32"
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
-          "ilOffset": 39,
+          "ilOffset": 30,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GuidRandomHashcodeSubjects",
@@ -2715,16 +1932,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 44
+          "ilOffset": 35,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -2732,7 +1952,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     },
     {
       "methodId": "guid-random-hashcode-subjects.guid-random-hashcode-subjects.subject-13",
@@ -2764,14 +1987,16 @@
           "opCode": 0,
           "operand": 42,
           "ilOffset": 1,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
           "ilOffset": 3,
-          "resultType": "System.Int32"
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -2833,139 +2058,78 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 42,
+          "operand": 1024130235,
           "ilOffset": 10,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 12,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 14,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.HashCode::Combine\u003CSystem.Int32,System.Int32\u003E:System.Int32(System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.HashCode::Combine\u003CSystem.Int32,System.Int32\u003E:System.Int32(System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.HashCode::Combine\u003CSystem.Int32,System.Int32\u003E:System.Int32(System.Int32,System.Int32)",
-            "openDefinitionSubjectId": "System.Private.CoreLib/System.HashCode::Combine:System.Int32(!!0,!!1)",
-            "sharedGenericBodyId": {
-              "value": "body:definition=System.Private.CoreLib/System.HashCode::Combine:System.Int32(!!0,!!1);type=[];method=[System.Int32,System.Int32]"
-            },
-            "instantiationStubId": {
-              "value": "stub:definition=System.Private.CoreLib/System.HashCode::Combine:System.Int32(!!0,!!1);type=[];method=[System.Int32,System.Int32]"
-            },
-            "runtimeGenericContext": {
-              "instantiationKey": {
-                "contextKind": 2,
-                "definitionSubjectId": "System.Private.CoreLib/System.HashCode::Combine:System.Int32(!!0,!!1)",
-                "typeArguments": [],
-                "methodArguments": [
-                  "System.Int32",
-                  "System.Int32"
-                ]
-              },
-              "sharedGenericBodyId": {
-                "value": "body:definition=System.Private.CoreLib/System.HashCode::Combine:System.Int32(!!0,!!1);type=[];method=[System.Int32,System.Int32]"
-              },
-              "instantiationStubId": {
-                "value": "stub:definition=System.Private.CoreLib/System.HashCode::Combine:System.Int32(!!0,!!1);type=[];method=[System.Int32,System.Int32]"
-              },
-              "supportKindCode": 3,
-              "specializationKindCode": 2,
-              "statusReasonCode": "loader-demand:methodSpec"
-            },
-            "genericDiagnostic": {
-              "subjectId": "System.Private.CoreLib/System.HashCode::Combine\u003CSystem.Int32,System.Int32\u003E:System.Int32(System.Int32,System.Int32)",
-              "definitionSubjectId": "System.Private.CoreLib/System.HashCode::Combine:System.Int32(!!0,!!1)",
-              "displaySubjectId": "System.Private.CoreLib/System.HashCode::Combine\u003CSystem.Int32,System.Int32\u003E(System.Int32,System.Int32)",
-              "instantiationKey": {
-                "contextKind": 2,
-                "definitionSubjectId": "System.Private.CoreLib/System.HashCode::Combine:System.Int32(!!0,!!1)",
-                "typeArguments": [],
-                "methodArguments": [
-                  "System.Int32",
-                  "System.Int32"
-                ]
-              }
-            },
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 19,
-          "resultType": "System.Int32"
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 21,
-          "resultType": "System.Int32"
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 22,
-          "resultType": "System.Int32"
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 24,
-          "resultType": "System.Void"
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 25
+          "ilOffset": 21,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 34,
-          "ilOffset": 26,
-          "resultType": "System.Void"
+          "operand": 30,
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 28,
-          "resultType": "System.Int32"
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
-          "ilOffset": 29,
+          "ilOffset": 25,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GuidRandomHashcodeSubjects",
@@ -2980,16 +2144,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 34
+          "ilOffset": 30,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -2997,7 +2164,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GuidRandomHashcodeSubjects"
     }
   ]
 }

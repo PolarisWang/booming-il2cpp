@@ -6,19 +6,18 @@
   "failed": 1,
   "results": [
     {
-      "family": "enum-parsing",
+      "family": "interface-dispatch",
       "config_tier": "CHECK",
       "steps": {
         "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "FAILED"
+        "convert_to_cpp": "FAILED"
       },
       "success": false,
-      "methodCount": 12,
+      "methodCount": 9,
       "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll",
-      "error": "entry.exe build failed"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\interface-dispatch\\managed\\subjects\\build-output\\InterfaceDispatchSubjects.dll",
+      "error": "convert-to-cpp failed"
     }
   ],
-  "timestamp": "2026-05-18T23:28:55"
+  "timestamp": "2026-05-19T00:53:19"
 }

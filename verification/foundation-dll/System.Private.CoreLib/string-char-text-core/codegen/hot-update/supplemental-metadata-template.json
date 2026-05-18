@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "StringCharTextCoreSubjects",
-      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
-      "metadataToken": 100663317,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "StringCharTextCoreSubjects",
       "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",

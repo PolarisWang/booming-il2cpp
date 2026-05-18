@@ -5,12 +5,6 @@
     {
       "assemblyName": "GuidRandomHashcodeSubjects",
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "GuidRandomHashcodeSubjects",
-      "subjectKind": "method",
       "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

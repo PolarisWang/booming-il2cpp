@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
 #include "abi_manifest.h"
@@ -10,6 +11,8 @@
 #include "reflection_query_model.h"
 #include "load_store_chaos_bridge.h"
 #include "interpreter_entry.h"
+#include <gc/gc_bgc_inline.h>
+#include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
@@ -50,23 +53,32 @@ inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ThreadingTasksPrimitivesSubje
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c = static_cast<CHAOS_IL2CPP_INTPTR>(17062827370772849792ULL);
 // ── Virtual method table arrays ──
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__15_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__5_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__7_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__3_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__14_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__6_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_1_System_Threading_Tasks_Task(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
 const void* chaos_vtable_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c[] =
 {
 	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor),
-	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__4_0),
-	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__15_0),
-	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__5_0),
-	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__7_0),
-	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_0),
-	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_1),
+	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__3_0),
+	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__14_0),
+	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__4_0),
+	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__6_0),
+	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_0),
+	reinterpret_cast<void*>(ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_1_System_Threading_Tasks_Task),
 };
-static const int s_vtreg_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c = (::chaos::il2cpp::runtime_vtable::RegisterVTable(CHAOS_IL2CPP_UINT64_C(17062827370772849792), chaos_vtable_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c, 7u), 0);
+static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c[] =
+{
+	{ 0x0000001Cu, reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor) },
+	{ 0x0000001Du, reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__3_0) },
+	{ 0x00000022u, reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__14_0) },
+	{ 0x0000001Eu, reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__4_0) },
+	{ 0x0000001Fu, reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__6_0) },
+	{ 0x00000020u, reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_0) },
+	{ 0x00000021u, reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_1_System_Threading_Tasks_Task) },
+};
 
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -112,6 +124,8 @@ struct chaos_type_System_Private_CoreLib_System_Delegate : public chaos_type_Sys
 	CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;
 	CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;
 	CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;
+	CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;
+	CHAOS_IL2CPP_UINT32 _pad = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_MulticastDelegate : public chaos_type_System_Private_CoreLib_System_Delegate
@@ -205,18 +219,23 @@ struct chaos_type_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubje
 };
 
 CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__11_0 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__11_1 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__15_0 = 0;
+CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__10_0 = 0;
+CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__10_1 = 0;
+CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__14_0 = 0;
+CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__3_0 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__4_0 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__5_0 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__7_0 = 0;
+CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__6_0 = 0;
 CHAOS_IL2CPP_INT32 chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___exitCode = 0;
 CHAOS_IL2CPP_INT32 chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects__s_sharedState = 0;
 
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	return ChaosObjectGetHashCode(chaos_fn_arg_0);
+}
+
+static void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	ChaosObjectCtor(chaos_fn_arg_0);
 }
 
 static void chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Join_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -254,6 +273,8 @@ void chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTas
 	{
 	    auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c);
 	    chaos_object->header.type_info = &chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c.hot;
+		const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor(chaos_arg_0);
 	    chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	});
@@ -270,28 +291,29 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0(void);
-extern "C" CHAOS_IL2CPP_INT32 ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__5_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__3_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1(void);
+extern "C" CHAOS_IL2CPP_INT32 ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2(void);
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__7_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__6_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4(void);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5(void);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6(void);
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_1_System_Threading_Tasks_Task(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8(void);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9(void);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10(void);
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__15_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__14_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12(void);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_13(void);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14(void);
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_cctor(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -305,7 +327,8 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[23] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[24] = {
+	0u,
 	0u,
 	0u,
 	0u,
@@ -328,48 +351,48 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[23] = {
 	1u,
 	1u,
 	1u,
-	2u,
+	1u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[22];
-	CHAOS_IL2CPP_UINT8 params[2];
+	::ChaosAbiMethodEntryV0 entries[23];
+	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		22u,
-		2u,
-		1855340169u,  // FNV-1a over entries+params
+		23u,
+		1u,
+		651180071u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
-		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__4_0
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0
-		{ 1u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__5_0
+		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__3_0
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1
+		{ 1u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__4_0
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2
-		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__7_0
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3
+		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__6_0
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6
-		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_0
-		{ 0u, 1u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_1
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7
+		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_0
+		{ 0u, 1u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_1_System_Threading_Tasks_Task
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10
-		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__15_0
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11
+		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__14_0
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_13
 		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14
-		{ 0u, 1u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Run
+		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_cctor
+		{ 0u, 0u },  // ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor
 	},
 	{
 		2u,
-		1u,
 	},
 };
 static const ::ChaosAbiManifestV0* const s_abi_manifest =
@@ -450,87 +473,90 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("ThreadingTasksPrimitivesSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[22] = {
-	{ "CustomEntrySubject_0", 0x0000000Eu, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_1", 0x0000000Fu, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_2", 0x00000010u, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_3", 0x00000011u, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_4", 0x00000012u, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_5", 0x00000013u, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_6", 0x00000014u, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_7", 0x00000015u, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_8", 0x00000016u, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_9", 0x00000017u, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_10", 0x00000018u, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_11", 0x00000019u, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_12", 0x0000001Au, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "Subject_13", 0x0000000Du, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "CustomEntrySubject_14", 0x0000001Bu, 0u },  // ThreadingTasksPrimitivesSubjects
-	{ "Run", 0x0000000Cu, 1u },  // ThreadingTasksPrimitivesSubjects
-	{ "<CustomEntrySubject_0>b__4_0", 0x0000001Eu, 0u },  // ThreadingTasksPrimitivesSubjects+<>c
-	{ "<CustomEntrySubject_1>b__5_0", 0x0000001Fu, 0u },  // ThreadingTasksPrimitivesSubjects+<>c
-	{ "<CustomEntrySubject_3>b__7_0", 0x00000020u, 0u },  // ThreadingTasksPrimitivesSubjects+<>c
-	{ "<CustomEntrySubject_7>b__11_0", 0x00000021u, 0u },  // ThreadingTasksPrimitivesSubjects+<>c
-	{ "<CustomEntrySubject_7>b__11_1", 0x00000022u, 1u },  // ThreadingTasksPrimitivesSubjects+<>c
-	{ "<CustomEntrySubject_11>b__15_0", 0x00000023u, 0u },  // ThreadingTasksPrimitivesSubjects+<>c
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[23] = {
+	{ "CustomEntrySubject_0", 0x0000000Du, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_1", 0x0000000Eu, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_2", 0x0000000Fu, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_3", 0x00000010u, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_4", 0x00000011u, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_5", 0x00000012u, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_6", 0x00000013u, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_7", 0x00000014u, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_8", 0x00000015u, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_9", 0x00000016u, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_10", 0x00000017u, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_11", 0x00000018u, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_12", 0x00000019u, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "Subject_13", 0x0000000Cu, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "CustomEntrySubject_14", 0x0000001Au, 0u },  // ThreadingTasksPrimitivesSubjects
+	{ "<CustomEntrySubject_0>b__3_0", 0x0000001Du, 0u },  // ThreadingTasksPrimitivesSubjects+<>c
+	{ "<CustomEntrySubject_1>b__4_0", 0x0000001Eu, 0u },  // ThreadingTasksPrimitivesSubjects+<>c
+	{ "<CustomEntrySubject_3>b__6_0", 0x0000001Fu, 0u },  // ThreadingTasksPrimitivesSubjects+<>c
+	{ "<CustomEntrySubject_7>b__10_0", 0x00000020u, 0u },  // ThreadingTasksPrimitivesSubjects+<>c
+	{ "<CustomEntrySubject_7>b__10_1", 0x00000021u, 1u },  // ThreadingTasksPrimitivesSubjects+<>c
+	{ "<CustomEntrySubject_11>b__14_0", 0x00000022u, 0u },  // ThreadingTasksPrimitivesSubjects+<>c
+	{ ".cctor", 0x0000001Bu, 0u },  // ThreadingTasksPrimitivesSubjects+<>c
+	{ ".ctor", 0x0000001Cu, 0u },  // ThreadingTasksPrimitivesSubjects+<>c
 };
 
 // Type name index entries (namespace, short_name)
 static constexpr HotpatchTypeEntryV0 s_hotpatch_types[2] = {
-	{ "ThreadingTasksPrimitivesSubjects", "", 0u, 16u },
-	{ "ThreadingTasksPrimitivesSubjects+<>c", "", 16u, 6u },
+	{ "ThreadingTasksPrimitivesSubjects", "", 0u, 15u },
+	{ "ThreadingTasksPrimitivesSubjects+<>c", "", 15u, 8u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[22] = {
-	{ 0x0000000Cu, 21u },
-	{ 0x0000000Du, 19u },
-	{ 0x0000000Eu, 1u },
-	{ 0x0000000Fu, 3u },
-	{ 0x00000010u, 4u },
-	{ 0x00000011u, 6u },
-	{ 0x00000012u, 7u },
-	{ 0x00000013u, 8u },
-	{ 0x00000014u, 9u },
-	{ 0x00000015u, 12u },
-	{ 0x00000016u, 13u },
-	{ 0x00000017u, 14u },
-	{ 0x00000018u, 15u },
-	{ 0x00000019u, 17u },
-	{ 0x0000001Au, 18u },
-	{ 0x0000001Bu, 20u },
-	{ 0x0000001Eu, 0u },
-	{ 0x0000001Fu, 2u },
-	{ 0x00000020u, 5u },
-	{ 0x00000021u, 10u },
-	{ 0x00000022u, 11u },
-	{ 0x00000023u, 16u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[23] = {
+	{ 0x0000000Cu, 19u },
+	{ 0x0000000Du, 0u },
+	{ 0x0000000Eu, 2u },
+	{ 0x0000000Fu, 4u },
+	{ 0x00000010u, 5u },
+	{ 0x00000011u, 7u },
+	{ 0x00000012u, 8u },
+	{ 0x00000013u, 9u },
+	{ 0x00000014u, 10u },
+	{ 0x00000015u, 13u },
+	{ 0x00000016u, 14u },
+	{ 0x00000017u, 15u },
+	{ 0x00000018u, 16u },
+	{ 0x00000019u, 18u },
+	{ 0x0000001Au, 20u },
+	{ 0x0000001Bu, 21u },
+	{ 0x0000001Cu, 22u },
+	{ 0x0000001Du, 1u },
+	{ 0x0000001Eu, 3u },
+	{ 0x0000001Fu, 6u },
+	{ 0x00000020u, 11u },
+	{ 0x00000021u, 12u },
+	{ 0x00000022u, 17u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[22] = {
-	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__4_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_0>b__4_0
+static HotpatchEntryV0 s_hotpatch_entries[23] = {
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0
-	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__5_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_1>b__5_0
+	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__3_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_0>b__3_0
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1
+	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__4_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_1>b__4_0
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_2
-	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__7_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_3>b__7_0
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_3
+	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__6_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_3>b__6_0
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_4
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_5
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_6
-	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_7>b__11_0
-	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_7>b__11_1
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_7
+	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_7>b__10_0
+	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_1_System_Threading_Tasks_Task), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_7>b__10_1
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_8
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_9
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_10
-	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__15_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_11>b__15_0
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_11
+	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__14_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_11>b__14_0
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_12
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::Subject_13
 	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects::CustomEntrySubject_14
-	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects::Run
+	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_cctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingTasksPrimitivesSubjects+<>c::.cctor
+	{ reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingTasksPrimitivesSubjects+<>c::.ctor
 };
 
 // Module hotpatch bundle
@@ -539,11 +565,11 @@ static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	s_hotpatch_types,
 	2u,
 	s_hotpatch_methods,
-	22u,
+	23u,
 	s_hotpatch_slots,
-	22u,
+	23u,
 	s_hotpatch_entries,
-	22u,
+	23u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -552,24 +578,24 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[34] = {
-	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9__4_0",
+extern "C" const char* kChaosExternalRuntimeSubjects[35] = {
+	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9__3_0",
 	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9",
 	"System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
 	"System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)",
 	"System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()",
-	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9__5_0",
+	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9__4_0",
 	"System.Private.CoreLib/System.Func<System.Int32>::.ctor:System.Void(System.Object,System.IntPtr)",
 	"System.Private.CoreLib/System.Threading.Tasks.Task::Run<System.Int32>:System.Threading.Tasks.Task<System.Int32>(System.Func<System.Int32>)",
 	"System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)",
-	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9__7_0",
+	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9__6_0",
 	"System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)",
 	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::_exitCode",
 	"System.Private.CoreLib/System.Threading.Tasks.Task::FromResult<System.Int32>:System.Threading.Tasks.Task<System.Int32>(System.Int32)",
 	"System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()",
 	"System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()",
-	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9__11_0",
-	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9__11_1",
+	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9__10_0",
+	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9__10_1",
 	"System.Private.CoreLib/System.Action<System.Threading.Tasks.Task>::.ctor:System.Void(System.Object,System.IntPtr)",
 	"System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>)",
 	"System.Private.CoreLib/System.Threading.Tasks.Task",
@@ -578,7 +604,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[34] = {
 	"System.Private.CoreLib/System.Threading.Tasks.Task<System.Threading.Tasks.Task>::get_Result:System.Threading.Tasks.Task()",
 	"System.Private.CoreLib/System.Threading.Tasks.Task<System.Int32>::get_Result:System.Int32()",
 	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::s_sharedState",
-	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9__15_0",
+	"ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<>9__14_0",
 	"System.Threading.Thread/System.Threading.ThreadStart::.ctor:System.Void(System.Object,System.IntPtr)",
 	"System.Threading.Thread/System.Threading.Thread::.ctor:System.Void(System.Threading.ThreadStart)",
 	"System.Threading.Thread/System.Threading.Thread::Start:System.Void()",
@@ -587,9 +613,10 @@ extern "C" const char* kChaosExternalRuntimeSubjects[34] = {
 	"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()",
 	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
 	"System.Threading.Thread/System.Threading.Thread::get_ManagedThreadId:System.Int32()",
+	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[34] = {
+extern "C" void* kChaosExternalRuntimeFnTable[35] = {
 	nullptr,
 	nullptr,
 	nullptr,
@@ -624,41 +651,43 @@ extern "C" void* kChaosExternalRuntimeFnTable[34] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
 	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 34;
+extern "C" int32_t kChaosExternalRuntimeCount = 35;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[22])() = {
-	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__4_0),
+static void (*kAotMethods[23])() = {
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0),
-	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__5_0),
+	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__3_0),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1),
+	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__4_0),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2),
-	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__7_0),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3),
+	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__6_0),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6),
-	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_0),
-	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_1),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7),
+	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_0),
+	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_1_System_Threading_Tasks_Task),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10),
-	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__15_0),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11),
+	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__14_0),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_13),
 	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14),
-	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Run),
+	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_cctor),
+	reinterpret_cast<void(*)()>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
-static void (*kBenchmarkWrappers[22])() = {
+static void (*kBenchmarkWrappers[23])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -670,8 +699,8 @@ static void (*kBenchmarkWrappers[22])() = {
 	[]() {kAotMethods[8]();},
 	[]() {kAotMethods[9]();},
 	[]() {kAotMethods[10]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[11])(0);},
-	[]() {kAotMethods[12]();},
+	[]() {kAotMethods[11]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[12])(0);},
 	[]() {kAotMethods[13]();},
 	[]() {kAotMethods[14]();},
 	[]() {kAotMethods[15]();},
@@ -680,7 +709,8 @@ static void (*kBenchmarkWrappers[22])() = {
 	[]() {kAotMethods[18]();},
 	[]() {kAotMethods[19]();},
 	[]() {kAotMethods[20]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[21])(0);},
+	[]() {kAotMethods[21]();},
+	[]() {kAotMethods[22]();},
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -697,7 +727,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 			entry.method_key, __chaos_args, __chaos_ret);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -715,7 +745,8 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
 			chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 				entry.method_key, __chaos_args, __chaos_ret);
 		} else {
-			reinterpret_cast<void(*)()>(entry.direct_ptr)();
+			// Use kBenchmarkWrappers which supply correct default argument values
+			kBenchmarkWrappers[i]();
 		}
 	}
 	return result;
@@ -734,7 +765,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
 			entry.method_key);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -754,37 +785,54 @@ extern "C" double BenchmarkMethod(
 }
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[22] = {
-	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__4_0),
+static void* const kMethodPointers[23] = {
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0),
-	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__5_0),
+	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__3_0),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1),
+	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__4_0),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2),
-	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__7_0),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3),
+	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__6_0),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6),
-	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_0),
-	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_1),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7),
+	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_0),
+	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_1_System_Threading_Tasks_Task),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10),
-	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__15_0),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11),
+	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__14_0),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_13),
 	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14),
-	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Run),
+	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_cctor),
+	reinterpret_cast<void*>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
+// ── VTable descriptors (for BootstrapRuntime TypeVTable registration) ──
+static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
+	{
+		CHAOS_IL2CPP_UINT64_C(0xECCB57174ABA6480),
+		0x00000002u,
+		0u,
+		7u,
+		reinterpret_cast<const void*>(kSlots_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c),
+		reinterpret_cast<const void**>(chaos_vtable_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c),
+		7u,
+		1,
+		{0, 0, 0},
+		nullptr,
+		0u,
+	},
+};
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 22u,
+	.method_pointer_count      = 23u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -793,6 +841,8 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.unresolved_virtual_call_count = 0u,
 	.type_capabilities       = nullptr,
 	.type_capability_count   = 0u,
+	.vtable_descriptors = kChaosVTableDescriptors,
+	.vtable_descriptor_count = 1u,
 };
 
 // MetadataRegistrationV0
@@ -828,16 +878,11 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c[6] = {
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_0>b__4_0:System.Void()", "<CustomEntrySubject_0>b__4_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_1>b__5_0:System.Int32()", "<CustomEntrySubject_1>b__5_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_3>b__7_0:System.Void()", "<CustomEntrySubject_3>b__7_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_7>b__11_0:System.Void()", "<CustomEntrySubject_7>b__11_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_7>b__11_1:System.Void(System.Threading.Tasks.Task)", "<CustomEntrySubject_7>b__11_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_11>b__15_0:System.Void()", "<CustomEntrySubject_11>b__15_0", "System.Void", 0, nullptr, 0u },
+static constexpr ReflectionQueryFieldDescriptor kReflFields_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects[2] = {
+	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::s_sharedState", "s_sharedState", "System.Int32", 0LL },
 };
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects[16] = {
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects[15] = {
 	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0:System.Void()", "CustomEntrySubject_0", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1:System.Void()", "CustomEntrySubject_1", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_2:System.Void()", "CustomEntrySubject_2", "System.Void", 0, nullptr, 0u },
@@ -853,14 +898,24 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadingTasksPrim
 	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_12:System.Void()", "CustomEntrySubject_12", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_14:System.Void()", "CustomEntrySubject_14", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c[8] = {
+	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_0>b__3_0:System.Void()", "<CustomEntrySubject_0>b__3_0", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_1>b__4_0:System.Int32()", "<CustomEntrySubject_1>b__4_0", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_3>b__6_0:System.Void()", "<CustomEntrySubject_3>b__6_0", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_7>b__10_0:System.Void()", "<CustomEntrySubject_7>b__10_0", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_7>b__10_1:System.Void(System.Threading.Tasks.Task)", "<CustomEntrySubject_7>b__10_1", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_11>b__14_0:System.Void()", "<CustomEntrySubject_11>b__14_0", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryTypeDescriptor kReflTypes[2] = {
+	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects", "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects", "", "ThreadingTasksPrimitivesSubjects", "ThreadingTasksPrimitivesSubjects", nullptr, kReflFields_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects, 2u, nullptr, 0u,
+	kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects, 15u },
 	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c", "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c", "", "ThreadingTasksPrimitivesSubjects+<>c", "ThreadingTasksPrimitivesSubjects+<>c", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c, 6u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects", "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects", "", "ThreadingTasksPrimitivesSubjects", "ThreadingTasksPrimitivesSubjects", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects, 16u },
+	kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c, 8u },
 };
 
 static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
@@ -907,8 +962,79 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
-// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_0>b__4_0()
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0()
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+	chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
+	_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__3_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
+			_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 15)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[15];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+			chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
+				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__3_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_arg_0 = _s0;
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		chaos_locals[0] = _s0;
+		_s0 = chaos_locals[0];
+		{
+			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[4])();
+		}
+		return;
+	}
+}
+
+// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_0>b__3_0()
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__3_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -917,8 +1043,8 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 	return;
 }
 
-// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0()
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0(void)
+// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1()
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -940,74 +1066,25 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		{
 			chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
 			_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9;
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_0_b__4_0);
 			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+				// Hotpatch-aware ldftn wrapper (slot 16)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[16];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
 			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-			chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
-				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__4_0 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_raw_arg_0 = _s0;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		chaos_locals[0] = _s0;
-		_s0 = chaos_locals[0];
-		{
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[4])();
-		}
-		return;
-	}
-}
-
-// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_1>b__5_0()
-extern "C" CHAOS_IL2CPP_INT32 ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__5_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1()
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-
-
-	chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
-	_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__5_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
-			_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9;
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__5_0);
 			{
 				const auto chaos_method_ptr = _s1;
 				const auto chaos_target = _s0;
@@ -1021,12 +1098,11 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 			{
 				auto chaos_value = _s1;
 			chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
-				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__5_0 = chaos_value;
+				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__4_0 = chaos_value;
 			}
 		}
 		{
-			const auto chaos_raw_arg_0 = _s0;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
+			const auto chaos_arg_0 = _s0;
 			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
@@ -1037,6 +1113,18 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		}
 		return;
 	}
+}
+
+// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_1>b__4_0()
+extern "C" CHAOS_IL2CPP_INT32 ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
 // Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_2()
@@ -1051,8 +1139,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1061,16 +1148,6 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 	{
 		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[4])();
 	}
-	return;
-}
-
-// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_3>b__7_0()
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__7_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
 	return;
 }
 
@@ -1090,14 +1167,31 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 
 
 	chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
-	_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__7_0;
+	_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__6_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
 		{
 			chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
 			_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9;
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__7_0);
+			{
+				// Hotpatch-aware ldftn wrapper (slot 17)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[17];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
 			{
 				const auto chaos_method_ptr = _s1;
 				const auto chaos_target = _s0;
@@ -1111,12 +1205,11 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 			{
 				auto chaos_value = _s1;
 			chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
-				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__7_0 = chaos_value;
+				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__6_0 = chaos_value;
 			}
 		}
 		{
-			const auto chaos_raw_arg_0 = _s0;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
+			const auto chaos_arg_0 = _s0;
 			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
@@ -1127,6 +1220,16 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		}
 		return;
 	}
+}
+
+// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_3>b__6_0()
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__6_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	return;
 }
 
 // Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_4()
@@ -1147,24 +1250,18 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(5000);
 	{
-		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s1;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[10])(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 	{
 		if (_s1 != 0)
 		{
@@ -1195,8 +1292,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1205,11 +1301,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 	{
 		if (_s1 != 0)
 		{
@@ -1242,8 +1334,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1252,17 +1343,9 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 	{
 		if (_s1 != 0)
 		{
@@ -1274,27 +1357,6 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		}
 		return;
 	}
-}
-
-// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_7>b__11_0()
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	return;
-}
-
-// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_7>b__11_1(System.Threading.Tasks.Task)
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	return;
 }
 
 // Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_7()
@@ -1321,14 +1383,31 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 
 
 	chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
-	_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__11_0;
+	_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__10_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
 		{
 			chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
 			_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9;
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_0);
+			{
+				// Hotpatch-aware ldftn wrapper (slot 18)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[18];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
 			{
 				const auto chaos_method_ptr = _s1;
 				const auto chaos_target = _s0;
@@ -1342,24 +1421,41 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 			{
 				auto chaos_value = _s1;
 			chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
-				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__11_0 = chaos_value;
+				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__10_0 = chaos_value;
 			}
 		}
 		{
-			const auto chaos_raw_arg_0 = _s0;
-			const auto chaos_arg_0 = chaos_raw_arg_0;
+			const auto chaos_arg_0 = _s0;
 			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
-		_s1 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__11_1;
+		_s1 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__10_1;
 		_s2 = _s1;
 		{
 			if (_s2 == 0)
 			{
 				chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
 				_s1 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9;
-				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__11_1);
+				{
+					// Hotpatch-aware ldftn wrapper (slot 19)
+					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) -> void {
+						auto& _d_entry = s_hotpatch_entries[19];
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+						{
+							alignas(16) uint8_t _d_ab[16];
+							ArgBuffer _d_bw(_d_ab);
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_1));
+							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+								_d_entry.method_key, _d_ab, nullptr);
+							return;
+						}
+						reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+					};
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+				}
 				{
 					const auto chaos_method_ptr = _s2;
 					const auto chaos_target = _s1;
@@ -1373,12 +1469,11 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 				{
 					auto chaos_value = _s2;
 				chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
-					chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__11_1 = chaos_value;
+					chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__10_1 = chaos_value;
 				}
 			}
 			{
-				const auto chaos_raw_arg_0 = _s1;
-				const auto chaos_arg_0 = chaos_raw_arg_0;
+				const auto chaos_arg_0 = _s1;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[18])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
@@ -1390,6 +1485,27 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 			return;
 		}
 	}
+}
+
+// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_7>b__10_0()
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	return;
+}
+
+// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_7>b__10_1(System.Threading.Tasks.Task)
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_1_System_Threading_Tasks_Task(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	return;
 }
 
 // Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_8()
@@ -1415,16 +1531,14 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	chaos_locals[0] = _s0;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1464,6 +1578,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]));
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 		GC_END_STUBBORN_CHANGE(chaos_array);
 		chaos_gc_dirty_card(chaos_array);
@@ -1476,13 +1591,13 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		auto chaos_value = chaos_value;
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
 		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]));
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 		GC_END_STUBBORN_CHANGE(chaos_array);
 		chaos_gc_dirty_card(chaos_array);
 	}
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1519,16 +1634,14 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(10000);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	chaos_locals[0] = _s0;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1536,10 +1649,8 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 	_s0 = chaos_locals[0];
 	_s1 = chaos_locals[1];
 	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_raw_arg_1;
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[21])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1552,17 +1663,9 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s3 = chaos_locals[1];
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
 	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
 	{
 		if (_s2 != 0)
 		{
@@ -1595,8 +1698,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
@@ -1605,17 +1707,9 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 	{
 		if (_s1 != 0)
 		{
@@ -1627,22 +1721,6 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		}
 		return;
 	}
-}
-
-// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_11>b__15_0()
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__15_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		auto chaos_value = _s0;
-		chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects__s_sharedState = chaos_value;
-	}
-	return;
 }
 
 // Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_11()
@@ -1675,14 +1753,31 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects__s_sharedState = chaos_value;
 	}
 	chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
-	_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__15_0;
+	_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__14_0;
 	_s1 = _s0;
 	{
 		if (_s1 == 0)
 		{
 			chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
 			_s0 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9;
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__15_0);
+			{
+				// Hotpatch-aware ldftn wrapper (slot 20)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[20];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Threading_Thread_System_Threading_ThreadStart, {});
 				chaos_object->header.type_info = &chaos_mt_System_Threading_Thread_System_Threading_ThreadStart.hot;
@@ -1692,7 +1787,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 			{
 				auto chaos_value = _s3;
 			chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
-				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__15_0 = chaos_value;
+				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9__14_0 = chaos_value;
 			}
 		}
 		{
@@ -1721,17 +1816,9 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		}
 		_s2 = chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects__s_sharedState;
 		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		{
-			const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-			const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-		}
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
 		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		{
-			const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
-			const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-		}
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
 		{
 			if (_s2 != 0)
 			{
@@ -1746,6 +1833,22 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 	}
 }
 
+// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::<CustomEntrySubject_11>b__14_0()
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__14_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		auto chaos_value = _s0;
+		chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects__s_sharedState = chaos_value;
+	}
+	return;
+}
+
 // Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_12()
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12(void)
 {
@@ -1756,8 +1859,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_raw_arg_0;
+		const auto chaos_arg_0 = _s0;
 		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
 	}
 	return;
@@ -1776,7 +1878,6 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 	{
@@ -1792,30 +1893,10 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	{
-		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		if (chaos_arg_0 == 0)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -1851,11 +1932,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s2);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left < chaos_right ? 1 : 0);
-	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1) < static_cast<CHAOS_IL2CPP_INT32>(_s2) ? 1 : 0);
 	{
 		if (_s1 != 0)
 		{
@@ -1869,279 +1946,41 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 	}
 }
 
-// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Run(System.Int32)
-extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::.cctor()
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_cctor(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
+
+	chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
+
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c, {});
+		chaos_object->header.type_info = &chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c.hot;
+		ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		auto chaos_value = _s0;
+	chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c();
+		chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c____9 = chaos_value;
+	}
+	return;
+}
+
+// Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects+<>c::.ctor()
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
 	_s0 = chaos_args[0];
 	{
-		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-		switch (chaos_switch_value)
-		{
-			case 0:
-			{
-				{
-					auto& _d0 = s_hotpatch_entries[0];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d0.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0();
-					}
-				}
-				break;
-			}
-			case 1:
-			{
-				{
-					auto& _d1 = s_hotpatch_entries[1];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d1.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1();
-					}
-				}
-				break;
-			}
-			case 2:
-			{
-				{
-					auto& _d2 = s_hotpatch_entries[2];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d2.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2();
-					}
-				}
-				break;
-			}
-			case 3:
-			{
-				{
-					auto& _d3 = s_hotpatch_entries[3];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d3.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3();
-					}
-				}
-				break;
-			}
-			case 4:
-			{
-				{
-					auto& _d4 = s_hotpatch_entries[4];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d4.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4();
-					}
-				}
-				break;
-			}
-			case 5:
-			{
-				{
-					auto& _d5 = s_hotpatch_entries[5];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d5.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5();
-					}
-				}
-				break;
-			}
-			case 6:
-			{
-				{
-					auto& _d6 = s_hotpatch_entries[6];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d6.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6();
-					}
-				}
-				break;
-			}
-			case 7:
-			{
-				{
-					auto& _d7 = s_hotpatch_entries[7];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d7.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7();
-					}
-				}
-				break;
-			}
-			case 8:
-			{
-				{
-					auto& _d8 = s_hotpatch_entries[8];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d8.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8();
-					}
-				}
-				break;
-			}
-			case 9:
-			{
-				{
-					auto& _d9 = s_hotpatch_entries[9];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d9.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9();
-					}
-				}
-				break;
-			}
-			case 10:
-			{
-				{
-					auto& _d10 = s_hotpatch_entries[10];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d10.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10();
-					}
-				}
-				break;
-			}
-			case 11:
-			{
-				{
-					auto& _d11 = s_hotpatch_entries[11];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d11.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11();
-					}
-				}
-				break;
-			}
-			case 12:
-			{
-				{
-					auto& _d12 = s_hotpatch_entries[12];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d12.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12();
-					}
-				}
-				break;
-			}
-			case 13:
-			{
-				{
-					auto& _d13 = s_hotpatch_entries[13];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d13.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_13();
-					}
-				}
-				break;
-			}
-			case 14:
-			{
-				{
-					auto& _d14 = s_hotpatch_entries[14];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d14.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14();
-					}
-				}
-				break;
-			}
-			default:
-				return;
-		}
+		const auto chaos_arg_0 = _s0;
+		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
 	}
 	return;
 }
@@ -2152,4 +1991,4 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 22;
+extern "C" const int kAotMethodCount = 23;

@@ -56,7 +56,7 @@ public static partial class CollectionsGenericCoreSubjects
     // [7] System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()
     public static void Subject_7()
     {
-        if (((new List<int>().ToArray()).Length) != ((new List<int>().ToArray()).Length)) _exitCode = 1;
+        if (((new List<int>().ToArray()).Length) != 0) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Add:System.Void(TKey,TValue)
@@ -68,7 +68,7 @@ public static partial class CollectionsGenericCoreSubjects
     // [9] System.Private.CoreLib/System.Collections.Generic.Dictionary`2::get_Count:System.Int32()
     public static void Subject_9()
     {
-        if (new Dictionary<string, int>().Count != new Dictionary<string, int>().Count) _exitCode = 1;
+        if (new Dictionary<string, int>().Count != 0) _exitCode = 1;
     }
 
     // [10] System.Private.CoreLib/System.Collections.Generic.Dictionary`2::TryGetValue:System.Boolean(TKey,TValue&)
@@ -105,29 +105,6 @@ public static partial class CollectionsGenericCoreSubjects
     public static void Subject_15()
     {
         // TODO: System.Private.CoreLib/System.Collections.Generic.HashSet`1::Remove:System.Boolean(T) could not be auto-generated
-    }
-
-    public static void Run(int entryIndex)
-    {
-        switch (entryIndex)
-        {
-            case 0: Subject_0(); break;
-            case 1: Subject_1(); break;
-            case 2: Subject_2(); break;
-            case 3: Subject_3(); break;
-            case 4: Subject_4(); break;
-            case 5: Subject_5(); break;
-            case 6: Subject_6(); break;
-            case 7: Subject_7(); break;
-            case 8: Subject_8(); break;
-            case 9: Subject_9(); break;
-            case 10: Subject_10(); break;
-            case 11: Subject_11(); break;
-            case 12: Subject_12(); break;
-            case 13: Subject_13(); break;
-            case 14: Subject_14(); break;
-            case 15: Subject_15(); break;
-        }
     }
 
 }

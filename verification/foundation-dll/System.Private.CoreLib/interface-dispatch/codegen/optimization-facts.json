@@ -69,11 +69,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Run:System.Void(System.Int32)",
-      "reason": "closed-world-entry"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
@@ -344,5 +339,51 @@
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_6:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    }
+  ]
 }

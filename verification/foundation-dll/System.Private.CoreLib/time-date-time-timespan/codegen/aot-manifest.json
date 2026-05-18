@@ -5,12 +5,6 @@
     {
       "assemblyName": "TimeDateTimeTimespanSubjects",
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "TimeDateTimeTimespanSubjects",
-      "subjectKind": "method",
       "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

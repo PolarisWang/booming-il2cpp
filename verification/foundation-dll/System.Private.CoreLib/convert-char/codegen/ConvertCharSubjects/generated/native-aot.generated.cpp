@@ -335,14 +335,6 @@ static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_0(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_11(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_12(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_13(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_14(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_15(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_16(void);
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_1(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_2(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_3(void);
@@ -352,6 +344,14 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_6(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_7(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_8(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_9(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_11(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_12(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_13(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_14(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_15(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_16(void);
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -401,14 +401,6 @@ static constexpr struct {
 	},
 	{
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_0
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_10
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_11
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_12
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_13
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_14
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_15
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_16
-		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_17
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_1
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_2
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_3
@@ -418,6 +410,14 @@ static constexpr struct {
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_7
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_8
 		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_9
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_10
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_11
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_12
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_13
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_14
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_15
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_16
+		{ 0u, 0u },  // ConvertCharSubjects_ConvertCharSubjects_Subject_17
 	},
 	{
 	},
@@ -491,14 +491,6 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 // Method name index entries
 static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[18] = {
 	{ "Subject_0", 0x00000003u, 0u },  // ConvertCharSubjects
-	{ "Subject_10", 0x0000000Du, 0u },  // ConvertCharSubjects
-	{ "Subject_11", 0x0000000Eu, 0u },  // ConvertCharSubjects
-	{ "Subject_12", 0x0000000Fu, 0u },  // ConvertCharSubjects
-	{ "Subject_13", 0x00000010u, 0u },  // ConvertCharSubjects
-	{ "Subject_14", 0x00000011u, 0u },  // ConvertCharSubjects
-	{ "Subject_15", 0x00000012u, 0u },  // ConvertCharSubjects
-	{ "Subject_16", 0x00000013u, 0u },  // ConvertCharSubjects
-	{ "Subject_17", 0x00000014u, 0u },  // ConvertCharSubjects
 	{ "Subject_1", 0x00000004u, 0u },  // ConvertCharSubjects
 	{ "Subject_2", 0x00000005u, 0u },  // ConvertCharSubjects
 	{ "Subject_3", 0x00000006u, 0u },  // ConvertCharSubjects
@@ -508,6 +500,14 @@ static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[18] = {
 	{ "Subject_7", 0x0000000Au, 0u },  // ConvertCharSubjects
 	{ "Subject_8", 0x0000000Bu, 0u },  // ConvertCharSubjects
 	{ "Subject_9", 0x0000000Cu, 0u },  // ConvertCharSubjects
+	{ "Subject_10", 0x0000000Du, 0u },  // ConvertCharSubjects
+	{ "Subject_11", 0x0000000Eu, 0u },  // ConvertCharSubjects
+	{ "Subject_12", 0x0000000Fu, 0u },  // ConvertCharSubjects
+	{ "Subject_13", 0x00000010u, 0u },  // ConvertCharSubjects
+	{ "Subject_14", 0x00000011u, 0u },  // ConvertCharSubjects
+	{ "Subject_15", 0x00000012u, 0u },  // ConvertCharSubjects
+	{ "Subject_16", 0x00000013u, 0u },  // ConvertCharSubjects
+	{ "Subject_17", 0x00000014u, 0u },  // ConvertCharSubjects
 };
 
 // Type name index entries (namespace, short_name)
@@ -518,36 +518,28 @@ static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
 // Token→Slot mapping (sorted by token for binary search)
 static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[18] = {
 	{ 0x00000003u, 0u },
-	{ 0x00000004u, 9u },
-	{ 0x00000005u, 10u },
-	{ 0x00000006u, 11u },
-	{ 0x00000007u, 12u },
-	{ 0x00000008u, 13u },
-	{ 0x00000009u, 14u },
-	{ 0x0000000Au, 15u },
-	{ 0x0000000Bu, 16u },
-	{ 0x0000000Cu, 17u },
-	{ 0x0000000Du, 1u },
-	{ 0x0000000Eu, 2u },
-	{ 0x0000000Fu, 3u },
-	{ 0x00000010u, 4u },
-	{ 0x00000011u, 5u },
-	{ 0x00000012u, 6u },
-	{ 0x00000013u, 7u },
-	{ 0x00000014u, 8u },
+	{ 0x00000004u, 1u },
+	{ 0x00000005u, 2u },
+	{ 0x00000006u, 3u },
+	{ 0x00000007u, 4u },
+	{ 0x00000008u, 5u },
+	{ 0x00000009u, 6u },
+	{ 0x0000000Au, 7u },
+	{ 0x0000000Bu, 8u },
+	{ 0x0000000Cu, 9u },
+	{ 0x0000000Du, 10u },
+	{ 0x0000000Eu, 11u },
+	{ 0x0000000Fu, 12u },
+	{ 0x00000010u, 13u },
+	{ 0x00000011u, 14u },
+	{ 0x00000012u, 15u },
+	{ 0x00000013u, 16u },
+	{ 0x00000014u, 17u },
 };
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[18] = {
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_0
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_10
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_11
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_12
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_13
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_14
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_15
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_16
-	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_17
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_1
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_2
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_3
@@ -557,6 +549,14 @@ static HotpatchEntryV0 s_hotpatch_entries[18] = {
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_7
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_8
 	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_9
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_10
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_11
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_12
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_13
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_14
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_15
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_16
+	{ reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ConvertCharSubjects::Subject_17
 };
 
 // Module hotpatch bundle
@@ -581,15 +581,6 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 extern "C" const char* kChaosExternalRuntimeSubjects[21] = {
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
 	"ConvertCharSubjects/ConvertCharSubjects::_exitCode",
-	"System.Private.CoreLib/System.Int32",
-	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
-	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
-	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
-	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
-	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
-	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
-	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
-	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
 	"System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
@@ -600,20 +591,20 @@ extern "C" const char* kChaosExternalRuntimeSubjects[21] = {
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
+	"System.Private.CoreLib/System.Int32",
+	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
+	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
+	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
+	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
+	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
+	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
+	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
+	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[21] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Boolean_),
 	nullptr,
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Object_System_IFormatProvider_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_SByte_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Single_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_String_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_String_System_IFormatProvider_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt16_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt32_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt64_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Byte_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Char_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_DateTime__get_UtcNow_System_DateTime__),
@@ -624,6 +615,15 @@ extern "C" void* kChaosExternalRuntimeFnTable[21] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int16_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int32_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int64_),
+	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Object_System_IFormatProvider_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_SByte_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Single_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_String_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_String_System_IFormatProvider_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt16_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt32_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt64_),
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 21;
@@ -632,14 +632,6 @@ extern "C" int32_t kChaosExternalRuntimeCount = 21;
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[18])() = {
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_0),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_11),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_12),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_13),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_14),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16),
-	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_2),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_3),
@@ -649,6 +641,14 @@ static void (*kAotMethods[18])() = {
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_7),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_8),
 	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_9),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_11),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_12),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_13),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_14),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16),
+	reinterpret_cast<void(*)()>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
@@ -689,7 +689,6 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 			entry.method_key, __chaos_args, __chaos_ret);
 	} else {
-		// Use kBenchmarkWrappers which supply correct default argument values
 		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
@@ -728,7 +727,6 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
 			entry.method_key);
 	} else {
-		// Use kBenchmarkWrappers which supply correct default argument values
 		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
@@ -751,14 +749,6 @@ extern "C" double BenchmarkMethod(
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[18] = {
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_0),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_11),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_12),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_13),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_14),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16),
-	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_1),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_2),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_3),
@@ -768,6 +758,14 @@ static void* const kMethodPointers[18] = {
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_7),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_8),
 	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_9),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_11),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_12),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_13),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_14),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_15),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_16),
+	reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -821,16 +819,11 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
+static constexpr ReflectionQueryFieldDescriptor kReflFields_ConvertCharSubjects_ConvertCharSubjects[1] = {
+	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+};
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ConvertCharSubjects_ConvertCharSubjects[18] = {
 	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
@@ -840,10 +833,18 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_ConvertCharSubject
 	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects", "ConvertCharSubjects/ConvertCharSubjects", "", "ConvertCharSubjects", "ConvertCharSubjects", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0u, "ConvertCharSubjects/ConvertCharSubjects", "ConvertCharSubjects/ConvertCharSubjects", "", "ConvertCharSubjects", "ConvertCharSubjects", nullptr, kReflFields_ConvertCharSubjects_ConvertCharSubjects, 1u, nullptr, 0u,
 	kReflMethods_ConvertCharSubjects_ConvertCharSubjects, 18u },
 };
 
@@ -1015,106 +1016,1245 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_0(void)
 	return;
 }
 
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()");
-}
-
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_11(void)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()");
-}
-
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_12(void)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()");
-}
-
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_13(void)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()");
-}
-
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_14(void)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()");
-}
-
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_15(void)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()");
-}
-
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_16(void)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()");
-}
-
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()
-extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()");
-}
-
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_1()
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_1(void)
 {
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()");
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
 }
 
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_2()
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_2(void)
 {
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()");
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
 }
 
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_3()
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_3(void)
 {
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()");
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+			{
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__get_UtcNow_System_DateTime__();
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			{
+				const auto chaos_inline_result = (throw chaos_managed_exception{{_s0}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+			{
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__get_UtcNow_System_DateTime__();
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			{
+				const auto chaos_inline_result = (throw chaos_managed_exception{{_s0}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+			{
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__get_UtcNow_System_DateTime__();
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			{
+				const auto chaos_inline_result = (throw chaos_managed_exception{{_s0}}, static_cast<CHAOS_IL2CPP_UINT16>(0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
 }
 
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_4()
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_4(void)
 {
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()");
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_1 = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Decimal, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Decimal.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Decimal___ctor_System_Void_System_Int32_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_decimal(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_1 = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Decimal, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Decimal.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Decimal___ctor_System_Void_System_Int32_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_decimal(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_1 = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Decimal, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Decimal.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Decimal___ctor_System_Void_System_Int32_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_decimal(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
 }
 
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_5()
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_5(void)
 {
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()");
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+			_s0 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_double(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+			_s0 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_double(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+			_s0 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_double(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
 }
 
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_6:System.Void()
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_6()
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_6(void)
 {
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_6:System.Void()");
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
 }
 
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_7()
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_7(void)
 {
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()");
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
 }
 
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_8()
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_8(void)
 {
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()");
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
 }
 
-// AOT-unreachable stub: ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_9()
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_9(void)
 {
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()");
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_10()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_0{};
+	{
+		const auto chaos_value = _s0;
+		chaos_box_storage_0.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+		chaos_box_storage_0.value = chaos_value;
+	}
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
+	_s1 = 0;
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_convert_tochar_object_provider(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_11()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_11(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_12()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_12(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+			_s0 = ChaosStoreFloat32(42.0f);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_single(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+			_s0 = ChaosStoreFloat32(42.0f);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_single(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+			_s0 = ChaosStoreFloat32(42.0f);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_single(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_13()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_13(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_string(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_FormatException.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_string(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_FormatException.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_string(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_FormatException.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_14()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_14(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			_s1 = 0;
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_string_provider(chaos_arg_0, chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_FormatException.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			_s1 = 0;
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_string_provider(chaos_arg_0, chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_FormatException.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			_s1 = 0;
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_string_provider(chaos_arg_0, chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_FormatException.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_15()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_15(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_16()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_16(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: ConvertCharSubjects/ConvertCharSubjects::Subject_17()
+extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+	{
+		const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
 }
 
 

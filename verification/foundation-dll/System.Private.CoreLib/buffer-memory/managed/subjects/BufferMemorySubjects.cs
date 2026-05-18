@@ -25,7 +25,7 @@ public static partial class BufferMemorySubjects
     // [2] System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)
     public static void Subject_2()
     {
-        if (Buffer.ByteLength(Array.Empty<byte>()) != Buffer.ByteLength(Array.Empty<byte>())) _exitCode = 1;
+        if (Buffer.ByteLength(Array.Empty<byte>()) != 0) _exitCode = 1;
     }
 
     // [3] System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)
@@ -68,23 +68,6 @@ public static partial class BufferMemorySubjects
     public static void Subject_9()
     {
         // TODO: System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte) could not be auto-generated
-    }
-
-    public static void Run(int entryIndex)
-    {
-        switch (entryIndex)
-        {
-            case 0: Subject_0(); break;
-            case 1: Subject_1(); break;
-            case 2: Subject_2(); break;
-            case 3: Subject_3(); break;
-            case 4: Subject_4(); break;
-            case 5: Subject_5(); break;
-            case 6: Subject_6(); break;
-            case 7: Subject_7(); break;
-            case 8: Subject_8(); break;
-            case 9: Subject_9(); break;
-        }
     }
 
 }

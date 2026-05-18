@@ -9,86 +9,93 @@ public static partial class BoxingUnboxingCastsPatchEntry
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type)
-    public static int Method0()
+    public static int Subject_0()
     {
         return unchecked((int)(0xB0000000u + 0));
     }
 
     // [1] System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)
-    public static int Method1()
+    public static int Subject_1()
     {
         return unchecked((int)(0xB0000000u + 1));
     }
 
     // [2] System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)
-    public static int Method2()
+    public static int Subject_2()
     {
         return unchecked((int)(0xB0000000u + 2));
     }
 
     // [3] System.Private.CoreLib/System.Type::IsInstanceOfType:System.Boolean(System.Object)
-    public static int Method3()
+    public static int Subject_3()
     {
         return unchecked((int)(0xB0000000u + 3));
     }
 
     // [4] System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)
-    public static int Method4()
+    public static int Subject_4()
     {
         return unchecked((int)(0xB0000000u + 4));
     }
 
     // [5] System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)
-    public static int Method5()
+    public static int Subject_5()
     {
         return unchecked((int)(0xB0000000u + 5));
     }
 
     // [6] System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()
-    public static int Method6()
+    public static int Subject_6()
     {
         return unchecked((int)(0xB0000000u + 6));
     }
 
     // [7] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
-    public static int Method7()
+    public static int Subject_7()
     {
         return unchecked((int)(0xB0000000u + 7));
     }
 
     // [8] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)
-    public static int Method8()
+    public static int Subject_8()
     {
         return unchecked((int)(0xB0000000u + 8));
     }
 
     // [9] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)
-    public static int Method9()
+    public static int Subject_9()
     {
         return unchecked((int)(0xB0000000u + 9));
     }
 
     // [10] System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)
-    public static int Method10()
+    public static int Subject_10()
     {
         return unchecked((int)(0xB0000000u + 10));
     }
 
     public static void Run(int entryIndex)
     {
-        switch (entryIndex)
+        try
         {
-            case 0: Method0(); break;
-            case 1: Method1(); break;
-            case 2: Method2(); break;
-            case 3: Method3(); break;
-            case 4: Method4(); break;
-            case 5: Method5(); break;
-            case 6: Method6(); break;
-            case 7: Method7(); break;
-            case 8: Method8(); break;
-            case 9: Method9(); break;
-            case 10: Method10(); break;
+            switch (entryIndex)
+            {
+                case 0: Subject_0(); break;
+                case 1: Subject_1(); break;
+                case 2: Subject_2(); break;
+                case 3: Subject_3(); break;
+                case 4: Subject_4(); break;
+                case 5: Subject_5(); break;
+                case 6: Subject_6(); break;
+                case 7: Subject_7(); break;
+                case 8: Subject_8(); break;
+                case 9: Subject_9(); break;
+                case 10: Subject_10(); break;
+            }
+        }
+        catch (System.Exception)
+        {
+            _exitCode = 1;
         }
     }
 

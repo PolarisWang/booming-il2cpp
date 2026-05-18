@@ -5,12 +5,6 @@
     {
       "assemblyName": "ReflectionActivationSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "ReflectionActivationSubjects",
-      "subjectKind": "method",
       "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

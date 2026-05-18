@@ -909,6 +909,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             case IRExceptionKind.TryCatch:
             {
+                int preTryDepth = _activeStructuredSlotContext?.Depth ?? 0;
                 builder.AppendLine("#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
                 builder.AppendLine(indentation + "try");
                 builder.AppendLine(indentation + "{");
@@ -940,6 +941,7 @@ public sealed partial class NativeAotLoweringPlanner
                 EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
                 builder.AppendLine(indentation + "}");
                 builder.AppendLine("#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
+                _activeStructuredSlotContext?.RestoreDepth(preTryDepth);
                 // WIN32_SEH mode: __try/__except with SEH filter.
                 builder.AppendLine(indentation + "__try");
                 builder.AppendLine(indentation + "{");
@@ -1011,6 +1013,7 @@ public sealed partial class NativeAotLoweringPlanner
                 EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
                 builder.AppendLine(indentation + "}");
                 builder.AppendLine("#else");
+                _activeStructuredSlotContext?.RestoreDepth(preTryDepth);
                 // SETJMP mode: use setjmp/if-else instead of try/catch.
                 builder.AppendLine(indentation + "{");
                 builder.AppendLine(inner + "auto* _chaos_jmp =");

@@ -3,641 +3,6 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.run",
-      "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Run:System.Void(System.Int32)",
-      "signature": "System.Void CollectionsGenericCoreSubjects::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "CollectionsGenericCoreSubjects",
-        "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
-        "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Run:System.Void(System.Int32)",
-        "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Run:System.Void(System.Int32)",
-        "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.run",
-        "signature": "System.Void CollectionsGenericCoreSubjects::Run(System.Int32)"
-      },
-      "nativeSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Run",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 1,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 2,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 3
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 4,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 5
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            80,
-            88,
-            96,
-            104,
-            112,
-            120,
-            128,
-            136,
-            144,
-            152,
-            160,
-            168,
-            176,
-            184,
-            192,
-            200
-          ],
-          "ilOffset": 6,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 75,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 80,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 86,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 88,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 94,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 96,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 102,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 104,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 110,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 112,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 118,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 120,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 126,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 128,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 134,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 136,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_7",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 142,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 144,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_8",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 150,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 152,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_9",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 158,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 160,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_10",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 166,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 168,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_11",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 174,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 176,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_12",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 182,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 184,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_13",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 190,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 192,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_14",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 198,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 200,
-          "resultType": "System.Void",
-          "callee": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()",
-          "reference": {
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectKind": "method",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "CollectionsGenericCoreSubjects",
-            "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_15",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 208,
-          "ilOffset": 206,
-          "resultType": "System.Void"
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 208
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "hasBlittableStructReturn": false
-    },
-    {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-0",
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
       "signature": "System.Void CollectionsGenericCoreSubjects::Subject_0()",
@@ -665,7 +30,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -673,7 +39,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-1",
@@ -719,9 +88,11 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -781,14 +152,17 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 12
+          "ilOffset": 12,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -796,7 +170,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-2",
@@ -826,7 +203,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -834,7 +212,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-3",
@@ -864,7 +245,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -872,7 +254,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-4",
@@ -902,7 +287,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -910,7 +296,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-5",
@@ -940,7 +329,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -948,7 +338,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-6",
@@ -994,9 +387,11 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1056,14 +451,17 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 12
+          "ilOffset": 12,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1071,7 +469,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-7",
@@ -1117,9 +518,11 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1179,170 +582,70 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldlen",
           "opCode": 46,
           "ilOffset": 11,
-          "resultType": "System.IntPtr"
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 12,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 13,
-          "resultType": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E",
-          "callee": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Collections",
-            "subjectKind": "method",
-            "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Collections",
-            "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 18,
-          "resultType": "System.Int32[]",
-          "callee": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::ToArray:System.Int32[]()",
-          "reference": {
-            "assemblyName": "System.Collections",
-            "subjectKind": "method",
-            "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::ToArray:System.Int32[]()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Collections",
-            "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::ToArray:System.Int32[]()",
-            "openDefinitionSubjectId": "System.Collections/System.Collections.Generic.List\u00601::ToArray:!0[]()",
-            "sharedGenericBodyId": {
-              "value": "body:definition=System.Collections/System.Collections.Generic.List\u00601::ToArray:!0[]();type=[System.Int32];method=[]"
-            },
-            "instantiationStubId": {
-              "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::ToArray:!0[]();type=[System.Int32];method=[]"
-            },
-            "runtimeGenericContext": {
-              "instantiationKey": {
-                "contextKind": 1,
-                "definitionSubjectId": "System.Collections/System.Collections.Generic.List\u00601::ToArray:!0[]()",
-                "typeArguments": [
-                  "System.Int32"
-                ],
-                "methodArguments": []
-              },
-              "sharedGenericBodyId": {
-                "value": "body:definition=System.Collections/System.Collections.Generic.List\u00601::ToArray:!0[]();type=[System.Int32];method=[]"
-              },
-              "instantiationStubId": {
-                "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::ToArray:!0[]();type=[System.Int32];method=[]"
-              },
-              "supportKindCode": 3,
-              "specializationKindCode": 2,
-              "statusReasonCode": "loader-demand:memberReference"
-            },
-            "genericDiagnostic": {
-              "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::ToArray:System.Int32[]()",
-              "definitionSubjectId": "System.Collections/System.Collections.Generic.List\u00601::ToArray:!0[]()",
-              "displaySubjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::ToArray()",
-              "instantiationKey": {
-                "contextKind": 1,
-                "definitionSubjectId": "System.Collections/System.Collections.Generic.List\u00601::ToArray:!0[]()",
-                "typeArguments": [
-                  "System.Int32"
-                ],
-                "methodArguments": []
-              }
-            },
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
-        },
-        {
-          "op": "ldlen",
-          "opCode": 46,
-          "ilOffset": 23,
-          "resultType": "System.IntPtr"
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 24,
-          "resultType": "System.Int32"
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 25,
-          "resultType": "System.Int32"
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 27,
-          "resultType": "System.Int32"
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 28,
-          "resultType": "System.Int32"
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 30,
-          "resultType": "System.Void"
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 31
+          "ilOffset": 16,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 40,
-          "ilOffset": 32,
-          "resultType": "System.Void"
+          "operand": 25,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 34,
-          "resultType": "System.Int32"
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::_exitCode",
-          "ilOffset": 35,
+          "ilOffset": 20,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "CollectionsGenericCoreSubjects",
@@ -1357,16 +660,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 40
+          "ilOffset": 25,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1374,7 +680,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-8",
@@ -1404,7 +713,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1412,7 +722,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-9",
@@ -1458,9 +771,11 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
         },
         {
           "op": "call",
@@ -1522,148 +837,63 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 11,
-          "resultType": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E",
-          "callee": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Collections",
-            "subjectKind": "method",
-            "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Collections",
-            "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "callee": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Collections",
-            "subjectKind": "method",
-            "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Collections",
-            "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
-            "openDefinitionSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u00602::get_Count:System.Int32()",
-            "sharedGenericBodyId": {
-              "value": "body:definition=System.Collections/System.Collections.Generic.Dictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
-            },
-            "instantiationStubId": {
-              "value": "stub:definition=System.Collections/System.Collections.Generic.Dictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
-            },
-            "runtimeGenericContext": {
-              "instantiationKey": {
-                "contextKind": 1,
-                "definitionSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u00602::get_Count:System.Int32()",
-                "typeArguments": [
-                  "System.String",
-                  "System.Int32"
-                ],
-                "methodArguments": []
-              },
-              "sharedGenericBodyId": {
-                "value": "body:definition=System.Collections/System.Collections.Generic.Dictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
-              },
-              "instantiationStubId": {
-                "value": "stub:definition=System.Collections/System.Collections.Generic.Dictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
-              },
-              "supportKindCode": 3,
-              "specializationKindCode": 2,
-              "statusReasonCode": "loader-demand:memberReference"
-            },
-            "genericDiagnostic": {
-              "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
-              "definitionSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u00602::get_Count:System.Int32()",
-              "displaySubjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::get_Count()",
-              "instantiationKey": {
-                "contextKind": 1,
-                "definitionSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u00602::get_Count:System.Int32()",
-                "typeArguments": [
-                  "System.String",
-                  "System.Int32"
-                ],
-                "methodArguments": []
-              }
-            },
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 21,
-          "resultType": "System.Int32"
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 23,
-          "resultType": "System.Int32"
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 24,
-          "resultType": "System.Int32"
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 26,
-          "resultType": "System.Void"
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 27
+          "ilOffset": 15,
+          "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 36,
-          "ilOffset": 28,
-          "resultType": "System.Void"
+          "operand": 24,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 30,
-          "resultType": "System.Int32"
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::_exitCode",
-          "ilOffset": 31,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "CollectionsGenericCoreSubjects",
@@ -1678,16 +908,19 @@
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
+            "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
-          "runtimeServiceKind": 5
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 36
+          "ilOffset": 24,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1695,7 +928,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-10",
@@ -1725,7 +961,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1733,7 +970,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-11",
@@ -1763,7 +1003,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1771,7 +1012,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-12",
@@ -1801,7 +1045,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1809,7 +1054,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-13",
@@ -1839,7 +1087,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1847,7 +1096,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-14",
@@ -1877,7 +1129,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1885,7 +1138,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     },
     {
       "methodId": "collections-generic-core-subjects.collections-generic-core-subjects.subject-15",
@@ -1915,7 +1171,8 @@
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -1923,7 +1180,10 @@
       "importCallingConvention": 0,
       "importCharSet": 0,
       "importSetLastError": false,
-      "hasBlittableStructReturn": false
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionsGenericCoreSubjects"
     }
   ]
 }

@@ -5,12 +5,6 @@
     {
       "assemblyName": "RcwBasicSubjects",
       "subjectKind": "method",
-      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Run:System.Void(System.Int32)",
-      "reason": "entrypoint"
-    },
-    {
-      "assemblyName": "RcwBasicSubjects",
-      "subjectKind": "method",
       "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },

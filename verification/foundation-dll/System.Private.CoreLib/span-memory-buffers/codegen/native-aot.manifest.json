@@ -2,8 +2,8 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
   "assemblyName": "SpanMemoryBuffersSubjects",
-  "entrySubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Run:System.Void(System.Int32)",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/codegen",
+  "entrySubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_0:System.Void()",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

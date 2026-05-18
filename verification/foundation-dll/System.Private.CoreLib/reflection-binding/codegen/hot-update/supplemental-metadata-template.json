@@ -12,14 +12,6 @@
   "registeredMethods": [
     {
       "assemblyName": "ReflectionBindingSubjects",
-      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects",
-      "metadataToken": 100663309,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "ReflectionBindingSubjects",
       "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_0:System.Void()",
       "definitionSubjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects",

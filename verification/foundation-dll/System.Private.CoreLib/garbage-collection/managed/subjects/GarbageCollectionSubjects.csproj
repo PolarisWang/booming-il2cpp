@@ -7,6 +7,7 @@
     <AssemblyName>GarbageCollectionSubjects</AssemblyName>
     <RootNamespace>GarbageCollectionSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GarbageCollectionSubjects.cs" />

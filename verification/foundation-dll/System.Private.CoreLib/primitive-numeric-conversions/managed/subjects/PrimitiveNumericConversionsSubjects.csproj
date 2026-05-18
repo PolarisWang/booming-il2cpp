@@ -7,6 +7,7 @@
     <AssemblyName>PrimitiveNumericConversionsSubjects</AssemblyName>
     <RootNamespace>PrimitiveNumericConversionsSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="PrimitiveNumericConversionsSubjects.cs" />
