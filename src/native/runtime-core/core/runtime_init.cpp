@@ -1,6 +1,9 @@
 #include "gc_old_gen.h"
 #include "gc_bgc.h"
 
+// T4 VEH handler for SEH dispatch in native-generated code.
+#include "../codegen/t4_seh_handler.h"
+
 namespace chaos::il2cpp::runtime_core {
 
 // Forward declarations from task_runner.cpp (threading sub-namespace)
@@ -49,6 +52,9 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
 
     // Start the BGC background thread for concurrent mark/sweep.
     BgcController::Instance().Start();
+
+    // Register T4 VEH handler for SEH dispatch in native-generated code.
+    ::chaos::il2cpp::codegen::RegisterT4SehHandler();
 
     // Register ThreadPool-backed Task.Run so that async_task_run() in
     // chaos_common delegates to the real implementation instead of stubbing.

@@ -368,6 +368,13 @@ private:
         int count;
     };
 
+    // ── Finalizer suppression support ──────────────────────────
+    /// Suppress finalization for @a obj.  Called from GC.SuppressFinalize.
+    void SuppressFinalizer(void* obj);
+
+    /// Re-register finalization for @a obj.  Called from GC.ReRegisterForFinalize.
+    void ReRegisterFinalizer(void* obj);
+
     // ── State ───────────────────────────────────────────────────
 
     uintptr_t heap_base_ = 0;
@@ -419,6 +426,9 @@ private:
 
     // Finalizer table: maps object → finalizer callback.
     // Uses namespace-level FinalizerEntry (defined above).
+    // Suppressed finalizers (objects with GC.SuppressFinalize called).
+    std::vector<void*> suppressed_finalizers_;
+
     std::vector<FinalizerEntry> finalizers_;
 };
 

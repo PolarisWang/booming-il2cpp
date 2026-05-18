@@ -45,8 +45,18 @@ void ChaosArrayCopy(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 sourceIndex, 
 CHAOS_IL2CPP_INTPTR ChaosArrayCreateInstance(CHAOS_IL2CPP_INTPTR elementType, CHAOS_IL2CPP_INT32 length) noexcept
 {
     (void)elementType;
-    (void)length;
-    return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    if (length < 0) return 0;
+    auto usize = static_cast<CHAOS_IL2CPP_SIZE>(length);
+    CHAOS_IL2CPP_SIZE elem_size = sizeof(void*);
+    CHAOS_IL2CPP_SIZE total = sizeof(ManagedArrayAccessor) + usize * elem_size;
+    auto* storage = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(total));
+    if (storage == nullptr) return 0;
+    auto* arr = reinterpret_cast<ManagedArrayAccessor*>(storage);
+    std::memset(arr, 0, total);
+    arr->element_type_shape = 1;
+    arr->length = static_cast<CHAOS_IL2CPP_UINTPTR>(usize);
+    arr->elements = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(storage + sizeof(ManagedArrayAccessor));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
 
 CHAOS_IL2CPP_INT32 ChaosArrayBinarySearch(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR value) noexcept

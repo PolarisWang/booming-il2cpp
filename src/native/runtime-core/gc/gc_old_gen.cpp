@@ -1667,6 +1667,7 @@ void MarkSweepOldGen::CrossPageCompact() {
 }
 
 void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data), void* user_data) {
+    fprintf(stderr, "Collect: entry, page_count=%d\n", page_count_); fflush(stderr);
     CHAOS_IL2CPP_PROFILE_SCOPE("OldGen::Collect");
 
     auto pause_start = std::chrono::steady_clock::now();
@@ -1814,6 +1815,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         // Sequential mark for small heaps.
         DrainMarkStack();
     }
+    fprintf(stderr, "Collect: mark done\n"); fflush(stderr);
 
     // Fire MARK_DONE event.
     CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_phase_mark_done_fired");
@@ -1826,6 +1828,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // memory is reclaimed (back on free list or VirtualFree'd), and the
     // finalizer would read freed memory (use-after-free).
     CHAOS_IL2CPP_SIZE finalizers_run = RunFinalizers();
+    fprintf(stderr, "Collect: after RunFinalizers, ran=%llu\n", (unsigned long long)finalizers_run); fflush(stderr);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_phase3_finalizers_done ran={0}",
         static_cast<unsigned long long>(finalizers_run));
@@ -1839,6 +1842,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // CoreCLR behavior where finalization is treated as a GC root for the
     // subsequent mark pass.
     HandleReMarkPass();
+    fprintf(stderr, "Collect: after HandleReMarkPass\n"); fflush(stderr);
     CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_remark_done");
 
     // Phase 4: Sweep all pages (parallel when beneficial).
@@ -1934,6 +1938,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         }
     }
     total_reclaimed += loh_reclaimed;
+    fprintf(stderr, "Collect: after Phase4 sweep, reclaimed=%llu\n", (unsigned long long)total_reclaimed); fflush(stderr);
 
     // LOH compaction (opt-in, controlled by CompactMode).
     // Relocates live LOH segments to reduce fragmentation.
@@ -1979,9 +1984,11 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
             GcRelocateHandles(loh_relocs);
         }
     }
+    fprintf(stderr, "Collect: after LOH\n"); fflush(stderr);
 
     // Phase 4b: Compaction (when fragmentation exceeds threshold).
     CompactMode compact_mode = DecideCompactMode();
+    fprintf(stderr, "Collect: compact_mode=%d\n", (int)compact_mode); fflush(stderr);
 
     if (compact_mode == CompactMode::CROSS_PAGE) {
         CHAOS_IL2CPP_LOG_INFO_M("OldGen", "cross_page_compact_mode_enabled");
@@ -1999,6 +2006,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     auto pause_end = std::chrono::steady_clock::now();
     uint64_t pause_ns = static_cast<uint64_t>(
         std::chrono::duration_cast<std::chrono::nanoseconds>(pause_end - pause_start).count());
+    fprintf(stderr, "Collect: pause_ns=%llu\n", (unsigned long long)pause_ns); fflush(stderr);
 
     CHAOS_IL2CPP_SIZE marked_count = static_cast<CHAOS_IL2CPP_SIZE>(
         marked_count_.exchange(0, std::memory_order_relaxed));
@@ -2011,15 +2019,18 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         total_reclaimed,
         finalizers_run,
         pause_ns);
+    fprintf(stderr, "Collect: after GcRecordFullCollection\n"); fflush(stderr);
 
     // Record into scheduler with actual heap size for full GC trigger decisions.
     g_gc_scheduler.RecordFullCollection(total_heap_bytes, pause_ns);
+    fprintf(stderr, "Collect: after scheduler\n"); fflush(stderr);
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_done reclaimed={0} pause_ns={1}",
         static_cast<unsigned long long>(total_reclaimed), pause_ns);
 
     // Fire GC_FULL_DONE event.
     GcFireEvent(GcEvent::GC_FULL_DONE);
+    fprintf(stderr, "Collect: exit OK\n"); fflush(stderr);
 }
 
 bool MarkSweepOldGen::CollectFull() {
