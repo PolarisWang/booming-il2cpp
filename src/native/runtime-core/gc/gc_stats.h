@@ -37,6 +37,7 @@ struct GcStats {
     std::atomic<uint64_t> full_objects_marked{0};
     std::atomic<uint64_t> full_bytes_reclaimed{0};
     std::atomic<uint64_t> full_finalizers_run{0};
+    std::atomic<CHAOS_IL2CPP_SIZE> finalization_pending_count{0};
     std::atomic<uint64_t> full_pause_ns{0};
 
     // ── Allocation (process-wide aggregate) ───────────────────────
@@ -117,6 +118,7 @@ struct GcSnapshot {
     uint64_t full_objects_marked;
     uint64_t full_bytes_reclaimed;
     uint64_t full_finalizers_run;
+    int32_t finalization_pending_count;
     uint64_t alloc_total;
     uint64_t alloc_bytes;
     uint64_t alloc_oversized;

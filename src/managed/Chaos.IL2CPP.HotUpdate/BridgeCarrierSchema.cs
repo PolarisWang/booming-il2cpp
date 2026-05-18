@@ -14,6 +14,9 @@ public enum BridgeCarrierKind
 {
     Void = 0,
     Int32 = 1,
+    Int64 = 7,
+    Float = 8,
+    Double = 9,
     String = 2,
     Object = 3,
     ByRefInt32 = 4,

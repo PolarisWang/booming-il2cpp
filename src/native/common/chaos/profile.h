@@ -39,6 +39,7 @@
 #include <cstring>
 #include <cstdio>
 #include <atomic>
+#include <new>
 #include <intrin.h>
 
 #ifdef _MSC_VER
@@ -70,8 +71,8 @@
 namespace chaos::il2cpp::common {
 
 // ── Config ───────────────────────────────────────────────
-constexpr int kProfileMaxSlots   = 64;
-constexpr int kProfileHashSize   = 128;  // 2× for low collision rate
+constexpr int kProfileMaxSlots   = 128;
+constexpr int kProfileHashSize   = 256;  // 2× for low collision rate
 constexpr int kProfileMaxThreads = 64;   // max concurrent threads tracked
 
 // ── Per-slot accumulator ─────────────────────────────────
@@ -108,13 +109,35 @@ extern thread_local ThreadProfileData g_tls_profile;
 extern std::atomic<ThreadProfileData*> g_profile_threads[kProfileMaxThreads];
 extern std::atomic<int> g_profile_thread_count;
 
+// Retired thread data node: preserves a thread's profile data after
+// the thread exits so that ProfileDump still sees its accumulators.
+// Linked into a lock-free singly-linked list (retired_list_head).
+struct RetiredProfileNode {
+    ThreadProfileData data;
+    RetiredProfileNode* next{nullptr};
+};
+extern std::atomic<RetiredProfileNode*> g_retired_profile_head;
+
 // Thread registration — called once per thread on first PROFILE_SCOPE use.
 //
-// Thread unregistration — clears the global registry entry so that ProfileDump
-// does not dereference dangling pointers to freed thread_local storage.
+// Thread unregistration — preserves the accumulated data in the retired
+// list so that ProfileDump still sees it after thread exit, then clears
+// the live registry entry to avoid dangling-pointer dereference.
 inline void UnregisterThread(ThreadProfileData& data) noexcept {
     int slot = data.registration_slot;
     if (slot >= 0 && slot < kProfileMaxThreads) {
+        // Snapshot into retired list before clearing the live entry.
+        auto* node = new (std::nothrow) RetiredProfileNode();
+        if (node != nullptr) {
+            std::memcpy(&node->data, &data, sizeof(ThreadProfileData));
+            node->data.registration_slot = -1;  // not re-registered
+            // Lock-free push to retired list head.
+            RetiredProfileNode* expected = g_retired_profile_head.load(std::memory_order_acquire);
+            do {
+                node->next = expected;
+            } while (!g_retired_profile_head.compare_exchange_weak(
+                expected, node, std::memory_order_release, std::memory_order_acquire));
+        }
         g_profile_threads[slot].store(nullptr, std::memory_order_release);
         data.registration_slot = -1;
     }
@@ -260,6 +283,34 @@ inline void ProfileDump() noexcept {
         }
     }
 
+    // Aggregate data from retired (exited) threads.
+    for (auto* node = g_retired_profile_head.load(std::memory_order_acquire);
+         node != nullptr; node = node->next) {
+        for (int si = 0; si < node->data.slot_count; ++si) {
+            const auto& src = node->data.slots[si];
+            if (src.name == nullptr || src.call_count == 0) continue;
+
+            int ai = 0;
+            for (; ai < agg_count; ++ai) {
+                if (agg[ai].name == src.name ||
+                    std::strcmp(agg[ai].name, src.name) == 0) break;
+            }
+            if (ai == agg_count) {
+                if (ai >= kProfileMaxSlots) break;
+                agg[ai].name  = src.name;
+                agg[ai].total = 0;
+                agg[ai].count = 0;
+                agg[ai].minv  = ~0ULL;
+                agg[ai].maxv  = 0;
+                ++agg_count;
+            }
+            agg[ai].total += src.total_cycles;
+            agg[ai].count += src.call_count;
+            if (src.min_cycles < agg[ai].minv) agg[ai].minv = src.min_cycles;
+            if (src.max_cycles > agg[ai].maxv) agg[ai].maxv = src.max_cycles;
+        }
+    }
+
     for (int i = 0; i < agg_count; ++i) {
         const auto& s = agg[i];
         if (s.count == 0) continue;
@@ -309,6 +360,16 @@ inline void ProfileReset() noexcept {
     g_profile_thread_count.store(0, std::memory_order_release);
     for (int ti = 0; ti < kProfileMaxThreads; ++ti) {
         g_profile_threads[ti].store(nullptr, std::memory_order_release);
+    }
+
+    // Free retired nodes — data is intentionally lost on explicit reset.
+    while (auto* old_head = g_retired_profile_head.exchange(nullptr,
+            std::memory_order_acq_rel)) {
+        while (old_head != nullptr) {
+            auto* next = old_head->next;
+            delete old_head;
+            old_head = next;
+        }
     }
 }
 

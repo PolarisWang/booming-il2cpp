@@ -38,26 +38,69 @@ enum class ManagedThreadPriority : int32_t {
 /// Allocated per thread, linked into a lock-free global list for
 /// GC thread enumeration.  TLS pointers provide O(1) self-identity
 /// without any lock or atomic operation on the fast path.
+///
+/// == Safepoint protocol ==
+/// Generation-based (even = idle, odd = GC active).  The initiator
+/// toggles generation odd and waits for each thread's suspend_ack.
+/// Threads check suspend_seq in SafepointPoll, set suspend_ack, and
+/// wait on suspend_event.  APC fallback on Windows handles threads
+/// stuck in native code without safepoint polls.
 struct ManagedThread {
     int32_t                  managed_id;          // Unique thread ID (main = 1)
     void*                    managed_object;      // System.Thread ref (nullable)
     bool                     is_running;          // false after UnregisterThread
     std::atomic<ManagedThread*> next;             // Lock-free list link
-    /// Generation-based GC safepoint cooperation (Scheme C).
+
+    // ── GC mode ──────────────────────────────────────────────────
     std::atomic<uint32_t>    gc_mode{0};          // 0=COOPERATIVE, 1=PREEMPTIVE
-    uint32_t                 last_seen_gen{0};     // Last confirmed generation
+
+    // ── Per-thread safepoint handshake ───────────────────────────
+    /// Non-zero = safepoint is requested.  Written by the safepoint
+    /// initiator (RequestGlobalSafepoint), read by SafepointPoll.
+    /// 0 means no safepoint in progress — the common fast path.
+    std::atomic<uint32_t>    suspend_seq{0};
+
+    /// Written by the thread in SafepointPoll to acknowledge suspend_seq.
+    /// Read (and cleared at release) by the safepoint initiator.
+    std::atomic<uint32_t>    suspend_ack{0};
+
+    /// Event handle for event-based safepoint wait (infinite wait,
+    /// zero CPU).  Created in RegisterThread, closed in UnregisterThread.
+    /// Set by ReleaseGlobalSafepoint to wake all waiting threads.
+#if defined(_WIN32) || defined(_WIN64)
+    void* suspend_event{nullptr};  // HANDLE (Windows Event)
+#else
+    void* suspend_event{nullptr};   // pthread_cond_t* (POSIX)
+    void* suspend_mutex{nullptr};   // pthread_mutex_t* (POSIX, paired with suspend_event)
+#endif
+
+    // ── Legacy fields (kept for transition compat) ──────────────
+    uint32_t                 last_seen_gen{0};     // Legacy: generation-based confirm
+    bool                     at_safepoint{false};  // Legacy: safepoint flag
+
+    // ── Thread abort / interrupt ─────────────────────────────────
     std::atomic<bool>        pending_abort{false};    // Thread.Abort pending flag
     std::atomic<bool>        pending_interrupt{false}; // Thread.Interrupt pending flag
+
+    // ── Thread metadata ─────────────────────────────────────────
     bool                     is_background{false};    // Thread.IsBackground flag
-    bool                     is_threadpool{false};    // ThreadPool worker flag (IsThreadPoolThread)
-    ManagedThreadState       managed_state{ManagedThreadState::Unstarted};  // ThreadState
-    ManagedThreadPriority    priority{ManagedThreadPriority::Normal};       // ThreadPriority
-    bool                     at_safepoint{false}; // Currently paused at safepoint (legacy, kept for compat)
-    uint32_t                 safepoint_generation{0}; // Last completed GC generation (legacy)
-    /// TLAB range for young GC scanning (Phase 2).
-    /// Set in NurseryAllocateSlow before GcYoungCollection, cleared after.
+    bool                     is_threadpool{false};    // ThreadPool worker flag
+    ManagedThreadState       managed_state{ManagedThreadState::Unstarted};
+    ManagedThreadPriority    priority{ManagedThreadPriority::Normal};
+
+    // ── OS handle for APC/thread ops ─────────────────────────────┐
+    /// OS thread handle.  Populated on RegisterThread.
+    /// Used for QueueUserAPC (safepoint fallback on Windows).
+    void* os_handle{nullptr};
+
+    // ── TLAB state (backed up across young GC safepoint) ────────
+    /// TLAB range start; read/written by gc_region.cpp across
+    /// GcYoungCollection, cleared by gc_young_collector.cpp via
+    /// EnumerateThreads after nursery sweep.
     char* tlab_start{nullptr};
+    /// TLAB current bump pointer; same protocol as tlab_start.
     char* tlab_current{nullptr};
+
     /// Stack bounds for conservative root scanning during full GC.
     /// Populated in RegisterThread, read-only after that.
     void* stack_base{nullptr};   // High address of the thread's stack
@@ -114,10 +157,14 @@ constexpr uint32_t kGcModePreemptive  = 1;
 /// released.  Threads that are inside native AOT frames (which lack
     // ── Generation-based GC safepoint ───────────────────────────────────
 
-    /// Check if GC needs attention — generation-based fast path.
+    /// Check if GC safepoint is active — per-thread suspend_seq check.
     /// Returns true if the calling thread should yield for GC.
-    /// Cost: single atomic load + compare (L1 hit < 1 ns).
-    bool SafepointRequested() noexcept;
+    /// Cost: TLS load + single atomic load (~1 ns when no GC active).
+    inline bool SafepointRequested() noexcept {
+        auto* thread = tls_this_thread;
+        return thread != nullptr &&
+               thread->suspend_seq.load(std::memory_order_acquire) != 0;
+    }
 
     /// Called at GC safe points (loop back-edges, method calls).
     /// If a GC safepoint is active, the thread acknowledges and spins until

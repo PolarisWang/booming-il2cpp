@@ -2,16 +2,22 @@
   "assembly": "System.Private.CoreLib",
   "mode": "family-entrypoint",
   "total": 1,
-  "passed": 0,
-  "failed": 1,
+  "passed": 1,
+  "failed": 0,
   "results": [
     {
-      "family": "System.Private.CoreLib",
+      "family": "rcw-basic",
       "config_tier": "CHECK",
-      "steps": {},
-      "success": false,
-      "error": "no method subject IDs"
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 7,
+      "entryPointSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Run:System.Void(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\build-output\\RcwBasicSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-17T14:53:48"
+  "timestamp": "2026-05-18T03:02:01"
 }

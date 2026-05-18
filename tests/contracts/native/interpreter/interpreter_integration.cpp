@@ -187,31 +187,38 @@ int main()
 
     // Codegen VTable path tests (using RegisterCodegenVTable)
     std::cout << "t32" << std::endl; TEST(Test_CodegenVTableDirect);
-    TEST(Test_CodegenVTableInheritance);
-    TEST(Test_CodegenVTableInterfaceDispatch);
+    std::cout << "t32_inherit" << std::endl; TEST(Test_CodegenVTableInheritance);
+    std::cout << "t32_iface" << std::endl; TEST(Test_CodegenVTableInterfaceDispatch);
 
     // Hot-update VTable path test (RegisterHotUpdateVTable)
-    TEST(Test_HotUpdateVTableResolution);
+    std::cout << "t32_hot" << std::endl; bool hot_ok = Test_HotUpdateVTableResolution(); std::cout << "t32_hot_done=" << hot_ok << std::endl; if (!hot_ok) ++failures;
 
     // Phase 9b+: Interface offset cache + runtime_iface_map tests
-    TEST(Test_ChaosFindInterfaceOffset);
-    TEST(Test_HotUpdateVTableInterfaceResolution);
+    std::cout << "t33" << std::endl; TEST(Test_ChaosFindInterfaceOffset);
+    std::cout << "t34" << std::endl; TEST(Test_HotUpdateVTableInterfaceResolution);
 
     // SEH exception handling tests
-    TEST(TestThrowUnhandled);
-    TEST(TestThrowCatch);
-    TEST(TestThrowFinallyUnwind);
-    TEST(TestLeaveFinally);
-    TEST(TestRethrow);
+    std::cout << "t35" << std::endl; TEST(TestThrowUnhandled);
+    std::cout << "t36" << std::endl; TEST(TestThrowCatch);
+    std::cout << "t37" << std::endl; TEST(TestThrowFinallyUnwind);
+    std::cout << "t38" << std::endl; TEST(TestLeaveFinally);
+    std::cout << "t39" << std::endl; TEST(TestRethrow);
+
+    std::cout << "t40" << std::endl;
 
     // Runtime-generic-method simulation tests (bridge core logic)
-    TEST(TestRuntimeMethodExecute);
-    TEST(TestRuntimeMethodReturnValueDispatch);
-    TEST(TestRuntimeMethodTypeParamResolution);
-    TEST(TestRuntimeMethodExceptionPropagation);
+    std::cout << "t41" << std::endl; TEST(TestRuntimeMethodExecute);
+    std::cout << "t42" << std::endl; TEST(TestRuntimeMethodReturnValueDispatch);
+    std::cout << "t43" << std::endl; TEST(TestRuntimeMethodTypeParamResolution);
+    std::cout << "t44" << std::endl; TEST(TestRuntimeMethodExceptionPropagation);
 
     // Struct value type tests
-    TEST(TestStructReturnValue);
+    std::cout << "t45" << std::endl; TEST(TestStructReturnValue);
+
+    // Phase 8: Dispatch callback integration tests
+    std::cout << "t46" << std::endl; TEST(TestDispatchBasic);
+    std::cout << "t47" << std::endl; TEST(TestDispatchException);
+    std::cout << "t48" << std::endl; TEST(TestDispatchArgs);
 
     // Phase 8: Dispatch callback integration tests
     TEST(TestDispatchBasic);
@@ -219,16 +226,16 @@ int main()
     TEST(TestDispatchArgs);
 
     // New interpreter VM feature tests
-    TEST(TestFloatBlt);
-    TEST(TestFloatBgt);
-    TEST(TestFloatBle);
-    TEST(TestFloatBge);
-    TEST(TestLdArgA_RefSemantics);
-    TEST(TestLdLocA_RefSemantics);
-    TEST(TestInterfaceCastClass);
-    TEST(TestInterfaceIsInst);
-    TEST(TestInterfaceVtableDispatch);
-    TEST(Test_MethodReplacementDispatch);
+    std::cout << "t49" << std::endl; TEST(TestFloatBlt);
+    std::cout << "t50" << std::endl; TEST(TestFloatBgt);
+    std::cout << "t51" << std::endl; TEST(TestFloatBle);
+    std::cout << "t52" << std::endl; TEST(TestFloatBge);
+    std::cout << "t53" << std::endl; TEST(TestLdArgA_RefSemantics);
+    std::cout << "t54" << std::endl; TEST(TestLdLocA_RefSemantics);
+    std::cout << "t55" << std::endl; TEST(TestInterfaceCastClass);
+    std::cout << "t56" << std::endl; TEST(TestInterfaceIsInst);
+    std::cout << "t57" << std::endl; TEST(TestInterfaceVtableDispatch);
+    std::cout << "t58" << std::endl; TEST(Test_MethodReplacementDispatch);
 
     std::cout << "interpreter-integration=failures=" << failures << std::endl;
 
@@ -718,20 +725,17 @@ bool TestExtendedLdLoc()
 bool TestCallVirtDirectResolution()
 {
     using namespace chaos::il2cpp::vtable_registry;
-    std::cout << "  t30a" << std::endl;
 
     // Register base class vtable: type_token=0x100, method_token=0x200 → 0xBEEF
-    VTableSlot base_slots[] = {
+    static VTableSlot base_slots[] = {
         { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) }
     };
-    TypeVTable base_vtable = {};
+    static TypeVTable base_vtable = {};
     base_vtable.type_token = 0x100u;
     base_vtable.base_token = 0u;
     base_vtable.slot_count = 1u;
     base_vtable.slots = base_slots;
-    std::cout << "  t30b" << std::endl;
     RegisterTypeVTable(&base_vtable);
-    std::cout << "  t30c" << std::endl;
 
     // Build IRMethod manually: ldarg.0 (this) → callvirt method_token=0x200
     IRMethod method;
@@ -746,58 +750,48 @@ bool TestCallVirtDirectResolution()
     callvirt.secondary_index = static_cast<CHAOS_IL2CPP_SIZE>(0x200u);  // declared method token
     callvirt.arg_count = 1u;  // just 'this'
     method.instructions.push_back(callvirt);
-    std::cout << "  t30d" << std::endl;
 
     // Create an object whose type token matches the registered vtable.
     auto* storage = new InterpreterObject();
     storage->type_token = 0x100u;
     storage->fields.resize(1u);
-    std::cout << "  t30e" << std::endl;
 
     ExecutionFrame frame;
     frame.arguments.push_back(InterpreterValue::from_obj(storage));
 
     const InterpreterVM vm = {};
-    std::cout << "  t30f" << std::endl;
     ExecutionResult result = vm.Execute(method, &frame);
-    std::cout << "  t30g " << result.needs_external_dispatch << " " << result.call_target << std::endl;
 
     bool ok = result.needs_external_dispatch &&
            result.call_target == reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu));
-    std::cout << "  t30h " << ok << std::endl;
     return ok;
 }
 
 bool TestCallVirtInheritanceChain()
 {
     using namespace chaos::il2cpp::vtable_registry;
-    std::cout << "  t31a" << std::endl;
 
     // Register base vtable: type_token=0x100, method_token=0x200 → 0xBEEF
-    VTableSlot base_slots[] = {
+    static VTableSlot base_slots[] = {
         { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) }
     };
-    TypeVTable base_vtable = {};
+    static TypeVTable base_vtable = {};
     base_vtable.type_token = 0x100u;
     base_vtable.base_token = 0u;
     base_vtable.slot_count = 1u;
     base_vtable.slots = base_slots;
-    std::cout << "  t31b" << std::endl;
     RegisterTypeVTable(&base_vtable);
-    std::cout << "  t31c" << std::endl;
 
     // Register derived vtable: type_token=0x101, base_token=0x100, method_token=0x200 → 0xCAFE
-    VTableSlot derived_slots[] = {
+    static VTableSlot derived_slots[] = {
         { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xCAFEu)) }
     };
-    TypeVTable derived_vtable = {};
+    static TypeVTable derived_vtable = {};
     derived_vtable.type_token = 0x101u;
     derived_vtable.base_token = 0x100u;
     derived_vtable.slot_count = 1u;
     derived_vtable.slots = derived_slots;
-    std::cout << "  t31d" << std::endl;
     RegisterTypeVTable(&derived_vtable);
-    std::cout << "  t31e" << std::endl;
 
     // Build IRMethod: ldarg.0 → callvirt method_token=0x200
     IRMethod method;
@@ -818,20 +812,15 @@ bool TestCallVirtInheritanceChain()
     storage->type_token = 0x101u;
     storage->fields.resize(1u);
 
-    std::cout << "  t31f" << std::endl;
     ExecutionFrame frame;
     frame.arguments.push_back(InterpreterValue::from_obj(storage));
-    std::cout << "  t31g" << std::endl;
 
     const InterpreterVM vm = {};
-    std::cout << "  t31h" << std::endl;
     ExecutionResult result = vm.Execute(method, &frame);
-    std::cout << "  t31i " << result.needs_external_dispatch << " " << result.call_target << std::endl;
 
     // Must resolve to the DERIVED class override (0xCAFE), not base (0xBEEF).
     bool ok = result.needs_external_dispatch &&
            result.call_target == reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xCAFEu));
-    std::cout << "  t31j " << ok << std::endl;
     return ok;
 }
 
@@ -1581,19 +1570,20 @@ bool TestInterfaceCastClass()
     using namespace chaos::il2cpp::vtable_registry;
 
     // Register an interface type vtable: type_token=0x200, type_shape=interface
-    // Object type: type_token=0x100, base_token=0, iface_map includes stable_id matching interface
+    // Object type: type_token=0x550 (unique, avoids conflict with t30/t31's 0x100),
+    // base_token=0, iface_map includes stable_id matching interface
     const CHAOS_IL2CPP_UINT64 kIfaceStableId = 0xABCD1234ULL;
     CHAOS_IL2CPP_UINT64 obj_stable_id = 0xDEADBEEFULL;
 
     // Object type's interface map entry
-    ChaosIl2cpp::Common::InterfaceMapEntry obj_iface_entries[] = {
+    static ChaosIl2cpp::Common::InterfaceMapEntry obj_iface_entries[] = {
         { kIfaceStableId, 0u, 0u }
     };
     // Dummy slot (MSVC requires non-zero array)
-    VTableSlot dummy_slot = { 1u, nullptr };
-    VTableSlot obj_slots[1] = { dummy_slot };
-    TypeVTable obj_vtable = {};
-    obj_vtable.type_token = 0x100u;
+    static VTableSlot dummy_slot = { 1u, nullptr };
+    static VTableSlot obj_slots[1] = { dummy_slot };
+    static TypeVTable obj_vtable = {};
+    obj_vtable.type_token = 0x550u;
     obj_vtable.base_token = 0u;
     obj_vtable.slot_count = 1u;
     obj_vtable.slots = obj_slots;
@@ -1604,8 +1594,8 @@ bool TestInterfaceCastClass()
     RegisterTypeVTable(&obj_vtable);
 
     // Register interface type vtable (with matching stable_id)
-    VTableSlot iface_slots[1] = { dummy_slot };
-    TypeVTable iface_vtable = {};
+    static VTableSlot iface_slots[1] = { dummy_slot };
+    static TypeVTable iface_vtable = {};
     iface_vtable.type_token = 0x200u;
     iface_vtable.base_token = 0u;
     iface_vtable.slot_count = 1u;
@@ -1622,9 +1612,9 @@ bool TestInterfaceCastClass()
     IRInstruction cast; cast.op_code = IROpCode::CastClass; cast.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(0x200u); method.instructions.push_back(cast);
     IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
 
-    // Create object with type_token = 0x100
+    // Create object with type_token = 0x550
     auto* storage = new InterpreterObject();
-    storage->type_token = 0x100u;
+    storage->type_token = 0x550u;
 
     ExecutionFrame frame;
     frame.arguments.push_back(InterpreterValue::from_obj(storage));
@@ -1641,12 +1631,13 @@ bool TestInterfaceIsInst()
 {
     using namespace chaos::il2cpp::vtable_registry;
 
-    VTableSlot dummy_slot2 = { 1u, nullptr };
-    VTableSlot obj_slots2[1] = { dummy_slot2 };
+    static VTableSlot dummy_slot2 = { 1u, nullptr };
+    static VTableSlot obj_slots2[1] = { dummy_slot2 };
 
-    // Object type: type_token=0x100, no iface_map
-    TypeVTable obj_vtable2 = {};
-    obj_vtable2.type_token = 0x100u;
+    // Object type: type_token=0x560, no iface_map — unique, avoids conflict with
+    // t30/t31's 0x100 used in CallVirtDirectResolution / InheritanceChain.
+    static TypeVTable obj_vtable2 = {};
+    obj_vtable2.type_token = 0x560u;
     obj_vtable2.base_token = 0u;
     obj_vtable2.slot_count = 1u;
     obj_vtable2.slots = obj_slots2;
@@ -1657,8 +1648,8 @@ bool TestInterfaceIsInst()
     RegisterTypeVTable(&obj_vtable2);
 
     // Interface type: type_token=0x300, type_shape=interface
-    VTableSlot iface_slots2[1] = { dummy_slot2 };
-    TypeVTable iface_vtable2 = {};
+    static VTableSlot iface_slots2[1] = { dummy_slot2 };
+    static TypeVTable iface_vtable2 = {};
     iface_vtable2.type_token = 0x300u;
     iface_vtable2.base_token = 0u;
     iface_vtable2.slot_count = 1u;
@@ -1674,7 +1665,7 @@ bool TestInterfaceIsInst()
     IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
 
     auto* storage = new InterpreterObject();
-    storage->type_token = 0x100u;
+    storage->type_token = 0x560u;
 
     ExecutionFrame frame;
     frame.arguments.push_back(InterpreterValue::from_obj(storage));
@@ -1696,19 +1687,19 @@ bool TestInterfaceVtableDispatch()
 
     // Derived: iface map + flat vtable
     // The iface entry maps the interface's first method (slot index 0) to vtable offset 2
-    ChaosIl2cpp::Common::InterfaceMapEntry impl_ifaces[] = {
+    static ChaosIl2cpp::Common::InterfaceMapEntry impl_ifaces[] = {
         { kIfaceStable, 2u, 1u }  // interface's method 0 → vtable slot 2
     };
-    void* impl_vtable_array[] = {
+    static void* impl_vtable_array[] = {
         nullptr, nullptr, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBABEu))
     };
 
-    VTableSlot slot0 = { 0x600u, nullptr };
-    VTableSlot slot1 = { 0x601u, nullptr };
-    VTableSlot slot2 = { 0x602u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBABEu)) };
-    VTableSlot base_slots_iface[3] = { slot0, slot1, slot2 };
+    static VTableSlot slot0 = { 0x600u, nullptr };
+    static VTableSlot slot1 = { 0x601u, nullptr };
+    static VTableSlot slot2 = { 0x602u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBABEu)) };
+    static VTableSlot base_slots_iface[3] = { slot0, slot1, slot2 };
 
-    TypeVTable derived_vtable_iface = {};
+    static TypeVTable derived_vtable_iface = {};
     derived_vtable_iface.type_token = 0x500u;
     derived_vtable_iface.base_token = 0u;
     derived_vtable_iface.slot_count = 3u;
@@ -1722,9 +1713,9 @@ bool TestInterfaceVtableDispatch()
     RegisterTypeVTable(&derived_vtable_iface);
 
     // Register interface: type_token=0x400, type_shape=interface
-    VTableSlot iface_slot = { 0x700u, nullptr };
-    VTableSlot iface_slots3[1] = { iface_slot };
-    TypeVTable iface_vtable3 = {};
+    static VTableSlot iface_slot = { 0x700u, nullptr };
+    static VTableSlot iface_slots3[1] = { iface_slot };
+    static TypeVTable iface_vtable3 = {};
     iface_vtable3.type_token = 0x400u;
     iface_vtable3.base_token = 0u;
     iface_vtable3.slot_count = 1u;
@@ -1769,13 +1760,11 @@ bool TestInterfaceVtableDispatch()
 bool Test_CodegenVTableDirect()
 {
     using namespace chaos::il2cpp::vtable_registry;
-    std::cout << "  t32a" << std::endl;
 
-    VTableSlot slots[] = {
+    static VTableSlot slots[] = {
         { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) }
     };
-    const void* vtable_array[] = { reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) };
-    std::cout << "  t32b" << std::endl;
+    static const void* vtable_array[] = { reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) };
 
     VTableDescriptorV0 desc;
     std::memset(&desc, 0, sizeof(desc));
@@ -1787,10 +1776,8 @@ bool Test_CodegenVTableDirect()
     desc.vtable_array   = vtable_array;
     desc.vtable_length  = 1u;
     desc.type_shape     = 1;
-    std::cout << "  t32c" << std::endl;
 
     RegisterCodegenVTable(&desc);
-    std::cout << "  t32d" << std::endl;
 
     // Build IR: ldarg.0 → callvirt method_token=0x200
     IRMethod method;
@@ -1811,8 +1798,9 @@ bool Test_CodegenVTableDirect()
     const InterpreterVM vm = {};
     ExecutionResult result = vm.Execute(method, &frame);
 
-    return result.needs_external_dispatch &&
+    bool t32_ok = result.needs_external_dispatch &&
            result.call_target == reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu));
+    return t32_ok;
 }
 
 bool Test_CodegenVTableInheritance()
@@ -1821,10 +1809,10 @@ bool Test_CodegenVTableInheritance()
 
     // Base type: type_token=0x610, method 0x200 → 0xBEEF (unique token avoids
     // dangling-pointer conflict with existing tests using 0x100-0x101)
-    VTableSlot base_slots[] = {
+    static VTableSlot base_slots[] = {
         { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) }
     };
-    const void* base_vtable_array[] = { reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) };
+    static const void* base_vtable_array[] = { reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBEEFu)) };
 
     VTableDescriptorV0 base_desc;
     std::memset(&base_desc, 0, sizeof(base_desc));
@@ -1839,10 +1827,10 @@ bool Test_CodegenVTableInheritance()
     RegisterCodegenVTable(&base_desc);
 
     // Derived type: type_token=0x611, base_token=0x610, method 0x200 → 0xCAFE
-    VTableSlot derived_slots[] = {
+    static VTableSlot derived_slots[] = {
         { 0x200u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xCAFEu)) }
     };
-    const void* derived_vtable_array[] = { reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xCAFEu)) };
+    static const void* derived_vtable_array[] = { reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xCAFEu)) };
 
     VTableDescriptorV0 derived_desc;
     std::memset(&derived_desc, 0, sizeof(derived_desc));
@@ -1887,7 +1875,7 @@ bool Test_CodegenVTableInterfaceDispatch()
     const CHAOS_IL2CPP_UINT64 kIfaceStable = 0xABCD0001ULL;
 
     // Interface map: interface's 2 methods (slot 0 & 1) map to vtable offset 1
-    chaos::il2cpp::common::InterfaceMapEntry iface_entries[] = {
+    static chaos::il2cpp::common::InterfaceMapEntry iface_entries[] = {
         { kIfaceStable, 1u, 2u }
     };
 
@@ -1895,14 +1883,14 @@ bool Test_CodegenVTableInterfaceDispatch()
     alignas(64) static char s_method0[64];
     alignas(64) static char s_method1[64];
     alignas(64) static char s_method2[64];
-    const void* vtable_array[] = {
+    static const void* vtable_array[] = {
         reinterpret_cast<void*>(&s_method0),
         reinterpret_cast<void*>(&s_method1),
         reinterpret_cast<void*>(&s_method2),
     };
 
     // VTableSlot array: type defines its own slot at method_token=0x20000001
-    VTableSlot obj_slots[] = {
+    static VTableSlot obj_slots[] = {
         { 0x20000001u, reinterpret_cast<void*>(&s_method0) }
     };
 
@@ -1969,18 +1957,13 @@ bool Test_HotUpdateVTableResolution()
 
     // ────────────────────────────────────────────────────────────────────────
     // Step 1: Register base type via RegisterCodegenVTable
-    //   type_token   = 0x630
-    //   slot_count   = 2
-    //   slots[0]     = { method_token=0x300, method_pointer=kBaseFn   }
-    //   slots[1]     = { method_token=0x301, method_pointer=kBaseFn2  }
-    //   vtable_array = { kBaseFn, kBaseFn2 }
     // ────────────────────────────────────────────────────────────────────────
     {
-        VTableSlot base_slots[] = {
+        static VTableSlot base_slots[] = {
             { 0x300u, kBaseFn },
             { 0x301u, kBaseFn2 }
         };
-        const void* base_vtable_array[] = { kBaseFn, kBaseFn2 };
+        static const void* base_vtable_array[] = { kBaseFn, kBaseFn2 };
 
         VTableDescriptorV0 base_desc;
         std::memset(&base_desc, 0, sizeof(base_desc));
@@ -2005,7 +1988,7 @@ bool Test_HotUpdateVTableResolution()
     //   but override method_token=0x300 → kOverrideFn
     // ────────────────────────────────────────────────────────────────────────
     {
-        VTableSlot override_slots[] = {
+        static VTableSlot override_slots[] = {
             { 0x300u, kOverrideFn }
         };
 
@@ -2034,8 +2017,12 @@ bool Test_HotUpdateVTableResolution()
         return false;
 
     // 3c: Derived type inherits non-overridden slot → kBaseFn2
-    if (ResolveVirtualMethodPointer(0x631u, 0x301u) != kBaseFn2)
-        return false;
+    {
+        void* resolved = ResolveVirtualMethodPointer(0x631u, 0x301u);
+        if (resolved != kBaseFn2) {
+            return false;
+        }
+    }
 
     // 3d: Unregistered type returns nullptr
     if (ResolveVirtualMethodPointer(0x999u, 0x300u) != nullptr)
@@ -2049,7 +2036,7 @@ bool Test_HotUpdateVTableResolution()
     // Step 4: Idempotency — re-registration is silently ignored
     // ────────────────────────────────────────────────────────────────────────
     {
-        VTableSlot override_slots[] = {
+        static VTableSlot override_slots[] = {
             { 0x300u, kOverrideFn }
         };
 

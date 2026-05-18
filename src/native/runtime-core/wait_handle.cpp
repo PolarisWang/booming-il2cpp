@@ -9,6 +9,11 @@
 #include <memory>
 #include <shared_mutex>
 #include <unordered_map>
+#include <vector>
+
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 namespace chaos::il2cpp::runtime_core::threading {
 
@@ -17,10 +22,14 @@ namespace chaos::il2cpp::runtime_core::threading {
 struct WaitHandleEntry {
     uint32_t id;
     WaitHandleType type;
-    bool signalled;
     bool active;
     CHAOS_IL2CPP_MUTEX mutex;
     CHAOS_IL2CPP_CONDITION_VARIABLE cv;
+#ifdef _WIN32
+    void* os_event{nullptr};  // HANDLE (CreateEvent)
+#else
+    bool signalled;
+#endif
 };
 
 // ── Global state ────────────────────────────────────────────────────────
@@ -54,6 +63,13 @@ int32_t WaitOnHandle(WaitHandleEntry* entry, int32_t timeout_ms) noexcept {
 
     GC_TRANSITION_TO_PREEMPTIVE();
 
+#ifdef _WIN32
+    DWORD ms = (timeout_ms < 0) ? INFINITE : static_cast<DWORD>(timeout_ms);
+    DWORD ret = WaitForSingleObject(static_cast<HANDLE>(entry->os_event), ms);
+    GC_TRANSITION_TO_COOPERATIVE();
+    if (thread) thread->managed_state = ManagedThreadState::Running;
+    return (ret == WAIT_OBJECT_0) ? 1 : (ret == WAIT_TIMEOUT) ? 0 : -1;
+#else
     std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
 
     if (entry->signalled) {
@@ -88,6 +104,7 @@ int32_t WaitOnHandle(WaitHandleEntry* entry, int32_t timeout_ms) noexcept {
     GC_TRANSITION_TO_COOPERATIVE();
     if (thread) thread->managed_state = ManagedThreadState::Running;
     return result;
+#endif
 }
 
 }  // anonymous namespace
@@ -107,8 +124,18 @@ uint32_t WaitHandleCreate(bool initial_state, WaitHandleType type) noexcept {
     auto entry = std::make_unique<WaitHandleEntry>();
     entry->id = id;
     entry->type = type;
-    entry->signalled = initial_state;
     entry->active = true;
+
+#ifdef _WIN32
+    bool manual_reset = (type == WaitHandleType::ManualResetEvent);
+    entry->os_event = CreateEventA(nullptr, manual_reset ? TRUE : FALSE,
+                                   initial_state ? TRUE : FALSE, nullptr);
+    if (entry->os_event == nullptr) {
+        return kInvalidWaitHandle;
+    }
+#else
+    entry->signalled = initial_state;
+#endif
 
     s_handles[id] = std::move(entry);
     return id;
@@ -121,7 +148,14 @@ bool WaitHandleClose(uint32_t handle_id) noexcept {
     if (entry == nullptr) return false;
 
     entry->active = false;
+#ifdef _WIN32
+    if (entry->os_event != nullptr) {
+        CloseHandle(static_cast<HANDLE>(entry->os_event));
+        entry->os_event = nullptr;
+    }
+#else
     entry->cv.notify_all();
+#endif
     // Note: entry pointer remains valid in the map (unique_ptr not released).
     return true;
 }
@@ -134,6 +168,9 @@ bool WaitHandleSet(uint32_t handle_id) noexcept {
     }
     if (entry == nullptr) return false;
 
+#ifdef _WIN32
+    SetEvent(static_cast<HANDLE>(entry->os_event));
+#else
     {
         std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
         entry->signalled = true;
@@ -144,6 +181,7 @@ bool WaitHandleSet(uint32_t handle_id) noexcept {
     } else {
         entry->cv.notify_all();
     }
+#endif
 
     return true;
 }
@@ -156,8 +194,12 @@ bool WaitHandleReset(uint32_t handle_id) noexcept {
     }
     if (entry == nullptr) return false;
 
+#ifdef _WIN32
+    ResetEvent(static_cast<HANDLE>(entry->os_event));
+#else
     std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
     entry->signalled = false;
+#endif
     return true;
 }
 
@@ -173,6 +215,33 @@ int32_t WaitHandleWaitOne(uint32_t handle_id, int32_t timeout_ms) noexcept {
 int32_t WaitHandleWaitAny(const uint32_t* handle_ids, uint32_t count, int32_t timeout_ms) noexcept {
     if (handle_ids == nullptr || count == 0) return -1;
 
+#ifdef _WIN32
+    // Gather native event handles (O(count) map lookups under shared lock).
+    std::vector<HANDLE> events;
+    events.reserve(count);
+    {
+        std::shared_lock<std::shared_mutex> lock(s_handle_table_mutex);
+        for (uint32_t i = 0; i < count; i++) {
+            auto it = s_handles.find(handle_ids[i]);
+            if (it != s_handles.end() && it->second->active && it->second->os_event != nullptr) {
+                events.push_back(static_cast<HANDLE>(it->second->os_event));
+            } else {
+                return -1;
+            }
+        }
+    }
+
+    GC_TRANSITION_TO_PREEMPTIVE();
+    DWORD ms = (timeout_ms < 0) ? INFINITE : static_cast<DWORD>(timeout_ms);
+    DWORD ret = WaitForMultipleObjects(static_cast<DWORD>(events.size()),
+                                        events.data(), FALSE, ms);
+    GC_TRANSITION_TO_COOPERATIVE();
+
+    if (ret >= WAIT_OBJECT_0 && ret < WAIT_OBJECT_0 + events.size()) {
+        return static_cast<int32_t>(ret - WAIT_OBJECT_0);
+    }
+    return -1;
+#else
     auto deadline = (timeout_ms >= 0)
         ? std::chrono::steady_clock::now() + std::chrono::milliseconds(timeout_ms)
         : std::chrono::steady_clock::time_point::max();
@@ -250,79 +319,35 @@ int32_t WaitHandleWaitAny(const uint32_t* handle_ids, uint32_t count, int32_t ti
 
     GC_TRANSITION_TO_COOPERATIVE();
     return -1;
+#endif
 }
 
 int32_t WaitHandleWaitAll(const uint32_t* handle_ids, uint32_t count, int32_t timeout_ms) noexcept {
     if (handle_ids == nullptr || count == 0) return -1;
 
-    auto deadline = (timeout_ms >= 0)
-        ? std::chrono::steady_clock::now() + std::chrono::milliseconds(timeout_ms)
-        : std::chrono::steady_clock::time_point::max();
-
-    // O(count) O(1) lookups under shared lock.
-    std::vector<WaitHandleEntry*> entries(count, nullptr);
+#ifdef _WIN32
+    // Gather native event handles.
+    std::vector<HANDLE> events;
+    events.reserve(count);
     {
         std::shared_lock<std::shared_mutex> lock(s_handle_table_mutex);
         for (uint32_t i = 0; i < count; i++) {
             auto it = s_handles.find(handle_ids[i]);
-            if (it != s_handles.end() && it->second->active) {
-                entries[i] = it->second.get();
+            if (it != s_handles.end() && it->second->active && it->second->os_event != nullptr) {
+                events.push_back(static_cast<HANDLE>(it->second->os_event));
+            } else {
+                return -1;
             }
         }
     }
-
-    // Poll once first.
-    bool all_signalled = true;
-    for (uint32_t i = 0; i < count; i++) {
-        if (entries[i] == nullptr) continue;
-        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
-        if (!entries[i]->signalled) {
-            all_signalled = false;
-            break;
-        }
-    }
-    if (all_signalled) return 0;
-
-    if (timeout_ms == 0) return -1;
 
     GC_TRANSITION_TO_PREEMPTIVE();
-
-    while (std::chrono::steady_clock::now() < deadline) {
-        bool all = true;
-        for (uint32_t i = 0; i < count; i++) {
-            if (entries[i] == nullptr) continue;
-            std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
-            if (!entries[i]->signalled) {
-                all = false;
-                break;
-            }
-        }
-        if (all) {
-            GC_TRANSITION_TO_COOPERATIVE();
-            return 0;
-        }
-
-        auto remaining = std::chrono::duration_cast<std::chrono::milliseconds>(
-            deadline - std::chrono::steady_clock::now());
-        if (remaining.count() <= 0) break;
-
-        for (uint32_t i = 0; i < count; i++) {
-            if (entries[i] == nullptr) continue;
-            std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
-            if (!entries[i]->signalled) {
-                entries[i]->cv.wait_for(lock, remaining, [&entries, count]() {
-                    for (uint32_t j = 0; j < count; j++) {
-                        if (entries[j] != nullptr && !entries[j]->signalled) return false;
-                    }
-                    return true;
-                });
-                break;
-            }
-        }
-    }
-
+    DWORD ms = (timeout_ms < 0) ? INFINITE : static_cast<DWORD>(timeout_ms);
+    DWORD ret = WaitForMultipleObjects(static_cast<DWORD>(events.size()),
+                                        events.data(), TRUE, ms);
     GC_TRANSITION_TO_COOPERATIVE();
-    return -1;
-}
+
+    return (ret == WAIT_OBJECT_0) ? 0 : -1;
+#else
 
 }  // namespace chaos::il2cpp::runtime_core::threading

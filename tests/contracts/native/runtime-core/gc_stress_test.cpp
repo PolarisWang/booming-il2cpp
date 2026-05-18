@@ -15,6 +15,8 @@
 #include <chaos/profile.h>
 
 #include "domain_unloader.h"
+#include "gc_bgc.h"
+#include "gc_bgc_inline.h"
 #include "gc_events.h"
 #include "gc_region.h"
 #include "gc_card_table.h"
@@ -1551,6 +1553,267 @@ static bool RunScenarioK(GcStatsSnapshot* stats_out) {
     return (completed == kKWorkers) && (total_fail == 0);
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// Scenario L: BGC concurrent mark stress
+// ════════════════════════════════════════════════════════════════════════════
+
+static constexpr int kLWorkers = 50;
+static constexpr int kLAllocsPerWorker = 192;
+static void* g_l_slot_pages[kLWorkers];
+
+static void worker_l(int thread_index, WorkerResult* result) {
+    RegisterWorker();
+    threading::EnterCooperativeMode();
+    if (!SetupTlsNursery()) {
+        std::snprintf(result->error_message, sizeof(result->error_message),
+                      "SetupTlsNursery failed for thread %d", thread_index);
+        UnregisterWorker();
+        return;
+    }
+    auto** slots = static_cast<void**>(g_l_slot_pages[thread_index]);
+    {
+        int spins = 0;
+        while (!g_bgc_is_marking.load(std::memory_order_acquire) && spins < 100000) {
+            std::this_thread::yield(); spins++;
+        }
+    }
+    for (int i = 0; i < kLAllocsPerWorker; ++i) {
+        result->allocations_attempted++;
+        size_t size = LcgSize(thread_index, i, 16, 4096);
+        size = (size + 7) & ~static_cast<size_t>(7);
+        void* p = NurseryAllocate(size);
+        if (!p) continue;
+        result->allocations_succeeded++;
+        WritePattern(p, size, thread_index, i);
+        if ((i & 3) == 0 && slots) {
+            int slot_idx = (i / 4) % 64;
+            BgcSatbPreWriteBarrier(&slots[slot_idx]);
+            slots[slot_idx] = p;
+        }
+        if ((i % kVerifyStep) == 0) {
+            result->pattern_verifications++;
+            if (!VerifyPattern(p, size, thread_index, i))
+                result->pattern_failures++;
+        }
+        if ((i & 15) == 15) threading::SafepointPoll();
+    }
+    threading::SafepointPoll();
+    UnregisterWorker();
+    result->completed = true;
+}
+
+static bool RunScenarioL(GcStatsSnapshot* stats_out) {
+    printf("\n  ── Scenario L: BGC concurrent mark stress (%d×%d, SATB cross-ref) ──\n",
+           kLWorkers, kLAllocsPerWorker);
+    GcStatsSnapshot before = SnapshotGcStats();
+    std::memset(g_l_slot_pages, 0, sizeof(g_l_slot_pages));
+    for (int i = 0; i < kLWorkers; i++)
+        g_l_slot_pages[i] = g_old_gen.Allocate(64 * sizeof(void*), true);
+    BgcController::Instance().Start();
+    std::vector<WorkerResult> results(kLWorkers);
+    std::vector<std::thread> workers;
+    for (int i = 0; i < kLWorkers; ++i)
+        workers.emplace_back(worker_l, i, &results[i]);
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    fprintf(stderr, "[L] starting BGC cycle\n");
+    BgcController::Instance().StartBgcCycle();
+    fprintf(stderr, "[L] BGC cycle started, waiting for workers\n");
+    for (auto& w : workers) { if (w.joinable()) w.join(); }
+    fprintf(stderr, "[L] workers done, ForceComplete\n");
+    { uint32_t gen = threading::RequestGlobalSafepoint();
+      BgcController::Instance().ForceComplete();
+      threading::ReleaseGlobalSafepoint(gen); }
+    fprintf(stderr, "[L] BGC cycle complete\n");
+    g_old_gen.Collect(nullptr, nullptr);
+    g_gc_scheduler.RecordFullCollection(0);
+    *stats_out = SnapshotGcStats();
+    int64_t total_alloc = 0, total_ver = 0, total_fail = 0;
+    int completed = 0;
+    for (auto& r : results) {
+        total_alloc += r.allocations_succeeded;
+        total_ver   += r.pattern_verifications;
+        total_fail  += r.pattern_failures;
+        if (r.completed) completed++;
+    }
+    printf("\n  Result: %lld allocs, %lld verified, %lld fails, workers=%d/%d\n",
+           (long long)total_alloc, (long long)total_ver, (long long)total_fail,
+           completed, kLWorkers);
+    g_last_pattern_failures = total_fail;
+    return (completed == kLWorkers) && (total_fail == 0);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// Scenario M: Parallel mark at scale
+// ════════════════════════════════════════════════════════════════════════════
+
+static constexpr int kMWorkers = 20;
+static constexpr int kMAllocsPerWorker = 256;
+static constexpr CHAOS_IL2CPP_SIZE kMAllocSize = 4096;
+static thread_local std::vector<void*> tls_m_ptrs;
+
+static void worker_m(int thread_index, WorkerResult* result) {
+    RegisterWorker();
+    threading::EnterCooperativeMode();
+    if (!SetupTlsNursery()) {
+        std::snprintf(result->error_message, sizeof(result->error_message),
+                      "SetupTlsNursery failed for thread %d", thread_index);
+        UnregisterWorker();
+        return;
+    }
+    tls_m_ptrs.clear();
+    tls_m_ptrs.reserve(static_cast<size_t>(kMAllocsPerWorker));
+    for (int i = 0; i < kMAllocsPerWorker; ++i) {
+        result->allocations_attempted++;
+        void* p = g_old_gen.Allocate(kMAllocSize, true);
+        if (!p) continue;
+        result->allocations_succeeded++;
+        WritePattern(p, kMAllocSize, thread_index, i);
+        tls_m_ptrs.push_back(p);
+    }
+    tls_m_ptrs.clear();
+    tls_m_ptrs.shrink_to_fit();
+    threading::SafepointPoll();
+    UnregisterWorker();
+    result->completed = true;
+}
+
+static bool RunScenarioM(GcStatsSnapshot* stats_out) {
+    printf("\n  ── Scenario M: Parallel mark at scale (%d×%d, %lluB ea) ──\n",
+           kMWorkers, kMAllocsPerWorker,
+           static_cast<unsigned long long>(kMAllocSize));
+    GcStatsSnapshot before = SnapshotGcStats();
+    fprintf(stderr, "[M] pre-filling old-gen\n");
+    std::vector<WorkerResult> results(kMWorkers);
+    std::vector<std::thread> workers;
+    for (int i = 0; i < kMWorkers; ++i)
+        workers.emplace_back(worker_m, i, &results[i]);
+    for (auto& w : workers) { if (w.joinable()) w.join(); }
+    auto pages = g_old_gen.TotalPages();
+    fprintf(stderr, "[M] pre-fill done: %llu pages\n", static_cast<unsigned long long>(pages));
+    if (pages < 64)
+        printf("  WARNING: only %llu pages (<64), parallel mark may not activate\n",
+               static_cast<unsigned long long>(pages));
+    fprintf(stderr, "[M] triggering full GC under safepoint\n");
+    { uint32_t gen = threading::RequestGlobalSafepoint();
+      g_old_gen.Collect(nullptr, nullptr);
+      threading::ReleaseGlobalSafepoint(gen); }
+    g_gc_scheduler.RecordFullCollection(0);
+    fprintf(stderr, "[M] full GC done\n");
+    *stats_out = SnapshotGcStats();
+    int64_t total_alloc = 0, total_fail = 0;
+    int completed = 0;
+    for (auto& r : results) {
+        total_alloc += r.allocations_succeeded;
+        total_fail  += r.pattern_failures;
+        if (r.completed) completed++;
+    }
+    uint64_t d_full = stats_out->full_collections > before.full_collections
+        ? stats_out->full_collections - before.full_collections : 0;
+    uint64_t d_marked = stats_out->full_marked > before.full_marked
+        ? stats_out->full_marked - before.full_marked : 0;
+    printf("\n  Result: %lld allocs, %lld fails, workers=%d/%d, pages=%llu, full_gc=%llu, marked=%llu\n",
+           (long long)total_alloc, (long long)total_fail,
+           completed, kMWorkers,
+           static_cast<unsigned long long>(pages),
+           static_cast<unsigned long long>(d_full),
+           static_cast<unsigned long long>(d_marked));
+    g_last_pattern_failures = total_fail;
+    return (completed == kMWorkers) && (total_fail == 0);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// Scenario N: SATB write barrier stress
+// ════════════════════════════════════════════════════════════════════════════
+
+static constexpr int kNWorkers = 30;
+static constexpr int kNWritesPerWorker = 1024;
+static constexpr int kNSlotsPerPage = 256;
+static constexpr int kNTargets = 200;
+static constexpr CHAOS_IL2CPP_SIZE kNSlotPageSize = 4096;
+static constexpr CHAOS_IL2CPP_SIZE kNTargetSize = 128;
+static void* g_n_slot_pages[kNWorkers];
+static void* g_n_targets[kNTargets];
+
+static void worker_n(int thread_index, WorkerResult* result) {
+    RegisterWorker();
+    threading::EnterCooperativeMode();
+    if (!SetupTlsNursery()) {
+        std::snprintf(result->error_message, sizeof(result->error_message),
+                      "SetupTlsNursery failed for thread %d", thread_index);
+        UnregisterWorker();
+        return;
+    }
+    void** slots = static_cast<void**>(g_n_slot_pages[thread_index]);
+    {
+        int spins = 0;
+        while (!g_bgc_is_marking.load(std::memory_order_acquire) && spins < 100000) {
+            std::this_thread::yield(); spins++;
+        }
+    }
+    for (int i = 0; i < kNWritesPerWorker; ++i) {
+        result->allocations_attempted++;
+        int slot_idx = static_cast<int>(LcgSize(thread_index, i, 0,
+            static_cast<size_t>(kNSlotsPerPage) - 1));
+        int target_idx = static_cast<int>(LcgSize(thread_index, i + 5000, 0,
+            static_cast<size_t>(kNTargets) - 1));
+        BgcSatbPreWriteBarrier(&slots[slot_idx]);
+        slots[slot_idx] = g_n_targets[target_idx];
+        result->allocations_succeeded++;
+        if ((i & 127) == 127) threading::SafepointPoll();
+    }
+    threading::SafepointPoll();
+    UnregisterWorker();
+    result->completed = true;
+}
+
+static bool RunScenarioN(GcStatsSnapshot* stats_out) {
+    printf("\n  ── Scenario N: SATB write barrier stress (%d×%d writes) ──\n",
+           kNWorkers, kNWritesPerWorker);
+    GcStatsSnapshot before = SnapshotGcStats();
+    fprintf(stderr, "[N] allocating slot pages and targets\n");
+    for (int i = 0; i < kNWorkers; ++i) {
+        g_n_slot_pages[i] = g_old_gen.Allocate(kNSlotPageSize, true);
+        if (g_n_slot_pages[i]) std::memset(g_n_slot_pages[i], 0, kNSlotPageSize);
+    }
+    for (int i = 0; i < kNTargets; ++i) {
+        g_n_targets[i] = g_old_gen.Allocate(kNTargetSize, true);
+        if (g_n_targets[i]) WritePattern(g_n_targets[i], kNTargetSize, i, 0);
+    }
+    BgcController::Instance().Start();
+    fprintf(stderr, "[N] starting BGC cycle\n");
+    BgcController::Instance().StartBgcCycle();
+    fprintf(stderr, "[N] BGC cycle started\n");
+    std::vector<WorkerResult> results(kNWorkers);
+    std::vector<std::thread> workers;
+    for (int i = 0; i < kNWorkers; ++i)
+        workers.emplace_back(worker_n, i, &results[i]);
+    for (auto& w : workers) { if (w.joinable()) w.join(); }
+    fprintf(stderr, "[N] workers done, ForceComplete\n");
+    { uint32_t gen = threading::RequestGlobalSafepoint();
+      BgcController::Instance().ForceComplete();
+      threading::ReleaseGlobalSafepoint(gen); }
+    fprintf(stderr, "[N] BGC cycle complete\n");
+    g_old_gen.Collect(nullptr, nullptr);
+    g_gc_scheduler.RecordFullCollection(0);
+    int target_fails = 0;
+    for (int i = 0; i < kNTargets; ++i) {
+        if (g_n_targets[i] && g_old_gen.IsInOldGen(g_n_targets[i])) {
+            if (!VerifyPattern(g_n_targets[i], kNTargetSize, i, 0)) target_fails++;
+        }
+    }
+    *stats_out = SnapshotGcStats();
+    int64_t total_writes = 0;
+    int completed = 0;
+    for (auto& r : results) {
+        total_writes += r.allocations_succeeded;
+        if (r.completed) completed++;
+    }
+    printf("\n  Result: %lld writes, %d target verify fails, workers=%d/%d\n",
+           (long long)total_writes, target_fails, completed, kNWorkers);
+    g_last_pattern_failures = target_fails;
+    return (completed == kNWorkers) && (total_writes > 0) && (target_fails == 0);
+}
+
 struct ScenarioInfo {
     const char* name;
     bool (*run)(GcStatsSnapshot* out);
@@ -1558,19 +1821,24 @@ struct ScenarioInfo {
     int allocs_per_worker;
 };
 
-static int run_scenarios() {
+/// Run all scenarios.  If @a start_from is > 0, skips earlier scenarios.
+/// Supports incremental validation without pre-existing scenario hangs.
+static int run_scenarios(int start_from = 0) {
     ScenarioInfo scenarios[] = {
-        {"baseline_concurrent",  RunScenarioA, kNumWorkerThreads, kAllocationsPerThread},
-        {"mixed_size",           RunScenarioB, kNumWorkerThreads, kAllocationsPerThread},
-        {"aggressive_young_gc",  RunScenarioC, kNumWorkerThreads, kAllocationsPerThread},
-        {"extended_gc_pressure", RunScenarioD, kDPressureWorkers, kDPressureAllocsPerThread},
-        {"domain_unload",        RunScenarioE, kEDomains,         kEAllocsPerDomain},
-        {"concurrent_pinned_root", RunScenarioF, kFWorkers,       kFAllocsPerThread},
-        {"oversized_objects",    RunScenarioG, kGWorkers,         kGAllocsPerThread},
-        {"domain_unload_storm",  RunScenarioH, kHWorkers,         kHAllocsPerDomain},
-        {"dependent_handle",     RunScenarioI, 1,                 kIHandleCount},
-        {"pinned_unpinned_mixed",RunScenarioJ, kJWorkers,         kJAllocsPerThread},
-        {"loh_sweep_verify",     RunScenarioK, kKWorkers,         kKAllocsPerThread},
+        {"baseline_concurrent",    RunScenarioA, kNumWorkerThreads, kAllocationsPerThread},
+        {"mixed_size",             RunScenarioB, kNumWorkerThreads, kAllocationsPerThread},
+        {"aggressive_young_gc",    RunScenarioC, kNumWorkerThreads, kAllocationsPerThread},
+        {"extended_gc_pressure",   RunScenarioD, kDPressureWorkers, kDPressureAllocsPerThread},
+        {"domain_unload",          RunScenarioE, kEDomains,         kEAllocsPerDomain},
+        {"concurrent_pinned_root", RunScenarioF, kFWorkers,         kFAllocsPerThread},
+        {"oversized_objects",      RunScenarioG, kGWorkers,         kGAllocsPerThread},
+        {"domain_unload_storm",    RunScenarioH, kHWorkers,         kHAllocsPerDomain},
+        {"dependent_handle",       RunScenarioI, 1,                 kIHandleCount},
+        {"pinned_unpinned_mixed",  RunScenarioJ, kJWorkers,         kJAllocsPerThread},
+        {"loh_sweep_verify",       RunScenarioK, kKWorkers,         kKAllocsPerThread},
+        {"bgc_concurrent_mark",    RunScenarioL, kLWorkers,         kLAllocsPerWorker},
+        {"parallel_mark_scale",    RunScenarioM, kMWorkers,         kMAllocsPerWorker},
+        {"satb_barrier_stress",    RunScenarioN, kNWorkers,         kNWritesPerWorker},
     };
     int num_scenarios = sizeof(scenarios) / sizeof(scenarios[0]);
 
@@ -1579,7 +1847,7 @@ static int run_scenarios() {
 
     OpenReport();
 
-    for (int s = 0; s < num_scenarios; ++s) {
+    for (int s = start_from; s < num_scenarios; ++s) {
         printf("\nScenario %d/%d: %s\n", s + 1, num_scenarios, scenarios[s].name);
 
         // Snapshot before.
@@ -1670,7 +1938,17 @@ static LONG WINAPI CrashHandler(EXCEPTION_POINTERS* ep) {
     return EXCEPTION_CONTINUE_SEARCH;  // Let the OS handle it (crash dump etc)
 }
 
-int main() {
+int main(int argc, char** argv) {
+    // Optional arguments:
+    //   --new-only   Run only scenarios L, M, N (indices 11-13)
+    //                Useful to avoid pre-existing hangs in A-K.
+    //   --all        Run all 14 scenarios (default).
+    int start_from = 0;
+    for (int a = 1; a < argc; a++) {
+        if (std::strcmp(argv[a], "--new-only") == 0) {
+            start_from = 11;  // Scenario L, M, N only
+        }
+    }
     // Use fully-buffered stdout with 64KB buffer to avoid pipe blocking.
     // _IONBF causes every log line to issue WriteFile, which blocks when the
     // pipe buffer is full.  _IOFBF with a large buffer means far fewer WriteFile
@@ -1684,7 +1962,9 @@ int main() {
 
     SetUnhandledExceptionFilter(CrashHandler);
 
-    int failures = run_scenarios();
+    ApplyStressScale();
+
+    int failures = run_scenarios(start_from);
 
     fprintf(stderr, "[DBG] run_scenarios returned %d\n", failures);
 

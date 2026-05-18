@@ -49,6 +49,28 @@ inline void BgcSatbPreWriteBarrier(void** slot) noexcept {
     if (old_obj == nullptr) [[likely]]
         return;
 
+    // ── SATB freeze check ───────────────────────────────────────
+    // When the BGC thread requests a freeze (near convergence), mutators
+    // flush their buffer and acknowledge to guarantee no new SATB entries
+    // are generated past this point.  The BGC thread then does a final
+    // drain and can safely conclude that all reachable objects are marked.
+    auto& ctrl = BgcController::Instance();
+    if (ctrl.satb_freeze_requested_.load(std::memory_order_acquire)) {
+        // Flush the current buffer to the global queue, then ack the freeze.
+        int pool_idx2 = tls_satb_buffer_index;
+        if (pool_idx2 >= 0) {
+            auto& buf2 = ctrl.GetSatbBuffer(pool_idx2);
+            uint32_t cnt2 = buf2.count.load(std::memory_order_acquire);
+            if (cnt2 > 0) {
+                BgcFlushSatbBuffer(buf2.entries, cnt2);
+                buf2.count.store(0, std::memory_order_release);
+            }
+        }
+        ctrl.satb_freeze_remaining_.fetch_sub(1, std::memory_order_acq_rel);
+        // Fall through: still record the current entry (the final drain
+        // will pick it up from the global queue after the ack).
+    }
+
     // Get or allocate the current thread's SATB buffer from the global pool.
     // Uses thread_local int index (~4 bytes) instead of a 4KB thread_local buffer.
     int pool_idx = tls_satb_buffer_index;

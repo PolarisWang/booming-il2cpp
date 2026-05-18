@@ -3,6 +3,11 @@
 
 namespace chaos::il2cpp::runtime_core {
 
+// Forward declarations from task_runner.cpp (threading sub-namespace)
+namespace threading {
+    void RegisterAsyncTaskRun() noexcept;
+}
+
 RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     const RuntimeInitParams* init_params,
     const RuntimeConfig* config,
@@ -44,6 +49,10 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
 
     // Start the BGC background thread for concurrent mark/sweep.
     BgcController::Instance().Start();
+
+    // Register ThreadPool-backed Task.Run so that async_task_run() in
+    // chaos_common delegates to the real implementation instead of stubbing.
+    threading::RegisterAsyncTaskRun();
 
     SetRuntimeMode(RuntimeMode::Aot);
     *out_runtime_state = runtime_state;

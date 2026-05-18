@@ -17,6 +17,10 @@ thread_local ThreadProfileData g_tls_profile;
 std::atomic<ThreadProfileData*> g_profile_threads[kProfileMaxThreads]{};
 std::atomic<int> g_profile_thread_count{0};
 
+// Retired thread data list: lock-free singly-linked list preserving profile
+// data from exited threads so ProfileDump still sees their accumulators.
+std::atomic<RetiredProfileNode*> g_retired_profile_head{nullptr};
+
 // TSC calibration state (lazily calibrated on first ProfileDump).
 double g_ns_per_cycle  = 0.0;
 bool   g_profile_calibrated = false;

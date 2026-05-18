@@ -2,8 +2,8 @@
   "family": "pinvoke-dllimport",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-17T13:17:52",
-  "duration_ms": 0,
+  "timestamp": "2026-05-18T08:03:36",
+  "duration_ms": 2,
   "overall_status": "failed",
   "stages": {
     "preflight": {
