@@ -33,7 +33,7 @@ public static partial class BufferMemoryNativeEntry
     public static void CustomEntryMethod3()
     {
         byte[] arr = new byte[] { 42, 100 };
-        if (arr[1] != 100) { _exitCode = 1; }
+        if (arr[1] != 100) { BufferMemorySubjects._exitCode = 1; }
     }
 
     // [9] System.Private.CoreLib/System.Buffer::SetByte

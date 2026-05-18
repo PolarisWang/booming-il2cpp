@@ -3,103 +3,109 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "CollectionsGenericCoreSubjects.dll",
+      "moduleName": "CollectionsGenericCorePatchEntry.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_0",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_0",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_0:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_1",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_1",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_1:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_2",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_2",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_2:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_3",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_3",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_3:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_4",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_4",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_4:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_5",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_5",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_5:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_6",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_6",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_6:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 7,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_7",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_7",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_7:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 8,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_8",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_8",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_8:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 9,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_9",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_9",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_9:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 10,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_10",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_10",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_10:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 11,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_11",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_11",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_11:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 12,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_12",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_12",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_12:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 13,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_13",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_13",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_13:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 14,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_14",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_14",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_14:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 15,
-          "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_15",
-          "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()"
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Subject_15",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Subject_15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Run_System_Int32",
+          "subjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Run:System.Void(System.Int32)"
         }
       ]
     }

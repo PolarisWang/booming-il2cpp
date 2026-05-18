@@ -49,19 +49,19 @@ public static partial class TimeDateTimeTimespanSubjects
     // [6] System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)
     public static void Subject_6()
     {
-        if (((DateTime.UtcNow.AddDays(42.0)).GetHashCode()) != -1237043284) _exitCode = 1;
+        if (((DateTime.UtcNow.AddDays(42.0)).GetHashCode()) != 2078120775) _exitCode = 1;
     }
 
     // [7] System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)
     public static void Subject_7()
     {
-        if (((DateTime.UtcNow.AddHours(42.0)).GetHashCode()) != -609958670) _exitCode = 1;
+        if (((DateTime.UtcNow.AddHours(42.0)).GetHashCode()) != -1891866585) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)
     public static void Subject_8()
     {
-        if (((DateTime.UtcNow.AddMinutes(42.0)).GetHashCode()) != -1349227924) _exitCode = 1;
+        if (((DateTime.UtcNow.AddMinutes(42.0)).GetHashCode()) != 1399717418) _exitCode = 1;
     }
 
     // [9] System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)

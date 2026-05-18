@@ -1068,6 +1068,9 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::SweepPage(OldGenPage* page, bool clear_bitmap
     auto bm = GcMarkBitmap(page->MarkBitmap(), page->bitmap_bytes);
     auto* bitmap = bm.Words();
     CHAOS_IL2CPP_SIZE num_words = bm.WordCount();
+    // Cap to actual payload slots (bitmap_bytes includes poison guard).
+    CHAOS_IL2CPP_SIZE max_sweep_slots = page->payload_size / sizeof(void*);
+    if (num_words * 64 > max_sweep_slots) num_words = (max_sweep_slots + 63) / 64;
     CHAOS_IL2CPP_SIZE slot = 0;  // global slot index across the page
 
     // Fast path: contiguous run of unmarked slots �� single free block.
@@ -1091,7 +1094,9 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::SweepPage(OldGenPage* page, bool clear_bitmap
             if (sc_size > remaining) {
                 // Last-chance fallback: skip one slot and retry so we
                 // don't leak non-size-class-aligned remainders.
-                sc_size = sizeof(void*);
+                // Minimum block = sizeof(OldGenFreeBlock) = 16 bytes.
+                if (remaining < sizeof(OldGenFreeBlock)) break;
+                sc_size = sizeof(OldGenFreeBlock);
                 sc_idx = SizeClassIndex(sc_size);
                 if (sc_idx < 0) break;
             }
@@ -1159,7 +1164,7 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::SweepPage(OldGenPage* page, bool clear_bitmap
     // Collect() mark phase (see Collect()).
     // GcMarkBitmap(page->MarkBitmap(), page->bitmap_bytes).Clear();
 
-    page->sweep_lock.store(false, std::memory_order_release);
+        page->sweep_lock.store(false, std::memory_order_release);
     return reclaimed;
 }
 
@@ -1230,7 +1235,8 @@ void MarkSweepOldGen::CoalescePage(OldGenPage* page) {
             }
             CHAOS_IL2CPP_SIZE sc_size = kOldGenSizeClasses[sc_idx];
             if (sc_size > remaining) {
-                sc_size = sizeof(void*);
+                if (remaining < sizeof(OldGenFreeBlock)) break;
+                sc_size = sizeof(OldGenFreeBlock);
                 sc_idx = SizeClassIndex(sc_size);
                 if (sc_idx < 0) break;
             }
@@ -1254,6 +1260,8 @@ float MarkSweepOldGen::PageFragmentation(const OldGenPage* page) const {
                             page->bitmap_bytes);
     auto* bitmap = bm.Words();
     CHAOS_IL2CPP_SIZE num_words = bm.WordCount();
+    CHAOS_IL2CPP_SIZE max_bm_slots = page->payload_size / sizeof(void*);
+    if (num_words * 64 > max_bm_slots) num_words = (max_bm_slots + 63) / 64;
     CHAOS_IL2CPP_SIZE marked_slots = 0;
     for (CHAOS_IL2CPP_SIZE w = 0; w < num_words; w++) {
         marked_slots += static_cast<CHAOS_IL2CPP_SIZE>(GcPopCount64(bitmap[w]));
@@ -1283,6 +1291,8 @@ MarkSweepOldGen::CompactMode MarkSweepOldGen::DecideCompactMode() {
                 auto bm3 = GcMarkBitmap(p->MarkBitmap(), p->bitmap_bytes);
                 auto* bitmap = bm3.Words();
                 CHAOS_IL2CPP_SIZE num_words = bm3.WordCount();
+                CHAOS_IL2CPP_SIZE max_bm_slots = p->payload_size / sizeof(void*);
+                if (num_words * 64 > max_bm_slots) num_words = (max_bm_slots + 63) / 64;
                 CHAOS_IL2CPP_SIZE marked_slots = 0;
                 for (CHAOS_IL2CPP_SIZE w = 0; w < num_words; w++) {
                     marked_slots += static_cast<CHAOS_IL2CPP_SIZE>(GcPopCount64(bitmap[w]));
@@ -1293,6 +1303,8 @@ MarkSweepOldGen::CompactMode MarkSweepOldGen::DecideCompactMode() {
         p = p->next;
     }
 
+    // V5: No live data means compaction has nothing to compact.
+    if (total_live == 0) return CompactMode::NONE;
     if (candidate_pages == 0) return CompactMode::NONE;
 
     // Cross-page compaction if global fragmentation > 40% (most pages
@@ -1322,6 +1334,8 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::PlanPageCompaction(OldGenPage* page,
     auto* bitmap = bm4.Words();
     char* payload = page->Payload();
     CHAOS_IL2CPP_SIZE num_words = bm4.WordCount();
+    CHAOS_IL2CPP_SIZE max_bm_slots = page->payload_size / sizeof(void*);
+    if (num_words * 64 > max_bm_slots) num_words = (max_bm_slots + 63) / 64;
     CHAOS_IL2CPP_SIZE num_slots = page->payload_size / sizeof(void*);
 
     // First pass: collect all marked object addresses using precise layouts.
@@ -1473,7 +1487,8 @@ void MarkSweepOldGen::CompactPage(OldGenPage* page, const CompactPlan& plan) {
         if (sc_idx < 0) sc_idx = kOldGenNumSizeClasses - 1;
         CHAOS_IL2CPP_SIZE sc_size = kOldGenSizeClasses[sc_idx];
         if (sc_size > remaining_bytes) {
-            sc_size = sizeof(void*);
+            if (remaining_bytes < sizeof(OldGenFreeBlock)) break;
+            sc_size = sizeof(OldGenFreeBlock);
             sc_idx = SizeClassIndex(sc_size);
             if (sc_idx < 0) break;
         }
@@ -1630,6 +1645,8 @@ void MarkSweepOldGen::PlanPageEvacuation(OldGenPage* page, CompactPlan& out_plan
     auto* bitmap = bm5.Words();
     char* payload = page->Payload();
     CHAOS_IL2CPP_SIZE num_words = bm5.WordCount();
+    CHAOS_IL2CPP_SIZE max_bm_slots = page->payload_size / sizeof(void*);
+    if (num_words * 64 > max_bm_slots) num_words = (max_bm_slots + 63) / 64;
     CHAOS_IL2CPP_SIZE num_slots = page->payload_size / sizeof(void*);
 
     CHAOS_IL2CPP_SIZE slot = 0;
@@ -1779,6 +1796,8 @@ void MarkSweepOldGen::CrossPageCompact() {
         auto bm6 = GcMarkBitmap(c.page->MarkBitmap(), c.page->bitmap_bytes);
         auto* bitmap = bm6.Words();
         CHAOS_IL2CPP_SIZE num_words = bm6.WordCount();
+        CHAOS_IL2CPP_SIZE max_bm_slots = c.page->payload_size / sizeof(void*);
+        if (num_words * 64 > max_bm_slots) num_words = (max_bm_slots + 63) / 64;
         CHAOS_IL2CPP_SIZE marked_slots = 0;
         for (CHAOS_IL2CPP_SIZE w = 0; w < num_words; w++) {
             marked_slots += static_cast<CHAOS_IL2CPP_SIZE>(GcPopCount64(bitmap[w]));
@@ -1847,7 +1866,8 @@ void MarkSweepOldGen::CrossPageCompact() {
                     if (sc_idx < 0) sc_idx = kOldGenNumSizeClasses - 1;
                     CHAOS_IL2CPP_SIZE sc_size = kOldGenSizeClasses[sc_idx];
                     if (sc_size > remaining) {
-                        sc_size = sizeof(void*);
+                        if (remaining < sizeof(OldGenFreeBlock)) break;
+                        sc_size = sizeof(OldGenFreeBlock);
                         sc_idx = SizeClassIndex(sc_size);
                         if (sc_idx < 0) break;
                     }

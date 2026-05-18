@@ -392,6 +392,22 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 | LOH Sweep | ~1ms | 0.5-5ms | 取决于 segment 数量 |
 | LOH Compact | ~5ms | 2-20ms | 含 relocate + fix-up, 4MB budget |
 
+### OldGen Sweep/Compact 性能优化 (2026-05-19)
+
+| 优化 | 位置 | 说明 |
+|------|------|------|
+| `WordCount()` 上限 | SweepPage、PageFragmentation、DecideCompactMode、PlanPageCompaction、PlanPageEvacuation、CrossPageCompact | Bitmap 末尾 16 字节 poison guard (0xCD) 导致 `WordCount()` 返回 130 而非 128。按 `payload_size / sizeof(void*)` 上限修正，消除 bitmap 越界读 |
+| `sizeof(OldGenFreeBlock)` 替换 `sizeof(void*)` | SweepPage、CoalescePage、CompactPage、CrossPageCompact | `OldGenFreeBlock` 16 字节 > `sizeof(void*)`=8。最小 block 从 8 改为 16，消除 free list 损坏 |
+| DecideCompactMode total_live==0 提前返回 | DecideCompactMode | Sweep 后 bitmap 全零时直接返回 `CompactMode::NONE`，跳过无意义的 CrossPageCompact |
+
+### 剩余性能瓶颈
+
+| 瓶颈 | 说明 | 难度 |
+|------|------|------|
+| page_count 无界增长 | 100%-free normal pages 从未释放，page_count 线性增长 | 中 — 需要安全的 page decommission 方案（free list 引用问题） |
+| FindPage O(N) | Page 查找是线性扫描，page_count 增大时暂停成比例增长 | 中 — 需要 page 索引或 skip list |
+| CrossPageCompact 空转 | 即使只有几字节存活也触发 full 5-phase compaction | 低 — 可加最小存活阈值 |
+
 ### 内存开销
 
 | 组件 | 开销 | 说明 |

@@ -2,8 +2,8 @@
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T01:09:52",
-  "duration_ms": 26747,
+  "timestamp": "2026-05-19T04:49:50",
+  "duration_ms": 15733,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -28,41 +28,41 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 26577
+      "duration_ms": 15597
     },
     "fact": {
       "stage": "fact",
       "status": "failed",
-      "summary": "Fact verify=failed (11/12)",
+      "summary": "Fact verify=failed (10/12)",
       "details": {
         "fact": {
           "status": "failed",
-          "passed": 11,
+          "passed": 10,
           "total": 12
         }
       },
       "errors": [],
-      "duration_ms": 36
+      "duration_ms": 32
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
+      "summary": "false_passing=0, principle=CONCERN",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "ALIGNED",
+        "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 132
+      "duration_ms": 102
     }
   },
   "coverage": {
-    "methodCoverage": 91.67,
+    "methodCoverage": 83.33,
     "testedRate": 100.0,
-    "overall": 95.84
+    "overall": 91.66
   },
   "dashboard": {
     "interpreter": {},
@@ -78,10 +78,25 @@
   },
   "regression": {
     "benchmark": {
-      "status": "skipped",
-      "message": "No benchmark report found"
+      "status": "regressed",
+      "baselineMetrics": {
+        "totalMethods": 12,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 12,
+        "matchedCount": 10,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 10,
+        "averageSpeedupPercent": -411.47
+      }
     },
-    "hasRegression": false,
-    "regressions": []
+    "hasRegression": true,
+    "regressions": [
+      "Managed-faster ratio 100% exceeds native-faster ratio 0% (10/10 methods)"
+    ]
   }
 }

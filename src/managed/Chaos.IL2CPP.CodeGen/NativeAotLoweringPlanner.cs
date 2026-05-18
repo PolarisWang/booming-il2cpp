@@ -1270,7 +1270,7 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine($"// AOT-unreachable stub: {method.SubjectId}");
         builder.AppendLine($"extern \"C\" {returnType} {symbol}({paramList})");
         builder.AppendLine("{");
-        builder.AppendLine($"    CHAOS_IL2CPP_FAIL(\"AOT-unreachable method invoked: {method.SubjectId}\");");
+        builder.AppendLine($"    CHAOS_IL2CPP_FAIL();");
         // For non-void return, add unreachable return to satisfy compiler
         if (!string.IsNullOrEmpty(returnType) && returnType != "void")
             builder.AppendLine($"    return {{}};");
@@ -1287,7 +1287,7 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine($"// AOT-unreachable generic instantiation stub: {method.SubjectId}");
             builder.AppendLine($"extern \"C\" {returnType} {stubSymbol}({paramList})");
             builder.AppendLine("{");
-            builder.AppendLine($"    CHAOS_IL2CPP_FAIL(\"AOT-unreachable generic stub invoked: {method.SubjectId}\");");
+            builder.AppendLine($"    CHAOS_IL2CPP_FAIL();");
             if (!string.IsNullOrEmpty(returnType) && returnType != "void")
                 builder.AppendLine($"    return {{}};");
             builder.AppendLine("}");

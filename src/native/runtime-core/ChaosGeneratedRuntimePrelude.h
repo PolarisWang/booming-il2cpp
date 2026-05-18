@@ -18,6 +18,12 @@
 #include <chaos/type_info.h>
 #include "generated_code_compat.h"
 
+// ── Compatibility macros for generated array-store code ─────────────────
+// GC_END_STUBBORN_CHANGE is a no-op under BGC (card-table + SATB replace
+// the stubborn-region concept from Boehm GC).  Keep the macro so existing
+// generated code compiles without modification.
+#define GC_END_STUBBORN_CHANGE(obj) ((void)(obj))
+
 namespace chaos::il2cpp::codegen {
 
 // ── Managed array type ───────────────────────────────────────────────

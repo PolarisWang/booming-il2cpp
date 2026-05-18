@@ -3,154 +3,46 @@
   "artifactKind": "aotManifest",
   "entries": [
     {
-      "assemblyName": "DispatchBasicSubjects",
+      "assemblyName": "DispatchBasicPatchEntry",
       "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_0:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "DispatchBasicSubjects",
+      "assemblyName": "DispatchBasicPatchEntry",
       "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_1:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "DispatchBasicSubjects",
+      "assemblyName": "DispatchBasicPatchEntry",
       "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_2:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "DispatchBasicSubjects",
+      "assemblyName": "DispatchBasicPatchEntry",
       "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_3:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "DispatchBasicSubjects",
+      "assemblyName": "DispatchBasicPatchEntry",
       "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Subject_4:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "DispatchBasicSubjects",
+      "assemblyName": "DispatchBasicPatchEntry",
       "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Run:System.Void(System.Int32)",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/Calculator::.ctor:System.Void()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "DispatchBasicSubjects",
+      "assemblyName": "DispatchBasicPatchEntry",
       "subjectKind": "field",
-      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
+      "subjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::_exitCode",
       "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Attribute::.ctor:System.Void()",
-      "reason": "external-call"
     }
   ]
 }

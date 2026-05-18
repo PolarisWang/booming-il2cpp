@@ -1,7 +1,7 @@
 {
   "family": "globalization-culture",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T01:10:58.419807",
+  "generated_at": "2026-05-19T04:50:34.432941",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -43,9 +43,15 @@
       "check_id": "p1_benchmark",
       "principle": "P1",
       "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available",
+      "summary": "13/13 methods are stubs — benchmark data not meaningful",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "managed_faster_count": 0,
+        "native_faster_count": 0,
+        "invalid_count": 13,
+        "total_methods": 13
+      }
     },
     "p2_template_hygiene": {
       "check_id": "p2_template_hygiene",
@@ -67,11 +73,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 13 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 14 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 13,
-        "entries_with_interrupt_ptr": 13,
+        "table_size": 14,
+        "entries_with_interrupt_ptr": 14,
         "has_hotpatch_module": true
       }
     },

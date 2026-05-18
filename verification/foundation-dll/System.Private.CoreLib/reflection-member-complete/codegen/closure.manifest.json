@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ReflectionMemberCompleteSubjects",
+  "assemblyName": "ReflectionMemberCompletePatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-member-complete/managed/subjects/build-output/ReflectionMemberCompleteSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-member-complete/managed/patch/build-output/ReflectionMemberCompletePatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "ReflectionMemberCompleteSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-member-complete/managed/subjects/build-output/ReflectionMemberCompleteSubjects.dll"
+      "assemblyName": "ReflectionMemberCompletePatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-member-complete/managed/patch/build-output/ReflectionMemberCompletePatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "6425b39e-21e9-40b6-8cce-70c1402fc68f",
+  "inputModuleVersionId": "50013cd5-e396-4a32-a4c3-dd46133caf70",
   "artifacts": [
     {
       "kind": "typedIlIr",

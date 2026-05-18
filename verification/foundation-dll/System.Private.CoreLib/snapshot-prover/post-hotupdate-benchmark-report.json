@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/snapshot/prover",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-19T03:33:56][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T03:33:56][WARN][CRAG] young_collection_no_region\n[2026-05-19T03:33:56][INFO][OldGen] init initial_pages=2\n[2026-05-19T03:33:56][INFO][OldGen] init done base=0x2640692183040 pages=2\n[2026-05-19T03:33:56][DEBUG][codegen] T4 VEH handler registered\n"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-19T03:33:56][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T03:33:56][WARN][CRAG] young_collection_no_region\n[2026-05-19T03:33:56][INFO][OldGen] init initial_pages=2\n[2026-05-19T03:33:56][INFO][OldGen] init done base=0x2423972691968 pages=2\n[2026-05-19T03:33:56][DEBUG][codegen] T4 VEH handler registered\n"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-19T03:33:56][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T03:33:56][WARN][CRAG] young_collection_no_region\n[2026-05-19T03:33:56][INFO][OldGen] init initial_pages=2\n[2026-05-19T03:33:56][INFO][OldGen] init done base=0x2289886298112 pages=2\n[2026-05-19T03:33:56][DEBUG][codegen] T4 VEH handler registered\n"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T03:33:57][WARN][CRAG] young_collection_no_region\n[2026-05-19T03:33:57][INFO][OldGen] init initial_pages=2\n[2026-05-19T03:33:57][INFO][OldGen] init done base=0x1889188249600 pages=2\n[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T03:33:57][WARN][CRAG] young_collection_no_region\n[2026-05-19T03:33:57][INFO][OldGen] init initial_pages=2\n[2026-05-19T03:33:57][INFO][OldGen] init done base=0x2763377082368 pages=2\n[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T03:33:57][WARN][CRAG] young_collection_no_region\n[2026-05-19T03:33:57][INFO][OldGen] init initial_pages=2\n[2026-05-19T03:33:57][INFO][OldGen] init done base=0x1911179051008 pages=2\n[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T03:33:57][WARN][CRAG] young_collection_no_region\n[2026-05-19T03:33:57][INFO][OldGen] init initial_pages=2\n[2026-05-19T03:33:57][INFO][OldGen] init done base=0x2020371202048 pages=2\n[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T03:33:57][WARN][CRAG] young_collection_no_region\n[2026-05-19T03:33:57][INFO][OldGen] init initial_pages=2\n[2026-05-19T03:33:57][INFO][OldGen] init done base=0x2132333887488 pages=2\n[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T03:33:57][WARN][CRAG] young_collection_no_region\n[2026-05-19T03:33:57][INFO][OldGen] init initial_pages=2\n[2026-05-19T03:33:57][INFO][OldGen] init done base=0x2726275776512 pages=2\n[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T03:33:57][WARN][CRAG] young_collection_no_region\n[2026-05-19T03:33:57][INFO][OldGen] init initial_pages=2\n[2026-05-19T03:33:57][INFO][OldGen] init done base=0x1607297466368 pages=2\n[2026-05-19T03:33:57][DEBUG][codegen] T4 VEH handler registered\n"
+    }
+  ],
+  "summary": {
+    "totalMethods": 10,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
+    "slowdownThresholdX": 50.0
+  }
+}

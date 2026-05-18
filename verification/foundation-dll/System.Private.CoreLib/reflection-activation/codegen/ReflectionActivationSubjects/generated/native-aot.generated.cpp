@@ -24,6 +24,8 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+static CHAOS_IL2CPP_UINT8 s_stub_sentinel = 0;
+
 namespace chaos::il2cpp::codegen::ReflectionActivationSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -505,7 +507,7 @@ CHAOS_IL2CPP_INT32 chaos_static_ReflectionActivationSubjects_ReflectionActivatio
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Activator__CreateInstance_System_Object_System_Type_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	(void)chaos_arg_0;
-	return 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_stub_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Activator__CreateInstance_System_Object_System_Type_System_Object___(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)

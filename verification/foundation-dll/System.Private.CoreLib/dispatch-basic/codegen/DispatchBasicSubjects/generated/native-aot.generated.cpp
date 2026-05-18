@@ -11,6 +11,8 @@
 #include "reflection_query_model.h"
 #include "load_store_chaos_bridge.h"
 #include "interpreter_entry.h"
+#include <gc/gc_bgc_inline.h>
+#include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
@@ -38,7 +40,8 @@ inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_BasicImpl = static_cast<CHAOS_IL2CPP_INTPTR>(5722114412902280165ULL);inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_Calculator = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_DispatchBasicSubjects_Calculator, 5786799786101565947ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_Calculator = static_cast<CHAOS_IL2CPP_INTPTR>(5786799786101565947ULL);inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects = {{nullptr, nullptr, 13619514316044602496ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_DispatchBasicSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(13619514316044602496ULL);inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_StatusProvider = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_DispatchBasicSubjects_StatusProvider, 11732973143578276300ULL, 5u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_StatusProvider = static_cast<CHAOS_IL2CPP_INTPTR>(11732973143578276300ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_StatusProvider = static_cast<CHAOS_IL2CPP_INTPTR>(11732973143578276300ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Exception = {{nullptr, nullptr, 10972282733316558392ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Exception = static_cast<CHAOS_IL2CPP_INTPTR>(10972282733316558392ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -54,14 +57,14 @@ const void* chaos_vtable_DispatchBasicSubjects_BasicImpl[] =
 	reinterpret_cast<void*>(DispatchBasicSubjects_BasicImpl_GetValue),
 };
 extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
 const void* chaos_vtable_DispatchBasicSubjects_Calculator[] =
 {
 	reinterpret_cast<void*>(DispatchBasicSubjects_Calculator__ctor),
 	nullptr,
-	reinterpret_cast<void*>(DispatchBasicSubjects_Calculator_Add),
-	reinterpret_cast<void*>(DispatchBasicSubjects_Calculator_Subtract),
+	reinterpret_cast<void*>(DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32),
+	reinterpret_cast<void*>(DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32),
 };
 extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
@@ -75,25 +78,25 @@ const void* chaos_vtable_DispatchBasicSubjects_StatusProvider[] =
 };
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_DispatchBasicSubjects_BasicImpl[] =
 {
-	{ 0x0000001Bu, reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl__ctor) },
-	{ 0x0000001Au, reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl_GetValue) },
+	{ 0x0000001Au, reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl__ctor) },
+	{ 0x00000019u, reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl_GetValue) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_DispatchBasicSubjects_Calculator[] =
 {
-	{ 0x00000017u, reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator__ctor) },
+	{ 0x00000016u, reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator__ctor) },
 	{ 0u, nullptr },
-	{ 0x00000015u, reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Add) },
-	{ 0x00000016u, reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Subtract) },
+	{ 0x00000014u, reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32) },
+	{ 0x00000015u, reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_DispatchBasicSubjects_StatusProvider[] =
 {
-	{ 0x00000019u, reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider__ctor) },
+	{ 0x00000018u, reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider__ctor) },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x00000018u, reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider_GetStatusCode) },
+	{ 0x00000017u, reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider_GetStatusCode) },
 };
 
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
@@ -149,6 +152,15 @@ struct chaos_type_DispatchBasicSubjects_DispatchBasicSubjects
 
 struct chaos_type_DispatchBasicSubjects_StatusProvider : public chaos_type_System_Private_CoreLib_System_Object
 {
+};
+
+struct chaos_type_System_Private_CoreLib_System_Exception
+{
+	ThinLockableHeader header{};
+	CHAOS_IL2CPP_INTPTR _message = 0;
+	CHAOS_IL2CPP_INTPTR _innerException = 0;
+	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
@@ -219,24 +231,28 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
 extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
 extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
 extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
 extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_IBasicOp_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_IStatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -250,18 +266,17 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[19] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[23] = {
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
 	0u,
 	0u,
 	2u,
-	2u,
-	4u,
-	4u,
-	4u,
-	4u,
-	4u,
-	4u,
-	4u,
 	4u,
 	5u,
 	5u,
@@ -269,40 +284,49 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[19] = {
 	5u,
 	5u,
 	5u,
-	6u,
+	7u,
+	9u,
+	9u,
+	9u,
+	9u,
+	10u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[18];
-	CHAOS_IL2CPP_UINT8 params[6];
+	::ChaosAbiMethodEntryV0 entries[22];
+	CHAOS_IL2CPP_UINT8 params[10];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		18u,
-		6u,
-		1451762686u,  // FNV-1a over entries+params
+		22u,
+		10u,
+		223538403u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
-		{ 0u, 0u },  // DispatchBasicSubjects_Calculator__ctor
-		{ 1u, 2u },  // DispatchBasicSubjects_Calculator_Add
-		{ 1u, 0u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd
-		{ 1u, 2u },  // DispatchBasicSubjects_Calculator_Subtract
-		{ 1u, 0u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub
-		{ 0u, 0u },  // DispatchBasicSubjects_StatusProvider__ctor
-		{ 1u, 0u },  // DispatchBasicSubjects_StatusProvider_GetStatusCode
-		{ 1u, 0u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus
-		{ 0u, 0u },  // DispatchBasicSubjects_BasicImpl__ctor
-		{ 1u, 0u },  // DispatchBasicSubjects_BasicImpl_GetValue
-		{ 1u, 0u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue
-		{ 1u, 1u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_Run
 		{ 0u, 0u },  // DispatchBasicSubjects_DispatchBasicSubjects_Subject_0
 		{ 0u, 0u },  // DispatchBasicSubjects_DispatchBasicSubjects_Subject_1
 		{ 0u, 0u },  // DispatchBasicSubjects_DispatchBasicSubjects_Subject_2
 		{ 0u, 0u },  // DispatchBasicSubjects_DispatchBasicSubjects_Subject_3
 		{ 0u, 0u },  // DispatchBasicSubjects_DispatchBasicSubjects_Subject_4
-		{ 0u, 1u },  // DispatchBasicSubjects_DispatchBasicSubjects_Run
+		{ 0u, 0u },  // DispatchBasicSubjects_BasicImpl__ctor
+		{ 1u, 0u },  // DispatchBasicSubjects_BasicImpl_GetValue
+		{ 0u, 0u },  // DispatchBasicSubjects_Calculator__ctor
+		{ 1u, 2u },  // DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32
+		{ 1u, 2u },  // DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32
+		{ 1u, 1u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32
+		{ 1u, 0u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus
+		{ 1u, 0u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd
+		{ 1u, 0u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub
+		{ 1u, 0u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue
+		{ 1u, 0u },  // DispatchBasicSubjects_IBasicOp_GetValue
+		{ 1u, 2u },  // DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32
+		{ 1u, 2u },  // DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32
+		{ 1u, 0u },  // DispatchBasicSubjects_IStatusProvider_GetStatusCode
+		{ 0u, 0u },  // DispatchBasicSubjects_StatusProvider__ctor
+		{ 1u, 0u },  // DispatchBasicSubjects_StatusProvider_GetStatusCode
+		{ 0u, 1u },  // DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType
 	},
 	{
 		1u,
@@ -311,6 +335,10 @@ static constexpr struct {
 		1u,
 		1u,
 		1u,
+		1u,
+		1u,
+		1u,
+		2u,
 	},
 };
 static const ::ChaosAbiManifestV0* const s_abi_manifest =
@@ -436,91 +464,107 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("DispatchBasicSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[18] = {
-	{ ".ctor", 0x0000001Bu, 0u },  // BasicImpl
-	{ "GetValue", 0x0000001Au, 0u },  // BasicImpl
-	{ ".ctor", 0x00000017u, 0u },  // Calculator
-	{ "Add", 0x00000015u, 2u },  // Calculator
-	{ "Subtract", 0x00000016u, 2u },  // Calculator
-	{ "TestIDispatchAdd", 0x0000001Du, 0u },  // DispatchBasicNativeEntry
-	{ "TestIDispatchSub", 0x0000001Eu, 0u },  // DispatchBasicNativeEntry
-	{ "TestDualGetStatus", 0x0000001Fu, 0u },  // DispatchBasicNativeEntry
-	{ "TestIUnknownGetValue", 0x00000020u, 0u },  // DispatchBasicNativeEntry
-	{ "Run", 0x0000001Cu, 1u },  // DispatchBasicNativeEntry
-	{ "Subject_0", 0x0000000Cu, 0u },  // DispatchBasicSubjects
-	{ "Subject_1", 0x0000000Du, 0u },  // DispatchBasicSubjects
-	{ "Subject_2", 0x0000000Eu, 0u },  // DispatchBasicSubjects
-	{ "Subject_3", 0x0000000Fu, 0u },  // DispatchBasicSubjects
-	{ "Subject_4", 0x00000010u, 0u },  // DispatchBasicSubjects
-	{ "Run", 0x0000000Bu, 1u },  // DispatchBasicSubjects
-	{ ".ctor", 0x00000019u, 0u },  // StatusProvider
-	{ "GetStatusCode", 0x00000018u, 0u },  // StatusProvider
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[22] = {
+	{ ".ctor", 0x0000001Au, 0u },  // BasicImpl
+	{ "GetValue", 0x00000019u, 0u },  // BasicImpl
+	{ ".ctor", 0x00000016u, 0u },  // Calculator
+	{ "Add", 0x00000014u, 2u },  // Calculator
+	{ "Subtract", 0x00000015u, 2u },  // Calculator
+	{ "Run", 0x0000001Bu, 1u },  // DispatchBasicNativeEntry
+	{ "TestDualGetStatus", 0x0000001Eu, 0u },  // DispatchBasicNativeEntry
+	{ "TestIDispatchAdd", 0x0000001Cu, 0u },  // DispatchBasicNativeEntry
+	{ "TestIDispatchSub", 0x0000001Du, 0u },  // DispatchBasicNativeEntry
+	{ "TestIUnknownGetValue", 0x0000001Fu, 0u },  // DispatchBasicNativeEntry
+	{ "Subject_0", 0x0000000Bu, 0u },  // DispatchBasicSubjects
+	{ "Subject_1", 0x0000000Cu, 0u },  // DispatchBasicSubjects
+	{ "Subject_2", 0x0000000Du, 0u },  // DispatchBasicSubjects
+	{ "Subject_3", 0x0000000Eu, 0u },  // DispatchBasicSubjects
+	{ "Subject_4", 0x0000000Fu, 0u },  // DispatchBasicSubjects
+	{ "GetValue", 0x00000013u, 0u },  // IBasicOp
+	{ "Add", 0x00000010u, 2u },  // ICalculator
+	{ "Subtract", 0x00000011u, 2u },  // ICalculator
+	{ "GetStatusCode", 0x00000012u, 0u },  // IStatusProvider
+	{ ".ctor", 0x00000018u, 0u },  // StatusProvider
+	{ "GetStatusCode", 0x00000017u, 0u },  // StatusProvider
+	{ ".ctor", 0x00000020u, 1u },  // System.Runtime.InteropServices.ComInterfaceTypeAttribute
 };
 
 // Type name index entries (namespace, short_name)
-static constexpr HotpatchTypeEntryV0 s_hotpatch_types[5] = {
+static constexpr HotpatchTypeEntryV0 s_hotpatch_types[9] = {
 	{ "BasicImpl", "", 0u, 2u },
 	{ "Calculator", "", 2u, 3u },
 	{ "DispatchBasicNativeEntry", "", 5u, 5u },
-	{ "DispatchBasicSubjects", "", 10u, 6u },
-	{ "StatusProvider", "", 16u, 2u },
+	{ "DispatchBasicSubjects", "", 10u, 5u },
+	{ "IBasicOp", "", 15u, 1u },
+	{ "ICalculator", "", 16u, 2u },
+	{ "IStatusProvider", "", 18u, 1u },
+	{ "StatusProvider", "", 19u, 2u },
+	{ "System.Runtime.InteropServices.ComInterfaceTypeAttribute", "System.Runtime.InteropServices", 21u, 1u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[18] = {
-	{ 0x0000000Bu, 17u },
-	{ 0x0000000Cu, 12u },
-	{ 0x0000000Du, 13u },
-	{ 0x0000000Eu, 14u },
-	{ 0x0000000Fu, 15u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[22] = {
+	{ 0x0000000Bu, 0u },
+	{ 0x0000000Cu, 1u },
+	{ 0x0000000Du, 2u },
+	{ 0x0000000Eu, 3u },
+	{ 0x0000000Fu, 4u },
 	{ 0x00000010u, 16u },
-	{ 0x00000015u, 1u },
-	{ 0x00000016u, 3u },
-	{ 0x00000017u, 0u },
-	{ 0x00000018u, 6u },
-	{ 0x00000019u, 5u },
-	{ 0x0000001Au, 9u },
-	{ 0x0000001Bu, 8u },
-	{ 0x0000001Cu, 11u },
-	{ 0x0000001Du, 2u },
-	{ 0x0000001Eu, 4u },
-	{ 0x0000001Fu, 7u },
-	{ 0x00000020u, 10u },
+	{ 0x00000011u, 17u },
+	{ 0x00000012u, 18u },
+	{ 0x00000013u, 15u },
+	{ 0x00000014u, 8u },
+	{ 0x00000015u, 9u },
+	{ 0x00000016u, 7u },
+	{ 0x00000017u, 20u },
+	{ 0x00000018u, 19u },
+	{ 0x00000019u, 6u },
+	{ 0x0000001Au, 5u },
+	{ 0x0000001Bu, 10u },
+	{ 0x0000001Cu, 12u },
+	{ 0x0000001Du, 13u },
+	{ 0x0000001Eu, 11u },
+	{ 0x0000001Fu, 14u },
+	{ 0x00000020u, 21u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[18] = {
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Calculator::.ctor
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Add), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Calculator::Add
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::TestIDispatchAdd
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Subtract), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Calculator::Subtract
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::TestIDispatchSub
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // StatusProvider::.ctor
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider_GetStatusCode), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // StatusProvider::GetStatusCode
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::TestDualGetStatus
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // BasicImpl::.ctor
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BasicImpl::GetValue
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::TestIUnknownGetValue
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::Run
+static HotpatchEntryV0 s_hotpatch_entries[22] = {
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicSubjects::Subject_0
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicSubjects::Subject_1
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicSubjects::Subject_2
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicSubjects::Subject_3
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicSubjects::Subject_4
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicSubjects::Run
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // BasicImpl::.ctor
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BasicImpl::GetValue
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Calculator::.ctor
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Calculator::Add
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Calculator::Subtract
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::Run
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::TestDualGetStatus
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::TestIDispatchAdd
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::TestIDispatchSub
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::TestIUnknownGetValue
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_IBasicOp_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IBasicOp::GetValue
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ICalculator::Add
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ICalculator::Subtract
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_IStatusProvider_GetStatusCode), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IStatusProvider::GetStatusCode
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // StatusProvider::.ctor
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider_GetStatusCode), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // StatusProvider::GetStatusCode
+	{ reinterpret_cast<void*>(&DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor
 };
 
 // Module hotpatch bundle
 static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	"DispatchBasicSubjects",
 	s_hotpatch_types,
-	5u,
+	9u,
 	s_hotpatch_methods,
-	18u,
+	22u,
 	s_hotpatch_slots,
-	18u,
+	22u,
 	s_hotpatch_entries,
-	18u,
+	22u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -529,63 +573,73 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[2] = {
-	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
+extern "C" const char* kChaosExternalRuntimeSubjects[3] = {
 	"DispatchBasicSubjects/DispatchBasicSubjects::_exitCode",
+	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
+	"System.Private.CoreLib/System.Attribute::.ctor:System.Void()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[2] = {
+extern "C" void* kChaosExternalRuntimeFnTable[3] = {
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
 	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 2;
+extern "C" int32_t kChaosExternalRuntimeCount = 3;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[18])() = {
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_Calculator__ctor),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_Calculator_Add),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_Calculator_Subtract),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_StatusProvider__ctor),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_StatusProvider_GetStatusCode),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_BasicImpl__ctor),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_BasicImpl_GetValue),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_Run),
+static void (*kAotMethods[22])() = {
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_2),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_3),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_4),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Run),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_BasicImpl__ctor),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_BasicImpl_GetValue),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_Calculator__ctor),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_IBasicOp_GetValue),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_IStatusProvider_GetStatusCode),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_StatusProvider__ctor),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_StatusProvider_GetStatusCode),
+	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
-static void (*kBenchmarkWrappers[18])() = {
+static void (*kBenchmarkWrappers[22])() = {
 	[]() {kAotMethods[0]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[1])(0,0);},
+	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[3])(0,0);},
+	[]() {kAotMethods[3]();},
 	[]() {kAotMethods[4]();},
 	[]() {kAotMethods[5]();},
 	[]() {kAotMethods[6]();},
 	[]() {kAotMethods[7]();},
-	[]() {kAotMethods[8]();},
-	[]() {kAotMethods[9]();},
-	[]() {kAotMethods[10]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[11])(0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[8])(0,0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[9])(0,0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[10])(0);},
+	[]() {kAotMethods[11]();},
 	[]() {kAotMethods[12]();},
 	[]() {kAotMethods[13]();},
 	[]() {kAotMethods[14]();},
 	[]() {kAotMethods[15]();},
-	[]() {kAotMethods[16]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[17])(0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[16])(0,0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[17])(0,0);},
+	[]() {kAotMethods[18]();},
+	[]() {kAotMethods[19]();},
+	[]() {kAotMethods[20]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[21])(0);},
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -602,7 +656,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 			entry.method_key, __chaos_args, __chaos_ret);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -640,7 +694,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
 			entry.method_key);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -660,25 +714,29 @@ extern "C" double BenchmarkMethod(
 }
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[18] = {
-	reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator__ctor),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Add),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Subtract),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider__ctor),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider_GetStatusCode),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl__ctor),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl_GetValue),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_Run),
+static void* const kMethodPointers[22] = {
 	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_0),
 	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_1),
 	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_2),
 	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_3),
 	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_4),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Run),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl__ctor),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl_GetValue),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator__ctor),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_IBasicOp_GetValue),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_IStatusProvider_GetStatusCode),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider__ctor),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider_GetStatusCode),
+	reinterpret_cast<void*>(&DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -728,7 +786,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 18u,
+	.method_pointer_count      = 22u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -774,23 +832,15 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_Calculator[3] = {
-	{ 0u, "DispatchBasicSubjects/Calculator::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)", "Add", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)", "Subtract", "System.Void", 0, nullptr, 0u },
+static constexpr ReflectionQueryFieldDescriptor kReflFields_DispatchBasicSubjects_DispatchBasicSubjects[1] = {
+	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
 };
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_DispatchBasicNativeEntry[5] = {
-	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()", "TestIDispatchAdd", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()", "TestIDispatchSub", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()", "TestDualGetStatus", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()", "TestIUnknownGetValue", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_StatusProvider[2] = {
-	{ 0u, "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()", "GetStatusCode", "System.Void", 0, nullptr, 0u },
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_DispatchBasicSubjects[5] = {
+	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
+	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
+	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
+	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
+	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_BasicImpl[2] = {
@@ -798,37 +848,76 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubje
 	{ 0u, "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()", "GetValue", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_DispatchBasicSubjects[6] = {
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_Calculator[3] = {
+	{ 0u, "DispatchBasicSubjects/Calculator::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
+	{ 0u, "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)", "Add", "System.Void", 0, nullptr, 0u },
+	{ 0u, "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)", "Subtract", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[5] = {
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_DispatchBasicNativeEntry[5] = {
+	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
+	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()", "TestDualGetStatus", "System.Void", 0, nullptr, 0u },
+	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()", "TestIDispatchAdd", "System.Void", 0, nullptr, 0u },
+	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()", "TestIDispatchSub", "System.Void", 0, nullptr, 0u },
+	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()", "TestIUnknownGetValue", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_IBasicOp[1] = {
+	{ 0u, "DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()", "GetValue", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_ICalculator[2] = {
+	{ 0u, "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)", "Add", "System.Void", 0, nullptr, 0u },
+	{ 0u, "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)", "Subtract", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_IStatusProvider[1] = {
+	{ 0u, "DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()", "GetStatusCode", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_StatusProvider[2] = {
+	{ 0u, "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
+	{ 0u, "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()", "GetStatusCode", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute[1] = {
+	{ 0u, "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)", ".ctor", "System.Void", 0, nullptr, 0u },
+};
+
+static constexpr ReflectionQueryTypeDescriptor kReflTypes[9] = {
+	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects", "DispatchBasicSubjects/DispatchBasicSubjects", "", "DispatchBasicSubjects", "DispatchBasicSubjects", nullptr, kReflFields_DispatchBasicSubjects_DispatchBasicSubjects, 1u, nullptr, 0u,
+	kReflMethods_DispatchBasicSubjects_DispatchBasicSubjects, 5u },
+	{ 0u, "DispatchBasicSubjects/BasicImpl", "DispatchBasicSubjects/BasicImpl", "", "BasicImpl", "BasicImpl", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_DispatchBasicSubjects_BasicImpl, 2u },
 	{ 0u, "DispatchBasicSubjects/Calculator", "DispatchBasicSubjects/Calculator", "", "Calculator", "Calculator", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_DispatchBasicSubjects_Calculator, 3u },
 	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry", "DispatchBasicSubjects/DispatchBasicNativeEntry", "", "DispatchBasicNativeEntry", "DispatchBasicNativeEntry", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_DispatchBasicSubjects_DispatchBasicNativeEntry, 5u },
+	{ 0u, "DispatchBasicSubjects/IBasicOp", "DispatchBasicSubjects/IBasicOp", "", "IBasicOp", "IBasicOp", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_DispatchBasicSubjects_IBasicOp, 1u },
+	{ 0u, "DispatchBasicSubjects/ICalculator", "DispatchBasicSubjects/ICalculator", "", "ICalculator", "ICalculator", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_DispatchBasicSubjects_ICalculator, 2u },
+	{ 0u, "DispatchBasicSubjects/IStatusProvider", "DispatchBasicSubjects/IStatusProvider", "", "IStatusProvider", "IStatusProvider", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_DispatchBasicSubjects_IStatusProvider, 1u },
 	{ 0u, "DispatchBasicSubjects/StatusProvider", "DispatchBasicSubjects/StatusProvider", "", "StatusProvider", "StatusProvider", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_DispatchBasicSubjects_StatusProvider, 2u },
-	{ 0u, "DispatchBasicSubjects/BasicImpl", "DispatchBasicSubjects/BasicImpl", "", "BasicImpl", "BasicImpl", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_DispatchBasicSubjects_BasicImpl, 2u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects", "DispatchBasicSubjects/DispatchBasicSubjects", "", "DispatchBasicSubjects", "DispatchBasicSubjects", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_DispatchBasicSubjects_DispatchBasicSubjects, 6u },
+	{ 0u, "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute", "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute", "System.Runtime.InteropServices", "System.Runtime.InteropServices.ComInterfaceTypeAttribute", "System.Runtime.InteropServices.ComInterfaceTypeAttribute", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute, 1u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[5] = {
+static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[9] = {
 	&kReflTypes[0],
 	&kReflTypes[1],
 	&kReflTypes[2],
 	&kReflTypes[3],
 	&kReflTypes[4],
+	&kReflTypes[5],
+	&kReflTypes[6],
+	&kReflTypes[7],
+	&kReflTypes[8],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "DispatchBasicSubjects", kReflTypePtrs, 5u };
+static constexpr ReflectionQueryImageDescriptor kReflImage = { "DispatchBasicSubjects", kReflTypePtrs, 9u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -867,6 +956,611 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
+// Managed method: DispatchBasicSubjects/DispatchBasicSubjects::Subject_0()
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: DispatchBasicSubjects/DispatchBasicSubjects::Subject_1()
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: DispatchBasicSubjects/DispatchBasicSubjects::Subject_2()
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: DispatchBasicSubjects/DispatchBasicSubjects::Subject_3()
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: DispatchBasicSubjects/DispatchBasicSubjects::Subject_4()
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+
+// Managed method: DispatchBasicSubjects/BasicImpl::.ctor()
+extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: DispatchBasicSubjects/BasicImpl::GetValue()
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
 // Managed method: DispatchBasicSubjects/Calculator::.ctor()
 extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
@@ -884,7 +1578,7 @@ extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos
 }
 
 // Managed method: DispatchBasicSubjects/Calculator::Add(System.Int32,System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -898,6 +1592,172 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add(CHAOS_IL2CPP_
 	_s0 = chaos_args[1];
 	_s1 = chaos_args[2];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: DispatchBasicSubjects/Calculator::Subtract(System.Int32,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
+
+	_s0 = chaos_args[1];
+	_s1 = chaos_args[2];
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: DispatchBasicSubjects/DispatchBasicNativeEntry::Run(System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		switch (chaos_switch_value)
+		{
+			case 0:
+				{
+					auto& _d7 = s_hotpatch_entries[7];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
+					{
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d7.method_key, nullptr, &_d_hpresult);
+					}
+					else
+					{
+						_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd();
+					}
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				}
+				chaos_locals[2] = _s0;
+			case 1:
+				{
+					auto& _d8 = s_hotpatch_entries[8];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
+					{
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d8.method_key, nullptr, &_d_hpresult);
+					}
+					else
+					{
+						_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub();
+					}
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				}
+				chaos_locals[2] = _s0;
+			case 2:
+				{
+					auto& _d6 = s_hotpatch_entries[6];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
+					{
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d6.method_key, nullptr, &_d_hpresult);
+					}
+					else
+					{
+						_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus();
+					}
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				}
+				chaos_locals[2] = _s0;
+			case 3:
+			{
+				{
+					auto& _d9 = s_hotpatch_entries[9];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
+					{
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d9.method_key, nullptr, &_d_hpresult);
+					}
+					else
+					{
+						_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue();
+					}
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				}
+				chaos_locals[2] = _s0;
+				break;
+			}
+			default:
+			{
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
+				chaos_locals[2] = _s0;
+				break;
+			}
+		}
+	}
+	_s0 = chaos_locals[2];
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus()
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+
+
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_StatusProvider, {});
+		chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_StatusProvider.hot;
+		DispatchBasicSubjects_StatusProvider__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	{
+		const auto chaos_raw_arg_0 = _s0;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
+		auto& _d20 = s_hotpatch_entries[20];
+		CHAOS_IL2CPP_INT32 _d_hpresult{};
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d20)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d20))
+		{
+			alignas(16) uint8_t _d_ab[8];
+			ArgBuffer _d_bw(_d_ab);
+			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
+			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+				_d20.method_key, _d_ab, &_d_hpresult);
+		}
+		else
+		{
+			_d_hpresult = DispatchBasicSubjects_StatusProvider_GetStatusCode(chaos_arg_0);
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+	}
+	chaos_locals[1] = _s0;
+	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -944,30 +1804,12 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 		}
 		else
 		{
-			_d_hpresult = DispatchBasicSubjects_Calculator_Add(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
+			_d_hpresult = DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 	}
 	chaos_locals[1] = _s0;
 	_s0 = chaos_locals[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: DispatchBasicSubjects/Calculator::Subtract(System.Int32,System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
-	_s0 = chaos_args[1];
-	_s1 = chaos_args[2];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -1014,112 +1856,12 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 		}
 		else
 		{
-			_d_hpresult = DispatchBasicSubjects_Calculator_Subtract(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
+			_d_hpresult = DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 	}
 	chaos_locals[1] = _s0;
 	_s0 = chaos_locals[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: DispatchBasicSubjects/StatusProvider::.ctor()
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: DispatchBasicSubjects/StatusProvider::GetStatusCode()
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(200);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus()
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_StatusProvider, {});
-		chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_StatusProvider.hot;
-		DispatchBasicSubjects_StatusProvider__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d17 = s_hotpatch_entries[17];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d17)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d17))
-		{
-			alignas(16) uint8_t _d_ab[8];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d17.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_StatusProvider_GetStatusCode(chaos_arg_0);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: DispatchBasicSubjects/BasicImpl::.ctor()
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: DispatchBasicSubjects/BasicImpl::GetValue()
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -1167,513 +1909,74 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: DispatchBasicSubjects/DispatchBasicNativeEntry::Run(System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+// AOT-unreachable stub: DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_IBasicOp_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()");
+	return {};
+}
+
+// AOT-unreachable stub: DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)");
+	return {};
+}
+
+// AOT-unreachable stub: DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)");
+	return {};
+}
+
+// AOT-unreachable stub: DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_IStatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()");
+	return {};
+}
+
+// Managed method: DispatchBasicSubjects/StatusProvider::.ctor()
+extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
 	_s0 = chaos_args[0];
 	{
-		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-		switch (chaos_switch_value)
-		{
-			case 0:
-				{
-					auto& _d5 = s_hotpatch_entries[5];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d5.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				chaos_locals[2] = _s0;
-			case 1:
-				{
-					auto& _d6 = s_hotpatch_entries[6];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d6.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				chaos_locals[2] = _s0;
-			case 2:
-				{
-					auto& _d7 = s_hotpatch_entries[7];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d7.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				chaos_locals[2] = _s0;
-			case 3:
-			{
-				{
-					auto& _d8 = s_hotpatch_entries[8];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d8.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				chaos_locals[2] = _s0;
-				break;
-			}
-			default:
-			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-				chaos_locals[2] = _s0;
-				break;
-			}
-		}
+		const auto chaos_arg_0 = _s0;
+		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
 	}
-	_s0 = chaos_locals[2];
+	return;
+}
+
+// Managed method: DispatchBasicSubjects/StatusProvider::GetStatusCode()
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(200);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: DispatchBasicSubjects/DispatchBasicSubjects::Subject_0()
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void)
+// Managed method: DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor(ComInterfaceType)
+extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_0 = _s0;
-		auto& _d9 = s_hotpatch_entries[9];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-		{
-			alignas(16) uint8_t _d_ab[4];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d9.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_Run(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_0 = _s1;
-		auto& _d9 = s_hotpatch_entries[9];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-		{
-			alignas(16) uint8_t _d_ab[4];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d9.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_Run(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: DispatchBasicSubjects/DispatchBasicSubjects::Subject_1()
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d5 = s_hotpatch_entries[5];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d5.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		auto& _d5 = s_hotpatch_entries[5];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d5.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd();
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: DispatchBasicSubjects/DispatchBasicSubjects::Subject_2()
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d6 = s_hotpatch_entries[6];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d6.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		auto& _d6 = s_hotpatch_entries[6];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d6.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub();
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: DispatchBasicSubjects/DispatchBasicSubjects::Subject_3()
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d7 = s_hotpatch_entries[7];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d7.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		auto& _d7 = s_hotpatch_entries[7];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d7.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus();
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: DispatchBasicSubjects/DispatchBasicSubjects::Subject_4()
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d8 = s_hotpatch_entries[8];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d8.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		auto& _d8 = s_hotpatch_entries[8];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d8.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue();
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: DispatchBasicSubjects/DispatchBasicSubjects::Run(System.Int32)
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 
 	_s0 = chaos_args[0];
 	{
-		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-		switch (chaos_switch_value)
-		{
-			case 0:
-				{
-					auto& _d10 = s_hotpatch_entries[10];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d10.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						DispatchBasicSubjects_DispatchBasicSubjects_Subject_0();
-					}
-				}
-			case 1:
-				{
-					auto& _d11 = s_hotpatch_entries[11];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d11.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						DispatchBasicSubjects_DispatchBasicSubjects_Subject_1();
-					}
-				}
-			case 2:
-				{
-					auto& _d12 = s_hotpatch_entries[12];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d12.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						DispatchBasicSubjects_DispatchBasicSubjects_Subject_2();
-					}
-				}
-			case 3:
-				{
-					auto& _d13 = s_hotpatch_entries[13];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d13.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						DispatchBasicSubjects_DispatchBasicSubjects_Subject_3();
-					}
-				}
-			case 4:
-			{
-				{
-					auto& _d14 = s_hotpatch_entries[14];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d14.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						DispatchBasicSubjects_DispatchBasicSubjects_Subject_4();
-					}
-				}
-				break;
-			}
-			default:
-				return;
-		}
+		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[2])();
 	}
 	return;
 }
@@ -1684,4 +1987,4 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Run(CHAOS_IL2CPP_INT
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 18;
+extern "C" const int kAotMethodCount = 22;

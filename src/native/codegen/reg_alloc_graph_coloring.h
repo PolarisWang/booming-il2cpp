@@ -294,6 +294,37 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
         }
     }
 
+    // ── Compute first_def / last_use for conservative live range ──────────
+    // Standard liveness uses def-kill semantics: when a vreg is redefined,
+    // the old definition is killed and doesn't propagate backwards. This
+    // means a vreg with multiple definitions has its earlier live range
+    // truncated, causing the interference graph to miss true overlaps.
+    //
+    // Conservative live range: each vreg is live from its FIRST definition
+    // to its LAST use, ignoring intermediate redefinitions. This ensures
+    // overlapping conservative ranges are correctly marked as interfering.
+    uint32_t first_def_idx[64];
+    uint32_t last_use_idx[64];
+    std::memset(first_def_idx, 0xFF, sizeof(first_def_idx));
+    std::memset(last_use_idx, 0xFF, sizeof(last_use_idx));
+
+    for (uint32_t i = 0; i < n_instrs; ++i) {
+        uint64_t dbits = def[i];
+        while (dbits) {
+            uint32_t d = static_cast<uint32_t>(Ctz64(dbits));
+            dbits &= dbits - 1;
+            if (d < interpreter::kGPRegisters && first_def_idx[d] == UINT32_MAX)
+                first_def_idx[d] = i;
+        }
+        uint64_t ubits = use[i];
+        while (ubits) {
+            uint32_t u = static_cast<uint32_t>(Ctz64(ubits));
+            ubits &= ubits - 1;
+            if (u < interpreter::kGPRegisters)
+                last_use_idx[u] = i;
+        }
+    }
+
     // ── Build GPR interference graph ──────────────────────────────────────
     // adj[v] = bitmask of vregs that interfere with v.
     uint64_t adj[64] = {};
@@ -331,6 +362,66 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
                         adj[lo] |= (1ULL << d);
                     }
                 }
+            }
+        }
+    }
+
+    // ── Conservative live-range interference ─────────────────────────────
+    // Standard liveness uses def-kill: when vreg r4 is redefined at instr 19,
+    // r4's earlier value (from instr 13) is killed and doesn't propagate
+    // backwards through instr 14. This means def[14] = r2 doesn't see r4
+    // as live, allowing r2 and r4 to share a register — but r2's redefinition
+    // at instr 14 clobbers r4's live value.
+    //
+    // Fix: add def→conservative_live interference (bidirectional), where
+    // conservative_live tracks vregs from their FIRST definition to their
+    // LAST use, ignoring intermediate redefinitions.
+    //
+    // Source operands of the current instruction are excluded from the
+    // interference set (three-address code: src is read before dst is
+    // written, so they can safely share a register with the dest).
+    {
+        uint64_t cons_live = 0;
+        for (uint32_t i = 0; i < n_instrs; ++i) {
+            // Add vregs first defined at this instruction.
+            uint64_t dbits = def[i];
+            uint64_t new_defs = 0;
+            while (dbits) {
+                uint32_t d = static_cast<uint32_t>(Ctz64(dbits));
+                dbits &= dbits - 1;
+                if (d < interpreter::kGPRegisters && first_def_idx[d] == i)
+                    new_defs |= (1ULL << d);
+            }
+            cons_live |= new_defs;
+
+            // Add bidirectional interference between def[i] and cons_live.
+            // Exclude source operands (three-address code: src read before dst write).
+            dbits = def[i];
+            while (dbits) {
+                uint32_t d = static_cast<uint32_t>(Ctz64(dbits));
+                dbits &= dbits - 1;
+                if (d < interpreter::kGPRegisters) {
+                    uint64_t exclude = (1ULL << d) | use[i];
+                    uint64_t interfere = cons_live & ~exclude;
+                    if (interfere) {
+                        adj[d] |= interfere;
+                        uint64_t ibits = interfere;
+                        while (ibits) {
+                            uint32_t iv = static_cast<uint32_t>(Ctz64(ibits));
+                            ibits &= ibits - 1;
+                            adj[iv] |= (1ULL << d);
+                        }
+                    }
+                }
+            }
+
+            // Remove vregs that had their last use at this instruction.
+            uint64_t ubits = use[i];
+            while (ubits) {
+                uint32_t u = static_cast<uint32_t>(Ctz64(ubits));
+                ubits &= ubits - 1;
+                if (u < interpreter::kGPRegisters && last_use_idx[u] == i)
+                    cons_live &= ~(1ULL << u);
             }
         }
     }

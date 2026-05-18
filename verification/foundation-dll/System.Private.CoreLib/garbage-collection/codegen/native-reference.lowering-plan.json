@@ -2,31 +2,32 @@
   "formatVersion": "v0",
   "artifactKind": "nativeReferenceLoweringPlan",
   "planKind": "assembly-full-closure-runtime-skeleton",
-  "assemblyName": "GarbageCollectionSubjects",
+  "assemblyName": "GarbageCollectionPatchEntry",
   "entrySubjectId": "",
   "includeHeader": "codegen_bridge.h",
   "nativeEntryFunctionName": "RunNativeReferenceAssembly",
-  "entrySymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
+  "entrySymbol": "GarbageCollectionPatchEntry_GarbageCollectionPatchEntry_Subject_0",
   "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
   "translationUnitMode": "runtime-skeleton",
   "translationUnitMethodSubjectIds": [
-    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
-    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()",
-    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()",
-    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()",
-    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
-    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()"
+    "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Run:System.Void(System.Int32)",
+    "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_0:System.Int32()",
+    "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_1:System.Int32()",
+    "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_2:System.Int32()",
+    "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_3:System.Int32()",
+    "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_4:System.Int32()",
+    "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_5:System.Int32()"
   ],
-  "translationUnitMethodCount": 6,
+  "translationUnitMethodCount": 7,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 6,
+      "methodCount": 7,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
-      "firstMethodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
-      "lastMethodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()"
+      "firstMethodSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Run:System.Void(System.Int32)",
+      "lastMethodSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_5:System.Int32()"
     }
   ],
   "auditStatus": "runtime-skeleton",

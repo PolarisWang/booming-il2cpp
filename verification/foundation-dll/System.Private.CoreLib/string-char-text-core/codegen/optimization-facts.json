@@ -116,25 +116,7 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_6:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
       "devirtualized": false
@@ -152,25 +134,7 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_7:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_11:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
       "devirtualized": false
@@ -188,18 +152,6 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_13:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_14:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_14:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
@@ -207,18 +159,6 @@
     },
     {
       "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_15:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_15:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_16:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
       "devirtualized": false
@@ -238,106 +178,5 @@
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": [
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_0:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_1:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_2:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_3:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_4:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_5:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_6:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_7:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_8:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_9:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_10:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_11:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_12:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_13:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_14:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_15:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_16:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_17:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_18:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    },
-    {
-      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_19:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
-    }
-  ]
+  "exceptionFacts": []
 }

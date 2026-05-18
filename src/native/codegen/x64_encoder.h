@@ -301,6 +301,75 @@ inline void EmitXorRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
     buf.EmitByte(ModRM(3, dst, src));
 }
 
+// ── 32-bit GPR arithmetic (zero-extend to 64-bit, matching x86 natural behavior) ──
+
+/// add r32, r/m32
+inline void EmitAdd32RR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x03);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// sub r32, r/m32
+inline void EmitSub32RR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x2B);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// imul r32, r/m32
+inline void EmitImul32RR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xAF);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// and r32, r/m32
+inline void EmitAnd32RR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x23);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// or r32, r/m32
+inline void EmitOr32RR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0B);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// xor r32, r/m32
+inline void EmitXor32RR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x33);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// neg r/m32
+inline void EmitNeg32(CodeBuffer& buf, uint8_t reg) noexcept {
+    EmitREX(buf, false, 3, reg);
+    buf.EmitByte(0xF7);
+    buf.EmitByte(ModRM(3, 3, reg));
+}
+
+/// not r/m32
+inline void EmitNot32(CodeBuffer& buf, uint8_t reg) noexcept {
+    EmitREX(buf, false, 2, reg);
+    buf.EmitByte(0xF7);
+    buf.EmitByte(ModRM(3, 2, reg));
+}
+
+/// xor r32, r/m32 (zero a register: xor eax, eax is shorter than xor rax, rax)
+inline void EmitXor32ZR(CodeBuffer& buf, uint8_t reg) noexcept {
+    EmitREX(buf, false, reg, reg);
+    buf.EmitByte(0x33);
+    buf.EmitByte(ModRM(3, reg, reg));
+}
+
+/// movsxd r64, r/m32 — sign-extend dword to qword (already exists, reference below)
+// inline void EmitMovsxd(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept;
+
 /// xor r/m64, r64 — [base+disp] ^= src
 inline void EmitXorMR(CodeBuffer& buf, uint8_t base, int32_t disp, uint8_t src) noexcept {
     EmitREX(buf, true, src, base);

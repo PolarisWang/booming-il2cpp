@@ -202,7 +202,7 @@ def ensure_cmakelists():
         f'set(CHAOS_NATIVE_BUILD "{native_build_str}")\n'
         f'\n'
         f'# Source files — codegen outputs to codegen/<AssemblyName>/generated/\n'
-        f'file(GLOB CHAOS_CODEGEN_CPP "${{CHAOS_CODEGEN_DIR}}/*/generated/native-aot.generated.cpp")\n'
+        f'file(GLOB CHAOS_CODEGEN_CPP "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.generated.cpp")\n'
         f'set(CHAOS_ENTRY_SOURCES\n'
         f'    "runtime-entry.cpp"\n'
         f'    "runtime-patchdata.cpp"\n'

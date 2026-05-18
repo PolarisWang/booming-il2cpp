@@ -32,14 +32,14 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: ArrayIndexingCopySubjects
-add_library(chaos_gen_ArrayIndexingCopySubjects STATIC
-    ${CHAOS_GEN_DIR}/ArrayIndexingCopySubjects/generated/native-aot.generated.cpp
+# Assembly: ArrayIndexingCopyPatchEntry
+add_library(chaos_gen_ArrayIndexingCopyPatchEntry STATIC
+    ${CHAOS_GEN_DIR}/ArrayIndexingCopyPatchEntry/generated/native-aot.generated.cpp
 )
 
-target_include_directories(chaos_gen_ArrayIndexingCopySubjects PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_ArrayIndexingCopySubjects PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_ArrayIndexingCopySubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_ArrayIndexingCopyPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_ArrayIndexingCopyPatchEntry PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_ArrayIndexingCopyPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -48,7 +48,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_ArrayIndexingCopySubjects
+    chaos_gen_ArrayIndexingCopyPatchEntry
     ${NATIVE_LIBS}
 )
 

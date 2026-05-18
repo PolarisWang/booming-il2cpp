@@ -384,7 +384,9 @@ public sealed partial class NativeAotLoweringPlanner
 				list.Add(method);
 			}
 			int nextSlot = 0;
-			var sortedReferenceTypes = TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds).ToArray();
+			var sortedReferenceTypes = TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds)
+				.Where(id => !valueTypeSubjectIds.Contains(id) && !hashSet3.Contains(id))
+				.ToArray();
 			foreach (string typeId in sortedReferenceTypes)
 			{
 				if (methodsByDeclaringTypeVT.TryGetValue(typeId, out var typeMethods))

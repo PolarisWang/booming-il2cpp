@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "ThreadingThreadBasicsSubjects",
-  "entrySubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()",
+  "assemblyName": "ThreadingThreadBasicsPatchEntry",
+  "entrySubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_0",
+  "entrySymbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

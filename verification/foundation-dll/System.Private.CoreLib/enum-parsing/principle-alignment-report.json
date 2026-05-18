@@ -1,7 +1,7 @@
 {
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T01:09:52.442094",
+  "generated_at": "2026-05-19T04:49:50.217421",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -42,10 +42,14 @@
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "principle": "P1",
-      "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available",
+      "status": "CONCERN",
+      "summary": "Average speedup -411.47% — native significantly slower than managed [downgraded from VIOLATION because benchmark stage was skipped]",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": -411.47,
+        "managed_faster_count": 10,
+        "native_faster_count": 0
+      }
     },
     "p2_template_hygiene": {
       "check_id": "p2_template_hygiene",
@@ -67,11 +71,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 12 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 13 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 12,
-        "entries_with_interrupt_ptr": 12,
+        "table_size": 13,
+        "entries_with_interrupt_ptr": 13,
         "has_hotpatch_module": true
       }
     },
@@ -96,8 +100,8 @@
     "total": 8,
     "aligned": 7,
     "concern": 0,
-    "violation": 0,
-    "not_applicable": 1,
-    "overall": "ALIGNED"
+    "violation": 1,
+    "not_applicable": 0,
+    "overall": "CONCERN"
   }
 }

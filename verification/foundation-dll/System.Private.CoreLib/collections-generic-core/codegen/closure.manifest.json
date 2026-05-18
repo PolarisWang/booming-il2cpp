@@ -1,18 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "CollectionsGenericCoreSubjects",
+  "assemblyName": "CollectionsGenericCorePatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/collections-generic-core/managed/subjects/build-output/CollectionsGenericCoreSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/collections-generic-core/managed/patch/build-output/CollectionsGenericCorePatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "CollectionsGenericCoreSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/collections-generic-core/managed/subjects/build-output/CollectionsGenericCoreSubjects.dll"
-    },
-    {
-      "assemblyName": "System.Collections",
-      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Collections.dll"
+      "assemblyName": "CollectionsGenericCorePatchEntry",
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/collections-generic-core/managed/patch/build-output/CollectionsGenericCorePatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "f8f147f3-d62e-4190-a688-1163299f4720",
+  "inputModuleVersionId": "1addd90c-6e64-4a2d-b733-6d1824ad7438",
   "artifacts": [
     {
       "kind": "typedIlIr",

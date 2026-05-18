@@ -80,6 +80,7 @@ static const char* OpcodeName(IROpCode opc) noexcept {
     HANDLE_OP(Cgt); HANDLE_OP(Conv_I4); HANDLE_OP(Conv_I8);
     HANDLE_OP(LdNull); HANDLE_OP(Pop); HANDLE_OP(Br);
     HANDLE_OP(BrTrue); HANDLE_OP(BrFalse); HANDLE_OP(Ret);
+    HANDLE_OP(Shl); HANDLE_OP(Shr); HANDLE_OP(ShrUn);
     #undef HANDLE_OP
     default: return "???";
     }
@@ -232,11 +233,14 @@ static void* SealAndGetEntry(NativeMethod* nm) {
 }
 
 static void DumpCode(const uint8_t* code, uint32_t size) {
-    std::printf("    code bytes (%u): ", size);
-    for (uint32_t i = 0; i < size && i < 128; i++) {
+    std::printf("    code bytes (%u):\n", size);
+    for (uint32_t i = 0; i < size; i++) {
+        if (i % 16 == 0) std::printf("      ");
         std::printf("%02X ", code[i]);
+        if (i % 16 == 15) std::printf("\n");
     }
-    std::printf("\n");
+    if (size % 16 != 0 && size <= 256) std::printf("\n");
+    if (size > 256) std::printf("      ... (%u more bytes)\n", size - 256);
 }
 
 static uint64_t ExecuteNative(void* entry, uint64_t* args = nullptr) {
@@ -1557,6 +1561,43 @@ static bool Test_LdVirtFtn() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+// Test: Ceq_ZeroExt — verify Ceq works with zero-extended Int32 values
+static bool Test_Ceq_ZeroExt() {
+    std::printf("  Test_Ceq_ZeroExt...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, -1, 0),
+        InstrI4(IROpCode::LdcI4, 0, 1),
+        InstrBinary(IROpCode::Ceq, 2, 0, 1),
+        InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    RegisterT4Code(entry, nm->code_size, nm);
+
+    RegisterFrame rf; std::memset(&rf, 0, sizeof(rf));
+    bool re_ok = RegisterExecute(rf, rm.instructions.data(),
+                                  static_cast<uint32_t>(rm.instructions.size()));
+    if (!re_ok || !rf.has_ret) { std::printf("    FAIL: RegisterExecute no result\n"); return false; }
+    std::printf("    RegisterExecute: 0x%llx\n", (unsigned long long)rf.ret_val);
+
+    uint64_t t4_ret = ExecuteNative(entry);
+    std::printf("    T4:               0x%llx\n", (unsigned long long)t4_ret);
+
+    if (t4_ret != rf.ret_val) {
+        std::printf("    FAIL: mismatch\n");
+        DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size);
+        return false;
+    }
+    std::printf("    Ceq zero-extend OK ✓\n");
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 // Test: Fuzz — random instruction sequence comparison (T4 vs RegisterExecute)
 //
 // Generates random RegisterInstruction sequences, runs them through both
@@ -1594,6 +1635,13 @@ static bool Test_Fuzz() {
         {IROpCode::Conv_I8, FOpGroup::Unary},
         {IROpCode::LdNull, FOpGroup::Unary},
         {IROpCode::Pop,   FOpGroup::Unary},
+        // Phase E additions:
+        {IROpCode::Ceq,   FOpGroup::Binary},
+        {IROpCode::Clt,   FOpGroup::Binary},
+        {IROpCode::Cgt,   FOpGroup::Binary},
+        {IROpCode::Shl,   FOpGroup::Binary},
+        {IROpCode::Shr,   FOpGroup::Binary},
+        {IROpCode::ShrUn, FOpGroup::Binary},
     };
     // clang-format on
 
@@ -1687,6 +1735,15 @@ static bool Test_Fuzz() {
             }  // end switch
         }  // end for each instruction
 
+        // 20% chance: insert an unconditional branch to the final Ret
+        if (rng() % 5 == 0 && instrs.size() > 2 && has_ret) {
+            // Target is the current last instruction (Ret before insertion).
+            // After insertion, Ret shifts by 1, so target = old size = new Ret index.
+            uint32_t target = static_cast<uint32_t>(instrs.size());
+            uint32_t br_pos = 1 + (rng() % (static_cast<uint32_t>(instrs.size()) - 2));
+            instrs.insert(instrs.begin() + br_pos, InstrBranch(IROpCode::Br, target));
+        }
+
         if (instrs.empty()) { run--; continue; }
 
         // Run via RegisterExecute
@@ -1737,6 +1794,16 @@ static bool Test_Fuzz() {
                                 re_ok, rf.has_ret, (unsigned long long)rf.ret_val);
                     std::printf("      T4:              val=0x%llx\n", (unsigned long long)t4_ret);
                     DumpInstrs(instrs);
+                    DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size);
+                    // Re-run with stack dump to debug
+                    {
+                        using NativeEntry = void (*)(void*, void*);
+                        auto native_entry = reinterpret_cast<NativeEntry>(entry);
+                        uint64_t args_buf2[8] = {};
+                        uint64_t ret_buf2[2] = {};
+                        native_entry(args_buf2, ret_buf2);
+                        std::printf("      T4 re-run: val=0x%llx\n", (unsigned long long)ret_buf2[0]);
+                    }
                 }
             }
         } else if (!re_ok) {
@@ -1813,6 +1880,9 @@ int main() {
 
     // WS11: Remaining opcodes — LdVirtFtn
     TEST(LdVirtFtn);
+
+    // Phase E: Ceq zero-extend regression test
+    TEST(Ceq_ZeroExt);
 
     // WS12: Fuzz test — random instruction sequences
     TEST(Fuzz);

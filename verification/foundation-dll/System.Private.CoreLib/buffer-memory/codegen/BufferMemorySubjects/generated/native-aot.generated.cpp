@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
 #include "abi_manifest.h"
@@ -10,6 +11,8 @@
 #include "reflection_query_model.h"
 #include "load_store_chaos_bridge.h"
 #include "interpreter_entry.h"
+#include <gc/gc_bgc_inline.h>
+#include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
@@ -30,7 +33,8 @@ using namespace chaos::il2cpp::runtime_core;
 
 
 inline TypeInfoV0 chaos_mt_BufferMemorySubjects_BufferMemorySubjects = {{nullptr, nullptr, 2212541280939211958ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_BufferMemorySubjects_BufferMemorySubjects = static_cast<CHAOS_IL2CPP_INTPTR>(2212541280939211958ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_BufferMemorySubjects_BufferMemorySubjects = static_cast<CHAOS_IL2CPP_INTPTR>(2212541280939211958ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -72,6 +76,11 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 }
 
 struct chaos_type_BufferMemorySubjects_BufferMemorySubjects
+{
+	ThinLockableHeader header{};
+};
+
+struct chaos_type_System_Private_CoreLib_System_Byte
 {
 	ThinLockableHeader header{};
 };
@@ -154,7 +163,9 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_6(void);
 extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_7(void);
 extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_8(void);
 extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_9(void);
-extern "C" void BufferMemorySubjects_BufferMemorySubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod0(void);
+extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod3(void);
+extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod9(void);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -168,7 +179,7 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[12] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[14] = {
 	0u,
 	0u,
 	0u,
@@ -180,19 +191,21 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[12] = {
 	0u,
 	0u,
 	0u,
-	1u,
+	0u,
+	0u,
+	0u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[11];
+	::ChaosAbiMethodEntryV0 entries[13];
 	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		11u,
-		1u,
-		1286593297u,  // FNV-1a over entries+params
+		13u,
+		0u,
+		1400052141u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
@@ -206,48 +219,56 @@ static constexpr struct {
 		{ 0u, 0u },  // BufferMemorySubjects_BufferMemorySubjects_Subject_7
 		{ 0u, 0u },  // BufferMemorySubjects_BufferMemorySubjects_Subject_8
 		{ 0u, 0u },  // BufferMemorySubjects_BufferMemorySubjects_Subject_9
-		{ 0u, 1u },  // BufferMemorySubjects_BufferMemorySubjects_Run
+		{ 0u, 0u },  // BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod0
+		{ 0u, 0u },  // BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod3
+		{ 0u, 0u },  // BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod9
 	},
 	{
-		1u,
 	},
 };
 static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);
 // ── Module registration ──
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[2] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[3] = {
 		0u,
+		1548u,
 		1548u,
 	};
 
-	static constexpr const char* s_type_names[2] = {
+	static constexpr const char* s_type_names[3] = {
 		"<Module>",
 		"BufferMemorySubjects",
+		"BufferMemoryNativeEntry",
 	};
 
-	static constexpr const char* s_type_namespaces[2] = {
+	static constexpr const char* s_type_namespaces[3] = {
 		"",
 		"",
+		"",
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[2] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[3] = {
+		0u,
 		0u,
 		0u,
 	};
 
-	static const TypeInfoHot* const s_type_info_ptrs[2] = {
+	static const TypeInfoHot* const s_type_info_ptrs[3] = {
 		nullptr,
 		&chaos_mt_BufferMemorySubjects_BufferMemorySubjects.hot,
+		nullptr,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[4] = {
+		0u,
 		0u,
 		0u,
 		0u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[3] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[4] = {
+		0u,
 		0u,
 		0u,
 		0u,
@@ -267,7 +288,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .nested_type_offset = */ s_nested_type_offset,
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
-		/* .type_count        = */ 2u,
+		/* .type_count        = */ 3u,
 	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
@@ -279,7 +300,10 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("BufferMemorySubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[11] = {
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[13] = {
+	{ "CustomEntryMethod0", 0x0000000Eu, 0u },  // BufferMemoryNativeEntry
+	{ "CustomEntryMethod3", 0x0000000Fu, 0u },  // BufferMemoryNativeEntry
+	{ "CustomEntryMethod9", 0x00000010u, 0u },  // BufferMemoryNativeEntry
 	{ "Subject_0", 0x00000004u, 0u },  // BufferMemorySubjects
 	{ "Subject_1", 0x00000005u, 0u },  // BufferMemorySubjects
 	{ "Subject_2", 0x00000006u, 0u },  // BufferMemorySubjects
@@ -290,17 +314,16 @@ static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[11] = {
 	{ "Subject_7", 0x0000000Bu, 0u },  // BufferMemorySubjects
 	{ "Subject_8", 0x0000000Cu, 0u },  // BufferMemorySubjects
 	{ "Subject_9", 0x0000000Du, 0u },  // BufferMemorySubjects
-	{ "Run", 0x00000003u, 1u },  // BufferMemorySubjects
 };
 
 // Type name index entries (namespace, short_name)
-static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
-	{ "BufferMemorySubjects", "", 0u, 11u },
+static constexpr HotpatchTypeEntryV0 s_hotpatch_types[2] = {
+	{ "BufferMemoryNativeEntry", "", 0u, 3u },
+	{ "BufferMemorySubjects", "", 3u, 10u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[11] = {
-	{ 0x00000003u, 10u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[13] = {
 	{ 0x00000004u, 0u },
 	{ 0x00000005u, 1u },
 	{ 0x00000006u, 2u },
@@ -311,10 +334,13 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[11] = {
 	{ 0x0000000Bu, 7u },
 	{ 0x0000000Cu, 8u },
 	{ 0x0000000Du, 9u },
+	{ 0x0000000Eu, 10u },
+	{ 0x0000000Fu, 11u },
+	{ 0x00000010u, 12u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[11] = {
+static HotpatchEntryV0 s_hotpatch_entries[13] = {
 	{ reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BufferMemorySubjects::Subject_0
 	{ reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BufferMemorySubjects::Subject_1
 	{ reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // BufferMemorySubjects::Subject_2
@@ -325,20 +351,22 @@ static HotpatchEntryV0 s_hotpatch_entries[11] = {
 	{ reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BufferMemorySubjects::Subject_7
 	{ reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BufferMemorySubjects::Subject_8
 	{ reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BufferMemorySubjects::Subject_9
-	{ reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BufferMemorySubjects::Run
+	{ reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BufferMemoryNativeEntry::CustomEntryMethod0
+	{ reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BufferMemoryNativeEntry::CustomEntryMethod3
+	{ reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BufferMemoryNativeEntry::CustomEntryMethod9
 };
 
 // Module hotpatch bundle
 static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	"BufferMemorySubjects",
 	s_hotpatch_types,
-	1u,
+	2u,
 	s_hotpatch_methods,
-	11u,
+	13u,
 	s_hotpatch_slots,
-	11u,
+	13u,
 	s_hotpatch_entries,
-	11u,
+	13u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -347,23 +375,25 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[3] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[4] = {
 	"System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()",
 	"System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
 	"BufferMemorySubjects/BufferMemorySubjects::_exitCode",
+	"System.Private.CoreLib/System.Byte",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[3] = {
+extern "C" void* kChaosExternalRuntimeFnTable[4] = {
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Buffer__ByteLength_System_Int32_System_Array_),
 	nullptr,
+	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 3;
+extern "C" int32_t kChaosExternalRuntimeCount = 4;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[11])() = {
+static void (*kAotMethods[13])() = {
 	reinterpret_cast<void(*)()>(&BufferMemorySubjects_BufferMemorySubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&BufferMemorySubjects_BufferMemorySubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&BufferMemorySubjects_BufferMemorySubjects_Subject_2),
@@ -374,13 +404,15 @@ static void (*kAotMethods[11])() = {
 	reinterpret_cast<void(*)()>(&BufferMemorySubjects_BufferMemorySubjects_Subject_7),
 	reinterpret_cast<void(*)()>(&BufferMemorySubjects_BufferMemorySubjects_Subject_8),
 	reinterpret_cast<void(*)()>(&BufferMemorySubjects_BufferMemorySubjects_Subject_9),
-	reinterpret_cast<void(*)()>(&BufferMemorySubjects_BufferMemorySubjects_Run),
+	reinterpret_cast<void(*)()>(&BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod0),
+	reinterpret_cast<void(*)()>(&BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod3),
+	reinterpret_cast<void(*)()>(&BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod9),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
-static void (*kBenchmarkWrappers[11])() = {
+static void (*kBenchmarkWrappers[13])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -391,7 +423,9 @@ static void (*kBenchmarkWrappers[11])() = {
 	[]() {kAotMethods[7]();},
 	[]() {kAotMethods[8]();},
 	[]() {kAotMethods[9]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[10])(0);},
+	[]() {kAotMethods[10]();},
+	[]() {kAotMethods[11]();},
+	[]() {kAotMethods[12]();},
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -408,7 +442,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 			entry.method_key, __chaos_args, __chaos_ret);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -426,7 +460,8 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
 			chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 				entry.method_key, __chaos_args, __chaos_ret);
 		} else {
-			reinterpret_cast<void(*)()>(entry.direct_ptr)();
+			// Use kBenchmarkWrappers which supply correct default argument values
+			kBenchmarkWrappers[i]();
 		}
 	}
 	return result;
@@ -445,7 +480,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
 			entry.method_key);
 	} else {
-		reinterpret_cast<void(*)()>(entry.direct_ptr)();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
@@ -465,7 +500,7 @@ extern "C" double BenchmarkMethod(
 }
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[11] = {
+static void* const kMethodPointers[13] = {
 	reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_0),
 	reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_1),
 	reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_2),
@@ -476,7 +511,9 @@ static void* const kMethodPointers[11] = {
 	reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_7),
 	reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_8),
 	reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_9),
-	reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Run),
+	reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod0),
+	reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod3),
+	reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod9),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -484,7 +521,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 11u,
+	.method_pointer_count      = 13u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -493,6 +530,8 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.unresolved_virtual_call_count = 0u,
 	.type_capabilities       = nullptr,
 	.type_capability_count   = 0u,
+	.vtable_descriptors = nullptr,
+	.vtable_descriptor_count = 0u,
 };
 
 // MetadataRegistrationV0
@@ -528,7 +567,10 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_BufferMemorySubjects_BufferMemorySubjects[11] = {
+static constexpr ReflectionQueryFieldDescriptor kReflFields_BufferMemorySubjects_BufferMemorySubjects[1] = {
+	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+};
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_BufferMemorySubjects_BufferMemorySubjects[10] = {
 	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
 	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
 	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
@@ -539,19 +581,27 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_BufferMemorySubjec
 	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
 	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
 	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects", "BufferMemorySubjects/BufferMemorySubjects", "", "BufferMemorySubjects", "BufferMemorySubjects", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_BufferMemorySubjects_BufferMemorySubjects, 11u },
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_BufferMemorySubjects_BufferMemoryNativeEntry[3] = {
+	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()", "CustomEntryMethod0", "System.Void", 0, nullptr, 0u },
+	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()", "CustomEntryMethod3", "System.Void", 0, nullptr, 0u },
+	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()", "CustomEntryMethod9", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static constexpr ReflectionQueryTypeDescriptor kReflTypes[2] = {
+	{ 0u, "BufferMemorySubjects/BufferMemorySubjects", "BufferMemorySubjects/BufferMemorySubjects", "", "BufferMemorySubjects", "BufferMemorySubjects", nullptr, kReflFields_BufferMemorySubjects_BufferMemorySubjects, 1u, nullptr, 0u,
+	kReflMethods_BufferMemorySubjects_BufferMemorySubjects, 10u },
+	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry", "BufferMemorySubjects/BufferMemoryNativeEntry", "", "BufferMemoryNativeEntry", "BufferMemoryNativeEntry", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_BufferMemorySubjects_BufferMemoryNativeEntry, 3u },
+};
+
+static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
 	&kReflTypes[0],
+	&kReflTypes[1],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "BufferMemorySubjects", kReflTypePtrs, 1u };
+static constexpr ReflectionQueryImageDescriptor kReflImage = { "BufferMemorySubjects", kReflTypePtrs, 2u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -621,9 +671,6 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_2(void)
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 	{
@@ -635,26 +682,8 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_2(void)
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Buffer__ByteLength_System_Int32_System_Array_(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[0])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Buffer__ByteLength_System_Int32_System_Array_(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left == chaos_right ? 1 : 0);
-	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
 	{
 		if (_s0 != 0)
 		{
@@ -738,194 +767,386 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_9(void)
 	return;
 }
 
-// Managed method: BufferMemorySubjects/BufferMemorySubjects::Run(System.Int32)
-extern "C" void BufferMemorySubjects_BufferMemorySubjects_Run(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+// Managed method: BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0()
+extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
+	CHAOS_IL2CPP_INTPTR _s21{};
+	CHAOS_IL2CPP_INTPTR _s22{};
+	CHAOS_IL2CPP_INTPTR _s23{};
+	CHAOS_IL2CPP_INTPTR _s24{};
+	CHAOS_IL2CPP_INTPTR _s25{};
+	CHAOS_IL2CPP_INTPTR _s26{};
+	CHAOS_IL2CPP_INTPTR _s27{};
+	CHAOS_IL2CPP_INTPTR _s28{};
 
-	_s0 = chaos_args[0];
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
 	{
-		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-		switch (chaos_switch_value)
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
 		{
-			case 0:
-			{
-				{
-					auto& _d0 = s_hotpatch_entries[0];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d0.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						BufferMemorySubjects_BufferMemorySubjects_Subject_0();
-					}
-				}
-				break;
-			}
-			case 1:
-			{
-				{
-					auto& _d1 = s_hotpatch_entries[1];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d1.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						BufferMemorySubjects_BufferMemorySubjects_Subject_1();
-					}
-				}
-				break;
-			}
-			case 2:
-			{
-				{
-					auto& _d2 = s_hotpatch_entries[2];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d2.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						BufferMemorySubjects_BufferMemorySubjects_Subject_2();
-					}
-				}
-				break;
-			}
-			case 3:
-			{
-				{
-					auto& _d3 = s_hotpatch_entries[3];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d3.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						BufferMemorySubjects_BufferMemorySubjects_Subject_3();
-					}
-				}
-				break;
-			}
-			case 4:
-			{
-				{
-					auto& _d4 = s_hotpatch_entries[4];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d4.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						BufferMemorySubjects_BufferMemorySubjects_Subject_4();
-					}
-				}
-				break;
-			}
-			case 5:
-			{
-				{
-					auto& _d5 = s_hotpatch_entries[5];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d5.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						BufferMemorySubjects_BufferMemorySubjects_Subject_5();
-					}
-				}
-				break;
-			}
-			case 6:
-			{
-				{
-					auto& _d6 = s_hotpatch_entries[6];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d6.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						BufferMemorySubjects_BufferMemorySubjects_Subject_6();
-					}
-				}
-				break;
-			}
-			case 7:
-			{
-				{
-					auto& _d7 = s_hotpatch_entries[7];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d7.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						BufferMemorySubjects_BufferMemorySubjects_Subject_7();
-					}
-				}
-				break;
-			}
-			case 8:
-			{
-				{
-					auto& _d8 = s_hotpatch_entries[8];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d8.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						BufferMemorySubjects_BufferMemorySubjects_Subject_8();
-					}
-				}
-				break;
-			}
-			case 9:
-			{
-				{
-					auto& _d9 = s_hotpatch_entries[9];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d9.method_key, nullptr, nullptr);
-					}
-					else
-					{
-						BufferMemorySubjects_BufferMemorySubjects_Subject_9();
-					}
-				}
-				break;
-			}
-			default:
-				return;
+			CHAOS_IL2CPP_FAIL();
 		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	chaos_locals[1] = _s0;
+	_s0 = chaos_locals[1];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = chaos_locals[0];
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s3);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s2);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+		_s2 = chaos_element;
+	}
+	{
+		auto chaos_value_raw = _s2;
+		const auto chaos_value = chaos_value_raw;
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+	}
+	_s0 = chaos_locals[1];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s2 = chaos_locals[0];
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s3);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s2);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+		_s2 = chaos_element;
+	}
+	{
+		auto chaos_value_raw = _s2;
+		const auto chaos_value = chaos_value_raw;
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+	}
+	_s0 = chaos_locals[1];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s2 = chaos_locals[0];
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	{
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s3);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s2);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+		_s2 = chaos_element;
+	}
+	{
+		auto chaos_value_raw = _s2;
+		const auto chaos_value = chaos_value_raw;
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+	}
+	_s0 = chaos_locals[1];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	_s2 = chaos_locals[0];
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	{
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s3);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s2);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+		_s2 = chaos_element;
+	}
+	{
+		auto chaos_value_raw = _s2;
+		const auto chaos_value = chaos_value_raw;
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+	}
+	_s0 = chaos_locals[1];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+	_s2 = chaos_locals[0];
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+	{
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s3);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s2);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+		_s2 = chaos_element;
+	}
+	{
+		auto chaos_value_raw = _s2;
+		const auto chaos_value = chaos_value_raw;
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+	}
+	return;
+}
+
+// Managed method: BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3()
+extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod3(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		auto chaos_value_raw = _s3;
+		const auto chaos_value = chaos_value_raw;
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+	}
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
+	{
+		auto chaos_value_raw = _s3;
+		const auto chaos_value = chaos_value_raw;
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+		_s0 = chaos_element;
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_BufferMemorySubjects_BufferMemorySubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9()
+extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod9(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(99);
+	{
+		auto chaos_value_raw = _s2;
+		const auto chaos_value = chaos_value_raw;
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
 	return;
 }
@@ -936,4 +1157,4 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Run(CHAOS_IL2CPP_INT32
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 11;
+extern "C" const int kAotMethodCount = 13;

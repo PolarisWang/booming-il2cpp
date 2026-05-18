@@ -1,7 +1,7 @@
 {
   "family": "boxing-unboxing-casts",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T01:08:35.466325",
+  "generated_at": "2026-05-19T04:48:34.397741",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -42,13 +42,15 @@
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "principle": "P1",
-      "status": "ALIGNED",
-      "summary": "avg_speedup=0.0%",
+      "status": "NOT_APPLICABLE",
+      "summary": "11/11 methods are stubs — benchmark data not meaningful",
       "details": [],
       "evidence": {
         "average_speedup_percent": 0.0,
         "managed_faster_count": 0,
-        "native_faster_count": 0
+        "native_faster_count": 0,
+        "invalid_count": 11,
+        "total_methods": 11
       }
     },
     "p2_template_hygiene": {
@@ -71,11 +73,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 11 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 12 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 11,
-        "entries_with_interrupt_ptr": 11,
+        "table_size": 12,
+        "entries_with_interrupt_ptr": 12,
         "has_hotpatch_module": true
       }
     },
@@ -98,10 +100,10 @@
   },
   "summary": {
     "total": 8,
-    "aligned": 8,
+    "aligned": 7,
     "concern": 0,
     "violation": 0,
-    "not_applicable": 0,
+    "not_applicable": 1,
     "overall": "ALIGNED"
   }
 }

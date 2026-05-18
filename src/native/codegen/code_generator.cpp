@@ -408,20 +408,20 @@ void NativeCodeGenerator::EmitGprArithmetic(
     LoadGpr(kRAX, src1);
     if (src2 != UINT32_MAX) LoadGpr(kRCX, src2);
     if (opc == IROpCode::Add) {
-        EmitAddRR(buf_, kRAX, kRCX);
+        EmitAdd32RR(buf_, kRAX, kRCX);
     } else if (opc == IROpCode::Sub) {
-        EmitSubRR(buf_, kRAX, kRCX);
+        EmitSub32RR(buf_, kRAX, kRCX);
     } else if (opc == IROpCode::Mul) {
-        EmitImulRR(buf_, kRAX, kRCX);
+        EmitImul32RR(buf_, kRAX, kRCX);
     } else if (opc == IROpCode::Neg) {
-        EmitNeg(buf_, kRAX);
+        EmitNeg32(buf_, kRAX);
     } else if (opc == IROpCode::Div || opc == IROpCode::Rem) {
-        EmitREXB(buf_, true, 0); buf_.EmitByte(0x99);
-        EmitREX(buf_, true, 7, kRCX); buf_.EmitByte(0xF7); buf_.EmitByte(ModRM(3, 7, kRCX));
+        EmitREXB(buf_, false, 0); buf_.EmitByte(0x99);  // cdq: sign-extend eax→edx:eax
+        EmitREX(buf_, false, 7, kRCX); buf_.EmitByte(0xF7); buf_.EmitByte(ModRM(3, 7, kRCX));  // idiv ecx
         if (opc == IROpCode::Rem) EmitMovRR(buf_, kRAX, kRDX);
     } else if (opc == IROpCode::DivUn || opc == IROpCode::RemUn) {
-        EmitXorZR(buf_, kRDX);
-        EmitREX(buf_, true, 6, kRCX); buf_.EmitByte(0xF7); buf_.EmitByte(ModRM(3, 6, kRCX));
+        EmitXor32ZR(buf_, kRDX);  // xor edx, edx
+        EmitREX(buf_, false, 6, kRCX); buf_.EmitByte(0xF7); buf_.EmitByte(ModRM(3, 6, kRCX));  // div ecx
         if (opc == IROpCode::RemUn) EmitMovRR(buf_, kRAX, kRDX);
     }
     StoreGpr(kRAX, dst);
@@ -456,26 +456,45 @@ void NativeCodeGenerator::EmitFprArithmetic(
 void NativeCodeGenerator::EmitBitwise(
     IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept {
     LoadGpr(kRAX, src1);
-    if (opc == IROpCode::Not) EmitNot(buf_, kRAX);
-    else if (opc == IROpCode::And) { if (src2 != UINT32_MAX) { LoadGpr(kRCX, src2); EmitAndRR(buf_, kRAX, kRCX); } }
-    else if (opc == IROpCode::Or)  { if (src2 != UINT32_MAX) { LoadGpr(kRCX, src2); EmitOrRR(buf_, kRAX, kRCX); } }
-    else if (opc == IROpCode::Xor) { if (src2 != UINT32_MAX) { LoadGpr(kRCX, src2); EmitXorRR(buf_, kRAX, kRCX); } }
+    if (opc == IROpCode::Not) EmitNot32(buf_, kRAX);
+    else if (opc == IROpCode::And) { if (src2 != UINT32_MAX) { LoadGpr(kRCX, src2); EmitAnd32RR(buf_, kRAX, kRCX); } }
+    else if (opc == IROpCode::Or)  { if (src2 != UINT32_MAX) { LoadGpr(kRCX, src2); EmitOr32RR(buf_, kRAX, kRCX); } }
+    else if (opc == IROpCode::Xor) { if (src2 != UINT32_MAX) { LoadGpr(kRCX, src2); EmitXor32RR(buf_, kRAX, kRCX); } }
     StoreGpr(kRAX, dst);
 }
 
+// ── Shift with proper 32-bit semantics ─────────────────────────────────
+// RegisterExecute uses int32_t/uint32_t for shift operations, which means:
+//   Shr (signed):   (int32_t)RAX >> CL  → sign-extend to 64-bit
+//   ShrUn (unsigned): (uint32_t)RAX >> CL → zero-extend to 64-bit
+// x64 32-bit ops automatically zero-extend to 64 bits.
 void NativeCodeGenerator::EmitShift(
     IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2, int32_t imm) noexcept {
     LoadGpr(kRAX, src1);
     if (src2 != UINT32_MAX) {
         LoadGpr(kRCX, src2);
-        if (opc == IROpCode::Shl) EmitShlRCL(buf_, kRAX);
-        else if (opc == IROpCode::Shr) EmitShrRCL(buf_, kRAX);
-        else if (opc == IROpCode::ShrUn) EmitSarRCL(buf_, kRAX);
+        if (opc == IROpCode::Shl) {
+            // shl eax, cl (32-bit, zero-extends to 64-bit)
+            buf_.EmitByte(0xD3); buf_.EmitByte(ModRM(3, 4, kRAX));
+        } else if (opc == IROpCode::Shr) {
+            // sar eax, cl (32-bit arithmetic shift, zero-extends to 64-bit)
+            buf_.EmitByte(0xD3); buf_.EmitByte(ModRM(3, 7, kRAX));
+        } else if (opc == IROpCode::ShrUn) {
+            // shr eax, cl (32-bit logical shift, zero-extends to 64-bit)
+            buf_.EmitByte(0xD3); buf_.EmitByte(ModRM(3, 5, kRAX));
+        }
     } else {
-        uint8_t shift = static_cast<uint8_t>(imm & 0x3F);
-        if (opc == IROpCode::Shl) EmitShlRI(buf_, kRAX, shift);
-        else if (opc == IROpCode::Shr) EmitShrRI(buf_, kRAX, shift);
-        else if (opc == IROpCode::ShrUn) EmitSarRI(buf_, kRAX, shift);
+        uint8_t shift = static_cast<uint8_t>(imm & 0x1F);  // 32-bit mask (not 64-bit 0x3F)
+        if (opc == IROpCode::Shl) {
+            // shl eax, imm (32-bit)
+            EmitREX(buf_, false, 4, kRAX); buf_.EmitByte(0xC1); buf_.EmitByte(ModRM(3, 4, kRAX)); buf_.EmitByte(shift);
+        } else if (opc == IROpCode::Shr) {
+            // sar eax, imm (32-bit)
+            EmitREX(buf_, false, 7, kRAX); buf_.EmitByte(0xC1); buf_.EmitByte(ModRM(3, 7, kRAX)); buf_.EmitByte(shift);
+        } else if (opc == IROpCode::ShrUn) {
+            // shr eax, imm (32-bit)
+            EmitREX(buf_, false, 5, kRAX); buf_.EmitByte(0xC1); buf_.EmitByte(ModRM(3, 5, kRAX)); buf_.EmitByte(shift);
+        }
     }
     StoreGpr(kRAX, dst);
 }
@@ -888,9 +907,21 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
     case IROpCode::Ceq: case IROpCode::Clt: case IROpCode::Cgt: {
         if (!instr.has_src1() || !instr.has_src2() || !instr.has_dst()) return false;
         LoadGpr(kRAX, instr.src1_reg()); LoadGpr(kRCX, instr.src2_reg());
-        EmitCmpRR(buf_, kRAX, kRCX);
+        // Ceq: 64-bit compare (uint64_t equality, RegisterExecute uses == on uint64_t).
+        // Clt/Cgt: 32-bit compare (RegisterExecute casts to int32_t first).
+        if (opc == IROpCode::Ceq) {
+            EmitCmpRR(buf_, kRAX, kRCX);
+        } else {
+            uint8_t rex_byte = REX(false, kRAX, 0, kRCX);
+            if (rex_byte != 0x40) buf_.EmitByte(rex_byte);
+            buf_.EmitByte(0x3B);
+            buf_.EmitByte(ModRM(3, kRAX, kRCX));
+        }
         uint8_t cc = (opc == IROpCode::Ceq) ? kCC_E : (opc == IROpCode::Clt) ? kCC_L : kCC_G;
-        EmitXorZR(buf_, kRAX); EmitSetcc(buf_, cc, kRAX);
+        // IMPORTANT: use mov reg, 0 (NOT xor reg, reg) to preserve CMP flags.
+        // xor reg,reg sets ZF=1 (result is zero), clobbering the flags sete reads.
+        EmitMovRIImm32(buf_, kRAX, 0);
+        EmitSetcc(buf_, cc, kRAX);
         StoreGpr(kRAX, instr.dst_reg());
         return true;
     }
@@ -900,7 +931,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
     case IROpCode::ConvOvfI: case IROpCode::ConvOvfI4: case IROpCode::ConvOvfI8: {
         if (!instr.has_src1() || !instr.has_dst()) return false;
         LoadGpr(kRAX, instr.src1_reg());
-        if (instr.op_code() == IROpCode::Conv_I4 || instr.op_code() == IROpCode::ConvOvfI4) { buf_.EmitByte(0x48); buf_.EmitByte(0x63); buf_.EmitByte(0xC0); }  // movsxd rax, eax (sign-extend int32→int64)
+        // Int32-converting opcodes: truncate to 32-bit via mov eax,eax (zero-extends).
+        // Int64 opcodes (Conv_I8, ConvOvfI8): keep full 64-bit value.
+        bool is_int32_op = (instr.op_code() != IROpCode::Conv_I8 && instr.op_code() != IROpCode::ConvOvfI8);
+        if (is_int32_op) {
+            buf_.EmitByte(0x89); buf_.EmitByte(0xC0);  // mov eax, eax (zero-extend 32→64)
+        }
         StoreGpr(kRAX, instr.dst_reg());
         return true;
     }
@@ -1461,6 +1497,15 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
                         if (!seen[x64r] && num_cache_regs_ < kMaxCacheRegs) {
                             seen[x64r] = true;
                             callee_x64_regs_[num_cache_regs_++] = x64r;
+                        } else {
+                            // Another vreg already claimed this callee-saved
+                            // register.  The caller-filter already handles
+                            // caller-saved duplicates, but graph coloring
+                            // can still assign interfering vregs to the same
+                            // callee-saved register (select-phase ordering:
+                            // neighbor not yet colored when this vreg is
+                            // selected).  Clear the color → stack spill.
+                            gcr_.gpr_color[vr] = 0xFF;
                         }
                     } else {
                         gcr_.gpr_color[vr] = 0xFF;  // caller-saved → spill
@@ -1488,6 +1533,8 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
                             callee_xmm_regs_[num_fpr_callee_] = xmm;
                             callee_xmm_fi_[num_fpr_callee_] = static_cast<uint8_t>(fi);
                             ++num_fpr_callee_;
+                        } else {
+                            gcr_.fpr_color[fi] = 0xFF;  // already claimed → spill
                         }
                     } else {
                         gcr_.fpr_color[fi] = 0xFF;  // caller-saved → spill
@@ -1520,24 +1567,20 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
         EmitMovUPSMR(buf_, kRSP, off, callee_xmm_regs_[si]);
     }
 
-    // Initialize colored callee-saved regs to 0 — the graph coloring may
-    // assign a register to a vreg that is read before its first write (e.g.
-    // LdLoc from a local that was never stored), and callers' register
-    // values would produce wrong results.
+    // Zero-initialize all GPR stack slots — reading an uninitialized slot
+    // produces garbage.  Done BEFORE colored-reg zeroing to use RDI as scratch.
+    EmitXorZR(buf_, kRAX);
+    EmitLeaRM(buf_, kRDI, kRSP, static_cast<int32_t>(kGprFileOff));
+    EmitMovRIImm32(buf_, kRCX, kGprCount);
+    buf_.EmitByte(0xF3);
+    buf_.EmitByte(0x48);
+    buf_.EmitByte(0xAB);
+
+    // Initialize colored callee-saved regs to 0 (re-zeros RDI if colored,
+    // since REP STOSQ above left RDI pointing past the GPR file).
     if (has_graph_coloring_) {
         for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
             EmitXorRR(buf_, callee_saved_regs_[slot], callee_saved_regs_[slot]);
-        // Zero-initialize stack slots for vregs that were colored but
-        // filtered (caller-saved). These vregs fall through to stack
-        // I/O, and reading an uninitialized slot produces garbage.
-        uint64_t fmask = filtered_vreg_mask_;
-        while (fmask) {
-            uint32_t vr = static_cast<uint32_t>(detail::Ctz64(fmask));
-            fmask &= fmask - 1;
-            int32_t off = static_cast<int32_t>(GprOff(vr));
-            EmitMovRI32(buf_, kRAX, 0);
-            EmitMovMR(buf_, kRSP, off, kRAX);
-        }
     }
 
     // Emit instructions

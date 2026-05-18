@@ -1388,15 +1388,15 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		builder.AppendLine($"{indentation}    const auto chaos_value = {valueExpression};");
 		builder.AppendLine($"{indentation}    const auto chaos_address = {ConsumeEvalStackValueExpression()};");
-		builder.AppendLine($"{indentation}    if (needsSatbBarrier)");
-		builder.AppendLine($"{indentation}    {{");
-		builder.AppendLine($"{indentation}        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_address));");
-		builder.AppendLine($"{indentation}    }}");
+		if (needsSatbBarrier)
+		{
+			builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_address));");
+		}
 		builder.AppendLine($"{indentation}    chaos_store_indirect<{nativeType}>(chaos_address, chaos_value);");
-		builder.AppendLine($"{indentation}    if (needsSatbBarrier)");
-		builder.AppendLine($"{indentation}    {{");
-		builder.AppendLine($"{indentation}        chaos_gc_dirty_card(reinterpret_cast<void*>(chaos_address));");
-		builder.AppendLine($"{indentation}    }}");
+		if (needsSatbBarrier)
+		{
+			builder.AppendLine($"{indentation}    chaos_gc_dirty_card(reinterpret_cast<void*>(chaos_address));");
+		}
 		builder.AppendLine($"{indentation}}}");
 	}
 
@@ -1472,7 +1472,7 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		if (isReferenceElement)
 		{
-			builder.AppendLine($"{indentation}    auto chaos_value = {storedValueExpression};");
+			builder.AppendLine($"{indentation}    auto chaos_value = chaos_value_raw;");
 		}
 		else
 		{
@@ -2115,8 +2115,8 @@ public sealed partial class NativeAotLoweringPlanner
 		AotCoreIrAbiSlotArtifact returnAbi = ResolveDelegateInvokeReturnAbi(instruction);
 		string returnType = MapAbiSlotReturnType(returnAbi);
 		string sigCache = FormatAbiSlotParameterSignature(parameterAbis);
-		string openFnType = string.IsNullOrEmpty(sigCache) ? (returnType + "(*)()") : string.Concat(returnType, "(*)(", sigCache, ")");
-		string closedFnType = (string.IsNullOrEmpty(sigCache) ? (returnType + "(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)") : (returnType + "(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target, " + sigCache + ")"));
+		string openFnType = parameterAbis.Count == 0 ? (returnType + "(*)()") : string.Concat(returnType, "(*)(", sigCache, ")");
+		string closedFnType = (parameterAbis.Count == 0 ? (returnType + "(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)") : (returnType + "(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target, " + sigCache + ")"));
 
 		builder.AppendLine($"{indentation}{{");
 		for (int i = parameterAbis.Count - 1; i >= 0; i--)
@@ -2179,7 +2179,8 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}            {{");
 		builder.AppendLine($"{indentation}                const auto chaos_closed_function = reinterpret_cast<{closedFnType}>(chaos_invocation_delegate->chaos_delegate_method_ptr);");
 		string closedCall = "chaos_closed_function(chaos_invocation_delegate->chaos_delegate_target" + ((parameterAbis.Count == 0) ? string.Empty : (", " + FormatAbiInvocationArgumentList(parameterAbis))) + ")";
-		if (string.Equals(returnType, "void", StringComparison.Ordinal))
+		string singleClosedCall = "chaos_closed_function(chaos_delegate->chaos_delegate_target" + ((parameterAbis.Count == 0) ? string.Empty : (", " + FormatAbiInvocationArgumentList(parameterAbis))) + ")";
+						if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
 			builder.AppendLine($"{indentation}                {closedCall};");
 		}
@@ -2218,11 +2219,11 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}            const auto chaos_closed_function = reinterpret_cast<{closedFnType}>(chaos_delegate->chaos_delegate_method_ptr);");
 		if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
-			builder.AppendLine($"{indentation}            {closedCall};");
+			builder.AppendLine($"{indentation}            {singleClosedCall};");
 		}
 		else
 		{
-			builder.AppendLine($"{indentation}            const auto chaos_result = {closedCall};");
+			builder.AppendLine($"{indentation}            const auto chaos_result = {singleClosedCall};");
 			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}            ");
 		}
 		builder.AppendLine($"{indentation}        }}");

@@ -3,190 +3,94 @@
   "artifactKind": "aotManifest",
   "entries": [
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_0:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_1:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_1:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_2:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_2:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_3:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_4:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_4:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_5:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_5:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_6:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_6:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_7:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_7:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_8:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_8:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_9:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_10:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_10:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_11:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_11:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_12:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ArrayIndexingCopySubjects",
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Run:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ArrayIndexingCopyPatchEntry",
       "subjectKind": "field",
-      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::_exitCode",
+      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::_exitCode",
       "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "type",
-      "subjectId": "System.Private.CoreLib/System.Byte",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::Sort\u003CSystem.Byte\u003E:System.Void(System.Byte[])",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Collections",
-      "subjectKind": "method",
-      "subjectId": "System.Collections/System.Collections.Generic.Comparer\u003CSystem.Byte\u003E::get_Default:System.Collections.Generic.Comparer\u003CSystem.Byte\u003E()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::Sort\u003CSystem.Byte\u003E:System.Void(System.Byte[],System.Collections.Generic.IComparer\u003CSystem.Byte\u003E)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::BinarySearch\u003CSystem.Byte\u003E:System.Int32(System.Byte[],System.Byte)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::BinarySearch\u003CSystem.Byte\u003E:System.Int32(System.Byte[],System.Int32,System.Int32,System.Byte)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::IndexOf\u003CSystem.Byte\u003E:System.Int32(System.Byte[],System.Byte)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::LastIndexOf\u003CSystem.Byte\u003E:System.Int32(System.Byte[],System.Byte)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::Reverse\u003CSystem.Byte\u003E:System.Void(System.Byte[])",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "type",
-      "subjectId": "System.Private.CoreLib/System.Int32",
-      "reason": "boxed-value-type"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "reason": "external-call"
     }
   ]
 }

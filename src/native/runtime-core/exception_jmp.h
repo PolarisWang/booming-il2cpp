@@ -127,6 +127,21 @@ namespace chaos::il2cpp::runtime_core {
 
 }  // namespace chaos::il2cpp::runtime_core
 
-#endif  // CHAOS_IL2CPP_EH_SETJMP / CHAOS_IL2CPP_EH_WIN32_SEH / CHAOS_IL2CPP_EH_CPP_THROW
+// ── Default (C++ try/catch) mode: same C++ throw delivery ─────────────
+// Used when no CHAOS_IL2CPP_EH_* macro is defined (the codegen's first
+// preprocessor branch: !SETJMP && !WIN32_SEH).
+#else
+
+#  include "generated_code_compat.h"
+
+namespace chaos::il2cpp::runtime_core {
+
+[[noreturn]] inline void chaos_raise_exception(CHAOS_IL2CPP_INTPTR obj) {
+    throw chaos_managed_exception{obj};
+}
+
+}  // namespace chaos::il2cpp::runtime_core
+
+#endif  // CHAOS_IL2CPP_EH_SETJMP / CHAOS_IL2CPP_EH_WIN32_SEH / CHAOS_IL2CPP_EH_CPP_THROW / default
 
 #endif  // CHAOS_IL2CPP_EXCEPTION_JMP_H_

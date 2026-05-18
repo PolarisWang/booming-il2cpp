@@ -2,8 +2,8 @@
   "family": "array-indexing-copy",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T01:07:52",
-  "duration_ms": 19932,
+  "timestamp": "2026-05-19T04:48:04",
+  "duration_ms": 14967,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 0
     },
     "codegen": {
       "stage": "codegen",
@@ -28,41 +28,41 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\build-output\\ArrayIndexingCopySubjects.dll"
       },
       "errors": [],
-      "duration_ms": 19473
+      "duration_ms": 14816
     },
     "fact": {
       "stage": "fact",
       "status": "failed",
-      "summary": "Fact verify=failed (10/13)",
+      "summary": "Fact verify=failed (12/13)",
       "details": {
         "fact": {
           "status": "failed",
-          "passed": 10,
+          "passed": 12,
           "total": 13
         }
       },
       "errors": [],
-      "duration_ms": 320
+      "duration_ms": 30
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN",
+      "summary": "false_passing=0, principle=ALIGNED",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 1,
-        "principleStatus": "CONCERN",
+        "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 134
+      "duration_ms": 117
     }
   },
   "coverage": {
-    "methodCoverage": 76.92,
+    "methodCoverage": 92.31,
     "testedRate": 92.31,
-    "overall": 84.62
+    "overall": 92.31
   },
   "dashboard": {
     "interpreter": {},

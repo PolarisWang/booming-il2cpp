@@ -1059,7 +1059,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": -1237043284,
+          "operand": 2078120775,
           "ilOffset": 31,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -1304,7 +1304,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": -609958670,
+          "operand": -1891866585,
           "ilOffset": 31,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -1549,7 +1549,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": -1349227924,
+          "operand": 1399717418,
           "ilOffset": 31,
           "resultType": "System.Int32",
           "isPreserveSig": false

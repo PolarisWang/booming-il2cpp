@@ -26,7 +26,7 @@ set(CHAOS_RUNTIME_LIBS
     chaos_fmt
 )
 
-file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_PROJECT_ROOT}/verification/foundation-dll/System.Private.CoreLib/convert-char/codegen/*/generated/native-aot.generated.cpp")
+file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_PROJECT_ROOT}/verification/foundation-dll/System.Private.CoreLib/convert-char/codegen/*Subjects/generated/native-aot.generated.cpp")
 add_executable(test_bridge test_bridge.cpp ${CHAOS_CODEGEN_CPP})
 target_include_directories(test_bridge PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_link_directories(test_bridge PRIVATE ${CHAOS_LIB_DIRS})

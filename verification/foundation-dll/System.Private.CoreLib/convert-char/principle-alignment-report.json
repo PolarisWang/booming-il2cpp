@@ -1,7 +1,7 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T01:09:10.604152",
+  "generated_at": "2026-05-19T04:49:19.884161",
   "checks": {
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -34,28 +34,23 @@
     "p1_no_unnecessary_indirection": {
       "check_id": "p1_no_unnecessary_indirection",
       "principle": "P1",
-      "status": "CONCERN",
-      "summary": "1 runtime_stub calls in generated code",
-      "details": [
-        {
-          "function": "ChaosDatetimeGetUtcNow",
-          "call_count": 1
-        }
-      ],
-      "evidence": {
-        "stub_call_count": 1
-      }
+      "status": "ALIGNED",
+      "summary": "No unnecessary runtime_stub calls in generated code",
+      "details": [],
+      "evidence": {}
     },
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "principle": "P1",
-      "status": "CONCERN",
-      "summary": "avg_speedup=30.06% (1 methods where native is slower than managed)",
+      "status": "NOT_APPLICABLE",
+      "summary": "18/18 methods are stubs — benchmark data not meaningful",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 30.06,
-        "managed_faster_count": 1,
-        "native_faster_count": 10
+        "average_speedup_percent": 0.0,
+        "managed_faster_count": 0,
+        "native_faster_count": 0,
+        "invalid_count": 18,
+        "total_methods": 18
       }
     },
     "p2_template_hygiene": {
@@ -78,11 +73,11 @@
       "check_id": "p3_patch_entry",
       "principle": "P3",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 18 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 19 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 18,
-        "entries_with_interrupt_ptr": 18,
+        "table_size": 19,
+        "entries_with_interrupt_ptr": 19,
         "has_hotpatch_module": true
       }
     },
@@ -105,10 +100,10 @@
   },
   "summary": {
     "total": 8,
-    "aligned": 6,
-    "concern": 2,
+    "aligned": 7,
+    "concern": 0,
     "violation": 0,
-    "not_applicable": 0,
-    "overall": "CONCERN"
+    "not_applicable": 1,
+    "overall": "ALIGNED"
   }
 }

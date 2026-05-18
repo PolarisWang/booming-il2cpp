@@ -1128,7 +1128,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__GetHashCode_System_Int32__(ChaosLoadInt64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1237043284);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2078120775);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1184,7 +1184,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__GetHashCode_System_Int32__(ChaosLoadInt64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-609958670);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1891866585);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1240,7 +1240,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__GetHashCode_System_Int32__(ChaosLoadInt64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1349227924);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1399717418);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);

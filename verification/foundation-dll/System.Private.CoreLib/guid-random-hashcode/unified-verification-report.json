@@ -2,8 +2,8 @@
   "family": "guid-random-hashcode",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T01:02:33",
-  "duration_ms": 20035,
+  "timestamp": "2026-05-19T04:50:48",
+  "duration_ms": 14539,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 0
     },
     "codegen": {
       "stage": "codegen",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\guid-random-hashcode\\managed\\subjects\\build-output\\GuidRandomHashcodeSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 19566
+      "duration_ms": 14400
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 322
+      "duration_ms": 30
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 144
+      "duration_ms": 108
     }
   },
   "coverage": {
@@ -78,10 +78,25 @@
   },
   "regression": {
     "benchmark": {
-      "status": "skipped",
-      "message": "No benchmark report found"
+      "status": "regressed",
+      "baselineMetrics": {
+        "totalMethods": 14,
+        "matchedCount": 9,
+        "nativeFasterCount": 1,
+        "managedFasterCount": 8,
+        "averageSpeedupPercent": -234.28
+      },
+      "currentMetrics": {
+        "totalMethods": 14,
+        "matchedCount": 9,
+        "nativeFasterCount": 1,
+        "managedFasterCount": 8,
+        "averageSpeedupPercent": -220.42
+      }
     },
-    "hasRegression": false,
-    "regressions": []
+    "hasRegression": true,
+    "regressions": [
+      "Managed-faster ratio 89% exceeds native-faster ratio 11% (8/9 methods)"
+    ]
   }
 }

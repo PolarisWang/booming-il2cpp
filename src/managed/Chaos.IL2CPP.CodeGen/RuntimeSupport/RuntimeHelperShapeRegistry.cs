@@ -2575,7 +2575,7 @@ public sealed partial class NativeAotLoweringPlanner
                         // Use nullptr instead: the catch handler skips type checking when the
                         // header is null, which is correct because this inline only applies to
                         // methods that always throw InvalidCastException.
-                        return "(throw chaos_managed_exception{{reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)}}, static_cast<CHAOS_IL2CPP_UINT16>(0))";
+                        return "(chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0))";
                     }
                     return null;
                 }));

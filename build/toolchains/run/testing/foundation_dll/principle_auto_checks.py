@@ -240,6 +240,23 @@ def check_p1_benchmark(assembly: str, family_slug: str) -> PrincipleCheckResult:
     avg_speedup = summary.get("averageSpeedupPercent", 0)
     managed_faster = summary.get("managedFasterCount", 0)
     native_faster = summary.get("nativeFasterCount", 0)
+    invalid_count = summary.get("invalidCount", 0)
+    total = summary.get("totalMethods", 0)
+
+    # If most methods are stubs/invalid, benchmark comparison is meaningless.
+    if total > 0 and invalid_count >= total / 2:
+        return PrincipleCheckResult(
+            check_id="p1_benchmark", principle="P1",
+            status="NOT_APPLICABLE",
+            summary=f"{invalid_count}/{total} methods are stubs — benchmark data not meaningful",
+            evidence={
+                "average_speedup_percent": avg_speedup,
+                "managed_faster_count": managed_faster,
+                "native_faster_count": native_faster,
+                "invalid_count": invalid_count,
+                "total_methods": total,
+            },
+        )
 
     if isinstance(avg_speedup, (int, float)) and avg_speedup < -50:
         return PrincipleCheckResult(

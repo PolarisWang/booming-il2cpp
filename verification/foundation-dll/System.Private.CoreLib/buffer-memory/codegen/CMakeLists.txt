@@ -32,14 +32,14 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: BufferMemorySubjects
-add_library(chaos_gen_BufferMemorySubjects STATIC
-    ${CHAOS_GEN_DIR}/BufferMemorySubjects/generated/native-aot.generated.cpp
+# Assembly: BufferMemoryPatchEntry
+add_library(chaos_gen_BufferMemoryPatchEntry STATIC
+    ${CHAOS_GEN_DIR}/BufferMemoryPatchEntry/generated/native-aot.generated.cpp
 )
 
-target_include_directories(chaos_gen_BufferMemorySubjects PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_BufferMemorySubjects PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_BufferMemorySubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_BufferMemoryPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_BufferMemoryPatchEntry PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_BufferMemoryPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -48,7 +48,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_BufferMemorySubjects
+    chaos_gen_BufferMemoryPatchEntry
     ${NATIVE_LIBS}
 )
 

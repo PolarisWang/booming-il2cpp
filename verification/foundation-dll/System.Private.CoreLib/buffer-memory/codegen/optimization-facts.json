@@ -4,62 +4,62 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Run:System.Void(System.Int32)",
-      "reason": "closed-world-entry"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_0:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_1:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_2:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_3:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_5:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_6:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_7:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],
@@ -67,10 +67,16 @@
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    }
+  ]
 }

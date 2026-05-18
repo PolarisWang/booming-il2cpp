@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "AttributesCustomMetadataSubjects",
-  "entrySubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()",
+  "assemblyName": "AttributesCustomMetadataPatchEntry",
+  "entrySubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_0",
+  "entrySymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

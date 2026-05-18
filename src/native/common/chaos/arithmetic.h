@@ -34,11 +34,11 @@ inline CHAOS_IL2CPP_INT32 div(CHAOS_IL2CPP_INT32 left, CHAOS_IL2CPP_INT32 right)
 {
     if (right == 0)
     {
-        CHAOS_IL2CPP_ABORT();
+        CHAOS_IL2CPP_FAIL();
     }
     if (left == CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT32) && right == -1)
     {
-        CHAOS_IL2CPP_ABORT();
+        CHAOS_IL2CPP_FAIL();
     }
     return static_cast<CHAOS_IL2CPP_INT32>(left / right);
 }
@@ -47,7 +47,7 @@ inline CHAOS_IL2CPP_INT32 rem(CHAOS_IL2CPP_INT32 left, CHAOS_IL2CPP_INT32 right)
 {
     if (right == 0)
     {
-        CHAOS_IL2CPP_ABORT();
+        CHAOS_IL2CPP_FAIL();
     }
     if (left == CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT32) && right == -1)
     {

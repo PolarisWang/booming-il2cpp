@@ -26,16 +26,26 @@
 #include <cstdlib>
 #include <cstring>
 
-// ── TLS definitions for exception_jmp.h (SETJMP mode only) ──────────────
+// ── TLS definitions for exception_jmp.h ──────────────────────────────
+// g_chaos_exception_obj is always defined so that the SEH/SETJMP paths
+// in generated code (which reference it via __except filter or longjmp)
+// can link even when the runtime lib was built without an EH mode define.
+// The C++ try/catch (default) path does not reference this variable at all.
 #if defined(CHAOS_IL2CPP_EH_SETJMP) || defined(CHAOS_IL2CPP_EH_WIN32_SEH)
 namespace chaos::il2cpp::runtime_core {
 #if defined(CHAOS_IL2CPP_EH_SETJMP)
 thread_local jmp_buf g_chaos_exception_jmp_stack[kMaxNestedTry] = {};
 thread_local int g_chaos_exception_jmp_depth = 0;
 #endif
-thread_local void* volatile g_chaos_exception_obj = nullptr;
 }  // namespace
 #endif
+
+// g_chaos_exception_obj is always compiled (no EH-mode guard) so the
+// linker can resolve it when generated code uses SEH/SETJMP paths even
+// if the runtime lib was built in default (C++ try/catch) mode.
+namespace chaos::il2cpp::runtime_core {
+thread_local void* volatile g_chaos_exception_obj = nullptr;
+}  // namespace
 
 // ── Fact Static verification fallback: callback instead of abort ──────────
 //

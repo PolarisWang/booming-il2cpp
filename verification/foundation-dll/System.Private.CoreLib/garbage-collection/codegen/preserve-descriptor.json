@@ -4,49 +4,55 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
+      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::_exitCode",
+      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
+      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_0:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()",
+      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_1:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()",
+      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_2:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()",
+      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_3:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
+      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_4:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()",
+      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_5:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

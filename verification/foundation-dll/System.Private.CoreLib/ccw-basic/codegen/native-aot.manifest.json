@@ -1,9 +1,9 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "CcwBasicSubjects",
-  "entrySubjectId": "CcwBasicSubjects/CcwBasicSubjects::Run:System.Void(System.Int32)",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/ccw-basic/codegen",
+  "assemblyName": "CcwBasicPatchEntry",
+  "entrySubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/ccw-basic/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

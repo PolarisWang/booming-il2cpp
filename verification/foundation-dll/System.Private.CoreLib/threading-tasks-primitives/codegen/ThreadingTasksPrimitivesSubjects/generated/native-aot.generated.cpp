@@ -1563,7 +1563,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 	_s3 = chaos_locals[0];
 	{
 		auto chaos_value_raw = _s3;
-		auto chaos_value = chaos_value;
+		auto chaos_value = chaos_value_raw;
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
 		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
 		if (chaos_array == nullptr)
@@ -1588,7 +1588,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 	_s3 = chaos_locals[1];
 	{
 		auto chaos_value_raw = _s3;
-		auto chaos_value = chaos_value;
+		auto chaos_value = chaos_value_raw;
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
 		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
 		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]));

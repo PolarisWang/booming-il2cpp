@@ -1,9 +1,9 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ThreadingThreadBasicsSubjects",
+  "assemblyName": "ThreadingThreadBasicsPatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/managed/subjects/build-output/ThreadingThreadBasicsSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/managed/patch/build-output/ThreadingThreadBasicsPatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -11,16 +11,12 @@
       "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Private.CoreLib.dll"
     },
     {
-      "assemblyName": "System.Threading.Thread",
-      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Threading.Thread.dll"
-    },
-    {
-      "assemblyName": "ThreadingThreadBasicsSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/managed/subjects/build-output/ThreadingThreadBasicsSubjects.dll"
+      "assemblyName": "ThreadingThreadBasicsPatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/managed/patch/build-output/ThreadingThreadBasicsPatchEntry.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "aee5c2fa-996f-4fb2-99a4-983d89e58d8c",
+  "inputModuleVersionId": "bcb275f2-fc80-481e-9e79-e693e8ffa075",
   "artifacts": [
     {
       "kind": "typedIlIr",

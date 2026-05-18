@@ -46,6 +46,7 @@
 // Engine lifecycle declarations (extern globals, handle table, GC handle state)
 // Must precede core/*.cpp inclusion so all unity sub-files see the symbols.
 #include "core/engine_lifecycle.h"
+#include "core/delegate_helpers.h"
 
 namespace chaos::il2cpp::runtime_core {
 
