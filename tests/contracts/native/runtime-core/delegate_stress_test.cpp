@@ -1427,6 +1427,18 @@ int main(int argc, char** argv) {
     // The GC stress test provides full init via GCInit/InitYoungGeneration
     SetupTlsNursery();
 
+    // Register test pseudo-TypeInfo addresses so the PrecisionMark path
+    // in MarkObject accepts them as valid TypeInfo pointers.
+    // g_delegate_type_a and g_delegate_type_b are `static int` variables
+    // used as fake type_info markers for test object identity.
+    auto& layout_registry = GcLayoutRegistry::Instance();
+    layout_registry.RegisterTypeInfoRange(
+        reinterpret_cast<uintptr_t>(&g_delegate_type_a),
+        reinterpret_cast<uintptr_t>(&g_delegate_type_a) + sizeof(g_delegate_type_a));
+    layout_registry.RegisterTypeInfoRange(
+        reinterpret_cast<uintptr_t>(&g_delegate_type_b),
+        reinterpret_cast<uintptr_t>(&g_delegate_type_b) + sizeof(g_delegate_type_b));
+
     OpenReport();
 
     int passed_count = 0;

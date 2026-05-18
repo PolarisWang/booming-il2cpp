@@ -6055,6 +6055,109 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0, 1 });
 
+            // ── Enum runtime stubs ─────────────────────────────────────────────
+            registry.Register("System.Enum", "IsDefined", ["System.Type", "System.Object"],
+                ShapeKind.SimpleForward, "ChaosEnumIsDefined",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType),
+                }), CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Enum", "GetName", ["System.Type", "System.Object"],
+                ShapeKind.SimpleForward, "ChaosEnumGetName",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType),
+                }), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Enum", "GetNames", ["System.Type"],
+                ShapeKind.SimpleForward, "ChaosEnumGetNames",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Array", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Enum", "GetValues", ["System.Type"],
+                ShapeKind.SimpleForward, "ChaosEnumGetValues",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Array", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Enum", "Parse", ["System.Type", "System.String"],
+                ShapeKind.SimpleForward, "ChaosEnumParse",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Enum", "Parse", ["System.Type", "System.String", "System.Boolean"],
+                ShapeKind.SimpleForward, "ChaosEnumParseWithIgnoreCase",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateInt32AbiSlot(),
+                }), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0, 1, 2 });
+
+            registry.Register("System.Enum", "Format", ["System.Type", "System.Object", "System.String"],
+                ShapeKind.SimpleForward, "ChaosEnumFormat",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0, 1, 2 });
+
+            // System.Enum.ToString has no declared parameters (instance method on System.Object — "this" is implicit in the ABI).
+            // The codegen passes the instance as chaos_fn_arg_0 automatically.
+            registry.Register("System.Enum", "ToString", [],
+                ShapeKind.SimpleForward, "ChaosEnumToString",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Enum", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Enum", "ToString", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosEnumToStringWithFormat",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Enum", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0, 1 });
+
+            // TryParse with out Object → ByRef parameter for the result slot.
+            // The ABI treats ByRef as CHAOS_IL2CPP_INTPTR (pointer to the result slot).
+            registry.Register("System.Enum", "TryParse", ["System.Type", "System.String", "System.Object&"],
+                ShapeKind.SimpleForward, "ChaosEnumTryParse",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.ByRef },
+                }), CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1, 2 });
+
+            registry.Register("System.Enum", "TryParse", ["System.Type", "System.String", "System.Boolean", "System.Object&"],
+                ShapeKind.SimpleForward, "ChaosEnumTryParseWithIgnoreCase",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateInt32AbiSlot(),
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.ByRef },
+                }), CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1, 2, 3 });
+
             return registry;
         }
 

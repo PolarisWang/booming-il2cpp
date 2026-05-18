@@ -5,6 +5,7 @@
 
 #include "gc_events.h"
 #include "gc_layout.h"
+#include "gc_loh.h"
 #include "gc_old_gen.h"
 #include "gc_region.h"
 #include "gc_young_gen.h"
@@ -201,7 +202,9 @@ void BgcController::StwCompact() {
 
     // Run compaction using the mark bitmap left intact by BgcSweep().
     // BgcCompact handles DecideCompactMode + compaction + bitmap clear.
+    printf("  BGC_DIAG: entering BgcCompact\n"); fflush(stdout);
     g_old_gen.BgcCompact();
+    printf("  BGC_DIAG: BgcCompact complete\n"); fflush(stdout);
 
     // Transition to FINISHED, signaling BGC thread to reset to IDLE.
     phase_.store(BgcPhase::FINISHED, std::memory_order_release);
@@ -323,12 +326,19 @@ void BgcController::PopulateRootSet() {
                 auto* slot = static_cast<void**>(root_addr);
                 void* ref = *slot;
                 s_gte_heap++;
-                if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
+                if (ref == nullptr) return;
+                if (g_old_gen.IsInOldGen(ref)) {
                     s_in_oldgen++;
                     if (!IsValidManagedObject(ref)) return;
                     s_valid++;
                     if (g_old_gen.BgcTryMark(ref)) {
                         s_marked++;
+                        std::lock_guard<std::mutex> lock(
+                            BgcController::Instance().bgc_workers_[0].steal_mutex);
+                        BgcController::Instance().bgc_workers_[0].deque.push_back(ref);
+                    }
+                } else if (g_loh.IsInLOH(ref)) {
+                    if (g_loh.MarkObject(ref)) {
                         std::lock_guard<std::mutex> lock(
                             BgcController::Instance().bgc_workers_[0].steal_mutex);
                         BgcController::Instance().bgc_workers_[0].deque.push_back(ref);
@@ -345,10 +355,17 @@ void BgcController::PopulateRootSet() {
     {
         GcIterateTenuredHandles(
             [](void* object, void* /*user_data*/) {
+                if (object == nullptr) return;
                 if (g_old_gen.BgcTryMark(object)) {
                     std::lock_guard<std::mutex> lock(
                         BgcController::Instance().bgc_workers_[0].steal_mutex);
                     BgcController::Instance().bgc_workers_[0].deque.push_back(object);
+                } else if (g_loh.IsInLOH(object)) {
+                    if (g_loh.MarkObject(object)) {
+                        std::lock_guard<std::mutex> lock(
+                            BgcController::Instance().bgc_workers_[0].steal_mutex);
+                        BgcController::Instance().bgc_workers_[0].deque.push_back(object);
+                    }
                 }
             },
             nullptr);
@@ -664,12 +681,16 @@ void BgcController::BgcThreadMain() {
             // Each page is swept under the old-gen mutex, with yields between
             // pages so that mutator allocations are not starved.
             g_old_gen.BgcSweep();
+            printf("  BGC_DIAG: after BgcSweep\n"); fflush(stdout);
 
             // Collect dead finalizable objects using the mark bitmap
             // (still valid because BgcSweep preserves it via clear_bitmap=false).
             // The bitmap will be cleared by StwCompact() later, so we must
             // capture the list now.
+            printf("  BGC_DIAG: before CollectDeadFinalizables\n"); fflush(stdout);
             bgc_dead_finalizables_ = g_old_gen.CollectDeadFinalizables();
+            printf("  BGC_DIAG: after CollectDeadFinalizables count=%zu\n",
+                   bgc_dead_finalizables_.size()); fflush(stdout);
             if (!bgc_dead_finalizables_.empty()) {
                 CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "dead_finalizables count={0}",
                     static_cast<unsigned long long>(bgc_dead_finalizables_.size()));
@@ -678,10 +699,12 @@ void BgcController::BgcThreadMain() {
             // Collect dead weak handles while the mark bitmap is still valid.
             // These will be nulled after finalization so that WeakTrackResurrection
             // semantics are preserved (resurrected objects keep their handles).
+            printf("  BGC_DIAG: before GcCollectDeadWeakHandles\n"); fflush(stdout);
             bgc_dead_weak_handles_.clear();
             {
                 std::vector<std::pair<uint64_t, void*>> flat;
                 GcCollectDeadWeakHandles(flat);
+                printf("  BGC_DIAG: after GcCollectDeadWeakHandles count=%zu\n", flat.size()); fflush(stdout);
                 for (auto& f : flat) {
                     bgc_dead_weak_handles_.push_back({f.first, f.second});
                 }
@@ -691,7 +714,9 @@ void BgcController::BgcThreadMain() {
                     static_cast<unsigned long long>(bgc_dead_weak_handles_.size()));
             }
 
+            printf("  BGC_DIAG: before concurrent_sweep_complete log\n"); fflush(stdout);
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_sweep_complete");
+            printf("  BGC_DIAG: after concurrent_sweep_complete log\n"); fflush(stdout);
         }
 
         // ── Phase 4: Signal compaction needed ────────────────────
@@ -699,9 +724,14 @@ void BgcController::BgcThreadMain() {
         // The BGC thread sleeps here until a mutator detects the
         // phase under an allocation slow path, enters a safepoint,
         // runs StwCompact(), and transitions to FINISHED.
+        auto phase_val = static_cast<int>(phase_.load(std::memory_order_acquire));
+        printf("  BGC_DIAG: Phase4 check phase=%d CONCURRENT_SWEEP=%d\n",
+               phase_val, static_cast<int>(BgcPhase::CONCURRENT_SWEEP)); fflush(stdout);
         if (phase_.load(std::memory_order_acquire) == BgcPhase::CONCURRENT_SWEEP) {
+            printf("  BGC_DIAG: setting COMPACT_NEEDED\n"); fflush(stdout);
             phase_.store(BgcPhase::COMPACT_NEEDED, std::memory_order_release);
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "compact_needed_waiting");
+            printf("  BGC_DIAG: COMPACT_NEEDED set\n"); fflush(stdout);
         }
 
         // BGC thread waits while STW compaction happens (executed by the
@@ -892,8 +922,13 @@ namespace {
                  slot_off += sizeof(void*)) {
                 auto* slot = reinterpret_cast<void**>(static_cast<char*>(obj) + slot_off);
                 void* ref = *slot;
-                if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
+                if (ref == nullptr) continue;
+                if (g_old_gen.IsInOldGen(ref)) {
                     if (g_old_gen.BgcTryMark(ref)) {
+                        out_children.push_back(ref);
+                    }
+                } else if (g_loh.IsInLOH(ref)) {
+                    if (g_loh.MarkObject(ref)) {
                         out_children.push_back(ref);
                     }
                 }
@@ -908,8 +943,13 @@ namespace {
             uint16_t offset = layout->pointer_offsets[i].offset;
             auto* slot = reinterpret_cast<void**>(obj_base + offset);
             void* ref = *slot;
-            if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
+            if (ref == nullptr) continue;
+            if (g_old_gen.IsInOldGen(ref)) {
                 if (g_old_gen.BgcTryMark(ref)) {
+                    out_children.push_back(ref);
+                }
+            } else if (g_loh.IsInLOH(ref)) {
+                if (g_loh.MarkObject(ref)) {
                     out_children.push_back(ref);
                 }
             }
@@ -1048,10 +1088,17 @@ CHAOS_IL2CPP_SIZE BgcController::DrainGlobalSatbQueue() {
             entry = global_satb_.back();
             global_satb_.pop_back();
         }
-        if (entry != nullptr && g_old_gen.IsInOldGen(entry)) {
-            if (g_old_gen.BgcTryMark(entry)) {
-                std::lock_guard<std::mutex> lock(w0.steal_mutex);
-                w0.deque.push_back(entry);
+        if (entry != nullptr) {
+            if (g_old_gen.IsInOldGen(entry)) {
+                if (g_old_gen.BgcTryMark(entry)) {
+                    std::lock_guard<std::mutex> lock(w0.steal_mutex);
+                    w0.deque.push_back(entry);
+                }
+            } else if (g_loh.IsInLOH(entry)) {
+                if (g_loh.MarkObject(entry)) {
+                    std::lock_guard<std::mutex> lock(w0.steal_mutex);
+                    w0.deque.push_back(entry);
+                }
             }
         }
         ++count;

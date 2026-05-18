@@ -35,6 +35,7 @@ struct ReflectionQueryFieldDescriptor {
     const char* subject_id_utf8;
     const char* name_utf8;
     const char* member_type_utf8;
+    CHAOS_IL2CPP_INT64 constant_value;  // For enum literal fields: the constant value; 0 otherwise
 };
 
 struct ReflectionQueryPropertyDescriptor {

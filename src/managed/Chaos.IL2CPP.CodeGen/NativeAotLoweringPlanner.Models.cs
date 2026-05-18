@@ -60,7 +60,8 @@ public sealed partial class NativeAotLoweringPlanner
     private sealed record ReflectionMemberFieldEntry(
         string DeclaringTypeSubjectId,
         string FieldName,
-        int MetadataToken);
+        int MetadataToken,
+        long? ConstantValue = null);
 
     private sealed record ReflectionMemberMethodEntry(
         string MethodSubjectId,

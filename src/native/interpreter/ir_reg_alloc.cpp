@@ -1825,8 +1825,9 @@ static constexpr RegOpHandler kRegHandlers[100] = {
 
 bool RegisterExecute(RegisterFrame& frame,
                      const RegisterInstruction* instrs,
-                     uint32_t instr_count) noexcept {
-    frame.pc = 0;
+                     uint32_t instr_count,
+                     uint32_t start_pc) noexcept {
+    frame.pc = start_pc;
 
     while (frame.pc < instr_count) {
         CHAOS_IL2CPP_PROFILE_SCOPE("RegisterExecute");

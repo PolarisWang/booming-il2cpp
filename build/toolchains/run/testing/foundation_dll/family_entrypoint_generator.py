@@ -325,37 +325,56 @@ def _generate_entrypoint_source(
                 lines.append(f"{ns_indent}        catch ({exc_type}) {{ }}")
             elif ev and "value" in ev and ev["value"] is not None:
                 # Known value: compare with expected, set _exitCode on mismatch
-                # Use Convert.ToInt32 for type-safe comparison (handles object, bool, etc.)
+                # No try/catch — if managed returns 42, C++ must return 42 too;
+                # any exception here is a real translation bug we want visible.
                 if ret == "System.Void" or not ret:
                     lines.append(f"{ns_indent}        {call_expr};")
                 else:
                     cast_expr = _cast_return_to_int(ret, call_expr)
                     lines.append(f"{ns_indent}        if ({cast_expr} != {ev['value']}) _exitCode = 1;")
             else:
-                # Fallback: void or unknown
+                # Fallback: void or unknown. Wrapped in try/catch — probe failed so
+                # self-comparison is a tautology, but the method might throw in C++
+                # even though managed returns a value (translation divergence).
                 if ret == "System.Void" or not ret:
-                    lines.append(f"{ns_indent}        {call_expr};")
+                    lines.append(f"{ns_indent}        try {{ {call_expr}; }}")
+                    lines.append(f"{ns_indent}        catch (Exception) {{ _exitCode = 1; }}")
                 else:
                     cast_expr = _cast_return_to_int(ret, call_expr)
-                    lines.append(f"{ns_indent}        if ({cast_expr} != {cast_expr}) _exitCode = 1;")
+                    lines.append(f"{ns_indent}        try {{ if ({cast_expr} != {cast_expr}) _exitCode = 1; }}")
+                    lines.append(f"{ns_indent}        catch (Exception) {{ _exitCode = 1; }}")
         else:
             lines.append(f"{ns_indent}        // TODO: {subject_id} could not be auto-generated")
         lines.append(f"{ns_indent}    }}")
         lines.append("")
 
     # --- Generate Run(int entryIndex) switch dispatcher ---
-    # Allows runtime-entry.cpp to invoke individual methods by index
-    # for --benchmark N and --hotupdate modes.
-    lines.append(f"{ns_indent}    public static void Run(int entryIndex)")
-    lines.append(f"{ns_indent}    {{")
-    lines.append(f"{ns_indent}        switch (entryIndex)")
-    lines.append(f"{ns_indent}        {{")
-    for idx in range(len(method_subject_ids)):
-        mn = f"{custom_prefix}{idx}" if idx in (custom_method_indices or set()) else f"{method_prefix}{idx}"
-        lines.append(f"{ns_indent}            case {idx}: {mn}(); break;")
-    lines.append(f"{ns_indent}        }}")
-    lines.append(f"{ns_indent}    }}")
-    lines.append("")
+    # Only needed for non-subjects variants (benchmark, patch, etc.).
+    # For subjects variant, dispatch is handled by RunNativeAot which calls
+    # Subject_N directly via s_hotpatch_entries.  A parameterless Run() entry
+    # would not crash but serves no purpose, and an actual Run(int) would
+    # break uniform void() dispatch via entry.direct_ptr in the Scriban template.
+    if variant != "subjects":
+        # Run() dispatcher level try/catch as safety net — if a subject method's
+        # own try/catch somehow misses an exception (e.g. custom entry stubs
+        # defined in Custom.cs), this prevents process crash during benchmark.
+        lines.append(f"{ns_indent}    public static void Run(int entryIndex)")
+        lines.append(f"{ns_indent}    {{")
+        lines.append(f"{ns_indent}        try")
+        lines.append(f"{ns_indent}        {{")
+        lines.append(f"{ns_indent}            switch (entryIndex)")
+        lines.append(f"{ns_indent}            {{")
+        for idx in range(len(method_subject_ids)):
+            mn = f"{custom_prefix}{idx}" if idx in (custom_method_indices or set()) else f"{method_prefix}{idx}"
+            lines.append(f"{ns_indent}                case {idx}: {mn}(); break;")
+        lines.append(f"{ns_indent}            }}")
+        lines.append(f"{ns_indent}        }}")
+        lines.append(f"{ns_indent}        catch (System.Exception)")
+        lines.append(f"{ns_indent}        {{")
+        lines.append(f"{ns_indent}            _exitCode = 1;")
+        lines.append(f"{ns_indent}        }}")
+        lines.append(f"{ns_indent}    }}")
+        lines.append("")
 
     lines.append(f"{ns_indent}}}")
     if namespace_name:
@@ -371,15 +390,20 @@ def _generate_program_source(
     probe_mode: bool = False,
     method_count: int = 0,
     custom_method_indices: set[int] | None = None,
+    method_prefix: str = "Method",
 ) -> str:
     """Generate Program.cs.
 
-    probe_mode=True:  Run each MethodN() directly, print RESULT N: <value>
+    probe_mode=True:  Run each entry directly, print RESULT N: <value>
                       or EXCEPTION N: <ExceptionType> for each. Handles custom
                       entries (throwing methods) with try/catch.
-    probe_mode=False: Call each MethodN() directly (no MethodTable to avoid
+    probe_mode=False: Call each entry directly (no MethodTable to avoid
                       delegate lowering issues in codegen). Custom entries use
-                      CustomEntryMethodN naming.
+                      CustomEntry{prefix}N naming.
+
+    Args:
+        method_prefix: Prefix for generated method names (e.g. "Method", "Subject_").
+                       Default "Method" for backward compatibility.
     """
     ns_indent = "    " if namespace_name else ""
     full_class = f"{namespace_name}.{class_name}" if namespace_name else class_name
@@ -400,10 +424,10 @@ def _generate_program_source(
 
         for idx in range(method_count):
             if idx in cmi:
-                parts.append(f"        try {{ results.Add($\"RESULT {idx}:{{Convert.ToInt32({full_class}.CustomEntryMethod{idx}())}}\"); }}")
+                parts.append(f"        try {{ results.Add($\"RESULT {idx}:{{Convert.ToInt32({full_class}.CustomEntry{method_prefix}{idx}())}}\"); }}")
                 parts.append(f"        catch (System.Exception ex) {{ results.Add($\"EXCEPTION {idx}:{{ex.GetType().Name}}\"); }}")
             else:
-                parts.append(f"        try {{ results.Add($\"RESULT {idx}:{{Convert.ToInt32({full_class}.Method{idx}())}}\"); }}")
+                parts.append(f"        try {{ results.Add($\"RESULT {idx}:{{Convert.ToInt32({full_class}.{method_prefix}{idx}())}}\"); }}")
                 parts.append(f"        catch (System.Exception ex) {{ results.Add($\"EXCEPTION {idx}:{{ex.GetType().Name}}\"); }}")
 
         parts.extend([
@@ -430,7 +454,7 @@ def _generate_program_source(
     parts.append(f"{ns_indent}    {{")
     parts.append(f"{ns_indent}        int failures = 0;")
     for idx in range(method_count):
-        method_name = f"CustomEntryMethod{idx}" if idx in cmi else f"Method{idx}"
+        method_name = f"CustomEntry{method_prefix}{idx}" if idx in cmi else f"{method_prefix}{idx}"
         parts.append(
             f"{ns_indent}        {full_class}._exitCode = 0; {full_class}.{method_name}(); "
             f"failures += {full_class}._exitCode << {idx};"
@@ -581,8 +605,10 @@ def _compute_entry_point_subject_id(
         full_type = f"{namespace_name}.{class_name}" if namespace_name else class_name
         return f"{class_name}/{full_type}::Run:System.Int32(System.Int32)"
     if variant == "subjects":
-        full_type = f"{namespace_name}.{class_name}" if namespace_name else class_name
-        return f"{class_name}/{full_type}::Run:System.Void(System.Int32)"
+        # Subjects variant no longer has Run(int entryIndex) — all Subject_N methods
+        # are void(void) and dispatch is handled by RunNativeAot via s_hotpatch_entries.
+        # No entry point override needed; the codegen compiles all methods in the closure.
+        return ""
     # Non-patch: entry is Program.Main()
     return f"{class_name}/Program::Main:System.Int32()"
 
@@ -717,8 +743,13 @@ def generate_and_build(
                 if custom_mids:
                     custom_method_indices = custom_mids
 
-    # ── Pass 1: Probe ──
-    if variant == "benchmark":
+    # ── Pass 1: Probe (shared by benchmark and subjects variants) ──
+    def _run_probe() -> dict[int, dict]:
+        """Build and run managed probe EXE to capture expected values.
+        Returns dict mapping method index -> {"value": int|None, "exception": str|None},
+        or {} on failure."""
+        # Determine method prefix used by the probe source generation
+        probe_prefix = "Subject_" if variant in ("subjects", "patch") else "Method"
         probe_source = _generate_entrypoint_source(
             assembly_name=assembly_name,
             family_id=family_id,
@@ -734,13 +765,15 @@ def generate_and_build(
             probe_mode=True,
             method_count=len(method_subject_ids),
             custom_method_indices=custom_method_indices,
+            method_prefix=probe_prefix,
         )
+        # Probe must be an EXE (not Library), so use "benchmark" variant for csproj
         probe_csproj = _generate_csproj(
             assembly_name=assembly_name,
             class_name=class_name,
             cs_file_name=cs_file_name,
-            variant=variant,
-            has_custom_entry=False,  # probe generates its own int stubs inline
+            variant="benchmark",
+            has_custom_entry=False,
         )
 
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -751,20 +784,21 @@ def generate_and_build(
         print(f"[probe] Building {class_name} probe...")
         build_out = output_dir / "build-output"
         build_result = subprocess.run(
-            ["dotnet", "build", str(csproj_path := output_dir / csproj_name), "-o", str(build_out), "--nologo", "-v", "quiet"],
+            ["dotnet", "build", str(output_dir / csproj_name), "-o", str(build_out), "--nologo", "-v", "quiet"],
             capture_output=True, text=True,
         )
         if build_result.returncode != 0:
             print(f"[probe] Build FAILED: {build_result.stderr[:200]}")
-            # Fall through: proceed with no expected values (generates self-comparison)
-            expected_values = {}
-        else:
-            expected_values = _run_probe_and_capture(
-                output_dir,
-                class_name,
-                method_subject_ids,
-                custom_method_indices=custom_method_indices,
-            )
+            return {}
+        return _run_probe_and_capture(
+            output_dir,
+            class_name,
+            method_subject_ids,
+            custom_method_indices=custom_method_indices,
+        )
+
+    if variant in ("benchmark", "subjects"):
+        expected_values = _run_probe()
     else:
         expected_values = {}
 
@@ -789,6 +823,16 @@ def generate_and_build(
 
     # ── Subjects variant: Library, no Program.cs, build as DLL ──
     if variant == "subjects":
+        # Clean up probe artifacts (Program.cs, old build-output/) to avoid
+        # them being pulled into the subjects Library build
+        probe_program = output_dir / "Program.cs"
+        if probe_program.exists():
+            probe_program.unlink()
+        probe_build_out = output_dir / "build-output"
+        if probe_build_out.exists():
+            import shutil
+            shutil.rmtree(probe_build_out)
+
         (output_dir / csproj_name).write_text(
             _generate_csproj(
                 assembly_name=assembly_name,

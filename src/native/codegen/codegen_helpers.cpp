@@ -31,6 +31,9 @@ thread_local DeoptTlsState t_deopt_state;
 // Virtual method resolution for CodegenLdVirtFtn.
 #include <vtable_registry.h>
 
+// SATB pre-write barrier for concurrent BGC marking.
+#include <gc/gc_bgc_inline.h>
+
 extern "C" uint64_t CodegenLdFld(void* obj, uint32_t field_idx) noexcept {
     using namespace chaos::il2cpp::interpreter;
     if (obj == nullptr) return 0;
@@ -63,11 +66,14 @@ extern "C" uint64_t CodegenLdFld(void* obj, uint32_t field_idx) noexcept {
 
 extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noexcept {
     using namespace chaos::il2cpp::interpreter;
+    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
     if (obj == nullptr) return;
     auto* io = static_cast<InterpreterObject*>(obj);
     if (field_idx >= io->fields.size()) {
         io->fields.resize(field_idx + 1u);
     }
+    // SATB pre-write barrier: record old obj pointer before overwriting.
+    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&io->fields[field_idx].obj));
     // Store as Int64 (bit-preserving). The call site may have set Int32 or
     // ObjectRef bits, but the uint64_t representation is what T4 tracks.
     io->fields[field_idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
@@ -237,9 +243,12 @@ extern "C" uint64_t CodegenLdSFld(uint32_t field_offset) noexcept {
 
 extern "C" void CodegenStSFld(uint32_t field_offset, uint64_t value) noexcept {
     using namespace chaos::il2cpp::interpreter;
+    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
     if (field_offset >= g_static_fields.size()) {
         g_static_fields.resize(field_offset + 1u);
     }
+    // SATB pre-write barrier: record old obj pointer before overwriting.
+    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&g_static_fields[field_offset].obj));
     g_static_fields[field_offset] = InterpreterValue::from_i64(static_cast<int64_t>(value));
 }
 
@@ -282,12 +291,15 @@ extern "C" uint64_t CodegenLdElem(void* arr, int32_t index) noexcept {
 
 extern "C" void CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept {
     using namespace chaos::il2cpp::interpreter;
+    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
     if (arr == nullptr) return;
     auto* as = static_cast<ArrayStorage*>(arr);
     auto idx = static_cast<size_t>(index >= 0 ? index : 0);
     if (idx >= as->elements.size()) {
         as->elements.resize(idx + 1u);
     }
+    // SATB pre-write barrier: record old obj pointer before overwriting.
+    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&as->elements[idx].obj));
     as->elements[idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
 }
 
@@ -352,8 +364,11 @@ extern "C" void CodegenInitObj(void* ptr) noexcept {
 
 extern "C" void CodegenStObj(void* ptr, uint64_t value) noexcept {
     using namespace chaos::il2cpp::interpreter;
+    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
     if (ptr == nullptr) return;
     auto* iv = static_cast<InterpreterValue*>(ptr);
+    // SATB pre-write barrier: record old obj pointer before overwriting.
+    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
     *iv = InterpreterValue::from_i64(static_cast<int64_t>(value));
 }
 
@@ -477,4 +492,12 @@ extern "C" void CodegenRethrow() noexcept {
 extern "C" void CodegenEndFinally() noexcept {
     // V1: no-op.  In a full implementation this would manage
     // finally unwind state (phase 2 unwinding).
+}
+
+// ── Overflow deoptimization helper ─────────────────────────────────────────
+
+extern "C" void CodegenReportDeopt(uint32_t instr_pc) noexcept {
+    using chaos::il2cpp::codegen::t_deopt_state;
+    t_deopt_state.instr_pc = instr_pc;
+    t_deopt_state.deopt_happened = true;
 }

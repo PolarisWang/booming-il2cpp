@@ -83,6 +83,14 @@ struct PatchMethod {
     // Populated during T3→T4 promotion. Set by GenerateNativeCode().
     mutable class chaos::il2cpp::codegen::NativeMethod* cached_native_method = nullptr;
 
+    // ── T3→T4 codegen failure backoff ─────────────────────────────────
+    mutable uint32_t    codegen_fail_count = 0;
+    static constexpr uint32_t kMaxCodegenFailures = 5;
+
+    // ── T4 deoptimization counter (demotion trigger) ───────────────────
+    mutable uint32_t    deopt_count = 0;
+    static constexpr uint32_t kMaxDeoptBeforeDemote = 10;
+
     // ── Call count for hot path detection (A2.3) ────────────────────────
     // Atomically incremented on each call to InterpreterEntryDirect.
     // When call_count exceeds kHotCallThreshold, method is promoted to
@@ -107,6 +115,7 @@ struct PatchMethod {
     static constexpr uint32_t kT3Ready       = 4;
     static constexpr uint32_t kT5Unloaded    = 5;
     static constexpr uint32_t kT4Ready       = 6;
+    static constexpr uint32_t kT4Skip        = 7;  // permanent: T4 codegen failed too many times
 
     // Tier 1→2 transition threshold (matches kHotCallThreshold).
     static constexpr uint32_t kT1HotThreshold = 100;

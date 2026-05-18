@@ -2779,6 +2779,86 @@ public sealed partial class NativeAotLoweringPlanner
     if (typeMethodMap.Count == 0) return string.Empty;
 
     var typeIndexToMethods = new List<(string TypeSubjectId, int Count, string SafeName, string Ns, string Name)>();
+	// Pre-collect field data for all types in the type method map by assembly.
+	// This ensures field descriptor arrays can be emitted in the reflection query image.
+	var typeFieldMap = new Dictionary<string, List<(string SubjectId, string Name, string Type, long Value)>>(StringComparer.Ordinal);
+	var assemblyTypeQueue = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
+	foreach (var typeSubjectId in typeMethodMap.Keys)
+	{
+		var slashIdx = typeSubjectId.IndexOf('/');
+		var assemblyName = slashIdx >= 0 ? typeSubjectId.Substring(0, slashIdx) : _assemblyName;
+		if (!assemblyTypeQueue.TryGetValue(assemblyName, out var typeSet))
+		{
+			typeSet = new HashSet<string>(StringComparer.Ordinal);
+			assemblyTypeQueue[assemblyName] = typeSet;
+		}
+		typeSet.Add(typeSubjectId);
+	}
+
+	foreach (var (assemblyName, typeIds) in assemblyTypeQueue)
+	{
+		if (!_closureAssemblyPathByName.TryGetValue(assemblyName, out var assemblyPath))
+			continue;
+
+		try
+		{
+			using var stream = new FileStream(assemblyPath, FileMode.Open, FileAccess.Read, FileShare.Read);
+			using var peReader = new PEReader(stream);
+			if (!peReader.HasMetadata) continue;
+			var metadataReader = peReader.GetMetadataReader();
+
+			foreach (var typeHandle in metadataReader.TypeDefinitions)
+			{
+				var typeDef = metadataReader.GetTypeDefinition(typeHandle);
+				var typeNs = metadataReader.GetString(typeDef.Namespace);
+				var typeName = metadataReader.GetString(typeDef.Name);
+				var nsTypeName = string.IsNullOrEmpty(typeNs) ? typeName : $"{typeNs}.{typeName}";
+				var candidateId = $"{assemblyName}/{nsTypeName}";
+
+				if (!typeIds.Contains(candidateId))
+					continue;
+
+				var fields = new List<(string SubjectId, string Name, string Type, long Value)>();
+				foreach (var fieldHandle in typeDef.GetFields())
+				{
+					var fieldDef = metadataReader.GetFieldDefinition(fieldHandle);
+					var fieldName = metadataReader.GetString(fieldDef.Name);
+
+					long fieldValue = 0;
+					var constHandle = fieldDef.GetDefaultValue();
+					if (!constHandle.IsNil)
+					{
+						try
+						{
+							var constant = metadataReader.GetConstant(constHandle);
+							var blobReader = metadataReader.GetBlobReader(constant.Value);
+							switch ((PrimitiveTypeCode)constant.TypeCode)
+							{
+								case PrimitiveTypeCode.Boolean: fieldValue = blobReader.ReadBoolean() ? 1L : 0L; break;
+								case PrimitiveTypeCode.Byte:    fieldValue = blobReader.ReadByte(); break;
+								case PrimitiveTypeCode.SByte:   fieldValue = blobReader.ReadSByte(); break;
+								case PrimitiveTypeCode.Int16:   fieldValue = blobReader.ReadInt16(); break;
+								case PrimitiveTypeCode.UInt16:  fieldValue = blobReader.ReadUInt16(); break;
+								case PrimitiveTypeCode.Char:    fieldValue = blobReader.ReadChar(); break;
+								case PrimitiveTypeCode.Int32:   fieldValue = blobReader.ReadInt32(); break;
+								case PrimitiveTypeCode.UInt32:  fieldValue = blobReader.ReadUInt32(); break;
+								case PrimitiveTypeCode.Int64:   fieldValue = blobReader.ReadInt64(); break;
+								case PrimitiveTypeCode.UInt64:  fieldValue = (long)blobReader.ReadUInt64(); break;
+							}
+						}
+						catch { }
+					}
+
+					var fieldSubjectId = $"{candidateId}::{fieldName}";
+					fields.Add((fieldSubjectId, fieldName, "System.Int32", fieldValue));
+				}
+
+				typeFieldMap[candidateId] = fields;
+			}
+		}
+		catch { }
+	}
+
     var typeGroups = new List<object>();
     foreach (var kvp in typeMethodMap)
     {
@@ -2792,6 +2872,7 @@ public sealed partial class NativeAotLoweringPlanner
             subject_id_literal = EscapeCppStringLiteral(m.SubjectId),
             method_name_literal = EscapeCppStringLiteral(m.MethodName),
         }).ToArray();
+        var fieldEntries = typeFieldMap.TryGetValue(typeSubjectId, out var tFields) ? tFields.Select(f => new { subject_id_literal = EscapeCppStringLiteral(f.SubjectId), name_literal = EscapeCppStringLiteral(f.Name), type_literal = EscapeCppStringLiteral(f.Type), constant_value = f.Value }).ToArray() : System.Array.Empty<object>();
 
         typeGroups.Add(new
         {
@@ -2801,6 +2882,7 @@ public sealed partial class NativeAotLoweringPlanner
             namespace_literal = EscapeCppStringLiteral(methodsInType[0].TypeNs),
             name_literal = EscapeCppStringLiteral(methodsInType[0].TypeName),
             methods = methodEntries,
+            fields = fieldEntries,
         });
     }
 

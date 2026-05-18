@@ -63,6 +63,29 @@ struct alignas(64) GcTypeLayout {
 static constexpr CHAOS_IL2CPP_UINT64 kGcLayoutRawAllocStableId =
     CHAOS_IL2CPP_UINT64(0x00000000DEADBEEFull);
 
+/// Base stable_id for free-block sentinel TypeInfo structs.
+/// Sentinels mark freed blocks in old-gen pages so MarkObject can
+/// distinguish live objects from free space without conservative
+/// size-class estimates.
+///
+/// Each sentinel's stable_id = kSentinelStableIdBase + sc_idx, and its
+/// GcTypeLayout reports instance_size = kOldGenSizeClasses[sc_idx] with
+/// pointer_count = 0 (no GC references to scan).
+///
+/// The sentinel structs live in a static array in GcLayoutRegistry, and
+/// their address range is registered via RegisterTypeInfoRange so that
+/// IsValidTypeInfoPointer returns true for sentinel pointers.
+/// MarkObject checks IsSentinelStableId(stable_id) to skip free blocks.
+static constexpr uint64_t kSentinelStableIdBase =
+    uint64_t(0xFFFFFFFF00000000ULL);
+
+/// Sentinel stable_id range check — true if @a stable_id identifies
+/// a free-block sentinel (not a real managed type).
+inline bool IsSentinelStableId(uint64_t stable_id) noexcept {
+    return stable_id >= kSentinelStableIdBase &&
+           stable_id < kSentinelStableIdBase + 32;  // generous upper bound
+}
+
 // ======================================================================
 // TypeInfo address range — used to validate TypeInfo* pointers before
 // dereferencing during conservative candidate validation.
@@ -159,6 +182,21 @@ public:
     /// Returns the stable_id used so the caller can write it at offset 0.
     uint64_t RegisterOrGetRawAllocType(uint32_t instance_size);
 
+    /// Initialize sentinel TypeInfoHot structs for free-block marking.
+    /// Registered stable_ids: kSentinelStableIdBase + sc_idx, each mapping to
+    /// a GcTypeLayout with instance_size = kOldGenSizeClasses[sc_idx] and
+    /// pointer_count = 0.  The sentinel array is registered in typeinfo_ranges_
+    /// so IsValidTypeInfoPointer accepts sentinel pointers.
+    /// Called once from the constructor.
+    void InitSentinels();
+
+    /// Get the sentinel TypeInfoHot* address for a given size class index.
+    /// @param sc_idx  Size class index [0, kOldGenNumSizeClasses).
+    /// @return  Pointer to a TypeInfoHot whose stable_id = kSentinelStableIdBase + sc_idx.
+    const TypeInfoHot* GetSentinelTypeInfo(int sc_idx) const {
+        return &sentinel_typeinfos_[sc_idx];
+    }
+
     /// Reclaim all retired (old) tables that are no longer in use.
     /// Safe to call inside a GC safepoint — no concurrent Lookup.
     /// Called from Collect() after mark-sweep completes.
@@ -190,6 +228,14 @@ private:
 
     // Mutex for registration (only Register() needs it).
     mutable std::mutex register_mutex_;
+
+    // Sentinel TypeInfoHot structs for free-block marking.
+    // One per old-gen size class.  Registered in typeinfo_ranges_ so
+    // IsValidTypeInfoPointer(sentinel_ptr) returns true.
+    // Max size classes = 28, TypeInfoHot = 32 bytes each, well within any
+    // alignment requirement.
+    static constexpr int kSentinelCount = 32;  // generous upper bound, matches IsSentinelStableId
+    TypeInfoHot sentinel_typeinfos_[kSentinelCount];
 
     // Last raw-alloc serial number (for generating unique stable_ids).
     std::atomic<uint32_t> raw_alloc_serial_{0};

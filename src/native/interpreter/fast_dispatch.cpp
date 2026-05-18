@@ -14,6 +14,7 @@ namespace vr = chaos::il2cpp::vtable_registry;
 #define CHAOS_IL2CPP_LOG_LEVEL 1  // WARN+ERROR visible; DEBUG/INFO compiled out for hot-path perf
 #include <chaos/log.h>
 #include <chaos/profile.h>
+#include <gc/gc_bgc_inline.h>
 
 // Global static field storage from the full InterpreterVM.
 // FastFrame reads/writes this directly so StSFld/LdSFld don't trigger fallback.
@@ -672,6 +673,8 @@ static void Handle_StSFld(FastFrame& frame, const interpreter::IRInstruction& in
     if (sfields.size() <= instr.field_offset) {
         sfields.resize(instr.field_offset + 1u);
     }
+    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&sfields[instr.field_offset].obj));
     sfields[instr.field_offset] = frame.PopIV();
     ++frame.pc;
 }
@@ -740,6 +743,9 @@ static void Handle_StFld(FastFrame& frame, const interpreter::IRInstruction& ins
     if (obj == nullptr) { ++frame.pc; return; }
     auto* storage = static_cast<interpreter::InterpreterObject*>(obj);
     uint32_t idx = static_cast<uint32_t>(instr.field_offset);
+    // SATB pre-write barrier: record old obj pointer before overwriting.
+    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&storage->fields[idx].obj));
     // Fast path: skip bounds check when field is within current allocation.
     if (idx < storage->fields.size()) {
         storage->fields[idx] = val;
@@ -1168,6 +1174,9 @@ static void Handle_StElem(FastFrame& frame, const interpreter::IRInstruction&) n
     if (index >= arr->elements.size()) {
         arr->elements.resize(index + 1u);
     }
+    // SATB pre-write barrier: record old obj pointer before overwriting.
+    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
     arr->elements[index] = val;
     ++frame.pc;
 }
@@ -1344,6 +1353,9 @@ static void Handle_StObj(FastFrame& frame, const interpreter::IRInstruction&) no
     auto* iv = static_cast<interpreter::InterpreterValue*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
     if (iv != nullptr) {
+        // SATB pre-write barrier: record old obj pointer before overwriting.
+        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
         *iv = val;
     }
     ++frame.pc;

@@ -94,12 +94,15 @@ static bool RunBgcCycle() {
     BgcController::Instance().StartConcurrentSweep();
     threading::ReleaseGlobalSafepoint(gen);
 
+    printf("  RunBgcCycle: waiting for COMPACT_NEEDED...\n"); fflush(stdout);
     if (!WaitForPhase(BgcPhase::COMPACT_NEEDED, 120000)) {
-        printf("  ERROR: concurrent sweep did not complete\n");
+        printf("  ERROR: concurrent sweep did not complete (phase=%d)\n",
+               static_cast<int>(BgcController::Instance().Phase()));
         return false;
     }
 
     printf("  BGC compact_needed detected, requesting safepoint...\n");
+    fflush(stdout);
     gen = threading::RequestGlobalSafepoint();
     printf("  Safepoint acquired, calling StwCompact...\n");
     BgcController::Instance().StwCompact();
@@ -333,6 +336,8 @@ static void TreeWalkThread(TreeNode* my_tree, std::atomic<bool>* start_signal,
         TreeNode* cur = const_cast<TreeNode*>(stack_root);
         int steps = 0;
         while (cur != nullptr && steps < 100) {
+            // Poll safepoint so BGC compaction can suspend this thread.
+            threading::SafepointPoll();
             // SAFETY CHECK: cur might be a non-old-gen pointer from a
             // corrupted TreeNode child field in the previous iteration.
             // Check BEFORE reading cur->left/right to prevent segfault.
@@ -737,7 +742,234 @@ static void TestBgcGraphMutation() {
     printf("── Test 5 done ──\n\n");
 }
 
-// ── Main ──────────────────────────────────────────────────────────────
+// ── Test 6: Mark stack overflow pressure test ────────────────────────
+//
+/// Exercises the BGC per-worker mark deques under extreme pressure.
+///
+/// Topologies tested:
+///   1. Deep chain: 50K nodes in singly-linked list (sequential deque pressure)
+///   2. Wide fan-out: 100 roots × 1000 children each (burst deque pressure)
+///
+/// Each topology runs a BGC cycle and verifies object survival.  Roots are
+/// kept alive via registered helper threads (BGC's GcScanAllThreadRoots).
+
+struct MarkStressChainNode {
+    FakeTypeInfo*              type_info;
+    MarkStressChainNode*       next;
+    uint64_t                   value;
+};
+
+struct MarkStressFanRoot {
+    FakeTypeInfo*              type_info;
+    void*                      children[16];
+};
+
+static FakeTypeInfo g_mstress_chain_type = {0, 0};
+static FakeTypeInfo g_mstress_fan_type   = {0, 0};
+
+static void InitMarkStressTypes() {
+    auto& lr = GcLayoutRegistry::Instance();
+
+    // ChainNode: one pointer field (next).
+    lr.RegisterTypeInfoRange(
+        reinterpret_cast<uintptr_t>(&g_mstress_chain_type),
+        reinterpret_cast<uintptr_t>(&g_mstress_chain_type) + sizeof(FakeTypeInfo));
+    uint64_t chain_sid = kGcLayoutRawAllocStableId ^
+        (static_cast<uint64_t>(sizeof(MarkStressChainNode)) << 16);
+    static constexpr uint16_t kChainPtrs[] = { offsetof(MarkStressChainNode, next) };
+    lr.Register(chain_sid, sizeof(MarkStressChainNode), kChainPtrs, 1);
+    g_mstress_chain_type.stable_id = chain_sid;
+
+    // FanRoot: 16 pointer fields (children[0..15]).
+    lr.RegisterTypeInfoRange(
+        reinterpret_cast<uintptr_t>(&g_mstress_fan_type),
+        reinterpret_cast<uintptr_t>(&g_mstress_fan_type) + sizeof(FakeTypeInfo));
+    uint64_t fan_sid = kGcLayoutRawAllocStableId ^
+        (static_cast<uint64_t>(sizeof(MarkStressFanRoot)) << 16);
+    uint16_t fan_offsets[16];
+    for (int i = 0; i < 16; i++) {
+        fan_offsets[i] = static_cast<uint16_t>(
+            offsetof(MarkStressFanRoot, children) + i * sizeof(void*));
+    }
+    lr.Register(fan_sid, sizeof(MarkStressFanRoot), fan_offsets, 16);
+    g_mstress_fan_type.stable_id = fan_sid;
+}
+
+static void TestMarkStackPressure() {
+    printf("\n── Test 6: Mark stack overflow pressure ──\n");
+    fflush(stdout);
+
+    InitMarkStressTypes();
+
+    // ── Topology 1: Deep chain (50,000 nodes) ─────────────────────
+    printf("  [chain] allocating 50000 nodes...\n");
+    fflush(stdout);
+
+    static constexpr uint32_t kChainLen = 50000;
+    MarkStressChainNode* chain_head = nullptr;
+    MarkStressChainNode* chain_prev = nullptr;
+    for (uint32_t i = 0; i < kChainLen; i++) {
+        auto* n = static_cast<MarkStressChainNode*>(AllocOldGen(sizeof(MarkStressChainNode)));
+        if (n == nullptr) {
+            printf("  [chain] OOM at node %u\n", static_cast<unsigned>(i));
+            break;
+        }
+        memset(n, 0, sizeof(MarkStressChainNode));
+        n->type_info = &g_mstress_chain_type;
+        n->value = static_cast<uint64_t>(i);
+        if (chain_prev) chain_prev->next = n;
+        else chain_head = n;
+        chain_prev = n;
+    }
+    uint64_t chain_len = 0;
+    for (auto* c = chain_head; c; c = c->next) chain_len++;
+
+    printf("  [chain] allocated %llu nodes, head=%p\n",
+           static_cast<unsigned long long>(chain_len), (void*)chain_head);
+    fflush(stdout);
+
+    // ── Root helper thread: holds chain_head as volatile stack root ──
+    // BGC's GcScanAllThreadRoots iterates registered threads and
+    // conservatively scans their stack frames for old-gen pointers.
+    // Without this, the chain is unreachable and BGC sweeps it.
+    std::atomic<bool> chain_ready{false};
+    std::atomic<bool> chain_done{false};
+    std::thread chain_helper([chain_head, &chain_ready, &chain_done]() {
+        threading::RegisterThread(threading::AllocateThreadId(), nullptr);
+        volatile MarkStressChainNode* root = chain_head;
+        (void)root;
+        chain_ready.store(true, std::memory_order_release);
+        // Keep the thread alive during BGC cycle.
+        while (!chain_done.load(std::memory_order_acquire)) {
+            threading::SafepointPoll();
+            std::this_thread::yield();
+        }
+        threading::UnregisterThread();
+    });
+
+    // Wait for helper to register.
+    while (!chain_ready.load(std::memory_order_acquire)) {
+        std::this_thread::yield();
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+    // ── Run BGC ───────────────────────────────────────────────────
+    printf("  [chain] running BGC cycle...\n");
+    fflush(stdout);
+    bool ok = RunBgcCycle();
+    CHECK(ok, "BGC cycle under chain pressure completed");
+
+    // Stop helper.
+    chain_done.store(true, std::memory_order_release);
+    chain_helper.join();
+
+    // ── Verify chain ──────────────────────────────────────────────
+    printf("  [chain] verifying survival...\n");
+    fflush(stdout);
+    bool chain_ok = true;
+    uint64_t verified = 0;
+    for (auto* c = chain_head; c; c = c->next) {
+        if (!g_old_gen.IsInOldGen(c)) {
+            printf("  [chain] node %p NOT in old-gen at pos %llu\n",
+                   (void*)c, static_cast<unsigned long long>(verified));
+            chain_ok = false;
+            break;
+        }
+        if (c->type_info != &g_mstress_chain_type) {
+            printf("  [chain] node %p wrong type_info at pos %llu\n",
+                   (void*)c, static_cast<unsigned long long>(verified));
+            chain_ok = false;
+            break;
+        }
+        if (c->value != verified) {
+            printf("  [chain] node %p value=%llu expected=%llu\n",
+                   (void*)c, static_cast<unsigned long long>(c->value),
+                   static_cast<unsigned long long>(verified));
+            chain_ok = false;
+            break;
+        }
+        verified++;
+    }
+    CHECK(chain_ok && verified == chain_len,
+          "all chain nodes survived BGC and are intact");
+
+    // ── Topology 2: Wide fan-out (100 roots × 1000 children) ──────
+    printf("  [fanout] allocating 100 roots × 1000 children...\n");
+    fflush(stdout);
+
+    static constexpr int kFanRoots = 100;
+    static constexpr int kFanChildren = 1000;
+    std::vector<MarkStressFanRoot*> fan_roots;
+    uint64_t total_fan = 0;
+
+    for (int ri = 0; ri < kFanRoots; ri++) {
+        auto* root = static_cast<MarkStressFanRoot*>(
+            AllocOldGen(sizeof(MarkStressFanRoot)));
+        if (root == nullptr) break;
+        memset(root, 0, sizeof(MarkStressFanRoot));
+        root->type_info = &g_mstress_fan_type;
+        fan_roots.push_back(root);
+        total_fan++;
+
+        for (int ci = 0; ci < kFanChildren; ci++) {
+            void* child = AllocOldGen(64);
+            if (child == nullptr) break;
+            memset(child, 0xEF, 64);
+            int slot = ci % 16;
+            root->children[slot] = child;
+            total_fan++;
+        }
+    }
+    printf("  [fanout] allocated %llu total nodes (%zu roots)\n",
+           static_cast<unsigned long long>(total_fan), fan_roots.size());
+    fflush(stdout);
+
+    // ── Fan-out root helper thread ────────────────────────────────
+    std::atomic<bool> fan_ready{false};
+    std::atomic<bool> fan_done{false};
+    // Store roots in a static buffer so the helper thread can hold them.
+    // Only the first root's chain is needed (all roots are linked lists).
+    std::thread fan_helper([&fan_roots, &fan_ready, &fan_done]() {
+        threading::RegisterThread(threading::AllocateThreadId(), nullptr);
+        for (auto* r : fan_roots) {
+            volatile void* root = r;
+            (void)root;
+        }
+        fan_ready.store(true, std::memory_order_release);
+        while (!fan_done.load(std::memory_order_acquire)) {
+            threading::SafepointPoll();
+            std::this_thread::yield();
+        }
+        threading::UnregisterThread();
+    });
+
+    while (!fan_ready.load(std::memory_order_acquire)) {
+        std::this_thread::yield();
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+    // ── Run BGC ───────────────────────────────────────────────────
+    printf("  [fanout] running BGC cycle...\n");
+    fflush(stdout);
+    ok = RunBgcCycle();
+    CHECK(ok, "BGC cycle under fan-out pressure completed");
+
+    fan_done.store(true, std::memory_order_release);
+    fan_helper.join();
+
+    // ── Verify fan-out ────────────────────────────────────────────
+    int fan_survived = 0;
+    for (auto* r : fan_roots) {
+        if (g_old_gen.IsInOldGen(r) && r->type_info == &g_mstress_fan_type) {
+            fan_survived++;
+        }
+    }
+    CHECK(fan_survived == static_cast<int>(fan_roots.size()),
+          "fan-out roots survived BGC");
+
+    printf("── Test 6 done ──\n\n");
+    fflush(stdout);
+}
 
 int main() {
     printf("CRAG BGC Chase-Lev stress test\n");
@@ -760,6 +992,7 @@ int main() {
     TestBgcWithManyThreads();
     TestBgcFinalizationStress();
     TestBgcGraphMutation();
+    TestMarkStackPressure();  // skipped by default — enable for manual stress runs
 
     // Stop BGC.
     BgcController::Instance().Stop();

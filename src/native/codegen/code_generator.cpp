@@ -118,6 +118,11 @@ private:
     uint8_t x64_to_cached_vreg_[16];    // x64 reg → vreg, 0xFF = none
     uint32_t cached_vreg_count_ = 0;
 
+    // ── GC ref vreg inference (T4 precise GC) ──────────────────────────────
+    uint64_t gc_ref_vregs_ = 0;  // bitmask: vregs that ever hold a GC ref
+    bool has_gc_ops_ = false;     // true if any instruction produces a GC ref
+    void InferGcRefVregs() noexcept;
+
     // Select hot vregs for register caching (run once before code emission).
     void SelectCacheableRegs() noexcept;
 
@@ -315,6 +320,51 @@ void NativeCodeGenerator::SelectCacheableRegs() noexcept {
         x64_to_cached_vreg_[kCacheableX64Regs[cached_vreg_count_]] = static_cast<uint8_t>(vreg);
         cached_vreg_count_++;
     }
+}
+
+void NativeCodeGenerator::InferGcRefVregs() noexcept {
+    uint64_t ref_mask = 0;
+    has_gc_ops_ = false;
+    for (const auto& instr : rm_.instructions) {
+        auto opc = instr.op_code();
+        bool produces_gc_ref = false;
+        switch (opc) {
+        // ALWAYS GC ref
+        case IROpCode::NewObj:
+        case IROpCode::Box:
+        case IROpCode::LdStr:
+        case IROpCode::LdNull:
+            produces_gc_ref = true;
+            break;
+        // POSSIBLY GC ref — conservatively mark dst
+        case IROpCode::LdFld:
+        case IROpCode::LdArg:
+        case IROpCode::LdLoc:
+        case IROpCode::Call:
+        case IROpCode::CallVirt:
+        case IROpCode::CallVirtConstrained:
+        case IROpCode::Calli:
+        case IROpCode::CallBridge:
+            produces_gc_ref = true;
+            break;
+        default:
+            break;
+        }
+        if (produces_gc_ref && instr.has_dst() && instr.dst_reg() < kGprCount) {
+            ref_mask |= (1ULL << instr.dst_reg());
+            has_gc_ops_ = true;
+        }
+    }
+    // Only mark vregs 0-15 as conservative GC refs when the method has at
+    // least one GC-producing instruction.  This ensures purely arithmetic
+    // methods produce no slot map (falling back to conservative scanning).
+    if (has_gc_ops_) {
+        uint32_t conservative_end = rm_.max_regs < 16 ? rm_.max_regs : 16;
+        for (uint32_t vr = 0; vr < conservative_end; ++vr) {
+            ref_mask |= (1ULL << vr);
+        }
+    }
+    gc_ref_vregs_ = ref_mask;
 }
 
 void NativeCodeGenerator::SpillCachedRegs() noexcept {
@@ -1319,6 +1369,9 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     // ── Select hot vregs for register caching (V4) ─────────────────────
     SelectCacheableRegs();
 
+    // ── Infer GC ref vregs (T4 precise GC) ────────────────────────────
+    InferGcRefVregs();
+
     // ── Prologue ────────────────────────────────────────────────────────
     // Save callee-saved registers: RBP, RBX, RSI (Win64).
     // RBX holds args_buf pointer, RSI holds ret_buf pointer.
@@ -1456,6 +1509,27 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
         n_instrs, code_bytes, seh_table_offset ? (total_bytes - code_bytes) : 0,
         call_sites_.size());
 
+    // ── GcSlotMapV0 emission (T4 precise GC) ──────────────────────────
+    GcSlotMapV0* slot_map = nullptr;
+    if (has_gc_ops_) {
+        uint32_t n_slots = 0;
+        uint64_t mask = gc_ref_vregs_;
+        while (mask) { n_slots += (mask & 1); mask >>= 1; }
+        size_t alloc_size = sizeof(GcSlotMapV0) + n_slots * sizeof(uint32_t);
+        slot_map = static_cast<GcSlotMapV0*>(CHAOS_IL2CPP_MALLOC(alloc_size));
+        if (slot_map != nullptr) {
+            slot_map->frame_size = kFrameSize;
+            slot_map->num_gc_slots = n_slots;
+            uint32_t si = 0;
+            for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+                if (gc_ref_vregs_ & (1ULL << vr)) {
+                    slot_map->slots[si++] = CHAOS_GC_SLOT_ENCODE(
+                        GprOff(vr), CHAOS_GC_SLOT_KIND_OBJECT);
+                }
+            }
+        }
+    }
+
     // ── Build NativeMethod ──────────────────────────────────────────────
     auto* nm = static_cast<NativeMethod*>(CHAOS_IL2CPP_MALLOC(sizeof(NativeMethod)));
     if (nm == nullptr) return nullptr;
@@ -1466,6 +1540,7 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     nm->code_size = total_bytes;
     nm->instr_count = n_instrs;
     nm->seh_table_offset = seh_table_offset;
+    nm->gc_slot_map = slot_map;
 
     // Allocate and fill call site info
     if (!call_sites_.empty()) {
@@ -1631,6 +1706,7 @@ NativeMethod::~NativeMethod() noexcept {
     CHAOS_IL2CPP_FREE(deopt_entries);
     CHAOS_IL2CPP_FREE(deopt_values);
     CHAOS_IL2CPP_FREE(gc_points);
+    CHAOS_IL2CPP_FREE(gc_slot_map);
     // Note: code is managed by CodeBuffer and freed separately.
     // For Phase 3b, we don't have a mechanism to free generated code yet.
     // Phase 3c will add a NativeMethodCache with proper cleanup.
