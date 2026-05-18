@@ -319,14 +319,15 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		builder.AppendLine($"extern \"C\" {returnType} {method.NativeSymbol}({parameterSignature})");
 		builder.AppendLine("{");
+		builder.AppendLine($"    using FnPtr = {fnPtrType};");
 		if (isInternal)
 		{
-			builder.AppendLine($"    static {fnPtrType} s_pinvoke_fn_ = reinterpret_cast<{fnPtrType}>(&{entryPointName});");
+			builder.AppendLine($"    static FnPtr s_pinvoke_fn_ = reinterpret_cast<FnPtr>(&{entryPointName});");
 		}
 		else
 		{
 			builder.AppendLine("    static void* s_pinvoke_lib_ = nullptr;");
-			builder.AppendLine($"    static {fnPtrType} s_pinvoke_fn_ = nullptr;");
+			builder.AppendLine("    static FnPtr s_pinvoke_fn_ = nullptr;");
 		}
 
 		// Marshalling local variables for string parameters.
@@ -388,7 +389,7 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine("        }");
 			}
 			builder.AppendLine("        if (s_pinvoke_lib_ == nullptr) CHAOS_IL2CPP_FAIL();");
-			builder.AppendLine($"        s_pinvoke_fn_ = reinterpret_cast<{fnPtrType}>(");
+			builder.AppendLine($"        s_pinvoke_fn_ = reinterpret_cast<FnPtr>(");
 			builder.AppendLine($"            ::chaos::il2cpp::runtime_core::NativeLibraryGetProcAddress(s_pinvoke_lib_, \"{entryPointName}\"));");
 			builder.AppendLine("        if (s_pinvoke_fn_ == nullptr) CHAOS_IL2CPP_FAIL();");
 			builder.AppendLine("    }");

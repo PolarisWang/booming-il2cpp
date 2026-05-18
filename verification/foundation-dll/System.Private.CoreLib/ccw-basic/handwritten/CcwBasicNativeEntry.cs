@@ -70,28 +70,28 @@ public static class CcwBasicNativeEntry
     }
 
     // [0] ISimpleMath.Add via managed dispatch
-    static int TestSimpleMathAdd()
+    public static int TestSimpleMathAdd()
     {
         ISimpleMath calc = new SimpleMath();
         return calc.Add(10, 5); // expected: 15
     }
 
     // [1] ISimpleMath.Multiply via managed dispatch
-    static int TestSimpleMathMul()
+    public static int TestSimpleMathMul()
     {
         ISimpleMath calc = new SimpleMath();
         return calc.Multiply(3, 4); // expected: 12
     }
 
     // [2] IConstantValue.GetValue via managed dispatch
-    static int TestConstantValue()
+    public static int TestConstantValue()
     {
         IConstantValue cv = new ConstantFortyTwo();
         return cv.GetValue(); // expected: 42
     }
 
     // [3] Dual-interface implementation via managed dispatch
-    static int TestDualInterface()
+    public static int TestDualInterface()
     {
         var obj = new DualInterfaceImpl();
         ISimpleMath math = obj;

@@ -291,8 +291,29 @@ CHAOS_IL2CPP_INTPTR MarshalRcwQueryInterface(
 /// Check whether an IntPtr is an RCW handle (by magic value).
 bool MarshalIsRcwHandle(CHAOS_IL2CPP_INTPTR ptr) noexcept;
 
+/// RCW-aware ComVtable dispatch: if ptr is an RCW handle, extract
+/// identity_unknown; then call vtable[slot](com_ptr, a, b).
+/// Returns the int32 result from the COM method.
+CHAOS_IL2CPP_INT32 MarshalCallComMethod(
+    CHAOS_IL2CPP_INTPTR ptr,
+    CHAOS_IL2CPP_INT32 slot,
+    CHAOS_IL2CPP_INT32 a,
+    CHAOS_IL2CPP_INT32 b) noexcept;
+
+/// Direct ComVtable dispatch (no RCW check): treat ptr as raw COM pointer
+/// and call vtable[slot](com_ptr, a, b).
+CHAOS_IL2CPP_INT32 MarshalCallDirectComMethod(
+    CHAOS_IL2CPP_INTPTR com_ptr,
+    CHAOS_IL2CPP_INT32 slot,
+    CHAOS_IL2CPP_INT32 a,
+    CHAOS_IL2CPP_INT32 b) noexcept;
+
 /// Throw a managed COMException for a failed HRESULT.
 void ChaosThrowComExceptionForHR(CHAOS_IL2CPP_INT32 hr) noexcept;
+
+/// Retrieve the HRESULT stored by the most recent ChaosThrowComExceptionForHR.
+/// Returns 0 if no COM failure is pending. Thread-safe (TLS).
+CHAOS_IL2CPP_INT32 ChaosGetComFailureHR() noexcept;
 
 // ── CCW (COM Callable Wrapper) ─────────────────────────────────────
 /// Create a CCW that exposes a managed object as a COM IUnknown.

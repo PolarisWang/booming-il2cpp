@@ -6017,6 +6017,30 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0, 1 });
 
+            registry.Register("System.Runtime.InteropServices.Marshal", "CallComMethod", ["System.IntPtr", "System.Int32", "System.Int32", "System.Int32"],
+                ShapeKind.SimpleForward, "MarshalCallComMethod",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateInt32AbiSlot(),
+                    CreateInt32AbiSlot(),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1, 2, 3 });
+
+            registry.Register("System.Runtime.InteropServices.Marshal", "CallDirectComMethod", ["System.IntPtr", "System.Int32", "System.Int32", "System.Int32"],
+                ShapeKind.SimpleForward, "MarshalCallDirectComMethod",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateInt32AbiSlot(),
+                    CreateInt32AbiSlot(),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1, 2, 3 });
+
             // ── COM CCW runtime helpers ─────────────────────────────────────────
             registry.Register("System.Runtime.InteropServices.Marshal", "CreateCcw", ["System.IntPtr", "System.IntPtr"],
                 ShapeKind.SimpleForward, "MarshalCreateCcw",

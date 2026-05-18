@@ -158,6 +158,32 @@ public sealed partial class NativeAotLoweringPlanner
 		return sealedTypes;
 	}
 
+	private static IReadOnlySet<string> CollectInterfaceTypeSubjectIds(AotCoreIrArtifact aotCoreIr)
+	{
+		HashSet<string> hashSet = new HashSet<string>(StringComparer.Ordinal);
+		foreach (AotCoreIrMethodArtifact method in aotCoreIr.Methods)
+		{
+			foreach (AotCoreIrInstructionArtifact instruction in method.Instructions)
+			{
+				AotCoreIrReferenceArtifact? targetReference = instruction.TargetReference;
+				if (targetReference is not null)
+				{
+					if (targetReference.Kind == AotCoreIrReferenceKind.Type && targetReference.TypeShape == AotCoreIrTypeShapeKind.InterfaceType)
+					{
+						hashSet.Add(targetReference.SubjectId);
+					}
+					AotCoreIrReferenceKind kind = targetReference.Kind;
+					bool flag = kind - 2 <= AotCoreIrReferenceKind.Type;
+					if (flag && targetReference.DeclaringTypeShape == AotCoreIrTypeShapeKind.InterfaceType && !string.IsNullOrEmpty(targetReference.DeclaringTypeSubjectId))
+					{
+						hashSet.Add(targetReference.DeclaringTypeSubjectId);
+					}
+				}
+			}
+		}
+		return hashSet;
+	}
+
 	private static string GetDeclaringTypeSubjectId(string fieldSubjectId)
 	{
 		int num = fieldSubjectId.IndexOf("::", StringComparison.Ordinal);

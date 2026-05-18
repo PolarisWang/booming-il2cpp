@@ -90,7 +90,9 @@ internal static class ScribanTemplateRenderer
             throw new FileNotFoundException("required Scriban template is missing", templatePath);
         }
 
-        var template = Template.Parse(File.ReadAllText(templatePath), templatePath);
+        var content = File.ReadAllText(templatePath);
+
+        var template = Template.Parse(content, templatePath);
         if (!template.HasErrors)
         {
             return template;

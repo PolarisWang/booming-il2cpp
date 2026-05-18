@@ -302,6 +302,7 @@ public sealed partial class NativeAotLoweringPlanner
         _referenceTypeImplementedInterfaceSubjectIds = CollectReferenceTypeImplementedInterfaceSubjectIds(aotCoreIr);
         _valueTypeSubjectIds = CollectValueTypeSubjectIds(aotCoreIr);
         _sealedTypeSubjectIds = CollectSealedTypeSubjectIds(aotCoreIr);
+        _interfaceTypeSubjectIds = CollectInterfaceTypeSubjectIds(aotCoreIr);
         _comInterfaceVtableData = CollectComInterfaceVtableData(aotCoreIr, _methodsBySubjectId, metadataRegistration);
 
         // Build generic sharing canonical map: group generic methods by open
@@ -313,6 +314,35 @@ public sealed partial class NativeAotLoweringPlanner
         var methodsForLowering = fullAssemblyMode
             ? CollectAllMethods(aotCoreIr)
             : CollectReachableMethods(aotCoreIr, entryMethod);
+
+        // Augment lowering set with methods of types that implement COM interfaces.
+        // These concrete implementations are referenced by vtable arrays for CCW dispatch
+        // but may not be discovered by static call-graph reachability (interface dispatch).
+        if (!fullAssemblyMode && _referenceTypeImplementedInterfaceSubjectIds?.Count > 0)
+        {
+            var existingIds = new HashSet<string>(methodsForLowering.Select(m => m.SubjectId), StringComparer.Ordinal);
+            var extraMethods = new List<AotCoreIrMethodArtifact>();
+
+            foreach (var kvp in _referenceTypeImplementedInterfaceSubjectIds)
+            {
+                var typeId = kvp.Key;
+                foreach (var method in _methodsBySubjectId.Values)
+                {
+                    if (string.Equals(method.Identity.DeclaringTypeSubjectId, typeId, StringComparison.Ordinal)
+                        && !existingIds.Contains(method.SubjectId))
+                    {
+                        extraMethods.Add(method);
+                        existingIds.Add(method.SubjectId);
+                    }
+                }
+            }
+
+            if (extraMethods.Count > 0)
+            {
+                extraMethods.Sort((a, b) => string.Compare(a.SubjectId, b.SubjectId, StringComparison.Ordinal));
+                methodsForLowering = methodsForLowering.Concat(extraMethods).ToList();
+            }
+        }
         _methodNativeSymbolToManifestIndex = methodsForLowering
             .Select((method, idx) => (method.NativeSymbol, idx))
             .DistinctBy(t => t.NativeSymbol)
@@ -325,6 +355,31 @@ public sealed partial class NativeAotLoweringPlanner
         // from the entry point need full C++ function bodies.
         var aotReachableSubjectIds = ComputeAotReachableSubjectIds(
             entryMethod?.SubjectId, methodsForLowering);
+
+        // Methods of types that implement COM interfaces are referenced by vtable
+        // entries and need real bodies even if not statically reachable via call graph.
+        if (_referenceTypeImplementedInterfaceSubjectIds?.Count > 0)
+        {
+            var comImplTypes = new HashSet<string>(_referenceTypeImplementedInterfaceSubjectIds.Keys, StringComparer.Ordinal);
+            foreach (var sid in methodsForLowering.Select(m => m.SubjectId))
+            {
+                if (!aotReachableSubjectIds.Contains(sid))
+                {
+                    // Find the declaring type for this method
+                    var slashIdx = sid.LastIndexOf('/');
+                    var colonIdx = sid.IndexOf("::", StringComparison.Ordinal);
+                    if (slashIdx > 0 && colonIdx > slashIdx)
+                    {
+                        var declTypeId = sid.Substring(0, colonIdx);
+                        if (comImplTypes.Contains(declTypeId))
+                        {
+                            aotReachableSubjectIds.Add(sid);
+                        }
+                    }
+                }
+            }
+        }
+
         AotReachableMethodCount = aotReachableSubjectIds.Count;
         // Only count unreachable among the methods we're actually emitting full bodies for.
         var loweringSubjectIds = new HashSet<string>(methodsForLowering.Select(m => m.SubjectId), StringComparer.Ordinal);
