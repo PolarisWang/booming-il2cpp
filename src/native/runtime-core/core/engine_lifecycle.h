@@ -22,6 +22,8 @@ struct GcHandleEntry {
     void* object_instance;
     bool pinned;
     bool weak;
+    bool track_resurrection;  // WeakTrackResurrection: defer nullification
+                              // until after finalization can resurrect
 };
 
 // ABI constants at runtime_core namespace scope (shared across core files).
@@ -48,6 +50,12 @@ CHAOS_IL2CPP_UINT64 GcCreateStrongHandle(void* object_instance) noexcept;
 /// Create a weak handle (object can be collected; handle nulled when dead).
 /// Returns a nonzero handle ID on success, 0 on failure.
 CHAOS_IL2CPP_UINT64 GcCreateWeakHandle(void* object_instance) noexcept;
+
+/// Create a long weak handle (WeakTrackResurrection): the handle is NOT
+/// nullified until the BGC cycle AFTER finalization has run, giving
+/// finalizers a chance to resurrect the object.  Returns a nonzero handle
+/// ID on success, 0 on failure.
+CHAOS_IL2CPP_UINT64 GcCreateLongWeakHandle(void* object_instance) noexcept;
 
 /// Create a pinned handle (object will not be moved by young GC).
 /// Returns a nonzero handle ID on success, 0 on failure.

@@ -1,10 +1,12 @@
 #include "code_generator.h"
 #include "x64_encoder.h"
 #include "code_buffer.h"
+#include "codegen_helpers.h"
 
 #include "../interpreter/ir_reg_alloc.h"
 #include "../interpreter/interpreter_vm.h"
 
+#include <codegen_bridge.h>
 #include <chaos/log.h>
 
 #include <cstdint>
