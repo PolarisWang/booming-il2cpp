@@ -33,9 +33,11 @@ CHAOS_IL2CPP_INTPTR ChaosTextInfoToUpper(CHAOS_IL2CPP_INTPTR text_info, CHAOS_IL
 CHAOS_IL2CPP_INTPTR ChaosTextInfoGetCultureName(CHAOS_IL2CPP_INTPTR text_info) noexcept;
 
 // GC
+extern "C" {
 void    ChaosGcCollect(CHAOS_IL2CPP_INT32 generation) noexcept;
 CHAOS_IL2CPP_INT32  ChaosGcGetGeneration(CHAOS_IL2CPP_INTPTR obj) noexcept;
 CHAOS_IL2CPP_INT32  ChaosGcGetMaxGeneration(void) noexcept;
+}
 
 // Environment / Console
 CHAOS_IL2CPP_INTPTR ChaosEnvironmentGetStackTrace(void) noexcept;

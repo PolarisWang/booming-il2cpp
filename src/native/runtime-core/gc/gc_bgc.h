@@ -367,6 +367,8 @@ extern std::atomic<bool> g_bgc_is_marking;
 /// Flush a thread's SATB buffer to the global queue (delegates to controller).
 extern void BgcFlushSatbBuffer(const SatbEntry* entries, uint32_t count);
 
+extern void GcAdvanceBgcCycle() noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_BGC_H_

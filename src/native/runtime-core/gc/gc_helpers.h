@@ -65,8 +65,8 @@ char* DomainStrDup(const char* src);
 
 }  // namespace chaos::il2cpp::runtime_core
 
-// GC collection declarations: direct extern "C" declarations to avoid
-// C2883/C2039 conflicts from unity-build namespace inclusion.
+// GC collection declarations (extern "C" at file scope for codegen call sites).
+// These are also declared in generated_code_compat.h for native AOT TUs.
 extern "C" void chaos_gc_collect() noexcept;
 extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept;
 

@@ -82,6 +82,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
             mt->tlab_current = nullptr;
         }
         threading::ReleaseGlobalSafepoint(gen);
+        GcAdvanceBgcCycle();
         tls_tlab = TLAB{};
     }
 
@@ -127,6 +128,7 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
             mt->tlab_current = nullptr;
         }
         threading::ReleaseGlobalSafepoint(gen);
+        GcAdvanceBgcCycle();
         tls_tlab = TLAB{};
     }
 

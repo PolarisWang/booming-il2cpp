@@ -330,6 +330,8 @@ internal static class ConvertToCppHandler
 #include ""patch_loader.h""
 #include ""hotpatch_table.h""
 #include ""chaos/profile.h""
+#include ""runtime_stubs/misc_stubs.h""
+#include ""gc/gc_bgc_inline.h""
 
 // kChaosExternalRuntimeFnTable is defined in native-aot.generated.cpp.
 extern ""C"" void* kChaosExternalRuntimeFnTable[];
@@ -391,11 +393,11 @@ static void FillExternalRuntimeStubs() {{
 
         // Known managed GC methods — wire real runtime implementations.
         if (std::strstr(sub, ""System.GC::Collect:"")) {{
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){{ ChaosGcCollect(-1); }});
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){{ chaos_gc_collect(); }});
             continue;
         }}
         if (std::strstr(sub, ""System.GC::WaitForPendingFinalizers:"")) {{
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){{ ChaosGcCollect(-1); }});
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){{ chaos_gc_wait_for_pending_finalizers(); }});
             continue;
         }}
         if (std::strstr(sub, ""System.GC::GetGeneration:"")) {{

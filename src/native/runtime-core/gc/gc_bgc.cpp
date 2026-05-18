@@ -944,4 +944,24 @@ CHAOS_IL2CPP_SIZE BgcController::DrainAllTlsSatbBuffers() {
     return total;
 }
 
+
+void GcAdvanceBgcCycle() noexcept {
+    auto& bgc = BgcController::Instance();
+    auto phase = bgc.Phase();
+    if (phase == BgcPhase::IDLE) {
+        auto decision = g_gc_scheduler.DecideCollection();
+        if (decision != GcCollectionKind::FULL_BGC) return;
+        bgc.StartBgcCycle();
+    } else if (phase == BgcPhase::REMARK_NEEDED) {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        bgc.StwRemark();
+        bgc.StartConcurrentSweep();
+        threading::ReleaseGlobalSafepoint(gen);
+    } else if (phase == BgcPhase::COMPACT_NEEDED) {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        bgc.StwCompact();
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+}
+
 }  // namespace chaos::il2cpp::runtime_core

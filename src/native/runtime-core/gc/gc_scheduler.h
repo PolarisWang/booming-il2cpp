@@ -232,7 +232,7 @@ private:
     std::atomic<bool> full_gc_requested_{false};
 
     // Estimated heap size (updated after full GC).
-    std::atomic<CHAOS_IL2CPP_SIZE> estimated_heap_size_{0};
+    std::atomic<CHAOS_IL2CPP_SIZE> estimated_heap_size_{kDefaultNurserySize};
 
     // Cooldown: skip during N RecordAllocation calls after each GC.
     // Set to kCooldownAllocations by RecordGcCompleted(); decremented
