@@ -15,9 +15,9 @@
       },
       "success": true,
       "methodCount": 12,
-      "entryPointSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Run:System.Void(System.Int32)",
+      "entryPointSubjectId": "",
       "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-18T20:13:30"
+  "timestamp": "2026-05-18T23:12:12"
 }

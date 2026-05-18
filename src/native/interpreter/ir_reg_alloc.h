@@ -234,11 +234,9 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept;
 // Execute a RegisterMethod using register-based dispatch.
 // Similar to FastExecute but reads/writes RegisterFile directly.
 // Returns true on normal completion, false on unsupported opcode fallback.
-/// @param start_pc  Starting instruction index (0 = beginning, used by OSR resume).
 bool RegisterExecute(RegisterFrame& frame,
                      const RegisterInstruction* instrs,
-                     uint32_t instr_count,
-                     uint32_t start_pc = 0) noexcept;
+                     uint32_t instr_count) noexcept;
 
 // Check if RegisterExecute can handle this method (no SEH required).
 inline bool CanRegisterExecute(const RegisterMethod& rm) noexcept {

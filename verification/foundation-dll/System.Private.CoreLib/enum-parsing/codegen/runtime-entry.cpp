@@ -68,18 +68,6 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
     return nullptr;
 }
 
-// ── Dummy string sentinel for Enum external runtime stubs ──────────
-// Layout matches chaos_managed_string (ThinLockableHeader(16B) + length(4B))
-// so get_Length can read length = 0 without crashing.
-// The "0x42" type_info ensures chaos_object_get_type_info doesn't crash
-// on the rare path that dereferences the type_info pointer.
-struct EnumStubDummyString {
-    void* type_info;   // offset 0
-    uint64_t sync;     // offset 8
-    int32_t length;    // offset 16 — get_Length reads this for non-string-id pointers
-};
-static EnumStubDummyString g_enum_stub_string;
-
 // ── Fill remaining null external runtime table entries with safe stubs ──
 // After ChaosResolveExternalRuntimeFnTable() runs during bootstrap, entries
 // that could NOT be resolved remain nullptr.  This function fills them with
@@ -108,57 +96,6 @@ static void FillExternalRuntimeStubs() {
             continue;
         }
 
-        // Enum external runtime stubs — return valid sentinel values so
-        // generated null-checks + get_Length/GetHashCode don't crash.
-        // String-returning methods return &g_enum_stub_string (length=0)
-        // so get_Length returns 0 and the comparison 0 != 0 passes.
-        // Object/Array-returning methods also return a non-null dummy
-        // pointer — GetHashCode just hashes the pointer value.
-        if (std::strstr(sub, "System.Enum::Format:")) {
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR {
-                return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&g_enum_stub_string);
-            });
-            continue;
-        }
-        if (std::strstr(sub, "System.Enum::GetName:")) {
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR {
-                return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&g_enum_stub_string);
-            });
-            continue;
-        }
-        if (std::strstr(sub, "System.Enum::GetNames:")) {
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR {
-                return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&g_enum_stub_string);
-            });
-            continue;
-        }
-        if (std::strstr(sub, "System.Enum::GetValues:")) {
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR {
-                return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&g_enum_stub_string);
-            });
-            continue;
-        }
-        if (std::strstr(sub, "System.Enum::Parse:") && std::strstr(sub, "System.Boolean")) {
-            // Parse(Type, String, Boolean) — 3 pointer args
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR {
-                return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&g_enum_stub_string);
-            });
-            continue;
-        }
-        if (std::strstr(sub, "System.Enum::Parse:")) {
-            // Parse(Type, String) — 2 pointer args
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR {
-                return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&g_enum_stub_string);
-            });
-            continue;
-        }
-        if (std::strstr(sub, "System.DayOfWeek::ToString:")) {
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INTPTR {
-                return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&g_enum_stub_string);
-            });
-            continue;
-        }
-
         // Parse return type from subject ID pattern:
         //   "Namespace.Type::Method:ReturnType(Params)"
         if (std::strstr(sub, ":System.Void(")) {
@@ -170,11 +107,9 @@ static void FillExternalRuntimeStubs() {
         } else if (std::strstr(sub, ":System.Boolean(")) {
             kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
         } else {
-            // Unknown return type — return 0 (null for ref types).
-            // The generated code checks for null after external runtime calls and
-            // triggers CHAOS_IL2CPF_FAIL() via the fail hook. This avoids crashes
-            // from nullptr function pointers in the external runtime table.
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });
+            // Unknown return type — safest default is void(void) to at least
+            // not corrupt the stack on callee-saved registers.
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){});
         }
     }
 }

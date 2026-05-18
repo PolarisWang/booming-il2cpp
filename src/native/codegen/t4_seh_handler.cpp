@@ -137,7 +137,7 @@ static constexpr uint32_t kManagedSehExceptionCode = 0xE0000001;
 
 /// Exception object pointer for the current thread (set by CodegenThrow,
 /// read by the VEH handler to restore the exception object for catch blocks).
-extern thread_local void* g_t4_exception_obj;
+thread_local void* g_t4_exception_obj = nullptr;
 
 static LONG WINAPI T4VectoredExceptionHandler(EXCEPTION_POINTERS* ep) noexcept {
     if (ep == nullptr || ep->ExceptionRecord == nullptr || ep->ContextRecord == nullptr) {

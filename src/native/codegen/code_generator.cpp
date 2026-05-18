@@ -8,6 +8,7 @@
 
 #include <codegen_bridge.h>
 #include <chaos/log.h>
+#include <chaos/profile.h>
 
 #include <cstdint>
 #include <cstring>
@@ -158,6 +159,7 @@ private:
 };
 
 void NativeCodeGenerator::LoadGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LoadGpr");
     if (config_.enable_register_caching && vreg < interpreter::kGPRegisters) {
         uint8_t cached = cached_x64_for_vreg_[vreg];
         if (cached != kNotCached) {
@@ -171,6 +173,7 @@ void NativeCodeGenerator::LoadGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
 }
 
 void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StoreGpr");
     if (config_.enable_register_caching && vreg < interpreter::kGPRegisters) {
         uint8_t cached = cached_x64_for_vreg_[vreg];
         if (cached != kNotCached && num_cache_regs_ > 0) {
@@ -529,6 +532,7 @@ void NativeCodeGenerator::EmitCallWithSpill(uint8_t reg) noexcept {
 }
 
 bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitInstruction");
     using IROpCode = interpreter::IROpCode;
     auto opc = instr.op_code();
     auto& _buf = this->buf_;
