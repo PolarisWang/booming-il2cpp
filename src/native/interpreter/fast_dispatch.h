@@ -74,6 +74,7 @@ struct FastFrame {
     static constexpr uint32_t kMaxTracked = 8;
     void*     tracked_objs[kMaxTracked]{};
     void (*tracked_dtors[kMaxTracked])(void*){};
+    bool      tracked_is_pool[kMaxTracked]{};  // true = pool-allocated (skip free)
     uint32_t  tracked_cnt            = 0;
 
     template<typename T>
@@ -81,18 +82,34 @@ struct FastFrame {
 
     void Track(void* ptr, void (*dtor)(void*)) noexcept {
         if (tracked_cnt < kMaxTracked) {
-            tracked_objs[tracked_cnt]   = ptr;
+            tracked_objs[tracked_cnt]    = ptr;
             tracked_dtors[tracked_cnt]   = dtor;
+            tracked_is_pool[tracked_cnt] = false;
             ++tracked_cnt;
         } else {
             CHAOS_IL2CPP_LOG_WARN_M("FastFrame", "Track overflow, ptr={0}", reinterpret_cast<const void*>(ptr));
         }
     }
 
+    /// Track a pool-allocated object. CleanupTracked calls the dtor but
+    /// skips the CHAOS_IL2CPP_FREE (the object returns to its pool).
+    void TrackPool(void* ptr, void (*dtor)(void*)) noexcept {
+        if (tracked_cnt < kMaxTracked) {
+            tracked_objs[tracked_cnt]    = ptr;
+            tracked_dtors[tracked_cnt]   = dtor;
+            tracked_is_pool[tracked_cnt] = true;
+            ++tracked_cnt;
+        } else {
+            CHAOS_IL2CPP_LOG_WARN_M("FastFrame", "TrackPool overflow, ptr={0}", reinterpret_cast<const void*>(ptr));
+        }
+    }
+
     void CleanupTracked() noexcept {
         for (uint32_t i = 0; i < tracked_cnt; ++i) {
             tracked_dtors[i](tracked_objs[i]);
-            CHAOS_IL2CPP_FREE(tracked_objs[i]);
+            if (!tracked_is_pool[i]) {
+                CHAOS_IL2CPP_FREE(tracked_objs[i]);
+            }
         }
         tracked_cnt = 0;
     }

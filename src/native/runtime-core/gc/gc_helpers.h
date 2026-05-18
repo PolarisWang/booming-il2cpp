@@ -65,9 +65,10 @@ char* DomainStrDup(const char* src);
 
 }  // namespace chaos::il2cpp::runtime_core
 
-// GC collection declarations are in runtime_stubs/misc_stubs.h
-// (pulled into file scope via generated_code_compat.h for codegen call sites).
-#include "../runtime_stubs/misc_stubs.h"
+// GC collection declarations: direct extern "C" declarations to avoid
+// C2883/C2039 conflicts from unity-build namespace inclusion.
+extern "C" void chaos_gc_collect() noexcept;
+extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept;
 
 /// GC.KeepAlive — prevents the GC from collecting the object before
 /// this call.  The generated code emits a direct call to this function
