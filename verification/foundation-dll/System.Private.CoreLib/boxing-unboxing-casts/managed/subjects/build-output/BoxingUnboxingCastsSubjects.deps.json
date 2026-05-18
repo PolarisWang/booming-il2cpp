@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "GlobalizationCultureSubjects/1.0.0": {
+      "BoxingUnboxingCastsSubjects/1.0.0": {
         "runtime": {
-          "GlobalizationCultureSubjects.dll": {}
+          "BoxingUnboxingCastsSubjects.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "GlobalizationCultureSubjects/1.0.0": {
+    "BoxingUnboxingCastsSubjects/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
