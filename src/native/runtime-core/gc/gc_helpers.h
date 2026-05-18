@@ -63,14 +63,11 @@ inline void GcEndStubbornChange(const void* /*obj*/) noexcept {
 /// Returns nullptr on OOM or null input.
 char* DomainStrDup(const char* src);
 
-// ── GC collection API (extern "C" for codegen inline body) ─────────
+}  // namespace chaos::il2cpp::runtime_core
 
-/// Trigger a full blocking GC collection from managed code (System.GC.Collect()).
-/// Runs young collection + full old-gen mark-sweep + pending finalizers.
-extern "C" void chaos_gc_collect() noexcept;
-
-/// Wait for pending finalizers (System.GC.WaitForPendingFinalizers()).
-extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept;
+// GC collection declarations are in runtime_stubs/misc_stubs.h
+// (pulled into file scope via generated_code_compat.h for codegen call sites).
+#include "../runtime_stubs/misc_stubs.h"
 
 /// GC.KeepAlive — prevents the GC from collecting the object before
 /// this call.  The generated code emits a direct call to this function
@@ -88,6 +85,12 @@ extern "C" void chaos_gc_keepalive(CHAOS_IL2CPP_INTPTR obj) noexcept;
 /// Used by codegen stfld/stelem.ref/stobj to keep the card table consistent.
 extern "C" void chaos_gc_dirty_card(const void* obj) noexcept;
 
-}  // namespace chaos::il2cpp::runtime_core
+/// Suppress finalization for @a obj (System.GC.SuppressFinalize).
+/// Called from managed code when an object's Dispose() has run.
+extern "C" void chaos_gc_suppress_finalize(CHAOS_IL2CPP_INTPTR obj) noexcept;
+
+/// Re-register finalization for @a obj (System.GC.ReRegisterForFinalize).
+/// Reverses a previous SuppressFinalize call.
+extern "C" void chaos_gc_reregister_finalize(CHAOS_IL2CPP_INTPTR obj) noexcept;
 
 #endif  // CHAOS_IL2CPP_GC_HELPERS_H_
