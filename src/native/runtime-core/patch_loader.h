@@ -111,6 +111,30 @@ struct PatchMethod {
     static constexpr uint32_t kT3NativeThreshold = 2000;
 };
 
+// ── CallSiteProfile (PGO data collected during T2 execution) ──────────────
+struct CallSiteProfile {
+    uint32_t    instruction_idx;        // IR instruction index
+    uint32_t    sample_count;           // total samples
+    uint32_t    type_count;             // distinct receiver types seen
+    uint64_t    type_tokens[4] = {};    // receiver type_token values
+    uint32_t    type_hit_counts[4] = {}; // per-type hit count
+};
+
+// ── PicDispatchEntry (single PIC slot) ───────────────────────────────────
+struct PicDispatchEntry {
+    uint64_t    type_token  = 0;        // 0 = sentinel (end of chain)
+    void*       direct_fn   = nullptr;  // pre-resolved AOT function pointer
+};
+
+// ── PicDispatchChain (per-call-site polymorphic cache) ────────────────────
+struct PicDispatchChain {
+    PicDispatchEntry slots[3];          // 3-slot polymorphic cache
+    void*            fallback_fn = nullptr; // MIC/vtable fallback
+    uint32_t         instruction_idx = 0;   // IR instruction index
+    uint32_t         method_token   = 0;    // for fallback resolution
+    uint32_t         generation     = 0;    // g_patch_generation at creation
+};
+
 // ── PatchMetadataCache ───────────────────────────────────────────────────
 // Self-contained metadata resolver backed by a .patchdata binary.
 // Provides token resolution for IL→IR lowering without registering types
