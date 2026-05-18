@@ -1,5 +1,7 @@
 #include "gc_old_gen.h"
 
+#include <cstring>
+
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
@@ -1673,14 +1675,28 @@ void MarkSweepOldGen::PlanPageEvacuation(OldGenPage* page, CompactPlan& out_plan
             void* obj = payload + obj_slot * sizeof(void*);
 
             // Determine object size from type info.
+            // Supports two type_info formats:
+            //   TypeInfoHot  — stable_id at offset +16 (real managed code)
+            //   FakeTypeInfo — stable_id at offset  +0 (stress-test objects)
             CHAOS_IL2CPP_SIZE obj_size = sizeof(void*);
             const void* type_info_ptr = *static_cast<const void* const*>(obj);
             if (type_info_ptr != nullptr) {
                 auto& registry = GcLayoutRegistry::Instance();
                 if (registry.IsValidTypeInfoPointer(type_info_ptr)) {
-                    auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-                    uint64_t stable_id = hot->stable_id;
-                    const auto* layout = registry.Lookup(stable_id);
+                    uint64_t stable_id = 0;
+                    const GcTypeLayout* layout = nullptr;
+
+                    // Try TypeInfoHot layout first (stable_id at +16).
+                    std::memcpy(&stable_id,
+                        reinterpret_cast<const char*>(type_info_ptr) + 16, sizeof(stable_id));
+                    layout = registry.Lookup(stable_id);
+
+                    // Fallback: compact/FakeTypeInfo layout (stable_id at +0).
+                    if (layout == nullptr) {
+                        std::memcpy(&stable_id, type_info_ptr, sizeof(stable_id));
+                        layout = registry.Lookup(stable_id);
+                    }
+
                     if (layout != nullptr && layout->instance_size > 0) {
                         obj_size = layout->instance_size;
                     }

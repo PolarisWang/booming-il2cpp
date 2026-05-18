@@ -728,6 +728,264 @@ static bool bench_native() {
 }
 
 
+// ── Scenario 5: Multi-ALU benchmark (T4) ─────────────────────────────────
+// Tests T4 native code generation for chains of arithmetic ops.
+// IL: LdArg(0), LdArg(1), Add, LdArg(0), Add, LdArg(1), Add, Ret
+// Exercises longer basic-block codegen paths in T4.
+static bool bench_multi_alu_t4() {
+    std::printf("\n--- bench_multi_alu_t4 ---\n");
+    std::fflush(stdout);
+
+    const char* json =
+        R"({"instructions":[)"
+        R"({"opCode":6,"ilOffset":0,"operand":0},)"
+        R"({"opCode":6,"ilOffset":1,"operand":1},)"
+        R"({"opCode":25,"ilOffset":2},)"
+        R"({"opCode":6,"ilOffset":3,"operand":0},)"
+        R"({"opCode":25,"ilOffset":4},)"
+        R"({"opCode":6,"ilOffset":5,"operand":1},)"
+        R"({"opCode":25,"ilOffset":6},)"
+        R"({"opCode":53,"ilOffset":7}])"
+        R"(})";
+
+    uint8_t sig_buf[16];
+    uint8_t param_types[] = { kElemI4, kElemI4 };
+    int sig_len = BuildSignature(sig_buf, 2, kElemI4, param_types);
+
+    PatchMethod pm;
+    SetupPatchMethod(&pm, json, sig_buf, sig_len);
+    if (pm.cached_ir == nullptr) {
+        std::fprintf(stderr, "  FAIL: cached_ir null\n");
+        return false;
+    }
+
+    uint64_t args_buf[2] = { 10, 20 };
+    // result = ((10+20) + 10) + 20 = 60
+    constexpr int32_t kExpectedResult = 60;
+
+    constexpr int kTotalCalls = 2500;
+
+    uint64_t t1_sum = 0, t2_sum = 0, t3_sum = 0, t4_sum = 0;
+    int t1_count = 0, t2_count = 0, t3_count = 0, t4_count = 0;
+
+    for (int i = 0; i < kTotalCalls; ++i) {
+        int64_t ret_val = -1;
+        auto start = Clock::now();
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        auto end = Clock::now();
+        auto ns = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        if (i >= 50 && i < 130)   { t1_sum += ns; ++t1_count; }
+        if (i >= 200 && i < 500)  { t2_sum += ns; ++t2_count; }
+        if (i >= 1500 && i < 1800){ t3_sum += ns; ++t3_count; }
+        if (i >= 2100 && i < 2500){ t4_sum += ns; ++t4_count; }
+        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+            std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
+                        (long long)ret_val, kExpectedResult, i);
+            return false;
+        }
+    }
+
+    bool has_native = (pm.cached_native_method != nullptr);
+
+    double t1_ns = (t1_count > 0) ? static_cast<double>(t1_sum) / t1_count : -1.0;
+    double t2_ns = (t2_count > 0) ? static_cast<double>(t2_sum) / t2_count : -1.0;
+    double t3_ns = (t3_count > 0) ? static_cast<double>(t3_sum) / t3_count : -1.0;
+    double t4_ns = (t4_count > 0) ? static_cast<double>(t4_sum) / t4_count : -1.0;
+
+    std::printf("  T1: %.0f ns/op\n", t1_ns);
+    std::printf("  T2: %.0f ns/op\n", t2_ns);
+    std::printf("  T3: %.0f ns/op\n", t3_ns);
+    std::printf("  T4: %.0f ns/op\n", t4_ns);
+    std::printf("  SUMMARY: T1=%.0fns  T2=%.0fns  T3=%.0fns  T4=%.0fns\n",
+                t1_ns, t2_ns, t3_ns, t4_ns);
+    std::printf("  final: tier=%u, call_count=%u, has_native=%d\n",
+                pm.tier_state.load(std::memory_order_acquire),
+                pm.call_count.load(std::memory_order_relaxed), has_native);
+    std::fflush(stdout);
+
+    if (!has_native) {
+        std::fprintf(stderr, "  FAIL: T4 native code was not generated\n");
+        return false;
+    }
+    return true;
+}
+
+// ── Scenario 6: Local variable storm benchmark (T4) ────────────────────────
+// Tests T4 native code generation for LdLoc/StLoc chains.
+// IL: LdArg(0), StLoc(0..3), LdLoc(3), LdArg(1), Add, LdLoc(3), Add, Ret
+// Exercises local-variable register allocation in T4 codegen.
+static bool bench_loc_storm_t4() {
+    std::printf("\n--- bench_loc_storm_t4 ---\n");
+    std::fflush(stdout);
+
+    const char* json =
+        R"({"instructions":[)"
+        R"({"opCode":6,"ilOffset":0,"operand":0},)"
+        R"({"opCode":8,"ilOffset":1,"operand":0},)"
+        R"({"opCode":7,"ilOffset":2,"operand":0},)"
+        R"({"opCode":8,"ilOffset":3,"operand":1},)"
+        R"({"opCode":7,"ilOffset":4,"operand":1},)"
+        R"({"opCode":8,"ilOffset":5,"operand":2},)"
+        R"({"opCode":7,"ilOffset":6,"operand":2},)"
+        R"({"opCode":8,"ilOffset":7,"operand":3},)"
+        R"({"opCode":7,"ilOffset":8,"operand":3},)"
+        R"({"opCode":6,"ilOffset":9,"operand":1},)"
+        R"({"opCode":25,"ilOffset":10},)"
+        R"({"opCode":7,"ilOffset":11,"operand":3},)"
+        R"({"opCode":25,"ilOffset":12},)"
+        R"({"opCode":53,"ilOffset":13}])"
+        R"(})";
+
+    uint8_t sig_buf[16];
+    uint8_t param_types[] = { kElemI4, kElemI4 };
+    int sig_len = BuildSignature(sig_buf, 2, kElemI4, param_types);
+
+    PatchMethod pm;
+    SetupPatchMethod(&pm, json, sig_buf, sig_len);
+    if (pm.cached_ir == nullptr) {
+        std::fprintf(stderr, "  FAIL: cached_ir null\n");
+        return false;
+    }
+
+    uint64_t args_buf[2] = { 10, 20 };
+    // result = ((arg0 -> loc3) + arg1) + loc3 = (10 + 20) + 10 = 40
+    constexpr int32_t kExpectedResult = 40;
+
+    constexpr int kTotalCalls = 2500;
+
+    uint64_t t1_sum = 0, t2_sum = 0, t3_sum = 0, t4_sum = 0;
+    int t1_count = 0, t2_count = 0, t3_count = 0, t4_count = 0;
+
+    std::printf("  Starting %d iterations...\n", kTotalCalls);
+    std::fflush(stdout);
+
+    for (int i = 0; i < kTotalCalls; ++i) {
+        int64_t ret_val = -1;
+        auto start = Clock::now();
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        auto end = Clock::now();
+        auto ns = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        if (i >= 50 && i < 130)   { t1_sum += ns; ++t1_count; }
+        if (i >= 200 && i < 500)  { t2_sum += ns; ++t2_count; }
+        if (i >= 1500 && i < 1800){ t3_sum += ns; ++t3_count; }
+        if (i >= 2100 && i < 2500){ t4_sum += ns; ++t4_count; }
+        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+            std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
+                        (long long)ret_val, kExpectedResult, i);
+            return false;
+        }
+    }
+
+    bool has_native = (pm.cached_native_method != nullptr);
+
+    double t1_ns = (t1_count > 0) ? static_cast<double>(t1_sum) / t1_count : -1.0;
+    double t2_ns = (t2_count > 0) ? static_cast<double>(t2_sum) / t2_count : -1.0;
+    double t3_ns = (t3_count > 0) ? static_cast<double>(t3_sum) / t3_count : -1.0;
+    double t4_ns = (t4_count > 0) ? static_cast<double>(t4_sum) / t4_count : -1.0;
+
+    std::printf("  T1: %.0f ns/op\n", t1_ns);
+    std::printf("  T2: %.0f ns/op\n", t2_ns);
+    std::printf("  T3: %.0f ns/op\n", t3_ns);
+    std::printf("  T4: %.0f ns/op\n", t4_ns);
+    std::printf("  SUMMARY: T1=%.0fns  T2=%.0fns  T3=%.0fns  T4=%.0fns\n",
+                t1_ns, t2_ns, t3_ns, t4_ns);
+    std::printf("  final: tier=%u, call_count=%u, has_native=%d\n",
+                pm.tier_state.load(std::memory_order_acquire),
+                pm.call_count.load(std::memory_order_relaxed), has_native);
+    std::fflush(stdout);
+
+    if (!has_native) {
+        std::fprintf(stderr, "  FAIL: T4 native code was not generated\n");
+        return false;
+    }
+    return true;
+}
+
+
+// ── Scenario 7: Branch benchmark (T4) ─────────────────────────────────────
+// Tests JSON-based branch target resolution end-to-end.
+// IL: LdcI4(0), BrFalse(target=offset4), LdcI4(-1)[dead], Ret[dead],
+//     LdcI4(42)[target], Ret
+// If BrFalse resolution works correctly, the dead path is skipped
+// and the method returns 42.
+static bool bench_branches_t4() {
+    std::printf("\n--- bench_branches_t4 ---\n");
+    std::fflush(stdout);
+
+    // BrFalse at ilOffset=1 targets ilOffset=4 (skip dead path at 2-3)
+    const char* json =
+        R"({"instructions":[)"
+        R"({"opCode":0,"ilOffset":0,"operand":0},)"
+        R"({"opCode":19,"ilOffset":1,"operand":4},)"
+        R"({"opCode":0,"ilOffset":2,"operand":-1},)"
+        R"({"opCode":53,"ilOffset":3},)"
+        R"({"opCode":0,"ilOffset":4,"operand":42},)"
+        R"({"opCode":53,"ilOffset":5}]})";
+
+    uint8_t sig_buf[256];
+    int sig_len = BuildSignature(sig_buf, 0, kElemI4, nullptr);
+
+    PatchMethod pm;
+    SetupPatchMethod(&pm, json, sig_buf, sig_len);
+    if (pm.cached_ir == nullptr) {
+        std::fprintf(stderr, "  FAIL: cached_ir null\n");
+        return false;
+    }
+
+    uint64_t args_buf[1] = {};
+    constexpr int32_t kExpectedResult = 42;
+
+    constexpr int kTotalCalls = 2500;
+
+    uint64_t t1_sum = 0, t2_sum = 0, t3_sum = 0, t4_sum = 0;
+    int t1_count = 0, t2_count = 0, t3_count = 0, t4_count = 0;
+
+    std::printf("  Starting %d iterations...\n", kTotalCalls);
+    std::fflush(stdout);
+
+    for (int i = 0; i < kTotalCalls; ++i) {
+        int64_t ret_val = -1;
+        auto start = Clock::now();
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        auto end = Clock::now();
+        auto ns = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        if (i >= 50 && i < 130)   { t1_sum += ns; ++t1_count; }
+        if (i >= 200 && i < 500)  { t2_sum += ns; ++t2_count; }
+        if (i >= 1500 && i < 1800){ t3_sum += ns; ++t3_count; }
+        if (i >= 2100 && i < 2500){ t4_sum += ns; ++t4_count; }
+        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+            std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
+                        (long long)ret_val, kExpectedResult, i);
+            return false;
+        }
+    }
+
+    bool has_native = (pm.cached_native_method != nullptr);
+
+    double t1_ns = (t1_count > 0) ? static_cast<double>(t1_sum) / t1_count : -1.0;
+    double t2_ns = (t2_count > 0) ? static_cast<double>(t2_sum) / t2_count : -1.0;
+    double t3_ns = (t3_count > 0) ? static_cast<double>(t3_sum) / t3_count : -1.0;
+    double t4_ns = (t4_count > 0) ? static_cast<double>(t4_sum) / t4_count : -1.0;
+
+    std::printf("  T1: %.0f ns/op\n", t1_ns);
+    std::printf("  T2: %.0f ns/op\n", t2_ns);
+    std::printf("  T3: %.0f ns/op\n", t3_ns);
+    std::printf("  T4: %.0f ns/op\n", t4_ns);
+    std::printf("  SUMMARY: T1=%.0fns  T2=%.0fns  T3=%.0fns  T4=%.0fns\n",
+                t1_ns, t2_ns, t3_ns, t4_ns);
+    std::printf("  final: tier=%u, call_count=%u, has_native=%d\n",
+                pm.tier_state.load(std::memory_order_acquire),
+                pm.call_count.load(std::memory_order_relaxed), has_native);
+    std::fflush(stdout);
+
+    if (!has_native) {
+        std::fprintf(stderr, "  FAIL: T4 native code was not generated\n");
+        return false;
+    }
+    return true;
+}
+
+
 // ── Main ──────────────────────────────────────────────────────────────────
 
 int main() {
@@ -735,10 +993,13 @@ int main() {
 
     std::printf("=== tiering_benchmark ===\n");
 
-    run_test("bench_arithmetic",  bench_arithmetic());
-    run_test("bench_register_10", bench_register_10());
+    run_test("bench_arithmetic",   bench_arithmetic());
+    run_test("bench_register_10",  bench_register_10());
     run_test("bench_callvirt_pic", bench_callvirt_pic());
-    run_test("bench_native",      bench_native());
+    run_test("bench_native",       bench_native());
+    run_test("bench_multi_alu_t4", bench_multi_alu_t4());
+    run_test("bench_loc_storm_t4", bench_loc_storm_t4());
+    run_test("bench_branches_t4",  bench_branches_t4());
 
     UnregisterThread();
 

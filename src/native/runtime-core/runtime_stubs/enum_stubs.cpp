@@ -2,6 +2,7 @@
 
 // enum_stubs.cpp — Enum helper stub implementations
 #include <chaos/native_types.h>
+#include <chaos/log.h>
 #include <cstring>
 #include <cstdio>
 
@@ -9,6 +10,7 @@
 #include "runtime_stubs/stub_common.h"
 #include "gc_helpers.h"
 #include "reflection_query_model.h"
+#include "reflection_api.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -164,11 +166,46 @@ static const ReflectionQueryFieldDescriptor* find_field_by_name_icase(
 
 // ── Public Enum stub functions ────────────────────────────────────
 
+/// Resolve a type argument to a ReflectionQueryTypeDescriptor.
+///
+/// Handles two cases:
+///   1. Direct TypeInfoHandle (kReflectionQueryHandleTag high bit set) ->
+///      decoded via TryDecodeReflectionQueryTypeHandle.
+///   2. Managed Type object (GC pointer, no high bit) -> extracts the
+///      runtime_type_handle field at offset 16 (after ThinLockableHeader)
+///      and converts it to a TypeInfoHandle via ChaosReflectionGetTypeFromHandle.
+///
+/// Returns nullptr if the type cannot be resolved.
+static const ReflectionQueryTypeDescriptor* resolve_type_arg(CHAOS_IL2CPP_INTPTR type_arg) noexcept {
+    if (type_arg == 0) return nullptr;
+
+    // Case 1: direct TypeInfoHandle (high bit set)
+    auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type_arg));
+    if (desc != nullptr) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("enum_stubs", "resolve_type_arg: direct handle, desc={0} fields={1}", (void*)desc, desc->field_count);
+        return desc;
+    }
+
+    // Case 2: managed Type object - read runtime_type_handle at offset 16
+    CHAOS_IL2CPP_INTPTR raw_handle = 0;
+    std::memcpy(&raw_handle, reinterpret_cast<const void*>(type_arg + 16), sizeof(raw_handle));
+    CHAOS_IL2CPP_LOG_DEBUG_M("enum_stubs", "resolve_type_arg: managed obj, type_arg={0} raw_handle={1}", (void*)type_arg, (unsigned long long)raw_handle);
+    if (raw_handle == 0) return nullptr;
+
+    auto type_info_handle = ChaosReflectionGetTypeFromHandle(raw_handle);
+    CHAOS_IL2CPP_LOG_DEBUG_M("enum_stubs", "resolve_type_arg: type_info_handle={0}", (void*)type_info_handle);
+    if (type_info_handle == 0) return nullptr;
+
+    desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type_info_handle));
+    CHAOS_IL2CPP_LOG_DEBUG_M("enum_stubs", "resolve_type_arg: decoded desc={0} fields={1}", (void*)desc, desc ? desc->field_count : 0);
+    return desc;
+}
+
 /// Enum.IsDefined(Type, Object) — returns 1 if value is a valid enum literal.
 CHAOS_IL2CPP_INT32 ChaosEnumIsDefined(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR value) noexcept
 {
     if (type == 0) return 0;
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type));
+    const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
 
     const CHAOS_IL2CPP_INT64 val = read_boxed_value(value);
@@ -179,7 +216,7 @@ CHAOS_IL2CPP_INT32 ChaosEnumIsDefined(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT
 CHAOS_IL2CPP_INTPTR ChaosEnumGetName(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR value) noexcept
 {
     if (type == 0) return 0;
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type));
+    const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
 
     const CHAOS_IL2CPP_INT64 val = read_boxed_value(value);
@@ -196,7 +233,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetName(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
 CHAOS_IL2CPP_INTPTR ChaosEnumGetNames(CHAOS_IL2CPP_INTPTR type) noexcept
 {
     if (type == 0) return 0;
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type));
+    const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
 
     const auto count = count_enum_fields(desc);
@@ -220,7 +257,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetNames(CHAOS_IL2CPP_INTPTR type) noexcept
 CHAOS_IL2CPP_INTPTR ChaosEnumGetValues(CHAOS_IL2CPP_INTPTR type) noexcept
 {
     if (type == 0) return 0;
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type));
+    const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
 
     const auto count = count_enum_fields(desc);
@@ -242,7 +279,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetValues(CHAOS_IL2CPP_INTPTR type) noexcept
 CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name) noexcept
 {
     if (type == 0 || name == 0) return 0;
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type));
+    const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
 
     CHAOS_IL2CPP_UINTPTR name_len = 0;
@@ -262,7 +299,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR
 CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INT32 ignoreCase) noexcept
 {
     if (type == 0 || name == 0) return 0;
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type));
+    const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
 
     CHAOS_IL2CPP_UINTPTR name_len = 0;
@@ -282,7 +319,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS
 CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_str) noexcept
 {
     if (type == 0 || value == 0) return 0;
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type));
+    const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
 
     const CHAOS_IL2CPP_INT64 val = read_boxed_value(value);
@@ -354,7 +391,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToString(CHAOS_IL2CPP_INTPTR this_obj) noexcept
     CHAOS_IL2CPP_INTPTR type_handle = 0;
     std::memcpy(&type_handle, reinterpret_cast<const void*>(this_obj), sizeof(type_handle));
 
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type_handle));
+    const auto* desc = resolve_type_arg(type_handle);
     if (desc == nullptr) return 0;
 
     const CHAOS_IL2CPP_INT64 val = read_boxed_value(this_obj);
@@ -392,7 +429,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToStringWithFormat(CHAOS_IL2CPP_INTPTR this_obj, CH
 CHAOS_IL2CPP_INT32 ChaosEnumTryParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INTPTR result) noexcept
 {
     if (type == 0 || name == 0 || result == 0) return 0;
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type));
+    const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
 
     CHAOS_IL2CPP_UINTPTR name_len = 0;
@@ -414,7 +451,7 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
 CHAOS_IL2CPP_INT32 ChaosEnumTryParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INT32 ignoreCase, CHAOS_IL2CPP_INTPTR result) noexcept
 {
     if (type == 0 || name == 0 || result == 0) return 0;
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type));
+    const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
 
     CHAOS_IL2CPP_UINTPTR name_len = 0;
