@@ -123,7 +123,7 @@ def step_ledger_overview(dlls, lookup):
 
 def step_phase2():
     """Run Phase 2 — generate test/benchmark/host/patch files."""
-    _print_header("Step 2: Phase 2 — Generate test/benchmark/host/patch files")
+    _print_header("Step 2: Phase 2 -- Generate test/benchmark/host/patch files")
     t0 = time.time()
     r = subprocess.run(
         [sys.executable, str(PHASE2)],
@@ -319,12 +319,12 @@ def step_results_table(dlls, verify_results):
             label = f"{aname}/{slug}"
             overall = report.get("overall_status", "?")
             stages = report.get("stages", {})
-            pre = stages.get("preflight", {}).get("status", "-")[:4]
-            cgn = stages.get("codegen", {}).get("status", "-")[:4]
-            fact = stages.get("fact", {}).get("status", "-")[:4]
-            audit = stages.get("audit", {}).get("status", "-")[:4]
-            bench = stages.get("benchmark", {}).get("status", "-")[:4]
-            hu = stages.get("hotupdate", {}).get("status", "-")[:4]
+            pre = stages.get("preflight", {}).get("status", "skip")[:4]
+            cgn = stages.get("codegen", {}).get("status", "skip")[:4]
+            fact = stages.get("fact", {}).get("status", "skip")[:4]
+            audit = stages.get("audit", {}).get("status", "skip")[:4]
+            bench = stages.get("benchmark", {}).get("status", "skip")[:4]
+            hu = stages.get("hotupdate", {}).get("status", "skip")[:4]
             print(f"  {label:48s} {overall:>8s} {pre:>5s} {cgn:>8s} {fact:>5s} {audit:>5s} {bench:>6s} {hu:>4s}")
 
     print()
@@ -390,8 +390,9 @@ def main():
     else:
         families = _get_verifyable_families(dlls, lookup)
 
-    # Build skip list: by default skip heavy stages
-    default_skip = {"benchmark", "hotupdate", "post_hotupdate_benchmark", "asm_compare", "microbench"}
+    # Build skip list: by default skip the heaviest stages that need full toolchain.
+    # benchmark is NOT skipped -- it's a required stage in standard mode (5 ledger gates).
+    default_skip = {"hotupdate", "post_hotupdate_benchmark", "asm_compare", "microbench"}
     skip_stages = list(default_skip.union(set(args.skip)))
 
     verify_results = step_verify_families(families, mode=args.mode,

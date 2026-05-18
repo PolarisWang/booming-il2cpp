@@ -161,4 +161,10 @@ extern "C" void CodegenRethrow() noexcept;
 /// implementation it would manage finally unwinding state.
 extern "C" void CodegenEndFinally() noexcept;
 
+// ── Overflow deoptimization helper ───────────────────────────────────────────
+// Called by the overflow trampoline in T4-generated code when an overflow-checked
+// arithmetic instruction signals overflow (OF=1).  Sets deopt_happened=true and
+// records the instruction index so entry_direct can resume RegisterExecute.
+extern "C" void CodegenReportDeopt(uint32_t instr_pc) noexcept;
+
 #endif  // CHAOS_IL2CPP_CODEGEN_HELPERS_H_

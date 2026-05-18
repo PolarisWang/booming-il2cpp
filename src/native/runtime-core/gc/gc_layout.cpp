@@ -1,5 +1,6 @@
 #include "gc_layout.h"
 
+#include "gc_old_gen.h"
 #include "gc_young_collector.h"
 
 #include <chaos/log.h>
@@ -18,11 +19,45 @@ GcLayoutRegistry::GcLayoutRegistry() {
     // Allocate initial table.
     auto* table = new GcLayoutTable(kGcLayoutMinCapacity);
     current_table_.store(table, std::memory_order_release);
+
+    // Initialize sentinel TypeInfo structs for free-block marking.
+    InitSentinels();
 }
 
 GcLayoutRegistry& GcLayoutRegistry::Instance() {
     static GcLayoutRegistry instance;
     return instance;
+}
+
+void GcLayoutRegistry::InitSentinels() {
+    // Populate sentinel TypeInfoHot structs and register their GcTypeLayouts.
+    // Each sentinel has stable_id = kSentinelStableIdBase + sc_idx, with an
+    // instance_size matching the size class block size and pointer_count = 0.
+    // DrainMarkStack reads hot->stable_id from the first word of the TypeInfo
+    // pointer; the sentinel's parent/vtable_array are nullptr (unused).
+    //
+    // Using kOldGenSizeClasses from gc_old_gen.h.  The number of classes is
+    // currently 28, well within the kSentinelCount = 32 array capacity.
+    for (int sc = 0; sc < kOldGenNumSizeClasses; sc++) {
+        auto& s = sentinel_typeinfos_[sc];
+        s.parent = nullptr;
+        s.vtable_array = nullptr;
+        s.stable_id = kSentinelStableIdBase + sc;
+        s.vtable_length = 0;
+        s.warm_delta = 0;
+        s.type_shape = 0;
+        s.flags = 0;
+
+        // Register GcTypeLayout: instance_size = block size, no GC pointers.
+        Register(s.stable_id, kOldGenSizeClasses[sc], nullptr, 0);
+    }
+
+    // Register the sentinel array address range so IsValidTypeInfoPointer
+    // accepts sentinel pointers (they look like valid TypeInfo addresses).
+    RegisterTypeInfoRange(
+        reinterpret_cast<uintptr_t>(&sentinel_typeinfos_[0]),
+        reinterpret_cast<uintptr_t>(&sentinel_typeinfos_[0]) +
+            static_cast<uintptr_t>(kSentinelCount * sizeof(TypeInfoHot)));
 }
 
 // ======================================================================

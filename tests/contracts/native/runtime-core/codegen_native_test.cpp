@@ -17,6 +17,8 @@
 #include "t4_seh_handler.h"
 #include "ir_reg_alloc.h"
 
+#include "gc/gc_root_scanner.h"
+
 #include <cstdint>
 #include <cstdio>
 #include <cstring>
@@ -104,6 +106,14 @@ static RegisterInstruction InstrBranch(IROpCode opc, uint32_t target,
 static RegisterInstruction InstrRet(uint8_t src) noexcept {
     RegisterInstruction ri;
     ri.header = MakeHeader(IROpCode::Ret, 0, src, 0, kRegHasSrc1);
+    ri.imm.i4 = 0;
+    return ri;
+}
+
+/// Construct a LdNull instruction (loads null into dst register).
+static RegisterInstruction InstrLdNull(uint8_t dst) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::LdNull, dst, 0, 0, kRegHasDst);
     ri.imm.i4 = 0;
     return ri;
 }
@@ -463,9 +473,33 @@ static bool Test_DeoptEntry_Registration() {
     return true;
 }
 
-// ═══════════════════════════════════════════════════════════════════════
-// Test: TLAB_Inline_Box — TLAB inline path generates cmp/ja bump code
-// ═══════════════════════════════════════════════════════════════════════
+// ── Graph coloring (V5) ──────────────────────────────────────────────────
+static bool Test_GraphColoring_Basic() {
+    std::printf("  Test_GraphColoring_Basic...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 10, 0),
+        InstrI4(IROpCode::LdcI4, 20, 1),
+        InstrBinary(IROpCode::Add, 2, 0, 1),
+        InstrI4(IROpCode::LdcI4, 3, 3),
+        InstrBinary(IROpCode::Mul, 4, 2, 3),
+        InstrI4(IROpCode::LdcI4, 5, 5),
+        InstrBinary(IROpCode::Sub, 6, 4, 5),
+        InstrRet(6),
+    };
+    rm.max_regs = 7;
+    if (!CanGenerateNativeCode(rm)) return false;
+    CodeGenConfig config;
+    config.enable_graph_coloring = true;
+    auto* nm = GenerateNativeCode(rm, config);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    return result == 85;
+}
+
+// ── TLAB inline allocation (V3.5) ────────────────────────────────────────
 static bool Test_TLAB_Inline_Box() {
     std::printf("  Test_TLAB_Inline_Box...\n");
 
@@ -542,6 +576,147 @@ static bool Test_TLAB_Inline_Box() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+// Test: GcSlotMap_WithGcOps — method with GC ops produces GcSlotMapV0
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_GcSlotMap_WithGcOps() {
+    std::printf("  Test_GcSlotMap_WithGcOps...\n");
+    RegisterMethod rm;
+    // Mix of non-GC (LdcI4) and GC (LdNull) operations.
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 10, 0),   // r0 = 10 (non-GC)
+        InstrLdNull(1),                     // r1 = null (GC ref)
+        InstrI4(IROpCode::LdcI4, 20, 2),   // r2 = 20 (non-GC)
+        InstrLdNull(3),                     // r3 = null (GC ref)
+        InstrRet(1),                        // return r1
+    };
+    rm.max_regs = 4;
+
+    if (!CanGenerateNativeCode(rm)) {
+        std::printf("    FAIL: CanGenerateNativeCode returned false\n");
+        return false;
+    }
+
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) {
+        std::printf("    FAIL: GenerateNativeCode returned null\n");
+        return false;
+    }
+
+    if (nm->gc_slot_map == nullptr) {
+        std::printf("    FAIL: gc_slot_map is null (expected non-null for method with LdNull)\n");
+        return false;
+    }
+
+    if (nm->gc_slot_map->num_gc_slots == 0) {
+        std::printf("    FAIL: num_gc_slots == 0 (expected > 0)\n");
+        return false;
+    }
+
+    std::printf("    frame_size=%u num_gc_slots=%u\n",
+                nm->gc_slot_map->frame_size, nm->gc_slot_map->num_gc_slots);
+
+    // Verify each slot offset is within the frame.
+    for (uint32_t i = 0; i < nm->gc_slot_map->num_gc_slots; i++) {
+        uint32_t encoded = nm->gc_slot_map->slots[i];
+        uint32_t offset = encoded & CHAOS_GC_SLOT_OFFSET_MASK;
+        uint32_t kind = encoded & CHAOS_GC_SLOT_KIND_MASK;
+        std::printf("    slot[%u]: offset=%u kind=%s\n", i, offset,
+                    kind == CHAOS_GC_SLOT_KIND_OBJECT ? "object" : "interior");
+
+        if (offset >= nm->gc_slot_map->frame_size) {
+            std::printf("    FAIL: slot[%u] offset %u >= frame_size %u\n",
+                        i, offset, nm->gc_slot_map->frame_size);
+            return false;
+        }
+        if (kind != CHAOS_GC_SLOT_KIND_OBJECT) {
+            std::printf("    FAIL: slot[%u] kind is not OBJECT\n", i);
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: GcSlotMap_ArithmeticOnly — arithmetic-only method has no slot map
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_GcSlotMap_ArithmeticOnly() {
+    std::printf("  Test_GcSlotMap_ArithmeticOnly...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 12, 0),
+        InstrI4(IROpCode::LdcI4, 30, 1),
+        InstrBinary(IROpCode::Add, 2, 0, 1),
+        InstrRet(2),
+    };
+    rm.max_regs = 3;
+
+    if (!CanGenerateNativeCode(rm)) return false;
+
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) {
+        std::printf("    FAIL: GenerateNativeCode returned null\n");
+        return false;
+    }
+
+    if (nm->gc_slot_map != nullptr) {
+        std::printf("    FAIL: gc_slot_map is non-null (expected null for arithmetic-only method)\n");
+        return false;
+    }
+
+    std::printf("    gc_slot_map is null (expected for arithmetic-only)\n");
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: GcSlotMap_RegisterAndLookup — GcRegisterSlotMap round-trip
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_GcSlotMap_RegisterAndLookup() {
+    std::printf("  Test_GcSlotMap_RegisterAndLookup...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrLdNull(0),  // r0 = null (GC ref, triggers slot map generation)
+        InstrRet(0),
+    };
+    rm.max_regs = 1;
+
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) {
+        std::printf("    FAIL: GenerateNativeCode returned null\n");
+        return false;
+    }
+
+    if (nm->gc_slot_map == nullptr) {
+        std::printf("    FAIL: gc_slot_map is null (expected non-null)\n");
+        return false;
+    }
+
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) {
+        std::printf("    FAIL: entry is null\n");
+        return false;
+    }
+
+    // Register the slot map.
+    chaos::il2cpp::runtime_core::GcRegisterSlotMap(entry, nm->gc_slot_map);
+
+    // Look it up and verify round-trip.
+    const auto* found = chaos::il2cpp::runtime_core::GcLookupSlotMap(entry);
+    if (found != nm->gc_slot_map) {
+        std::printf("    FAIL: GcLookupSlotMap returned %p, expected %p\n",
+                    static_cast<const void*>(found),
+                    static_cast<const void*>(nm->gc_slot_map));
+        return false;
+    }
+
+    std::printf("    nm=%p entry=%p gc_slot_map=%p num_gc_slots=%u\n",
+                static_cast<const void*>(nm), entry,
+                static_cast<const void*>(nm->gc_slot_map),
+                nm->gc_slot_map->num_gc_slots);
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 // Main
 // ═══════════════════════════════════════════════════════════════════════
 int main() {
@@ -562,6 +737,10 @@ int main() {
     TEST(DeoptSequence_Generated);
     TEST(DeoptEntry_Registration);
     TEST(TLAB_Inline_Box);
+    TEST(GraphColoring_Basic);
+    TEST(GcSlotMap_WithGcOps);
+    TEST(GcSlotMap_ArithmeticOnly);
+    TEST(GcSlotMap_RegisterAndLookup);
 
     std::printf("\nResults: %d passed, %d failed out of %d\n",
                 g_tests_passed, g_tests_failed,

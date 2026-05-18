@@ -13,6 +13,10 @@
 #include <cstdint>
 #include <cstddef>
 
+// Forward declaration: GcSlotMapV0 is defined in codegen_bridge.h
+// We use a pointer member only, so no full definition is needed here.
+struct GcSlotMapV0;
+
 namespace chaos::il2cpp::codegen {
 
 /// A single call site in the generated code — used by deoptimization
@@ -81,6 +85,17 @@ struct NativeMethod {
     // The table is appended to the code buffer after Generate() completes.
     // 0 means no SEH table.
     uint32_t      seh_table_offset = 0;
+
+#if defined(_WIN64)
+    // Win64 RUNTIME_FUNCTION for .pdata/.xdata unwind info.
+    // Allocated by GenerateNativeCode, freed by ~NativeMethod.
+    void* runtime_function = nullptr;
+#endif
+
+    // Precise GC slot map for root scanning during collection.
+    // Allocated by GenerateNativeCode, freed by ~NativeMethod.
+    // When non-null, the GC can use this instead of conservative scanning.
+    GcSlotMapV0* gc_slot_map = nullptr;
 
     // Destructor: frees all allocations.
     ~NativeMethod() noexcept;

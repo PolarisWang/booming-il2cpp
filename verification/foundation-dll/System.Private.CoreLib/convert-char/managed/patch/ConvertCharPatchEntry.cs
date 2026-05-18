@@ -118,26 +118,33 @@ public static partial class ConvertCharPatchEntry
 
     public static void Run(int entryIndex)
     {
-        switch (entryIndex)
+        try
         {
-            case 0: Subject_0(); break;
-            case 1: Subject_1(); break;
-            case 2: Subject_2(); break;
-            case 3: Subject_3(); break;
-            case 4: Subject_4(); break;
-            case 5: Subject_5(); break;
-            case 6: Subject_6(); break;
-            case 7: Subject_7(); break;
-            case 8: Subject_8(); break;
-            case 9: Subject_9(); break;
-            case 10: Subject_10(); break;
-            case 11: Subject_11(); break;
-            case 12: Subject_12(); break;
-            case 13: Subject_13(); break;
-            case 14: Subject_14(); break;
-            case 15: Subject_15(); break;
-            case 16: Subject_16(); break;
-            case 17: Subject_17(); break;
+            switch (entryIndex)
+            {
+                case 0: Subject_0(); break;
+                case 1: Subject_1(); break;
+                case 2: Subject_2(); break;
+                case 3: Subject_3(); break;
+                case 4: Subject_4(); break;
+                case 5: Subject_5(); break;
+                case 6: Subject_6(); break;
+                case 7: Subject_7(); break;
+                case 8: Subject_8(); break;
+                case 9: Subject_9(); break;
+                case 10: Subject_10(); break;
+                case 11: Subject_11(); break;
+                case 12: Subject_12(); break;
+                case 13: Subject_13(); break;
+                case 14: Subject_14(); break;
+                case 15: Subject_15(); break;
+                case 16: Subject_16(); break;
+                case 17: Subject_17(); break;
+            }
+        }
+        catch (System.Exception)
+        {
+            _exitCode = 1;
         }
     }
 

@@ -486,10 +486,59 @@ public sealed partial class NativeAotLoweringPlanner
                             continue;
                         }
 
+                        long? constantValue = null;
+                        var constantHandle = fieldDefinition.GetDefaultValue();
+                        if (!constantHandle.IsNil)
+                        {
+                            try
+                            {
+                                var constant = metadataReader.GetConstant(constantHandle);
+                                var blobReader = metadataReader.GetBlobReader(constant.Value);
+                                switch ((PrimitiveTypeCode)constant.TypeCode)
+                                {
+                                    case PrimitiveTypeCode.Boolean:
+                                        constantValue = blobReader.ReadBoolean() ? 1L : 0L;
+                                        break;
+                                    case PrimitiveTypeCode.Byte:
+                                        constantValue = blobReader.ReadByte();
+                                        break;
+                                    case PrimitiveTypeCode.SByte:
+                                        constantValue = blobReader.ReadSByte();
+                                        break;
+                                    case PrimitiveTypeCode.Int16:
+                                        constantValue = blobReader.ReadInt16();
+                                        break;
+                                    case PrimitiveTypeCode.UInt16:
+                                        constantValue = blobReader.ReadUInt16();
+                                        break;
+                                    case PrimitiveTypeCode.Char:
+                                        constantValue = blobReader.ReadChar();
+                                        break;
+                                    case PrimitiveTypeCode.Int32:
+                                        constantValue = blobReader.ReadInt32();
+                                        break;
+                                    case PrimitiveTypeCode.UInt32:
+                                        constantValue = blobReader.ReadUInt32();
+                                        break;
+                                    case PrimitiveTypeCode.Int64:
+                                        constantValue = blobReader.ReadInt64();
+                                        break;
+                                    case PrimitiveTypeCode.UInt64:
+                                        constantValue = (long)blobReader.ReadUInt64();
+                                        break;
+                                }
+                            }
+                            catch
+                            {
+                                // Ignore constant read failures
+                            }
+                        }
+
                         fieldEntries.Add(new ReflectionMemberFieldEntry(
                             typeEntry.SubjectId,
                             fieldName,
-                            MetadataTokens.GetToken(fieldHandle)));
+                            MetadataTokens.GetToken(fieldHandle),
+                            constantValue));
                     }
                 }
             }

@@ -7,6 +7,8 @@
 #include <codegen_helpers.h>
 #include <native_method.h>
 
+#include <gc/gc_root_scanner.h>
+
 #include <chaos/log.h>
 
 #include <vector>
@@ -710,7 +712,7 @@ void InterpreterEntryDirect(
     // but test or custom callers passing int32_t will get stack corruption.
     {
         auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
-        if (t4_tier >= PatchMethod::kT4Ready) {
+        if (t4_tier >= PatchMethod::kT4Ready && t4_tier != PatchMethod::kT5Unloaded) {
             auto* nm = patch_method->cached_native_method;
             if (nm != nullptr && nm->code != nullptr) {
                 GetTierCounters().step_native.fetch_add(1, std::memory_order_relaxed);
@@ -731,6 +733,20 @@ void InterpreterEntryDirect(
                 }
                 if (!deopt_detected) {
                     return;  // Normal return — result is in ret_buf.
+                }
+
+                // ── Deoptimization occurred — increment counter, check demotion ──
+                uint32_t deopt_cnt = ++patch_method->deopt_count;
+                if (deopt_cnt >= PatchMethod::kMaxDeoptBeforeDemote) {
+                    // Demote from T4 to T3: clear native method, unregister slot map.
+                    if (nm->gc_slot_map != nullptr) {
+                        GcRegisterSlotMap(nm->code, nullptr);
+                    }
+                    patch_method->cached_native_method = nullptr;
+                    patch_method->tier_state.store(PatchMethod::kT3Ready,
+                        std::memory_order_release);
+                    CHAOS_IL2CPP_LOG_DEBUG_M("dispatch",
+                        "T4 demotion: method_key=0x{:x}, deopt_count={}", method_key, deopt_cnt);
                 }
             }
         }
@@ -805,7 +821,11 @@ void InterpreterEntryDirect(
                     std::memory_order_acq_rel)) {
                 CHAOS_IL2CPP_LOG_DEBUG_M("dispatch", "T2->T3 enqueue: method_key=0x{:x}, count={}",
                     method_key, call_count);
-                TierManager::Get().EnqueueOptimization(patch_method);
+                if (!TierManager::Get().EnqueueOptimization(patch_method)) {
+                    // Queue full — revert to kT2Ready, retry next call.
+                    patch_method->tier_state.store(PatchMethod::kT2Ready,
+                        std::memory_order_release);
+                }
             }
         }
 
@@ -814,33 +834,61 @@ void InterpreterEntryDirect(
         // generate native code synchronously.
         {
             auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
-            if (t4_tier >= PatchMethod::kT3Ready && call_count >= PatchMethod::kT3NativeThreshold) {
-                uint32_t t4_expected = PatchMethod::kT3Ready;
-                if (patch_method->tier_state.compare_exchange_strong(t4_expected,
-                        PatchMethod::kT4Ready, std::memory_order_acq_rel)) {
-                    CHAOS_IL2CPP_LOG_DEBUG_M("dispatch", "T3->T4 promotion: method_key=0x{:x}, count={}",
-                        method_key, call_count);
-                    auto* reg_m = static_cast<interpreter::RegisterMethod*>(
-                        patch_method->cached_optimized_reg_method);
-                    if (reg_m == nullptr) {
-                        reg_m = static_cast<interpreter::RegisterMethod*>(
-                            patch_method->cached_reg_method);
-                    }
-                    if (reg_m != nullptr && codegen::CanGenerateNativeCode(*reg_m)) {
-                        codegen::CodeGenConfig cfg;
-                        cfg.enable_safepoint_polls = true;
-                        cfg.safepoint_fn = reinterpret_cast<void*>(
-                            &chaos::il2cpp::runtime_core::threading::SafepointPoll);
-                        cfg.pic_dispatch_data = patch_method->pic_dispatch_data;
-                        auto* nm = codegen::GenerateNativeCode(*reg_m, cfg);
-                        patch_method->cached_native_method = nm;
-                        if (nm == nullptr) {
-                            patch_method->tier_state.store(PatchMethod::kT3Ready,
-                                std::memory_order_release);
-                        }
+            if (t4_tier == PatchMethod::kT4Skip) {
+                // Permanently skipped (too many codegen failures) — do nothing.
+            } else if (t4_tier >= PatchMethod::kT3Ready && call_count >= PatchMethod::kT3NativeThreshold) {
+                // Backoff: after each codegen failure, require more calls before retry.
+                uint32_t fail_cnt = patch_method->codegen_fail_count;
+                if (fail_cnt > 0) {
+                    uint32_t backoff = fail_cnt * 1000;
+                    if (call_count < PatchMethod::kT3NativeThreshold + backoff) {
+                        // Not yet — need more calls before retrying.
                     } else {
-                        patch_method->tier_state.store(PatchMethod::kT3Ready,
-                            std::memory_order_release);
+                        goto do_t4_codegen;
+                    }
+                } else {
+                    do_t4_codegen: {
+                        uint32_t t4_expected = PatchMethod::kT3Ready;
+                        if (patch_method->tier_state.compare_exchange_strong(t4_expected,
+                                PatchMethod::kT4Ready, std::memory_order_acq_rel)) {
+                            CHAOS_IL2CPP_LOG_DEBUG_M("dispatch", "T3->T4 promotion: method_key=0x{:x}, count={}",
+                                method_key, call_count);
+                            auto* reg_m = static_cast<interpreter::RegisterMethod*>(
+                                patch_method->cached_optimized_reg_method);
+                            if (reg_m == nullptr) {
+                                reg_m = static_cast<interpreter::RegisterMethod*>(
+                                    patch_method->cached_reg_method);
+                            }
+                            if (reg_m != nullptr && codegen::CanGenerateNativeCode(*reg_m)) {
+                                codegen::CodeGenConfig cfg;
+                                cfg.enable_safepoint_polls = true;
+                                cfg.safepoint_fn = reinterpret_cast<void*>(
+                                    &chaos::il2cpp::runtime_core::threading::SafepointPoll);
+                                cfg.pic_dispatch_data = patch_method->pic_dispatch_data;
+                                auto* nm = codegen::GenerateNativeCode(*reg_m, cfg);
+                                patch_method->cached_native_method = nm;
+                                if (nm != nullptr && nm->gc_slot_map != nullptr) {
+                                    GcRegisterSlotMap(nm->code, nm->gc_slot_map);
+                                }
+                                if (nm == nullptr) {
+                                    // Failed — increment counter, check for permanent skip.
+                                    uint32_t fc = ++patch_method->codegen_fail_count;
+                                    if (fc >= PatchMethod::kMaxCodegenFailures) {
+                                        patch_method->tier_state.store(PatchMethod::kT4Skip,
+                                            std::memory_order_release);
+                                    } else {
+                                        patch_method->tier_state.store(PatchMethod::kT3Ready,
+                                            std::memory_order_release);
+                                    }
+                                } else {
+                                    // Success — reset failure counter.
+                                    patch_method->codegen_fail_count = 0;
+                                }
+                            } else {
+                                patch_method->tier_state.store(PatchMethod::kT3Ready,
+                                    std::memory_order_release);
+                            }
+                        }
                     }
                 }
             }

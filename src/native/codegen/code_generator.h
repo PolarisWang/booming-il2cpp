@@ -66,6 +66,9 @@ struct CodeGenConfig {
 
     // Absolute address of the thread-local tls_tlab.end (char* end bound).
     void* tlab_end_loc = nullptr;
+
+    // If true, use graph coloring register allocation for optimal register use.
+    bool enable_graph_coloring = false;
 };
 
 /// Generate native x64 code from a RegisterMethod.

@@ -33,6 +33,7 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/datetime_stubs.cpp
     runtime_stubs/char_stubs.cpp
     runtime_stubs/guid_stubs.cpp
+    runtime_stubs/enum_stubs.cpp
     runtime_stubs/random_stubs.cpp
     runtime_stubs/stream_stubs.cpp
     runtime_stubs/hashcode_stubs.cpp

@@ -50,8 +50,13 @@ static constexpr int kOldGenNumSizeClasses = 28;
 static constexpr CHAOS_IL2CPP_SIZE kOldGenMaxInline = 32 * 1024;
 
 // Per-page free-list entry (embedded in free memory, no separate allocation).
+// Layout: [sentinel:8][next:8] = 16 bytes total.
+// sentinel stores a TypeInfoHot* from the sentinel registry — MarkObject
+// reads this to distinguish free blocks from live objects.  next chains
+// blocks in the per-size-class free list.
 struct OldGenFreeBlock {
-    OldGenFreeBlock* next;
+    const void*     sentinel;  // [0] GC sentinel TypeInfo pointer (marks free block)
+    OldGenFreeBlock* next;     // [8] free list linkage
 };
 
 // Page descriptor stored at the start of each virtual allocation.
