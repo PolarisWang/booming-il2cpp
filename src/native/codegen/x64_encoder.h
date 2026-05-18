@@ -549,6 +549,20 @@ inline void EmitRet(CodeBuffer& buf) noexcept {
     buf.EmitByte(0xC3);
 }
 
+/// lea r64, [base + disp] — load effective address
+inline void EmitLeaRM(CodeBuffer& buf, uint8_t dst, uint8_t base, int32_t disp) noexcept {
+    EmitREX(buf, true, dst, base);
+    buf.EmitByte(0x8D);
+    EmitMR(buf, dst, base, disp);
+}
+
+/// jmp r/m64 — indirect jump via register (opcode FF /4)
+inline void EmitJmpReg(CodeBuffer& buf, uint8_t reg) noexcept {
+    EmitREXB(buf, false, reg);
+    buf.EmitByte(0xFF);
+    buf.EmitByte(ModRM(3, 4, reg));
+}
+
 /// push r/m64
 inline void EmitPush(CodeBuffer& buf, uint8_t reg) noexcept {
     EmitREXB(buf, false, reg);
