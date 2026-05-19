@@ -183,6 +183,26 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("    }");
         sb.AppendLine("}");
         sb.AppendLine();
+        sb.AppendLine("/// Lookup enum metadata by FNV-1a 24-bit hash (extracted from TypeInfoHandle).");
+        sb.AppendLine("/// Skips resolve_type_arg entirely — the 24-bit hash is embedded in the");
+        sb.AppendLine("/// codegen pseudo-handle (0x02XXXXXX), so callers can extract it directly");
+        sb.AppendLine("/// and call this function without going through the reflection API.");
+        sb.AppendLine("/// Returns nullptr if the type is unknown (fallback to resolve_type_arg +");
+        sb.AppendLine("/// chaos_find_enum_metadata).");
+        sb.AppendLine("inline static const EnumMetadataTable* chaos_find_enum_metadata_by_fnv24(");
+        sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24) noexcept");
+        sb.AppendLine("{");
+        sb.AppendLine("    switch (fnv24) {");
+        foreach (var kv in hashToIdentifier.OrderBy(kv => kv.Key))
+        {
+            uint fnv24 = kv.Key & 0xFFFFFF;
+            sb.AppendLine($"        case 0x{fnv24:X6}u: return &kEnumTable_{kv.Value};");
+        }
+        sb.AppendLine("        default:");
+        sb.AppendLine("            return nullptr;");
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
         sb.AppendLine("}}}  // namespace chaos::il2cpp::codegen");
         sb.AppendLine();
         // ── Function pointer registration ──────────────────────────────────
@@ -191,9 +211,11 @@ internal static class EnumMetadataExtractor
         // can use pre-computed metadata instead of the reflection API.
         // It also registers each enum type with the reflection system so that
         // ChaosReflectionGetTypeFromHandle can resolve enum type FNV hashes.
-        sb.AppendLine("// C-linkage variable defined in enum_stubs.cpp");
+        sb.AppendLine("// Function pointers defined in enum_stubs.cpp (default nullptr).");
         sb.AppendLine("extern \"C\" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata)(");
         sb.AppendLine("    const char* subject_id) noexcept;");
+        sb.AppendLine("extern \"C\" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata_by_fnv24)(");
+        sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24) noexcept;");
         sb.AppendLine();
         sb.AppendLine("// Helper: compute FNV-1a 24-bit hash (matching ChaosReflectionGetTypeFromHandle).");
         sb.AppendLine("static inline CHAOS_IL2CPP_UINT32 compute_enum_hash24(const char* s) noexcept {");
@@ -224,6 +246,10 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("        if (g_chaos_resolve_enum_metadata == nullptr) {");
         sb.AppendLine("            g_chaos_resolve_enum_metadata =");
         sb.AppendLine("                &chaos::il2cpp::codegen::chaos_find_enum_metadata;");
+        sb.AppendLine("        }");
+        sb.AppendLine("        if (g_chaos_resolve_enum_metadata_by_fnv24 == nullptr) {");
+        sb.AppendLine("            g_chaos_resolve_enum_metadata_by_fnv24 =");
+        sb.AppendLine("                &chaos::il2cpp::codegen::chaos_find_enum_metadata_by_fnv24;");
         sb.AppendLine("        }");
         sb.AppendLine("    }");
         sb.AppendLine("} _s_enum_reg;");

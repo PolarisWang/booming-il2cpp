@@ -982,3 +982,12 @@
 {"timestamp": "2026-05-19T16:54:40.838529+00:00", "skill_path": null, "completed": false, "signals": {"has_recent_commit": false, "has_skill_edit": false}, "event": "session_outcome"}
 {"timestamp": "2026-05-19T16:55:28.141707+00:00", "skill_path": null, "completed": false, "signals": {"has_recent_commit": false, "has_skill_edit": false}, "event": "session_outcome"}
 {"timestamp": "2026-05-19T16:56:29.909472+00:00", "skill_path": null, "completed": false, "signals": {"has_recent_commit": false, "has_skill_edit": false}, "event": "session_outcome"}
+{"timestamp": "2026-05-19T16:58:44.794911+00:00", "skill_path": null, "completed": true, "signals": {"has_recent_commit": true, "has_skill_edit": false}, "event": "session_outcome"}
+{"timestamp": "2026-05-19T17:00:26.406538+00:00", "skill_path": null, "completed": true, "signals": {"has_recent_commit": true, "has_skill_edit": false}, "event": "session_outcome"}
+{"timestamp": "2026-05-19T17:03:17.923538+00:00", "skill_path": null, "completed": true, "signals": {"has_recent_commit": true, "has_skill_edit": false}, "event": "session_outcome"}
+{"timestamp": "2026-05-19T17:07:40.946569+00:00", "skill_path": null, "completed": true, "signals": {"has_recent_commit": true, "has_skill_edit": false}, "event": "session_outcome"}
+{"timestamp": "2026-05-19T17:09:44.055148+00:00", "skill_path": null, "completed": true, "signals": {"has_recent_commit": true, "has_skill_edit": false}, "event": "session_outcome"}
+{"timestamp": "2026-05-19T17:09:55.736110+00:00", "skill_path": null, "completed": true, "signals": {"has_recent_commit": true, "has_skill_edit": false}, "event": "session_outcome"}
+{"timestamp": "2026-05-19T17:11:07.741285+00:00", "skill_path": null, "completed": true, "signals": {"has_recent_commit": true, "has_skill_edit": false}, "event": "session_outcome"}
+{"timestamp": "2026-05-19T17:11:33.758332+00:00", "skill_path": null, "completed": true, "signals": {"has_recent_commit": true, "has_skill_edit": false}, "event": "session_outcome"}
+{"timestamp": "2026-05-19T17:12:27.106777+00:00", "skill_path": null, "completed": true, "signals": {"has_recent_commit": true, "has_skill_edit": false}, "event": "session_outcome"}

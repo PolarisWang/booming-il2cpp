@@ -73,8 +73,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
     target_link_libraries(
         chaos_gc_bump_cache_test
         PRIVATE
-            chaos_fmt
-            chaos_common)
+            ${CHAOS_GC_COMMON_LIBS})
 endif()
 
 # gc_region_test — CRAG region framework + card table unit tests (C0.1-C0.3)

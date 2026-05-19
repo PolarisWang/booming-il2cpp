@@ -228,6 +228,11 @@ static thread_local CHAOS_IL2CPP_INTPTR s_enum_str_names[64];
 // nullptr → stubs fall back to reflection API (safe default).
 extern "C" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata)(const char* subject_id) noexcept = nullptr;
 
+// Bypass: look up metadata by FNV-1a 24-bit hash (extracted from TypeInfoHandle).
+// Skips resolve_type_arg entirely when the type_arg has the codegen pseudo-handle
+// format (0x02XXXXXX). Set by static initializer in enum_metadata.generated.h.
+extern "C" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata_by_fnv24)(CHAOS_IL2CPP_UINT32 fnv24) noexcept = nullptr;
+
 /// Populate the enum string cache for the given type.
 /// Pre-allocates managed strings for all named field values.
 ///
@@ -329,10 +334,28 @@ static thread_local const EnumMetadataTable* s_enum_meta_cache = nullptr;
 /// Resolve type_arg to enum metadata table (cached).
 /// Returns nullptr if metadata is unavailable for this type.
 /// When non-null, the caller can skip resolve_type_arg entirely.
+///
+/// Fast path: when type_arg has the codegen pseudo-handle format (0x02XXXXXX),
+/// extract the FNV-1a 24-bit hash and look up metadata directly via
+/// g_chaos_resolve_enum_metadata_by_fnv24 — no resolve_type_arg call needed.
 static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) noexcept {
     if (type_arg == s_enum_meta_type_key) return s_enum_meta_cache;
 
-    // Miss: resolve type and look up metadata
+    // Fast path: direct fnv24 lookup from TypeInfoHandle (no resolve_type_arg)
+    uint32_t val = static_cast<uint32_t>(type_arg & 0xFFFFFFFFu);
+    if ((val & 0xFF000000u) == 0x02000000u && (val & 0xFFFFFFu) != 0u) {
+        uint32_t fnv24 = val & 0xFFFFFFu;
+        const auto* meta = g_chaos_resolve_enum_metadata_by_fnv24
+            ? g_chaos_resolve_enum_metadata_by_fnv24(fnv24)
+            : nullptr;
+        if (meta != nullptr) {
+            s_enum_meta_type_key = type_arg;
+            s_enum_meta_cache = meta;
+            return meta;
+        }
+    }
+
+    // Fallback: resolve type_arg and look up by subject_id
     const auto* desc = resolve_type_arg(type_arg);
     const auto* meta = (desc != nullptr && desc->subject_id_utf8 != nullptr)
         ? (g_chaos_resolve_enum_metadata

@@ -53,8 +53,10 @@ def _get_repo_changed_files() -> list[str]:
     try:
         result = subprocess.run(
             ["git", "diff", "--name-only", "HEAD"],
-            capture_output=True, text=True, cwd=_REPO_ROOT, timeout=30,
+            capture_output=True, encoding="utf-8", cwd=_REPO_ROOT, timeout=30,
         )
+        if result.stdout is None:
+            return []
         return [f.strip() for f in result.stdout.strip().split("\n") if f.strip()]
     except (subprocess.SubprocessError, OSError):
         return []

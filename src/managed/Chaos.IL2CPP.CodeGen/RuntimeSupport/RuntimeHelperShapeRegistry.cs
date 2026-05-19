@@ -6229,6 +6229,29 @@ public sealed partial class NativeAotLoweringPlanner
                 }), CreateInt32AbiSlot(),
                 new HashSet<int> { 0, 1 });
 
+            // ── ICustomMarshaler runtime helpers (V3) ──────────────────────────
+            registry.Register("System.Runtime.InteropServices.Marshal", "CustomMarshalerNativeToManaged",
+                ["System.IntPtr", "System.IntPtr"],
+                ShapeKind.SimpleForward, "CustomMarshalerNativeToManaged",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Runtime.InteropServices.Marshal", "CustomMarshalerManagedToNative",
+                ["System.IntPtr", "System.IntPtr"],
+                ShapeKind.SimpleForward, "CustomMarshalerManagedToNative",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
             registry.Register("System.Enum", "GetName", ["System.Type", "System.Object"],
                 ShapeKind.SimpleForward, "ChaosEnumGetName",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]

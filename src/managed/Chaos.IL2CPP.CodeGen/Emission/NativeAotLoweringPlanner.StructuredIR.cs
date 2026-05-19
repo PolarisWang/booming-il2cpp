@@ -1789,8 +1789,6 @@ public sealed partial class NativeAotLoweringPlanner
         _activeStructuredSlotContext = new StructuredSlotEmissionContext();
         _structuredSlotTypes.Clear();
         _structLocalSlots = IdentifyStructLocalSlots(instructions);
-        System.IO.File.AppendAllText(@"D:\agent\booming-il2cpp\codegen_diag.txt",
-            $"[EMIT] method={method.SubjectId} bodyType={body.GetType().Name} structLocals=[{string.Join(",", _structLocalSlots ?? new HashSet<int>())}]\n");
         try
         {
             EmitStructuredIRNode(builder, body!, method, "    ");

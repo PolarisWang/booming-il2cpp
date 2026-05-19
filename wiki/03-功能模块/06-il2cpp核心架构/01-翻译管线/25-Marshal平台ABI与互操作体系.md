@@ -33,7 +33,8 @@ struct MarshalPlatformAbiRootV1 {
 | 3 | `DelegateBridge` — GetFunctionPointer/GetDelegate | Sprint 3 |
 | 4 | `ComCore` — RCW/CCW/IUnknown | Sprint 5 |
 | 5 | `ComActivation` — COM activation | 不支持 |
-| 6-8 | Variant 族 | 不支持 |
+| 6 | `VariantInterop` — Variant scalar boxing (I2/I4/R4/R8/BOOL) | Sprint 6 |
+| 7-8 | Variant 族 (预留) | 不支持 |
 
 ## 已支持能力表
 
@@ -71,7 +72,7 @@ struct MarshalPlatformAbiRootV1 {
 | `Marshal.DestroyStructure<T>(IntPtr)` | 清理 string 等非 blittable 字段 |
 | `Marshal.Copy` (byte/sbyte/short/int/long/float/double → native) | 按元素类型 memcpy |
 | `Marshal.Copy` (native → byte/sbyte/short/int/long/float/double) | 按元素类型 memcpy |
-| LPArray (`[MarshalAs(UnmanagedType.LPArray)]`) | 指针 + 可选长度 |
+| LPArray (`[MarshalAs(UnmanagedType.LPArray)]`) | 双向 marshalling（managed→native 转发 + native→managed 回写）|
 | ByValArray (`[MarshalAs(UnmanagedType.ByValArray, SizeConst=N)]`) | inline 固定大小数组 |
 
 ### 结构体 Marshalling 分类
@@ -166,5 +167,5 @@ Native 实现位于 `src/native/runtime-core/core/marshal_api.cpp`。
 - COM Activation (CoCreateInstance)
 - COM+/事件/连接点
 - WinRT interop
-- Variant 类型 (scalar/bulk/extended)
+- Variant bulk/extended 类型 (VT_ARRAY/VT_BSTR/VT_UNKNOWN 等)
 - varargs P/Invoke

@@ -79,7 +79,7 @@ void CcwDispatchMethod(void* ccw_ptr, uint64_t iface_stable_id, uint32_t method_
 }
 ```
 
-## IDispatch 支持 (V4)
+## IDispatch 支持 (V2)
 
 IDispatch 是 COM 的晚期绑定接口，允许通过名称或 DISPID 调用方法。
 
@@ -105,7 +105,7 @@ struct IDispatchVtbl : IUnknownVtbl {
 | GetTypeInfoCount | 返回 `0`（不支持类型库） |
 | GetTypeInfo | 返回 `E_NOTIMPL` |
 | GetIDsOfNames | 遍历 iface_map 查找方法名→DISPID 映射，返回顺序 DISPID |
-| Invoke | 根据 DISPID 匹配方法，通过 CcwDispatchMethod 分发 |
+| Invoke | 根据 DISPID 匹配方法，通过 CcwDispatchMethod 分发；支持 VT_I4 参数从 DISPPARAMS 转发 |
 
 ### IDispatch 的 codegen 支持
 
@@ -142,4 +142,4 @@ unsigned int s_ccw_factory_registered_X = []() {
 | V1 | IUnknown 基础 (QI/AddRef/Release)，单接口 |
 | V2 | 多接口支持，零初始化 vtable |
 | V3 | 方法 thunk + CcwDispatchMethod，codegen vtable 填充，factory 注册 |
-| V4 | IDispatch 支持 (GetTypeInfoCount/GetTypeInfo/GetIDsOfNames/Invoke) |
+| V2 | IDispatch 支持 (GetTypeInfoCount/GetTypeInfo/GetIDsOfNames/Invoke) + Invoke 参数转发 |
