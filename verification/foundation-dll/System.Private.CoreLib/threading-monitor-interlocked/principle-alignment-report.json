@@ -1,7 +1,7 @@
 {
   "family": "threading-monitor-interlocked",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:21:08.982598",
+  "generated_at": "2026-05-19T22:55:35.559093",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -350,10 +350,17 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "NOT_APPLICABLE",
-      "summary": "No changed source files detected",
+      "status": "ALIGNED",
+      "summary": "All 4 changed source files within expected architecture layers",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "changed_source_count": 4,
+        "layer_distribution": {
+          "Templates": 1,
+          "RuntimeCore": 2,
+          "Tests": 1
+        }
+      }
     },
     "p2_no_bare_new": {
       "check_id": "p2_no_bare_new",
@@ -412,10 +419,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
+    "aligned": 9,
     "concern": 0,
     "violation": 0,
-    "not_applicable": 4,
+    "not_applicable": 3,
     "overall": "ALIGNED"
   }
 }

@@ -4,6 +4,7 @@
 // Variant: subjects
 
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 public static partial class DelegateCoreInvocationSubjects
@@ -35,7 +36,7 @@ public static partial class DelegateCoreInvocationSubjects
     // [3] System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()
     public static void Subject_3()
     {
-        if (((new System.Action(() => {}).Method).GetHashCode()) != -1597880513) _exitCode = 1;
+        if (((new System.Action(() => {}).Method).GetHashCode()) != 659009488) _exitCode = 1;
     }
 
     // [4] System.Private.CoreLib/System.Delegate::get_Target:System.Object()

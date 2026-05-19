@@ -272,7 +272,16 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_cctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -290,7 +299,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__4_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -299,7 +308,79 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_1_b__4_0",
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__6_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_1_System_Threading_Tasks_Task",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -318,15 +399,6 @@
     },
     {
       "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_3_b__6_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -371,24 +443,6 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_0",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_7_b__10_1_System_Threading_Tasks_Task",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
       "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8",
       "subject_id": "",
       "is_stub": false,
@@ -407,61 +461,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
       "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_13",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_cctor",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

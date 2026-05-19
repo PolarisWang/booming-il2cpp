@@ -41,6 +41,7 @@ def _collect_required_usings(method_subject_ids: list[str]) -> set[str]:
 
     # Always needed
     usings.add("System")
+    usings.add("System.Collections.Generic")
 
     for subject_id in method_subject_ids:
         parsed = _parse_method_subject_id(subject_id)

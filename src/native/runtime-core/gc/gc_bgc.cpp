@@ -318,7 +318,7 @@ void BgcController::PopulateRootSet() {
         }
     }
 
-    // Phase 1c:// Phase 1c: Scan all thread stacks as conservative roots.
+    // Phase 1c: Scan all thread stacks as conservative roots.
     // This catches old-gen references that live in thread-local stack
     // slots and are NOT in any TLS nursery.
     {

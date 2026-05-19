@@ -1,7 +1,7 @@
 {
   "family": "delegate-core-invocation",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:08:35.904373",
+  "generated_at": "2026-05-19T23:14:01.757912",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -18,223 +18,256 @@
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "ALIGNED",
-      "summary": "All methods have lowering [OK]",
+      "status": "CONCERN",
+      "summary": "19/60 methods have lowering (file has lowering in helper functions)",
       "details": [],
       "evidence": {
         "has_lowering": true,
+        "file_has_lowering": true,
+        "methods_with_lowering": 19,
+        "methods_total": 60,
         "stub_count": 0,
-        "simple_forward_count": 0,
-        "methods_with_lowering": 52,
-        "methods_total": 52
+        "simple_forward_count": 0
       },
       "per_method": [
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Run_System_Int32",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
+        },
+        {
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor",
           "has_lowering": true
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7",
-          "has_lowering": true
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c",
+          "has_lowering": false
         },
         {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Run_System_Int32",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9",
+          "name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor",
           "has_lowering": true
         }
       ]
@@ -256,10 +289,17 @@
     },
     "p1_no_unnecessary_indirection": {
       "check_id": "p1_no_unnecessary_indirection",
-      "status": "ALIGNED",
-      "summary": "No unnecessary runtime_stub calls in generated code",
-      "details": [],
-      "evidence": {}
+      "status": "CONCERN",
+      "summary": "1 runtime_stub calls in generated code",
+      "details": [
+        {
+          "function": "ChaosObjectCtor",
+          "call_count": 1
+        }
+      ],
+      "evidence": {
+        "stub_call_count": 1
+      }
     },
     "p2_abstraction_balance": {
       "check_id": "p2_abstraction_balance",
@@ -270,11 +310,36 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "VIOLATION",
-      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
-      "details": [],
+      "status": "CONCERN",
+      "summary": "2 of 10 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/common/chaos/common.h",
+          "reason": "outside expected architecture layers"
+        }
+      ],
       "evidence": {
-        "error": "'NoneType' object has no attribute 'strip'"
+        "changed_source_count": 10,
+        "layer_distribution": {
+          "TestInfra": 2,
+          "Templates": 1,
+          "RuntimeCore": 4,
+          "Tests": 1
+        },
+        "violations": [
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/common/chaos/common.h",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -308,25 +373,24 @@
     "p3_patch_entry": {
       "check_id": "p3_patch_entry",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 11 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 16 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 11,
-        "entries_with_interrupt_ptr": 11,
+        "table_size": 16,
+        "entries_with_interrupt_ptr": 16,
         "has_hotpatch_module": true
       }
     },
     "p3_patchdata": {
       "check_id": "p3_patchdata",
       "status": "ALIGNED",
-      "summary": "2/2 valid .patchdata files",
+      "summary": "1/1 valid .patchdata files",
       "details": [],
       "evidence": {
-        "patchdata_count": 2,
-        "valid_count": 2,
+        "patchdata_count": 1,
+        "valid_count": 1,
         "stub_patchdata_count": 0,
         "files": [
-          "System.Private.CoreLib\\delegate-core-invocation\\il2cpp_dist\\patch\\patchdata\\delegate-core-invocation.patchdata",
           "System.Private.CoreLib\\delegate-core-invocation\\managed\\patch\\patchdata\\delegate-core-invocation.patchdata"
         ]
       }
@@ -334,10 +398,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
-    "concern": 0,
-    "violation": 1,
+    "aligned": 6,
+    "concern": 3,
+    "violation": 0,
     "not_applicable": 3,
-    "overall": "ALIGNED"
+    "overall": "CONCERN"
   }
 }

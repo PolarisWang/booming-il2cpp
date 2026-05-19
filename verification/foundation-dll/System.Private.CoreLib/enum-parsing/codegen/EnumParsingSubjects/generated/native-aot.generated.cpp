@@ -576,49 +576,49 @@ CHAOS_IL2CPP_INT32 chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCo
 		return 0u;
 	}();
 
-static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Enum__Format_System_String_System_Type_System_Object_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Enum__Format_System_String_System_Type_System_Object_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)
 {
-	return ChaosEnumFormat(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+	return ChaosEnumFormat(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 }
 
-static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Enum__GetName_System_String_System_Type_System_Object_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Enum__GetName_System_String_System_Type_System_Object_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
 {
-	return ChaosEnumGetName(chaos_fn_arg_0, chaos_fn_arg_1);
+	return ChaosEnumGetName(chaos_arg_0, chaos_arg_1);
 }
 
-static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Enum__GetNames_System_String___System_Type_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Enum__GetNames_System_String___System_Type_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
-	return ChaosEnumGetNames(chaos_fn_arg_0);
+	return ChaosEnumGetNames(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Enum__GetValues_System_Array_System_Type_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Enum__GetValues_System_Array_System_Type_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
-	return ChaosEnumGetValues(chaos_fn_arg_0);
+	return ChaosEnumGetValues(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Enum__IsDefined_System_Boolean_System_Type_System_Object_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Enum__IsDefined_System_Boolean_System_Type_System_Object_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
 {
-	return ChaosEnumIsDefined(chaos_fn_arg_0, chaos_fn_arg_1);
+	return ChaosEnumIsDefined(chaos_arg_0, chaos_arg_1);
 }
 
-static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
 {
-	return ChaosEnumParse(chaos_fn_arg_0, chaos_fn_arg_1);
+	return ChaosEnumParse(chaos_arg_0, chaos_arg_1);
 }
 
-static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_System_Boolean_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
+static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_System_Boolean_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2)
 {
-	return ChaosEnumParseWithIgnoreCase(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+	return ChaosEnumParseWithIgnoreCase(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 }
 
-static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Enum__TryParse_System_Boolean_System_Type_System_String_System_Boolean_System_Object__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
+static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Enum__TryParse_System_Boolean_System_Type_System_String_System_Boolean_System_Object__(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2, CHAOS_IL2CPP_INTPTR chaos_arg_3)
 {
-	return ChaosEnumTryParseWithIgnoreCase(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+	return ChaosEnumTryParseWithIgnoreCase(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
 }
 
-static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Enum__TryParse_System_Boolean_System_Type_System_String_System_Object__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Enum__TryParse_System_Boolean_System_Type_System_String_System_Object__(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)
 {
-	return ChaosEnumTryParse(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+	return ChaosEnumTryParse(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 }
 
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
@@ -1185,7 +1185,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_0(void)
 				const auto chaos_arg_2 = _s2;
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__Format_System_String_System_Type_System_Object_System_String_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				const auto chaos_result = ChaosEnumFormat(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1231,7 +1231,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_0(void)
 				const auto chaos_arg_2 = _s2;
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__Format_System_String_System_Type_System_Object_System_String_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				const auto chaos_result = ChaosEnumFormat(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1288,7 +1288,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_0(void)
 				const auto chaos_arg_2 = _s2;
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__Format_System_String_System_Type_System_Object_System_String_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				const auto chaos_result = ChaosEnumFormat(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1370,7 +1370,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_1(void)
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__GetName_System_String_System_Type_System_Object_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = ChaosEnumGetName(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -1436,7 +1436,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_2(void)
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__GetName_System_String_System_Type_System_Object_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = ChaosEnumGetName(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -1487,7 +1487,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_3(void)
 			}
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__GetNames_System_String___System_Type_(chaos_arg_0);
+				const auto chaos_result = ChaosEnumGetNames(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1520,7 +1520,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_3(void)
 			}
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__GetNames_System_String___System_Type_(chaos_arg_0);
+				const auto chaos_result = ChaosEnumGetNames(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1564,7 +1564,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_3(void)
 			}
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__GetNames_System_String___System_Type_(chaos_arg_0);
+				const auto chaos_result = ChaosEnumGetNames(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1631,7 +1631,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_4(void)
 			}
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__GetValues_System_Array_System_Type_(chaos_arg_0);
+				const auto chaos_result = ChaosEnumGetValues(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1664,7 +1664,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_4(void)
 			}
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__GetValues_System_Array_System_Type_(chaos_arg_0);
+				const auto chaos_result = ChaosEnumGetValues(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1708,7 +1708,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_4(void)
 			}
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__GetValues_System_Array_System_Type_(chaos_arg_0);
+				const auto chaos_result = ChaosEnumGetValues(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1787,7 +1787,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_5(void)
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__IsDefined_System_Boolean_System_Type_System_Object_(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = ChaosEnumIsDefined(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1829,7 +1829,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_5(void)
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__IsDefined_System_Boolean_System_Type_System_Object_(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = ChaosEnumIsDefined(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1882,7 +1882,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_5(void)
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__IsDefined_System_Boolean_System_Type_System_Object_(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = ChaosEnumIsDefined(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1954,7 +1954,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_6(void)
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = ChaosEnumParse(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -1991,7 +1991,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_6(void)
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = ChaosEnumParse(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -2039,7 +2039,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_6(void)
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = ChaosEnumParse(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -2114,7 +2114,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_7(void)
 				const auto chaos_arg_2 = _s2;
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_System_Boolean_(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
+				const auto chaos_result = ChaosEnumParseWithIgnoreCase(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -2153,7 +2153,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_7(void)
 				const auto chaos_arg_2 = _s2;
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_System_Boolean_(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
+				const auto chaos_result = ChaosEnumParseWithIgnoreCase(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -2203,7 +2203,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_7(void)
 				const auto chaos_arg_2 = _s2;
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_System_Boolean_(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
+				const auto chaos_result = ChaosEnumParseWithIgnoreCase(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -2390,7 +2390,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_10(void)
 		const auto chaos_arg_2 = _s2;
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__TryParse_System_Boolean_System_Type_System_String_System_Boolean_System_Object__(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), chaos_arg_3);
+		const auto chaos_result = ChaosEnumTryParseWithIgnoreCase(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), chaos_arg_3);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -2454,7 +2454,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_11(void)
 		const auto chaos_arg_2 = _s2;
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Enum__TryParse_System_Boolean_System_Type_System_String_System_Object__(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		const auto chaos_result = ChaosEnumTryParse(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{

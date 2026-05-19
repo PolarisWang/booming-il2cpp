@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "TimeDateTimeTimespanPatchEntry",
-  "entrySubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "TimeDateTimeTimespanSubjects",
+  "entrySubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

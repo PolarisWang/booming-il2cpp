@@ -2,8 +2,8 @@
   "family": "threading-monitor-interlocked",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T19:26:10",
-  "duration_ms": 323388,
+  "timestamp": "2026-05-19T22:55:35",
+  "duration_ms": 29212,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         ]
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -39,7 +39,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\build-output\\ThreadingMonitorInterlockedSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 20828
+      "duration_ms": 27965
     },
     "fact": {
       "stage": "fact",
@@ -53,7 +53,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 36
+      "duration_ms": 397
     },
     "audit": {
       "stage": "audit",
@@ -67,15 +67,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 566
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "failed",
-      "summary": "Benchmark stage crashed: Command '['D:\\\\agent\\\\booming-il2cpp\\\\verification\\\\foundation-dll\\\\System.Private.CoreLib\\\\threading-monitor-interlocked\\\\native\\\\entry.exe', '--benchmark', '3', '100000']' timed out after 300 seconds",
-      "details": {},
-      "errors": [],
-      "duration_ms": 0
+      "duration_ms": 847
     }
   },
   "coverage": {

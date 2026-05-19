@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/time/date/time/timespan",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 152.33,
+      "postPatchNsPerOp": 150.6,
+      "slowdownPercent": -1.14
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 143.57,
+      "postPatchNsPerOp": 181.3,
+      "slowdownPercent": 26.28
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 171.08,
+      "postPatchNsPerOp": 187.6,
+      "slowdownPercent": 9.66
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime&)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 340.59,
+      "postPatchNsPerOp": 380.4,
+      "slowdownPercent": 11.69
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 394.95,
+      "postPatchNsPerOp": 330.5,
+      "slowdownPercent": -16.32
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 163.96999999999997,
+      "postPatchNsPerOp": 195.6,
+      "slowdownPercent": 19.29
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 173.57,
+      "postPatchNsPerOp": 153.8,
+      "slowdownPercent": -11.39
+    }
+  ],
+  "summary": {
+    "totalMethods": 16,
+    "nonStubMethods": 7,
+    "averageSlowdownPercent": 5.44,
+    "slowdownFactor": 1.0544,
+    "slowdownThresholdX": 50.0
+  }
+}

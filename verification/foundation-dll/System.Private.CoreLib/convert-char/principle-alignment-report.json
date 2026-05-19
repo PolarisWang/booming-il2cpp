@@ -1,19 +1,19 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:08:09.043770",
+  "generated_at": "2026-05-19T23:13:51.051149",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "ALIGNED",
-      "summary": "avg_speedup=37.29%",
+      "summary": "avg_speedup=54.54%",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 37.29,
-        "managed_faster_count": 1,
+        "average_speedup_percent": 54.54,
+        "managed_faster_count": 0,
         "native_faster_count": 10,
-        "matched_count": 11,
-        "regression_ratio": 0.091
+        "matched_count": 10,
+        "regression_ratio": 0.0
       }
     },
     "p1_lowering": {
@@ -430,11 +430,36 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "VIOLATION",
-      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
-      "details": [],
+      "status": "CONCERN",
+      "summary": "2 of 10 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/common/chaos/common.h",
+          "reason": "outside expected architecture layers"
+        }
+      ],
       "evidence": {
-        "error": "'NoneType' object has no attribute 'strip'"
+        "changed_source_count": 10,
+        "layer_distribution": {
+          "TestInfra": 2,
+          "Templates": 1,
+          "RuntimeCore": 4,
+          "Tests": 1
+        },
+        "violations": [
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/common/chaos/common.h",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -495,8 +520,8 @@
   "summary": {
     "total": 12,
     "aligned": 9,
-    "concern": 0,
-    "violation": 1,
+    "concern": 1,
+    "violation": 0,
     "not_applicable": 2,
     "overall": "ALIGNED"
   }

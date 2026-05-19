@@ -13,6 +13,7 @@
     "System.Private.CoreLib/System.Reflection.Module::GetCustomAttributes:System.Object[](System.Type)"
   ],
   "methodSubjectCount": 6,
+  "customEntryIndices": [5],
   "functionalObligation": {
     "required": true
   },

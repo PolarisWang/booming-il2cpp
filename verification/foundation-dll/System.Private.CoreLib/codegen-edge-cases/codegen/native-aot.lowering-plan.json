@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "CodegenEdgeCasesPatchEntry",
-  "entrySubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "CodegenEdgeCasesSubjects",
+  "entrySubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Run_System_Int32",
+  "entrySymbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

@@ -350,8 +350,10 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Assembly", "GetExecutingAssembly", 0): "Assembly.GetExecutingAssembly()",
     ("Assembly", "GetCallingAssembly", 0): "Assembly.GetCallingAssembly()",
     ("Assembly", "GetEntryAssembly", 0): "Assembly.GetEntryAssembly()",
-    # Module.GetCustomAttributes returns IEnumerable<Attribute> — wrap in List for .Count
-    ("Module", "GetCustomAttributes", 1): "new List<Attribute>(typeof(byte).Module.GetCustomAttributes(false)).Count",
+    # Module.GetCustomAttributes(Type) returns IEnumerable<Attribute> (no .Length),
+    # but metadata says object[]. The cast layer adds .Length based on metadata,
+    # creating a type mismatch. Delegate to custom entry instead.
+    ("Module", "GetCustomAttributes", 1): "skip",
     # MethodBase.Invoke with object, object[]
     ("MethodBase", "Invoke", 2): "typeof(byte).GetMethods()[0].Invoke(null, new object[0])",
     # MemberInfo.get_MemberType via typeof(byte)
@@ -811,6 +813,11 @@ def _cast_return_to_int(ret: str, call_expr: str) -> str:
     if ret.startswith("System.Threading.Tasks.Task"):
         return f"(({call_expr}).GetHashCode())"
     if ret.endswith("[]"):
+        # Override expressions may already return int (e.g., List<T>(...).Count)
+        # instead of an array. Detect int-returning patterns to avoid adding
+        # .Length to something that already produces an int.
+        if re.search(r'\.(Count|Length|GetHashCode)\s*\)?\s*$', call_expr.strip()):
+            return f"({call_expr})"
         return f"(({call_expr}).Length)"
     return f"(int)({call_expr})"
 

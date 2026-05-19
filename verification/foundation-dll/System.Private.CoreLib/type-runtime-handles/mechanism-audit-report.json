@@ -263,6 +263,33 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_1",
       "subject_id": "",
       "is_stub": false,
@@ -336,33 +363,6 @@
     },
     {
       "method_name": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_9",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_10",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_11",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_12",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

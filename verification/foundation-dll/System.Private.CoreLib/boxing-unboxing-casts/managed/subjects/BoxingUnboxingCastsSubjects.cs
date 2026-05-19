@@ -4,6 +4,7 @@
 // Variant: subjects
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 public static partial class BoxingUnboxingCastsSubjects

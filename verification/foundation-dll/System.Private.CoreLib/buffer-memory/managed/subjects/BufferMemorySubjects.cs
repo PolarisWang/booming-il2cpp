@@ -4,6 +4,7 @@
 // Variant: subjects
 
 using System;
+using System.Collections.Generic;
 
 public static partial class BufferMemorySubjects
 {

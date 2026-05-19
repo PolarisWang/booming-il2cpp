@@ -378,17 +378,17 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[11] = {
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[11] = {
-	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ThreadingThreadBasicsSubjects::Subject_0
-	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ThreadingThreadBasicsSubjects::Subject_1
-	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ThreadingThreadBasicsSubjects::Subject_2
-	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ThreadingThreadBasicsSubjects::Subject_3
-	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ThreadingThreadBasicsSubjects::Subject_4
-	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ThreadingThreadBasicsSubjects::Subject_5
-	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ThreadingThreadBasicsSubjects::Subject_6
-	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ThreadingThreadBasicsSubjects::Subject_7
-	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ThreadingThreadBasicsSubjects::Subject_8
-	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ThreadingThreadBasicsSubjects::Subject_9
-	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ThreadingThreadBasicsSubjects::Subject_10
+	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingThreadBasicsSubjects::Subject_0
+	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingThreadBasicsSubjects::Subject_1
+	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingThreadBasicsSubjects::Subject_2
+	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingThreadBasicsSubjects::Subject_3
+	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingThreadBasicsSubjects::Subject_4
+	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingThreadBasicsSubjects::Subject_5
+	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingThreadBasicsSubjects::Subject_6
+	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingThreadBasicsSubjects::Subject_7
+	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadingThreadBasicsSubjects::Subject_8
+	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingThreadBasicsSubjects::Subject_9
+	{ reinterpret_cast<void*>(&ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadingThreadBasicsSubjects::Subject_10
 };
 
 // Module hotpatch bundle
@@ -679,6 +679,7 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
+#pragma code_seg(".text$hot")
 // Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0()
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_0(void)
 {
@@ -698,7 +699,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
+		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
 		{
 			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
@@ -719,7 +720,228 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		return;
 	}
 }
+#pragma code_seg()
 
+#pragma code_seg(".text$warm")
+// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2()
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+
+
+	{
+		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__set_Priority_System_Void_System_Threading_ThreadPriority_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+	}
+	return;
+}
+#pragma code_seg()
+
+#pragma code_seg(".text$warm")
+// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4()
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_4(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+
+
+	{
+		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__set_IsBackground_System_Void_System_Boolean_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+	}
+	return;
+}
+#pragma code_seg()
+
+#pragma code_seg(".text$warm")
+// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7()
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_7(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+
+
+	{
+		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_arg_0 = _s0;
+		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Interrupt_System_Void__(chaos_arg_0);
+	}
+	return;
+}
+#pragma code_seg()
+
+#pragma code_seg(".text$warm")
+// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8()
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_8(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
+	return;
+}
+#pragma code_seg()
+
+#pragma code_seg(".text$cold")
+// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10()
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_10(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects___exitCode = chaos_value;
+			}
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects___exitCode = chaos_value;
+			}
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects___exitCode = chaos_value;
+			}
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
+#pragma code_seg()
+
+#pragma code_seg(".text$cold")
 // Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_1()
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_1(void)
 {
@@ -741,7 +963,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
+		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
 		{
 			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
@@ -764,33 +986,9 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		return;
 	}
 }
+#pragma code_seg()
 
-// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2()
-extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-
-
-	{
-		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__set_Priority_System_Void_System_Threading_ThreadPriority_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-	}
-	return;
-}
-
+#pragma code_seg(".text$cold")
 // Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_3()
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_3(void)
 {
@@ -812,7 +1010,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
+		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
 		{
 			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
@@ -843,33 +1041,9 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		}
 	}
 }
+#pragma code_seg()
 
-// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4()
-extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_4(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-
-
-	{
-		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__set_IsBackground_System_Void_System_Boolean_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-	}
-	return;
-}
-
+#pragma code_seg(".text$cold")
 // Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_5()
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_5(void)
 {
@@ -891,7 +1065,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
+		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
 		{
 			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
@@ -922,7 +1096,9 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		}
 	}
 }
+#pragma code_seg()
 
+#pragma code_seg(".text$cold")
 // Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6()
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_6(void)
 {
@@ -1052,40 +1228,9 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 #endif
 	return;
 }
+#pragma code_seg()
 
-// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7()
-extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_7(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-
-
-	{
-		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Interrupt_System_Void__(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8()
-extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_8(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-
-	return;
-}
-
+#pragma code_seg(".text$cold")
 // Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_9()
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_9(void)
 {
@@ -1128,130 +1273,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		}
 	}
 }
-
-// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10()
-extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_10(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-
-
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_arg_0 = _s0;
-				chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects___exitCode = chaos_value;
-			}
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
-			{
-				throw;
-			}
-		}
-		_s0 = chaos_exception.object_value;
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_arg_0 = _s0;
-				chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects___exitCode = chaos_value;
-			}
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_arg_0 = _s0;
-				chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects___exitCode = chaos_value;
-			}
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
-	return;
-}
+#pragma code_seg()
 
 
 
@@ -1261,40 +1283,4 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 11;
 
-// ── JIT Method Entry Table ───────────────────────────────────────────
-// Auto-generated by chaos-il2cpp codegen for --mode jit.
-#include <cstdint>
-#include "jit_registration.h"
-
-static const char kMethodJson_0[] = "{\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-0\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_0()\",\"identity\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"definitionSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()\",\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-0\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_0()\"},\"nativeSymbol\":\"ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_0\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Threading.Thread\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":6,\"resultType\":\"System.Threading.ThreadState\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::get_ThreadState:System.Threading.ThreadState()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_ThreadState:System.Threading.ThreadState()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_ThreadState:System.Threading.ThreadState()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":15,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":24,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"ilOffset\":19,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ThreadingThreadBasicsSubjects\"}";
-static const char kMethodJson_1[] = "{\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-1\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_1:System.Void()\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_1()\",\"identity\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"definitionSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_1:System.Void()\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_1:System.Void()\",\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-1\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_1()\"},\"nativeSymbol\":\"ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_1\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Threading.Thread\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":6,\"resultType\":\"System.Threading.ThreadPriority\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::get_Priority:System.Threading.ThreadPriority()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_Priority:System.Threading.ThreadPriority()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_Priority:System.Threading.ThreadPriority()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":27,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"ilOffset\":22,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":27,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ThreadingThreadBasicsSubjects\"}";
-static const char kMethodJson_2[] = "{\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-2\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2:System.Void()\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_2()\",\"identity\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"definitionSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2:System.Void()\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2:System.Void()\",\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-2\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_2()\"},\"nativeSymbol\":\"ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_2\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Threading.Thread\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.Void\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::set_Priority:System.Void(System.Threading.ThreadPriority)\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::set_Priority:System.Void(System.Threading.ThreadPriority)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::set_Priority:System.Void(System.Threading.ThreadPriority)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":13,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ThreadingThreadBasicsSubjects\"}";
-static const char kMethodJson_3[] = "{\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-3\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_3:System.Void()\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_3()\",\"identity\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"definitionSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_3:System.Void()\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_3:System.Void()\",\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-3\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_3()\"},\"nativeSymbol\":\"ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_3\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Threading.Thread\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":6,\"resultType\":\"System.Boolean\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::get_IsBackground:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_IsBackground:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_IsBackground:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":16,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":17,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":21,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":30,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"ilOffset\":25,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":30,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ThreadingThreadBasicsSubjects\"}";
-static const char kMethodJson_4[] = "{\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-4\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4:System.Void()\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_4()\",\"identity\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"definitionSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4:System.Void()\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4:System.Void()\",\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-4\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_4()\"},\"nativeSymbol\":\"ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_4\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Threading.Thread\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.Void\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::set_IsBackground:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::set_IsBackground:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::set_IsBackground:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":13,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ThreadingThreadBasicsSubjects\"}";
-static const char kMethodJson_5[] = "{\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-5\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_5:System.Void()\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_5()\",\"identity\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"definitionSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_5:System.Void()\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_5:System.Void()\",\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-5\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_5()\"},\"nativeSymbol\":\"ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_5\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Threading.Thread\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":6,\"resultType\":\"System.Boolean\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::get_IsThreadPoolThread:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_IsThreadPoolThread:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_IsThreadPoolThread:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":16,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":17,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":21,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":30,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"ilOffset\":25,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":30,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ThreadingThreadBasicsSubjects\"}";
-static const char kMethodJson_6[] = "{\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-6\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6:System.Void()\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_6()\",\"identity\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"definitionSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6:System.Void()\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6:System.Void()\",\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-6\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_6()\"},\"nativeSymbol\":\"ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_6\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":21,\"handlerOffset\":22,\"handlerLength\":5,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.PlatformNotSupportedException\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"System.Threading.Thread\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.Void\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::Abort:System.Void()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::Abort:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::Abort:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"ilOffset\":14,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":27,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":22,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":27,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":27,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ThreadingThreadBasicsSubjects\"}";
-static const char kMethodJson_7[] = "{\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-7\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7:System.Void()\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_7()\",\"identity\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"definitionSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7:System.Void()\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7:System.Void()\",\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-7\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_7()\"},\"nativeSymbol\":\"ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_7\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Threading.Thread\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":6,\"resultType\":\"System.Void\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::Interrupt:System.Void()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::Interrupt:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::Interrupt:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ThreadingThreadBasicsSubjects\"}";
-static const char kMethodJson_8[] = "{\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-8\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8:System.Void()\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_8()\",\"identity\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"definitionSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8:System.Void()\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8:System.Void()\",\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-8\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_8()\"},\"nativeSymbol\":\"ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_8\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ThreadingThreadBasicsSubjects\"}";
-static const char kMethodJson_9[] = "{\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-9\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_9:System.Void()\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_9()\",\"identity\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"definitionSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_9:System.Void()\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_9:System.Void()\",\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-9\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_9()\"},\"nativeSymbol\":\"ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_9\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Boolean\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::Yield:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::Yield:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::Yield:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":11,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":12,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":25,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"ilOffset\":20,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":25,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ThreadingThreadBasicsSubjects\"}";
-static const char kMethodJson_10[] = "{\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-10\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10:System.Void()\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_10()\",\"identity\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"definitionSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10:System.Void()\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10:System.Void()\",\"methodId\":\"threading-thread-basics-subjects.threading-thread-basics-subjects.subject-10\",\"signature\":\"System.Void ThreadingThreadBasicsSubjects::Subject_10()\"},\"nativeSymbol\":\"ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_10\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":18,\"handlerOffset\":19,\"handlerLength\":5,\"catchTypeSubjectId\":\"System.Threading.Thread/System.Threading.ThreadInterruptedException\"}],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Threading.Thread/System.Threading.Thread::Sleep:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Threading.Thread\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::Sleep:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Thread\",\"subjectId\":\"System.Threading.Thread/System.Threading.Thread::Sleep:System.Void(System.Int32)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"ilOffset\":11,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"ThreadingThreadBasicsSubjects\",\"subjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ThreadingThreadBasicsSubjects\"}";
-
-extern "C" const JitMethodEntry kChaosJitMethodEntries[11] =
-{
-    { kMethodJson_0, 4186u, 0x00000003u, 0u },
-    { kMethodJson_1, 4378u, 0x00000004u, 0u },
-    { kMethodJson_2, 2952u, 0x00000005u, 0u },
-    { kMethodJson_3, 4543u, 0x00000006u, 0u },
-    { kMethodJson_4, 2913u, 0x00000007u, 0u },
-    { kMethodJson_5, 4561u, 0x00000008u, 0u },
-    { kMethodJson_6, 4051u, 0x00000009u, 0u },
-    { kMethodJson_7, 2748u, 0x0000000Au, 0u },
-    { kMethodJson_8, 1391u, 0x0000000Bu, 0u },
-    { kMethodJson_9, 3791u, 0x0000000Cu, 0u },
-    { kMethodJson_10, 3490u, 0x0000000Du, 0u }
-};
-
-extern "C" const uint32_t kChaosJitMethodEntryCount = 11u;
-
-extern "C" void ChaosJitRegisterAll() {
-    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
-}
+extern "C" void ChaosJitRegisterAll() {}

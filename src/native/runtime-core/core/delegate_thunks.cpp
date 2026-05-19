@@ -1,3 +1,6 @@
+#include <chaos/native_types.h>
+#include <runtime_abi.h>
+#include "../gc/gc_old_gen.h"
 #include <mutex>
 #include <shared_mutex>
 
@@ -14,6 +17,8 @@ struct DelegateThunkEntry {
 // P0.3: Dynamic vector — no fixed cap.
 static std::vector<DelegateThunkEntry> g_delegate_thunks;
 static std::shared_mutex g_delegate_thunks_mutex;
+
+}  // anonymous namespace
 
 // ── Native function dispatch thunks for GetDelegateForFunctionPointer ──
 //
@@ -72,6 +77,8 @@ static void* const kNativeDfnThunks[5] = {
     reinterpret_cast<void*>(&NativeDfnThunkArity4),
 };
 
+namespace {  // reopen anonymous for NativeFunctionDelegate
+
 // Layout-compatible with bootstrap::DelegateInstance.
 struct NativeFunctionDelegate {
     CHAOS_IL2CPP_UINT32 method_token;   // 0 = native function sentinel
@@ -80,7 +87,7 @@ struct NativeFunctionDelegate {
     NativeFunctionDelegate* next;
 };
 
-}  // anonymous namespace
+}  // anonymous namespace (NativeFunctionDelegate)
 
 // ── Exported functions (declared in runtime_core.h) ──
 

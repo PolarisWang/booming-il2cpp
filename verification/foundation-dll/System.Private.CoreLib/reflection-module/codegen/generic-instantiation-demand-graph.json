@@ -1,3 +1,44 @@
 {
-  "demands": []
+  "demands": [
+    {
+      "requestingAssemblyName": "ReflectionModuleSubjects",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Attribute\u003E::.ctor:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E)",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.List\u00601::.ctor:System.Void(System.Collections.Generic.IEnumerable\u003C!0\u003E)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.List\u00601::.ctor:System.Void(System.Collections.Generic.IEnumerable\u003C!0\u003E)",
+        "typeArguments": [
+          "System.Attribute"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ReflectionModuleSubjects",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Attribute\u003E::get_Count:System.Int32()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.List\u00601::get_Count:System.Int32()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.List\u00601::get_Count:System.Int32()",
+        "typeArguments": [
+          "System.Attribute"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
 }

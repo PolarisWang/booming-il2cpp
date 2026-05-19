@@ -1,15 +1,8 @@
 using chaos_delegate_invocation_list = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR);
 
-struct chaos_type_System_Private_CoreLib_System_Delegate
-{
-    ThinLockableHeader header{};
-    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;
-    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;
-    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;
-    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;
-    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;
-    CHAOS_IL2CPP_UINT32 _pad = 0;
-};
+// struct chaos_type_System_Private_CoreLib_System_Delegate is defined by the
+// object model (EmitObjectModelDeclarations) with proper : public System_Object
+// inheritance. Only the size assertion lives here to avoid C2011 redefinition.
 static_assert(sizeof(chaos_type_System_Private_CoreLib_System_Delegate) == 56,
     "System.Delegate struct size must be 56 bytes");
 
@@ -29,6 +22,17 @@ CHAOS_IL2CPP_INTPTR chaos_delegate_allocate_with_type_info(const TypeInfo* chaos
             CHAOS_IL2CPP_FAIL();
     }
 }
+
+// Forward declarations for native function dispatch thunks (defined in delegate_thunks.cpp).
+// These are used by chaos_register_delegate_thunks() when generated delegate thunk entries
+// reference &NativeDfnThunkArityN. The definitions live in delegate_thunks.cpp.
+// Note: void* parameters instead of typed RuntimeState*/ThreadState* because those types
+// are defined in header_layouts.cpp (not a header) and are invisible to the generated code.
+extern "C" void* NativeDfnThunkArity0(void*, void*, void*);
+extern "C" void* NativeDfnThunkArity1(void*, void*, void*, void*);
+extern "C" void* NativeDfnThunkArity2(void*, void*, void*, void*, void*);
+extern "C" void* NativeDfnThunkArity3(void*, void*, void*, void*, void*, void*);
+extern "C" void* NativeDfnThunkArity4(void*, void*, void*, void*, void*, void*, void*);
 
 // Delegate combine/remove forwarded to runtime-core for unified DelegateObject layout.
 // The runtime-core implementations use the invocation_list vector model and allocate

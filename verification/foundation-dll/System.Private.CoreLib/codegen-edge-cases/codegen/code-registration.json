@@ -3,37 +3,31 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "CodegenEdgeCasesPatchEntry.dll",
+      "moduleName": "CodegenEdgeCasesSubjects.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_0",
-          "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_0:System.Int32()"
+          "symbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0",
+          "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_1",
-          "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_1:System.Int32()"
+          "symbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32",
+          "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_2",
-          "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_2:System.Int32()"
+          "symbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2",
+          "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_3",
-          "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_3:System.Int32()"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 4,
-          "symbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Run_System_Int32",
-          "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Run:System.Void(System.Int32)"
+          "symbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32",
+          "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)"
         }
       ]
     }

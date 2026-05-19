@@ -1,18 +1,18 @@
 {
   "family": "collections-generic-core",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:07:45.254401",
+  "generated_at": "2026-05-19T23:13:27.057819",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "12/16 methods are stubs — benchmark data not meaningful",
+      "summary": "11/16 methods are stubs — benchmark data not meaningful",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -1619.13,
-        "managed_faster_count": 4,
+        "average_speedup_percent": -1575.24,
+        "managed_faster_count": 5,
         "native_faster_count": 0,
-        "invalid_count": 12,
+        "invalid_count": 11,
         "total_methods": 16
       }
     },
@@ -390,11 +390,36 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "VIOLATION",
-      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
-      "details": [],
+      "status": "CONCERN",
+      "summary": "2 of 10 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/common/chaos/common.h",
+          "reason": "outside expected architecture layers"
+        }
+      ],
       "evidence": {
-        "error": "'NoneType' object has no attribute 'strip'"
+        "changed_source_count": 10,
+        "layer_distribution": {
+          "TestInfra": 2,
+          "Templates": 1,
+          "RuntimeCore": 4,
+          "Tests": 1
+        },
+        "violations": [
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/common/chaos/common.h",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -455,8 +480,8 @@
   "summary": {
     "total": 12,
     "aligned": 8,
-    "concern": 0,
-    "violation": 1,
+    "concern": 1,
+    "violation": 0,
     "not_applicable": 3,
     "overall": "ALIGNED"
   }
