@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "CcwBasicPatchEntry",
+  "assemblyName": "CcwBasicSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/ccw-basic/managed/patch/build-output/CcwBasicPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/ccw-basic/managed/subjects/build-output/CcwBasicSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "CcwBasicPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/ccw-basic/managed/patch/build-output/CcwBasicPatchEntry.dll"
+      "assemblyName": "CcwBasicSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/ccw-basic/managed/subjects/build-output/CcwBasicSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "2500ebae-05b3-4d6b-be92-6f0b66e880d5",
+  "inputModuleVersionId": "816e3e58-af1e-46ba-a695-2872c86f80fd",
   "artifacts": [
     {
       "kind": "typedIlIr",

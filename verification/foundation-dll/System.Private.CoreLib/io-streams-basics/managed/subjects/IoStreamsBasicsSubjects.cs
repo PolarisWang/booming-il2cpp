@@ -14,13 +14,13 @@ public static partial class IoStreamsBasicsSubjects
     // [0] System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)
     public static void Subject_0()
     {
-        // TODO: System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32) could not be auto-generated
+        if (new MemoryStream(new byte[10]).Read(new byte[5], 0, 5) != 5) _exitCode = 1;
     }
 
     // [1] System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)
     public static void Subject_1()
     {
-        // TODO: System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32) could not be auto-generated
+        new MemoryStream().Write(new byte[5], 0, 5);
     }
 
     // [2] System.Private.CoreLib/System.IO.Stream::Flush:System.Void()
@@ -56,7 +56,7 @@ public static partial class IoStreamsBasicsSubjects
     // [7] System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)
     public static void Subject_7()
     {
-        // TODO: System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream) could not be auto-generated
+        new MemoryStream().CopyTo(new MemoryStream());
     }
 
     // [8] System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()
@@ -92,31 +92,31 @@ public static partial class IoStreamsBasicsSubjects
     // [13] System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()
     public static void Subject_13()
     {
-        // TODO: System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32() could not be auto-generated
+        if (new BinaryReader(new MemoryStream(new byte[4])).ReadInt32() != 0) _exitCode = 1;
     }
 
     // [14] System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()
     public static void Subject_14()
     {
-        // TODO: System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String() could not be auto-generated
+        if (((new BinaryReader(new MemoryStream(new byte[] { 0 })).ReadString()).Length) != 0) _exitCode = 1;
     }
 
     // [15] System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()
     public static void Subject_15()
     {
-        // TODO: System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double() could not be auto-generated
+        if ((int)(new BinaryReader(new MemoryStream(new byte[8])).ReadDouble()) != 0) _exitCode = 1;
     }
 
     // [16] System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)
     public static void Subject_16()
     {
-        // TODO: System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32) could not be auto-generated
+        new BinaryWriter(new MemoryStream()).Write(42);
     }
 
     // [17] System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.String)
     public static void Subject_17()
     {
-        // TODO: System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.String) could not be auto-generated
+        new BinaryWriter(new MemoryStream()).Write(42);
     }
 
 }

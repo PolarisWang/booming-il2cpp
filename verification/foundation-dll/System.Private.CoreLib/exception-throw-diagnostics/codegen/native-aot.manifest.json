@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-  "entrySubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()",
+  "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+  "entrySubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Void(System.Int32)",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

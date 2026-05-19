@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ExceptionThrowDiagnosticsSubjects",
+  "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/managed/subjects/build-output/ExceptionThrowDiagnosticsSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/managed/patch/build-output/ExceptionThrowDiagnosticsPatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/managed/subjects/build-output/ExceptionThrowDiagnosticsSubjects.dll"
+      "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/managed/patch/build-output/ExceptionThrowDiagnosticsPatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "3d8397ff-119b-44c7-bbed-c06bed0c437c",
+  "inputModuleVersionId": "13d50481-cb99-46e6-8fb5-3661ef86c396",
   "artifacts": [
     {
       "kind": "typedIlIr",

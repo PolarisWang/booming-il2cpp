@@ -2,9 +2,9 @@
   "family": "reflection-member-basics",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T17:35:28",
-  "duration_ms": 25693,
-  "overall_status": "passed",
+  "timestamp": "2026-05-19T19:18:10",
+  "duration_ms": 24417,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -21,14 +21,17 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
+      "status": "failed",
+      "summary": "entry.exe build failed",
       "details": {
-        "methodCount": 14,
-        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-basics\\managed\\subjects\\build-output\\ReflectionMemberBasicsSubjects.dll"
+        "steps": {
+          "build_subjects": "OK",
+          "convert_to_cpp": "OK",
+          "build_entry_exe": "FAILED"
+        }
       },
       "errors": [],
-      "duration_ms": 21653
+      "duration_ms": 18595
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +45,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 331
+      "duration_ms": 33
     },
     "audit": {
       "stage": "audit",
@@ -51,12 +54,12 @@
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
-        "skipsFound": 12,
+        "skipsFound": 0,
         "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 697
+      "duration_ms": 2005
     },
     "benchmark": {
       "stage": "benchmark",
@@ -72,13 +75,13 @@
         "benchmarkQuality": "matchedCount=0/14 below threshold 50%"
       },
       "errors": [],
-      "duration_ms": 3009
+      "duration_ms": 3781
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
-    "testedRate": 14.29,
-    "overall": 57.14
+    "testedRate": 100.0,
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {},

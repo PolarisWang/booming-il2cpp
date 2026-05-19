@@ -377,6 +377,11 @@ int GcProcessDependentHandlesAfterFullGC() noexcept {
 // collect dead weak-handle entries at that point and null them later,
 // after finalization (for WeakTrackResurrection semantics).
 
+/// Fast empty check for the handle table (no lock).
+bool GcHasAnyHandles() noexcept {
+    return !s_gc_handle_table.empty();
+}
+
 void GcCollectDeadWeakHandles(
     std::vector<std::pair<uint64_t, void*>>& out_dead) noexcept {
     std::lock_guard<std::mutex> lock(s_gc_handle_mutex);

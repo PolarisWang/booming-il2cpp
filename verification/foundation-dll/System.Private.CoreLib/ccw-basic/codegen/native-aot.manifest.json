@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "CcwBasicPatchEntry",
-  "entrySubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "CcwBasicSubjects",
+  "entrySubjectId": "CcwBasicSubjects/CcwBasicNativeEntry::Run:System.Int32(System.Int32)",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/ccw-basic/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

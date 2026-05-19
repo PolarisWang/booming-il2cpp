@@ -2,8 +2,8 @@
   "family": "primitive-numeric-conversions",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T17:33:26",
-  "duration_ms": 24886,
+  "timestamp": "2026-05-19T19:15:01",
+  "duration_ms": 27929,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions\\managed\\subjects\\build-output\\PrimitiveNumericConversionsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 20904
+      "duration_ms": 24384
     },
     "fact": {
       "stage": "fact",
@@ -42,37 +42,37 @@
         }
       },
       "errors": [],
-      "duration_ms": 366
+      "duration_ms": 48
     },
     "audit": {
       "stage": "audit",
       "status": "failed",
-      "summary": "false_passing=0, principle=CONCERN",
+      "summary": "false_passing=0, principle=VIOLATION",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "CONCERN",
+        "principleStatus": "VIOLATION",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 802
+      "duration_ms": 917
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "passed",
-      "summary": "avg_speedup=-59.67%, native_faster=5/15, managed_faster=10/15",
+      "summary": "avg_speedup=1.03%, native_faster=9/15, managed_faster=6/15",
       "details": {
-        "averageSpeedupPercent": -59.67,
-        "nativeFasterCount": 5,
-        "managedFasterCount": 10,
+        "averageSpeedupPercent": 1.03,
+        "nativeFasterCount": 9,
+        "managedFasterCount": 6,
         "matchedCount": 15,
         "totalMethods": 15,
         "invalidCount": 0,
         "benchmarkQuality": "ok"
       },
       "errors": [],
-      "duration_ms": 2811
+      "duration_ms": 2577
     }
   },
   "coverage": {
@@ -84,16 +84,16 @@
     "interpreter": {},
     "irTranslation": {},
     "performance": {
-      "averageSpeedupPercent": -59.67,
-      "nativeFasterCount": 5,
-      "managedFasterCount": 10,
+      "averageSpeedupPercent": 1.03,
+      "nativeFasterCount": 9,
+      "managedFasterCount": 6,
       "matchedCount": 15,
       "totalMethods": 15,
       "invalidCount": 0
     },
     "hotupdate": {},
     "keyRatios": {
-      "nativeFasterRatio": 0.33,
+      "nativeFasterRatio": 0.6,
       "irExpansionRatio": 0,
       "interpreterSlowdownFactor": 0,
       "asmPassRate": 0.0
@@ -101,7 +101,7 @@
   },
   "regression": {
     "benchmark": {
-      "status": "regressed",
+      "status": "matched",
       "baselineMetrics": {
         "totalMethods": 15,
         "matchedCount": 15,
@@ -112,14 +112,12 @@
       "currentMetrics": {
         "totalMethods": 15,
         "matchedCount": 15,
-        "nativeFasterCount": 5,
-        "managedFasterCount": 10,
-        "averageSpeedupPercent": -59.67
+        "nativeFasterCount": 9,
+        "managedFasterCount": 6,
+        "averageSpeedupPercent": 1.03
       }
     },
-    "hasRegression": true,
-    "regressions": [
-      "Managed-faster ratio 67% exceeds native-faster ratio 33% (10/15 methods)"
-    ]
+    "hasRegression": false,
+    "regressions": []
   }
 }

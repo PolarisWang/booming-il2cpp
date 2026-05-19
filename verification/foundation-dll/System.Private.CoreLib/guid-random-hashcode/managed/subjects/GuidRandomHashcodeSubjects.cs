@@ -26,7 +26,7 @@ public static partial class GuidRandomHashcodeSubjects
     // [2] System.Private.CoreLib/System.Guid::NewGuid:System.Guid()
     public static void Subject_2()
     {
-        if (((Guid.NewGuid()).GetHashCode()) != 2039506795) _exitCode = 1;
+        if (((Guid.NewGuid()).GetHashCode()) != -1488749681) _exitCode = 1;
     }
 
     // [3] System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)
@@ -38,7 +38,7 @@ public static partial class GuidRandomHashcodeSubjects
     // [4] System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)
     public static void Subject_4()
     {
-        // TODO: System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&) could not be auto-generated
+        if (((Guid.TryParse("00000000-0000-0000-0000-000000000000", out _)) ? 1 : 0) != 1) _exitCode = 1;
     }
 
     // [5] System.Private.CoreLib/System.Guid::ToString:System.String()
@@ -56,13 +56,13 @@ public static partial class GuidRandomHashcodeSubjects
     // [7] System.Private.CoreLib/System.Random::Next:System.Int32()
     public static void Subject_7()
     {
-        if (new Random().Next() != 1145454994) _exitCode = 1;
+        if (new Random().Next() != 507685591) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)
     public static void Subject_8()
     {
-        if (new Random().Next(42) != 12) _exitCode = 1;
+        if (new Random().Next(42) != 28) _exitCode = 1;
     }
 
     // [9] System.Private.CoreLib/System.Random::NextDouble:System.Double()
@@ -86,13 +86,13 @@ public static partial class GuidRandomHashcodeSubjects
     // [12] System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()
     public static void Subject_12()
     {
-        if (default(HashCode).ToHashCode() != -2147056710) _exitCode = 1;
+        if (default(HashCode).ToHashCode() != 1069915699) _exitCode = 1;
     }
 
     // [13] System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)
     public static void Subject_13()
     {
-        if (HashCode.Combine(42, 42) != 1318169306) _exitCode = 1;
+        if (HashCode.Combine(42, 42) != -106836967) _exitCode = 1;
     }
 
 }

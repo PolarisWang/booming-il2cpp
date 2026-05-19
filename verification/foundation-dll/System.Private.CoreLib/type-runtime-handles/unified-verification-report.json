@@ -2,9 +2,9 @@
   "family": "type-runtime-handles",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T17:23:33",
-  "duration_ms": 23784,
-  "overall_status": "passed",
+  "timestamp": "2026-05-19T18:49:23",
+  "duration_ms": 17200,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\type-runtime-handles\\managed\\subjects\\build-output\\TypeRuntimeHandlesSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 22686
+      "duration_ms": 16501
     },
     "fact": {
       "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (13/13)",
+      "status": "failed",
+      "summary": "Fact verify=failed (12/13)",
       "details": {
         "fact": {
-          "status": "passed",
-          "passed": 13,
+          "status": "failed",
+          "passed": 12,
           "total": 13
         }
       },
       "errors": [],
-      "duration_ms": 355
+      "duration_ms": 33
     },
     "audit": {
       "stage": "audit",
@@ -51,18 +51,18 @@
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
-        "skipsFound": 3,
+        "skipsFound": 0,
         "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 741
+      "duration_ms": 664
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
-    "testedRate": 76.92,
-    "overall": 88.46
+    "methodCoverage": 92.31,
+    "testedRate": 100.0,
+    "overall": 96.16
   },
   "dashboard": {
     "interpreter": {},

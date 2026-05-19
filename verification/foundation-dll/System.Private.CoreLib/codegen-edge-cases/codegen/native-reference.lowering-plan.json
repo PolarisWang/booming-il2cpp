@@ -2,29 +2,30 @@
   "formatVersion": "v0",
   "artifactKind": "nativeReferenceLoweringPlan",
   "planKind": "assembly-full-closure-runtime-skeleton",
-  "assemblyName": "CodegenEdgeCasesSubjects",
+  "assemblyName": "CodegenEdgeCasesPatchEntry",
   "entrySubjectId": "",
   "includeHeader": "codegen_bridge.h",
   "nativeEntryFunctionName": "RunNativeReferenceAssembly",
-  "entrySymbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0",
+  "entrySymbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_0",
   "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
   "translationUnitMode": "runtime-skeleton",
   "translationUnitMethodSubjectIds": [
-    "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
-    "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
-    "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
-    "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)"
+    "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Run:System.Void(System.Int32)",
+    "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_0:System.Int32()",
+    "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_1:System.Int32()",
+    "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_2:System.Int32()",
+    "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_3:System.Int32()"
   ],
-  "translationUnitMethodCount": 4,
+  "translationUnitMethodCount": 5,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 4,
+      "methodCount": 5,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
-      "firstMethodSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
-      "lastMethodSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)"
+      "firstMethodSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Run:System.Void(System.Int32)",
+      "lastMethodSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_3:System.Int32()"
     }
   ],
   "auditStatus": "runtime-skeleton",

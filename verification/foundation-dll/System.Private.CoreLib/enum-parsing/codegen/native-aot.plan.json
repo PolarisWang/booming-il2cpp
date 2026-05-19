@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "EnumParsingSubjects",
-  "entrySubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()",
+  "assemblyName": "EnumParsingPatchEntry",
+  "entrySubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_0",
+  "entrySymbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

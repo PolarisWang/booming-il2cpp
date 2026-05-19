@@ -1,7 +1,7 @@
 {
   "family": "ccw-basic",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T13:53:16.281041",
+  "generated_at": "2026-05-19T19:07:19.804327",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -25,52 +25,28 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 17,
-        "methods_total": 17
+        "methods_with_lowering": 27,
+        "methods_total": 27
       },
       "per_method": [
         {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method0",
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method1",
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method2",
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method3",
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method4",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Run_System_Int32",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method0",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method1",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method2",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method3",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method4",
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4",
           "has_lowering": true
         },
         {
@@ -78,23 +54,87 @@
           "has_lowering": true
         },
         {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method0",
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method1",
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method2",
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method3",
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method4",
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Run_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4",
           "has_lowering": true
         }
       ]
@@ -130,29 +170,11 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "CONCERN",
-      "summary": "1 of 20 changed source files are outside expected architecture layers",
-      "details": [
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        }
-      ],
+      "status": "VIOLATION",
+      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
+      "details": [],
       "evidence": {
-        "changed_source_count": 20,
-        "layer_distribution": {
-          "TestInfra": 5,
-          "Driver": 1,
-          "Codegen": 3,
-          "RuntimeCore": 6,
-          "Tests": 4
-        },
-        "violations": [
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          }
-        ]
+        "error": "'NoneType' object has no attribute 'strip'"
       }
     },
     "p2_no_bare_new": {
@@ -212,8 +234,8 @@
   "summary": {
     "total": 12,
     "aligned": 8,
-    "concern": 1,
-    "violation": 0,
+    "concern": 0,
+    "violation": 1,
     "not_applicable": 3,
     "overall": "ALIGNED"
   }

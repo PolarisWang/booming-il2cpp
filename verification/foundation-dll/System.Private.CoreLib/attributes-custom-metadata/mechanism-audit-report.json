@@ -5,7 +5,7 @@
   "audited": 33,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 3,
+  "skips_found": 1,
   "methods_without_lowering": 0,
   "methods_without_assert": 33,
   "passed": true,
@@ -309,18 +309,6 @@
     }
   ],
   "skip_details": [
-    {
-      "type_name": "Attribute",
-      "method_name": "GetCustomAttributes",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Attribute",
-      "method_name": "GetCustomAttributes",
-      "param_count": 1,
-      "override_value": "skip"
-    },
     {
       "type_name": "Attribute",
       "method_name": "get_TypeId",

@@ -5,7 +5,7 @@
   "audited": 51,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 2,
+  "skips_found": 0,
   "methods_without_lowering": 0,
   "methods_without_assert": 51,
   "passed": true,
@@ -470,19 +470,6 @@
       "audit_status": "PASS"
     }
   ],
-  "skip_details": [
-    {
-      "type_name": "BitConverter",
-      "method_name": "ToDouble",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "BitConverter",
-      "method_name": "ToInt32",
-      "param_count": 2,
-      "override_value": "skip"
-    }
-  ],
+  "skip_details": [],
   "errors": []
 }

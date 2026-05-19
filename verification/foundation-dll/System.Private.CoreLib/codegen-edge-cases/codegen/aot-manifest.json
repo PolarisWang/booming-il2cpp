@@ -3,33 +3,39 @@
   "artifactKind": "aotManifest",
   "entries": [
     {
-      "assemblyName": "CodegenEdgeCasesSubjects",
+      "assemblyName": "CodegenEdgeCasesPatchEntry",
       "subjectKind": "method",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
+      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_0:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "CodegenEdgeCasesSubjects",
+      "assemblyName": "CodegenEdgeCasesPatchEntry",
       "subjectKind": "method",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
+      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_1:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "CodegenEdgeCasesSubjects",
+      "assemblyName": "CodegenEdgeCasesPatchEntry",
       "subjectKind": "method",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
+      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_2:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "CodegenEdgeCasesSubjects",
+      "assemblyName": "CodegenEdgeCasesPatchEntry",
       "subjectKind": "method",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_3:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "CodegenEdgeCasesSubjects",
+      "assemblyName": "CodegenEdgeCasesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Run:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CodegenEdgeCasesPatchEntry",
       "subjectKind": "field",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode",
+      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::_exitCode",
       "reason": "instance-field-state"
     }
   ]

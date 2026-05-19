@@ -101,9 +101,11 @@ MarkSweepOldGen::~MarkSweepOldGen() {
         std::free(old_array->pages);
         delete old_array;
     }
-    if (page_array_retired_ != nullptr) {
-        std::free(page_array_retired_->pages);
-        delete page_array_retired_;
+    for (int i = 0; i < kRetiredRingSize; i++) {
+        if (retired_ring_[i] != nullptr) {
+            std::free(retired_ring_[i]->pages);
+            delete retired_ring_[i];
+        }
     }
 }
 
@@ -312,13 +314,17 @@ void MarkSweepOldGen::RebuildPageArray() {
     auto* new_array = new PageArray{new_pages, count};
     auto* old_array = page_array_.exchange(new_array, std::memory_order_acq_rel);
 
-    // Retire old array for deferred free (no concurrent reader is accessing it
-    // once we've swapped, but we defer free to ensure in-flight readers finish).
-    if (page_array_retired_ != nullptr) {
-        std::free(page_array_retired_->pages);
-        delete page_array_retired_;
+    // Ring-buffer based deferred free: retire the old array and free the
+    // array from 2 slots ago.  This gives any in-flight reader that loaded
+    // page_array_ before the exchange at least 2 more rebuilds before the
+    // array is freed — sufficient for microsecond-range lock-free reads.
+    int retire_slot = retired_ring_idx_ % kRetiredRingSize;
+    if (retired_ring_[retire_slot] != nullptr) {
+        std::free(retired_ring_[retire_slot]->pages);
+        delete retired_ring_[retire_slot];
     }
-    page_array_retired_ = old_array;
+    retired_ring_[retire_slot] = old_array;
+    retired_ring_idx_ = (retire_slot + 1) % kRetiredRingSize;
 }
 
 OldGenPage* MarkSweepOldGen::FindPage(const void* ptr) const {
@@ -2676,32 +2682,18 @@ void MarkSweepOldGen::BgcSweep() {
     // bitmap for DecideCompactMode which runs later in BgcCompact().
     {
         int total_pages = static_cast<int>(pages.size());
-        if (total_pages >= 2) {
-            std::atomic<int> bgc_next_page{0};
-            int max_workers = std::min(
-                static_cast<int>(std::thread::hardware_concurrency()), total_pages);
-            if (max_workers < 2) max_workers = 2;
-
-            GcWorkerPool::Instance().RunWorkers(max_workers, [&](int) {
-                while (true) {
-                    int idx = bgc_next_page.fetch_add(1, std::memory_order_relaxed);
-                    if (idx >= total_pages) break;
-                    auto* page = pages[static_cast<size_t>(idx)];
-                    if (!page->in_use.load(std::memory_order_acquire)) continue;
-                    SweepPage(page, false);
-                    CoalescePage(page);
-                }
-            });
-        } else {
-            for (auto* page : pages) {
-                if (!page->in_use.load(std::memory_order_acquire)) continue;
-                SweepPage(page, false);
-                CoalescePage(page);
-            }
+        for (auto* page : pages) {
+            if (!page->in_use.load(std::memory_order_acquire)) continue;
+            SweepPage(page, false);
+            CoalescePage(page);
         }
     }
 
     // Phase 4b: Free decommissioned oversized pages (marked !in_use by SweepPage).
+    // IMPORTANT: Do NOT VirtualFree here — BgcSweep runs concurrently with
+    // mutators that may still hold stale page_array_ references to these pages.
+    // Defer VirtualFree to BgcCompact (under STW safepoint) where no concurrent
+    // readers exist.
     {
         std::lock_guard<std::mutex> lock(mutex_);
 
@@ -2722,7 +2714,8 @@ void MarkSweepOldGen::BgcSweep() {
                 if (should_pool) {
                     page_pool_.push_back(p);
                 } else {
-                    FreePage(p);
+                    // Defer VirtualFree to BgcCompact (STW safepoint).
+                    deferred_free_pages_.push_back(p);
                 }
                 page_count_--;
             } else {
@@ -2730,12 +2723,9 @@ void MarkSweepOldGen::BgcSweep() {
             }
         }
 
-        // Free deferred pages (oversized pages freed by external Free()
-        // since the last safepoint).
-        for (auto* p : deferred_free_pages_) {
-            VirtualFreePage(p, p->page_size);
-        }
-        deferred_free_pages_.clear();
+        // Deferred pages are freed in BgcCompact (under STW safepoint).
+        // Not here — mutators may still reference freed pages via stale
+        // page_array_ entries.
 
         // Rebuild under mutex_ to prevent TOCTOU: mutators (AllocatePage/Free)
         // can modify page_list_ between count and fill loops inside
@@ -2790,6 +2780,19 @@ void MarkSweepOldGen::BgcCompact() {
             }
             p = p->next;
         }
+    }
+
+    // Phase 3: Free deferred pages collected during BgcSweep.
+    // BgcCompact runs under STW safepoint — no mutators are running, so
+    // it is safe to VirtualFree pages that were unlinked from page_list_
+    // by BgcSweep's Phase 4b but deferred to avoid use-after-free through
+    // stale page_array_ entries in concurrent mutators.
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        for (auto* p : deferred_free_pages_) {
+            VirtualFreePage(p, p->page_size);
+        }
+        deferred_free_pages_.clear();
     }
 
     // Clear compaction skip list (snapshot of pinned_roots_ taken above).

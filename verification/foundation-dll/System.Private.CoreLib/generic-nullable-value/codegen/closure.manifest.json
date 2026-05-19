@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "GenericNullableValueSubjects",
+  "assemblyName": "GenericNullableValuePatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/generic-nullable-value/managed/subjects/build-output/GenericNullableValueSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/generic-nullable-value/managed/patch/build-output/GenericNullableValuePatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "GenericNullableValueSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/generic-nullable-value/managed/subjects/build-output/GenericNullableValueSubjects.dll"
+      "assemblyName": "GenericNullableValuePatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/generic-nullable-value/managed/patch/build-output/GenericNullableValuePatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "d89a55ce-5ad2-4253-85f7-cd594c060384",
+  "inputModuleVersionId": "1afe86fd-7f21-47fe-9674-4eabe4a73095",
   "artifacts": [
     {
       "kind": "typedIlIr",

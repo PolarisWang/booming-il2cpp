@@ -5,7 +5,7 @@
   "audited": 101,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 3,
+  "skips_found": 0,
   "methods_without_lowering": 0,
   "methods_without_assert": 101,
   "passed": true,
@@ -920,25 +920,6 @@
       "audit_status": "PASS"
     }
   ],
-  "skip_details": [
-    {
-      "type_name": "Type",
-      "method_name": "GetType",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Type",
-      "method_name": "GetType",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Type",
-      "method_name": "GetType",
-      "param_count": 3,
-      "override_value": "skip"
-    }
-  ],
+  "skip_details": [],
   "errors": []
 }

@@ -3,79 +3,73 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "ThreadingThreadBasicsPatchEntry.dll",
+      "moduleName": "ThreadingThreadBasicsSubjects.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Subject_0",
-          "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_0:System.Int32()"
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_0",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Subject_1",
-          "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_1:System.Int32()"
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_1",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_1:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Subject_2",
-          "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_2:System.Int32()"
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_2",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Subject_3",
-          "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_3:System.Int32()"
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_3",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_3:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Subject_4",
-          "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_4:System.Int32()"
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_4",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Subject_5",
-          "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_5:System.Int32()"
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_5",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_5:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Subject_6",
-          "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_6:System.Int32()"
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_6",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 7,
-          "symbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Subject_7",
-          "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_7:System.Int32()"
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_7",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 8,
-          "symbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Subject_8",
-          "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_8:System.Int32()"
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_8",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 9,
-          "symbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Subject_9",
-          "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_9:System.Int32()"
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_9",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_9:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 10,
-          "symbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Subject_10",
-          "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_10:System.Int32()"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 11,
-          "symbol": "ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_Run_System_Int32",
-          "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Run:System.Void(System.Int32)"
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_10",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10:System.Void()"
         }
       ]
     }

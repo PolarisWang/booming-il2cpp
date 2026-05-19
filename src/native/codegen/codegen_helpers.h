@@ -92,6 +92,7 @@ extern "C" void     CodegenStSFld(uint32_t field_offset, uint64_t value) noexcep
 
 // ── Array helpers ──────────────────────────────────────────────────────────
 extern "C" void*    CodegenNewArr(int32_t length) noexcept;
+extern "C" void*    CodegenNewArrTlab(void* mem, int32_t length) noexcept;
 extern "C" uint64_t CodegenLdElem(void* arr, int32_t index) noexcept;
 extern "C" void     CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept;
 

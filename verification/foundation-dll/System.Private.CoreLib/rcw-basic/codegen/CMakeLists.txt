@@ -34,14 +34,14 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: RcwBasicPatchEntry
-add_library(chaos_gen_RcwBasicPatchEntry STATIC
-    ${CHAOS_GEN_DIR}/RcwBasicPatchEntry/generated/native-aot.generated.cpp
+# Assembly: RcwBasicSubjects
+add_library(chaos_gen_RcwBasicSubjects STATIC
+    ${CHAOS_GEN_DIR}/RcwBasicSubjects/generated/native-aot.generated.cpp
 )
 
-target_include_directories(chaos_gen_RcwBasicPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_RcwBasicPatchEntry PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_RcwBasicPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_RcwBasicSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_RcwBasicSubjects PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_RcwBasicSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -50,7 +50,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_RcwBasicPatchEntry
+    chaos_gen_RcwBasicSubjects
     ${NATIVE_LIBS}
 )
 

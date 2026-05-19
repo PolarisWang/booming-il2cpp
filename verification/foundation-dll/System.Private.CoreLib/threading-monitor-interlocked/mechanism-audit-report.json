@@ -5,7 +5,7 @@
   "audited": 43,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 10,
+  "skips_found": 4,
   "methods_without_lowering": 0,
   "methods_without_assert": 43,
   "passed": true,
@@ -401,12 +401,6 @@
   "skip_details": [
     {
       "type_name": "Monitor",
-      "method_name": "Enter",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Monitor",
       "method_name": "Exit",
       "param_count": 1,
       "override_value": "skip"
@@ -427,36 +421,6 @@
       "type_name": "Monitor",
       "method_name": "Wait",
       "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Interlocked",
-      "method_name": "CompareExchange",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Interlocked",
-      "method_name": "Exchange",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Interlocked",
-      "method_name": "Increment",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Interlocked",
-      "method_name": "Decrement",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Interlocked",
-      "method_name": "Add",
-      "param_count": 2,
       "override_value": "skip"
     }
   ],

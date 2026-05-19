@@ -2,28 +2,95 @@
   "family": "pinvoke-dllimport",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T13:34:56",
-  "duration_ms": 2,
+  "timestamp": "2026-05-19T19:14:33",
+  "duration_ms": 21491,
   "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
-      "status": "failed",
-      "summary": "Contract not found: D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\pinvoke-dllimport\\capability-family-contract.json",
-      "details": {},
+      "status": "passed",
+      "summary": "4 methods, 0 custom entries",
+      "details": {
+        "methodCount": 4,
+        "customMethodCount": 0,
+        "hasCustomEntryFile": false,
+        "customMethods": []
+      },
       "errors": [],
       "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 4,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\pinvoke-dllimport\\managed\\subjects\\build-output\\PinvokeDllimportSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 18061
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "failed",
+      "summary": "Fact verify=failed (4/12)",
+      "details": {
+        "fact": {
+          "status": "failed",
+          "passed": 4,
+          "total": 12
+        }
+      },
+      "errors": [],
+      "duration_ms": 304
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "failed",
+      "summary": "false_passing=0, principle=VIOLATION",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "VIOLATION",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 789
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/4 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 4,
+        "invalidCount": 4,
+        "benchmarkQuality": "matchedCount=0/4 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 2333
     }
   },
   "coverage": {
-    "methodCoverage": 0.0,
-    "testedRate": 0.0,
-    "overall": 0.0
+    "methodCoverage": 33.33,
+    "testedRate": 100.0,
+    "overall": 66.66
   },
   "dashboard": {
     "interpreter": {},
     "irTranslation": {},
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": 0.0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 4,
+      "invalidCount": 4
+    },
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,
@@ -34,8 +101,15 @@
   },
   "regression": {
     "benchmark": {
-      "status": "skipped",
-      "message": "No benchmark report found"
+      "status": "no_baseline",
+      "message": "Baseline auto-created from this run",
+      "currentMetrics": {
+        "totalMethods": 4,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
     },
     "hasRegression": false,
     "regressions": []

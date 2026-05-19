@@ -289,6 +289,12 @@
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_CultureInfo:System.Globalization.CultureInfo()",
       "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String)",
+      "reason": "external-call"
     }
   ]
 }

@@ -3,210 +3,65 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-0",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_0()",
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-0",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_0:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_0()",
       "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-0",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_0()"
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_0:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_0:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-0",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_0()"
       },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_0",
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_0",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 0,
       "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 2024,
+          "operand": -1342177280,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
           "ilOffset": 6,
-          "resultType": "System.Int32",
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
           "ilOffset": 7,
-          "resultType": "System.Int32",
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 8,
-          "resultType": "System.Private.CoreLib/System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 13,
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 14,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-1",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_1:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_1()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_1:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_1:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-1",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_1()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_1",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 2024,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 6,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 7,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 8,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 9,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
           "ilOffset": 10,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 11,
-          "resultType": "System.Private.CoreLib/System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 16,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 17,
           "isPreserveSig": false
         }
       ],
@@ -218,1647 +73,26 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
     },
     {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-2",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_2:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_2()",
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-1",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_1:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_1()",
       "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_2:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_2:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-2",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_2()"
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_1:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_1:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-1",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_1()"
       },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_2",
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_1",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "2024-01-01",
-          "ilOffset": 1,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 6,
-          "resultType": "System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 11,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 12,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 14,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1847801252,
-          "ilOffset": 19,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 26,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 29,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 30,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 39,
-          "ilOffset": 31,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 33,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 34,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectKind": "field",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 39,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-3",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_3:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_3()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_3:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_3:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-3",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_3()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_3",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-4",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_4:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_4()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_4:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_4:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-4",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_4()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_4",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 1,
-          "resultType": "System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 7,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 9,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.DateTime::ToString:System.String()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 14,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 20,
-          "ilOffset": 19,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 23,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 26,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 27,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 36,
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 30,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 31,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectKind": "field",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 36,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-5",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_5:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_5()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_5:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_5:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-5",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_5()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_5",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 1,
-          "resultType": "System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 7,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 9,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 14,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 19,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 5,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 25,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 28,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 30,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 31,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 40,
-          "ilOffset": 32,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 34,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 35,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectKind": "field",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 40,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-6",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_6:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_6()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_6:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_6:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-6",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_6()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_6",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 1,
-          "resultType": "System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 7,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 9,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 18,
-          "resultType": "System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 24,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 26,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 762828818,
-          "ilOffset": 31,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 36,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 38,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 39,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 41,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 42,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 51,
-          "ilOffset": 43,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 45,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 46,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectKind": "field",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 51,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-7",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_7:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_7()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_7:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_7:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-7",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_7()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_7",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 1,
-          "resultType": "System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 7,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 9,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 18,
-          "resultType": "System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 24,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 26,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 844502591,
-          "ilOffset": 31,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 36,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 38,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 39,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 41,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 42,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 51,
-          "ilOffset": 43,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 45,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 46,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectKind": "field",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 51,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-8",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_8:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_8()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_8:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_8:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-8",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_8()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_8",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 1,
-          "resultType": "System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 7,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 9,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 18,
-          "resultType": "System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 24,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 26,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 109558782,
-          "ilOffset": 31,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 36,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 38,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 39,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 41,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 42,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 51,
-          "ilOffset": 43,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 45,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 46,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectKind": "field",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 51,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-9",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_9:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_9()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_9:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_9:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-9",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_9()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_9",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 1,
-          "resultType": "System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 6,
-          "resultType": "System.DateTime",
-          "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 11,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "cgt.un",
-          "opCode": 33,
-          "ilOffset": 17,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 20,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 29,
-          "ilOffset": 21,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 23,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 24,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectKind": "field",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 29,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-10",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_10:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_10()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_10:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_10:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-10",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_10()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_10",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
@@ -1869,71 +103,8 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 2024,
+          "operand": -1342177279,
           "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 2,
-          "ilOffset": 6,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 7,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 29,
-          "ilOffset": 12,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 14,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 17,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1941,7 +112,15 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 19,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1949,56 +128,13 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 20,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 29,
-          "ilOffset": 21,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 23,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 24,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectKind": "field",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
+          "ilOffset": 9,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 29,
+          "ilOffset": 10,
           "isPreserveSig": false
         }
       ],
@@ -2010,194 +146,1197 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
     },
     {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-11",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_11:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_11()",
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-2",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_2:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_2()",
       "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_11:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_11:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-11",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_11()"
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_2:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_2:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-2",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_2()"
       },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_11",
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_2",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 0,
       "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 42,
+          "operand": -1342177278,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-3",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_3:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_3()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_3:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_3:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-3",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_3()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 42,
+          "operand": -1342177277,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-4",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_4:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_4()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_4:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_4:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-4",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_4()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177276,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-5",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_5:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_5()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_5:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_5:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-5",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_5()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177275,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-6",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_6:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_6()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_6:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_6:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-6",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_6()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177274,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-7",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_7:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_7()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_7:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_7:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-7",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_7()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177273,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-8",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_8:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_8()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_8:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_8:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-8",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_8()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177272,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-9",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_9:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_9()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_9:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_9:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-9",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_9()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177271,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-10",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_10:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_10()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_10:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_10:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-10",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_10()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177270,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-11",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_11:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_11()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_11:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_11:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-11",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_11()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177269,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-12",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_12:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_12()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_12:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_12:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-12",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_12()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177268,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-13",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_13:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_13()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_13:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_13:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-13",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_13()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177267,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-14",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_14:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_14()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_14:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_14:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-14",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_14()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_14",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177266,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-15",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_15:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_15()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_15:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_15:System.Int32()",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.subject-15",
+        "signature": "System.Int32 TimeDateTimeTimespanPatchEntry::Subject_15()"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_15",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177265,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
+    },
+    {
+      "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.run",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Run:System.Void(System.Int32)",
+      "signature": "System.Void TimeDateTimeTimespanPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanPatchEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Run:System.Void(System.Int32)",
+        "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Run:System.Void(System.Int32)",
+        "methodId": "time-date-time-timespan-patch-entry.time-date-time-timespan-patch-entry.run",
+        "signature": "System.Void TimeDateTimeTimespanPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Run_System_Int32",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 211,
+          "handlerOffset": 212,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
           "ilOffset": 3,
-          "resultType": "System.Int32",
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
           "ilOffset": 5,
-          "resultType": "System.Int32",
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "newobj",
-          "opCode": 34,
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            81,
+            89,
+            97,
+            105,
+            113,
+            121,
+            129,
+            137,
+            145,
+            153,
+            161,
+            169,
+            177,
+            185,
+            193,
+            201
+          ],
           "ilOffset": 7,
-          "resultType": "System.Private.CoreLib/System.TimeSpan",
-          "callee": "System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 76,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 81,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_0:System.Int32()",
           "reference": {
-            "assemblyName": "System.Private.CoreLib",
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)"
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_0:System.Int32()"
           },
           "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.TimeSpan",
-            "typeShape": 1,
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_0:System.Int32()",
+            "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 1,
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 12,
+          "ilOffset": 86,
           "isPreserveSig": false
         },
         {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 13,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-12",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_12:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_12()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_12:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_12:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-12",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_12()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_12",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 87,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 10,
-          "resultType": "System.TimeSpan",
-          "callee": "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 15,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 16,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 24,
+          "ilOffset": 89,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_1:System.Int32()",
           "reference": {
-            "assemblyName": "System.Private.CoreLib",
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_1:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_1:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -2205,92 +1344,657 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.TimeSpan",
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -178675456,
-          "ilOffset": 29,
-          "resultType": "System.Int32",
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 94,
           "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 34,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 36,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 37,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 39,
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 95,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 40,
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 97,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_2:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 49,
-          "ilOffset": 41,
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 102,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 103,
           "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 105,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_3:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 110,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 111,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 113,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_4:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 118,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 119,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 121,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_5:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 126,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 127,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 129,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_6:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 134,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 135,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 137,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_7:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 142,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 143,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 145,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_8:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 150,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 151,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 153,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_9:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 158,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 159,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 161,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_10:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 166,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 167,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 169,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_11:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 174,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 175,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 177,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_12:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 182,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 183,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 185,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_13:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 190,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 191,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 193,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_14:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_14:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_14:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 198,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 199,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 201,
+          "resultType": "System.Int32",
+          "callee": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_15:System.Int32()",
+          "reference": {
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_15:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_15:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Subject_15",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 206,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 209,
+          "ilOffset": 207,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 223,
+          "ilOffset": 210,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 212,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 43,
+          "ilOffset": 214,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 44,
+          "operand": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::_exitCode",
+          "ilOffset": 215,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "TimeDateTimeTimespanSubjects",
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
             "subjectKind": "field",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode"
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
+            "assemblyName": "TimeDateTimeTimespanPatchEntry",
+            "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
+            "declaringTypeSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2298,9 +2002,17 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 223,
+          "ilOffset": 221,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 49,
+          "ilOffset": 223,
           "isPreserveSig": false
         }
       ],
@@ -2312,622 +2024,7 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-13",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_13:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_13()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_13:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_13:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-13",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_13()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_13",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 10,
-          "resultType": "System.TimeSpan",
-          "callee": "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 15,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 16,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.TimeSpan",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 171512160,
-          "ilOffset": 29,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 34,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 36,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 37,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 39,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 40,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 49,
-          "ilOffset": 41,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 43,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 44,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectKind": "field",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 49,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-14",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_14:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_14()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_14:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_14:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-14",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_14()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_14",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 10,
-          "resultType": "System.TimeSpan",
-          "callee": "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 15,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 16,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.TimeSpan",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -569803771,
-          "ilOffset": 29,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 34,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 36,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 37,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 39,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 40,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 49,
-          "ilOffset": 41,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 43,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 44,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectKind": "field",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 49,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
-    },
-    {
-      "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-15",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_15:System.Void()",
-      "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_15()",
-      "identity": {
-        "assemblyName": "TimeDateTimeTimespanSubjects",
-        "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-        "definitionSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_15:System.Void()",
-        "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_15:System.Void()",
-        "methodId": "time-date-time-timespan-subjects.time-date-time-timespan-subjects.subject-15",
-        "signature": "System.Void TimeDateTimeTimespanSubjects::Subject_15()"
-      },
-      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_15",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "1:00:00",
-          "ilOffset": 1,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 6,
-          "resultType": "System.TimeSpan",
-          "callee": "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 11,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 1,
-          "ilOffset": 12,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 20,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.TimeSpan",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1640261640,
-          "ilOffset": 25,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 30,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 33,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 35,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 36,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 45,
-          "ilOffset": 37,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 39,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 40,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectKind": "field",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TimeDateTimeTimespanSubjects",
-            "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 45,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "TimeDateTimeTimespanSubjects"
+      "declaringAssemblyName": "TimeDateTimeTimespanPatchEntry"
     }
   ]
 }

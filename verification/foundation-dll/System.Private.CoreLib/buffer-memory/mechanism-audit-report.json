@@ -5,7 +5,7 @@
   "audited": 38,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 5,
+  "skips_found": 2,
   "methods_without_lowering": 0,
   "methods_without_assert": 38,
   "passed": true,
@@ -356,12 +356,6 @@
   "skip_details": [
     {
       "type_name": "Buffer",
-      "method_name": "BlockCopy",
-      "param_count": 5,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Buffer",
       "method_name": "BulkMoveWithWriteBarrier",
       "param_count": 3,
       "override_value": "skip"
@@ -369,18 +363,6 @@
     {
       "type_name": "Buffer",
       "method_name": "Memmove",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Buffer",
-      "method_name": "GetByte",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Buffer",
-      "method_name": "SetByte",
       "param_count": 3,
       "override_value": "skip"
     }

@@ -5,7 +5,7 @@
   "audited": 51,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 7,
+  "skips_found": 0,
   "methods_without_lowering": 0,
   "methods_without_assert": 51,
   "passed": true,
@@ -470,49 +470,6 @@
       "audit_status": "PASS"
     }
   ],
-  "skip_details": [
-    {
-      "type_name": "BinaryReader",
-      "method_name": "ReadString",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "BinaryReader",
-      "method_name": "ReadInt32",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "BinaryReader",
-      "method_name": "ReadDouble",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "BinaryWriter",
-      "method_name": "Write",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Stream",
-      "method_name": "Read",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Stream",
-      "method_name": "Write",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Stream",
-      "method_name": "CopyTo",
-      "param_count": 1,
-      "override_value": "skip"
-    }
-  ],
+  "skip_details": [],
   "errors": []
 }

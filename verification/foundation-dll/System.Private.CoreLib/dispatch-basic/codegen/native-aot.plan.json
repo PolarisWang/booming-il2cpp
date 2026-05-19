@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "DispatchBasicPatchEntry",
-  "entrySubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "DispatchBasicSubjects",
+  "entrySubjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Run_System_Int32",
+  "entrySymbol": "DispatchBasicSubjects_BasicImpl__ctor",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

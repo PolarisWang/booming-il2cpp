@@ -217,6 +217,21 @@ void BgcController::WaitForCycleComplete() {
     cycle_complete_.store(false, std::memory_order_release);
 }
 
+void BgcController::CollectDeadWeakHandlesForBgc() {
+    // Must be called after BgcSweep() while the mark bitmap is still valid.
+    // Collects dead weak handles into bgc_dead_weak_handles_.
+    // Fast path: skip if no handles are registered (avoids locking corrupted
+    // handle table state under extreme stress).
+    if (!GcHasAnyHandles()) {
+        return;
+    }
+    std::vector<std::pair<uint64_t, void*>> flat;
+    GcCollectDeadWeakHandles(flat);
+    for (auto& f : flat) {
+        bgc_dead_weak_handles_.push_back({f.first, f.second});
+    }
+}
+
 void BgcController::ForceComplete() {
     // Called under safepoint.  Complete marking and sweep inline.
     auto p = phase_.load(std::memory_order_acquire);
@@ -236,19 +251,17 @@ void BgcController::ForceComplete() {
     // finalizers skipped (the BGC main loop skips CONCURRENT_SWEEP phase when
     // ForceComplete jumps straight to FINISHED).
     if (p == BgcPhase::CONCURRENT_MARK || p == BgcPhase::REMARK_NEEDED) {
-        printf("  DIAG: about to call BgcSweep()\n");
         g_old_gen.BgcSweep();
-        printf("  DIAG: BgcSweep() completed\n");
         bgc_dead_finalizables_ = g_old_gen.CollectDeadFinalizables();
         bgc_dead_weak_handles_.clear();
-        {
-            std::vector<std::pair<uint64_t, void*>> flat;
-            GcCollectDeadWeakHandles(flat);
-            for (auto& f : flat) {
-                bgc_dead_weak_handles_.push_back({f.first, f.second});
-            }
-        }
+        CollectDeadWeakHandlesForBgc();
     }
+
+    // Phase 2b: Run BgcCompact under safepoint to handle deferred page
+    // freeing (pages unlinked by BgcSweep Phase 4b but deferred for
+    // safe VirtualFree) and mark bitmap clearing.
+    // BgcCompact runs under safepoint — no concurrent readers exist.
+    g_old_gen.BgcCompact();
 
     // Phase 3+4: Publish dead finalizables + weak handles to the finalizer
     // thread instead of running them inline.  The finalizer thread processes
@@ -263,10 +276,13 @@ void BgcController::ForceComplete() {
         bgc_dead_weak_handles_.clear();
     }
 
-    // Notify BGC thread to skip to finish.
-    phase_.store(BgcPhase::FINISHED, std::memory_order_release);
+    // Fully complete the cycle: set IDLE directly so that the call to
+    // WaitForCycleComplete() returns with Phase() == IDLE.
+    // The BGC thread will also process the IDLE transition when it wakes,
+    // but since we're under safepoint it's safe to set both here.
     g_bgc_is_marking.store(false, std::memory_order_release);
     bgc_start_requested_.store(false, std::memory_order_release);
+    phase_.store(BgcPhase::IDLE, std::memory_order_release);
     cycle_complete_.store(true, std::memory_order_release);
     NotifyBgc();
 
@@ -688,34 +704,16 @@ void BgcController::BgcThreadMain() {
             // These will be nulled after finalization so that WeakTrackResurrection
             // semantics are preserved (resurrected objects keep their handles).
             bgc_dead_weak_handles_.clear();
-            {
-                std::vector<std::pair<uint64_t, void*>> flat;
-                GcCollectDeadWeakHandles(flat);
-                for (auto& f : flat) {
-                    bgc_dead_weak_handles_.push_back({f.first, f.second});
-                }
-            }
-            if (!bgc_dead_weak_handles_.empty()) {
-                CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "dead_weak_handles count={0}",
-                    static_cast<unsigned long long>(bgc_dead_weak_handles_.size()));
-            }
-
+            CollectDeadWeakHandlesForBgc();
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_sweep_complete");
         }
 
         // ── Phase 4: Signal compaction needed ────────────────────
-        // After concurrent sweep, transition to COMPACT_NEEDED.
-        // The BGC thread sleeps here until a mutator detects the
-        // phase under an allocation slow path, enters a safepoint,
-        // runs StwCompact(), and transitions to FINISHED.
         if (phase_.load(std::memory_order_acquire) == BgcPhase::CONCURRENT_SWEEP) {
             phase_.store(BgcPhase::COMPACT_NEEDED, std::memory_order_release);
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "compact_needed_waiting");
         }
 
-        // BGC thread waits while STW compaction happens (executed by the
-        // requesting mutator under safepoint).  The phase will be set to
-        // FINISHED by StwCompact() after compaction completes.
         {
             std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
             bgc_cv_.wait(lock, [this]() {

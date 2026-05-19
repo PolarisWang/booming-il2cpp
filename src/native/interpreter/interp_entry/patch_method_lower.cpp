@@ -14,6 +14,7 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
     if (method_key == 0) return;
 
     auto* patch_method = reinterpret_cast<PatchMethod*>(method_key);
+
     auto& state = patch_method->ir_state;
 
     // Fast path: already lowered.

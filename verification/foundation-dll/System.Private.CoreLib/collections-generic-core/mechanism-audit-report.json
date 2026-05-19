@@ -5,7 +5,7 @@
   "audited": 47,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 7,
+  "skips_found": 0,
   "methods_without_lowering": 0,
   "methods_without_assert": 47,
   "passed": true,
@@ -434,49 +434,6 @@
       "audit_status": "PASS"
     }
   ],
-  "skip_details": [
-    {
-      "type_name": "List",
-      "method_name": "RemoveAt",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "List",
-      "method_name": "Remove",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Dictionary",
-      "method_name": "ContainsKey",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Dictionary",
-      "method_name": "Remove",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "HashSet",
-      "method_name": "Add",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "HashSet",
-      "method_name": "Contains",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "HashSet",
-      "method_name": "Remove",
-      "param_count": 1,
-      "override_value": "skip"
-    }
-  ],
+  "skip_details": [],
   "errors": []
 }

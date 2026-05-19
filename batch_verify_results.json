@@ -1,56 +1,8 @@
 {
-  "array-indexing-copy": {
-    "status": "passed",
-    "passed": 13,
-    "total": 13,
-    "exit_code": 0
-  },
-  "attributes-custom-metadata": {
-    "status": "passed",
-    "passed": 9,
-    "total": 9,
-    "exit_code": 0
-  },
   "boxing-unboxing-casts": {
     "status": "passed",
     "passed": 11,
     "total": 11,
-    "exit_code": 0
-  },
-  "buffer-memory": {
-    "status": "passed",
-    "passed": 13,
-    "total": 13,
-    "exit_code": 0
-  },
-  "ccw-basic": {
-    "status": "passed",
-    "passed": 19,
-    "total": 19,
-    "exit_code": 0
-  },
-  "collections-generic-core": {
-    "status": "passed",
-    "passed": 16,
-    "total": 16,
-    "exit_code": 0
-  },
-  "convert-char": {
-    "status": "failed",
-    "passed": 0,
-    "total": 0,
-    "exit_code": 3221226505
-  },
-  "delegate-core-invocation": {
-    "status": "failed",
-    "passed": 0,
-    "total": 0,
-    "exit_code": 3221226505
-  },
-  "dispatch-basic": {
-    "status": "passed",
-    "passed": 18,
-    "total": 18,
     "exit_code": 0
   },
   "enum-parsing": {
@@ -65,12 +17,6 @@
     "total": 14,
     "exit_code": 0
   },
-  "garbage-collection": {
-    "status": "passed",
-    "passed": 6,
-    "total": 6,
-    "exit_code": 0
-  },
   "generic-nullable-value": {
     "status": "passed",
     "passed": 10,
@@ -81,24 +27,6 @@
     "status": "passed",
     "passed": 13,
     "total": 13,
-    "exit_code": 0
-  },
-  "guid-random-hashcode": {
-    "status": "passed",
-    "passed": 14,
-    "total": 14,
-    "exit_code": 0
-  },
-  "interface-dispatch": {
-    "status": "passed",
-    "passed": 40,
-    "total": 40,
-    "exit_code": 0
-  },
-  "io-streams-basics": {
-    "status": "passed",
-    "passed": 18,
-    "total": 18,
     "exit_code": 0
   },
   "math-numerics": {
@@ -113,131 +41,10 @@
     "total": 7,
     "exit_code": 0
   },
-  "pinvoke-dllimport": {
-    "status": "passed",
-    "passed": 12,
-    "total": 12,
-    "exit_code": 0
-  },
-  "primitive-numeric-conversions": {
-    "status": "passed",
-    "passed": 15,
-    "total": 15,
-    "exit_code": 0
-  },
-  "primitive-numeric-conversions-core": {
-    "status": "passed",
-    "passed": 20,
-    "total": 20,
-    "exit_code": 0
-  },
-  "rcw-basic": {
-    "status": "passed",
-    "passed": 29,
-    "total": 29,
-    "exit_code": 0
-  },
-  "reflection-activation": {
-    "status": "failed",
-    "passed": 0,
-    "total": 0,
-    "exit_code": 3221226505
-  },
-  "reflection-assembly": {
-    "status": "failed",
-    "passed": 0,
-    "total": 0,
-    "exit_code": 3221226505
-  },
-  "reflection-binding": {
-    "status": "failed",
-    "passed": 0,
-    "total": 0,
-    "exit_code": 3221226505
-  },
-  "reflection-generics": {
-    "status": "failed",
-    "passed": 0,
-    "total": 0,
-    "exit_code": 3221226505
-  },
-  "reflection-member-basics": {
-    "status": "passed",
-    "passed": 14,
-    "total": 14,
-    "exit_code": 0
-  },
-  "reflection-member-complete": {
-    "status": "passed",
-    "passed": 22,
-    "total": 22,
-    "exit_code": 0
-  },
-  "reflection-module": {
-    "status": "passed",
-    "passed": 6,
-    "total": 6,
-    "exit_code": 0
-  },
-  "reflection-parameters": {
-    "status": "passed",
-    "passed": 10,
-    "total": 10,
-    "exit_code": 0
-  },
-  "reflection-type": {
-    "status": "failed",
-    "passed": 0,
-    "total": 0,
-    "exit_code": 3221226505
-  },
-  "runtime-compiler-services": {
-    "status": "passed",
-    "passed": 10,
-    "total": 10,
-    "exit_code": 0
-  },
   "snapshot-prover": {
     "status": "passed",
     "passed": 157,
     "total": 157,
-    "exit_code": 0
-  },
-  "span-memory-buffers": {
-    "status": "failed",
-    "passed": 0,
-    "total": 0,
-    "exit_code": 3221226505
-  },
-  "string-char-text-core": {
-    "status": "passed",
-    "passed": 20,
-    "total": 20,
-    "exit_code": 0
-  },
-  "threading-monitor-interlocked": "build-exception: [WinError 32] The process cannot access the file because it is being used by another process",
-  "threading-tasks-primitives": {
-    "status": "passed",
-    "passed": 22,
-    "total": 22,
-    "exit_code": 0
-  },
-  "threading-thread-basics": {
-    "status": "passed",
-    "passed": 11,
-    "total": 11,
-    "exit_code": 0
-  },
-  "time-date-time-timespan": {
-    "status": "passed",
-    "passed": 16,
-    "total": 16,
-    "exit_code": 0
-  },
-  "type-runtime-handles": {
-    "status": "passed",
-    "passed": 13,
-    "total": 13,
     "exit_code": 0
   }
 }

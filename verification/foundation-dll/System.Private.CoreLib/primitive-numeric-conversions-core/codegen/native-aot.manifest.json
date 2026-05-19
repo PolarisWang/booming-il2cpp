@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
-  "entrySubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+  "entrySubjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions-core/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

@@ -64,6 +64,42 @@
           "slot": 9,
           "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9",
           "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.cctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0",
+          "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void()"
         }
       ]
     }

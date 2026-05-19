@@ -3,100 +3,65 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "codegen-edge-cases-subjects.codegen-edge-cases-subjects.subject-0",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
-      "signature": "System.Void CodegenEdgeCasesSubjects::Subject_0()",
+      "methodId": "codegen-edge-cases-patch-entry.codegen-edge-cases-patch-entry.subject-0",
+      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_0:System.Int32()",
+      "signature": "System.Int32 CodegenEdgeCasesPatchEntry::Subject_0()",
       "identity": {
-        "assemblyName": "CodegenEdgeCasesSubjects",
-        "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
-        "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
-        "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
-        "methodId": "codegen-edge-cases-subjects.codegen-edge-cases-subjects.subject-0",
-        "signature": "System.Void CodegenEdgeCasesSubjects::Subject_0()"
+        "assemblyName": "CodegenEdgeCasesPatchEntry",
+        "declaringTypeSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
+        "definitionSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_0:System.Int32()",
+        "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_0:System.Int32()",
+        "methodId": "codegen-edge-cases-patch-entry.codegen-edge-cases-patch-entry.subject-0",
+        "signature": "System.Int32 CodegenEdgeCasesPatchEntry::Subject_0()"
       },
-      "nativeSymbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0",
+      "nativeSymbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_0",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 4,
-          "handlerOffset": 5,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 16,
-          "ilOffset": 3,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 5,
-          "isPreserveSig": false
-        },
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 1,
-          "ilOffset": 7,
+          "operand": -1342177280,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode",
-          "ilOffset": 8,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
           "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "CodegenEdgeCasesSubjects",
-            "subjectKind": "field",
-            "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "CodegenEdgeCasesSubjects",
-            "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 16,
-          "ilOffset": 14,
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
           "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 16,
+          "ilOffset": 10,
           "isPreserveSig": false
         }
       ],
@@ -108,21 +73,240 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "CodegenEdgeCasesSubjects"
+      "declaringAssemblyName": "CodegenEdgeCasesPatchEntry"
     },
     {
-      "methodId": "codegen-edge-cases-subjects.codegen-edge-cases-subjects.subject-1",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
-      "signature": "System.Void CodegenEdgeCasesSubjects::Subject_1(System.Int32)",
+      "methodId": "codegen-edge-cases-patch-entry.codegen-edge-cases-patch-entry.subject-1",
+      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_1:System.Int32()",
+      "signature": "System.Int32 CodegenEdgeCasesPatchEntry::Subject_1()",
       "identity": {
-        "assemblyName": "CodegenEdgeCasesSubjects",
-        "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
-        "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
-        "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
-        "methodId": "codegen-edge-cases-subjects.codegen-edge-cases-subjects.subject-1",
-        "signature": "System.Void CodegenEdgeCasesSubjects::Subject_1(System.Int32)"
+        "assemblyName": "CodegenEdgeCasesPatchEntry",
+        "declaringTypeSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
+        "definitionSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_1:System.Int32()",
+        "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_1:System.Int32()",
+        "methodId": "codegen-edge-cases-patch-entry.codegen-edge-cases-patch-entry.subject-1",
+        "signature": "System.Int32 CodegenEdgeCasesPatchEntry::Subject_1()"
       },
-      "nativeSymbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32",
+      "nativeSymbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177279,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CodegenEdgeCasesPatchEntry"
+    },
+    {
+      "methodId": "codegen-edge-cases-patch-entry.codegen-edge-cases-patch-entry.subject-2",
+      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_2:System.Int32()",
+      "signature": "System.Int32 CodegenEdgeCasesPatchEntry::Subject_2()",
+      "identity": {
+        "assemblyName": "CodegenEdgeCasesPatchEntry",
+        "declaringTypeSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
+        "definitionSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_2:System.Int32()",
+        "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_2:System.Int32()",
+        "methodId": "codegen-edge-cases-patch-entry.codegen-edge-cases-patch-entry.subject-2",
+        "signature": "System.Int32 CodegenEdgeCasesPatchEntry::Subject_2()"
+      },
+      "nativeSymbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177278,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CodegenEdgeCasesPatchEntry"
+    },
+    {
+      "methodId": "codegen-edge-cases-patch-entry.codegen-edge-cases-patch-entry.subject-3",
+      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_3:System.Int32()",
+      "signature": "System.Int32 CodegenEdgeCasesPatchEntry::Subject_3()",
+      "identity": {
+        "assemblyName": "CodegenEdgeCasesPatchEntry",
+        "declaringTypeSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
+        "definitionSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_3:System.Int32()",
+        "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_3:System.Int32()",
+        "methodId": "codegen-edge-cases-patch-entry.codegen-edge-cases-patch-entry.subject-3",
+        "signature": "System.Int32 CodegenEdgeCasesPatchEntry::Subject_3()"
+      },
+      "nativeSymbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177277,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CodegenEdgeCasesPatchEntry"
+    },
+    {
+      "methodId": "codegen-edge-cases-patch-entry.codegen-edge-cases-patch-entry.run",
+      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Run:System.Void(System.Int32)",
+      "signature": "System.Void CodegenEdgeCasesPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "CodegenEdgeCasesPatchEntry",
+        "declaringTypeSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
+        "definitionSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Run:System.Void(System.Int32)",
+        "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Run:System.Void(System.Int32)",
+        "methodId": "codegen-edge-cases-patch-entry.codegen-edge-cases-patch-entry.run",
+        "signature": "System.Void CodegenEdgeCasesPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Run_System_Int32",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -136,62 +320,289 @@
           "typeShape": 2
         }
       ],
-      "localCount": 0,
+      "localCount": 2,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 4,
-          "handlerOffset": 5,
+          "tryLength": 64,
+          "handlerOffset": 65,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
         {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            30,
+            38,
+            46,
+            54
+          ],
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 62,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "callee": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_0:System.Int32()",
+          "reference": {
+            "assemblyName": "CodegenEdgeCasesPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "CodegenEdgeCasesPatchEntry",
+            "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 35,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 62,
+          "ilOffset": 36,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 38,
+          "resultType": "System.Int32",
+          "callee": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_1:System.Int32()",
+          "reference": {
+            "assemblyName": "CodegenEdgeCasesPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "CodegenEdgeCasesPatchEntry",
+            "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 43,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 62,
+          "ilOffset": 44,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 46,
+          "resultType": "System.Int32",
+          "callee": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_2:System.Int32()",
+          "reference": {
+            "assemblyName": "CodegenEdgeCasesPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "CodegenEdgeCasesPatchEntry",
+            "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 51,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 62,
+          "ilOffset": 52,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 54,
+          "resultType": "System.Int32",
+          "callee": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_3:System.Int32()",
+          "reference": {
+            "assemblyName": "CodegenEdgeCasesPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "CodegenEdgeCasesPatchEntry",
+            "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 59,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 62,
+          "ilOffset": 60,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "leave",
           "opCode": 50,
-          "operand": 16,
-          "ilOffset": 3,
+          "operand": 76,
+          "ilOffset": 63,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 5,
+          "ilOffset": 65,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 7,
+          "ilOffset": 67,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode",
-          "ilOffset": 8,
+          "operand": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::_exitCode",
+          "ilOffset": 68,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "CodegenEdgeCasesSubjects",
+            "assemblyName": "CodegenEdgeCasesPatchEntry",
             "subjectKind": "field",
-            "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode"
+            "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "CodegenEdgeCasesSubjects",
-            "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode",
+            "assemblyName": "CodegenEdgeCasesPatchEntry",
+            "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
+            "declaringTypeSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -201,15 +612,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 16,
-          "ilOffset": 14,
+          "operand": 76,
+          "ilOffset": 74,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 16,
+          "ilOffset": 76,
           "isPreserveSig": false
         }
       ],
@@ -221,228 +632,7 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "CodegenEdgeCasesSubjects"
-    },
-    {
-      "methodId": "codegen-edge-cases-subjects.codegen-edge-cases-subjects.subject-2",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
-      "signature": "System.Void CodegenEdgeCasesSubjects::Subject_2()",
-      "identity": {
-        "assemblyName": "CodegenEdgeCasesSubjects",
-        "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
-        "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
-        "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
-        "methodId": "codegen-edge-cases-subjects.codegen-edge-cases-subjects.subject-2",
-        "signature": "System.Void CodegenEdgeCasesSubjects::Subject_2()"
-      },
-      "nativeSymbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 4,
-          "handlerOffset": 5,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
-      "instructions": [
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 16,
-          "ilOffset": 3,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 7,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode",
-          "ilOffset": 8,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "CodegenEdgeCasesSubjects",
-            "subjectKind": "field",
-            "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "CodegenEdgeCasesSubjects",
-            "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 16,
-          "ilOffset": 14,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 16,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "CodegenEdgeCasesSubjects"
-    },
-    {
-      "methodId": "codegen-edge-cases-subjects.codegen-edge-cases-subjects.subject-3",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
-      "signature": "System.Void CodegenEdgeCasesSubjects::Subject_3(System.Int32)",
-      "identity": {
-        "assemblyName": "CodegenEdgeCasesSubjects",
-        "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
-        "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
-        "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
-        "methodId": "codegen-edge-cases-subjects.codegen-edge-cases-subjects.subject-3",
-        "signature": "System.Void CodegenEdgeCasesSubjects::Subject_3(System.Int32)"
-      },
-      "nativeSymbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 4,
-          "handlerOffset": 5,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
-      "instructions": [
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 16,
-          "ilOffset": 3,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 7,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode",
-          "ilOffset": 8,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "CodegenEdgeCasesSubjects",
-            "subjectKind": "field",
-            "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "CodegenEdgeCasesSubjects",
-            "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 16,
-          "ilOffset": 14,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 16,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "CodegenEdgeCasesSubjects"
+      "declaringAssemblyName": "CodegenEdgeCasesPatchEntry"
     }
   ]
 }

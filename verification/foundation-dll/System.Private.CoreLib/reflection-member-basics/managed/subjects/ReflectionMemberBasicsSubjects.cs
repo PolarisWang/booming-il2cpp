@@ -21,7 +21,7 @@ public static partial class ReflectionMemberBasicsSubjects
     // [1] System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()
     public static void Subject_1()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes() could not be auto-generated
+        if ((int)(typeof(byte).MemberType) != 32) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()
@@ -34,67 +34,74 @@ public static partial class ReflectionMemberBasicsSubjects
     // [3] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
     public static void Subject_3()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[]) could not be auto-generated
+        try { typeof(byte).GetMethods()[0].Invoke(null, new object[0]); _exitCode = 1; }
+        catch (TargetException) { }
     }
 
     // [4] System.Private.CoreLib/System.Reflection.MethodInfo::GetParameters:System.Reflection.ParameterInfo[]()
     public static void Subject_4()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.MethodInfo::GetParameters:System.Reflection.ParameterInfo[]() could not be auto-generated
+        if (((typeof(byte).GetMethods()[0].GetParameters()).Length) != 1) _exitCode = 1;
     }
 
     // [5] System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()
     public static void Subject_5()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type() could not be auto-generated
+        if (((typeof(byte).GetMethods()[0].ReturnType).GetHashCode()) != 35342034) _exitCode = 1;
     }
 
     // [6] System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])
     public static void Subject_6()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[]) could not be auto-generated
+        try { typeof(byte).GetConstructors()[0].Invoke(new object[0]); _exitCode = 1; }
+        catch (IndexOutOfRangeException) { }
     }
 
     // [7] System.Private.CoreLib/System.Reflection.FieldInfo::GetValue:System.Object(System.Object)
     public static void Subject_7()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.FieldInfo::GetValue:System.Object(System.Object) could not be auto-generated
+        if (((typeof(byte).GetFields()[0].GetValue(null)).GetHashCode()) != 255) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object)
     public static void Subject_8()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object) could not be auto-generated
+        try { typeof(byte).GetFields()[0].SetValue(null, (byte)42); _exitCode = 1; }
+        catch (FieldAccessException) { }
     }
 
     // [9] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()
     public static void Subject_9()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type() could not be auto-generated
+        if (((typeof(byte).GetFields()[0].FieldType).GetHashCode()) != 56793269) _exitCode = 1;
     }
 
     // [10] System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object)
     public static void Subject_10()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object) could not be auto-generated
+        try { typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null); _exitCode = 1; }
+        catch (IndexOutOfRangeException) { }
     }
 
     // [11] System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Object[])
     public static void Subject_11()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Object[]) could not be auto-generated
+        try { typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null, null); _exitCode = 1; }
+        catch (IndexOutOfRangeException) { }
     }
 
     // [12] System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object)
     public static void Subject_12()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object) could not be auto-generated
+        try { typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].SetValue(null, (byte)42); _exitCode = 1; }
+        catch (IndexOutOfRangeException) { }
     }
 
     // [13] System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()
     public static void Subject_13()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type() could not be auto-generated
+        try { _ = typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType; _exitCode = 1; }
+        catch (IndexOutOfRangeException) { }
     }
 
 }

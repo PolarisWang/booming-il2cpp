@@ -11,92 +11,92 @@
     "nativeFasterCount": 2,
     "managedFasterCount": 10,
     "equalCount": 0,
-    "averageSpeedupPercent": -397.01
+    "averageSpeedupPercent": -363.48
   },
   "methodResults": [
     {
       "methodSubjectId": "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)",
       "status": "matched",
-      "managedElapsedMs": 3.1669,
-      "nativeElapsedMs": 16.537,
-      "speedupPercent": -422.18
+      "managedElapsedMs": 5.1937,
+      "nativeElapsedMs": 14.703,
+      "speedupPercent": -183.09
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)",
       "status": "matched",
-      "managedElapsedMs": 3.8318,
-      "nativeElapsedMs": 35.522,
-      "speedupPercent": -827.03
+      "managedElapsedMs": 3.1067,
+      "nativeElapsedMs": 34.32,
+      "speedupPercent": -1004.71
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)",
       "status": "matched",
-      "managedElapsedMs": 3.6956,
-      "nativeElapsedMs": 36.466,
-      "speedupPercent": -886.74
+      "managedElapsedMs": 3.0863,
+      "nativeElapsedMs": 34.392,
+      "speedupPercent": -1014.34
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)",
       "status": "matched",
-      "managedElapsedMs": 1.9109,
-      "nativeElapsedMs": 17.565,
-      "speedupPercent": -819.2
+      "managedElapsedMs": 1.9142,
+      "nativeElapsedMs": 14.917,
+      "speedupPercent": -679.28
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)",
       "status": "matched",
-      "managedElapsedMs": 7.2939,
-      "nativeElapsedMs": 17.573,
-      "speedupPercent": -140.93
+      "managedElapsedMs": 7.3712,
+      "nativeElapsedMs": 15.77,
+      "speedupPercent": -113.94
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
       "status": "matched",
-      "managedElapsedMs": 3.8672,
-      "nativeElapsedMs": 17.824,
-      "speedupPercent": -360.9
+      "managedElapsedMs": 3.8016,
+      "nativeElapsedMs": 17.09,
+      "speedupPercent": -349.55
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)",
       "status": "matched",
-      "managedElapsedMs": 4.0909,
-      "nativeElapsedMs": 18.404,
-      "speedupPercent": -349.88
+      "managedElapsedMs": 4.1776,
+      "nativeElapsedMs": 16.801,
+      "speedupPercent": -302.17
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)",
       "status": "matched",
-      "managedElapsedMs": 4.9399,
-      "nativeElapsedMs": 20.495,
-      "speedupPercent": -314.89
+      "managedElapsedMs": 4.3916,
+      "nativeElapsedMs": 15.465,
+      "speedupPercent": -252.15
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Enum::ToString:System.String()",
       "status": "matched",
-      "managedElapsedMs": 1.4114,
-      "nativeElapsedMs": 0.468,
-      "speedupPercent": 66.84
+      "managedElapsedMs": 1.4204,
+      "nativeElapsedMs": 0.459,
+      "speedupPercent": 67.69
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)",
       "status": "matched",
-      "managedElapsedMs": 1.3658,
-      "nativeElapsedMs": 0.324,
-      "speedupPercent": 76.28
+      "managedElapsedMs": 1.2619,
+      "nativeElapsedMs": 0.46,
+      "speedupPercent": 63.55
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
       "status": "matched",
-      "managedElapsedMs": 4.3321,
-      "nativeElapsedMs": 20.808,
-      "speedupPercent": -380.32
+      "managedElapsedMs": 4.2853,
+      "nativeElapsedMs": 16.585,
+      "speedupPercent": -287.02
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)",
       "status": "matched",
-      "managedElapsedMs": 4.2382,
-      "nativeElapsedMs": 21.41,
-      "speedupPercent": -405.17
+      "managedElapsedMs": 4.0907,
+      "nativeElapsedMs": 16.639,
+      "speedupPercent": -306.75
     }
   ]
 }

@@ -4,117 +4,79 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Subject_0:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_1:System.Void()",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Subject_1:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_2:System.Void()",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Subject_2:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_3:System.Void()",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Subject_3:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_4:System.Void()",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Subject_4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_5:System.Void()",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Subject_5:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_6:System.Void()",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Subject_6:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_7:System.Void()",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Subject_7:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_8:System.Void()",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Subject_8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_9:System.Void()",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Subject_9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [
-    {
-      "methodSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_4:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_5:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_6:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_6:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_7:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_9:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_9:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    }
-  ],
+  "dispatchFacts": [],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::_exitCode",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Run:System.Void(System.Int32)",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
 }

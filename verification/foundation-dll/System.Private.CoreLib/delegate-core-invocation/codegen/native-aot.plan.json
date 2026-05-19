@@ -3,9 +3,9 @@
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
   "assemblyName": "DelegateCoreInvocationSubjects",
-  "entrySubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
+  "entrySubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0",
+  "entrySymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

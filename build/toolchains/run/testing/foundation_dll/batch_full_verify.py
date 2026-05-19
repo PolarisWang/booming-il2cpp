@@ -1,5 +1,12 @@
 """Batch: regenerate codegen, rebuild entry, and fact-verify all families.
 Handles GBK encoding on Windows, module path issues, and SEH injection.
+
+Usage:
+    python batch_full_verify.py                    # full rebuild + verify all
+    python batch_full_verify.py --quick            # just run existing entry.exe
+    python batch_full_verify.py --families a,b     # specific families only
+    python batch_full_verify.py --quick --families a,b  # quick scan specific
+    python batch_full_verify.py reflection-type    # resume from family
 """
 import subprocess, sys, os, time, json
 from pathlib import Path
@@ -69,6 +76,14 @@ def build_entry(family_slug, retries=3):
     inject_seh(cmakelists)
 
     build_dir = native_dir / "build"
+
+    # Remove stale build directory to force fresh cmake configure
+    # (file(GLOB) results are cached across cmake runs, so new codegen
+    #  files won't be picked up without a clean configure.)
+    import shutil
+    if build_dir.exists():
+        shutil.rmtree(build_dir, ignore_errors=True)
+
     build_dir.mkdir(parents=True, exist_ok=True)
 
     for attempt in range(1, retries + 1):
@@ -124,7 +139,7 @@ def build_entry(family_slug, retries=3):
     return "ok"
 
 def fact_verify(family_slug):
-    """Direct fact verification without module imports."""
+    """Direct fact verification by running entry.exe."""
     entry = VERIFICATION / family_slug / "native" / "entry.exe"
     if not entry.exists():
         return {"status": "no-entry", "passed": 0, "total": 0, "exit_code": -1}
@@ -147,25 +162,56 @@ def fact_verify(family_slug):
     return {"status": status, "passed": passed, "total": total, "exit_code": rc}
 
 def main():
-    import sys as _sys
-    start_from = _sys.argv[1] if len(_sys.argv) > 1 else None
+    import argparse
+    parser = argparse.ArgumentParser(description="Batch verify all foundation-dll families")
+    parser.add_argument("--quick", action="store_true", help="Skip codegen + build, only run existing entry.exe")
+    parser.add_argument("--families", help="Comma-separated list of families to process (default: all)")
+    parser.add_argument("start_from", nargs="?", help="Resume from this family (positional, ignored if --families set)")
+    args = parser.parse_args()
 
-    families = get_families()
-    if start_from:
+    all_families = get_families()
+
+    if args.families:
+        requested = [f.strip() for f in args.families.split(",")]
+        families = [f for f in all_families if f in requested]
+        missing = set(requested) - set(families)
+        if missing:
+            print(f"Unknown families: {missing}")
+    elif args.start_from:
         try:
-            idx = families.index(start_from)
-            families = families[idx:]
-            print(f"Resuming from [{idx+1}/39] {start_from}")
+            idx = all_families.index(args.start_from)
+            families = all_families[idx:]
+            print(f"Resuming from [{idx+1}/{len(all_families)}] {args.start_from}")
         except ValueError:
-            print(f"Family '{start_from}' not found, starting from beginning")
+            print(f"Family '{args.start_from}' not found, starting from beginning")
+            families = all_families
+    else:
+        families = all_families
 
-    print(f"Found {len(families)} families to process")
+    mode = "QUICK (entry.exe only)" if args.quick else "FULL (codegen + build + verify)"
+    print(f"Batch verify — {mode}")
+    print(f"Families: {len(families)}")
 
     results = {}
     for i, f in enumerate(families):
         print(f"\n[{i+1}/{len(families)}] {f} ...", flush=True)
 
-        # Find DLL
+        if args.quick:
+            # Quick mode: just run entry.exe directly
+            print(f"    quick scan...", flush=True)
+            try:
+                vr = fact_verify(f)
+                status = vr["status"]
+                passed = vr["passed"]
+                total = vr["total"]
+                print(f"    => {status} ({passed}/{total})", flush=True)
+                results[f] = {"status": status, "passed": passed, "total": total, "exit_code": vr["exit_code"]}
+            except Exception as e:
+                print(f"    QUICK exception: {e}", flush=True)
+                results[f] = f"quick-exception: {e}"
+            continue
+
+        # Full mode: find DLL → codegen → build → verify
         try:
             dll = find_dll(f)
             if dll is None:
@@ -177,7 +223,6 @@ def main():
             results[f] = f"find-dll-error: {e}"
             continue
 
-        # Codegen
         try:
             if not run_codegen(f, dll):
                 results[f] = "codegen-fail"
@@ -187,7 +232,6 @@ def main():
             results[f] = f"codegen-exception: {e}"
             continue
 
-        # Build
         try:
             build_status = build_entry(f)
             if build_status != "ok":
@@ -199,7 +243,6 @@ def main():
             results[f] = f"build-exception: {e}"
             continue
 
-        # Fact verify
         print(f"    verify...", flush=True)
         try:
             vr = fact_verify(f)

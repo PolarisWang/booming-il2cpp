@@ -1378,6 +1378,35 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::NewArr: {
         if (!instr.has_src1() || !instr.has_dst()) return false;
+        static constexpr int32_t kArrSize = static_cast<int32_t>(sizeof(interpreter::ArrayStorage));
+
+        // ═══ TLAB inline allocation path ═══
+        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenGetTlab));
+        EmitCallWithSpill(kRAX);           // rax = &tls_tlab
+
+        EmitMovRM(buf_, kRCX, kRAX, 8);   // rcx = tls_tlab.current
+        EmitLeaRM(buf_, kRBX, kRCX, kArrSize); // rbx = new current
+        EmitMovRM(buf_, kRDX, kRAX, 16);  // rdx = tls_tlab.end
+        EmitCmpRR(buf_, kRBX, kRDX);
+        uint32_t newarr_ja_pos = buf_.pos();
+        EmitJccRel32(buf_, kCC_A, 0);     // ja slow_path
+
+        // TLAB HIT: bump
+        EmitMovMR(buf_, kRAX, 8, kRBX);   // tls_tlab.current = new_ptr
+
+        // CodegenNewArrTlab(mem=rcx, length=rdx) — placement new + elements.resize
+        LoadGpr(kRDX, instr.src1_reg());  // rdx = length
+        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenNewArrTlab));
+        EmitCallWithSpill(kRAX);
+        StoreGpr(kRAX, instr.dst_reg());
+
+        uint32_t newarr_jmp_done_pos = buf_.pos();
+        EmitJmpRel32(buf_, 0);            // skip slow path
+
+        // ═══ Slow path (TLAB miss) ═══
+        uint32_t newarr_slow_pos = buf_.pos();
+        buf_.Patch32(newarr_ja_pos + 2, newarr_slow_pos - (newarr_ja_pos + 6));
+
         LoadGpr(kRCX, instr.src1_reg());
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenNewArr));
         uint32_t call_pos = buf_.pos();
@@ -1393,6 +1422,9 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         }
         RecordGcPoint(call_pos);
         StoreGpr(kRAX, instr.dst_reg());
+
+        uint32_t newarr_done_pos = buf_.pos();
+        buf_.Patch32(newarr_jmp_done_pos + 1, newarr_done_pos - (newarr_jmp_done_pos + 5));
         return true;
     }
 
@@ -1845,6 +1877,7 @@ static void OptimizeInstructions(
         const auto& ri = instrs[i];
         if (ri.has_src1() && ri.src1_reg() < 64) ++use_count[ri.src1_reg()];
         if (ri.has_src2() && ri.src2_reg() < 64) ++use_count[ri.src2_reg()];
+        if ((ri.flags() & interpreter::kRegHasSrc3) && ri.src3_reg() < 64) ++use_count[ri.src3_reg()];
     }
 
     // ── Header builder for folded instructions ───────────────────────
@@ -1917,6 +1950,28 @@ static void OptimizeInstructions(
             }
         }
 
+        // (a2) Constant folding — unary Neg/Not with constant src
+        if (opc == interpreter::IROpCode::Neg && ri.has_dst() && ri.has_src1()) {
+            const int32_t* v = FindDefLdcI4(i, ri.src1_reg());
+            if (v) {
+                ri.header = MakeHdr(interpreter::IROpCode::LdcI4, ri.dst_reg(), 0, 0,
+                                    interpreter::kRegHasDst | interpreter::kRegHasImm);
+                ri.imm.i4 = -*v;
+                did_opt = true;
+                continue;
+            }
+        }
+        if (opc == interpreter::IROpCode::Not && ri.has_dst() && ri.has_src1()) {
+            const int32_t* v = FindDefLdcI4(i, ri.src1_reg());
+            if (v) {
+                ri.header = MakeHdr(interpreter::IROpCode::LdcI4, ri.dst_reg(), 0, 0,
+                                    interpreter::kRegHasDst | interpreter::kRegHasImm);
+                ri.imm.i4 = ~(*v);
+                did_opt = true;
+                continue;
+            }
+        }
+
         // (b) DCE — unused LdcI4
         if (opc == interpreter::IROpCode::LdcI4 && ri.has_dst()) {
             uint8_t dst = ri.dst_reg();
@@ -1982,6 +2037,46 @@ static void OptimizeInstructions(
             }
         }
 
+        // (e2) Extended dead store: non-adjacent StLoc to same local (EBB-safe scan)
+        if (opc == interpreter::IROpCode::StLoc && ri.has_src1() && i > 0) {
+            uint32_t local_idx = ri.imm.operand_index;
+            const uint32_t kMaxScan = 20;
+            for (uint32_t j = i; j > 0 && (i - j) < kMaxScan; --j) {
+                uint32_t idx = j - 1;
+                if (removed_mask[idx]) continue;
+                auto& prev = instrs[idx];
+                auto prev_opc = prev.op_code();
+                // Stop at branches, calls, or terminators (different execution path)
+                if (prev_opc == interpreter::IROpCode::Br ||
+                    prev_opc == interpreter::IROpCode::BrTrue ||
+                    prev_opc == interpreter::IROpCode::BrFalse ||
+                    prev_opc == interpreter::IROpCode::Beq ||
+                    prev_opc == interpreter::IROpCode::Blt ||
+                    prev_opc == interpreter::IROpCode::Bgt ||
+                    prev_opc == interpreter::IROpCode::Ble ||
+                    prev_opc == interpreter::IROpCode::Bge ||
+                    prev_opc == interpreter::IROpCode::BneUn ||
+                    prev_opc == interpreter::IROpCode::BgeUn ||
+                    prev_opc == interpreter::IROpCode::BgtUn ||
+                    prev_opc == interpreter::IROpCode::BleUn ||
+                    prev_opc == interpreter::IROpCode::BltUn ||
+                    prev_opc == interpreter::IROpCode::Switch ||
+                    prev_opc == interpreter::IROpCode::Call ||
+                    prev_opc == interpreter::IROpCode::CallVirt)
+                    break;
+                if (prev_opc == interpreter::IROpCode::StLoc &&
+                    prev.imm.operand_index == local_idx) {
+                    removed_mask[idx] = 1;  // previous StLoc is dead
+                    did_opt = true;
+                    break;
+                }
+                if (prev_opc == interpreter::IROpCode::LdLoc &&
+                    prev.src1_reg() == local_idx) {
+                    break;  // LdLoc reads this local — not dead
+                }
+            }
+        }
+
         // (f) Copy propagation: Dup elimination + forwarding
         if (opc == interpreter::IROpCode::Dup && ri.has_dst() && ri.has_src1()) {
             uint8_t dup_dst = ri.dst_reg();
@@ -2009,6 +2104,29 @@ static void OptimizeInstructions(
                     next.header = nh;
                     removed_mask[i] = 1;
                     did_opt = true;
+                }
+            }
+            // (f3) Multi-hop Dup forwarding: find first non-removed user past i+1
+            if (!removed_mask[i] && dup_dst < 64 && use_count[dup_dst] == 1) {
+                for (uint32_t k = i + 1; k < n; ++k) {
+                    if (removed_mask[k]) continue;
+                    auto& later = instrs[k];
+                    uint64_t nh = later.header;
+                    bool changed = false;
+                    if (later.has_src1() && later.src1_reg() == dup_dst) {
+                        nh = (nh & ~(0xFFULL << 24)) | (static_cast<uint64_t>(dup_src) << 24);
+                        changed = true;
+                    }
+                    if (later.has_src2() && later.src2_reg() == dup_dst) {
+                        nh = (nh & ~(0xFFULL << 32)) | (static_cast<uint64_t>(dup_src) << 32);
+                        changed = true;
+                    }
+                    if (changed) {
+                        later.header = nh;
+                        removed_mask[i] = 1;
+                        did_opt = true;
+                    }
+                    break;  // only forward to the first non-removed user
                 }
             }
         }
@@ -2048,6 +2166,64 @@ static void OptimizeInstructions(
                         removed_mask[i] = 1;
                         did_opt = true;
                     }
+                }
+            }
+            // (g3) Non-adjacent StLoc→LdLoc forwarding (single-use, EBB-safe)
+            if (!removed_mask[i] && ldst < 64 && use_count[ldst] == 1 && i > 0) {
+                uint8_t local_vreg = ri.src1_reg();
+                const uint32_t kMaxScan = 20;
+                // Scan backward for the defining StLoc
+                for (uint32_t j = i; j > 0 && (i - j) < kMaxScan; --j) {
+                    uint32_t idx = j - 1;
+                    if (removed_mask[idx]) continue;
+                    auto& prev = instrs[idx];
+                    auto prev_opc = prev.op_code();
+                    if (prev_opc == interpreter::IROpCode::StLoc &&
+                        prev.imm.operand_index == local_vreg &&
+                        prev.has_src1())
+                    {
+                        uint8_t store_src = prev.src1_reg();
+                        // Scan forward from LdLoc for the single user
+                        for (uint32_t k = i + 1; k < n; ++k) {
+                            if (removed_mask[k]) continue;
+                            auto& later = instrs[k];
+                            uint64_t nh = later.header;
+                            bool changed = false;
+                            if (later.has_src1() && later.src1_reg() == ldst) {
+                                nh = (nh & ~(0xFFULL << 24)) | (static_cast<uint64_t>(store_src) << 24);
+                                changed = true;
+                            }
+                            if (later.has_src2() && later.src2_reg() == ldst) {
+                                nh = (nh & ~(0xFFULL << 32)) | (static_cast<uint64_t>(store_src) << 32);
+                                changed = true;
+                            }
+                            if (changed) {
+                                later.header = nh;
+                                removed_mask[i] = 1;
+                                did_opt = true;
+                            }
+                            break;
+                        }
+                        break;
+                    }
+                    // Stop at branches/calls
+                    if (prev_opc == interpreter::IROpCode::Br ||
+                        prev_opc == interpreter::IROpCode::BrTrue ||
+                        prev_opc == interpreter::IROpCode::BrFalse ||
+                        prev_opc == interpreter::IROpCode::Beq ||
+                        prev_opc == interpreter::IROpCode::Blt ||
+                        prev_opc == interpreter::IROpCode::Bgt ||
+                        prev_opc == interpreter::IROpCode::Ble ||
+                        prev_opc == interpreter::IROpCode::Bge ||
+                        prev_opc == interpreter::IROpCode::BneUn ||
+                        prev_opc == interpreter::IROpCode::BgeUn ||
+                        prev_opc == interpreter::IROpCode::BgtUn ||
+                        prev_opc == interpreter::IROpCode::BleUn ||
+                        prev_opc == interpreter::IROpCode::BltUn ||
+                        prev_opc == interpreter::IROpCode::Switch ||
+                        prev_opc == interpreter::IROpCode::Call ||
+                        prev_opc == interpreter::IROpCode::CallVirt)
+                        break;
                 }
             }
         }
@@ -2140,6 +2316,35 @@ static void OptimizeInstructions(
                                         interpreter::kRegHasDst | interpreter::kRegHasSrc1);
                     ri.imm.i4 = 0;
                     identity_opt = true;
+                } else {
+                    // x & 0 → 0 (src2 is constant 0)
+                    const int32_t* v2 = FindDefLdcI4(i, ri.src2_reg());
+                    if (v2 && *v2 == 0) {
+                        ri.header = MakeHdr(interpreter::IROpCode::LdcI4, ri.dst_reg(), 0, 0,
+                                            interpreter::kRegHasDst | interpreter::kRegHasImm);
+                        ri.imm.i4 = 0;
+                        identity_opt = true;
+                    }
+                }
+            }
+
+            if (!identity_opt && opc == interpreter::IROpCode::Or && ri.has_src2()) {
+                if (ri.src1_reg() == ri.src2_reg()) {
+                    // x | x → x
+                    ri.header = MakeHdr(interpreter::IROpCode::Dup, ri.dst_reg(), ri.src1_reg(), 0,
+                                        interpreter::kRegHasDst | interpreter::kRegHasSrc1);
+                    ri.imm.i4 = 0;
+                    identity_opt = true;
+                }
+            }
+
+            if (!identity_opt && opc == interpreter::IROpCode::Xor && ri.has_src2()) {
+                if (ri.src1_reg() == ri.src2_reg()) {
+                    // x ^ x → 0
+                    ri.header = MakeHdr(interpreter::IROpCode::LdcI4, ri.dst_reg(), 0, 0,
+                                        interpreter::kRegHasDst | interpreter::kRegHasImm);
+                    ri.imm.i4 = 0;
+                    identity_opt = true;
                 }
             }
 
@@ -2154,6 +2359,152 @@ static void OptimizeInstructions(
             }
 
             if (identity_opt) {
+                did_opt = true;
+                continue;
+            }
+        }
+
+        // (j) DivUn/RemUn by power of 2 → shift/and
+        if (ri.has_dst() && ri.has_src1() && ri.has_src2()) {
+            if (opc == interpreter::IROpCode::DivUn || opc == interpreter::IROpCode::RemUn) {
+                const int32_t* v2 = FindDefLdcI4(i, ri.src2_reg());
+                if (v2 && *v2 > 0) {
+                    uint32_t shift = 0;
+                    uint32_t uv = static_cast<uint32_t>(*v2);
+                    if (uv && (uv & (uv - 1)) == 0) {
+                        while ((uv >> shift) > 1) ++shift;
+                        if (opc == interpreter::IROpCode::DivUn) {
+                            // DivUn by 2^k → Shr by k
+                            ri.header = MakeHdr(interpreter::IROpCode::Shr, ri.dst_reg(), ri.src1_reg(), ri.src2_reg(),
+                                                interpreter::kRegHasDst | interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2);
+                            // Replace src2 with LdcI4(k) — update the defining LdcI4
+                            uint8_t src2_reg = ri.src2_reg();
+                            for (uint32_t j = i; j > 0; --j) {
+                                auto& prev = instrs[j - 1];
+                                if (prev.has_dst() && prev.dst_reg() == src2_reg &&
+                                    prev.op_code() == interpreter::IROpCode::LdcI4) {
+                                    prev.imm.i4 = static_cast<int32_t>(shift);
+                                    break;
+                                }
+                            }
+                            did_opt = true;
+                            continue;
+                        } else {
+                            // RemUn by 2^k → And with (2^k - 1)
+                            uint32_t mask = (1u << shift) - 1u;
+                            ri.header = MakeHdr(interpreter::IROpCode::And, ri.dst_reg(), ri.src1_reg(), ri.src2_reg(),
+                                                interpreter::kRegHasDst | interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2);
+                            uint8_t src2_reg = ri.src2_reg();
+                            for (uint32_t j = i; j > 0; --j) {
+                                auto& prev = instrs[j - 1];
+                                if (prev.has_dst() && prev.dst_reg() == src2_reg &&
+                                    prev.op_code() == interpreter::IROpCode::LdcI4) {
+                                    prev.imm.i4 = static_cast<int32_t>(mask);
+                                    break;
+                                }
+                            }
+                            did_opt = true;
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+
+        // (k) Ceq/Clt/Cgt self-comparison → constant
+        if (ri.has_dst() && ri.has_src1() && ri.has_src2() && ri.src1_reg() == ri.src2_reg()) {
+            if (opc == interpreter::IROpCode::Ceq) {
+                // x == x → 1
+                ri.header = MakeHdr(interpreter::IROpCode::LdcI4, ri.dst_reg(), 0, 0,
+                                    interpreter::kRegHasDst | interpreter::kRegHasImm);
+                ri.imm.i4 = 1;
+                did_opt = true;
+                continue;
+            }
+            if (opc == interpreter::IROpCode::Clt || opc == interpreter::IROpCode::Cgt) {
+                // x < x → 0,  x > x → 0
+                ri.header = MakeHdr(interpreter::IROpCode::LdcI4, ri.dst_reg(), 0, 0,
+                                    interpreter::kRegHasDst | interpreter::kRegHasImm);
+                ri.imm.i4 = 0;
+                did_opt = true;
+                continue;
+            }
+        }
+
+        // (l) Branch-to-switch conversion: consecutive Beq (same src1 vs different LdcI4) → Switch
+        if (opc == interpreter::IROpCode::Beq && ri.has_src1() && ri.has_src2() && !removed_mask[i]) {
+            uint8_t switch_reg = ri.src1_reg();
+            uint32_t max_cases = (n - i) / 2;  // each case = Beq (+ optional LdcI4)
+            if (max_cases > 64) max_cases = 64;
+
+            // Collect cases: (value_k, target_k) pairs
+            struct BeqCase { int32_t value; uint32_t target; uint32_t beq_idx; };
+            BeqCase cases[64];
+            uint32_t case_count = 0;
+            bool valid_chain = true;
+            uint32_t default_target = n;  // fall-through
+
+            for (uint32_t j = i; j < n && case_count < max_cases; ) {
+                if (j > i) {
+                    // Skip any LdcI4 that defines the Beq's src2
+                    if (instrs[j].op_code() == interpreter::IROpCode::LdcI4 &&
+                        instrs[j].has_dst() && !removed_mask[j]) {
+                        ++j;
+                        continue;
+                    }
+                }
+                auto& cur = instrs[j];
+                if (cur.op_code() != interpreter::IROpCode::Beq ||
+                    !cur.has_src1() || !cur.has_src2() ||
+                    cur.src1_reg() != switch_reg || removed_mask[j])
+                {
+                    // Check for trailing Br (default target)
+                    if (cur.op_code() == interpreter::IROpCode::Br &&
+                        cur.has_imm() && case_count >= 3) {
+                        default_target = cur.imm.branch_target;
+                        removed_mask[j] = 1;  // remove Br, Switch handles default
+                        did_opt = true;
+                    }
+                    if (case_count < 3) valid_chain = false;
+                    break;
+                }
+                // Find the LdcI4 defining this Beq's src2 (scan backward from j)
+                uint8_t src2 = cur.src2_reg();
+                const int32_t* val = FindDefLdcI4(j, src2);
+                if (val == nullptr) { valid_chain = false; break; }
+                cases[case_count].value = *val;
+                cases[case_count].target = cur.imm.branch_target;
+                cases[case_count].beq_idx = j;
+                ++case_count;
+                ++j;
+            }
+
+            if (valid_chain && case_count >= 3) {
+                // Build targets array: [case_0, case_1, ..., case_n-1, default]
+                static uint32_t s_switch_targets[256];
+                uint32_t tc = case_count;
+                for (uint32_t c = 0; c < tc; ++c) {
+                    s_switch_targets[c] = cases[c].target;
+                }
+                s_switch_targets[tc] = default_target;
+
+                // Replace first Beq with Switch
+                uint64_t switch_header =
+                    static_cast<uint64_t>(interpreter::IROpCode::Switch) |
+                    (static_cast<uint64_t>(0) << 16) |      // no dst
+                    (static_cast<uint64_t>(switch_reg) << 24) |
+                    (static_cast<uint64_t>(0) << 32) |      // no src2
+                    (static_cast<uint64_t>(interpreter::kRegHasSrc1 |
+                                           interpreter::kRegHasImm |
+                                           interpreter::kRegIsBranch) << 40) |
+                    (static_cast<uint64_t>(tc & 0x7FFF) << 48);
+                ri.header = switch_header;
+                ri.imm.ptr = s_switch_targets;
+
+                // Mark subsequent Beqs as removed
+                for (uint32_t c = 1; c < tc; ++c) {
+                    removed_mask[cases[c].beq_idx] = 1;
+                }
                 did_opt = true;
                 continue;
             }

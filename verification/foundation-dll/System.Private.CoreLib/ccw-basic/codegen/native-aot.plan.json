@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "CcwBasicPatchEntry",
-  "entrySubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "CcwBasicSubjects",
+  "entrySubjectId": "CcwBasicSubjects/CcwBasicNativeEntry::Run:System.Int32(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Run_System_Int32",
+  "entrySymbol": "CcwBasicSubjects_CcwBasicNativeEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

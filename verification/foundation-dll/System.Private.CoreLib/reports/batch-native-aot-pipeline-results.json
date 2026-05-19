@@ -6,7 +6,7 @@
   "failed": 0,
   "results": [
     {
-      "family": "codegen-edge-cases",
+      "family": "reflection-assembly",
       "config_tier": "CHECK",
       "steps": {
         "build_subjects": "OK",
@@ -14,10 +14,10 @@
         "build_entry_exe": "OK"
       },
       "success": true,
-      "methodCount": 4,
+      "methodCount": 22,
       "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\build-output\\CodegenEdgeCasesSubjects.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-assembly\\managed\\subjects\\build-output\\ReflectionAssemblySubjects.dll"
     }
   ],
-  "timestamp": "2026-05-19T17:31:39"
+  "timestamp": "2026-05-19T18:44:50"
 }

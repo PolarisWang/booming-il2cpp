@@ -5,7 +5,7 @@
   "audited": 31,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 3,
+  "skips_found": 2,
   "methods_without_lowering": 0,
   "methods_without_assert": 31,
   "passed": true,
@@ -301,12 +301,6 @@
       "type_name": "Activator",
       "method_name": "CreateInstance",
       "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "ConstructorInfo",
-      "method_name": "Invoke",
-      "param_count": 1,
       "override_value": "skip"
     }
   ],

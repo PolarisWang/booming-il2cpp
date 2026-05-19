@@ -14,19 +14,19 @@ public static partial class TypeRuntimeHandlesSubjects
     // [0] System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
     public static void Subject_0()
     {
-        // TODO: System.Private.CoreLib/System.Type::GetType:System.Type(System.String) could not be auto-generated
+        if (((Type.GetType("System.Int32")).GetHashCode()) != 7880838) _exitCode = 1;
     }
 
     // [1] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)
     public static void Subject_1()
     {
-        // TODO: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean) could not be auto-generated
+        if (((Type.GetType("System.Int32", false)).GetHashCode()) != 7880838) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)
     public static void Subject_2()
     {
-        // TODO: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean) could not be auto-generated
+        if (((Type.GetType("System.Int32", false, false)).GetHashCode()) != 7880838) _exitCode = 1;
     }
 
     // [3] System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)
@@ -57,7 +57,7 @@ public static partial class TypeRuntimeHandlesSubjects
     // [7] System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()
     public static void Subject_7()
     {
-        if (((typeof(byte).TypeHandle).GetHashCode()) != 35342034) _exitCode = 1;
+        if (((typeof(byte).TypeHandle).GetHashCode()) != 56793269) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.Type::get_FullName:System.String()
@@ -75,7 +75,7 @@ public static partial class TypeRuntimeHandlesSubjects
     // [10] System.Private.CoreLib/System.Type::get_BaseType:System.Type()
     public static void Subject_10()
     {
-        if (((typeof(byte).BaseType).GetHashCode()) != 56793269) _exitCode = 1;
+        if (((typeof(byte).BaseType).GetHashCode()) != 115000) _exitCode = 1;
     }
 
     // [11] System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()

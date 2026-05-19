@@ -2,8 +2,8 @@
   "family": "ccw-basic",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T13:53:18",
-  "duration_ms": 10505,
+  "timestamp": "2026-05-19T19:07:22",
+  "duration_ms": 21370,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -21,30 +21,28 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "convert-to-cpp failed",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "OK",
-          "convert_to_cpp": "FAILED"
-        }
+        "methodCount": 5,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\ccw-basic\\managed\\subjects\\build-output\\CcwBasicSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 7621
+      "duration_ms": 17981
     },
     "fact": {
       "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (20/20)",
+      "status": "failed",
+      "summary": "Fact verify=failed (14/19)",
       "details": {
         "fact": {
-          "status": "passed",
-          "passed": 20,
-          "total": 20
+          "status": "failed",
+          "passed": 14,
+          "total": 19
         }
       },
       "errors": [],
-      "duration_ms": 33
+      "duration_ms": 339
     },
     "audit": {
       "stage": "audit",
@@ -58,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 736
+      "duration_ms": 638
     },
     "benchmark": {
       "stage": "benchmark",
@@ -74,13 +72,13 @@
         "benchmarkQuality": "matchedCount=0/5 below threshold 50%"
       },
       "errors": [],
-      "duration_ms": 2110
+      "duration_ms": 2410
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
+    "methodCoverage": 73.68,
     "testedRate": 100.0,
-    "overall": 100.0
+    "overall": 86.84
   },
   "dashboard": {
     "interpreter": {},

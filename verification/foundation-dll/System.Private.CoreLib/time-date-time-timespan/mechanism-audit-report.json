@@ -5,7 +5,7 @@
   "audited": 47,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 1,
+  "skips_found": 0,
   "methods_without_lowering": 0,
   "methods_without_assert": 47,
   "passed": true,
@@ -434,13 +434,6 @@
       "audit_status": "PASS"
     }
   ],
-  "skip_details": [
-    {
-      "type_name": "DateTime",
-      "method_name": "TryParse",
-      "param_count": 2,
-      "override_value": "skip"
-    }
-  ],
+  "skip_details": [],
   "errors": []
 }

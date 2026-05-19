@@ -75,7 +75,8 @@ public static partial class ThreadingThreadBasicsSubjects
     // [10] System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)
     public static void Subject_10()
     {
-        // TODO: System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32) could not be auto-generated
+        try { Thread.Sleep(42); _exitCode = 1; }
+        catch (ThreadInterruptedException) { }
     }
 
 }

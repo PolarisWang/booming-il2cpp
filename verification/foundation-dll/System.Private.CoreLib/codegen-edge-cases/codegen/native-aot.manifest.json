@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "CodegenEdgeCasesSubjects",
-  "entrySubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
+  "assemblyName": "CodegenEdgeCasesPatchEntry",
+  "entrySubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Run:System.Void(System.Int32)",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/codegen-edge-cases/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

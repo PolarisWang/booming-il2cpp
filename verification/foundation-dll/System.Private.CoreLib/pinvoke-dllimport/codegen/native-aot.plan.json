@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "PinvokeDllimportPatchEntry",
-  "entrySubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "PinvokeDllimportSubjects",
+  "entrySubjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetCurrentProcess:System.IntPtr()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "PinvokeDllimportPatchEntry_PinvokeDllimportPatchEntry_Run_System_Int32",
+  "entrySymbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentProcess",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

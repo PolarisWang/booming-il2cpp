@@ -150,7 +150,7 @@ public static partial class ReflectionAssemblySubjects
     // [21] System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
     public static void Subject_21()
     {
-        // TODO: System.Private.CoreLib/System.Type::GetType:System.Type(System.String) could not be auto-generated
+        if (((Type.GetType("System.Int32")).GetHashCode()) != 1495009) _exitCode = 1;
     }
 
 }

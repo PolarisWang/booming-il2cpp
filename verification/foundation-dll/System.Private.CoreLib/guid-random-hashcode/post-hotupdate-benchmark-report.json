@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/guid/random/hashcode",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 279.45,
+      "postPatchNsPerOp": 262.8,
+      "slowdownPercent": -5.96
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.Byte[])",
+      "status": "passed",
+      "prePatchNsPerOp": 1077.68,
+      "postPatchNsPerOp": 632.1,
+      "slowdownPercent": -41.35
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 312.61,
+      "postPatchNsPerOp": 270.1,
+      "slowdownPercent": -13.6
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)",
+      "status": "passed",
+      "prePatchNsPerOp": 25.91,
+      "postPatchNsPerOp": 29.7,
+      "slowdownPercent": 14.63
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Guid::ToString:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 402.79,
+      "postPatchNsPerOp": 314.0,
+      "slowdownPercent": -22.04
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Random::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 192.25,
+      "postPatchNsPerOp": 192.9,
+      "slowdownPercent": 0.34
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 189.67,
+      "postPatchNsPerOp": 188.1,
+      "slowdownPercent": -0.83
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 198.63,
+      "postPatchNsPerOp": 211.0,
+      "slowdownPercent": 6.23
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Random::NextDouble:System.Double()",
+      "status": "passed",
+      "prePatchNsPerOp": 194.42,
+      "postPatchNsPerOp": 215.1,
+      "slowdownPercent": 10.64
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])",
+      "status": "passed",
+      "prePatchNsPerOp": 1039.41,
+      "postPatchNsPerOp": 611.7,
+      "slowdownPercent": -41.15
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 7.03,
+      "postPatchNsPerOp": 9.3,
+      "slowdownPercent": 32.29
+    }
+  ],
+  "summary": {
+    "totalMethods": 14,
+    "nonStubMethods": 11,
+    "averageSlowdownPercent": -5.53,
+    "slowdownFactor": 0.9447,
+    "slowdownThresholdX": 50.0
+  }
+}

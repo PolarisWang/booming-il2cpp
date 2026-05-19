@@ -3,75 +3,315 @@
   "artifactKind": "supplementalMetadataTemplate",
   "registeredTypes": [
     {
-      "assemblyName": "RcwBasicPatchEntry",
-      "subjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry",
-      "definitionSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry",
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
       "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/ISimpleMath",
+      "definitionSubjectId": "RcwBasicSubjects/ISimpleMath",
+      "metadataToken": 33554435
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/IConstantValue",
+      "definitionSubjectId": "RcwBasicSubjects/IConstantValue",
+      "metadataToken": 33554436
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/SimpleMath",
+      "definitionSubjectId": "RcwBasicSubjects/SimpleMath",
+      "metadataToken": 33554437
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/ConstantFortyTwo",
+      "definitionSubjectId": "RcwBasicSubjects/ConstantFortyTwo",
+      "metadataToken": 33554438
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 33554439
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RuntimeState",
+      "definitionSubjectId": "RcwBasicSubjects/RuntimeState",
+      "metadataToken": 33554440
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "RcwBasicSubjects/\u003CPrivateImplementationDetails\u003E",
+      "metadataToken": 33554441
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=16",
+      "definitionSubjectId": "RcwBasicSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=16",
+      "metadataToken": 33554442
     }
   ],
   "registeredMethods": [
     {
-      "assemblyName": "RcwBasicPatchEntry",
-      "subjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_0:System.Int32()",
-      "definitionSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_0:System.Int32()",
-      "declaringTypeSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry",
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
       "metadataToken": 100663297,
       "parameterCount": 0
     },
     {
-      "assemblyName": "RcwBasicPatchEntry",
-      "subjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_1:System.Int32()",
-      "definitionSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_1:System.Int32()",
-      "declaringTypeSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry",
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
       "metadataToken": 100663298,
       "parameterCount": 0
     },
     {
-      "assemblyName": "RcwBasicPatchEntry",
-      "subjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_2:System.Int32()",
-      "definitionSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_2:System.Int32()",
-      "declaringTypeSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry",
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
       "metadataToken": 100663299,
       "parameterCount": 0
     },
     {
-      "assemblyName": "RcwBasicPatchEntry",
-      "subjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_3:System.Int32()",
-      "definitionSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_3:System.Int32()",
-      "declaringTypeSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry",
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
       "metadataToken": 100663300,
       "parameterCount": 0
     },
     {
-      "assemblyName": "RcwBasicPatchEntry",
-      "subjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_4:System.Int32()",
-      "definitionSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_4:System.Int32()",
-      "declaringTypeSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry",
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
       "metadataToken": 100663301,
       "parameterCount": 0
     },
     {
-      "assemblyName": "RcwBasicPatchEntry",
-      "subjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_5:System.Int32()",
-      "definitionSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_5:System.Int32()",
-      "declaringTypeSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry",
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
       "metadataToken": 100663302,
       "parameterCount": 0
     },
     {
-      "assemblyName": "RcwBasicPatchEntry",
-      "subjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_6:System.Int32()",
-      "definitionSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Subject_6:System.Int32()",
-      "declaringTypeSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry",
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicSubjects",
       "metadataToken": 100663303,
       "parameterCount": 0
     },
     {
-      "assemblyName": "RcwBasicPatchEntry",
-      "subjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry",
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/ISimpleMath::Add:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "RcwBasicSubjects/ISimpleMath::Add:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/ISimpleMath",
       "metadataToken": 100663304,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/ISimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "RcwBasicSubjects/ISimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/ISimpleMath",
+      "metadataToken": 100663305,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/IConstantValue::GetValue:System.Int32()",
+      "definitionSubjectId": "RcwBasicSubjects/IConstantValue::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/IConstantValue",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/SimpleMath::Add:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "RcwBasicSubjects/SimpleMath::Add:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/SimpleMath",
+      "metadataToken": 100663307,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/SimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "RcwBasicSubjects/SimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/SimpleMath",
+      "metadataToken": 100663308,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/SimpleMath::.ctor:System.Void()",
+      "definitionSubjectId": "RcwBasicSubjects/SimpleMath::.ctor:System.Void()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/SimpleMath",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/ConstantFortyTwo::GetValue:System.Int32()",
+      "definitionSubjectId": "RcwBasicSubjects/ConstantFortyTwo::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/ConstantFortyTwo",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/ConstantFortyTwo::.ctor:System.Void()",
+      "definitionSubjectId": "RcwBasicSubjects/ConstantFortyTwo::.ctor:System.Void()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/ConstantFortyTwo",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663312,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663319,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateCcw:System.IntPtr(System.IntPtr,System.IntPtr)",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateCcw:System.IntPtr(System.IntPtr,System.IntPtr)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663320,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663321,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663322,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663323,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalRcwQueryInterface:System.IntPtr(System.IntPtr,System.IntPtr)",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalRcwQueryInterface:System.IntPtr(System.IntPtr,System.IntPtr)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663324,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663325,
+      "parameterCount": 4
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallDirectComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallDirectComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "metadataToken": 100663326,
+      "parameterCount": 4
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()",
+      "definitionSubjectId": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RuntimeState",
+      "metadataToken": 100663327,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectId": "RcwBasicSubjects/RuntimeState::Set:System.Void(System.IntPtr)",
+      "definitionSubjectId": "RcwBasicSubjects/RuntimeState::Set:System.Void(System.IntPtr)",
+      "declaringTypeSubjectId": "RcwBasicSubjects/RuntimeState",
+      "metadataToken": 100663328,
       "parameterCount": 1
     }
   ],
