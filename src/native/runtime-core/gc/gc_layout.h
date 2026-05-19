@@ -166,6 +166,11 @@ public:
     /// Lock-free (atomic load of current table + linear probe).
     const GcTypeLayout* Lookup(uint64_t stable_id) const;
 
+    /// Read stable_id from a validated type_info pointer, trying both
+    /// TypeInfoHot layout (offset +16) and FakeTypeInfo layout (offset +0).
+    /// Returns the first stable_id that matches a registered layout, or 0.
+    uint64_t ReadStableId(const void* type_info_ptr) const;
+
     /// Register a range of memory that contains valid TypeInfo structs.
     /// The young collector uses this to validate candidate TypeInfo*
     /// pointers before dereferencing them.
