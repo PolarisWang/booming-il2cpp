@@ -17,7 +17,11 @@
 #include <cstdlib>
 #include <thread>
 #include <cerrno>
+#include <chrono>
 #include <cstring>
+#if !defined(_WIN32) && !defined(_WIN64) && !defined(__APPLE__)
+#include <signal.h>
+#endif
 
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
@@ -117,6 +121,9 @@ void RegisterThread(int32_t managed_id, void* managed_obj) noexcept {
     auto* mtx = new pthread_mutex_t;
     pthread_mutex_init(mtx, nullptr);
     thread->suspend_mutex = mtx;
+#if !defined(__APPLE__)
+    thread->os_thread_id = pthread_self();
+#endif
 #endif
 
     // Capture stack bounds for conservative root scanning during full GC.
@@ -247,6 +254,18 @@ thread_local int s_safepoint_depth = 0;
 /// Monotonic epoch counter for suspend_seq values.
 /// Threads compare against their stored value, not this counter directly.
 std::atomic<uint32_t> s_safepoint_epoch{1};
+
+// ── Safepoint timeout constants (matching CoreCLR) ──────────────
+/// Default safepoint timeout after which non-responding threads are
+/// preemptively suspended. 100ms matches CoreCLR's default timeout.
+static constexpr uint64_t kSafepointTimeoutNs = 100ULL * 1000000ULL;  // 100 ms
+
+/// Hard timeout: if a thread doesn't ack even after preemptive suspend,
+/// force-release the safepoint and proceed with conservative scanning.
+static constexpr uint64_t kSafepointHardTimeoutNs = 500ULL * 1000000ULL;  // 500 ms
+
+/// Spin threshold before yielding (matching existing code).
+static constexpr int kSpinYieldThreshold = 32768;
 }  // anonymous namespace
 
 void SafepointPoll() noexcept {
@@ -328,6 +347,39 @@ void EnterPreemptiveMode() noexcept {
     thread->gc_mode.store(kGcModePreemptive, std::memory_order_release);
 }
 
+#if !defined(_WIN32) && !defined(_WIN64) && !defined(__APPLE__)
+/// Signal handler for SIGUSR1: preemptive safepoint suspend.
+/// Runs in the target thread's context. Uses spin-wait because
+/// pthread_cond_wait is not async-signal-safe.
+static void SafepointSuspendHandler(int sig) {
+    if (sig != SIGUSR1) return;
+    auto* thread = tls_this_thread;
+    if (thread == nullptr) return;
+
+    // Acknowledge safepoint (set suspend_ack to current suspend_seq).
+    uint32_t seq = thread->suspend_seq.load(std::memory_order_acquire);
+    thread->suspend_ack.store(seq, std::memory_order_release);
+
+    // Spin-wait until suspend_seq is cleared by ReleaseGlobalSafepoint.
+    while (thread->suspend_seq.load(std::memory_order_acquire) != 0) {
+        sched_yield();
+    }
+}
+
+/// Install the SIGUSR1 handler for preemptive safepoint suspend.
+static std::atomic<bool> s_sigusr1_installed{false};
+static void InstallSafepointSignalHandler() noexcept {
+    if (s_sigusr1_installed.load(std::memory_order_acquire)) return;
+    struct sigaction sa;
+    std::memset(&sa, 0, sizeof(sa));
+    sa.sa_handler = SafepointSuspendHandler;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = SA_RESTART | SA_NODEFER;
+    sigaction(SIGUSR1, &sa, nullptr);
+    s_sigusr1_installed.store(true, std::memory_order_release);
+}
+#endif
+
 #if defined(_WIN32) || defined(_WIN64)
 /// APC callback: runs in the target thread's context, forcing a suspended
 /// thread to acknowledge the safepoint and wait on suspend_event.
@@ -397,11 +449,17 @@ uint32_t RequestGlobalSafepoint() noexcept {
     // Wait for each cooperative thread to acknowledge.
     // Spin with pause for ~1ms, then yield to avoid starving the very
     // threads we're waiting on (critical for oversubscribed scenarios).
-    constexpr int kSpinYieldThreshold = 32768;
+    // After kSafepointTimeoutNs (100ms), use preemptive suspend fallback
+    // matching CoreCLR: QueueUserAPC on Windows, pthread_kill on POSIX.
+    // After kSafepointHardTimeoutNs (500ms), force-release with diagnostic.
     {
         static uint32_t s_confirm_epoch = 0;
         static int s_remaining = 0;
         s_confirm_epoch = epoch;
+
+        auto wait_start = std::chrono::steady_clock::now();
+        bool preemptive_attempted = false;
+        bool hard_timeout = false;
 
         for (int spin = 0; ; spin++) {
             s_remaining = 0;
@@ -414,6 +472,7 @@ uint32_t RequestGlobalSafepoint() noexcept {
                 return true;
             });
             if (s_remaining == 0) break;
+            if (hard_timeout) break;  // force-release after hard timeout
 
             if (spin < kSpinYieldThreshold) {
                 _mm_pause();
@@ -423,7 +482,8 @@ uint32_t RequestGlobalSafepoint() noexcept {
 #else
                 std::this_thread::yield();
 #endif
-                // After yielding for ~100ms with no response, try APC fallback.
+                // After yielding for ~100ms with no response, try APC fallback
+                // (Windows only — cooperative threads stuck in native code).
                 if (spin >= kSpinYieldThreshold + 100000) {
 #if defined(_WIN32) || defined(_WIN64)
                     EnumerateThreads([](ManagedThread* t) -> bool {
@@ -437,6 +497,60 @@ uint32_t RequestGlobalSafepoint() noexcept {
                     });
 #endif
                     std::this_thread::sleep_for(std::chrono::microseconds(100));
+                }
+
+                // Check real-time timeout every ~5000 iterations (~5ms).
+                if (spin % 5000 == 0 && !hard_timeout) {
+                    auto elapsed = std::chrono::steady_clock::now() - wait_start;
+                    uint64_t elapsed_ns = std::chrono::duration_cast<
+                        std::chrono::nanoseconds>(elapsed).count();
+
+                    if (!preemptive_attempted && elapsed_ns >= kSafepointTimeoutNs) {
+                        preemptive_attempted = true;
+                        CHAOS_IL2CPP_LOG_WARN("Safepoint",
+                            "safepoint timeout: {0} threads unresponsive after {1}ms, "
+                            "attempting preemptive suspend",
+                            s_remaining, elapsed_ns / 1000000);
+
+                        EnumerateThreads([](ManagedThread* t) -> bool {
+                            if (t->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive)
+                                return true;
+                            if (t == tls_this_thread) return true;
+                            if (t->suspend_ack.load(std::memory_order_acquire) != s_confirm_epoch) {
+#if defined(_WIN32) || defined(_WIN64)
+                                // Windows: QueueUserAPC is the safe fallback for
+                                // unresponsive threads — it runs in the target's
+                                // context when it enters an alertable wait.  Do NOT
+                                // use SuspendThread here: the thread may hold OS
+                                // locks (heap, loader, etc.) and suspension would
+                                // corrupt process state upon resume.
+                                ::QueueUserAPC(SuspendApf, t->os_handle, s_confirm_epoch);
+                                CHAOS_IL2CPP_LOG_DEBUG("Safepoint",
+                                    "APC queued for thread {0}", t->managed_id);
+#elif !defined(__APPLE__)
+                                // POSIX (non-iOS): send SIGUSR1 to force safepoint ack.
+                                InstallSafepointSignalHandler();
+                                pthread_kill(t->os_thread_id, SIGUSR1);
+                                t->preemptive_suspended.store(true, std::memory_order_release);
+#else
+                                // iOS: no force-suspend available. Log and continue.
+                                CHAOS_IL2CPP_LOG_WARN("Safepoint",
+                                    "thread {0} unresponsive, "
+                                    "cannot preemptively suspend on iOS",
+                                    t->managed_id);
+#endif
+                            }
+                            return true;
+                        });
+                    }
+
+                    if (preemptive_attempted && elapsed_ns >= kSafepointHardTimeoutNs) {
+                        hard_timeout = true;
+                        CHAOS_IL2CPP_LOG_ERROR("Safepoint",
+                            "safepoint hard timeout: {0} threads still unresponsive "
+                            "after {1}ms, forcing release",
+                            s_remaining, elapsed_ns / 1000000);
+                    }
                 }
             }
         }
@@ -476,6 +590,11 @@ void ReleaseGlobalSafepoint(uint32_t /*epoch*/) noexcept {
             pthread_cond_broadcast(cv);
         }
 #endif
+        // Resume preemptively suspended threads.
+        if (t->preemptive_suspended.load(std::memory_order_acquire)) {
+            t->preemptive_suspended.store(false, std::memory_order_release);
+        }
+        t->safepoint_wait_start_ns = 0;
         return true;
     });
 

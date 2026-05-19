@@ -107,12 +107,6 @@
     {
       "assemblyName": "InterfaceDispatchSubjects",
       "subjectKind": "method",
-      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "InterfaceDispatchSubjects",
-      "subjectKind": "method",
       "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()",
       "reason": "generated-direct-call"
     },

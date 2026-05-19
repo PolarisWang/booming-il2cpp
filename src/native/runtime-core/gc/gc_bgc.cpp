@@ -14,6 +14,8 @@
 #include <algorithm>
 #include <chrono>
 #include <cstdio>
+#include <future>
+#include <thread>
 #include <thread>
 
 namespace chaos::il2cpp::runtime_core {
@@ -686,8 +688,10 @@ void BgcController::PublishFinalizationWork(
     if (finalizers.empty() && weak_handles.empty()) return;
     {
         std::lock_guard<std::mutex> lock(finalizer_mutex_);
-        pending_finalizers_.insert(pending_finalizers_.end(),
-            finalizers.begin(), finalizers.end());
+        // Convert to timed entries with retry tracking.
+        for (auto& f : finalizers) {
+            pending_timed_finalizers_.push_back({f.obj, f.finalizer, 0, false});
+        }
         pending_weak_handles_.insert(pending_weak_handles_.end(),
             weak_handles.begin(), weak_handles.end());
         finalizer_work_pending_.store(true, std::memory_order_release);
@@ -702,27 +706,77 @@ void BgcController::FinalizerThreadMain() noexcept {
     CHAOS_IL2CPP_LOG_DEBUG("Finalizer", "thread_started id={0}", thread_id);
 
     while (finalizer_running_.load(std::memory_order_acquire)) {
-        std::vector<FinalizerEntry> queue;
+        std::vector<TimedFinalizerEntry> queue;
         std::vector<DeadWeakHandle> weak_handles;
         {
             std::unique_lock<std::mutex> lock(finalizer_mutex_);
-            finalizer_cv_.wait(lock, [this]() {
+            finalizer_cv_.wait_for(lock,
+                std::chrono::milliseconds(kFinalizerHeartbeatMs), [this]() {
                 return finalizer_work_pending_.load(std::memory_order_acquire) ||
                        !finalizer_running_.load(std::memory_order_acquire);
             });
             if (!finalizer_running_.load(std::memory_order_acquire)) break;
-            queue.swap(pending_finalizers_);
+            queue.swap(pending_timed_finalizers_);
             weak_handles.swap(pending_weak_handles_);
             finalizer_work_pending_.store(false, std::memory_order_release);
         }
 
-        if (!queue.empty()) {
-            CHAOS_IL2CPP_LOG_DEBUG_M("Finalizer", "running {0} finalizers",
-                static_cast<unsigned long long>(queue.size()));
-            for (auto& entry : queue) {
-                if (entry.finalizer != nullptr) {
-                    entry.finalizer(entry.obj);
+        if (queue.empty()) continue;
+
+        CHAOS_IL2CPP_LOG_DEBUG_M("Finalizer", "running {0} finalizers",
+            static_cast<unsigned long long>(queue.size()));
+
+        std::vector<TimedFinalizerEntry> retry_queue;
+
+        for (auto& entry : queue) {
+            if (entry.finalizer == nullptr) continue;
+            if (entry.is_dead) continue;  // permanently skipped
+
+            // Launch finalizer via std::async with timeout.
+            auto future = std::async(std::launch::async, [&entry]() {
+#if !defined(__APPLE__)
+                int tid = threading::AllocateThreadId();
+                threading::RegisterThread(tid, nullptr);
+                threading::EnterCooperativeMode();
+#endif
+                entry.finalizer(entry.obj);
+#if !defined(__APPLE__)
+                threading::EnterPreemptiveMode();
+                threading::UnregisterThread();
+#endif
+            });
+
+            auto status = future.wait_for(
+                std::chrono::milliseconds(kFinalizerTimeoutMs));
+
+            if (status == std::future_status::ready) {
+                try { future.get(); } catch (...) {
+                    CHAOS_IL2CPP_LOG_WARN("Finalizer",
+                        "finalizer exception obj={0}", entry.obj);
                 }
+            } else {
+                entry.retry_count++;
+                CHAOS_IL2CPP_LOG_WARN("Finalizer",
+                    "finalizer timeout obj={0} retry={1}/{2}",
+                    entry.obj, entry.retry_count, kFinalizerMaxRetries);
+
+                if (entry.retry_count >= kFinalizerMaxRetries) {
+                    entry.is_dead = true;
+                    CHAOS_IL2CPP_LOG_ERROR("Finalizer",
+                        "finalizer permanently skipped obj={0}", entry.obj);
+                } else {
+                    retry_queue.push_back(entry);
+                }
+            }
+        }
+
+        // Re-queue timed-out finalizers for retry in the next batch.
+        if (!retry_queue.empty()) {
+            std::lock_guard<std::mutex> lock(finalizer_mutex_);
+            pending_timed_finalizers_.insert(pending_timed_finalizers_.end(),
+                retry_queue.begin(), retry_queue.end());
+            if (!pending_timed_finalizers_.empty()) {
+                finalizer_work_pending_.store(true, std::memory_order_release);
             }
         }
 

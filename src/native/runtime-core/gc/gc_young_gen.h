@@ -64,6 +64,22 @@ struct YoungGeneration {
 
     /// End of the young region (exclusive).
     std::atomic<char*> region_end{nullptr};
+
+    // ── Survivor area (within the nursery region) ─────────────
+    /// Survivor area start (beginning of second half of nursery).
+    char* survivor_begin{nullptr};
+
+    /// Survivor area end (exclusive).
+    char* survivor_end{nullptr};
+
+    /// Survivor bump pointer for objects that survived one young GC.
+    std::atomic<char*> survivor_bump{nullptr};
+
+    /// Promotion age threshold: number of young GCs an object survives
+    /// in the survivor area before being promoted to old gen.
+    /// Fixed at 1 in V0: survive once in young → survivor, survive
+    /// once in survivor → old gen.
+    static constexpr int kPromotionAgeThreshold = 1;
 };
 
 // ── Global state ─────────────────────────────────────────────

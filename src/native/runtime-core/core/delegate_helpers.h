@@ -36,6 +36,20 @@ CHAOS_IL2CPP_INTPTR DelegateCombine(
 CHAOS_IL2CPP_INTPTR DelegateRemove(
     CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR value_to_remove);
 
+/// Hotpatch checkpoint for delegate invocations.
+/// Checks if the method identified by method_token has been hotpatched.
+/// If hotpatch is active, routes through InterpreterEntryDirect and
+/// returns true (caller must use ret_buf for the return value).
+/// If no hotpatch is active, returns false (caller should call native method_ptr).
+/// args_buf: flat uint64_t array of N args (cast from typed args).
+/// ret_buf:  flat uint64_t[2] for return value (unused on false return).
+/// arg_count: number of args in args_buf.
+bool DelegateHotpatchCheckpoint(
+    CHAOS_IL2CPP_UINT32 method_token,
+    uint64_t* args_buf,
+    uint64_t* ret_buf,
+    uint32_t arg_count);
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_DELEGATE_HELPERS_H_

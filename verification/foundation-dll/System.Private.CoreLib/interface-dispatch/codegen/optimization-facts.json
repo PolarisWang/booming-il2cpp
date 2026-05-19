@@ -154,11 +154,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()",
       "reason": "closed-world-method"
     },
@@ -278,7 +273,7 @@
     {
       "methodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()",
       "dispatchKind": "callvirt.interface-runtime-helper",
-      "targetSubjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
+      "targetSubjectId": "InterfaceDispatchSubjects/IWithDefault::GetValue:System.Int32()",
       "devirtualized": true
     },
     {

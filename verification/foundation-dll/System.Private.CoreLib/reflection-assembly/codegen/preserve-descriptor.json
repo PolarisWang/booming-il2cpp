@@ -142,7 +142,7 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

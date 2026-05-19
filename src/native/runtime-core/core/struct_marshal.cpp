@@ -284,10 +284,49 @@ static void MarshalFieldNativeToManaged(
         }
         break;
 
-    case StructFieldKind::LPArray:
-        // V1: LPArray reverse marshalling requires managed array creation,
-        // which is not yet wired from struct_marshal. Stub for now.
+    case StructFieldKind::LPArray: {
+        // V2: Copy data back from native CoTaskMem buffer into the managed array.
+        // The managed array was pre-allocated before the P/Invoke call (forward
+        // marshalling direction), so its length is known from the array header.
+        void* managed_arr = *reinterpret_cast<void**>(managed_ptr + field.offset);
+        if (managed_arr == nullptr) break;
+
+        const CHAOS_IL2CPP_INTPTR native_buf = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset);
+        if (native_buf == 0) {
+            *reinterpret_cast<void**>(managed_ptr + field.offset) = nullptr;
+            break;
+        }
+
+        // Get element count from the managed array header.
+        const auto* arr_bytes = static_cast<const unsigned char*>(managed_arr);
+        const CHAOS_IL2CPP_UINTPTR elem_count = *reinterpret_cast<const CHAOS_IL2CPP_UINTPTR*>(
+            arr_bytes + sizeof(CHAOS_IL2CPP_UINT64));
+
+        // Determine element size from the marshalling descriptor.
+        uint32_t elem_size = NativeElementSize(field.element_type);
+        if (elem_size == 0 && field.nested != nullptr) {
+            elem_size = field.nested->total_size;
+        }
+        if (elem_size == 0) break;
+
+        const CHAOS_IL2CPP_SIZE total_bytes = static_cast<CHAOS_IL2CPP_SIZE>(elem_count) * elem_size;
+        auto* native_data = reinterpret_cast<unsigned char*>(native_buf);
+        auto* managed_data = static_cast<unsigned char*>(managed_arr)
+            + sizeof(CHAOS_IL2CPP_UINT64) + sizeof(CHAOS_IL2CPP_UINTPTR);
+
+        if (field.element_type == NativeElementType::Struct && field.nested != nullptr) {
+            for (CHAOS_IL2CPP_UINTPTR i = 0; i < elem_count; ++i) {
+                MarshalFieldsNativeToManaged(
+                    field.nested,
+                    managed_data + i * elem_size,
+                    native_data + i * elem_size,
+                    runtime);
+            }
+        } else {
+            CHAOS_IL2CPP_MEMCPY(managed_data, native_data, total_bytes);
+        }
         break;
+    }
     }
 }
 

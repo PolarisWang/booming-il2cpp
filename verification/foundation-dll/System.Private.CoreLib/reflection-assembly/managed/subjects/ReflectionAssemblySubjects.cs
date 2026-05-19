@@ -4,6 +4,7 @@
 // Variant: subjects
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
@@ -148,9 +149,5 @@ public static partial class ReflectionAssemblySubjects
     }
 
     // [21] System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
-    public static void Subject_21()
-    {
-        if (((Type.GetType("System.Int32")).GetHashCode()) != 1495009) _exitCode = 1;
-    }
 
 }

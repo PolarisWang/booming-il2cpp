@@ -109,6 +109,44 @@ MarkSweepOldGen::~MarkSweepOldGen() {
     }
 }
 
+// ── OldGenPage helpers ─────────────────────────────────────────────
+
+void* OldGenPage::FindObjectContaining(const void* interior_ptr) const {
+    uintptr_t addr = reinterpret_cast<uintptr_t>(interior_ptr);
+    uintptr_t payload_start = reinterpret_cast<uintptr_t>(Payload());
+    uintptr_t payload_end = payload_start + payload_size;
+
+    if (addr < payload_start || addr >= payload_end) return nullptr;
+
+    // Walk backward from interior_ptr, checking each pointer-aligned slot
+    // for a marked object start in the bitmap.
+    uintptr_t scan = addr & ~static_cast<uintptr_t>(sizeof(void*) - 1);
+    while (scan >= payload_start) {
+        CHAOS_IL2CPP_SIZE offset = scan - payload_start;
+        CHAOS_IL2CPP_SIZE slot_idx = offset / sizeof(void*);
+        auto bm = GcMarkBitmap(const_cast<unsigned char*>(MarkBitmap()), bitmap_bytes);
+        if (bm.TestSlot(slot_idx)) {
+            const void* type_info_ptr = *reinterpret_cast<const void* const*>(scan);
+            if (!GcLayoutRegistry::Instance().IsValidTypeInfoPointer(type_info_ptr)) {
+                if (scan == payload_start) break;
+                scan -= sizeof(void*);
+                continue;
+            }
+            uint64_t sid = GcLayoutRegistry::Instance().ReadStableId(type_info_ptr);
+            const auto* layout = GcLayoutRegistry::Instance().Lookup(sid);
+            if (layout != nullptr) {
+                uintptr_t obj_end = scan + layout->instance_size;
+                if (addr < obj_end) {
+                    return reinterpret_cast<void*>(scan);
+                }
+            }
+        }
+        if (scan == payload_start) break;
+        scan -= sizeof(void*);
+    }
+    return nullptr;
+}
+
 // ======================================================================
 // Init
 // ======================================================================
@@ -2093,7 +2131,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     {
         size_t before_roots = mark_stack_.size();
 
-                // EnumerateThreads lambda �� scan shared young generation TLAB pointers.
+                // EnumerateThreads lambda — scan shared young generation TLAB pointers.
         threading::EnumerateThreads(
             [](threading::ManagedThread* thread) -> bool {
                 // Scan the shared young generation region directly.
@@ -2103,6 +2141,17 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 if (young_region->current > young_region->begin) {
                     g_old_gen.ScanRangeForRoots(
                         young_region->begin, young_region->current);
+                }
+
+                // Scan the survivor area as roots.  Survivor objects were
+                // promoted from the young half in a previous GC and may hold
+                // references to old-gen objects that must be retained.
+                char* s_begin = g_young_gen.survivor_begin;
+                if (s_begin != nullptr) {
+                    char* s_end = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+                    if (s_end > s_begin) {
+                        g_old_gen.ScanRangeForRoots(s_begin, s_end);
+                    }
                 }
                 return true;
             });

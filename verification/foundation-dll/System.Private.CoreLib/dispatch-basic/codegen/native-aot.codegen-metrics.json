@@ -5,13 +5,15 @@
   "planKind": "full-assembly-entry",
   "generatedSourcePaths": [
     "generated/runtime_helper_shapes.h",
+    "generated/chaos_generated_module.h",
+    "generated/chaos_generated_module.cpp",
     "generated/native-aot.generated.cpp"
   ],
-  "generatedCppFileCount": 2,
-  "generatedCppTotalBytes": 160186,
+  "generatedCppFileCount": 4,
+  "generatedCppTotalBytes": 174226,
   "largestGeneratedCppBytes": 81344,
   "generatedSymbolCount": 24,
-  "peakWorkingSetBytes": 504836096,
+  "peakWorkingSetBytes": 496971776,
   "structuredMethodCount": 13,
   "structuredExceptionBodyCount": 5,
   "flatFallbackCount": 0,

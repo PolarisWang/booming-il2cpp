@@ -1,6 +1,9 @@
 #include <chaos/native_types.h>
 #include <runtime_abi.h>
 #include "../gc/gc_old_gen.h"
+#include <hotpatch_table.h>
+#include <interpreter_entry.h>
+#include <cstring>
 #include <mutex>
 #include <shared_mutex>
 
@@ -175,6 +178,50 @@ void* MarshalGetDelegateForFunctionPointerImpl(
     node->next = nullptr;
 
     return node;
+}
+
+// ── DelegateHotpatchCheckpoint ─────────────────────────────────────────
+// Hotpatch checkpoint for delegate invocations.
+// Checks if the method identified by method_token has been hotpatched.
+// If active, routes through InterpreterEntryDirect and returns true.
+// If no hotpatch, returns false (caller should call native method_ptr).
+
+bool DelegateHotpatchCheckpoint(
+    CHAOS_IL2CPP_UINT32 method_token,
+    uint64_t* args_buf,
+    uint64_t* ret_buf,
+    uint32_t arg_count)
+{
+    if (method_token == 0u)
+        return false;  // No token → can't check, call native
+
+    if (args_buf == nullptr || ret_buf == nullptr)
+        return false;
+
+    // Find which module owns this token (binary search across all modules).
+    auto& registry = GetHotpatchNameRegistry();
+    uint64_t composite = registry.FindToken(method_token);
+    if (composite == 0ull)
+        return false;  // Token not found in any module → not a hotpatchable method
+
+    uint32_t module_id = ExtractModuleId(composite);
+    uint32_t token = ExtractToken(composite);
+
+    // Get the dispatch entry for this (module_id, token).
+    auto* entry = registry.GetDispatchEntry(module_id, token);
+    if (entry == nullptr)
+        return false;  // No dispatch entry → not managed by hotpatch system
+
+    // Check if hotpatch is active and we should route to interpreter.
+    if (!HotpatchIsActive(*entry) || HotpatchShouldKeepNative(*entry))
+        return false;  // No active hotpatch → call native
+
+    // Route through interpreter. The interpreter reads arg_count from the
+    // method's IR signature and parses args_buf according to parameter types.
+    InterpreterEntryDirect(entry->method_key,
+                           reinterpret_cast<void*>(args_buf),
+                           reinterpret_cast<void*>(ret_buf));
+    return true;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

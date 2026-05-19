@@ -2,8 +2,8 @@
   "assembly": "System.Private.CoreLib",
   "mode": "family-entrypoint",
   "total": 1,
-  "passed": 0,
-  "failed": 1,
+  "passed": 1,
+  "failed": 0,
   "results": [
     {
       "family": "delegate-core-invocation",
@@ -11,14 +11,13 @@
       "steps": {
         "build_subjects": "OK",
         "convert_to_cpp": "OK",
-        "build_entry_exe": "FAILED"
+        "build_entry_exe": "OK"
       },
-      "success": false,
+      "success": true,
       "methodCount": 10,
       "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\delegate-core-invocation\\managed\\subjects\\build-output\\DelegateCoreInvocationSubjects.dll",
-      "error": "entry.exe build failed"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\delegate-core-invocation\\managed\\subjects\\build-output\\DelegateCoreInvocationSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-19T23:14:01"
+  "timestamp": "2026-05-20T00:54:10"
 }

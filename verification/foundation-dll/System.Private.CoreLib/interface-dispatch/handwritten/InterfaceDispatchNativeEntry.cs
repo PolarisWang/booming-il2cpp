@@ -99,21 +99,21 @@ public static class InterfaceDispatchNativeEntry
     }
 
     // [0] Single implementation → devirtualized direct call
-    static int TestSingleImplSimple()
+    public static int TestSingleImplSimple()
     {
         ISimple x = new ImplSimple();
         return x.GetValue(); // expected: 42
     }
 
     // [1] Default interface method → devirtualized
-    static int TestSingleImplDefault()
+    public static int TestSingleImplDefault()
     {
         IWithDefault x = new ImplWithDefault();
         return x.GetValue(); // expected: 0
     }
 
     // [2] Multiple implementations — direct calls on concrete types
-    static int TestMultiImplCalc()
+    public static int TestMultiImplCalc()
     {
         CalcAdd a = new CalcAdd();
         CalcMul b = new CalcMul();
@@ -121,7 +121,7 @@ public static class InterfaceDispatchNativeEntry
     }
 
     // [3] Interface 'is' check → chaos_type_implements_interface
-    static int TestIsCheck()
+    public static int TestIsCheck()
     {
         object a = new ImplSimple();
         object b = new CalcAdd();
@@ -133,7 +133,7 @@ public static class InterfaceDispatchNativeEntry
     }
 
     // [4] Interface 'is' check + direct cast (instead of 'as')
-    static int TestAsCheck()
+    public static int TestAsCheck()
     {
         object a = new ImplSimple();
         if (a is ISimple s)
@@ -142,21 +142,21 @@ public static class InterfaceDispatchNativeEntry
     }
 
     // [5] Diamond: call base interface method
-    static int TestDiamondBase()
+    public static int TestDiamondBase()
     {
         IDerived x = new ImplDiamond();
         return ((IBase)x).BaseMethod(); // 100
     }
 
     // [6] Diamond: call derived interface method
-    static int TestDiamondDerived()
+    public static int TestDiamondDerived()
     {
         IDerived x = new ImplDiamond();
         return x.DerivedMethod(); // 200
     }
 
     // [7] Diamond with multiple implementations → virtual dispatch
-    static int TestDiamondMulti()
+    public static int TestDiamondMulti()
     {
         IDerived a = new ImplDiamond();
         IDerived b = new ImplDiamond2();

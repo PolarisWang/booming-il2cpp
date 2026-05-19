@@ -132,9 +132,16 @@ public sealed partial class NativeAotLoweringPlanner
 
         public string PeekValue()
         {
+            // When the slot stack is empty, return a freshly-allocated slot name
+            // instead of throwing. This handles the case where the structured IR
+            // reconstruction places a `dup` instruction at the start of a nested
+            // if-then-else's condition instructions -- the value was left on the
+            // eval stack by the outer branch, and `dup` needs to reference it.
+            // The actual duplication (destination = source) will be emitted by
+            // the caller; the slot allocation here is purely a naming concern.
             if (_depth <= 0)
             {
-                throw new InvalidOperationException("structured slot stack underflow.");
+                return FormatStructuredSlotName(_depth);
             }
 
             return FormatStructuredSlotName(_depth - 1);
@@ -651,6 +658,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             if (ite.PostMergeBody != null)
             {
+                _activeStructuredSlotContext?.RestoreDepth(preConditionDepth);
                 EmitStructuredIRNode(builder, ite.PostMergeBody, method, inner);
             }
 
@@ -719,7 +727,10 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             if (ite.PostMergeBody != null)
+            {
+                _activeStructuredSlotContext?.RestoreDepth(preConditionDepth);
                 EmitStructuredIRNode(builder, ite.PostMergeBody, method, inner);
+            }
 
             builder.AppendLine(indentation + "}");
         }
@@ -1763,7 +1774,9 @@ public sealed partial class NativeAotLoweringPlanner
         if (body is IRFlatRegion flatRegion)
         {
             FlatFallbackCount++;
+            _structLocalSlots = IdentifyStructLocalSlots(instructions);
             EmitFlatGotoBody(builder, method, flatRegion.Instructions, flatRegion.Offsets);
+            _structLocalSlots = null;
             return;
         }
 
@@ -1775,6 +1788,9 @@ public sealed partial class NativeAotLoweringPlanner
         StructuredSlotEmissionContext? previousSlotContext = _activeStructuredSlotContext;
         _activeStructuredSlotContext = new StructuredSlotEmissionContext();
         _structuredSlotTypes.Clear();
+        _structLocalSlots = IdentifyStructLocalSlots(instructions);
+        System.IO.File.AppendAllText(@"D:\agent\booming-il2cpp\codegen_diag.txt",
+            $"[EMIT] method={method.SubjectId} bodyType={body.GetType().Name} structLocals=[{string.Join(",", _structLocalSlots ?? new HashSet<int>())}]\n");
         try
         {
             EmitStructuredIRNode(builder, body!, method, "    ");
@@ -1783,6 +1799,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             _activeStructuredSlotContext = previousSlotContext;
             _structuredSlotTypes.Clear();
+            _structLocalSlots = null;
         }
     }
 

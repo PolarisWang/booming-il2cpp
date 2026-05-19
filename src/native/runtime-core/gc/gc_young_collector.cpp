@@ -94,6 +94,29 @@ static CHAOS_IL2CPP_SIZE PreciseObjectSize(const void* obj) {
 // Cheney copy
 // ======================================================================
 
+/// Try to allocate in the survivor area (within the nursery region).
+/// Returns nullptr if the survivor area is exhausted — caller should fall
+/// back to old gen.  Thread-safe via CAS on survivor_bump.
+static void* TryAllocateInSurvivor(CHAOS_IL2CPP_SIZE size) noexcept {
+    char* current = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+    char* next;
+    do {
+        if (current == nullptr) return nullptr;
+        next = current + size;
+        if (next > g_young_gen.survivor_end) return nullptr;
+    } while (!g_young_gen.survivor_bump.compare_exchange_weak(
+        current, next, std::memory_order_release, std::memory_order_acquire));
+    std::memset(current, 0, size);
+    return current;
+}
+
+/// Determine whether an address falls within the survivor area.
+static bool IsInSurvivor(const void* ptr) noexcept {
+    return g_young_gen.survivor_begin != nullptr &&
+        static_cast<const char*>(ptr) >= g_young_gen.survivor_begin &&
+        static_cast<const char*>(ptr) < g_young_gen.survivor_bump.load(std::memory_order_acquire);
+}
+
 void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
     if (obj == nullptr) return nullptr;
     if (!IsInNursery(obj)) {
@@ -170,22 +193,36 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
         }
     }
 
-    void* tenured = g_old_gen.Allocate(obj_size, true);
-    if (tenured == nullptr) return nullptr;
+    // ── Age tenuring: determine destination based on current location ──
+    // Objects in the survivor area have survived one young GC and are
+    // promoted to old gen.  Objects in the young half are promoted to
+    // the survivor area (they survive one more GC before reaching old gen).
+    void* target;
+    if (IsInSurvivor(obj)) {
+        target = g_old_gen.Allocate(obj_size, true);  // promote to old gen
+    } else {
+        target = TryAllocateInSurvivor(obj_size);       // copy to survivor area
+        if (target == nullptr) {
+            // Survivor area exhausted — fall back to old gen.
+            target = g_old_gen.Allocate(obj_size, true);
+        }
+    }
 
-    std::memcpy(tenured, obj, obj_size);
-    SetForwardingAddress(obj, tenured);
+    if (target == nullptr) return nullptr;
+
+    std::memcpy(target, obj, obj_size);
+    SetForwardingAddress(obj, target);
 
     if (result) {
         result->objects_promoted++;
         result->bytes_promoted += obj_size;
         if (result->bfs_worklist && result->bfs_worklist_count < result->bfs_worklist_capacity) {
-            result->bfs_worklist[result->bfs_worklist_count++] = tenured;
+            result->bfs_worklist[result->bfs_worklist_count++] = target;
         }
     }
 
     CHAOS_IL2CPP_LOG_DEBUG("CRAG", "scavenge_object_known_nursery");
-    return tenured;
+    return target;
 }
 
 // ======================================================================
@@ -325,6 +362,44 @@ YoungCollectionResult GcYoungCollection() {
         }
     }
 
+    // ── Phase 2b: Survivor area scan ──
+    // Scan survivor objects for pointers to the young half.  Survivor
+    // objects were promoted from the young half in a previous GC and may
+    // have been modified since then to point to newly allocated young
+    // objects.  These young referents must be scavenged to survivor.
+    if (g_young_gen.survivor_begin != nullptr) {
+        char* s_cur = g_young_gen.survivor_begin;
+        char* s_end = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+        auto& layout_registry = GcLayoutRegistry::Instance();
+        while (s_cur < s_end) {
+            void* survivor_obj = s_cur;
+            const void* ti = *reinterpret_cast<const void* const*>(survivor_obj);
+            if (layout_registry.IsValidTypeInfoPointer(ti)) {
+                uint64_t sid = layout_registry.ReadStableId(ti);
+                const auto* slayout = layout_registry.Lookup(sid);
+                if (slayout != nullptr && slayout->pointer_count > 0) {
+                    uint32_t sobj_size = slayout->instance_size;
+                    for (uint16_t i = 0; i < slayout->pointer_count; i++) {
+                        uint16_t off = slayout->pointer_offsets[i].offset;
+                        auto* slot = reinterpret_cast<void**>(s_cur + off);
+                        void* val = *slot;
+                        if (val == nullptr) continue;
+                        if (IsInNursery(val)) {
+                            void* tenured = GcScavengeObjectKnownNursery(val, &result);
+                            if (tenured != nullptr && tenured != val) {
+                                *slot = tenured;
+                            }
+                        }
+                    }
+                    s_cur += sobj_size;
+                    continue;
+                }
+            }
+            // Fallback: advance by conservative estimate.
+            s_cur += kMaxEstObjectSize;
+        }
+    }
+
 phase3:
     // ── Phase 3: Cheney BFS ──
     {
@@ -390,6 +465,44 @@ phase3:
     CHAOS_IL2CPP_SIZE nursery_used_bytes = static_cast<CHAOS_IL2CPP_SIZE>(
         nursery_used - nursery_begin);
     result.bytes_reclaimed = nursery_used_bytes;
+
+    // Survivor area exhaustion check: if the survivor bump has reached
+    // near the survivor end, promote all remaining survivor objects to
+    // old gen and reset the survivor bump.
+    if (g_young_gen.survivor_begin != nullptr) {
+        constexpr CHAOS_IL2CPP_SIZE kSurvivorNearFullThreshold = 4096;
+        char* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+        CHAOS_IL2CPP_SIZE s_used = static_cast<CHAOS_IL2CPP_SIZE>(
+            s_bump - g_young_gen.survivor_begin);
+        CHAOS_IL2CPP_SIZE s_capacity = static_cast<CHAOS_IL2CPP_SIZE>(
+            g_young_gen.survivor_end - g_young_gen.survivor_begin);
+        if (s_used + kSurvivorNearFullThreshold >= s_capacity) {
+            char* s_cur = g_young_gen.survivor_begin;
+            auto& sv_layout_registry = GcLayoutRegistry::Instance();
+            while (s_cur < s_bump) {
+                void* sv_obj = s_cur;
+                const void* sv_ti = *reinterpret_cast<const void* const*>(sv_obj);
+                CHAOS_IL2CPP_SIZE sv_size;
+                if (sv_ti != nullptr && sv_layout_registry.IsValidTypeInfoPointer(sv_ti)) {
+                    uint64_t sv_sid = sv_layout_registry.ReadStableId(sv_ti);
+                    const auto* sv_layout = sv_layout_registry.Lookup(sv_sid);
+                    sv_size = (sv_layout != nullptr && sv_layout->instance_size > 0)
+                        ? static_cast<CHAOS_IL2CPP_SIZE>(sv_layout->instance_size)
+                        : kMaxEstObjectSize;
+                } else {
+                    sv_size = kMaxEstObjectSize;
+                }
+                void* promoted = g_old_gen.Allocate(sv_size, true);
+                if (promoted != nullptr) {
+                    std::memcpy(promoted, sv_obj, sv_size);
+                    result.objects_promoted++;
+                    result.bytes_promoted += sv_size;
+                }
+                s_cur += sv_size;
+            }
+            g_young_gen.survivor_bump.store(g_young_gen.survivor_begin, std::memory_order_release);
+        }
+    }
 
     // Reset the shared young region bump pointer.
     nursery->current = nursery->begin;

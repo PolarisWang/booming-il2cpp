@@ -10,6 +10,7 @@
   "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
   "translationUnitMode": "runtime-skeleton",
   "translationUnitMethodSubjectIds": [
+    "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
     "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
     "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
     "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
@@ -18,7 +19,6 @@
     "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
     "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
     "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
-    "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
     "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
     "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()",
     "SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()",
@@ -177,7 +177,7 @@
       "pageNumber": 1,
       "methodCount": 158,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
-      "firstMethodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+      "firstMethodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
       "lastMethodSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()"
     }
   ],

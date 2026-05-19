@@ -5,6 +5,26 @@
 extern "C" {
 namespace chaos::il2cpp::runtime_core {
 
+// ── Dynamic type registration (for codegen-generated enum types) ──────────
+static constexpr CHAOS_IL2CPP_UINT32 kMaxDynamicTypes = 256u;
+struct DynamicTypeEntry {
+    CHAOS_IL2CPP_UINT32 fnv24_hash;
+    const ReflectionQueryTypeDescriptor* type_desc;
+};
+static DynamicTypeEntry s_dynamicTypes[kMaxDynamicTypes];
+static CHAOS_IL2CPP_UINT32 s_dynamicTypeCount = 0u;
+
+extern "C" void ChaosRegisterExternalType(
+    CHAOS_IL2CPP_UINT32 fnv24_hash,
+    const ReflectionQueryTypeDescriptor* type_desc) noexcept
+{
+    if (s_dynamicTypeCount < kMaxDynamicTypes && type_desc != nullptr) {
+        s_dynamicTypes[s_dynamicTypeCount].fnv24_hash = fnv24_hash;
+        s_dynamicTypes[s_dynamicTypeCount].type_desc = type_desc;
+        s_dynamicTypeCount++;
+    }
+}
+
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR runtime_type_handle) {
     if (runtime_type_handle == 0) return 0;
 
@@ -30,6 +50,14 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR runtime
             }
             if ((h & 0xFFFFFFu) == target_hash) {
                 return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(type));
+            }
+        }
+
+        // Scan dynamically registered types (codegen enum types, etc.).
+        for (CHAOS_IL2CPP_UINT32 i = 0u; i < s_dynamicTypeCount; i++) {
+            if (s_dynamicTypes[i].fnv24_hash == target_hash) {
+                return static_cast<CHAOS_IL2CPP_INTPTR>(
+                    EncodeReflectionQueryTypeHandle(s_dynamicTypes[i].type_desc));
             }
         }
     }

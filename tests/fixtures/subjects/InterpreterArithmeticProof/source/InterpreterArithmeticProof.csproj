@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <!-- Exclude AotBridge sources from the main project -->
+  <ItemGroup>
+    <Compile Remove="AotBridge\**\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\src\managed\Chaos.IL2CPP.Interpreter\Chaos.IL2CPP.Interpreter.csproj" />
+    <ProjectReference Include="..\..\..\..\..\src\managed\Chaos.IL2CPP.Contracts\Chaos.IL2CPP.Contracts.csproj" />
+    <ProjectReference Include="AotBridge\InterpreterArithmeticProof.AotBridge.csproj" />
+  </ItemGroup>
+</Project>

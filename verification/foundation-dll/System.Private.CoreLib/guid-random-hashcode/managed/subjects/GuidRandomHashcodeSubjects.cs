@@ -4,6 +4,7 @@
 // Variant: subjects
 
 using System;
+using System.Collections.Generic;
 
 public static partial class GuidRandomHashcodeSubjects
 {
@@ -26,7 +27,7 @@ public static partial class GuidRandomHashcodeSubjects
     // [2] System.Private.CoreLib/System.Guid::NewGuid:System.Guid()
     public static void Subject_2()
     {
-        if (((Guid.NewGuid()).GetHashCode()) != -1488749681) _exitCode = 1;
+        if (((Guid.NewGuid()).GetHashCode()) != 1179009093) _exitCode = 1;
     }
 
     // [3] System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)
@@ -56,13 +57,13 @@ public static partial class GuidRandomHashcodeSubjects
     // [7] System.Private.CoreLib/System.Random::Next:System.Int32()
     public static void Subject_7()
     {
-        if (new Random().Next() != 507685591) _exitCode = 1;
+        if (new Random().Next() != 313986725) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)
     public static void Subject_8()
     {
-        if (new Random().Next(42) != 28) _exitCode = 1;
+        if (new Random().Next(42) != 21) _exitCode = 1;
     }
 
     // [9] System.Private.CoreLib/System.Random::NextDouble:System.Double()
@@ -86,13 +87,13 @@ public static partial class GuidRandomHashcodeSubjects
     // [12] System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()
     public static void Subject_12()
     {
-        if (default(HashCode).ToHashCode() != 1069915699) _exitCode = 1;
+        if (default(HashCode).ToHashCode() != 1188417462) _exitCode = 1;
     }
 
     // [13] System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)
     public static void Subject_13()
     {
-        if (HashCode.Combine(42, 42) != -106836967) _exitCode = 1;
+        if (HashCode.Combine(42, 42) != -606560917) _exitCode = 1;
     }
 
 }

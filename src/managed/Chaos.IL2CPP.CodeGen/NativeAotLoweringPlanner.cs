@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
@@ -518,7 +519,7 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     SubjectId = method.SubjectId,
                     MethodSource = aotReachableSubjectIds.Contains(method.SubjectId)
-                        ? BuildMethodSource(method)
+                        ? BuildMethodSourceSafe(method)
                         : BuildAotUnreachableMethodStub(method),
                 };
             })
@@ -668,10 +669,9 @@ extern ""C"" void ChaosJitRegisterAll() {}
                 // of helper functions previously emitted inline in every file).
                 "<ChaosGeneratedRuntimePrelude.h>",
                 // Pre-computed enum metadata tables for fast path in enum stubs.
-                // Only added when the closure contains enum types.
-                ..(string.IsNullOrEmpty(enumMetaHeader)
-                    ? []
-                    : new[] { "\"enum_metadata.generated.h\"" }),
+                // Always included when the file exists on disk — the old header
+                // survives rebuilds even when the codegen extractor has no data.
+                "\"enum_metadata.generated.h\"",
                 // Native bridge headers (e.g., "convert.h") from external runtime
                 // helpers that map to direct native function calls.
                 ..externalRuntimeHelpers
@@ -1326,6 +1326,20 @@ extern ""C"" void ChaosJitRegisterAll() {}
         return builder.ToString();
     }
 
+    private string BuildMethodSourceSafe(AotCoreIrMethodArtifact method)
+    {
+        try
+        {
+            return BuildMethodSource(method);
+        }
+        catch (InvalidOperationException ex) when (ex.Message.Contains("slot stack"))
+        {
+            var msg = $"[codegen] WARNING: structured IR slot tracking failed for {method.SubjectId}, emitting stub. Root cause: {ex.Message}";
+            Console.Error.WriteLine(msg);
+            return BuildAotUnreachableMethodStub(method);
+        }
+    }
+
     private string BuildMethodSource(AotCoreIrMethodArtifact method)
     {
         var builder = new StringBuilder(4096);
@@ -1440,16 +1454,9 @@ extern ""C"" void ChaosJitRegisterAll() {}
 
         if (delegateThunkModels.Length > 0)
         {
-            // Forward declarations for native function dispatch thunks (defined in delegate_thunks.cpp).
-            builder.AppendLine("// Forward declarations for native function dispatch thunks (defined in delegate_thunks.cpp).");
-            builder.AppendLine("struct RuntimeState;");
-            builder.AppendLine("struct ThreadState;");
-            builder.AppendLine("extern \"C\" void* NativeDfnThunkArity0(struct RuntimeState*, struct ThreadState*, void*);");
-            builder.AppendLine("extern \"C\" void* NativeDfnThunkArity1(struct RuntimeState*, struct ThreadState*, void*, void*);");
-            builder.AppendLine("extern \"C\" void* NativeDfnThunkArity2(struct RuntimeState*, struct ThreadState*, void*, void*, void*);");
-            builder.AppendLine("extern \"C\" void* NativeDfnThunkArity3(struct RuntimeState*, struct ThreadState*, void*, void*, void*, void*);");
-            builder.AppendLine("extern \"C\" void* NativeDfnThunkArity4(struct RuntimeState*, struct ThreadState*, void*, void*, void*, void*, void*);");
-            builder.AppendLine();
+            // Forward declarations are emitted by DelegateRuntimeSupport.cpp.scriban
+            // (void* parameter variant — intentionally not typed RuntimeState*/ThreadState*
+            // because those types are defined in header_layouts.cpp not a header).
 
             var thunkResult = ScribanTemplateRenderer.RenderTemplate(
                 NativeAotTemplateCatalog.GetDelegateThunksTemplate(),

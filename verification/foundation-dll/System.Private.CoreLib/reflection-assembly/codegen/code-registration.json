@@ -134,8 +134,8 @@
         {
           "registrationKind": "methodPointer",
           "slot": 21,
-          "symbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_21",
-          "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()"
+          "symbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_CustomEntrySubject_21",
+          "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()"
         }
       ]
     }

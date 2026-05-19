@@ -35,6 +35,25 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("#include <cstring>");
         sb.AppendLine();
         sb.AppendLine("// Types EnumFieldEntry/EnumMetadataTable defined in generated_code_compat.h.");
+        sb.AppendLine("// Forward-declare ReflectionQueryTypeDescriptor (defined in reflection_query_model.h");
+        sb.AppendLine("// in runtime-core). We only need its first fields: metadata_token + subject_id_utf8.");
+        sb.AppendLine("namespace chaos { namespace il2cpp { namespace runtime_core {");
+        sb.AppendLine("struct ReflectionQueryTypeDescriptor;");
+        sb.AppendLine("}}}");
+        sb.AppendLine();
+        sb.AppendLine("// Minimal type descriptor with same initial layout as ReflectionQueryTypeDescriptor.");
+        sb.AppendLine("// Only metadata_token (offset 0) and subject_id_utf8 (offset 8) need to be valid");
+        sb.AppendLine("// for enum_resolve_meta to extract the subject_id. Everything else is zero.");
+        sb.AppendLine("struct EnumTypeDescriptor {");
+        sb.AppendLine("    CHAOS_IL2CPP_UINT32 metadata_token;");
+        sb.AppendLine("    CHAOS_IL2CPP_UINT32 _padding;");
+        sb.AppendLine("    const char* subject_id_utf8;");
+        sb.AppendLine("};");
+        sb.AppendLine();
+        sb.AppendLine("// Registration function defined in runtime-core/reflection/type_resolve.cpp.");
+        sb.AppendLine("extern \"C\" void ChaosRegisterExternalType(");
+        sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24_hash,");
+        sb.AppendLine("    const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor* type_desc) noexcept;");
         sb.AppendLine();
         sb.AppendLine("namespace chaos { namespace il2cpp { namespace codegen {");
         sb.AppendLine();
@@ -115,6 +134,14 @@ internal static class EnumMetadataExtractor
             sb.AppendLine("};");
             sb.AppendLine();
 
+            // Emit minimal type descriptor (matching ReflectionQueryTypeDescriptor layout)
+            sb.AppendLine($"static constexpr EnumTypeDescriptor kEnumTypeDesc_{uniqueId} = {{");
+            sb.AppendLine($"    0u,");
+            sb.AppendLine($"    0u,");
+            sb.AppendLine($"    \"{EscapeCppString(et.SubjectId)}\"");
+            sb.AppendLine("};");
+            sb.AppendLine();
+
             // Compute FNV-1a 32-bit hash
             uint hash = ComputeFnv1a32(et.SubjectId);
             hashToIdentifier[hash] = uniqueId;
@@ -162,13 +189,38 @@ internal static class EnumMetadataExtractor
         // The C-linkage variable is defined in enum_stubs.cpp (default nullptr).
         // This static initializer registers our lookup function so that stubs
         // can use pre-computed metadata instead of the reflection API.
+        // It also registers each enum type with the reflection system so that
+        // ChaosReflectionGetTypeFromHandle can resolve enum type FNV hashes.
         sb.AppendLine("// C-linkage variable defined in enum_stubs.cpp");
         sb.AppendLine("extern \"C\" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata)(");
         sb.AppendLine("    const char* subject_id) noexcept;");
         sb.AppendLine();
+        sb.AppendLine("// Helper: compute FNV-1a 24-bit hash (matching ChaosReflectionGetTypeFromHandle).");
+        sb.AppendLine("static inline CHAOS_IL2CPP_UINT32 compute_enum_hash24(const char* s) noexcept {");
+        sb.AppendLine("    if (s == nullptr || s[0] == '\\0') return 0u;");
+        sb.AppendLine("    CHAOS_IL2CPP_UINT32 h = 2166136261u;");
+        sb.AppendLine("    for (; *s; ++s) {");
+        sb.AppendLine("        h ^= static_cast<CHAOS_IL2CPP_UINT8>(*s);");
+        sb.AppendLine("        h *= 16777619u;");
+        sb.AppendLine("    }");
+        sb.AppendLine("    return h & 0xFFFFFFu;");
+        sb.AppendLine("}");
+        sb.AppendLine();
         sb.AppendLine("namespace {");
         sb.AppendLine("struct _EnumMetadataRegistrar {");
         sb.AppendLine("    _EnumMetadataRegistrar() noexcept {");
+
+        // Emit type registration for each enum type
+        foreach (var kv in hashToIdentifier.OrderBy(kv => kv.Key))
+        {
+            var et = enumTypes.First(e => typeIds[e.SubjectId] == kv.Value);
+            sb.AppendLine($"        ChaosRegisterExternalType(");
+            sb.AppendLine($"            compute_enum_hash24(\"{EscapeCppString(et.SubjectId)}\"),");
+            sb.AppendLine($"            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(");
+            sb.AppendLine($"                &kEnumTypeDesc_{kv.Value}));");
+        }
+
+        sb.AppendLine();
         sb.AppendLine("        if (g_chaos_resolve_enum_metadata == nullptr) {");
         sb.AppendLine("            g_chaos_resolve_enum_metadata =");
         sb.AppendLine("                &chaos::il2cpp::codegen::chaos_find_enum_metadata;");

@@ -89,7 +89,7 @@ struct ManagedThread {
     ManagedThreadPriority    priority{ManagedThreadPriority::Normal};
 
     // ── OS handle for APC/thread ops ─────────────────────────────┐
-    /// OS thread handle.  Populated on RegisterThread.
+    /// OS thread handle (for APC fallback on Windows; SuspendThread/ResumeThread on Windows only when preemptive_suspended).
     /// Used for QueueUserAPC (safepoint fallback on Windows).
     void* os_handle{nullptr};
 
@@ -105,6 +105,17 @@ struct ManagedThread {
     /// Populated in RegisterThread, read-only after that.
     void* stack_base{nullptr};   // High address of the thread's stack
     void* stack_limit{nullptr};  // Low address of the thread's stack
+
+    /// Safepoint wait start timestamp (ns since epoch), for timeout detection.
+    uint64_t safepoint_wait_start_ns{0};
+
+    /// Set to true when this thread is preemptively suspended (POSIX SIGUSR1).
+    std::atomic<bool> preemptive_suspended{false};
+
+#if !defined(__APPLE__) && !defined(_WIN32) && !defined(_WIN64)
+    /// POSIX thread ID for pthread_kill-based preemptive suspend.
+    pthread_t os_thread_id{};
+#endif
 };
 
 // ── TLS identity (O(1), no lock) ─────────────────────────────────────

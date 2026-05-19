@@ -4524,18 +4524,18 @@
       "declaringAssemblyName": "ReflectionAssemblySubjects"
     },
     {
-      "methodId": "reflection-assembly-subjects.reflection-assembly-subjects.subject-21",
-      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
-      "signature": "System.Void ReflectionAssemblySubjects::Subject_21()",
+      "methodId": "reflection-assembly-subjects.reflection-assembly-subjects.custom-entry-subject-21",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
+      "signature": "System.Void ReflectionAssemblySubjects::CustomEntrySubject_21()",
       "identity": {
         "assemblyName": "ReflectionAssemblySubjects",
         "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
-        "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
-        "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
-        "methodId": "reflection-assembly-subjects.reflection-assembly-subjects.subject-21",
-        "signature": "System.Void ReflectionAssemblySubjects::Subject_21()"
+        "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
+        "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
+        "methodId": "reflection-assembly-subjects.reflection-assembly-subjects.custom-entry-subject-21",
+        "signature": "System.Void ReflectionAssemblySubjects::CustomEntrySubject_21()"
       },
-      "nativeSymbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_21",
+      "nativeSymbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_CustomEntrySubject_21",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -4544,22 +4544,31 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 26,
+          "handlerOffset": 27,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
-          "operand": "System.Int32",
-          "ilOffset": 1,
+          "operand": "NonExistentType",
+          "ilOffset": 2,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Type",
           "callee": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String)",
           "reference": {
@@ -4584,7 +4593,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 11,
+          "ilOffset": 12,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
           "reference": {
@@ -4607,63 +4616,16 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1495009,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 23,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 26,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 27,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 36,
-          "ilOffset": 28,
-          "resultType": "System.Void",
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 17,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 30,
+          "ilOffset": 18,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4671,7 +4633,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::_exitCode",
-          "ilOffset": 31,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ReflectionAssemblySubjects",
@@ -4695,9 +4657,31 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 32,
+          "ilOffset": 25,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 32,
+          "ilOffset": 30,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 36,
+          "ilOffset": 32,
           "isPreserveSig": false
         }
       ],

@@ -2779,18 +2779,18 @@
       "declaringAssemblyName": "SnapshotTestFixtures"
     },
     {
-      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-8",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
-      "signature": "System.Void SnapshotProverSubjects::Subject_8()",
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-9",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::Subject_9()",
       "identity": {
         "assemblyName": "SnapshotProverSubjects",
         "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
-        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
-        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
-        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-8",
-        "signature": "System.Void SnapshotProverSubjects::Subject_8()"
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-9",
+        "signature": "System.Void SnapshotProverSubjects::Subject_9()"
       },
-      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_8",
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -2817,16 +2817,16 @@
           "opCode": 14,
           "ilOffset": 2,
           "resultType": "System.Int32",
-          "callee": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+          "callee": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
           "reference": {
             "assemblyName": "SnapshotTestFixtures",
             "subjectKind": "method",
-            "subjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()"
+            "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "SnapshotTestFixtures",
-            "subjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+            "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -2834,7 +2834,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "SnapshotTestFixtures_LdftnHelper_GetFnPtr",
+          "targetSymbol": "SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 3,
@@ -2845,16 +2845,16 @@
           "opCode": 14,
           "ilOffset": 7,
           "resultType": "System.Int32",
-          "callee": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+          "callee": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
           "reference": {
             "assemblyName": "SnapshotTestFixtures",
             "subjectKind": "method",
-            "subjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()"
+            "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "SnapshotTestFixtures",
-            "subjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+            "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -2862,7 +2862,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "SnapshotTestFixtures_LdftnHelper_GetFnPtr",
+          "targetSymbol": "SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 3,
@@ -3161,18 +3161,18 @@
       "declaringAssemblyName": "SnapshotTestFixtures"
     },
     {
-      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-9",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
-      "signature": "System.Void SnapshotProverSubjects::Subject_9()",
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.custom-entry-subject-8",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::CustomEntrySubject_8()",
       "identity": {
         "assemblyName": "SnapshotProverSubjects",
         "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
-        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
-        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
-        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.subject-9",
-        "signature": "System.Void SnapshotProverSubjects::Subject_9()"
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.custom-entry-subject-8",
+        "signature": "System.Void SnapshotProverSubjects::CustomEntrySubject_8()"
       },
-      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -3182,33 +3182,24 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 29,
-          "handlerOffset": 30,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.Int32",
-          "callee": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+          "callee": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
           "reference": {
             "assemblyName": "SnapshotTestFixtures",
             "subjectKind": "method",
-            "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()"
+            "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "SnapshotTestFixtures",
-            "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+            "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -3216,7 +3207,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine",
+          "targetSymbol": "SnapshotTestFixtures_VoidCaller_DoNothing",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 3,
@@ -3225,18 +3216,18 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 7,
+          "ilOffset": 6,
           "resultType": "System.Int32",
-          "callee": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+          "callee": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
           "reference": {
             "assemblyName": "SnapshotTestFixtures",
             "subjectKind": "method",
-            "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()"
+            "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "SnapshotTestFixtures",
-            "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+            "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -3244,7 +3235,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine",
+          "targetSymbol": "SnapshotTestFixtures_VoidCaller_DoNothing",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 3,
@@ -3253,7 +3244,7 @@
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 12,
+          "ilOffset": 11,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3261,14 +3252,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 14,
+          "ilOffset": 13,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 15,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3276,7 +3267,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 16,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3284,30 +3275,30 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 18,
+          "ilOffset": 17,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 27,
-          "ilOffset": 19,
+          "operand": 26,
+          "ilOffset": 18,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 1,
+          "operand": 8,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
           "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
-          "ilOffset": 22,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SnapshotProverSubjects",
@@ -3328,69 +3319,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 30,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
-          "ilOffset": 33,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "SnapshotProverSubjects",
-            "subjectKind": "field",
-            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "SnapshotProverSubjects",
-            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 39,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 41,
+          "ilOffset": 26,
           "isPreserveSig": false
         }
       ],
@@ -8542,45 +8476,233 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 1,
+      "localCount": 2,
       "exceptionRegionCount": 0,
       "exceptionRegions": [],
       "instructions": [
         {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "SnapshotTestFixtures/MyValueType",
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectKind": "type",
+            "subjectId": "SnapshotTestFixtures/MyValueType"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/MyValueType",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "isSealed": true,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "baseTypeSubjectId": "System.Private.CoreLib/System.ValueType",
+            "implementedInterfaceSubjectIds": [],
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 9,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 30,
-          "ilOffset": 1,
+          "operand": 42,
+          "ilOffset": 11,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 3,
+          "op": "stfld",
+          "opCode": 11,
+          "operand": "SnapshotTestFixtures/MyValueType::X",
+          "ilOffset": 13,
           "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectKind": "field",
+            "subjectId": "SnapshotTestFixtures/MyValueType::X"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/MyValueType::X",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SnapshotTestFixtures/MyValueType",
+            "declaringTypeShape": 2,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 3,
           "isPreserveSig": false
         },
         {
-          "op": "br",
-          "opCode": 17,
-          "operand": 6,
-          "ilOffset": 4,
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 10,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stfld",
+          "opCode": 11,
+          "operand": "SnapshotTestFixtures/MyValueType::Y",
+          "ilOffset": 22,
           "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectKind": "field",
+            "subjectId": "SnapshotTestFixtures/MyValueType::Y"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/MyValueType::Y",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SnapshotTestFixtures/MyValueType",
+            "declaringTypeShape": 2,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 3,
           "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 6,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldfld",
+          "opCode": 10,
+          "operand": "SnapshotTestFixtures/MyValueType::X",
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "reference": {
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectKind": "field",
+            "subjectId": "SnapshotTestFixtures/MyValueType::X"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/MyValueType::X",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SnapshotTestFixtures/MyValueType",
+            "declaringTypeShape": 2,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 33,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldfld",
+          "opCode": 10,
+          "operand": "SnapshotTestFixtures/MyValueType::Y",
+          "ilOffset": 34,
+          "resultType": "System.Int32",
+          "reference": {
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectKind": "field",
+            "subjectId": "SnapshotTestFixtures/MyValueType::Y"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/MyValueType::Y",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SnapshotTestFixtures/MyValueType",
+            "declaringTypeShape": 2,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "add",
+          "opCode": 25,
+          "ilOffset": 39,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 40,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 43,
+          "ilOffset": 41,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 43,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 7,
+          "ilOffset": 44,
           "isPreserveSig": false
         }
       ],

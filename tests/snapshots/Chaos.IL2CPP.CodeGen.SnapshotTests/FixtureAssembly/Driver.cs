@@ -381,12 +381,22 @@ public static class ArrayLengthHelper
 }
 
 // --- Fixture 29: value type initobj (ldobj, stobj, initobj) ---
+[System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+public struct MyValueType
+{
+    public int X;
+    public int Y;
+}
+
 public static class ValueTypeHelper
 {
     // Used by fixture 29-value-type-initobj
     public static int RunValueType()
     {
-        return 30;  // simplified: struct initobj/ldfld/stfld not stable at runtime
+        MyValueType s = default;
+        s.X = 42;
+        s.Y = 10;
+        return s.X + s.Y;
     }
 }
 

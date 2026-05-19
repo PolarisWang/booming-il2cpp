@@ -46,6 +46,8 @@ internal static class NativeAotTemplateCatalog
     public const string DelegateRuntimeSupportTemplateRelativePath = "Templates/NativeAot.DelegateRuntimeSupport.cpp.scriban";
     public const string StructMarshallingDescriptorsTemplateRelativePath = "Templates/NativeAot.StructMarshallingDescriptors.cpp.scriban";
     public const string DelegateThunksTemplateRelativePath = "Templates/NativeAot.DelegateThunks.cpp.scriban";
+    public const string GeneratedModuleHeaderTemplateRelativePath = "Templates/NativeAot.GeneratedModule.h.scriban";
+    public const string GeneratedModuleSourceTemplateRelativePath = "Templates/NativeAot.GeneratedModule.cpp.scriban";
 
     public static Template GetTypeDeclarationsTemplate()
     {
@@ -215,6 +217,16 @@ internal static class NativeAotTemplateCatalog
     public static Template GetDelegateThunksTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(DelegateThunksTemplateRelativePath);
+    }
+
+    public static Template GetGeneratedModuleHeaderTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(GeneratedModuleHeaderTemplateRelativePath);
+    }
+
+    public static Template GetGeneratedModuleSourceTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(GeneratedModuleSourceTemplateRelativePath);
     }
 
     public static Template GetInterfaceTypeIdTemplate()

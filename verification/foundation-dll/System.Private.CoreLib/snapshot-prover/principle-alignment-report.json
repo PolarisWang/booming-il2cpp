@@ -1,7 +1,7 @@
 {
   "family": "snapshot-prover",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T22:57:16.541118",
+  "generated_at": "2026-05-20T00:56:51.172590",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -25,216 +25,88 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 52,
-        "methods_total": 52
+        "methods_with_lowering": 20,
+        "methods_total": 20
       },
       "per_method": [
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_4",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_5",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_6",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_7",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_4",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_5",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_6",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_7",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9",
+          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
           "has_lowering": true
         }
       ]
@@ -256,10 +128,17 @@
     },
     "p1_no_unnecessary_indirection": {
       "check_id": "p1_no_unnecessary_indirection",
-      "status": "ALIGNED",
-      "summary": "No unnecessary runtime_stub calls in generated code",
-      "details": [],
-      "evidence": {}
+      "status": "CONCERN",
+      "summary": "1 runtime_stub calls in generated code",
+      "details": [
+        {
+          "function": "ChaosObjectCtor",
+          "call_count": 1
+        }
+      ],
+      "evidence": {
+        "stub_call_count": 1
+      }
     },
     "p2_abstraction_balance": {
       "check_id": "p2_abstraction_balance",
@@ -270,17 +149,37 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "ALIGNED",
-      "summary": "All 5 changed source files within expected architecture layers",
-      "details": [],
-      "evidence": {
-        "changed_source_count": 5,
-        "layer_distribution": {
-          "TestInfra": 1,
-          "Templates": 1,
-          "RuntimeCore": 2,
-          "Tests": 1
+      "status": "CONCERN",
+      "summary": "2 of 23 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
         }
+      ],
+      "evidence": {
+        "changed_source_count": 23,
+        "layer_distribution": {
+          "TestInfra": 2,
+          "Emitter": 3,
+          "RuntimeSupport": 1,
+          "RuntimeCore": 14,
+          "Tests": 1
+        },
+        "violations": [
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -314,11 +213,11 @@
     "p3_patch_entry": {
       "check_id": "p3_patch_entry",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 11 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 157 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 11,
-        "entries_with_interrupt_ptr": 11,
+        "table_size": 157,
+        "entries_with_interrupt_ptr": 157,
         "has_hotpatch_module": true
       }
     },
@@ -339,10 +238,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 9,
-    "concern": 0,
+    "aligned": 7,
+    "concern": 2,
     "violation": 0,
     "not_applicable": 3,
-    "overall": "ALIGNED"
+    "overall": "CONCERN"
   }
 }

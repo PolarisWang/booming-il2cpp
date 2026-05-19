@@ -55,6 +55,32 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private readonly Stack<SlotType> _structuredSlotTypes = new();
 
+	/// <summary>
+	/// Local slots that are struct value types. Populated per-method in
+	/// <c>EmitViaStructuredIR</c>. When set, ldloc for any slot in this
+	/// set emits &amp;chaos_locals[N] (address) instead of chaos_locals[N] (value),
+	/// because struct data is inline in CHAOS_IL2CPP_INTPTR slots and downstream
+	/// consumers (ldfld) expect a pointer via chaos_resolve_managed_value_pointer.
+	/// </summary>
+	private HashSet<int>? _structLocalSlots;
+
+	private static HashSet<int> IdentifyStructLocalSlots(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+	{
+		var structLocals = new HashSet<int>();
+		for (int i = 1; i < instructions.Count; i++)
+		{
+			if (!string.Equals(instructions[i].Op, "initobj", StringComparison.Ordinal))
+				continue;
+			var targetRef = instructions[i].TargetReference;
+			if (targetRef?.TypeShape != AotCoreIrTypeShapeKind.ValueType)
+				continue;
+			if (!string.Equals(instructions[i - 1].Op, "ldloca", StringComparison.Ordinal))
+				continue;
+			structLocals.Add(GetRequiredIntOperand(instructions[i - 1]));
+		}
+		return structLocals;
+	}
+
 	private SlotType PeekSlotType()
 		=> _activeStructuredSlotContext is not null && _structuredSlotTypes.Count > 0
 			? _structuredSlotTypes.Peek()
@@ -280,7 +306,15 @@ public sealed partial class NativeAotLoweringPlanner
 			break;
 		case "ldloc":
 		{
-			EmitEvalStackPush(builder, indentation, $"chaos_locals[{GetRequiredIntOperand(instruction)}]");
+			int ldlocSlot = GetRequiredIntOperand(instruction);
+			if (_structLocalSlots is not null && _structLocalSlots.Contains(ldlocSlot))
+			{
+				EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[{ldlocSlot}])");
+			}
+			else
+			{
+				EmitEvalStackPush(builder, indentation, $"chaos_locals[{ldlocSlot}]");
+			}
 			break;
 		}
 		case "ldsfld":
@@ -1560,24 +1594,10 @@ public sealed partial class NativeAotLoweringPlanner
 			throw new NotSupportedException($"native-aot structured EH linear box requires type target reference, got '{requiredTargetReference.Kind}'.");
 		}
 
-		// Stack-allocate boxes for simple value types (scalar primitives like Int32, Int64, etc.).
-		// For structured value types (requiring chaos_resolve_managed_value_pointer), fall back to heap.
-		// Stack allocation eliminates ~20-30ns per call from C++ heap operator new.
-		// NOTE: The storage is declared at the enclosing scope level (no inner {})
-		// to ensure the pointer remains valid when consumed later by a call instruction.
-		if (!RequiresStructuredValueTypePayload(requiredTargetReference))
-		{
-			string storageName = AllocateLinearScratchName("box_storage");
-			string boxTypeName = GetNativeBoxTypeSymbol(requiredTargetReference.SubjectId);
-			builder.AppendLine($"{indentation}{boxTypeName} {storageName}{{}};");
-			builder.AppendLine($"{indentation}{{");
-			builder.AppendLine($"{indentation}    const auto chaos_value = {ConsumeEvalStackValueExpression()};");
-			builder.AppendLine($"{indentation}    {storageName}.header.type_info = &{GetNativeBoxTypeInfoSymbol(requiredTargetReference.SubjectId)};");
-			builder.AppendLine($"{indentation}    {storageName}.value = chaos_value;");
-			builder.AppendLine($"{indentation}}}");
-			EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&{storageName})");
-			return;
-		}
+		// NOTE: Stack allocation for simple value types was removed:
+		// storing a stack address into object[] via stelem.ref causes
+		// GC crash (SEH access violation). All boxes go through
+		// CHAOS_IL2CPP_NEW_GC. See boxing-to-object-array-crash fix.
 
 		builder.AppendLine($"{indentation}{{");
 		builder.AppendLine($"{indentation}    const auto chaos_value = {ConsumeEvalStackValueExpression()};");
@@ -2238,37 +2258,79 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}        ");
 		}
 		builder.AppendLine($"{indentation}    }}");
+		// ── Single delegate path with hotpatch checkpoint ──
 		builder.AppendLine($"{indentation}    else");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        if (chaos_delegate->chaos_delegate_method_ptr == 0)");
 		builder.AppendLine($"{indentation}        {{");
 		builder.AppendLine($"{indentation}            CHAOS_IL2CPP_FAIL();");
 		builder.AppendLine($"{indentation}        }}");
-		builder.AppendLine($"{indentation}        if (chaos_delegate->chaos_delegate_target == 0)");
-		builder.AppendLine($"{indentation}        {{");
-		builder.AppendLine($"{indentation}            const auto chaos_open_function = reinterpret_cast<{openFnType}>(chaos_delegate->chaos_delegate_method_ptr);");
-		if (string.Equals(returnType, "void", StringComparison.Ordinal))
+		// Hotpatch checkpoint: check if the delegate target method has been patched.
+		int paramCount = parameterAbis.Count;
+		string argsArray = string.Join(", ", Enumerable.Range(0, paramCount).Select(i => $"(uint64_t)chaos_arg_{i}"));
+		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
-			builder.AppendLine($"{indentation}            {openCall};");
+			builder.AppendLine($"{indentation}        {returnType} __chaos_hotpatch_result{{}};");
+		}
+		builder.AppendLine($"{indentation}        bool __chaos_hotpatch_taken = false;");
+		if (paramCount > 0)
+		{
+			builder.AppendLine($"{indentation}        uint64_t __chaos_args_buf[{paramCount}] = {{ {argsArray} }};");
 		}
 		else
 		{
-			builder.AppendLine($"{indentation}            const auto chaos_result = {openCall};");
-			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}            ");
+			builder.AppendLine($"{indentation}        uint64_t __chaos_args_buf[1] = {{0}};");
+		}
+		builder.AppendLine($"{indentation}        uint64_t __chaos_ret_buf[2] = {{}};");
+		builder.AppendLine($"{indentation}        if (chaos_delegate->chaos_delegate_method_token != 0)");
+		builder.AppendLine($"{indentation}        {{");
+		builder.AppendLine($"{indentation}            __chaos_hotpatch_taken = ::chaos::il2cpp::runtime_core::DelegateHotpatchCheckpoint(");
+		builder.AppendLine($"{indentation}                chaos_delegate->chaos_delegate_method_token,");
+		builder.AppendLine($"{indentation}                __chaos_args_buf, __chaos_ret_buf, {paramCount});");
+		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}            if (__chaos_hotpatch_taken)");
+			builder.AppendLine($"{indentation}            {{");
+			builder.AppendLine($"{indentation}                __chaos_hotpatch_result = *reinterpret_cast<const {returnType}*>(__chaos_ret_buf);");
+			builder.AppendLine($"{indentation}            }}");
+		}
+		builder.AppendLine($"{indentation}        }}");
+		builder.AppendLine();
+		builder.AppendLine($"{indentation}        if (__chaos_hotpatch_taken)");
+		builder.AppendLine($"{indentation}        {{");
+		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			EmitAbiReturnPush(builder, returnAbi, "__chaos_hotpatch_result", $"{indentation}            ");
 		}
 		builder.AppendLine($"{indentation}        }}");
 		builder.AppendLine($"{indentation}        else");
 		builder.AppendLine($"{indentation}        {{");
-		builder.AppendLine($"{indentation}            const auto chaos_closed_function = reinterpret_cast<{closedFnType}>(chaos_delegate->chaos_delegate_method_ptr);");
+		builder.AppendLine($"{indentation}            if (chaos_delegate->chaos_delegate_target == 0)");
+		builder.AppendLine($"{indentation}            {{");
+		builder.AppendLine($"{indentation}                const auto chaos_open_function = reinterpret_cast<{openFnType}>(chaos_delegate->chaos_delegate_method_ptr);");
 		if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
-			builder.AppendLine($"{indentation}            {singleClosedCall};");
+			builder.AppendLine($"{indentation}                {openCall};");
 		}
 		else
 		{
-			builder.AppendLine($"{indentation}            const auto chaos_result = {singleClosedCall};");
-			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}            ");
+			builder.AppendLine($"{indentation}                const auto chaos_result = {openCall};");
+			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}                ");
 		}
+		builder.AppendLine($"{indentation}            }}");
+		builder.AppendLine($"{indentation}            else");
+		builder.AppendLine($"{indentation}            {{");
+		builder.AppendLine($"{indentation}                const auto chaos_closed_function = reinterpret_cast<{closedFnType}>(chaos_delegate->chaos_delegate_method_ptr);");
+		if (string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}                {singleClosedCall};");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}                const auto chaos_result = {singleClosedCall};");
+			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}                ");
+		}
+		builder.AppendLine($"{indentation}            }}");
 		builder.AppendLine($"{indentation}        }}");
 		builder.AppendLine($"{indentation}    }}");
 		builder.AppendLine($"{indentation}}}");

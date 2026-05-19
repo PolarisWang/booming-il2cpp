@@ -10,6 +10,7 @@
   "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
   "translationUnitMode": "runtime-skeleton",
   "translationUnitMethodSubjectIds": [
+    "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
     "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_0:System.Void()",
     "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
     "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_11:System.Void()",
@@ -23,7 +24,6 @@
     "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_19:System.Void()",
     "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_1:System.Void()",
     "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_20:System.Void()",
-    "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
     "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_2:System.Void()",
     "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_3:System.Void()",
     "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_4:System.Void()",
@@ -41,7 +41,7 @@
       "pageNumber": 1,
       "methodCount": 22,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
-      "firstMethodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_0:System.Void()",
+      "firstMethodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
       "lastMethodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_9:System.Void()"
     }
   ],

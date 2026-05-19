@@ -101,7 +101,7 @@
     {
       "assemblyName": "SnapshotProverSubjects",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
       "reason": "generated-direct-call"
     },
     {
@@ -113,7 +113,7 @@
     {
       "assemblyName": "SnapshotProverSubjects",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
       "reason": "generated-direct-call"
     },
     {
@@ -1008,6 +1008,18 @@
       "assemblyName": "SnapshotTestFixtures",
       "subjectKind": "field",
       "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/MyValueType::X",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/MyValueType::Y",
       "reason": "instance-field-state"
     },
     {

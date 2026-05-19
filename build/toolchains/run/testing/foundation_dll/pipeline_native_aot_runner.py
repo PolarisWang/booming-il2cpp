@@ -136,6 +136,17 @@ def _build_subjects_dll(
     v = verification or _VERIFICATION
     subjects_dir = v / family_slug / "managed" / "subjects"
     subjects_dir.mkdir(parents=True, exist_ok=True)
+
+    # Copy handwritten partial class files (e.g. Custom.cs) to subjects dir
+    # so generate_and_build() detects them as custom entries.
+    handwritten_dir = v / family_slug / "handwritten"
+    if handwritten_dir.exists():
+        cs_files = sorted(handwritten_dir.glob("*.cs"))
+        if cs_files:
+            for f in cs_files:
+                dest = subjects_dir / f.name
+                dest.write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
+
     from family_entrypoint_generator import generate_and_build
     extra_refs = None
     if family_slug in ("snapshot-prover",):
@@ -881,6 +892,21 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
         # 2. `int result` bitmask with `while (tmp)` loop hangs for >31 methods
         #    (MSVC arithmetic right shift of negative int never reaches 0)
         _fix_runtime_entry(native_runtime_entry)
+
+    # Sync generated .cpp from codegen/<Assembly>/ to native/<Assembly>/
+    # so the native CMakeLists.txt compiles the latest codegen output.
+    codegen_dir = v / family_slug / "codegen"
+    if codegen_dir.exists():
+        for subdir in sorted(codegen_dir.iterdir()):
+            if not subdir.is_dir() or subdir.name in ("build", "generated", "hot-update"):
+                continue
+            src = subdir / "generated" / "native-aot.generated.cpp"
+            if not src.exists():
+                continue
+            dst = native_dir / subdir.name / "generated" / "native-aot.generated.cpp"
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+            print(f"    [build_entry] synced {src.relative_to(codegen_dir)} to native/")
 
     # Ensure CMakeLists.txt exists — auto-generate from template if missing
     # (families deleted and regenerated from scratch won't have native/CMakeLists.txt)

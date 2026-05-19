@@ -11,5 +11,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ReflectionAssemblySubjects.cs" />
+    <Compile Include="ReflectionAssemblySubjects.Custom.cs" />
   </ItemGroup>
 </Project>

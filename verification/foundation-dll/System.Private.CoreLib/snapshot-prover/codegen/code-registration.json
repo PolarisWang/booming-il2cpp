@@ -56,14 +56,14 @@
         {
           "registrationKind": "methodPointer",
           "slot": 8,
-          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_8",
-          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()"
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 9,
-          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
-          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()"
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()"
         }
       ]
     },

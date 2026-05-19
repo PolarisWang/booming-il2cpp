@@ -131,7 +131,7 @@
     {
       "assemblyName": "ReflectionAssemblySubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
       "reason": "generated-direct-call"
     },
     {

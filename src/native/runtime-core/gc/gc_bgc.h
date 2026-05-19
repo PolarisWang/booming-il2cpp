@@ -344,10 +344,21 @@ private:
 
     /// Background thread that runs finalizers collected by BGC.
     /// Runs in preemptive mode so it can allocate without blocking.
+
+    /// Per-finalizer timeout before marking for retry (2 seconds, matching CoreCLR).
+    static constexpr int kFinalizerTimeoutMs = 2000;
+
+    /// Maximum retries before permanently skipping a hung finalizer.
+    static constexpr int kFinalizerMaxRetries = 3;
+
+    /// Finalizer thread heartbeat timeout: if CV wait exceeds this without
+    /// work, log a diagnostic (thread may be hung).
+    static constexpr int kFinalizerHeartbeatMs = 10000;
+
     std::thread finalizer_thread_;
     std::condition_variable finalizer_cv_;
     std::mutex finalizer_mutex_;
-    std::vector<FinalizerEntry> pending_finalizers_;
+    std::vector<TimedFinalizerEntry> pending_timed_finalizers_;
     std::vector<DeadWeakHandle> pending_weak_handles_;
     std::atomic<bool> finalizer_work_pending_{false};
     std::atomic<bool> finalizer_running_{false};

@@ -1,15 +1,15 @@
 {
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T23:14:45.849183",
+  "generated_at": "2026-05-20T00:54:16.622470",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "Average speedup -340.91% — native significantly slower than managed [overridden — benchmark stage was skipped]",
+      "summary": "Average speedup -372.71% — native significantly slower than managed [overridden — codegen-mode=jit, interpreter path is expected to be slower]",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -340.91,
+        "average_speedup_percent": -372.71,
         "managed_faster_count": 10,
         "native_faster_count": 2
       }
@@ -309,32 +309,33 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "2 of 10 changed source files are outside expected architecture layers",
+      "summary": "2 of 23 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/native/common/chaos/common.h",
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 10,
+        "changed_source_count": 23,
         "layer_distribution": {
           "TestInfra": 2,
-          "Templates": 1,
-          "RuntimeCore": 4,
+          "Emitter": 3,
+          "RuntimeSupport": 1,
+          "RuntimeCore": 14,
           "Tests": 1
         },
         "violations": [
           {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/native/common/chaos/common.h",
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
             "reason": "outside expected architecture layers"
           }
         ]

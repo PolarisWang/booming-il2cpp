@@ -5,13 +5,14 @@
   "planKind": "full-assembly-entry",
   "generatedSourcePaths": [
     "generated/runtime_helper_shapes.h",
+    "generated/enum_metadata.generated.h",
     "generated/native-aot.generated.cpp"
   ],
-  "generatedCppFileCount": 2,
-  "generatedCppTotalBytes": 180985,
-  "largestGeneratedCppBytes": 102143,
+  "generatedCppFileCount": 3,
+  "generatedCppTotalBytes": 243248,
+  "largestGeneratedCppBytes": 164406,
   "generatedSymbolCount": 18,
-  "peakWorkingSetBytes": 500629504,
+  "peakWorkingSetBytes": 501469184,
   "structuredMethodCount": 6,
   "structuredExceptionBodyCount": 6,
   "flatFallbackCount": 0,

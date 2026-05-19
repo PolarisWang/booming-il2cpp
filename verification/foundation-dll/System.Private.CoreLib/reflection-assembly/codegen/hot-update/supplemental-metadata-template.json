@@ -180,8 +180,8 @@
     },
     {
       "assemblyName": "ReflectionAssemblySubjects",
-      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
-      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
       "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
       "metadataToken": 100663318,
       "parameterCount": 0
