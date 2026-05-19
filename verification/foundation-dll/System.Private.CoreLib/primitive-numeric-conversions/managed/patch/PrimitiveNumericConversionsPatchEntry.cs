@@ -121,7 +121,7 @@ public static partial class PrimitiveNumericConversionsPatchEntry
                 case 14: Subject_14(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

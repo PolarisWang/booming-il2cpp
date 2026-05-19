@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "StringCharTextCoreSubjects",
+  "assemblyName": "StringCharTextCorePatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/managed/subjects/build-output/StringCharTextCoreSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/managed/patch/build-output/StringCharTextCorePatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "StringCharTextCoreSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/managed/subjects/build-output/StringCharTextCoreSubjects.dll"
+      "assemblyName": "StringCharTextCorePatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/managed/patch/build-output/StringCharTextCorePatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "02e45933-e851-4a72-92d5-dd276fd129c0",
+  "inputModuleVersionId": "363314f3-1345-4f99-88cc-8b9803362dbc",
   "artifacts": [
     {
       "kind": "typedIlIr",

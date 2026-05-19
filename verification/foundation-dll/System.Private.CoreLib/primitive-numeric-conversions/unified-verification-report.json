@@ -2,8 +2,8 @@
   "family": "primitive-numeric-conversions",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T04:51:47",
-  "duration_ms": 14735,
+  "timestamp": "2026-05-19T15:10:22",
+  "duration_ms": 18620,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions\\managed\\subjects\\build-output\\PrimitiveNumericConversionsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 14593
+      "duration_ms": 17645
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 37
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 113
+      "duration_ms": 937
     }
   },
   "coverage": {
@@ -78,7 +78,7 @@
   },
   "regression": {
     "benchmark": {
-      "status": "matched",
+      "status": "regressed",
       "baselineMetrics": {
         "totalMethods": 15,
         "matchedCount": 15,
@@ -89,12 +89,14 @@
       "currentMetrics": {
         "totalMethods": 15,
         "matchedCount": 15,
-        "nativeFasterCount": 9,
-        "managedFasterCount": 6,
-        "averageSpeedupPercent": -52.98
+        "nativeFasterCount": 5,
+        "managedFasterCount": 10,
+        "averageSpeedupPercent": -52.16
       }
     },
-    "hasRegression": false,
-    "regressions": []
+    "hasRegression": true,
+    "regressions": [
+      "Managed-faster ratio 67% exceeds native-faster ratio 33% (10/15 methods)"
+    ]
   }
 }

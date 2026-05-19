@@ -6,16 +6,16 @@
   "entrySubjectId": "",
   "includeHeader": "codegen_bridge.h",
   "nativeEntryFunctionName": "RunNativeReferenceAssembly",
-  "entrySymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method0",
+  "entrySymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0",
   "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
   "translationUnitMode": "runtime-skeleton",
   "translationUnitMethodSubjectIds": [
-    "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()",
-    "CcwBasicPatchEntry/CcwBasicPatchEntry::Method1:System.Int32()",
-    "CcwBasicPatchEntry/CcwBasicPatchEntry::Method2:System.Int32()",
-    "CcwBasicPatchEntry/CcwBasicPatchEntry::Method3:System.Int32()",
-    "CcwBasicPatchEntry/CcwBasicPatchEntry::Method4:System.Int32()",
-    "CcwBasicPatchEntry/CcwBasicPatchEntry::Run:System.Void(System.Int32)"
+    "CcwBasicPatchEntry/CcwBasicPatchEntry::Run:System.Void(System.Int32)",
+    "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_0:System.Int32()",
+    "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_1:System.Int32()",
+    "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_2:System.Int32()",
+    "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_3:System.Int32()",
+    "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_4:System.Int32()"
   ],
   "translationUnitMethodCount": 6,
   "translationUnitPageSize": 1024,
@@ -25,8 +25,8 @@
       "pageNumber": 1,
       "methodCount": 6,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
-      "firstMethodSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()",
-      "lastMethodSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Run:System.Void(System.Int32)"
+      "firstMethodSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Run:System.Void(System.Int32)",
+      "lastMethodSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_4:System.Int32()"
     }
   ],
   "auditStatus": "runtime-skeleton",

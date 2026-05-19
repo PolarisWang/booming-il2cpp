@@ -51,7 +51,7 @@ public static partial class DispatchBasicPatchEntry
                 case 4: Subject_4(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

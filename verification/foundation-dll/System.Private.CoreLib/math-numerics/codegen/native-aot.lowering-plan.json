@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "MathNumericsSubjects",
-  "entrySubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()",
+  "assemblyName": "MathNumericsPatchEntry",
+  "entrySubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_0",
+  "entrySymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

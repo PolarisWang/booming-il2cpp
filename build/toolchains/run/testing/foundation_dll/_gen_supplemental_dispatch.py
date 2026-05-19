@@ -39,21 +39,21 @@ extern "C" std::int32_t RunNativeAot(std::int32_t chaos_entry_index);
 
 extern "C" std::int32_t RunNativeAotAll()
 {
-    std::int32_t result = 0;
+    std::int32_t failed_count = 0;
     for (int i = 0; i < %d; i++)
     {
         g_chaos_abort_flag = 0;
         if (std::setjmp(g_chaos_abort_jmp) == 0)
         {
             std::int32_t r = RunNativeAot(i);
-            if (r) result |= (1 << i);
+            if (r) ++failed_count;
         }
         if (g_chaos_abort_flag)
         {
-            result |= (1 << i);  // Mark this method as failed
+            ++failed_count;  // Mark this method as failed
         }
     }
-    return result;
+    return failed_count;
 }
 
 // ── Sentinel patchdata (empty — hotpatch disabled) ─────────────

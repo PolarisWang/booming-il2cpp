@@ -40,8 +40,7 @@ inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_BasicImpl = static_cast<CHAOS_IL2CPP_INTPTR>(5722114412902280165ULL);inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_Calculator = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_DispatchBasicSubjects_Calculator, 5786799786101565947ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_Calculator = static_cast<CHAOS_IL2CPP_INTPTR>(5786799786101565947ULL);inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects = {{nullptr, nullptr, 13619514316044602496ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_DispatchBasicSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(13619514316044602496ULL);inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_StatusProvider = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_DispatchBasicSubjects_StatusProvider, 11732973143578276300ULL, 5u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_StatusProvider = static_cast<CHAOS_IL2CPP_INTPTR>(11732973143578276300ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Exception = {{nullptr, nullptr, 10972282733316558392ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Exception = static_cast<CHAOS_IL2CPP_INTPTR>(10972282733316558392ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_StatusProvider = static_cast<CHAOS_IL2CPP_INTPTR>(11732973143578276300ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -154,15 +153,6 @@ struct chaos_type_DispatchBasicSubjects_StatusProvider : public chaos_type_Syste
 {
 };
 
-struct chaos_type_System_Private_CoreLib_System_Exception
-{
-	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR _message = 0;
-	CHAOS_IL2CPP_INTPTR _innerException = 0;
-	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-	CHAOS_IL2CPP_INT32 _HResult = 0;
-};
-
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
 {
 	ThinLockableHeader header{};
@@ -246,10 +236,6 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
 extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
 extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_IBasicOp_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_IStatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
@@ -266,7 +252,7 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[23] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[19] = {
 	0u,
 	0u,
 	0u,
@@ -284,24 +270,20 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[23] = {
 	5u,
 	5u,
 	5u,
-	7u,
-	9u,
-	9u,
-	9u,
-	9u,
-	10u,
+	5u,
+	6u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[22];
-	CHAOS_IL2CPP_UINT8 params[10];
+	::ChaosAbiMethodEntryV0 entries[18];
+	CHAOS_IL2CPP_UINT8 params[6];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		22u,
-		10u,
-		223538403u,  // FNV-1a over entries+params
+		18u,
+		6u,
+		3898181747u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
@@ -320,19 +302,11 @@ static constexpr struct {
 		{ 1u, 0u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd
 		{ 1u, 0u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub
 		{ 1u, 0u },  // DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue
-		{ 1u, 0u },  // DispatchBasicSubjects_IBasicOp_GetValue
-		{ 1u, 2u },  // DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32
-		{ 1u, 2u },  // DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32
-		{ 1u, 0u },  // DispatchBasicSubjects_IStatusProvider_GetStatusCode
 		{ 0u, 0u },  // DispatchBasicSubjects_StatusProvider__ctor
 		{ 1u, 0u },  // DispatchBasicSubjects_StatusProvider_GetStatusCode
 		{ 0u, 1u },  // DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType
 	},
 	{
-		1u,
-		1u,
-		1u,
-		1u,
 		1u,
 		1u,
 		1u,
@@ -464,7 +438,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("DispatchBasicSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[22] = {
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[18] = {
 	{ ".ctor", 0x0000001Au, 0u },  // BasicImpl
 	{ "GetValue", 0x00000019u, 0u },  // BasicImpl
 	{ ".ctor", 0x00000016u, 0u },  // Calculator
@@ -480,44 +454,33 @@ static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[22] = {
 	{ "Subject_2", 0x0000000Du, 0u },  // DispatchBasicSubjects
 	{ "Subject_3", 0x0000000Eu, 0u },  // DispatchBasicSubjects
 	{ "Subject_4", 0x0000000Fu, 0u },  // DispatchBasicSubjects
-	{ "GetValue", 0x00000013u, 0u },  // IBasicOp
-	{ "Add", 0x00000010u, 2u },  // ICalculator
-	{ "Subtract", 0x00000011u, 2u },  // ICalculator
-	{ "GetStatusCode", 0x00000012u, 0u },  // IStatusProvider
 	{ ".ctor", 0x00000018u, 0u },  // StatusProvider
 	{ "GetStatusCode", 0x00000017u, 0u },  // StatusProvider
 	{ ".ctor", 0x00000020u, 1u },  // System.Runtime.InteropServices.ComInterfaceTypeAttribute
 };
 
 // Type name index entries (namespace, short_name)
-static constexpr HotpatchTypeEntryV0 s_hotpatch_types[9] = {
+static constexpr HotpatchTypeEntryV0 s_hotpatch_types[6] = {
 	{ "BasicImpl", "", 0u, 2u },
 	{ "Calculator", "", 2u, 3u },
 	{ "DispatchBasicNativeEntry", "", 5u, 5u },
 	{ "DispatchBasicSubjects", "", 10u, 5u },
-	{ "IBasicOp", "", 15u, 1u },
-	{ "ICalculator", "", 16u, 2u },
-	{ "IStatusProvider", "", 18u, 1u },
-	{ "StatusProvider", "", 19u, 2u },
-	{ "System.Runtime.InteropServices.ComInterfaceTypeAttribute", "System.Runtime.InteropServices", 21u, 1u },
+	{ "StatusProvider", "", 15u, 2u },
+	{ "System.Runtime.InteropServices.ComInterfaceTypeAttribute", "System.Runtime.InteropServices", 17u, 1u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[22] = {
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[18] = {
 	{ 0x0000000Bu, 0u },
 	{ 0x0000000Cu, 1u },
 	{ 0x0000000Du, 2u },
 	{ 0x0000000Eu, 3u },
 	{ 0x0000000Fu, 4u },
-	{ 0x00000010u, 16u },
-	{ 0x00000011u, 17u },
-	{ 0x00000012u, 18u },
-	{ 0x00000013u, 15u },
 	{ 0x00000014u, 8u },
 	{ 0x00000015u, 9u },
 	{ 0x00000016u, 7u },
-	{ 0x00000017u, 20u },
-	{ 0x00000018u, 19u },
+	{ 0x00000017u, 16u },
+	{ 0x00000018u, 15u },
 	{ 0x00000019u, 6u },
 	{ 0x0000001Au, 5u },
 	{ 0x0000001Bu, 10u },
@@ -525,11 +488,11 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[22] = {
 	{ 0x0000001Du, 13u },
 	{ 0x0000001Eu, 11u },
 	{ 0x0000001Fu, 14u },
-	{ 0x00000020u, 21u },
+	{ 0x00000020u, 17u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[22] = {
+static HotpatchEntryV0 s_hotpatch_entries[18] = {
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicSubjects::Subject_0
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicSubjects::Subject_1
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicSubjects::Subject_2
@@ -545,10 +508,6 @@ static HotpatchEntryV0 s_hotpatch_entries[22] = {
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::TestIDispatchAdd
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::TestIDispatchSub
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DispatchBasicNativeEntry::TestIUnknownGetValue
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_IBasicOp_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IBasicOp::GetValue
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ICalculator::Add
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ICalculator::Subtract
-	{ reinterpret_cast<void*>(&DispatchBasicSubjects_IStatusProvider_GetStatusCode), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IStatusProvider::GetStatusCode
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // StatusProvider::.ctor
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider_GetStatusCode), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // StatusProvider::GetStatusCode
 	{ reinterpret_cast<void*>(&DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor
@@ -558,13 +517,13 @@ static HotpatchEntryV0 s_hotpatch_entries[22] = {
 static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	"DispatchBasicSubjects",
 	s_hotpatch_types,
-	9u,
+	6u,
 	s_hotpatch_methods,
-	22u,
+	18u,
 	s_hotpatch_slots,
-	22u,
+	18u,
 	s_hotpatch_entries,
-	22u,
+	18u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -589,7 +548,7 @@ extern "C" int32_t kChaosExternalRuntimeCount = 3;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[22])() = {
+static void (*kAotMethods[18])() = {
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_2),
@@ -605,10 +564,6 @@ static void (*kAotMethods[22])() = {
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_IBasicOp_GetValue),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32),
-	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_IStatusProvider_GetStatusCode),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_StatusProvider__ctor),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_StatusProvider_GetStatusCode),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType),
@@ -617,7 +572,7 @@ static void (*kAotMethods[22])() = {
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
-static void (*kBenchmarkWrappers[22])() = {
+static void (*kBenchmarkWrappers[18])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -634,12 +589,8 @@ static void (*kBenchmarkWrappers[22])() = {
 	[]() {kAotMethods[13]();},
 	[]() {kAotMethods[14]();},
 	[]() {kAotMethods[15]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[16])(0,0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[17])(0,0);},
-	[]() {kAotMethods[18]();},
-	[]() {kAotMethods[19]();},
-	[]() {kAotMethods[20]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[21])(0);},
+	[]() {kAotMethods[16]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[17])(0);},
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -714,7 +665,7 @@ extern "C" double BenchmarkMethod(
 }
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[22] = {
+static void* const kMethodPointers[18] = {
 	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_0),
 	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_1),
 	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_2),
@@ -730,10 +681,6 @@ static void* const kMethodPointers[22] = {
 	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd),
 	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub),
 	reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_IBasicOp_GetValue),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32),
-	reinterpret_cast<void*>(&DispatchBasicSubjects_IStatusProvider_GetStatusCode),
 	reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider__ctor),
 	reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider_GetStatusCode),
 	reinterpret_cast<void*>(&DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType),
@@ -786,7 +733,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 22u,
+	.method_pointer_count      = 18u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -862,19 +809,6 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubje
 	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()", "TestIUnknownGetValue", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_IBasicOp[1] = {
-	{ 0u, "DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()", "GetValue", "System.Void", 0, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_ICalculator[2] = {
-	{ 0u, "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)", "Add", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)", "Subtract", "System.Void", 0, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_IStatusProvider[1] = {
-	{ 0u, "DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()", "GetStatusCode", "System.Void", 0, nullptr, 0u },
-};
-
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_StatusProvider[2] = {
 	{ 0u, "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
 	{ 0u, "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()", "GetStatusCode", "System.Void", 0, nullptr, 0u },
@@ -884,7 +818,7 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubje
 	{ 0u, "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)", ".ctor", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[9] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[6] = {
 	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects", "DispatchBasicSubjects/DispatchBasicSubjects", "", "DispatchBasicSubjects", "DispatchBasicSubjects", nullptr, kReflFields_DispatchBasicSubjects_DispatchBasicSubjects, 1u, nullptr, 0u,
 	kReflMethods_DispatchBasicSubjects_DispatchBasicSubjects, 5u },
 	{ 0u, "DispatchBasicSubjects/BasicImpl", "DispatchBasicSubjects/BasicImpl", "", "BasicImpl", "BasicImpl", nullptr, nullptr, 0u, nullptr, 0u,
@@ -893,31 +827,22 @@ static constexpr ReflectionQueryTypeDescriptor kReflTypes[9] = {
 	kReflMethods_DispatchBasicSubjects_Calculator, 3u },
 	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry", "DispatchBasicSubjects/DispatchBasicNativeEntry", "", "DispatchBasicNativeEntry", "DispatchBasicNativeEntry", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_DispatchBasicSubjects_DispatchBasicNativeEntry, 5u },
-	{ 0u, "DispatchBasicSubjects/IBasicOp", "DispatchBasicSubjects/IBasicOp", "", "IBasicOp", "IBasicOp", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_DispatchBasicSubjects_IBasicOp, 1u },
-	{ 0u, "DispatchBasicSubjects/ICalculator", "DispatchBasicSubjects/ICalculator", "", "ICalculator", "ICalculator", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_DispatchBasicSubjects_ICalculator, 2u },
-	{ 0u, "DispatchBasicSubjects/IStatusProvider", "DispatchBasicSubjects/IStatusProvider", "", "IStatusProvider", "IStatusProvider", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_DispatchBasicSubjects_IStatusProvider, 1u },
 	{ 0u, "DispatchBasicSubjects/StatusProvider", "DispatchBasicSubjects/StatusProvider", "", "StatusProvider", "StatusProvider", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_DispatchBasicSubjects_StatusProvider, 2u },
 	{ 0u, "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute", "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute", "System.Runtime.InteropServices", "System.Runtime.InteropServices.ComInterfaceTypeAttribute", "System.Runtime.InteropServices.ComInterfaceTypeAttribute", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute, 1u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[9] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[6] = {
 	&kReflTypes[0],
 	&kReflTypes[1],
 	&kReflTypes[2],
 	&kReflTypes[3],
 	&kReflTypes[4],
 	&kReflTypes[5],
-	&kReflTypes[6],
-	&kReflTypes[7],
-	&kReflTypes[8],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "DispatchBasicSubjects", kReflTypePtrs, 9u };
+static const ReflectionQueryImageDescriptor kReflImage = { "DispatchBasicSubjects", kReflTypePtrs, 6u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -983,7 +908,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				throw;
 			}
@@ -1011,7 +936,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void)
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				chaos::il2cpp::runtime_core::chaos_raise_exception(
 					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1052,7 +977,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void)
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
 				chaos::il2cpp::runtime_core::chaos_raise_exception(
@@ -1098,7 +1023,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				throw;
 			}
@@ -1126,7 +1051,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void)
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				chaos::il2cpp::runtime_core::chaos_raise_exception(
 					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1167,7 +1092,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void)
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
 				chaos::il2cpp::runtime_core::chaos_raise_exception(
@@ -1213,7 +1138,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				throw;
 			}
@@ -1241,7 +1166,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void)
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				chaos::il2cpp::runtime_core::chaos_raise_exception(
 					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1282,7 +1207,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void)
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
 				chaos::il2cpp::runtime_core::chaos_raise_exception(
@@ -1328,7 +1253,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				throw;
 			}
@@ -1356,7 +1281,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void)
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				chaos::il2cpp::runtime_core::chaos_raise_exception(
 					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1397,7 +1322,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void)
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
 				chaos::il2cpp::runtime_core::chaos_raise_exception(
@@ -1443,7 +1368,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				throw;
 			}
@@ -1471,7 +1396,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void)
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				chaos::il2cpp::runtime_core::chaos_raise_exception(
 					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1512,7 +1437,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void)
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
 				chaos::il2cpp::runtime_core::chaos_raise_exception(
@@ -1739,16 +1664,16 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 	{
 		const auto chaos_raw_arg_0 = _s0;
 		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d20 = s_hotpatch_entries[20];
+		auto& _d16 = s_hotpatch_entries[16];
 		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d20)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d20))
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
 		{
 			alignas(16) uint8_t _d_ab[8];
 			ArgBuffer _d_bw(_d_ab);
 			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d20.method_key, _d_ab, &_d_hpresult);
+				_d16.method_key, _d_ab, &_d_hpresult);
 		}
 		else
 		{
@@ -1909,34 +1834,6 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// AOT-unreachable stub: DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_IBasicOp_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()");
-	return {};
-}
-
-// AOT-unreachable stub: DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)");
-	return {};
-}
-
-// AOT-unreachable stub: DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)");
-	return {};
-}
-
-// AOT-unreachable stub: DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_IStatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_FAIL("AOT-unreachable method invoked: DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()");
-	return {};
-}
-
 // Managed method: DispatchBasicSubjects/StatusProvider::.ctor()
 extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
@@ -1987,4 +1884,4 @@ extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfac
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 22;
+extern "C" const int kAotMethodCount = 18;

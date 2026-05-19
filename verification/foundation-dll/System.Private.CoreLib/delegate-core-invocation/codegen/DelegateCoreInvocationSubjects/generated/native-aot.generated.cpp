@@ -599,16 +599,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_DelegateCoreInvoca
 	{ 0u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects", "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects", "", "DelegateCoreInvocationSubjects", "DelegateCoreInvocationSubjects", nullptr, kReflFields_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects, 1u, nullptr, 0u,
 	kReflMethods_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects, 10u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "DelegateCoreInvocationSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "DelegateCoreInvocationSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

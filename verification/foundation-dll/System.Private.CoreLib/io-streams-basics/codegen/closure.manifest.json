@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "IoStreamsBasicsSubjects",
+  "assemblyName": "IoStreamsBasicsPatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/io-streams-basics/managed/subjects/build-output/IoStreamsBasicsSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/io-streams-basics/managed/patch/build-output/IoStreamsBasicsPatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "IoStreamsBasicsSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/io-streams-basics/managed/subjects/build-output/IoStreamsBasicsSubjects.dll"
+      "assemblyName": "IoStreamsBasicsPatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/io-streams-basics/managed/patch/build-output/IoStreamsBasicsPatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "9a52c21b-ce48-4246-a78b-4cd8318dea58",
+  "inputModuleVersionId": "b79b50a4-f906-4425-bb27-02d132402498",
   "artifacts": [
     {
       "kind": "typedIlIr",

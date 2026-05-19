@@ -55,6 +55,7 @@ struct CodegenCallVirtArgs {
     uint32_t instruction_idx;   // 24: current instruction index (for PIC chain lookup)
     uint32_t arg_count;         // 28: number of arguments
     uint32_t first_arg_reg;     // 32: src1_reg (first argument register)
+    uint32_t method_token;      // 36: method token for vtable fallback (was padding)
     void* call_target;          // 40: instr.imm.ptr (method handle for fallback)
     uint32_t has_dst;           // 48: whether instruction has a dst register
     uint32_t is_instance_call;  // 52: from header bit 63
@@ -64,8 +65,14 @@ struct CodegenCallVirtArgs {
 
 // Returns the uint64_t result value (0 if no return).
 // Internal: reads args from gpr_base, calls direct_fn on PIC hit,
-// or InterpreterDispatchRaw on miss.
+// vtable_resolve on PIC miss with method_token, or deoptimization on miss.
 extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept;
+
+// ── TLAB access helper ───────────────────────────────────────────────
+// Returns &tls_tlab for the current thread — enables T4 code to access
+// the Thread-Local Allocation Buffer inline for bump-pointer allocation.
+// Return value is a pointer to TLAB (see gc_young_gen.h for struct layout).
+extern "C" void*   CodegenGetTlab() noexcept;
 
 // ── Box / NewObj helpers ─────────────────────────────────────────────────
 // Box: wrap a raw value (uint64_t + tag) into an InterpreterObject.

@@ -3,124 +3,132 @@
   "artifactKind": "supplementalMetadataTemplate",
   "registeredTypes": [
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 33554434
     }
   ],
   "registeredMethods": [
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_0:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_0:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_0:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_0:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663297,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_1:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_1:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_1:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_1:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663298,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_2:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_2:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_2:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_2:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663299,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_3:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_3:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_3:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_3:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663300,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_4:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_4:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_4:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_4:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663301,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_5:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_5:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_5:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_5:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663302,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_6:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_6:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_6:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_6:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663303,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_7:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_7:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_7:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_7:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663304,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_8:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_8:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_8:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_8:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663305,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_9:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_9:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_9:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_9:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663306,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_10:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_10:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_10:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_10:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663307,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_11:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_11:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_11:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_11:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663308,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_12:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_12:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_12:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_12:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663309,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_13:System.Void()",
-      "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_13:System.Void()",
-      "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_13:System.Int32()",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_13:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "metadataToken": 100663310,
       "parameterCount": 0
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "metadataToken": 100663311,
+      "parameterCount": 1
     }
   ],
   "reservedSlots": {

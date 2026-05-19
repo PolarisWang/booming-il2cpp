@@ -80,6 +80,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_EXCEPTION_GET_HRESULT = 0xA24695DCu,
     SHAPE_SYSTEM_EXCEPTION_GET_INNEREXCEPTION = 0xD7B5C090u,
     SHAPE_SYSTEM_EXCEPTION_GET_MESSAGE = 0xA28AE25Eu,
+    SHAPE_SYSTEM_EXCEPTION__CTOR = 0x6EF95CA6u,
     SHAPE_SYSTEM_EXCEPTION__CTOR_SYSTEM_STRING = 0x1B319934u,
     SHAPE_SYSTEM_GC_ADDMEMORYPRESSURE_SYSTEM_INT64 = 0x0D6763A0u,
     SHAPE_SYSTEM_GC_COLLECT = 0xBC962311u,
@@ -320,7 +321,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 306u,
+    SHAPE_COUNT = 307u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -1155,6 +1156,9 @@ void DispatchVoid(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_DECIMAL__CTOR_SYSTEM_INT32) {
         chaos_decimal_ctor_int32(args...);
     }
+    else if constexpr (S == SHAPE_SYSTEM_EXCEPTION__CTOR) {
+        ChaosReflectionInitDefaultException(args...);
+    }
     else if constexpr (S == SHAPE_SYSTEM_EXCEPTION__CTOR_SYSTEM_STRING) {
         ChaosReflectionSetExceptionMetadata(args...);
     }
@@ -1522,7 +1526,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 306u,
+static_assert(SHAPE_COUNT == 307u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

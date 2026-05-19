@@ -2,9 +2,9 @@
   "family": "guid-random-hashcode",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T04:50:48",
-  "duration_ms": 14539,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T15:09:07",
+  "duration_ms": 17922,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,16 +28,16 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\guid-random-hashcode\\managed\\subjects\\build-output\\GuidRandomHashcodeSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 14400
+      "duration_ms": 17070
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (13/14)",
+      "status": "passed",
+      "summary": "Fact verify=passed (14/14)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 13,
+          "status": "passed",
+          "passed": 14,
           "total": 14
         }
       },
@@ -56,13 +56,13 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 108
+      "duration_ms": 821
     }
   },
   "coverage": {
-    "methodCoverage": 92.86,
+    "methodCoverage": 100.0,
     "testedRate": 85.71,
-    "overall": 89.28
+    "overall": 92.85
   },
   "dashboard": {
     "interpreter": {},
@@ -88,15 +88,15 @@
       },
       "currentMetrics": {
         "totalMethods": 14,
-        "matchedCount": 9,
+        "matchedCount": 10,
         "nativeFasterCount": 1,
-        "managedFasterCount": 8,
-        "averageSpeedupPercent": -220.42
+        "managedFasterCount": 9,
+        "averageSpeedupPercent": -301.75
       }
     },
     "hasRegression": true,
     "regressions": [
-      "Managed-faster ratio 89% exceeds native-faster ratio 11% (8/9 methods)"
+      "Managed-faster ratio 90% exceeds native-faster ratio 10% (9/10 methods)"
     ]
   }
 }

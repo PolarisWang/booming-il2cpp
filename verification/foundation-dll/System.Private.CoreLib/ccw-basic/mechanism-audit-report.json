@@ -1,13 +1,13 @@
 {
   "family": "ccw-basic",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 26,
-  "audited": 26,
+  "total_methods": 12,
+  "audited": 12,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 26,
+  "methods_without_assert": 12,
   "passed": true,
   "method_details": [
     {
@@ -65,7 +65,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CcwBasicSubjects_SimpleMath__ctor",
+      "method_name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -74,7 +74,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathAdd",
+      "method_name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method1",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -83,7 +83,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathMul",
+      "method_name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -92,7 +92,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CcwBasicSubjects_ConstantFortyTwo__ctor",
+      "method_name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method3",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -101,7 +101,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CcwBasicSubjects_CcwBasicNativeEntry_TestConstantValue",
+      "method_name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method4",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -110,133 +110,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CcwBasicSubjects_DualInterfaceImpl__ctor",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_CcwBasicNativeEntry_TestDualInterface",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_CcwBasicNativeEntry_Run",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_CcwBasicSubjects_Subject_0",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_CcwBasicSubjects_Subject_1",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_CcwBasicSubjects_Subject_2",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_CcwBasicSubjects_Subject_3",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_CcwBasicSubjects_Subject_4",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_CcwBasicSubjects_Run",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_ConstantFortyTwo_GetValue",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_DualInterfaceImpl_Add",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_DualInterfaceImpl_GetValue",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_DualInterfaceImpl_Multiply",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_SimpleMath_Add",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "CcwBasicSubjects_SimpleMath_Multiply",
+      "method_name": "CcwBasicPatchEntry_CcwBasicPatchEntry_Run_System_Int32",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

@@ -66,12 +66,12 @@ public static class PrimitiveNumericConversionsHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.Double)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_PrimitiveNumericConversions)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Convert_ToDecimal_System_Decimal_System_Double() { _ = Convert.ToDecimal("42"); }
+    public static void HotUpdate_System_Private_CoreLib_System_Convert_ToDecimal_System_Decimal_System_Double() { _ = Convert.ToDecimal(42.0); }
     // Verify Convert.ToInt32 after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_PrimitiveNumericConversions)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Convert_ToInt32_System_Int32_System_Double() { _ = Convert.ToInt32("42"); }
+    public static void HotUpdate_System_Private_CoreLib_System_Convert_ToInt32_System_Int32_System_Double() { _ = Convert.ToInt32(42.0); }
     // Verify Int32.Parse after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_PrimitiveNumericConversions)]

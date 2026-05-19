@@ -1,13 +1,13 @@
 {
   "family": "threading-tasks-primitives",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 51,
-  "audited": 51,
+  "total_methods": 50,
+  "audited": 50,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 14,
   "methods_without_lowering": 0,
-  "methods_without_assert": 51,
+  "methods_without_assert": 50,
   "passed": true,
   "method_details": [
     {
@@ -408,15 +408,6 @@
     },
     {
       "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c_CustomEntrySubject_11_b__14_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

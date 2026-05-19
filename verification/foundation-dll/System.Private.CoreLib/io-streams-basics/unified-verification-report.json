@@ -2,9 +2,9 @@
   "family": "io-streams-basics",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T04:51:03",
-  "duration_ms": 14539,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T15:09:25",
+  "duration_ms": 18156,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\io-streams-basics\\managed\\subjects\\build-output\\IoStreamsBasicsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 14403
+      "duration_ms": 17245
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (16/18)",
+      "status": "passed",
+      "summary": "Fact verify=passed (18/18)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 16,
+          "status": "passed",
+          "passed": 18,
           "total": 18
         }
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 31
     },
     "audit": {
       "stage": "audit",
@@ -56,13 +56,13 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 106
+      "duration_ms": 878
     }
   },
   "coverage": {
-    "methodCoverage": 88.89,
+    "methodCoverage": 100.0,
     "testedRate": 61.11,
-    "overall": 75.0
+    "overall": 80.56
   },
   "dashboard": {
     "interpreter": {},

@@ -4,91 +4,97 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_0:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_0:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_1:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_1:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_2:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_2:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_3:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_3:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_4:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_4:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_5:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_5:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_6:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_6:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_7:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_7:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_8:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_8:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_9:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_9:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_10:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_10:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_11:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_11:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_12:System.Void()",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_12:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

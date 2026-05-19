@@ -24,8 +24,6 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
-static CHAOS_IL2CPP_UINT8 s_stub_sentinel = 0;
-
 namespace chaos::il2cpp::codegen::ReflectionBindingSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -973,67 +971,78 @@ CHAOS_IL2CPP_INT32 chaos_static_ReflectionBindingSubjects_ReflectionBindingSubje
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Reflection_MethodBase__Invoke_System_Object_System_Object_System_Reflection_BindingFlags_System_Reflection_Binder_System_Object___System_Globalization_CultureInfo_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2, CHAOS_IL2CPP_INTPTR chaos_arg_3, CHAOS_IL2CPP_INTPTR chaos_arg_4, CHAOS_IL2CPP_INTPTR chaos_arg_5)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2; (void)chaos_arg_3; (void)chaos_arg_4; (void)chaos_arg_5;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_stub_sentinel);
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetEvent_System_Reflection_EventInfo_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_stub_sentinel);
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetEvent_System_Reflection_EventInfo_System_String_System_Reflection_BindingFlags_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_stub_sentinel);
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetField_System_Reflection_FieldInfo_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_stub_sentinel);
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetField_System_Reflection_FieldInfo_System_String_System_Reflection_BindingFlags_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_stub_sentinel);
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetMethod_System_Reflection_MethodInfo_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_stub_sentinel);
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetMethod_System_Reflection_MethodInfo_System_String_System_Reflection_BindingFlags_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_stub_sentinel);
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetMethod_System_Reflection_MethodInfo_System_String_System_Type___(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_stub_sentinel);
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetProperty_System_Reflection_PropertyInfo_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_stub_sentinel);
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetProperty_System_Reflection_PropertyInfo_System_String_System_Reflection_BindingFlags_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;
-	return 0;
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetProperty_System_Reflection_PropertyInfo_System_String_System_Type___(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)
 {
 	(void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;
-	return 0;
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -1493,16 +1502,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_ReflectionBindingS
 	{ 0u, "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "ReflectionBindingSubjects/ReflectionBindingSubjects", "ReflectionBindingSubjects/ReflectionBindingSubjects", "", "ReflectionBindingSubjects", "ReflectionBindingSubjects", nullptr, kReflFields_ReflectionBindingSubjects_ReflectionBindingSubjects, 1u, nullptr, 0u,
 	kReflMethods_ReflectionBindingSubjects_ReflectionBindingSubjects, 12u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "ReflectionBindingSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ReflectionBindingSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -2224,7 +2233,7 @@ extern "C" void ReflectionBindingSubjects_ReflectionBindingSubjects_Subject_4(vo
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetField_System_Reflection_FieldInfo_System_String_System_Reflection_BindingFlags_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -2267,7 +2276,7 @@ extern "C" void ReflectionBindingSubjects_ReflectionBindingSubjects_Subject_4(vo
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetField_System_Reflection_FieldInfo_System_String_System_Reflection_BindingFlags_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -2321,7 +2330,7 @@ extern "C" void ReflectionBindingSubjects_ReflectionBindingSubjects_Subject_4(vo
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetField_System_Reflection_FieldInfo_System_String_System_Reflection_BindingFlags_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3051,7 +3060,7 @@ extern "C" void ReflectionBindingSubjects_ReflectionBindingSubjects_Subject_9(vo
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetEvent_System_Reflection_EventInfo_System_String_System_Reflection_BindingFlags_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3094,7 +3103,7 @@ extern "C" void ReflectionBindingSubjects_ReflectionBindingSubjects_Subject_9(vo
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetEvent_System_Reflection_EventInfo_System_String_System_Reflection_BindingFlags_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3148,7 +3157,7 @@ extern "C" void ReflectionBindingSubjects_ReflectionBindingSubjects_Subject_9(vo
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetEvent_System_Reflection_EventInfo_System_String_System_Reflection_BindingFlags_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3250,7 +3259,7 @@ extern "C" void ReflectionBindingSubjects_ReflectionBindingSubjects_Subject_11(v
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MethodBase__Invoke_System_Object_System_Object_System_Reflection_BindingFlags_System_Reflection_Binder_System_Object___System_Globalization_CultureInfo_(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3302,7 +3311,7 @@ extern "C" void ReflectionBindingSubjects_ReflectionBindingSubjects_Subject_11(v
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MethodBase__Invoke_System_Object_System_Object_System_Reflection_BindingFlags_System_Reflection_Binder_System_Object___System_Globalization_CultureInfo_(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -3365,7 +3374,7 @@ extern "C" void ReflectionBindingSubjects_ReflectionBindingSubjects_Subject_11(v
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MethodBase__Invoke_System_Object_System_Object_System_Reflection_BindingFlags_System_Reflection_Binder_System_Object___System_Globalization_CultureInfo_(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);

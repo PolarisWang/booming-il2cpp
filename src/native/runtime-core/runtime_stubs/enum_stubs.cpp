@@ -17,25 +17,42 @@ extern "C" {
 
 // ── Internal helpers ────────────────────────────────────────────
 
+/// chaos_managed_string header size: ThinLockableHeader(16) + length(4) +
+/// padding(4) + utf8_data(8) + string_id(8) = 40 bytes on x64.
+static constexpr CHAOS_IL2CPP_SIZE kManagedStringHeader = 40;
+
 /// Allocate a managed string with the given byte_count of UTF-8 payload + NUL.
+/// Uses chaos_managed_string layout so generated code reads length/utf8_data
+/// at correct offsets via the CHAOS_IL2CPP_STRING_TYPE* path.
 static CHAOS_IL2CPP_INTPTR enum_alloc_string(CHAOS_IL2CPP_UINTPTR byte_count) noexcept
 {
-    auto* result = static_cast<StubStringHeader*>(
-        GcAllocateAtomic(sizeof(StubStringHeader) + byte_count + 1));
-    if (result == nullptr) return 0;
-    result->type = 0;
-    result->byte_count = byte_count;
-    reinterpret_cast<char*>(result + 1)[byte_count] = '\0';
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result);
+    auto* storage = static_cast<unsigned char*>(
+        GcAllocateAtomic(kManagedStringHeader + byte_count + 1));
+    if (storage == nullptr) return 0;
+
+    std::memset(storage, 0, kManagedStringHeader);
+
+    // length at offset 16
+    auto* len_field = reinterpret_cast<CHAOS_IL2CPP_INT32*>(storage + 16);
+    *len_field = static_cast<CHAOS_IL2CPP_INT32>(byte_count);
+
+    // inline data, utf8_data ptr at offset 24
+    char* data_area = reinterpret_cast<char*>(storage + kManagedStringHeader);
+    if (byte_count > 0) data_area[0] = '\0';
+    auto* utf8_field = reinterpret_cast<const char**>(storage + 24);
+    *utf8_field = data_area;
+
+    // string_id at offset 32 stays 0 (uninterned)
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
 }
 
-/// Write a C string into a pre-allocated stub string's data area.
+/// Write a C string into a pre-allocated managed string's inline data area.
 static void write_string_data(CHAOS_IL2CPP_INTPTR str_handle, const char* data, CHAOS_IL2CPP_UINTPTR len) noexcept
 {
     if (str_handle == 0 || data == nullptr || len == 0) return;
-    auto* sh = reinterpret_cast<StubStringHeader*>(str_handle);
-    if (len > sh->byte_count) len = sh->byte_count;
-    char* dest = reinterpret_cast<char*>(sh + 1);
+    // The data area starts at offset kManagedStringHeader
+    auto* dest = reinterpret_cast<char*>(str_handle) + kManagedStringHeader;
     std::memcpy(dest, data, len);
     dest[len] = '\0';
 }
@@ -44,9 +61,10 @@ static void write_string_data(CHAOS_IL2CPP_INTPTR str_handle, const char* data, 
 static const char* get_string_data(CHAOS_IL2CPP_INTPTR str_handle, CHAOS_IL2CPP_UINTPTR& out_len) noexcept
 {
     if (str_handle == 0) { out_len = 0; return ""; }
-    auto* sh = reinterpret_cast<const StubStringHeader*>(str_handle);
-    out_len = sh->byte_count;
-    return stub_string_data(sh);
+    // length at offset 16
+    out_len = static_cast<CHAOS_IL2CPP_UINTPTR>(*reinterpret_cast<const CHAOS_IL2CPP_INT32*>(str_handle + 16));
+    // utf8_data at offset 24
+    return *reinterpret_cast<const char* const*>(str_handle + 24);
 }
 
 /// Read a boxed int32 value from a managed object (ThinLockableHeader + payload).
@@ -175,14 +193,35 @@ static const ReflectionQueryFieldDescriptor* find_field_by_name_icase(
 ///      runtime_type_handle field at offset 16 (after ThinLockableHeader)
 ///      and converts it to a TypeInfoHandle via ChaosReflectionGetTypeFromHandle.
 ///
+/// Uses a small thread-local direct-mapped cache to skip redundant decoding
+/// when the same type argument is used repeatedly (common in benchmark loops).
+///
 /// Returns nullptr if the type cannot be resolved.
 static const ReflectionQueryTypeDescriptor* resolve_type_arg(CHAOS_IL2CPP_INTPTR type_arg) noexcept {
     if (type_arg == 0) return nullptr;
 
+    // Small direct-mapped cache: 4 entries, keyed by type_arg.
+    // Avoids redundant handle decoding on repeated calls with the same type.
+    struct TypeCacheEntry { CHAOS_IL2CPP_INTPTR key; const ReflectionQueryTypeDescriptor* desc; };
+    thread_local TypeCacheEntry s_type_cache[4] = {};
+
+    // Check cache
+    for (auto& entry : s_type_cache) {
+        if (entry.key == type_arg) {
+            CHAOS_IL2CPP_LOG_DEBUG_M("enum_stubs", "resolve_type_arg: cache hit key={0} desc={1}", (void*)type_arg, (void*)entry.desc);
+            return entry.desc;
+        }
+    }
+
+    const ReflectionQueryTypeDescriptor* desc = nullptr;
+
     // Case 1: direct TypeInfoHandle (high bit set)
-    auto* desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type_arg));
+    desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type_arg));
     if (desc != nullptr) {
         CHAOS_IL2CPP_LOG_DEBUG_M("enum_stubs", "resolve_type_arg: direct handle, desc={0} fields={1}", (void*)desc, desc->field_count);
+        // Insert into cache (direct-mapped: replace first entry)
+        s_type_cache[0].key = type_arg;
+        s_type_cache[0].desc = desc;
         return desc;
     }
 
@@ -198,6 +237,10 @@ static const ReflectionQueryTypeDescriptor* resolve_type_arg(CHAOS_IL2CPP_INTPTR
 
     desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type_info_handle));
     CHAOS_IL2CPP_LOG_DEBUG_M("enum_stubs", "resolve_type_arg: decoded desc={0} fields={1}", (void*)desc, desc ? desc->field_count : 0);
+
+    // Insert into cache (direct-mapped: replace first entry)
+    s_type_cache[0].key = type_arg;
+    s_type_cache[0].desc = desc;
     return desc;
 }
 

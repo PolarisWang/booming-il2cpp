@@ -4,106 +4,104 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_0:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_0:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_1:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_1:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_2:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_2:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_3:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_3:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_4:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_5:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_5:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_6:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_6:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_7:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_7:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_8:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_9:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_9:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_10:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_10:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_11:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_11:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_12:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_12:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_13:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_13:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_14:System.Void()",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Subject_14:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [
-    {
-      "methodSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_9:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    }
-  ],
+  "dispatchFacts": [],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
+      "subjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Run:System.Void(System.Int32)",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
 }

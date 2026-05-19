@@ -2,8 +2,8 @@
   "family": "runtime-compiler-services",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T04:52:16",
-  "duration_ms": 14373,
+  "timestamp": "2026-05-19T15:10:59",
+  "duration_ms": 18405,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\runtime-compiler-services\\managed\\subjects\\build-output\\RuntimeCompilerServicesSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 14247
+      "duration_ms": 17588
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 27
+      "duration_ms": 30
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 96
+      "duration_ms": 784
     }
   },
   "coverage": {

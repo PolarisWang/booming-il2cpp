@@ -2,9 +2,9 @@
   "family": "globalization-culture",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T04:50:34",
-  "duration_ms": 14806,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T15:08:49",
+  "duration_ms": 18238,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\globalization-culture\\managed\\subjects\\build-output\\GlobalizationCultureSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 14678
+      "duration_ms": 17365
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (9/13)",
+      "status": "passed",
+      "summary": "Fact verify=passed (13/13)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 9,
+          "status": "passed",
+          "passed": 13,
           "total": 13
         }
       },
       "errors": [],
-      "duration_ms": 30
+      "duration_ms": 31
     },
     "audit": {
       "stage": "audit",
@@ -56,13 +56,13 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 96
+      "duration_ms": 841
     }
   },
   "coverage": {
-    "methodCoverage": 69.23,
+    "methodCoverage": 100.0,
     "testedRate": 92.31,
-    "overall": 80.77
+    "overall": 96.16
   },
   "dashboard": {
     "interpreter": {},

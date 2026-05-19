@@ -27,6 +27,21 @@ thread_local DeoptTlsState t_deopt_state;
 // Virtual method resolution for CodegenLdVirtFtn.
 #include <vtable_registry.h>
 
+// TLAB (Thread-Local Allocation Buffer) for inline bump-pointer allocation.
+// We avoid including gc/gc_young_gen.h here because it pulls in GcScheduler
+// and other GC internals that the codegen library should not depend on.
+// Instead, we forward-declare the TLAB struct and extern tls_tlab.
+namespace chaos::il2cpp::runtime_core {
+struct TLAB {
+    char* start{nullptr};
+    char* current{nullptr};
+    char* end{nullptr};
+    char* start_scan{nullptr};
+    char* current_scan{nullptr};
+};
+extern thread_local TLAB tls_tlab;
+}  // namespace chaos::il2cpp::runtime_core
+
 extern "C" uint64_t CodegenLdFld(void* obj, uint32_t field_idx) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdFld");
     using namespace chaos::il2cpp::interpreter;
@@ -130,6 +145,40 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
         }
     }
 
+    // ── Megamorphic fallback: vtable resolution ───────────────────────────
+    // PIC miss — try ResolveVirtualMethodPointer before deoptimizing.
+    // This is slower than PIC hit (vtable walk) but much faster than
+    // deoptimization (T4 demotion + T3 RegisterExecute rebuild).
+    if (args->method_token != 0) {
+        uint64_t receiver_val = gpr_base[args->first_arg_reg];
+        if (receiver_val != 0) {
+            auto* obj = reinterpret_cast<InterpreterObject*>(receiver_val);
+            uint32_t type_token = obj->type_token;
+            if (type_token != 0) {
+                void* resolved_fn = chaos::il2cpp::vtable_registry::
+                    ResolveVirtualMethodPointer(type_token, args->method_token);
+                if (resolved_fn != nullptr) {
+                    auto fn = reinterpret_cast<uint64_t (*)(
+                        uint64_t, uint64_t, uint64_t, uint64_t,
+                        uint64_t, uint64_t, uint64_t, uint64_t)>(
+                        resolved_fn);
+                    uint32_t ac = args->arg_count;
+                    uint32_t base = args->first_arg_reg;
+                    uint64_t result = fn(
+                        (ac > 0) ? gpr_base[base]     : 0,
+                        (ac > 1) ? gpr_base[base + 1] : 0,
+                        (ac > 2) ? gpr_base[base + 2] : 0,
+                        (ac > 3) ? gpr_base[base + 3] : 0,
+                        (ac > 4) ? gpr_base[base + 4] : 0,
+                        (ac > 5) ? gpr_base[base + 5] : 0,
+                        (ac > 6) ? gpr_base[base + 6] : 0,
+                        (ac > 7) ? gpr_base[base + 7] : 0);
+                    return result;
+                }
+            }
+        }
+    }
+
     // ── Fallback: Deoptimization path ────────────────────────────────────
     // PIC cache miss — deoptimize to RegisterExecute instead of calling
     // the VM path (InterpreterDispatchRaw).  Saves all register file values
@@ -182,6 +231,10 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
         *static_cast<uint64_t*>(args->ret_buf) = kDeoptMagic;
     }
     return 0;
+}
+
+extern "C" void* CodegenGetTlab() noexcept {
+    return &chaos::il2cpp::runtime_core::tls_tlab;
 }
 
 extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) noexcept {

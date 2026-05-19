@@ -23,7 +23,7 @@ public static class GuidRandomHashcodeBenchmarks
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GuidRandomHashcode)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Guid_ctor_System_Void_System_Byte() { new Guid("00000000-0000-0000-0000-000000000000"); }
+    public static void Benchmark_System_Private_CoreLib_System_Guid_ctor_System_Void_System_Byte() { new Guid(new byte[] { 1, 2, 3 }); }
     // Benchmark Guid.NewGuid native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Guid::NewGuid:System.Guid()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GuidRandomHashcode)]

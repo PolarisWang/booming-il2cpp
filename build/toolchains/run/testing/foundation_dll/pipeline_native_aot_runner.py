@@ -611,7 +611,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'set(CHAOS_NATIVE_BUILD "{native_build}")\n'
         f'\n'
         f'# Source files — codegen outputs to codegen/<AssemblyName>/generated/\n'
-        f'file(GLOB CHAOS_CODEGEN_CPP "${{CHAOS_CODEGEN_DIR}}/*/generated/native-aot.generated.cpp")\n'
+        f'file(GLOB CHAOS_CODEGEN_CPP "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.generated.cpp")\n'
         f'file(GLOB CHAOS_NATIVE_STUBS "*.cpp")\n'
         f'list(REMOVE_ITEM CHAOS_NATIVE_STUBS\n'
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/runtime-entry.cpp"\n'
@@ -738,6 +738,109 @@ def _fix_runtime_entry(path: Path) -> None:
     )
     if old_bitmask in text:
         text = text.replace(old_bitmask, new_counter)
+        changed = True
+
+    # Fix 3: SEH-guarded Fact mode (has #if defined + bool caught) — same counter fix
+    old_seh_bitmask = (
+        "        int result = 0;\n"
+        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
+        "            bool caught = false;\n"
+        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
+        "#else\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "#endif\n"
+        "            try {\n"
+        "                RunNativeAot(i);\n"
+        "            } catch (const chaos_managed_exception&) {\n"
+        "                caught = true;\n"
+        "            } catch (...) {\n"
+        "                caught = true;\n"
+        "            }\n"
+        "            if (caught) result |= (1 << i);\n"
+        "        }\n"
+        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+        "        int failed_count = 0;\n"
+        "        int tmp = result;\n"
+        "        while (tmp) { failed_count += tmp & 1; tmp >>= 1; }\n"
+        "        int passed_count = kAotMethodCount - failed_count;\n"
+        '        printf("Passed: %d/%d\\n", passed_count, kAotMethodCount);\n'
+        "        std::fflush(stdout);\n"
+        "        _exit(result);\n"
+        "        return result;\n"
+    )
+    new_seh_counter = (
+        "        int failed_count = 0;\n"
+        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
+        "            bool caught = false;\n"
+        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
+        "#else\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "#endif\n"
+        "            try {\n"
+        "                RunNativeAot(i);\n"
+        "            } catch (const chaos_managed_exception&) {\n"
+        "                ++failed_count;\n"
+        "            } catch (...) {\n"
+        "                ++failed_count;\n"
+        "            }\n"
+        "        }\n"
+        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+        "        int passed_count = kAotMethodCount - failed_count;\n"
+        '        printf("Passed: %d/%d\\n", passed_count, kAotMethodCount);\n'
+        "        std::fflush(stdout);\n"
+        "        _exit(failed_count);\n"
+        "        return failed_count;\n"
+    )
+    if old_seh_bitmask in text:
+        text = text.replace(old_seh_bitmask, new_seh_counter)
+        changed = True
+
+    # Fix 4: HotUpdate mode bitmask — replace with counter
+    old_hot_bitmask = (
+        "        auto* patch_ctx = ApplyHotpatchIfAvailable();\n"
+        "        int result = 0;\n"
+        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "            try {\n"
+        "                RunNativeAot(i);\n"
+        "            } catch (...) {\n"
+        "                result |= (1 << i);\n"
+        "            }\n"
+        "        }\n"
+        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+        "        int failed_count = 0;\n"
+        "        int tmp2 = result;\n"
+        "        while (tmp2) { failed_count += tmp2 & 1; tmp2 >>= 1; }\n"
+        "        int passed_count = kAotMethodCount - failed_count;\n"
+        '        printf("{\\"passedMethods\\":%d,\\"failedMethods\\":%d,\\"totalMethods\\":%d}\\n",\n'
+        "               passed_count, failed_count, kAotMethodCount);\n"
+        "        std::fflush(stdout);\n"
+        "        _exit(result);\n"
+        "        return result;\n"
+    )
+    new_hot_counter = (
+        "        auto* patch_ctx = ApplyHotpatchIfAvailable();\n"
+        "        int hotupdate_failed = 0;\n"
+        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "            try {\n"
+        "                RunNativeAot(i);\n"
+        "            } catch (...) {\n"
+        "                ++hotupdate_failed;\n"
+        "            }\n"
+        "        }\n"
+        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+        "        int passed_count = kAotMethodCount - hotupdate_failed;\n"
+        '        printf("{\\"passedMethods\\":%d,\\"failedMethods\\":%d,\\"totalMethods\\":%d}\\n",\n'
+        "               passed_count, hotupdate_failed, kAotMethodCount);\n"
+        "        std::fflush(stdout);\n"
+        "        _exit(hotupdate_failed);\n"
+        "        return hotupdate_failed;\n"
+    )
+    if old_hot_bitmask in text:
+        text = text.replace(old_hot_bitmask, new_hot_counter)
         changed = True
 
     if changed:

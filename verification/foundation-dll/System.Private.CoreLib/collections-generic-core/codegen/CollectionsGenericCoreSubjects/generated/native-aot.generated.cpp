@@ -635,16 +635,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_CollectionsGeneric
 	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects", "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects", "", "CollectionsGenericCoreSubjects", "CollectionsGenericCoreSubjects", nullptr, kReflFields_CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects, 1u, nullptr, 0u,
 	kReflMethods_CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects, 16u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "CollectionsGenericCoreSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "CollectionsGenericCoreSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

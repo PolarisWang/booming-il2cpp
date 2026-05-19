@@ -3,192 +3,23 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-0",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_0()",
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-0",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_0:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_0()",
       "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-0",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_0()"
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_0:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_0:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-0",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_0()"
       },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_0",
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_0",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 1,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 6,
-          "resultType": "System.Private.CoreLib/System.Exception",
-          "callee": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Exception",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 11,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 12,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
-    },
-    {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-1",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_1:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_1()",
-      "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_1:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_1:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-1",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_1()"
-      },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 1,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldnull",
-          "opCode": 5,
-          "ilOffset": 6,
-          "resultType": "System.Object",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 7,
-          "resultType": "System.Private.CoreLib/System.Exception",
-          "callee": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Exception",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 12,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 13,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
-    },
-    {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-2",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_2:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_2()",
-      "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_2:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_2:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-2",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_2()"
-      },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_2",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
@@ -197,107 +28,10 @@
       "exceptionRegions": [],
       "instructions": [
         {
-          "op": "newobj",
-          "opCode": 34,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177280,
           "ilOffset": 1,
-          "resultType": "System.Private.CoreLib/System.Exception",
-          "callee": "System.Private.CoreLib/System.Exception::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Exception",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 6,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.Exception::get_Message:System.String()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Exception::get_Message:System.String()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Exception::get_Message:System.String()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 11,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 48,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 20,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -305,7 +39,15 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 23,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -313,56 +55,13 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 24,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 33,
-          "ilOffset": 25,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-            "subjectKind": "field",
-            "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-            "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
+          "ilOffset": 9,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 33,
+          "ilOffset": 10,
           "isPreserveSig": false
         }
       ],
@@ -374,279 +73,1080 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
     },
     {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-3",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_3:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_3()",
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-1",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_1:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_1()",
       "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_3:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_3:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-3",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_3()"
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_1:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_1:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-1",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_1()"
       },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_3",
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177279,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-2",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_2:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_2()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_2:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_2:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-2",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_2()"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177278,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-3",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_3:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_3()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_3:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_3:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-3",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_3()"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177277,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-4",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_4:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_4()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_4:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_4:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-4",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_4()"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177276,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-5",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_5:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_5()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_5:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_5:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-5",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_5()"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177275,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-6",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_6:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_6()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_6:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_6:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-6",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_6()"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177274,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-7",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_7:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_7()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_7:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_7:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-7",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_7()"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177273,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-8",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_8:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_8()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_8:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_8:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-8",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_8()"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177272,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-9",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_9:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_9()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_9:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_9:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-9",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_9()"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177271,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-10",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_10:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_10()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_10:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_10:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-10",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_10()"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177270,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-11",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_11:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_11()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_11:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_11:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-11",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_11()"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177269,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-12",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_12:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_12()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_12:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_12:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-12",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_12()"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177268,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-13",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_13:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_13()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_13:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_13:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.subject-13",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Subject_13()"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177267,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.run",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Void(System.Int32)",
+      "signature": "System.Void ExceptionThrowDiagnosticsPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Void(System.Int32)",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Void(System.Int32)",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.run",
+        "signature": "System.Void ExceptionThrowDiagnosticsPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Run_System_Int32",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
         "carrierKindCode": 0,
         "typeShape": 1
       },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 2,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 21,
-          "handlerOffset": 22,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 184,
+          "handlerOffset": 185,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
         {
-          "op": "newobj",
-          "opCode": 34,
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
           "ilOffset": 2,
-          "resultType": "System.Private.CoreLib/System.Exception",
-          "callee": "System.Private.CoreLib/System.Exception::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Exception",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
+          "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "call",
-          "opCode": 14,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            70,
+            78,
+            86,
+            94,
+            102,
+            110,
+            118,
+            126,
+            134,
+            142,
+            150,
+            158,
+            166,
+            174
+          ],
           "ilOffset": 7,
-          "resultType": "System.Exception",
-          "callee": "System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 12,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 13,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
-          "ilOffset": 14,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-            "subjectKind": "field",
-            "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-            "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 27,
-          "ilOffset": 20,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 22,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 27,
-          "ilOffset": 25,
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 68,
           "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 27,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
-    },
-    {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-4",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_4:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_4()",
-      "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_4:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_4:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-4",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_4()"
-      },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_4",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
-    },
-    {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-5",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_5:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_5()",
-      "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_5:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_5:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-5",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_5()"
-      },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_5",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 1,
-          "resultType": "System.Private.CoreLib/System.Exception",
-          "callee": "System.Private.CoreLib/System.Exception::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Exception",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 6,
+          "ilOffset": 70,
           "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.Exception::get_HResult:System.Int32()",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_0:System.Int32()",
           "reference": {
-            "assemblyName": "System.Private.CoreLib",
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Exception::get_HResult:System.Int32()"
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_0:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Exception::get_HResult:System.Int32()",
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_0:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -654,91 +1154,615 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 4,
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -2146233088,
-          "ilOffset": 11,
-          "resultType": "System.Int32",
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 75,
           "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 19,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 21,
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 76,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 22,
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 78,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_1:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 31,
-          "ilOffset": 23,
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 83,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 84,
           "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 86,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_2:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 91,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 92,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 94,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_3:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 99,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 100,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 102,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_4:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 107,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 108,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 110,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_5:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 115,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 116,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 118,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_6:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 123,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 124,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 126,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_7:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 131,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 132,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 134,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_8:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 139,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 140,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 142,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_9:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 147,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 148,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 150,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_10:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 155,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 156,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 158,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_11:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 163,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 164,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 166,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_12:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 171,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 172,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 174,
+          "resultType": "System.Int32",
+          "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_13:System.Int32()",
+          "reference": {
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 179,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 182,
+          "ilOffset": 180,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 196,
+          "ilOffset": 183,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 185,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 25,
+          "ilOffset": 187,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
-          "ilOffset": 26,
+          "operand": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::_exitCode",
+          "ilOffset": 188,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ExceptionThrowDiagnosticsSubjects",
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode"
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-            "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
+            "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+            "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
+            "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -746,214 +1770,17 @@
           "isPreserveSig": false
         },
         {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 31,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
-    },
-    {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-6",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_6:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_6()",
-      "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_6:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_6:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-6",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_6()"
-      },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_6",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 1,
-          "resultType": "System.Private.CoreLib/System.Exception",
-          "callee": "System.Private.CoreLib/System.Exception::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Exception",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 6,
-          "resultType": "System.String",
-          "callee": "System.Private.CoreLib/System.Object::ToString:System.String()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 11,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 66,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 20,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 23,
+          "op": "leave",
+          "opCode": 50,
+          "operand": 196,
+          "ilOffset": 194,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 24,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 33,
-          "ilOffset": 25,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-            "subjectKind": "field",
-            "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-            "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 33,
+          "ilOffset": 196,
           "isPreserveSig": false
         }
       ],
@@ -965,706 +1792,7 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
-    },
-    {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-7",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_7:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_7()",
-      "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_7:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_7:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-7",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_7()"
-      },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_7",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 1,
-          "resultType": "System.Private.CoreLib/System.Exception",
-          "callee": "System.Private.CoreLib/System.Exception::.ctor:System.Void()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void()"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Exception",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 6,
-          "resultType": "System.Exception",
-          "callee": "System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 11,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 35342034,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 23,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 26,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 27,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 36,
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 30,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
-          "ilOffset": 31,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-            "subjectKind": "field",
-            "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-            "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 36,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
-    },
-    {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-8",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_8:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_8()",
-      "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_8:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_8:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-8",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_8()"
-      },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_8",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 1,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 6,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 11,
-          "resultType": "System.Private.CoreLib/System.ArgumentException",
-          "callee": "System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.ArgumentException",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 16,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 17,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
-    },
-    {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-9",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_9:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_9()",
-      "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_9:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_9:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-9",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_9()"
-      },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_9",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 1,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 6,
-          "resultType": "System.Private.CoreLib/System.ArgumentNullException",
-          "callee": "System.Private.CoreLib/System.ArgumentNullException::.ctor:System.Void(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.ArgumentNullException::.ctor:System.Void(System.String)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.ArgumentNullException",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 11,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 12,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
-    },
-    {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-10",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_10:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_10()",
-      "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_10:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_10:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-10",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_10()"
-      },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_10",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 1,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 6,
-          "resultType": "System.Private.CoreLib/System.ArgumentOutOfRangeException",
-          "callee": "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.ArgumentOutOfRangeException",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 11,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 12,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
-    },
-    {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-11",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_11:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_11()",
-      "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_11:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_11:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-11",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_11()"
-      },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 1,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 6,
-          "resultType": "System.Private.CoreLib/System.InvalidOperationException",
-          "callee": "System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.InvalidOperationException",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 11,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 12,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
-    },
-    {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-12",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_12:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_12()",
-      "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_12:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_12:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-12",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_12()"
-      },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 1,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 6,
-          "resultType": "System.Private.CoreLib/System.NotSupportedException",
-          "callee": "System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.NotSupportedException",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 11,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 12,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
-    },
-    {
-      "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-13",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()",
-      "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_13()",
-      "identity": {
-        "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
-        "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()",
-        "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()",
-        "methodId": "exception-throw-diagnostics-subjects.exception-throw-diagnostics-subjects.subject-13",
-        "signature": "System.Void ExceptionThrowDiagnosticsSubjects::Subject_13()"
-      },
-      "nativeSymbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldstr",
-          "opCode": 4,
-          "operand": "hello",
-          "ilOffset": 1,
-          "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 6,
-          "resultType": "System.Private.CoreLib/System.NotImplementedException",
-          "callee": "System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.NotImplementedException",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 11,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 12,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ExceptionThrowDiagnosticsSubjects"
+      "declaringAssemblyName": "ExceptionThrowDiagnosticsPatchEntry"
     }
   ]
 }

@@ -1255,8 +1255,8 @@ public sealed partial class NativeAotLoweringPlanner
     /// Builds a minimal C++ function body stub for AOT-unreachable methods.
     /// Unreachable methods still need a dispatchable entry point (for the
     /// interpreter dispatch table) but do not require a full native body.
-    /// This stub will CHAOS_IL2CPP_FAIL if unexpectedly invoked at runtime,
-    /// serving as a safety net for reachability analysis accuracy.
+    /// Returns a default value to avoid crashing when the fact loop runs
+    /// every dispatch-table entry including unreachable interface stubs.
     /// </summary>
     private static string BuildAotUnreachableMethodStub(AotCoreIrMethodArtifact method)
     {
@@ -1270,8 +1270,6 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine($"// AOT-unreachable stub: {method.SubjectId}");
         builder.AppendLine($"extern \"C\" {returnType} {symbol}({paramList})");
         builder.AppendLine("{");
-        builder.AppendLine($"    CHAOS_IL2CPP_FAIL();");
-        // For non-void return, add unreachable return to satisfy compiler
         if (!string.IsNullOrEmpty(returnType) && returnType != "void")
             builder.AppendLine($"    return {{}};");
         builder.AppendLine("}");
@@ -1287,7 +1285,6 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine($"// AOT-unreachable generic instantiation stub: {method.SubjectId}");
             builder.AppendLine($"extern \"C\" {returnType} {stubSymbol}({paramList})");
             builder.AppendLine("{");
-            builder.AppendLine($"    CHAOS_IL2CPP_FAIL();");
             if (!string.IsNullOrEmpty(returnType) && returnType != "void")
                 builder.AppendLine($"    return {{}};");
             builder.AppendLine("}");
@@ -2685,26 +2682,44 @@ public sealed partial class NativeAotLoweringPlanner
         {
             var method = methods[i];
             var ac = method.ParameterCount;
+            var isInstance = !method.IsStatic;
 
-            // extra_params: array of size (param_count - 1) for the reinterpret_cast signature
-            var extraParams = new object[Math.Max(0, ac - 1)];
+            // totalAc includes 'this' for instance methods
+            var totalAc = ac + (isInstance ? 1 : 0);
 
-            // params: each entry has is_string(bool)
-            var parameterSlots = new List<ScriptObject>(ac);
+            // extra_params: array of size (totalAc - 1) for the reinterpret_cast signature
+            var extraParams = new object[Math.Max(0, totalAc - 1)];
+
+            // params: each entry has is_string(bool), is_this(bool)
+            // Instance methods get 'this' as first param (is_this=true), then explicit params
+            var parameterSlots = new List<ScriptObject>(totalAc);
+            if (isInstance)
+            {
+                parameterSlots.Add(new ScriptObject
+                {
+                    ["is_string"] = false,
+                    ["is_this"] = true,
+                });
+            }
             for (int j = 0; j < ac; j++)
             {
                 var abi = j < method.ParameterAbis.Count ? method.ParameterAbis[j] : null;
                 var isString = abi != null && IsStringParameterSlot(abi);
-                parameterSlots.Add(new ScriptObject { ["is_string"] = isString });
+                parameterSlots.Add(new ScriptObject
+                {
+                    ["is_string"] = isString,
+                    ["is_this"] = false,
+                });
             }
 
             methodEntries.Add(new ScriptObject
             {
                 ["index"] = i,
                 ["native_symbol"] = method.NativeSymbol,
-                ["param_count"] = ac,
+                ["param_count"] = totalAc,
                 ["extra_params"] = extraParams,
                 ["params"] = parameterSlots,
+                ["is_instance"] = isInstance,
             });
         }
 

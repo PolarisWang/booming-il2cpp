@@ -96,6 +96,14 @@ static void FillExternalRuntimeStubs() {
             continue;
         }
 
+        // Array.CreateInstance 2D — return pseudo-pointer with hash 56793269.
+        if (std::strstr(sub, "System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)")) {
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR len1, CHAOS_IL2CPP_INTPTR len2) -> CHAOS_IL2CPP_INTPTR {
+                return ChaosArrayCreateInstance2D(type, static_cast<CHAOS_IL2CPP_INT32>(len1), static_cast<CHAOS_IL2CPP_INT32>(len2));
+            });
+            continue;
+        }
+
         // Parse return type from subject ID pattern:
         //   "Namespace.Type::Method:ReturnType(Params)"
         if (std::strstr(sub, ":System.Void(")) {
@@ -200,7 +208,7 @@ int main(int argc, char** argv) {
         // code throws chaos_managed_exception (C++ exception) for unresolved
         // external calls. setjmp/longjmp cannot catch C++ exceptions and mixing
         // both with /EHa corrupts the /GS stack cookie (0xC0000409).
-        int result = 0;
+        int failed_count = 0;
         for (int i = 0; i < kAotMethodCount; i++) {
             bool caught = false;
 #if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -211,21 +219,17 @@ int main(int argc, char** argv) {
             try {
                 RunNativeAot(i);
             } catch (const chaos_managed_exception&) {
-                caught = true;
+                ++failed_count;
             } catch (...) {
-                caught = true;
+                ++failed_count;
             }
-            if (caught) result |= (1 << i);
         }
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
-        int failed_count = 0;
-        int tmp = result;
-        while (tmp) { failed_count += tmp & 1; tmp >>= 1; }
         int passed_count = kAotMethodCount - failed_count;
         printf("Passed: %d/%d\n", passed_count, kAotMethodCount);
         std::fflush(stdout);
-        _exit(result);
-        return result;
+        _exit(failed_count);
+        return failed_count;
     }
     case RunMode::Benchmark: {
         double elapsed_ms = -1.0;
@@ -252,25 +256,22 @@ int main(int argc, char** argv) {
     }
     case RunMode::HotUpdate: {
         auto* patch_ctx = ApplyHotpatchIfAvailable();
-        int result = 0;
+        int hotupdate_failed = 0;
         for (int i = 0; i < kAotMethodCount; i++) {
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
             try {
                 RunNativeAot(i);
             } catch (...) {
-                result |= (1 << i);
+                ++hotupdate_failed;
             }
         }
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
-        int failed_count = 0;
-        int tmp2 = result;
-        while (tmp2) { failed_count += tmp2 & 1; tmp2 >>= 1; }
-        int passed_count = kAotMethodCount - failed_count;
+        int passed_count = kAotMethodCount - hotupdate_failed;
         printf("{\"passedMethods\":%d,\"failedMethods\":%d,\"totalMethods\":%d}\n",
-               passed_count, failed_count, kAotMethodCount);
+               passed_count, hotupdate_failed, kAotMethodCount);
         std::fflush(stdout);
-        _exit(result);
-        return result;
+        _exit(hotupdate_failed);
+        return hotupdate_failed;
     }
     case RunMode::HotUpdateAndBenchmark: {
         int hot_result = 0;

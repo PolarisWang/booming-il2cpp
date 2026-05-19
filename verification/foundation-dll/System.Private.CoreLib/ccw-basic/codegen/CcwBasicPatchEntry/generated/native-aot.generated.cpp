@@ -32,7 +32,9 @@ using namespace chaos::il2cpp::runtime_core;
 // Runtime prelude dependencies included at translation unit level
 
 
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_CcwBasicPatchEntry_CcwBasicPatchEntry = {{nullptr, nullptr, 3147567819162317944ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CcwBasicPatchEntry_CcwBasicPatchEntry = static_cast<CHAOS_IL2CPP_INTPTR>(3147567819162317944ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -72,6 +74,16 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 	return false;
 }
+
+struct chaos_type_CcwBasicPatchEntry_CcwBasicPatchEntry
+{
+	ThinLockableHeader header{};
+};
+
+struct chaos_type_System_Private_CoreLib_System_Object
+{
+	ThinLockableHeader header{};
+};
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
 {
@@ -123,6 +135,8 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
+CHAOS_IL2CPP_INT32 chaos_static_CcwBasicPatchEntry_CcwBasicPatchEntry___exitCode = 0;
+
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
 
 static constexpr GenericTypeRegistrationEntryV0 kGenericTypeEntries[1] = { { 0, 0, 0, 0 } };
@@ -134,11 +148,11 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
-extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method0(void);
-extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method1(void);
-extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method2(void);
-extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method3(void);
-extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method4(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4(void);
 extern "C" void CcwBasicPatchEntry_CcwBasicPatchEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 
 
@@ -176,11 +190,11 @@ static constexpr struct {
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
-		{ 1u, 0u },  // CcwBasicPatchEntry_CcwBasicPatchEntry_Method0
-		{ 1u, 0u },  // CcwBasicPatchEntry_CcwBasicPatchEntry_Method1
-		{ 1u, 0u },  // CcwBasicPatchEntry_CcwBasicPatchEntry_Method2
-		{ 1u, 0u },  // CcwBasicPatchEntry_CcwBasicPatchEntry_Method3
-		{ 1u, 0u },  // CcwBasicPatchEntry_CcwBasicPatchEntry_Method4
+		{ 1u, 0u },  // CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0
+		{ 1u, 0u },  // CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1
+		{ 1u, 0u },  // CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2
+		{ 1u, 0u },  // CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3
+		{ 1u, 0u },  // CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4
 		{ 0u, 1u },  // CcwBasicPatchEntry_CcwBasicPatchEntry_Run_System_Int32
 	},
 	{
@@ -213,7 +227,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[2] = {
 		nullptr,
-		nullptr,
+		&chaos_mt_CcwBasicPatchEntry_CcwBasicPatchEntry.hot,
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
@@ -255,11 +269,11 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
 static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[6] = {
-	{ "Method0", 0x00000003u, 0u },  // CcwBasicPatchEntry
-	{ "Method1", 0x00000004u, 0u },  // CcwBasicPatchEntry
-	{ "Method2", 0x00000005u, 0u },  // CcwBasicPatchEntry
-	{ "Method3", 0x00000006u, 0u },  // CcwBasicPatchEntry
-	{ "Method4", 0x00000007u, 0u },  // CcwBasicPatchEntry
+	{ "Subject_0", 0x00000003u, 0u },  // CcwBasicPatchEntry
+	{ "Subject_1", 0x00000004u, 0u },  // CcwBasicPatchEntry
+	{ "Subject_2", 0x00000005u, 0u },  // CcwBasicPatchEntry
+	{ "Subject_3", 0x00000006u, 0u },  // CcwBasicPatchEntry
+	{ "Subject_4", 0x00000007u, 0u },  // CcwBasicPatchEntry
 	{ "Run", 0x00000008u, 1u },  // CcwBasicPatchEntry
 };
 
@@ -280,11 +294,11 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[6] = {
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[6] = {
-	{ reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CcwBasicPatchEntry::Method0
-	{ reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CcwBasicPatchEntry::Method1
-	{ reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CcwBasicPatchEntry::Method2
-	{ reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CcwBasicPatchEntry::Method3
-	{ reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CcwBasicPatchEntry::Method4
+	{ reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CcwBasicPatchEntry::Subject_0
+	{ reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CcwBasicPatchEntry::Subject_1
+	{ reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CcwBasicPatchEntry::Subject_2
+	{ reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CcwBasicPatchEntry::Subject_3
+	{ reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CcwBasicPatchEntry::Subject_4
 	{ reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Run_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CcwBasicPatchEntry::Run
 };
 
@@ -304,26 +318,35 @@ static constexpr HotpatchModuleV0 s_hotpatch_module = {
 // Expose hotpatch module to BootstrapRuntime
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 	= &s_hotpatch_module;
-// ── External Runtime Dispatch Table (empty) ─────────────────
-extern "C" const char* kChaosExternalRuntimeSubjects[1] = { nullptr };
-extern "C" void* kChaosExternalRuntimeFnTable[1] = { nullptr };
-extern "C" int32_t kChaosExternalRuntimeCount = 0;
+// ── External Runtime Dispatch Table ──────────────────────────
+// Startup-time-resolved function pointers for cross-assembly calls.
 
+extern "C" const char* kChaosExternalRuntimeSubjects[1] = {
+	"CcwBasicPatchEntry/CcwBasicPatchEntry::_exitCode",
+};
+
+extern "C" void* kChaosExternalRuntimeFnTable[1] = {
+	nullptr,
+};
+
+extern "C" int32_t kChaosExternalRuntimeCount = 1;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[6])() = {
-	reinterpret_cast<void(*)()>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method0),
-	reinterpret_cast<void(*)()>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method1),
-	reinterpret_cast<void(*)()>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method2),
-	reinterpret_cast<void(*)()>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method3),
-	reinterpret_cast<void(*)()>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method4),
+	reinterpret_cast<void(*)()>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0),
+	reinterpret_cast<void(*)()>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1),
+	reinterpret_cast<void(*)()>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2),
+	reinterpret_cast<void(*)()>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3),
+	reinterpret_cast<void(*)()>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4),
 	reinterpret_cast<void(*)()>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Run_System_Int32),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
+// Instance methods receive a sentinel this-pointer so they don't crash on null.
+static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
 static void (*kBenchmarkWrappers[6])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
@@ -406,11 +429,11 @@ extern "C" double BenchmarkMethod(
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[6] = {
-	reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method0),
-	reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method1),
-	reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method2),
-	reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method3),
-	reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Method4),
+	reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0),
+	reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1),
+	reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2),
+	reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3),
+	reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4),
 	reinterpret_cast<void*>(&CcwBasicPatchEntry_CcwBasicPatchEntry_Run_System_Int32),
 };
 
@@ -469,24 +492,24 @@ static constexpr ReflectionQueryFieldDescriptor kReflFields_CcwBasicPatchEntry_C
 	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry::_exitCode", "_exitCode", "System.Int32", 0LL },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CcwBasicPatchEntry_CcwBasicPatchEntry[6] = {
-	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()", "Method0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry::Method1:System.Int32()", "Method1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry::Method2:System.Int32()", "Method2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry::Method3:System.Int32()", "Method3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry::Method4:System.Int32()", "Method4", "System.Void", 0, nullptr, 0u },
+	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_0:System.Int32()", "Subject_0", "System.Void", 0, nullptr, 0u },
+	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_1:System.Int32()", "Subject_1", "System.Void", 0, nullptr, 0u },
+	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_2:System.Int32()", "Subject_2", "System.Void", 0, nullptr, 0u },
+	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_3:System.Int32()", "Subject_3", "System.Void", 0, nullptr, 0u },
+	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_4:System.Int32()", "Subject_4", "System.Void", 0, nullptr, 0u },
 	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "CcwBasicPatchEntry/CcwBasicPatchEntry", "CcwBasicPatchEntry/CcwBasicPatchEntry", "", "CcwBasicPatchEntry", "CcwBasicPatchEntry", nullptr, kReflFields_CcwBasicPatchEntry_CcwBasicPatchEntry, 1u, nullptr, 0u,
 	kReflMethods_CcwBasicPatchEntry_CcwBasicPatchEntry, 6u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "CcwBasicPatchEntry", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "CcwBasicPatchEntry", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -525,8 +548,8 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
-// Managed method: CcwBasicPatchEntry/CcwBasicPatchEntry::Method0()
-extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method0(void)
+// Managed method: CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_0()
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -540,8 +563,8 @@ extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method0(void
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: CcwBasicPatchEntry/CcwBasicPatchEntry::Method1()
-extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method1(void)
+// Managed method: CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_1()
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -555,8 +578,8 @@ extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method1(void
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: CcwBasicPatchEntry/CcwBasicPatchEntry::Method2()
-extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method2(void)
+// Managed method: CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_2()
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -570,8 +593,8 @@ extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method2(void
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: CcwBasicPatchEntry/CcwBasicPatchEntry::Method3()
-extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method3(void)
+// Managed method: CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_3()
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -585,8 +608,8 @@ extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method3(void
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: CcwBasicPatchEntry/CcwBasicPatchEntry::Method4()
-extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Method4(void)
+// Managed method: CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_4()
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -613,100 +636,388 @@ extern "C" void CcwBasicPatchEntry_CcwBasicPatchEntry_Run_System_Int32(CHAOS_IL2
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
-	_s0 = chaos_args[0];
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
 	{
-		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-		switch (chaos_switch_value)
-		{
-			case 0:
-				{
-					auto& _d0 = s_hotpatch_entries[0];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d0.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Method0();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-			case 1:
-				{
-					auto& _d1 = s_hotpatch_entries[1];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d1.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Method1();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-			case 2:
-				{
-					auto& _d2 = s_hotpatch_entries[2];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d2.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Method2();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-			case 3:
-				{
-					auto& _d3 = s_hotpatch_entries[3];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
-					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d3.method_key, nullptr, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Method3();
-					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-			case 4:
+			_s0 = chaos_args[0];
 			{
+				const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+				switch (chaos_switch_value)
 				{
-					auto& _d4 = s_hotpatch_entries[4];
-					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
+					case 0:
+						{
+							auto& _d0 = s_hotpatch_entries[0];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d0.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+					case 1:
+						{
+							auto& _d1 = s_hotpatch_entries[1];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d1.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+					case 2:
+						{
+							auto& _d2 = s_hotpatch_entries[2];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d2.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+					case 3:
+						{
+							auto& _d3 = s_hotpatch_entries[3];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d3.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+					case 4:
 					{
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d4.method_key, nullptr, &_d_hpresult);
+						{
+							auto& _d4 = s_hotpatch_entries[4];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d4.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+						break;
 					}
-					else
+					default:
 					{
-						_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Method4();
+						break;
 					}
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 				}
-				break;
 			}
-			default:
-				return;
-		}
 	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CcwBasicPatchEntry_CcwBasicPatchEntry___exitCode = chaos_value;
+			}
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+			_s0 = chaos_args[0];
+			{
+				const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+				switch (chaos_switch_value)
+				{
+					case 0:
+						{
+							auto& _d0 = s_hotpatch_entries[0];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d0.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+					case 1:
+						{
+							auto& _d1 = s_hotpatch_entries[1];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d1.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+					case 2:
+						{
+							auto& _d2 = s_hotpatch_entries[2];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d2.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+					case 3:
+						{
+							auto& _d3 = s_hotpatch_entries[3];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d3.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+					case 4:
+					{
+						{
+							auto& _d4 = s_hotpatch_entries[4];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d4.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+						break;
+					}
+					default:
+					{
+						break;
+					}
+				}
+			}
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CcwBasicPatchEntry_CcwBasicPatchEntry___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+			_s0 = chaos_args[0];
+			{
+				const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+				switch (chaos_switch_value)
+				{
+					case 0:
+						{
+							auto& _d0 = s_hotpatch_entries[0];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d0.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+					case 1:
+						{
+							auto& _d1 = s_hotpatch_entries[1];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d1.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+					case 2:
+						{
+							auto& _d2 = s_hotpatch_entries[2];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d2.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+					case 3:
+						{
+							auto& _d3 = s_hotpatch_entries[3];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d3.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+					case 4:
+					{
+						{
+							auto& _d4 = s_hotpatch_entries[4];
+							CHAOS_IL2CPP_INT32 _d_hpresult{};
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d4.method_key, nullptr, &_d_hpresult);
+							}
+							else
+							{
+								_d_hpresult = CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4();
+							}
+							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						}
+						break;
+					}
+					default:
+					{
+						break;
+					}
+				}
+			}
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CcwBasicPatchEntry_CcwBasicPatchEntry___exitCode = chaos_value;
+			}
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
 	return;
 }
 

@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "IoStreamsBasicsSubjects",
-  "entrySubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
+  "assemblyName": "IoStreamsBasicsPatchEntry",
+  "entrySubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Void(System.Int32)",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/io-streams-basics/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

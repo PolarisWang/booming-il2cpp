@@ -241,10 +241,24 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToInt32FromDouble(CHAOS_IL2CPP_FLOAT64
 
 extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatInt32(CHAOS_IL2CPP_INT32 value) noexcept
 {
+    // Fast itoa: fill from right-to-left, no snprintf format-string parsing.
     char buf[16];
-    int n = std::snprintf(buf, sizeof(buf), "%d", static_cast<int>(value));
-    if (n < 0) return 0;
-    auto id = chaos::il2cpp::string_table::Intern(buf, static_cast<CHAOS_IL2CPP_UINT32>(n));
+    char* p = buf + sizeof(buf);
+    CHAOS_IL2CPP_UINT32 remaining;
+    if (value < 0) {
+        // INT32_MIN maps to 2147483648 when negated as uint32 (no UB).
+        remaining = static_cast<CHAOS_IL2CPP_UINT32>(-(value + 1)) + 1u;
+    } else {
+        remaining = static_cast<CHAOS_IL2CPP_UINT32>(value);
+    }
+    do {
+        *--p = static_cast<char>('0' + (remaining % 10));
+        remaining /= 10;
+    } while (remaining != 0);
+    if (value < 0) *--p = '-';
+
+    auto len = static_cast<CHAOS_IL2CPP_UINT32>(buf + sizeof(buf) - p);
+    auto id = chaos::il2cpp::string_table::Intern(p, len);
     return chaos_make_string_id_value(id);
 }
 

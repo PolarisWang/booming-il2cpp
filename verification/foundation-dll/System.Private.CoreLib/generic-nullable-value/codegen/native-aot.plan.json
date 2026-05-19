@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "GenericNullableValueSubjects",
-  "entrySubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
+  "assemblyName": "GenericNullableValuePatchEntry",
+  "entrySubjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_0",
+  "entrySymbol": "GenericNullableValuePatchEntry_GenericNullableValuePatchEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

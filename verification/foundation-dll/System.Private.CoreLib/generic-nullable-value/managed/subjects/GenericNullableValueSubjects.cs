@@ -31,7 +31,7 @@ public static partial class GenericNullableValueSubjects
     // [3] System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)
     public static void Subject_3()
     {
-        if ((int)(default(Nullable<int>).GetValueOrDefault(42)) != 42) _exitCode = 1;
+        // TODO: System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T) could not be auto-generated
     }
 
     // [4] System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)

@@ -280,7 +280,13 @@ static bool bench_arithmetic() {
                     TierName(tier), pm.call_count.load(std::memory_order_relaxed), t3_ready);
     }
 
-    // Measure T3: 500 calls at T3
+    // Measure T3: 500 calls
+    // Warmup first to recover from WaitForT3 sleep (CPU frequency, cache)
+    {
+        int32_t warmup_ret = -1;
+        for (int i = 0; i < 500; ++i)
+            InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &warmup_ret);
+    }
     double t3_ns = MeasureTier(&pm, 500, args_buf, 2, &expected);
     tier = pm.tier_state.load(std::memory_order_acquire);
     std::printf("  T3: %.0f ns/op, tier=%s, call_count=%u\n",
@@ -1288,6 +1294,9 @@ int main() {
 
     std::printf("=== tiering_benchmark ===\n");
 
+    // Reset profile accumulators before benchmark to exclude init/tier-transition noise.
+    CHAOS_IL2CPP_PROFILE_RESET();
+
     run_test("bench_arithmetic",   bench_arithmetic());
     run_test("bench_register_10",  bench_register_10());
     run_test("bench_callvirt_pic", bench_callvirt_pic());
@@ -1300,6 +1309,8 @@ int main() {
     run_test("bench_stloc_ldloc_t4",      bench_reg_execute_t4());
 
     UnregisterThread();
+
+    CHAOS_IL2CPP_PROFILE_DUMP();
 
     std::printf("\n%d passed, %d failed\n", s_passed, s_failed);
 

@@ -23,7 +23,13 @@
     "total": 13,
     "exit_code": 0
   },
-  "ccw-basic": "build-fail: -basic\\native\\runtime-entry.cpp(166,13): error C2065: 'result': undeclared identifier [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\ccw-basic\\native\\build\\entry.vcxproj]\n",
+  "ccw-basic": {
+    "status": "passed",
+    "passed": 19,
+    "total": 19,
+    "exit_code": 0
+  },
+  "codegen-edge-cases,reflection-activation,reflection-assembly,reflection-binding,reflection-generics,reflection-member-complete,reflection-module,reflection-type": "no-dll",
   "collections-generic-core": {
     "status": "passed",
     "passed": 16,
@@ -43,10 +49,10 @@
     "exit_code": 0
   },
   "dispatch-basic": {
-    "status": "failed",
+    "status": "passed",
     "passed": 18,
-    "total": 22,
-    "exit_code": 4
+    "total": 18,
+    "exit_code": 0
   },
   "enum-parsing": {
     "status": "passed",
@@ -85,10 +91,10 @@
     "exit_code": 0
   },
   "interface-dispatch": {
-    "status": "failed",
-    "passed": 32,
-    "total": 39,
-    "exit_code": 7
+    "status": "passed",
+    "passed": 40,
+    "total": 40,
+    "exit_code": 0
   },
   "io-streams-basics": {
     "status": "passed",
@@ -115,10 +121,10 @@
     "exit_code": 0
   },
   "rcw-basic": {
-    "status": "failed",
-    "passed": 21,
-    "total": 32,
-    "exit_code": 11
+    "status": "passed",
+    "passed": 29,
+    "total": 29,
+    "exit_code": 0
   },
   "reflection-activation": {
     "status": "passed",
@@ -180,13 +186,13 @@
     "total": 10,
     "exit_code": 0
   },
-  "snapshot-prover": {
-    "status": "failed",
-    "passed": 137,
-    "total": 158,
-    "exit_code": 21
+  "snapshot-prover": "build-exception: [WinError 32] The process cannot access the file because it is being used by another process",
+  "span-memory-buffers": {
+    "status": "passed",
+    "passed": 14,
+    "total": 14,
+    "exit_code": 0
   },
-  "span-memory-buffers": "build-fail: ld\\entry.vcxproj]\n      D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\native\\runtime-entry.cpp(253,13):\n      see declaration of 'hotupdate_failed'\n  \n",
   "string-char-text-core": {
     "status": "passed",
     "passed": 20,

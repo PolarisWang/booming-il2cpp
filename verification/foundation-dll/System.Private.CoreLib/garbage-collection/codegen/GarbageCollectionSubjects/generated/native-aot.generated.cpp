@@ -895,16 +895,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_GarbageCollectionS
 	{ 0u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "GarbageCollectionSubjects/GarbageCollectionSubjects", "GarbageCollectionSubjects/GarbageCollectionSubjects", "", "GarbageCollectionSubjects", "GarbageCollectionSubjects", nullptr, kReflFields_GarbageCollectionSubjects_GarbageCollectionSubjects, 1u, nullptr, 0u,
 	kReflMethods_GarbageCollectionSubjects_GarbageCollectionSubjects, 6u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "GarbageCollectionSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "GarbageCollectionSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1072,7 +1072,7 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4(vo
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);

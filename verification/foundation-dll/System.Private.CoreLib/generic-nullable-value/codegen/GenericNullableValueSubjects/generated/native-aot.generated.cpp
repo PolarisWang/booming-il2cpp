@@ -196,19 +196,11 @@ struct chaos_boxed_type_System_Private_CoreLib_System_Int32
 
 CHAOS_IL2CPP_INT32 chaos_static_GenericNullableValueSubjects_GenericNullableValueSubjects___exitCode = 0;
 
-static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_Int32___GetValueOrDefault_System_Int32_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
-{
-	// nullable struct layout: ThinLockableHeader(24B) | hasValue(int32, 4B) | value(T)
-	// For value types passed by pointer, offset to value field is sizeof(ThinLockableHeader) + 4
-	if (chaos_arg_0 == 0) return 0;
-	return *reinterpret_cast<CHAOS_IL2CPP_INT32*>(reinterpret_cast<char*>(chaos_arg_0) + sizeof(ThinLockableHeader) + 4);
-}
-
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_Int32___GetValueOrDefault_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
-	// nullable struct layout: ThinLockableHeader(24B) | hasValue(int32, 4B) | value(T)
-	// For value types passed by pointer, offset to value field is sizeof(ThinLockableHeader) + 4
+	// nullable struct layout: ThinLockableHeader(16B) | hasValue(int32, 4B) | value(T)
 	if (chaos_arg_0 == 0) return 0;
+	auto* chaos_has_value = reinterpret_cast<CHAOS_IL2CPP_INT32*>(reinterpret_cast<char*>(chaos_arg_0) + sizeof(ThinLockableHeader));
 	return *reinterpret_cast<CHAOS_IL2CPP_INT32*>(reinterpret_cast<char*>(chaos_arg_0) + sizeof(ThinLockableHeader) + 4);
 }
 
@@ -430,7 +422,7 @@ static HotpatchEntryV0 s_hotpatch_entries[10] = {
 	{ reinterpret_cast<void*>(&GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GenericNullableValueSubjects::Subject_0
 	{ reinterpret_cast<void*>(&GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // GenericNullableValueSubjects::Subject_1
 	{ reinterpret_cast<void*>(&GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GenericNullableValueSubjects::Subject_2
-	{ reinterpret_cast<void*>(&GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GenericNullableValueSubjects::Subject_3
+	{ reinterpret_cast<void*>(&GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // GenericNullableValueSubjects::Subject_3
 	{ reinterpret_cast<void*>(&GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GenericNullableValueSubjects::Subject_4
 	{ reinterpret_cast<void*>(&GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GenericNullableValueSubjects::Subject_5
 	{ reinterpret_cast<void*>(&GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GenericNullableValueSubjects::Subject_6
@@ -458,12 +450,11 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[13] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[12] = {
 	"System.Private.CoreLib/System.Nullable<System.Int32>",
 	"System.Private.CoreLib/System.Nullable<System.Int32>::get_HasValue:System.Boolean()",
 	"GenericNullableValueSubjects/GenericNullableValueSubjects::_exitCode",
 	"System.Private.CoreLib/System.Nullable<System.Int32>::GetValueOrDefault:System.Int32()",
-	"System.Private.CoreLib/System.Nullable<System.Int32>::GetValueOrDefault:System.Int32(System.Int32)",
 	"System.Private.CoreLib/System.Int32",
 	"System.Private.CoreLib/System.Nullable<System.Int32>::Equals:System.Boolean(System.Object)",
 	"System.Private.CoreLib/System.Nullable<System.Int32>::GetHashCode:System.Int32()",
@@ -474,12 +465,11 @@ extern "C" const char* kChaosExternalRuntimeSubjects[13] = {
 	"System.Private.CoreLib/System.Object::ToString:System.String()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[13] = {
+extern "C" void* kChaosExternalRuntimeFnTable[12] = {
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_Int32___get_HasValue_System_Boolean__),
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_Int32___GetValueOrDefault_System_Int32__),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_Int32___GetValueOrDefault_System_Int32_System_Int32_),
 	nullptr,
 	nullptr,
 	nullptr,
@@ -490,7 +480,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[13] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 13;
+extern "C" int32_t kChaosExternalRuntimeCount = 12;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -675,16 +665,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_GenericNullableVal
 	{ 0u, "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "GenericNullableValueSubjects/GenericNullableValueSubjects", "GenericNullableValueSubjects/GenericNullableValueSubjects", "", "GenericNullableValueSubjects", "GenericNullableValueSubjects", nullptr, kReflFields_GenericNullableValueSubjects_GenericNullableValueSubjects, 1u, nullptr, 0u,
 	kReflMethods_GenericNullableValueSubjects_GenericNullableValueSubjects, 10u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "GenericNullableValueSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "GenericNullableValueSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -845,54 +835,10 @@ extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subjec
 extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_3(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 
 
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	_s1 = _s0;
-	{
-		const auto chaos_address = _s1;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_Int32___GetValueOrDefault_System_Int32_System_Int32_(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
-	{
-		if (_s1 != 0)
-		{
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_GenericNullableValueSubjects_GenericNullableValueSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
+	return;
 }
 
 // Managed method: GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_4()
@@ -938,7 +884,7 @@ extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subjec
 	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
 	{
 		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[6])(chaos_arg_0);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -995,7 +941,7 @@ extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subjec
 		}
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[7])();
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[6])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1043,14 +989,14 @@ extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subjec
 		}
 	}
 	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s1;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1113,7 +1059,7 @@ extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subjec
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1174,7 +1120,7 @@ extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subjec
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1226,7 +1172,7 @@ extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subjec
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1235,7 +1181,7 @@ extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subjec
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);

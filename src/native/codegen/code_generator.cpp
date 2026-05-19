@@ -1208,46 +1208,140 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::NewObj: {
         if (!instr.has_dst()) return false;
-        uint32_t type_token  = instr.imm.field_offset;
-        uint32_t field_count = 8;
-        EmitMovRIImm32(buf_, kRCX, type_token);
-        EmitMovRIImm32(buf_, kRDX, field_count);
-        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenNewObj));
-        uint32_t call_pos = buf_.pos();
-        EmitCallWithSpill(kRAX);
+        uint32_t type_token = instr.imm.field_offset;
+        // InterpreterObject size (64 bytes: SmallFieldArray 56 + type_token 4 + padding 4)
+        static constexpr int32_t kObjSize = static_cast<int32_t>(sizeof(interpreter::InterpreterObject));
+
+        // ═══ TLAB inline allocation path ═══
+        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenGetTlab));
+        EmitCallWithSpill(kRAX);           // rax = &tls_tlab
+
+        EmitMovRM(buf_, kRCX, kRAX, 8);   // rcx = tls_tlab.current
+        EmitLeaRM(buf_, kRBX, kRCX, kObjSize); // rbx = new current
+        EmitMovRM(buf_, kRDX, kRAX, 16);  // rdx = tls_tlab.end
+        EmitCmpRR(buf_, kRBX, kRDX);
+        uint32_t newobj_ja_pos = buf_.pos();
+        EmitJccRel32(buf_, kCC_A, 0);     // ja slow_path (patched later)
+
+        // TLAB HIT: bump, zero-init, init struct
+        EmitMovMR(buf_, kRAX, 8, kRBX);   // tls_tlab.current = new_ptr
+
+        // Zero-init 64 bytes (4 × movups)
+        EmitXorpsRR(buf_, 0, 0);          // xorps xmm0, xmm0
+        EmitMovUPSMR(buf_, kRCX, 0, 0);   // [rcx+0]
+        EmitMovUPSMR(buf_, kRCX, 16, 0);  // [rcx+16]
+        EmitMovUPSMR(buf_, kRCX, 32, 0);  // [rcx+32]
+        EmitMovUPSMR(buf_, kRCX, 48, 0);  // [rcx+48]
+
+        // Init SmallFieldArray: fields_ptr_ = &inline_[0] (at offset 24)
+        EmitLeaRM(buf_, kRBX, kRCX, 24);
+        EmitMovMR(buf_, kRCX, 0, kRBX);   // fields.fields_ptr_ = &inline_[0]
+        EmitMovRI32(buf_, kRBX, 2);       // rbx = kInlineCapacity
+        EmitMovMR(buf_, kRCX, 16, kRBX);  // fields.field_capacity_ = 2
+        // field_count_ at offset 8 is already 0 from zero-init
+
+        // Set type_token at offset 56 (4 bytes, upper 4 zero from zero-init)
+        EmitMovRIImm32(buf_, kRBX, type_token);
+        EmitMovMR(buf_, kRCX, 56, kRBX);  // obj->type_token = type_token
+
+        StoreGpr(kRCX, instr.dst_reg());  // result = obj pointer
+
+        uint32_t newobj_jmp_done_pos = buf_.pos();
+        EmitJmpRel32(buf_, 0);            // skip slow path
+
+        // ═══ Slow path (TLAB miss) ═══
+        uint32_t newobj_slow_pos = buf_.pos();
+        buf_.Patch32(newobj_ja_pos + 2, newobj_slow_pos - (newobj_ja_pos + 6));
+
         {
-            uint32_t call_token = 0, call_module = 0;
-            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
-                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
-                call_token = cached.method_token;
-                call_module = cached.module_id;
+            uint32_t field_count = 8;
+            EmitMovRIImm32(buf_, kRCX, type_token);
+            EmitMovRIImm32(buf_, kRDX, field_count);
+            EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenNewObj));
+            uint32_t call_pos = buf_.pos();
+            EmitCallWithSpill(kRAX);
+            {
+                uint32_t call_token = 0, call_module = 0;
+                if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                    const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                    call_token = cached.method_token;
+                    call_module = cached.module_id;
+                }
+                call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
             }
-            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+            RecordGcPoint(call_pos);
+            StoreGpr(kRAX, instr.dst_reg());
         }
-        RecordGcPoint(call_pos);
-        StoreGpr(kRAX, instr.dst_reg());
+
+        uint32_t newobj_done_pos = buf_.pos();
+        buf_.Patch32(newobj_jmp_done_pos + 1, newobj_done_pos - (newobj_jmp_done_pos + 5));
         return true;
     }
 
     case IROpCode::Box: {
         if (!instr.has_src1() || !instr.has_dst()) return false;
-        LoadGpr(kRCX, instr.src1_reg());
-        EmitMovRIImm32(buf_, kRDX, static_cast<uint32_t>(interpreter::ValueTag::Int64));
-        EmitMovRIImm32(buf_, kR8, instr.imm.field_offset);
-        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenBox));
-        uint32_t call_pos = buf_.pos();
-        EmitCallWithSpill(kRAX);
+        // BoxedValue = 16 bytes (single InterpreterValue, no heap-allocated fields)
+        static constexpr int32_t kBoxSize = static_cast<int32_t>(sizeof(interpreter::BoxedValue));
+
+        // ═══ TLAB inline allocation path ═══
+        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenGetTlab));
+        EmitCallWithSpill(kRAX);           // rax = &tls_tlab
+
+        EmitMovRM(buf_, kRCX, kRAX, 8);   // rcx = tls_tlab.current
+        EmitLeaRM(buf_, kRBX, kRCX, kBoxSize); // rbx = new current
+        EmitMovRM(buf_, kRDX, kRAX, 16);  // rdx = tls_tlab.end
+        EmitCmpRR(buf_, kRBX, kRDX);
+        uint32_t box_ja_pos = buf_.pos();
+        EmitJccRel32(buf_, kCC_A, 0);     // ja slow_path
+
+        // TLAB HIT: bump, write value into BoxedValue
+        EmitMovMR(buf_, kRAX, 8, kRBX);   // tls_tlab.current = new_ptr
+
+        // Load the value to box from src1
+        LoadGpr(kR8, instr.src1_reg());   // r8 = value
+
+        // Zero-init 16 bytes then write tag + value
+        EmitXorpsRR(buf_, 0, 0);          // xorps xmm0, xmm0
+        EmitMovUPSMR(buf_, kRCX, 0, 0);   // [rcx+0..15] = 0
+
+        // Set tag = Int64 at offset 0 (4 bytes, struct_size at +4 = 0)
+        EmitMovRIImm32(buf_, kRBX, static_cast<uint32_t>(interpreter::ValueTag::Int64));
+        EmitMovMR(buf_, kRCX, 0, kRBX);   // BoxedValue::value.tag = Int64
+
+        // Set value at offset 8 (InterpreterValue union slot)
+        EmitMovMR(buf_, kRCX, 8, kR8);    // BoxedValue::value.i64 = value
+
+        StoreGpr(kRCX, instr.dst_reg());  // result = boxed pointer
+
+        uint32_t box_jmp_done_pos = buf_.pos();
+        EmitJmpRel32(buf_, 0);            // skip slow path
+
+        // ═══ Slow path (TLAB miss) ═══
+        uint32_t box_slow_pos = buf_.pos();
+        buf_.Patch32(box_ja_pos + 2, box_slow_pos - (box_ja_pos + 6));
+
         {
-            uint32_t call_token = 0, call_module = 0;
-            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
-                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
-                call_token = cached.method_token;
-                call_module = cached.module_id;
+            LoadGpr(kRCX, instr.src1_reg());
+            EmitMovRIImm32(buf_, kRDX, static_cast<uint32_t>(interpreter::ValueTag::Int64));
+            EmitMovRIImm32(buf_, kR8, instr.imm.field_offset);
+            EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenBox));
+            uint32_t call_pos = buf_.pos();
+            EmitCallWithSpill(kRAX);
+            {
+                uint32_t call_token = 0, call_module = 0;
+                if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                    const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                    call_token = cached.method_token;
+                    call_module = cached.module_id;
+                }
+                call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
             }
-            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+            RecordGcPoint(call_pos);
+            StoreGpr(kRAX, instr.dst_reg());
         }
-        RecordGcPoint(call_pos);
-        StoreGpr(kRAX, instr.dst_reg());
+
+        uint32_t box_done_pos = buf_.pos();
+        buf_.Patch32(box_jmp_done_pos + 1, box_done_pos - (box_jmp_done_pos + 5));
         return true;
     }
 
@@ -1644,6 +1738,18 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         EmitMovMR(buf_, kRCX, 28, kRAX);   // arg_count
         EmitMovRIImm32(buf_, kRAX, first_arg_reg);
         EmitMovMR(buf_, kRCX, 32, kRAX);   // first_arg_reg
+
+        // method_token at offset 36 (from call_cache or 0)
+        {
+            uint32_t mt = 0;
+            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                mt = cached.method_token;
+            }
+            EmitMovRIImm32(buf_, kRAX, mt);
+            EmitMovMR(buf_, kRCX, 36, kRAX);   // method_token
+        }
+
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(instr.imm.ptr));
         EmitMovMR(buf_, kRCX, 40, kRAX);   // call_target
         EmitMovRIImm32(buf_, kRAX, instr.has_dst() ? 1 : 0);
@@ -1718,6 +1824,197 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         }
         return false;
     }
+}
+
+// ── OptimizeInstructions ──────────────────────────────────────────────────
+// Performs constant folding + dead code elimination on register instructions.
+// Two-pass: (1) use-count scan, (2) fold arithmetic + DCE + branch simplify.
+// Does not change instruction count — marks removed entries to be skipped
+// during emission via the returned removed_mask (empty = no optimizations).
+
+static void OptimizeInstructions(
+    CHAOS_IL2CPP_VECTOR(interpreter::RegisterInstruction)& instrs,
+    std::vector<uint8_t>& removed_mask) noexcept
+{
+    uint32_t n = static_cast<uint32_t>(instrs.size());
+    if (n == 0) return;
+
+    // ── Pass 1: Use count ────────────────────────────────────────────
+    uint32_t use_count[64] = {};
+    for (uint32_t i = 0; i < n; ++i) {
+        const auto& ri = instrs[i];
+        if (ri.has_src1() && ri.src1_reg() < 64) ++use_count[ri.src1_reg()];
+        if (ri.has_src2() && ri.src2_reg() < 64) ++use_count[ri.src2_reg()];
+    }
+
+    // ── Header builder for folded instructions ───────────────────────
+    auto MakeHdr = [](interpreter::IROpCode opc, uint8_t dst, uint8_t src1,
+                       uint8_t src2, uint8_t flags) -> uint64_t {
+        return static_cast<uint64_t>(opc) |
+               (static_cast<uint64_t>(dst)   << 16) |
+               (static_cast<uint64_t>(src1)  << 24) |
+               (static_cast<uint64_t>(src2)  << 32) |
+               (static_cast<uint64_t>(flags) << 40);
+    };
+
+    // Foldable pure-arithmetic opcodes (no side effects, no overflow).
+    auto IsFoldable = [](interpreter::IROpCode opc) -> bool {
+        return opc == interpreter::IROpCode::Add ||
+               opc == interpreter::IROpCode::Sub ||
+               opc == interpreter::IROpCode::Mul ||
+               opc == interpreter::IROpCode::And ||
+               opc == interpreter::IROpCode::Or  ||
+               opc == interpreter::IROpCode::Xor ||
+               opc == interpreter::IROpCode::Shl ||
+               opc == interpreter::IROpCode::Shr;
+    };
+
+    auto FoldBinary = [](interpreter::IROpCode opc, int32_t a, int32_t b) -> int32_t {
+        switch (opc) {
+            case interpreter::IROpCode::Add: return a + b;
+            case interpreter::IROpCode::Sub: return a - b;
+            case interpreter::IROpCode::Mul: return a * b;
+            case interpreter::IROpCode::And: return a & b;
+            case interpreter::IROpCode::Or:  return a | b;
+            case interpreter::IROpCode::Xor: return a ^ b;
+            case interpreter::IROpCode::Shl: return static_cast<int32_t>(
+                static_cast<uint32_t>(a) << (static_cast<uint32_t>(b) & 0x1F));
+            case interpreter::IROpCode::Shr: return a >> (static_cast<uint32_t>(b) & 0x1F);
+            default: return 0;
+        }
+    };
+
+    // Find the most recent definition of `reg` as LdcI4 (scan backwards).
+    auto FindDefLdcI4 = [&](uint32_t current_idx, uint32_t reg) -> const int32_t* {
+        for (uint32_t j = current_idx; j > 0; --j) {
+            const auto& prev = instrs[j - 1];
+            if (prev.has_dst() && prev.dst_reg() == reg) {
+                return (prev.op_code() == interpreter::IROpCode::LdcI4) ? &prev.imm.i4 : nullptr;
+            }
+        }
+        return nullptr;
+    };
+
+    // ── Pass 2: Fold + DCE + branch simplify ─────────────────────────
+    removed_mask.assign(n, 0);
+    bool did_opt = false;
+
+    for (uint32_t i = 0; i < n; ++i) {
+        auto& ri = instrs[i];
+        auto opc = ri.op_code();
+
+        // (a) Constant folding — binary pure arithmetic with both srcs constant
+        if (IsFoldable(opc) && ri.has_dst() && ri.has_src1() && ri.has_src2()) {
+            const int32_t* v1 = FindDefLdcI4(i, ri.src1_reg());
+            const int32_t* v2 = FindDefLdcI4(i, ri.src2_reg());
+            if (v1 && v2) {
+                int32_t result = FoldBinary(opc, *v1, *v2);
+                ri.header = MakeHdr(interpreter::IROpCode::LdcI4, ri.dst_reg(), 0, 0,
+                                    interpreter::kRegHasDst | interpreter::kRegHasImm);
+                ri.imm.i4 = result;
+                did_opt = true;
+                continue;
+            }
+        }
+
+        // (b) DCE — unused LdcI4
+        if (opc == interpreter::IROpCode::LdcI4 && ri.has_dst()) {
+            uint8_t dst = ri.dst_reg();
+            if (dst < 64 && use_count[dst] == 0) {
+                removed_mask[i] = 1;
+                did_opt = true;
+                continue;
+            }
+        }
+
+        // (c) BrFalse simplification
+        if (opc == interpreter::IROpCode::BrFalse && ri.has_src1()) {
+            const int32_t* v = FindDefLdcI4(i, ri.src1_reg());
+            if (v) {
+                uint32_t target = ri.imm.branch_target;
+                if (*v == 0) {
+                    // src == 0 → branch IS taken → unconditional Br
+                    ri.header = MakeHdr(interpreter::IROpCode::Br, 0, 0, 0,
+                                        interpreter::kRegIsBranch | interpreter::kRegHasImm);
+                    ri.imm.branch_target = target;
+                } else {
+                    // src != 0 → branch NOT taken → remove (fall through)
+                    removed_mask[i] = 1;
+                }
+                did_opt = true;
+            }
+        }
+
+        // (d) Unbox elimination: Box(dst_b, src) + Unbox(dst_u, dst_b) → Dup(dst_u, src)
+        if (opc == interpreter::IROpCode::Unbox && ri.has_src1()) {
+            uint8_t unbox_src = ri.src1_reg();
+            uint8_t unbox_dst = ri.has_dst() ? ri.dst_reg() : 0;
+            for (uint32_t j = i; j > 0; --j) {
+                auto& prev = instrs[j - 1];
+                if (prev.has_dst() && prev.dst_reg() == unbox_src) {
+                    if (prev.op_code() == interpreter::IROpCode::Box &&
+                        prev.has_src1() && unbox_src < 64 &&
+                        use_count[unbox_src] == 1)  // Box dst used only by this Unbox
+                    {
+                        uint8_t box_src1 = prev.src1_reg();
+                        prev.header = MakeHdr(interpreter::IROpCode::Dup, unbox_dst, box_src1, 0,
+                                              interpreter::kRegHasDst | interpreter::kRegHasSrc1);
+                        prev.imm.i4 = 0;
+                        removed_mask[i] = 1;
+                        did_opt = true;
+                    }
+                    break;
+                }
+            }
+        }
+
+        // (e) Dead store elimination: consecutive StLoc to same local
+        if (opc == interpreter::IROpCode::StLoc && ri.has_src1() && i > 0) {
+            auto& prev = instrs[i - 1];
+            if (prev.op_code() == interpreter::IROpCode::StLoc &&
+                prev.imm.operand_index == ri.imm.operand_index &&
+                !removed_mask[i - 1])
+            {
+                // Previous StLoc writes to the same local vreg and is immediately
+                // overwritten — safe to remove regardless of use_count.
+                removed_mask[i - 1] = 1;
+                did_opt = true;
+            }
+        }
+
+        // (f) Copy propagation: Dup elimination + forwarding
+        if (opc == interpreter::IROpCode::Dup && ri.has_dst() && ri.has_src1()) {
+            uint8_t dup_dst = ri.dst_reg();
+            uint8_t dup_src = ri.src1_reg();
+            // (f1) Dead Dup: dst never read
+            if (dup_dst < 64 && use_count[dup_dst] == 0) {
+                removed_mask[i] = 1;
+                did_opt = true;
+                continue;
+            }
+            // (f2) Single-use: propagate to immediately next instruction
+            if (dup_dst < 64 && use_count[dup_dst] == 1 && i + 1 < n) {
+                auto& next = instrs[i + 1];
+                uint64_t nh = next.header;
+                bool changed = false;
+                if (next.has_src1() && next.src1_reg() == dup_dst) {
+                    nh = (nh & ~(0xFFULL << 24)) | (static_cast<uint64_t>(dup_src) << 24);
+                    changed = true;
+                }
+                if (next.has_src2() && next.src2_reg() == dup_dst) {
+                    nh = (nh & ~(0xFFULL << 32)) | (static_cast<uint64_t>(dup_src) << 32);
+                    changed = true;
+                }
+                if (changed) {
+                    next.header = nh;
+                    removed_mask[i] = 1;
+                    did_opt = true;
+                }
+            }
+        }
+    }
+
+    if (!did_opt) removed_mask.clear();
 }
 
 NativeMethod* NativeCodeGenerator::Generate() noexcept {
@@ -1871,11 +2168,27 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
             EmitXorRR(buf_, callee_saved_regs_[slot], callee_saved_regs_[slot]);
     }
 
+    // Zero caller-colored registers (R8-R11) — LoadGpr reads them directly
+    // for vregs colored to caller-saved regs, bypassing the zeroed stack.
+    // Without this, a read-before-write vreg in R8-R11 returns garbage from
+    // the caller, while RegisterExecute and V2 (spill-to-stack) return 0.
+    if (caller_colored_mask_) {
+        for (uint32_t x64r = kR8; x64r <= kR11; ++x64r)
+            EmitXorRR(buf_, x64r, x64r);
+    }
+
+    // ── Optimize instructions (constant folding + DCE) ───────────────────
+    // Creates a mutable copy of rm_.instructions for the optimizer.
+    auto opt_instrs = rm_.instructions;
+    std::vector<uint8_t> removed_mask;
+    OptimizeInstructions(opt_instrs, removed_mask);
+
     // Emit instructions
     for (uint32_t i = 0; i < n_instrs; ++i) {
         instr_offsets_[i] = buf_.pos();
         current_instr_index_ = i;
-        const auto& instr = rm_.instructions[i];
+        const auto& instr = opt_instrs[i];
+        if (!removed_mask.empty() && removed_mask[i]) continue;
         if (!EmitInstruction(instr)) {
             CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
                 "GenerateNativeCode: unsupported opcode {} at pc={}, emitting deopt",

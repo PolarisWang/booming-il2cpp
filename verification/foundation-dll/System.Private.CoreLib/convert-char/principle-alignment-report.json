@@ -1,15 +1,15 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T13:15:29.623920",
+  "generated_at": "2026-05-19T15:07:16.509394",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "ALIGNED",
-      "summary": "avg_speedup=41.62%",
+      "summary": "avg_speedup=44.29%",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 41.62,
+        "average_speedup_percent": 44.29,
         "managed_faster_count": 1,
         "native_faster_count": 10,
         "matched_count": 11,
@@ -430,23 +430,31 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "ALIGNED",
-      "summary": "All 51 changed source files within expected architecture layers",
-      "details": [],
-      "evidence": {
-        "changed_source_count": 51,
-        "layer_distribution": {
-          "TestInfra": 4,
-          "Emitter": 2,
-          "RuntimeSupport": 2,
-          "Templates": 2,
-          "Driver": 1,
-          "Codegen": 8,
-          "HotUpdate": 1,
-          "Interpreter": 2,
-          "RuntimeCore": 25,
-          "Tests": 4
+      "status": "CONCERN",
+      "summary": "1 of 27 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
         }
+      ],
+      "evidence": {
+        "changed_source_count": 27,
+        "layer_distribution": {
+          "TestInfra": 5,
+          "Planner": 1,
+          "Templates": 1,
+          "Driver": 1,
+          "Codegen": 3,
+          "RuntimeCore": 11,
+          "Tests": 4
+        },
+        "violations": [
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -506,8 +514,8 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 10,
-    "concern": 0,
+    "aligned": 9,
+    "concern": 1,
     "violation": 0,
     "not_applicable": 2,
     "overall": "ALIGNED"

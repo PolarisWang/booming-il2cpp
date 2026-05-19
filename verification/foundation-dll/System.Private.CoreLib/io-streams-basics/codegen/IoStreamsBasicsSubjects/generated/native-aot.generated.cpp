@@ -797,16 +797,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_IoStreamsBasicsSub
 	{ 0u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects", "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects", "", "IoStreamsBasicsSubjects", "IoStreamsBasicsSubjects", nullptr, kReflFields_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects, 1u, nullptr, 0u,
 	kReflMethods_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects, 18u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "IoStreamsBasicsSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "IoStreamsBasicsSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -883,7 +883,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_2(void)
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Flush_System_Void__(chaos_arg_0);
 	}
@@ -968,7 +968,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_4(void)
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__SetLength_System_Void_System_Int64_(chaos_arg_0, ChaosLoadInt64(chaos_arg_1));
 	}
@@ -1000,7 +1000,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5(void)
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__get_Length_System_Int64__(chaos_arg_0);
 		_s0 = ChaosStoreInt64(chaos_result);
@@ -1046,7 +1046,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6(void)
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__get_Position_System_Int64__(chaos_arg_0);
 		_s0 = ChaosStoreInt64(chaos_result);
@@ -1108,7 +1108,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8(void)
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_TextReader__ReadLine_System_String__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1117,7 +1117,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8(void)
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1170,7 +1170,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9(void)
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_IO_TextReader__ReadToEnd_System_String__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1179,7 +1179,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9(void)
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1224,7 +1224,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_10(void)
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__Write_System_Void_System_String_(chaos_arg_0, chaos_arg_1);
 	}
@@ -1254,7 +1254,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_11(void)
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void_System_String_(chaos_arg_0, chaos_arg_1);
 	}
@@ -1279,7 +1279,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_12(void)
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void__(chaos_arg_0);
 	}

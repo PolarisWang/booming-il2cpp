@@ -317,7 +317,7 @@ public static partial class ReflectionTypePatchEntry
                 case 42: Subject_42(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

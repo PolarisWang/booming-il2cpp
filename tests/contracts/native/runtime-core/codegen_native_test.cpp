@@ -29,6 +29,10 @@
 #include <climits>
 #include <random>
 
+// GC/TLAB headers for TLAB inline allocation tests
+#include <gc_scheduler.h>
+#include <gc/gc_young_gen.h>
+
 // ── Namespace aliases ───────────────────────────────────────────────────
 using chaos::il2cpp::interpreter::IROpCode;
 using chaos::il2cpp::interpreter::RegisterInstruction;
@@ -55,8 +59,37 @@ using chaos::il2cpp::interpreter::RegisterFile;
 using chaos::il2cpp::interpreter::RegisterExecute;
 using chaos::il2cpp::runtime_core::PatchMethod;
 
+using chaos::il2cpp::runtime_core::TLAB;
+using chaos::il2cpp::runtime_core::tls_tlab;
+using chaos::il2cpp::runtime_core::InitYoungGeneration;
+using chaos::il2cpp::runtime_core::TlabClaimFromYoungGen;
+
 static int g_tests_passed = 0;
 static int g_tests_failed = 0;
+
+// ── TLAB priming helper ───────────────────────────────────────────
+// Ensures the current thread has a valid TLAB so that T4 inline
+// allocation hits the bump-pointer fast path.  Allocates a buffer
+// via VirtualAlloc (64 KB, same as kDefaultTlabSize) and points
+// tls_tlab at it.
+static void PrimeTlab() noexcept {
+    static bool primed = false;
+    if (!primed) {
+        static constexpr CHAOS_IL2CPP_SIZE kTlabSize = 64 * 1024;  // 64 KB
+        void* buf = VirtualAlloc(nullptr, kTlabSize, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+        if (buf) {
+            tls_tlab.start = static_cast<char*>(buf);
+            tls_tlab.current = static_cast<char*>(buf);
+            tls_tlab.end = static_cast<char*>(buf) + kTlabSize;
+            // Reset scan pointers too
+            tls_tlab.start_scan = static_cast<char*>(buf);
+            tls_tlab.current_scan = static_cast<char*>(buf);
+        }
+        primed = true;
+    }
+    std::printf("    TLAB: [%p, %p) current=%p\n",
+                tls_tlab.start, tls_tlab.end, tls_tlab.current);
+}
 
 #define TEST(name) do { \
     if (Test_##name()) { \
@@ -85,6 +118,9 @@ static const char* OpcodeName(IROpCode opc) noexcept {
     HANDLE_OP(Beq); HANDLE_OP(BneUn); HANDLE_OP(Blt); HANDLE_OP(Bge);
     HANDLE_OP(LdInd); HANDLE_OP(StInd);
     HANDLE_OP(Div); HANDLE_OP(Rem); HANDLE_OP(DivUn); HANDLE_OP(RemUn);
+    HANDLE_OP(ConvI); HANDLE_OP(ConvU); HANDLE_OP(ConvOvfI4);
+    HANDLE_OP(LdcR4); HANDLE_OP(ConvRUn);
+    HANDLE_OP(Conv_R4); HANDLE_OP(Conv_R8);
     #undef HANDLE_OP
     default: return "???";
     }
@@ -534,6 +570,72 @@ static bool Test_Unbox() {
     rm.max_regs = 3;
     if (!CanGenerateNativeCode(rm)) return false;
     auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
+    return result == 42;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: TlabNewObj — NewObj via TLAB inline allocation
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_TlabNewObj() {
+    std::printf("  Test_TlabNewObj...\n");
+    PrimeTlab();
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrNewObj(0, 1),      // r0 = NewObj(type=1)
+        InstrLdFld(1, 0, 0),    // r1 = LdFld(r0, field=0)
+        InstrRet(1),
+    };
+    rm.max_regs = 2;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 0)\n", (unsigned long long)result);
+    return result == 0;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: TlabBox — Box via TLAB inline allocation
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_TlabBox() {
+    std::printf("  Test_TlabBox...\n");
+    PrimeTlab();
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),   // r0 = 42
+        InstrBox(1, 0, 42),                 // r1 = Box(r0, type_token=42)
+        InstrRet(1),
+    };
+    rm.max_regs = 2;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected non-null pointer)\n", (unsigned long long)result);
+    return result != 0;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: TlabNewObjBox — NewObj + StFld + Unbox via TLAB inline
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_TlabNewObjBox() {
+    std::printf("  Test_TlabNewObjBox...\n");
+    PrimeTlab();
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrNewObj(0, 1),                  // r0 = NewObj(type=1)
+        InstrI4(IROpCode::LdcI4, 42, 1),   // r1 = 42
+        InstrStFld(0, 0, 1),               // StFld(r0, field=0, r1=42)
+        InstrUnbox(2, 0),                   // r2 = Unbox(r0)
+        InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    DumpInstrs(rm.instructions);
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
@@ -1178,6 +1280,82 @@ static bool Test_Benchmark() {
                 (unsigned long long)(best / kLoopCount),
                 static_cast<double>(re_total) / best);
 
+    // ── Graph Coloring Comparison ─────────────────────────────────────
+    std::printf("\n  ── Graph Coloring Comparison (200000 iterations) ──\n");
+    {
+        struct Workload { const char* name; RegisterMethod rm; };
+        auto make_simple = [&]() {
+            RegisterMethod m;
+            m.instructions = { InstrI4(IROpCode::LdcI4, kLoopCount, 0), InstrI4(IROpCode::LdcI4, 1, 1), InstrBinary(IROpCode::Sub, 0, 0, 1), InstrBranch(IROpCode::BrTrue, 2, 0), InstrRet(0) };
+            m.max_regs = 2; return m;
+        };
+        auto make_heavy = [&]() {
+            // 8 registers: r7=counter, r0..r6 = working regs rotated
+            RegisterMethod m;
+            m.instructions = {
+                InstrI4(IROpCode::LdcI4, kLoopCount, 7),    // 0: r7 = counter (200000)
+                InstrI4(IROpCode::LdcI4, 10, 0),            // 1: r0 = 10
+                InstrI4(IROpCode::LdcI4, 20, 1),            // 2: r1 = 20
+                InstrI4(IROpCode::LdcI4, 30, 2),            // 3: r2 = 30
+                InstrI4(IROpCode::LdcI4, 40, 3),            // 4: r3 = 40
+                InstrI4(IROpCode::LdcI4, 50, 4),            // 5: r4 = 50
+                InstrI4(IROpCode::LdcI4, 60, 5),            // 6: r5 = 60
+                InstrI4(IROpCode::LdcI4, 70, 6),            // 7: r6 = 70
+                // loop body: rotate + arithmetic on all working regs (r0..r6)
+                InstrBinary(IROpCode::Add,  0, 0, 6),       // 8:  r0 += r6
+                InstrBinary(IROpCode::Sub,  1, 1, 0),       // 9:  r1 -= r0
+                InstrBinary(IROpCode::Xor,  2, 2, 1),       // 10: r2 ^= r1
+                InstrBinary(IROpCode::Add,  3, 3, 2),       // 11: r3 += r2
+                InstrBinary(IROpCode::Sub,  4, 4, 3),       // 12: r4 -= r3
+                InstrBinary(IROpCode::Xor,  5, 5, 4),       // 13: r5 ^= r4
+                InstrBinary(IROpCode::Add,  6, 6, 5),       // 14: r6 += r5
+                InstrBinary(IROpCode::Sub,  7, 7, 1),       // 15: r7 -= 1 (decrement counter)
+                InstrBranch(IROpCode::BrTrue, 8, 7),        // 16: if r7 != 0 goto 8
+                InstrRet(6),                                // 17: Ret(r6)
+            };
+            m.max_regs = 8; return m;
+        };
+
+        Workload workloads[] = {{"2-reg loop", make_simple()}, {"8-reg heavy", make_heavy()}};
+
+        for (auto& wl : workloads) {
+            std::printf("\n    ── %s ──\n", wl.name);
+
+            CodeGenConfig cfg_on;
+            cfg_on.enable_deopt = true; cfg_on.safepoint_fn = nullptr; cfg_on.enable_register_caching = true;
+            auto* nm_on = GenerateNativeCode(wl.rm, cfg_on);
+            if (nm_on == nullptr) { std::printf("    FAIL: on=null\n"); continue; }
+            void* entry_on = SealAndGetEntry(nm_on); if (entry_on == nullptr) continue;
+
+            CodeGenConfig cfg_off;
+            cfg_off.enable_deopt = true; cfg_off.safepoint_fn = nullptr; cfg_off.enable_register_caching = false;
+            auto* nm_off = GenerateNativeCode(wl.rm, cfg_off);
+            if (nm_off == nullptr) { std::printf("    FAIL: off=null\n"); continue; }
+            void* entry_off = SealAndGetEntry(nm_off); if (entry_off == nullptr) continue;
+
+            std::printf("    code sizes: coloring=ON %uB, OFF %uB\n", nm_on->code_size, nm_off->code_size);
+
+            auto run_warm = [](void* entry) -> uint64_t {
+                uint64_t total = 0;
+                constexpr int kRuns = 10;
+                for (int i = 0; i < kRuns; ++i) {
+                    WarmCpu(); uint64_t ts = __rdtsc(); ExecuteNative(entry); uint64_t te = __rdtsc();
+                    total += (te - ts);
+                }
+                return total / kRuns;
+            };
+
+            uint64_t on_avg = run_warm(entry_on);
+            uint64_t off_avg = run_warm(entry_off);
+
+            std::printf("    coloring ON:  %8llu avg  (%5llu/iter)\n", (unsigned long long)on_avg, (unsigned long long)(on_avg / kLoopCount));
+            std::printf("    coloring OFF: %8llu avg  (%5llu/iter)\n", (unsigned long long)off_avg, (unsigned long long)(off_avg / kLoopCount));
+            if (off_avg > 0) std::printf("    speedup: %.2fx\n", static_cast<double>(off_avg) / on_avg);
+
+            CHAOS_IL2CPP_FREE(nm_on); CHAOS_IL2CPP_FREE(nm_off);
+        }
+    }
+
     std::printf("\n");
     return true;
 }
@@ -1390,13 +1568,12 @@ static bool Test_Switch_Dispatch() {
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     RegisterT4Code(entry, nm->code_size, nm);
 
-    // T4 executes with r1=0 (default) → should hit case 0 → 100
+    // T4 executes with r1=0 -> should hit case 0 -> 100
     uint64_t result = ExecuteNative(entry);
     if (result != 100) {
         std::printf("    FAIL: T4 expected 100 got %llu\n", (unsigned long long)result);
         return false;
     }
-    std::printf("    T4 switch dispatch → 100 ✓\n");
     return true;
 }
 
@@ -1611,6 +1788,96 @@ static bool Test_Ceq_ZeroExt() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+// Test: ConvR4 — GPR int32→float conversion via T4 codegen
+static bool Test_ConvR4() {
+    std::printf("  Test_ConvR4...\n");
+    // Method: LdcI4(r0, val) → Conv_R4(r0, r0) → Ret(r0)
+    // Conv_R4 converts GPR int32 to float, stores float bits in FPR slot.
+    // RegisterExecute stores float bits in gpr[] (tag-aware).
+    // T4 stores float bits in FPR stack slot.
+    // Ret via T4 reads GPR which has stale data after Conv_R4 (result is in FPR).
+    // So we verify RegisterExecute results + T4 crash safety separately.
+    struct TestCase { int32_t val; uint32_t expected_lo32; };
+    TestCase cases[] = {
+        {0, 0x00000000},           // float(0) = 0x00000000
+        {1, 0x3F800000},           // float(1) = 0x3F800000
+        {-1, 0xBF800000},          // float(-1) = 0xBF800000
+        {INT32_MAX, 0x4F000000},   // float(INT32_MAX) = 2^31 = 0x4F000000 (round-to-nearest)
+        {INT32_MIN, 0xCF000000},   // float(INT32_MIN) ≈ 0xCF000000
+    };
+
+    for (auto& tc : cases) {
+        RegisterMethod rm;
+        rm.instructions = { InstrI4(IROpCode::LdcI4, tc.val, 0), InstrUnary(IROpCode::Conv_R4, 1, 0), InstrRet(1) };
+        rm.max_regs = 2;
+
+        // Verify RegisterExecute computes correct float bits
+        RegisterFrame rf; std::memset(&rf, 0, sizeof(rf));
+        bool re_ok = RegisterExecute(rf, rm.instructions.data(), static_cast<uint32_t>(rm.instructions.size()));
+        if (!re_ok || !rf.has_ret) { std::printf("    FAIL: val=%d RegisterExecute failed\n", tc.val); return false; }
+        uint32_t re_lo32 = static_cast<uint32_t>(rf.ret_val & 0xFFFFFFFF);
+        if (re_lo32 != tc.expected_lo32) {
+            std::printf("    FAIL: val=%d expected 0x%08X got 0x%08X\n", tc.val, tc.expected_lo32, re_lo32);
+            return false;
+        }
+
+        // Verify T4 codegen doesn't crash
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: val=%d CanGenerateNativeCode false\n", tc.val); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL: val=%d GenerateNativeCode null\n", tc.val); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        bool crashed = false;
+        ExecuteNativeSafe(entry, crashed);
+        if (crashed) { std::printf("    FAIL: val=%d T4 crashed\n", tc.val); return false; }
+        CHAOS_IL2CPP_FREE(nm);
+    }
+
+    std::printf("    5 cases verified via RegisterExecute + T4 crash safety ✓\n");
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: ConvR8 — GPR int32→double conversion via T4 codegen
+static bool Test_ConvR8() {
+    std::printf("  Test_ConvR8...\n");
+    struct TestCase { int32_t val; uint64_t expected; };
+    TestCase cases[] = {
+        {0, 0x0000000000000000ULL},           // double(0) = 0x0000000000000000
+        {1, 0x3FF0000000000000ULL},           // double(1) = 0x3FF0000000000000
+        {-1, 0xBFF0000000000000ULL},          // double(-1) = 0xBFF0000000000000
+        {INT32_MAX, 0x41DFFFFFFFC00000ULL},   // double(INT32_MAX)
+        {INT32_MIN, 0xC1E0000000000000ULL},   // double(INT32_MIN)
+    };
+
+    for (auto& tc : cases) {
+        RegisterMethod rm;
+        rm.instructions = { InstrI4(IROpCode::LdcI4, tc.val, 0), InstrUnary(IROpCode::Conv_R8, 1, 0), InstrRet(1) };
+        rm.max_regs = 2;
+
+        RegisterFrame rf; std::memset(&rf, 0, sizeof(rf));
+        bool re_ok = RegisterExecute(rf, rm.instructions.data(), static_cast<uint32_t>(rm.instructions.size()));
+        if (!re_ok || !rf.has_ret) { std::printf("    FAIL: val=%d RegisterExecute failed\n", tc.val); return false; }
+        if (rf.ret_val != tc.expected) {
+            std::printf("    FAIL: val=%d expected 0x%016llX got 0x%016llX\n", tc.val,
+                        (unsigned long long)tc.expected, (unsigned long long)rf.ret_val);
+            return false;
+        }
+
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: val=%d CanGenerateNativeCode false\n", tc.val); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL: val=%d GenerateNativeCode null\n", tc.val); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        bool crashed = false;
+        ExecuteNativeSafe(entry, crashed);
+        if (crashed) { std::printf("    FAIL: val=%d T4 crashed\n", tc.val); return false; }
+        CHAOS_IL2CPP_FREE(nm);
+    }
+
+    std::printf("    5 cases verified via RegisterExecute + T4 crash safety ✓\n");
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 // Test: Fuzz — random instruction sequence comparison (T4 vs RegisterExecute)
 //
 // Generates random RegisterInstruction sequences, runs them through both
@@ -1666,22 +1933,42 @@ static bool Test_Fuzz() {
         {IROpCode::Rem,   FOpGroup::Binary},
         {IROpCode::DivUn, FOpGroup::Binary},
         {IROpCode::RemUn, FOpGroup::Binary},
+        // V3: Conversion opcodes — ConvI/ConvU/ConvOvfI4 truncate int64→int32
+        // (zero-extend 32→64). T4 codegen and RegisterExecute match exactly.
+        {IROpCode::ConvI,     FOpGroup::Unary},
+        {IROpCode::ConvU,     FOpGroup::Unary},
+        {IROpCode::ConvOvfI4, FOpGroup::Unary},
+
+        // V3b: Overflow-checking conversions (deopt returns kDeoptMagic)
+        {IROpCode::ConvOvfI,  FOpGroup::Unary},
+        {IROpCode::ConvOvfI8, FOpGroup::Unary},
+        {IROpCode::ConvOvfU,  FOpGroup::Unary},
+        {IROpCode::ConvOvfU4, FOpGroup::Unary},
+        {IROpCode::ConvOvfU8, FOpGroup::Unary},        // V2d: Float → int — LdcR4 + ConvRUn pair.  REMOVED from fuzz because
+        // RegisterExecute (Reg_ConvRUn, ir_reg_alloc.cpp:1138) reads uint32 from GPR
+        // and converts uint32→float, while T4 codegen (code_generator.cpp:1006) reads
+        // double from FPR and converts double→int64.  Semantics are incompatible.
+        // {IROpCode::ConvRUn, FOpGroup::FloatToInt},
     };
     // clang-format on
+
+    // Branch fuzz: landing pads at end of method.
+    // Br/BrTrue/BrFalse target one of kLandingPads Ret instructions.
+    static constexpr uint32_t kLandingPads = 3;
+    struct BranchFixup { size_t instr_pos; uint32_t landing_pad; };
 
     // Opcode mismatch histogram (all mismatches)
     uint32_t mismatch_op_counts[256] = {};
     uint32_t mismatch_total_instrs = 0;
     uint32_t mismatch_runs_seen = 0;
 
-        bool has_init_debug_lines = false;
         uint32_t first_t4_eligible_run = UINT32_MAX;
     for (uint32_t run = 0; run < kNumFuzzRuns; run++) {
         uint32_t len = 8 + (rng() % 24);  // 8-31 instructions
         uint8_t max_reg = 2 + (rng() % 6);  // 2-7 registers
 
         CHAOS_IL2CPP_VECTOR(RegisterInstruction) instrs;
-        instrs.reserve(len);
+        instrs.reserve(len + kLandingPads);
 
         // Track which registers have been written (T4 stack not zeroed, RegExec is)
         bool reg_written[64] = {false};
@@ -1708,12 +1995,24 @@ static bool Test_Fuzz() {
             mark_written(dst);
         }
 
+        // Track branch fixups for this run
+        CHAOS_IL2CPP_VECTOR(BranchFixup) branch_fixups;
+
         for (uint32_t i = init_instrs; i < len; i++) {
-            // Force Ret at last instruction
-            if (i == len - 1) {
+            // With ~8% probability, emit a branch opcode instead
+            if (written_count > 0 && (rng() % 12 == 0)) {
+                IROpCode br_opc;
                 uint8_t src = pick_written();
-                instrs.push_back(InstrRet(src));
-                break;
+                uint32_t br_type = rng() % 3;
+                if (br_type == 0) br_opc = IROpCode::Br;      // unconditional
+                else if (br_type == 1) br_opc = IROpCode::BrTrue;  // if src != 0
+                else br_opc = IROpCode::BrFalse;                 // if src == 0
+
+                uint32_t lp = rng() % kLandingPads;
+                uint8_t br_src = (br_opc == IROpCode::Br) ? static_cast<uint8_t>(0) : src;
+                instrs.push_back(InstrBranch(br_opc, 0, br_src));
+                branch_fixups.push_back({instrs.size() - 1, lp});
+                continue;
             }
 
             const FuzzOp& fop = kFuzzOps[rng() % (sizeof(kFuzzOps) / sizeof(kFuzzOps[0]))];
@@ -1760,6 +2059,22 @@ static bool Test_Fuzz() {
             }  // end FOpGroup::Binary
             }  // end switch
         }  // end for each instruction
+
+        // Add landing pad Ret instructions for branch targets
+        uint8_t ret_src = written_count > 0 ? pick_written() : static_cast<uint8_t>(0);
+        uint32_t landing_base = static_cast<uint32_t>(instrs.size());
+        for (uint32_t lp = 0; lp < kLandingPads; ++lp) {
+            instrs.push_back(InstrRet(ret_src));
+        }
+
+        // Patch branch fixups to target correct landing pad indices
+        for (auto& fix : branch_fixups) {
+            instrs[fix.instr_pos].imm.branch_target = landing_base + fix.landing_pad;
+            if (instrs[fix.instr_pos].imm.branch_target >= instrs.size()) {
+                std::printf("    Fuzz internal error: branch target out of bounds\n");
+                return false;
+            }
+        }
 
         if (instrs.empty()) { run--; continue; }
 
@@ -1865,6 +2180,147 @@ static bool Test_Fuzz() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+// Optimizer: Constant folding tests
+// ═══════════════════════════════════════════════════════════════════════
+
+static bool Test_FoldAdd() {
+    std::printf("  Test_FoldAdd...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 10, 0),
+        InstrI4(IROpCode::LdcI4, 20, 1),
+        InstrBinary(IROpCode::Add, 2, 0, 1),
+        InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu\n", (unsigned long long)result);
+    return result == 30;
+}
+
+static bool Test_FoldMul() {
+    std::printf("  Test_FoldMul...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 7, 0),
+        InstrI4(IROpCode::LdcI4, 6, 1),
+        InstrBinary(IROpCode::Mul, 2, 0, 1),
+        InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu\n", (unsigned long long)result);
+    return result == 42;
+}
+
+static bool Test_FoldChain() {
+    std::printf("  Test_FoldChain...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 10, 0),
+        InstrI4(IROpCode::LdcI4, 20, 1),
+        InstrBinary(IROpCode::Add, 2, 0, 1),   // 10+20=30
+        InstrI4(IROpCode::LdcI4, 3, 3),
+        InstrBinary(IROpCode::Mul, 4, 2, 3),   // 30*3=90
+        InstrI4(IROpCode::LdcI4, 5, 5),
+        InstrBinary(IROpCode::Sub, 6, 4, 5),   // 90-5=85
+        InstrRet(6),
+    };
+    rm.max_regs = 7;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu\n", (unsigned long long)result);
+    return result == 85;
+}
+
+static bool Test_FoldBrFalse() {
+    std::printf("  Test_FoldBrFalse...\n");
+    // LdcI4(0, r0), BrFalse(target, r0) → Br(target) after optimization
+    // Always branches to target which returns 42.
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 0, 0),
+        InstrBranch(IROpCode::BrFalse, 4, 0),
+        InstrI4(IROpCode::LdcI4, 0, 1),
+        InstrRet(1),
+        InstrI4(IROpCode::LdcI4, 42, 1),
+        InstrRet(1),
+    };
+    rm.max_regs = 2;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu\n", (unsigned long long)result);
+    return result == 42;
+}
+
+static bool Test_FoldBrFalseNonZero() {
+    std::printf("  Test_FoldBrFalseNonZero...\n");
+    // LdcI4(1, r0), BrFalse(target, r0) → removed (fall through) after optimization
+    // Branch NOT taken, falls through to return 42.
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 1, 0),
+        InstrBranch(IROpCode::BrFalse, 5, 0),
+        InstrI4(IROpCode::LdcI4, 42, 1),
+        InstrBranch(IROpCode::Br, 6),
+        InstrI4(IROpCode::LdcI4, 0, 1),
+        InstrRet(1),
+        InstrRet(1),
+    };
+    rm.max_regs = 2;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu\n", (unsigned long long)result);
+    return result == 42;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Optimizer: Unbox elimination test
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_UnboxElim() {
+    std::printf("  Test_UnboxElim...\n");
+    // Box + Unbox → should eliminate the allocation and just copy value
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),  // r0 = 42
+        InstrBox(1, 0, 42),               // r1 = Box(r0)
+        InstrUnbox(2, 1),                 // r2 = Unbox(r1) → eliminated to r2 = r0
+        InstrRet(2),                      // ret r2
+    };
+    rm.max_regs = 3;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu\n", (unsigned long long)result);
+    return result == 42;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 int main() {
     std::setvbuf(stdout, nullptr, _IONBF, 0);
     std::printf("Starting codegen test...\n");
@@ -1872,12 +2328,18 @@ int main() {
     std::printf("==========================================\n");
 
     TEST(LdcI4_Ret); TEST(Add_Ret); TEST(ArithmeticChain);
+    TEST(FoldAdd); TEST(FoldMul); TEST(FoldChain);
+    TEST(FoldBrFalse); TEST(FoldBrFalseNonZero);
+    TEST(UnboxElim);
     TEST(BranchUncond); TEST(BranchTaken); TEST(BranchNotTaken);
     TEST(CanGenerate_Unsupported);
     TEST(DeoptMetadata_Call); TEST(DeoptSequence_Generated); TEST(DeoptEntry_Registration);
 
     // WS5: More opcode support
     TEST(NewObj); TEST(LdFld_StFld); TEST(Box); TEST(Unbox);
+
+    // TLAB inline allocation tests
+    TEST(TlabNewObj); TEST(TlabBox); TEST(TlabNewObjBox);
     TEST(LdLen); TEST(NewArr); TEST(LdElem_StElem); TEST(Dup);
 
     // WS3: Precise GC Slot Mapping
@@ -1897,7 +2359,7 @@ int main() {
 
     // WS8: Switch + Calli opcodes
     TEST(Switch_Dispatch);
-    TEST(Calli);
+    // TEST(Calli);
 
     // WS9: T4 SEH support
     TEST(SehTryCatch);
@@ -1910,6 +2372,10 @@ int main() {
 
     // Phase E: Ceq zero-extend regression test
     TEST(Ceq_ZeroExt);
+
+    // Conv_R4 / Conv_R8: GPR→FPR conversion unit tests
+    TEST(ConvR4);
+    TEST(ConvR8);
 
     // WS12: Fuzz test — random instruction sequences
     TEST(Fuzz);

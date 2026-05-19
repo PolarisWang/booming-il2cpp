@@ -114,7 +114,7 @@ public static partial class GuidRandomHashcodePatchEntry
                 case 13: Subject_13(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

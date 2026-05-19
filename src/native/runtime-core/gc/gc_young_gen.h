@@ -93,6 +93,9 @@ TLAB TlabClaimFromYoungGen() noexcept;
 
 // ── GC trigger ───────────────────────────────────────────────
 
+// Forward declaration for FlushTlsAllocCounter
+struct GcScheduler;
+
 /// Flush the TLS allocation counter to the scheduler.
 inline void FlushTlsAllocCounter() noexcept {
     extern thread_local CHAOS_IL2CPP_SIZE tls_alloc_since_last_gc;

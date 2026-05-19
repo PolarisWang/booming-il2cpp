@@ -5,31 +5,31 @@
     {
       "assemblyName": "CcwBasicPatchEntry",
       "subjectKind": "method",
-      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()",
+      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_0:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
       "assemblyName": "CcwBasicPatchEntry",
       "subjectKind": "method",
-      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method1:System.Int32()",
+      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_1:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
       "assemblyName": "CcwBasicPatchEntry",
       "subjectKind": "method",
-      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method2:System.Int32()",
+      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_2:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
       "assemblyName": "CcwBasicPatchEntry",
       "subjectKind": "method",
-      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method3:System.Int32()",
+      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_3:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
       "assemblyName": "CcwBasicPatchEntry",
       "subjectKind": "method",
-      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method4:System.Int32()",
+      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_4:System.Int32()",
       "reason": "generated-direct-call"
     },
     {

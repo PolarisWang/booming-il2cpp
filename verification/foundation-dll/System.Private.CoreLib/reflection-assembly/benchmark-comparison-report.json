@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/assembly",
+  "summary": {
+    "totalMethods": 22,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 22,
+    "nativeFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetExecutingAssembly:System.Reflection.Assembly()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetCallingAssembly:System.Reflection.Assembly()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetEntryAssembly:System.Reflection.Assembly()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_FullName:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_Location:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_ImageRuntimeVersion:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetExportedTypes:System.Type[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetForwardedTypes:System.Type[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String,System.Boolean)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetModule:System.Reflection.Module(System.String)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceStream:System.IO.Stream(System.String)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceNames:System.String[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_EntryPoint:System.Reflection.MethodInfo()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_Name:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_Version:System.Version()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_CultureInfo:System.Globalization.CultureInfo()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

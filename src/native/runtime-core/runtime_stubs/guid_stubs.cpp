@@ -19,6 +19,32 @@
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 
+// ── Managed string allocator ──────────────────────────────────────────
+// Allocates a chaos_managed_string (40B header + inline data) so the
+// generated code's CHAOS_IL2CPP_STRING_TYPE* path reads length/utf8_data
+// at the correct offsets. Avoids string_table::Intern overhead.
+static CHAOS_IL2CPP_INTPTR alloc_guid_string(const char* utf8, CHAOS_IL2CPP_UINT32 byte_count) noexcept
+{
+    constexpr CHAOS_IL2CPP_SIZE kHeaderSize = 40;
+    auto* storage = static_cast<unsigned char*>(GcAllocateAtomic(kHeaderSize + byte_count + 1));
+    if (storage == nullptr) return 0;
+
+    std::memset(storage, 0, kHeaderSize);
+
+    // length at offset 16 (after ThinLockableHeader)
+    auto* len_field = reinterpret_cast<CHAOS_IL2CPP_INT32*>(storage + 16);
+    *len_field = static_cast<CHAOS_IL2CPP_INT32>(byte_count);
+
+    // inline data, utf8_data pointer at offset 24
+    char* data_area = reinterpret_cast<char*>(storage + kHeaderSize);
+    if (byte_count > 0) std::memcpy(data_area, utf8, byte_count);
+    data_area[byte_count] = '\0';
+    auto* utf8_field = reinterpret_cast<const char**>(storage + 24);
+    *utf8_field = data_area;
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
+}
+
 static CHAOS_IL2CPP_UINT8 HexNibble(char c) noexcept
 {
     if (c >= '0' && c <= '9') return static_cast<CHAOS_IL2CPP_UINT8>(c - '0');
@@ -132,15 +158,33 @@ CHAOS_IL2CPP_INTPTR ChaosGuidToString(CHAOS_IL2CPP_INTPTR guid) noexcept
 {
     if (guid == 0) return 0;
     const auto* bytes = reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(guid);
+
+    // Fast hex LUT -- no snprintf format-string parsing
+    static constexpr char kHex[] = "0123456789abcdef";
     char buf[37];
-    std::snprintf(buf, sizeof(buf),
-        "%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x",
-        bytes[0], bytes[1], bytes[2], bytes[3],
-        bytes[4], bytes[5], bytes[6], bytes[7],
-        bytes[8], bytes[9], bytes[10], bytes[11],
-        bytes[12], bytes[13], bytes[14], bytes[15]);
-    auto str_id = string_table::Intern(buf, 36);
-    return chaos_make_string_id_value(str_id);
+    auto put_hex = [&](int& p, CHAOS_IL2CPP_UINT8 b) noexcept {
+        buf[p++] = kHex[b >> 4];
+        buf[p++] = kHex[b & 0x0F];
+    };
+    int pos = 0;
+    put_hex(pos, bytes[0]); put_hex(pos, bytes[1]);
+    put_hex(pos, bytes[2]); put_hex(pos, bytes[3]);
+    buf[pos++] = '-';
+    put_hex(pos, bytes[4]); put_hex(pos, bytes[5]);
+    buf[pos++] = '-';
+    put_hex(pos, bytes[6]); put_hex(pos, bytes[7]);
+    buf[pos++] = '-';
+    put_hex(pos, bytes[8]); put_hex(pos, bytes[9]);
+    buf[pos++] = '-';
+    put_hex(pos, bytes[10]); put_hex(pos, bytes[11]);
+    put_hex(pos, bytes[12]); put_hex(pos, bytes[13]);
+    put_hex(pos, bytes[14]); put_hex(pos, bytes[15]);
+    buf[pos] = '\0';
+
+    // Allocate a proper chaos_managed_string with inline data.
+    // Avoids string_table::Intern (lock + hash + insert) since GUID
+    // strings are unique per call and never match existing entries.
+    return alloc_guid_string(buf, 36);
 }
 
 }  // extern "C"

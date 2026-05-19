@@ -77,13 +77,13 @@ public static class PrimitiveNumericConversionsBenchmarks
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_PrimitiveNumericConversions)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Convert_ToDecimal_System_Decimal_System_Double() { _ = Convert.ToDecimal("42"); }
+    public static void Benchmark_System_Private_CoreLib_System_Convert_ToDecimal_System_Decimal_System_Double() { _ = Convert.ToDecimal(42.0); }
     // Benchmark Convert.ToInt32 native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_PrimitiveNumericConversions)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Convert_ToInt32_System_Int32_System_Double() { _ = Convert.ToInt32("42"); }
+    public static void Benchmark_System_Private_CoreLib_System_Convert_ToInt32_System_Int32_System_Double() { _ = Convert.ToInt32(42.0); }
     // Benchmark Int32.Parse native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_PrimitiveNumericConversions)]

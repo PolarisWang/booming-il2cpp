@@ -1065,16 +1065,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_TypeRuntimeHandles
 	{ 0u, "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects", "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects", "", "TypeRuntimeHandlesSubjects", "TypeRuntimeHandlesSubjects", nullptr, kReflFields_TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects, 1u, nullptr, 0u,
 	kReflMethods_TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects, 13u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "TypeRuntimeHandlesSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "TypeRuntimeHandlesSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1393,7 +1393,7 @@ extern "C" void TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_5(
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_IsEnum_System_Boolean__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1503,7 +1503,7 @@ extern "C" void TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_7(
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_TypeHandle_System_RuntimeTypeHandle__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1559,7 +1559,7 @@ extern "C" void TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_8(
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_FullName_System_String__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1568,7 +1568,7 @@ extern "C" void TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_8(
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1617,7 +1617,7 @@ extern "C" void TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_9(
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__get_Name_System_String__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1626,7 +1626,7 @@ extern "C" void TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_9(
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1675,7 +1675,7 @@ extern "C" void TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_10
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_BaseType_System_Type__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1684,7 +1684,7 @@ extern "C" void TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_10
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);

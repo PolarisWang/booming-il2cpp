@@ -32,14 +32,14 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: ThreadingMonitorInterlockedSubjects
-add_library(chaos_gen_ThreadingMonitorInterlockedSubjects STATIC
-    ${CHAOS_GEN_DIR}/ThreadingMonitorInterlockedSubjects/generated/native-aot.generated.cpp
+# Assembly: ThreadingMonitorInterlockedPatchEntry
+add_library(chaos_gen_ThreadingMonitorInterlockedPatchEntry STATIC
+    ${CHAOS_GEN_DIR}/ThreadingMonitorInterlockedPatchEntry/generated/native-aot.generated.cpp
 )
 
-target_include_directories(chaos_gen_ThreadingMonitorInterlockedSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_ThreadingMonitorInterlockedSubjects PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_ThreadingMonitorInterlockedSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_ThreadingMonitorInterlockedPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_ThreadingMonitorInterlockedPatchEntry PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_ThreadingMonitorInterlockedPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -48,7 +48,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_ThreadingMonitorInterlockedSubjects
+    chaos_gen_ThreadingMonitorInterlockedPatchEntry
     ${NATIVE_LIBS}
 )
 

@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "ConvertCharSubjects",
-  "entrySubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
+  "assemblyName": "ConvertCharPatchEntry",
+  "entrySubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
+  "entrySymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

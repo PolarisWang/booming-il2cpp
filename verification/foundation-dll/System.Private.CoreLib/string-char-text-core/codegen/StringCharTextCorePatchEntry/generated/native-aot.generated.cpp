@@ -33,8 +33,8 @@ using namespace chaos::il2cpp::runtime_core;
 
 
 inline TypeInfoV0 chaos_mt_StringCharTextCorePatchEntry_StringCharTextCorePatchEntry = {{nullptr, nullptr, 12266957158064140644ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_StringCharTextCorePatchEntry_StringCharTextCorePatchEntry = static_cast<CHAOS_IL2CPP_INTPTR>(12266957158064140644ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Exception = {{nullptr, nullptr, 10972282733316558392ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Exception = static_cast<CHAOS_IL2CPP_INTPTR>(10972282733316558392ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_StringCharTextCorePatchEntry_StringCharTextCorePatchEntry = static_cast<CHAOS_IL2CPP_INTPTR>(12266957158064140644ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -80,13 +80,9 @@ struct chaos_type_StringCharTextCorePatchEntry_StringCharTextCorePatchEntry
 	ThinLockableHeader header{};
 };
 
-struct chaos_type_System_Private_CoreLib_System_Exception
+struct chaos_type_System_Private_CoreLib_System_Object
 {
 	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR _message = 0;
-	CHAOS_IL2CPP_INTPTR _innerException = 0;
-	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
@@ -454,6 +450,8 @@ static void (*kAotMethods[21])() = {
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
+// Instance methods receive a sentinel this-pointer so they don't crash on null.
+static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
 static void (*kBenchmarkWrappers[21])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
@@ -652,16 +650,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_StringCharTextCore
 	{ 0u, "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry", "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry", "", "StringCharTextCorePatchEntry", "StringCharTextCorePatchEntry", nullptr, kReflFields_StringCharTextCorePatchEntry_StringCharTextCorePatchEntry, 1u, nullptr, 0u,
 	kReflMethods_StringCharTextCorePatchEntry_StringCharTextCorePatchEntry, 21u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "StringCharTextCorePatchEntry", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "StringCharTextCorePatchEntry", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1375,7 +1373,7 @@ extern "C" void StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Run_Sy
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				throw;
 			}
@@ -1737,7 +1735,7 @@ extern "C" void StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Run_Sy
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				chaos::il2cpp::runtime_core::chaos_raise_exception(
 					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -2112,7 +2110,7 @@ extern "C" void StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Run_Sy
 			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Exception.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{
 				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
 				chaos::il2cpp::runtime_core::chaos_raise_exception(

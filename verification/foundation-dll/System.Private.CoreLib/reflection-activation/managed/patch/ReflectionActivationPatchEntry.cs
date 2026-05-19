@@ -72,7 +72,7 @@ public static partial class ReflectionActivationPatchEntry
                 case 7: Subject_7(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

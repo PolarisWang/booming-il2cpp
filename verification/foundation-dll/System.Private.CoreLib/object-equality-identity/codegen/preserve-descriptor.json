@@ -4,55 +4,61 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_0:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_1:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_2:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_3:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_4:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_5:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_6:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

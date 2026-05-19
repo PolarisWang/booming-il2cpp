@@ -8,116 +8,116 @@
     "unmatchedCount": 0,
     "invalidCount": 2,
     "jitElidedCount": 0,
-    "nativeFasterCount": 10,
-    "managedFasterCount": 3,
+    "nativeFasterCount": 11,
+    "managedFasterCount": 2,
     "equalCount": 0,
-    "averageSpeedupPercent": -159.3
+    "averageSpeedupPercent": -142.79
   },
   "methodResults": [
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action{System.Threading.Tasks.Task})",
       "status": "invalid",
       "managedElapsedMs": 0,
-      "nativeElapsedMs": 0.247,
+      "nativeElapsedMs": 0.254,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)",
       "status": "matched",
-      "managedElapsedMs": 0.9527,
-      "nativeElapsedMs": 1.151,
-      "speedupPercent": -20.81
+      "managedElapsedMs": 0.9697,
+      "nativeElapsedMs": 0.551,
+      "speedupPercent": 43.18
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::FromResult:System.Threading.Tasks.Task`1(TResult)",
       "status": "matched",
-      "managedElapsedMs": 0.6049,
-      "nativeElapsedMs": 0.942,
-      "speedupPercent": -55.73
+      "managedElapsedMs": 0.6854,
+      "nativeElapsedMs": 1.05,
+      "speedupPercent": -53.2
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)",
       "status": "matched",
-      "managedElapsedMs": 39.3583,
-      "nativeElapsedMs": 0.555,
-      "speedupPercent": 98.59
+      "managedElapsedMs": 42.5422,
+      "nativeElapsedMs": 0.553,
+      "speedupPercent": 98.7
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task`1(System.Func`1)",
       "status": "matched",
-      "managedElapsedMs": 0.7509,
-      "nativeElapsedMs": 0.153,
-      "speedupPercent": 79.62
+      "managedElapsedMs": 0.715,
+      "nativeElapsedMs": 0.159,
+      "speedupPercent": 77.76
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)",
       "status": "invalid",
       "managedElapsedMs": 0,
-      "nativeElapsedMs": 0.342,
+      "nativeElapsedMs": 0.259,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()",
       "status": "matched",
-      "managedElapsedMs": 0.934,
-      "nativeElapsedMs": 0.098,
-      "speedupPercent": 89.51
+      "managedElapsedMs": 0.9822,
+      "nativeElapsedMs": 0.097,
+      "speedupPercent": 90.12
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])",
       "status": "matched",
-      "managedElapsedMs": 0.8966,
-      "nativeElapsedMs": 0.248,
-      "speedupPercent": 72.34
+      "managedElapsedMs": 0.903,
+      "nativeElapsedMs": 0.339,
+      "speedupPercent": 62.46
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAny:System.Threading.Tasks.Task{System.Threading.Tasks.Task}(System.Threading.Tasks.Task[])",
       "status": "matched",
-      "managedElapsedMs": 7.7801,
-      "nativeElapsedMs": 0.256,
-      "speedupPercent": 96.71
+      "managedElapsedMs": 7.9621,
+      "nativeElapsedMs": 0.259,
+      "speedupPercent": 96.75
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()",
       "status": "matched",
-      "managedElapsedMs": 0.6065,
-      "nativeElapsedMs": 0.535,
-      "speedupPercent": 11.79
+      "managedElapsedMs": 0.6307,
+      "nativeElapsedMs": 0.544,
+      "speedupPercent": 13.75
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()",
       "status": "matched",
-      "managedElapsedMs": 0.6067,
-      "nativeElapsedMs": 0.157,
-      "speedupPercent": 74.12
+      "managedElapsedMs": 0.6529,
+      "nativeElapsedMs": 0.154,
+      "speedupPercent": 76.41
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)",
       "status": "matched",
-      "managedElapsedMs": 24.2733,
-      "nativeElapsedMs": 0.155,
-      "speedupPercent": 99.36
+      "managedElapsedMs": 22.0783,
+      "nativeElapsedMs": 0.156,
+      "speedupPercent": 99.29
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Start:System.Void()",
       "status": "matched",
-      "managedElapsedMs": 6664.4738,
-      "nativeElapsedMs": 0.155,
+      "managedElapsedMs": 9562.2107,
+      "nativeElapsedMs": 0.162,
       "speedupPercent": 100.0
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()",
       "status": "matched",
-      "managedElapsedMs": 1.0047,
-      "nativeElapsedMs": 28.821,
-      "speedupPercent": -2768.62
+      "managedElapsedMs": 1.0939,
+      "nativeElapsedMs": 29.328,
+      "speedupPercent": -2581.05
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()",
       "status": "matched",
-      "managedElapsedMs": 1.0247,
-      "nativeElapsedMs": 0.489,
-      "speedupPercent": 52.28
+      "managedElapsedMs": 0.6336,
+      "nativeElapsedMs": 0.51,
+      "speedupPercent": 19.51
     }
   ]
 }

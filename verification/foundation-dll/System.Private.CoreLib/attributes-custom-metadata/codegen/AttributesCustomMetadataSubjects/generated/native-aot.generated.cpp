@@ -300,7 +300,12 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssembly(CHAOS_IL2CPP_INTPTR chaos_type_va
 	switch (chaos_type->runtime_type_handle)
 	{
 		default:
-			return 0;
+		{
+			auto* chaos_assembly = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Reflection_Assembly);
+			chaos_assembly->header.type_info = &chaos_mt_System_Private_CoreLib_System_Reflection_Assembly.hot;
+			chaos_assembly->runtime_assembly_name_value = chaos_reflection_create_string_literal("System.Private.CoreLib");
+			return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_assembly);
+		}
 	}
 }
 
@@ -1004,16 +1009,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_AttributesCustomMe
 	{ 0u, "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects", "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects", "", "AttributesCustomMetadataSubjects", "AttributesCustomMetadataSubjects", nullptr, kReflFields_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects, 1u, nullptr, 0u,
 	kReflMethods_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects, 9u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "AttributesCustomMetadataSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "AttributesCustomMetadataSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1082,7 +1087,7 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_Assembly_System_Reflection_Assembly__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1103,12 +1108,12 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1368257119);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1544657226);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1155,7 +1160,7 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_Assembly_System_Reflection_Assembly__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1176,12 +1181,12 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1368257119);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1544657226);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1269,7 +1274,7 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_Assembly_System_Reflection_Assembly__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1344,7 +1349,7 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_Assembly_System_Reflection_Assembly__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);

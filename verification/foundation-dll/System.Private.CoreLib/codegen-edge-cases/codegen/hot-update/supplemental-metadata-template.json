@@ -1,0 +1,51 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "CodegenEdgeCasesSubjects",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "CodegenEdgeCasesSubjects",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CodegenEdgeCasesSubjects",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CodegenEdgeCasesSubjects",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CodegenEdgeCasesSubjects",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 1
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

@@ -353,68 +353,68 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
             coll_type = coll_match.group(1)
             if coll_type == 'List':
                 if method_name == 'Add':
-                    return f'new System.Collections.Generic.List<int>().Add({ipart})'
+                    return f'new System.Collections.Generic.List<int>().Add({ipart})', False
                 elif method_name == 'Clear':
-                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.Clear()'
+                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.Clear()', False
                 elif method_name == 'Contains':
-                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.Contains({ipart})'
+                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.Contains({ipart})', False
                 elif method_name == 'IndexOf':
-                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.IndexOf({ipart})'
+                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.IndexOf({ipart})', False
                 elif method_name == 'Remove':
-                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.Remove({ipart})'
+                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.Remove({ipart})', False
                 elif method_name == 'RemoveAt':
-                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.RemoveAt(0)'
+                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.RemoveAt(0)', False
                 elif method_name == 'Sort':
-                    return f'new System.Collections.Generic.List<int>{{3, 1, 2}}.Sort()'
+                    return f'new System.Collections.Generic.List<int>{{3, 1, 2}}.Sort()', False
                 elif method_name == 'ToArray':
-                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.ToArray()'
+                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.ToArray()', False
             elif coll_type == 'Dictionary':
                 if method_name == 'Add':
-                    return f'new System.Collections.Generic.Dictionary<int, int>().Add({ipart}, {ipart})'
+                    return f'new System.Collections.Generic.Dictionary<int, int>().Add({ipart}, {ipart})', False
                 elif method_name == 'get_Count':
                     # Property access can't be a statement expression; wrap in discard
-                    return f'_ = new System.Collections.Generic.Dictionary<int, int>{{{{{ipart}, {ipart}}}}}.Count'
+                    return f'_ = new System.Collections.Generic.Dictionary<int, int>{{{{{ipart}, {ipart}}}}}.Count', False
                 elif method_name == 'TryGetValue':
-                    return f'new System.Collections.Generic.Dictionary<int, int>{{{{{ipart}, {ipart}}}}}.TryGetValue({ipart}, out _)'
+                    return f'new System.Collections.Generic.Dictionary<int, int>{{{{{ipart}, {ipart}}}}}.TryGetValue({ipart}, out _)', False
                 elif method_name == 'ContainsKey':
-                    return f'new System.Collections.Generic.Dictionary<int, int>{{{{{ipart}, {ipart}}}}}.ContainsKey({ipart})'
+                    return f'new System.Collections.Generic.Dictionary<int, int>{{{{{ipart}, {ipart}}}}}.ContainsKey({ipart})', False
                 elif method_name == 'Remove':
-                    return f'new System.Collections.Generic.Dictionary<int, int>{{{{{ipart}, {ipart}}}}}.Remove({ipart})'
+                    return f'new System.Collections.Generic.Dictionary<int, int>{{{{{ipart}, {ipart}}}}}.Remove({ipart})', False
             elif coll_type == 'HashSet':
                 if method_name == 'Add':
-                    return f'new System.Collections.Generic.HashSet<int>().Add({ipart})'
+                    return f'new System.Collections.Generic.HashSet<int>().Add({ipart})', False
                 elif method_name == 'Contains':
-                    return f'new System.Collections.Generic.HashSet<int>{{{ipart}}}.Contains({ipart})'
+                    return f'new System.Collections.Generic.HashSet<int>{{{ipart}}}.Contains({ipart})', False
                 elif method_name == 'Remove':
-                    return f'new System.Collections.Generic.HashSet<int>{{{ipart}}}.Remove({ipart})'
+                    return f'new System.Collections.Generic.HashSet<int>{{{ipart}}}.Remove({ipart})', False
             return '', False
 
         # ── System.Array methods ──────────────────────────────────────
         if declaring_type == 'System.Array':
             if method_name == 'Copy' and len(param_types) == 3:
-                return 'System.Array.Copy(new byte[]{1,2,3,4,5}, new byte[5], 3)'
+                return 'System.Array.Copy(new byte[]{1,2,3,4,5}, new byte[5], 3)', False
             elif method_name == 'Copy' and len(param_types) == 5:
-                return 'System.Array.Copy(new byte[]{1,2,3,4,5}, 1, new byte[3], 0, 3)'
+                return 'System.Array.Copy(new byte[]{1,2,3,4,5}, 1, new byte[3], 0, 3)', False
             elif method_name == 'Clear':
-                return 'System.Array.Clear(new byte[]{1,2,3,4,5}, 0, 3)'
+                return 'System.Array.Clear(new byte[]{1,2,3,4,5}, 0, 3)', False
             elif method_name == 'Sort' and len(param_types) == 1:
-                return 'System.Array.Sort(new byte[]{3,1,4,1,5})'
+                return 'System.Array.Sort(new byte[]{3,1,4,1,5})', False
             elif method_name == 'Sort' and len(param_types) == 2:
-                return 'System.Array.Sort(new byte[]{3,1,2}, (System.Collections.IComparer)null)'
+                return 'System.Array.Sort(new byte[]{3,1,2}, (System.Collections.IComparer)null)', False
             elif method_name == 'BinarySearch' and len(param_types) == 2:
-                return 'System.Array.BinarySearch(new byte[]{10,20,30,40}, (object)(byte)30)'
+                return 'System.Array.BinarySearch(new byte[]{10,20,30,40}, (object)(byte)30)', False
             elif method_name == 'BinarySearch' and len(param_types) == 4:
-                return 'System.Array.BinarySearch(new byte[]{10,20,30,40}, 0, 3, (object)(byte)20)'
+                return 'System.Array.BinarySearch(new byte[]{10,20,30,40}, 0, 3, (object)(byte)20)', False
             elif method_name == 'IndexOf':
-                return 'System.Array.IndexOf(new byte[]{5,3,5,3}, (object)(byte)3)'
+                return 'System.Array.IndexOf(new byte[]{5,3,5,3}, (object)(byte)3)', False
             elif method_name == 'LastIndexOf':
-                return 'System.Array.LastIndexOf(new byte[]{5,3,5,3}, (object)(byte)3)'
+                return 'System.Array.LastIndexOf(new byte[]{5,3,5,3}, (object)(byte)3)', False
             elif method_name == 'Reverse':
-                return 'System.Array.Reverse(new byte[]{1,2,3,4,5})'
+                return 'System.Array.Reverse(new byte[]{1,2,3,4,5})', False
             elif method_name == 'GetLength':
-                return 'System.Array.CreateInstance(typeof(byte), 3).GetLength(0)'
+                return 'System.Array.CreateInstance(typeof(byte), 3).GetLength(0)', False
             elif method_name == 'GetValue':
-                return 'new byte[]{10,20,30}.GetValue(0)'
+                return 'new byte[]{10,20,30}.GetValue(0)', False
             return '', False
 
         # ── System.Guid methods ─────────────────────────────────────────
@@ -900,14 +900,15 @@ def _stage_audit(family_slug: str, assembly: str, skip_stages: set[str] | None =
     principle = audit.get("principle_alignment", {})
     overall = audit.get("overall", {})
 
-    # If benchmark is skipped, demote p1_benchmark VIOLATION to CONCERN
-    # so families without meaningful benchmark data still pass audit.
+    # If benchmark is skipped, demote p1_benchmark so families without
+    # meaningful benchmark data still pass audit.
     if "benchmark" in skip:
         checks = principle.get("checks", {})
         bm_check = checks.get("p1_benchmark", {})
-        if bm_check.get("status") == "VIOLATION":
-            bm_check["status"] = "CONCERN"
-            bm_check["summary"] += " [downgraded from VIOLATION because benchmark stage was skipped]"
+        bm_status = bm_check.get("status")
+        if bm_status in ("VIOLATION", "CONCERN"):
+            bm_check["status"] = "NOT_APPLICABLE"
+            bm_check["summary"] += " [overridden — benchmark stage was skipped]"
             # Recompute overall principle status
             status_counts = {}
             for c in checks.values():

@@ -118,6 +118,12 @@ def _run_test(
         kw["build"] = options.get("build", False)
         kw["quick"] = options.get("quick", False)
         kw["scenario"] = options.get("scenario")
+    else:
+        # Catch-all for tests without special option handling (loh-stress,
+        # finalizer-stress, bgc-stress, etc.)
+        kw["build"] = options.get("build", False)
+        kw["quick"] = options.get("quick", False)
+        kw["scenario"] = options.get("scenario")
 
     print(f"Running {test_name}...")
     results = runner_fn(repo_root, **kw)

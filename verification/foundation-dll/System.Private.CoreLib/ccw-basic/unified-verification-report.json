@@ -2,8 +2,8 @@
   "family": "ccw-basic",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-18T07:57:20",
-  "duration_ms": 52553,
+  "timestamp": "2026-05-19T13:53:18",
+  "duration_ms": 10505,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -21,14 +21,16 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
+      "status": "failed",
+      "summary": "convert-to-cpp failed",
       "details": {
-        "methodCount": 5,
-        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\ccw-basic\\managed\\subjects\\build-output\\CcwBasicSubjects.dll"
+        "steps": {
+          "build_subjects": "OK",
+          "convert_to_cpp": "FAILED"
+        }
       },
       "errors": [],
-      "duration_ms": 10259
+      "duration_ms": 7621
     },
     "fact": {
       "stage": "fact",
@@ -42,62 +44,21 @@
         }
       },
       "errors": [],
-      "duration_ms": 244
+      "duration_ms": 33
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN",
+      "summary": "false_passing=0, principle=ALIGNED",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "CONCERN",
+        "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 102
-    },
-    "asm_compare": {
-      "stage": "asm_compare",
-      "status": "failed",
-      "summary": "asm-compare: 0/5 methods OK, avg JIT=0 instr, avg AOT IR=0 instr, expansion=0x",
-      "details": {
-        "totalMethods": 5,
-        "okCount": 0,
-        "failedCount": 5,
-        "skippedCount": 0,
-        "jitInstructionCount": {
-          "min": 0,
-          "max": 0,
-          "avg": 0,
-          "total": 0
-        },
-        "aotInstructionCount": {
-          "min": 0,
-          "max": 0,
-          "avg": 0,
-          "total": 0
-        },
-        "totalExternalRuntimeCalls": 0,
-        "totalVirtualDispatches": 0,
-        "totalBoxingOps": 0,
-        "topInstructionCategories": {},
-        "overallIrExpansionRatio": 0,
-        "averageExpansionRatio": 0
-      },
-      "errors": [],
-      "duration_ms": 7310
-    },
-    "microbench": {
-      "stage": "microbench",
-      "status": "passed",
-      "summary": "FramePool=0.0ns/op | FastExecute=0.0ns/instr | CallVirt dispatch=0.0ns",
-      "details": {
-        "poolSize": 0
-      },
-      "errors": [],
-      "duration_ms": 25
+      "duration_ms": 736
     },
     "benchmark": {
       "stage": "benchmark",
@@ -113,34 +74,7 @@
         "benchmarkQuality": "matchedCount=0/5 below threshold 50%"
       },
       "errors": [],
-      "duration_ms": 33424
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "failed",
-      "summary": "HotUpdate returned 0 total — no verification performed",
-      "details": {
-        "passedMethods": 0,
-        "failedMethods": 0,
-        "totalMethods": 0,
-        "realMethods": 0,
-        "stubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 219
-    },
-    "post_hotupdate_benchmark": {
-      "stage": "post_hotupdate_benchmark",
-      "status": "passed",
-      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (interpreter path — expected)",
-      "details": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
-        "threshold": 50.0,
-        "nonStubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 964
+      "duration_ms": 2110
     }
   },
   "coverage": {
@@ -149,14 +83,7 @@
     "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 0,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 0,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 0
-    },
+    "interpreter": {},
     "irTranslation": {
       "totalMethods": 5,
       "okCount": 0,
@@ -179,22 +106,11 @@
       "totalMethods": 5,
       "invalidCount": 5
     },
-    "hotupdate": {
-      "functional": {
-        "passedMethods": 0,
-        "failedMethods": 0,
-        "totalMethods": 0
-      },
-      "interpreterOverhead": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
-        "nonStubMethods": 0
-      }
-    },
+    "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0,
-      "interpreterSlowdownFactor": 1.0,
+      "interpreterSlowdownFactor": 0,
       "asmPassRate": 0.0
     }
   },

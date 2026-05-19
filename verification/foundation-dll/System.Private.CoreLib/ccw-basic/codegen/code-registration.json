@@ -8,32 +8,32 @@
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method0",
-          "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()"
+          "symbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0",
+          "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_0:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method1",
-          "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method1:System.Int32()"
+          "symbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1",
+          "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_1:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method2",
-          "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method2:System.Int32()"
+          "symbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2",
+          "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_2:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method3",
-          "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method3:System.Int32()"
+          "symbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3",
+          "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_3:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method4",
-          "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method4:System.Int32()"
+          "symbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4",
+          "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_4:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",

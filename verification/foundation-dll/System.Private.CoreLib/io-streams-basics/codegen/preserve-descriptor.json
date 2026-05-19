@@ -4,121 +4,127 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_0:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_1:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_2:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_3:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_4:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_5:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_6:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_7:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_7:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_8:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_9:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_10:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_10:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_11:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_11:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_12:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_13:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_13:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_14:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_15:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_16:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_17:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

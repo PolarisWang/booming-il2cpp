@@ -2,9 +2,9 @@
   "family": "threading-tasks-primitives",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T04:53:17",
-  "duration_ms": 14716,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T15:12:13",
+  "duration_ms": 17596,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -43,21 +43,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-tasks-primitives\\managed\\subjects\\build-output\\ThreadingTasksPrimitivesSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 14567
+      "duration_ms": 16747
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (21/23)",
+      "status": "passed",
+      "summary": "Fact verify=passed (22/22)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 21,
-          "total": 23
+          "status": "passed",
+          "passed": 22,
+          "total": 22
         }
       },
       "errors": [],
-      "duration_ms": 43
+      "duration_ms": 40
     },
     "audit": {
       "stage": "audit",
@@ -71,13 +71,13 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 105
+      "duration_ms": 807
     }
   },
   "coverage": {
-    "methodCoverage": 91.3,
+    "methodCoverage": 100.0,
     "testedRate": 6.67,
-    "overall": 48.98
+    "overall": 53.34
   },
   "dashboard": {
     "interpreter": {},
@@ -117,9 +117,9 @@
       "currentMetrics": {
         "totalMethods": 15,
         "matchedCount": 13,
-        "nativeFasterCount": 10,
-        "managedFasterCount": 3,
-        "averageSpeedupPercent": -159.3
+        "nativeFasterCount": 11,
+        "managedFasterCount": 2,
+        "averageSpeedupPercent": -142.79
       }
     },
     "hasRegression": false,

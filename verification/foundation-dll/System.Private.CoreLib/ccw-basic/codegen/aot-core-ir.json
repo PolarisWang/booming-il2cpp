@@ -3,18 +3,18 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.method0",
-      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()",
-      "signature": "System.Int32 CcwBasicPatchEntry::Method0()",
+      "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.subject-0",
+      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_0:System.Int32()",
+      "signature": "System.Int32 CcwBasicPatchEntry::Subject_0()",
       "identity": {
         "assemblyName": "CcwBasicPatchEntry",
         "declaringTypeSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry",
-        "definitionSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()",
-        "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()",
-        "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.method0",
-        "signature": "System.Int32 CcwBasicPatchEntry::Method0()"
+        "definitionSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_0:System.Int32()",
+        "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_0:System.Int32()",
+        "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.subject-0",
+        "signature": "System.Int32 CcwBasicPatchEntry::Subject_0()"
       },
-      "nativeSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method0",
+      "nativeSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0",
       "isStatic": true,
       "returnType": "System.Int32",
       "returnAbi": {
@@ -76,18 +76,18 @@
       "declaringAssemblyName": "CcwBasicPatchEntry"
     },
     {
-      "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.method1",
-      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method1:System.Int32()",
-      "signature": "System.Int32 CcwBasicPatchEntry::Method1()",
+      "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.subject-1",
+      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_1:System.Int32()",
+      "signature": "System.Int32 CcwBasicPatchEntry::Subject_1()",
       "identity": {
         "assemblyName": "CcwBasicPatchEntry",
         "declaringTypeSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry",
-        "definitionSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method1:System.Int32()",
-        "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method1:System.Int32()",
-        "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.method1",
-        "signature": "System.Int32 CcwBasicPatchEntry::Method1()"
+        "definitionSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_1:System.Int32()",
+        "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_1:System.Int32()",
+        "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.subject-1",
+        "signature": "System.Int32 CcwBasicPatchEntry::Subject_1()"
       },
-      "nativeSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method1",
+      "nativeSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1",
       "isStatic": true,
       "returnType": "System.Int32",
       "returnAbi": {
@@ -149,18 +149,18 @@
       "declaringAssemblyName": "CcwBasicPatchEntry"
     },
     {
-      "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.method2",
-      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method2:System.Int32()",
-      "signature": "System.Int32 CcwBasicPatchEntry::Method2()",
+      "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.subject-2",
+      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_2:System.Int32()",
+      "signature": "System.Int32 CcwBasicPatchEntry::Subject_2()",
       "identity": {
         "assemblyName": "CcwBasicPatchEntry",
         "declaringTypeSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry",
-        "definitionSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method2:System.Int32()",
-        "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method2:System.Int32()",
-        "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.method2",
-        "signature": "System.Int32 CcwBasicPatchEntry::Method2()"
+        "definitionSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_2:System.Int32()",
+        "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_2:System.Int32()",
+        "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.subject-2",
+        "signature": "System.Int32 CcwBasicPatchEntry::Subject_2()"
       },
-      "nativeSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method2",
+      "nativeSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2",
       "isStatic": true,
       "returnType": "System.Int32",
       "returnAbi": {
@@ -222,18 +222,18 @@
       "declaringAssemblyName": "CcwBasicPatchEntry"
     },
     {
-      "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.method3",
-      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method3:System.Int32()",
-      "signature": "System.Int32 CcwBasicPatchEntry::Method3()",
+      "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.subject-3",
+      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_3:System.Int32()",
+      "signature": "System.Int32 CcwBasicPatchEntry::Subject_3()",
       "identity": {
         "assemblyName": "CcwBasicPatchEntry",
         "declaringTypeSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry",
-        "definitionSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method3:System.Int32()",
-        "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method3:System.Int32()",
-        "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.method3",
-        "signature": "System.Int32 CcwBasicPatchEntry::Method3()"
+        "definitionSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_3:System.Int32()",
+        "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_3:System.Int32()",
+        "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.subject-3",
+        "signature": "System.Int32 CcwBasicPatchEntry::Subject_3()"
       },
-      "nativeSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method3",
+      "nativeSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3",
       "isStatic": true,
       "returnType": "System.Int32",
       "returnAbi": {
@@ -295,18 +295,18 @@
       "declaringAssemblyName": "CcwBasicPatchEntry"
     },
     {
-      "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.method4",
-      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method4:System.Int32()",
-      "signature": "System.Int32 CcwBasicPatchEntry::Method4()",
+      "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.subject-4",
+      "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_4:System.Int32()",
+      "signature": "System.Int32 CcwBasicPatchEntry::Subject_4()",
       "identity": {
         "assemblyName": "CcwBasicPatchEntry",
         "declaringTypeSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry",
-        "definitionSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method4:System.Int32()",
-        "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method4:System.Int32()",
-        "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.method4",
-        "signature": "System.Int32 CcwBasicPatchEntry::Method4()"
+        "definitionSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_4:System.Int32()",
+        "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_4:System.Int32()",
+        "methodId": "ccw-basic-patch-entry.ccw-basic-patch-entry.subject-4",
+        "signature": "System.Int32 CcwBasicPatchEntry::Subject_4()"
       },
-      "nativeSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method4",
+      "nativeSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4",
       "isStatic": true,
       "returnType": "System.Int32",
       "returnAbi": {
@@ -394,14 +394,23 @@
         }
       ],
       "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 76,
+          "handlerOffset": 77,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
       "instructions": [
         {
           "op": "ldarg",
           "opCode": 6,
           "operand": 0,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -409,7 +418,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
-          "ilOffset": 2,
+          "ilOffset": 3,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -417,14 +426,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 3,
+          "ilOffset": 4,
           "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 4,
+          "ilOffset": 5,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -432,46 +441,46 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 5,
+          "ilOffset": 6,
           "isPreserveSig": false
         },
         {
           "op": "switch",
           "opCode": 69,
           "operand": [
-            33,
-            41,
-            49,
-            57,
-            65
+            34,
+            42,
+            50,
+            58,
+            66
           ],
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 73,
-          "ilOffset": 31,
+          "operand": 74,
+          "ilOffset": 32,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 33,
+          "ilOffset": 34,
           "resultType": "System.Int32",
-          "callee": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()",
+          "callee": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_0:System.Int32()",
           "reference": {
             "assemblyName": "CcwBasicPatchEntry",
             "subjectKind": "method",
-            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()"
+            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_0:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "CcwBasicPatchEntry",
-            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method0:System.Int32()",
+            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_0:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -479,7 +488,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method0",
+          "targetSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_0",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
@@ -488,32 +497,32 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 38,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 73,
           "ilOffset": 39,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 74,
+          "ilOffset": 40,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 41,
+          "ilOffset": 42,
           "resultType": "System.Int32",
-          "callee": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method1:System.Int32()",
+          "callee": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_1:System.Int32()",
           "reference": {
             "assemblyName": "CcwBasicPatchEntry",
             "subjectKind": "method",
-            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method1:System.Int32()"
+            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_1:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "CcwBasicPatchEntry",
-            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method1:System.Int32()",
+            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_1:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -521,7 +530,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method1",
+          "targetSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_1",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
@@ -530,32 +539,32 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 46,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 73,
           "ilOffset": 47,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 74,
+          "ilOffset": 48,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 49,
+          "ilOffset": 50,
           "resultType": "System.Int32",
-          "callee": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method2:System.Int32()",
+          "callee": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_2:System.Int32()",
           "reference": {
             "assemblyName": "CcwBasicPatchEntry",
             "subjectKind": "method",
-            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method2:System.Int32()"
+            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_2:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "CcwBasicPatchEntry",
-            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method2:System.Int32()",
+            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_2:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -563,7 +572,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method2",
+          "targetSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_2",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
@@ -572,32 +581,32 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 54,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 73,
           "ilOffset": 55,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 74,
+          "ilOffset": 56,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 57,
+          "ilOffset": 58,
           "resultType": "System.Int32",
-          "callee": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method3:System.Int32()",
+          "callee": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_3:System.Int32()",
           "reference": {
             "assemblyName": "CcwBasicPatchEntry",
             "subjectKind": "method",
-            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method3:System.Int32()"
+            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_3:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "CcwBasicPatchEntry",
-            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method3:System.Int32()",
+            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_3:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -605,7 +614,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method3",
+          "targetSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_3",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
@@ -614,32 +623,32 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 62,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 73,
           "ilOffset": 63,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 74,
+          "ilOffset": 64,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 65,
+          "ilOffset": 66,
           "resultType": "System.Int32",
-          "callee": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method4:System.Int32()",
+          "callee": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_4:System.Int32()",
           "reference": {
             "assemblyName": "CcwBasicPatchEntry",
             "subjectKind": "method",
-            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method4:System.Int32()"
+            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_4:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "CcwBasicPatchEntry",
-            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Method4:System.Int32()",
+            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::Subject_4:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -647,7 +656,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Method4",
+          "targetSymbol": "CcwBasicPatchEntry_CcwBasicPatchEntry_Subject_4",
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
@@ -656,21 +665,78 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 70,
+          "ilOffset": 71,
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 73,
-          "ilOffset": 71,
+          "operand": 74,
+          "ilOffset": 72,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 88,
+          "ilOffset": 75,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 77,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 79,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "CcwBasicPatchEntry/CcwBasicPatchEntry::_exitCode",
+          "ilOffset": 80,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "CcwBasicPatchEntry",
+            "subjectKind": "field",
+            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "CcwBasicPatchEntry",
+            "subjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "CcwBasicPatchEntry/CcwBasicPatchEntry",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 88,
+          "ilOffset": 86,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 73,
+          "ilOffset": 88,
           "isPreserveSig": false
         }
       ],

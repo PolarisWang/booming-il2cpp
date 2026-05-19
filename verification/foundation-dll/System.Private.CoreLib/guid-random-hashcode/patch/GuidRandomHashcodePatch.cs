@@ -21,7 +21,7 @@ public static class GuidRandomHashcodePatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Guid::.ctor:System.Void(System.Byte[])")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GuidRandomHashcode)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Guid_ctor_System_Void_System_Byte() { new Guid("00000000-0000-0000-0000-000000000000"); }
+    public static void Patch_System_Private_CoreLib_System_Guid_ctor_System_Void_System_Byte() { new Guid(new byte[] { 1, 2, 3 }); }
     // Verify Guid.NewGuid after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Guid::NewGuid:System.Guid()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GuidRandomHashcode)]

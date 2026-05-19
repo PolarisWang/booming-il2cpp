@@ -101,7 +101,7 @@ public partial class PrimitiveNumericConversionsTests
     public void _System_Private_CoreLib_System_Convert_ToDecimal_System_Decimal_System_Double()
     {
         // Purpose: Verify Convert.ToDecimal with typical input
-            var result = Convert.ToDecimal("42");
+            var result = Convert.ToDecimal(42.0);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -109,7 +109,7 @@ public partial class PrimitiveNumericConversionsTests
     public void _System_Private_CoreLib_System_Convert_ToInt32_System_Int32_System_Double()
     {
         // Purpose: Verify Convert.ToInt32 with typical input
-            var result = Convert.ToInt32("42");
+            var result = Convert.ToInt32(42.0);
             Xunit.Assert.NotNull((object)result);
     }
 
