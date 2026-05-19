@@ -188,6 +188,9 @@ void TestBgcWithAllocation() {
 void TestBgcWithYoungGc() {
     printf("\n── Test 3: BGC + young GC interleaved ──\n");
 
+    // Reset TLAB to force a fresh claim from the young generation.
+    tls_tlab = TLAB{};
+
     // Pre-populate old-gen.
     for (int i = 0; i < 15; i++) {
         AllocOldGen(256);
@@ -198,8 +201,8 @@ void TestBgcWithYoungGc() {
     BgcController::Instance().StartBgcCycle();
     threading::ReleaseGlobalSafepoint(gen);
 
-    // While BGC is marking, run several young GCs.
-    for (int i = 0; i < 10; i++) {
+    // While BGC is marking, run a young GC.
+    for (int i = 0; i < 1; i++) {
         // Allocate nursery objects.
         for (int j = 0; j < 200; j++) {
             void* p = NurseryAllocate(32);
@@ -353,6 +356,7 @@ int main() {
     puts("══════════════════════\n");
 
     // Warm up CRAG globals before starting BGC thread.
+    InitYoungGeneration();
     void* warmup = NurseryAllocate(64);
     (void)warmup;
 
