@@ -149,6 +149,73 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
     bitmap_bytes += kBitmapPoison;
     CHAOS_IL2CPP_SIZE total_size = sizeof(OldGenPage) + bitmap_bytes + payload_size;
 
+    // Helper: carve payload into size-class free blocks
+    // (used for both new and recycled pages).
+    auto carve_free_lists = [](OldGenPage* p, int pref_sc) {
+        char* payload = p->Payload();
+        CHAOS_IL2CPP_SIZE remaining = p->payload_size;
+        CHAOS_IL2CPP_SIZE n_sc = kOldGenNumSizeClasses;
+
+        if (pref_sc >= 0 && pref_sc < n_sc) {
+            CHAOS_IL2CPP_SIZE pref_size = kOldGenSizeClasses[pref_sc];
+            CHAOS_IL2CPP_SIZE pref_budget = (p->payload_size * 8) / 10;
+            while (remaining >= pref_size && pref_budget >= pref_size) {
+                auto* block = reinterpret_cast<OldGenFreeBlock*>(payload);
+                block->next = p->free_lists[pref_sc];
+                block->sentinel = GcLayoutRegistry::Instance().GetSentinelTypeInfo(pref_sc);
+                p->free_lists[pref_sc] = block;
+                payload += pref_size;
+                remaining -= pref_size;
+                pref_budget -= pref_size;
+            }
+        }
+        int sc = 0;
+        while (remaining >= kOldGenSizeClasses[0]) {
+            CHAOS_IL2CPP_SIZE sc_size = kOldGenSizeClasses[sc];
+            if (sc_size <= remaining) {
+                auto* block = reinterpret_cast<OldGenFreeBlock*>(payload);
+                block->next = p->free_lists[sc];
+                block->sentinel = GcLayoutRegistry::Instance().GetSentinelTypeInfo(sc);
+                p->free_lists[sc] = block;
+                payload += sc_size;
+                remaining -= sc_size;
+            }
+            sc = (sc + 1) % kOldGenNumSizeClasses;
+        }
+    };
+
+    // Try to recycle a pooled page first (avoids VirtualAlloc syscall).
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (!page_pool_.empty()) {
+            auto* recycled = page_pool_.back();
+            page_pool_.pop_back();
+
+            // Re-initialize non-permanent header fields.
+            recycled->scanning = scanning;
+            recycled->preferred_sc_idx = (preferred_sc_idx >= 0 && preferred_sc_idx < kOldGenNumSizeClasses)
+                ? static_cast<int8_t>(preferred_sc_idx) : static_cast<int8_t>(-1);
+            recycled->in_use.store(true, std::memory_order_release);
+
+            // Clear bitmap (permanent fields like page_size/payload_size are unchanged).
+            GcMarkBitmap(recycled->MarkBitmap(), recycled->bitmap_bytes).Clear();
+
+            // Clear free list heads and re-carve.
+            for (int i = 0; i < kOldGenNumSizeClasses; i++)
+                recycled->free_lists[i] = nullptr;
+            carve_free_lists(recycled, recycled->preferred_sc_idx);
+
+            // Link into page list and rebuild the page array index.
+            recycled->next = page_list_;
+            page_list_ = recycled;
+            page_count_++;
+            g_gc_scheduler.RecordPageCountGrowth(1);
+            RebuildPageArray();
+
+            return recycled;
+        }
+    }
+
     auto* mem = static_cast<OldGenPage*>(VirtualAllocPage(total_size));
     if (mem == nullptr) return nullptr;
 
@@ -187,48 +254,15 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
     }
 #endif
 
-    // Carve payload into size-class blocks.
-    // When a specific allocation triggers this page (preferred_sc_idx >= 0),
-    // 80% of the page goes to that size class so a burst of same-size allocs
-    // doesn't allocate one page per object.
-    char* payload = mem->Payload();
-    CHAOS_IL2CPP_SIZE remaining = payload_size;
-
-    if (preferred_sc_idx >= 0 && preferred_sc_idx < kOldGenNumSizeClasses) {
-        CHAOS_IL2CPP_SIZE pref_size = kOldGenSizeClasses[preferred_sc_idx];
-        CHAOS_IL2CPP_SIZE pref_budget = (payload_size * 8) / 10;  // 80%
-        while (remaining >= pref_size && pref_budget >= pref_size) {
-            auto* block = reinterpret_cast<OldGenFreeBlock*>(payload);
-            block->next = mem->free_lists[preferred_sc_idx];
-            block->sentinel = GcLayoutRegistry::Instance().GetSentinelTypeInfo(preferred_sc_idx);
-            mem->free_lists[preferred_sc_idx] = block;
-            payload += pref_size;
-            remaining -= pref_size;
-            pref_budget -= pref_size;
-        }
-    }
-
-    // Fill the rest with round-robin across all size classes.
-    int sc = 0;
-    while (remaining >= kOldGenSizeClasses[0]) {
-        CHAOS_IL2CPP_SIZE sc_size = kOldGenSizeClasses[sc];
-        if (sc_size <= remaining) {
-            auto* block = reinterpret_cast<OldGenFreeBlock*>(payload);
-            block->next = mem->free_lists[sc];
-            block->sentinel = GcLayoutRegistry::Instance().GetSentinelTypeInfo(sc);
-            mem->free_lists[sc] = block;
-            payload += sc_size;
-            remaining -= sc_size;
-        }
-        sc = (sc + 1) % kOldGenNumSizeClasses;
-    }
-
+    // Carve payload into size-class free blocks.
+    carve_free_lists(mem, preferred_sc_idx);
     // Link into page list.
     {
         std::lock_guard<std::mutex> lock(mutex_);
         mem->next = page_list_;
         page_list_ = mem;
         page_count_++;
+        g_gc_scheduler.RecordPageCountGrowth(1);
 
         if (heap_base_ == 0) {
             heap_base_ = reinterpret_cast<uintptr_t>(mem);
@@ -522,19 +556,12 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
             return loh_ptr;
         }
 
-        // 32-85 KB: oversized page allocation (existing behavior).
+        // 32-85 KB: oversized page allocation.
 
-        // Check GC pressure before oversized allocation.
-        auto decision = g_gc_scheduler.DecideCollection();
-        if (decision == GcCollectionKind::FULL) {
-            uint32_t gen = threading::RequestGlobalSafepoint();
-            Collect(nullptr, nullptr);
-            threading::ReleaseGlobalSafepoint(gen);
-            // RecordFullCollection is handled inside Collect().
-        } else if (decision == GcCollectionKind::YOUNG) {
-            // For oversized, we don't run young GC (nursery is irrelevant).
-            // The scheduler will trigger young GC on the next normal allocation.
-        }
+        // Defer full GC to next safepoint instead of blocking synchronously.
+        // The page pool can absorb allocation bursts without GC; blocking here
+        // penalizes transient oversized allocations with unnecessary STW pauses.
+        g_gc_scheduler.RequestFullGc();
 
         auto* page = AllocatePage(size, scanning_required);
         if (page == nullptr) return nullptr;
@@ -740,8 +767,8 @@ bool MarkSweepOldGen::MarkObject(void* obj) {
     auto& layout_registry = GcLayoutRegistry::Instance();
     if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) return false;
 
-    auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-    uint64_t stable_id = hot->stable_id;
+    uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
+    if (stable_id == 0) return false;
 
     // Skip sentinel free blocks (stable_id in the reserved sentinel range).
     if (IsSentinelStableId(stable_id)) return false;
@@ -804,8 +831,8 @@ void MarkSweepOldGen::DrainMarkStack() {
         }
 
         // Valid TypeInfo �� look up the precise GC layout.
-        auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-        uint64_t stable_id = hot->stable_id;
+        uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
+        if (stable_id == 0) continue;
         const auto* layout = layout_registry.Lookup(stable_id);
 
         if (layout == nullptr || layout->pointer_count == 0) {
@@ -923,8 +950,8 @@ void MarkSweepOldGen::DrainMarkStackParallel(OldGenPage** pages, int page_count)
                     const void* type_info_ptr = *static_cast<const void* const*>(obj);
                     if (type_info_ptr == nullptr) continue;
                     if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) continue;
-                    auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-                    uint64_t stable_id = hot->stable_id;
+                    uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
+                    if (stable_id == 0) continue;
                     const auto* layout = layout_registry.Lookup(stable_id);
                     if (layout == nullptr || layout->pointer_count == 0) continue;
                     uintptr_t obj_base = reinterpret_cast<uintptr_t>(obj);
@@ -1305,6 +1332,10 @@ MarkSweepOldGen::CompactMode MarkSweepOldGen::DecideCompactMode() {
 
     // V5: No live data means compaction has nothing to compact.
     if (total_live == 0) return CompactMode::NONE;
+    // Skip compaction when live data is trivially small — the 5-phase
+    // CrossPageCompact overhead exceeds the benefit for a few KB of movement.
+    static constexpr CHAOS_IL2CPP_SIZE kMinCrossCompactBytes = 4096;
+    if (total_live < kMinCrossCompactBytes) return CompactMode::NONE;
     if (candidate_pages == 0) return CompactMode::NONE;
 
     // Cross-page compaction if global fragmentation > 40% (most pages
@@ -1368,8 +1399,7 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::PlanPageCompaction(OldGenPage* page,
             if (type_info_ptr != nullptr) {
                 auto& registry = GcLayoutRegistry::Instance();
                 if (registry.IsValidTypeInfoPointer(type_info_ptr)) {
-                    auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-                    uint64_t stable_id = hot->stable_id;
+                    uint64_t stable_id = registry.ReadStableId(type_info_ptr);
                     const auto* layout = registry.Lookup(stable_id);
                     if (layout != nullptr && layout->instance_size > 0) {
                         obj_size = layout->instance_size;
@@ -1672,8 +1702,7 @@ void MarkSweepOldGen::PlanPageEvacuation(OldGenPage* page, CompactPlan& out_plan
             if (type_info_ptr != nullptr) {
                 auto& registry = GcLayoutRegistry::Instance();
                 if (registry.IsValidTypeInfoPointer(type_info_ptr)) {
-                    auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-                    uint64_t stable_id = hot->stable_id;
+                    uint64_t stable_id = registry.ReadStableId(type_info_ptr);
                     const auto* layout = registry.Lookup(stable_id);
                     if (layout != nullptr && layout->instance_size > 0) {
                         obj_size = layout->instance_size;
@@ -1737,6 +1766,39 @@ void MarkSweepOldGen::GlobalRelocate(
             }
         }
     }
+}
+
+void MarkSweepOldGen::RelocateRoots(const std::vector<CompactPlanEntry>& entries) {
+    if (entries.empty()) return;
+
+    // Build old→new address map sorted by old_addr for binary search.
+    struct AddrPair { uintptr_t old_addr; uintptr_t new_addr; };
+    std::vector<AddrPair> addr_map;
+    addr_map.reserve(entries.size());
+    for (auto& e : entries) {
+        addr_map.push_back({
+            reinterpret_cast<uintptr_t>(e.old_addr),
+            reinterpret_cast<uintptr_t>(e.new_addr)
+        });
+    }
+    std::sort(addr_map.begin(), addr_map.end(),
+        [](const AddrPair& a, const AddrPair& b) { return a.old_addr < b.old_addr; });
+
+    // Scan all thread stacks and update pointers that reference moved objects.
+    threading::GcScanAllThreadRoots(
+        [](void* root_addr, bool /*is_interior*/, void* user_data) {
+            if (root_addr == nullptr) return;
+            auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
+            uintptr_t val = *static_cast<uintptr_t*>(root_addr);
+            if (val == 0) return;
+
+            auto it = std::lower_bound(map.begin(), map.end(), val,
+                [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
+            if (it != map.end() && it->old_addr == val) {
+                *static_cast<void**>(root_addr) = reinterpret_cast<void*>(it->new_addr);
+            }
+        },
+        &addr_map);
 }
 
 void MarkSweepOldGen::CrossPageCompact() {
@@ -1881,6 +1943,12 @@ void MarkSweepOldGen::CrossPageCompact() {
             }
         });
     }
+
+    // Phase 6: Relocate thread stack roots after compaction.
+    // Without this step, thread stack variables that point to evacuated
+    // objects contain stale (old) addresses, and the next mutator access
+    // will dereference freed (0xFF-filled) memory.
+    RelocateRoots(global_plan.entries);
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen",
         "cross_page_compact_done bytes={0}",
@@ -2139,10 +2207,15 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // Phase 4: Free decommissioned pages (oversized pages that were fully garbage).
     {
         std::lock_guard<std::mutex> lock(mutex_);
+
+
         OldGenPage** pp = &page_list_;
         while (*pp != nullptr) {
             OldGenPage* p = *pp;
-            if (!p->in_use.load(std::memory_order_acquire)) {
+            bool in_use = p->in_use.load(std::memory_order_acquire);
+            bool should_pool = (in_use && !p->is_oversized
+                                && PageFragmentation(p) >= 1.0f);
+            if (should_pool || !in_use) {
                 *pp = p->next;
                 // Invalidate last_alloc_page_ entries that point to this page.
                 for (int i = 0; i < kOldGenNumSizeClasses; i++) {
@@ -2150,7 +2223,11 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                         last_alloc_page_[i] = nullptr;
                     }
                 }
-                FreePage(p);
+                if (should_pool) {
+                    page_pool_.push_back(p);
+                } else {
+                    FreePage(p);
+                }
                 page_count_--;
             } else {
                 pp = &p->next;
@@ -2522,35 +2599,61 @@ void MarkSweepOldGen::BgcSweep() {
     }
 
 
-    // Sequential sweep (bypass GcWorkerPool for diagnostic purposes).
-    // FIXME: Restore parallel sweep after BGC hang investigation.
+    // Parallel sweep via GcWorkerPool.
+    // Restored after BGC hang investigation — see git log for details.
+    // Each page has independent free_lists and bitmap; SweepPage + CoalescePage
+    // are thread-safe on disjoint pages. clear_bitmap=false preserves mark
+    // bitmap for DecideCompactMode which runs later in BgcCompact().
     {
-        int page_idx = 0;
-        for (auto* page : pages) {
-            if (!page->in_use.load(std::memory_order_acquire)) {
-                page_idx++;
-                continue;
+        int total_pages = static_cast<int>(pages.size());
+        if (total_pages >= 2) {
+            std::atomic<int> bgc_next_page{0};
+            int max_workers = std::min(
+                static_cast<int>(std::thread::hardware_concurrency()), total_pages);
+            if (max_workers < 2) max_workers = 2;
+
+            GcWorkerPool::Instance().RunWorkers(max_workers, [&](int) {
+                while (true) {
+                    int idx = bgc_next_page.fetch_add(1, std::memory_order_relaxed);
+                    if (idx >= total_pages) break;
+                    auto* page = pages[static_cast<size_t>(idx)];
+                    if (!page->in_use.load(std::memory_order_acquire)) continue;
+                    SweepPage(page, false);
+                    CoalescePage(page);
+                }
+            });
+        } else {
+            for (auto* page : pages) {
+                if (!page->in_use.load(std::memory_order_acquire)) continue;
+                SweepPage(page, false);
+                CoalescePage(page);
             }
-            SweepPage(page, false);
-            CoalescePage(page);
-            page_idx++;
         }
     }
 
     // Phase 4b: Free decommissioned oversized pages (marked !in_use by SweepPage).
     {
         std::lock_guard<std::mutex> lock(mutex_);
+
+
         OldGenPage** pp = &page_list_;
         while (*pp != nullptr) {
             OldGenPage* p = *pp;
-            if (!p->in_use.load(std::memory_order_acquire)) {
+            bool in_use = p->in_use.load(std::memory_order_acquire);
+            bool should_pool = (in_use && !p->is_oversized
+                                && PageFragmentation(p) >= 1.0f);
+            if (should_pool || !in_use) {
                 *pp = p->next;
                 for (int i = 0; i < kOldGenNumSizeClasses; i++) {
                     if (last_alloc_page_[i] == p) {
                         last_alloc_page_[i] = nullptr;
                     }
                 }
-                FreePage(p);
+                if (should_pool) {
+                    page_pool_.push_back(p);
+                } else {
+                    FreePage(p);
+                }
                 page_count_--;
             } else {
                 pp = &p->next;

@@ -394,6 +394,12 @@ private:
     static void GlobalRelocate(const std::vector<CompactPlanEntry>& entries,
                                OldGenPage* page_list);
 
+    /// Relocate thread stack roots after compaction.
+    /// Scans all thread stacks and updates any pointer that matches a
+    /// compacted object's old address to its new address.
+    /// Must be called at safepoint (all mutators suspended).
+    static void RelocateRoots(const std::vector<CompactPlanEntry>& entries);
+
     // ── Page index (sorted array for O(log n) lookup) ────────────
 
 public:
@@ -443,6 +449,12 @@ public:
     // sweep stale entries — deferring the VirtualFree prevents access
     // to freed memory in the BgcSweep path.
     std::vector<OldGenPage*> deferred_free_pages_;
+
+    // Pool of 100%-free normal pages that have been decommissioned for reuse.
+    // Instead of VirtualFree, these are kept alive and recycled by AllocatePage
+    // on the next allocation that needs a fresh page — avoids a system call.
+    // Protected by mutex_.
+    std::vector<OldGenPage*> page_pool_;
 
     // Per-size-class last-used-page cache (avoids O(n) page_list walk).
     OldGenPage* last_alloc_page_[kOldGenNumSizeClasses]{};

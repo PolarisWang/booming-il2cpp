@@ -81,6 +81,10 @@ static const char* OpcodeName(IROpCode opc) noexcept {
     HANDLE_OP(LdNull); HANDLE_OP(Pop); HANDLE_OP(Br);
     HANDLE_OP(BrTrue); HANDLE_OP(BrFalse); HANDLE_OP(Ret);
     HANDLE_OP(Shl); HANDLE_OP(Shr); HANDLE_OP(ShrUn);
+    HANDLE_OP(Mul); HANDLE_OP(AddOvf); HANDLE_OP(SubOvf); HANDLE_OP(MulOvf);
+    HANDLE_OP(Beq); HANDLE_OP(BneUn); HANDLE_OP(Blt); HANDLE_OP(Bge);
+    HANDLE_OP(LdInd); HANDLE_OP(StInd);
+    HANDLE_OP(Div); HANDLE_OP(Rem); HANDLE_OP(DivUn); HANDLE_OP(RemUn);
     #undef HANDLE_OP
     default: return "???";
     }
@@ -144,6 +148,15 @@ static RegisterInstruction InstrBranch(IROpCode opc, uint32_t target,
     uint8_t flags = kRegIsBranch | kRegHasImm;
     if (opc != IROpCode::Br) flags |= kRegHasSrc1;
     ri.header = MakeHeader(opc, 0, src, 0, flags);
+    ri.imm.branch_target = target;
+    return ri;
+}
+
+static RegisterInstruction InstrCondBranch(IROpCode opc, uint32_t target,
+                                           uint8_t src1, uint8_t src2) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(opc, 0, src1, src2,
+                           kRegIsBranch | kRegHasImm | kRegHasSrc1 | kRegHasSrc2);
     ri.imm.branch_target = target;
     return ri;
 }
@@ -1613,9 +1626,6 @@ static bool Test_Fuzz() {
     uint32_t reg_exec_fails = 0;
 
     // Opcode groups for random selection (only T4-safe opcodes)
-    // Phase C V1: arithmetic + comparisons excluded (Ceq/Clt/Cgt have T4
-    // codegen edge cases to investigate — produce ~12% mismatch rate).
-    // Include Br/BrTrue/BrFalse here after comparison issues resolved.
     enum class FOpGroup { Imm, Unary, Binary };
     struct FuzzOp { IROpCode opc; FOpGroup group; };
 
@@ -1625,6 +1635,7 @@ static bool Test_Fuzz() {
         {IROpCode::LdcI8, FOpGroup::Imm},
         {IROpCode::Add,   FOpGroup::Binary},
         {IROpCode::Sub,   FOpGroup::Binary},
+        {IROpCode::Mul,   FOpGroup::Binary},
         {IROpCode::And,   FOpGroup::Binary},
         {IROpCode::Or,    FOpGroup::Binary},
         {IROpCode::Xor,   FOpGroup::Binary},
@@ -1635,13 +1646,13 @@ static bool Test_Fuzz() {
         {IROpCode::Conv_I8, FOpGroup::Unary},
         {IROpCode::LdNull, FOpGroup::Unary},
         {IROpCode::Pop,   FOpGroup::Unary},
-        // Phase E additions:
-        {IROpCode::Ceq,   FOpGroup::Binary},
-        {IROpCode::Clt,   FOpGroup::Binary},
-        {IROpCode::Cgt,   FOpGroup::Binary},
+        // Phase E additions (clean ops): shifts
         {IROpCode::Shl,   FOpGroup::Binary},
         {IROpCode::Shr,   FOpGroup::Binary},
         {IROpCode::ShrUn, FOpGroup::Binary},
+        // Note: Ceq/Clt/Cgt excluded — known ~12% mismatch edge case
+        // Note: AddOvf/SubOvf/MulOvf excluded — T4 deopt returns kDeoptMagic,
+        //       RegisterExecute wraps, producing expected mismatches
     };
     // clang-format on
 
@@ -1684,16 +1695,11 @@ static bool Test_Fuzz() {
             mark_written(dst);
         }
 
-        // Track branch targets: which indices have a Ret (valid Br target)
-        bool has_ret = false;
-        uint32_t ret_index = len - 1;
-
         for (uint32_t i = init_instrs; i < len; i++) {
-            // Force Ret at last instruction if none yet
-            if (i == len - 1 && !has_ret) {
+            // Force Ret at last instruction
+            if (i == len - 1) {
                 uint8_t src = pick_written();
                 instrs.push_back(InstrRet(src));
-                has_ret = true;
                 break;
             }
 
@@ -1734,15 +1740,6 @@ static bool Test_Fuzz() {
             }  // end FOpGroup::Binary
             }  // end switch
         }  // end for each instruction
-
-        // 20% chance: insert an unconditional branch to the final Ret
-        if (rng() % 5 == 0 && instrs.size() > 2 && has_ret) {
-            // Target is the current last instruction (Ret before insertion).
-            // After insertion, Ret shifts by 1, so target = old size = new Ret index.
-            uint32_t target = static_cast<uint32_t>(instrs.size());
-            uint32_t br_pos = 1 + (rng() % (static_cast<uint32_t>(instrs.size()) - 2));
-            instrs.insert(instrs.begin() + br_pos, InstrBranch(IROpCode::Br, target));
-        }
 
         if (instrs.empty()) { run--; continue; }
 

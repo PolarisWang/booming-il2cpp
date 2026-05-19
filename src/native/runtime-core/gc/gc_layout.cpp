@@ -6,6 +6,12 @@
 #include <chaos/log.h>
 
 #include <algorithm>
+#include <cstring>
+#include "gc_young_collector.h"
+
+#include <chaos/log.h>
+
+#include <algorithm>
 #include <cmath>
 #include <cstdlib>
 
@@ -198,6 +204,25 @@ const GcTypeLayout* GcLayoutRegistry::Lookup(uint64_t stable_id) const {
     }
 
     return nullptr;  // table full or not found
+}
+
+uint64_t GcLayoutRegistry::ReadStableId(const void* type_info_ptr) const {
+    if (type_info_ptr == nullptr) return 0;
+
+    uint64_t stable_id = 0;
+
+    // Try TypeInfoHot layout: stable_id at offset +16
+    // (parent* [8] + vtable_array* [8] + stable_id [8]).
+    std::memcpy(&stable_id,
+        reinterpret_cast<const char*>(type_info_ptr) + 16, sizeof(stable_id));
+    if (Lookup(stable_id) != nullptr) return stable_id;
+
+    // Fallback: FakeTypeInfo layout: stable_id at offset +0
+    // (stable_id [8] + padding [8]).
+    std::memcpy(&stable_id, type_info_ptr, sizeof(stable_id));
+    if (Lookup(stable_id) != nullptr) return stable_id;
+
+    return 0;
 }
 
 void GcLayoutRegistry::RegisterTypeInfoRange(uintptr_t range_begin,

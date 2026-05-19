@@ -225,8 +225,7 @@ void ProcessChunk(ParallelMarkContext* ctx, MarkWorkerState* worker,
         const GcTypeLayout* layout = nullptr;
 
         if (layout_registry.IsValidTypeInfoPointer(type_info_ptr)) {
-            auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-            uint64_t stable_id = hot->stable_id;
+            uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
             layout = layout_registry.Lookup(stable_id);
             if (layout != nullptr) {
                 obj_size = layout->instance_size;

@@ -84,8 +84,7 @@ static CHAOS_IL2CPP_SIZE PreciseObjectSize(const void* obj) {
     if (type_info_ptr == nullptr) return 0;
     auto& layout_registry = GcLayoutRegistry::Instance();
     if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) return 0;
-    auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-    uint64_t stable_id = hot->stable_id;
+    uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
     const auto* layout = layout_registry.Lookup(stable_id);
     if (layout == nullptr || layout->instance_size == 0) return 0;
     return layout->instance_size;
@@ -283,8 +282,7 @@ YoungCollectionResult GcYoungCollection() {
                 scan_ptr += sizeof(void*);
                 continue;
             }
-            auto* hot = static_cast<const TypeInfoHot*>(first_word);
-            uint64_t stable_id = hot->stable_id;
+            uint64_t stable_id = layout_registry.ReadStableId(first_word);
             const auto* layout = layout_registry.Lookup(stable_id);
 
             if (layout == nullptr) {
@@ -351,8 +349,7 @@ phase3:
                 if (type_info_ptr == nullptr) continue;
                 if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) continue;
 
-                auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-                uint64_t stable_id = hot->stable_id;
+                uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
                 const auto* layout = layout_registry.Lookup(stable_id);
 
                 if (layout == nullptr || layout->pointer_count == 0) {

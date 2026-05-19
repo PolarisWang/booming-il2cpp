@@ -106,6 +106,14 @@ public:
     ///        for scheduling the next full GC trigger threshold.
     void RecordFullCollection(CHAOS_IL2CPP_SIZE total_heap_bytes, uint64_t pause_ns = 0) noexcept;
 
+    /// Record page count growth since last full GC.
+    /// When page_count grows rapidly without matching reclaim, the GC
+    /// scheduler can trigger earlier to prevent unbounded page growth.
+    void RecordPageCountGrowth(int delta) noexcept;
+
+    /// Reset page count growth counter (called after full GC).
+    void ResetPageCountGrowth() noexcept;
+
     // ── GC rate limiting ──────────────────────────────────────────
 
     /// Try to claim a "GC slot" — returns true if enough time has passed
@@ -211,6 +219,12 @@ private:
     // multiplier × estimated heap size.
     static constexpr float kFullTriggerMultiplier = 4.0f;
 
+    // When page_count has grown by this many pages since the last full GC
+    // without a collection, trigger FULL_BGC.  Prevents unbounded page list
+    // growth when the allocation-rate-based trigger (kFullTriggerMultiplier)
+    // is too slow to react to rapid page allocation bursts.
+    static constexpr int kMaxPageGrowthThreshold = 32;
+
     // ── State ────────────────────────────────────────────────────
 
     // V4-M8: survival_rate_ stored as atomic<uint64_t> (bitcast from double)
@@ -227,6 +241,10 @@ private:
 
     // Total bytes allocated since the last full GC.
     std::atomic<CHAOS_IL2CPP_SIZE> alloc_since_last_full_gc_{0};
+
+    // Net page count growth since last full GC (new pages - reclaimed).
+    // Tracked via RecordPageCountGrowth(), reset in RecordFullCollection().
+    std::atomic<int> page_count_growth_{0};
 
     // Full GC request flag (set by any thread, checked at safepoint).
     std::atomic<bool> full_gc_requested_{false};

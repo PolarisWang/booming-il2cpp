@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <cassert>
+#include <memory>
 #include <thread>
 #include <atomic>
 #include <chrono>
@@ -227,9 +228,164 @@ static void StressThread(ThreadContext* ctx) {
 
 static void TestBgcConcurrentStress() {
     printf("\n── Test 1: BGC concurrent allocation stress ──\n");
-    printf("  SKIPPED — Test 1 is a long-running stress test.\n");
-    printf("  Use run_stress.sh with --test bgc for full stress.\n");
+
+    static constexpr int kNumThreads = 8;
+    static constexpr int kRootsPerThread = 50;
+    static constexpr int kAllocsPerCycle = 5000;
+    static constexpr int kTotalCycles = 3;
+
+    std::vector<std::unique_ptr<ThreadContext>> contexts;
+    contexts.reserve(static_cast<size_t>(kNumThreads));
+    std::vector<std::thread> threads;
+    threads.reserve(static_cast<size_t>(kNumThreads));
+
+    // Protocol: g_stress_running==true makes threads spin-wait.
+    g_stress_running.store(true, std::memory_order_release);
+
+    for (int i = 0; i < kNumThreads; i++) {
+        auto ctx = std::make_unique<ThreadContext>();
+        ctx->thread_id = i;
+        ctx->roots_per_thread = kRootsPerThread;
+        ctx->allocs_per_cycle = kAllocsPerCycle;
+        ctx->total_cycles = kTotalCycles;
+        contexts.push_back(std::move(ctx));
+    }
+
+    for (int i = 0; i < kNumThreads; i++) {
+        threads.emplace_back(StressThread, contexts[static_cast<size_t>(i)].get());
+    }
+
+    // Wait for all threads to be ready (spin-waiting at the while loop).
+    for (auto& ctx_ptr : contexts) {
+        while (!ctx_ptr->ready.load(std::memory_order_acquire)) {
+            std::this_thread::yield();
+        }
+    }
+    printf("  all %d threads ready, starting allocation...\n", kNumThreads);
+
+    // Release threads: they enter the allocation for-loop when running==false.
+    g_stress_running.store(false, std::memory_order_release);
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+    // Run 3 BGC cycles while threads allocate concurrently.
+    for (int c = 0; c < kTotalCycles; c++) {
+        printf("  BGC cycle %d/%d...\n", c + 1, kTotalCycles);
+        if (!RunBgcCycle()) {
+            printf("  ERROR: BGC cycle %d failed\n", c + 1);
+            g_stress_running.store(true, std::memory_order_release);
+            for (auto& t : threads) t.join();
+            CHECK(false, "BGC cycle failed during concurrent stress");
+            return;
+        }
+        printf("  BGC cycle %d complete\n", c + 1);
+    }
+
+    // Signal threads to stop (g_stress_running==true exits the for-loop).
+    g_stress_running.store(true, std::memory_order_release);
+    for (auto& t : threads) t.join();
+
+    // Verify all threads completed.
+    int total_survived = 0;
+    for (auto& ctx_ptr : contexts) {
+        if (!ctx_ptr->done.load(std::memory_order_acquire)) {
+            printf("  WARNING: thread %d did not complete\n", ctx_ptr->thread_id);
+            CHECK(false, "thread incomplete");
+            return;
+        }
+        total_survived += ctx_ptr->survive_count.load(std::memory_order_relaxed);
+    }
+    printf("  total roots survived across %d threads: %d\n",
+           kNumThreads, total_survived);
+    printf("  Test 1 PASS\n");
     printf("── Test 1 done ──\n\n");
+}
+
+// ── Test 7: Young GC during BGC ──────────────────────────────────
+//
+/// Old-gen allocator threads run alongside nursery-only threads and
+/// a dedicated young-GC trigger thread, interleaved with 2 BGC cycles.
+/// Verifies young GC + BGC can coexist without deadlock or data corruption.
+
+static void TestYoungGcDuringBgc() {
+    printf("\n── Test 7: Young GC during BGC ──\n");
+
+    static constexpr int kNumNurseryWorkers = 4;
+    static constexpr int kNumOldGenWorkers = 4;
+    static constexpr int kNurseryAllocs = 2000;
+    static constexpr int kOldGenAllocs = 2000;
+
+    std::atomic<bool> running{true};
+    std::atomic<int> nursery_done{0};
+    std::atomic<int> oldgen_done{0};
+
+    // Nursery workers: allocate nursery objects, triggering young GC.
+    auto nursery_worker = [&](int tid) {
+        threading::RegisterThread(threading::AllocateThreadId(), nullptr);
+        for (int i = 0; i < kNurseryAllocs && running.load(std::memory_order_acquire); i++) {
+            void* p = NurseryAllocate(64 + (tid * 8) % 128);
+            if (p) {
+                *static_cast<int*>(p) = tid * kNurseryAllocs + i;
+            }
+            if ((i % 200) == 0) {
+                threading::SafepointPoll();
+            }
+        }
+        threading::UnregisterThread();
+        nursery_done.fetch_add(1, std::memory_order_release);
+    };
+
+    // Old-gen workers: allocate in old-gen while BGC runs.
+    auto oldgen_worker = [&](int tid) {
+        threading::RegisterThread(threading::AllocateThreadId(), nullptr);
+        for (int i = 0; i < kOldGenAllocs && running.load(std::memory_order_acquire); i++) {
+            void* p = AllocOldGen(48 + (tid * 8) % 64);
+            if (p) {
+                *static_cast<FakeTypeInfo**>(p) = &g_fake_type_info;
+            }
+            if ((i % 200) == 0) {
+                threading::SafepointPoll();
+            }
+        }
+        oldgen_done.fetch_add(1, std::memory_order_release);
+        threading::UnregisterThread();
+    };
+
+    std::vector<std::thread> threads;
+
+    // Start nursery workers.
+    for (int i = 0; i < kNumNurseryWorkers; i++) {
+        threads.emplace_back(nursery_worker, i);
+    }
+    // Start old-gen workers.
+    for (int i = 0; i < kNumOldGenWorkers; i++) {
+        threads.emplace_back(oldgen_worker, i + kNumNurseryWorkers);
+    }
+
+    // Let workers warm up.
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+    // Run 2 BGC cycles while both worker types are active.
+    for (int c = 0; c < 2; c++) {
+        printf("  BGC cycle %d/2 with young GC interleaved...\n", c + 1);
+        if (!RunBgcCycle()) {
+            printf("  ERROR: BGC cycle %d failed during young GC interleave\n", c + 1);
+            running.store(false, std::memory_order_release);
+            for (auto& t : threads) t.join();
+            CHECK(false, "BGC+young GC interleave cycle failed");
+            return;
+        }
+    }
+
+    running.store(false, std::memory_order_release);
+    for (auto& t : threads) t.join();
+
+    int nd = nursery_done.load(std::memory_order_acquire);
+    int od = oldgen_done.load(std::memory_order_acquire);
+    printf("  workers: nursery=%d/%d oldgen=%d/%d\n",
+           nd, kNumNurseryWorkers, od, kNumOldGenWorkers);
+    CHECK(nd == kNumNurseryWorkers, "all nursery workers completed");
+    CHECK(od == kNumOldGenWorkers, "all old-gen workers completed");
+    printf("── Test 7 done ──\n\n");
 }
 
 // ── Helper: allocate trees for Test 2 ───────────────────────────────
@@ -992,6 +1148,7 @@ int main() {
     TestBgcWithManyThreads();
     TestBgcFinalizationStress();
     TestBgcGraphMutation();
+    TestYoungGcDuringBgc();
     TestMarkStackPressure();  // skipped by default — enable for manual stress runs
 
     // Stop BGC.

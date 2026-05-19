@@ -248,6 +248,50 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_loh_test.cpp")
             ${CHAOS_GC_COMMON_LIBS})
 endif()
 
+# loh_stress_test — LOH multi-threaded stress tests (5 scenarios)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/loh_stress_test.cpp")
+    add_executable(chaos_loh_stress_test loh_stress_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_loh_stress_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_loh_stress_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_loh_stress_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_loh_stress_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_loh_stress_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_finalizer_stress_test — Finalizer stress tests (5 scenarios)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_finalizer_stress_test.cpp")
+    add_executable(chaos_gc_finalizer_stress_test gc_finalizer_stress_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_finalizer_stress_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_finalizer_stress_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_finalizer_stress_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_finalizer_stress_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_finalizer_stress_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
 # memory_domain_test — MemoryDomain lifecycle + tagged allocation unit tests
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/memory_domain_test.cpp")
     add_executable(chaos_memory_domain_test memory_domain_test.cpp ${CHAOS_GC_TEST_STUBS})

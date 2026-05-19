@@ -127,8 +127,8 @@ void BgcController::StartBgcCycle() {
     {
         uint64_t ff_post_sp = g_old_gen.DiagCountOxFFBytes();
         if (ff_post_sp > 0) {
-            CHAOS_IL2CPP_LOG_ERROR("BGC",
-                "DIAG: 0xFF bytes = %llu immediately after safepoint release!",
+            CHAOS_IL2CPP_LOG_ERROR_M("BGC",
+                "DIAG: 0xFF bytes = {0} immediately after safepoint release!",
                 static_cast<unsigned long long>(ff_post_sp));
         }
     }
@@ -409,8 +409,7 @@ void BgcController::PopulateRootSet() {
                             if (type_info_ptr == nullptr) continue;
                             if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) continue;
 
-                            auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-                            uint64_t stable_id = hot->stable_id;
+                            uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
                             const auto* layout = layout_registry.Lookup(stable_id);
                             if (layout == nullptr) {
                                 total_lookup_miss++;
@@ -439,8 +438,8 @@ void BgcController::PopulateRootSet() {
     // DIAG: check 0xFF bytes after all Phase 1 work.
     uint64_t ff_after = g_old_gen.DiagCountOxFFBytes();
     if (ff_after > ff_before) {
-        CHAOS_IL2CPP_LOG_ERROR("BGC",
-            "DIAG: 0xFF bytes increased from %llu to %llu during PopulateRootSet!",
+        CHAOS_IL2CPP_LOG_ERROR_M("BGC",
+            "DIAG: 0xFF bytes increased from {0} to {1} during PopulateRootSet!",
             static_cast<unsigned long long>(ff_before),
             static_cast<unsigned long long>(ff_after));
     }
@@ -488,8 +487,8 @@ void BgcController::BgcThreadMain() {
             // DIAG: how many 0xFF bytes before concurrent mark processing?
             uint64_t ff_at_start = g_old_gen.DiagCountOxFFBytes();
             if (ff_at_start > 0) {
-                CHAOS_IL2CPP_LOG_ERROR("BGC",
-                    "DIAG: 0xFF bytes = %llu at concurrent_mark_begin (already corrupted!)",
+                CHAOS_IL2CPP_LOG_ERROR_M("BGC",
+                    "DIAG: 0xFF bytes = {0} at concurrent_mark_begin (already corrupted!)",
                     static_cast<unsigned long long>(ff_at_start));
             } else {
                 CHAOS_IL2CPP_LOG_DEBUG("BGC", "DIAG: 0xFF bytes = 0 at concurrent_mark_begin (clean)");
@@ -899,8 +898,7 @@ namespace {
         auto& layout_registry = GcLayoutRegistry::Instance();
         if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) return;
 
-        auto* hot = static_cast<const TypeInfoHot*>(type_info_ptr);
-        uint64_t stable_id = hot->stable_id;
+        uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
         const auto* layout = layout_registry.Lookup(stable_id);
 
         if (layout == nullptr) {

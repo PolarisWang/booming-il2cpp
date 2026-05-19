@@ -107,6 +107,9 @@ void GcScheduler::RecordFullCollection(CHAOS_IL2CPP_SIZE total_heap_bytes, uint6
     // Reset full-GC allocation counter.
     alloc_since_last_full_gc_.store(0, std::memory_order_relaxed);
 
+    // Reset page count growth counter.
+    page_count_growth_.store(0, std::memory_order_relaxed);
+
     // Update estimated heap size from the actual total heap footprint.
     // This enables DecideCollection() to trigger full GC when allocation
     // exceeds kFullTriggerMultiplier * estimated_heap_size_.
@@ -120,6 +123,14 @@ void GcScheduler::RecordFullCollection(CHAOS_IL2CPP_SIZE total_heap_bytes, uint6
     full_gc_requested_.store(false, std::memory_order_relaxed);
 }
 
+void GcScheduler::RecordPageCountGrowth(int delta) noexcept {
+    page_count_growth_.fetch_add(delta, std::memory_order_relaxed);
+}
+
+void GcScheduler::ResetPageCountGrowth() noexcept {
+    page_count_growth_.store(0, std::memory_order_relaxed);
+}
+
 // ── Collection decision ──────────────────────────────────────────
 
 GcCollectionKind GcScheduler::DecideCollection() const noexcept {
@@ -128,7 +139,17 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
         return GcCollectionKind::FULL;
     }
 
-    // 2. Snapshot multi-variable state for consistent decision.
+    // 2. Page count growth threshold exceeded?
+    // Catches rapid page allocation bursts before the byte-based trigger reacts.
+    if (page_count_growth_.load(std::memory_order_relaxed) >= kMaxPageGrowthThreshold) {
+        auto& bgc = BgcController::Instance();
+        if (!bgc.IsBusy()) {
+            return GcCollectionKind::FULL_BGC;
+        }
+        return GcCollectionKind::FULL;
+    }
+
+    // 3. Snapshot multi-variable state for consistent decision.
     CHAOS_IL2CPP_SIZE alloc_full = alloc_since_last_full_gc_.load(std::memory_order_relaxed);
     CHAOS_IL2CPP_SIZE heap_est = estimated_heap_size_.load(std::memory_order_relaxed);
 
