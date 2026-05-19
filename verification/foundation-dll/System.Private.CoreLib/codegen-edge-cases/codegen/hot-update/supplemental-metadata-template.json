@@ -3,51 +3,43 @@
   "artifactKind": "supplementalMetadataTemplate",
   "registeredTypes": [
     {
-      "assemblyName": "CodegenEdgeCasesPatchEntry",
-      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
-      "definitionSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
+      "assemblyName": "CodegenEdgeCasesSubjects",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
       "metadataToken": 33554434
     }
   ],
   "registeredMethods": [
     {
-      "assemblyName": "CodegenEdgeCasesPatchEntry",
-      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_0:System.Int32()",
-      "definitionSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_0:System.Int32()",
-      "declaringTypeSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
+      "assemblyName": "CodegenEdgeCasesSubjects",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
       "metadataToken": 100663297,
       "parameterCount": 0
     },
     {
-      "assemblyName": "CodegenEdgeCasesPatchEntry",
-      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_1:System.Int32()",
-      "definitionSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_1:System.Int32()",
-      "declaringTypeSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
+      "assemblyName": "CodegenEdgeCasesSubjects",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
       "metadataToken": 100663298,
-      "parameterCount": 0
+      "parameterCount": 1
     },
     {
-      "assemblyName": "CodegenEdgeCasesPatchEntry",
-      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_2:System.Int32()",
-      "definitionSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_2:System.Int32()",
-      "declaringTypeSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
+      "assemblyName": "CodegenEdgeCasesSubjects",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
       "metadataToken": 100663299,
       "parameterCount": 0
     },
     {
-      "assemblyName": "CodegenEdgeCasesPatchEntry",
-      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_3:System.Int32()",
-      "definitionSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Subject_3:System.Int32()",
-      "declaringTypeSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
+      "assemblyName": "CodegenEdgeCasesSubjects",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
       "metadataToken": 100663300,
-      "parameterCount": 0
-    },
-    {
-      "assemblyName": "CodegenEdgeCasesPatchEntry",
-      "subjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "CodegenEdgeCasesPatchEntry/CodegenEdgeCasesPatchEntry",
-      "metadataToken": 100663301,
       "parameterCount": 1
     }
   ],

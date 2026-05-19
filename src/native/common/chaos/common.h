@@ -18,6 +18,7 @@
 #include "load_store.h"
 #include "finally.h"
 #include "ptr_tag.h"
+#include "compiler_hints.h"
 #include "status.h"
 #include "static_init.h"
 #include "span.h"

@@ -216,7 +216,9 @@ int main(int argc, char** argv) {
         // external calls. setjmp/longjmp cannot catch C++ exceptions and mixing
         // both with /EHa corrupts the /GS stack cookie (0xC0000409).
         int failed_count = 0;
+        std::fprintf(stderr, "DEBUG: before hook setup\n");
         for (int i = 0; i < kAotMethodCount; i++) {
+            std::fprintf(stderr, "DEBUG: running method %d\n", i);
             bool caught = false;
 #if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
             chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };

@@ -1,7 +1,7 @@
 {
   "family": "codegen-edge-cases",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T17:54:47.412483",
+  "generated_at": "2026-05-19T23:13:06.761835",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -25,40 +25,96 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 8,
-        "methods_total": 8
+        "methods_with_lowering": 22,
+        "methods_total": 22
       },
       "per_method": [
         {
-          "name": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0",
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32",
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2",
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32",
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0",
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Run_System_Int32",
           "has_lowering": true
         },
         {
-          "name": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32",
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2",
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32",
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Run_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "CodegenEdgeCasesPatchEntry_CodegenEdgeCasesPatchEntry_Subject_3",
           "has_lowering": true
         }
       ]
@@ -94,17 +150,36 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "ALIGNED",
-      "summary": "All 5 changed source files within expected architecture layers",
-      "details": [],
+      "status": "CONCERN",
+      "summary": "2 of 11 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/common/chaos/common.h",
+          "reason": "outside expected architecture layers"
+        }
+      ],
       "evidence": {
-        "changed_source_count": 5,
+        "changed_source_count": 11,
         "layer_distribution": {
           "TestInfra": 2,
-          "RuntimeSupport": 1,
-          "RuntimeCore": 1,
+          "Templates": 2,
+          "RuntimeCore": 4,
           "Tests": 1
-        }
+        },
+        "violations": [
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/common/chaos/common.h",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -138,11 +213,11 @@
     "p3_patch_entry": {
       "check_id": "p3_patch_entry",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 4 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 5 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 4,
-        "entries_with_interrupt_ptr": 4,
+        "table_size": 5,
+        "entries_with_interrupt_ptr": 5,
         "has_hotpatch_module": true
       }
     },
@@ -163,8 +238,8 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 9,
-    "concern": 0,
+    "aligned": 8,
+    "concern": 1,
     "violation": 0,
     "not_applicable": 3,
     "overall": "ALIGNED"

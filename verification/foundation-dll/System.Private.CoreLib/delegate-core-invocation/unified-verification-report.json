@@ -2,8 +2,8 @@
   "family": "delegate-core-invocation",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T19:08:37",
-  "duration_ms": 23745,
+  "timestamp": "2026-05-19T23:14:01",
+  "duration_ms": 10700,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -22,16 +22,15 @@
     "codegen": {
       "stage": "codegen",
       "status": "failed",
-      "summary": "entry.exe build failed",
+      "summary": "convert-to-cpp failed",
       "details": {
         "steps": {
           "build_subjects": "OK",
-          "convert_to_cpp": "OK",
-          "build_entry_exe": "FAILED"
+          "convert_to_cpp": "FAILED"
         }
       },
       "errors": [],
-      "duration_ms": 20935
+      "duration_ms": 9870
     },
     "fact": {
       "stage": "fact",
@@ -45,37 +44,21 @@
         }
       },
       "errors": [],
-      "duration_ms": 32
+      "duration_ms": 34
     },
     "audit": {
       "stage": "audit",
-      "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
+      "status": "failed",
+      "summary": "false_passing=0, principle=CONCERN",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 4,
-        "principleStatus": "ALIGNED",
+        "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 710
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "failed",
-      "summary": "matchedCount=0/10 below threshold 50%",
-      "details": {
-        "averageSpeedupPercent": 0.0,
-        "nativeFasterCount": 0,
-        "managedFasterCount": 0,
-        "matchedCount": 0,
-        "totalMethods": 10,
-        "invalidCount": 10,
-        "benchmarkQuality": "matchedCount=0/10 below threshold 50%"
-      },
-      "errors": [],
-      "duration_ms": 2066
+      "duration_ms": 794
     }
   },
   "coverage": {
@@ -86,14 +69,7 @@
   "dashboard": {
     "interpreter": {},
     "irTranslation": {},
-    "performance": {
-      "averageSpeedupPercent": 0.0,
-      "nativeFasterCount": 0,
-      "managedFasterCount": 0,
-      "matchedCount": 0,
-      "totalMethods": 10,
-      "invalidCount": 10
-    },
+    "performance": {},
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,

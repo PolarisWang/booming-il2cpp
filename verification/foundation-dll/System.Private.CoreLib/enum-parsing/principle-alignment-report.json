@@ -1,15 +1,15 @@
 {
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:30:45.853410",
+  "generated_at": "2026-05-19T23:14:45.849183",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
-      "status": "VIOLATION",
-      "summary": "Average speedup -377.59% — native significantly slower than managed",
+      "status": "NOT_APPLICABLE",
+      "summary": "Average speedup -340.91% — native significantly slower than managed [overridden — benchmark stage was skipped]",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -377.59,
+        "average_speedup_percent": -340.91,
         "managed_faster_count": 10,
         "native_faster_count": 2
       }
@@ -309,48 +309,32 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "4 of 11 changed source files are outside expected architecture layers",
+      "summary": "2 of 10 changed source files are outside expected architecture layers",
       "details": [
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.Models.cs",
-          "reason": "outside expected architecture layers"
-        },
         {
           "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
+          "file": "src/native/common/chaos/common.h",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 11,
+        "changed_source_count": 10,
         "layer_distribution": {
-          "TestInfra": 1,
-          "Interpreter": 1,
-          "RuntimeCore": 2,
-          "Tests": 3
+          "TestInfra": 2,
+          "Templates": 1,
+          "RuntimeCore": 4,
+          "Tests": 1
         },
         "violations": [
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.Models.cs",
-            "reason": "outside expected architecture layers"
-          },
           {
             "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
+            "file": "src/native/common/chaos/common.h",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -417,6 +401,6 @@
     "concern": 1,
     "violation": 1,
     "not_applicable": 2,
-    "overall": "VIOLATION"
+    "overall": "CONCERN"
   }
 }

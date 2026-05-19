@@ -2,8 +2,8 @@
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T19:08:14",
-  "duration_ms": 26308,
+  "timestamp": "2026-05-19T23:13:51",
+  "duration_ms": 23991,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 0
     },
     "codegen": {
       "stage": "codegen",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 20195
+      "duration_ms": 22544
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 36
+      "duration_ms": 332
     },
     "audit": {
       "stage": "audit",
@@ -56,23 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 905
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "passed",
-      "summary": "avg_speedup=54.54%, native_faster=10/10, managed_faster=0/10",
-      "details": {
-        "averageSpeedupPercent": 54.54,
-        "nativeFasterCount": 10,
-        "managedFasterCount": 0,
-        "matchedCount": 10,
-        "totalMethods": 18,
-        "invalidCount": 8,
-        "benchmarkQuality": "ok"
-      },
-      "errors": [],
-      "duration_ms": 5169
+      "duration_ms": 1113
     }
   },
   "coverage": {
@@ -96,17 +80,10 @@
       "totalBoxingOps": 0,
       "topInstructionCategories": {}
     },
-    "performance": {
-      "averageSpeedupPercent": 54.54,
-      "nativeFasterCount": 10,
-      "managedFasterCount": 0,
-      "matchedCount": 10,
-      "totalMethods": 18,
-      "invalidCount": 8
-    },
+    "performance": {},
     "hotupdate": {},
     "keyRatios": {
-      "nativeFasterRatio": 1.0,
+      "nativeFasterRatio": 0,
       "irExpansionRatio": 0,
       "interpreterSlowdownFactor": 0,
       "asmPassRate": 0.0

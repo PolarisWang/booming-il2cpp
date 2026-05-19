@@ -1,7 +1,7 @@
 {
   "family": "threading-thread-basics",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:27:30.300883",
+  "generated_at": "2026-05-19T22:56:21.798653",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -290,51 +290,16 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "CONCERN",
-      "summary": "4 of 8 changed source files are outside expected architecture layers",
-      "details": [
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.Models.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
-          "reason": "outside expected architecture layers"
-        }
-      ],
+      "status": "ALIGNED",
+      "summary": "All 4 changed source files within expected architecture layers",
+      "details": [],
       "evidence": {
-        "changed_source_count": 8,
+        "changed_source_count": 4,
         "layer_distribution": {
-          "TestInfra": 1,
+          "Templates": 1,
           "RuntimeCore": 2,
           "Tests": 1
-        },
-        "violations": [
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.Models.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
-            "reason": "outside expected architecture layers"
-          }
-        ]
+        }
       }
     },
     "p2_no_bare_new": {
@@ -394,8 +359,8 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
-    "concern": 1,
+    "aligned": 9,
+    "concern": 0,
     "violation": 0,
     "not_applicable": 3,
     "overall": "ALIGNED"

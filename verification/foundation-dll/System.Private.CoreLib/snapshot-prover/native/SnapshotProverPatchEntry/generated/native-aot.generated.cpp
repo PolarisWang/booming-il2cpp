@@ -24,7 +24,7 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
-namespace chaos::il2cpp::codegen::DelegateCoreInvocationPatchEntry {
+namespace chaos::il2cpp::codegen::SnapshotProverPatchEntry {
 
 // Bring runtime_core declarations into scope for unqualified lookup
 using namespace chaos::il2cpp::runtime_core;
@@ -32,8 +32,8 @@ using namespace chaos::il2cpp::runtime_core;
 // Runtime prelude dependencies included at translation unit level
 
 
-inline TypeInfoV0 chaos_mt_DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry = {{nullptr, nullptr, 18284868091112721314ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry = static_cast<CHAOS_IL2CPP_INTPTR>(18284868091112721314ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_SnapshotProverPatchEntry_SnapshotProverPatchEntry = {{nullptr, nullptr, 475613706628293222ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotProverPatchEntry_SnapshotProverPatchEntry = static_cast<CHAOS_IL2CPP_INTPTR>(475613706628293222ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -75,7 +75,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	return false;
 }
 
-struct chaos_type_DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry
+struct chaos_type_SnapshotProverPatchEntry_SnapshotProverPatchEntry
 {
 	ThinLockableHeader header{};
 };
@@ -135,7 +135,7 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
-CHAOS_IL2CPP_INT32 chaos_static_DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry___exitCode = 0;
+CHAOS_IL2CPP_INT32 chaos_static_SnapshotProverPatchEntry_SnapshotProverPatchEntry___exitCode = 0;
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
 
@@ -148,17 +148,17 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0(void);
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1(void);
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2(void);
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3(void);
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5(void);
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6(void);
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7(void);
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8(void);
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9(void);
-extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0(void);
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1(void);
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2(void);
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3(void);
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4(void);
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5(void);
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6(void);
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7(void);
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8(void);
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9(void);
+extern "C" void SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -200,17 +200,17 @@ static constexpr struct {
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
-		{ 1u, 0u },  // DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0
-		{ 1u, 0u },  // DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1
-		{ 1u, 0u },  // DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2
-		{ 1u, 0u },  // DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3
-		{ 1u, 0u },  // DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4
-		{ 1u, 0u },  // DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5
-		{ 1u, 0u },  // DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6
-		{ 1u, 0u },  // DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7
-		{ 1u, 0u },  // DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8
-		{ 1u, 0u },  // DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9
-		{ 0u, 1u },  // DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Run_System_Int32
+		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0
+		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1
+		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2
+		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3
+		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4
+		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5
+		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6
+		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7
+		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8
+		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9
+		{ 0u, 1u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32
 	},
 	{
 		1u,
@@ -227,7 +227,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static constexpr const char* s_type_names[2] = {
 		"<Module>",
-		"DelegateCoreInvocationPatchEntry",
+		"SnapshotProverPatchEntry",
 	};
 
 	static constexpr const char* s_type_namespaces[2] = {
@@ -242,7 +242,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[2] = {
 		nullptr,
-		&chaos_mt_DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry.hot,
+		&chaos_mt_SnapshotProverPatchEntry_SnapshotProverPatchEntry.hot,
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
@@ -260,7 +260,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 
 	static const ::chaos::il2cpp::runtime_core::ModuleDescriptor s_native_aot_module = {
-		/* .name_utf8         = */ "DelegateCoreInvocationPatchEntry",
+		/* .name_utf8         = */ "SnapshotProverPatchEntry",
 		/* .image             = */ &kReflImage,
 		/* .type_flags        = */ s_type_flags,
 		/* .type_names        = */ s_type_names,
@@ -280,26 +280,26 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
-		::chaos::il2cpp::runtime_core::RegisterModule("DelegateCoreInvocationPatchEntry", &s_native_aot_module);
+		::chaos::il2cpp::runtime_core::RegisterModule("SnapshotProverPatchEntry", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
 static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[11] = {
-	{ "Subject_0", 0x00000003u, 0u },  // DelegateCoreInvocationPatchEntry
-	{ "Subject_1", 0x00000004u, 0u },  // DelegateCoreInvocationPatchEntry
-	{ "Subject_2", 0x00000005u, 0u },  // DelegateCoreInvocationPatchEntry
-	{ "Subject_3", 0x00000006u, 0u },  // DelegateCoreInvocationPatchEntry
-	{ "Subject_4", 0x00000007u, 0u },  // DelegateCoreInvocationPatchEntry
-	{ "Subject_5", 0x00000008u, 0u },  // DelegateCoreInvocationPatchEntry
-	{ "Subject_6", 0x00000009u, 0u },  // DelegateCoreInvocationPatchEntry
-	{ "Subject_7", 0x0000000Au, 0u },  // DelegateCoreInvocationPatchEntry
-	{ "Subject_8", 0x0000000Bu, 0u },  // DelegateCoreInvocationPatchEntry
-	{ "Subject_9", 0x0000000Cu, 0u },  // DelegateCoreInvocationPatchEntry
-	{ "Run", 0x0000000Du, 1u },  // DelegateCoreInvocationPatchEntry
+	{ "Subject_0", 0x00000003u, 0u },  // SnapshotProverPatchEntry
+	{ "Subject_1", 0x00000004u, 0u },  // SnapshotProverPatchEntry
+	{ "Subject_2", 0x00000005u, 0u },  // SnapshotProverPatchEntry
+	{ "Subject_3", 0x00000006u, 0u },  // SnapshotProverPatchEntry
+	{ "Subject_4", 0x00000007u, 0u },  // SnapshotProverPatchEntry
+	{ "Subject_5", 0x00000008u, 0u },  // SnapshotProverPatchEntry
+	{ "Subject_6", 0x00000009u, 0u },  // SnapshotProverPatchEntry
+	{ "Subject_7", 0x0000000Au, 0u },  // SnapshotProverPatchEntry
+	{ "Subject_8", 0x0000000Bu, 0u },  // SnapshotProverPatchEntry
+	{ "Subject_9", 0x0000000Cu, 0u },  // SnapshotProverPatchEntry
+	{ "Run", 0x0000000Du, 1u },  // SnapshotProverPatchEntry
 };
 
 // Type name index entries (namespace, short_name)
 static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
-	{ "DelegateCoreInvocationPatchEntry", "", 0u, 11u },
+	{ "SnapshotProverPatchEntry", "", 0u, 11u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
@@ -319,22 +319,22 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[11] = {
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[11] = {
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationPatchEntry::Subject_0
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationPatchEntry::Subject_1
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationPatchEntry::Subject_2
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationPatchEntry::Subject_3
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationPatchEntry::Subject_4
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationPatchEntry::Subject_5
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationPatchEntry::Subject_6
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationPatchEntry::Subject_7
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationPatchEntry::Subject_8
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationPatchEntry::Subject_9
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Run_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationPatchEntry::Run
+	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_0
+	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_1
+	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_2
+	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_3
+	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_4
+	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_5
+	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_6
+	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_7
+	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_8
+	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_9
+	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Run
 };
 
 // Module hotpatch bundle
 static constexpr HotpatchModuleV0 s_hotpatch_module = {
-	"DelegateCoreInvocationPatchEntry",
+	"SnapshotProverPatchEntry",
 	s_hotpatch_types,
 	1u,
 	s_hotpatch_methods,
@@ -352,7 +352,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // Startup-time-resolved function pointers for cross-assembly calls.
 
 extern "C" const char* kChaosExternalRuntimeSubjects[1] = {
-	"DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::_exitCode",
+	"SnapshotProverPatchEntry/SnapshotProverPatchEntry::_exitCode",
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[1] = {
@@ -364,17 +364,17 @@ extern "C" int32_t kChaosExternalRuntimeCount = 1;
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[11])() = {
-	reinterpret_cast<void(*)()>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0),
-	reinterpret_cast<void(*)()>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1),
-	reinterpret_cast<void(*)()>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2),
-	reinterpret_cast<void(*)()>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3),
-	reinterpret_cast<void(*)()>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4),
-	reinterpret_cast<void(*)()>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5),
-	reinterpret_cast<void(*)()>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6),
-	reinterpret_cast<void(*)()>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7),
-	reinterpret_cast<void(*)()>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8),
-	reinterpret_cast<void(*)()>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9),
-	reinterpret_cast<void(*)()>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Run_System_Int32),
+	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0),
+	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1),
+	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2),
+	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3),
+	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4),
+	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5),
+	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6),
+	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7),
+	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8),
+	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9),
+	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
@@ -469,17 +469,17 @@ extern "C" double BenchmarkMethod(
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[11] = {
-	reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0),
-	reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1),
-	reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2),
-	reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3),
-	reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4),
-	reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5),
-	reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6),
-	reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7),
-	reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8),
-	reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9),
-	reinterpret_cast<void*>(&DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Run_System_Int32),
+	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0),
+	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1),
+	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2),
+	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3),
+	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4),
+	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5),
+	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6),
+	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7),
+	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8),
+	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9),
+	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -527,39 +527,39 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 	= {
 	.struct_size       = sizeof(CodegenRegistrationOptionsV0),
 	.registration_flags = 0u,
-	.image_name_utf8    = "DelegateCoreInvocationPatchEntry",
+	.image_name_utf8    = "SnapshotProverPatchEntry",
 };
 // ── Reflection Query Image Descriptor ──────────────────────────
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
-static constexpr ReflectionQueryFieldDescriptor kReflFields_DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry[1] = {
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::_exitCode", "_exitCode", "System.Int32", 0LL },
+static constexpr ReflectionQueryFieldDescriptor kReflFields_SnapshotProverPatchEntry_SnapshotProverPatchEntry[1] = {
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::_exitCode", "_exitCode", "System.Int32", 0LL },
 };
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry[11] = {
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_0:System.Int32()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_1:System.Int32()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_2:System.Int32()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_3:System.Int32()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_4:System.Int32()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_5:System.Int32()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_6:System.Int32()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_7:System.Int32()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_8:System.Int32()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_9:System.Int32()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotProverPatchEntry_SnapshotProverPatchEntry[11] = {
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_0:System.Int32()", "Subject_0", "System.Void", 0, nullptr, 0u },
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_1:System.Int32()", "Subject_1", "System.Void", 0, nullptr, 0u },
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_2:System.Int32()", "Subject_2", "System.Void", 0, nullptr, 0u },
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_3:System.Int32()", "Subject_3", "System.Void", 0, nullptr, 0u },
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_4:System.Int32()", "Subject_4", "System.Void", 0, nullptr, 0u },
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_5:System.Int32()", "Subject_5", "System.Void", 0, nullptr, 0u },
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_6:System.Int32()", "Subject_6", "System.Void", 0, nullptr, 0u },
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_7:System.Int32()", "Subject_7", "System.Void", 0, nullptr, 0u },
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_8:System.Int32()", "Subject_8", "System.Void", 0, nullptr, 0u },
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_9:System.Int32()", "Subject_9", "System.Void", 0, nullptr, 0u },
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry", "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry", "", "DelegateCoreInvocationPatchEntry", "DelegateCoreInvocationPatchEntry", nullptr, kReflFields_DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry, 1u, nullptr, 0u,
-	kReflMethods_DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry, 11u },
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry", "SnapshotProverPatchEntry/SnapshotProverPatchEntry", "", "SnapshotProverPatchEntry", "SnapshotProverPatchEntry", nullptr, kReflFields_SnapshotProverPatchEntry_SnapshotProverPatchEntry, 1u, nullptr, 0u,
+	kReflMethods_SnapshotProverPatchEntry_SnapshotProverPatchEntry, 11u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "DelegateCoreInvocationPatchEntry", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "SnapshotProverPatchEntry", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -598,8 +598,8 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
-// Managed method: DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_0()
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0(void)
+// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_0()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -613,8 +613,8 @@ extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvoc
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_1()
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1(void)
+// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_1()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -628,8 +628,8 @@ extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvoc
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_2()
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2(void)
+// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_2()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -643,8 +643,8 @@ extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvoc
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_3()
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3(void)
+// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_3()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -658,8 +658,8 @@ extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvoc
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_4()
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4(void)
+// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_4()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -673,8 +673,8 @@ extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvoc
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_5()
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5(void)
+// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_5()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -688,8 +688,8 @@ extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvoc
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_6()
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6(void)
+// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_6()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -703,8 +703,8 @@ extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvoc
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_7()
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7(void)
+// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_7()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -718,8 +718,8 @@ extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvoc
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_8()
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8(void)
+// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_8()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -733,8 +733,8 @@ extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvoc
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_9()
-extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9(void)
+// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_9()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -748,8 +748,8 @@ extern "C" CHAOS_IL2CPP_INT32 DelegateCoreInvocationPatchEntry_DelegateCoreInvoc
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run(System.Int32)
-extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Run(System.Int32)
+extern "C" void SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
@@ -789,7 +789,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -805,7 +805,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -821,7 +821,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -837,7 +837,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -853,7 +853,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -869,7 +869,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -885,7 +885,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -901,7 +901,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -917,7 +917,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -934,7 +934,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -962,7 +962,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
-				chaos_static_DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry___exitCode = chaos_value;
+				chaos_static_SnapshotProverPatchEntry_SnapshotProverPatchEntry___exitCode = chaos_value;
 			}
 	}
 #elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -985,7 +985,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1001,7 +1001,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1017,7 +1017,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1033,7 +1033,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1049,7 +1049,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1065,7 +1065,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1081,7 +1081,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1097,7 +1097,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1113,7 +1113,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1130,7 +1130,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1166,7 +1166,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
-				chaos_static_DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry___exitCode = chaos_value;
+				chaos_static_SnapshotProverPatchEntry_SnapshotProverPatchEntry___exitCode = chaos_value;
 			}
 	}
 #else
@@ -1192,7 +1192,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_0();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1208,7 +1208,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_1();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1224,7 +1224,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_2();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1240,7 +1240,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_3();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1256,7 +1256,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_4();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1272,7 +1272,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_5();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1288,7 +1288,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_6();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1304,7 +1304,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_7();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1320,7 +1320,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_8();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1337,7 +1337,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 							}
 							else
 							{
-								_d_hpresult = DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Subject_9();
+								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9();
 							}
 							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 						}
@@ -1382,7 +1382,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
-				chaos_static_DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry___exitCode = chaos_value;
+				chaos_static_SnapshotProverPatchEntry_SnapshotProverPatchEntry___exitCode = chaos_value;
 			}
 		}
 		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
@@ -1393,7 +1393,7 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 
 
 
-}  // namespace chaos::il2cpp::codegen::DelegateCoreInvocationPatchEntry
+}  // namespace chaos::il2cpp::codegen::SnapshotProverPatchEntry
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp

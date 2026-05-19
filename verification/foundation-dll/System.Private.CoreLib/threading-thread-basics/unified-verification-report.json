@@ -2,9 +2,9 @@
   "family": "threading-thread-basics",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T18:48:49",
-  "duration_ms": 17521,
-  "overall_status": "passed",
+  "timestamp": "2026-05-19T22:56:21",
+  "duration_ms": 22256,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -33,14 +33,17 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
+      "status": "failed",
+      "summary": "entry.exe build failed",
       "details": {
-        "methodCount": 11,
-        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-thread-basics\\managed\\subjects\\build-output\\ThreadingThreadBasicsSubjects.dll"
+        "steps": {
+          "build_subjects": "OK",
+          "convert_to_cpp": "OK",
+          "build_entry_exe": "FAILED"
+        }
       },
       "errors": [],
-      "duration_ms": 16577
+      "duration_ms": 21104
     },
     "fact": {
       "stage": "fact",
@@ -54,7 +57,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 337
+      "duration_ms": 80
     },
     "audit": {
       "stage": "audit",
@@ -68,7 +71,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 606
+      "duration_ms": 1071
     }
   },
   "coverage": {
@@ -78,7 +81,20 @@
   },
   "dashboard": {
     "interpreter": {},
-    "irTranslation": {},
+    "irTranslation": {
+      "totalMethods": 11,
+      "okCount": 0,
+      "failedCount": 11,
+      "overallIrExpansionRatio": 0,
+      "averageExpansionRatio": 0,
+      "maxExpansionRatio": 0,
+      "jitInstructionAvg": 0,
+      "aotInstructionAvg": 0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {}
+    },
     "performance": {},
     "hotupdate": {},
     "keyRatios": {

@@ -2,34 +2,35 @@
   "family": "reflection-module",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T19:18:44",
-  "duration_ms": 6663,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T23:08:57",
+  "duration_ms": 20394,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
       "status": "passed",
-      "summary": "6 methods, 0 custom entries",
+      "summary": "6 methods, 1 custom entries",
       "details": {
         "methodCount": 6,
-        "customMethodCount": 0,
-        "hasCustomEntryFile": false,
-        "customMethods": []
+        "customMethodCount": 1,
+        "hasCustomEntryFile": true,
+        "customMethods": [
+          "System.Private.CoreLib/System.Reflection.Module::GetCustomAttributes:System.Object[](System.Type)"
+        ]
       },
       "errors": [],
       "duration_ms": 0
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.cs(38,21): warning CS8602: Dereference of a possibly null reference. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.cs(38,76): warning CS8602: Dereference of a possibly null reference. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.cs(52,25): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.cs(52,113): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.cs(38,21): warning CS8602: Dereference of a possibly null reference. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.cs(38,76): warning CS8602: Dereference of a possibly null reference. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.cs(52,25): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.cs(52,113): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\ReflectionModuleSubjects.csproj]\n    2 Warning(s)\n    2 Error(s)\n\nTime Elapsed 00:00:01.17\n",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "FAILED"
-        }
+        "methodCount": 6,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\build-output\\ReflectionModuleSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 3445
+      "duration_ms": 19319
     },
     "fact": {
       "stage": "fact",
@@ -43,7 +44,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 34
+      "duration_ms": 303
     },
     "audit": {
       "stage": "audit",
@@ -52,46 +53,23 @@
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
-        "skipsFound": 0,
+        "skipsFound": 1,
         "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 504
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "failed",
-      "summary": "matchedCount=0/6 below threshold 50%",
-      "details": {
-        "averageSpeedupPercent": 0.0,
-        "nativeFasterCount": 0,
-        "managedFasterCount": 0,
-        "matchedCount": 0,
-        "totalMethods": 6,
-        "invalidCount": 6,
-        "benchmarkQuality": "matchedCount=0/6 below threshold 50%"
-      },
-      "errors": [],
-      "duration_ms": 2678
+      "duration_ms": 768
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
-    "testedRate": 100.0,
-    "overall": 100.0
+    "testedRate": 83.33,
+    "overall": 91.66
   },
   "dashboard": {
     "interpreter": {},
     "irTranslation": {},
-    "performance": {
-      "averageSpeedupPercent": 0.0,
-      "nativeFasterCount": 0,
-      "managedFasterCount": 0,
-      "matchedCount": 0,
-      "totalMethods": 6,
-      "invalidCount": 6
-    },
+    "performance": {},
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,

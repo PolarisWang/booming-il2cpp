@@ -1,14 +1,18 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ReflectionModulePatchEntry",
+  "assemblyName": "ReflectionModuleSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-module/managed/patch/build-output/ReflectionModulePatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-module/managed/subjects/build-output/ReflectionModuleSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "ReflectionModulePatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-module/managed/patch/build-output/ReflectionModulePatchEntry.dll"
+      "assemblyName": "ReflectionModuleSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-module/managed/subjects/build-output/ReflectionModuleSubjects.dll"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Collections.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "9661caad-0e8f-4f5a-89ca-af91806c3076",
+  "inputModuleVersionId": "dc58b91a-9f69-44aa-9e9e-fb73a0a0140e",
   "artifacts": [
     {
       "kind": "typedIlIr",

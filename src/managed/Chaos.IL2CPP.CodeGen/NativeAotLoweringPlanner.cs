@@ -1440,6 +1440,17 @@ extern ""C"" void ChaosJitRegisterAll() {}
 
         if (delegateThunkModels.Length > 0)
         {
+            // Forward declarations for native function dispatch thunks (defined in delegate_thunks.cpp).
+            builder.AppendLine("// Forward declarations for native function dispatch thunks (defined in delegate_thunks.cpp).");
+            builder.AppendLine("struct RuntimeState;");
+            builder.AppendLine("struct ThreadState;");
+            builder.AppendLine("extern \"C\" void* NativeDfnThunkArity0(struct RuntimeState*, struct ThreadState*, void*);");
+            builder.AppendLine("extern \"C\" void* NativeDfnThunkArity1(struct RuntimeState*, struct ThreadState*, void*, void*);");
+            builder.AppendLine("extern \"C\" void* NativeDfnThunkArity2(struct RuntimeState*, struct ThreadState*, void*, void*, void*);");
+            builder.AppendLine("extern \"C\" void* NativeDfnThunkArity3(struct RuntimeState*, struct ThreadState*, void*, void*, void*, void*);");
+            builder.AppendLine("extern \"C\" void* NativeDfnThunkArity4(struct RuntimeState*, struct ThreadState*, void*, void*, void*, void*, void*);");
+            builder.AppendLine();
+
             var thunkResult = ScribanTemplateRenderer.RenderTemplate(
                 NativeAotTemplateCatalog.GetDelegateThunksTemplate(),
                 new ScriptObject { ["delegate_thunks"] = delegateThunkModels });

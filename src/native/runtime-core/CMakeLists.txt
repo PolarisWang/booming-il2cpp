@@ -77,6 +77,7 @@ add_library(chaos_runtime_core STATIC
     aot_core_ir_reader.cpp
     aot_core_ir_reader.h
     core/delegate_helpers.cpp
+    core/delegate_thunks.cpp
     core/delegate_helpers.h
     method_table.cpp
     method_table.h
