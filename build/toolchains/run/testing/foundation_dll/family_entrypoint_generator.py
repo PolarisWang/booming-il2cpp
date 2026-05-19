@@ -116,7 +116,23 @@ def _build_call_expr_for_benchmark(subject_id: str) -> tuple[str, str]:
     param_count = len(parsed["param_types"])
     override = _METHOD_OVERRIDES.get((parsed["type_name"], parsed["method_name"], param_count))
     if override is not None and override != "skip":
-        return ("", override)
+        # Convert.ToXxx(string) and Guid..ctor(string) overrides apply to
+        # ALL 1-param overloads. Only apply when param IS System.String.
+        tn, mn = parsed["type_name"], parsed["method_name"]
+        if (
+            param_count >= 1
+            and parsed["param_types"][0] == "System.String"
+            and (
+                (tn == "Convert" and mn.startswith("To"))
+                or (tn == "Guid" and mn == ".ctor")
+            )
+        ) or (
+            param_count == 0
+        ):
+            return ("", override)
+        # For non-string param overrides, let _build_call_expr handle
+        # the override (it has the same type-aware logic).
+        pass
 
     if _has_blocked_param(parsed["param_types"]):
         return ("", "")

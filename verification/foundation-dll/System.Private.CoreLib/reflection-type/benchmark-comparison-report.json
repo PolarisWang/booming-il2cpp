@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/type",
+  "summary": {
+    "totalMethods": 43,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 43,
+    "nativeFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_Name:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_FullName:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_Namespace:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_AssemblyQualifiedName:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsAbstract:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsSealed:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsInterface:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsByRef:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsPointer:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsGenericType:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsConstructedGenericType:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsNested:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsPublic:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsNotPublic:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsNestedPublic:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsNestedPrivate:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_DeclaringType:System.Type()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_ReflectedType:System.Type()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_UnderlyingSystemType:System.Type()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetMembers:System.Reflection.MemberInfo[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetElementType:System.Type()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetNestedTypes:System.Type[]()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

@@ -79,7 +79,7 @@ public static partial class InterfaceDispatchPatchEntry
                 case 8: Subject_8(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

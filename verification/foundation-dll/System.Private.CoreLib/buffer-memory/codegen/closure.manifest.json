@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "BufferMemoryPatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/buffer-memory/managed/patch/build-output/BufferMemoryPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/buffer-memory/managed/patch/build-output/BufferMemoryPatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "BufferMemoryPatchEntry",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/buffer-memory/managed/patch/build-output/BufferMemoryPatchEntry.dll"
+      "path": "verification/foundation-dll/System.Private.CoreLib/buffer-memory/managed/patch/build-output/BufferMemoryPatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "0e42a33c-a7c4-426e-8af8-031a947a8e23",
+  "inputModuleVersionId": "0e0ce764-2bb2-45c4-953c-19dfb1f2d192",
   "artifacts": [
     {
       "kind": "typedIlIr",

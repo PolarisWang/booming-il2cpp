@@ -1,13 +1,13 @@
 {
   "family": "rcw-basic",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 31,
-  "audited": 31,
+  "total_methods": 42,
+  "audited": 42,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 31,
+  "methods_without_assert": 42,
   "passed": true,
   "method_details": [
     {
@@ -65,7 +65,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RuntimeState_Get",
+      "method_name": "RcwBasicPatchEntry_RcwBasicPatchEntry_Subject_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -74,7 +74,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_SimpleMath__ctor",
+      "method_name": "RcwBasicPatchEntry_RcwBasicPatchEntry_Subject_1",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -83,7 +83,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateCcw",
+      "method_name": "RcwBasicPatchEntry_RcwBasicPatchEntry_Subject_2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -92,7 +92,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath",
+      "method_name": "RcwBasicPatchEntry_RcwBasicPatchEntry_Subject_3",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -101,7 +101,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw",
+      "method_name": "RcwBasicPatchEntry_RcwBasicPatchEntry_Subject_4",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -110,7 +110,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown",
+      "method_name": "RcwBasicPatchEntry_RcwBasicPatchEntry_Subject_5",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -119,7 +119,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw",
+      "method_name": "RcwBasicPatchEntry_RcwBasicPatchEntry_Subject_6",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -128,7 +128,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundTripIdentity",
+      "method_name": "RcwBasicPatchEntry_RcwBasicPatchEntry_Run_System_Int32",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -137,7 +137,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalRcwQueryInterface",
+      "method_name": "RuntimeSubjects",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -146,7 +146,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundTripQi",
+      "method_name": "RuntimeFnTable",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -155,7 +155,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwMultipleWrappers",
+      "method_name": "RunNativeAot",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -164,7 +164,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwQiUnknownInterface",
+      "method_name": "RunNativeAotAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -173,7 +173,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallComMethod",
+      "method_name": "RunNativeAotBench",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -182,34 +182,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwVtableMethodCall",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallDirectComMethod",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwDirectVtable",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_Run",
+      "method_name": "BenchmarkMethod",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -281,7 +254,133 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RcwBasicSubjects_RcwBasicSubjects_Run",
+      "method_name": "RcwBasicSubjects_ConstantFortyTwo__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_ConstantFortyTwo_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwDirectVtable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwMultipleWrappers",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwQiUnknownInterface",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundTripIdentity",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundTripQi",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwVtableMethodCall",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_RuntimeState_Get",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_RuntimeState_Set_System_IntPtr",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_SimpleMath__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_SimpleMath_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

@@ -63,6 +63,7 @@ struct CachedCallInfo {
     bool     is_patched       = false;    // true = method has active patch
     uint32_t module_id        = 0;        // module owning the target method
     uint32_t slot             = 0;        // dispatch table slot index
+    uint32_t method_token     = 0;        // AOT metadata token for T4 call-site tracking
 
     // ── CallVirt MIC (Monomorphic Inline Cache) ────────────────────────────
     // Runtime-populated fields for virtual call optimization.  Handle_CallVirt
@@ -84,6 +85,7 @@ struct CachedCallInfo {
         , is_patched(other.is_patched)
         , module_id(other.module_id)
         , slot(other.slot)
+        , method_token(other.method_token)
         , mic_dispatch_ptr(other.mic_dispatch_ptr.load(std::memory_order_relaxed))
         , mic_type_token(other.mic_type_token.load(std::memory_order_relaxed))
         , mic_generation(other.mic_generation.load(std::memory_order_relaxed))
@@ -96,12 +98,16 @@ struct CachedCallInfo {
         , is_patched(other.is_patched)
         , module_id(other.module_id)
         , slot(other.slot)
+        , method_token(other.method_token)
         , mic_dispatch_ptr(other.mic_dispatch_ptr.load(std::memory_order_relaxed))
         , mic_type_token(other.mic_type_token.load(std::memory_order_relaxed))
         , mic_generation(other.mic_generation.load(std::memory_order_relaxed))
     {
         other.ret_tag = 0xFF;
         other.direct_ptr = nullptr;
+        other.module_id = 0;
+        other.slot = 0;
+        other.method_token = 0;
         other.mic_dispatch_ptr.store(nullptr, std::memory_order_relaxed);
         other.mic_type_token.store(0, std::memory_order_relaxed);
         other.mic_generation.store(0, std::memory_order_relaxed);
@@ -115,6 +121,7 @@ struct CachedCallInfo {
         is_patched = other.is_patched;
         module_id = other.module_id;
         slot = other.slot;
+        method_token = other.method_token;
         mic_dispatch_ptr.store(other.mic_dispatch_ptr.load(std::memory_order_relaxed), std::memory_order_relaxed);
         mic_type_token.store(other.mic_type_token.load(std::memory_order_relaxed), std::memory_order_relaxed);
         mic_generation.store(other.mic_generation.load(std::memory_order_relaxed), std::memory_order_relaxed);

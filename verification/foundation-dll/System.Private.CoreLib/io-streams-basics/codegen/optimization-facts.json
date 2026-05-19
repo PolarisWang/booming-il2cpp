@@ -4,181 +4,119 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_0:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_1:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_2:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_3:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_5:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_6:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_7:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_7:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_9:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_10:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_10:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_11:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_11:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_12:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_13:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_13:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_14:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_15:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_16:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_17:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::Flush:System.Void()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_10:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_11:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()",
-      "devirtualized": false
-    }
-  ],
+  "dispatchFacts": [],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Void(System.Int32)",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
 }

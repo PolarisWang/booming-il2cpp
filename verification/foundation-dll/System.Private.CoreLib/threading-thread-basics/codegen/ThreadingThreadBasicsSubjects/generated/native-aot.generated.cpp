@@ -616,16 +616,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadingThreadBas
 	{ 0u, "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects", "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects", "", "ThreadingThreadBasicsSubjects", "ThreadingThreadBasicsSubjects", nullptr, kReflFields_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects, 1u, nullptr, 0u,
 	kReflMethods_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects, 11u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "ThreadingThreadBasicsSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ThreadingThreadBasicsSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -685,7 +685,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_ThreadState_System_Threading_ThreadState__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -728,7 +728,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_Priority_System_Threading_ThreadPriority__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -769,7 +769,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__set_Priority_System_Void_System_Threading_ThreadPriority_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
 	}
@@ -799,7 +799,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_IsBackground_System_Boolean__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -848,7 +848,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__set_IsBackground_System_Void_System_Boolean_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
 	}
@@ -878,7 +878,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_IsThreadPoolThread_System_Boolean__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1054,7 +1054,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Interrupt_System_Void__(chaos_arg_0);
 	}

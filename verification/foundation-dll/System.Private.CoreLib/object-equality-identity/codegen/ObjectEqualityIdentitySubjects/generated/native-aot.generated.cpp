@@ -631,16 +631,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_ObjectEqualityIden
 	{ 0u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects", "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects", "", "ObjectEqualityIdentitySubjects", "ObjectEqualityIdentitySubjects", nullptr, kReflFields_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects, 1u, nullptr, 0u,
 	kReflMethods_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects, 7u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "ObjectEqualityIdentitySubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ObjectEqualityIdentitySubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -716,7 +716,7 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -904,7 +904,7 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -952,7 +952,7 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -961,7 +961,7 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1013,7 +1013,7 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 		const auto chaos_arg_0 = _s1;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);

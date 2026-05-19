@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ConvertCharSubjects",
+  "assemblyName": "ConvertCharPatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/convert-char/managed/patch/build-output/ConvertCharPatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "ConvertCharSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll"
+      "assemblyName": "ConvertCharPatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/convert-char/managed/patch/build-output/ConvertCharPatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "effb9269-cd7c-4345-89cd-e6b7cb203fcf",
+  "inputModuleVersionId": "253180a5-b307-400c-941f-06e5c68c3920",
   "artifacts": [
     {
       "kind": "typedIlIr",

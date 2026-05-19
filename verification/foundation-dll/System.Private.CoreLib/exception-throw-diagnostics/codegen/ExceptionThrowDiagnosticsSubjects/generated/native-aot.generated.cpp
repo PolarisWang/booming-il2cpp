@@ -283,6 +283,11 @@ static void chaos_external_runtime_System_Private_CoreLib_System_Exception___cto
 	ChaosReflectionSetExceptionMetadata(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
+static void chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	ChaosReflectionInitDefaultException(chaos_fn_arg_0);
+}
+
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Exception__get_HResult_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	return ChaosExceptionGetHresult(chaos_fn_arg_0);
@@ -585,7 +590,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[17] = {
 extern "C" void* kChaosExternalRuntimeFnTable[17] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_),
 	nullptr,
-	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception__get_Message_System_String__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__),
 	nullptr,
@@ -803,16 +808,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_ExceptionThrowDiag
 	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects", "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects", "", "ExceptionThrowDiagnosticsSubjects", "ExceptionThrowDiagnosticsSubjects", nullptr, kReflFields_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects, 1u, nullptr, 0u,
 	kReflMethods_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects, 14u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "ExceptionThrowDiagnosticsSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ExceptionThrowDiagnosticsSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -914,13 +919,14 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Exception__get_Message_System_String__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -929,7 +935,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -967,6 +973,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
 				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -999,6 +1006,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
 				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -1042,6 +1050,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
 				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -1119,6 +1128,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
@@ -1162,13 +1172,14 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1177,7 +1188,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1218,13 +1229,14 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Exception__GetBaseException_System_Exception__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1233,7 +1245,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);

@@ -93,7 +93,7 @@ public static partial class ThreadingThreadBasicsPatchEntry
                 case 10: Subject_10(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

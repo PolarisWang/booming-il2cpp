@@ -2,6 +2,9 @@
 
 #include <chaos/native_types.h>
 #include <ctime>
+#include <cstring>
+
+#include "gc_helpers.h"
 
 struct StubArrayHeader {
     CHAOS_IL2CPP_INTPTR element_type;

@@ -86,7 +86,7 @@ public static partial class GenericNullableValuePatchEntry
                 case 9: Subject_9(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

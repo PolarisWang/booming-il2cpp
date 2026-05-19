@@ -3,49 +3,55 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "ObjectEqualityIdentitySubjects.dll",
+      "moduleName": "ObjectEqualityIdentityPatchEntry.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_0",
-          "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()"
+          "symbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_0",
+          "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_0:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_1",
-          "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()"
+          "symbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_1",
+          "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_1:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_2",
-          "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()"
+          "symbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_2",
+          "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_2:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_3",
-          "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()"
+          "symbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_3",
+          "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_3:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_4",
-          "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()"
+          "symbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_4",
+          "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_4:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_5",
-          "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()"
+          "symbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_5",
+          "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_5:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_6",
-          "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()"
+          "symbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_6",
+          "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Run_System_Int32",
+          "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Run:System.Void(System.Int32)"
         }
       ]
     }

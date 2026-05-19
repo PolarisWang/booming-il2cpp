@@ -128,7 +128,7 @@ public static partial class CollectionsGenericCorePatchEntry
                 case 15: Subject_15(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

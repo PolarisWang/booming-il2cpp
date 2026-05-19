@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ReflectionMemberBasicsSubjects",
+  "assemblyName": "ReflectionMemberBasicsPatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-member-basics/managed/subjects/build-output/ReflectionMemberBasicsSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-member-basics/managed/patch/build-output/ReflectionMemberBasicsPatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "ReflectionMemberBasicsSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-member-basics/managed/subjects/build-output/ReflectionMemberBasicsSubjects.dll"
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-member-basics/managed/patch/build-output/ReflectionMemberBasicsPatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "6ca10bf9-4a90-4d98-b6f9-a7e267ee9a84",
+  "inputModuleVersionId": "8fb0b4a0-a04a-47b5-ad88-9f6f51f333b6",
   "artifacts": [
     {
       "kind": "typedIlIr",

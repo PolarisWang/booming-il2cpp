@@ -3,91 +3,97 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "GuidRandomHashcodeSubjects.dll",
+      "moduleName": "GuidRandomHashcodePatchEntry.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_0",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_0:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_1:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_1",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_1:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_2:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_2",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_2:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_3",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_3:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_3",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_3:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_4",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_4:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_4",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_4:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_5",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_5:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_5",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_5:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_6",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_6:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_6",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_6:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 7,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_7:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_7",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_7:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 8,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_8:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_8",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_8:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 9,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_9:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_9",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_9:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 10,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_10:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_10",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_10:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 11,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_11:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_11",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_11:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 12,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_12:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_12",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_12:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 13,
-          "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13",
-          "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_13:System.Void()"
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Subject_13",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Run_System_Int32",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Void(System.Int32)"
         }
       ]
     }

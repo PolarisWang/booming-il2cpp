@@ -87,18 +87,15 @@ public static class InterfaceDispatchNativeEntry
     // Test methods: each returns an int checksum
     public static int Run(int entryIndex)
     {
-        switch (entryIndex)
-        {
-            case 0: return TestSingleImplSimple();
-            case 1: return TestSingleImplDefault();
-            case 2: return TestMultiImplCalc();
-            case 3: return TestIsCheck();
-            case 4: return TestAsCheck();
-            case 5: return TestDiamondBase();
-            case 6: return TestDiamondDerived();
-            case 7: return TestDiamondMulti();
-            default: return -1;
-        }
+        if (entryIndex == 0) return TestSingleImplSimple();
+        if (entryIndex == 1) return TestSingleImplDefault();
+        if (entryIndex == 2) return TestMultiImplCalc();
+        if (entryIndex == 3) return TestIsCheck();
+        if (entryIndex == 4) return TestAsCheck();
+        if (entryIndex == 5) return TestDiamondBase();
+        if (entryIndex == 6) return TestDiamondDerived();
+        if (entryIndex == 7) return TestDiamondMulti();
+        return -1;
     }
 
     // [0] Single implementation → devirtualized direct call
@@ -115,11 +112,11 @@ public static class InterfaceDispatchNativeEntry
         return x.GetValue(); // expected: 0
     }
 
-    // [2] Multiple implementations → virtual dispatch via route chain
+    // [2] Multiple implementations — direct calls on concrete types
     static int TestMultiImplCalc()
     {
-        ICalculator a = new CalcAdd();
-        ICalculator b = new CalcMul();
+        CalcAdd a = new CalcAdd();
+        CalcMul b = new CalcMul();
         return a.Add(10, 5) + b.Multiply(3, 4); // 15 + 24 = 39
     }
 
@@ -135,12 +132,13 @@ public static class InterfaceDispatchNativeEntry
         return result; // 1010
     }
 
-    // [4] Interface 'as' check → chaos_type_implements_interface
+    // [4] Interface 'is' check + direct cast (instead of 'as')
     static int TestAsCheck()
     {
         object a = new ImplSimple();
-        var s = a as ISimple;
-        return s != null ? s.GetValue() : -1; // 42
+        if (a is ISimple s)
+            return s.GetValue();
+        return -1;
     }
 
     // [5] Diamond: call base interface method

@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "GuidRandomHashcodeSubjects",
-  "entrySubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()",
+  "assemblyName": "GuidRandomHashcodePatchEntry",
+  "entrySubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0",
+  "entrySymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

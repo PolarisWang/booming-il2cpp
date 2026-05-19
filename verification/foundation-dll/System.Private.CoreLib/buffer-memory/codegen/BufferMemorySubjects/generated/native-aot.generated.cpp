@@ -589,19 +589,19 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_BufferMemorySubjec
 	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()", "CustomEntryMethod9", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[2] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[2] = {
 	{ 0u, "BufferMemorySubjects/BufferMemorySubjects", "BufferMemorySubjects/BufferMemorySubjects", "", "BufferMemorySubjects", "BufferMemorySubjects", nullptr, kReflFields_BufferMemorySubjects_BufferMemorySubjects, 1u, nullptr, 0u,
 	kReflMethods_BufferMemorySubjects_BufferMemorySubjects, 10u },
 	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry", "BufferMemorySubjects/BufferMemoryNativeEntry", "", "BufferMemoryNativeEntry", "BufferMemoryNativeEntry", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_BufferMemorySubjects_BufferMemoryNativeEntry, 3u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
 	&kReflTypes[0],
 	&kReflTypes[1],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "BufferMemorySubjects", kReflTypePtrs, 2u };
+static const ReflectionQueryImageDescriptor kReflImage = { "BufferMemorySubjects", kReflTypePtrs, 2u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

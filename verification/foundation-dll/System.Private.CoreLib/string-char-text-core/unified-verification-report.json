@@ -2,9 +2,9 @@
   "family": "string-char-text-core",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T04:52:45",
-  "duration_ms": 14875,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T15:11:35",
+  "duration_ms": 17980,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\string-char-text-core\\managed\\subjects\\build-output\\StringCharTextCoreSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 14461
+      "duration_ms": 17005
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (8/20)",
+      "status": "passed",
+      "summary": "Fact verify=passed (20/20)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 8,
+          "status": "passed",
+          "passed": 20,
           "total": 20
         }
       },
       "errors": [],
-      "duration_ms": 289
+      "duration_ms": 36
     },
     "audit": {
       "stage": "audit",
@@ -56,13 +56,13 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 123
+      "duration_ms": 937
     }
   },
   "coverage": {
-    "methodCoverage": 40.0,
+    "methodCoverage": 100.0,
     "testedRate": 100.0,
-    "overall": 70.0
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {},

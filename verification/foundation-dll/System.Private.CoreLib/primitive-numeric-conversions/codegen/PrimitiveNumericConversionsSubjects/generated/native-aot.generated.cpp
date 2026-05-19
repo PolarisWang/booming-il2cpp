@@ -204,6 +204,11 @@ static CHAOS_IL2CPP_UINT8 chaos_external_runtime_System_Private_CoreLib_System_C
 	return ChaosConvertToByte(chaos_fn_arg_0);
 }
 
+static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToDecimal_System_Decimal_System_Double_(double chaos_fn_arg_0)
+{
+	return ChaosDecimalFromDouble(chaos_fn_arg_0);
+}
+
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToDecimal_System_Decimal_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	return ChaosConvertToDecimal(chaos_fn_arg_0);
@@ -217,6 +222,11 @@ static double chaos_external_runtime_System_Private_CoreLib_System_Convert__ToDo
 static CHAOS_IL2CPP_INT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToInt16_System_Int16_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	return ChaosConvertToInt16(chaos_fn_arg_0);
+}
+
+static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToInt32_System_Int32_System_Double_(double chaos_fn_arg_0)
+{
+	return ChaosConvertToInt32FromDouble(chaos_fn_arg_0);
 }
 
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToInt32_System_Int32_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -519,7 +529,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[16] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[18] = {
 	"System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String)",
 	"PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::_exitCode",
 	"System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String)",
@@ -533,12 +543,14 @@ extern "C" const char* kChaosExternalRuntimeSubjects[16] = {
 	"System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)",
 	"System.Private.CoreLib/System.String::get_Length:System.Int32()",
 	"System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)",
+	"System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.Double)",
+	"System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double)",
 	"System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)",
 	"System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String)",
 	"System.Private.CoreLib/System.Double::Parse:System.Double(System.String)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[16] = {
+extern "C" void* kChaosExternalRuntimeFnTable[18] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToBoolean_System_Boolean_System_String_),
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToByte_System_Byte_System_String_),
@@ -552,12 +564,14 @@ extern "C" void* kChaosExternalRuntimeFnTable[16] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToString_System_String_System_Int32_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToString_System_String_System_Double_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToDecimal_System_Decimal_System_Double_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToInt32_System_Int32_System_Double_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Int32__Parse_System_Int32_System_String_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Int64__Parse_System_Int64_System_String_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Double__Parse_System_Double_System_String_),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 16;
+extern "C" int32_t kChaosExternalRuntimeCount = 18;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -762,16 +776,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_PrimitiveNumericCo
 	{ 0u, "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects", "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects", "", "PrimitiveNumericConversionsSubjects", "PrimitiveNumericConversionsSubjects", nullptr, kReflFields_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects, 1u, nullptr, 0u,
 	kReflMethods_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects, 15u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "PrimitiveNumericConversionsSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "PrimitiveNumericConversionsSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1183,7 +1197,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1231,7 +1245,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1269,12 +1283,10 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("42");
-	}}
+	_s0 = ChaosStoreFloat64(42);
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToDecimal_System_Decimal_System_String_(chaos_arg_0);
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToDecimal_System_Decimal_System_Double_(ChaosLoadFloat64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -1283,7 +1295,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
@@ -1314,16 +1326,14 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	CHAOS_IL2CPP_INTPTR _s7{};
 
 
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("42");
-	}}
+	_s0 = ChaosStoreFloat64(42);
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToInt32_System_Int32_System_String_(chaos_arg_0);
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToInt32_System_Int32_System_Double_(ChaosLoadFloat64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{

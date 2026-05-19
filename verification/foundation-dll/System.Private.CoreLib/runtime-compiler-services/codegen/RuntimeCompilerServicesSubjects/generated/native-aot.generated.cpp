@@ -659,16 +659,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_RuntimeCompilerSer
 	{ 0u, "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects", "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects", "", "RuntimeCompilerServicesSubjects", "RuntimeCompilerServicesSubjects", nullptr, kReflFields_RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects, 1u, nullptr, 0u,
 	kReflMethods_RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects, 10u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "RuntimeCompilerServicesSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "RuntimeCompilerServicesSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -860,7 +860,7 @@ extern "C" void RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -956,7 +956,7 @@ extern "C" void RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -1046,7 +1046,7 @@ extern "C" void RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_
 		const auto chaos_arg_0 = _s1;
 		if (chaos_arg_0 == 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);

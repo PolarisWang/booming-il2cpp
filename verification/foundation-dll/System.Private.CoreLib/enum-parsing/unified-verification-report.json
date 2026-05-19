@@ -2,9 +2,9 @@
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T04:49:50",
-  "duration_ms": 15733,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T15:07:54",
+  "duration_ms": 19363,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 15597
+      "duration_ms": 18479
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (10/12)",
+      "status": "passed",
+      "summary": "Fact verify=passed (12/12)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 10,
+          "status": "passed",
+          "passed": 12,
           "total": 12
         }
       },
       "errors": [],
-      "duration_ms": 32
+      "duration_ms": 36
     },
     "audit": {
       "stage": "audit",
@@ -56,13 +56,13 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 102
+      "duration_ms": 846
     }
   },
   "coverage": {
-    "methodCoverage": 83.33,
+    "methodCoverage": 100.0,
     "testedRate": 100.0,
-    "overall": 91.66
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {},
@@ -88,15 +88,15 @@
       },
       "currentMetrics": {
         "totalMethods": 12,
-        "matchedCount": 10,
-        "nativeFasterCount": 0,
+        "matchedCount": 12,
+        "nativeFasterCount": 2,
         "managedFasterCount": 10,
-        "averageSpeedupPercent": -411.47
+        "averageSpeedupPercent": -232.46
       }
     },
     "hasRegression": true,
     "regressions": [
-      "Managed-faster ratio 100% exceeds native-faster ratio 0% (10/10 methods)"
+      "Managed-faster ratio 83% exceeds native-faster ratio 17% (10/12 methods)"
     ]
   }
 }

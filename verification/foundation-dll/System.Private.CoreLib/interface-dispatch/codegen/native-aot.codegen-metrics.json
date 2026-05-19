@@ -8,10 +8,10 @@
     "generated/native-aot.generated.cpp"
   ],
   "generatedCppFileCount": 2,
-  "generatedCppTotalBytes": 133355,
-  "largestGeneratedCppBytes": 78670,
+  "generatedCppTotalBytes": 133480,
+  "largestGeneratedCppBytes": 78842,
   "generatedSymbolCount": 15,
-  "peakWorkingSetBytes": 494350336,
+  "peakWorkingSetBytes": 494252032,
   "structuredMethodCount": 9,
   "structuredExceptionBodyCount": 1,
   "flatFallbackCount": 0,

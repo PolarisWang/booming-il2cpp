@@ -15,8 +15,12 @@
 #include <vector>
 
 #include <chaos/native_types.h>
+#include "gc_card_table.h"
 #include "gc_old_gen.h"
 #include "gc_region.h"
+#include "gc_bgc.h"
+#include "gc_scheduler.h"
+#include "thread_state.h"
 
 using namespace chaos::il2cpp::runtime_core;
 
@@ -80,7 +84,7 @@ static void ScenarioF1() {
     std::vector<void*> objs;
 
     for (int i = 0; i < kNumObjects; i++) {
-        void* obj = NurseryAllocate(64);
+        void* obj = g_old_gen.Allocate(64, false);
         if (!obj) { FAIL("nursery allocation failed"); return; }
         // Use the index as the object ID, stored at the pointer value.
         // We register with the pointer itself, and the callback identifies
@@ -98,7 +102,7 @@ static void ScenarioF1() {
 
     // Trigger young GC pressure to age the objects.
     for (int i = 0; i < 500; i++) {
-        volatile void* tmp = NurseryAllocate(32);
+        volatile void* tmp = g_old_gen.Allocate(32, false);
         (void)tmp;
     }
 
@@ -129,7 +133,7 @@ static void ScenarioF2() {
     std::vector<void*> all;
 
     for (int i = 0; i < kNumObjects; i++) {
-        void* obj = NurseryAllocate(64);
+        void* obj = g_old_gen.Allocate(64, false);
         if (!obj) { FAIL("nursery allocation failed"); return; }
         // Assign the index cast as pointer so the callback can identify it.
         void* id = reinterpret_cast<void*>(static_cast<intptr_t>(i));
@@ -144,7 +148,7 @@ static void ScenarioF2() {
     // Multiple GC cycles with kept objects still reachable.
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 200; j++) {
-            volatile void* tmp = NurseryAllocate(32);
+            volatile void* tmp = g_old_gen.Allocate(32, false);
             (void)tmp;
         }
         g_old_gen.Collect(nullptr, nullptr);
@@ -177,7 +181,7 @@ static void ScenarioF3() {
     std::vector<void*> objs;
 
     for (int i = 0; i < kNumObjects; i++) {
-        void* obj = NurseryAllocate(32);
+        void* obj = g_old_gen.Allocate(32, false);
         if (!obj) { FAIL("nursery allocation failed"); return; }
         objs.push_back(obj);
     }
@@ -190,7 +194,7 @@ static void ScenarioF3() {
 
     // GC pressure.
     for (int i = 0; i < 1000; i++) {
-        volatile void* tmp = NurseryAllocate(32);
+        volatile void* tmp = g_old_gen.Allocate(32, false);
         (void)tmp;
     }
 
@@ -220,7 +224,7 @@ static void ScenarioF4() {
         std::vector<void*> my_objs;
 
         for (int i = 0; i < kAllocsPerThread; i++) {
-            void* obj = NurseryAllocate(48 + (tid * 8) % 32);
+            void* obj = g_old_gen.Allocate(48 + (tid * 8) % 32, false);
             if (!obj) { failed.store(true); break; }
             my_objs.push_back(obj);
         }
@@ -235,7 +239,7 @@ static void ScenarioF4() {
 
         // More allocation to trigger GC.
         for (int i = 0; i < 200; i++) {
-            volatile void* tmp = NurseryAllocate(32);
+            volatile void* tmp = g_old_gen.Allocate(32, false);
             (void)tmp;
         }
 
@@ -268,14 +272,14 @@ static void ScenarioF5() {
 
     InitTrackers();
 
-    void* obj = NurseryAllocate(64);
+    void* obj = g_old_gen.Allocate(64, false);
     if (!obj) { FAIL("nursery allocation failed"); return; }
 
     g_old_gen.RegisterFinalizer(obj, ResurrectionCallback);
 
     // GC pressure to make obj unreachable.
     for (int i = 0; i < 500; i++) {
-        volatile void* tmp = NurseryAllocate(32);
+        volatile void* tmp = g_old_gen.Allocate(32, false);
         (void)tmp;
     }
 
@@ -289,7 +293,7 @@ static void ScenarioF5() {
     // Second GC: the re-registered finalizer should run again if the
     // object is still unreachable (no new reference was created).
     for (int i = 0; i < 500; i++) {
-        volatile void* tmp = NurseryAllocate(32);
+        volatile void* tmp = g_old_gen.Allocate(32, false);
         (void)tmp;
     }
     g_old_gen.Collect(nullptr, nullptr);
@@ -327,10 +331,16 @@ static constexpr int kNumScenarios = sizeof(g_scenarios) / sizeof(g_scenarios[0]
 // ── Main ───────────────────────────────────────────────────────────
 
 int main(int argc, char** argv) {
+    setbuf(stdout, NULL);
     const char* filter = (argc > 1) ? argv[1] : nullptr;
 
     // Init GC subsystems.
+    GcSetHeapBase(reinterpret_cast<void*>(uintptr_t(0)));
     g_old_gen.Init(0, 2);
+
+    // Start BGC and finalizer threads.
+    BgcController::Instance().Start();
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
     int run_count = 0;
     int pass_count = 0;
@@ -350,6 +360,9 @@ int main(int argc, char** argv) {
         if (failed == 0) pass_count++;
         printf("  Result: %d tests, %d failures\n", g_tests, g_failures);
 
+        // Drain pending finalizers between scenarios to avoid cross-talk.
+        chaos_gc_wait_for_pending_finalizers();
+
         if (filter && strcmp(filter, g_scenarios[i].name) == 0) {
             break;
         }
@@ -359,6 +372,10 @@ int main(int argc, char** argv) {
     printf("Results: %d scenarios, %d passed, %d failed\n",
            run_count, pass_count, g_failures);
     printf("═══════════════════════════════════════════\n");
+
+    // Cleanup.
+    chaos_gc_wait_for_pending_finalizers();
+    BgcController::Instance().Stop();
 
     return g_failures > 0 ? 1 : 0;
 }

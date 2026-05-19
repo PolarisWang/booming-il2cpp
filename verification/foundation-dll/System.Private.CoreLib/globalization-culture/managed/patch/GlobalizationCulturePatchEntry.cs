@@ -107,7 +107,7 @@ public static partial class GlobalizationCulturePatchEntry
                 case 12: Subject_12(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

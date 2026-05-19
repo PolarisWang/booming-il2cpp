@@ -30,3 +30,9 @@ CHAOS_IL2CPP_INTPTR    ChaosFormatInt32(CHAOS_IL2CPP_INT32 value) noexcept;
 
 // ── Decimal helpers ────────────────────────────────────────────────
 CHAOS_IL2CPP_INT32     ChaosDecimalToInt32(CHAOS_IL2CPP_INTPTR dec) noexcept;
+
+// ── Convert from Double ─────────────────────────────────────────────
+// Double→Int32 truncation bridge (cvttsd2si equivalent).
+CHAOS_IL2CPP_INT32     ChaosConvertToInt32FromDouble(double value) noexcept;
+// Double→Decimal conversion bridge.
+CHAOS_IL2CPP_INTPTR    ChaosDecimalFromDouble(double value) noexcept;

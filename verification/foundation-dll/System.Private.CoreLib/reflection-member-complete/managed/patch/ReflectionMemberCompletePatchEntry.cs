@@ -170,7 +170,7 @@ public static partial class ReflectionMemberCompletePatchEntry
                 case 21: Subject_21(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

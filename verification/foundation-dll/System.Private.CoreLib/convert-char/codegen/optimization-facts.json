@@ -4,97 +4,102 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_0:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_1:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_2:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_3:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_5:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_6:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_6:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_7:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_9:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_10:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_11:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_12:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_13:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_14:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_15:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_16:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_17:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],
@@ -102,46 +107,16 @@
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "ConvertCharSubjects/ConvertCharSubjects::_exitCode",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
   "exceptionFacts": [
     {
-      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
+      "methodSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Run:System.Void(System.Int32)",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidCastException"
-    },
-    {
-      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidCastException"
-    },
-    {
-      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidCastException"
-    },
-    {
-      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidCastException"
-    },
-    {
-      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidCastException"
-    },
-    {
-      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.FormatException"
-    },
-    {
-      "methodSubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.FormatException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

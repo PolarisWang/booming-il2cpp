@@ -4,57 +4,62 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_0:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_1:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_2:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_3:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_5:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_6:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_7:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],
@@ -62,21 +67,16 @@
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
   "exceptionFacts": [
     {
-      "methodSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
+      "methodSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Void(System.Int32)",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
-    },
-    {
-      "methodSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

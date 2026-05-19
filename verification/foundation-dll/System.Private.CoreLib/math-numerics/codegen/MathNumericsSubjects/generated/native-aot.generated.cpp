@@ -134,7 +134,8 @@ CHAOS_IL2CPP_INT32 chaos_static_MathNumericsSubjects_MathNumericsSubjects___exit
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_BitConverter__GetBytes_System_Byte___System_Double_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	(void)chaos_arg_0;
-	return 0;
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_BitConverter__GetBytes_System_Byte___System_Int32_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
@@ -717,16 +718,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_MathNumericsSubjec
 	{ 0u, "MathNumericsSubjects/MathNumericsSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "MathNumericsSubjects/MathNumericsSubjects", "MathNumericsSubjects/MathNumericsSubjects", "", "MathNumericsSubjects", "MathNumericsSubjects", nullptr, kReflFields_MathNumericsSubjects_MathNumericsSubjects, 1u, nullptr, 0u,
 	kReflMethods_MathNumericsSubjects_MathNumericsSubjects, 18u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "MathNumericsSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "MathNumericsSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

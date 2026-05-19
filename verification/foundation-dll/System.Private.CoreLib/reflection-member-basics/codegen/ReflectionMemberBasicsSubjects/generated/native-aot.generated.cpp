@@ -595,16 +595,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_ReflectionMemberBa
 	{ 0u, "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects", "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects", "", "ReflectionMemberBasicsSubjects", "ReflectionMemberBasicsSubjects", nullptr, kReflFields_ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects, 1u, nullptr, 0u,
 	kReflMethods_ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects, 14u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "ReflectionMemberBasicsSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ReflectionMemberBasicsSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -661,7 +661,7 @@ extern "C" void ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Su
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__get_Name_System_String__(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -693,7 +693,7 @@ extern "C" void ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Su
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__get_Name_System_String__(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -736,7 +736,7 @@ extern "C" void ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Su
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__get_Name_System_String__(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -811,7 +811,7 @@ extern "C" void ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Su
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__get_DeclaringType_System_Type__(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -843,7 +843,7 @@ extern "C" void ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Su
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__get_DeclaringType_System_Type__(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -886,7 +886,7 @@ extern "C" void ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Su
 				const auto chaos_arg_0 = _s0;
 				if (chaos_arg_0 == 0)
 				{
-					CHAOS_IL2CPP_FAIL();
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 				}
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__get_DeclaringType_System_Type__(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);

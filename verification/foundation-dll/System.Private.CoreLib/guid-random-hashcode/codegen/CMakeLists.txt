@@ -32,14 +32,14 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: GuidRandomHashcodeSubjects
-add_library(chaos_gen_GuidRandomHashcodeSubjects STATIC
-    ${CHAOS_GEN_DIR}/GuidRandomHashcodeSubjects/generated/native-aot.generated.cpp
+# Assembly: GuidRandomHashcodePatchEntry
+add_library(chaos_gen_GuidRandomHashcodePatchEntry STATIC
+    ${CHAOS_GEN_DIR}/GuidRandomHashcodePatchEntry/generated/native-aot.generated.cpp
 )
 
-target_include_directories(chaos_gen_GuidRandomHashcodeSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_GuidRandomHashcodeSubjects PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_GuidRandomHashcodeSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_GuidRandomHashcodePatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_GuidRandomHashcodePatchEntry PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_GuidRandomHashcodePatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -48,7 +48,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_GuidRandomHashcodeSubjects
+    chaos_gen_GuidRandomHashcodePatchEntry
     ${NATIVE_LIBS}
 )
 

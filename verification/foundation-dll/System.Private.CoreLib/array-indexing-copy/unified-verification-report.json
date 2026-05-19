@@ -2,9 +2,9 @@
   "family": "array-indexing-copy",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T04:48:04",
-  "duration_ms": 14967,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T15:05:43",
+  "duration_ms": 18182,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\build-output\\ArrayIndexingCopySubjects.dll"
       },
       "errors": [],
-      "duration_ms": 14816
+      "duration_ms": 17197
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (12/13)",
+      "status": "passed",
+      "summary": "Fact verify=passed (13/13)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 12,
+          "status": "passed",
+          "passed": 13,
           "total": 13
         }
       },
       "errors": [],
-      "duration_ms": 30
+      "duration_ms": 37
     },
     "audit": {
       "stage": "audit",
@@ -56,13 +56,13 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 117
+      "duration_ms": 943
     }
   },
   "coverage": {
-    "methodCoverage": 92.31,
+    "methodCoverage": 100.0,
     "testedRate": 92.31,
-    "overall": 92.31
+    "overall": 96.16
   },
   "dashboard": {
     "interpreter": {},
@@ -78,8 +78,21 @@
   },
   "regression": {
     "benchmark": {
-      "status": "skipped",
-      "message": "No benchmark report found"
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 13,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 13,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
     },
     "hasRegression": false,
     "regressions": []

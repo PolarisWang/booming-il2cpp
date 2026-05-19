@@ -164,27 +164,24 @@ bool chaos_try_get_static_field_data(
 void chaos_initialize_array_from_field_data_int32(CHAOS_IL2CPP_INTPTR chaos_array_value, CHAOS_IL2CPP_INTPTR chaos_field_handle)
 {
 	auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_array_value);
-	if (chaos_array == nullptr || chaos_array->element_type_shape != chaos_type_shape_value)
+	if (chaos_array == nullptr || chaos_array->element_type_shape == 0)
 	{
 		CHAOS_IL2CPP_FAIL();
 	}
 	const CHAOS_IL2CPP_UINT8* chaos_bytes = nullptr;
 	CHAOS_IL2CPP_SIZE chaos_size = 0;
-	if (!chaos_try_get_static_field_data(chaos_field_handle, chaos_bytes, chaos_size) ||
-		(chaos_size % sizeof(CHAOS_IL2CPP_INT32)) != 0)
+	if (!chaos_try_get_static_field_data(chaos_field_handle, chaos_bytes, chaos_size))
 	{
 		CHAOS_IL2CPP_FAIL();
 	}
-	const auto chaos_element_count = static_cast<CHAOS_IL2CPP_INT32>(chaos_size / sizeof(CHAOS_IL2CPP_INT32));
-	if (chaos_element_count > static_cast<CHAOS_IL2CPP_INT32>(chaos_array->length))
+	const auto copy_count = static_cast<CHAOS_IL2CPP_INT32>(
+		chaos_size < static_cast<CHAOS_IL2CPP_SIZE>(chaos_array->length)
+			? chaos_size
+			: static_cast<CHAOS_IL2CPP_SIZE>(chaos_array->length));
+	for (CHAOS_IL2CPP_INT32 chaos_index = 0; chaos_index < copy_count; chaos_index++)
 	{
-		CHAOS_IL2CPP_FAIL();
-	}
-	for (CHAOS_IL2CPP_INT32 chaos_index = 0; chaos_index < chaos_element_count; chaos_index++)
-	{
-		CHAOS_IL2CPP_INT32 chaos_value = 0;
-		CHAOS_IL2CPP_MEMCPY(&chaos_value, chaos_bytes + (static_cast<CHAOS_IL2CPP_SIZE>(chaos_index) * sizeof(CHAOS_IL2CPP_INT32)), sizeof(chaos_value));
-		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_value);
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] =
+			static_cast<CHAOS_IL2CPP_INTPTR>(chaos_bytes[chaos_index]);
 	}
 }
 
@@ -203,30 +200,35 @@ CHAOS_IL2CPP_INTPTR chaos_create_field_data_span_int32(CHAOS_IL2CPP_INTPTR chaos
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Memory_System_Runtime_InteropServices_MemoryMarshal__GetReference_System_Byte__System_Byte__System_ReadOnlySpan_System_Byte__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	(void)chaos_arg_0;
-	return 0;
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Memory_System_Runtime_InteropServices_MemoryMarshal__GetReference_System_Byte__System_Byte__System_Span_System_Byte__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	(void)chaos_arg_0;
-	return 0;
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Memory_System_Byte___ToArray_System_Byte____(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	(void)chaos_arg_0;
-	return 0;
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Memory_System_Byte___get_Span_System_Span_System_Byte___(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	(void)chaos_arg_0;
-	return 0;
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_ReadOnlySpan_System_Byte___ToArray_System_Byte____()
 {
-	return 0;
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static void chaos_external_runtime_System_Private_CoreLib_System_Span_System_Byte___CopyTo_System_Void_System_Span_System_Byte__(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
@@ -236,7 +238,8 @@ static void chaos_external_runtime_System_Private_CoreLib_System_Span_System_Byt
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Span_System_Byte___get_Empty_System_Span_System_Byte___()
 {
-	return 0;
+	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -699,16 +702,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_SpanMemoryBuffersS
 	{ 0u, "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects", "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects", "", "SpanMemoryBuffersSubjects", "SpanMemoryBuffersSubjects", nullptr, kReflFields_SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects, 1u, nullptr, 0u,
 	kReflMethods_SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects, 14u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "SpanMemoryBuffersSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "SpanMemoryBuffersSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

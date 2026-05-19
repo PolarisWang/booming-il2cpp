@@ -2,9 +2,9 @@
   "family": "attributes-custom-metadata",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T04:48:19",
-  "duration_ms": 14836,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T15:06:01",
+  "duration_ms": 18533,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\attributes-custom-metadata\\managed\\subjects\\build-output\\AttributesCustomMetadataSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 14705
+      "duration_ms": 17673
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (7/9)",
+      "status": "passed",
+      "summary": "Fact verify=passed (9/9)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 7,
+          "status": "passed",
+          "passed": 9,
           "total": 9
         }
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 43
     },
     "audit": {
       "stage": "audit",
@@ -56,13 +56,13 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 101
+      "duration_ms": 815
     }
   },
   "coverage": {
-    "methodCoverage": 77.78,
+    "methodCoverage": 100.0,
     "testedRate": 66.67,
-    "overall": 72.22
+    "overall": 83.34
   },
   "dashboard": {
     "interpreter": {},

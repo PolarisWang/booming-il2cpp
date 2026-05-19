@@ -100,7 +100,7 @@ public static partial class EnumParsingPatchEntry
                 case 11: Subject_11(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "GuidRandomHashcodeSubjects",
+  "assemblyName": "GuidRandomHashcodePatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/guid-random-hashcode/managed/subjects/build-output/GuidRandomHashcodeSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/guid-random-hashcode/managed/patch/build-output/GuidRandomHashcodePatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "GuidRandomHashcodeSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/guid-random-hashcode/managed/subjects/build-output/GuidRandomHashcodeSubjects.dll"
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/guid-random-hashcode/managed/patch/build-output/GuidRandomHashcodePatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "27a83f9e-9f5d-4b61-bc81-88826af75ae0",
+  "inputModuleVersionId": "17100565-239c-461a-82c1-aac0df1dcabf",
   "artifacts": [
     {
       "kind": "typedIlIr",

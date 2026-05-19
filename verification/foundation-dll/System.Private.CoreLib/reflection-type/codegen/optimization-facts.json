@@ -241,7 +241,7 @@
     {
       "methodSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Run:System.Void(System.Int32)",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

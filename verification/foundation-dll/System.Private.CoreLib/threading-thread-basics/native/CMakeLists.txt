@@ -16,9 +16,15 @@ set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/build/native")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
 file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp")
+file(GLOB CHAOS_NATIVE_STUBS "*.cpp")
+list(REMOVE_ITEM CHAOS_NATIVE_STUBS
+    "${CMAKE_CURRENT_SOURCE_DIR}/runtime-entry.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/runtime-patchdata.cpp"
+)
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
+    ${CHAOS_NATIVE_STUBS}
     ${CHAOS_CODEGEN_CPP}
 )
 
@@ -30,6 +36,7 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
+    "${CHAOS_PROJECT_ROOT}/src/native/codegen"
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/src/native"

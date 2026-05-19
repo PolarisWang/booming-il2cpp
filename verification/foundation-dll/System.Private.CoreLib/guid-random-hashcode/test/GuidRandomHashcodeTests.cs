@@ -28,7 +28,7 @@ public partial class GuidRandomHashcodeTests
     public void _System_Private_CoreLib_System_Guid_ctor_System_Void_System_Byte()
     {
         // Purpose: Verify Guid..ctor with typical input
-            new Guid("00000000-0000-0000-0000-000000000000");
+            new Guid(new byte[] { 1, 2, 3 });
     }
 
     [Fact]

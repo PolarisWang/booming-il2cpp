@@ -840,7 +840,7 @@
           "tryLength": 148,
           "handlerOffset": 149,
           "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [

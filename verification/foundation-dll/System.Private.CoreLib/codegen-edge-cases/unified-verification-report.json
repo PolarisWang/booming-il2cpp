@@ -2,9 +2,9 @@
   "family": "codegen-edge-cases",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T01:07:37",
-  "duration_ms": 3430,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T13:54:47",
+  "duration_ms": 21502,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -21,54 +21,89 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\CodegenEdgeCasesSubjects.cs(23,40): error CS1501: No overload for method 'Subject_1' takes 1 arguments [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\CodegenEdgeCasesSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\CodegenEdgeCasesSubjects.cs(37,44): error CS1501: No overload for method 'Subject_3' takes 1 arguments [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\CodegenEdgeCasesSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\CodegenEdgeCasesSubjects.cs(37,86): error CS1501: No overload for method 'Subject_3' takes 1 arguments [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\CodegenEdgeCasesSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\CodegenEdgeCasesSubjects.cs(23,40): error CS1501: No overload for method 'Subject_1' takes 1 arguments [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\CodegenEdgeCasesSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\CodegenEdgeCasesSubjects.cs(37,44): error CS1501: No overload for method 'Subject_3' takes 1 arguments [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\CodegenEdgeCasesSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\CodegenEdgeCasesSubjects.cs(37,86): error CS1501: No overload for method 'Subject_3' takes 1 arguments [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\CodegenEdgeCasesSubjects.csproj]\n    0 Warning(s)\n    3 Error(s)\n\nTime Elapsed 00:00:01.22\n",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "FAILED"
-        }
+        "methodCount": 4,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\codegen-edge-cases\\managed\\subjects\\build-output\\CodegenEdgeCasesSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 3358
+      "duration_ms": 18299
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=skip (0/0)",
+      "status": "passed",
+      "summary": "Fact verify=passed (4/4)",
       "details": {
         "fact": {
-          "status": "skip",
-          "passed": 0,
-          "total": 0
+          "status": "passed",
+          "passed": 4,
+          "total": 4
         }
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 294
     },
     "audit": {
       "stage": "audit",
-      "status": "failed",
-      "summary": "false_passing=0, principle=VIOLATION",
+      "status": "passed",
+      "summary": "false_passing=0, principle=ALIGNED",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "VIOLATION",
+        "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 69
+      "duration_ms": 808
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/4 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 4,
+        "invalidCount": 4,
+        "benchmarkQuality": "matchedCount=0/4 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 2097
     }
   },
   "coverage": {
-    "methodCoverage": 0.0,
+    "methodCoverage": 100.0,
     "testedRate": 100.0,
     "overall": 100.0
   },
   "dashboard": {
     "interpreter": {},
-    "irTranslation": {},
-    "performance": {},
+    "irTranslation": {
+      "totalMethods": 4,
+      "okCount": 0,
+      "failedCount": 4,
+      "overallIrExpansionRatio": 0,
+      "averageExpansionRatio": 0,
+      "maxExpansionRatio": 0,
+      "jitInstructionAvg": 0,
+      "aotInstructionAvg": 0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {}
+    },
+    "performance": {
+      "averageSpeedupPercent": 0.0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 4,
+      "invalidCount": 4
+    },
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,
@@ -79,8 +114,21 @@
   },
   "regression": {
     "benchmark": {
-      "status": "skipped",
-      "message": "No benchmark report found"
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 4,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 4,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
     },
     "hasRegression": false,
     "regressions": []

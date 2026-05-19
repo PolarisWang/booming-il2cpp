@@ -156,7 +156,7 @@ public static partial class StringCharTextCorePatchEntry
                 case 19: Subject_19(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

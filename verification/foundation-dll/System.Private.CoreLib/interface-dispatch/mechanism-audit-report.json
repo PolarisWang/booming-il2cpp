@@ -1,13 +1,13 @@
 {
   "family": "interface-dispatch",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 40,
-  "audited": 40,
+  "total_methods": 103,
+  "audited": 103,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 40,
+  "methods_without_assert": 103,
   "passed": true,
   "method_details": [
     {
@@ -65,7 +65,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_ImplSimple__ctor",
+      "method_name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -74,7 +74,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple",
+      "method_name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_1",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -83,7 +83,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_ImplWithDefault__ctor",
+      "method_name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -92,7 +92,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault",
+      "method_name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_3",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -101,7 +101,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_CalcAdd__ctor",
+      "method_name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_4",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -110,7 +110,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_CalcMul__ctor",
+      "method_name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_5",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -119,7 +119,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc",
+      "method_name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_6",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -128,7 +128,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck",
+      "method_name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_7",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -137,7 +137,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck",
+      "method_name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -146,7 +146,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_ImplDiamond__ctor",
+      "method_name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Run_System_Int32",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -155,7 +155,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase",
+      "method_name": "RuntimeSubjects",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -164,7 +164,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived",
+      "method_name": "RuntimeFnTable",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -173,7 +173,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_ImplDiamond2__ctor",
+      "method_name": "RunNativeAot",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -182,7 +182,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti",
+      "method_name": "RunNativeAotAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -191,7 +191,16 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run",
+      "method_name": "RunNativeAotBench",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BenchmarkMethod",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -281,7 +290,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Run",
+      "method_name": "InterfaceDispatchSubjects_CalcAdd__ctor",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -290,7 +299,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_CalcAdd_Add",
+      "method_name": "InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -299,7 +308,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_CalcAdd_Multiply",
+      "method_name": "InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -308,7 +317,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_CalcMul_Add",
+      "method_name": "InterfaceDispatchSubjects_CalcMul__ctor",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -317,7 +326,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_CalcMul_Multiply",
+      "method_name": "InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -326,7 +335,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_ImplDiamond2_BaseMethod",
+      "method_name": "InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -335,7 +344,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod",
+      "method_name": "InterfaceDispatchSubjects_ImplDiamond__ctor",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -362,7 +371,565 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "InterfaceDispatchSubjects_ImplDiamond2__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplDiamond2_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplSimple__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "InterfaceDispatchSubjects_ImplSimple_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplWithDefault__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_IWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAot",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotBench",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BenchmarkMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_CalcAdd__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_CalcMul__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_IBase_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ICalculator_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ICalculator_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_IDerived_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplDiamond__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplDiamond_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplDiamond_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplDiamond2__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplDiamond2_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplSimple__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplSimple_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplWithDefault__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ImplWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_ISimple_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchSubjects_IWithDefault_GetValue",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

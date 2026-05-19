@@ -3,79 +3,85 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "EnumParsingSubjects.dll",
+      "moduleName": "EnumParsingPatchEntry.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_0",
-          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()"
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Subject_0",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_0:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_1",
-          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()"
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Subject_1",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_1:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_2",
-          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()"
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Subject_2",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_2:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_3",
-          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()"
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Subject_3",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_3:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_4",
-          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()"
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Subject_4",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_4:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_5",
-          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()"
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Subject_5",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_5:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_6",
-          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_6:System.Void()"
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Subject_6",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_6:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 7,
-          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_7",
-          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_7:System.Void()"
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Subject_7",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_7:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 8,
-          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_8",
-          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()"
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Subject_8",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_8:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 9,
-          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_9",
-          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()"
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Subject_9",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_9:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 10,
-          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_10",
-          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_10:System.Void()"
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Subject_10",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_10:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 11,
-          "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_11",
-          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_11:System.Void()"
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Subject_11",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "EnumParsingPatchEntry_EnumParsingPatchEntry_Run_System_Int32",
+          "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Run:System.Void(System.Int32)"
         }
       ]
     }

@@ -1,0 +1,22 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotManifest",
+  "assemblyName": "CodegenEdgeCasesSubjects",
+  "entrySubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/codegen-edge-cases/codegen",
+  "planArtifactPath": "native-aot.plan.json",
+  "generatedArtifacts": [
+    {
+      "kind": "shapeDispatchHeader",
+      "path": "generated/runtime_helper_shapes.h"
+    },
+    {
+      "kind": "generatedTranslationUnit",
+      "path": "generated/native-aot.generated.cpp"
+    },
+    {
+      "kind": "codegenMetrics",
+      "path": "native-aot.codegen-metrics.json"
+    }
+  ]
+}

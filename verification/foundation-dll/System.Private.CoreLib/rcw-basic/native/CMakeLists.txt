@@ -30,13 +30,13 @@ set(CHAOS_ENTRY_SOURCES
 
 # Include directories
 set(CHAOS_ENTRY_INCLUDES
-    "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
     "${CHAOS_PROJECT_ROOT}/src/native/common"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
+    "${CHAOS_PROJECT_ROOT}/src/native/codegen"
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/src/native"

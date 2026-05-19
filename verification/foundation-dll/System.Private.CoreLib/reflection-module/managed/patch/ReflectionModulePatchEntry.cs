@@ -58,7 +58,7 @@ public static partial class ReflectionModulePatchEntry
                 case 5: Subject_5(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

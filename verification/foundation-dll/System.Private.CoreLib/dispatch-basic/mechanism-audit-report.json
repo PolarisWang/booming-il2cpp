@@ -1,13 +1,13 @@
 {
   "family": "dispatch-basic",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 24,
-  "audited": 24,
+  "total_methods": 40,
+  "audited": 40,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 24,
+  "methods_without_assert": 40,
   "passed": true,
   "method_details": [
     {
@@ -65,7 +65,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_Calculator__ctor",
+      "method_name": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -74,7 +74,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_Calculator_Add",
+      "method_name": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_1",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -83,7 +83,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd",
+      "method_name": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -92,7 +92,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_Calculator_Subtract",
+      "method_name": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_3",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -101,7 +101,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub",
+      "method_name": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Subject_4",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -110,7 +110,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_StatusProvider__ctor",
+      "method_name": "DispatchBasicPatchEntry_DispatchBasicPatchEntry_Run_System_Int32",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -119,7 +119,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_StatusProvider_GetStatusCode",
+      "method_name": "RuntimeSubjects",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -128,7 +128,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus",
+      "method_name": "RuntimeFnTable",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -137,7 +137,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_BasicImpl__ctor",
+      "method_name": "RunNativeAot",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -146,7 +146,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_BasicImpl_GetValue",
+      "method_name": "RunNativeAotAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -155,7 +155,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue",
+      "method_name": "RunNativeAotBench",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -164,7 +164,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_DispatchBasicNativeEntry_Run",
+      "method_name": "BenchmarkMethod",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -218,7 +218,151 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DispatchBasicSubjects_DispatchBasicSubjects_Run",
+      "method_name": "DispatchBasicSubjects_BasicImpl__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_BasicImpl_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_Calculator__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_IBasicOp_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_ICalculator_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_ICalculator_Subtract_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_IStatusProvider_GetStatusCode",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_StatusProvider__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_StatusProvider_GetStatusCode",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

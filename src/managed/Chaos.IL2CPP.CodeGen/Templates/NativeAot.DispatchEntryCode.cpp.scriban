@@ -9,9 +9,11 @@ static void (*kAotMethods[{{ methods_count }}])() = {
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
+// Instance methods receive a sentinel this-pointer so they don't crash on null.
+static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
 static void (*kBenchmarkWrappers[{{ methods_count }}])() = {
 {{~ for method in methods ~}}
-    []() { {{~ if method.param_count == 0 ~}}kAotMethods[{{ method.index }}]();{{~ else ~}}reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR{{~ for i in method.extra_params ~}}, CHAOS_IL2CPP_INTPTR{{~ end ~}})>(kAotMethods[{{ method.index }}])({{~ for param in method.params ~}}{{~ if param.is_string && default_string_id != 0 ~}}chaos_make_string_id_value({{ default_string_id }}ULL){{~ else ~}}0{{~ end ~}}{{~ if !for.last ~}}, {{~ end ~}}{{~ end ~}});{{~ end ~}} },
+    []() { {{~ if method.param_count == 0 ~}}kAotMethods[{{ method.index }}]();{{~ else ~}}reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR{{~ for i in method.extra_params ~}}, CHAOS_IL2CPP_INTPTR{{~ end ~}})>(kAotMethods[{{ method.index }}])({{~ for param in method.params ~}}{{~ if param.is_string && default_string_id != 0 ~}}chaos_make_string_id_value({{ default_string_id }}ULL){{~ else if param.is_this ~}}reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel){{~ else ~}}0{{~ end ~}}{{~ if !for.last ~}}, {{~ end ~}}{{~ end ~}});{{~ end ~}} },
 {{~ end ~}}
 };
 

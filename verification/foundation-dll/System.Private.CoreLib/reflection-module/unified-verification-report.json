@@ -2,9 +2,9 @@
   "family": "reflection-module",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T01:06:21",
-  "duration_ms": 17076,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T14:28:37",
+  "duration_ms": 24369,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -17,35 +17,32 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "entry.exe build failed",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "OK",
-          "convert_to_cpp": "OK",
-          "build_entry_exe": "FAILED"
-        }
+        "methodCount": 6,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\build-output\\ReflectionModuleSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 16621
+      "duration_ms": 20234
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (1/6)",
+      "status": "passed",
+      "summary": "Fact verify=passed (6/6)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 1,
+          "status": "passed",
+          "passed": 6,
           "total": 6
         }
       },
       "errors": [],
-      "duration_ms": 338
+      "duration_ms": 43
     },
     "audit": {
       "stage": "audit",
@@ -59,18 +56,41 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 115
+      "duration_ms": 1032
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/6 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 6,
+        "invalidCount": 6,
+        "benchmarkQuality": "matchedCount=0/6 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 3055
     }
   },
   "coverage": {
-    "methodCoverage": 16.67,
+    "methodCoverage": 100.0,
     "testedRate": 83.33,
-    "overall": 50.0
+    "overall": 91.66
   },
   "dashboard": {
     "interpreter": {},
     "irTranslation": {},
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": 0.0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 6,
+      "invalidCount": 6
+    },
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,
@@ -81,8 +101,21 @@
   },
   "regression": {
     "benchmark": {
-      "status": "skipped",
-      "message": "No benchmark report found"
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 6,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 6,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
     },
     "hasRegression": false,
     "regressions": []

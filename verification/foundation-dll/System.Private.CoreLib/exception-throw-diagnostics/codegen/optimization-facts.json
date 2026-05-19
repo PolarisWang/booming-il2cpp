@@ -4,131 +4,99 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_0:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_1:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_1:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_2:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_2:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_3:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_3:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_4:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_5:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_5:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_6:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_6:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_7:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_7:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_8:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_9:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_9:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_10:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_10:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_11:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_11:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_12:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_12:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_13:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [
-    {
-      "methodSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Exception::get_Message:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_6:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_6:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_7:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_7:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    }
-  ],
+  "dispatchFacts": [],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
   "exceptionFacts": [
     {
-      "methodSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_3:System.Void()",
+      "methodSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Void(System.Int32)",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

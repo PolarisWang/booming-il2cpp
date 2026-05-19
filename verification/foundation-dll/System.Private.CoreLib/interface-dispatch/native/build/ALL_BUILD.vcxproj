@@ -173,6 +173,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\interface-dispatch\native\build\chaos_gen_InterfaceDispatchSubjects.vcxproj">
+      <Project>{5EF6F5C2-4F13-3F6D-9532-27CCA02B1B4E}</Project>
+      <Name>chaos_gen_InterfaceDispatchSubjects</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\interface-dispatch\native\build\entry.vcxproj">
       <Project>{5995D268-7AF7-3B5B-A448-57F1D7994B98}</Project>
       <Name>entry</Name>

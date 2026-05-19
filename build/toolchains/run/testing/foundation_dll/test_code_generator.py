@@ -893,7 +893,21 @@ def _build_call_expr(
     param_count = len(parsed["param_types"])
     override = _METHOD_OVERRIDES.get((type_name, method_name, param_count))
     if override is not None and override != "skip":
-        return override
+        # Convert.ToXxx(String) and Guid..ctor(String) overrides at
+        # (type, method, paramCount=1) apply to ALL 1-param overloads,
+        # including (Double) and (Byte[]) variants. Only apply these
+        # string-based overrides when the param type IS System.String.
+        if (
+            param_count == 1
+            and parsed["param_types"][0] != "System.String"
+            and (
+                (type_name == "Convert" and method_name.startswith("To"))
+                or (type_name == "Guid" and method_name == ".ctor")
+            )
+        ):
+            pass  # not a string param — fall through to TYPE_DEFAULT_MAP
+        else:
+            return override
 
     # Constructor: Type..ctor(...) → new Type(...)
     if method_name in (".ctor", ".cctor"):

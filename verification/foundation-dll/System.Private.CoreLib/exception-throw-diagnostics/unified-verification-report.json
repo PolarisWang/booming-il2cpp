@@ -2,9 +2,9 @@
   "family": "exception-throw-diagnostics",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T04:50:04",
-  "duration_ms": 14640,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T15:08:12",
+  "duration_ms": 18475,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\exception-throw-diagnostics\\managed\\subjects\\build-output\\ExceptionThrowDiagnosticsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 14507
+      "duration_ms": 17523
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (13/14)",
+      "status": "passed",
+      "summary": "Fact verify=passed (14/14)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 13,
+          "status": "passed",
+          "passed": 14,
           "total": 14
         }
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 87
     },
     "audit": {
       "stage": "audit",
@@ -56,13 +56,13 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 103
+      "duration_ms": 864
     }
   },
   "coverage": {
-    "methodCoverage": 92.86,
+    "methodCoverage": 100.0,
     "testedRate": 92.86,
-    "overall": 92.86
+    "overall": 96.43
   },
   "dashboard": {
     "interpreter": {},

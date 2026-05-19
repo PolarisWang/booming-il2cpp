@@ -73,13 +73,13 @@ public static partial class PrimitiveNumericConversionsSubjects
     // [10] System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.Double)
     public static void Subject_10()
     {
-        if ((int)(Convert.ToDecimal("42")) != 42) _exitCode = 1;
+        if ((int)(Convert.ToDecimal(42.0)) != 42) _exitCode = 1;
     }
 
     // [11] System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double)
     public static void Subject_11()
     {
-        if (Convert.ToInt32("42") != 42) _exitCode = 1;
+        if (Convert.ToInt32(42.0) != 42) _exitCode = 1;
     }
 
     // [12] System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)

@@ -3,23 +3,23 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-0",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_0()",
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-0",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_0:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_0()",
       "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-0",
-        "signature": "System.Void MathNumericsSubjects::Subject_0()"
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_0:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_0:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-0",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_0()"
       },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_0",
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_0",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
@@ -30,63 +30,8 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 42,
+          "operand": -1342177280,
           "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 3,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 8,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 10,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 12,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 13,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -94,7 +39,15 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 15,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -102,2439 +55,13 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 16,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 25,
-          "ilOffset": 17,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 19,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 20,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 25,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-1",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_1:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_1()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_1:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_1:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-1",
-        "signature": "System.Void MathNumericsSubjects::Subject_1()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_1",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 10,
-          "resultType": "System.Double",
-          "callee": "System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 15,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 20,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 24,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 33,
-          "ilOffset": 25,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 33,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-2",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_2:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_2()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_2:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_2:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-2",
-        "signature": "System.Void MathNumericsSubjects::Subject_2()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_2",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 10,
-          "resultType": "System.Double",
-          "callee": "System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 15,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 20,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 24,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 33,
-          "ilOffset": 25,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 33,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-3",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_3:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_3()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_3:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_3:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-3",
-        "signature": "System.Void MathNumericsSubjects::Subject_3()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_3",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 10,
-          "resultType": "System.Double",
-          "callee": "System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 15,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 20,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 24,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 33,
-          "ilOffset": 25,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 33,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-4",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_4:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_4()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_4:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_4:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-4",
-        "signature": "System.Void MathNumericsSubjects::Subject_4()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_4",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 10,
-          "resultType": "System.Double",
-          "callee": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 15,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 20,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 24,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 33,
-          "ilOffset": 25,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 33,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-5",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_5:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_5()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_5:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_5:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-5",
-        "signature": "System.Void MathNumericsSubjects::Subject_5()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_5",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 10,
-          "resultType": "System.Double",
-          "callee": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 15,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 20,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 24,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 33,
-          "ilOffset": 25,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 33,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-6",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_6:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_6()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_6:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_6:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-6",
-        "signature": "System.Void MathNumericsSubjects::Subject_6()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_6",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 3,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 5,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 10,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 12,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 14,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 15,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 17,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 18,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 27,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 22,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 27,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-7",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_7:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_7()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_7:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_7:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-7",
-        "signature": "System.Void MathNumericsSubjects::Subject_7()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_7",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 10,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 19,
-          "resultType": "System.Double",
-          "callee": "System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 25,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 27,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 29,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 30,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 32,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 33,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 42,
-          "ilOffset": 34,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 36,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 37,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 42,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-8",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_8:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_8()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_8:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_8:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-8",
-        "signature": "System.Void MathNumericsSubjects::Subject_8()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_8",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 3,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 5,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 10,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 12,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 14,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 15,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 17,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 18,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 27,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 22,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 27,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-9",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_9:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_9()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_9:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_9:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-9",
-        "signature": "System.Void MathNumericsSubjects::Subject_9()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_9",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 10,
-          "resultType": "System.Double",
-          "callee": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 15,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 6,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 17,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 19,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 20,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 22,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 23,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 32,
-          "ilOffset": 24,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 26,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 27,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 32,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-10",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_10:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_10()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_10:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_10:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-10",
-        "signature": "System.Void MathNumericsSubjects::Subject_10()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_10",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 10,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 19,
-          "resultType": "System.Double",
-          "callee": "System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 2147483647,
-          "ilOffset": 25,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 30,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 33,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 35,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 36,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 45,
-          "ilOffset": 37,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 39,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 40,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 45,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-11",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_11:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_11()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_11:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_11:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-11",
-        "signature": "System.Void MathNumericsSubjects::Subject_11()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_11",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 10,
-          "resultType": "System.Double",
-          "callee": "System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 15,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "cgt.un",
-          "opCode": 33,
-          "ilOffset": 17,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 20,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 29,
-          "ilOffset": 21,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 23,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 24,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 29,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-12",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_12:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_12()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_12:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_12:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-12",
-        "signature": "System.Void MathNumericsSubjects::Subject_12()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_12",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 10,
-          "resultType": "System.Double",
-          "callee": "System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 15,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "cgt.un",
-          "opCode": 33,
-          "ilOffset": 17,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 20,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 29,
-          "ilOffset": 21,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 23,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 24,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 29,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-13",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_13:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_13()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_13:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_13:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-13",
-        "signature": "System.Void MathNumericsSubjects::Subject_13()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_13",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 3,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 5,
-          "resultType": "System.Int64",
-          "callee": "System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 10,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1764,
-          "ilOffset": 11,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 19,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 21,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 22,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 31,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 25,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 26,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 31,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-14",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_14:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_14()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_14:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_14:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-14",
-        "signature": "System.Void MathNumericsSubjects::Subject_14()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_14",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 3,
-          "resultType": "System.Byte[]",
-          "callee": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldlen",
-          "opCode": 46,
-          "ilOffset": 8,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
           "ilOffset": 9,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 4,
-          "ilOffset": 10,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 11,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 13,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 14,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 16,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 17,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 26,
-          "ilOffset": 18,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 20,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 21,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "MathNumericsSubjects",
-            "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26,
+          "ilOffset": 10,
           "isPreserveSig": false
         }
       ],
@@ -2546,26 +73,26 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
+      "declaringAssemblyName": "MathNumericsPatchEntry"
     },
     {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-15",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_15:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_15()",
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-1",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_1:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_1()",
       "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_15:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_15:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-15",
-        "signature": "System.Void MathNumericsSubjects::Subject_15()"
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_1:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_1:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-1",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_1()"
       },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_15",
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_1",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
@@ -2574,79 +101,10 @@
       "exceptionRegions": [],
       "instructions": [
         {
-          "op": "ldc.r8",
-          "opCode": 3,
-          "operand": 42,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177279,
           "ilOffset": 1,
-          "resultType": "System.Double",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 10,
-          "resultType": "System.Byte[]",
-          "callee": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldlen",
-          "opCode": 46,
-          "ilOffset": 15,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "conv.i4",
-          "opCode": 39,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 8,
-          "ilOffset": 17,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 20,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 21,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2654,7 +112,15 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 23,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2662,46 +128,2105 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 24,
+          "ilOffset": 9,
           "isPreserveSig": false
         },
         {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 33,
-          "ilOffset": 25,
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-2",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_2:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_2()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_2:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_2:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-2",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_2()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177278,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
           "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-3",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_3:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_3()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_3:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_3:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-3",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_3()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177277,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-4",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_4:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_4()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_4:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_4:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-4",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_4()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177276,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-5",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_5:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_5()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_5:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_5:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-5",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_5()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177275,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-6",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_6:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_6()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_6:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_6:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-6",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_6()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177274,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-7",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_7:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_7()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_7:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_7:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-7",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_7()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177273,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-8",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_8:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_8()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_8:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_8:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-8",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_8()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177272,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-9",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_9:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_9()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_9:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_9:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-9",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_9()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177271,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-10",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_10:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_10()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_10:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_10:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-10",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_10()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177270,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-11",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_11:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_11()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_11:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_11:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-11",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_11()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177269,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-12",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_12:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_12()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_12:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_12:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-12",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_12()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177268,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-13",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_13:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_13()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_13:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_13:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-13",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_13()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177267,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-14",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_14:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_14()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_14:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_14:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-14",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_14()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_14",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177266,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-15",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_15:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_15()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_15:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_15:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-15",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_15()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_15",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177265,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-16",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_16:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_16()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_16:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_16:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-16",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_16()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_16",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177264,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-17",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_17:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Subject_17()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_17:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_17:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.subject-17",
+        "signature": "System.Int32 MathNumericsPatchEntry::Subject_17()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_17",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177263,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "MathNumericsPatchEntry"
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.run",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Void(System.Int32)",
+      "signature": "System.Void MathNumericsPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Void(System.Int32)",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Void(System.Int32)",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.run",
+        "signature": "System.Void MathNumericsPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Run_System_Int32",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 241,
+          "handlerOffset": 242,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            89,
+            100,
+            111,
+            119,
+            127,
+            135,
+            143,
+            151,
+            159,
+            167,
+            175,
+            183,
+            191,
+            199,
+            207,
+            215,
+            223,
+            231
+          ],
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 84,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 89,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_0:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 94,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 95,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 100,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_1:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 105,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 106,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 111,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_2:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 116,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 117,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 119,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_3:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 124,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 125,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 127,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_4:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 132,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 133,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 135,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_5:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 140,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 141,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 143,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_6:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 148,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 149,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 151,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_7:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 156,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 157,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 159,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_8:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 164,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 165,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 167,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_9:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 172,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 173,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 175,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_10:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 180,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 181,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 183,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_11:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 188,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 189,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 191,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_12:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 196,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 197,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 199,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_13:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 204,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 205,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 207,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_14:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_14:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_14:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 212,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 213,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 215,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_15:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_15:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_15:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_15",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 220,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 221,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 223,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_16:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_16:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_16:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_16",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 228,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 229,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 231,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_17:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_17:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_17:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Subject_17",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 236,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 239,
+          "ilOffset": 237,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 253,
+          "ilOffset": 240,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 242,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 27,
+          "ilOffset": 244,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
-          "ilOffset": 28,
+          "operand": "MathNumericsPatchEntry/MathNumericsPatchEntry::_exitCode",
+          "ilOffset": 245,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "MathNumericsSubjects",
+            "assemblyName": "MathNumericsPatchEntry",
             "subjectKind": "field",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode"
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "MathNumericsSubjects",
-            "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
+            "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2709,51 +2234,17 @@
           "isPreserveSig": false
         },
         {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 33,
+          "op": "leave",
+          "opCode": 50,
+          "operand": 253,
+          "ilOffset": 251,
+          "resultType": "System.Void",
           "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-16",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_16:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_16()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_16:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_16:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-16",
-        "signature": "System.Void MathNumericsSubjects::Subject_16()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_16",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
+        },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1,
+          "ilOffset": 253,
           "isPreserveSig": false
         }
       ],
@@ -2765,49 +2256,7 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
-    },
-    {
-      "methodId": "math-numerics-subjects.math-numerics-subjects.subject-17",
-      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_17:System.Void()",
-      "signature": "System.Void MathNumericsSubjects::Subject_17()",
-      "identity": {
-        "assemblyName": "MathNumericsSubjects",
-        "declaringTypeSubjectId": "MathNumericsSubjects/MathNumericsSubjects",
-        "definitionSubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_17:System.Void()",
-        "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_17:System.Void()",
-        "methodId": "math-numerics-subjects.math-numerics-subjects.subject-17",
-        "signature": "System.Void MathNumericsSubjects::Subject_17()"
-      },
-      "nativeSymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_17",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "MathNumericsSubjects"
+      "declaringAssemblyName": "MathNumericsPatchEntry"
     }
   ]
 }

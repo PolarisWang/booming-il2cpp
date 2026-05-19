@@ -65,7 +65,7 @@ public static partial class ObjectEqualityIdentityPatchEntry
                 case 6: Subject_6(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

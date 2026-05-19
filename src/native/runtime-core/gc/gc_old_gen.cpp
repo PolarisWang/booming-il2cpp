@@ -1713,16 +1713,37 @@ void MarkSweepOldGen::PlanPageEvacuation(OldGenPage* page, CompactPlan& out_plan
             void* obj = payload + obj_slot * sizeof(void*);
 
             // Determine object size from type info.
+            // Skip slots that are NOT the start of an object (interior
+            // slots like left/right pointers or pattern bytes).  Each
+            // object is marked via MarkRange(instance_size/sizeof(void*)),
+            // which sets ALL slots of the object.  Only the first slot
+            // has a valid TypeInfo pointer; interior slots have data fields.
+            // Processing every set bit as a separate object creates
+            // overlapping compact-plan entries that race in the parallel
+            // Phase 4 memcpy/memset (one worker zeros source data that
+            // another is about to read).
             CHAOS_IL2CPP_SIZE obj_size = sizeof(void*);
             const void* type_info_ptr = *static_cast<const void* const*>(obj);
-            if (type_info_ptr != nullptr) {
-                auto& registry = GcLayoutRegistry::Instance();
-                if (registry.IsValidTypeInfoPointer(type_info_ptr)) {
-                    uint64_t stable_id = registry.ReadStableId(type_info_ptr);
-                    const auto* layout = registry.Lookup(stable_id);
-                    if (layout != nullptr && layout->instance_size > 0) {
-                        obj_size = layout->instance_size;
-                    }
+            if (type_info_ptr == nullptr) continue;
+            auto& registry = GcLayoutRegistry::Instance();
+            if (!registry.IsValidTypeInfoPointer(type_info_ptr)) continue;
+            uint64_t stable_id = registry.ReadStableId(type_info_ptr);
+            const auto* layout = registry.Lookup(stable_id);
+            if (layout != nullptr && layout->instance_size > 0) {
+                obj_size = layout->instance_size;
+            }
+
+            // Advance past interior slots of this object so the inner
+            // bitmap loop doesn't create duplicate evacuation entries.
+            if (obj_size > sizeof(void*)) {
+                CHAOS_IL2CPP_SIZE obj_slots = obj_size / sizeof(void*);
+                for (CHAOS_IL2CPP_SIZE s = 1; s < obj_slots; s++) {
+                    CHAOS_IL2CPP_SIZE skip_slot = obj_slot + s;
+                    if (skip_slot >= num_slots) break;
+                    CHAOS_IL2CPP_SIZE skip_bit = skip_slot % 64;
+                    CHAOS_IL2CPP_SIZE skip_word = skip_slot / 64;
+                    if (skip_word != w) break; // crosses word boundary
+                    remaining &= ~(static_cast<uint64_t>(1) << skip_bit);
                 }
             }
 
@@ -2737,6 +2758,10 @@ void MarkSweepOldGen::BgcSweep() {
 
 void MarkSweepOldGen::BgcCompact() {
 
+    // Transfer pinned roots to compaction skip list so PlanPageEvacuation
+    // excludes them from cross-page relocation (same as Collect() does).
+    pinned_compact_skip_ = pinned_roots_;
+
     // Phase 1: Decide compaction mode (reads mark bitmap preserved by BgcSweep).
     CompactMode compact_mode = DecideCompactMode();
 
@@ -2766,6 +2791,9 @@ void MarkSweepOldGen::BgcCompact() {
             p = p->next;
         }
     }
+
+    // Clear compaction skip list (snapshot of pinned_roots_ taken above).
+    pinned_compact_skip_.clear();
 
 }
 

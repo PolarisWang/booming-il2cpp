@@ -292,6 +292,27 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_finalizer_stress_test.cpp")
             ${CHAOS_GC_COMMON_LIBS})
 endif()
 
+# oversized_stress_test — 32-85KB oversized allocation burst with deferred Full GC
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/oversized_stress_test.cpp")
+    add_executable(chaos_oversized_stress_test
+        oversized_stress_test.cpp
+        ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_oversized_stress_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_oversized_stress_test PRIVATE
+        ${CHAOS_GC_TEST_DEFS})
+    target_compile_options(chaos_oversized_stress_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(chaos_oversized_stress_test PRIVATE
+        ${CHAOS_GC_TEST_INCS})
+    target_link_libraries(chaos_oversized_stress_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+    set_target_properties(chaos_oversized_stress_test PROPERTIES
+        FOLDER "tests/contracts/native/runtime-core")
+    if(CHAOS_GC_COPY_TO_BIN)
+        list(APPEND CHAOS_GC_DEPLOY_TARGETS chaos_oversized_stress_test)
+    endif()
+endif()
+
 # memory_domain_test — MemoryDomain lifecycle + tagged allocation unit tests
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/memory_domain_test.cpp")
     add_executable(chaos_memory_domain_test memory_domain_test.cpp ${CHAOS_GC_TEST_STUBS})

@@ -3,91 +3,97 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "ExceptionThrowDiagnosticsSubjects.dll",
+      "moduleName": "ExceptionThrowDiagnosticsPatchEntry.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_0",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_0",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_0:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_1:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_1",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_1:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_2",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_2:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_2",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_2:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_3",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_3:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_3",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_3:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_4",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_4:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_4",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_4:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_5",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_5:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_5",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_5:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_6",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_6:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_6",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_6:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 7,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_7",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_7:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_7",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_7:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 8,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_8",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_8:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_8",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_8:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 9,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_9",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_9:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_9",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_9:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 10,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_10",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_10:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_10",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_10:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 11,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_11:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_11",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_11:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 12,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_12:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_12",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_12:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 13,
-          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13",
-          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()"
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Subject_13",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Subject_13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Run_System_Int32",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Void(System.Int32)"
         }
       ]
     }

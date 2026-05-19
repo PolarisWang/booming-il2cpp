@@ -2,9 +2,9 @@
   "family": "reflection-type",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T01:05:45",
-  "duration_ms": 22229,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T14:31:34",
+  "duration_ms": 33034,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -21,31 +21,28 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "entry.exe build failed",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "OK",
-          "convert_to_cpp": "OK",
-          "build_entry_exe": "FAILED"
-        }
+        "methodCount": 43,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-type\\managed\\subjects\\build-output\\ReflectionTypeSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 21391
+      "duration_ms": 27308
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (37/43)",
+      "status": "passed",
+      "summary": "Fact verify=passed (43/43)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 37,
+          "status": "passed",
+          "passed": 43,
           "total": 43
         }
       },
       "errors": [],
-      "duration_ms": 600
+      "duration_ms": 59
     },
     "audit": {
       "stage": "audit",
@@ -59,18 +56,41 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 234
+      "duration_ms": 1648
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/43 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 43,
+        "invalidCount": 43,
+        "benchmarkQuality": "matchedCount=0/43 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 4014
     }
   },
   "coverage": {
-    "methodCoverage": 86.05,
+    "methodCoverage": 100.0,
     "testedRate": 93.02,
-    "overall": 89.53
+    "overall": 96.51
   },
   "dashboard": {
     "interpreter": {},
     "irTranslation": {},
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": 0.0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 43,
+      "invalidCount": 43
+    },
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,
@@ -81,8 +101,21 @@
   },
   "regression": {
     "benchmark": {
-      "status": "skipped",
-      "message": "No benchmark report found"
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 43,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 43,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
     },
     "hasRegression": false,
     "regressions": []
