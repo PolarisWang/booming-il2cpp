@@ -31,6 +31,9 @@ struct CodeGenConfig {
     // If true, enable basic register caching (map hot GPRs to x64 regs).
     bool enable_register_caching = true;
 
+    // If true, run the IR optimizer (constant folding + DCE) before codegen.
+    bool enable_optimizer = true;
+
     // If true, record deoptimization metadata at call sites.
     bool enable_deopt = true;
 

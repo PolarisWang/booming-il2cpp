@@ -22,6 +22,7 @@
 #include <windows.h>
 #include <cstdint>
 
+#include <chaos/profile.h>
 #include <codegen_bridge.h>
 
 #include <cstdio>
@@ -1423,6 +1424,8 @@ static bool Test_Benchmark() {
         }
     }
 
+    CHAOS_IL2CPP_PROFILE_DUMP();
+
     std::printf("\n");
     return true;
 }
@@ -1559,6 +1562,8 @@ static bool Test_BenchmarkExtended() {
                     (unsigned long long)avg, (unsigned long long)best,
                     static_cast<double>(re_cycles) / avg);
     }
+
+    CHAOS_IL2CPP_PROFILE_DUMP();
 
     return true;
 }
@@ -2299,6 +2304,41 @@ static bool Test_Fuzz() {
                         uint64_t ret_buf2[2] = {};
                         native_entry(args_buf2, ret_buf2);
                         std::printf("      T4 re-run: val=0x%llx\n", (unsigned long long)ret_buf2[0]);
+                    }
+                    // Diagnostic: re-generate without register caching to isolate graph coloring bug
+                    {
+                        CodeGenConfig cfg_no_cache;
+                        cfg_no_cache.enable_deopt = true;
+                        cfg_no_cache.safepoint_fn = nullptr;
+                        cfg_no_cache.enable_register_caching = false;
+                        auto* nm_nc = GenerateNativeCode(rm, cfg_no_cache);
+                        if (nm_nc != nullptr) {
+                            void* entry_nc = SealAndGetEntry(nm_nc);
+                            if (entry_nc != nullptr) {
+                                bool crashed_nc = false;
+                                uint64_t val_nc = ExecuteNativeSafe(entry_nc, crashed_nc);
+                                std::printf("      T4 (no-cache): val=0x%llx crashed=%d\n",
+                                            (unsigned long long)val_nc, crashed_nc);
+                            }
+                        }
+                    }
+                    // Diagnostic: re-generate with neither caching nor optimization
+                    {
+                        CodeGenConfig cfg_raw;
+                        cfg_raw.enable_deopt = true;
+                        cfg_raw.safepoint_fn = nullptr;
+                        cfg_raw.enable_register_caching = false;
+                        cfg_raw.enable_optimizer = false;
+                        auto* nm_raw = GenerateNativeCode(rm, cfg_raw);
+                        if (nm_raw != nullptr) {
+                            void* entry_raw = SealAndGetEntry(nm_raw);
+                            if (entry_raw != nullptr) {
+                                bool crashed_raw = false;
+                                uint64_t val_raw = ExecuteNativeSafe(entry_raw, crashed_raw);
+                                std::printf("      T4 (no-opt):      val=0x%llx crashed=%d\n",
+                                            (unsigned long long)val_raw, crashed_raw);
+                            }
+                        }
                     }
                 }
             }
