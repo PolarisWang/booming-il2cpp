@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -982,13 +983,13 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2(vo
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_0{};
 	{
 		const auto chaos_value = _s0;
-		chaos_box_storage_0.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-		chaos_box_storage_0.value = chaos_value;
+		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+		chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+		chaos_boxed->value = chaos_value;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 	}
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
 	{
 		const auto chaos_arg_0 = _s0;
 		chaos_external_runtime_System_Private_CoreLib_System_GC__KeepAlive_System_Void_System_Object_(chaos_arg_0);
@@ -1012,13 +1013,13 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3(vo
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_0{};
 	{
 		const auto chaos_value = _s0;
-		chaos_box_storage_0.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-		chaos_box_storage_0.value = chaos_value;
+		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+		chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+		chaos_boxed->value = chaos_value;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 	}
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
 	{
 		const auto chaos_arg_0 = _s0;
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[4])(chaos_arg_0);

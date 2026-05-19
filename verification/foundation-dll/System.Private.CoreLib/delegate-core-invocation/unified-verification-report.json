@@ -2,8 +2,8 @@
   "family": "delegate-core-invocation",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T23:14:01",
-  "duration_ms": 10700,
+  "timestamp": "2026-05-20T01:08:28",
+  "duration_ms": 26015,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -17,34 +17,32 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "convert-to-cpp failed",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "OK",
-          "convert_to_cpp": "FAILED"
-        }
+        "methodCount": 10,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\delegate-core-invocation\\managed\\subjects\\build-output\\DelegateCoreInvocationSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 9870
+      "duration_ms": 21648
     },
     "fact": {
       "stage": "fact",
       "status": "passed",
-      "summary": "Fact verify=passed (10/10)",
+      "summary": "Fact verify=passed (16/16)",
       "details": {
         "fact": {
           "status": "passed",
-          "passed": 10,
-          "total": 10
+          "passed": 16,
+          "total": 16
         }
       },
       "errors": [],
-      "duration_ms": 34
+      "duration_ms": 343
     },
     "audit": {
       "stage": "audit",
@@ -58,7 +56,23 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 794
+      "duration_ms": 1113
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/10 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 10,
+        "invalidCount": 10,
+        "benchmarkQuality": "matchedCount=0/10 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 2908
     }
   },
   "coverage": {
@@ -68,8 +82,28 @@
   },
   "dashboard": {
     "interpreter": {},
-    "irTranslation": {},
-    "performance": {},
+    "irTranslation": {
+      "totalMethods": 10,
+      "okCount": 0,
+      "failedCount": 10,
+      "overallIrExpansionRatio": 0,
+      "averageExpansionRatio": 0,
+      "maxExpansionRatio": 0,
+      "jitInstructionAvg": 0,
+      "aotInstructionAvg": 0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {}
+    },
+    "performance": {
+      "averageSpeedupPercent": 0.0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 10,
+      "invalidCount": 10
+    },
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,

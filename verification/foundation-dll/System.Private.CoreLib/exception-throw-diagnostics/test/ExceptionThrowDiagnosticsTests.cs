@@ -33,6 +33,14 @@ public partial class ExceptionThrowDiagnosticsTests
     }
 
     [Fact]
+    public void _System_Private_CoreLib_System_Exception_get_StackTrace_System_String()
+    {
+        // Purpose: Verify Exception.get_StackTrace with typical input
+            var result = ((new Exception().StackTrace) ?? "");
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
     public void _System_Private_CoreLib_System_Exception_get_HResult_System_Int32()
     {
         // Purpose: Verify Exception.get_HResult with typical input
@@ -111,13 +119,5 @@ public partial class ExceptionThrowDiagnosticsTests
     {
         // Purpose: Smoke — Exception.GetBaseException with complex param(s)
             _ = new Exception().GetBaseException();
-    }
-
-    // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — get_StackTrace with 0 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Exception_get_StackTrace_System_String()
-    {
-        // TODO: Exception.get_StackTrace needs manual impl
     }
 }

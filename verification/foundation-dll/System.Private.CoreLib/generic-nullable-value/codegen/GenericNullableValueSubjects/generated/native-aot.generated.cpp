@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -725,64 +726,9 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
-// Managed method: GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0()
+// AOT-unreachable stub: GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()
 extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_0(void)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	_s1 = _s0;
-	{
-		const auto chaos_address = _s1;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_Int32___get_HasValue_System_Boolean__(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
-		{
-			if (_s0 != 0)
-			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				{
-					auto chaos_value = _s0;
-					chaos_static_GenericNullableValueSubjects_GenericNullableValueSubjects___exitCode = chaos_value;
-				}
-			}
-			return;
-		}
-	}
 }
 
 // Managed method: GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_1()
@@ -889,75 +835,9 @@ extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subjec
 	return;
 }
 
-// Managed method: GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_4()
+// AOT-unreachable stub: GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_4:System.Void()
 extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_4(void)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-
-
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	_s1 = _s0;
-	{
-		const auto chaos_address = _s1;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_0{};
-	{
-		const auto chaos_value = _s1;
-		chaos_box_storage_0.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-		chaos_box_storage_0.value = chaos_value;
-	}
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (_s1 != 0)
-		{
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
-		{
-			if (_s0 != 0)
-			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				{
-					auto chaos_value = _s0;
-					chaos_static_GenericNullableValueSubjects_GenericNullableValueSubjects___exitCode = chaos_value;
-				}
-			}
-			return;
-		}
-	}
 }
 
 // Managed method: GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_5()
@@ -1064,79 +944,9 @@ extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subjec
 	}
 }
 
-// Managed method: GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_7()
+// AOT-unreachable stub: GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_7:System.Void()
 extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_7(void)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_0{};
-	{
-		const auto chaos_value = _s0;
-		chaos_box_storage_0.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-		chaos_box_storage_0.value = chaos_value;
-	}
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_1{};
-	{
-		const auto chaos_value = _s1;
-		chaos_box_storage_1.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-		chaos_box_storage_1.value = chaos_value;
-	}
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-		{
-			if (_s0 != 0)
-			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				{
-					auto chaos_value = _s0;
-					chaos_static_GenericNullableValueSubjects_GenericNullableValueSubjects___exitCode = chaos_value;
-				}
-			}
-			return;
-		}
-	}
 }
 
 // Managed method: GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_8()
@@ -1157,13 +967,13 @@ extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subjec
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_0{};
 	{
 		const auto chaos_value = _s0;
-		chaos_box_storage_0.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-		chaos_box_storage_0.value = chaos_value;
+		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+		chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+		chaos_boxed->value = chaos_value;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 	}
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
 	{
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)
@@ -1209,13 +1019,13 @@ extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subjec
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_0{};
 	{
 		const auto chaos_value = _s0;
-		chaos_box_storage_0.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-		chaos_box_storage_0.value = chaos_value;
+		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+		chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+		chaos_boxed->value = chaos_value;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 	}
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
 	{
 		const auto chaos_arg_0 = _s0;
 		if (chaos_arg_0 == 0)

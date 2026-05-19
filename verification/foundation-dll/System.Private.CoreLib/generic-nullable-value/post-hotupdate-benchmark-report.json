@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/generic/nullable/value",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::get_HasValue:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 1.65,
+      "postPatchNsPerOp": 1.9,
+      "slowdownPercent": 15.15
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::get_Value:T()",
+      "status": "passed",
+      "prePatchNsPerOp": 145.9,
+      "postPatchNsPerOp": 138.3,
+      "slowdownPercent": -5.21
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::GetHashCode:System.Int32()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::ToString:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.71,
+      "postPatchNsPerOp": 5.7,
+      "slowdownPercent": 110.33
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.ValueType::GetHashCode:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 137.42,
+      "postPatchNsPerOp": 138.4,
+      "slowdownPercent": 0.71
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.ValueType::ToString:System.String()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    }
+  ],
+  "summary": {
+    "totalMethods": 10,
+    "nonStubMethods": 4,
+    "averageSlowdownPercent": 30.24,
+    "slowdownFactor": 1.3024,
+    "slowdownThresholdX": 50.0
+  }
+}

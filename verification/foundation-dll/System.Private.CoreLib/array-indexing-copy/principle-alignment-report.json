@@ -1,7 +1,7 @@
 {
   "family": "array-indexing-copy",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T23:11:27.357997",
+  "generated_at": "2026-05-20T01:04:53.032817",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -331,32 +331,31 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "2 of 11 changed source files are outside expected architecture layers",
+      "summary": "2 of 7 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "file": "codegen_diag.txt",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/native/common/chaos/common.h",
+          "file": "codegen_ldloc_diag.txt",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 11,
+        "changed_source_count": 7,
         "layer_distribution": {
-          "TestInfra": 2,
-          "Templates": 2,
-          "RuntimeCore": 4,
-          "Tests": 1
+          "TestInfra": 1,
+          "Emitter": 2,
+          "Tests": 2
         },
         "violations": [
           {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "file": "codegen_diag.txt",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/native/common/chaos/common.h",
+            "file": "codegen_ldloc_diag.txt",
             "reason": "outside expected architecture layers"
           }
         ]

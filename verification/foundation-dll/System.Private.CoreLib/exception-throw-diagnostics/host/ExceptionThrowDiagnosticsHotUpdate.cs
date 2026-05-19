@@ -36,7 +36,7 @@ public static class ExceptionThrowDiagnosticsHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Exception::get_StackTrace:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ExceptionThrowDiagnostics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Exception_get_StackTrace_System_String() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Exception_get_StackTrace_System_String() { _ = ((new Exception().StackTrace) ?? ""); }
     // Verify Exception.get_HResult after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Exception::get_HResult:System.Int32()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ExceptionThrowDiagnostics)]

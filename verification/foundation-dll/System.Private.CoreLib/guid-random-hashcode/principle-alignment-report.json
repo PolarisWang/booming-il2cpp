@@ -1,17 +1,17 @@
 {
   "family": "guid-random-hashcode",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T00:47:44.346129",
+  "generated_at": "2026-05-20T01:11:47.241166",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "Average speedup -162.93% — native significantly slower than managed [overridden — codegen-mode=jit, interpreter path is expected to be slower]",
+      "summary": "Average speedup -144.0% — native significantly slower than managed [overridden — codegen-mode=jit, interpreter path is expected to be slower]",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -162.93,
-        "managed_faster_count": 9,
-        "native_faster_count": 1
+        "average_speedup_percent": -144.0,
+        "managed_faster_count": 8,
+        "native_faster_count": 2
       }
     },
     "p1_lowering": {
@@ -348,29 +348,11 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "CONCERN",
-      "summary": "1 of 22 changed source files are outside expected architecture layers",
-      "details": [
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        }
-      ],
+      "status": "VIOLATION",
+      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
+      "details": [],
       "evidence": {
-        "changed_source_count": 22,
-        "layer_distribution": {
-          "TestInfra": 2,
-          "Emitter": 3,
-          "RuntimeSupport": 1,
-          "RuntimeCore": 14,
-          "Tests": 1
-        },
-        "violations": [
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          }
-        ]
+        "error": "'NoneType' object has no attribute 'strip'"
       }
     },
     "p2_no_bare_new": {
@@ -431,9 +413,9 @@
   "summary": {
     "total": 12,
     "aligned": 8,
-    "concern": 1,
-    "violation": 1,
+    "concern": 0,
+    "violation": 2,
     "not_applicable": 2,
-    "overall": "CONCERN"
+    "overall": "VIOLATION"
   }
 }

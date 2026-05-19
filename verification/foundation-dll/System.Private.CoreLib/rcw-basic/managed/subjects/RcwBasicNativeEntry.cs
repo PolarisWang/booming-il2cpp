@@ -56,8 +56,10 @@ public static class RcwBasicNativeEntry
         {
             case 0: return TestRcwRoundTripIdentity();
             case 1: return TestRcwRoundTripQi();
-            case 2: return TestRcwVtableMethodCall();
-            case 3: return TestRcwDirectVtable();
+            case 2: return TestRcwMultipleWrappers();
+            case 3: return TestRcwQiUnknownInterface();
+            case 4: return TestRcwVtableMethodCall();
+            case 5: return TestRcwDirectVtable();
             default: return -1;
         }
     }
@@ -117,7 +119,59 @@ public static class RcwBasicNativeEntry
         return 0;
     }
 
-    // [2] RCW-aware method dispatch via ComVtable:
+    // [2] Multiple wrappers identity test:
+    //   Create CCW → wrap in RCW → wrap again → both RCW wrappers should be identical
+    public static int TestRcwMultipleWrappers()
+    {
+        IntPtr runtimeState = RuntimeState.Get();
+        if (runtimeState == IntPtr.Zero) return 1;
+
+        IntPtr ccwUnknown = CreateCcwForSimpleMath(runtimeState);
+        if (ccwUnknown == IntPtr.Zero) return 2;
+
+        IntPtr rcw1 = MarshalCreateRcw(ccwUnknown);
+        if (rcw1 == IntPtr.Zero) return 3;
+
+        IntPtr rcw2 = MarshalCreateRcw(ccwUnknown);
+        if (rcw2 == IntPtr.Zero) { MarshalReleaseRcw(rcw1); return 4; }
+
+        if (rcw1 != rcw2) { MarshalReleaseRcw(rcw1); MarshalReleaseRcw(rcw2); return 5; }
+
+        MarshalReleaseRcw(rcw1);
+        return 0;
+    }
+
+    // [3] QI for unknown interface test:
+    //   Create CCW → wrap in RCW → QI with unregistered GUID → should return IntPtr.Zero
+    public static int TestRcwQiUnknownInterface()
+    {
+        IntPtr runtimeState = RuntimeState.Get();
+        if (runtimeState == IntPtr.Zero) return 1;
+
+        IntPtr ccwUnknown = CreateCcwForSimpleMath(runtimeState);
+        if (ccwUnknown == IntPtr.Zero) return 2;
+
+        IntPtr rcw = MarshalCreateRcw(ccwUnknown);
+        if (rcw == IntPtr.Zero) return 3;
+
+        // Zero GUID (unregistered interface) — QI should return null
+        byte[] guidBytes = new byte[16] {
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+        };
+        IntPtr guidPtr = Marshal.AllocHGlobal(16);
+        Marshal.Copy(guidBytes, 0, guidPtr, 16);
+
+        IntPtr ifacePtr = MarshalRcwQueryInterface(rcw, guidPtr);
+        Marshal.FreeHGlobal(guidPtr);
+
+        if (ifacePtr != IntPtr.Zero) return 4;
+
+        MarshalReleaseRcw(rcw);
+        return 0;
+    }
+
+    // [4] RCW-aware method dispatch via ComVtable:
     //   Create CCW → wrap in RCW → call Add(3,4) via RCW-aware dispatch helper
     public static int TestRcwVtableMethodCall()
     {
@@ -138,7 +192,7 @@ public static class RcwBasicNativeEntry
         return 0;
     }
 
-    // [3] Direct ComVtable dispatch (no RCW check):
+    // [5] Direct ComVtable dispatch (no RCW check):
     //   Create CCW → call Add(10,5) via direct dispatch on raw CCW pointer
     public static int TestRcwDirectVtable()
     {

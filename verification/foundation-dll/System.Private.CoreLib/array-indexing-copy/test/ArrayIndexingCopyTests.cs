@@ -109,9 +109,9 @@ public partial class ArrayIndexingCopyTests
             Array.Sort(new byte[1], System.Collections.Generic.Comparer<byte>.Default);
     }
 
-    // === needs-manual (operator/protected/etc) ===
+    // === needs-manual (ref/pointer/generic) ===
 
-    [Fact(Skip = "needs-manual — Resize with 2 params requires manual implementation")]
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void _System_Private_CoreLib_System_Array_Resize_System_Void_T_System_Int32()
     {
         // TODO: Array.Resize needs manual impl

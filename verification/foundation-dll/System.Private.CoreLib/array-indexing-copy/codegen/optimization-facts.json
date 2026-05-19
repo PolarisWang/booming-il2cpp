@@ -8,6 +8,11 @@
       "reason": "closed-world-type"
     },
     {
+      "subjectKind": "type",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "reason": "closed-world-type"
+    },
+    {
       "subjectKind": "method",
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
@@ -71,14 +76,41 @@
       "subjectKind": "method",
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
       "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Int32()",
+      "reason": "closed-world-method"
     }
   ],
   "dispatchFacts": [
+    {
+      "methodSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::Invoke:System.Int32()",
+      "devirtualized": false
+    },
     {
       "methodSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Int32()",
+      "devirtualized": true
     }
   ],
   "layoutFacts": [
@@ -87,6 +119,18 @@
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
     }
   ],
   "exceptionFacts": []

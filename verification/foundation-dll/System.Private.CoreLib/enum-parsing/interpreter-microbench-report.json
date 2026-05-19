@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/enum/parsing",
-  "capturedAt": "2026-05-19T19:30:48",
+  "capturedAt": "2026-05-20T01:13:22",
   "metrics": {
     "poolSize": 0
   },
-  "rawOutput": "[2026-05-19T19:30:48][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T19:30:48][WARN][CRAG] young_collection_no_region\n[2026-05-19T19:30:48][INFO][OldGen] init initial_pages=2\n[2026-05-19T19:30:48][INFO][OldGen] init done base=0x2597145804800 pages=2\n[2026-05-19T19:30:48][DEBUG][codegen] T4 VEH handler registered\nPassed: 12/12\n[2026-05-19T19:30:48][DEBUG][BGC] thread_started\n[2026-05-19T19:30:48][DEBUG][Finalizer] thread_started id={0}\n"
+  "rawOutput": "[2026-05-20T01:13:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T01:13:22][WARN][CRAG] young_collection_no_region\n[2026-05-20T01:13:22][INFO][OldGen] init initial_pages=2\n[2026-05-20T01:13:22][INFO][OldGen] init done base=0x1669941166080 pages=2\n[2026-05-20T01:13:22][DEBUG][codegen] T4 VEH handler registered\nPassed: 12/12\n"
 }

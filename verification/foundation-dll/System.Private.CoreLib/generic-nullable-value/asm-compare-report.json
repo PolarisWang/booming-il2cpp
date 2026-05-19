@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/generic/nullable/value",
+  "capturedAt": "2026-05-20T01:06:50",
+  "batchMode": true,
+  "summary": {
+    "totalMethods": 10,
+    "okCount": 0,
+    "failedCount": 10,
+    "skippedCount": 0,
+    "jitInstructionCount": {
+      "min": 0,
+      "max": 0,
+      "avg": 0,
+      "total": 0
+    },
+    "aotInstructionCount": {
+      "min": 0,
+      "max": 0,
+      "avg": 0,
+      "total": 0
+    },
+    "totalExternalRuntimeCalls": 0,
+    "totalVirtualDispatches": 0,
+    "totalBoxingOps": 0,
+    "topInstructionCategories": {},
+    "overallIrExpansionRatio": 0,
+    "averageExpansionRatio": 0
+  },
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::get_HasValue:System.Boolean()",
+      "shortName": "System.Nullable`1::get_HasValue",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 148)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_HasValue\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_Value\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::GetValueOrDefault\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\",
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object) -> System.Private.CoreLib/System.Nullable<System.Int32>::Equals:System.Boolean(System.Object)\n[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::GetHashCode:System.Int32() -> System.Private.CoreLib/System.Nullable<System.Int32>::GetHashCode:System.Int32()\n[constra"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::get_Value:T()",
+      "shortName": "System.Nullable`1::get_Value",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 148)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_HasValue\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_Value\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::GetValueOrDefault\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\",
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object) -> System.Private.CoreLib/System.Nullable<System.Int32>::Equals:System.Boolean(System.Object)\n[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::GetHashCode:System.Int32() -> System.Private.CoreLib/System.Nullable<System.Int32>::GetHashCode:System.Int32()\n[constra"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T()",
+      "shortName": "System.Nullable`1::GetValueOrDefault",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 148)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_HasValue\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_Value\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::GetValueOrDefault\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\",
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object) -> System.Private.CoreLib/System.Nullable<System.Int32>::Equals:System.Boolean(System.Object)\n[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::GetHashCode:System.Int32() -> System.Private.CoreLib/System.Nullable<System.Int32>::GetHashCode:System.Int32()\n[constra"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)",
+      "shortName": "System.Nullable`1::GetValueOrDefault",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 148)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_HasValue\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_Value\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::GetValueOrDefault\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\",
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object) -> System.Private.CoreLib/System.Nullable<System.Int32>::Equals:System.Boolean(System.Object)\n[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::GetHashCode:System.Int32() -> System.Private.CoreLib/System.Nullable<System.Int32>::GetHashCode:System.Int32()\n[constra"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)",
+      "shortName": "System.Nullable`1::Equals",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 148)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_HasValue\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_Value\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::GetValueOrDefault\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\",
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object) -> System.Private.CoreLib/System.Nullable<System.Int32>::Equals:System.Boolean(System.Object)\n[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::GetHashCode:System.Int32() -> System.Private.CoreLib/System.Nullable<System.Int32>::GetHashCode:System.Int32()\n[constra"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::GetHashCode:System.Int32()",
+      "shortName": "System.Nullable`1::GetHashCode",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 148)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_HasValue\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_Value\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::GetValueOrDefault\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\",
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object) -> System.Private.CoreLib/System.Nullable<System.Int32>::Equals:System.Boolean(System.Object)\n[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::GetHashCode:System.Int32() -> System.Private.CoreLib/System.Nullable<System.Int32>::GetHashCode:System.Int32()\n[constra"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::ToString:System.String()",
+      "shortName": "System.Nullable`1::ToString",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 148)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_HasValue\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_Value\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::GetValueOrDefault\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\",
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object) -> System.Private.CoreLib/System.Nullable<System.Int32>::Equals:System.Boolean(System.Object)\n[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::GetHashCode:System.Int32() -> System.Private.CoreLib/System.Nullable<System.Int32>::GetHashCode:System.Int32()\n[constra"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)",
+      "shortName": "System.ValueType::Equals",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 148)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_HasValue\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_Value\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::GetValueOrDefault\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\",
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object) -> System.Private.CoreLib/System.Nullable<System.Int32>::Equals:System.Boolean(System.Object)\n[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::GetHashCode:System.Int32() -> System.Private.CoreLib/System.Nullable<System.Int32>::GetHashCode:System.Int32()\n[constra"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.ValueType::GetHashCode:System.Int32()",
+      "shortName": "System.ValueType::GetHashCode",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 148)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_HasValue\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_Value\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::GetValueOrDefault\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\",
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object) -> System.Private.CoreLib/System.Nullable<System.Int32>::Equals:System.Boolean(System.Object)\n[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::GetHashCode:System.Int32() -> System.Private.CoreLib/System.Nullable<System.Int32>::GetHashCode:System.Int32()\n[constra"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.ValueType::ToString:System.String()",
+      "shortName": "System.ValueType::ToString",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 148)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_HasValue\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::get_Value\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\u00601::GetValueOrDefault\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Nullable\\",
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object) -> System.Private.CoreLib/System.Nullable<System.Int32>::Equals:System.Boolean(System.Object)\n[constrained] System.Private.CoreLib/System.Nullable<System.Int32> :: System.Private.CoreLib/System.Object::GetHashCode:System.Int32() -> System.Private.CoreLib/System.Nullable<System.Int32>::GetHashCode:System.Int32()\n[constra"
+    }
+  ]
+}

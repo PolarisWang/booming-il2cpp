@@ -2,8 +2,8 @@
   "family": "math-numerics",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T19:13:49",
-  "duration_ms": 31661,
+  "timestamp": "2026-05-20T01:13:44",
+  "duration_ms": 47691,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\math-numerics\\managed\\subjects\\build-output\\MathNumericsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 27878
+      "duration_ms": 36439
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 55
+      "duration_ms": 545
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 957
+      "duration_ms": 2558
     },
     "benchmark": {
       "stage": "benchmark",
@@ -72,7 +72,7 @@
         "benchmarkQuality": "matchedCount=0/18 below threshold 50%"
       },
       "errors": [],
-      "duration_ms": 2768
+      "duration_ms": 8146
     }
   },
   "coverage": {

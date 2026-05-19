@@ -2,8 +2,8 @@
   "family": "exception-throw-diagnostics",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T19:09:45",
-  "duration_ms": 21330,
+  "timestamp": "2026-05-20T01:09:53",
+  "duration_ms": 28957,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\exception-throw-diagnostics\\managed\\subjects\\build-output\\ExceptionThrowDiagnosticsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 18052
+      "duration_ms": 23472
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 37
+      "duration_ms": 465
     },
     "audit": {
       "stage": "audit",
@@ -51,12 +51,12 @@
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
-        "skipsFound": 1,
+        "skipsFound": 0,
         "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 779
+      "duration_ms": 1006
     },
     "benchmark": {
       "stage": "benchmark",
@@ -72,13 +72,13 @@
         "benchmarkQuality": "matchedCount=0/14 below threshold 50%"
       },
       "errors": [],
-      "duration_ms": 2459
+      "duration_ms": 4011
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
-    "testedRate": 92.86,
-    "overall": 96.43
+    "testedRate": 100.0,
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {},

@@ -10,6 +10,9 @@
   "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
   "translationUnitMode": "runtime-skeleton",
   "translationUnitMethodSubjectIds": [
+    "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+    "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+    "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Int32()",
     "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
     "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_10:System.Void()",
     "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_11:System.Void()",
@@ -24,15 +27,15 @@
     "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_8:System.Void()",
     "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()"
   ],
-  "translationUnitMethodCount": 13,
+  "translationUnitMethodCount": 16,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 13,
+      "methodCount": 16,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
-      "firstMethodSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
+      "firstMethodSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
       "lastMethodSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()"
     }
   ],

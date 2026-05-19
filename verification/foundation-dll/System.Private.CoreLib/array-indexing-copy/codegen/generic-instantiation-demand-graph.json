@@ -124,6 +124,26 @@
       "requestingAssemblyName": "ArrayIndexingCopySubjects",
       "owningAssemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Resize\u003CSystem.Byte\u003E:System.Void(System.Byte[]\u0026,System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Array::Resize:System.Void(!!0[]\u0026,System.Int32)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Private.CoreLib/System.Array::Resize:System.Void(!!0[]\u0026,System.Int32)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ArrayIndexingCopySubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Array::Reverse\u003CSystem.Byte\u003E:System.Void(System.Byte[])",
       "definitionSubjectId": "System.Private.CoreLib/System.Array::Reverse:System.Void(!!0[])",
       "demandSourceKind": "methodSpec",
@@ -178,6 +198,46 @@
       "supportKindCode": 3,
       "specializationKindCode": 2,
       "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ArrayIndexingCopySubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00601::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00601::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ArrayIndexingCopySubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::Invoke:System.Int32()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00601::Invoke:!0()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00601::Invoke:!0()",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
       "isCrossAssembly": true
     }
   ]

@@ -1,7 +1,7 @@
 {
   "family": "interface-dispatch",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T00:44:43.499154",
+  "generated_at": "2026-05-20T01:12:14.814545",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -250,18 +250,11 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "ALIGNED",
-      "summary": "All 21 changed source files within expected architecture layers",
+      "status": "VIOLATION",
+      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
       "details": [],
       "evidence": {
-        "changed_source_count": 21,
-        "layer_distribution": {
-          "TestInfra": 2,
-          "Emitter": 3,
-          "RuntimeSupport": 1,
-          "RuntimeCore": 14,
-          "Tests": 1
-        }
+        "error": "'NoneType' object has no attribute 'strip'"
       }
     },
     "p2_no_bare_new": {
@@ -320,9 +313,9 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 9,
+    "aligned": 8,
     "concern": 0,
-    "violation": 0,
+    "violation": 1,
     "not_applicable": 3,
     "overall": "ALIGNED"
   }

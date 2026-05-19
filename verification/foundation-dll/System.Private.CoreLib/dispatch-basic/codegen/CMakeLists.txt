@@ -36,7 +36,6 @@ set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
 # Assembly: DispatchBasicSubjects
 add_library(chaos_gen_DispatchBasicSubjects STATIC
-    ${CHAOS_GEN_DIR}/DispatchBasicSubjects/generated/chaos_generated_module.cpp
     ${CHAOS_GEN_DIR}/DispatchBasicSubjects/generated/native-aot.generated.cpp
 )
 

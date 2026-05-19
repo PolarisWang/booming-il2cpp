@@ -3,1076 +3,70 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-0",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_0:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_0()",
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-0",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_0:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_0()",
       "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_0:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_0:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-0",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_0()"
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_0:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_0:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-0",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_0()"
       },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_0",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177280,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-1",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_1:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_1()",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_1:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_1:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-1",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_1()"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_1",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177279,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-2",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_2:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_2()",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_2:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_2:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-2",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_2()"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_2",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177278,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-3",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_3:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_3()",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_3:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_3:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-3",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_3()"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_3",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177277,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-4",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_4:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_4()",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_4:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_4:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-4",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_4()"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_4",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177276,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-5",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_5:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_5()",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_5:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_5:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-5",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_5()"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_5",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177275,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-6",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_6:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_6()",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_6:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_6:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-6",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_6()"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_6",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177274,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-7",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_7:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_7()",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_7:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_7:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-7",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_7()"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_7",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177273,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-8",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_8:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_8()",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_8:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_8:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-8",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_8()"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_8",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177272,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-9",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_9:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_9()",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_9:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_9:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-9",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_9()"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_9",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177271,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-10",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_10:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_10()",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_10:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_10:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-10",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_10()"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_10",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177270,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-11",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_11:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_11()",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_11:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_11:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-11",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_11()"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_11",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177269,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-12",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_12:System.Int32()",
-      "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_12()",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_12:System.Int32()",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_12:System.Int32()",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.subject-12",
-        "signature": "System.Int32 GlobalizationCulturePatchEntry::Subject_12()"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_12",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177268,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
-    },
-    {
-      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.run",
-      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Run:System.Void(System.Int32)",
-      "signature": "System.Void GlobalizationCulturePatchEntry::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "GlobalizationCulturePatchEntry",
-        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
-        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Run:System.Void(System.Int32)",
-        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Run:System.Void(System.Int32)",
-        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.run",
-        "signature": "System.Void GlobalizationCulturePatchEntry::Run(System.Int32)"
-      },
-      "nativeSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Run_System_Int32",
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_0",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
         "carrierKindCode": 0,
         "typeShape": 1
       },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 2,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 172,
-          "handlerOffset": 173,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 2,
-          "resultType": "System.Int32",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 3,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 5,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 6,
-          "isPreserveSig": false
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            66,
-            74,
-            82,
-            90,
-            98,
-            106,
-            114,
-            122,
-            130,
-            138,
-            146,
-            154,
-            162
-          ],
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 64,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 66,
           "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_0:System.Int32()",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
           "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
+            "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_0:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_0:System.Int32()",
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -1080,573 +74,91 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 71,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 72,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 74,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 308247714,
+          "ilOffset": 11,
           "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_1:System.Int32()",
-          "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_1:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_1:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 79,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 80,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 82,
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 16,
           "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_2:System.Int32()",
-          "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_2:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_2:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 87,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 88,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 90,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 18,
           "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_3:System.Int32()",
-          "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_3:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_3:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 95,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 96,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 98,
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 19,
           "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_4:System.Int32()",
-          "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_4:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_4:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 103,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 104,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 21,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 106,
-          "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_5:System.Int32()",
-          "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_5:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_5:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 22,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 111,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 112,
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 31,
+          "ilOffset": 23,
           "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 114,
-          "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_6:System.Int32()",
-          "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_6:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_6:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 119,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 120,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 122,
-          "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_7:System.Int32()",
-          "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_7:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_7:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_7",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 127,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 128,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 130,
-          "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_8:System.Int32()",
-          "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_8:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_8:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_8",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 135,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 136,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 138,
-          "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_9:System.Int32()",
-          "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_9:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_9:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_9",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 143,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 144,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 146,
-          "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_10:System.Int32()",
-          "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_10:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_10:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_10",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 151,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 152,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 154,
-          "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_11:System.Int32()",
-          "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_11:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_11:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_11",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 159,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 160,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 162,
-          "resultType": "System.Int32",
-          "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_12:System.Int32()",
-          "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectKind": "method",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_12:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Subject_12:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_12",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 167,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 170,
-          "ilOffset": 168,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 184,
-          "ilOffset": 171,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 173,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 175,
+          "ilOffset": 25,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::_exitCode",
-          "ilOffset": 176,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 26,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "GlobalizationCulturePatchEntry",
+            "assemblyName": "GlobalizationCultureSubjects",
             "subjectKind": "field",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::_exitCode"
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "GlobalizationCulturePatchEntry",
-            "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::_exitCode",
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -1654,17 +166,9 @@
           "isPreserveSig": false
         },
         {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 184,
-          "ilOffset": 182,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 184,
+          "ilOffset": 31,
           "isPreserveSig": false
         }
       ],
@@ -1676,7 +180,2497 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GlobalizationCulturePatchEntry"
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
+    },
+    {
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-1",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_1:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_1:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_1:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-1",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_1()"
+      },
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1932024690,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 22,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 31,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectKind": "field",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
+    },
+    {
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-2",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_2:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_2:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_2:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-2",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_2()"
+      },
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "",
+          "ilOffset": 1,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1932024690,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectKind": "field",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 36,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
+    },
+    {
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-3",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_3:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_3:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_3:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-3",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_3()"
+      },
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 20,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 29,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectKind": "field",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 29,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
+    },
+    {
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-4",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_4:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_4:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_4:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-4",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_4()"
+      },
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 38,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 24,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 33,
+          "ilOffset": 25,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectKind": "field",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 33,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
+    },
+    {
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-5",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_5:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_5:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_5:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-5",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_5()"
+      },
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Globalization.DateTimeFormatInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 35342034,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectKind": "field",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 36,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
+    },
+    {
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-6",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_6:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_6:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_6:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-6",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_6()"
+      },
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Globalization.NumberFormatInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 56793269,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectKind": "field",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 36,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
+    },
+    {
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-7",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_7:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_7:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_7:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-7",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_7()"
+      },
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Globalization.CompareInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 16,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 39,
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 33,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 34,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectKind": "field",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 39,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
+    },
+    {
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-8",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_8:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_8:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_8:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-8",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_8()"
+      },
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Globalization.CompareInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 16,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 30,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 40,
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 34,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 35,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectKind": "field",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 40,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
+    },
+    {
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-9",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_9:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_9:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_9:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-9",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_9()"
+      },
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Globalization.CompareInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 16,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 39,
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 33,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 34,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectKind": "field",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 39,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
+    },
+    {
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-10",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_10:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_10()",
+      "identity": {
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_10:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_10:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-10",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_10()"
+      },
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_10",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Globalization.TextInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 16,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 33,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 42,
+          "ilOffset": 34,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 36,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 37,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectKind": "field",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 42,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
+    },
+    {
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-11",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_11:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_11()",
+      "identity": {
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_11:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_11:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-11",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_11()"
+      },
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_11",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Globalization.TextInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 16,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 33,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 42,
+          "ilOffset": 34,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 36,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 37,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectKind": "field",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 42,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
+    },
+    {
+      "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-12",
+      "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_12:System.Void()",
+      "signature": "System.Void GlobalizationCultureSubjects::Subject_12()",
+      "identity": {
+        "assemblyName": "GlobalizationCultureSubjects",
+        "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+        "definitionSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_12:System.Void()",
+        "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_12:System.Void()",
+        "methodId": "globalization-culture-subjects.globalization-culture-subjects.subject-12",
+        "signature": "System.Void GlobalizationCultureSubjects::Subject_12()"
+      },
+      "nativeSymbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_12",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Globalization.CultureInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Globalization.TextInfo",
+          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 25,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 34,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectKind": "field",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GlobalizationCultureSubjects",
+            "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 34,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GlobalizationCultureSubjects"
     }
   ]
 }
