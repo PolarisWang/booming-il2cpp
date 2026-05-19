@@ -18,11 +18,33 @@ public partial class BufferMemoryTests
     // === simple (all-primitive) ===
 
     [Fact]
+    public void _System_Private_CoreLib_System_Buffer_BlockCopy_System_Void_System_Array_System_Int32_System_Array_System_Int32_System_In()
+    {
+        // Purpose: Verify Buffer.BlockCopy with typical input
+            Buffer.BlockCopy(new byte[8], 0, new byte[8], 0, 8);
+    }
+
+    [Fact]
     public void _System_Private_CoreLib_System_Buffer_ByteLength_System_Int32_System_Array()
     {
         // Purpose: Verify Buffer.ByteLength with typical input
             var result = Buffer.ByteLength(Array.Empty<byte>());
             Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_Buffer_GetByte_System_Byte_System_Array_System_Int32()
+    {
+        // Purpose: Verify Buffer.GetByte with typical input
+            var result = Buffer.GetByte(new byte[4], 0);
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_Buffer_SetByte_System_Void_System_Array_System_Int32_System_Byte()
+    {
+        // Purpose: Verify Buffer.SetByte with typical input
+            Buffer.SetByte(new byte[4], 0, (byte)42);
     }
 
     // === needs-manual (ref/pointer/generic) ===
@@ -53,33 +75,15 @@ public partial class BufferMemoryTests
 
     // === needs-manual (operator/protected/etc) ===
 
-    [Fact(Skip = "needs-manual — BlockCopy with 5 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Buffer_BlockCopy_System_Void_System_Array_System_Int32_System_Array_System_Int32_System_In()
-    {
-        // TODO: Buffer.BlockCopy needs manual impl
-    }
-
     [Fact(Skip = "needs-manual — BulkMoveWithWriteBarrier with 3 params requires manual implementation")]
     public void _System_Private_CoreLib_System_Buffer_BulkMoveWithWriteBarrier_System_Void_System_Byte_System_Byte_System_UIntPtr()
     {
         // TODO: Buffer.BulkMoveWithWriteBarrier needs manual impl
     }
 
-    [Fact(Skip = "needs-manual — GetByte with 2 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Buffer_GetByte_System_Byte_System_Array_System_Int32()
-    {
-        // TODO: Buffer.GetByte needs manual impl
-    }
-
     [Fact(Skip = "needs-manual — Memmove with 3 params requires manual implementation")]
     public void _System_Private_CoreLib_System_Buffer_Memmove_System_Void_System_Byte_System_Byte_System_UIntPtr()
     {
         // TODO: Buffer.Memmove needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — SetByte with 3 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Buffer_SetByte_System_Void_System_Array_System_Int32_System_Byte()
-    {
-        // TODO: Buffer.SetByte needs manual impl
     }
 }

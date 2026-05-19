@@ -21,7 +21,7 @@ public static class ReflectionMemberBasicsHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_MemberInfo_get_MemberType_System_Reflection_MemberTypes() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_MemberInfo_get_MemberType_System_Reflection_MemberTypes() { _ = typeof(byte).MemberType; }
     // Verify MemberInfo.get_DeclaringType after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
@@ -31,54 +31,54 @@ public static class ReflectionMemberBasicsHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_MethodBase_Invoke_System_Object_System_Object_System_Object() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_MethodBase_Invoke_System_Object_System_Object_System_Object() { _ = typeof(byte).GetMethods()[0].Invoke(null, new object[0]); }
     // Verify MethodInfo.GetParameters after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.MethodInfo::GetParameters:System.Reflection.ParameterInfo[]()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_MethodInfo_GetParameters_System_Reflection_ParameterInfo() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_MethodInfo_GetParameters_System_Reflection_ParameterInfo() { _ = typeof(byte).GetMethods()[0].GetParameters(); }
     // Verify MethodInfo.get_ReturnType after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_MethodInfo_get_ReturnType_System_Type() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_MethodInfo_get_ReturnType_System_Type() { _ = typeof(byte).GetMethods()[0].ReturnType; }
     // Verify ConstructorInfo.Invoke after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_ConstructorInfo_Invoke_System_Object_System_Object() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_ConstructorInfo_Invoke_System_Object_System_Object() { _ = typeof(byte).GetConstructors()[0].Invoke(new object[0]); }
     // Verify FieldInfo.GetValue after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.FieldInfo::GetValue:System.Object(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_FieldInfo_GetValue_System_Object_System_Object() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_FieldInfo_GetValue_System_Object_System_Object() { _ = typeof(byte).GetFields()[0].GetValue(null); }
     // Verify FieldInfo.SetValue after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_FieldInfo_SetValue_System_Void_System_Object_System_Object() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_FieldInfo_SetValue_System_Void_System_Object_System_Object() { typeof(byte).GetFields()[0].SetValue(null, (byte)42); }
     // Verify FieldInfo.get_FieldType after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_FieldInfo_get_FieldType_System_Type() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_FieldInfo_get_FieldType_System_Type() { _ = typeof(byte).GetFields()[0].FieldType; }
     // Verify PropertyInfo.GetValue after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_PropertyInfo_GetValue_System_Object_System_Object() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_PropertyInfo_GetValue_System_Object_System_Object() { _ = typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null); }
     // Verify PropertyInfo.GetValue after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Object[])")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_PropertyInfo_GetValue_System_Object_System_Object_System_Object() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_PropertyInfo_GetValue_System_Object_System_Object_System_Object() { _ = typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null, null); }
     // Verify PropertyInfo.SetValue after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_PropertyInfo_SetValue_System_Void_System_Object_System_Object() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_PropertyInfo_SetValue_System_Void_System_Object_System_Object() { typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].SetValue(null, (byte)42); }
     // Verify PropertyInfo.get_PropertyType after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_PropertyInfo_get_PropertyType_System_Type() { }}
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_PropertyInfo_get_PropertyType_System_Type() { _ = typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType; }}

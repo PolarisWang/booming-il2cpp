@@ -14,6 +14,7 @@
 #include "gc_region.h"
 #include "gc_card_table.h"
 #include "gc_young_collector.h"
+#include "gc_young_gen.h"
 
 #include <cstdint>
 #include <cstdio>
@@ -74,13 +75,11 @@ static void test_forwarding_protocol() {
 static void test_is_in_nursery() {
     TEST("IsInNursery");
 
-    auto& mgr = RegionManager::Instance();
-
-    // Set up TLS nursery context.
-    Region* nursery = mgr.AllocateNursery();
+    // Set up young generation.
+    InitYoungGeneration();
+    tls_tlab = TLAB{};
+    Region* nursery = g_young_gen.region.load(std::memory_order_acquire);
     if (nursery == nullptr) { FAIL("no nursery"); return; }
-    tls_nursery_ctx.nursery = nursery;
-    tls_nursery_ctx.limit = nursery->end - kMaxNurseryAlloc;
 
     SUBTEST("null pointer returns false");
     if (IsInNursery(nullptr)) { FAIL("null should not be in nursery"); return; }
@@ -116,12 +115,10 @@ static void test_is_in_nursery() {
 static void test_scavenge_object() {
     TEST("GcScavengeObject");
 
-    auto& mgr = RegionManager::Instance();
-
-    Region* nursery = mgr.AllocateNursery();
+    InitYoungGeneration();
+    tls_tlab = TLAB{};
+    Region* nursery = g_young_gen.region.load(std::memory_order_acquire);
     if (nursery == nullptr) { FAIL("no nursery"); return; }
-    tls_nursery_ctx.nursery = nursery;
-    tls_nursery_ctx.limit = nursery->end - kMaxNurseryAlloc;
 
     SUBTEST("null input returns null");
     void* result = GcScavengeObject(nullptr);
@@ -193,12 +190,10 @@ static void test_scavenge_object() {
 static void test_young_collection() {
     TEST("GcYoungCollection empty nursery");
 
-    auto& mgr = RegionManager::Instance();
-
-    Region* nursery = mgr.AllocateNursery();
+    InitYoungGeneration();
+    tls_tlab = TLAB{};
+    Region* nursery = g_young_gen.region.load(std::memory_order_acquire);
     if (nursery == nullptr) { FAIL("no nursery"); return; }
-    tls_nursery_ctx.nursery = nursery;
-    tls_nursery_ctx.limit = nursery->end - kMaxNurseryAlloc;
 
     // Set up a heap base for card table ops.
     GcSetHeapBase(nursery->begin);
@@ -208,7 +203,7 @@ static void test_young_collection() {
     if (p == nullptr) { FAIL("nursery alloc failed"); return; }
 
     SUBTEST("null nursery returns empty result");
-    YoungCollectionResult r1 = GcYoungCollection(nullptr);
+    YoungCollectionResult r1 = GcYoungCollection();
     if (r1.dirty_cards_scanned != 0) { FAIL("null nursery scanned cards"); return; }
     PASS();
 
@@ -217,9 +212,9 @@ static void test_young_collection() {
     DirtyCard(p);
     if (!IsDirty(p)) { FAIL("card should be dirty before collect"); return; }
 
-    YoungCollectionResult r2 = GcYoungCollection(nursery);
+    YoungCollectionResult r2 = GcYoungCollection();
     // Nursery should be reset.
-    if (nursery->current != nursery->begin) { FAIL("nursery not reset after collect"); return; }
+    if (g_young_gen.bump.load(std::memory_order_acquire) != nursery->begin) { FAIL("nursery not reset after collect"); return; }
     // Cards should be cleared.
     if (IsDirty(p)) { FAIL("card still dirty after collect"); return; }
     PASS();
@@ -243,12 +238,10 @@ static void test_young_collection() {
 static void test_collection_with_dirty_card() {
     TEST("GcYoungCollection with dirty old->nursery refs");
 
-    auto& mgr = RegionManager::Instance();
-
-    Region* nursery = mgr.AllocateNursery();
+    InitYoungGeneration();
+    tls_tlab = TLAB{};
+    Region* nursery = g_young_gen.region.load(std::memory_order_acquire);
     if (nursery == nullptr) { FAIL("no nursery"); return; }
-    tls_nursery_ctx.nursery = nursery;
-    tls_nursery_ctx.limit = nursery->end - kMaxNurseryAlloc;
 
     // Set heap base so card index 0 covers the nursery's region.
     // Align g_heap_base to card boundary so that nursery occupies
@@ -313,10 +306,10 @@ static void test_collection_with_dirty_card() {
 
         // Run young collection — this should scavenge nursery_obj
         // when it encounters the old->nursery reference during card scan.
-        YoungCollectionResult r = GcYoungCollection(nursery);
+        YoungCollectionResult r = GcYoungCollection();
 
         // Verify nursery was reset.
-        if (nursery->current != nursery->begin) { FAIL("nursery not reset"); return; }
+        if (g_young_gen.bump.load(std::memory_order_acquire) != nursery->begin) { FAIL("nursery not reset"); return; }
 
         // Verify cards were cleared.
         if (IsDirty(old_block)) { FAIL("card still dirty after collect"); return; }
@@ -355,9 +348,9 @@ static void test_collection_with_dirty_card() {
     // since GcYoungCollection resets current back to begin).
     // Actually, let's just run the collection — Phase 2 will find objB
     // referenced from objA's memory.
-    YoungCollectionResult r = GcYoungCollection(nursery);
+    YoungCollectionResult r = GcYoungCollection();
     // Verify nursery was reset.
-    if (nursery->current != nursery->begin) { FAIL("nursery not reset (sweep)"); return; }
+    if (g_young_gen.bump.load(std::memory_order_acquire) != nursery->begin) { FAIL("nursery not reset (sweep)"); return; }
 
     // Re-allocate objA in the reset nursery and link to a new objB.
     // Then verify the conservative sweep scavenges objB.
@@ -369,12 +362,8 @@ static void test_collection_with_dirty_card() {
     *static_cast<uint32_t*>(objB) = 0xDEADBEEF;
     std::memcpy(static_cast<uint8_t*>(objA) + 8, &objB, sizeof(void*));
 
-    // Touch tls_nursery_ctx to ensure nursery is set.
-    tls_nursery_ctx.nursery = nursery;
-    tls_nursery_ctx.limit = nursery->end - kMaxNurseryAlloc;
-
     // Run collection again.
-    GcYoungCollection(nursery);
+    GcYoungCollection();
 
     // objB should have been forwarded (Phase 2 found it via objA's field).
     // Check the forwarding tag on objB.

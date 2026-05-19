@@ -1,7 +1,7 @@
 {
   "family": "threading-monitor-interlocked",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T18:48:12.917049",
+  "generated_at": "2026-05-19T19:21:08.982598",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -350,12 +350,10 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "VIOLATION",
-      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
+      "status": "NOT_APPLICABLE",
+      "summary": "No changed source files detected",
       "details": [],
-      "evidence": {
-        "error": "'NoneType' object has no attribute 'strip'"
-      }
+      "evidence": {}
     },
     "p2_no_bare_new": {
       "check_id": "p2_no_bare_new",
@@ -416,8 +414,8 @@
     "total": 12,
     "aligned": 8,
     "concern": 0,
-    "violation": 1,
-    "not_applicable": 3,
+    "violation": 0,
+    "not_applicable": 4,
     "overall": "ALIGNED"
   }
 }

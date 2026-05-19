@@ -50,6 +50,14 @@ public partial class ReflectionMemberCompleteTests
     }
 
     [Fact]
+    public void _System_Private_CoreLib_System_Reflection_MethodInfo_get_ReturnType_System_Type()
+    {
+        // Purpose: Verify MethodInfo.get_ReturnType with typical input
+            var result = typeof(byte).GetMethods()[0].ReturnType;
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
     public void _System_Private_CoreLib_System_Reflection_MethodBase_get_IsPublic_System_Boolean()
     {
         // Purpose: Verify MethodBase.get_IsPublic with typical input
@@ -70,6 +78,14 @@ public partial class ReflectionMemberCompleteTests
     {
         // Purpose: Verify MethodBase.get_IsVirtual with typical input
             var result = default(MethodInfo)!.IsVirtual;
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_Reflection_FieldInfo_get_FieldType_System_Type()
+    {
+        // Purpose: Verify FieldInfo.get_FieldType with typical input
+            var result = typeof(byte).GetFields()[0].FieldType;
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -98,6 +114,14 @@ public partial class ReflectionMemberCompleteTests
     }
 
     [Fact]
+    public void _System_Private_CoreLib_System_Reflection_PropertyInfo_get_PropertyType_System_Type()
+    {
+        // Purpose: Verify PropertyInfo.get_PropertyType with typical input
+            var result = typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType;
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
     public void _System_Private_CoreLib_System_Reflection_PropertyInfo_get_CanRead_System_Boolean()
     {
         // Purpose: Verify PropertyInfo.get_CanRead with typical input
@@ -114,6 +138,13 @@ public partial class ReflectionMemberCompleteTests
     }
 
     // === mixed (smoke) ===
+
+    [Fact]
+    public void _System_Private_CoreLib_System_Reflection_MemberInfo_get_MemberType_System_Reflection_MemberTypes()
+    {
+        // Purpose: Smoke — MemberInfo.get_MemberType with complex param(s)
+            _ = typeof(byte).MemberType;
+    }
 
     [Fact]
     public void _System_Private_CoreLib_System_Reflection_MethodInfo_GetBaseDefinition_System_Reflection_MethodInfo()
@@ -155,31 +186,5 @@ public partial class ReflectionMemberCompleteTests
     {
         // Purpose: Smoke — ConstructorInfo.get_CallingConvention with complex param(s)
             _ = default(ConstructorInfo)!.CallingConvention;
-    }
-
-    // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — get_MemberType with 0 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Reflection_MemberInfo_get_MemberType_System_Reflection_MemberTypes()
-    {
-        // TODO: MemberInfo.get_MemberType needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — get_ReturnType with 0 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Reflection_MethodInfo_get_ReturnType_System_Type()
-    {
-        // TODO: MethodInfo.get_ReturnType needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — get_FieldType with 0 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Reflection_FieldInfo_get_FieldType_System_Type()
-    {
-        // TODO: FieldInfo.get_FieldType needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — get_PropertyType with 0 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Reflection_PropertyInfo_get_PropertyType_System_Type()
-    {
-        // TODO: PropertyInfo.get_PropertyType needs manual impl
     }
 }

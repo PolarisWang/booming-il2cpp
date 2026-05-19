@@ -116,9 +116,9 @@ public partial class GuidRandomHashcodeTests
             Xunit.Assert.NotNull((object)result);
     }
 
-    // === needs-manual (operator/protected/etc) ===
+    // === needs-manual (ref/pointer/generic) ===
 
-    [Fact(Skip = "needs-manual — TryParse with 2 params requires manual implementation")]
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void _System_Private_CoreLib_System_Guid_TryParse_System_Boolean_System_String_System_Guid()
     {
         // TODO: Guid.TryParse needs manual impl

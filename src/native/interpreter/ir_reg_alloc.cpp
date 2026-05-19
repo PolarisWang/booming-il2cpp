@@ -11,6 +11,7 @@ namespace ri = chaos::il2cpp::runtime_instantiation;
 #include "../codegen/codegen_helpers.h"  // CodegenLdVirtFtn
 
 #include <chaos/profile.h>
+#include <chaos/log.h>
 
 // Access interpreter global state for static field and object operations.
 namespace chaos::il2cpp::interpreter {
@@ -1925,7 +1926,9 @@ static void TryOsrPromotion(RegisterFrame& frame,
             auto osr_entry = reinterpret_cast<OsrEntry>(
                 static_cast<uint8_t*>(existing_nm->code) + existing_nm->osr_entry_offset);
             uint64_t osr_ret_buf[2] = {};
+            CHAOS_IL2CPP_LOG_DEBUG_M("osr", "TryOsrPromotion: re-promote osr_entry at offset={}", existing_nm->osr_entry_offset);
             osr_entry(&frame.regs, osr_ret_buf);
+            CHAOS_IL2CPP_LOG_DEBUG_M("osr", "TryOsrPromotion: re-promote osr_entry returned, ret_val=0x{:x}", osr_ret_buf[0]);
             frame.ret_val = osr_ret_buf[0];
             frame.has_ret = true;
             frame.pc = 0xFFffFFffu;
@@ -1957,7 +1960,9 @@ static void TryOsrPromotion(RegisterFrame& frame,
         auto osr_entry = reinterpret_cast<OsrEntry>(
             static_cast<uint8_t*>(nm->code) + nm->osr_entry_offset);
         uint64_t osr_ret_buf[2] = {};
+        CHAOS_IL2CPP_LOG_DEBUG_M("osr", "TryOsrPromotion: calling osr_entry at offset={}", nm->osr_entry_offset);
         osr_entry(&frame.regs, osr_ret_buf);
+        CHAOS_IL2CPP_LOG_DEBUG_M("osr", "TryOsrPromotion: osr_entry returned, ret_val=0x{:x}", osr_ret_buf[0]);
 
         // Native code completed — capture return value and exit RegisterExecute
         frame.ret_val = osr_ret_buf[0];

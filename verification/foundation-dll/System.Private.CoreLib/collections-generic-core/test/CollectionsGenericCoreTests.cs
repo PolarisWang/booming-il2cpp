@@ -25,6 +25,13 @@ public partial class CollectionsGenericCoreTests
     }
 
     [Fact]
+    public void _System_Private_CoreLib_System_Collections_Generic_List_1_RemoveAt_System_Void_System_Int32()
+    {
+        // Purpose: Verify List.RemoveAt with typical input
+            new System.Collections.Generic.List<int>{1,2,3}.RemoveAt(1);
+    }
+
+    [Fact]
     public void _System_Private_CoreLib_System_Collections_Generic_List_1_Sort_System_Void()
     {
         // Purpose: Verify List.Sort with typical input
@@ -69,6 +76,12 @@ public partial class CollectionsGenericCoreTests
     }
 
     [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
+    public void _System_Private_CoreLib_System_Collections_Generic_List_1_Remove_System_Boolean_T()
+    {
+        // TODO: List.Remove needs manual impl
+    }
+
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void _System_Private_CoreLib_System_Collections_Generic_Dictionary_2_Add_System_Void_TKey_TValue()
     {
         // TODO: Dictionary.Add needs manual impl
@@ -80,45 +93,31 @@ public partial class CollectionsGenericCoreTests
         // TODO: Dictionary.TryGetValue needs manual impl
     }
 
-    // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — Remove with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Collections_Generic_List_1_Remove_System_Boolean_T()
-    {
-        // TODO: List.Remove needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — RemoveAt with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Collections_Generic_List_1_RemoveAt_System_Void_System_Int32()
-    {
-        // TODO: List.RemoveAt needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — ContainsKey with 1 params requires manual implementation")]
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void _System_Private_CoreLib_System_Collections_Generic_Dictionary_2_ContainsKey_System_Boolean_TKey()
     {
         // TODO: Dictionary.ContainsKey needs manual impl
     }
 
-    [Fact(Skip = "needs-manual — Remove with 1 params requires manual implementation")]
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void _System_Private_CoreLib_System_Collections_Generic_Dictionary_2_Remove_System_Boolean_TKey()
     {
         // TODO: Dictionary.Remove needs manual impl
     }
 
-    [Fact(Skip = "needs-manual — Add with 1 params requires manual implementation")]
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void _System_Private_CoreLib_System_Collections_Generic_HashSet_1_Add_System_Boolean_T()
     {
         // TODO: HashSet.Add needs manual impl
     }
 
-    [Fact(Skip = "needs-manual — Contains with 1 params requires manual implementation")]
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void _System_Private_CoreLib_System_Collections_Generic_HashSet_1_Contains_System_Boolean_T()
     {
         // TODO: HashSet.Contains needs manual impl
     }
 
-    [Fact(Skip = "needs-manual — Remove with 1 params requires manual implementation")]
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void _System_Private_CoreLib_System_Collections_Generic_HashSet_1_Remove_System_Boolean_T()
     {
         // TODO: HashSet.Remove needs manual impl

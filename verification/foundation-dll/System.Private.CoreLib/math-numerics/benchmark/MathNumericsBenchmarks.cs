@@ -111,8 +111,12 @@ public static class MathNumericsBenchmarks
     // Benchmark BitConverter.ToInt32 native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_MathNumerics)]
-    public static void Benchmark_System_Private_CoreLib_System_BitConverter_ToInt32_System_Int32_System_Byte_System_Int32() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_BitConverter_ToInt32_System_Int32_System_Byte_System_Int32() { _ = BitConverter.ToInt32(new byte[4], 0); }
     // Benchmark BitConverter.ToDouble native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.BitConverter::ToDouble:System.Double(System.Byte[],System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_MathNumerics)]
-    public static void Benchmark_System_Private_CoreLib_System_BitConverter_ToDouble_System_Double_System_Byte_System_Int32() { }}
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_BitConverter_ToDouble_System_Double_System_Byte_System_Int32() { _ = BitConverter.ToDouble(new byte[8], 0); }}

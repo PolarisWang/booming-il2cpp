@@ -59,6 +59,13 @@ public partial class RuntimeCompilerServicesTests
     // === mixed (smoke) ===
 
     [Fact]
+    public void _System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_RunClassConstructor_System_Void_System_RuntimeType()
+    {
+        // Purpose: Smoke — RuntimeHelpers.RunClassConstructor with complex param(s)
+            RuntimeHelpers.RunClassConstructor(typeof(byte).TypeHandle);
+    }
+
+    [Fact]
     public void _System_Private_CoreLib_System_Runtime_CompilerServices_FormattableStringFactory_Create_System_Runtime_CompilerServices_F()
     {
         // Purpose: Smoke — FormattableStringFactory.Create with complex param(s)
@@ -74,12 +81,6 @@ public partial class RuntimeCompilerServicesTests
     }
 
     // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — RunClassConstructor with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_RunClassConstructor_System_Void_System_RuntimeType()
-    {
-        // TODO: RuntimeHelpers.RunClassConstructor needs manual impl
-    }
 
     [Fact(Skip = "needs-manual — InitializeArray with 2 params requires manual implementation")]
     public void _System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_InitializeArray_System_Void_System_Array_System_Ru()

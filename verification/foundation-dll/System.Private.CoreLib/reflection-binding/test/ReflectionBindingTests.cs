@@ -15,6 +15,16 @@ public partial class ReflectionBindingTests
 {
     // AI-generated tests for family/System.Private.CoreLib/reflection/binding
 
+    // === simple (all-primitive) ===
+
+    [Fact]
+    public void _System_Private_CoreLib_System_Reflection_MethodBase_Invoke_System_Object_System_Object_System_Object()
+    {
+        // Purpose: Verify MethodBase.Invoke with typical input
+            var result = typeof(byte).GetMethods()[0].Invoke(null, new object[0]);
+            Xunit.Assert.NotNull((object)result);
+    }
+
     // === mixed (smoke) ===
 
     [Fact]
@@ -92,13 +102,5 @@ public partial class ReflectionBindingTests
     {
         // Purpose: Smoke — MethodBase.Invoke with complex param(s)
             _ = default(MethodInfo)!.Invoke(42, System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!);
-    }
-
-    // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — Invoke with 2 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Reflection_MethodBase_Invoke_System_Object_System_Object_System_Object()
-    {
-        // TODO: MethodBase.Invoke needs manual impl
     }
 }

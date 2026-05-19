@@ -51,4 +51,4 @@ public static class ReflectionActivationHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionActivation)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_ConstructorInfo_Invoke_System_Object_System_Object() { }}
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_ConstructorInfo_Invoke_System_Object_System_Object() { _ = typeof(byte).GetConstructors()[0].Invoke(new object[0]); }}

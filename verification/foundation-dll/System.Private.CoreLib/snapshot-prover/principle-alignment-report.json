@@ -1,7 +1,7 @@
 {
   "family": "snapshot-prover",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T17:55:32.529354",
+  "generated_at": "2026-05-19T19:26:25.845322",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -270,18 +270,43 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "ALIGNED",
-      "summary": "All 7 changed source files within expected architecture layers",
-      "details": [],
+      "status": "CONCERN",
+      "summary": "3 of 7 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
+          "reason": "outside expected architecture layers"
+        }
+      ],
       "evidence": {
         "changed_source_count": 7,
         "layer_distribution": {
-          "TestInfra": 2,
-          "RuntimeSupport": 1,
-          "Codegen": 2,
-          "RuntimeCore": 1,
+          "TestInfra": 1,
+          "RuntimeCore": 2,
           "Tests": 1
-        }
+        },
+        "violations": [
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -340,8 +365,8 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 9,
-    "concern": 0,
+    "aligned": 8,
+    "concern": 1,
     "violation": 0,
     "not_applicable": 3,
     "overall": "ALIGNED"

@@ -57,7 +57,7 @@ public sealed partial class NativeAotLoweringPlanner
         int GenericParameterCount,
         int MetadataToken);
 
-    private sealed record ReflectionMemberFieldEntry(
+    internal sealed record ReflectionMemberFieldEntry(
         string DeclaringTypeSubjectId,
         string FieldName,
         int MetadataToken,

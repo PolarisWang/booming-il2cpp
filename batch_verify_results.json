@@ -1,50 +1,56 @@
 {
-  "boxing-unboxing-casts": {
+  "reflection-activation": {
     "status": "passed",
-    "passed": 11,
-    "total": 11,
+    "passed": 8,
+    "total": 8,
     "exit_code": 0
   },
-  "enum-parsing": {
+  "reflection-assembly": {
+    "status": "passed",
+    "passed": 22,
+    "total": 22,
+    "exit_code": 0
+  },
+  "reflection-binding": {
     "status": "passed",
     "passed": 12,
     "total": 12,
     "exit_code": 0
   },
-  "exception-throw-diagnostics": {
+  "reflection-generics": {
+    "status": "passed",
+    "passed": 12,
+    "total": 12,
+    "exit_code": 0
+  },
+  "reflection-member-basics": {
     "status": "passed",
     "passed": 14,
     "total": 14,
     "exit_code": 0
   },
-  "generic-nullable-value": {
+  "reflection-member-complete": {
+    "status": "passed",
+    "passed": 22,
+    "total": 22,
+    "exit_code": 0
+  },
+  "reflection-module": {
+    "status": "passed",
+    "passed": 6,
+    "total": 6,
+    "exit_code": 0
+  },
+  "reflection-parameters": {
     "status": "passed",
     "passed": 10,
     "total": 10,
     "exit_code": 0
   },
-  "globalization-culture": {
+  "reflection-type": {
     "status": "passed",
-    "passed": 13,
-    "total": 13,
-    "exit_code": 0
-  },
-  "math-numerics": {
-    "status": "passed",
-    "passed": 18,
-    "total": 18,
-    "exit_code": 0
-  },
-  "object-equality-identity": {
-    "status": "passed",
-    "passed": 7,
-    "total": 7,
-    "exit_code": 0
-  },
-  "snapshot-prover": {
-    "status": "passed",
-    "passed": 157,
-    "total": 157,
+    "passed": 43,
+    "total": 43,
     "exit_code": 0
   }
 }

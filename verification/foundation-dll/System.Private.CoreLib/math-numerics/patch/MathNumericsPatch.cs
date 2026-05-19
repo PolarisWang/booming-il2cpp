@@ -96,9 +96,9 @@ public static class MathNumericsPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_MathNumerics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_BitConverter_ToInt32_System_Int32_System_Byte_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_BitConverter_ToInt32_System_Int32_System_Byte_System_Int32() { _ = BitConverter.ToInt32(new byte[4], 0); }
     // Verify BitConverter.ToDouble after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.BitConverter::ToDouble:System.Double(System.Byte[],System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_MathNumerics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_BitConverter_ToDouble_System_Double_System_Byte_System_Int32() { }}
+    public static void Patch_System_Private_CoreLib_System_BitConverter_ToDouble_System_Double_System_Byte_System_Int32() { _ = BitConverter.ToDouble(new byte[8], 0); }}

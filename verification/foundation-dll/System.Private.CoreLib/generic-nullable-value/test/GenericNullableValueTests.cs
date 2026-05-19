@@ -76,6 +76,13 @@ public partial class GenericNullableValueTests
     // === mixed (smoke) ===
 
     [Fact]
+    public void _System_Private_CoreLib_System_Nullable_1_get_Value_T()
+    {
+        // Purpose: Smoke — Nullable.get_Value with complex param(s)
+            _ = ((int?)42).Value;
+    }
+
+    [Fact]
     public void _System_Private_CoreLib_System_Nullable_1_GetValueOrDefault_T()
     {
         // Purpose: Smoke — Nullable.GetValueOrDefault with complex param(s)
@@ -88,13 +95,5 @@ public partial class GenericNullableValueTests
     public void _System_Private_CoreLib_System_Nullable_1_GetValueOrDefault_T_T()
     {
         // TODO: Nullable.GetValueOrDefault needs manual impl
-    }
-
-    // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — get_Value with 0 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Nullable_1_get_Value_T()
-    {
-        // TODO: Nullable.get_Value needs manual impl
     }
 }

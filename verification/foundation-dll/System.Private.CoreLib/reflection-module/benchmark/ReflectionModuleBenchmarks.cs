@@ -45,4 +45,6 @@ public static class ReflectionModuleBenchmarks
     // Benchmark Module.GetCustomAttributes native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Reflection.Module::GetCustomAttributes:System.Object[](System.Type)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionModule)]
-    public static void Benchmark_System_Private_CoreLib_System_Reflection_Module_GetCustomAttributes_System_Object_System_Type() { }}
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Reflection_Module_GetCustomAttributes_System_Object_System_Type() { _ = new List<Attribute>(typeof(byte).Module.GetCustomAttributes(false)).Count; }}

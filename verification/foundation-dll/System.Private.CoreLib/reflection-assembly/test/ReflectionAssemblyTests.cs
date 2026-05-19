@@ -105,6 +105,14 @@ public partial class ReflectionAssemblyTests
             Xunit.Assert.NotNull((object)result);
     }
 
+    [Fact]
+    public void _System_Private_CoreLib_System_Type_GetType_System_Type_System_String()
+    {
+        // Purpose: Verify Type.GetType with typical input
+            var result = Type.GetType("System.Int32");
+            Xunit.Assert.NotNull((object)result);
+    }
+
     // === mixed (smoke) ===
 
     [Fact]
@@ -175,13 +183,5 @@ public partial class ReflectionAssemblyTests
     {
         // Purpose: Smoke — Type.get_Assembly with complex param(s)
             _ = typeof(byte).Assembly;
-    }
-
-    // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — GetType with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Type_GetType_System_Type_System_String()
-    {
-        // TODO: Type.GetType needs manual impl
     }
 }

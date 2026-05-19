@@ -16,22 +16,22 @@ public static class SpanMemoryBuffersPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Span`1::get_Item:T&(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Span_1_get_Item_T_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_Span_1_get_Item_T_System_Int32() { _ = new Span<byte>(new byte[4])[0]; }
     // Verify Span.Slice after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Span_1_Slice_System_Span_1_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_Span_1_Slice_System_Span_1_System_Int32() { _ = new Span<byte>(new byte[4]).Slice(1).Length; }
     // Verify Span.Slice after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32,System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Span_1_Slice_System_Span_1_System_Int32_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_Span_1_Slice_System_Span_1_System_Int32_System_Int32() { _ = new Span<byte>(new byte[4]).Slice(1, 2).Length; }
     // Verify Span.ToArray after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Span`1::ToArray:T[](System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Span_1_ToArray_T_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_Span_1_ToArray_T_System_Int32() { _ = new byte[1].AsSpan().ToArray(); }
     // Verify Span.CopyTo after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Span`1::CopyTo:System.Void(System.Span`1)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
@@ -46,12 +46,12 @@ public static class SpanMemoryBuffersPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.ReadOnlySpan`1::get_Item:T&(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_ReadOnlySpan_1_get_Item_T_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_ReadOnlySpan_1_get_Item_T_System_Int32() { _ = new ReadOnlySpan<byte>(new byte[4])[0]; }
     // Verify ReadOnlySpan.Slice after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.ReadOnlySpan`1::Slice:System.ReadOnlySpan`1(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_ReadOnlySpan_1_Slice_System_ReadOnlySpan_1_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_ReadOnlySpan_1_Slice_System_ReadOnlySpan_1_System_Int32() { _ = new ReadOnlySpan<byte>(new byte[4]).Slice(1).Length; }
     // Verify ReadOnlySpan.ToArray after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.ReadOnlySpan`1::ToArray:T[]()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
@@ -61,7 +61,7 @@ public static class SpanMemoryBuffersPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Memory`1::Slice:System.Memory`1(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Memory_1_Slice_System_Memory_1_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_Memory_1_Slice_System_Memory_1_System_Int32() { _ = new Memory<byte>(new byte[4]).Slice(1).Length; }
     // Verify Memory.get_Span after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Memory`1::get_Span:System.Span`1()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]

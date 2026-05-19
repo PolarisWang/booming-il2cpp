@@ -2,9 +2,9 @@
   "family": "reflection-type",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T18:46:53",
-  "duration_ms": 27843,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T19:19:36",
+  "duration_ms": 28944,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-type\\managed\\subjects\\build-output\\ReflectionTypeSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 26306
+      "duration_ms": 22130
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (42/43)",
+      "status": "passed",
+      "summary": "Fact verify=passed (43/43)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 42,
+          "status": "passed",
+          "passed": 43,
           "total": 43
         }
       },
       "errors": [],
-      "duration_ms": 48
+      "duration_ms": 45
     },
     "audit": {
       "stage": "audit",
@@ -56,18 +56,41 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1486
+      "duration_ms": 972
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/43 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 43,
+        "invalidCount": 43,
+        "benchmarkQuality": "matchedCount=0/43 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 5793
     }
   },
   "coverage": {
-    "methodCoverage": 97.67,
+    "methodCoverage": 100.0,
     "testedRate": 100.0,
-    "overall": 98.84
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {},
     "irTranslation": {},
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": 0.0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 43,
+      "invalidCount": 43
+    },
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,

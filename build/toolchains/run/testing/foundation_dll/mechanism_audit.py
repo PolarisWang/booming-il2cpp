@@ -446,8 +446,8 @@ def run_assembly_audit(assembly: str) -> dict[str, Any]:
     for item in sorted(asm_dir.iterdir()):
         if not item.is_dir() or item.name.startswith("_") or item.name == "reports":
             continue
-        cpp_path = item / "codegen" / "generated" / "native-aot.generated.cpp"
-        if not cpp_path.exists():
+        cpp_candidates = sorted(item.glob("codegen/*/generated/native-aot.generated.cpp"))
+        if not cpp_candidates:
             continue
         families[item.name] = run_full_audit(assembly, item.name)
 

@@ -16,17 +16,17 @@ public static class ReflectionTypeHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Type::GetType:System.Type(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionType)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Type_GetType_System_Type_System_String() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Type_GetType_System_Type_System_String() { _ = Type.GetType("System.Int32"); }
     // Verify Type.GetType after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionType)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean() { _ = Type.GetType("System.Int32", false); }
     // Verify Type.GetType after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionType)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean_System_Boolean() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean_System_Boolean() { _ = Type.GetType("System.Int32", false, false); }
     // Verify Type.GetTypeFromHandle after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionType)]

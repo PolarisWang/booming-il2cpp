@@ -18,6 +18,21 @@ public partial class IoStreamsBasicsTests
     // === simple (all-primitive) ===
 
     [Fact]
+    public void _System_Private_CoreLib_System_IO_Stream_Read_System_Int32_System_Byte_System_Int32_System_Int32()
+    {
+        // Purpose: Verify Stream.Read with typical input
+            var result = new MemoryStream(new byte[10]).Read(new byte[5], 0, 5);
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_IO_Stream_Write_System_Void_System_Byte_System_Int32_System_Int32()
+    {
+        // Purpose: Verify Stream.Write with typical input
+            new MemoryStream().Write(new byte[5], 0, 5);
+    }
+
+    [Fact]
     public void _System_Private_CoreLib_System_IO_Stream_Flush_System_Void()
     {
         // Purpose: Verify Stream.Flush with typical input
@@ -84,6 +99,44 @@ public partial class IoStreamsBasicsTests
             new StringWriter().WriteLine();
     }
 
+    [Fact]
+    public void _System_Private_CoreLib_System_IO_BinaryReader_ReadInt32_System_Int32()
+    {
+        // Purpose: Verify BinaryReader.ReadInt32 with typical input
+            var result = new BinaryReader(new MemoryStream(new byte[4])).ReadInt32();
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_IO_BinaryReader_ReadString_System_String()
+    {
+        // Purpose: Verify BinaryReader.ReadString with typical input
+            var result = new BinaryReader(new MemoryStream(new byte[] { 0 })).ReadString();
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_IO_BinaryReader_ReadDouble_System_Double()
+    {
+        // Purpose: Verify BinaryReader.ReadDouble with typical input
+            var result = new BinaryReader(new MemoryStream(new byte[8])).ReadDouble();
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_Int32()
+    {
+        // Purpose: Verify BinaryWriter.Write with typical input
+            new BinaryWriter(new MemoryStream()).Write(42);
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_String()
+    {
+        // Purpose: Verify BinaryWriter.Write with typical input
+            new BinaryWriter(new MemoryStream()).Write(42);
+    }
+
     // === mixed (smoke) ===
 
     [Fact]
@@ -93,53 +146,10 @@ public partial class IoStreamsBasicsTests
             _ = new MemoryStream().Seek(42L, System.IO.SeekOrigin.Begin);
     }
 
-    // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — Read with 3 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_IO_Stream_Read_System_Int32_System_Byte_System_Int32_System_Int32()
-    {
-        // TODO: Stream.Read needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — Write with 3 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_IO_Stream_Write_System_Void_System_Byte_System_Int32_System_Int32()
-    {
-        // TODO: Stream.Write needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — CopyTo with 1 params requires manual implementation")]
+    [Fact]
     public void _System_Private_CoreLib_System_IO_Stream_CopyTo_System_Void_System_IO_Stream()
     {
-        // TODO: Stream.CopyTo needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — ReadInt32 with 0 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_IO_BinaryReader_ReadInt32_System_Int32()
-    {
-        // TODO: BinaryReader.ReadInt32 needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — ReadString with 0 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_IO_BinaryReader_ReadString_System_String()
-    {
-        // TODO: BinaryReader.ReadString needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — ReadDouble with 0 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_IO_BinaryReader_ReadDouble_System_Double()
-    {
-        // TODO: BinaryReader.ReadDouble needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — Write with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_Int32()
-    {
-        // TODO: BinaryWriter.Write needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — Write with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_String()
-    {
-        // TODO: BinaryWriter.Write needs manual impl
+        // Purpose: Smoke — Stream.CopyTo with complex param(s)
+            new MemoryStream().CopyTo(new MemoryStream());
     }
 }

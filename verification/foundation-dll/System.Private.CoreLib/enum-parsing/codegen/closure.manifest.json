@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "EnumParsingPatchEntry",
+  "assemblyName": "EnumParsingSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/enum-parsing/managed/patch/build-output/EnumParsingPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/enum-parsing/managed/subjects/build-output/EnumParsingSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/enum-parsing/managed/patch/build-output/EnumParsingPatchEntry.dll"
+      "assemblyName": "EnumParsingSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/enum-parsing/managed/subjects/build-output/EnumParsingSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "3dde679f-d256-4eb1-b1bd-6dcfe0eaed50",
+  "inputModuleVersionId": "7fbfaf1c-3467-4b1c-8521-b2687ad29ea7",
   "artifacts": [
     {
       "kind": "typedIlIr",

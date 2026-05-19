@@ -13,6 +13,7 @@
 
 #include "gc_region.h"
 #include "gc_card_table.h"
+#include "gc_young_gen.h"
 
 #include <cstdint>
 #include <cstdio>
@@ -135,13 +136,8 @@ static void test_region_manager() {
 static void test_nursery_allocate() {
     TEST("NurseryAllocate");
 
-    auto& mgr = RegionManager::Instance();
-
-    // Set up TLS nursery context.
-    Region* nursery = mgr.AllocateNursery();
-    if (nursery == nullptr) { FAIL("no nursery for test"); return; }
-    tls_nursery_ctx.nursery = nursery;
-    tls_nursery_ctx.limit = nursery->end - kMaxNurseryAlloc;
+    // Set up young generation (TLAB-based nursery).
+    InitYoungGeneration();
 
     SUBTEST("small allocation returns non-null, zeroed memory");
     void* p1 = NurseryAllocate(16);
@@ -185,11 +181,11 @@ static void test_nursery_allocate() {
     PASS();
 
     SUBTEST("oversized bypasses nursery");
-    void* large = NurseryAllocate(kMaxNurseryAlloc + 1);
+    void* large = NurseryAllocate(kMaxTlabAlloc + 1);
     if (large == nullptr) { FAIL("null large"); return; }
     // Should be zeroed.
     auto* blarge = static_cast<uint8_t*>(large);
-    if (blarge[0] != 0 || blarge[kMaxNurseryAlloc] != 0) { FAIL("large not zeroed"); return; }
+    if (blarge[0] != 0 || blarge[kMaxTlabAlloc] != 0) { FAIL("large not zeroed"); return; }
     PASS();
 }
 

@@ -26,22 +26,22 @@ public static class AttributesCustomMetadataHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.MemberInfo,System.Type)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_AttributesCustomMetadata)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_MemberInfo_System_Type() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_MemberInfo_System_Type() { _ = new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute))).Count; }
     // Verify Attribute.GetCustomAttributes after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.Assembly,System.Type)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_AttributesCustomMetadata)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_Assembly_System_Type() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_Assembly_System_Type() { _ = new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute))).Count; }
     // Verify Attribute.GetCustomAttributes after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.MemberInfo)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_AttributesCustomMetadata)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_MemberInfo() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_MemberInfo() { _ = new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(false)).Count; }
     // Verify Attribute.GetCustomAttributes after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.Assembly)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_AttributesCustomMetadata)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_Assembly() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_Assembly() { _ = new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(false)).Count; }
     // Verify Attribute.IsDefined after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Attribute::IsDefined:System.Boolean(System.Reflection.MemberInfo,System.Type)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_AttributesCustomMetadata)]

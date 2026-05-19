@@ -90,6 +90,13 @@ public partial class GlobalizationCultureTests
     }
 
     [Fact]
+    public void _System_Private_CoreLib_System_Globalization_CultureInfo_GetCultureInfo_System_Globalization_CultureInfo_System_String()
+    {
+        // Purpose: Smoke — CultureInfo.GetCultureInfo with complex param(s)
+            _ = CultureInfo.GetCultureInfo("");
+    }
+
+    [Fact]
     public void _System_Private_CoreLib_System_Globalization_CultureInfo_get_DateTimeFormat_System_Globalization_DateTimeFormatInfo()
     {
         // Purpose: Smoke — CultureInfo.get_DateTimeFormat with complex param(s)
@@ -108,13 +115,5 @@ public partial class GlobalizationCultureTests
     {
         // Purpose: Smoke — CompareInfo.Compare with complex param(s)
             _ = CultureInfo.InvariantCulture.CompareInfo.Compare("hello", "hello", System.Globalization.CompareOptions.None);
-    }
-
-    // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — GetCultureInfo with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Globalization_CultureInfo_GetCultureInfo_System_Globalization_CultureInfo_System_String()
-    {
-        // TODO: CultureInfo.GetCultureInfo needs manual impl
     }
 }

@@ -41,7 +41,7 @@ public static class CollectionsGenericCoreHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_CollectionsGenericCore)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Collections_Generic_List_1_RemoveAt_System_Void_System_Int32() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Collections_Generic_List_1_RemoveAt_System_Void_System_Int32() { new System.Collections.Generic.List<int>{1,2,3}.RemoveAt(1); }
     // Verify List.Sort after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_CollectionsGenericCore)]

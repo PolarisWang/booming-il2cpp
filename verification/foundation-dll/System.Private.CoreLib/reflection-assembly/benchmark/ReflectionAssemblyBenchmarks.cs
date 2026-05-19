@@ -141,4 +141,6 @@ public static class ReflectionAssemblyBenchmarks
     // Benchmark Type.GetType native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::GetType:System.Type(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
-    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String() { }}
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String() { _ = Type.GetType("System.Int32"); }}

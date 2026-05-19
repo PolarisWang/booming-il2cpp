@@ -18,6 +18,13 @@ public partial class ThreadingMonitorInterlockedTests
     // === simple (all-primitive) ===
 
     [Fact]
+    public void _System_Private_CoreLib_System_Threading_Monitor_Enter_System_Void_System_Object()
+    {
+        // Purpose: Verify Monitor.Enter with typical input
+            System.Threading.Monitor.Enter(new object());
+    }
+
+    [Fact]
     public void _System_Private_CoreLib_System_Threading_Monitor_TryEnter_System_Boolean_System_Object()
     {
         // Purpose: Verify Monitor.TryEnter with typical input
@@ -43,18 +50,42 @@ public partial class ThreadingMonitorInterlockedTests
     // === needs-manual (ref/pointer/generic) ===
 
     [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
+    public void _System_Private_CoreLib_System_Threading_Interlocked_Increment_System_Int32_System_Int32()
+    {
+        // TODO: Interlocked.Increment needs manual impl
+    }
+
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
+    public void _System_Private_CoreLib_System_Threading_Interlocked_Decrement_System_Int32_System_Int32()
+    {
+        // TODO: Interlocked.Decrement needs manual impl
+    }
+
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
+    public void _System_Private_CoreLib_System_Threading_Interlocked_Exchange_System_Int32_System_Int32_System_Int32()
+    {
+        // TODO: Interlocked.Exchange needs manual impl
+    }
+
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
+    public void _System_Private_CoreLib_System_Threading_Interlocked_CompareExchange_System_Int32_System_Int32_System_Int32_System_Int32()
+    {
+        // TODO: Interlocked.CompareExchange needs manual impl
+    }
+
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
+    public void _System_Private_CoreLib_System_Threading_Interlocked_Add_System_Int32_System_Int32_System_Int32()
+    {
+        // TODO: Interlocked.Add needs manual impl
+    }
+
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void _System_Private_CoreLib_System_Threading_Volatile_Read_System_Int32_System_Int32()
     {
         // TODO: Volatile.Read needs manual impl
     }
 
     // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — Enter with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Threading_Monitor_Enter_System_Void_System_Object()
-    {
-        // TODO: Monitor.Enter needs manual impl
-    }
 
     [Fact(Skip = "needs-manual — Exit with 1 params requires manual implementation")]
     public void _System_Private_CoreLib_System_Threading_Monitor_Exit_System_Void_System_Object()
@@ -78,35 +109,5 @@ public partial class ThreadingMonitorInterlockedTests
     public void _System_Private_CoreLib_System_Threading_Monitor_Wait_System_Boolean_System_Object()
     {
         // TODO: Monitor.Wait needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — Increment with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Threading_Interlocked_Increment_System_Int32_System_Int32()
-    {
-        // TODO: Interlocked.Increment needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — Decrement with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Threading_Interlocked_Decrement_System_Int32_System_Int32()
-    {
-        // TODO: Interlocked.Decrement needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — Exchange with 2 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Threading_Interlocked_Exchange_System_Int32_System_Int32_System_Int32()
-    {
-        // TODO: Interlocked.Exchange needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — CompareExchange with 3 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Threading_Interlocked_CompareExchange_System_Int32_System_Int32_System_Int32_System_Int32()
-    {
-        // TODO: Interlocked.CompareExchange needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — Add with 2 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Threading_Interlocked_Add_System_Int32_System_Int32_System_Int32()
-    {
-        // TODO: Interlocked.Add needs manual impl
     }
 }

@@ -21,7 +21,9 @@ public static class ReflectionMemberCompleteBenchmarks
     // Benchmark MemberInfo.get_MemberType native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberComplete)]
-    public static void Benchmark_System_Private_CoreLib_System_Reflection_MemberInfo_get_MemberType_System_Reflection_MemberTypes() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Reflection_MemberInfo_get_MemberType_System_Reflection_MemberTypes() { _ = typeof(byte).MemberType; }
     // Benchmark MemberInfo.get_DeclaringType native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberComplete)]
@@ -43,7 +45,9 @@ public static class ReflectionMemberCompleteBenchmarks
     // Benchmark MethodInfo.get_ReturnType native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberComplete)]
-    public static void Benchmark_System_Private_CoreLib_System_Reflection_MethodInfo_get_ReturnType_System_Type() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Reflection_MethodInfo_get_ReturnType_System_Type() { _ = typeof(byte).GetMethods()[0].ReturnType; }
     // Benchmark MethodInfo.GetBaseDefinition native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Reflection.MethodInfo::GetBaseDefinition:System.Reflection.MethodInfo()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberComplete)]
@@ -83,7 +87,9 @@ public static class ReflectionMemberCompleteBenchmarks
     // Benchmark FieldInfo.get_FieldType native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberComplete)]
-    public static void Benchmark_System_Private_CoreLib_System_Reflection_FieldInfo_get_FieldType_System_Type() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Reflection_FieldInfo_get_FieldType_System_Type() { _ = typeof(byte).GetFields()[0].FieldType; }
     // Benchmark FieldInfo.get_IsStatic native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Reflection.FieldInfo::get_IsStatic:System.Boolean()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberComplete)]
@@ -105,7 +111,9 @@ public static class ReflectionMemberCompleteBenchmarks
     // Benchmark PropertyInfo.get_PropertyType native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberComplete)]
-    public static void Benchmark_System_Private_CoreLib_System_Reflection_PropertyInfo_get_PropertyType_System_Type() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Reflection_PropertyInfo_get_PropertyType_System_Type() { _ = typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType; }
     // Benchmark PropertyInfo.get_CanRead native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Reflection.PropertyInfo::get_CanRead:System.Boolean()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberComplete)]

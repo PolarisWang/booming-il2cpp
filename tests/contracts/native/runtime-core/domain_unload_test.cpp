@@ -16,6 +16,7 @@
 #include "gc_card_table.h"
 #include "gc_region.h"
 #include "gc_young_collector.h"
+#include "gc_young_gen.h"
 #include "memory_domain.h"
 
 #include <cstdint>
@@ -130,15 +131,14 @@ static void test_basic_unload() {
         return;
     }
 
-    // Also set up a nursery + TLS context for a realistic GC environment.
-    Region* nursery = mgr.AllocateNursery();
+    // Also set up a nursery for a realistic GC environment.
+    InitYoungGeneration();
+    Region* nursery = g_young_gen.region.load(std::memory_order_acquire);
     if (nursery == nullptr) {
-        FAIL("AllocateNursery failed");
+        FAIL("InitYoungGeneration failed");
         UnregisterMemoryDomain(id);
         return;
     }
-    tls_nursery_ctx.nursery = nursery;
-    tls_nursery_ctx.limit = nursery->end - kMaxNurseryAlloc;
 
     // Allocate objects and create card-table dirtiness for the scan.
     void* p = NurseryAllocate(64);

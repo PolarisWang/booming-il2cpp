@@ -4,85 +4,79 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::_exitCode",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_0:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_1:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_2:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_3:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_4:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_5:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_6:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_7:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_8:System.Int32()",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_8:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_9:System.Int32()",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_9:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_10:System.Int32()",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_10:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

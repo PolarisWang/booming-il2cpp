@@ -16,7 +16,7 @@ public static class BufferMemoryPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Buffer::BlockCopy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_BufferMemory)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Buffer_BlockCopy_System_Void_System_Array_System_Int32_System_Array_System_Int32_System_In() { }
+    public static void Patch_System_Private_CoreLib_System_Buffer_BlockCopy_System_Void_System_Array_System_Int32_System_Array_System_Int32_System_In() { Buffer.BlockCopy(new byte[8], 0, new byte[8], 0, 8); }
     // Verify Buffer.BulkMoveWithWriteBarrier after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Buffer::BulkMoveWithWriteBarrier:System.Void(System.Byte&,System.Byte&,System.UIntPtr)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_BufferMemory)]
@@ -31,7 +31,7 @@ public static class BufferMemoryPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_BufferMemory)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Buffer_GetByte_System_Byte_System_Array_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_Buffer_GetByte_System_Byte_System_Array_System_Int32() { _ = Buffer.GetByte(new byte[4], 0); }
     // Verify Buffer.Memcpy after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Byte*,System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_BufferMemory)]
@@ -61,4 +61,4 @@ public static class BufferMemoryPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_BufferMemory)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Buffer_SetByte_System_Void_System_Array_System_Int32_System_Byte() { }}
+    public static void Patch_System_Private_CoreLib_System_Buffer_SetByte_System_Void_System_Array_System_Int32_System_Byte() { Buffer.SetByte(new byte[4], 0, (byte)42); }}

@@ -289,6 +289,7 @@ public static class NativeAotArtifactNames
     public const string GeneratedHeader = "generated/native-aot.generated.header.h";
     public const string AuditSummaryTranslationUnit = "generated/audit/native-aot.audit.generated.cpp";
     public const string ShapeDispatchHeader = "generated/runtime_helper_shapes.h";
+    public const string EnumMetadataHeader = "generated/enum_metadata.generated.h";
     public const string ModuleRegistration = "generated/module-registration.inc";
     public const string CodegenMetrics = "native-aot.codegen-metrics.json";
     public const string LoweringPlan = "native-aot.plan.json";

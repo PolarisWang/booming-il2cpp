@@ -57,6 +57,14 @@ public partial class ReflectionActivationTests
             Xunit.Assert.NotNull((object)result);
     }
 
+    [Fact]
+    public void _System_Private_CoreLib_System_Reflection_ConstructorInfo_Invoke_System_Object_System_Object()
+    {
+        // Purpose: Verify ConstructorInfo.Invoke with typical input
+            var result = typeof(byte).GetConstructors()[0].Invoke(new object[0]);
+            Xunit.Assert.NotNull((object)result);
+    }
+
     // === mixed (smoke) ===
 
     [Fact]
@@ -72,11 +80,5 @@ public partial class ReflectionActivationTests
     public void _System_Private_CoreLib_System_Activator_CreateInstance_T()
     {
         // TODO: Activator.CreateInstance needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — Invoke with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Reflection_ConstructorInfo_Invoke_System_Object_System_Object()
-    {
-        // TODO: ConstructorInfo.Invoke needs manual impl
     }
 }

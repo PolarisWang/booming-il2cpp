@@ -21,7 +21,7 @@ public static class GenericNullableValueHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Nullable`1::get_Value:T()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GenericNullableValue)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Nullable_1_get_Value_T() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Nullable_1_get_Value_T() { _ = ((int?)42).Value; }
     // Verify Nullable.GetValueOrDefault after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GenericNullableValue)]
