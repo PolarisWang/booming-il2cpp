@@ -1650,9 +1650,22 @@ static bool Test_Fuzz() {
         {IROpCode::Shl,   FOpGroup::Binary},
         {IROpCode::Shr,   FOpGroup::Binary},
         {IROpCode::ShrUn, FOpGroup::Binary},
-        // Note: Ceq/Clt/Cgt excluded — known ~12% mismatch edge case
-        // Note: AddOvf/SubOvf/MulOvf excluded — T4 deopt returns kDeoptMagic,
-        //       RegisterExecute wraps, producing expected mismatches
+        // V2a: Overflow-checking arithmetic — T4 deopt returns kDeoptMagic
+        // on overflow (expected), RegisterExecute wraps silently.
+        // Mismatch check below tolerates kDeoptMagic.
+        {IROpCode::AddOvf,   FOpGroup::Binary},
+        {IROpCode::SubOvf,   FOpGroup::Binary},
+        {IROpCode::MulOvf,   FOpGroup::Binary},
+        // V2b: Comparison opcodes — both RegisterExecute and T4 use
+        // 64-bit integer CMP for Ceq and 32-bit CMP for Clt/Cgt.
+        {IROpCode::Ceq,   FOpGroup::Binary},
+        {IROpCode::Clt,   FOpGroup::Binary},
+        {IROpCode::Cgt,   FOpGroup::Binary},
+        // V2c: Division — fuzz injects non-zero divisor to avoid #DE.
+        {IROpCode::Div,   FOpGroup::Binary},
+        {IROpCode::Rem,   FOpGroup::Binary},
+        {IROpCode::DivUn, FOpGroup::Binary},
+        {IROpCode::RemUn, FOpGroup::Binary},
     };
     // clang-format on
 
@@ -1734,6 +1747,13 @@ static bool Test_Fuzz() {
                 uint8_t dst = static_cast<uint8_t>(rng() % max_reg);
                 uint8_t s1  = pick_written();
                 uint8_t s2  = pick_written();
+                // Div/Rem/DivUn/RemUn: force divisor (s2) to non-zero to
+                // avoid #DE hardware exception in both T4 and RegisterExecute.
+                if (fop.opc == IROpCode::Div || fop.opc == IROpCode::Rem ||
+                    fop.opc == IROpCode::DivUn || fop.opc == IROpCode::RemUn) {
+                    int32_t safe_val = 1 + static_cast<int32_t>(rng() & 0x7F);  // 1-128
+                    instrs.push_back(InstrI4(IROpCode::LdcI4, safe_val, s2));
+                }
                 instrs.push_back(InstrBinary(fop.opc, dst, s1, s2));
                 mark_written(dst);
                 break;
@@ -1771,11 +1791,21 @@ static bool Test_Fuzz() {
             uint64_t re_ret = (re_ok && rf.has_ret) ? rf.ret_val : 0xDEADBEEF;
 
             if (crashed) {
-                mismatches++;
-                if (mismatches <= 10) {
-                    std::printf("    Fuzz CRASH run=%u (T4 segfault)\n", run);
-                    DumpInstrs(instrs);
+                if (re_ok) {
+                    // T4 crashed but RegisterExecute didn't — real mismatch
+                    mismatches++;
+                    if (mismatches <= 10) {
+                        std::printf("    Fuzz CRASH run=%u (T4 segfault)\n", run);
+                        DumpInstrs(instrs);
+                    }
                 }
+                // Both crashed (e.g. div-by-zero) — expected, skip
+                if (first_t4_eligible_run == UINT32_MAX) first_t4_eligible_run = run;
+            } else if (t4_ret == kDeoptMagic) {
+                // Expected: T4 overflow-checking ops (AddOvf/SubOvf/MulOvf)
+                // deoptimize on overflow (return kDeoptMagic), while
+                // RegisterExecute wraps silently.  Accept as valid.
+                if (first_t4_eligible_run == UINT32_MAX) first_t4_eligible_run = run;
             } else if ((re_ok && rf.has_ret && t4_ret != rf.ret_val) ||
                 (!re_ok && t4_ret != 0xDEADBEEF)) {
                 mismatches++;

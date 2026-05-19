@@ -43,6 +43,9 @@ AVAILABLE_TESTS = {
     "threading-stress": lambda repo, **kw: [runners_module.run_threading_stress(repo, **kw)],
     "gc-stress-mode": lambda repo, **kw: [runners_module.run_gc_stress_mode(repo, **kw)],
     "delegate-stress": runners_module.run_delegate_stress,
+    "loh-stress": runners_module.run_loh_stress,
+    "finalizer-stress": runners_module.run_finalizer_stress,
+    "bgc-stress": runners_module.run_bgc_stress,
 }
 
 
