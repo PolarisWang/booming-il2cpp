@@ -18,6 +18,30 @@ public partial class ReflectionTypeTests
     // === simple (all-primitive) ===
 
     [Fact]
+    public void _System_Private_CoreLib_System_Type_GetType_System_Type_System_String()
+    {
+        // Purpose: Verify Type.GetType with typical input
+            var result = Type.GetType("System.Int32");
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean()
+    {
+        // Purpose: Verify Type.GetType with typical input
+            var result = Type.GetType("System.Int32", false);
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean_System_Boolean()
+    {
+        // Purpose: Verify Type.GetType with typical input
+            var result = Type.GetType("System.Int32", false, false);
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
     public void _System_Private_CoreLib_System_Type_get_Name_System_String()
     {
         // Purpose: Verify Type.get_Name with typical input
@@ -324,25 +348,5 @@ public partial class ReflectionTypeTests
     {
         // Purpose: Smoke — Type.get_Assembly with complex param(s)
             _ = typeof(byte).Assembly;
-    }
-
-    // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — GetType with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Type_GetType_System_Type_System_String()
-    {
-        // TODO: Type.GetType needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — GetType with 2 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean()
-    {
-        // TODO: Type.GetType needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — GetType with 3 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean_System_Boolean()
-    {
-        // TODO: Type.GetType needs manual impl
     }
 }

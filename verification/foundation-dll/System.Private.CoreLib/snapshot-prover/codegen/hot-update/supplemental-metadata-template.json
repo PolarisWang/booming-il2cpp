@@ -3,100 +3,2030 @@
   "artifactKind": "supplementalMetadataTemplate",
   "registeredTypes": [
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
-      "definitionSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ArithmeticOps",
+      "definitionSubjectId": "SnapshotTestFixtures/ArithmeticOps",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StringOps",
+      "definitionSubjectId": "SnapshotTestFixtures/StringOps",
+      "metadataToken": 33554435
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/VoidCaller",
+      "definitionSubjectId": "SnapshotTestFixtures/VoidCaller",
+      "metadataToken": 33554436
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MathHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/MathHelper",
+      "metadataToken": 33554437
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/FlowControl",
+      "definitionSubjectId": "SnapshotTestFixtures/FlowControl",
+      "metadataToken": 33554438
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/InstanceHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper",
+      "metadataToken": 33554439
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CallVirtHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/CallVirtHelper",
+      "metadataToken": 33554440
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BoxingHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/BoxingHelper",
+      "metadataToken": 33554441
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/FieldHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/FieldHelper",
+      "metadataToken": 33554442
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LoopHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LoopHelper",
+      "metadataToken": 33554443
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ConversionHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ConversionHelper",
+      "metadataToken": 33554444
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Helper",
+      "definitionSubjectId": "SnapshotTestFixtures/Helper",
+      "metadataToken": 33554445
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SwitchHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/SwitchHelper",
+      "metadataToken": 33554446
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdftnHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper",
+      "metadataToken": 33554447
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/TargetHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/TargetHelper",
+      "metadataToken": 33554448
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ArrayHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ArrayHelper",
+      "metadataToken": 33554449
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhHelper",
+      "metadataToken": 33554450
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/GenericHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/GenericHelper",
+      "metadataToken": 33554451
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u00601",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+      "metadataToken": 33554452
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/DelegateHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/DelegateHelper",
+      "metadataToken": 33554453
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BaseClass",
+      "definitionSubjectId": "SnapshotTestFixtures/BaseClass",
+      "metadataToken": 33554454
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/DerivedClass",
+      "definitionSubjectId": "SnapshotTestFixtures/DerivedClass",
+      "metadataToken": 33554455
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/VirtualHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/VirtualHelper",
+      "metadataToken": 33554456
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MarkedClass",
+      "definitionSubjectId": "SnapshotTestFixtures/MarkedClass",
+      "metadataToken": 33554458
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/TypeCheckHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/TypeCheckHelper",
+      "metadataToken": 33554459
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SizeOfHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/SizeOfHelper",
+      "metadataToken": 33554461
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/IndirectHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/IndirectHelper",
+      "metadataToken": 33554462
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ArithmeticCompareHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ArithmeticCompareHelper",
+      "metadataToken": 33554463
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BranchDupHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/BranchDupHelper",
+      "metadataToken": 33554464
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/HasInstanceFields",
+      "definitionSubjectId": "SnapshotTestFixtures/HasInstanceFields",
+      "metadataToken": 33554465
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/InstanceFieldHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceFieldHelper",
+      "metadataToken": 33554466
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
+      "metadataToken": 33554467
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/VirtualDispatchHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/VirtualDispatchHelper",
+      "metadataToken": 33554468
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BitwiseHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/BitwiseHelper",
+      "metadataToken": 33554469
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ShiftHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ShiftHelper",
+      "metadataToken": 33554470
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ArrayLengthHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ArrayLengthHelper",
+      "metadataToken": 33554471
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ValueTypeHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ValueTypeHelper",
+      "metadataToken": 33554472
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LocalAllocHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LocalAllocHelper",
+      "metadataToken": 33554473
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MulDivHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/MulDivHelper",
+      "metadataToken": 33554474
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BranchCompareHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/BranchCompareHelper",
+      "metadataToken": 33554475
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/FloatOpsHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/FloatOpsHelper",
+      "metadataToken": 33554476
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ConvWideHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ConvWideHelper",
+      "metadataToken": 33554477
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/NegShiftHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/NegShiftHelper",
+      "metadataToken": 33554478
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdcI8Helper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdcI8Helper",
+      "metadataToken": 33554479
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper",
+      "metadataToken": 33554480
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdindI1Helper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindI1Helper",
+      "metadataToken": 33554481
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BranchCompareBHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/BranchCompareBHelper",
+      "metadataToken": 33554482
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/HasFields",
+      "definitionSubjectId": "SnapshotTestFixtures/HasFields",
+      "metadataToken": 33554483
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/AddressHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/AddressHelper",
+      "metadataToken": 33554484
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdtokenHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdtokenHelper",
+      "metadataToken": 33554485
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdelemaHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdelemaHelper",
+      "metadataToken": 33554486
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdargaHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdargaHelper",
+      "metadataToken": 33554487
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CpobjHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/CpobjHelper",
+      "metadataToken": 33554488
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StindNarrowHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/StindNarrowHelper",
+      "metadataToken": 33554489
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CallvirtHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/CallvirtHelper",
+      "metadataToken": 33554490
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/UnboxHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/UnboxHelper",
+      "metadataToken": 33554491
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CpblkHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/CpblkHelper",
+      "metadataToken": 33554492
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdindUnsignedHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindUnsignedHelper",
+      "metadataToken": 33554493
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdindI8Helper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindI8Helper",
+      "metadataToken": 33554494
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdindWideHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindWideHelper",
+      "metadataToken": 33554495
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StindWideHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/StindWideHelper",
+      "metadataToken": 33554496
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ArrayRefHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ArrayRefHelper",
+      "metadataToken": 33554497
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ThrowHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ThrowHelper",
+      "metadataToken": 33554498
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper",
+      "metadataToken": 33554499
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+      "metadataToken": 33554500
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CalliHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/CalliHelper",
+      "metadataToken": 33554501
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MyClass",
+      "definitionSubjectId": "SnapshotTestFixtures/MyClass",
+      "metadataToken": 33554502
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdVirtftnHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdVirtftnHelper",
+      "metadataToken": 33554503
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdelemAllHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdelemAllHelper",
+      "metadataToken": 33554504
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StelemAllHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/StelemAllHelper",
+      "metadataToken": 33554505
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
+      "metadataToken": 33554506
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper",
+      "metadataToken": 33554507
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StringFormatHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/StringFormatHelper",
+      "metadataToken": 33554508
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BranchUnsignedHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedHelper",
+      "metadataToken": 33554509
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper",
+      "metadataToken": 33554510
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/RethrowHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/RethrowHelper",
+      "metadataToken": 33554511
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper",
+      "metadataToken": 33554512
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+      "metadataToken": 33554513
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 33554514
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+      "metadataToken": 33554515
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
+      "metadataToken": 33554516
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CollectionsHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper",
+      "metadataToken": 33554517
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ExternalCaller",
+      "definitionSubjectId": "SnapshotTestFixtures/ExternalCaller",
+      "metadataToken": 33554518
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MultiDispatcher",
+      "definitionSubjectId": "SnapshotTestFixtures/MultiDispatcher",
+      "metadataToken": 33554519
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/InternalHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/InternalHelper",
+      "metadataToken": 33554520
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StringConcatHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/StringConcatHelper",
+      "metadataToken": 33554521
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo",
+      "definitionSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo",
+      "metadataToken": 33554522
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo",
+      "definitionSubjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo",
+      "metadataToken": 33554523
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo",
+      "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo",
+      "metadataToken": 33554524
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo",
+      "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo",
+      "metadataToken": 33554525
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SealedHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/SealedHelper",
+      "metadataToken": 33554526
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper",
+      "metadataToken": 33554527
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/IMyInterface",
+      "definitionSubjectId": "SnapshotTestFixtures/IMyInterface",
+      "metadataToken": 33554528
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ImplHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ImplHelper",
+      "metadataToken": 33554529
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/InterfaceDevirtHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper",
+      "metadataToken": 33554530
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=SnapshotTestFixtures/Wrapper\u00601;type=[System.Int32];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=SnapshotTestFixtures/Wrapper\u00601;type=[System.Int32];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 2,
+        "statusReasonCode": "loader-demand:typeSpec"
+      },
+      "genericDiagnostic": {
+        "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
+        "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+        "displaySubjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        }
+      },
+      "metadataToken": 452984834
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=SnapshotTestFixtures/Wrapper\u00601;type=[!0];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=SnapshotTestFixtures/Wrapper\u00601;type=[!0];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 2,
+        "statusReasonCode": "loader-demand:typeSpec"
+      },
+      "genericDiagnostic": {
+        "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E",
+        "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+        "displaySubjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "metadataToken": 452984835
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/IMarker",
+      "definitionSubjectId": "SnapshotTestFixtures/IMarker",
+      "metadataToken": 33554457
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SmallStruct",
+      "definitionSubjectId": "SnapshotTestFixtures/SmallStruct",
+      "metadataToken": 33554460
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO",
+      "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO",
+      "metadataToken": 33554531
     }
   ],
   "registeredMethods": [
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_0:System.Int32()",
-      "definitionSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_0:System.Int32()",
-      "declaringTypeSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "metadataToken": 100663297,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_1:System.Int32()",
-      "definitionSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_1:System.Int32()",
-      "declaringTypeSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ArithmeticOps",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "metadataToken": 100663298,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_2:System.Int32()",
-      "definitionSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_2:System.Int32()",
-      "declaringTypeSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StringOps::UseString:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/StringOps::UseString:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/StringOps",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "metadataToken": 100663299,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_3:System.Int32()",
-      "definitionSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_3:System.Int32()",
-      "declaringTypeSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/VoidCaller",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "metadataToken": 100663300,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_4:System.Int32()",
-      "definitionSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_4:System.Int32()",
-      "declaringTypeSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/MathHelper",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "metadataToken": 100663301,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_5:System.Int32()",
-      "definitionSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_5:System.Int32()",
-      "declaringTypeSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/FlowControl",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "metadataToken": 100663302,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_6:System.Int32()",
-      "definitionSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_6:System.Int32()",
-      "declaringTypeSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/InstanceHelper",
+      "metadataToken": 100663302,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "metadataToken": 100663303,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_7:System.Int32()",
-      "definitionSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_7:System.Int32()",
-      "declaringTypeSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/InstanceHelper",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "metadataToken": 100663304,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_8:System.Int32()",
-      "definitionSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_8:System.Int32()",
-      "declaringTypeSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/CallVirtHelper",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "metadataToken": 100663305,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_9:System.Int32()",
-      "definitionSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_9:System.Int32()",
-      "declaringTypeSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/BoxingHelper",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "metadataToken": 100663306,
       "parameterCount": 0
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/FieldHelper",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LoopHelper",
       "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ConversionHelper",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
+      "definitionSubjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
+      "metadataToken": 100663310,
       "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
+      "definitionSubjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
+      "metadataToken": 100663311,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SwitchHelper::Classify:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/SwitchHelper::Classify:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/SwitchHelper",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdftnHelper",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/TargetHelper",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ArrayHelper",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhHelper",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/GenericHelper",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+      "metadataToken": 100663319,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+      "metadataToken": 100663320,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/DelegateHelper",
+      "metadataToken": 100663321,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BaseClass::Compute:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/BaseClass::Compute:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/BaseClass",
+      "metadataToken": 100663322,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BaseClass::.ctor:System.Void()",
+      "definitionSubjectId": "SnapshotTestFixtures/BaseClass::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/BaseClass",
+      "metadataToken": 100663323,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/DerivedClass::Compute:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/DerivedClass::Compute:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/DerivedClass",
+      "metadataToken": 100663324,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()",
+      "definitionSubjectId": "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/DerivedClass",
+      "metadataToken": 100663325,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/VirtualHelper",
+      "metadataToken": 100663326,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MarkedClass::.ctor:System.Void()",
+      "definitionSubjectId": "SnapshotTestFixtures/MarkedClass::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/MarkedClass",
+      "metadataToken": 100663327,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/TypeCheckHelper",
+      "metadataToken": 100663328,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SizeOfHelper::GetSize:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/SizeOfHelper::GetSize:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/SizeOfHelper",
+      "metadataToken": 100663329,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/IndirectHelper",
+      "metadataToken": 100663330,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ArithmeticCompareHelper",
+      "metadataToken": 100663331,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/BranchDupHelper",
+      "metadataToken": 100663332,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/HasInstanceFields",
+      "metadataToken": 100663333,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/InstanceFieldHelper",
+      "metadataToken": 100663334,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
+      "metadataToken": 100663335,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/VirtualDispatchHelper",
+      "metadataToken": 100663336,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BitwiseHelper::RunBitwise:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/BitwiseHelper::RunBitwise:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/BitwiseHelper",
+      "metadataToken": 100663337,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ShiftHelper",
+      "metadataToken": 100663338,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ArrayLengthHelper",
+      "metadataToken": 100663339,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ValueTypeHelper::RunValueType:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/ValueTypeHelper::RunValueType:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ValueTypeHelper",
+      "metadataToken": 100663340,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LocalAllocHelper::RunAlloc:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LocalAllocHelper::RunAlloc:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LocalAllocHelper",
+      "metadataToken": 100663341,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MulDivHelper::RunMulDiv:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/MulDivHelper::RunMulDiv:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/MulDivHelper",
+      "metadataToken": 100663342,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BranchCompareHelper::RunBranchCompare:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/BranchCompareHelper::RunBranchCompare:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/BranchCompareHelper",
+      "metadataToken": 100663343,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/FloatOpsHelper",
+      "metadataToken": 100663344,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ConvWideHelper::RunConvWide:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/ConvWideHelper::RunConvWide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ConvWideHelper",
+      "metadataToken": 100663345,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/NegShiftHelper::RunNegShift:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/NegShiftHelper::RunNegShift:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/NegShiftHelper",
+      "metadataToken": 100663346,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int64()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int64()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdcI8Helper",
+      "metadataToken": 100663347,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper",
+      "metadataToken": 100663348,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdindI1Helper",
+      "metadataToken": 100663349,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/BranchCompareBHelper",
+      "metadataToken": 100663350,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/HasFields::.ctor:System.Void()",
+      "definitionSubjectId": "SnapshotTestFixtures/HasFields::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/HasFields",
+      "metadataToken": 100663351,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/AddressHelper",
+      "metadataToken": 100663352,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdtokenHelper",
+      "metadataToken": 100663353,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdelemaHelper::RunLdelema:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdelemaHelper::RunLdelema:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdelemaHelper",
+      "metadataToken": 100663354,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdargaHelper",
+      "metadataToken": 100663355,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CpobjHelper::RunCpobj:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/CpobjHelper::RunCpobj:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/CpobjHelper",
+      "metadataToken": 100663356,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StindNarrowHelper::RunStindNarrow:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/StindNarrowHelper::RunStindNarrow:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/StindNarrowHelper",
+      "metadataToken": 100663357,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/CallvirtHelper",
+      "metadataToken": 100663358,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/UnboxHelper",
+      "metadataToken": 100663359,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/CpblkHelper",
+      "metadataToken": 100663360,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdindUnsignedHelper",
+      "metadataToken": 100663361,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdindI8Helper",
+      "metadataToken": 100663362,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdindWideHelper",
+      "metadataToken": 100663363,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/StindWideHelper",
+      "metadataToken": 100663364,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ArrayRefHelper",
+      "metadataToken": 100663365,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ThrowHelper",
+      "metadataToken": 100663366,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowHelper",
+      "metadataToken": 100663367,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowHelper",
+      "metadataToken": 100663368,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowHelper",
+      "metadataToken": 100663369,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+      "metadataToken": 100663370,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+      "metadataToken": 100663371,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+      "metadataToken": 100663372,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+      "metadataToken": 100663373,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+      "metadataToken": 100663374,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+      "metadataToken": 100663375,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+      "metadataToken": 100663376,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/CalliHelper",
+      "metadataToken": 100663377,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/MyClass",
+      "metadataToken": 100663378,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/MyClass",
+      "metadataToken": 100663379,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdVirtftnHelper",
+      "metadataToken": 100663380,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdelemAllHelper::TestAllElems:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdelemAllHelper::TestAllElems:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdelemAllHelper",
+      "metadataToken": 100663381,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StelemAllHelper::TestAllElems:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/StelemAllHelper::TestAllElems:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/StelemAllHelper",
+      "metadataToken": 100663382,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
+      "metadataToken": 100663383,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
+      "metadataToken": 100663384,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
+      "metadataToken": 100663385,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+      "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
+      "metadataToken": 100663386,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
+      "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/RareOpsHelper",
+      "metadataToken": 100663387,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/RareOpsHelper",
+      "metadataToken": 100663388,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+      "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/RareOpsHelper",
+      "metadataToken": 100663389,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/StringFormatHelper",
+      "metadataToken": 100663390,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/BranchUnsignedHelper",
+      "metadataToken": 100663391,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper",
+      "metadataToken": 100663392,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/RethrowHelper",
+      "metadataToken": 100663393,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowUnHelper",
+      "metadataToken": 100663394,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowUnHelper",
+      "metadataToken": 100663395,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowUnHelper",
+      "metadataToken": 100663396,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+      "metadataToken": 100663397,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+      "metadataToken": 100663398,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+      "metadataToken": 100663399,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+      "metadataToken": 100663400,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+      "metadataToken": 100663401,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 100663402,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 100663403,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 100663404,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 100663405,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 100663406,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 100663407,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 100663408,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 100663409,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 100663410,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 100663411,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 100663412,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+      "metadataToken": 100663413,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+      "metadataToken": 100663414,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+      "metadataToken": 100663415,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+      "metadataToken": 100663416,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+      "metadataToken": 100663417,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+      "metadataToken": 100663418,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+      "metadataToken": 100663419,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
+      "metadataToken": 100663420,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
+      "metadataToken": 100663421,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
+      "metadataToken": 100663422,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/CollectionsHelper",
+      "metadataToken": 100663423,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/CollectionsHelper",
+      "metadataToken": 100663424,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/CollectionsHelper",
+      "metadataToken": 100663425,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ExternalCaller",
+      "metadataToken": 100663426,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/MultiDispatcher",
+      "metadataToken": 100663427,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/InternalHelper",
+      "metadataToken": 100663428,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/StringConcatHelper",
+      "metadataToken": 100663429,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo",
+      "metadataToken": 100663430,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo",
+      "metadataToken": 100663431,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo",
+      "metadataToken": 100663432,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo",
+      "metadataToken": 100663433,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/SealedHelper",
+      "metadataToken": 100663434,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/SealedHelper",
+      "metadataToken": 100663435,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper",
+      "metadataToken": 100663436,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/IMyInterface",
+      "metadataToken": 100663437,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ImplHelper",
+      "metadataToken": 100663438,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ImplHelper",
+      "metadataToken": 100663439,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper",
+      "metadataToken": 100663440,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 2,
+        "statusReasonCode": "loader-demand:memberReference"
+      },
+      "genericDiagnostic": {
+        "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+        "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
+        "displaySubjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor(System.Int32)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
+      "metadataToken": 1912602624,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=SnapshotTestFixtures/Wrapper\u00601::GetValue:!0();type=[System.Int32];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=SnapshotTestFixtures/Wrapper\u00601::GetValue:!0();type=[System.Int32];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 2,
+        "statusReasonCode": "loader-demand:memberReference"
+      },
+      "genericDiagnostic": {
+        "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
+        "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
+        "displaySubjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::GetValue()",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
+      "metadataToken": 1912602625,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
+      "genericDiagnostic": {
+        "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
+        "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
+        "displaySubjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::.ctor(!0)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E",
+      "metadataToken": 1912602626,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::GetValue:!0()",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
+      "genericDiagnostic": {
+        "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::GetValue:!0()",
+        "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
+        "displaySubjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::GetValue()",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E",
+      "metadataToken": 1912602627,
+      "parameterCount": 0
     }
   ],
   "reservedSlots": {

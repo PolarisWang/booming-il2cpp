@@ -21,7 +21,9 @@ public static class GenericNullableValueBenchmarks
     // Benchmark Nullable.get_Value native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Nullable`1::get_Value:T()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GenericNullableValue)]
-    public static void Benchmark_System_Private_CoreLib_System_Nullable_1_get_Value_T() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Nullable_1_get_Value_T() { _ = ((int?)42).Value; }
     // Benchmark Nullable.GetValueOrDefault native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GenericNullableValue)]

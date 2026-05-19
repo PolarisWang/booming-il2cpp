@@ -26,7 +26,7 @@ public static class GlobalizationCultureHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GlobalizationCulture)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Globalization_CultureInfo_GetCultureInfo_System_Globalization_CultureInfo_System_String() { }
+    public static void HotUpdate_System_Private_CoreLib_System_Globalization_CultureInfo_GetCultureInfo_System_Globalization_CultureInfo_System_String() { _ = CultureInfo.GetCultureInfo(""); }
     // Verify CultureInfo.get_Name after hot-update (patch side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GlobalizationCulture)]

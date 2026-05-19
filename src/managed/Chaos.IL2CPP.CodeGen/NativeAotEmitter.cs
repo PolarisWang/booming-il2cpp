@@ -287,6 +287,21 @@ public sealed class NativeAotEmitter
             Path = NativeAotArtifactNames.ShapeDispatchHeader,
         });
 
+        // Include enum metadata header if non-empty
+        if (!string.IsNullOrEmpty(templateModel.EnumMetadataHeaderContent))
+        {
+            sources.Add(new NativeAotGeneratedSource
+            {
+                RelativePath = NativeAotArtifactNames.EnumMetadataHeader,
+                Contents = templateModel.EnumMetadataHeaderContent,
+            });
+            artifacts.Add(new NativeAotGeneratedArtifactRef
+            {
+                Kind = "enumMetadataHeader",
+                Path = NativeAotArtifactNames.EnumMetadataHeader,
+            });
+        }
+
         var pages = loweringPlan.TranslationUnitPages;
         if (pages is { Count: > 0 } && loweringPlan.TranslationUnitPageSize is > 0)
         {

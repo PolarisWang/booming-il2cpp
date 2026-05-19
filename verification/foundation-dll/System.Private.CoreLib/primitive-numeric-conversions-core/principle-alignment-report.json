@@ -1,14 +1,20 @@
 {
   "family": "primitive-numeric-conversions-core",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:15:24.178041",
+  "generated_at": "2026-05-19T19:21:37.139919",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available — benchmarks may not have been run [overridden — codegen-mode=jit, interpreter path is expected to be slower]",
+      "summary": "10/10 methods are stubs — benchmark data not meaningful",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "managed_faster_count": 0,
+        "native_faster_count": 0,
+        "invalid_count": 10,
+        "total_methods": 10
+      }
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -264,11 +270,39 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "VIOLATION",
-      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
-      "details": [],
+      "status": "CONCERN",
+      "summary": "3 of 3 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
+          "reason": "outside expected architecture layers"
+        }
+      ],
       "evidence": {
-        "error": "'NoneType' object has no attribute 'strip'"
+        "changed_source_count": 3,
+        "layer_distribution": {},
+        "violations": [
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -329,8 +363,8 @@
     "total": 12,
     "aligned": 8,
     "concern": 1,
-    "violation": 1,
-    "not_applicable": 2,
-    "overall": "VIOLATION"
+    "violation": 0,
+    "not_applicable": 3,
+    "overall": "ALIGNED"
   }
 }

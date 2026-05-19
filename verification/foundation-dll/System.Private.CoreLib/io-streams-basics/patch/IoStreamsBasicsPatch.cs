@@ -16,12 +16,12 @@ public static class IoStreamsBasicsPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_IO_Stream_Read_System_Int32_System_Byte_System_Int32_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_IO_Stream_Read_System_Int32_System_Byte_System_Int32_System_Int32() { _ = new MemoryStream(new byte[10]).Read(new byte[5], 0, 5); }
     // Verify Stream.Write after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_IO_Stream_Write_System_Void_System_Byte_System_Int32_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_IO_Stream_Write_System_Void_System_Byte_System_Int32_System_Int32() { new MemoryStream().Write(new byte[5], 0, 5); }
     // Verify Stream.Flush after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.IO.Stream::Flush:System.Void()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
@@ -51,7 +51,7 @@ public static class IoStreamsBasicsPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_IO_Stream_CopyTo_System_Void_System_IO_Stream() { }
+    public static void Patch_System_Private_CoreLib_System_IO_Stream_CopyTo_System_Void_System_IO_Stream() { new MemoryStream().CopyTo(new MemoryStream()); }
     // Verify TextReader.ReadLine after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
@@ -81,24 +81,24 @@ public static class IoStreamsBasicsPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_IO_BinaryReader_ReadInt32_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_IO_BinaryReader_ReadInt32_System_Int32() { _ = new BinaryReader(new MemoryStream(new byte[4])).ReadInt32(); }
     // Verify BinaryReader.ReadString after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_IO_BinaryReader_ReadString_System_String() { }
+    public static void Patch_System_Private_CoreLib_System_IO_BinaryReader_ReadString_System_String() { _ = new BinaryReader(new MemoryStream(new byte[] { 0 })).ReadString(); }
     // Verify BinaryReader.ReadDouble after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_IO_BinaryReader_ReadDouble_System_Double() { }
+    public static void Patch_System_Private_CoreLib_System_IO_BinaryReader_ReadDouble_System_Double() { _ = new BinaryReader(new MemoryStream(new byte[8])).ReadDouble(); }
     // Verify BinaryWriter.Write after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_Int32() { }
+    public static void Patch_System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_Int32() { new BinaryWriter(new MemoryStream()).Write(42); }
     // Verify BinaryWriter.Write after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_String() { }}
+    public static void Patch_System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_String() { new BinaryWriter(new MemoryStream()).Write(42); }}

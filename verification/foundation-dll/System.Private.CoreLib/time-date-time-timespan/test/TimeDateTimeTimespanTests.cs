@@ -134,9 +134,9 @@ public partial class TimeDateTimeTimespanTests
             Xunit.Assert.NotNull((object)result);
     }
 
-    // === needs-manual (operator/protected/etc) ===
+    // === needs-manual (ref/pointer/generic) ===
 
-    [Fact(Skip = "needs-manual — TryParse with 2 params requires manual implementation")]
+    [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void _System_Private_CoreLib_System_DateTime_TryParse_System_Boolean_System_String_System_DateTime()
     {
         // TODO: DateTime.TryParse needs manual impl

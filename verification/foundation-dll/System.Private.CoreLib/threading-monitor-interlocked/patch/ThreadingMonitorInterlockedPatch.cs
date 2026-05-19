@@ -16,7 +16,7 @@ public static class ThreadingMonitorInterlockedPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Threading.Monitor::Enter:System.Void(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingMonitorInterlocked)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Threading_Monitor_Enter_System_Void_System_Object() { }
+    public static void Patch_System_Private_CoreLib_System_Threading_Monitor_Enter_System_Void_System_Object() { System.Threading.Monitor.Enter(new object()); }
     // Verify Monitor.Exit after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Threading.Monitor::Exit:System.Void(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingMonitorInterlocked)]

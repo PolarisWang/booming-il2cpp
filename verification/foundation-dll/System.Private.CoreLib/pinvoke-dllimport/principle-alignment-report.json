@@ -1,14 +1,20 @@
 {
   "family": "pinvoke-dllimport",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:14:30.746417",
+  "generated_at": "2026-05-19T19:19:58.335211",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available — benchmarks may not have been run [overridden — codegen-mode=jit, interpreter path is expected to be slower]",
+      "summary": "4/4 methods are stubs — benchmark data not meaningful",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "managed_faster_count": 0,
+        "native_faster_count": 0,
+        "invalid_count": 4,
+        "total_methods": 4
+      }
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -144,12 +150,10 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "VIOLATION",
-      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
+      "status": "NOT_APPLICABLE",
+      "summary": "No changed source files detected",
       "details": [],
-      "evidence": {
-        "error": "'NoneType' object has no attribute 'strip'"
-      }
+      "evidence": {}
     },
     "p2_no_bare_new": {
       "check_id": "p2_no_bare_new",
@@ -208,9 +212,9 @@
   "summary": {
     "total": 12,
     "aligned": 8,
-    "concern": 1,
-    "violation": 1,
-    "not_applicable": 2,
-    "overall": "VIOLATION"
+    "concern": 0,
+    "violation": 0,
+    "not_applicable": 4,
+    "overall": "ALIGNED"
   }
 }

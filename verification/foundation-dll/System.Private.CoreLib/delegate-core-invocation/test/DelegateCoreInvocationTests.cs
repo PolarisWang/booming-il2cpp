@@ -15,6 +15,24 @@ public partial class DelegateCoreInvocationTests
 {
     // AI-generated tests for family/System.Private.CoreLib/delegate/core-invocation
 
+    // === simple (all-primitive) ===
+
+    [Fact]
+    public void _System_Private_CoreLib_System_Delegate_DynamicInvoke_System_Object_System_Object()
+    {
+        // Purpose: Verify Delegate.DynamicInvoke with typical input
+            var result = new System.Action(() => {}).DynamicInvoke();
+            Xunit.Assert.NotNull((object)result);
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_Delegate_get_Target_System_Object()
+    {
+        // Purpose: Verify Delegate.get_Target with typical input
+            var result = new System.Action(() => {}).Target;
+            Xunit.Assert.NotNull((object)result);
+    }
+
     // === mixed (smoke) ===
 
     [Fact]
@@ -31,25 +49,21 @@ public partial class DelegateCoreInvocationTests
             _ = Delegate.Remove(null!, null!);
     }
 
-    // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — DynamicInvoke with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Delegate_DynamicInvoke_System_Object_System_Object()
-    {
-        // TODO: Delegate.DynamicInvoke needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — get_Method with 0 params requires manual implementation")]
+    [Fact]
     public void _System_Private_CoreLib_System_Delegate_get_Method_System_Reflection_MethodInfo()
     {
-        // TODO: Delegate.get_Method needs manual impl
+        // Purpose: Smoke — Delegate.get_Method with complex param(s)
+            _ = new System.Action(() => {}).Method;
     }
 
-    [Fact(Skip = "needs-manual — get_Target with 0 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Delegate_get_Target_System_Object()
+    [Fact]
+    public void _System_Private_CoreLib_System_MulticastDelegate_GetInvocationList_System_Delegate()
     {
-        // TODO: Delegate.get_Target needs manual impl
+        // Purpose: Smoke — MulticastDelegate.GetInvocationList with complex param(s)
+            _ = new System.Action(() => {}).GetInvocationList();
     }
+
+    // === needs-manual (operator/protected/etc) ===
 
     [Fact(Skip = "needs-manual — CreateDelegate with 3 params requires manual implementation")]
     public void _System_Private_CoreLib_System_Delegate_CreateDelegate_System_Delegate_System_Type_System_Object_System_String()
@@ -61,12 +75,6 @@ public partial class DelegateCoreInvocationTests
     public void _System_Private_CoreLib_System_Delegate_CreateDelegate_System_Delegate_System_Type_System_Reflection_MethodInfo()
     {
         // TODO: Delegate.CreateDelegate needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — GetInvocationList with 0 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_MulticastDelegate_GetInvocationList_System_Delegate()
-    {
-        // TODO: MulticastDelegate.GetInvocationList needs manual impl
     }
 
     [Fact(Skip = "needs-manual — op_Equality requires manual implementation")]

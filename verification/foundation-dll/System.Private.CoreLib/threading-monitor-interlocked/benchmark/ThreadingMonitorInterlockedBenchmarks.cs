@@ -15,7 +15,9 @@ public static class ThreadingMonitorInterlockedBenchmarks
     // Benchmark Monitor.Enter native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Monitor::Enter:System.Void(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingMonitorInterlocked)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Monitor_Enter_System_Void_System_Object() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Monitor_Enter_System_Void_System_Object() { System.Threading.Monitor.Enter(new object()); }
     // Benchmark Monitor.Exit native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Monitor::Exit:System.Void(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingMonitorInterlocked)]

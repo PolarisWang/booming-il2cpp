@@ -1,14 +1,24 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "SnapshotProverPatchEntry",
+  "assemblyName": "SnapshotProverSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/patch/build-output/SnapshotProverPatchEntry.dll",
-  "additionalAssemblyPaths": [],
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/subjects/build-output/SnapshotProverSubjects.dll",
+  "additionalAssemblyPaths": [
+    "verification/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/subjects/build-output/SnapshotTestFixtures.dll"
+  ],
   "resolvedAssemblies": [
     {
-      "assemblyName": "SnapshotProverPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/patch/build-output/SnapshotProverPatchEntry.dll"
+      "assemblyName": "SnapshotProverSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/subjects/build-output/SnapshotProverSubjects.dll"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "path": "verification/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/subjects/build-output/SnapshotTestFixtures.dll"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Collections.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +26,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "d5f97f7a-5ea3-4753-a131-b378ad4d3019",
+  "inputModuleVersionId": "eb76485b-19dd-4cf6-a828-c29edd5f8be5",
   "artifacts": [
     {
       "kind": "typedIlIr",

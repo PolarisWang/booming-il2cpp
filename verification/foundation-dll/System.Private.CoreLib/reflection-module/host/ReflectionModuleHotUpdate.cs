@@ -41,4 +41,4 @@ public static class ReflectionModuleHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.Module::GetCustomAttributes:System.Object[](System.Type)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionModule)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Reflection_Module_GetCustomAttributes_System_Object_System_Type() { }}
+    public static void HotUpdate_System_Private_CoreLib_System_Reflection_Module_GetCustomAttributes_System_Object_System_Type() { _ = new List<Attribute>(typeof(byte).Module.GetCustomAttributes(false)).Count; }}

@@ -2,9 +2,9 @@
   "family": "pinvoke-dllimport",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T19:14:33",
-  "duration_ms": 21491,
-  "overall_status": "failed",
+  "timestamp": "2026-05-19T19:19:58",
+  "duration_ms": 23766,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -28,69 +28,46 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\pinvoke-dllimport\\managed\\subjects\\build-output\\PinvokeDllimportSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 18061
+      "duration_ms": 22897
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (4/12)",
+      "status": "passed",
+      "summary": "Fact verify=passed (12/12)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 4,
+          "status": "passed",
+          "passed": 12,
           "total": 12
         }
       },
       "errors": [],
-      "duration_ms": 304
+      "duration_ms": 319
     },
     "audit": {
       "stage": "audit",
-      "status": "failed",
-      "summary": "false_passing=0, principle=VIOLATION",
+      "status": "passed",
+      "summary": "false_passing=0, principle=ALIGNED",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "VIOLATION",
+        "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 789
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "failed",
-      "summary": "matchedCount=0/4 below threshold 50%",
-      "details": {
-        "averageSpeedupPercent": 0.0,
-        "nativeFasterCount": 0,
-        "managedFasterCount": 0,
-        "matchedCount": 0,
-        "totalMethods": 4,
-        "invalidCount": 4,
-        "benchmarkQuality": "matchedCount=0/4 below threshold 50%"
-      },
-      "errors": [],
-      "duration_ms": 2333
+      "duration_ms": 545
     }
   },
   "coverage": {
-    "methodCoverage": 33.33,
+    "methodCoverage": 100.0,
     "testedRate": 100.0,
-    "overall": 66.66
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {},
     "irTranslation": {},
-    "performance": {
-      "averageSpeedupPercent": 0.0,
-      "nativeFasterCount": 0,
-      "managedFasterCount": 0,
-      "matchedCount": 0,
-      "totalMethods": 4,
-      "invalidCount": 4
-    },
+    "performance": {},
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,
@@ -101,8 +78,14 @@
   },
   "regression": {
     "benchmark": {
-      "status": "no_baseline",
-      "message": "Baseline auto-created from this run",
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 4,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
       "currentMetrics": {
         "totalMethods": 4,
         "matchedCount": 0,

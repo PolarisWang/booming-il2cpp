@@ -32,6 +32,34 @@ public partial class AttributesCustomMetadataTests
     }
 
     [Fact]
+    public void _System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_MemberInfo_System_Type()
+    {
+        // Purpose: Smoke — Attribute.GetCustomAttributes with complex param(s)
+            _ = new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute))).Count;
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_Assembly_System_Type()
+    {
+        // Purpose: Smoke — Attribute.GetCustomAttributes with complex param(s)
+            _ = new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute))).Count;
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_MemberInfo()
+    {
+        // Purpose: Smoke — Attribute.GetCustomAttributes with complex param(s)
+            _ = new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(false)).Count;
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_Assembly()
+    {
+        // Purpose: Smoke — Attribute.GetCustomAttributes with complex param(s)
+            _ = new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(false)).Count;
+    }
+
+    [Fact]
     public void _System_Private_CoreLib_System_Attribute_IsDefined_System_Boolean_System_Reflection_MemberInfo_System_Type()
     {
         // Purpose: Smoke — Attribute.IsDefined with complex param(s)
@@ -46,30 +74,6 @@ public partial class AttributesCustomMetadataTests
     }
 
     // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — GetCustomAttributes with 2 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_MemberInfo_System_Type()
-    {
-        // TODO: Attribute.GetCustomAttributes needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — GetCustomAttributes with 2 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_Assembly_System_Type()
-    {
-        // TODO: Attribute.GetCustomAttributes needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — GetCustomAttributes with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_MemberInfo()
-    {
-        // TODO: Attribute.GetCustomAttributes needs manual impl
-    }
-
-    [Fact(Skip = "needs-manual — GetCustomAttributes with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_Assembly()
-    {
-        // TODO: Attribute.GetCustomAttributes needs manual impl
-    }
 
     [Fact(Skip = "needs-manual — get_TypeId with 0 params requires manual implementation")]
     public void _System_Private_CoreLib_System_Attribute_get_TypeId_System_Object()

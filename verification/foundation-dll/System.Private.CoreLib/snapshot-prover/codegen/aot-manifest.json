@@ -3,76 +3,1258 @@
   "artifactKind": "aotManifest",
   "entries": [
     {
-      "assemblyName": "SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotProverSubjects",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotProverSubjects",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/StringOps::UseString:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotProverSubjects",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotProverSubjects",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotProverSubjects",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_8:System.Int32()",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_9:System.Int32()",
+      "subjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotProverSubjects",
       "subjectKind": "method",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "SnapshotProverPatchEntry",
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/SwitchHelper::Classify:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/BaseClass::Compute:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/BaseClass::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/DerivedClass::Compute:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/MarkedClass::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/SizeOfHelper::GetSize:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/BitwiseHelper::RunBitwise:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ValueTypeHelper::RunValueType:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LocalAllocHelper::RunAlloc:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/MulDivHelper::RunMulDiv:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/BranchCompareHelper::RunBranchCompare:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ConvWideHelper::RunConvWide:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/NegShiftHelper::RunNegShift:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int64()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/HasFields::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdelemaHelper::RunLdelema:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/CpobjHelper::RunCpobj:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/StindNarrowHelper::RunStindNarrow:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdelemAllHelper::TestAllElems:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/StelemAllHelper::TestAllElems:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::GetValue:!0()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
       "subjectKind": "field",
-      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::_exitCode",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
       "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/FieldHelper::_counter",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u00601::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/MarkedClass::Value",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/SmallStruct::X",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/SmallStruct::Y",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/HasInstanceFields::Value",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_writeTarget",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/HasFields::instanceVal",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/HasFields::staticVal",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/MyClass::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/SealedHelper::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/ImplHelper::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO::\u003C0\u003E__GetValue",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::_val",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::Invoke:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.SByte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle::get_Value:System.IntPtr()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IntPtr::ToInt32:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int16",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.UInt16",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.UInt32",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int64",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Single",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Double",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Object",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::Invoke:System.Int32(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Double::IsFinite:System.Boolean(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::Add:System.Void(System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::ContainsKey:System.Boolean(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E::Remove:System.Boolean(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Add:System.Boolean(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Remove:System.Boolean(System.Int32)",
+      "reason": "external-call"
     }
   ]
 }

@@ -26,17 +26,17 @@ public static class DelegateCoreInvocationPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_DelegateCoreInvocation)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Delegate_DynamicInvoke_System_Object_System_Object() { }
+    public static void Patch_System_Private_CoreLib_System_Delegate_DynamicInvoke_System_Object_System_Object() { _ = new System.Action(() => {}).DynamicInvoke(); }
     // Verify Delegate.get_Method after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_DelegateCoreInvocation)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Delegate_get_Method_System_Reflection_MethodInfo() { }
+    public static void Patch_System_Private_CoreLib_System_Delegate_get_Method_System_Reflection_MethodInfo() { _ = new System.Action(() => {}).Method; }
     // Verify Delegate.get_Target after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Delegate::get_Target:System.Object()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_DelegateCoreInvocation)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Delegate_get_Target_System_Object() { }
+    public static void Patch_System_Private_CoreLib_System_Delegate_get_Target_System_Object() { _ = new System.Action(() => {}).Target; }
     // Verify Delegate.CreateDelegate after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_DelegateCoreInvocation)]
@@ -51,7 +51,7 @@ public static class DelegateCoreInvocationPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.MulticastDelegate::GetInvocationList:System.Delegate[]()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_DelegateCoreInvocation)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_MulticastDelegate_GetInvocationList_System_Delegate() { }
+    public static void Patch_System_Private_CoreLib_System_MulticastDelegate_GetInvocationList_System_Delegate() { _ = new System.Action(() => {}).GetInvocationList(); }
     // Verify Delegate.op_Equality after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_DelegateCoreInvocation)]

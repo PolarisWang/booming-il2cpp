@@ -49,6 +49,14 @@ public partial class ReflectionModuleTests
             Xunit.Assert.NotNull((object)result);
     }
 
+    [Fact]
+    public void _System_Private_CoreLib_System_Reflection_Module_GetCustomAttributes_System_Object_System_Type()
+    {
+        // Purpose: Verify Module.GetCustomAttributes with typical input
+            var result = new List<Attribute>(typeof(byte).Module.GetCustomAttributes(false)).Count;
+            Xunit.Assert.NotNull((object)result);
+    }
+
     // === mixed (smoke) ===
 
     [Fact]
@@ -56,13 +64,5 @@ public partial class ReflectionModuleTests
     {
         // Purpose: Smoke — Module.get_Assembly with complex param(s)
             _ = default(Module)!.Assembly;
-    }
-
-    // === needs-manual (operator/protected/etc) ===
-
-    [Fact(Skip = "needs-manual — GetCustomAttributes with 1 params requires manual implementation")]
-    public void _System_Private_CoreLib_System_Reflection_Module_GetCustomAttributes_System_Object_System_Type()
-    {
-        // TODO: Module.GetCustomAttributes needs manual impl
     }
 }

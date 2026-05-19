@@ -37,7 +37,9 @@ public static class CollectionsGenericCoreBenchmarks
     // Benchmark List.RemoveAt native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_CollectionsGenericCore)]
-    public static void Benchmark_System_Private_CoreLib_System_Collections_Generic_List_1_RemoveAt_System_Void_System_Int32() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Collections_Generic_List_1_RemoveAt_System_Void_System_Int32() { new System.Collections.Generic.List<int>{1,2,3}.RemoveAt(1); }
     // Benchmark List.Sort native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_CollectionsGenericCore)]

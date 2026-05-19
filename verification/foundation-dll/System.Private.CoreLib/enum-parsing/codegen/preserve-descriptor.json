@@ -4,91 +4,85 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::_exitCode",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_6:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_7:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_8:System.Int32()",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_9:System.Int32()",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_10:System.Int32()",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_10:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_11:System.Int32()",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_11:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }
