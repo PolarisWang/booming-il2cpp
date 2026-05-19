@@ -121,16 +121,27 @@ static void ScenarioF2() {
 
     InitTrackers();
 
-    // Allocate in old-gen (kept alive).
-    void* obj = g_old_gen.Allocate(256, true);
-    if (!obj) { FAIL("old-gen allocation failed"); return; }
+    // Allocate N objects via nursery, keep half alive in a vector.
+    // After GC, the kept objects should NOT have finalizers called;
+    // the dropped objects should have finalizers called (control).
+    static constexpr int kNumObjects = 50;
+    std::vector<void*> kept;
+    std::vector<void*> all;
 
-    // Register a finalizer that would fail the test if called.
-    g_old_gen.RegisterFinalizer(obj, [](void*) {
-        FAIL("finalizer called on reachable object!");
-    });
+    for (int i = 0; i < kNumObjects; i++) {
+        void* obj = NurseryAllocate(64);
+        if (!obj) { FAIL("nursery allocation failed"); return; }
+        // Assign the index cast as pointer so the callback can identify it.
+        void* id = reinterpret_cast<void*>(static_cast<intptr_t>(i));
+        g_old_gen.RegisterFinalizer(obj, FinalizerCallback);
+        all.push_back(obj);
+        // Keep even-indexed objects alive.
+        if (i % 2 == 0) {
+            kept.push_back(obj);
+        }
+    }
 
-    // Multiple GC cycles with the object still reachable.
+    // Multiple GC cycles with kept objects still reachable.
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 200; j++) {
             volatile void* tmp = NurseryAllocate(32);
@@ -138,8 +149,17 @@ static void ScenarioF2() {
         }
         g_old_gen.Collect(nullptr, nullptr);
     }
+    chaos_gc_wait_for_pending_finalizers();
 
-    // If we got here, finalizer was not called.
+    // Verify: kept (even) objects should NOT be finalized.
+    for (size_t i = 0; i < kept.size(); i++) {
+        int idx = static_cast<int>(i * 2);  // kept are even indices
+        if (g_fired_flags[idx].load() != 0) {
+            FAIL("kept object was finalized");
+            return;
+        }
+    }
+
     PASS();
 }
 

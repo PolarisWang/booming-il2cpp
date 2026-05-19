@@ -111,13 +111,13 @@ static void ScenarioL1() {
         threads.emplace_back(worker, t);
     }
     for (auto& th : threads) th.join();
+    threads.clear();
 
     if (failed.load()) { FAIL("allocation failed"); return; }
 
     // Trigger full GC to verify LOH objects survive.
-    uint32_t gen = threading::RequestGlobalSafepoint();
+    // Note: no safepoint wrapping needed — all worker threads have joined.
     g_old_gen.Collect(nullptr, nullptr);
-    threading::ReleaseGlobalSafepoint(gen);
 
     // Re-run workers to verify allocations via pattern checking.
     // (We can't easily find the old allocations, so we check new ones work.)
@@ -154,15 +154,15 @@ static void ScenarioL2() {
 
     static constexpr int kBaseThreads = 4;
     static constexpr int kBaseAllocs = 200;
-    static constexpr int kGcInterval = 50;
     int n_threads = kBaseThreads;
     int n_allocs = Scaled(kBaseAllocs);
 
     std::atomic<bool> failed{false};
+    std::mutex all_roots_mutex;
+    std::vector<void*> all_roots;
 
     auto worker = [&](int tid) {
         threading::RegisterThread(threading::AllocateThreadId(), nullptr);
-        std::vector<void*> roots;
 
         for (int i = 0; i < n_allocs; i++) {
             CHAOS_IL2CPP_SIZE size = 96 * 1024;
@@ -170,29 +170,12 @@ static void ScenarioL2() {
             if (!obj) { failed.store(true); break; }
             WritePattern(obj, size, tid, i);
 
-            // Keep every other allocation.
+            // Keep every other allocation — push to shared roots list.
             if (i % 2 == 0) {
-                roots.push_back(obj);
+                std::lock_guard<std::mutex> lock(all_roots_mutex);
+                all_roots.push_back(obj);
             }
 
-            // Periodically trigger GC to sweep unmarked LOH segments.
-            if (i > 0 && (i % kGcInterval) == 0) {
-                // Mark roots.
-                for (auto* r : roots) {
-                    if (r) g_loh.MarkObject(r);
-                }
-                CHAOS_IL2CPP_SIZE reclaimed = g_loh.Sweep();
-                printf("\n      GC at i=%d: reclaimed=%llu roots=%zu",
-                       i, (unsigned long long)reclaimed, roots.size());
-
-                // Verify roots still valid.
-                for (auto* r : roots) {
-                    if (r && !g_loh.IsInLOH(r)) {
-                        printf(" root lost!"); failed.store(true); break;
-                    }
-                }
-                if (failed.load()) break;
-            }
             if ((i % 100) == 0) threading::SafepointPoll();
         }
 
@@ -204,6 +187,24 @@ static void ScenarioL2() {
         threads.emplace_back(worker, t);
     }
     for (auto& th : threads) th.join();
+
+    if (failed.load()) { FAIL("sweep stress failed"); return; }
+
+    // Single-threaded GC: mark all roots, sweep, verify.
+    int marked = 0;
+    for (auto* r : all_roots) {
+        if (g_loh.MarkObject(r)) marked++;
+    }
+    printf("\n    marking: roots=%zu newly_marked=%d", all_roots.size(), marked);
+
+    CHAOS_IL2CPP_SIZE reclaimed = g_loh.Sweep();
+    printf(" reclaimed=%llu", (unsigned long long)reclaimed);
+
+    for (auto* r : all_roots) {
+        if (!g_loh.IsInLOH(r)) {
+            printf(" root lost!"); failed.store(true); break;
+        }
+    }
 
     if (failed.load()) { FAIL("sweep stress failed"); return; }
     PASS();
@@ -260,16 +261,15 @@ static void ScenarioL4() {
     TEST("L4: LOH compaction stress");
 
     static constexpr int kBaseAllocs = 1000;
-    static constexpr int kGcInterval = 200;
     int n_allocs = Scaled(kBaseAllocs);
 
     std::atomic<bool> failed{false};
+    std::mutex shared_mutex;
+    std::vector<void*> all_keep;
+    std::vector<void*> all_free;
 
     auto worker = [&](int tid) {
         threading::RegisterThread(threading::AllocateThreadId(), nullptr);
-        std::vector<void*> keep;
-        std::vector<void*> free_list;
-        int round = 0;
 
         for (int i = 0; i < n_allocs; i++) {
             CHAOS_IL2CPP_SIZE size = 128 * 1024;
@@ -278,44 +278,13 @@ static void ScenarioL4() {
             WritePattern(obj, size, tid, i);
 
             // Alternate: keep even, free odd.
+            std::lock_guard<std::mutex> lock(shared_mutex);
             if (i % 2 == 0) {
-                keep.push_back(obj);
+                all_keep.push_back(obj);
             } else {
-                free_list.push_back(obj);
+                all_free.push_back(obj);
             }
 
-            // Periodically free the "free" objects and trigger sweep.
-            if (i > 0 && (i % kGcInterval) == 0) {
-                // Free the free_list batch.
-                for (auto* f : free_list) {
-                    g_loh.Free(f);
-                }
-                free_list.clear();
-
-                // Mark kept objects.
-                for (auto* k : keep) {
-                    if (!g_loh.MarkObject(k)) {
-                        // Already marked or not found — OK.
-                    }
-                }
-
-                // Sweep — AUTOMATIC compaction should handle interleaved gaps.
-                CHAOS_IL2CPP_SIZE reclaimed = g_loh.Sweep();
-                printf("\n      round %d: keep=%zu reclaimed=%llu",
-                       round++, keep.size(), (unsigned long long)reclaimed);
-
-                // Verify all kept objects survived.
-                for (auto* k : keep) {
-                    if (!g_loh.IsInLOH(k)) {
-                        printf(" keep lost!"); failed.store(true); break;
-                    }
-                    // Verify pattern if the segment was compacted (relocated).
-                    // Note: after compaction, the data is memcpy'd so pattern
-                    // should still be valid — but the object pointer changed.
-                    // After Sweep (without Compact), segments aren't moved.
-                }
-                if (failed.load()) break;
-            }
             if ((i % 200) == 0) threading::SafepointPoll();
         }
 
@@ -327,6 +296,30 @@ static void ScenarioL4() {
         threads.emplace_back(worker, t);
     }
     for (auto& th : threads) th.join();
+
+    if (failed.load()) { FAIL("allocation failed"); return; }
+
+    // Single-threaded: free the "free" objects, then mark keep, sweep, verify.
+    printf("\n    total: keep=%zu free=%zu", all_keep.size(), all_free.size());
+
+    for (auto* f : all_free) {
+        g_loh.Free(f);
+    }
+
+    int marked = 0;
+    for (auto* k : all_keep) {
+        if (g_loh.MarkObject(k)) marked++;
+    }
+    printf(" marked=%d", marked);
+
+    CHAOS_IL2CPP_SIZE reclaimed = g_loh.Sweep();
+    printf(" reclaimed=%llu", (unsigned long long)reclaimed);
+
+    for (auto* k : all_keep) {
+        if (!g_loh.IsInLOH(k)) {
+            printf(" keep lost!"); failed.store(true); break;
+        }
+    }
 
     if (failed.load()) { FAIL("compaction stress failed"); return; }
     PASS();

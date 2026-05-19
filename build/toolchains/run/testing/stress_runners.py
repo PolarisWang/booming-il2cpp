@@ -616,3 +616,174 @@ def run_delegate_stress_gc_mode(
         errors=errors,
         config={"mode": mode, "quick": quick, "scenario": scenario},
     )
+
+
+# ---------------------------------------------------------------------------
+# LOH Stress runner
+# ---------------------------------------------------------------------------
+
+def run_loh_stress(
+    repo_root: Path,
+    *,
+    build: bool = False,
+    quick: bool = False,
+    scenario: str | None = None,
+    **kw: Any,
+) -> list[StressRunResult]:
+    """Run the LOH (Large Object Heap) stress test."""
+    binary = repo_root / "artifacts" / "native-runtime-core-test" / "Debug" / "chaos_loh_stress_test.exe"
+    if not binary.exists():
+        return [StressRunResult(status="error", test_name="loh-stress",
+                                errors=["Binary not found; build first"])]
+
+    if build:
+        b = _run(["cmake", "--build", str(repo_root / "artifacts" / "presets" / "debug"),
+                   "--target", "chaos_loh_stress_test", "--config", "Debug"])
+        if b.returncode != 0:
+            return [StressRunResult(status="error", test_name="loh-stress",
+                                    errors=[f"Build failed: {b.stderr[:500]}"])]
+
+    env = {**os.environ}
+    if quick:
+        env["CHAOS_IL2CPP_STRESS_SCALE"] = "10"
+
+    cmd = [str(binary)]
+    if scenario:
+        cmd.append(scenario)
+    else:
+        cmd.append("all")
+
+    result = _run(cmd, timeout=300, env=env)
+
+    status = "passed"
+    errors: list[str] = []
+    metrics: dict[str, Any] = {}
+
+    if result.returncode != 0:
+        status = "failed"
+        errors.append(f"Exit code {result.returncode}")
+
+    # Parse "Results: N scenarios, M passed, F failed"
+    m = re.search(r'Results:\s+(\d+)\s+scenarios,\s+(\d+)\s+passed,\s+(\d+)\s+failed', result.stdout)
+    if m:
+        metrics["scenarios"] = int(m.group(1))
+        metrics["passed"] = int(m.group(2))
+        metrics["failed"] = int(m.group(3))
+        if metrics["failed"] > 0:
+            status = "failed"
+
+    return [StressRunResult(
+        status=status,
+        test_name="loh-stress",
+        scenario_name=scenario or "__all__",
+        metrics=metrics,
+        output={"stdout": result.stdout[:3000], "stderr": result.stderr[:2000]},
+        errors=errors,
+    )]
+
+
+# ---------------------------------------------------------------------------
+# Finalizer Stress runner
+# ---------------------------------------------------------------------------
+
+def run_finalizer_stress(
+    repo_root: Path,
+    *,
+    build: bool = False,
+    quick: bool = False,
+    scenario: str | None = None,
+    **kw: Any,
+) -> list[StressRunResult]:
+    """Run the GC finalizer stress test."""
+    binary = repo_root / "artifacts" / "native-runtime-core-test" / "Debug" / "chaos_gc_finalizer_stress_test.exe"
+    if not binary.exists():
+        return [StressRunResult(status="error", test_name="finalizer-stress",
+                                errors=["Binary not found; build first"])]
+
+    if build:
+        b = _run(["cmake", "--build", str(repo_root / "artifacts" / "presets" / "debug"),
+                   "--target", "chaos_gc_finalizer_stress_test", "--config", "Debug"])
+        if b.returncode != 0:
+            return [StressRunResult(status="error", test_name="finalizer-stress",
+                                    errors=[f"Build failed: {b.stderr[:500]}"])]
+
+    env = {**os.environ}
+    cmd = [str(binary)]
+    if scenario:
+        cmd.append(scenario)
+    else:
+        cmd.append("all")
+
+    result = _run(cmd, timeout=120, env=env)
+
+    status = "passed"
+    errors: list[str] = []
+    metrics: dict[str, Any] = {}
+
+    if result.returncode != 0:
+        status = "failed"
+        errors.append(f"Exit code {result.returncode}")
+
+    m = re.search(r'Results:\s+(\d+)\s+scenarios,\s+(\d+)\s+passed,\s+(\d+)\s+failed', result.stdout)
+    if m:
+        metrics["scenarios"] = int(m.group(1))
+        metrics["passed"] = int(m.group(2))
+        metrics["failed"] = int(m.group(3))
+        if metrics["failed"] > 0:
+            status = "failed"
+
+    return [StressRunResult(
+        status=status,
+        test_name="finalizer-stress",
+        scenario_name=scenario or "__all__",
+        metrics=metrics,
+        output={"stdout": result.stdout[:3000], "stderr": result.stderr[:2000]},
+        errors=errors,
+    )]
+
+
+# ---------------------------------------------------------------------------
+# BGC Stress runner
+# ---------------------------------------------------------------------------
+
+def run_bgc_stress(
+    repo_root: Path,
+    *,
+    build: bool = False,
+    quick: bool = False,
+    scenario: str | None = None,
+    **kw: Any,
+) -> list[StressRunResult]:
+    """Run the BGC (background GC) stress test."""
+    binary = repo_root / "artifacts" / "native-runtime-core-test" / "Debug" / "chaos_gc_bgc_stress_test.exe"
+    if not binary.exists():
+        return [StressRunResult(status="error", test_name="bgc-stress",
+                                errors=["Binary not found; build first"])]
+
+    if build:
+        b = _run(["cmake", "--build", str(repo_root / "artifacts" / "presets" / "debug"),
+                   "--target", "chaos_gc_bgc_stress_test", "--config", "Debug"])
+        if b.returncode != 0:
+            return [StressRunResult(status="error", test_name="bgc-stress",
+                                    errors=[f"Build failed: {b.stderr[:500]}"])]
+
+    env = {**os.environ}
+    cmd = [str(binary)]
+
+    result = _run(cmd, timeout=300, env=env)
+
+    status = "passed"
+    errors: list[str] = []
+    metrics: dict[str, Any] = {}
+
+    if result.returncode != 0:
+        status = "failed"
+        errors.append(f"Exit code {result.returncode}")
+
+    return [StressRunResult(
+        status=status,
+        test_name="bgc-stress",
+        metrics=metrics,
+        output={"stdout": result.stdout[:3000], "stderr": result.stderr[:2000]},
+        errors=errors,
+    )]

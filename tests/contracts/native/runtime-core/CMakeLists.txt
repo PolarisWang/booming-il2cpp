@@ -622,6 +622,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
             "${REPO_ROOT}/contracts/native/v0"
             "${REPO_ROOT}/src/native/common"
             "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
             "${REPO_ROOT}/src/native/interpreter"
             "${REPO_ROOT}/src/native/interpreter/generated"
             "${REPO_ROOT}/src/native/codegen"
