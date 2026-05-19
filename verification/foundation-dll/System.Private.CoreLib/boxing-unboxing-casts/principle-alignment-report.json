@@ -1,7 +1,7 @@
 {
   "family": "boxing-unboxing-casts",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T23:11:55.168431",
+  "generated_at": "2026-05-20T01:05:33.973320",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -290,36 +290,11 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "CONCERN",
-      "summary": "2 of 11 changed source files are outside expected architecture layers",
-      "details": [
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/common/chaos/common.h",
-          "reason": "outside expected architecture layers"
-        }
-      ],
+      "status": "VIOLATION",
+      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
+      "details": [],
       "evidence": {
-        "changed_source_count": 11,
-        "layer_distribution": {
-          "TestInfra": 2,
-          "Templates": 2,
-          "RuntimeCore": 4,
-          "Tests": 1
-        },
-        "violations": [
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/common/chaos/common.h",
-            "reason": "outside expected architecture layers"
-          }
-        ]
+        "error": "'NoneType' object has no attribute 'strip'"
       }
     },
     "p2_no_bare_new": {
@@ -380,8 +355,8 @@
   "summary": {
     "total": 12,
     "aligned": 8,
-    "concern": 1,
-    "violation": 0,
+    "concern": 0,
+    "violation": 1,
     "not_applicable": 3,
     "overall": "ALIGNED"
   }

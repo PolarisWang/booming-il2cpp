@@ -1,7 +1,7 @@
 {
   "family": "math-numerics",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:13:47.181547",
+  "generated_at": "2026-05-20T01:13:36.076880",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/generic/nullable/value",
+  "capturedAt": "2026-05-20T01:06:50",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": "[2026-05-20T01:06:50][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T01:06:50][WARN][CRAG] young_collection_no_region\n[2026-05-20T01:06:50][INFO][OldGen] init initial_pages=2\n[2026-05-20T01:06:50][INFO][OldGen] init done base=0x2419242303488 pages=2\n[2026-05-20T01:06:50][DEBUG][codegen] T4 VEH handler registered\nPassed: 10/10\n[2026-05-20T01:06:50][DEBUG][BGC] thread_started\n"
+}

@@ -7,6 +7,12 @@
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "metadataToken": 33554435
     }
   ],
   "registeredMethods": [
@@ -112,6 +118,30 @@
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Int32()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Int32()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663312,
       "parameterCount": 0
     }
   ],

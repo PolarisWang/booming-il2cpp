@@ -11,12 +11,8 @@
       "path": "generated/runtime_helper_shapes.h"
     },
     {
-      "kind": "generatedModuleHeader",
-      "path": "generated/chaos_generated_module.h"
-    },
-    {
-      "kind": "generatedModuleSource",
-      "path": "generated/chaos_generated_module.cpp"
+      "kind": "enumMetadataHeader",
+      "path": "generated/enum_metadata.generated.h"
     },
     {
       "kind": "generatedTranslationUnit",

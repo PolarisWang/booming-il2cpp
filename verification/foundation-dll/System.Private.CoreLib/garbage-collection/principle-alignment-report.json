@@ -1,7 +1,7 @@
 {
   "family": "garbage-collection",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:10:14.246530",
+  "generated_at": "2026-05-20T01:10:21.616551",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",

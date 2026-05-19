@@ -2,9 +2,9 @@
   "family": "ccw-basic",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T23:12:41",
-  "duration_ms": 22410,
-  "overall_status": "passed",
+  "timestamp": "2026-05-20T01:06:20",
+  "duration_ms": 33303,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\ccw-basic\\managed\\subjects\\build-output\\CcwBasicSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 21428
+      "duration_ms": 28530
     },
     "fact": {
       "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (19/19)",
+      "status": "failed",
+      "summary": "Fact verify=failed (14/19)",
       "details": {
         "fact": {
-          "status": "passed",
-          "passed": 19,
+          "status": "failed",
+          "passed": 14,
           "total": 19
         }
       },
       "errors": [],
-      "duration_ms": 300
+      "duration_ms": 498
     },
     "audit": {
       "stage": "audit",
@@ -56,13 +56,29 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 679
+      "duration_ms": 1116
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/5 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 5,
+        "invalidCount": 5,
+        "benchmarkQuality": "matchedCount=0/5 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 3155
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
+    "methodCoverage": 73.68,
     "testedRate": 100.0,
-    "overall": 100.0
+    "overall": 86.84
   },
   "dashboard": {
     "interpreter": {},
@@ -80,7 +96,14 @@
       "totalBoxingOps": 0,
       "topInstructionCategories": {}
     },
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": 0.0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 5,
+      "invalidCount": 5
+    },
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,

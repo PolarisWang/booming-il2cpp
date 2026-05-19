@@ -6,8 +6,10 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 896.9,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 1,
@@ -18,20 +20,26 @@
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 1.72,
+      "postPatchNsPerOp": 3.5,
+      "slowdownPercent": 103.49
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 897.6,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 195.2,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 5,
@@ -66,8 +74,10 @@
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 153.23,
+      "postPatchNsPerOp": 145.4,
+      "slowdownPercent": -5.11
     },
     {
       "methodIndex": 11,
@@ -114,9 +124,9 @@
   ],
   "summary": {
     "totalMethods": 18,
-    "nonStubMethods": 0,
-    "averageSlowdownPercent": 0.0,
-    "slowdownFactor": 1.0,
+    "nonStubMethods": 2,
+    "averageSlowdownPercent": 49.19,
+    "slowdownFactor": 1.4919,
     "slowdownThresholdX": 50.0
   }
 }

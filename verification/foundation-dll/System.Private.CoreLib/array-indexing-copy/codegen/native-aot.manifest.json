@@ -2,13 +2,17 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ArrayIndexingCopySubjects",
-  "entrySubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
+  "entrySubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {
       "kind": "shapeDispatchHeader",
       "path": "generated/runtime_helper_shapes.h"
+    },
+    {
+      "kind": "enumMetadataHeader",
+      "path": "generated/enum_metadata.generated.h"
     },
     {
       "kind": "generatedTranslationUnit",

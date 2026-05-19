@@ -39,7 +39,9 @@ public static class ExceptionThrowDiagnosticsBenchmarks
     // Benchmark Exception.get_StackTrace native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Exception::get_StackTrace:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ExceptionThrowDiagnostics)]
-    public static void Benchmark_System_Private_CoreLib_System_Exception_get_StackTrace_System_String() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Exception_get_StackTrace_System_String() { _ = ((new Exception().StackTrace) ?? ""); }
     // Benchmark Exception.get_HResult native-runtime throughput
     [BenchmarkSubjectId("System.Private.CoreLib/System.Exception::get_HResult:System.Int32()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ExceptionThrowDiagnostics)]

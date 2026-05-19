@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/snapshot/prover",
-  "capturedAt": "2026-05-19T03:33:56",
+  "capturedAt": "2026-05-20T01:04:41",
   "metrics": {
     "poolSize": 0
   },
-  "rawOutput": "[2026-05-19T03:33:56][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T03:33:56][WARN][CRAG] young_collection_no_region\n[2026-05-19T03:33:56][INFO][OldGen] init initial_pages=2\n[2026-05-19T03:33:56][INFO][OldGen] init done base=0x2345085698048 pages=2\n[2026-05-19T03:33:56][DEBUG][codegen] T4 VEH handler registered\n"
+  "rawOutput": "[2026-05-20T01:04:41][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T01:04:41][WARN][CRAG] young_collection_no_region\n[2026-05-20T01:04:41][INFO][OldGen] init initial_pages=2\n[2026-05-20T01:04:41][INFO][OldGen] init done base=0x2245603098624 pages=2\n[2026-05-20T01:04:41][DEBUG][codegen] T4 VEH handler registered\nPassed: 157/157\n[2026-05-20T01:04:41][DEBUG][Finalizer] thread_started id={0}\n[2026-05-20T01:04:41][DEBUG][BGC] thread_started\n"
 }

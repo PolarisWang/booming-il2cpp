@@ -4,6 +4,7 @@
 // Variant: subjects
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 public static partial class GlobalizationCultureSubjects
@@ -14,19 +15,19 @@ public static partial class GlobalizationCultureSubjects
     // [0] System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()
     public static void Subject_0()
     {
-        if (((CultureInfo.CurrentCulture).GetHashCode()) != 1413004028) _exitCode = 1;
+        if (((CultureInfo.CurrentCulture).GetHashCode()) != 308247714) _exitCode = 1;
     }
 
     // [1] System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()
     public static void Subject_1()
     {
-        if (((CultureInfo.InvariantCulture).GetHashCode()) != -22807904) _exitCode = 1;
+        if (((CultureInfo.InvariantCulture).GetHashCode()) != 1932024690) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)
     public static void Subject_2()
     {
-        if (((CultureInfo.GetCultureInfo("")).GetHashCode()) != -22807904) _exitCode = 1;
+        if (((CultureInfo.GetCultureInfo("")).GetHashCode()) != 1932024690) _exitCode = 1;
     }
 
     // [3] System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()

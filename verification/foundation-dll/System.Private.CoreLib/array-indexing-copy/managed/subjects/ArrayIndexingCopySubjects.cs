@@ -33,7 +33,7 @@ public static partial class ArrayIndexingCopySubjects
     // [3] System.Private.CoreLib/System.Array::Resize:System.Void(T[]&,System.Int32)
     public static void Subject_3()
     {
-        // TODO: System.Private.CoreLib/System.Array::Resize:System.Void(T[]&,System.Int32) could not be auto-generated
+        ((System.Func<int>)(() => { byte[] __arr = new byte[4]; Array.Resize(ref __arr, 8); return __arr.Length; }))();
     }
 
     // [4] System.Private.CoreLib/System.Array::Sort:System.Void(System.Array)

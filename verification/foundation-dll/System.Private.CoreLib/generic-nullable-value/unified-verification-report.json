@@ -2,8 +2,8 @@
   "family": "generic-nullable-value",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T19:11:16",
-  "duration_ms": 39631,
+  "timestamp": "2026-05-20T01:10:59",
+  "duration_ms": 26806,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\generic-nullable-value\\managed\\subjects\\build-output\\GenericNullableValueSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 33706
+      "duration_ms": 22640
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 96
+      "duration_ms": 350
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1274
+      "duration_ms": 783
     },
     "benchmark": {
       "stage": "benchmark",
@@ -72,7 +72,7 @@
         "benchmarkQuality": "matchedCount=0/10 below threshold 50%"
       },
       "errors": [],
-      "duration_ms": 4552
+      "duration_ms": 3032
     }
   },
   "coverage": {
@@ -82,7 +82,20 @@
   },
   "dashboard": {
     "interpreter": {},
-    "irTranslation": {},
+    "irTranslation": {
+      "totalMethods": 10,
+      "okCount": 0,
+      "failedCount": 10,
+      "overallIrExpansionRatio": 0,
+      "averageExpansionRatio": 0,
+      "maxExpansionRatio": 0,
+      "jitInstructionAvg": 0,
+      "aotInstructionAvg": 0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {}
+    },
     "performance": {
       "averageSpeedupPercent": 0.0,
       "nativeFasterCount": 0,

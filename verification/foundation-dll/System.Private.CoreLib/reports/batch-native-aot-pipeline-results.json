@@ -2,22 +2,23 @@
   "assembly": "System.Private.CoreLib",
   "mode": "family-entrypoint",
   "total": 1,
-  "passed": 1,
-  "failed": 0,
+  "passed": 0,
+  "failed": 1,
   "results": [
     {
-      "family": "delegate-core-invocation",
+      "family": "reflection-member-basics",
       "config_tier": "CHECK",
       "steps": {
         "build_subjects": "OK",
         "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
+        "build_entry_exe": "FAILED"
       },
-      "success": true,
-      "methodCount": 10,
+      "success": false,
+      "methodCount": 14,
       "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\delegate-core-invocation\\managed\\subjects\\build-output\\DelegateCoreInvocationSubjects.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-basics\\managed\\subjects\\build-output\\ReflectionMemberBasicsSubjects.dll",
+      "error": "entry.exe build failed"
     }
   ],
-  "timestamp": "2026-05-20T00:54:10"
+  "timestamp": "2026-05-20T01:08:59"
 }

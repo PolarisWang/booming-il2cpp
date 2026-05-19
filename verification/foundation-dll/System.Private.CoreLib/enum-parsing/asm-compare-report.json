@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/enum/parsing",
-  "capturedAt": "2026-05-19T19:30:48",
+  "capturedAt": "2026-05-20T01:13:22",
   "batchMode": true,
   "summary": {
     "totalMethods": 12,
@@ -36,7 +36,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 131)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Enum::Format\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetNames\",\n    \"status\": \"not_found\",\n    \"error\": \"Me",
-      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-8/12] System.Enum::Parse...  [3/3-4/12] System.Enum::GetNames... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-9/12] System.Enum::ToString... "
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/12] System.Enum::Format... not found in closure\n  [3/3-2/12] System.Enum::GetName... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-7/12] Sys"
     },
     {
       "methodIndex": 1,
@@ -45,7 +45,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 131)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Enum::Format\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetNames\",\n    \"status\": \"not_found\",\n    \"error\": \"Me",
-      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-8/12] System.Enum::Parse...  [3/3-4/12] System.Enum::GetNames... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-9/12] System.Enum::ToString... "
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/12] System.Enum::Format... not found in closure\n  [3/3-2/12] System.Enum::GetName... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-7/12] Sys"
     },
     {
       "methodIndex": 2,
@@ -54,7 +54,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 131)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Enum::Format\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetNames\",\n    \"status\": \"not_found\",\n    \"error\": \"Me",
-      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-8/12] System.Enum::Parse...  [3/3-4/12] System.Enum::GetNames... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-9/12] System.Enum::ToString... "
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/12] System.Enum::Format... not found in closure\n  [3/3-2/12] System.Enum::GetName... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-7/12] Sys"
     },
     {
       "methodIndex": 3,
@@ -63,7 +63,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 131)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Enum::Format\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetNames\",\n    \"status\": \"not_found\",\n    \"error\": \"Me",
-      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-8/12] System.Enum::Parse...  [3/3-4/12] System.Enum::GetNames... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-9/12] System.Enum::ToString... "
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/12] System.Enum::Format... not found in closure\n  [3/3-2/12] System.Enum::GetName... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-7/12] Sys"
     },
     {
       "methodIndex": 4,
@@ -72,7 +72,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 131)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Enum::Format\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetNames\",\n    \"status\": \"not_found\",\n    \"error\": \"Me",
-      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-8/12] System.Enum::Parse...  [3/3-4/12] System.Enum::GetNames... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-9/12] System.Enum::ToString... "
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/12] System.Enum::Format... not found in closure\n  [3/3-2/12] System.Enum::GetName... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-7/12] Sys"
     },
     {
       "methodIndex": 5,
@@ -81,7 +81,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 131)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Enum::Format\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetNames\",\n    \"status\": \"not_found\",\n    \"error\": \"Me",
-      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-8/12] System.Enum::Parse...  [3/3-4/12] System.Enum::GetNames... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-9/12] System.Enum::ToString... "
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/12] System.Enum::Format... not found in closure\n  [3/3-2/12] System.Enum::GetName... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-7/12] Sys"
     },
     {
       "methodIndex": 6,
@@ -90,7 +90,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 131)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Enum::Format\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetNames\",\n    \"status\": \"not_found\",\n    \"error\": \"Me",
-      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-8/12] System.Enum::Parse...  [3/3-4/12] System.Enum::GetNames... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-9/12] System.Enum::ToString... "
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/12] System.Enum::Format... not found in closure\n  [3/3-2/12] System.Enum::GetName... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-7/12] Sys"
     },
     {
       "methodIndex": 7,
@@ -99,7 +99,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 131)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Enum::Format\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetNames\",\n    \"status\": \"not_found\",\n    \"error\": \"Me",
-      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-8/12] System.Enum::Parse...  [3/3-4/12] System.Enum::GetNames... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-9/12] System.Enum::ToString... "
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/12] System.Enum::Format... not found in closure\n  [3/3-2/12] System.Enum::GetName... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-7/12] Sys"
     },
     {
       "methodIndex": 8,
@@ -108,7 +108,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 131)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Enum::Format\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetNames\",\n    \"status\": \"not_found\",\n    \"error\": \"Me",
-      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-8/12] System.Enum::Parse...  [3/3-4/12] System.Enum::GetNames... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-9/12] System.Enum::ToString... "
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/12] System.Enum::Format... not found in closure\n  [3/3-2/12] System.Enum::GetName... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-7/12] Sys"
     },
     {
       "methodIndex": 9,
@@ -117,7 +117,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 131)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Enum::Format\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetNames\",\n    \"status\": \"not_found\",\n    \"error\": \"Me",
-      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-8/12] System.Enum::Parse...  [3/3-4/12] System.Enum::GetNames... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-9/12] System.Enum::ToString... "
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/12] System.Enum::Format... not found in closure\n  [3/3-2/12] System.Enum::GetName... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-7/12] Sys"
     },
     {
       "methodIndex": 10,
@@ -126,7 +126,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 131)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Enum::Format\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetNames\",\n    \"status\": \"not_found\",\n    \"error\": \"Me",
-      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-8/12] System.Enum::Parse...  [3/3-4/12] System.Enum::GetNames... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-9/12] System.Enum::ToString... "
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/12] System.Enum::Format... not found in closure\n  [3/3-2/12] System.Enum::GetName... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-7/12] Sys"
     },
     {
       "methodIndex": 11,
@@ -135,7 +135,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 131)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Enum::Format\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetName\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Enum::GetNames\",\n    \"status\": \"not_found\",\n    \"error\": \"Me",
-      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-8/12] System.Enum::Parse...  [3/3-4/12] System.Enum::GetNames... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-9/12] System.Enum::ToString... "
+      "stderr": "  [1/3] Running IL2CPP pipeline...[constrained] System.Private.CoreLib/System.DayOfWeek :: System.Private.CoreLib/System.Object::ToString:System.String() -> System.Private.CoreLib/System.DayOfWeek::ToString:System.String()\n 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-1/12] System.Enum::Format... not found in closure\n  [3/3-2/12] System.Enum::GetName... not found in closure\n  [3/3-5/12] System.Enum::GetValues... not found in closure\n  [3/3-7/12] Sys"
     }
   ]
 }

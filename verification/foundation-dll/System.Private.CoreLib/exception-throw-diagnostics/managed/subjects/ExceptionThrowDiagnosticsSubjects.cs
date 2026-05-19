@@ -39,7 +39,7 @@ public static partial class ExceptionThrowDiagnosticsSubjects
     // [4] System.Private.CoreLib/System.Exception::get_StackTrace:System.String()
     public static void Subject_4()
     {
-        // TODO: System.Private.CoreLib/System.Exception::get_StackTrace:System.String() could not be auto-generated
+        if (((((new Exception().StackTrace) ?? "")).Length) != 0) _exitCode = 1;
     }
 
     // [5] System.Private.CoreLib/System.Exception::get_HResult:System.Int32()

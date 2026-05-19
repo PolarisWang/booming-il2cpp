@@ -1,7 +1,7 @@
 {
   "family": "io-streams-basics",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:13:14.210293",
+  "generated_at": "2026-05-20T01:12:52.486038",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",

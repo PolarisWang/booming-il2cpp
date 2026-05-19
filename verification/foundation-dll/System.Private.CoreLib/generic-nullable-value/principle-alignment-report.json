@@ -1,7 +1,7 @@
 {
   "family": "generic-nullable-value",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:11:11.573636",
+  "generated_at": "2026-05-20T01:10:56.704938",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",

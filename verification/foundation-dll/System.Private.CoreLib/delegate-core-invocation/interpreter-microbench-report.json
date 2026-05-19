@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/delegate/core/invocation",
+  "capturedAt": "2026-05-20T00:59:40",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": "[2026-05-20T00:59:40][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T00:59:40][WARN][CRAG] young_collection_no_region\n[2026-05-20T00:59:40][INFO][OldGen] init initial_pages=2\n[2026-05-20T00:59:40][INFO][OldGen] init done base=0x1404711075840 pages=2\n[2026-05-20T00:59:40][DEBUG][codegen] T4 VEH handler registered\nPassed: 16/16\n[2026-05-20T00:59:40][DEBUG][BGC] thread_started\n"
+}
