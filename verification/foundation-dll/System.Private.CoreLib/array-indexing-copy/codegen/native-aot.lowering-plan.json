@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "ArrayIndexingCopyPatchEntry",
-  "entrySubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "ArrayIndexingCopySubjects",
+  "entrySubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "ArrayIndexingCopyPatchEntry_ArrayIndexingCopyPatchEntry_Run_System_Int32",
+  "entrySymbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_0",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

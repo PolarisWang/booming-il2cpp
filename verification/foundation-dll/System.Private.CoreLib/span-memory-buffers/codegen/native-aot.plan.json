@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "SpanMemoryBuffersPatchEntry",
-  "entrySubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "SpanMemoryBuffersSubjects",
+  "entrySubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_0:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Run_System_Int32",
+  "entrySymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_0",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

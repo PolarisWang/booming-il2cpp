@@ -33,7 +33,8 @@ public sealed class NativeAotEmitter
             closureManifest,
             metadataRegistration,
             supplementalMetadataTemplate,
-            fullAssemblyMode: isFullAssembly);
+            fullAssemblyMode: isFullAssembly,
+            mode: request.Mode);
 
         var (generatedSources, generatedArtifacts) = BuildGeneratedSources(
             templateModel, loweringPlan);

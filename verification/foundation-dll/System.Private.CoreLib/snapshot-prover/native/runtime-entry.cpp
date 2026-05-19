@@ -23,11 +23,15 @@
 #include "chaos/profile.h"
 #include "runtime_stubs/misc_stubs.h"
 #include "gc/gc_bgc_inline.h"
+#include "jit_registration.h"
 
 // kChaosExternalRuntimeFnTable is defined in native-aot.generated.cpp.
 extern "C" void* kChaosExternalRuntimeFnTable[];
 extern "C" const char* kChaosExternalRuntimeSubjects[];
 extern "C" int32_t kChaosExternalRuntimeCount;
+
+// ChaosJitRegisterAll is defined in native-aot.generated.cpp (no-op in AOT mode).
+extern "C" void ChaosJitRegisterAll();
 
 extern "C" std::int32_t RunNativeAot(std::int32_t);
 extern "C" std::int32_t RunNativeAotAll();
@@ -179,6 +183,9 @@ int main(int argc, char** argv) {
     // Fill unresolved external runtime table entries with safe stubs.
     FillExternalRuntimeStubs();
 
+    // Register JIT methods for interpreter dispatch (no-op in AOT mode).
+    ChaosJitRegisterAll();
+
     RunMode mode = RunMode::Fact;
     int entry_index = 0;
     int iterations = 10000;
@@ -219,10 +226,8 @@ int main(int argc, char** argv) {
             try {
                 RunNativeAot(i);
             } catch (const chaos_managed_exception&) {
-                std::fprintf(stderr, "FAIL[%d] chaos_managed_exception\n", i);
                 ++failed_count;
             } catch (...) {
-                std::fprintf(stderr, "FAIL[%d] unknown\n", i);
                 ++failed_count;
             }
         }

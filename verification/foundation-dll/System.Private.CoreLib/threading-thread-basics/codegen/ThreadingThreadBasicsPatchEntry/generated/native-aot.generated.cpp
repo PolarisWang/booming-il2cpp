@@ -1472,3 +1472,5 @@ extern "C" void ThreadingThreadBasicsPatchEntry_ThreadingThreadBasicsPatchEntry_
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 12;
+
+extern "C" void ChaosJitRegisterAll() {}

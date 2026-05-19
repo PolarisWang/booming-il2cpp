@@ -22,18 +22,12 @@
 
 using namespace chaos::il2cpp::runtime_core;
 
+#include "gc_test_macros.h"
+
 // Public API for waiting on pending finalizers.
 extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept;
 
 static int g_failures = 0;
-#define CHECK(cond, msg) do {                                   \
-    if (!(cond)) {                                              \
-        printf("  FAIL [%s:%d]: %s\n", __FILE__, __LINE__, msg);\
-        ++g_failures;                                           \
-    } else {                                                    \
-        printf("  PASS: %s\n", msg);                            \
-    }                                                           \
-} while(0)
 
 // ── Test 1: Basic finalizer registration and execution ─────────────
 void TestBasicFinalizer() {
@@ -204,7 +198,68 @@ void TestWaitForPending() {
     CHECK(true, "WaitForPendingFinalizers completed without crash");
 }
 
-// ── Main ───────────────────────────────────────────────────────────
+// ── Test 7: Large finalizer queue (>64K objects) ────────────────────
+void TestLargeFinalizerQueue() {
+    printf("\n── Test 7: Large finalizer queue (>64K objects) ──\n");
+
+    constexpr int kNumObjects = 70000;
+    std::vector<void*> objs;
+    objs.reserve(kNumObjects);
+
+    for (int i = 0; i < kNumObjects; i++) {
+        void* obj = NurseryAllocate(32);
+        if (!obj) break;
+        g_old_gen.RegisterFinalizer(obj, [](void*) {});
+        objs.push_back(obj);
+    }
+
+    printf("  Registered %zu finalizers\n", objs.size());
+    CHECK(objs.size() >= 65000,
+          "At least 65000 finalizers registered (got %zu)", objs.size());
+
+    // Drop all references and collect.
+    objs.clear();
+    for (int g = 0; g < 3; g++) {
+        for (int i = 0; i < 500; i++) {
+            volatile void* tmp = NurseryAllocate(32);
+            (void)tmp;
+        }
+        g_old_gen.Collect(nullptr, nullptr);
+    }
+
+    chaos_gc_wait_for_pending_finalizers();
+    CHECK(true, "Large finalizer queue processed without crash");
+}
+
+// ── Test 8: Double SuppressFinalizer ──────────────────────────────────
+void TestSuppressSuppressed() {
+    printf("\n── Test 8: Double SuppressFinalizer ──\n");
+
+    void* obj = NurseryAllocate(64);
+    CHECK(obj != nullptr, "Allocate obj for double-suppress test");
+
+    g_old_gen.RegisterFinalizer(obj, [](void*) {
+        printf("    FAIL: finalizer called on suppressed object!\n");
+    });
+
+    // Suppress once.
+    g_old_gen.SuppressFinalizer(obj);
+    CHECK(true, "First SuppressFinalizer OK");
+
+    // Suppress again — should be a no-op, not crash.
+    g_old_gen.SuppressFinalizer(obj);
+    CHECK(true, "Second SuppressFinalizer (no-op) did not crash");
+
+    // Suppress on non-finalizable object — should not crash.
+    void* no_finalizer_obj = NurseryAllocate(64);
+    CHECK(no_finalizer_obj != nullptr, "Allocate obj with no finalizer");
+    g_old_gen.SuppressFinalizer(no_finalizer_obj);
+    CHECK(true, "SuppressFinalizer on non-finalizable object did not crash");
+
+    // GC should not crash either.
+    g_old_gen.Collect(nullptr, nullptr);
+    CHECK(true, "GC after suppressed finalizers completed without crash");
+}
 int main() {
     puts("CRAG Finalizer unit test");
     puts("═══════════════════════\n");
@@ -215,9 +270,11 @@ int main() {
     TestMultipleFinalizers();
     TestResurrection();
     TestWaitForPending();
+    TestLargeFinalizerQueue();
+    TestSuppressSuppressed();
 
     printf("\n══ Results: %d tests, %d failures ══\n",
-           6 - (g_failures > 0 ? 1 : 0), g_failures);
+           8 - (g_failures > 0 ? 1 : 0), g_failures);
 
     return g_failures > 0 ? 1 : 0;
 }

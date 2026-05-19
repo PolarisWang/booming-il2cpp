@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "TypeRuntimeHandlesPatchEntry",
-  "entrySubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "TypeRuntimeHandlesSubjects",
+  "entrySubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/type-runtime-handles/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

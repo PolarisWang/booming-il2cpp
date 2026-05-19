@@ -4,79 +4,97 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::_exitCode",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_8:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_9:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

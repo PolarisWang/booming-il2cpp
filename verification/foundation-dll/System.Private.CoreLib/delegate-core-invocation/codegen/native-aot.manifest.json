@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "DelegateCoreInvocationPatchEntry",
-  "entrySubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "DelegateCoreInvocationSubjects",
+  "entrySubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/delegate-core-invocation/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

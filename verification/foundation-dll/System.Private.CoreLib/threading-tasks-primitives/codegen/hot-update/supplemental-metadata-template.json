@@ -3,139 +3,193 @@
   "artifactKind": "supplementalMetadataTemplate",
   "registeredTypes": [
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 33554435
     }
   ],
   "registeredMethods": [
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_0:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_0:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_13:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663297,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_1:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_1:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663298,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_2:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_2:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663299,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_3:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_3:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_2:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_2:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663300,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_4:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_4:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_3:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_3:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663301,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_5:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_5:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_4:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_4:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663302,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_6:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_6:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_5:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_5:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663303,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_7:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_7:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_6:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_6:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663304,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_8:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_8:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_7:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_7:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663305,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_9:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_9:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_8:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_8:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663306,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_10:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_10:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_9:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_9:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663307,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_11:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_11:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_10:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_10:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663308,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_12:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_12:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_11:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_11:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663309,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_13:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_13:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_12:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_12:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663310,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_14:System.Int32()",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Subject_14:System.Int32()",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_14:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_14:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "metadataToken": 100663311,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry",
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec",
       "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__3_0:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__3_0:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__4_0:System.Int32()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__4_0:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__6_0:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__6_0:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__10_0:System.Void()",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__10_0:System.Void()",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__10_1:System.Void(System.Threading.Tasks.Task)",
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__10_1:System.Void(System.Threading.Tasks.Task)",
+      "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663318,
       "parameterCount": 1
     }
   ],

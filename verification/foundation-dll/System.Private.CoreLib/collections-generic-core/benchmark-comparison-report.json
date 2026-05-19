@@ -11,120 +11,120 @@
     "nativeFasterCount": 0,
     "managedFasterCount": 4,
     "equalCount": 0,
-    "averageSpeedupPercent": -1587.19
+    "averageSpeedupPercent": -1619.13
   },
   "methodResults": [
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Add:System.Void(TKey,TValue)",
       "status": "invalid",
-      "managedElapsedMs": 2.4354,
+      "managedElapsedMs": 2.4893,
       "nativeElapsedMs": -1.0,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::ContainsKey:System.Boolean(TKey)",
       "status": "invalid",
-      "managedElapsedMs": 3.2711,
+      "managedElapsedMs": 2.8399,
       "nativeElapsedMs": -1.0,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Remove:System.Boolean(TKey)",
       "status": "invalid",
-      "managedElapsedMs": 3.046,
+      "managedElapsedMs": 2.6987,
       "nativeElapsedMs": -1.0,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::TryGetValue:System.Boolean(TKey,TValue&)",
       "status": "invalid",
-      "managedElapsedMs": 2.9891,
+      "managedElapsedMs": 3.1068,
       "nativeElapsedMs": -1.0,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::get_Count:System.Int32()",
       "status": "matched",
-      "managedElapsedMs": 2.4226,
-      "nativeElapsedMs": 34.184,
-      "speedupPercent": -1311.05
+      "managedElapsedMs": 2.46,
+      "nativeElapsedMs": 35.811,
+      "speedupPercent": -1355.73
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Add:System.Boolean(T)",
       "status": "invalid",
-      "managedElapsedMs": 2.4947,
+      "managedElapsedMs": 2.4316,
       "nativeElapsedMs": -1.0,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Contains:System.Boolean(T)",
       "status": "invalid",
-      "managedElapsedMs": 2.9885,
+      "managedElapsedMs": 2.8925,
       "nativeElapsedMs": -1.0,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Remove:System.Boolean(T)",
       "status": "invalid",
-      "managedElapsedMs": 3.1558,
+      "managedElapsedMs": 2.669,
       "nativeElapsedMs": -1.0,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Add:System.Void(T)",
       "status": "invalid",
-      "managedElapsedMs": 2.5052,
+      "managedElapsedMs": 1.5112,
       "nativeElapsedMs": -1.0,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Clear:System.Void()",
       "status": "matched",
-      "managedElapsedMs": 1.6061,
-      "nativeElapsedMs": 32.629,
-      "speedupPercent": -1931.57
+      "managedElapsedMs": 1.6584,
+      "nativeElapsedMs": 26.899,
+      "speedupPercent": -1521.99
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Contains:System.Boolean(T)",
       "status": "invalid",
-      "managedElapsedMs": 2.0329,
+      "managedElapsedMs": 2.1018,
       "nativeElapsedMs": -1.0,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::IndexOf:System.Int32(T)",
       "status": "invalid",
-      "managedElapsedMs": 1.9374,
+      "managedElapsedMs": 1.9308,
       "nativeElapsedMs": -1.0,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Remove:System.Boolean(T)",
       "status": "invalid",
-      "managedElapsedMs": 2.2388,
+      "managedElapsedMs": 2.1165,
       "nativeElapsedMs": -1.0,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32)",
       "status": "invalid",
-      "managedElapsedMs": 1.7681,
+      "managedElapsedMs": 1.6784,
       "nativeElapsedMs": -1.0,
       "speedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()",
       "status": "matched",
-      "managedElapsedMs": 2.871,
-      "nativeElapsedMs": 34.024,
-      "speedupPercent": -1085.09
+      "managedElapsedMs": 2.9322,
+      "nativeElapsedMs": 35.627,
+      "speedupPercent": -1115.03
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()",
       "status": "matched",
-      "managedElapsedMs": 2.3306,
-      "nativeElapsedMs": 49.433,
-      "speedupPercent": -2021.04
+      "managedElapsedMs": 2.385,
+      "nativeElapsedMs": 61.623,
+      "speedupPercent": -2483.77
     }
   ]
 }

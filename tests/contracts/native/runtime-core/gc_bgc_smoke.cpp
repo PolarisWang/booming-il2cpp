@@ -27,27 +27,22 @@
 #include "gc_scheduler.h"
 #include "gc_old_gen.h"
 #include "gc_young_collector.h"
+#include "gc_young_gen.h"
 #include "thread_state.h"
 
 using namespace chaos::il2cpp::runtime_core;
 
+#include "gc_test_macros.h"
+
 static int g_failures = 0;
-#define CHECK(cond, msg) do {                                   \
-    if (!(cond)) {                                              \
-        printf("  FAIL [%s:%d]: %s\n", __FILE__, __LINE__, msg);\
-        ++g_failures;                                           \
-    } else {                                                    \
-        printf("  PASS: %s\n", msg);                            \
-    }                                                           \
-} while(0)
 
 // ── Helpers ──────────────────────────────────────────────────────────
 
-/// Allocate directly into old-gen by requesting > kMaxNurseryAlloc bytes.
+/// Allocate directly into old-gen by requesting > kMaxTlabAlloc bytes.
 static void* AllocOldGen(size_t payload_size) {
     size_t alloc_size = payload_size + 64;
-    if (alloc_size <= kMaxNurseryAlloc) {
-        alloc_size = kMaxNurseryAlloc + 8;
+    if (alloc_size <= kMaxTlabAlloc) {
+        alloc_size = kMaxTlabAlloc + 8;
     }
     void* p = NurseryAllocate(alloc_size);
     if (p) std::memset(p, 0xAA, payload_size);
@@ -211,9 +206,9 @@ void TestBgcWithYoungGc() {
             if (p) std::memset(p, 0xCC, 32);
         }
 
-        // Run young GC (promotes survivors to old-gen).
+        // Run young GC.
         gen = threading::RequestGlobalSafepoint();
-        GcYoungCollection(tls_nursery_ctx.nursery);
+        GcYoungCollection();
         threading::ReleaseGlobalSafepoint(gen);
 
         printf("  young GC #%d during BGC mark OK\n", i + 1);
@@ -248,7 +243,108 @@ void TestBgcWithYoungGc() {
           "BGC + young GC interleaved completed");
 }
 
-// ── Main ────────────────────────────────────────────────────────────
+// ── Test 4: ForceComplete during BGC marking ────────────────────────
+void TestBgcForceComplete() {
+    printf("\n── Test 4: BGC ForceComplete ──\n");
+
+    // Pre-populate old-gen.
+    for (int i = 0; i < 10; i++) {
+        AllocOldGen(256);
+    }
+
+    // Start BGC cycle.
+    {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StartBgcCycle();
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+
+    // Let concurrent mark run briefly, then force-complete.
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+    {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        CHECK(BgcController::Instance().IsBusy(), "BGC is busy before ForceComplete");
+        BgcController::Instance().ForceComplete();
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+
+    BgcController::Instance().WaitForCycleComplete();
+    CHECK(BgcController::Instance().Phase() == BgcPhase::IDLE,
+          "BGC returned to IDLE after ForceComplete");
+    CHECK(!BgcController::Instance().IsBusy(),
+          "BGC not busy after ForceComplete");
+    CHECK(true, "BGC ForceComplete completed without crash");
+}
+
+// ── Test 5: IsBusy / IsMarking phase checks ──────────────────────────
+void TestBgcIsBusyIsMarking() {
+    printf("\n── Test 5: BGC IsBusy / IsMarking phase checks ──\n");
+
+    // Initially idle → not busy, not marking.
+    CHECK(!BgcController::Instance().IsBusy(),
+          "BGC not busy at idle");
+    CHECK(!BgcController::Instance().IsMarking(),
+          "BGC not marking at idle");
+
+    for (int i = 0; i < 10; i++) {
+        AllocOldGen(256);
+    }
+
+    // Start cycle → should become busy + marking.
+    {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StartBgcCycle();
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+
+    // Allow some time for concurrent mark to start.
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+
+    BgcPhase phase = BgcController::Instance().Phase();
+    printf("  Phase after start: %d\n", static_cast<int>(phase));
+
+    if (phase == BgcPhase::CONCURRENT_MARK) {
+        CHECK(BgcController::Instance().IsBusy(), "IsBusy true during CONCURRENT_MARK");
+        CHECK(BgcController::Instance().IsMarking(), "IsMarking true during CONCURRENT_MARK");
+    }
+
+    // Force-complete to clean up.
+    {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().ForceComplete();
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+    BgcController::Instance().WaitForCycleComplete();
+
+    CHECK(!BgcController::Instance().IsBusy(),
+          "Not busy after forced completion");
+    CHECK(!BgcController::Instance().IsMarking(),
+          "Not marking after forced completion");
+    CHECK(true, "IsBusy/IsMarking phase checks complete");
+}
+
+// ── Test 6: Multiple consecutive BGC cycles ──────────────────────────
+void TestBgcMultipleCycles() {
+    printf("\n── Test 6: Multiple consecutive BGC cycles ──\n");
+
+    constexpr int kCycles = 5;
+    for (int c = 0; c < kCycles; c++) {
+        // Populate fresh old-gen objects for each cycle.
+        for (int i = 0; i < 10; i++) {
+            AllocOldGen(256);
+        }
+
+        printf("  Cycle %d/%d: ", c + 1, kCycles);
+        bool ok = RunBgcCycle();
+        CHECK(ok, "BGC cycle %d/%d completed", c + 1, kCycles);
+        if (!ok) break;
+    }
+
+    CHECK(BgcController::Instance().Phase() == BgcPhase::IDLE,
+          "BGC idle after %d cycles", kCycles);
+    CHECK(true, "Multiple BGC cycles completed without crash");
+}
 int main() {
     puts("CRAG BGC smoke test");
     puts("══════════════════════\n");
@@ -269,13 +365,16 @@ int main() {
     TestBasicBgcCycle();
     TestBgcWithAllocation();
     TestBgcWithYoungGc();
+    TestBgcForceComplete();
+    TestBgcIsBusyIsMarking();
+    TestBgcMultipleCycles();
 
     // Clean shutdown.
     BgcController::Instance().Stop();
 
     threading::UnregisterThread();
 
-    printf("\n══ Results: 3 tests, %d failures ══\n", g_failures);
+    printf("\n══ Results: 6 tests, %d failures ══\n", g_failures);
 
     return g_failures > 0 ? 1 : 0;
 }

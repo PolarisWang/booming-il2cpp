@@ -88,30 +88,72 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static IReadOnlyList<AotCoreIrInstructionArtifact> FilterRedundantStoreReloadPairs(
 		IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
-		IReadOnlySet<int>? branchTargetOffsets = null)
+		IReadOnlySet<int>? branchTargetOffsets = null,
+		IReadOnlySet<int>? externallyReferencedLocals = null)
 	{
 		var result = new List<AotCoreIrInstructionArtifact>(instructions.Count);
-		int i = 0;
-		while (i < instructions.Count)
+
+		// Pre-scan: count ldloc occurrences per local slot.
+		// If a local is read by ldloc instructions outside a stloc+ldloc pair,
+		// we must preserve the stloc so chaos_locals[N] is populated for those reads.
+		var ldlocCountBySlot = new Dictionary<int, int>();
+		for (int i = 0; i < instructions.Count; i++)
 		{
-			if (i + 1 < instructions.Count &&
-				instructions[i].Op is "stloc" &&
-				instructions[i + 1].Op is "ldloc" &&
-				GetRequiredIntOperand(instructions[i]) == GetRequiredIntOperand(instructions[i + 1]))
+			if (instructions[i].Op is "ldloc")
+			{
+				int slot = GetRequiredIntOperand(instructions[i]);
+				ldlocCountBySlot.TryGetValue(slot, out int count);
+				ldlocCountBySlot[slot] = count + 1;
+			}
+		}
+
+		int idx = 0;
+		while (idx < instructions.Count)
+		{
+			if (idx + 1 < instructions.Count &&
+				instructions[idx].Op is "stloc" &&
+				instructions[idx + 1].Op is "ldloc" &&
+				GetRequiredIntOperand(instructions[idx]) == GetRequiredIntOperand(instructions[idx + 1]))
 			{
 				// Don't skip the ldloc if it's a branch target — the label must be preserved.
 				if (branchTargetOffsets is not null &&
-					branchTargetOffsets.Contains(GetRequiredIlOffset(instructions[i + 1])))
+					branchTargetOffsets.Contains(GetRequiredIlOffset(instructions[idx + 1])))
 				{
-					result.Add(instructions[i]);
-					i++;
+					result.Add(instructions[idx]);
+					idx++;
 					continue;
 				}
-				i += 2;
+
+				int slot = GetRequiredIntOperand(instructions[idx]);
+
+				// If the local slot is referenced by other instruction lists (e.g., then-body or
+				// else-body of an if-then-else), we must preserve the stloc so chaos_locals[N] is
+				// populated for those external references.
+				if (externallyReferencedLocals is not null && externallyReferencedLocals.Contains(slot))
+				{
+					// Keep stloc (other instruction lists read chaos_locals[slot]).
+					// Skip ldloc since the value remains on the eval stack.
+					result.Add(instructions[idx]);
+					idx++;
+					continue;
+				}
+
+				// If any OTHER instruction reads from this local slot in the current list,
+				// we must keep the stloc so chaos_locals[N] is populated.
+				if (ldlocCountBySlot.TryGetValue(slot, out int totalLdloc) && totalLdloc > 1)
+				{
+					// Keep stloc (other instructions read chaos_locals[slot]).
+					// Skip ldloc since the value remains on the eval stack.
+					result.Add(instructions[idx]);
+					idx++;
+					continue;
+				}
+
+				idx += 2;  // Skip BOTH stloc and ldloc
 				continue;
 			}
-			result.Add(instructions[i]);
-			i++;
+			result.Add(instructions[idx]);
+			idx++;
 		}
 		return result;
 	}

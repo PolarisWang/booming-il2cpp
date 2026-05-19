@@ -24,6 +24,7 @@
 #include "gc_young_collector.h"
 #include "gc_old_gen.h"
 #include "gc_stats.h"
+#include "gc_api.h"
 #include "memory_domain.h"
 #include "thread_state.h"
 
@@ -49,18 +50,11 @@
 // Test helpers (ad-hoc, no framework dependency)
 // ════════════════════════════════════════════════════════════════════════════
 
+#include "gc_test_macros.h"
+
 static int g_failures = 0;
 static int g_tests    = 0;
 static int g_sub      = 0;
-
-#define TEST(name)                                                      \
-    do { ++g_tests; g_sub = 0; printf("  TEST: %s ... ", name); } while (0)
-
-#define SUBTEST(name)                                                   \
-    do { ++g_sub; printf("\n    SUB %d: %s ... ", g_sub, name); } while (0)
-
-#define PASS()          puts("PASS")
-#define FAIL(msg)       do { ++g_failures; printf("FAIL: %s\n", msg); } while (0)
 
 using namespace chaos::il2cpp::runtime_core;
 using namespace chaos::il2cpp::memory_domain;
@@ -1842,6 +1836,235 @@ static bool RunScenarioN(GcStatsSnapshot* stats_out) {
     return (completed == kNWorkers) && (total_writes > 0) && (target_fails == 0);
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// Scenario O: GC.Collect modes — FORCED / OPTIMIZED / AGGRESSIVE
+// ════════════════════════════════════════════════════════════════════════════
+
+static constexpr int kOWorkers = 20;
+static constexpr int kOAllocsPerWorker = 100;
+
+static void worker_o(int thread_index, WorkerResult* result) {
+    RegisterWorker();
+    threading::EnterCooperativeMode();
+    if (!SetupTlsNursery()) {
+        std::snprintf(result->error_message, sizeof(result->error_message),
+                      "SetupTlsNursery failed for thread %d", thread_index);
+        UnregisterWorker();
+        return;
+    }
+
+    for (int i = 0; i < kOAllocsPerWorker; ++i) {
+        result->allocations_attempted++;
+        size_t size = LcgSize(thread_index, i, 32, 4096);
+        size = (size + 7) & ~static_cast<size_t>(7);
+        void* p = NurseryAllocate(size);
+        if (!p) continue;
+        result->allocations_succeeded++;
+        WritePattern(p, size, thread_index, i);
+        if ((i % kVerifyStep) == 0) threading::SafepointPoll();
+    }
+
+    threading::SafepointPoll();
+    UnregisterWorker();
+    result->completed = true;
+}
+
+static bool RunScenarioO(GcStatsSnapshot* stats_out) {
+    printf("\n  ── Scenario O: GC.Collect modes (FORCED/OPTIMIZED/AGGRESSIVE) ──\n");
+    GcStatsSnapshot before = SnapshotGcStats();
+
+    // Phase 1: Allocate under normal mode.
+    std::vector<WorkerResult> results(kOWorkers);
+    std::vector<std::thread> workers;
+    for (int i = 0; i < kOWorkers; ++i)
+        workers.emplace_back(worker_o, i, &results[i]);
+    for (auto& w : workers) { if (w.joinable()) w.join(); }
+
+    // Phase 2: Trigger FORCED full GC.
+    printf("  Triggering FORCED full GC...\n");
+    uint32_t gen = threading::RequestGlobalSafepoint();
+    chaos_gc_collect_with_mode(2, 1);  // gen=2 (all), mode=1 (Forced)
+    threading::ReleaseGlobalSafepoint(gen);
+    printf("  FORCED full GC done\n");
+
+    // Phase 3: More allocation.
+    workers.clear();
+    results.clear();
+    results.resize(kOWorkers);
+    for (int i = 0; i < kOWorkers; ++i)
+        workers.emplace_back(worker_o, i, &results[i]);
+    for (auto& w : workers) { if (w.joinable()) w.join(); }
+
+    // Phase 4: Trigger OPTIMIZED GC (deferred via scheduler).
+    printf("  Triggering OPTIMIZED GC...\n");
+    chaos_gc_collect_with_mode(2, 2);  // gen=2, mode=2 (Optimized)
+    printf("  OPTIMIZED GC requested\n");
+
+    // Phase 5: More allocation + AGGRESSIVE full GC.
+    workers.clear();
+    results.clear();
+    results.resize(kOWorkers);
+    for (int i = 0; i < kOWorkers; ++i)
+        workers.emplace_back(worker_o, i, &results[i]);
+    for (auto& w : workers) { if (w.joinable()) w.join(); }
+
+    printf("  Triggering AGGRESSIVE full GC...\n");
+    gen = threading::RequestGlobalSafepoint();
+    chaos_gc_collect_with_mode(2, 3);  // gen=2, mode=3 (Aggressive)
+    threading::ReleaseGlobalSafepoint(gen);
+    printf("  AGGRESSIVE full GC done\n");
+
+    g_gc_scheduler.RecordFullCollection(0);
+    *stats_out = SnapshotGcStats();
+
+    int64_t total_alloc = 0;
+    int completed = 0;
+    for (auto& r : results) {
+        total_alloc += r.allocations_succeeded;
+        if (r.completed) completed++;
+    }
+
+    printf("\n  Result: %lld allocs, workers=%d/%d\n",
+           (long long)total_alloc, completed, kOWorkers);
+    g_last_pattern_failures = 0;
+    return completed > 0;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// Scenario P: AddMemoryPressure / RemoveMemoryPressure
+// ════════════════════════════════════════════════════════════════════════════
+
+static constexpr int kPWorkers = 10;
+static constexpr int kPPressureOpsPerWorker = 50;
+
+static bool RunScenarioP(GcStatsSnapshot* stats_out) {
+    printf("\n  ── Scenario P: AddMemoryPressure / RemoveMemoryPressure ──\n");
+    GcStatsSnapshot before = SnapshotGcStats();
+
+    std::atomic<int> ok{1};
+
+    std::vector<std::thread> threads;
+    for (int t = 0; t < kPWorkers; t++) {
+        threads.emplace_back([&ok]() {
+            threading::RegisterThread(threading::AllocateThreadId(), nullptr);
+            threading::EnterCooperativeMode();
+            for (int i = 0; i < kPPressureOpsPerWorker; i++) {
+                // Add pressure in varying sizes: 1MB to 64MB.
+                int64_t pressure = static_cast<int64_t>(1024 * 1024) *
+                    (1 + (i % 8));
+                chaos_gc_add_memory_pressure(pressure);
+
+                // Allocate some managed objects.
+                for (int j = 0; j < 10; j++) {
+                    void* p = NurseryAllocate(64);
+                    if (!p) { ok.store(0); break; }
+                    std::memset(p, 0xEE, 64);
+                }
+
+                // Remove pressure on even iterations.
+                if ((i & 1) == 0) {
+                    chaos_gc_remove_memory_pressure(pressure);
+                }
+
+                if ((i % 10) == 9) threading::SafepointPoll();
+            }
+            threading::UnregisterThread();
+        });
+    }
+    for (auto& th : threads) th.join();
+
+    g_old_gen.Collect(nullptr, nullptr);
+    g_gc_scheduler.RecordFullCollection(0);
+
+    *stats_out = SnapshotGcStats();
+    printf("\n  Result: OK=%d\n", ok.load());
+    g_last_pattern_failures = 0;
+    return ok.load() == 1;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// Scenario Q: Domain unload + concurrent allocation (extended H)
+//
+// 30 threads: 15 create+unload domains, 15 allocate concurrently.
+// Tests domain lifecycle under concurrent GC pressure.
+// ════════════════════════════════════════════════════════════════════════════
+
+static constexpr int kQDomainWorkers = 15;
+static constexpr int kQAllocWorkers = 15;
+static constexpr int kQAllocsPerDomain = 50;
+
+static bool RunScenarioQ(GcStatsSnapshot* stats_out) {
+    printf("\n  ── Scenario Q: Domain unload + concurrent alloc (%d domain, %d alloc) ──\n",
+           kQDomainWorkers, kQAllocWorkers);
+    GcStatsSnapshot before = SnapshotGcStats();
+
+    std::atomic<int> domain_ok{1};
+    std::atomic<int> alloc_ok{1};
+    std::atomic<int> domain_counter{0};
+
+    // Domain worker: create, allocate, unload.
+    std::vector<std::thread> domain_threads;
+    for (int t = 0; t < kQDomainWorkers; t++) {
+        domain_threads.emplace_back([&domain_ok, &domain_counter, t]() {
+            char name_buf[64];
+            std::snprintf(name_buf, sizeof(name_buf), "QDomain_%d", t);
+
+            DomainInit init{};
+            init.module_name = name_buf;
+            init.module_kind = 1;
+            init.usage_limit = 0;
+
+            auto domain_id = RegisterMemoryDomain(init);
+            if (domain_id == kDomainIdInvalid) {
+                domain_ok.store(0);
+                return;
+            }
+            domain_counter.fetch_add(1);
+
+            for (int a = 0; a < kQAllocsPerDomain; a++) {
+                size_t size = (a % 3 == 0) ? 64 : (a % 3 == 1) ? 1024 : 8192;
+                void* p = DomainAllocate(domain_id, size);
+                if (!p) { domain_ok.store(0); return; }
+                std::memset(p, 0xA0 + (a & 0x0F), size);
+            }
+
+            auto result = UnloadDomain(domain_id);
+            if (!result.success) {
+                domain_ok.store(0);
+            }
+        });
+    }
+
+    // Allocation workers: concurrent nursery/old-gen allocation.
+    std::vector<std::thread> alloc_threads;
+    for (int t = 0; t < kQAllocWorkers; t++) {
+        alloc_threads.emplace_back([&alloc_ok, t]() {
+            threading::RegisterThread(threading::AllocateThreadId(), nullptr);
+            threading::EnterCooperativeMode();
+            for (int i = 0; i < 200; i++) {
+                size_t size = (i % 2 == 0) ? (64) : (4096);
+                void* p = NurseryAllocate(size);
+                if (!p) { alloc_ok.store(0); break; }
+                std::memset(p, 0xDD, size);
+                if ((i % 16) == 15) threading::SafepointPoll();
+            }
+            threading::UnregisterThread();
+        });
+    }
+
+    for (auto& th : domain_threads) th.join();
+    for (auto& th : alloc_threads) th.join();
+
+    g_old_gen.Collect(nullptr, nullptr);
+    g_gc_scheduler.RecordFullCollection(0);
+
+    *stats_out = SnapshotGcStats();
+    bool ok = (domain_ok.load() == 1) && (alloc_ok.load() == 1);
+    printf("\n  Result: domain_ok=%d alloc_ok=%d, domains_created=%d\n",
+           domain_ok.load(), alloc_ok.load(), domain_counter.load());
+    g_last_pattern_failures = 0;
+    return ok;
+}
 struct ScenarioInfo {
     const char* name;
     bool (*run)(GcStatsSnapshot* out);
@@ -1852,7 +2075,7 @@ struct ScenarioInfo {
 /// Run all scenarios.  If @a start_from is > 0, skips earlier scenarios.
 /// If @a end_at is <= num_scenarios, stops after that scenario (exclusive).
 /// Supports incremental validation without pre-existing scenario hangs.
-static int run_scenarios(int start_from = 0, int end_at = 14) {
+static int run_scenarios(int start_from = 0, int end_at = 17) {
     fprintf(stderr, "[DBG] run_scenarios(start_from=%d, end_at=%d)\n", start_from, end_at);
     ScenarioInfo scenarios[] = {
         {"baseline_concurrent",    RunScenarioA, kNumWorkerThreads, kAllocationsPerThread},
@@ -1869,6 +2092,9 @@ static int run_scenarios(int start_from = 0, int end_at = 14) {
         {"bgc_concurrent_mark",    RunScenarioL, kLWorkers,         kLAllocsPerWorker},
         {"parallel_mark_scale",    RunScenarioM, kMWorkers,         kMAllocsPerWorker},
         {"satb_barrier_stress",    RunScenarioN, kNWorkers,         kNWritesPerWorker},
+        {"collect_modes",          RunScenarioO, kOWorkers,         kOAllocsPerWorker},
+        {"memory_pressure",        RunScenarioP, kPWorkers,         kPPressureOpsPerWorker},
+        {"domain_concurrent_alloc",RunScenarioQ, kQDomainWorkers,   kQAllocsPerDomain},
     };
     int num_scenarios = sizeof(scenarios) / sizeof(scenarios[0]);
 

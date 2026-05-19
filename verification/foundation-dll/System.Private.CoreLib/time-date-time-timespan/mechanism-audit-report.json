@@ -1,13 +1,13 @@
 {
   "family": "time-date-time-timespan",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 45,
-  "audited": 45,
+  "total_methods": 47,
+  "audited": 47,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 1,
   "methods_without_lowering": 0,
-  "methods_without_assert": 45,
+  "methods_without_assert": 47,
   "passed": true,
   "method_details": [
     {
@@ -218,6 +218,15 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "RuntimeSubjects",
       "subject_id": "",
       "is_stub": false,
@@ -408,6 +417,15 @@
     },
     {
       "method_name": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

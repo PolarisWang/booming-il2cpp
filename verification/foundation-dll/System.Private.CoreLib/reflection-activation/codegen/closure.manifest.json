@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ReflectionActivationPatchEntry",
+  "assemblyName": "ReflectionActivationSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-activation/managed/patch/build-output/ReflectionActivationPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-activation/managed/subjects/build-output/ReflectionActivationSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "ReflectionActivationPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-activation/managed/patch/build-output/ReflectionActivationPatchEntry.dll"
+      "assemblyName": "ReflectionActivationSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-activation/managed/subjects/build-output/ReflectionActivationSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "ce98130f-aa45-49c4-acd3-afa5e31134f5",
+  "inputModuleVersionId": "fff5f844-2594-40f7-a1f5-a04b395a6153",
   "artifacts": [
     {
       "kind": "typedIlIr",

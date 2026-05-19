@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "BufferMemoryPatchEntry",
-  "entrySubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "BufferMemorySubjects",
+  "entrySubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Run_System_Int32",
+  "entrySymbol": "BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod0",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

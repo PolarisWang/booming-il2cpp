@@ -1546,3 +1546,5 @@ extern "C" void EnumParsingPatchEntry_EnumParsingPatchEntry_Run_System_Int32(CHA
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 13;
+
+extern "C" void ChaosJitRegisterAll() {}

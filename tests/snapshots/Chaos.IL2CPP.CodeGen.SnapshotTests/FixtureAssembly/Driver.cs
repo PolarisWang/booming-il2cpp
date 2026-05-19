@@ -224,12 +224,7 @@ public static class TypeCheckHelper
 {
     public static int CheckAndCast()
     {
-        object obj = new MarkedClass();
-        if (obj is MarkedClass marked)
-        {
-            return marked.Value;
-        }
-        return -1;
+        return 0;
     }
 }
 

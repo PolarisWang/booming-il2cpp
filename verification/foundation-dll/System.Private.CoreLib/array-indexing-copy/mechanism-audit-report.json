@@ -1,13 +1,13 @@
 {
   "family": "array-indexing-copy",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 39,
-  "audited": 39,
+  "total_methods": 41,
+  "audited": 41,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 1,
   "methods_without_lowering": 0,
-  "methods_without_assert": 39,
+  "methods_without_assert": 41,
   "passed": true,
   "method_details": [
     {
@@ -191,6 +191,15 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "RuntimeSubjects",
       "subject_id": "",
       "is_stub": false,
@@ -354,6 +363,15 @@
     },
     {
       "method_name": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

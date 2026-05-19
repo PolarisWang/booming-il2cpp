@@ -1,5 +1,14 @@
 ﻿namespace Chaos.IL2CPP.Contracts;
 
+/// <summary>Code generation mode for the AOT/JIT switch.</summary>
+public enum CodegenMode
+{
+    /// <summary>Generate native AOT code (default). All methods compiled to C++.</summary>
+    Aot,
+    /// <summary>Generate JIT-friendly entries. All methods routed through the interpreter.</summary>
+    Jit,
+}
+
 public sealed record AotManifestArtifact
 {
     public string FormatVersion { get; init; } = "v0";
@@ -259,7 +268,7 @@ public sealed record ManagedClosureResult
 
 public sealed record NativeReferenceProofRequest(string ManagedClosureRootPath, string OutputRootPath);
 
-public sealed record NativeAotRequest(string ManagedClosureRootPath, string OutputRootPath);
+public sealed record NativeAotRequest(string ManagedClosureRootPath, string OutputRootPath, CodegenMode Mode = CodegenMode.Aot);
 
 public static class NativeReferenceArtifactNames
 {

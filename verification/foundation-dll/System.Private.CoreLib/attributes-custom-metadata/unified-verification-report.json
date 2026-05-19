@@ -2,8 +2,8 @@
   "family": "attributes-custom-metadata",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T15:06:01",
-  "duration_ms": 18533,
+  "timestamp": "2026-05-19T17:27:15",
+  "duration_ms": 24612,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\attributes-custom-metadata\\managed\\subjects\\build-output\\AttributesCustomMetadataSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 17673
+      "duration_ms": 21417
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 43
+      "duration_ms": 36
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,23 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 815
+      "duration_ms": 698
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/9 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 9,
+        "invalidCount": 9,
+        "benchmarkQuality": "matchedCount=0/9 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 2458
     }
   },
   "coverage": {
@@ -67,7 +83,14 @@
   "dashboard": {
     "interpreter": {},
     "irTranslation": {},
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": 0.0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 9,
+      "invalidCount": 9
+    },
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,

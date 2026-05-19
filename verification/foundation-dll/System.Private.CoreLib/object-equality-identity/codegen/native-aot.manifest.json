@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "ObjectEqualityIdentityPatchEntry",
-  "entrySubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "ObjectEqualityIdentitySubjects",
+  "entrySubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/object-equality-identity/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "BoxingUnboxingCastsPatchEntry",
-  "entrySubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "BoxingUnboxingCastsSubjects",
+  "entrySubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_0:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Run_System_Int32",
+  "entrySymbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_0",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

@@ -1,17 +1,19 @@
 {
   "family": "primitive-numeric-conversions",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T15:10:22.532588",
+  "generated_at": "2026-05-19T17:33:23.524818",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
-      "status": "NOT_APPLICABLE",
-      "summary": "Average speedup -52.16% — native significantly slower than managed [overridden — benchmark stage was skipped]",
+      "status": "CONCERN",
+      "summary": "avg_speedup=-37.91% (9/15 methods where native is slower than managed (60%); average speedup -37.91% (native slightly slower overall))",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -52.16,
-        "managed_faster_count": 10,
-        "native_faster_count": 5
+        "average_speedup_percent": -37.91,
+        "managed_faster_count": 9,
+        "native_faster_count": 6,
+        "matched_count": 15,
+        "regression_ratio": 0.6
       }
     },
     "p1_lowering": {
@@ -369,27 +371,75 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "1 of 27 changed source files are outside expected architecture layers",
+      "summary": "7 of 39 changed source files are outside expected architecture layers",
       "details": [
         {
+          "file": "build/check_foundation_dll_pipeline.py",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/toolchains/run/commands/foundation_dll.py",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/AotCoreIrLowering.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/BuildSystem/CmakeGenerator.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
           "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 27,
+        "changed_source_count": 39,
         "layer_distribution": {
           "TestInfra": 5,
-          "Planner": 1,
-          "Templates": 1,
-          "Driver": 1,
-          "Codegen": 3,
-          "RuntimeCore": 11,
-          "Tests": 4
+          "Emitter": 3,
+          "RuntimeSupport": 1,
+          "Driver": 2,
+          "Codegen": 1,
+          "RuntimeCore": 3,
+          "Tests": 17
         },
         "violations": [
           {
+            "file": "build/check_foundation_dll_pipeline.py",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/toolchains/run/commands/foundation_dll.py",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/AotCoreIrLowering.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/BuildSystem/CmakeGenerator.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
             "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -453,8 +503,8 @@
   "summary": {
     "total": 12,
     "aligned": 8,
-    "concern": 1,
-    "violation": 1,
+    "concern": 2,
+    "violation": 0,
     "not_applicable": 2,
     "overall": "CONCERN"
   }

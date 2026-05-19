@@ -1620,3 +1620,5 @@ extern "C" void ArrayIndexingCopyPatchEntry_ArrayIndexingCopyPatchEntry_Run_Syst
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 14;
+
+extern "C" void ChaosJitRegisterAll() {}

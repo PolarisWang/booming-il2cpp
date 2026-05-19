@@ -29,7 +29,6 @@
     "total": 19,
     "exit_code": 0
   },
-  "codegen-edge-cases,reflection-activation,reflection-assembly,reflection-binding,reflection-generics,reflection-member-complete,reflection-module,reflection-type": "no-dll",
   "collections-generic-core": {
     "status": "passed",
     "passed": 16,
@@ -37,16 +36,16 @@
     "exit_code": 0
   },
   "convert-char": {
-    "status": "passed",
-    "passed": 18,
-    "total": 18,
-    "exit_code": 0
+    "status": "failed",
+    "passed": 0,
+    "total": 0,
+    "exit_code": 3221226505
   },
   "delegate-core-invocation": {
-    "status": "passed",
-    "passed": 10,
-    "total": 10,
-    "exit_code": 0
+    "status": "failed",
+    "passed": 0,
+    "total": 0,
+    "exit_code": 3221226505
   },
   "dispatch-basic": {
     "status": "passed",
@@ -114,10 +113,22 @@
     "total": 7,
     "exit_code": 0
   },
+  "pinvoke-dllimport": {
+    "status": "passed",
+    "passed": 12,
+    "total": 12,
+    "exit_code": 0
+  },
   "primitive-numeric-conversions": {
     "status": "passed",
     "passed": 15,
     "total": 15,
+    "exit_code": 0
+  },
+  "primitive-numeric-conversions-core": {
+    "status": "passed",
+    "passed": 20,
+    "total": 20,
     "exit_code": 0
   },
   "rcw-basic": {
@@ -127,28 +138,28 @@
     "exit_code": 0
   },
   "reflection-activation": {
-    "status": "passed",
-    "passed": 8,
-    "total": 8,
-    "exit_code": 0
+    "status": "failed",
+    "passed": 0,
+    "total": 0,
+    "exit_code": 3221226505
   },
   "reflection-assembly": {
-    "status": "passed",
-    "passed": 22,
-    "total": 22,
-    "exit_code": 0
+    "status": "failed",
+    "passed": 0,
+    "total": 0,
+    "exit_code": 3221226505
   },
   "reflection-binding": {
-    "status": "passed",
-    "passed": 12,
-    "total": 12,
-    "exit_code": 0
+    "status": "failed",
+    "passed": 0,
+    "total": 0,
+    "exit_code": 3221226505
   },
   "reflection-generics": {
-    "status": "passed",
-    "passed": 12,
-    "total": 12,
-    "exit_code": 0
+    "status": "failed",
+    "passed": 0,
+    "total": 0,
+    "exit_code": 3221226505
   },
   "reflection-member-basics": {
     "status": "passed",
@@ -175,10 +186,10 @@
     "exit_code": 0
   },
   "reflection-type": {
-    "status": "passed",
-    "passed": 43,
-    "total": 43,
-    "exit_code": 0
+    "status": "failed",
+    "passed": 0,
+    "total": 0,
+    "exit_code": 3221226505
   },
   "runtime-compiler-services": {
     "status": "passed",
@@ -186,12 +197,17 @@
     "total": 10,
     "exit_code": 0
   },
-  "snapshot-prover": "build-exception: [WinError 32] The process cannot access the file because it is being used by another process",
-  "span-memory-buffers": {
+  "snapshot-prover": {
     "status": "passed",
-    "passed": 14,
-    "total": 14,
+    "passed": 157,
+    "total": 157,
     "exit_code": 0
+  },
+  "span-memory-buffers": {
+    "status": "failed",
+    "passed": 0,
+    "total": 0,
+    "exit_code": 3221226505
   },
   "string-char-text-core": {
     "status": "passed",
@@ -199,12 +215,7 @@
     "total": 20,
     "exit_code": 0
   },
-  "threading-monitor-interlocked": {
-    "status": "passed",
-    "passed": 14,
-    "total": 14,
-    "exit_code": 0
-  },
+  "threading-monitor-interlocked": "build-exception: [WinError 32] The process cannot access the file because it is being used by another process",
   "threading-tasks-primitives": {
     "status": "passed",
     "passed": 22,

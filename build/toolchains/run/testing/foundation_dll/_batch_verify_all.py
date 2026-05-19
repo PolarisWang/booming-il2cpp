@@ -12,7 +12,7 @@ VERIFICATION = REPO / "verification" / "foundation-dll" / "System.Private.CoreLi
 DRIVER = REPO / "src" / "managed" / "Chaos.IL2CPP.Driver"
 
 # Families to skip (no entry.exe expected or infrastructure-only)
-SKIP_FAMILIES = {"reports", "System.Private.CoreLib", "codegen-edge-cases", "pinvoke-dllimport", "primitive-numeric-conversions-core"}
+SKIP_FAMILIES = {"reports", "System.Private.CoreLib"}
 
 def get_families():
     families = sorted(d.name for d in VERIFICATION.iterdir() if d.is_dir() and d.name not in SKIP_FAMILIES)
@@ -62,7 +62,7 @@ def inject_seh(cmakelists):
     cmakelists.write_text(text, encoding="utf-8")
     return True
 
-def build_entry(family_slug):
+def build_entry(family_slug, retries=3):
     native_dir = VERIFICATION / family_slug / "native"
     cmakelists = native_dir / "CMakeLists.txt"
     if not cmakelists.exists():
@@ -74,21 +74,35 @@ def build_entry(family_slug):
     build_dir = native_dir / "build"
     build_dir.mkdir(parents=True, exist_ok=True)
 
-    # CMake configure
-    cfg = subprocess.run(
-        ["cmake", "-S", str(native_dir), "-B", str(build_dir),
-         "-G", "Visual Studio 17 2022", "-A", "x64"],
-        capture_output=True, text=True, timeout=120)
-    if cfg.returncode != 0:
-        return f"cmake-fail: {cfg.stderr[-100:]}"
+    for attempt in range(1, retries + 1):
+        # CMake configure
+        cfg = subprocess.run(
+            ["cmake", "-S", str(native_dir), "-B", str(build_dir),
+             "-G", "Visual Studio 17 2022", "-A", "x64"],
+            capture_output=True, text=True, timeout=120)
+        if cfg.returncode != 0:
+            err = cfg.stderr[-100:]
+            if attempt < retries and ("locked" in err.lower() or "LNK" in err):
+                print(f"      cmake configure locked, retry {attempt}/{retries}")
+                time.sleep(5)
+                continue
+            return f"cmake-fail: {err}"
 
-    # CMake build
-    bld = subprocess.run(
-        ["cmake", "--build", str(build_dir), "--config", "Release",
-         "--target", "entry"],
-        capture_output=True, text=True, timeout=300)
-    if bld.returncode != 0:
-        return f"build-fail: {bld.stderr[-100:]}"
+        # CMake build
+        bld = subprocess.run(
+            ["cmake", "--build", str(build_dir), "--config", "Release",
+             "--target", "entry"],
+            capture_output=True, text=True, timeout=300)
+        if bld.returncode != 0:
+            err = bld.stderr[-100:]
+            if attempt < retries and ("locked" in err.lower() or "LNK" in err):
+                print(f"      cmake build locked/contention, retry {attempt}/{retries}")
+                time.sleep(5)
+                continue
+            return f"build-fail: {err}"
+
+        # Success — break out of retry loop
+        break
 
     # Copy entry.exe to native/
     src_exe = build_dir / "Release" / "entry.exe"

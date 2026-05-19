@@ -1,0 +1,158 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "name": "PrimitiveNumericConversionsCorePatchEntry",
+      "displayName": "PrimitiveNumericConversionsCorePatchEntry",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::_exitCode",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_0:System.Int32()",
+      "name": "Subject_0",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_0:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_1:System.Int32()",
+      "name": "Subject_1",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_1:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_2:System.Int32()",
+      "name": "Subject_2",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_2:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_3:System.Int32()",
+      "name": "Subject_3",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_3:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_4:System.Int32()",
+      "name": "Subject_4",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_4:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_5:System.Int32()",
+      "name": "Subject_5",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_5:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_6:System.Int32()",
+      "name": "Subject_6",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_6:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_7:System.Int32()",
+      "name": "Subject_7",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_7:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_8:System.Int32()",
+      "name": "Subject_8",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_8:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_9:System.Int32()",
+      "name": "Subject_9",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_9:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Run:System.Void(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 14,
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Run:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

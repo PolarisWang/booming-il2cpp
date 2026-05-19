@@ -40,6 +40,7 @@ public sealed class CmakeGenerator
             "src/native/support/${CFG}/chaos_support.lib",
             "src/native/interpreter/${CFG}/chaos_interpreter.lib",
             "src/native/hot-update/${CFG}/chaos_hot_update.lib",
+            "src/native/codegen/${CFG}/chaos_codegen.lib",
             "fmt_build/${CFG}/chaos_fmt.lib",
         };
 
@@ -52,6 +53,7 @@ public sealed class CmakeGenerator
             "src/native/runtime-core/gc",
             "src/native/interpreter",
             "third_party/fmt/include",
+            "third_party/unordered_dense/include",
         };
 
         // Build per-assembly static library entries

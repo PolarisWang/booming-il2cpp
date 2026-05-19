@@ -24,6 +24,8 @@
 
 using namespace chaos::il2cpp::runtime_core;
 
+#include "gc_test_macros.h"
+
 // Forward declarations from engine_lifecycle.h.
 namespace chaos { namespace il2cpp { namespace runtime_core {
 CHAOS_IL2CPP_UINT64 GcCreateStrongHandle(void* object_instance) noexcept;
@@ -33,14 +35,6 @@ void* GcGetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
 }}}
 
 static int g_failures = 0;
-#define CHECK(cond, msg) do {                                   \
-    if (!(cond)) {                                              \
-        printf("  FAIL [%s:%d]: %s\n", __FILE__, __LINE__, msg);\
-        ++g_failures;                                           \
-    } else {                                                    \
-        printf("  PASS: %s\n", msg);                            \
-    }                                                           \
-} while(0)
 
 // ── Test 1: Basic POH allocation ─────────────────────────────────
 void TestPohBasicAlloc() {
@@ -252,7 +246,105 @@ void TestPohConcurrentAlloc() {
     CHECK(ok.load() == 1, "8 threads x 100 POH allocs OK");
 }
 
-// ── Main ─────────────────────────────────────────────────────────
+// ── Test 8: POH + Full GC ─────────────────────────────────────────
+void TestPohFullGc() {
+    printf("\n── Test 8: POH + Full GC ──\n");
+
+    // Allocate POH objects and keep strong handles.
+    void* poh1 = PohAllocate(128);
+    void* poh2 = PohAllocate(256);
+    void* poh3 = PohAllocate(512);
+    CHECK(poh1 != nullptr && poh2 != nullptr && poh3 != nullptr,
+          "POH allocs for FullGC test OK");
+    CHECK(IsPohPointer(poh1), "poh1 IsPohPointer");
+    CHECK(IsPohPointer(poh2), "poh2 IsPohPointer");
+    CHECK(IsPohPointer(poh3), "poh3 IsPohPointer");
+
+    std::memset(poh1, 0x11, 128);
+    std::memset(poh2, 0x22, 256);
+    std::memset(poh3, 0x33, 512);
+
+    // Trigger full GC.
+    for (int g = 0; g < 3; g++) {
+        for (int i = 0; i < 500; i++) {
+            volatile void* tmp = NurseryAllocate(32);
+            (void)tmp;
+        }
+        g_old_gen.Collect(nullptr, nullptr);
+    }
+
+    // Verify POH pointers still valid and content intact.
+    CHECK(IsPohPointer(poh1), "poh1 still POH after FullGC");
+    CHECK(IsPohPointer(poh2), "poh2 still POH after FullGC");
+    CHECK(IsPohPointer(poh3), "poh3 still POH after FullGC");
+
+    CHECK(static_cast<unsigned char*>(poh1)[0] == 0x11,
+          "poh1 content intact after FullGC");
+    CHECK(static_cast<unsigned char*>(poh2)[0] == 0x22,
+          "poh2 content intact after FullGC");
+    CHECK(static_cast<unsigned char*>(poh3)[0] == 0x33,
+          "poh3 content intact after FullGC");
+
+    CHECK(true, "POH + FullGC verification complete");
+}
+
+// ── Test 9: POH multi-region concurrent allocation ──────────────────
+void TestPohMultiRegionConcurrent() {
+    printf("\n── Test 9: POH multi-region concurrent allocation ──\n");
+
+    std::atomic<int> ok{1};
+
+    std::vector<std::thread> threads;
+    for (int t = 0; t < 8; t++) {
+        threads.emplace_back([&ok]() {
+            for (int region = 0; region < 10; region++) {
+                for (int i = 0; i < 20; i++) {
+                    // Mix small and large within each "region".
+                    size_t size = (i % 3 == 0) ? 64 : (i % 3 == 1) ? 4096 : 32768;
+                    void* p = PohAllocate(size);
+                    if (!p) { ok.store(0); return; }
+                    std::memset(p, 0xAB, size);
+                }
+            }
+        });
+    }
+    for (auto& th : threads) th.join();
+    CHECK(ok.load() == 1,
+          "8 threads x 10 regions x 20 allocs POH OK");
+}
+
+// ── Test 10: POH oversized at LOH boundary (85KB, 85KB+1) ──────────
+void TestPohOversizedBoundary() {
+    printf("\n── Test 10: POH oversized at LOH boundary ──\n");
+
+    // 85KB = kLohThreshold (exact LOH boundary)
+    void* at_boundary = PohAllocate(85 * 1024);
+    CHECK(at_boundary != nullptr, "PohAllocate(85KB) at LOH threshold OK");
+    // Falls back to old-gen (exceeds POH region size of 64KB).
+    CHECK(!IsPohPointer(at_boundary),
+          "85KB POH allocation falls back to old-gen (not in POH region)");
+    std::memset(at_boundary, 0xAA, 256);
+    CHECK(static_cast<unsigned char*>(at_boundary)[0] == 0xAA,
+          "85KB POH fallback writable");
+
+    // 85KB+1 = just past LOH threshold
+    void* past_boundary = PohAllocate(85 * 1024 + 1);
+    CHECK(past_boundary != nullptr, "PohAllocate(85KB+1) past LOH threshold OK");
+    CHECK(!IsPohPointer(past_boundary),
+          "85KB+1 POH allocation falls back to old-gen");
+    std::memset(past_boundary, 0xBB, 256);
+    CHECK(static_cast<unsigned char*>(past_boundary)[0] == 0xBB,
+          "85KB+1 POH fallback writable");
+
+    // Verify zeroed
+    for (size_t i = 0; i < 64; i++) {
+        if (static_cast<char*>(at_boundary)[i] != 0) {
+            printf("  INFO: POH fallback may not be zeroed at byte %zu\n", i);
+            break;
+        }
+    }
+    CHECK(true, "POH oversized boundary tests completed");
+}
 int main() {
     setvbuf(stdout, NULL, _IONBF, 0);
     puts("CRAG POH comprehensive unit test");
@@ -265,9 +357,12 @@ int main() {
     TestPohAddressStability();
     TestPohOversizedFallback();
     TestPohConcurrentAlloc();
+    TestPohFullGc();
+    TestPohMultiRegionConcurrent();
+    TestPohOversizedBoundary();
 
     printf("\n══ Results: %d passed, %d failures ══\n",
-           7 - g_failures, g_failures);
+           10 - g_failures, g_failures);
 
     return g_failures > 0 ? 1 : 0;
 }

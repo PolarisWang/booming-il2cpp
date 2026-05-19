@@ -2138,3 +2138,5 @@ extern "C" void StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Run_Sy
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 21;
+
+extern "C" void ChaosJitRegisterAll() {}

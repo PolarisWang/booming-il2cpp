@@ -1,0 +1,92 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "PinvokeDllimportPatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "name": "PinvokeDllimportPatchEntry",
+      "displayName": "PinvokeDllimportPatchEntry",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::_exitCode",
+      "declaringTypeSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_0:System.Int32()",
+      "name": "Subject_0",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_0:System.Int32()",
+      "declaringTypeSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_1:System.Int32()",
+      "name": "Subject_1",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_1:System.Int32()",
+      "declaringTypeSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_2:System.Int32()",
+      "name": "Subject_2",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_2:System.Int32()",
+      "declaringTypeSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_3:System.Int32()",
+      "name": "Subject_3",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_3:System.Int32()",
+      "declaringTypeSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 8,
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

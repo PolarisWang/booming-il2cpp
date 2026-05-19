@@ -18,6 +18,7 @@ set(NATIVE_LIBS
     "${NATIVE_LIB_DIR}/src/native/support/${CFG}/chaos_support.lib"
     "${NATIVE_LIB_DIR}/src/native/interpreter/${CFG}/chaos_interpreter.lib"
     "${NATIVE_LIB_DIR}/src/native/hot-update/${CFG}/chaos_hot_update.lib"
+    "${NATIVE_LIB_DIR}/src/native/codegen/${CFG}/chaos_codegen.lib"
     "${NATIVE_LIB_DIR}/fmt_build/${CFG}/chaos_fmt.lib"
 )
 
@@ -28,18 +29,19 @@ set(COMMON_INCLUDE_DIRS
     "${REPO_ROOT}/src/native/runtime-core/gc"
     "${REPO_ROOT}/src/native/interpreter"
     "${REPO_ROOT}/third_party/fmt/include"
+    "${REPO_ROOT}/third_party/unordered_dense/include"
 )
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: ReflectionTypePatchEntry
-add_library(chaos_gen_ReflectionTypePatchEntry STATIC
-    ${CHAOS_GEN_DIR}/ReflectionTypePatchEntry/generated/native-aot.generated.cpp
+# Assembly: ReflectionTypeSubjects
+add_library(chaos_gen_ReflectionTypeSubjects STATIC
+    ${CHAOS_GEN_DIR}/ReflectionTypeSubjects/generated/native-aot.generated.cpp
 )
 
-target_include_directories(chaos_gen_ReflectionTypePatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_ReflectionTypePatchEntry PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_ReflectionTypePatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_ReflectionTypeSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_ReflectionTypeSubjects PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_ReflectionTypeSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -48,7 +50,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_ReflectionTypePatchEntry
+    chaos_gen_ReflectionTypeSubjects
     ${NATIVE_LIBS}
 )
 

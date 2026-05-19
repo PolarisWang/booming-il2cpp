@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "AttributesCustomMetadataPatchEntry",
+  "assemblyName": "AttributesCustomMetadataSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/patch/build-output/AttributesCustomMetadataPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/subjects/build-output/AttributesCustomMetadataSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "AttributesCustomMetadataPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/patch/build-output/AttributesCustomMetadataPatchEntry.dll"
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/subjects/build-output/AttributesCustomMetadataSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "d6341d13-7d99-433f-93d7-30b2ab19e0e0",
+  "inputModuleVersionId": "a78157aa-427d-48aa-a71f-24dcd5aa02c0",
   "artifacts": [
     {
       "kind": "typedIlIr",

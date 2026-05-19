@@ -15,6 +15,7 @@
 #include <vector>
 
 #include <chaos/native_types.h>
+#include "gc_test_macros.h"
 #include "gc_card_table.h"
 #include "gc_old_gen.h"
 #include "gc_region.h"
@@ -31,11 +32,6 @@ extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept;
 static int g_failures = 0;
 static int g_tests = 0;
 static int g_sub = 0;
-
-#define TEST(name)    do { ++g_tests; g_sub = 0; printf("  TEST: %s ... ", name); } while (0)
-#define SUBTEST(name) do { ++g_sub; printf("\n    SUB %d: %s ... ", g_sub, name); } while (0)
-#define PASS()        puts("PASS")
-#define FAIL(msg)     do { ++g_failures; printf("FAIL: %s\n", msg); } while (0)
 
 // ── Global finalizer counters ───────────────────────────────────────
 // Finalizer callbacks are raw function pointers (no captures), so we

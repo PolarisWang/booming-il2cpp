@@ -51,6 +51,10 @@ target_link_libraries(
 # (defined in hotpatch_resolve.cpp, part of chaos_interpreter).
 set(CHAOS_GC_COMMON_LIBS chaos_runtime_core chaos_bootstrap chaos_interpreter chaos_fmt chaos_common chaos_support chaos_hot_update chaos_codegen)
 
+# ═══════════════════════════════════════════════════════════════════════════
+# GC Unit Tests — single subsystem, deterministic
+# ═══════════════════════════════════════════════════════════════════════════
+
 # gc_bump_cache_test — GcBumpCache size-class allocator unit tests
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
     add_executable(chaos_gc_bump_cache_test gc_bump_cache_test.cpp)
@@ -248,15 +252,19 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_loh_test.cpp")
             ${CHAOS_GC_COMMON_LIBS})
 endif()
 
-# loh_stress_test — LOH multi-threaded stress tests (5 scenarios)
+# ═══════════════════════════════════════════════════════════════════════════
+# GC Stress Tests — multi-thread, long running
+# ═══════════════════════════════════════════════════════════════════════════
+
+# gc_loh_stress_test — LOH multi-threaded stress tests (5 scenarios)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/loh_stress_test.cpp")
-    add_executable(chaos_loh_stress_test loh_stress_test.cpp ${CHAOS_GC_TEST_STUBS})
-    target_compile_features(chaos_loh_stress_test PRIVATE cxx_std_17)
-    target_compile_definitions(chaos_loh_stress_test PRIVATE
+    add_executable(chaos_gc_loh_stress_test loh_stress_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_loh_stress_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_loh_stress_test PRIVATE
         _CRT_SECURE_NO_WARNINGS)
-    target_compile_options(chaos_loh_stress_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_compile_options(chaos_gc_loh_stress_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
     target_include_directories(
-        chaos_loh_stress_test
+        chaos_gc_loh_stress_test
         PRIVATE
             "${REPO_ROOT}/contracts/native/v0"
             "${REPO_ROOT}/src/native/common"
@@ -265,7 +273,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/loh_stress_test.cpp")
             "${REPO_ROOT}/third_party/fmt/include"
             "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
-        chaos_loh_stress_test
+        chaos_gc_loh_stress_test
         PRIVATE
             ${CHAOS_GC_COMMON_LIBS})
 endif()
@@ -294,22 +302,22 @@ endif()
 
 # oversized_stress_test — 32-85KB oversized allocation burst with deferred Full GC
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/oversized_stress_test.cpp")
-    add_executable(chaos_oversized_stress_test
+    add_executable(chaos_gc_oversized_stress_test
         oversized_stress_test.cpp
         ${CHAOS_GC_TEST_STUBS})
-    target_compile_features(chaos_oversized_stress_test PRIVATE cxx_std_17)
-    target_compile_definitions(chaos_oversized_stress_test PRIVATE
+    target_compile_features(chaos_gc_oversized_stress_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_oversized_stress_test PRIVATE
         ${CHAOS_GC_TEST_DEFS})
-    target_compile_options(chaos_oversized_stress_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
-    target_include_directories(chaos_oversized_stress_test PRIVATE
+    target_compile_options(chaos_gc_oversized_stress_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(chaos_gc_oversized_stress_test PRIVATE
         ${CHAOS_GC_TEST_INCS})
-    target_link_libraries(chaos_oversized_stress_test
+    target_link_libraries(chaos_gc_oversized_stress_test
         PRIVATE
             ${CHAOS_GC_COMMON_LIBS})
-    set_target_properties(chaos_oversized_stress_test PROPERTIES
+    set_target_properties(chaos_gc_oversized_stress_test PROPERTIES
         FOLDER "tests/contracts/native/runtime-core")
     if(CHAOS_GC_COPY_TO_BIN)
-        list(APPEND CHAOS_GC_DEPLOY_TARGETS chaos_oversized_stress_test)
+        list(APPEND CHAOS_GC_DEPLOY_TARGETS chaos_gc_oversized_stress_test)
     endif()
 endif()
 
@@ -486,6 +494,10 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_stress_test.cpp")
             ${CHAOS_GC_COMMON_LIBS})
 endif()
 
+# ═══════════════════════════════════════════════════════════════════════════
+# GC Smoke Tests — lightweight lifecycle checks
+# ═══════════════════════════════════════════════════════════════════════════
+
 # gc_worker_pool_smoke — GcWorkerPool parallel mark/sweep smoke test
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_worker_pool_smoke.cpp")
     add_executable(chaos_gc_worker_pool_smoke gc_worker_pool_smoke.cpp ${CHAOS_GC_TEST_STUBS})
@@ -660,4 +672,253 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
             chaos_common
             chaos_support
             chaos_hot_update)
+endif()
+
+# ============================================================
+# Phase A — HIGH priority new tests
+# ============================================================
+
+# gc_scheduler_test — GcScheduler unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_scheduler_test.cpp")
+    add_executable(chaos_gc_scheduler_test gc_scheduler_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_scheduler_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_scheduler_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_scheduler_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_scheduler_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_scheduler_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_parallel_mark_test — ParallelMark work-stealing unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_parallel_mark_test.cpp")
+    add_executable(chaos_gc_parallel_mark_test gc_parallel_mark_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_parallel_mark_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_parallel_mark_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_parallel_mark_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_parallel_mark_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_parallel_mark_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_safepoint_test — Safepoint protocol unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_safepoint_test.cpp")
+    add_executable(chaos_gc_safepoint_test gc_safepoint_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_safepoint_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_safepoint_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_safepoint_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_safepoint_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_safepoint_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_old_gen_unit_test — OldGen core operations unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_old_gen_unit_test.cpp")
+    add_executable(chaos_gc_old_gen_unit_test gc_old_gen_unit_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_old_gen_unit_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_old_gen_unit_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_old_gen_unit_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_old_gen_unit_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_old_gen_unit_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# ============================================================
+# Phase B — MEDIUM priority new tests
+# ============================================================
+
+# gc_mark_bitmap_test — Mark bitmap unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_mark_bitmap_test.cpp")
+    add_executable(chaos_gc_mark_bitmap_test gc_mark_bitmap_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_mark_bitmap_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_mark_bitmap_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_mark_bitmap_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_mark_bitmap_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_mark_bitmap_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_bit_utils_test — Bit utilities unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bit_utils_test.cpp")
+    add_executable(chaos_gc_bit_utils_test gc_bit_utils_test.cpp)
+    target_compile_features(chaos_gc_bit_utils_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_bit_utils_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_bit_utils_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_bit_utils_test
+        PRIVATE
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_bit_utils_test
+        PRIVATE
+            chaos_fmt
+            chaos_common)
+endif()
+
+# gc_layout_test — GcLayoutRegistry unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_layout_test.cpp")
+    add_executable(chaos_gc_layout_test gc_layout_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_layout_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_layout_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_layout_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_layout_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_layout_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_events_test — GC events unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_events_test.cpp")
+    add_executable(chaos_gc_events_test gc_events_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_events_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_events_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_events_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_events_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_events_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_stats_test — GC stats unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_stats_test.cpp")
+    add_executable(chaos_gc_stats_test gc_stats_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_stats_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_stats_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_stats_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_stats_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_stats_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_card_table_ext_test — Card table edge case tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_card_table_ext_test.cpp")
+    add_executable(chaos_gc_card_table_ext_test gc_card_table_ext_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_card_table_ext_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_card_table_ext_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_card_table_ext_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_card_table_ext_test
+        PRIVATE
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_card_table_ext_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_tlab_test — TLAB unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_tlab_test.cpp")
+    add_executable(chaos_gc_tlab_test gc_tlab_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_tlab_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_tlab_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_tlab_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_tlab_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_tlab_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
 endif()

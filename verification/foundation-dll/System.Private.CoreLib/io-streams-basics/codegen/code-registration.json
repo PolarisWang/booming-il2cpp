@@ -3,121 +3,115 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "IoStreamsBasicsPatchEntry.dll",
+      "moduleName": "IoStreamsBasicsSubjects.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_0",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_0:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_1",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_1:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_2",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_2:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_2",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_3",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_3:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_4",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_4:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_4",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_5",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_5:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_6",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_6:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 7,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_7",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_7:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_7",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_7:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 8,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_8",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_8:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 9,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_9",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_9:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 10,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_10",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_10:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_10",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_10:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 11,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_11",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_11:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_11",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_11:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 12,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_12",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_12:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_12",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 13,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_13",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_13:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_13",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_13:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 14,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_14",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_14:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_14",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 15,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_15",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_15:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 16,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_16",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_16:System.Int32()"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_16",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 17,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_17",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_17:System.Int32()"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 18,
-          "symbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Run_System_Int32",
-          "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Void(System.Int32)"
+          "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_17",
+          "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()"
         }
       ]
     }

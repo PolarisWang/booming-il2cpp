@@ -3,854 +3,193 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-0",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_0:System.Int32()",
-      "signature": "System.Int32 BufferMemoryPatchEntry::Subject_0()",
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-0",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_0()",
       "identity": {
-        "assemblyName": "BufferMemoryPatchEntry",
-        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
-        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_0:System.Int32()",
-        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_0:System.Int32()",
-        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-0",
-        "signature": "System.Int32 BufferMemoryPatchEntry::Subject_0()"
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-0",
+        "signature": "System.Void BufferMemorySubjects::Subject_0()"
       },
-      "nativeSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_0",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177280,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "BufferMemoryPatchEntry"
-    },
-    {
-      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-1",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_1:System.Int32()",
-      "signature": "System.Int32 BufferMemoryPatchEntry::Subject_1()",
-      "identity": {
-        "assemblyName": "BufferMemoryPatchEntry",
-        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
-        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_1:System.Int32()",
-        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_1:System.Int32()",
-        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-1",
-        "signature": "System.Int32 BufferMemoryPatchEntry::Subject_1()"
-      },
-      "nativeSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_1",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177279,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "BufferMemoryPatchEntry"
-    },
-    {
-      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-2",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_2:System.Int32()",
-      "signature": "System.Int32 BufferMemoryPatchEntry::Subject_2()",
-      "identity": {
-        "assemblyName": "BufferMemoryPatchEntry",
-        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
-        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_2:System.Int32()",
-        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_2:System.Int32()",
-        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-2",
-        "signature": "System.Int32 BufferMemoryPatchEntry::Subject_2()"
-      },
-      "nativeSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_2",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177278,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "BufferMemoryPatchEntry"
-    },
-    {
-      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-3",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_3:System.Int32()",
-      "signature": "System.Int32 BufferMemoryPatchEntry::Subject_3()",
-      "identity": {
-        "assemblyName": "BufferMemoryPatchEntry",
-        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
-        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_3:System.Int32()",
-        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_3:System.Int32()",
-        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-3",
-        "signature": "System.Int32 BufferMemoryPatchEntry::Subject_3()"
-      },
-      "nativeSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_3",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177277,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "BufferMemoryPatchEntry"
-    },
-    {
-      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-4",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_4:System.Int32()",
-      "signature": "System.Int32 BufferMemoryPatchEntry::Subject_4()",
-      "identity": {
-        "assemblyName": "BufferMemoryPatchEntry",
-        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
-        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_4:System.Int32()",
-        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_4:System.Int32()",
-        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-4",
-        "signature": "System.Int32 BufferMemoryPatchEntry::Subject_4()"
-      },
-      "nativeSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_4",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177276,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "BufferMemoryPatchEntry"
-    },
-    {
-      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-5",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_5:System.Int32()",
-      "signature": "System.Int32 BufferMemoryPatchEntry::Subject_5()",
-      "identity": {
-        "assemblyName": "BufferMemoryPatchEntry",
-        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
-        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_5:System.Int32()",
-        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_5:System.Int32()",
-        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-5",
-        "signature": "System.Int32 BufferMemoryPatchEntry::Subject_5()"
-      },
-      "nativeSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_5",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177275,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "BufferMemoryPatchEntry"
-    },
-    {
-      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-6",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_6:System.Int32()",
-      "signature": "System.Int32 BufferMemoryPatchEntry::Subject_6()",
-      "identity": {
-        "assemblyName": "BufferMemoryPatchEntry",
-        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
-        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_6:System.Int32()",
-        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_6:System.Int32()",
-        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-6",
-        "signature": "System.Int32 BufferMemoryPatchEntry::Subject_6()"
-      },
-      "nativeSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_6",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177274,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "BufferMemoryPatchEntry"
-    },
-    {
-      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-7",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_7:System.Int32()",
-      "signature": "System.Int32 BufferMemoryPatchEntry::Subject_7()",
-      "identity": {
-        "assemblyName": "BufferMemoryPatchEntry",
-        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
-        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_7:System.Int32()",
-        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_7:System.Int32()",
-        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-7",
-        "signature": "System.Int32 BufferMemoryPatchEntry::Subject_7()"
-      },
-      "nativeSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_7",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177273,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "BufferMemoryPatchEntry"
-    },
-    {
-      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-8",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_8:System.Int32()",
-      "signature": "System.Int32 BufferMemoryPatchEntry::Subject_8()",
-      "identity": {
-        "assemblyName": "BufferMemoryPatchEntry",
-        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
-        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_8:System.Int32()",
-        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_8:System.Int32()",
-        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-8",
-        "signature": "System.Int32 BufferMemoryPatchEntry::Subject_8()"
-      },
-      "nativeSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_8",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177272,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "BufferMemoryPatchEntry"
-    },
-    {
-      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-9",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_9:System.Int32()",
-      "signature": "System.Int32 BufferMemoryPatchEntry::Subject_9()",
-      "identity": {
-        "assemblyName": "BufferMemoryPatchEntry",
-        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
-        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_9:System.Int32()",
-        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_9:System.Int32()",
-        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.subject-9",
-        "signature": "System.Int32 BufferMemoryPatchEntry::Subject_9()"
-      },
-      "nativeSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_9",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177271,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "BufferMemoryPatchEntry"
-    },
-    {
-      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.run",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)",
-      "signature": "System.Void BufferMemoryPatchEntry::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "BufferMemoryPatchEntry",
-        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
-        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)",
-        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)",
-        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.run",
-        "signature": "System.Void BufferMemoryPatchEntry::Run(System.Int32)"
-      },
-      "nativeSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Run_System_Int32",
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_0",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
         "carrierKindCode": 0,
         "typeShape": 1
       },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 2,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 136,
-          "handlerOffset": 137,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 2,
-          "resultType": "System.Int32",
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "BufferMemorySubjects"
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-1",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-1",
+        "signature": "System.Void BufferMemorySubjects::Subject_1()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "BufferMemorySubjects"
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-2",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-2",
+        "signature": "System.Void BufferMemorySubjects::Subject_2()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Byte[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 3,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 5,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 6,
-          "isPreserveSig": false
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            54,
-            62,
-            70,
-            78,
-            86,
-            94,
-            102,
-            110,
-            118,
-            126
-          ],
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 134,
-          "ilOffset": 52,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 54,
           "resultType": "System.Int32",
-          "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_0:System.Int32()",
+          "callee": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
           "reference": {
-            "assemblyName": "BufferMemoryPatchEntry",
+            "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_0:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_0:System.Int32()",
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -858,447 +197,76 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 59,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 134,
-          "ilOffset": 60,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 62,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 11,
           "resultType": "System.Int32",
-          "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_1:System.Int32()",
-          "reference": {
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_1:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_1:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 67,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 134,
-          "ilOffset": 68,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 70,
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 12,
           "resultType": "System.Int32",
-          "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_2:System.Int32()",
-          "reference": {
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_2:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_2:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 75,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 134,
-          "ilOffset": 76,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 14,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 78,
-          "resultType": "System.Int32",
-          "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_3:System.Int32()",
-          "reference": {
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_3:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_3:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 15,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 83,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 134,
-          "ilOffset": 84,
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 24,
+          "ilOffset": 16,
           "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 86,
-          "resultType": "System.Int32",
-          "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_4:System.Int32()",
-          "reference": {
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_4:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_4:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 91,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 134,
-          "ilOffset": 92,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 94,
-          "resultType": "System.Int32",
-          "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_5:System.Int32()",
-          "reference": {
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_5:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_5:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 99,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 134,
-          "ilOffset": 100,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 102,
-          "resultType": "System.Int32",
-          "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_6:System.Int32()",
-          "reference": {
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_6:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_6:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 107,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 134,
-          "ilOffset": 108,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 110,
-          "resultType": "System.Int32",
-          "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_7:System.Int32()",
-          "reference": {
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_7:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_7:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_7",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 115,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 134,
-          "ilOffset": 116,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 118,
-          "resultType": "System.Int32",
-          "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_8:System.Int32()",
-          "reference": {
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_8:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_8:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_8",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 123,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 134,
-          "ilOffset": 124,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 126,
-          "resultType": "System.Int32",
-          "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_9:System.Int32()",
-          "reference": {
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_9:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_9:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "BufferMemoryPatchEntry_BufferMemoryPatchEntry_Subject_9",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 131,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 134,
-          "ilOffset": 132,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 148,
-          "ilOffset": 135,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 137,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 139,
+          "ilOffset": 18,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::_exitCode",
-          "ilOffset": 140,
+          "operand": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
+          "ilOffset": 19,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "BufferMemoryPatchEntry",
+            "assemblyName": "BufferMemorySubjects",
             "subjectKind": "field",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::_exitCode"
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "BufferMemoryPatchEntry",
-            "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::_exitCode",
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+            "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -1306,17 +274,9 @@
           "isPreserveSig": false
         },
         {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 148,
-          "ilOffset": 146,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 148,
+          "ilOffset": 24,
           "isPreserveSig": false
         }
       ],
@@ -1328,7 +288,1037 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "BufferMemoryPatchEntry"
+      "declaringAssemblyName": "BufferMemorySubjects"
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-3",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-3",
+        "signature": "System.Void BufferMemorySubjects::Subject_3()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "BufferMemorySubjects"
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-4",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-4",
+        "signature": "System.Void BufferMemorySubjects::Subject_4()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "BufferMemorySubjects"
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-5",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-5",
+        "signature": "System.Void BufferMemorySubjects::Subject_5()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "BufferMemorySubjects"
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-6",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-6",
+        "signature": "System.Void BufferMemorySubjects::Subject_6()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "BufferMemorySubjects"
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-7",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-7",
+        "signature": "System.Void BufferMemorySubjects::Subject_7()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "BufferMemorySubjects"
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-8",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-8",
+        "signature": "System.Void BufferMemorySubjects::Subject_8()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "BufferMemorySubjects"
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-9",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+      "signature": "System.Void BufferMemorySubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-subjects.subject-9",
+        "signature": "System.Void BufferMemorySubjects::Subject_9()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "BufferMemorySubjects"
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-native-entry.custom-entry-method0",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
+      "signature": "System.Void BufferMemoryNativeEntry::CustomEntryMethod0()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-native-entry.custom-entry-method0",
+        "signature": "System.Void BufferMemoryNativeEntry::CustomEntryMethod0()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newarr",
+          "opCode": 43,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 2,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newarr",
+          "opCode": 43,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 9,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 15,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldelem",
+          "opCode": 44,
+          "operand": "System.Byte",
+          "ilOffset": 19,
+          "resultType": "System.Byte",
+          "runtimeServiceKind": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stelem",
+          "opCode": 45,
+          "operand": "System.SByte",
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "runtimeServiceKind": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 21,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldelem",
+          "opCode": 44,
+          "operand": "System.Byte",
+          "ilOffset": 25,
+          "resultType": "System.Byte",
+          "runtimeServiceKind": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stelem",
+          "opCode": 45,
+          "operand": "System.SByte",
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "runtimeServiceKind": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 2,
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 29,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 2,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldelem",
+          "opCode": 44,
+          "operand": "System.Byte",
+          "ilOffset": 31,
+          "resultType": "System.Byte",
+          "runtimeServiceKind": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stelem",
+          "opCode": 45,
+          "operand": "System.SByte",
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "runtimeServiceKind": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 33,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 3,
+          "ilOffset": 34,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 35,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 3,
+          "ilOffset": 36,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldelem",
+          "opCode": 44,
+          "operand": "System.Byte",
+          "ilOffset": 37,
+          "resultType": "System.Byte",
+          "runtimeServiceKind": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stelem",
+          "opCode": 45,
+          "operand": "System.SByte",
+          "ilOffset": 38,
+          "resultType": "System.Void",
+          "runtimeServiceKind": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 39,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 4,
+          "ilOffset": 40,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 41,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 4,
+          "ilOffset": 42,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldelem",
+          "opCode": 44,
+          "operand": "System.Byte",
+          "ilOffset": 43,
+          "resultType": "System.Byte",
+          "runtimeServiceKind": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stelem",
+          "opCode": 45,
+          "operand": "System.SByte",
+          "ilOffset": 44,
+          "resultType": "System.Void",
+          "runtimeServiceKind": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 45,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "BufferMemorySubjects"
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-native-entry.custom-entry-method3",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()",
+      "signature": "System.Void BufferMemoryNativeEntry::CustomEntryMethod3()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-native-entry.custom-entry-method3",
+        "signature": "System.Void BufferMemoryNativeEntry::CustomEntryMethod3()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 2,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newarr",
+          "opCode": 43,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 2,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stelem",
+          "opCode": 45,
+          "operand": "System.SByte",
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "runtimeServiceKind": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 100,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stelem",
+          "opCode": 45,
+          "operand": "System.SByte",
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "runtimeServiceKind": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldelem",
+          "opCode": 44,
+          "operand": "System.Byte",
+          "ilOffset": 20,
+          "resultType": "System.Byte",
+          "runtimeServiceKind": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 100,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 29,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 40,
+          "ilOffset": 30,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 33,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
+          "ilOffset": 34,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "BufferMemorySubjects",
+            "subjectKind": "field",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "BufferMemorySubjects",
+            "subjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 40,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "BufferMemorySubjects"
+    },
+    {
+      "methodId": "buffer-memory-subjects.buffer-memory-native-entry.custom-entry-method9",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()",
+      "signature": "System.Void BufferMemoryNativeEntry::CustomEntryMethod9()",
+      "identity": {
+        "assemblyName": "BufferMemorySubjects",
+        "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()",
+        "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()",
+        "methodId": "buffer-memory-subjects.buffer-memory-native-entry.custom-entry-method9",
+        "signature": "System.Void BufferMemoryNativeEntry::CustomEntryMethod9()"
+      },
+      "nativeSymbol": "BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 3,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newarr",
+          "opCode": 43,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 2,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 99,
+          "ilOffset": 10,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stelem",
+          "opCode": 45,
+          "operand": "System.SByte",
+          "ilOffset": 12,
+          "resultType": "System.Void",
+          "runtimeServiceKind": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "BufferMemorySubjects"
     }
   ]
 }

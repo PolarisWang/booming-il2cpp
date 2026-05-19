@@ -4,79 +4,73 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry",
+      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::_exitCode",
+      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_0:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_1:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_2:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_3:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_4:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_5:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_6:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_7:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_8:System.Int32()",
+      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_8:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_9:System.Int32()",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_9:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

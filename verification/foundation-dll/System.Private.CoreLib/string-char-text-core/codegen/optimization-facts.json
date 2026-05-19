@@ -4,129 +4,179 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_0:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_1:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_1:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_2:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_2:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_3:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_3:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_4:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_4:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_5:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_5:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_6:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_6:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_7:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_7:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_8:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_8:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_9:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_9:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_10:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_10:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_11:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_11:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_12:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_12:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_13:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_13:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_14:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_14:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_15:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_15:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_16:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_16:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_17:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_17:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_18:System.Int32()",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_18:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Subject_19:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_19:System.Void()",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_11:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_13:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_14:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_15:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::Subject_16:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    }
+  ],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::_exitCode",
+      "subjectId": "StringCharTextCoreSubjects/StringCharTextCoreSubjects::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": [
-    {
-      "methodSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Run:System.Void(System.Int32)",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-    }
-  ]
+  "exceptionFacts": []
 }

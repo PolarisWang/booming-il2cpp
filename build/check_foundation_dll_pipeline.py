@@ -181,7 +181,7 @@ def _get_verifyable_families(dlls, lookup):
     return candidates
 
 
-def step_verify_families(families, *, mode, skip_stages, verbose):
+def step_verify_families(families, *, mode, skip_stages, verbose, codegen_mode=None):
     """Run verify_family() for each family.
 
     Returns dict mapping (assembly, slug) -> unified_report dict.
@@ -210,6 +210,7 @@ def step_verify_families(families, *, mode, skip_stages, verbose):
                 mode=mode,
                 skip_stages=skip_stages,
                 verbose=verbose,
+                codegen_mode=codegen_mode,
             )
         except Exception as e:
             print(f"\n  FAMILY CRASHED: {e}")
@@ -368,6 +369,9 @@ def main():
                         help="Single family to verify (e.g. convert-char). If omitted, verifies all active families.")
     parser.add_argument("--assembly", type=str, default=None,
                         help="Assembly name (default: System.Private.CoreLib). Only used with --family.")
+    parser.add_argument("--codegen-mode", type=str, default=None,
+                        choices=["aot", "jit"],
+                        help="Codegen mode: aot (native C++, default) or jit (interpreter dispatch)")
     args = parser.parse_args()
 
     errors = []
@@ -403,7 +407,8 @@ def main():
 
     verify_results = step_verify_families(families, mode=args.mode,
                                           skip_stages=skip_stages,
-                                          verbose=args.verbose)
+                                          verbose=args.verbose,
+                                          codegen_mode=args.codegen_mode)
 
     # Check for failures
     for (aname, slug), report in verify_results.items():

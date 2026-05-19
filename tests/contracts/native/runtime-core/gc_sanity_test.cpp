@@ -15,15 +15,9 @@
 
 using namespace chaos::il2cpp::runtime_core;
 
+#include "gc_test_macros.h"
+
 static int g_failures = 0;
-#define CHECK(cond, msg) do {                                   \
-    if (!(cond)) {                                              \
-        printf("  FAIL [%s:%d]: %s\n", __FILE__, __LINE__, msg);\
-        ++g_failures;                                           \
-    } else {                                                    \
-        printf("  PASS: %s\n", msg);                            \
-    }                                                           \
-} while(0)
 
 // ── Test 1: POH allocation + pointer identification ──────────────
 void TestPohAllocate() {

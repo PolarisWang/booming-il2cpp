@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "MathNumericsPatchEntry",
-  "entrySubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "MathNumericsSubjects",
+  "entrySubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/math-numerics/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

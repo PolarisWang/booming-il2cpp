@@ -808,7 +808,7 @@ def _stage_preflight(family_slug: str, assembly: str) -> StageResult:
     )
 
 
-def _stage_codegen(family_slug: str, assembly: str, preflight: StageResult) -> StageResult:
+def _stage_codegen(family_slug: str, assembly: str, preflight: StageResult, *, codegen_mode: str | None = None) -> StageResult:
     """Stage 1: Entrypoint generation + IL2CPP compile.
 
     Delegates to pipeline_native_aot_runner.run_family() for the heavy lifting.
@@ -823,7 +823,7 @@ def _stage_codegen(family_slug: str, assembly: str, preflight: StageResult) -> S
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    result = run_family(family_slug, assembly_name=assembly)
+    result = run_family(family_slug, assembly_name=assembly, codegen_mode=codegen_mode)
     ok = result.get("success", False)
 
     trace("codegen", family=family_slug, success=ok,
@@ -879,10 +879,14 @@ def _stage_fact(family_slug: str, assembly: str) -> StageResult:
     )
 
 
-def _stage_audit(family_slug: str, assembly: str, skip_stages: set[str] | None = None) -> StageResult:
+def _stage_audit(family_slug: str, assembly: str, skip_stages: set[str] | None = None, *, codegen_mode: str | None = None) -> StageResult:
     """Stage 3: Mechanism + Principle audit + principle alignment.
 
     Delegates to mechanism_audit.run_full_audit(), writes reports to disk.
+
+    When codegen_mode is "jit", the p1_benchmark principle check is
+    overridden to NOT_APPLICABLE — JIT mode intentionally routes all methods
+    through the interpreter, so native-slower-than-managed is expected.
     """
     skip = skip_stages or set()
     start = time.perf_counter()
@@ -900,6 +904,11 @@ def _stage_audit(family_slug: str, assembly: str, skip_stages: set[str] | None =
     principle = audit.get("principle_alignment", {})
     overall = audit.get("overall", {})
 
+    # When running in JIT mode, the p1_benchmark principle is not applicable.
+    # JIT mode intentionally routes all methods through the interpreter, so
+    # native-slower-than-managed is expected behavior, not a violation.
+    is_jit_mode = (codegen_mode or "").lower() == "jit"
+
     # If benchmark is skipped, demote p1_benchmark so families without
     # meaningful benchmark data still pass audit.
     if "benchmark" in skip:
@@ -909,6 +918,30 @@ def _stage_audit(family_slug: str, assembly: str, skip_stages: set[str] | None =
         if bm_status in ("VIOLATION", "CONCERN"):
             bm_check["status"] = "NOT_APPLICABLE"
             bm_check["summary"] += " [overridden — benchmark stage was skipped]"
+            # Recompute overall principle status
+            status_counts = {}
+            for c in checks.values():
+                status_counts[c["status"]] = status_counts.get(c["status"], 0) + 1
+            if status_counts.get("VIOLATION", 0) > 0:
+                principle_overall_new = "VIOLATION"
+            elif status_counts.get("CONCERN", 0) > 0:
+                principle_overall_new = "CONCERN"
+            elif status_counts.get("ALIGNED", 0) > 0:
+                principle_overall_new = "ALIGNED"
+            else:
+                principle_overall_new = "NOT_APPLICABLE"
+            principle.setdefault("summary", {})["overall"] = principle_overall_new
+            overall["principle_status"] = principle_overall_new
+            overall["passed"] = mechanism.get("passed", False) and principle_overall_new != "VIOLATION"
+
+    # In JIT mode, demote p1_benchmark since interpreter is intentionally slower
+    if is_jit_mode:
+        checks = principle.get("checks", {})
+        bm_check = checks.get("p1_benchmark", {})
+        bm_status = bm_check.get("status")
+        if bm_status in ("VIOLATION", "CONCERN"):
+            bm_check["status"] = "NOT_APPLICABLE"
+            bm_check["summary"] += " [overridden — codegen-mode=jit, interpreter path is expected to be slower]"
             # Recompute overall principle status
             status_counts = {}
             for c in checks.values():
@@ -1817,7 +1850,8 @@ def verify_family(family_slug: str,
                   assembly: str = "System.Private.CoreLib",
                   mode: str = "standard",
                   skip_stages: list[str] | None = None,
-                  verbose: bool = False) -> dict[str, Any]:
+                  verbose: bool = False,
+                  codegen_mode: str | None = None) -> dict[str, Any]:
     """Run the full 8-stage verification pipeline for a single family.
 
     Args:
@@ -1826,6 +1860,7 @@ def verify_family(family_slug: str,
         mode:         "standard" (default) or "strict"
         skip_stages:  List of stage names to skip, e.g. ["benchmark", "hotupdate"]
         verbose:      Print detailed output
+        codegen_mode: "aot" (default) or "jit" — passed to chaos-il2cpp convert-to-cpp
 
     Returns:
         UnifiedReport as dict
@@ -1860,7 +1895,7 @@ def verify_family(family_slug: str,
     # Stage 1: Codegen
     if "codegen" not in skip:
         print(f"[1/8] Codegen...")
-        sr = _stage_codegen(family_slug, assembly, stage_results[0] if stage_results else StageResult("preflight", "passed"))
+        sr = _stage_codegen(family_slug, assembly, stage_results[0] if stage_results else StageResult("preflight", "passed"), codegen_mode=codegen_mode)
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
         if sr.status == "failed" and mode == "strict":
@@ -1890,7 +1925,7 @@ def verify_family(family_slug: str,
     if "audit" not in skip:
         print(f"[3/8] Mechanism + Principle Audit...")
         try:
-            sr = _stage_audit(family_slug, assembly, skip)
+            sr = _stage_audit(family_slug, assembly, skip, codegen_mode=codegen_mode)
         except Exception as e:
             trace("audit", family=family_slug, error=str(e))
             sr = StageResult(stage="audit", status="failed",

@@ -22,15 +22,9 @@
 
 using namespace chaos::il2cpp::runtime_core;
 
+#include "gc_test_macros.h"
+
 static int g_failures = 0;
-#define CHECK(cond, msg) do {                                   \
-    if (!(cond)) {                                              \
-        printf("  FAIL [%s:%d]: %s\n", __FILE__, __LINE__, msg);\
-        ++g_failures;                                           \
-    } else {                                                    \
-        printf("  PASS: %s\n", msg);                            \
-    }                                                           \
-} while(0)
 
 // ── Test 1: Basic LOH allocation ──────────────────────────────────
 void TestLohBasicAlloc() {
@@ -226,7 +220,118 @@ void TestConcurrentLoh() {
     CHECK(ok.load() == 1, "4 threads x 20 LOH allocs under GC pressure OK");
 }
 
-// ── Main ───────────────────────────────────────────────────────────
+// ── Test 6: LOH very large objects (>1MB) ──────────────────────────
+void TestLohVeryLarge() {
+    printf("\n── Test 6: LOH very large objects (>1MB) ──\n");
+
+    void* big2m = g_loh.Allocate(2 * 1024 * 1024);
+    CHECK(big2m != nullptr, "LOH Allocate(2MB) OK");
+    CHECK(g_loh.IsInLOH(big2m), "2MB object recognized as LOH");
+    std::memset(big2m, 0xAA, 2 * 1024 * 1024);
+    CHECK(static_cast<unsigned char*>(big2m)[0] == 0xAA,
+          "2MB object writable");
+    CHECK(static_cast<unsigned char*>(big2m)[2 * 1024 * 1024 - 1] == 0xAA,
+          "2MB last byte writable");
+
+    void* big4m = g_loh.Allocate(4 * 1024 * 1024);
+    CHECK(big4m != nullptr, "LOH Allocate(4MB) OK");
+    CHECK(g_loh.IsInLOH(big4m), "4MB object recognized as LOH");
+    std::memset(big4m, 0xBB, 4 * 1024 * 1024);
+    CHECK(static_cast<unsigned char*>(big4m)[0] == 0xBB,
+          "4MB object writable");
+    CHECK(static_cast<unsigned char*>(big4m)[4 * 1024 * 1024 - 1] == 0xBB,
+          "4MB last byte writable");
+
+    // Mark both and sweep.
+    g_loh.MarkObject(big2m);
+    g_loh.MarkObject(big4m);
+    g_loh.Sweep();
+    CHECK(g_loh.IsInLOH(big2m), "2MB still in LOH after mark+sweep");
+    CHECK(g_loh.IsInLOH(big4m), "4MB still in LOH after mark+sweep");
+
+    CHECK(true, "LOH very large objects test complete");
+}
+
+// ── Test 7: LOH concurrent sweep ─────────────────────────────────
+void TestLohConcurrentSweep() {
+    printf("\n── Test 7: LOH concurrent sweep ──\n");
+
+    std::atomic<int> ok{1};
+    constexpr int kAllocThreads = 3;
+    constexpr int kAllocsPerThread = 50;
+
+    // Allocator threads.
+    std::vector<std::thread> alloc_threads;
+    for (int t = 0; t < kAllocThreads; t++) {
+        alloc_threads.emplace_back([&ok]() {
+            for (int i = 0; i < 50; i++) {
+                size_t size = (i % 2 == 0) ? (86 * 1024) : (256 * 1024);
+                void* obj = g_loh.Allocate(size);
+                if (!obj) { ok.store(0); return; }
+                std::memset(obj, 0xCC, size);
+            }
+        });
+    }
+
+    // Sweep thread runs concurrently.
+    std::thread sweep_thread([&ok]() {
+        for (int i = 0; i < 5; i++) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            try {
+                g_loh.Sweep();
+            } catch (...) {
+                ok.store(0);
+                return;
+            }
+        }
+    });
+
+    for (auto& th : alloc_threads) th.join();
+    sweep_thread.join();
+
+    CHECK(ok.load() == 1,
+          "3 alloc threads + concurrent sweep completed without crash");
+}
+
+// ── Test 8: LOH segment count ─────────────────────────────────────▁
+void TestLohSegmentCount() {
+    printf("\n── Test 8: LOH segment count ──\n");
+
+    int before_count = g_loh.SegmentCount();
+
+    // Allocate many LOH objects of varying sizes.
+    constexpr int kNumAllocs = 10;
+    std::vector<void*> objs;
+    objs.reserve(kNumAllocs);
+
+    for (int i = 0; i < kNumAllocs; i++) {
+        size_t size = (i % 3 == 0) ? (86 * 1024) : (i % 3 == 1) ? (192 * 1024) : (512 * 1024);
+        void* obj = g_loh.Allocate(size);
+        CHECK(obj != nullptr, "LOH alloc for segment count test");
+        if (obj) {
+            objs.push_back(obj);
+            std::memset(obj, 0xDD, 128);
+        }
+    }
+
+    int after_alloc = g_loh.SegmentCount();
+    CHECK(after_alloc >= before_count + kNumAllocs / 2,
+          "Segment count increased after %d allocs (%d -> %d)",
+          kNumAllocs, before_count, after_alloc);
+
+    // Mark all and sweep.
+    for (auto* obj : objs) {
+        g_loh.MarkObject(obj);
+    }
+    g_loh.Sweep();
+
+    int after_sweep = g_loh.SegmentCount();
+    CHECK(after_sweep == (int)objs.size(),
+          "Segment count matches marked objects after sweep (expected %zu, got %d)",
+          objs.size(), after_sweep);
+
+    CHECK(true, "LOH segment count test complete");
+}
 int main() {
     puts("CRAG LOH unit test");
     puts("═════════════════\n");
@@ -236,9 +341,12 @@ int main() {
     TestLohFreeListReuse();
     TestLohCompaction();
     TestConcurrentLoh();
+    TestLohVeryLarge();
+    TestLohConcurrentSweep();
+    TestLohSegmentCount();
 
     printf("\n══ Results: %d tests, %d failures ══\n",
-           5 - (g_failures > 0 ? 1 : 0), g_failures);
+           8 - (g_failures > 0 ? 1 : 0), g_failures);
 
     return g_failures > 0 ? 1 : 0;
 }

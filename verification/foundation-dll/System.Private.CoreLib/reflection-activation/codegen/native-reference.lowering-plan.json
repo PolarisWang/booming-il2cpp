@@ -2,34 +2,33 @@
   "formatVersion": "v0",
   "artifactKind": "nativeReferenceLoweringPlan",
   "planKind": "assembly-full-closure-runtime-skeleton",
-  "assemblyName": "ReflectionActivationPatchEntry",
+  "assemblyName": "ReflectionActivationSubjects",
   "entrySubjectId": "",
   "includeHeader": "codegen_bridge.h",
   "nativeEntryFunctionName": "RunNativeReferenceAssembly",
-  "entrySymbol": "ReflectionActivationPatchEntry_ReflectionActivationPatchEntry_Subject_0",
+  "entrySymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_0",
   "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
   "translationUnitMode": "runtime-skeleton",
   "translationUnitMethodSubjectIds": [
-    "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Run:System.Void(System.Int32)",
-    "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_0:System.Int32()",
-    "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_1:System.Int32()",
-    "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_2:System.Int32()",
-    "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_3:System.Int32()",
-    "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_4:System.Int32()",
-    "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_5:System.Int32()",
-    "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_6:System.Int32()",
-    "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_7:System.Int32()"
+    "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
+    "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_1:System.Void()",
+    "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_2:System.Void()",
+    "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_3:System.Void()",
+    "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_4:System.Void()",
+    "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_5:System.Void()",
+    "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_6:System.Void()",
+    "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()"
   ],
-  "translationUnitMethodCount": 9,
+  "translationUnitMethodCount": 8,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 9,
+      "methodCount": 8,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
-      "firstMethodSubjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Run:System.Void(System.Int32)",
-      "lastMethodSubjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_7:System.Int32()"
+      "firstMethodSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
+      "lastMethodSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()"
     }
   ],
   "auditStatus": "runtime-skeleton",

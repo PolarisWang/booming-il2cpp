@@ -1,9 +1,9 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "TypeRuntimeHandlesPatchEntry",
+  "assemblyName": "TypeRuntimeHandlesSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/type-runtime-handles/managed/patch/build-output/TypeRuntimeHandlesPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/type-runtime-handles/managed/subjects/build-output/TypeRuntimeHandlesSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -11,12 +11,12 @@
       "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Private.CoreLib.dll"
     },
     {
-      "assemblyName": "TypeRuntimeHandlesPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/type-runtime-handles/managed/patch/build-output/TypeRuntimeHandlesPatchEntry.dll"
+      "assemblyName": "TypeRuntimeHandlesSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/type-runtime-handles/managed/subjects/build-output/TypeRuntimeHandlesSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "8f389204-11d5-4a5c-86e6-2f1ee8bcaedc",
+  "inputModuleVersionId": "9749d99d-d5bc-4093-aba1-28d8326f679a",
   "artifacts": [
     {
       "kind": "typedIlIr",

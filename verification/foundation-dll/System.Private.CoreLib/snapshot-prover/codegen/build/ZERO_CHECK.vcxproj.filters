@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\snapshot-prover\codegen\build\CMakeFiles\f3e5f3510f725bec997a28e868fba1e6\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{DCD24901-D87E-34EE-B10E-0D2B2D9FFFB2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

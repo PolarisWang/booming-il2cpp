@@ -1842,3 +1842,5 @@ extern "C" void CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntr
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 17;
+
+extern "C" void ChaosJitRegisterAll() {}

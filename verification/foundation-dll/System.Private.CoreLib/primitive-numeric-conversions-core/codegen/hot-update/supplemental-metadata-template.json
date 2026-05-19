@@ -1,0 +1,107 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_0:System.Int32()",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_0:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_1:System.Int32()",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_1:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_2:System.Int32()",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_2:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_3:System.Int32()",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_3:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_4:System.Int32()",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_4:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_5:System.Int32()",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_5:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_6:System.Int32()",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_6:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_7:System.Int32()",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_7:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_8:System.Int32()",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_8:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_9:System.Int32()",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_9:System.Int32()",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCorePatchEntry",
+      "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 1
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

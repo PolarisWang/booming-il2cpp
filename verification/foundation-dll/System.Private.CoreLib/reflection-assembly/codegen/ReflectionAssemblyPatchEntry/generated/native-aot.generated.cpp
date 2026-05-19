@@ -2286,3 +2286,5 @@ extern "C" void ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Run_Sy
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 23;
+
+extern "C" void ChaosJitRegisterAll() {}

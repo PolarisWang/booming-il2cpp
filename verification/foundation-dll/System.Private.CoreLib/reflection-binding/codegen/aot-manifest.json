@@ -3,88 +3,178 @@
   "artifactKind": "aotManifest",
   "entries": [
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_1:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_2:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_3:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_4:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_5:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_6:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_7:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Subject_8:System.Int32()",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_8:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Subject_9:System.Int32()",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_9:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Subject_10:System.Int32()",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_10:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Subject_11:System.Int32()",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_11:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionBindingPatchEntry",
-      "subjectKind": "method",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Run:System.Void(System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "ReflectionBindingPatchEntry",
+      "assemblyName": "ReflectionBindingSubjects",
       "subjectKind": "field",
-      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::_exitCode",
+      "subjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::_exitCode",
       "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Reflection.BindingFlags)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Type\u003E:System.Type[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Type[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetField:System.Reflection.FieldInfo(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetField:System.Reflection.FieldInfo(System.String,System.Reflection.BindingFlags)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String,System.Reflection.BindingFlags)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String,System.Type[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String,System.Reflection.BindingFlags)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",
+      "reason": "external-call"
     }
   ]
 }

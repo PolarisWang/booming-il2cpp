@@ -842,6 +842,16 @@ public sealed class AotCoreIrLowering
             };
         }
 
+        if (string.Equals(typeIdentity, "System.String", StringComparison.Ordinal))
+        {
+            return new AotCoreIrAbiSlotArtifact
+            {
+                CarrierKindCode = AotCoreIrAbiCarrierKind.NativeInt,
+                TypeSubjectId = "System.Private.CoreLib/System.String",
+                TypeShape = AotCoreIrTypeShapeKind.ReferenceType,
+            };
+        }
+
         if (managedType is not null &&
             managedType.IsValueType &&
             RequiresValueTypeByValueCarrier(managedType))

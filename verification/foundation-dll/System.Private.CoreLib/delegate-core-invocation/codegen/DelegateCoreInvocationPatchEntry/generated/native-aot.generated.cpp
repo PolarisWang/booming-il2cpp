@@ -1398,3 +1398,5 @@ extern "C" void DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntr
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 11;
+
+extern "C" void ChaosJitRegisterAll() {}

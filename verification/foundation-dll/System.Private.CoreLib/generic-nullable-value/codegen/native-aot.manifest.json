@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "GenericNullableValuePatchEntry",
-  "entrySubjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "GenericNullableValueSubjects",
+  "entrySubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/generic-nullable-value/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

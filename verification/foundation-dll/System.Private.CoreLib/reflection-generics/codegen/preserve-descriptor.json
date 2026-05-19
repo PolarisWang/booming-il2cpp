@@ -4,91 +4,85 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::_exitCode",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_0:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_1:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_2:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_3:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_4:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_5:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_6:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_7:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_8:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_8:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_9:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_9:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_10:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_10:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_11:System.Int32()",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_11:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

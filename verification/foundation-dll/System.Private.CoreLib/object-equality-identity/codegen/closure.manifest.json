@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ObjectEqualityIdentityPatchEntry",
+  "assemblyName": "ObjectEqualityIdentitySubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/object-equality-identity/managed/patch/build-output/ObjectEqualityIdentityPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/object-equality-identity/managed/subjects/build-output/ObjectEqualityIdentitySubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "ObjectEqualityIdentityPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/object-equality-identity/managed/patch/build-output/ObjectEqualityIdentityPatchEntry.dll"
+      "assemblyName": "ObjectEqualityIdentitySubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/object-equality-identity/managed/subjects/build-output/ObjectEqualityIdentitySubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "0f619c14-311b-4b5c-95e2-bcbf755b5098",
+  "inputModuleVersionId": "4186c4da-c5d8-4472-a7b2-0013eaa0c5e9",
   "artifacts": [
     {
       "kind": "typedIlIr",

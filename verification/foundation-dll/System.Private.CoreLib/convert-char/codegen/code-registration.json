@@ -3,121 +3,115 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "ConvertCharPatchEntry.dll",
+      "moduleName": "ConvertCharSubjects.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_0",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_0:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_1",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_1:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_2",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_2:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_3",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_3:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_4",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_4:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_5",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_5:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_6",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_6:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_6:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 7,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_7",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_7:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 8,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_8",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_8:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 9,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_9",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_9:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 10,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_10",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_10:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 11,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_11",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_11:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 12,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_12",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_12:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 13,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_13",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_13:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 14,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_14",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_14:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 15,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_15",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_15:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 16,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_16",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_16:System.Int32()"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 17,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Subject_17",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Subject_17:System.Int32()"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 18,
-          "symbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Run_System_Int32",
-          "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Run:System.Void(System.Int32)"
+          "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
+          "subjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()"
         }
       ]
     }

@@ -1,0 +1,78 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "PrimitiveNumericConversionsCorePatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "PrimitiveNumericConversionsCorePatchEntry_PrimitiveNumericConversionsCorePatchEntry_Subject_0",
+          "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "PrimitiveNumericConversionsCorePatchEntry_PrimitiveNumericConversionsCorePatchEntry_Subject_1",
+          "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "PrimitiveNumericConversionsCorePatchEntry_PrimitiveNumericConversionsCorePatchEntry_Subject_2",
+          "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "PrimitiveNumericConversionsCorePatchEntry_PrimitiveNumericConversionsCorePatchEntry_Subject_3",
+          "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "PrimitiveNumericConversionsCorePatchEntry_PrimitiveNumericConversionsCorePatchEntry_Subject_4",
+          "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "PrimitiveNumericConversionsCorePatchEntry_PrimitiveNumericConversionsCorePatchEntry_Subject_5",
+          "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "PrimitiveNumericConversionsCorePatchEntry_PrimitiveNumericConversionsCorePatchEntry_Subject_6",
+          "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "PrimitiveNumericConversionsCorePatchEntry_PrimitiveNumericConversionsCorePatchEntry_Subject_7",
+          "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "PrimitiveNumericConversionsCorePatchEntry_PrimitiveNumericConversionsCorePatchEntry_Subject_8",
+          "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "PrimitiveNumericConversionsCorePatchEntry_PrimitiveNumericConversionsCorePatchEntry_Subject_9",
+          "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Subject_9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "PrimitiveNumericConversionsCorePatchEntry_PrimitiveNumericConversionsCorePatchEntry_Run_System_Int32",
+          "subjectId": "PrimitiveNumericConversionsCorePatchEntry/PrimitiveNumericConversionsCorePatchEntry::Run:System.Void(System.Int32)"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

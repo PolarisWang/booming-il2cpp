@@ -1398,3 +1398,5 @@ extern "C" void BufferMemoryPatchEntry_BufferMemoryPatchEntry_Run_System_Int32(C
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 11;
+
+extern "C" void ChaosJitRegisterAll() {}

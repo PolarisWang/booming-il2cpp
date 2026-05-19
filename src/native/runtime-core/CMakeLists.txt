@@ -87,6 +87,8 @@ add_library(chaos_runtime_core STATIC
     hotpatch_table.cpp
     patch_loader.h
     patch_loader.cpp
+    jit_registration.h
+    jit_registration.cpp
     metadata_interface.h
     metadata_interface.cpp
     assembly_manager.h
@@ -152,6 +154,9 @@ target_include_directories(
         "${CMAKE_CURRENT_LIST_DIR}/gc")
 
 target_link_libraries(chaos_runtime_core PUBLIC chaos_fmt chaos_common)
+if(WIN32)
+    target_link_libraries(chaos_runtime_core PRIVATE bcrypt)
+endif()
 target_include_directories(chaos_runtime_core PRIVATE
     "${REPO_ROOT}/src/native"
     "${REPO_ROOT}/third_party/fmt/include")

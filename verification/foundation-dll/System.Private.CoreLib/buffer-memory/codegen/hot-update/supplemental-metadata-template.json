@@ -3,100 +3,122 @@
   "artifactKind": "supplementalMetadataTemplate",
   "registeredTypes": [
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
-      "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
+      "metadataToken": 33554435
     }
   ],
   "registeredMethods": [
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_0:System.Int32()",
-      "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_0:System.Int32()",
-      "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "metadataToken": 100663297,
       "parameterCount": 0
     },
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_1:System.Int32()",
-      "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_1:System.Int32()",
-      "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "metadataToken": 100663298,
       "parameterCount": 0
     },
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_2:System.Int32()",
-      "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_2:System.Int32()",
-      "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "metadataToken": 100663299,
       "parameterCount": 0
     },
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_3:System.Int32()",
-      "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_3:System.Int32()",
-      "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "metadataToken": 100663300,
       "parameterCount": 0
     },
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_4:System.Int32()",
-      "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_4:System.Int32()",
-      "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "metadataToken": 100663301,
       "parameterCount": 0
     },
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_5:System.Int32()",
-      "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_5:System.Int32()",
-      "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "metadataToken": 100663302,
       "parameterCount": 0
     },
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_6:System.Int32()",
-      "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_6:System.Int32()",
-      "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "metadataToken": 100663303,
       "parameterCount": 0
     },
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_7:System.Int32()",
-      "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_7:System.Int32()",
-      "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "metadataToken": 100663304,
       "parameterCount": 0
     },
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_8:System.Int32()",
-      "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_8:System.Int32()",
-      "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "metadataToken": 100663305,
       "parameterCount": 0
     },
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_9:System.Int32()",
-      "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_9:System.Int32()",
-      "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "metadataToken": 100663306,
       "parameterCount": 0
     },
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
       "metadataToken": 100663307,
-      "parameterCount": 1
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
     }
   ],
   "reservedSlots": {

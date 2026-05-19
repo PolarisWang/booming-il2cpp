@@ -1,13 +1,13 @@
 {
   "family": "threading-tasks-primitives",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 50,
-  "audited": 50,
+  "total_methods": 52,
+  "audited": 52,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 14,
   "methods_without_lowering": 0,
-  "methods_without_assert": 50,
+  "methods_without_assert": 52,
   "passed": true,
   "method_details": [
     {
@@ -201,6 +201,15 @@
     },
     {
       "method_name": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -453,6 +462,15 @@
     },
     {
       "method_name": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___c__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

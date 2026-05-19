@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "PinvokeDllimportPatchEntry",
+  "entrySubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "PinvokeDllimportPatchEntry_PinvokeDllimportPatchEntry_Run_System_Int32",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "IoStreamsBasicsPatchEntry",
-  "entrySubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "IoStreamsBasicsSubjects",
+  "entrySubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Run_System_Int32",
+  "entrySymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

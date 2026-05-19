@@ -3,1766 +3,491 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-0",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_0:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_0()",
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-0",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_0:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_0()",
       "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_0:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_0:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-0",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_0()"
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_0:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_0:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-0",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_0()"
       },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_0",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177280,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-1",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_1:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_1()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_1:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_1:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-1",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_1()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_1",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177279,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-2",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_2:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_2()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_2:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_2:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-2",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_2()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_2",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177278,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-3",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_3:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_3()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_3:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_3:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-3",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_3()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_3",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177277,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-4",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_4:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_4()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_4:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_4:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-4",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_4()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_4",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177276,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-5",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_5:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_5()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_5:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_5:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-5",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_5()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_5",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177275,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-6",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_6:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_6()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_6:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_6:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-6",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_6()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_6",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177274,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-7",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_7:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_7()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_7:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_7:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-7",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_7()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_7",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177273,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-8",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_8:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_8()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_8:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_8:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-8",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_8()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_8",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177272,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-9",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_9:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_9()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_9:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_9:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-9",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_9()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_9",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177271,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-10",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_10:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_10()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_10:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_10:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-10",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_10()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_10",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177270,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-11",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_11:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_11()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_11:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_11:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-11",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_11()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_11",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177269,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-12",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_12:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_12()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_12:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_12:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-12",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_12()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_12",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177268,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-13",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_13:System.Int32()",
-      "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_13()",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_13:System.Int32()",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_13:System.Int32()",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.subject-13",
-        "signature": "System.Int32 SpanMemoryBuffersPatchEntry::Subject_13()"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_13",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177267,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
-    },
-    {
-      "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.run",
-      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Void(System.Int32)",
-      "signature": "System.Void SpanMemoryBuffersPatchEntry::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "SpanMemoryBuffersPatchEntry",
-        "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
-        "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Void(System.Int32)",
-        "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Void(System.Int32)",
-        "methodId": "span-memory-buffers-patch-entry.span-memory-buffers-patch-entry.run",
-        "signature": "System.Void SpanMemoryBuffersPatchEntry::Run(System.Int32)"
-      },
-      "nativeSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Run_System_Int32",
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_0",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
         "carrierKindCode": 0,
         "typeShape": 1
       },
-      "parameterCount": 1,
-      "parameterAbis": [
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
         {
-          "carrierKindCode": 1,
-          "typeShape": 2
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
         }
       ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-1",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_1:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_1:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_1:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-1",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_1()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-2",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_2:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_2:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_2:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-2",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_2()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-3",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_3:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_3:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_3:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-3",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_3()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-4",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_4:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_4:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_4:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-4",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_4()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
       "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 10,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E",
+          "ilOffset": 12,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::CopyTo:System.Void(System.Span\u003CSystem.Byte\u003E)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::CopyTo:System.Void(System.Span\u003CSystem.Byte\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::CopyTo:System.Void(System.Span\u003CSystem.Byte\u003E)",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Span\u00601::CopyTo:System.Void(System.Span\u003C!0\u003E)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Span\u00601::CopyTo:System.Void(System.Span\u003C!0\u003E);type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Span\u00601::CopyTo:System.Void(System.Span\u003C!0\u003E);type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::CopyTo:System.Void(System.Span\u003C!0\u003E)",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Span\u00601::CopyTo:System.Void(System.Span\u003C!0\u003E);type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Span\u00601::CopyTo:System.Void(System.Span\u003C!0\u003E);type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::CopyTo:System.Void(System.Span\u003CSystem.Byte\u003E)",
+              "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::CopyTo:System.Void(System.Span\u003C!0\u003E)",
+              "displaySubjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::CopyTo(System.Span\u003CSystem.Byte\u003E)",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::CopyTo:System.Void(System.Span\u003C!0\u003E)",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 25,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-5",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_5:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_5:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_5:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-5",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_5()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 184,
-          "handlerOffset": 185,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+          "tryLength": 16,
+          "handlerOffset": 17,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NotSupportedException"
         }
       ],
       "instructions": [
         {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 2,
-          "resultType": "System.Int32",
+          "resultType": "System.Span\u003CSystem.Byte\u003E",
+          "callee": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::get_Empty:System.Span\u003CSystem.Byte\u003E()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::get_Empty:System.Span\u003CSystem.Byte\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::get_Empty:System.Span\u003CSystem.Byte\u003E()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Span\u00601::get_Empty:System.Span\u003C!0\u003E()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Span\u00601::get_Empty:System.Span\u003C!0\u003E();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Span\u00601::get_Empty:System.Span\u003C!0\u003E();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::get_Empty:System.Span\u003C!0\u003E()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Span\u00601::get_Empty:System.Span\u003C!0\u003E();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Span\u00601::get_Empty:System.Span\u003C!0\u003E();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::get_Empty:System.Span\u003CSystem.Byte\u003E()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::get_Empty:System.Span\u003C!0\u003E()",
+              "displaySubjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::get_Empty()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::get_Empty:System.Span\u003C!0\u003E()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 3,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 5,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 6,
-          "isPreserveSig": false
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            70,
-            78,
-            86,
-            94,
-            102,
-            110,
-            118,
-            126,
-            134,
-            142,
-            150,
-            158,
-            166,
-            174
-          ],
+          "op": "pop",
+          "opCode": 47,
           "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 68,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 70,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_0:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_0:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_0:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 75,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 76,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 78,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_1:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_1:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_1:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 83,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 84,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 86,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_2:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_2:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_2:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 91,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 92,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 94,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_3:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_3:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_3:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 99,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 100,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 102,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_4:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_4:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_4:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 107,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 108,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 110,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_5:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_5:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_5:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 115,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 116,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 118,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_6:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_6:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_6:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 123,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 124,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 126,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_7:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_7:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_7:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_7",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 131,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 132,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 134,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_8:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_8:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_8:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_8",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 139,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 140,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 142,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_9:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_9:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_9:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_9",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 147,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 148,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 150,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_10:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_10:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_10:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_10",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 155,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 156,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 158,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_11:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_11:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_11:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_11",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 163,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 164,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 166,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_12:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_12:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_12:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_12",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 171,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 172,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 174,
-          "resultType": "System.Int32",
-          "callee": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_13:System.Int32()",
-          "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_13:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_13:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "SpanMemoryBuffersPatchEntry_SpanMemoryBuffersPatchEntry_Subject_13",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 179,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 180,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 196,
-          "ilOffset": 183,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 185,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 187,
+          "ilOffset": 8,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::_exitCode",
-          "ilOffset": 188,
+          "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
+          "ilOffset": 9,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
+            "assemblyName": "SpanMemoryBuffersSubjects",
             "subjectKind": "field",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::_exitCode"
+            "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "SpanMemoryBuffersPatchEntry",
-            "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::_exitCode",
+            "assemblyName": "SpanMemoryBuffersSubjects",
+            "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+            "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -1772,15 +497,29 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 196,
-          "ilOffset": 194,
+          "operand": 22,
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 22,
+          "ilOffset": 20,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 196,
+          "ilOffset": 22,
           "isPreserveSig": false
         }
       ],
@@ -1792,7 +531,1236 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "SpanMemoryBuffersPatchEntry"
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-6",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_6:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_6:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_6:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-6",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_6()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-7",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_7:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_7:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_7:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-7",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_7()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-8",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_8:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_8:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_8:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-8",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_8()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 1,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 10,
+          "resultType": "System.Byte[]",
+          "callee": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::ToArray:System.Byte[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::ToArray:System.Byte[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::ToArray:System.Byte[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::ToArray:!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.ReadOnlySpan\u00601::ToArray:!0[]();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.ReadOnlySpan\u00601::ToArray:!0[]();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::ToArray:!0[]()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.ReadOnlySpan\u00601::ToArray:!0[]();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.ReadOnlySpan\u00601::ToArray:!0[]();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::ToArray:System.Byte[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::ToArray:!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::ToArray()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::ToArray:!0[]()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 15,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 20,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 29,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SpanMemoryBuffersSubjects",
+            "subjectKind": "field",
+            "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SpanMemoryBuffersSubjects",
+            "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 29,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-9",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_9:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_9:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_9:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-9",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_9()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-10",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_10:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_10()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_10:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_10:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-10",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_10()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_10",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 25,
+          "handlerOffset": 26,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NotSupportedException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E",
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Span\u003CSystem.Byte\u003E",
+          "callee": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::get_Span:System.Span\u003CSystem.Byte\u003E()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::get_Span:System.Span\u003CSystem.Byte\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::get_Span:System.Span\u003CSystem.Byte\u003E()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::get_Span:System.Span\u003C!0\u003E()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Memory\u00601::get_Span:System.Span\u003C!0\u003E();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Memory\u00601::get_Span:System.Span\u003C!0\u003E();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::get_Span:System.Span\u003C!0\u003E()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Memory\u00601::get_Span:System.Span\u003C!0\u003E();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Memory\u00601::get_Span:System.Span\u003C!0\u003E();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::get_Span:System.Span\u003CSystem.Byte\u003E()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::get_Span:System.Span\u003C!0\u003E()",
+              "displaySubjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::get_Span()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::get_Span:System.Span\u003C!0\u003E()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SpanMemoryBuffersSubjects",
+            "subjectKind": "field",
+            "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SpanMemoryBuffersSubjects",
+            "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 31,
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 26,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 31,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-11",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_11:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_11()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_11:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_11:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-11",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_11()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_11",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 1,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 10,
+          "resultType": "System.Byte[]",
+          "callee": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::ToArray:System.Byte[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::ToArray:System.Byte[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::ToArray:System.Byte[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::ToArray:!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Memory\u00601::ToArray:!0[]();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Memory\u00601::ToArray:!0[]();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::ToArray:!0[]()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Memory\u00601::ToArray:!0[]();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Memory\u00601::ToArray:!0[]();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::ToArray:System.Byte[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::ToArray:!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::ToArray()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::ToArray:!0[]()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 15,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 20,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 29,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SpanMemoryBuffersSubjects",
+            "subjectKind": "field",
+            "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SpanMemoryBuffersSubjects",
+            "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 29,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-12",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_12:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_12()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_12:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_12:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-12",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_12()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_12",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 25,
+          "handlerOffset": 26,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Byte\u0026",
+          "callee": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+          "reference": {
+            "assemblyName": "System.Memory",
+            "subjectKind": "method",
+            "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Memory",
+            "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+            "openDefinitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+              "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+              "displaySubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SpanMemoryBuffersSubjects",
+            "subjectKind": "field",
+            "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SpanMemoryBuffersSubjects",
+            "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 31,
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 26,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 31,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
+    },
+    {
+      "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-13",
+      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_13:System.Void()",
+      "signature": "System.Void SpanMemoryBuffersSubjects::Subject_13()",
+      "identity": {
+        "assemblyName": "SpanMemoryBuffersSubjects",
+        "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+        "definitionSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_13:System.Void()",
+        "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_13:System.Void()",
+        "methodId": "span-memory-buffers-subjects.span-memory-buffers-subjects.subject-13",
+        "signature": "System.Void SpanMemoryBuffersSubjects::Subject_13()"
+      },
+      "nativeSymbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_13",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 25,
+          "handlerOffset": 26,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Byte\u0026",
+          "callee": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
+          "reference": {
+            "assemblyName": "System.Memory",
+            "subjectKind": "method",
+            "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Memory",
+            "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
+            "openDefinitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
+              "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+              "displaySubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E(System.Span\u003CSystem.Byte\u003E)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SpanMemoryBuffersSubjects",
+            "subjectKind": "field",
+            "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SpanMemoryBuffersSubjects",
+            "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 31,
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 26,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 31,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SpanMemoryBuffersSubjects"
     }
   ]
 }

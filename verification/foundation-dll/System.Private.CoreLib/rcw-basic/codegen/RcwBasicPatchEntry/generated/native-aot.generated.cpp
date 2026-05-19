@@ -1176,3 +1176,5 @@ extern "C" void RcwBasicPatchEntry_RcwBasicPatchEntry_Run_System_Int32(CHAOS_IL2
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 8;
+
+extern "C" void ChaosJitRegisterAll() {}

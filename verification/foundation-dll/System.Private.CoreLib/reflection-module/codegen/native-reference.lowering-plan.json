@@ -2,32 +2,31 @@
   "formatVersion": "v0",
   "artifactKind": "nativeReferenceLoweringPlan",
   "planKind": "assembly-full-closure-runtime-skeleton",
-  "assemblyName": "ReflectionModulePatchEntry",
+  "assemblyName": "ReflectionModuleSubjects",
   "entrySubjectId": "",
   "includeHeader": "codegen_bridge.h",
   "nativeEntryFunctionName": "RunNativeReferenceAssembly",
-  "entrySymbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Subject_0",
+  "entrySymbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_0",
   "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
   "translationUnitMode": "runtime-skeleton",
   "translationUnitMethodSubjectIds": [
-    "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Void(System.Int32)",
-    "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_0:System.Int32()",
-    "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_1:System.Int32()",
-    "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_2:System.Int32()",
-    "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_3:System.Int32()",
-    "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_4:System.Int32()",
-    "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_5:System.Int32()"
+    "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()",
+    "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_1:System.Void()",
+    "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_2:System.Void()",
+    "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_3:System.Void()",
+    "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_4:System.Void()",
+    "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_5:System.Void()"
   ],
-  "translationUnitMethodCount": 7,
+  "translationUnitMethodCount": 6,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 7,
+      "methodCount": 6,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
-      "firstMethodSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Void(System.Int32)",
-      "lastMethodSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_5:System.Int32()"
+      "firstMethodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()",
+      "lastMethodSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_5:System.Void()"
     }
   ],
   "auditStatus": "runtime-skeleton",
