@@ -5028,6 +5028,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CollectionsHelper_TestDict(vo
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_Dictionary_System_Int32_System_Int32_, {});
 		chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_Dictionary_System_Int32_System_Int32_.hot;
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		chaos_locals[0] = _s0;
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
@@ -5176,6 +5177,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CollectionsHelper_TestSet(voi
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_HashSet_System_Int32_, {});
 		chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_HashSet_System_Int32_.hot;
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		chaos_locals[0] = _s0;
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
 	{
