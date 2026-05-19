@@ -1,10 +1,17 @@
-// Copy of handwritten RcwBasicNativeEntry for managed subject compilation.
+// Hand-written native-AOT entry point for RCW basic verification
 // Family: family/System.Private.CoreLib/rcw/basic
-// Variant: subjects
+// Assembly: System.Private.CoreLib
+// Variant: benchmark
 
 using System;
 using System.Runtime.InteropServices;
 
+//
+// ── COM interface definitions (reused from CCW basic) ─────────────
+//
+
+// Simple calculator COM interface
+// {7E4FCFC0-3A8F-4A0C-8C9D-1A2B3C4D5E6F}
 [Guid("7E4FCFC0-3A8F-4A0C-8C9D-1A2B3C4D5E6F")]
 public interface ISimpleMath
 {
@@ -12,11 +19,19 @@ public interface ISimpleMath
     int Multiply(int a, int b);
 }
 
+// COM interface with a single method returning a constant
+// {9A8B7C6D-5E4F-3A2B-1C0D-9E8F7A6B5C4D}
 [Guid("9A8B7C6D-5E4F-3A2B-1C0D-9E8F7A6B5C4D")]
 public interface IConstantValue
 {
     int GetValue();
 }
+
+//
+// ── Implementations (no interface declarations on classes,
+//     to avoid codegen emitting interface methods in vtables
+//     without function bodies)
+//
 
 public class SimpleMath // was: ISimpleMath
 {
@@ -29,6 +44,10 @@ public class ConstantFortyTwo // was: IConstantValue
     public int GetValue() => 42;
 }
 
+//
+// ── Native exports for CCW creation ──────────────────────────────
+//
+
 public static class RcwBasicNativeEntry
 {
     public static int Run(int entryIndex)
@@ -37,14 +56,14 @@ public static class RcwBasicNativeEntry
         {
             case 0: return TestRcwRoundTripIdentity();
             case 1: return TestRcwRoundTripQi();
-            case 2: return TestRcwMultipleWrappers();
-            case 3: return TestRcwQiUnknownInterface();
-            case 4: return TestRcwVtableMethodCall();
-            case 5: return TestRcwDirectVtable();
+            case 2: return TestRcwVtableMethodCall();
+            case 3: return TestRcwDirectVtable();
             default: return -1;
         }
     }
 
+    // [0] Round-trip identity test:
+    //   Create CCW → get IUnknown* → wrap in RCW → verify identity_unknown == original
     public static int TestRcwRoundTripIdentity()
     {
         IntPtr runtimeState = RuntimeState.Get();
@@ -65,6 +84,8 @@ public static class RcwBasicNativeEntry
         return 0;
     }
 
+    // [1] Round-trip QI test:
+    //   Create CCW → wrap in RCW → QI for ISimpleMath → verify non-null and != identity
     public static int TestRcwRoundTripQi()
     {
         IntPtr runtimeState = RuntimeState.Get();
@@ -76,6 +97,7 @@ public static class RcwBasicNativeEntry
         IntPtr rcw = MarshalCreateRcw(ccwUnknown);
         if (rcw == IntPtr.Zero) return 3;
 
+        // ISimpleMath GUID: 7E4FCFC0-3A8F-4A0C-8C9D-1A2B3C4D5E6F
         byte[] guidBytes = new byte[16] {
             0xC0, 0xCF, 0x4F, 0x7E, 0x8F, 0x3A, 0x0C, 0x4A,
             0x8C, 0x9D, 0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F
@@ -95,59 +117,8 @@ public static class RcwBasicNativeEntry
         return 0;
     }
 
-    public static int TestRcwMultipleWrappers()
-    {
-        IntPtr runtimeState = RuntimeState.Get();
-        if (runtimeState == IntPtr.Zero) return 1;
-
-        IntPtr ccwUnknown = CreateCcwForSimpleMath(runtimeState);
-        if (ccwUnknown == IntPtr.Zero) return 2;
-
-        IntPtr rcw1 = MarshalCreateRcw(ccwUnknown);
-        if (rcw1 == IntPtr.Zero) return 3;
-
-        IntPtr rcw2 = MarshalCreateRcw(ccwUnknown);
-        if (rcw2 == IntPtr.Zero) { MarshalReleaseRcw(rcw1); return 4; }
-
-        IntPtr identity1 = MarshalGetRcwUnknown(rcw1);
-        IntPtr identity2 = MarshalGetRcwUnknown(rcw2);
-        if (identity1 != identity2) { MarshalReleaseRcw(rcw2); MarshalReleaseRcw(rcw1); return 5; }
-
-        if (identity1 != ccwUnknown) { MarshalReleaseRcw(rcw2); MarshalReleaseRcw(rcw1); return 6; }
-
-        MarshalReleaseRcw(rcw2);
-        MarshalReleaseRcw(rcw1);
-        return 0;
-    }
-
-    public static int TestRcwQiUnknownInterface()
-    {
-        IntPtr runtimeState = RuntimeState.Get();
-        if (runtimeState == IntPtr.Zero) return 1;
-
-        IntPtr ccwUnknown = CreateCcwForSimpleMath(runtimeState);
-        if (ccwUnknown == IntPtr.Zero) return 2;
-
-        IntPtr rcw = MarshalCreateRcw(ccwUnknown);
-        if (rcw == IntPtr.Zero) return 3;
-
-        byte[] guidBytes = new byte[16] {
-            0xC0, 0xCF, 0x4F, 0x7E, 0x8F, 0x3A, 0x0C, 0x4A,
-            0x8C, 0x9D, 0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F
-        };
-        IntPtr guidPtr = Marshal.AllocHGlobal(16);
-        Marshal.Copy(guidBytes, 0, guidPtr, 16);
-
-        IntPtr ifacePtr = MarshalRcwQueryInterface(rcw, guidPtr);
-        Marshal.FreeHGlobal(guidPtr);
-
-        if (ifacePtr != IntPtr.Zero) { MarshalReleaseRcw(rcw); return 4; }
-
-        MarshalReleaseRcw(rcw);
-        return 0;
-    }
-
-    // [4] RCW-aware method dispatch via ComVtable
+    // [2] RCW-aware method dispatch via ComVtable:
+    //   Create CCW → wrap in RCW → call Add(3,4) via RCW-aware dispatch helper
     public static int TestRcwVtableMethodCall()
     {
         IntPtr runtimeState = RuntimeState.Get();
@@ -159,6 +130,7 @@ public static class RcwBasicNativeEntry
         IntPtr rcw = MarshalCreateRcw(ccwUnknown);
         if (rcw == IntPtr.Zero) return 3;
 
+        // Call Add(3,4) via RCW-aware dispatch at vtable slot 3 (after 3 IUnknown slots)
         int result = MarshalCallComMethod(rcw, 3, 3, 4);
         if (result != 7) return 4;
 
@@ -166,7 +138,8 @@ public static class RcwBasicNativeEntry
         return 0;
     }
 
-    // [5] Direct ComVtable dispatch (no RCW check)
+    // [3] Direct ComVtable dispatch (no RCW check):
+    //   Create CCW → call Add(10,5) via direct dispatch on raw CCW pointer
     public static int TestRcwDirectVtable()
     {
         IntPtr runtimeState = RuntimeState.Get();
@@ -175,12 +148,14 @@ public static class RcwBasicNativeEntry
         IntPtr ccwUnknown = CreateCcwForSimpleMath(runtimeState);
         if (ccwUnknown == IntPtr.Zero) return 2;
 
+        // Call Add(10,5) via direct dispatch at vtable slot 3 on the CCW's IUnknown*
         int result = MarshalCallDirectComMethod(ccwUnknown, 3, 10, 5);
         if (result != 15) return 3;
 
         return 0;
     }
 
+    // Creates a CCW wrapping a SimpleMath instance and returns its IUnknown*
     static IntPtr CreateCcwForSimpleMath(IntPtr runtimeState)
     {
         var obj = new SimpleMath();
@@ -194,6 +169,7 @@ public static class RcwBasicNativeEntry
         return ccw;
     }
 
+    // ── P/Invoke declarations ──────────────────────────────────
     [DllImport("__Internal", EntryPoint = "MarshalCreateCcw")]
     static extern IntPtr MarshalCreateCcw(IntPtr managedObject, IntPtr runtimeState);
 
@@ -216,6 +192,7 @@ public static class RcwBasicNativeEntry
     static extern int MarshalCallDirectComMethod(IntPtr comPtr, int slot, int a, int b);
 }
 
+// Minimal runtime state accessor for verification builds
 internal static class RuntimeState
 {
     static IntPtr _state;

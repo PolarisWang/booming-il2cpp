@@ -675,11 +675,50 @@ void* CHAOS_RUNTIME_ABI_CALL ChaosGetObjectForNativeVariant(CHAOS_IL2CPP_INTPTR 
     const auto* v = static_cast<const VariantLayout*>(
         reinterpret_cast<const void*>(variant_ptr));
 
+    auto* ts = GetCurrentThreadState();
+    auto* rs = ts ? ts->runtime_state : nullptr;
+
     auto vt = static_cast<CHAOS_IL2CPP_UINT16>(v->vt & ~CHAOS_IL2CPP_VT_BYREF);
     switch (vt) {
     case CHAOS_IL2CPP_VT_EMPTY:
     case CHAOS_IL2CPP_VT_NULL:
         return nullptr;
+    case CHAOS_IL2CPP_VT_I2:
+        if (rs == nullptr || ts == nullptr) return nullptr;
+        {
+            auto type_handle = ResolveTypeByName("System.Int16");
+            if (type_handle == 0) return nullptr;
+            return BoxValueObject(rs, ts, type_handle, &v->data.iVal, sizeof(v->data.iVal));
+        }
+    case CHAOS_IL2CPP_VT_I4:
+        if (rs == nullptr || ts == nullptr) return nullptr;
+        {
+            auto type_handle = ResolveTypeByName("System.Int32");
+            if (type_handle == 0) return nullptr;
+            return BoxValueObject(rs, ts, type_handle, &v->data.lVal, sizeof(v->data.lVal));
+        }
+    case CHAOS_IL2CPP_VT_R4:
+        if (rs == nullptr || ts == nullptr) return nullptr;
+        {
+            auto type_handle = ResolveTypeByName("System.Single");
+            if (type_handle == 0) return nullptr;
+            return BoxValueObject(rs, ts, type_handle, &v->data.fltVal, sizeof(v->data.fltVal));
+        }
+    case CHAOS_IL2CPP_VT_R8:
+        if (rs == nullptr || ts == nullptr) return nullptr;
+        {
+            auto type_handle = ResolveTypeByName("System.Double");
+            if (type_handle == 0) return nullptr;
+            return BoxValueObject(rs, ts, type_handle, &v->data.dblVal, sizeof(v->data.dblVal));
+        }
+    case CHAOS_IL2CPP_VT_BOOL:
+        if (rs == nullptr || ts == nullptr) return nullptr;
+        {
+            auto type_handle = ResolveTypeByName("System.Boolean");
+            if (type_handle == 0) return nullptr;
+            CHAOS_IL2CPP_INT32 bool_val = (v->data.boolVal != 0) ? 1 : 0;
+            return BoxValueObject(rs, ts, type_handle, &bool_val, sizeof(bool_val));
+        }
     case CHAOS_IL2CPP_VT_BSTR:
         return MarshalPtrToStringBSTR(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(v->data.bstrVal));
     case CHAOS_IL2CPP_VT_UNKNOWN:
@@ -687,7 +726,6 @@ void* CHAOS_RUNTIME_ABI_CALL ChaosGetObjectForNativeVariant(CHAOS_IL2CPP_INTPTR 
             ? reinterpret_cast<void*>(MarshalCreateRcw(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(v->data.punkVal)))
             : nullptr;
     default:
-        // V1: numeric types (I2/I4/R4/R8/BOOL) not boxed — returns null.
         return nullptr;
     }
 #else
@@ -703,16 +741,80 @@ void CHAOS_RUNTIME_ABI_CALL ChaosGetNativeVariantForObject(
     if (variant_ptr == 0) return;
     auto* v = static_cast<VariantLayout*>(reinterpret_cast<void*>(variant_ptr));
     if (destroy_old != 0 && v->vt != CHAOS_IL2CPP_VT_EMPTY) {
-        // V1: caller is responsible for cleaning up BSTR/IUnknown.
         CHAOS_IL2CPP_MEMSET(v, 0, sizeof(VariantLayout));
     }
     if (obj == nullptr) {
         v->vt = CHAOS_IL2CPP_VT_NULL;
         return;
     }
-    // V1: marshal all non-null objects as VT_UNKNOWN.
-    // Full implementation would inspect the managed type and choose
-    // VT_BSTR for strings, VT_I4 for integers, etc.
+
+    // Inspect the managed object's type to determine the correct VT.
+    // Boxed value-type layout: TypeInfoHot* (8B) [+ sync (8B if ThinLockable)] + value.
+    using ::chaos::il2cpp::common::kTypeInfoHeaderKindMask;
+    using ::chaos::il2cpp::common::kTypeInfoHeaderKindPure;
+    const auto* obj_type = *static_cast<const TypeInfoHot* const*>(obj);
+    const CHAOS_IL2CPP_SIZE hdr = (obj_type->flags & kTypeInfoHeaderKindMask) == kTypeInfoHeaderKindPure ? 8u : 16u;
+    const void* val_ptr = static_cast<const uint8_t*>(obj) + hdr;
+
+    // Resolve primitive type handles and compare against the object's type.
+    auto th = ResolveTypeByName("System.Int32");
+    if (th != 0 && obj_type == reinterpret_cast<const TypeInfoHot*>(th)) {
+        v->vt = CHAOS_IL2CPP_VT_I4;
+        v->data.lVal = *static_cast<const CHAOS_IL2CPP_INT32*>(val_ptr);
+        return;
+    }
+    th = ResolveTypeByName("System.Int16");
+    if (th != 0 && obj_type == reinterpret_cast<const TypeInfoHot*>(th)) {
+        v->vt = CHAOS_IL2CPP_VT_I2;
+        v->data.iVal = *static_cast<const CHAOS_IL2CPP_INT16*>(val_ptr);
+        return;
+    }
+    th = ResolveTypeByName("System.Byte");
+    if (th != 0 && obj_type == reinterpret_cast<const TypeInfoHot*>(th)) {
+        v->vt = CHAOS_IL2CPP_VT_I4;
+        v->data.lVal = *static_cast<const CHAOS_IL2CPP_UINT8*>(val_ptr);
+        return;
+    }
+    th = ResolveTypeByName("System.SByte");
+    if (th != 0 && obj_type == reinterpret_cast<const TypeInfoHot*>(th)) {
+        v->vt = CHAOS_IL2CPP_VT_I4;
+        v->data.lVal = *static_cast<const CHAOS_IL2CPP_INT8*>(val_ptr);
+        return;
+    }
+    th = ResolveTypeByName("System.UInt16");
+    if (th != 0 && obj_type == reinterpret_cast<const TypeInfoHot*>(th)) {
+        v->vt = CHAOS_IL2CPP_VT_I4;
+        v->data.lVal = *static_cast<const CHAOS_IL2CPP_UINT16*>(val_ptr);
+        return;
+    }
+    th = ResolveTypeByName("System.UInt32");
+    if (th != 0 && obj_type == reinterpret_cast<const TypeInfoHot*>(th)) {
+        v->vt = CHAOS_IL2CPP_VT_I4;
+        v->data.lVal = static_cast<CHAOS_IL2CPP_INT32>(*static_cast<const CHAOS_IL2CPP_UINT32*>(val_ptr));
+        return;
+    }
+    th = ResolveTypeByName("System.Single");
+    if (th != 0 && obj_type == reinterpret_cast<const TypeInfoHot*>(th)) {
+        v->vt = CHAOS_IL2CPP_VT_R4;
+        v->data.fltVal = *static_cast<const float*>(val_ptr);
+        return;
+    }
+    th = ResolveTypeByName("System.Double");
+    if (th != 0 && obj_type == reinterpret_cast<const TypeInfoHot*>(th)) {
+        v->vt = CHAOS_IL2CPP_VT_R8;
+        v->data.dblVal = *static_cast<const double*>(val_ptr);
+        return;
+    }
+    th = ResolveTypeByName("System.Boolean");
+    if (th != 0 && obj_type == reinterpret_cast<const TypeInfoHot*>(th)) {
+        v->vt = CHAOS_IL2CPP_VT_BOOL;
+        // VARIANT_TRUE = -1 (0xFFFF), VARIANT_FALSE = 0
+        const CHAOS_IL2CPP_UINT8 b = *static_cast<const CHAOS_IL2CPP_UINT8*>(val_ptr);
+        v->data.boolVal = (b != 0) ? -1 : 0;
+        return;
+    }
+
+    // Fallback: marshal as VT_UNKNOWN.
     v->vt = CHAOS_IL2CPP_VT_UNKNOWN;
     v->data.punkVal = obj;
 #else

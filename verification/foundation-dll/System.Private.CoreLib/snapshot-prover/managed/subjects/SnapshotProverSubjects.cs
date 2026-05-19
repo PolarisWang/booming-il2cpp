@@ -4,6 +4,7 @@
 // Variant: subjects
 
 using System;
+using System.Collections.Generic;
 
 public static partial class SnapshotProverSubjects
 {
@@ -67,11 +68,6 @@ public static partial class SnapshotProverSubjects
     }
 
     // [8] SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()
-    public static void Subject_8()
-    {
-        try { if (LdftnHelper.GetFnPtr() != LdftnHelper.GetFnPtr()) _exitCode = 1; }
-        catch { _exitCode = 1; }
-    }
 
     // [9] SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()
     public static void Subject_9()

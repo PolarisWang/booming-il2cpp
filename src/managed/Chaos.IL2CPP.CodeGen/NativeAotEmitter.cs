@@ -287,20 +287,19 @@ public sealed class NativeAotEmitter
             Path = NativeAotArtifactNames.ShapeDispatchHeader,
         });
 
-        // Include enum metadata header if non-empty
-        if (!string.IsNullOrEmpty(templateModel.EnumMetadataHeaderContent))
+        // Always emit enum metadata header — the generated C++ unconditionally
+        // includes it (#include "enum_metadata.generated.h"). Families with no
+        // enum types produce an empty file, which is valid C++.
+        sources.Add(new NativeAotGeneratedSource
         {
-            sources.Add(new NativeAotGeneratedSource
-            {
-                RelativePath = NativeAotArtifactNames.EnumMetadataHeader,
-                Contents = templateModel.EnumMetadataHeaderContent,
-            });
-            artifacts.Add(new NativeAotGeneratedArtifactRef
-            {
-                Kind = "enumMetadataHeader",
-                Path = NativeAotArtifactNames.EnumMetadataHeader,
-            });
-        }
+            RelativePath = NativeAotArtifactNames.EnumMetadataHeader,
+            Contents = templateModel.EnumMetadataHeaderContent,
+        });
+        artifacts.Add(new NativeAotGeneratedArtifactRef
+        {
+            Kind = "enumMetadataHeader",
+            Path = NativeAotArtifactNames.EnumMetadataHeader,
+        });
 
         var pages = loweringPlan.TranslationUnitPages;
         if (pages is { Count: > 0 } && loweringPlan.TranslationUnitPageSize is > 0)

@@ -258,9 +258,9 @@
     {
       "registrationKind": "method",
       "slot": 24,
-      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
-      "name": "Subject_21",
-      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
+      "name": "CustomEntrySubject_21",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
       "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,

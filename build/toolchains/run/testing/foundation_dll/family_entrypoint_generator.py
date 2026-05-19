@@ -565,8 +565,11 @@ def _generate_csproj(
         # Include all .cs files from the subjects directory (handwritten native entries, custom files, etc.)
         extra_cs = ""
         if output_dir is not None and output_dir.is_dir():
+            custom_cs_name = f"{class_name}.Custom.cs"
             for f in sorted(output_dir.iterdir()):
                 if f.suffix == ".cs" and f.name != cs_file_name:
+                    if has_custom_entry and f.name == custom_cs_name:
+                        continue  # skip — included explicitly via custom_cs
                     extra_cs += f'    <Compile Include="{f.name}" />\n'
         custom_cs = f'    <Compile Include="{class_name}.Custom.cs" />\n' if has_custom_entry else ""
         extra_refs_xml = "  </ItemGroup>\n"

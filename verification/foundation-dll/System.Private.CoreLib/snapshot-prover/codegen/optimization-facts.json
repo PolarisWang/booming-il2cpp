@@ -504,6 +504,11 @@
     },
     {
       "subjectKind": "type",
+      "subjectId": "SnapshotTestFixtures/MyValueType",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
       "subjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO",
       "reason": "closed-world-type"
     },
@@ -589,7 +594,7 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
       "reason": "closed-world-method"
     },
     {
@@ -599,7 +604,7 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
       "reason": "closed-world-method"
     },
     {
@@ -1501,6 +1506,18 @@
     },
     {
       "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/MyValueType::X",
+      "dataKind": "value",
+      "requiresBoxing": true
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SnapshotTestFixtures/MyValueType::Y",
+      "dataKind": "value",
+      "requiresBoxing": true
+    },
+    {
+      "subjectKind": "field",
       "subjectId": "SnapshotTestFixtures/HasFields::instanceVal",
       "dataKind": "value",
       "requiresBoxing": true
@@ -1600,11 +1617,6 @@
     },
     {
       "methodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-    },
-    {
-      "methodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_8:System.Void()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },

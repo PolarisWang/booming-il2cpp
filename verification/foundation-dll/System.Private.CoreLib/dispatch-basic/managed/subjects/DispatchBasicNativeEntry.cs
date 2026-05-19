@@ -1,7 +1,7 @@
-// Copy of handwritten native-AOT entry point for subjects codegen resolution
+// Hand-written native-AOT entry point for IDispatch basic verification
 // Family: family/System.Private.CoreLib/dispatch/basic
 // Assembly: System.Private.CoreLib
-// Variant: subjects
+// Variant: benchmark
 
 using System;
 using System.Runtime.InteropServices;
@@ -38,7 +38,7 @@ public interface ICalculator
 // Dual-marked interface (both IUnknown and IDispatch)
 // {5E6F7A8B-9C0D-1E2F-3A4B-5C6D7E8F9A0B}
 [Guid("5E6F7A8B-9C0D-1E2F-3A4B-5C6D7E8F9A0B")]
-[ComInterfaceType(ComInterfaceType.InterfaceIsDual)]
+[ComInterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
 public interface IStatusProvider
 {
     int GetStatusCode();

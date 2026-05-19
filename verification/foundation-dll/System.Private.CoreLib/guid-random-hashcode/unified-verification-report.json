@@ -2,9 +2,9 @@
   "family": "guid-random-hashcode",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T19:12:17",
-  "duration_ms": 28405,
-  "overall_status": "failed",
+  "timestamp": "2026-05-20T00:47:47",
+  "duration_ms": 29020,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\guid-random-hashcode\\managed\\subjects\\build-output\\GuidRandomHashcodeSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 23153
+      "duration_ms": 23951
     },
     "fact": {
       "stage": "fact",
@@ -42,37 +42,37 @@
         }
       },
       "errors": [],
-      "duration_ms": 382
+      "duration_ms": 348
     },
     "audit": {
       "stage": "audit",
-      "status": "failed",
-      "summary": "false_passing=0, principle=VIOLATION",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "VIOLATION",
+        "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 917
+      "duration_ms": 1172
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "passed",
-      "summary": "avg_speedup=-162.93%, native_faster=1/10, managed_faster=9/10",
+      "summary": "avg_speedup=-183.6%, native_faster=2/10, managed_faster=8/10",
       "details": {
-        "averageSpeedupPercent": -162.93,
-        "nativeFasterCount": 1,
-        "managedFasterCount": 9,
+        "averageSpeedupPercent": -183.6,
+        "nativeFasterCount": 2,
+        "managedFasterCount": 8,
         "matchedCount": 10,
         "totalMethods": 14,
         "invalidCount": 4,
         "benchmarkQuality": "ok"
       },
       "errors": [],
-      "duration_ms": 3951
+      "duration_ms": 3543
     }
   },
   "coverage": {
@@ -97,16 +97,16 @@
       "topInstructionCategories": {}
     },
     "performance": {
-      "averageSpeedupPercent": -162.93,
-      "nativeFasterCount": 1,
-      "managedFasterCount": 9,
+      "averageSpeedupPercent": -183.6,
+      "nativeFasterCount": 2,
+      "managedFasterCount": 8,
       "matchedCount": 10,
       "totalMethods": 14,
       "invalidCount": 4
     },
     "hotupdate": {},
     "keyRatios": {
-      "nativeFasterRatio": 0.1,
+      "nativeFasterRatio": 0.2,
       "irExpansionRatio": 0,
       "interpreterSlowdownFactor": 0,
       "asmPassRate": 0.0
@@ -125,14 +125,14 @@
       "currentMetrics": {
         "totalMethods": 14,
         "matchedCount": 10,
-        "nativeFasterCount": 1,
-        "managedFasterCount": 9,
-        "averageSpeedupPercent": -162.93
+        "nativeFasterCount": 2,
+        "managedFasterCount": 8,
+        "averageSpeedupPercent": -183.6
       }
     },
     "hasRegression": true,
     "regressions": [
-      "Managed-faster ratio 90% exceeds native-faster ratio 10% (9/10 methods)"
+      "Managed-faster ratio 80% exceeds native-faster ratio 20% (8/10 methods)"
     ]
   }
 }

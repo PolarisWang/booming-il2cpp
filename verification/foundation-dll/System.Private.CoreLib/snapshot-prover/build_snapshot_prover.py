@@ -53,7 +53,7 @@ CONFIG_TIER = "CHAOS_IL2CPP_CONFIG_TIER_CHECK"
 LOG_LEVEL = "3"
 CMAKE_PRESET = "x64-check"  # Must match build/native CMake preset
 
-METHOD_COUNT = 10  # Number of subjects in the contract
+METHOD_COUNT = 158  # Total methods in the full fixture assembly
 
 
 # ── Step 1: Build subjects DLL ──────────────────────────────────────────
@@ -361,16 +361,16 @@ def run_verification() -> bool:
         passed = int(match.group(1))
         total = int(match.group(2))
         if passed == total and total == METHOD_COUNT:
-            print(f"\n  ✅ VERIFICATION PASSED: {passed}/{total}")
+            print(f"\n  [PASS] VERIFICATION PASSED: {passed}/{total}")
             return True
         elif passed == total:
-            print(f"\n  ⚠️  Count mismatch: {passed}/{total} (expected {METHOD_COUNT})")
+            print(f"\n  [WARN]  Count mismatch: {passed}/{total} (expected {METHOD_COUNT})")
             return total > 0
         else:
-            print(f"\n  ❌ VERIFICATION FAILED: {passed}/{total}")
+            print(f"\n  [FAIL] VERIFICATION FAILED: {passed}/{total}")
             return False
     else:
-        print(f"\n  ❌ Could not find 'Passed: N/M' in output")
+        print(f"\n  [FAIL] Could not find 'Passed: N/M' in output")
         return False
 
 

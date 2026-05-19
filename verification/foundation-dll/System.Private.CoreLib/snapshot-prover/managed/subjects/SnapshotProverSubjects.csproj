@@ -12,6 +12,7 @@
   <ItemGroup>
     <Compile Include="SnapshotProverSubjects.cs" />
     <Compile Include="GlobalUsings.cs" />
+    <Compile Include="SnapshotProverSubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../../../../../tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj" />

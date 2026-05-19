@@ -2583,56 +2583,6 @@
       "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
-      "methodId": "interface-dispatch-subjects.impl-with-default.get-value",
-      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
-      "signature": "System.Int32 ImplWithDefault::GetValue()",
-      "identity": {
-        "assemblyName": "InterfaceDispatchSubjects",
-        "declaringTypeSubjectId": "InterfaceDispatchSubjects/ImplWithDefault",
-        "definitionSubjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
-        "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
-        "methodId": "interface-dispatch-subjects.impl-with-default.get-value",
-        "signature": "System.Int32 ImplWithDefault::GetValue()"
-      },
-      "nativeSymbol": "InterfaceDispatchSubjects_ImplWithDefault_GetValue",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "InterfaceDispatchSubjects"
-    },
-    {
       "methodId": "interface-dispatch-subjects.impl-with-default.ctor",
       "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()",
       "signature": "System.Void ImplWithDefault::.ctor()",
@@ -5336,7 +5286,7 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 2,
+      "localCount": 4,
       "exceptionRegionCount": 0,
       "exceptionRegions": [],
       "instructions": [
@@ -5385,8 +5335,8 @@
           "isPreserveSig": false
         },
         {
-          "op": "castclass",
-          "opCode": 37,
+          "op": "isinst",
+          "opCode": 38,
           "operand": "InterfaceDispatchSubjects/ISimple",
           "ilOffset": 8,
           "resultType": "InterfaceDispatchSubjects/ISimple",
@@ -5407,13 +5357,72 @@
             "implementedInterfaceSubjectIds": [],
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 7,
+          "runtimeServiceKind": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 15,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 19,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 31,
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 22,
           "isPreserveSig": false
         },
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 13,
+          "ilOffset": 23,
           "resultType": "System.Int32",
           "callee": "InterfaceDispatchSubjects/ISimple::GetValue:System.Int32()",
           "reference": {
@@ -5441,30 +5450,54 @@
         {
           "op": "stloc",
           "opCode": 8,
-          "operand": 1,
-          "ilOffset": 18,
+          "operand": 3,
+          "ilOffset": 28,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 21,
-          "ilOffset": 19,
+          "operand": 35,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1,
+          "ilOffset": 31,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 3,
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 35,
+          "ilOffset": 33,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
-          "operand": 1,
-          "ilOffset": 21,
+          "operand": 3,
+          "ilOffset": 35,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 22,
+          "ilOffset": 36,
           "isPreserveSig": false
         }
       ],

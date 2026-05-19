@@ -114,7 +114,7 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
       "reason": "closed-world-method"
     }
   ],
@@ -360,7 +360,7 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_21:System.Void()",
+      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
@@ -412,6 +412,11 @@
     },
     {
       "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_19:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
     }

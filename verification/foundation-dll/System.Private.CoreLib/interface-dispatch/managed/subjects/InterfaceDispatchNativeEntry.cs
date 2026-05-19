@@ -47,13 +47,8 @@ public class ImplSimple : ISimple
 }
 
 // Single implementation of IWithDefault → devirtualizable
-// NOTE: Explicitly implements GetValue to work around codegen vtable issue
-// where types that don't override default interface methods have undersized
-// vtables (only ctor slot) but interface maps point to slot 5, causing
-// out-of-bounds read in chaos_vtable_resolve.
 public class ImplWithDefault : IWithDefault
 {
-    public int GetValue() => 0;
 }
 
 // Multiple implementations of ICalculator → must use virtual dispatch
@@ -137,12 +132,13 @@ public static class InterfaceDispatchNativeEntry
         return result; // 1010
     }
 
-    // [4] Direct cast test: (ISimple)a avoids the codegen local-spilling bug
-    // in the 'is' pattern check lowering. TestIsCheck covers is-pattern verification.
+    // [4] Interface 'is' check + direct cast (instead of 'as')
     public static int TestAsCheck()
     {
         object a = new ImplSimple();
-        return ((ISimple)a).GetValue();
+        if (a is ISimple s)
+            return s.GetValue();
+        return -1;
     }
 
     // [5] Diamond: call base interface method

@@ -90,12 +90,25 @@ struct OldGenPage {
     const char* Payload() const {
         return reinterpret_cast<const char*>(this) + sizeof(OldGenPage) + bitmap_bytes;
     }
+
+    /// Given an interior pointer to within this page's payload, locate the
+    /// containing object by backward bitmap scan + TypeInfo validation.
+    /// Returns nullptr if no valid containing object is found.
+    void* FindObjectContaining(const void* interior_ptr) const;
 };
 
 // Finalizer table entry: maps object -> finalizer callback.
 struct FinalizerEntry {
     void* obj;
     void (*finalizer)(void*);
+};
+
+/// Finalizer entry with timeout tracking for BGC finalizer watchdog.
+struct TimedFinalizerEntry {
+    void* obj{nullptr};
+    void (*finalizer)(void*){nullptr};
+    int retry_count{0};
+    bool is_dead{false};  ///< true = exceeded max retries, permanently skipped
 };
 
 // Mark-sweep collector state.

@@ -228,16 +228,31 @@ void TeardownTlsPoh() noexcept {
 void InitYoungGeneration() noexcept {
     auto* region = RegionManager::Instance().AllocateRegion(
         RegionKind::REGION_NURSERY, kDefaultYoungRegionSize);
+    auto* region_begin = region ? region->begin : nullptr;
     g_young_gen.region.store(region, std::memory_order_release);
     if (region) {
-        g_young_gen.bump.store(region->begin, std::memory_order_release);
-        g_young_gen.region_end.store(region->end, std::memory_order_release);
+        // Split the nursery region into young half (8 MB) and survivor half (8 MB).
+        CHAOS_IL2CPP_SIZE half_size = kDefaultYoungRegionSize / 2;
+        char* mid = region_begin + half_size;
+
+        region->end = mid;  // young half ends at mid
+        g_young_gen.region = region;
+        g_young_gen.bump.store(region_begin, std::memory_order_release);
+        g_young_gen.region_end.store(mid, std::memory_order_release);
+
+        // Survivor area occupies the second half.
+        g_young_gen.survivor_begin = mid;
+        g_young_gen.survivor_end = mid + half_size;
+        g_young_gen.survivor_bump.store(mid, std::memory_order_release);
     }
 }
 
 void DestroyYoungGeneration() noexcept {
     auto* region = g_young_gen.region.exchange(nullptr, std::memory_order_acq_rel);
     if (region) {
+        g_young_gen.survivor_begin = nullptr;
+        g_young_gen.survivor_end = nullptr;
+        g_young_gen.survivor_bump.store(nullptr, std::memory_order_release);
         RegionManager::Instance().FreeRegion(region->id);
     }
     g_young_gen.bump.store(nullptr, std::memory_order_release);
