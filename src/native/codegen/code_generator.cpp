@@ -1069,7 +1069,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::Conv_I4: case IROpCode::Conv_I8:
     case IROpCode::ConvI: case IROpCode::ConvU:
-    case IROpCode::ConvOvfI: case IROpCode::ConvOvfI4: case IROpCode::ConvOvfI8: {
+    case IROpCode::ConvOvfI: case IROpCode::ConvOvfI8: {
         if (!instr.has_src1() || !instr.has_dst()) return false;
         LoadGpr(kRAX, instr.src1_reg());
         // Int32-converting opcodes: truncate to 32-bit via mov eax,eax (zero-extends).
@@ -1078,6 +1078,28 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         if (is_int32_op) {
             buf_.EmitByte(0x89); buf_.EmitByte(0xC0);  // mov eax, eax (zero-extend 32→64)
         }
+        StoreGpr(kRAX, instr.dst_reg());
+        return true;
+    }
+
+    case IROpCode::ConvOvfI4: {
+        if (!instr.has_src1() || !instr.has_dst()) return false;
+        LoadGpr(kRAX, instr.src1_reg());
+        // Check overflow: sign-extend 32-bit truncation back to 64-bit and compare.
+        // If original ≠ sign-extend(truncate(original)), the value doesn't fit int32.
+        EmitMovRR(buf_, kRCX, kRAX);           // rcx = rax (copy original)
+        buf_.EmitByte(0x89); buf_.EmitByte(0xC1);  // mov ecx, eax (truncate to 32-bit)
+        EmitMovsxd(buf_, kRCX, kRCX);           // movsxd rcx, ecx (sign-extend 32→64)
+        EmitCmpRR(buf_, kRAX, kRCX);            // cmp rax, rcx
+        {
+            uint32_t jne_pos = buf_.pos();
+            EmitJccRel32(buf_, kCC_NE, 0);      // jne → deopt (overflow)
+            EmitDeoptSequence(current_instr_index_);
+            uint32_t no_overflow = buf_.pos();
+            int32_t disp = static_cast<int32_t>(no_overflow - (jne_pos + 6));
+            buf_.Patch32(jne_pos + 2, static_cast<uint32_t>(disp));
+        }
+        // Result: truncated 32-bit value in EAX (zero-extended to 64-bit in RAX)
         StoreGpr(kRAX, instr.dst_reg());
         return true;
     }
@@ -1918,11 +1940,46 @@ static void OptimizeInstructions(
     };
 
     // Find the most recent definition of `reg` as LdcI4 (scan backwards).
+    // Returns nullptr if a backward branch targets an instruction between the def
+    // and current_idx — loop back-edges can redefine the register on re-entry,
+    // making the "constant" stale.
     auto FindDefLdcI4 = [&](uint32_t current_idx, uint32_t reg) -> const int32_t* {
         for (uint32_t j = current_idx; j > 0; --j) {
             const auto& prev = instrs[j - 1];
             if (prev.has_dst() && prev.dst_reg() == reg) {
-                return (prev.op_code() == interpreter::IROpCode::LdcI4) ? &prev.imm.i4 : nullptr;
+                if (prev.op_code() == interpreter::IROpCode::LdcI4) {
+                    // Check for backward branches from current_idx onward that
+                    // target an instruction between the def (j-1) and current_idx.
+                    // Such back-edges skip the def on loop re-entry, making the
+                    // "constant" stale.
+                    for (uint32_t k = current_idx; k < instrs.size(); ++k) {
+                        const auto& bi = instrs[k];
+                        auto bopc = bi.op_code();
+                        if (bi.has_imm() &&
+                            (bopc == interpreter::IROpCode::Br ||
+                             bopc == interpreter::IROpCode::BrTrue ||
+                             bopc == interpreter::IROpCode::BrFalse ||
+                             bopc == interpreter::IROpCode::Beq ||
+                             bopc == interpreter::IROpCode::BneUn ||
+                             bopc == interpreter::IROpCode::Blt ||
+                             bopc == interpreter::IROpCode::BltUn ||
+                             bopc == interpreter::IROpCode::Bgt ||
+                             bopc == interpreter::IROpCode::BgtUn ||
+                             bopc == interpreter::IROpCode::Ble ||
+                             bopc == interpreter::IROpCode::BleUn)) {
+                            uint32_t target = bi.imm.branch_target;
+                            // target < k = backward branch; target between def and
+                            // current_idx means loop re-entry skips the LdcI4 def.
+                            if (target < k &&
+                                target >= j - 1 &&
+                                target <= current_idx) {
+                                return nullptr; // killed by loop back-edge
+                            }
+                        }
+                    }
+                    return &prev.imm.i4;
+                }
+                return nullptr; // non-LdcI4 def found
             }
         }
         return nullptr;
@@ -2365,46 +2422,49 @@ static void OptimizeInstructions(
         }
 
         // (j) DivUn/RemUn by power of 2 → shift/and
+        // NOTE: only apply when use_count[src2_reg] == 1 — the optimization
+        // modifies the defining LdcI4's immediate value in-place.  If other
+        // instructions also read that LdcI4, they'd see the wrong value.
         if (ri.has_dst() && ri.has_src1() && ri.has_src2()) {
             if (opc == interpreter::IROpCode::DivUn || opc == interpreter::IROpCode::RemUn) {
-                const int32_t* v2 = FindDefLdcI4(i, ri.src2_reg());
-                if (v2 && *v2 > 0) {
-                    uint32_t shift = 0;
-                    uint32_t uv = static_cast<uint32_t>(*v2);
-                    if (uv && (uv & (uv - 1)) == 0) {
-                        while ((uv >> shift) > 1) ++shift;
-                        if (opc == interpreter::IROpCode::DivUn) {
-                            // DivUn by 2^k → Shr by k
-                            ri.header = MakeHdr(interpreter::IROpCode::Shr, ri.dst_reg(), ri.src1_reg(), ri.src2_reg(),
-                                                interpreter::kRegHasDst | interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2);
-                            // Replace src2 with LdcI4(k) — update the defining LdcI4
-                            uint8_t src2_reg = ri.src2_reg();
-                            for (uint32_t j = i; j > 0; --j) {
-                                auto& prev = instrs[j - 1];
-                                if (prev.has_dst() && prev.dst_reg() == src2_reg &&
-                                    prev.op_code() == interpreter::IROpCode::LdcI4) {
-                                    prev.imm.i4 = static_cast<int32_t>(shift);
-                                    break;
+                uint8_t src2_reg = ri.src2_reg();
+                if (src2_reg < 64 && use_count[src2_reg] == 1) {
+                    const int32_t* v2 = FindDefLdcI4(i, src2_reg);
+                    if (v2 && *v2 > 0) {
+                        uint32_t shift = 0;
+                        uint32_t uv = static_cast<uint32_t>(*v2);
+                        if (uv && (uv & (uv - 1)) == 0) {
+                            while ((uv >> shift) > 1) ++shift;
+                            if (opc == interpreter::IROpCode::DivUn) {
+                                // DivUn by 2^k → ShrUn by k (logical shift, unsigned)
+                                ri.header = MakeHdr(interpreter::IROpCode::ShrUn, ri.dst_reg(), ri.src1_reg(), src2_reg,
+                                                    interpreter::kRegHasDst | interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2);
+                                for (uint32_t j = i; j > 0; --j) {
+                                    auto& prev = instrs[j - 1];
+                                    if (prev.has_dst() && prev.dst_reg() == src2_reg &&
+                                        prev.op_code() == interpreter::IROpCode::LdcI4) {
+                                        prev.imm.i4 = static_cast<int32_t>(shift);
+                                        break;
+                                    }
                                 }
-                            }
-                            did_opt = true;
-                            continue;
-                        } else {
-                            // RemUn by 2^k → And with (2^k - 1)
-                            uint32_t mask = (1u << shift) - 1u;
-                            ri.header = MakeHdr(interpreter::IROpCode::And, ri.dst_reg(), ri.src1_reg(), ri.src2_reg(),
-                                                interpreter::kRegHasDst | interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2);
-                            uint8_t src2_reg = ri.src2_reg();
-                            for (uint32_t j = i; j > 0; --j) {
-                                auto& prev = instrs[j - 1];
-                                if (prev.has_dst() && prev.dst_reg() == src2_reg &&
-                                    prev.op_code() == interpreter::IROpCode::LdcI4) {
-                                    prev.imm.i4 = static_cast<int32_t>(mask);
-                                    break;
+                                did_opt = true;
+                                continue;
+                            } else {
+                                // RemUn by 2^k → And with (2^k - 1)
+                                uint32_t mask = (1u << shift) - 1u;
+                                ri.header = MakeHdr(interpreter::IROpCode::And, ri.dst_reg(), ri.src1_reg(), src2_reg,
+                                                    interpreter::kRegHasDst | interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2);
+                                for (uint32_t j = i; j > 0; --j) {
+                                    auto& prev = instrs[j - 1];
+                                    if (prev.has_dst() && prev.dst_reg() == src2_reg &&
+                                        prev.op_code() == interpreter::IROpCode::LdcI4) {
+                                        prev.imm.i4 = static_cast<int32_t>(mask);
+                                        break;
+                                    }
                                 }
+                                did_opt = true;
+                                continue;
                             }
-                            did_opt = true;
-                            continue;
                         }
                     }
                 }
@@ -2678,7 +2738,8 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     // Creates a mutable copy of rm_.instructions for the optimizer.
     auto opt_instrs = rm_.instructions;
     std::vector<uint8_t> removed_mask;
-    OptimizeInstructions(opt_instrs, removed_mask);
+    if (config_.enable_optimizer)
+        OptimizeInstructions(opt_instrs, removed_mask);
 
     // Emit instructions
     for (uint32_t i = 0; i < n_instrs; ++i) {
@@ -2798,6 +2859,15 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
                     }
                 }
                 cached_dirty_mask_ = 0;  // clean after initialization
+            }
+
+            // Zero caller-colored registers (R8-R11) — matches regular prologue.
+            // OSR entry only loads callee-saved regs from the stack (above);
+            // caller-colored regs have no stack slot, so without this they
+            // contain garbage from the caller, while RegisterExecute returns 0.
+            if (caller_colored_mask_) {
+                for (uint32_t x64r = kR8; x64r <= kR11; ++x64r)
+                    EmitXorRR(buf_, x64r, x64r);
             }
 
             // Initialize callee-saved XMM registers from RegisterFile FPR copy.
