@@ -259,7 +259,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Array", "BinarySearch", 4): "Array.BinarySearch(new byte[4], 0, 4, (byte)42)",
     ("Array", "IndexOf", 2): "Array.IndexOf(new byte[4], (byte)42)",
     ("Array", "LastIndexOf", 2): "Array.LastIndexOf(new byte[4], (byte)42)",
-    ("Array", "Resize", 2): "skip",         # generic type parameter T can't be resolved at entrypoint generation
+    ("Array", "Resize", 2): "((System.Func<int>)(() => { byte[] __arr = new byte[4]; Array.Resize(ref __arr, 8); return __arr.Length; }))()",  # lambda wrapper to handle ref + generic T
     # Buffer methods with non-empty arrays
     ("Buffer", "BlockCopy", 5): "Buffer.BlockCopy(new byte[8], 0, new byte[8], 0, 8)",
     ("Buffer", "BulkMoveWithWriteBarrier", 3): "skip",  # internal runtime intrinsic, not in .NET 8 public API
@@ -373,7 +373,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("PropertyInfo", "SetValue", 2): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].SetValue(null, (byte)42)",
     ("PropertyInfo", "get_PropertyType", 0): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType",
     # Exception — StackTrace is null on non-thrown exception
-    ("Exception", "get_StackTrace", 0): "skip",  # null on non-thrown exception → NullReferenceException on .Length
+    ("Exception", "get_StackTrace", 0): "((new Exception().StackTrace) ?? \"\")",  # null on non-thrown exception → use null-coalescing
     # Math with invalid precision
     ("Math", "Round", 2): "Math.Round(42.0)",
     # BitConverter with valid array and offset

@@ -2993,17 +2993,174 @@ public sealed partial class NativeAotLoweringPlanner
 
 /// <summary>
 /// Generate the C++ header for pre-computed enum metadata tables.
-/// Returns empty string if no enum types are available.
+/// Collects enum type data from ALL resolved assemblies (not just the entry
+/// assembly) so that SPC enum types (DayOfWeek, BindingFlags, etc.) are
+/// included alongside the entry assembly's own enum types.
+/// Returns empty string if no enum types or field data are available.
 /// </summary>
 private string GenerateEnumMetadataHeader()
 {
-    if (_moduleTypeFlags.Count == 0 || _reflectionMemberSupport.FieldEntries.Count == 0)
+    // Start with entry assembly data (already collected in _moduleTypeFlags/SubjectIds).
+    // Then augment with enum type data from all other resolved assemblies.
+    // The seenSubjectIds set prevents duplicates when an assembly's types
+    // overlap (e.g., when the entry assembly is also in resolved paths).
+    var mergedFlags = new List<uint>(_moduleTypeFlags);
+    var mergedSubjectIds = new List<string>(_moduleTypeSubjectIds);
+    var seenSubjectIds = new HashSet<string>(_moduleTypeSubjectIds, StringComparer.Ordinal);
+    // Collect field entries from PE metadata for all enum types (used when
+    // _reflectionMemberSupport.FieldEntries is empty for stub-based families).
+    var enumFieldEntries = new List<ReflectionMemberFieldEntry>();
+
+    foreach (var assemblyPath in _cachedClosureAssemblyPaths)
+    {
+        try
+        {
+            CollectEnumTypesAndFieldsFromAssembly(assemblyPath, seenSubjectIds,
+                mergedFlags, mergedSubjectIds, enumFieldEntries);
+        }
+        catch
+        {
+            // Skip assemblies that can't be read (e.g., native images, missing files)
+            continue;
+        }
+    }
+
+    if (mergedFlags.Count == 0)
+        return string.Empty;
+
+    // Prefer reflection member field entries when available (they include data
+    // from all closure assemblies); fall back to PE-metadata field entries.
+    var fieldEntries = _reflectionMemberSupport.FieldEntries.Count > 0
+        ? _reflectionMemberSupport.FieldEntries
+        : enumFieldEntries;
+
+    if (fieldEntries.Count == 0)
         return string.Empty;
 
     return EnumMetadataExtractor.GenerateHeader(
-        _moduleTypeFlags,
-        _moduleTypeSubjectIds,
-        _reflectionMemberSupport.FieldEntries);
+        mergedFlags,
+        mergedSubjectIds,
+        fieldEntries);
+}
+
+/// <summary>
+/// Read assembly PE metadata and collect enum type flags, subjectIds,
+/// AND field name/value entries for each enum type.
+/// Populates the provided lists, skipping types already in seenSubjectIds.
+/// </summary>
+private static void CollectEnumTypesAndFieldsFromAssembly(
+    string assemblyPath,
+    HashSet<string> seenSubjectIds,
+    List<uint> mergedFlags,
+    List<string> mergedSubjectIds,
+    List<ReflectionMemberFieldEntry> enumFieldEntries)
+{
+    if (string.IsNullOrEmpty(assemblyPath) || !File.Exists(assemblyPath))
+        return;
+
+    using var stream = File.OpenRead(assemblyPath);
+    using var peReader = new System.Reflection.PortableExecutable.PEReader(stream);
+    if (!peReader.HasMetadata)
+        return;
+
+    var metadataReader = peReader.GetMetadataReader();
+    if (!metadataReader.IsAssembly)
+        return;
+
+    var assemblyName = metadataReader.GetString(metadataReader.GetAssemblyDefinition().Name);
+
+    foreach (var handle in metadataReader.TypeDefinitions)
+    {
+        var typeDef = metadataReader.GetTypeDefinition(handle);
+        var parentHandle = typeDef.BaseType;
+
+        // Only interested in enum types
+        if (parentHandle.IsNil)
+            continue;
+
+        var parentFullName = ResolveBaseTypeName(metadataReader, parentHandle);
+        if (parentFullName == null ||
+            !string.Equals(parentFullName, "System.Enum", StringComparison.Ordinal))
+            continue;
+
+        var subjectId = ComputeTypeDefSubjectId(metadataReader, handle, assemblyName);
+        if (string.IsNullOrEmpty(subjectId) || !seenSubjectIds.Add(subjectId))
+            continue;
+
+        uint flags = ComputeTypeFlags(metadataReader, typeDef, parentHandle);
+        mergedFlags.Add(flags);
+        mergedSubjectIds.Add(subjectId);
+
+        // Read field entries (names + constant values) from PE metadata
+        foreach (var fieldHandle in typeDef.GetFields())
+        {
+            var fieldDef = metadataReader.GetFieldDefinition(fieldHandle);
+            var fieldName = metadataReader.GetString(fieldDef.Name);
+
+            // Skip the implicit "value__" instance field
+            if (string.Equals(fieldName, "value__", StringComparison.Ordinal))
+                continue;
+
+            long? constantValue = ReadFieldConstantValue(metadataReader, fieldDef);
+            if (!constantValue.HasValue)
+                continue;
+
+            enumFieldEntries.Add(new ReflectionMemberFieldEntry(
+                subjectId, fieldName, MetadataTokens.GetToken(fieldHandle), constantValue));
+        }
+    }
+}
+
+/// <summary>
+/// Read the constant value from a field definition's Constant metadata.
+/// Returns null if the field has no constant or the type is unsupported.
+/// </summary>
+private static long? ReadFieldConstantValue(
+    System.Reflection.Metadata.MetadataReader reader,
+    System.Reflection.Metadata.FieldDefinition fieldDef)
+{
+    try
+    {
+        var constHandle = fieldDef.GetDefaultValue();
+        if (constHandle.IsNil)
+            return null;
+
+        var constant = reader.GetConstant(constHandle);
+        var blobReader = reader.GetBlobReader(constant.Value);
+
+        // PrimitiveTypeCode matches the ECMA 335 constant type codes
+        // used by System.Reflection.Metadata (not to be confused with
+        // the unrelated ConstantTypeCode enum from a different namespace).
+        switch ((System.Reflection.Metadata.PrimitiveTypeCode)constant.TypeCode)
+        {
+            case System.Reflection.Metadata.PrimitiveTypeCode.Boolean:
+                return blobReader.ReadBoolean() ? 1L : 0L;
+            case System.Reflection.Metadata.PrimitiveTypeCode.Byte:
+                return blobReader.ReadByte();
+            case System.Reflection.Metadata.PrimitiveTypeCode.SByte:
+                return blobReader.ReadSByte();
+            case System.Reflection.Metadata.PrimitiveTypeCode.Int16:
+                return blobReader.ReadInt16();
+            case System.Reflection.Metadata.PrimitiveTypeCode.UInt16:
+                return blobReader.ReadUInt16();
+            case System.Reflection.Metadata.PrimitiveTypeCode.Char:
+                return blobReader.ReadChar();
+            case System.Reflection.Metadata.PrimitiveTypeCode.Int32:
+                return blobReader.ReadInt32();
+            case System.Reflection.Metadata.PrimitiveTypeCode.UInt32:
+                return blobReader.ReadUInt32();
+            case System.Reflection.Metadata.PrimitiveTypeCode.Int64:
+                return blobReader.ReadInt64();
+            case System.Reflection.Metadata.PrimitiveTypeCode.UInt64:
+                return unchecked((long)blobReader.ReadUInt64());
+            default:
+                return null;
+        }
+    }
+    catch
+    {
+        return null;
+    }
 }
 }
 

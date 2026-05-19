@@ -323,15 +323,17 @@ CHAOS_IL2CPP_INTPTR MarshalCreateCcw(
     CHAOS_IL2CPP_INTPTR managed_object,
     CHAOS_IL2CPP_INTPTR runtime_state) noexcept;
 
-// ── ICustomMarshaler (V1 stubs) ──────────────────────────────────────────
-/// ICALL stub: resolve and invoke ICustomMarshaler.MarshalNativeToManaged.
-/// V1: logs a warning and returns nullptr (caller should pass through).
+// ── ICustomMarshaler (V3 — interpreter dispatch) ─────────────────────────
+/// Resolve ICustomMarshaler type from cookie, call GetInstance to obtain
+/// the marshaler, then dispatch to MarshalNativeToManaged on the instance.
+/// Returns the managed object pointer, or 0 on failure.
 CHAOS_IL2CPP_INTPTR CustomMarshalerNativeToManaged(
     const char* cookie_utf8,
     CHAOS_IL2CPP_INTPTR native_ptr) noexcept;
 
-/// ICALL stub: resolve and invoke ICustomMarshaler.MarshalManagedToNative.
-/// V1: logs a warning and returns native_ptr unchanged (pass-through).
+/// Resolve ICustomMarshaler type from cookie, call GetInstance to obtain
+/// the marshaler, then dispatch to MarshalManagedToNative on the instance.
+/// Returns the native IntPtr, or the managed_obj unchanged on failure.
 CHAOS_IL2CPP_INTPTR CustomMarshalerManagedToNative(
     const char* cookie_utf8,
     CHAOS_IL2CPP_INTPTR managed_obj) noexcept;

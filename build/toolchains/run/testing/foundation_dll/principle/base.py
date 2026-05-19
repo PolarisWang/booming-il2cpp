@@ -263,8 +263,11 @@ class FamilyContext:
         try:
             result = subprocess.run(
                 ["git", "diff", "--name-only", "HEAD"],
-                capture_output=True, text=True, cwd=_REPO_ROOT, timeout=30,
+                capture_output=True, encoding="utf-8", cwd=_REPO_ROOT, timeout=30,
             )
+            if result.stdout is None:
+                self._changed_files = []
+                return self._changed_files
             changed = [f for f in result.stdout.strip().split("\n") if f]
             # Filter to files in this family's codegen dir
             codegen_str = str(codegen_dir.resolve())

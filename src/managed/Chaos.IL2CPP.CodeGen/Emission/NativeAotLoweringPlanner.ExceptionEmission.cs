@@ -308,13 +308,9 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			int ldlocSlot = GetRequiredIntOperand(instruction);
 			if (_structLocalSlots is not null && _structLocalSlots.Contains(ldlocSlot))
-			{
 				EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[{ldlocSlot}])");
-			}
 			else
-			{
 				EmitEvalStackPush(builder, indentation, $"chaos_locals[{ldlocSlot}]");
-			}
 			break;
 		}
 		case "ldsfld":

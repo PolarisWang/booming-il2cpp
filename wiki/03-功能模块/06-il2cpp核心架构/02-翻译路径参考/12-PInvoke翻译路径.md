@@ -245,6 +245,9 @@ if (!isInternal)
 | **DllImportResolver managed callback** | **2026-05-17 新增** |
 | **COM Interop (RCW/CCW IUnknown)** | **2026-05-17 V1 新增** |
 | **COM `[PreserveSig]` metadata** | **2026-05-17 新增** |
+| **COM IDispatch (晚期绑定 + Invoke 参数转发)** | **2026-05-20 新增** |
+| **COM Variant 标量 boxing (I2/I4/R4/R8/BOOL)** | **2026-05-20 新增** |
+| **LPArray 反向 marshalling** | **2026-05-20 新增** |
 | COM/WinRT interop | 不支持 |
 | varargs | 不支持 |
 

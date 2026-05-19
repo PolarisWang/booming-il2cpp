@@ -3,6 +3,7 @@
 #endif
 
 #include <atomic>
+#include <cstring>
 
 namespace chaos::il2cpp::runtime_core {
 // NOTE: no anonymous namespace — functions are declared in engine_binding.h
@@ -824,26 +825,200 @@ void CHAOS_RUNTIME_ABI_CALL ChaosGetNativeVariantForObject(
 #endif
 }
 
-// ── ICustomMarshaler (V1 stubs) ─────────────────────────────────────────
+// ── ICustomMarshaler (V3 — interpreter dispatch) ─────────────────────────
+//
+// ICustomMarshaler allows user-defined managed types to control parameter
+// marshalling for P/Invoke calls decorated with
+// [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(T), Cookie = "...")].
+//
+// V3 approach:
+//   The cookie encodes the ICustomMarshaler implementor type name.
+//   Native stub resolves the type, calls its static GetInstance(cookie) to
+//   obtain/reuse a marshaler instance, then dispatches to the instance's
+//   MarshalNativeToManaged / MarshalManagedToNative methods via the ABI
+//   method_invoke table.
+//
+//   Results are cached per unique cookie string to avoid repeated resolution.
+
+namespace {
+
+// ── Cookie → marshaler cache ─────────────────────────────────────────────
+// Fixed-size cache with linear scan (small N, low contention).
+// Uses thread-safe slots: marshaler_instance != 0 means occupied.
+
+struct MarshalerSlot {
+    char cookie[64];             // cookie key (truncated)
+    void* marshaler_instance;    // resolved ICustomMarshaler instance
+    MethodInfoHandle method_n2m; // cached MarshalNativeToManaged
+    MethodInfoHandle method_m2n; // cached MarshalManagedToNative
+};
+
+constexpr uint32_t kMarshalerCacheSize = 8;
+static MarshalerSlot s_marshaler_cache[kMarshalerCacheSize] = {};
+
+// ── Helpers ──────────────────────────────────────────────────────────────
+
+/// Extract the fully-qualified type name from a cookie string.
+/// Format: "TypeName" or "TypeName:Suffix" — returns only the TypeName part.
+/// Returns a pointer into the input (null-terminated at the separator or end).
+static const char* TypeNameFromCookie(const char* cookie_utf8, const char*& out_end) {
+    if (cookie_utf8 == nullptr) {
+        out_end = nullptr;
+        return nullptr;
+    }
+    const char* sep = cookie_utf8;
+    while (*sep != '\0' && *sep != ':') ++sep;
+    out_end = sep;
+    return cookie_utf8;
+}
+
+static void* ResolveOrCreateMarshaler(
+    RuntimeState* rs,
+    ThreadState* ts,
+    const RuntimeAbiV0* abi,
+    const char* cookie_utf8) {
+    if (cookie_utf8 == nullptr || cookie_utf8[0] == '\0') return nullptr;
+
+    // ── Scan cache ──
+    for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
+        if (s_marshaler_cache[i].marshaler_instance != nullptr &&
+            std::strncmp(s_marshaler_cache[i].cookie, cookie_utf8,
+                         sizeof(s_marshaler_cache[i].cookie)) == 0) {
+            return s_marshaler_cache[i].marshaler_instance;
+        }
+    }
+
+    // ── Cache miss: resolve type and call GetInstance ──
+    const char* type_name_end = nullptr;
+    const char* type_name_start = TypeNameFromCookie(cookie_utf8, type_name_end);
+    if (type_name_start == nullptr) return nullptr;
+
+    // Build null-terminated type name from the cookie prefix.
+    char type_name_buf[128];
+    const size_t type_name_len = static_cast<size_t>(type_name_end - type_name_start);
+    if (type_name_len == 0 || type_name_len >= sizeof(type_name_buf)) return nullptr;
+    std::memcpy(type_name_buf, type_name_start, type_name_len);
+    type_name_buf[type_name_len] = '\0';
+
+    const auto type_handle = ResolveTypeByName(type_name_buf);
+    if (type_handle == 0) {
+        CHAOS_IL2CPP_LOG_WARN("ICustomMarshaler: type '{0}' not found", type_name_buf);
+        return nullptr;
+    }
+
+    // Ensure type is initialized.
+    abi->class_init(rs, type_handle);
+
+    // Find GetInstance(string) static method.
+    const MethodInfoHandle get_instance_method = abi->type_find_method(
+        type_handle, "GetInstance", 1);
+    if (get_instance_method == 0) {
+        CHAOS_IL2CPP_LOG_WARN("ICustomMarshaler: GetInstance not found on {0}", type_name_buf);
+        return nullptr;
+    }
+
+    // Create managed string from cookie for the argument.
+    void* cookie_managed = abi->string_new_utf8(rs, ts, cookie_utf8,
+        static_cast<CHAOS_IL2CPP_INT32>(std::strlen(cookie_utf8)));
+    if (cookie_managed == nullptr) return nullptr;
+
+    // Call GetInstance(cookie) — static method, so object_instance = nullptr.
+    void* const args_get_instance[] = { &cookie_managed };
+    void* marshaler_instance = nullptr;
+    ExceptionHandle exc = nullptr;
+    abi->method_invoke(rs, ts, get_instance_method,
+        nullptr, args_get_instance, 1, &marshaler_instance, sizeof(void*), &exc);
+
+    if (marshaler_instance == nullptr) {
+        CHAOS_IL2CPP_LOG_WARN("ICustomMarshaler: GetInstance returned null for cookie '{0}'",
+                              cookie_utf8);
+        return nullptr;
+    }
+
+    // Pre-resolve MarshalNativeToManaged and MarshalManagedToNative method handles
+    // so we don't need to re-resolve them on each call. We find them on the
+    // marshaler's actual type (not ICustomMarshaler interface).
+    const MethodInfoHandle method_n2m = abi->type_find_method(
+        type_handle, "MarshalNativeToManaged", 1);
+    const MethodInfoHandle method_m2n = abi->type_find_method(
+        type_handle, "MarshalManagedToNative", 1);
+
+    // Store in first empty cache slot.
+    for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
+        if (s_marshaler_cache[i].marshaler_instance == nullptr) {
+            std::strncpy(s_marshaler_cache[i].cookie, cookie_utf8,
+                         sizeof(s_marshaler_cache[i].cookie) - 1);
+            s_marshaler_cache[i].cookie[sizeof(s_marshaler_cache[i].cookie) - 1] = '\0';
+            s_marshaler_cache[i].marshaler_instance = marshaler_instance;
+            s_marshaler_cache[i].method_n2m = method_n2m;
+            s_marshaler_cache[i].method_m2n = method_m2n;
+            break;
+        }
+    }
+
+    return marshaler_instance;
+}
+
+}  // anonymous namespace
 
 CHAOS_IL2CPP_INTPTR CustomMarshalerNativeToManaged(
     const char* cookie_utf8,
     CHAOS_IL2CPP_INTPTR native_ptr) noexcept {
-    CHAOS_IL2CPP_LOG_WARN("ICustomMarshaler::MarshalNativeToManaged not yet implemented "
-                          "(cookie={0}, native_ptr={1}) — returning nullptr",
-                          (cookie_utf8 ? cookie_utf8 : "(null)"),
-                          static_cast<void*>(reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(native_ptr)));
-    return 0;
+    auto* abi = GetRuntimeAbiV0();
+    auto* rs = runtime_core::GetCurrentRuntimeState();
+    auto* ts = runtime_core::GetCurrentThreadState();
+    if (abi == nullptr || rs == nullptr || ts == nullptr) return 0;
+
+    void* marshaler = ResolveOrCreateMarshaler(rs, ts, abi, cookie_utf8);
+    if (marshaler == nullptr) return 0;
+
+    // Find the MarshalNativeToManaged method from cache.
+    MethodInfoHandle method_n2m = 0;
+    for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
+        if (s_marshaler_cache[i].marshaler_instance == marshaler) {
+            method_n2m = s_marshaler_cache[i].method_n2m;
+            break;
+        }
+    }
+    if (method_n2m == 0) return 0;
+
+    // Call marshaler.MarshalNativeToManaged(native_ptr).
+    void* const args[] = { &native_ptr };
+    void* result = nullptr;
+    ExceptionHandle exc = nullptr;
+    abi->method_invoke(rs, ts, method_n2m, marshaler, args, 1,
+                       &result, sizeof(void*), &exc);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result);
 }
 
 CHAOS_IL2CPP_INTPTR CustomMarshalerManagedToNative(
     const char* cookie_utf8,
     CHAOS_IL2CPP_INTPTR managed_obj) noexcept {
-    CHAOS_IL2CPP_LOG_WARN("ICustomMarshaler::MarshalManagedToNative not yet implemented "
-                          "(cookie={0}, managed_obj={1}) — pass-through",
-                          (cookie_utf8 ? cookie_utf8 : "(null)"),
-                          static_cast<void*>(reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(managed_obj)));
-    return managed_obj;
+    auto* abi = GetRuntimeAbiV0();
+    auto* rs = runtime_core::GetCurrentRuntimeState();
+    auto* ts = runtime_core::GetCurrentThreadState();
+    if (abi == nullptr || rs == nullptr || ts == nullptr) return managed_obj;
+
+    void* marshaler = ResolveOrCreateMarshaler(rs, ts, abi, cookie_utf8);
+    if (marshaler == nullptr) return managed_obj;
+
+    // Find the MarshalManagedToNative method from cache.
+    MethodInfoHandle method_m2n = 0;
+    for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
+        if (s_marshaler_cache[i].marshaler_instance == marshaler) {
+            method_m2n = s_marshaler_cache[i].method_m2n;
+            break;
+        }
+    }
+    if (method_m2n == 0) return managed_obj;
+
+    // Call marshaler.MarshalManagedToNative(managed_obj).
+    void* const args[] = { &managed_obj };
+    CHAOS_IL2CPP_INTPTR result = 0;
+    ExceptionHandle exc = nullptr;
+    abi->method_invoke(rs, ts, method_m2n, marshaler, args, 1,
+                       &result, sizeof(CHAOS_IL2CPP_INTPTR), &exc);
+    return result;
 }
 
 // ── HRESULT exception helpers (V1) ────────────────────────────────────
