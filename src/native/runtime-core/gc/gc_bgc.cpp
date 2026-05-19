@@ -123,16 +123,6 @@ void BgcController::StartBgcCycle() {
     threading::ReleaseGlobalSafepoint(bgc_gen);
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "root_set_populated");
 
-    // DIAG: check 0xFF bytes immediately after safepoint release.
-    {
-        uint64_t ff_post_sp = g_old_gen.DiagCountOxFFBytes();
-        if (ff_post_sp > 0) {
-            CHAOS_IL2CPP_LOG_ERROR_M("BGC",
-                "DIAG: 0xFF bytes = {0} immediately after safepoint release!",
-                static_cast<unsigned long long>(ff_post_sp));
-        }
-    }
-
     // Transition to concurrent mark phase.
     phase_.store(BgcPhase::CONCURRENT_MARK, std::memory_order_release);
     g_bgc_is_marking.store(true, std::memory_order_release);
@@ -292,9 +282,6 @@ void BgcController::ForceComplete() {
 // ── Root set population (under safepoint) ────────────────────────────
 
 void BgcController::PopulateRootSet() {
-    // DIAG: check 0xFF bytes before any Phase 1 work.
-    uint64_t ff_before = g_old_gen.DiagCountOxFFBytes();
-
     // Phase 1a: Mark pinned roots from MarkSweepOldGen.
     // Pinned roots are registered via g_old_gen.AddPinnedRoot().
     // They are stored in MarkSweepOldGen::pinned_roots_ (private),
@@ -388,74 +375,6 @@ void BgcController::PopulateRootSet() {
     // Phase 1e: Process initial mark stack to build transitive root closure.
     // This runs under safepoint, so it's fast (no concurrent interference).
     DrainWorkerDeque(0, 0);
-
-    // DIAG Phase 1f: Verify all marked objects have valid GcLayout lookups.
-    {
-        auto& layout_registry = GcLayoutRegistry::Instance();
-        auto* arr = g_old_gen.GetPageArray();
-        int arr_count = arr ? arr->count : -1;
-        int pages_with_marks = 0;
-        int total_marked = 0, total_lookup_miss = 0;
-        if (arr != nullptr) {
-            for (int pi = 0; pi < arr->count; pi++) {
-                auto* page = arr->pages[pi];
-                if (page == nullptr || !page->in_use.load(std::memory_order_acquire))
-                    continue;
-                if (page->is_oversized) continue;
-
-                auto bm9 = GcMarkBitmap(page->MarkBitmap(), page->bitmap_bytes);
-                auto* bitmap = bm9.Words();
-                char* payload = page->Payload();
-                CHAOS_IL2CPP_SIZE num_words = bm9.WordCount();
-                CHAOS_IL2CPP_SIZE slot = 0;
-                bool page_has_mark = false;
-
-                for (CHAOS_IL2CPP_SIZE w = 0; w < num_words; w++) {
-                    uint64_t word = bitmap[w];
-                    if (word == 0) { slot += 64; continue; }
-                    page_has_mark = true;
-
-                    for (int b = 0; b < 64; b++) {
-                        if (word & (static_cast<uint64_t>(1) << b)) {
-                            total_marked++;
-                            CHAOS_IL2CPP_SIZE obj_offset = (slot + b) * sizeof(void*);
-                            void* obj = payload + obj_offset;
-
-                            const void* type_info_ptr = *static_cast<const void* const*>(obj);
-                            if (type_info_ptr == nullptr) continue;
-                            if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) continue;
-
-                            uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
-                            const auto* layout = layout_registry.Lookup(stable_id);
-                            if (layout == nullptr) {
-                                total_lookup_miss++;
-                            }
-                        }
-                    }
-                    slot += 64;
-                }
-                if (page_has_mark) pages_with_marks++;
-            }
-        }
-        printf("  DIAG Phase1f: arr_count=%d pages_with_marks=%d total_marked=%d misses=%d\n",
-               arr_count, pages_with_marks, total_marked, total_lookup_miss);
-        if (arr == nullptr) {
-            printf("  DIAG Phase1f: arr is null — can't check marked objects\n");
-        }
-    }
-
-    // DIAG: check 0xFF bytes after all Phase 1 work.
-    uint64_t ff_after = g_old_gen.DiagCountOxFFBytes();
-    if (ff_after > ff_before) {
-        CHAOS_IL2CPP_LOG_ERROR_M("BGC",
-            "DIAG: 0xFF bytes increased from {0} to {1} during PopulateRootSet!",
-            static_cast<unsigned long long>(ff_before),
-            static_cast<unsigned long long>(ff_after));
-    }
-    CHAOS_IL2CPP_LOG_DEBUG_M("BGC",
-        "DIAG: 0xFF bytes before={0} after={1}",
-        static_cast<unsigned long long>(ff_before),
-        static_cast<unsigned long long>(ff_after));
 }
 
 // ── BGC thread main ──────────────────────────────────────────────────
@@ -492,16 +411,6 @@ void BgcController::BgcThreadMain() {
 
         if (phase_.load(std::memory_order_acquire) == BgcPhase::CONCURRENT_MARK) {
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_mark_begin");
-
-            // DIAG: how many 0xFF bytes before concurrent mark processing?
-            uint64_t ff_at_start = g_old_gen.DiagCountOxFFBytes();
-            if (ff_at_start > 0) {
-                CHAOS_IL2CPP_LOG_ERROR_M("BGC",
-                    "DIAG: 0xFF bytes = {0} at concurrent_mark_begin (already corrupted!)",
-                    static_cast<unsigned long long>(ff_at_start));
-            } else {
-                CHAOS_IL2CPP_LOG_DEBUG("BGC", "DIAG: 0xFF bytes = 0 at concurrent_mark_begin (clean)");
-            }
 
             // Spawn parallel workers for mark stack processing.
             // Uses per-worker deques with work-stealing (P1-1):
