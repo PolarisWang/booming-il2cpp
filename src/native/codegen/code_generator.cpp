@@ -8,6 +8,7 @@
 #include "reg_alloc_graph_coloring.h"
 
 #include <codegen_bridge.h>
+#include <instantiation_engine.h>
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
@@ -23,7 +24,12 @@ namespace chaos::il2cpp::codegen {
 //   [rsp + 32 .. 544)     = GPR file (virtual register 0..63, 512 bytes)
 //   [rsp + 544 .. 800)    = FPR file (virtual register 64..95, 256 bytes)
 //   [rsp + 800 .. 864)    = CallVirtArgs struct (only used for CallVirt)
-// Total frame: 864 bytes
+// Total base frame: 864 bytes
+//
+// When LocAlloc is used, an additional reserve region is appended:
+//   [rsp + base_frame_end .. +8)       = localloc_bump (uint32_t counter)
+//   [rsp + base_frame_end+8 .. +4008)  = localloc_reserve (4KB scratch)
+//   localloc_extra = 4008 bytes
 
 static constexpr uint32_t kShadowSize = 32;
 static constexpr uint32_t kGprCount   = interpreter::kGPRegisters;  // 64
@@ -34,6 +40,10 @@ static constexpr uint32_t kGprFileOff   = kShadowSize;     // 32
 static constexpr uint32_t kFprFileOff   = kGprFileOff + kGprFileSize;  // 544
 static constexpr uint32_t kCallVirtArgsOff = kFprFileOff + kFprFileSize; // 800
 static constexpr uint32_t kFrameSize    = kCallVirtArgsOff + sizeof(CodegenCallVirtArgs);  // 864 bytes
+
+// LocAlloc reserve: bump counter + scratch region
+static constexpr uint32_t kLocAllocReserveSize = 4096;
+static constexpr uint32_t kLocAllocBumpAndReserve = 8 + kLocAllocReserveSize;  // 4008 bytes
 
 // Helper: RSP offset for a virtual GPR.
 inline uint32_t GprOff(uint32_t vreg) noexcept {
@@ -84,6 +94,14 @@ private:
         uint32_t patch_offset;
     };
     std::vector<DeoptJumpPatch> deopt_jump_patches_;
+
+    // Jump table patch records (for Switch with >=4 cases).
+    struct JumpTablePatch {
+        uint32_t table_entry_offset;  // buffer offset of this .int32 entry
+        uint32_t table_base;          // buffer offset of the table start
+        uint32_t target_instr;        // target instruction index
+    };
+    std::vector<JumpTablePatch> jump_table_patches_;
 
     // Call site metadata
     std::vector<CallSiteInfo> call_sites_;
@@ -161,6 +179,14 @@ private:
     // their stack slots to prevent garbage reads (e.g. Calli func_ptr).
     uint64_t filtered_vreg_mask_ = 0;
 
+    // Bitmask of vregs colored to caller-saved x64 registers (R8-R11).
+    // These survive the callee-only filter — EmitCallWithSpill reloads
+    // them after each runtime helper call.
+    uint64_t caller_colored_mask_ = 0;
+
+    // LocAlloc: extra frame bytes (bump counter + reserve) when method uses LocAlloc.
+    uint32_t localloc_extra_ = 0;
+
     void SelectCacheableRegs() noexcept;
     void SpillCachedRegs() noexcept;
     void SpillGcRefCachedRegs() noexcept;
@@ -215,6 +241,11 @@ void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
         uint8_t colored_x64 = gcr_.gpr_color[vreg];
         if (colored_x64 != 0xFF) {
             if (x64_reg != colored_x64) EmitMovRR(buf_, colored_x64, x64_reg);
+            // Caller-colored vregs: write through to stack so the stack slot
+            // holds the correct value even if argument setup clobbers the
+            // colored register before EmitCallWithSpill's pre-call spill.
+            if (caller_colored_mask_ & (1ULL << vreg))
+                EmitMovMR(buf_, kRSP, static_cast<int32_t>(GprOff(vreg)), colored_x64);
             return;
         }
     }
@@ -278,10 +309,26 @@ void NativeCodeGenerator::StoreFpr(uint8_t xmm_reg, uint32_t vreg) noexcept {
 }
 
 void NativeCodeGenerator::EmitSafepointPoll() noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitSafepointPoll");
     if (!config_.enable_safepoint_polls || config_.safepoint_fn == nullptr) return;
     // Spill only GC-ref cached regs BEFORE shadow space adjustment (offsets relative to frame RSP).
     // Non-GC ref values stay in registers across safepoints — GC only needs object refs on stack.
     if (config_.enable_register_caching && cached_slots_used_) SpillGcRefCachedRegs();
+    // Spill colored GPRs holding ObjectRef values — StoreGpr with graph coloring
+    // skips stack writes, so stack slots are stale for GC scanning.
+    // Caller-colored vregs are excluded: StoreGpr already keeps their stack
+    // slots up-to-date (write-through), and the colored register may have
+    // been clobbered since the last StoreGpr.
+    if (has_graph_coloring_) {
+        for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+            uint8_t colored_x64 = gcr_.gpr_color[vr];
+            if (colored_x64 != 0xFF && vr < vreg_types_.size() &&
+                vreg_types_[vr] == kTypeObjectRef) {
+                if (caller_colored_mask_ & (1ULL << vr)) continue;
+                EmitMovMR(buf_, kRSP, static_cast<int32_t>(GprOff(vr)), colored_x64);
+            }
+        }
+    }
     EmitSubRI(buf_, kRSP, 32);
     EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(config_.safepoint_fn));
     uint32_t call_pos = buf_.pos();
@@ -292,6 +339,7 @@ void NativeCodeGenerator::EmitSafepointPoll() noexcept {
 }
 
 void NativeCodeGenerator::RecordGcPoint(uint32_t native_offset) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::RecordGcPoint");
     GcPoint gp;
     gp.native_offset = native_offset;
 
@@ -319,6 +367,7 @@ void NativeCodeGenerator::RecordGcPoint(uint32_t native_offset) noexcept {
 void NativeCodeGenerator::PropagateTypes(
     const interpreter::RegisterInstruction& instr) noexcept
 {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::PropagateTypes");
     using interpreter::IROpCode;
     if (!instr.has_dst()) return;
     uint8_t dst = instr.dst_reg();
@@ -338,10 +387,12 @@ void NativeCodeGenerator::PropagateTypes(
         SetVregType(dst, kTypeInt64); break;
 
     // Float immediates and conversions
-    case IROpCode::LdcR4: case IROpCode::Conv_R4: case IROpCode::ConvRUn:
+    case IROpCode::LdcR4: case IROpCode::Conv_R4:
         SetVregType(dst, kTypeFloat32); break;
     case IROpCode::LdcR8: case IROpCode::Conv_R8:
         SetVregType(dst, kTypeFloat64); break;
+    case IROpCode::ConvRUn:
+        SetVregType(dst, kTypeInt64); break;
 
     // Object references
     case IROpCode::LdNull: case IROpCode::LdStr:
@@ -405,6 +456,7 @@ void NativeCodeGenerator::PropagateTypes(
 
 void NativeCodeGenerator::EmitGprArithmetic(
     IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitGprArithmetic");
     LoadGpr(kRAX, src1);
     if (src2 != UINT32_MAX) LoadGpr(kRCX, src2);
     if (opc == IROpCode::Add) {
@@ -429,6 +481,7 @@ void NativeCodeGenerator::EmitGprArithmetic(
 
 void NativeCodeGenerator::EmitFprArithmetic(
     IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitFprArithmetic");
     // Pick the working XMM register: prefer src1's colored reg, else XMM0.
     uint8_t op_xmm = 0;
     if (has_graph_coloring_ && src1 >= kGprCount) {
@@ -455,6 +508,7 @@ void NativeCodeGenerator::EmitFprArithmetic(
 
 void NativeCodeGenerator::EmitBitwise(
     IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitBitwise");
     LoadGpr(kRAX, src1);
     if (opc == IROpCode::Not) EmitNot32(buf_, kRAX);
     else if (opc == IROpCode::And) { if (src2 != UINT32_MAX) { LoadGpr(kRCX, src2); EmitAnd32RR(buf_, kRAX, kRCX); } }
@@ -470,6 +524,7 @@ void NativeCodeGenerator::EmitBitwise(
 // x64 32-bit ops automatically zero-extend to 64 bits.
 void NativeCodeGenerator::EmitShift(
     IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2, int32_t imm) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitShift");
     LoadGpr(kRAX, src1);
     if (src2 != UINT32_MAX) {
         LoadGpr(kRCX, src2);
@@ -500,6 +555,7 @@ void NativeCodeGenerator::EmitShift(
 }
 
 void NativeCodeGenerator::ResolveBranches() noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::ResolveBranches");
     for (auto& bp : branch_patches_) {
         if (bp.target_instr >= instr_offsets_.size()) {
             buf_.Patch32(bp.patch_offset, 0);
@@ -515,9 +571,17 @@ void NativeCodeGenerator::ResolveBranches() noexcept {
         int32_t disp = static_cast<int32_t>(deopt_ret_off - (djp.patch_offset + 4));
         buf_.Patch32(djp.patch_offset, static_cast<uint32_t>(disp));
     }
+    // Patch jump table entries: each stores target_off - table_base
+    for (auto& jtp : jump_table_patches_) {
+        uint32_t target_off = jtp.target_instr < instr_offsets_.size()
+                              ? instr_offsets_[jtp.target_instr] : 0;
+        int32_t disp = static_cast<int32_t>(target_off - jtp.table_base);
+        buf_.Patch32(jtp.table_entry_offset, static_cast<uint32_t>(disp));
+    }
 }
 
 void NativeCodeGenerator::EmitDeoptSequence(uint32_t instr_pc) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitDeoptSequence");
     uint32_t deopt_pos = buf_.pos();
     if (config_.enable_deopt) {
         // Spill any dirty cached regs so the stack frame is consistent
@@ -569,6 +633,7 @@ void NativeCodeGenerator::EmitDeoptSequence(uint32_t instr_pc) noexcept {
 
 // ── Register caching V1 ──────────────────────────────────────────────────
 void NativeCodeGenerator::SelectCacheableRegs() noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::SelectCacheableRegs");
     if (!config_.enable_register_caching) return;
 
     // Count access frequency for each virtual register across all instructions.
@@ -613,6 +678,7 @@ void NativeCodeGenerator::SelectCacheableRegs() noexcept {
 }
 
 void NativeCodeGenerator::SpillCachedRegs() noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::SpillCachedRegs");
     if (!config_.enable_register_caching || cached_slots_used_ == 0) return;
     if (cached_dirty_mask_ == 0) return;
 
@@ -631,6 +697,7 @@ void NativeCodeGenerator::SpillCachedRegs() noexcept {
 }
 
 void NativeCodeGenerator::SpillGcRefCachedRegs() noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::SpillGcRefCachedRegs");
     if (!config_.enable_register_caching || cached_slots_used_ == 0) return;
     if (cached_dirty_mask_ == 0) return;
 
@@ -652,8 +719,38 @@ void NativeCodeGenerator::SpillGcRefCachedRegs() noexcept {
 }
 
 void NativeCodeGenerator::EmitCallWithSpill(uint8_t reg) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitCallWithSpill");
     if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
+    // Spill colored GPRs — StoreGpr with graph coloring skips the stack write,
+    // so stack slots (read by deopt metadata, GC scanning, CodegenCallVirt)
+    // hold stale values.  Write all colored vregs to their stack slots.
+    // Caller-colored vregs are excluded: StoreGpr already keeps their stack
+    // slots up-to-date (write-through), and argument setup may have clobbered
+    // the colored register making a pre-call spill capture a stale value.
+    if (has_graph_coloring_) {
+        for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+            uint8_t colored_x64 = gcr_.gpr_color[vr];
+            if (colored_x64 != 0xFF) {
+                if (caller_colored_mask_ & (1ULL << vr)) continue;
+                EmitMovMR(buf_, kRSP, static_cast<int32_t>(GprOff(vr)), colored_x64);
+            }
+        }
+    }
     EmitCallReg(buf_, reg);
+    // Post-call reload: restore caller-saved colored vregs (R8-R11, colors 1-4)
+    // that were clobbered by the call.  Only reload vregs that are still alive
+    // at this point — the conservative approach reloads all caller-colored
+    // vregs from their stack slots (spilled before the call above).
+    if (has_graph_coloring_ && caller_colored_mask_) {
+        uint64_t mask = caller_colored_mask_;
+        for (uint32_t vr = 0; mask; ++vr) {
+            if (mask & 1) {
+                uint8_t colored_x64 = gcr_.gpr_color[vr];
+                EmitMovRM(buf_, colored_x64, kRSP, static_cast<int32_t>(GprOff(vr)));
+            }
+            mask >>= 1;
+        }
+    }
 }
 
 bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction& instr) noexcept {
@@ -688,9 +785,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::LdcR4: {
         if (!instr.has_dst()) return false;
+        // Load float constant, promote to double (matching RegisterExecute's
+        // WriteFloat64(static_cast<double>(v), dst) semantics).
         float v; std::memcpy(&v, &instr.imm.i4, sizeof(v));
         uint32_t bits; std::memcpy(&bits, &v, sizeof(bits));
         EmitMovRIImm32(buf_, kRAX, bits); EmitMovdXrm(buf_, 0, kRAX);
+        EmitCvtss2sd(buf_, 0, 0);  // promote float→double
         StoreFpr(0, instr.dst_reg());
         return true;
     }
@@ -753,7 +853,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             int32_t off = static_cast<int32_t>(kFrameSize + frame_align_adj_ + si * 16);
             EmitMovUPRM(buf_, callee_xmm_regs_[si], kRSP, off);
         }
-        EmitAddRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_));
+        EmitAddRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
         for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
             EmitPop(buf_, callee_saved_regs_[slot - 1]);
         EmitPop(buf_, kRSI); EmitPop(buf_, kRBX); EmitPop(buf_, kRBP); EmitRet(buf_);
@@ -852,23 +952,64 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         return true;
     }
 
-    // ── Switch: chain-of-branches (V1) ──────────────────────────────
+    // ── Switch: jump table (>=4 cases) or linear chain (<4 cases) ────
     case IROpCode::Switch: {
         if (!instr.has_src1()) return false;
         uint32_t target_count = static_cast<uint32_t>((instr.header >> 48) & 0x7FFF);
         auto* targets = static_cast<const uint32_t*>(instr.imm.ptr);
         if (targets == nullptr || target_count == 0) return false;
         LoadGpr(kRAX, instr.src1_reg());
-        for (uint32_t i = 0; i < target_count; ++i) {
-            EmitCmpRI(buf_, kRAX, static_cast<int32_t>(i));
-            uint32_t patch_off = buf_.pos() + 2;
-            EmitJccRel32(buf_, kCC_E, 0);
-            branch_patches_.push_back({patch_off, targets[i]});
+
+        if (target_count >= 4) {
+            // ── Jump table path ────────────────────────────────────────
+            //   cmp   rax, target_count-1
+            //   jae   default_branch
+            //   lea   r10, [rip + table_off]   ; disp = 9 (fixed: past the 9 bytes after LEA)
+            //   movsxd rax, [r10 + rax*4]       ; rax = table[value]
+            //   add   r10, rax                  ; r10 = table_base + offset = target
+            //   jmp   r10
+            //   table: .int32 disp_to_target_i
+
+            // Bounds check: if (value >= target_count) goto default
+            EmitCmpRI(buf_, kRAX, static_cast<int32_t>(target_count));
+            uint32_t default_patch_off = buf_.pos() + 2;
+            EmitJccRel32(buf_, kCC_AE, 0);
+            branch_patches_.push_back({default_patch_off, targets[target_count]});
+
+            // LEA r10, [rip + 10] — points to table start (10 bytes from LEA end)
+            // LEA is 7 bytes. movsxd(4) + add(3) + jmp(3) = 10 bytes after LEA.
+            uint32_t lea_pos = buf_.pos();
+            EmitLeaRipRel(buf_, kR10, 10);
+            // MOVSXD rax, [r10 + rax*4] — load sign-extended table entry
+            // REX: W=1, R=0(rax), X=0(rax), B=1(r10) → 0x49
+            buf_.EmitByte(0x49);
+            buf_.EmitByte(0x63);                     // MOVSXD opcode
+            buf_.EmitByte(ModRM(0, kRAX, 4));         // rm=4 = SIB escape
+            buf_.EmitByte(SIB(2, kRAX, kR10));        // scale=4, index=rax, base=r10
+            // ADD r10, rax
+            EmitAddRR(buf_, kR10, kRAX);
+            // JMP r10
+            EmitJmpReg(buf_, kR10);
+
+            // Emit jump table entries (placeholder values, patched by ResolveBranches)
+            uint32_t table_pos = buf_.pos();
+            for (uint32_t i = 0; i < target_count; ++i) {
+                buf_.Emit32(0);  // placeholder
+                jump_table_patches_.push_back({buf_.pos() - 4, table_pos, targets[i]});
+            }
+        } else {
+            // ── Linear chain for small switches (< 4 cases) ──────────
+            for (uint32_t i = 0; i < target_count; ++i) {
+                EmitCmpRI(buf_, kRAX, static_cast<int32_t>(i));
+                uint32_t patch_off = buf_.pos() + 2;
+                EmitJccRel32(buf_, kCC_E, 0);
+                branch_patches_.push_back({patch_off, targets[i]});
+            }
+            // No match: jump to default target at targets[target_count]
+            uint32_t default_patch_off = buf_.pos() + 1;
+            EmitJmpRel32(buf_, 0);
+            branch_patches_.push_back({default_patch_off, targets[target_count]});
         }
-        // No match: jump to default target at targets[target_count]
-        uint32_t default_patch_off = buf_.pos() + 1;
-        EmitJmpRel32(buf_, 0);
-        branch_patches_.push_back({default_patch_off, targets[target_count]});
         return true;
     }
 
@@ -969,9 +1110,36 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         return true;
     }
 
-    case IROpCode::Conv_R4: case IROpCode::Conv_R8: case IROpCode::ConvRUn: {
+    case IROpCode::Conv_R4: {
         if (!instr.has_src1() || !instr.has_dst()) return false;
-        LoadFpr(0, instr.src1_reg()); StoreFpr(0, instr.dst_reg());
+        // int32→float: read GPR[src1], truncate to int32, convert to float.
+        // Matches RegisterExecute: float v = static_cast<float>(static_cast<int32_t>(gpr[src1]));
+        LoadGpr(kRAX, instr.src1_reg());
+        EmitMovsxd(buf_, kRAX, kRAX);           // movsxd rax, eax (sign-extend 32→64)
+        EmitCvtsi2ss(buf_, 0, kRAX);            // cvtsi2ss xmm0, rax (int64→float)
+        StoreFpr(0, instr.dst_reg());
+        return true;
+    }
+
+    case IROpCode::Conv_R8: {
+        if (!instr.has_src1() || !instr.has_dst()) return false;
+        // int32→double: read GPR[src1], truncate to int32, convert to double.
+        // Matches RegisterExecute: double v = static_cast<double>(static_cast<int32_t>(gpr[src1]));
+        LoadGpr(kRAX, instr.src1_reg());
+        EmitMovsxd(buf_, kRAX, kRAX);           // movsxd rax, eax (sign-extend 32→64)
+        EmitCvtsi2sd(buf_, 0, kRAX);            // cvtsi2sd xmm0, rax (int64→double)
+        StoreFpr(0, instr.dst_reg());
+        return true;
+    }
+
+    case IROpCode::ConvRUn: {
+        if (!instr.has_src1() || !instr.has_dst()) return false;
+        // float64 → uint64: load double from FPR[src1], truncate to int64 via
+        // CVTTSD2SI, store to GPR[dst].  Matches RegisterExecute semantics:
+        //   uint64_t result = static_cast<uint64_t>(static_cast<int64_t>(val));
+        LoadFpr(0, instr.src1_reg());
+        EmitCvttsd2si(buf_, kRAX, 0);
+        StoreGpr(kRAX, instr.dst_reg());
         return true;
     }
 
@@ -1014,7 +1182,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenLdFld));
         uint32_t call_pos = buf_.pos();
         EmitCallWithSpill(kRAX);
-        call_sites_.push_back({current_instr_index_, call_pos});
+        {
+            uint32_t call_token = 0, call_module = 0;
+            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                call_token = cached.method_token;
+                call_module = cached.module_id;
+            }
+            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+        }
         RecordGcPoint(call_pos);
         StoreGpr(kRAX, instr.dst_reg());
         return true;
@@ -1039,7 +1215,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenNewObj));
         uint32_t call_pos = buf_.pos();
         EmitCallWithSpill(kRAX);
-        call_sites_.push_back({current_instr_index_, call_pos});
+        {
+            uint32_t call_token = 0, call_module = 0;
+            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                call_token = cached.method_token;
+                call_module = cached.module_id;
+            }
+            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+        }
         RecordGcPoint(call_pos);
         StoreGpr(kRAX, instr.dst_reg());
         return true;
@@ -1053,7 +1237,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenBox));
         uint32_t call_pos = buf_.pos();
         EmitCallWithSpill(kRAX);
-        call_sites_.push_back({current_instr_index_, call_pos});
+        {
+            uint32_t call_token = 0, call_module = 0;
+            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                call_token = cached.method_token;
+                call_module = cached.module_id;
+            }
+            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+        }
         RecordGcPoint(call_pos);
         StoreGpr(kRAX, instr.dst_reg());
         return true;
@@ -1065,7 +1257,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenUnbox));
         uint32_t call_pos = buf_.pos();
         EmitCallWithSpill(kRAX);
-        call_sites_.push_back({current_instr_index_, call_pos});
+        {
+            uint32_t call_token = 0, call_module = 0;
+            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                call_token = cached.method_token;
+                call_module = cached.module_id;
+            }
+            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+        }
         RecordGcPoint(call_pos);
         StoreGpr(kRAX, instr.dst_reg());
         return true;
@@ -1077,7 +1277,6 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenLdLen));
         uint32_t call_pos = buf_.pos();
         EmitCallWithSpill(kRAX);
-        call_sites_.push_back({current_instr_index_, call_pos});
         RecordGcPoint(call_pos);
         StoreGpr(kRAX, instr.dst_reg());
         return true;
@@ -1089,7 +1288,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenNewArr));
         uint32_t call_pos = buf_.pos();
         EmitCallWithSpill(kRAX);
-        call_sites_.push_back({current_instr_index_, call_pos});
+        {
+            uint32_t call_token = 0, call_module = 0;
+            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                call_token = cached.method_token;
+                call_module = cached.module_id;
+            }
+            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+        }
         RecordGcPoint(call_pos);
         StoreGpr(kRAX, instr.dst_reg());
         return true;
@@ -1102,7 +1309,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenLdElem));
         uint32_t call_pos = buf_.pos();
         EmitCallWithSpill(kRAX);
-        call_sites_.push_back({current_instr_index_, call_pos});
+        {
+            uint32_t call_token = 0, call_module = 0;
+            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                call_token = cached.method_token;
+                call_module = cached.module_id;
+            }
+            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+        }
         RecordGcPoint(call_pos);
         StoreGpr(kRAX, instr.dst_reg());
         return true;
@@ -1124,7 +1339,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenLdSFld));
         uint32_t call_pos = buf_.pos();
         EmitCallWithSpill(kRAX);
-        call_sites_.push_back({current_instr_index_, call_pos});
+        {
+            uint32_t call_token = 0, call_module = 0;
+            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                call_token = cached.method_token;
+                call_module = cached.module_id;
+            }
+            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+        }
         RecordGcPoint(call_pos);
         StoreGpr(kRAX, instr.dst_reg());
         return true;
@@ -1208,7 +1431,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenLdObj));
         uint32_t call_pos = buf_.pos();
         EmitCallWithSpill(kRAX);
-        call_sites_.push_back({current_instr_index_, call_pos});
+        {
+            uint32_t call_token = 0, call_module = 0;
+            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                call_token = cached.method_token;
+                call_module = cached.module_id;
+            }
+            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+        }
         RecordGcPoint(call_pos);
         StoreGpr(kRAX, instr.dst_reg());
         return true;
@@ -1236,8 +1467,20 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::LocAlloc: {
         if (!instr.has_src1() || !instr.has_dst()) return false;
-        LoadGpr(kRCX, instr.src1_reg());
-        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenLocAlloc));
+        LoadGpr(kRCX, instr.src1_reg());           // size
+        if (localloc_extra_ > 0) {
+            // Stack allocation from pre-allocated frame reserve.
+            // RDX = base address of localloc reserve.
+            EmitLeaRM(buf_, kRDX, kRSP,
+                static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + 8));
+            // R8 = bump counter pointer (8 bytes, at kFrameSize + align_adj + xmm_save).
+            EmitLeaRM(buf_, kR8, kRSP,
+                static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_));
+            EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenLocAlloc));
+        } else {
+            // Fallback: heap allocation (no stack reserve — rare edge case).
+            EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenLocAlloc));
+        }
         EmitCallWithSpill(kRAX);
         StoreGpr(kRAX, instr.dst_reg());
         return true;
@@ -1280,7 +1523,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(target_fn));
         uint32_t call_pos = buf_.pos();
         EmitCallWithSpill(kRAX);
-        call_sites_.push_back({current_instr_index_, call_pos});
+        {
+            uint32_t call_token = 0, call_module = 0;
+            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                call_token = cached.method_token;
+                call_module = cached.module_id;
+            }
+            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+        }
         RecordGcPoint(call_pos);
         if (config_.enable_deopt) {
             uint32_t val_start = static_cast<uint32_t>(deopt_values_.size());
@@ -1338,7 +1589,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         LoadGpr(kRAX, func_ptr_vreg);
         uint32_t call_pos = buf_.pos();
         EmitCallWithSpill(kRAX);
-        call_sites_.push_back({current_instr_index_, call_pos});
+        {
+            uint32_t call_token = 0, call_module = 0;
+            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                call_token = cached.method_token;
+                call_module = cached.module_id;
+            }
+            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+        }
         RecordGcPoint(call_pos);
 
         if (config_.enable_deopt) {
@@ -1397,7 +1656,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         uint32_t call_pos = buf_.pos();
         EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenCallVirt));
         EmitCallWithSpill(kRAX);
-        call_sites_.push_back({current_instr_index_, call_pos});
+        {
+            uint32_t call_token = 0, call_module = 0;
+            if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                call_token = cached.method_token;
+                call_module = cached.module_id;
+            }
+            call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+        }
         RecordGcPoint(call_pos);
 
         // Deoptimization metadata for CallVirt: if CodegenCallVirt takes the
@@ -1454,12 +1721,23 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 }
 
 NativeMethod* NativeCodeGenerator::Generate() noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Generate");
     uint32_t n_instrs = static_cast<uint32_t>(rm_.instructions.size());
     if (n_instrs == 0) return nullptr;
     instr_offsets_.resize(n_instrs, 0);
 
     // Initialize type inference state for all GPR vregs
     vreg_types_.assign(kGprCount, kTypeVoid);
+
+    // Scan for LocAlloc: if used, enlarge frame to include stack reserve.
+    // This avoids heap allocation (no leak, freed on method return).
+    localloc_extra_ = 0;
+    for (const auto& instr : rm_.instructions) {
+        if (instr.op_code() == interpreter::IROpCode::LocAlloc) {
+            localloc_extra_ = kLocAllocBumpAndReserve;
+            break;
+        }
+    }
 
     // ── Register allocation: graph coloring (V2) or frequency cache (V1) ──
     if (config_.enable_register_caching) {
@@ -1480,15 +1758,18 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
                 if (gcr_.gpr_color[dv] != 0xFF)
                     std::printf(" r%u→x%u", dv, gcr_.gpr_color[dv]);
             }
-            std::printf(" | filtered_mask=0x%llx\n", (unsigned long long)filtered_vreg_mask_);
+            std::printf(" | caller_mask=0x%llx filtered_mask=0x%llx\n",
+                        (unsigned long long)caller_colored_mask_,
+                        (unsigned long long)filtered_vreg_mask_);
 
-            // Filter: only callee-saved x64 registers survive.  Caller-saved
-            // registers (R8-R11) get clobbered by runtime helper calls, so
-            // clear their color assignment to force stack spill/reload.
-            // Track filtered vregs so the prologue can zero their stack slots.
+            // V3: keep all colored registers, build caller_colored_mask_ for
+            // caller-saved regs (R8-R11, colors 1-4).  EmitCallWithSpill
+            // reloads these after each runtime helper call.  Only callee-saved
+            // regs (RDI=7, R12-R15=12-15) are PUSH/POP'd in prologue/epilogue.
             bool seen[16] = {};
             num_cache_regs_ = 0;
             filtered_vreg_mask_ = 0;
+            caller_colored_mask_ = 0;
             for (uint32_t vr = 0; vr < kGprCount; ++vr) {
                 uint8_t x64r = gcr_.gpr_color[vr];
                 if (x64r != 0xFF) {
@@ -1508,8 +1789,10 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
                             gcr_.gpr_color[vr] = 0xFF;
                         }
                     } else {
-                        gcr_.gpr_color[vr] = 0xFF;  // caller-saved → spill
-                        filtered_vreg_mask_ |= (1ULL << vr);
+                        // Caller-saved register (R8-R11, colors 1-4).
+                        // Keep the color assignment.  EmitCallWithSpill
+                        // will reload these from stack after each call.
+                        caller_colored_mask_ |= (1ULL << vr);
                     }
                 }
             }
@@ -1558,7 +1841,7 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
         EmitPush(buf_, callee_saved_regs_[slot]);
     EmitMovRR(buf_, kRBX, kRCX); EmitMovRR(buf_, kRSI, kRDX);
-    EmitSubRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_));
+    EmitSubRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
 
     // Save callee-saved XMM registers (used by graph coloring)
     // Stored in the area just below the regular frame (at RSP + kFrameSize + frame_align_adj_).
@@ -1575,6 +1858,11 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     buf_.EmitByte(0xF3);
     buf_.EmitByte(0x48);
     buf_.EmitByte(0xAB);
+
+    // Zero the localloc bump pointer (RAX is still 0 from xor above)
+    if (localloc_extra_ > 0) {
+        EmitMovMR(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_), kRAX);
+    }
 
     // Initialize colored callee-saved regs to 0 (re-zeros RDI if colored,
     // since REP STOSQ above left RDI pointing past the GPR file).
@@ -1611,7 +1899,7 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
         int32_t off = static_cast<int32_t>(kFrameSize + frame_align_adj_ + si * 16);
         EmitMovUPRM(buf_, callee_xmm_regs_[si], kRSP, off);
     }
-    EmitAddRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_));
+    EmitAddRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
     for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
         EmitPop(buf_, callee_saved_regs_[slot - 1]);
     EmitPop(buf_, kRSI); EmitPop(buf_, kRBX); EmitPop(buf_, kRBP);
@@ -1665,7 +1953,12 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
             // Push cached/colored regs (matches main prologue layout for correct epilogue)
             for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
                 EmitPush(buf_, callee_saved_regs_[slot]);
-            EmitSubRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_));
+            EmitSubRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
+            // Zero the localloc bump pointer for OSR entry
+            if (localloc_extra_ > 0) {
+                EmitXorRR(buf_, kRAX, kRAX);
+                EmitMovMR(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_), kRAX);
+            }
             // using rep movsq (RSI=source, RDI=dest, RCX=count)
             EmitLeaRM(buf_, kRDI, kRSP, static_cast<int32_t>(kGprFileOff));
             EmitMovRR(buf_, kRSI, kRCX);
@@ -1777,8 +2070,7 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     }
 
     nm->rbp_to_rsp_offset = 16 + num_cache_regs_ * 8 +
-                            static_cast<uint32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_);
-                            static_cast<uint32_t>(kFrameSize + frame_align_adj_);
+                            static_cast<uint32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_);
 
     return nm;
 }

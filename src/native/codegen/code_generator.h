@@ -55,6 +55,19 @@ struct CodeGenConfig {
     // CodegenCallVirt.  Points to InterpreterDispatchContext on the caller's
     // stack, valid for the lifetime of the current RegisterExecute session.
     void* dispatch_ctx = nullptr;
+
+    // CachedCallInfo[] from PatchMethod (one per instruction).
+    // Used by EmitCall to populate CallSiteInfo.method_token for T4 call-site
+    // hotpatch tracking.  Indexed by current_instr_index_.
+    // nullptr = no call cache available (T4 test paths without PatchMethod).
+    const void* call_cache = nullptr;
+    uint32_t    call_cache_count = 0;
+
+    // This method's own AOT metadata token.
+    // Used by RegisterT4Code to associate the generated code with its token
+    // so method_replacement::Register can find and demote matching T4 entries.
+    uint32_t method_token = 0;
+    uint32_t method_module_id = 0;
 };
 
 /// Generate native x64 code from a RegisterMethod.

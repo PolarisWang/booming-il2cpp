@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 # Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions
 # thrown by generated code (throw chaos_managed_exception from unresolved calls).
-add_compile_options(/utf-8 /GS-)
+add_compile_options(/utf-8 /GS- /FS)
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
 add_compile_definitions(CHAOS_IL2CPP_PROFILE_ENABLED=1)
 add_compile_definitions(CHAOS_IL2CPP_EH_WIN32_SEH)

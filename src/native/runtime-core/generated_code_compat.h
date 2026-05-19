@@ -97,6 +97,7 @@ constexpr CHAOS_IL2CPP_INTPTR kManagedExceptionComFailure      = -3;  // COMExce
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 void ChaosReflectionSetExceptionMetadata(CHAOS_IL2CPP_INTPTR exception_obj, CHAOS_IL2CPP_INTPTR message_value);
+void ChaosReflectionInitDefaultException(CHAOS_IL2CPP_INTPTR exception_obj);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetExceptionMessage(CHAOS_IL2CPP_INTPTR exception_obj);
 }  // extern "C"
 

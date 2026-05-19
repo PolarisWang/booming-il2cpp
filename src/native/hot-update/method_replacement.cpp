@@ -16,6 +16,13 @@
 // the replacement thunk instead of calling the original AOT native code.
 #include <hotpatch_table.h>
 
+// T4 code demotion — when a method is hotpatched, any T4-compiled methods
+// that call the patched method must be demoted so they fall back to the
+// interpreter (which routes through method_replacement::Resolve).
+// Uses runtime_core callback slots to avoid circular dependency with
+// chaos_codegen (codegen → interpreter → hot_update → codegen).
+#include <t4_demotion.h>
+
 namespace chaos::il2cpp::method_replacement {
 
 namespace {
@@ -67,6 +74,15 @@ bool Register(CHAOS_IL2CPP_UINT32 method_token, void* thunk) {
             }
         }
     }
+
+    // Demote T4-compiled code that references this method.
+    // When a hotpatch replacement is registered, any T4 methods that call
+    // the patched method must fall back to the interpreter (which routes
+    // through Resolve()).  DemoteT4ByToken handles methods whose own token
+    // matches (e.g., the patched method's own T4 code).  DemoteT4ByCallSiteToken
+    // handles T4 methods whose call_sites reference the patched method.
+    chaos::il2cpp::runtime_core::DemoteT4ByToken(method_token);
+    chaos::il2cpp::runtime_core::DemoteT4ByCallSiteToken(method_token);
 
     return true;
 }

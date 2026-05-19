@@ -1285,7 +1285,24 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine("        }");
 			}
 			builder.AppendLine("        default:");
-			builder.AppendLine("            return 0;");
+			builder.AppendLine("        {");
+			stringBuilder = builder;
+			StringBuilder stringBuilderFallback = stringBuilder;
+			handler = new StringBuilder.AppendInterpolatedStringHandler(50, 1, stringBuilder);
+			handler.AppendLiteral("            auto* chaos_assembly = CHAOS_IL2CPP_NEW_GC(");
+			handler.AppendFormatted(GetNativeTypeSymbol("System.Private.CoreLib/System.Reflection.Assembly"));
+			handler.AppendLiteral(");");
+			stringBuilderFallback.AppendLine(ref handler);
+			stringBuilder = builder;
+			StringBuilder stringBuilderFallback2 = stringBuilder;
+			handler = new StringBuilder.AppendInterpolatedStringHandler(58, 1, stringBuilder);
+			handler.AppendLiteral("            chaos_assembly->header.type_info = &");
+			handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.Assembly"));
+			handler.AppendLiteral(";");
+			stringBuilderFallback2.AppendLine(ref handler);
+			builder.AppendLine("            chaos_assembly->runtime_assembly_name_value = chaos_reflection_create_string_literal(\"System.Private.CoreLib\");");
+			builder.AppendLine("            return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_assembly);");
+			builder.AppendLine("        }");
 			builder.AppendLine("    }");
 			builder.AppendLine("}");
 			builder.AppendLine();

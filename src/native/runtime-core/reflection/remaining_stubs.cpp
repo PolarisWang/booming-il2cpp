@@ -83,8 +83,24 @@ CHAOS_IL2CPP_INTPTR ChaosTypeGetTypeInfo(CHAOS_IL2CPP_INTPTR type) noexcept {
 
 // ── Assembly stubs ──────────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetExportedTypes(CHAOS_IL2CPP_INTPTR assembly) noexcept {
-    // In AOT, all types are exported types — delegate to GetTypes.
-    return ChaosReflectionAssemblyGetTypes(assembly);
+    // Count types with kFlagIsPublic set = exported types.
+    auto* decoded = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly));
+    if (decoded == nullptr) return 0;
+
+    uint32_t module_count = GetModuleCount();
+    for (uint32_t mid = 0; mid < module_count; mid++) {
+        const auto* mod = GetModuleByIndex(mid);
+        if (mod == nullptr || mod->image != decoded || mod->type_flags == nullptr) continue;
+
+        uint32_t exported_count = 0;
+        for (uint32_t i = 0; i < mod->type_count; i++) {
+            if (mod->type_flags[i] & kFlagIsPublic) {
+                exported_count++;
+            }
+        }
+        return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<intptr_t>(exported_count));
+    }
+    return 0;
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetForwardedTypes(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept {

@@ -7,6 +7,8 @@
 #include <cstdint>
 #include <cstring>
 
+#include <chaos/profile.h>
+
 #include <intrin.h>  // _ReturnAddress()
 
 // ── Thread-local deoptimization state ───────────────────────────────────────
@@ -26,6 +28,7 @@ thread_local DeoptTlsState t_deopt_state;
 #include <vtable_registry.h>
 
 extern "C" uint64_t CodegenLdFld(void* obj, uint32_t field_idx) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdFld");
     using namespace chaos::il2cpp::interpreter;
     if (obj == nullptr) return 0;
     auto* io = static_cast<InterpreterObject*>(obj);
@@ -56,6 +59,7 @@ extern "C" uint64_t CodegenLdFld(void* obj, uint32_t field_idx) noexcept {
 }
 
 extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StFld");
     using namespace chaos::il2cpp::interpreter;
     if (obj == nullptr) return;
     auto* io = static_cast<InterpreterObject*>(obj);
@@ -68,6 +72,7 @@ extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noex
 }
 
 extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::CallVirt");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
     using namespace chaos::il2cpp::runtime_instantiation;
@@ -180,6 +185,7 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
 }
 
 extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Box");
     using namespace chaos::il2cpp::interpreter;
     auto* boxed = static_cast<BoxedValue*>(CHAOS_IL2CPP_MALLOC(sizeof(BoxedValue)));
     if (boxed == nullptr) return nullptr;
@@ -205,6 +211,7 @@ extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) no
 }
 
 extern "C" void* CodegenNewObj(uint32_t type_token, uint32_t field_count) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::NewObj");
     using namespace chaos::il2cpp::interpreter;
     auto* obj = static_cast<InterpreterObject*>(CHAOS_IL2CPP_MALLOC(sizeof(InterpreterObject)));
     if (obj == nullptr) return nullptr;
@@ -216,6 +223,7 @@ extern "C" void* CodegenNewObj(uint32_t type_token, uint32_t field_count) noexce
 }
 
 extern "C" int32_t CodegenLdLen(void* arr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdLen");
     using namespace chaos::il2cpp::interpreter;
     if (arr == nullptr) return 0;
     auto* as = static_cast<ArrayStorage*>(arr);
@@ -229,6 +237,7 @@ extern CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
 }
 
 extern "C" uint64_t CodegenLdSFld(uint32_t field_offset) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdSFld");
     using namespace chaos::il2cpp::interpreter;
     if (field_offset >= g_static_fields.size()) {
         g_static_fields.resize(field_offset + 1u);
@@ -255,6 +264,7 @@ extern "C" uint64_t CodegenLdSFld(uint32_t field_offset) noexcept {
 }
 
 extern "C" void CodegenStSFld(uint32_t field_offset, uint64_t value) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StSFld");
     using namespace chaos::il2cpp::interpreter;
     if (field_offset >= g_static_fields.size()) {
         g_static_fields.resize(field_offset + 1u);
@@ -265,6 +275,7 @@ extern "C" void CodegenStSFld(uint32_t field_offset, uint64_t value) noexcept {
 // ── Array helpers ─────────────────────────────────────────────────────────
 
 extern "C" void* CodegenNewArr(int32_t length) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::NewArr");
     using namespace chaos::il2cpp::interpreter;
     auto* arr = static_cast<ArrayStorage*>(CHAOS_IL2CPP_MALLOC(sizeof(ArrayStorage)));
     if (arr == nullptr) return nullptr;
@@ -274,6 +285,7 @@ extern "C" void* CodegenNewArr(int32_t length) noexcept {
 }
 
 extern "C" uint64_t CodegenLdElem(void* arr, int32_t index) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdElem");
     using namespace chaos::il2cpp::interpreter;
     if (arr == nullptr) return 0;
     auto* as = static_cast<ArrayStorage*>(arr);
@@ -300,6 +312,7 @@ extern "C" uint64_t CodegenLdElem(void* arr, int32_t index) noexcept {
 }
 
 extern "C" void CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StElem");
     using namespace chaos::il2cpp::interpreter;
     if (arr == nullptr) return;
     auto* as = static_cast<ArrayStorage*>(arr);
@@ -310,19 +323,28 @@ extern "C" void CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept
     as->elements[idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
 }
 
-// ── Type check helpers (no-op — matches FastExecute convention) ──────────
+// ── Type check helpers ──────────────────────────────────────────────────────
 
-extern "C" void* CodegenCastClass(void* obj, uint32_t /*target_token*/) noexcept {
-    return obj;  // FastExecute convention: no type checking
+extern "C" void* CodegenCastClass(void* obj, uint32_t target_token) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::CastClass");
+    using namespace chaos::il2cpp::interpreter;
+    if (obj == nullptr) return nullptr;
+    auto* io = static_cast<InterpreterObject*>(obj);
+    return (io->type_token == target_token) ? obj : nullptr;
 }
 
-extern "C" void* CodegenIsInst(void* obj, uint32_t /*target_token*/) noexcept {
-    return obj;  // FastExecute convention: no type checking
+extern "C" void* CodegenIsInst(void* obj, uint32_t target_token) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::IsInst");
+    using namespace chaos::il2cpp::interpreter;
+    if (obj == nullptr) return nullptr;
+    auto* io = static_cast<InterpreterObject*>(obj);
+    return (io->type_token == target_token) ? obj : nullptr;
 }
 
 // ── Unbox helper ──────────────────────────────────────────────────────────
 
 extern "C" uint64_t CodegenUnbox(void* obj) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Unbox");
     using namespace chaos::il2cpp::interpreter;
     if (obj == nullptr) return 0;
     auto* io = static_cast<InterpreterObject*>(obj);
@@ -351,6 +373,7 @@ extern "C" uint64_t CodegenUnbox(void* obj) noexcept {
 // ── LdVirtFtn helper ───────────────────────────────────────────────────────
 
 extern "C" void* CodegenLdVirtFtn(void* obj, uint32_t method_token) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdVirtFtn");
     if (obj == nullptr) return nullptr;
     using namespace chaos::il2cpp::interpreter;
     auto* io = static_cast<InterpreterObject*>(obj);
@@ -363,13 +386,19 @@ extern "C" void* CodegenLdVirtFtn(void* obj, uint32_t method_token) noexcept {
 // ── InitObj helper ─────────────────────────────────────────────────────────
 
 extern "C" void CodegenInitObj(void* ptr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::InitObj");
     if (ptr == nullptr) return;
-    std::memset(ptr, 0, sizeof(chaos::il2cpp::interpreter::InterpreterValue));
+    // 16-byte zero fill — two uint64_t stores instead of std::memset.
+    // InterpreterValue is 16 bytes (tag + pad + struct_size + union).
+    auto* p = static_cast<uint64_t*>(ptr);
+    p[0] = 0;
+    p[1] = 0;
 }
 
 // ── StObj helper ─────────────────────────────────────────────────────────────
 
 extern "C" void CodegenStObj(void* ptr, uint64_t value) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StObj");
     using namespace chaos::il2cpp::interpreter;
     if (ptr == nullptr) return;
     auto* iv = static_cast<InterpreterValue*>(ptr);
@@ -379,6 +408,7 @@ extern "C" void CodegenStObj(void* ptr, uint64_t value) noexcept {
 // ── Cpblk helper ─────────────────────────────────────────────────────────────
 
 extern "C" void CodegenCpblk(void* dst, const void* src, uint32_t count) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Cpblk");
     if (dst == nullptr || src == nullptr || count == 0) return;
     std::memcpy(dst, src, count);
 }
@@ -386,6 +416,7 @@ extern "C" void CodegenCpblk(void* dst, const void* src, uint32_t count) noexcep
 // ── InitBlk helper ───────────────────────────────────────────────────────────
 
 extern "C" void CodegenInitBlk(void* dst, uint32_t value, uint32_t count) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::InitBlk");
     if (dst == nullptr || count == 0) return;
     std::memset(dst, static_cast<int>(value & 0xFF), count);
 }
@@ -393,6 +424,7 @@ extern "C" void CodegenInitBlk(void* dst, uint32_t value, uint32_t count) noexce
 // ── LdObj helper ────────────────────────────────────────────────────────────
 
 extern "C" uint64_t CodegenLdObj(void* ptr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdObj");
     using namespace chaos::il2cpp::interpreter;
     if (ptr == nullptr) return 0;
     auto* iv = static_cast<InterpreterValue*>(ptr);
@@ -418,7 +450,24 @@ extern "C" uint64_t CodegenLdObj(void* ptr) noexcept {
 
 // ── LocAlloc helper ─────────────────────────────────────────────────────────
 
-extern "C" void* CodegenLocAlloc(uint32_t size) noexcept {
+extern "C" void* CodegenLocAlloc(uint32_t size, void* base, uint32_t* bump) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LocAlloc");
+
+    // Stack-backed allocation: bump-pointer from pre-allocated frame reserve.
+    if (base != nullptr && bump != nullptr) {
+        uint32_t old = *bump;
+        uint32_t new_bump = old + size;
+        // 4KB reserve should be enough for typical localloc usage.
+        // If exceeded, fall through to heap below.
+        if (new_bump <= 4096) {
+            *bump = new_bump;
+            void* ptr = static_cast<char*>(base) + old;
+            std::memset(ptr, 0, size);
+            return ptr;
+        }
+    }
+
+    // Heap fallback (no stack reserve, or reserve exhausted).
     void* mem = CHAOS_IL2CPP_MALLOC(size);
     if (mem == nullptr) return nullptr;
     std::memset(mem, 0, size);
@@ -428,6 +477,7 @@ extern "C" void* CodegenLocAlloc(uint32_t size) noexcept {
 // ── Inline deoptimization state saver for EmitDeoptSequence ─────────────────────
 
 extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::DeoptSaveFrameState");
     using namespace chaos::il2cpp::codegen;
     using namespace chaos::il2cpp::interpreter;
 
@@ -483,6 +533,7 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
 // ── Deoptimization trampoline entry point ─────────────────────────────────────
 
 extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::DeoptTrapEntry");
     using namespace chaos::il2cpp::codegen;
 
     if (ctx == nullptr) return;

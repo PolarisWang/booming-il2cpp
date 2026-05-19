@@ -271,6 +271,14 @@ YoungCollectionResult GcYoungCollection() {
             }
         }
 
+        // Cache the last TypeInfo/layout pair to skip redundant
+        // IsValidTypeInfoPointer + ReadStableId + Lookup for adjacent
+        // objects of the same type (common for arrays and sequential
+        // allocations).  Initialize to nullptr so the first iteration
+        // always takes the slow path.
+        const void* last_first_word = nullptr;
+        const GcTypeLayout* last_layout = nullptr;
+
         while (scan_ptr < nursery_used) {
             auto* obj = reinterpret_cast<void*>(scan_ptr);
             const void* first_word = *static_cast<const void* const*>(obj);
@@ -278,12 +286,21 @@ YoungCollectionResult GcYoungCollection() {
                 scan_ptr += sizeof(void*);
                 continue;
             }
-            if (!layout_registry.IsValidTypeInfoPointer(first_word)) {
-                scan_ptr += sizeof(void*);
-                continue;
+
+            // Fast path: same TypeInfo as the previous object.
+            const GcTypeLayout* layout;
+            if (first_word == last_first_word) {
+                layout = last_layout;
+            } else {
+                if (!layout_registry.IsValidTypeInfoPointer(first_word)) {
+                    scan_ptr += sizeof(void*);
+                    continue;
+                }
+                uint64_t stable_id = layout_registry.ReadStableId(first_word);
+                layout = layout_registry.Lookup(stable_id);
+                last_first_word = first_word;
+                last_layout = layout;
             }
-            uint64_t stable_id = layout_registry.ReadStableId(first_word);
-            const auto* layout = layout_registry.Lookup(stable_id);
 
             if (layout == nullptr) {
                 CHAOS_IL2CPP_SIZE obj_size = EstimateObjectSize(obj, nursery);

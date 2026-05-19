@@ -193,4 +193,26 @@ const TypeInfoHot* LookupTypeInfoPtr(uint32_t module_id, uint32_t token) {
     return g_module_storage[module_id].type_info_ptrs[idx];
 }
 
+const char* LookupTypeNameByInfoPtr(const TypeInfoHot* type_info, const char** out_namespace) {
+    if (type_info == nullptr) return nullptr;
+
+    std::shared_lock<std::shared_mutex> lock(g_module_mutex());
+
+    for (uint32_t m = 0; m < g_module_count; m++) {
+        auto& mod = g_module_storage[m];
+        if (mod.name_utf8 == nullptr || mod.tombstone) continue;
+        if (mod.type_info_ptrs == nullptr || mod.type_names == nullptr) continue;
+
+        for (uint32_t t = 0; t < mod.type_count; t++) {
+            if (mod.type_info_ptrs[t] == type_info) {
+                if (out_namespace != nullptr) {
+                    *out_namespace = mod.type_namespaces != nullptr ? mod.type_namespaces[t] : nullptr;
+                }
+                return mod.type_names[t];
+            }
+        }
+    }
+    return nullptr;
+}
+
 }  // namespace chaos::il2cpp::runtime_core

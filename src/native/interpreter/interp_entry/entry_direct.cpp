@@ -11,6 +11,8 @@
 #include <codegen_bridge.h>
 #include <gc_root_scanner.h>
 
+#include <method_replacement.h>
+
 #include <chaos/log.h>
 
 #include <vector>
@@ -379,6 +381,18 @@ void InterpreterEntryDirect(
         }
     }
 
+    // ── Check for method replacement BEFORE T4 path ────
+    {
+        void* replacement = method_replacement::Resolve(patch_method->token);
+        if (replacement != nullptr) {
+            using ReplacementFn = void (*)(void*, void*);
+            auto repl_fn = reinterpret_cast<ReplacementFn>(replacement);
+            repl_fn(args_buf, ret_buf);
+            return;
+        }
+    }
+
+    
     // ── Step A: Native code path (T4) ────────────────────────────────
     {
         auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
@@ -394,7 +408,8 @@ void InterpreterEntryDirect(
                     GetTierCounters().deopt_t4.fetch_add(1, std::memory_order_relaxed);
                     ++patch_method->deopt_count;
                     if (patch_method->deopt_count > PatchMethod::kMaxDeoptBeforeDemote) {
-                        patch_method->tier_state.store(PatchMethod::kT3Ready, std::memory_order_release);
+                        // Permanently skip T4: overflow/OSR deopts would recur on re-promotion.
+                        patch_method->tier_state.store(PatchMethod::kT4Skip, std::memory_order_release);
                         auto* nm = patch_method->cached_native_method;
                         if (nm != nullptr) {
                             chaos::il2cpp::codegen::UnregisterT4Code(nm->code);
@@ -476,6 +491,10 @@ void InterpreterEntryDirect(
                             cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
                             cfg.pic_dispatch_data = patch_method->pic_dispatch_data;
                             cfg.dispatch_ctx = &reg_dispatch_ctx;
+                            cfg.call_cache = patch_method->call_cache;
+                            cfg.call_cache_count = patch_method->reg_ir_instr_count;
+                            cfg.method_token = patch_method->token;
+                            cfg.method_module_id = patch_method->module_id;
                             auto* nm = codegen::GenerateNativeCode(*reg_m, cfg);
                             patch_method->cached_native_method = nm;
                             if (nm != nullptr) {
@@ -487,7 +506,7 @@ void InterpreterEntryDirect(
                                 }
                                 // Register T4 code range for VEH handler (SEH + deopt)
                                 chaos::il2cpp::codegen::RegisterT4Code(
-                                    nm->code, nm->code_size, nm);
+                                    nm->code, nm->code_size, nm, patch_method->token);
                             } else {
                                 ++patch_method->codegen_fail_count;
                                 if (patch_method->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {

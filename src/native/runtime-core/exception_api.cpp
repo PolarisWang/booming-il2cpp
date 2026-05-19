@@ -19,9 +19,11 @@
 // The header size is sizeof(ThinLockableHeader) = 16 bytes (64-bit)
 
 #include "runtime_core.h"
+#include "module_registry.h"
 #include <chaos/trace.h>
 #include <chaos/type_info.h>
 
+#include <cstdio>
 #include <cstring>
 
 namespace chaos::il2cpp::runtime_core {
@@ -83,6 +85,46 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_exception_param_name(
 {
     (void)exception_obj;
     return 0;
+}
+
+extern "C" void ChaosReflectionInitDefaultException(
+    CHAOS_IL2CPP_INTPTR exception_obj)
+{
+    auto* runtime = GetCurrentRuntimeState();
+    auto* thread = GetCurrentThreadState();
+    auto* abi = GetRuntimeAbiV0();
+    if (runtime == nullptr || thread == nullptr || abi == nullptr) return;
+
+    auto* obj = reinterpret_cast<void*>(exception_obj);
+    if (obj == nullptr) return;
+    auto* type_info = chaos_object_get_type_info(obj);
+    if (type_info == nullptr) return;
+
+    // Look up the exception's class name from the module registry.
+    const char* ns = nullptr;
+    const char* type_name = LookupTypeNameByInfoPtr(type_info, &ns);
+    if (type_name == nullptr) type_name = "Exception";
+
+    // Format: "Exception of type 'Namespace.TypeName' was thrown."
+    char buffer[256];
+    const char* fmt_str = "Exception of type '%s' was thrown.";
+    if (ns != nullptr && ns[0] != '\0') {
+        // Use a temporary format with the namespace prefix
+        char qualified_name[128];
+        std::snprintf(qualified_name, sizeof(qualified_name), "%s.%s", ns, type_name);
+        std::snprintf(buffer, sizeof(buffer), fmt_str, qualified_name);
+    } else {
+        std::snprintf(buffer, sizeof(buffer), fmt_str, type_name);
+    }
+
+    auto* msg_obj = abi->string_new_utf8(runtime, thread, buffer,
+        static_cast<uintptr_t>(std::strlen(buffer)));
+    if (msg_obj != nullptr) {
+        auto* message_slot = GetExceptionFieldPtr(obj, kExceptionMessageOffset);
+        if (message_slot != nullptr) {
+            *message_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(msg_obj);
+        }
+    }
 }
 
 }  // namespace chaos::il2cpp::runtime_core

@@ -129,10 +129,15 @@ extern "C" void CodegenInitBlk(void* dst, uint32_t value, uint32_t count) noexce
 extern "C" uint64_t CodegenLdObj(void* ptr) noexcept;
 
 // ── LocAlloc helper ──────────────────────────────────────────────────────────
-// Allocates a zero-initialized block of memory on the heap (CHAOS_IL2CPP_MALLOC).
+// Allocates a zero-initialized block of memory.
+// When base != nullptr and bump != nullptr, allocates from the pre-allocated
+// stack reserve (bump-allocated, freed on method return — no leak).
+// When base == nullptr (legacy fallback), uses CHAOS_IL2CPP_MALLOC heap.
 // size: number of bytes to allocate.
-// Returns pointer to the allocated memory, or nullptr on failure.
-extern "C" void* CodegenLocAlloc(uint32_t size) noexcept;
+// base: start of the pre-allocated stack reserve (or nullptr for heap fallback).
+// bump: pointer to the bump counter (uint32_t) at the reserve start (or nullptr).
+// Returns pointer to the allocated memory, or nullptr on failure/overflow.
+extern "C" void* CodegenLocAlloc(uint32_t size, void* base = nullptr, uint32_t* bump = nullptr) noexcept;
 
 // ── Deoptimization trampoline entry point ─────────────────────────────────────
 // Called from the deopt trampoline in generated native code.  The trampoline

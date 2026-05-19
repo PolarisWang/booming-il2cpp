@@ -40,7 +40,9 @@ except ImportError:
     scan_family = None
 
 try:
-    from testing.foundation_dll.principle_auto_checks import run_all_checks as run_principle_checks
+    from testing.foundation_dll.principle import run_family_checks, discover_checks
+    discover_checks()
+    run_principle_checks = run_family_checks
 except ImportError:
     run_principle_checks = None
 
@@ -128,6 +130,47 @@ def _get_skip_entries(relevant_type_names: set[str] | None = None) -> dict[tuple
 
 # ── Generated C++ analysis ────────────────────────────────────────────
 
+def _class_name_from_slug(family_slug: str) -> str:
+    """Derive the C++ class name from a family slug.
+    'convert-char' -> 'ConvertChar'
+    'boxing-unboxing-casts' -> 'BoxingUnboxingCasts'
+    """
+    return ''.join(word.capitalize() for word in family_slug.replace('_', '-').split('-'))
+
+
+def _detect_class_name(cpp_content: str, family_slug: str, family_dir: Path) -> str:
+    """Detect the native entry class name from generated C++.
+
+    Prefers the codegen subdirectory name (source of truth).
+    Falls back to deriving from family_slug, then to generic patterns.
+    """
+    # Method 1: read from codegen subdirectory
+    cpp_candidates = sorted(family_dir.glob("codegen/*/generated/native-aot.generated.cpp"))
+    if cpp_candidates:
+        cn = cpp_candidates[0].parent.parent.name
+        if cn:
+            return cn
+
+    # Method 2: derive from family slug
+    derived = _class_name_from_slug(family_slug)
+
+    # Method 3: scan C++ for functions matching known patterns
+    if cpp_content:
+        for suffix in ["NativeEntry", "PatchEntry", "Subjects"]:
+            candidate = f"{derived}{suffix}"
+            if re.search(rf'\b{re.escape(candidate)}_', cpp_content):
+                return candidate
+    return derived
+
+
+def _build_native_entry_re(class_name: str) -> str:
+    """Build a regex matching native entry function definitions.
+
+    Patterns: ClassName_ClassName_Method or NativeReferenceStub_Method etc.
+    """
+    return rf'(?:{re.escape(class_name)}_{re.escape(class_name)}_|NativeReferenceStub_|RunNativeAot_|BenchmarkEntry_)(\w+)\s*\('
+
+
 def _count_assert_invocations(cpp_content: str) -> int:
     """Count assert-related references in generated code (placeholder, no longer used)."""
     return 0
@@ -178,6 +221,9 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
         errors.append("Generated C++ not found")
 
     has_file_level_lowering = ("chaos_eval_stack" in cpp_content or "CHAOS_IL2CPP_ARRAY" in cpp_content) if cpp_content else False
+
+    # Compute class name once for method-level analysis
+    method_class_name = _detect_class_name(cpp_content, family_slug, family_dir) if cpp_content else ""
 
     # ── 3. Load _METHOD_OVERRIDES skip entries ─────────────────────────
     # Extract relevant C# type names from the capability-family-contract
@@ -253,9 +299,16 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
 
     # If no stub_results, extract methods from C++ using dynamic class name
     if not method_details and cpp_content:
-        class_name = f"{family_slug.title().replace('-', '').replace('_', '')}NativeEntry"
-        # Namespaced pattern: ClassName_ClassName_Method0
-        namespaced = re.findall(rf'\b{class_name}_{class_name}_(\w+)\s*\(', cpp_content)
+        # Detect class name from codegen directory or derive from family slug
+        cpp_dir_class = None
+        cpp_candidates = sorted(family_dir.glob("codegen/*/generated/native-aot.generated.cpp"))
+        if cpp_candidates:
+            cpp_dir_class = cpp_candidates[0].parent.parent.name
+        class_name = cpp_dir_class or _class_name_from_slug(family_slug)
+
+        # Try multiple naming conventions
+        canonical_fn = rf'\b{re.escape(class_name)}_{re.escape(class_name)}_(\w+)\s*\('
+        namespaced = re.findall(canonical_fn, cpp_content)
         if namespaced:
             for m in namespaced:
                 method_details.append({
@@ -265,8 +318,12 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
                     "stub_pattern": "",
                 })
         else:
-            # Flat pattern: ClassName_Method0 or NativeReferenceStub_Method0 or RunNativeAot
-            flat = re.findall(rf'(?:NativeReferenceStub_|{class_name}_|NativeEntry_|RunNativeAot_)(\w+)\s*\(', cpp_content)
+            # Broader fallback: any function with the expected prefixes
+            patterns = (
+                rf'(?:{re.escape(class_name)}_NativeEntry_|NativeReferenceStub_|RunNativeAot_|BenchmarkEntry_)'
+                rf'(\w+)\s*\('
+            )
+            flat = re.findall(patterns, cpp_content)
             for m in flat:
                 method_details.append({
                     "method_name": m,
@@ -289,11 +346,30 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
     assert_invocations = _count_assert_invocations(cpp_content)
     for md in method_details:
         mname = md["method_name"]
-        # Use file-level chaos_eval_stack check — per-method body parsing
-        # is unreliable on complex C++; if the file has real lowering, it's
-        # reasonable to attribute lowering to all non-stub methods.
         is_explicit_stub = md.get("is_stub", False)
-        md["has_lowering"] = has_file_level_lowering and not is_explicit_stub
+
+        # Per-method lowering detection: find the function definition and
+        # extract its body (rough brace matching).  Fallback to file-level.
+        if cpp_content and method_class_name and not is_explicit_stub:
+            # Try: ClassName_ClassName_Method(...) {
+            fn_pattern = rf'\b{re.escape(method_class_name)}_{re.escape(method_class_name)}_{re.escape(mname)}\s*\([^{{]*{{'
+            fn_match = re.search(fn_pattern, cpp_content)
+            if fn_match:
+                body_start = fn_match.end() - 1
+                brace_depth = 1
+                pos = body_start + 1
+                while pos < len(cpp_content) and brace_depth > 0:
+                    if cpp_content[pos] == '{': brace_depth += 1
+                    elif cpp_content[pos] == '}': brace_depth -= 1
+                    pos += 1
+                body = cpp_content[body_start:pos]
+                method_lowering = "chaos_eval_stack" in body or "CHAOS_IL2CPP_ARRAY" in body
+            else:
+                method_lowering = has_file_level_lowering
+        else:
+            method_lowering = has_file_level_lowering and not is_explicit_stub
+
+        md["has_lowering"] = method_lowering
         md["assert_fired"] = assert_invocations > 0
 
         if not md["has_lowering"] and not is_explicit_stub:
@@ -336,7 +412,8 @@ def run_full_audit(assembly: str, family_slug: str) -> dict[str, Any]:
     # Determine overall status
     mechanism_pass = mechanism.passed
     principle_overall = principle_result.get("summary", {}).get("overall", "NOT_APPLICABLE") if isinstance(principle_result, dict) else "NOT_APPLICABLE"
-    overall_pass = mechanism_pass and principle_overall != "VIOLATION"
+    # Strict pass: mechanism must pass AND principle must be ALIGNED
+    overall_pass = mechanism_pass and principle_overall == "ALIGNED"
 
     report = {
         "generated_at": __import__("datetime").datetime.now().isoformat(),

@@ -57,6 +57,8 @@ add_library(chaos_runtime_core STATIC
     instantiation_engine.h
     thread_state.cpp
     thread_state.h
+    t4_demotion.cpp
+    t4_demotion.h
     thread_pool.cpp
     thread_pool.h
     timer_queue.cpp
@@ -138,7 +140,7 @@ add_library(chaos_runtime_core STATIC
     )
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PUBLIC NOMINMAX)
-target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /EHa /GS->)
+target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /EHa /GS- /FS>)
 target_include_directories(
     chaos_runtime_core
     PUBLIC

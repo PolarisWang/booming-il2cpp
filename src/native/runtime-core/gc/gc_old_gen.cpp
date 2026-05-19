@@ -604,7 +604,23 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     auto* page = AllocatePage(kOldGenPageSize, scanning_required, sc_idx);
     if (page == nullptr) return nullptr;
 
-    // Retry free list (new page was pre-carved with size-class blocks).
+    // Pop from the newly carved page's freelist directly, avoiding a full
+    // TryAllocateFromFreeLists walk (which would re-acquire mutex_ and scan
+    // the entire page_list_ for an entry we know exists on this new page).
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (page->free_lists[sc_idx] != nullptr) {
+            auto* block = page->free_lists[sc_idx];
+            page->free_lists[sc_idx] = block->next;
+            std::memset(block, 0, size);
+            last_alloc_page_[sc_idx] = page;
+            GcRecordAlloc(size, false);
+            memory_domain::GcTrackDomainAlloc(size);
+            return block;
+        }
+    }
+
+    // Fallback: retry free list walk (should be rare — new page was just carved).
     ptr = TryAllocateFromFreeLists(size, sc_idx);
     if (ptr != nullptr) {
         GcRecordAlloc(size, false);
@@ -1736,7 +1752,9 @@ void MarkSweepOldGen::GlobalRelocate(
     OldGenPage* page_list) {
     if (entries.empty()) return;
 
-    // Build sorted old��new address map.
+    // Build sorted old→new address map.  The entries from PlanPageEvacuation
+    // are NOT guaranteed to be in sorted order, and std::lower_bound below
+    // requires a sorted range — sort here explicitly.
     struct AddrPair { uintptr_t old_addr; uintptr_t new_addr; };
     std::vector<AddrPair> addr_map;
     addr_map.reserve(entries.size());
@@ -1746,6 +1764,8 @@ void MarkSweepOldGen::GlobalRelocate(
             reinterpret_cast<uintptr_t>(e.new_addr)
         });
     }
+    std::sort(addr_map.begin(), addr_map.end(),
+        [](const AddrPair& a, const AddrPair& b) { return a.old_addr < b.old_addr; });
 
     // Walk all old-gen pages once and update pointers.
     for (auto* src = page_list; src != nullptr; src = src->next) {
@@ -1799,6 +1819,35 @@ void MarkSweepOldGen::RelocateRoots(const std::vector<CompactPlanEntry>& entries
             }
         },
         &addr_map);
+
+    // GcScanAllThreadRoots above skips the current (calling) thread's own
+    // stack.  If the calling thread holds managed object references in stack
+    // locals (e.g., the thread that triggered a full GC), those references
+    // would NOT be relocated, leaving dangling pointers to evacuated pages
+    // that BgcSweep subsequently decommissions.
+    //
+    // Scan the current thread's own stack conservatively using the Windows
+    // TEB to cover this case.
+    auto* teb = reinterpret_cast<NT_TIB*>(__readgsqword(0x30));
+    uintptr_t self_stack_limit = reinterpret_cast<uintptr_t>(teb->StackLimit);
+    uintptr_t self_stack_base  = reinterpret_cast<uintptr_t>(teb->StackBase);
+    uintptr_t self_aligned_start = (self_stack_limit + sizeof(void*) - 1)
+        & ~static_cast<uintptr_t>(sizeof(void*) - 1);
+    uintptr_t self_aligned_end   = self_stack_base
+        & ~static_cast<uintptr_t>(sizeof(void*) - 1);
+
+    for (uintptr_t slot = self_aligned_start; slot < self_aligned_end; slot += sizeof(void*)) {
+        auto* val_ptr = reinterpret_cast<void**>(slot);
+        if (*val_ptr == nullptr) continue;
+        uintptr_t val = reinterpret_cast<uintptr_t>(*val_ptr);
+        if (val < g_heap_base) continue;
+
+        auto it = std::lower_bound(addr_map.begin(), addr_map.end(), val,
+            [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
+        if (it != addr_map.end() && it->old_addr == val) {
+            *val_ptr = reinterpret_cast<void*>(it->new_addr);
+        }
+    }
 }
 
 void MarkSweepOldGen::CrossPageCompact() {

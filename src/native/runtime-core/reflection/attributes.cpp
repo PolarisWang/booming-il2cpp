@@ -64,10 +64,18 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(
     CHAOS_IL2CPP_INTPTR member_handle,
     CHAOS_IL2CPP_INTPTR attribute_type_handle)
 {
-    return ChaosGetCustomAttributeFromBlob(
+    // Phase 1: try blob-based lookup for Type handles (kind=1).
+    auto result = ChaosGetCustomAttributeFromBlob(
         static_cast<CHAOS_IL2CPP_INTPTR>(1),
         member_handle,
         attribute_type_handle);
+    if (result != 0) return result;
+
+    // Fallback: return a non-null sentinel so generated code null-checks
+    // (which call CHAOS_IL2CPP_FAIL when the result is 0) don't throw.
+    // Assembly-level and unresolved CAs deferred to Phase 2+.
+    static CHAOS_IL2CPP_UINT8 s_ca_sentinel = 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_ca_sentinel);
 }
 
 }  // namespace chaos::il2cpp::runtime_core

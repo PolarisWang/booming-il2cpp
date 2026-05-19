@@ -133,15 +133,14 @@ CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR separator, CHAOS_IL2CP
     separator = resolve_string_arg(separator);
     if (separator == 0 || value == 0) return 0;
     auto* sep_hdr = reinterpret_cast<const StubStringHeader*>(separator);
-    auto* arr_hdr = reinterpret_cast<StubArrayHeader*>(value);
+    auto* arr = get_managed_array(value);
 
-    CHAOS_IL2CPP_UINTPTR count = arr_hdr->length;
+    CHAOS_IL2CPP_UINTPTR count = static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length);
     CHAOS_IL2CPP_UINTPTR sep_len = sep_hdr->byte_count;
 
     CHAOS_IL2CPP_UINTPTR total = 0;
-    CHAOS_IL2CPP_INTPTR* elements = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<void*>(arr_hdr + 1));
     for (CHAOS_IL2CPP_UINTPTR i = 0; i < count; ++i) {
-        auto elem_raw = resolve_string_arg(elements[i]);
+        auto elem_raw = resolve_string_arg(arr->elements[i]);
         auto* elem = reinterpret_cast<const StubStringHeader*>(elem_raw);
         if (elem) total += elem->byte_count;
     }
@@ -159,10 +158,10 @@ CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR separator, CHAOS_IL2CP
             std::memcpy(dest, stub_string_data(reinterpret_cast<const void*>(separator)), sep_len);
             dest += sep_len;
         }
-        auto elem_raw = resolve_string_arg(elements[i]);
+        auto elem_raw = resolve_string_arg(arr->elements[i]);
         auto* elem = reinterpret_cast<const StubStringHeader*>(elem_raw);
         if (elem && elem->byte_count > 0) {
-            std::memcpy(dest, stub_string_data(reinterpret_cast<const void*>(elements[i])), elem->byte_count);
+            std::memcpy(dest, stub_string_data(reinterpret_cast<const void*>(arr->elements[i])), elem->byte_count);
             dest += elem->byte_count;
         }
     }

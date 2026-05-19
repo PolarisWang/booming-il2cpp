@@ -33,8 +33,10 @@ struct NativeMethod;
 /// @param code_start  Entry point of the generated code (RX memory)
 /// @param code_size   Size of generated code in bytes
 /// @param nm          NativeMethod containing SEH clause table metadata
+/// @param patch_method_token  AOT metadata token of the owning PatchMethod (for hotpatch demotion)
 void RegisterT4Code(void* code_start, uint32_t code_size,
-                    const NativeMethod* nm) noexcept;
+                    const NativeMethod* nm,
+                    uint32_t patch_method_token = 0) noexcept;
 
 /// Unregister a T4 code range.  Called during T4 demotion.
 /// Marks the entry inactive so the VEH handler won't dispatch to it.
@@ -47,6 +49,17 @@ void RegisterT4SehHandler() noexcept;
 /// Find the NativeMethod covering a given code address.
 /// Returns nullptr if not found.  Exported for deoptimization trampoline.
 const NativeMethod* FindT4CodeByAddress(const void* address) noexcept;
+
+/// Demote all T4 code entries matching the given method_token.
+/// Clears their NativeMethod reference so the VEH handler stops dispatching
+/// to them.  Returns the number of entries demoted.
+/// Called by method_replacement::Register() when a hotpatch is applied.
+uint32_t DemoteT4ByToken(uint32_t method_token) noexcept;
+
+/// Demote all T4 code entries whose call_sites reference the given method_token.
+/// This handles the case where a T4 method calls a now-hotpatched method.
+/// Returns the number of entries demoted.
+uint32_t DemoteT4ByCallSiteToken(uint32_t method_token) noexcept;
 
 }  // namespace chaos::il2cpp::codegen
 

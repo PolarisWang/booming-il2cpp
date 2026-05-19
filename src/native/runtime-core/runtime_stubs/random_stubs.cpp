@@ -16,10 +16,9 @@ void ChaosRandomNextBytes(CHAOS_IL2CPP_INTPTR rng, CHAOS_IL2CPP_INTPTR buffer) n
 {
     (void)rng;
     if (buffer == 0) return;
-    auto* hdr = reinterpret_cast<StubArrayHeader*>(buffer);
-    auto* bytes = reinterpret_cast<CHAOS_IL2CPP_UINT8*>(hdr + 1);
-    for (CHAOS_IL2CPP_UINTPTR i = 0; i < hdr->length; ++i) {
-        bytes[i] = static_cast<CHAOS_IL2CPP_UINT8>(stub_xorshift32());
+    auto* arr = get_managed_array_mut(buffer);
+    for (CHAOS_IL2CPP_INTPTR i = 0; i < arr->length; ++i) {
+        arr->elements[i] = static_cast<CHAOS_IL2CPP_INTPTR>(stub_xorshift32() & 0xFF);
     }
 }
 
